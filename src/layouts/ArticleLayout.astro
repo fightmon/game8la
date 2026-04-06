@@ -1,0 +1,222 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  author?: string;
+  publishDate?: string;
+  breadcrumbs?: Array<{ label: string; href: string }>;
+  showTOC?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage,
+  ogUrl,
+  author = 'GAME8LA',
+  publishDate,
+  breadcrumbs = [{ label: '首頁', href: '/' }, { label: '文章', href: '/articles/' }],
+  showTOC = false
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogUrl={ogUrl}
+  currentPage="article"
+>
+  <article class="article-wrapper">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+      {breadcrumbs.map((crumb, index) => (
+        <>
+          <a href={crumb.href}>{crumb.label}</a>
+          {index < breadcrumbs.length - 1 && <span class="separator">/</span>}
+        </>
+      ))}
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <h1>{title}</h1>
+      <div class="article-meta">
+        {author && <span class="author"><i class="fas fa-user"></i> {author}</span>}
+        {publishDate && <span class="date"><i class="fas fa-calendar"></i> {publishDate}</span>}
+      </div>
+    </header>
+
+    <!-- Article Content -->
+    <div class="article-content">
+      <slot />
+    </div>
+
+    <!-- Share Buttons -->
+    <ShareButtons title={title} description={description} />
+  </article>
+</BaseLayout>
+
+<style>
+  .article-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* === BREADCRUMB === */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--gold-light);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--gold);
+  }
+
+  .breadcrumb .separator {
+    color: var(--text-muted);
+    margin: 0 0.3rem;
+  }
+
+  /* === ARTICLE HEADER === */
+  .article-header {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .article-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .article-meta i {
+    color: var(--gold-light);
+  }
+
+  /* === ARTICLE CONTENT === */
+  .article-content {
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .article-content :global(h2) {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    border-left: 4px solid var(--gold-light);
+    padding-left: 1rem;
+  }
+
+  .article-content :global(h3) {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .article-content :global(p) {
+    margin-bottom: 1.2rem;
+    color: var(--text-secondary);
+  }
+
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin: 1.2rem 0;
+    margin-left: 2rem;
+  }
+
+  .article-content :global(li) {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+  }
+
+  .article-content :global(a) {
+    color: var(--gold-light);
+    transition: color 0.3s;
+  }
+
+  .article-content :global(a:hover) {
+    color: var(--gold);
+  }
+
+  .article-content :global(blockquote) {
+    border-left: 4px solid var(--gold-light);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .article-content :global(code) {
+    background: var(--bg-card);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: var(--gold-light);
+  }
+
+  .article-content :global(pre) {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.2rem 0;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .article-wrapper {
+      padding: 1rem;
+    }
+
+    .article-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .article-meta {
+      gap: 1rem;
+      flex-direction: column;
+    }
+
+    .article-content :global(h2) {
+      font-size: 1.4rem;
+    }
+
+    .article-content :global(h3) {
+      font-size: 1.1rem;
+    }
+  }
+</style>

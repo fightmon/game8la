@@ -1,0 +1,339 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+---
+
+<BaseLayout 
+  title="2026 老虎機評分排名｜9款熱門Slot完整評比 - GAME8LA"
+  description="2026最新老虎機評分排名！GAME8LA實測評比9款熱門Slot，涵蓋ATG、RSG、PG Soft、RG、GR電子，RTP、玩法機制、爆分倍數全分析。"
+  ogImage="https://game8la.com/images/og-image.webp"
+  currentPage="rankings"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; 遊戲排名</div>
+  <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
+  <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a,#1a1a1a);border-radius:16px;margin-bottom:1.5rem"></div>
+  <div class="page-hero">
+    <h1>🏆 2026 <em>老虎機評分總排名</em></h1>
+    <p>GAME8LA編輯部實測評比 9 款熱門老虎機，綜合 RTP、遊戲機制、爆分倍數、認證等多項指標</p>
+  </div>
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;justify-content:center">
+    <button class="tag" style="cursor:pointer;border:none;font-size:0.9rem;padding:0.5rem 1rem" onclick="filterGames('all')">全部 (9)</button>
+    <button class="tag" style="cursor:pointer;border:none;font-size:0.9rem;padding:0.5rem 1rem" onclick="filterGames('atg')">⚡ ATG電子</button>
+    <button class="tag" style="cursor:pointer;border:none;font-size:0.9rem;padding:0.5rem 1rem" onclick="filterGames('rsg')">👑 RSG皇家電子</button>
+    <button class="tag" style="cursor:pointer;border:none;font-size:0.9rem;padding:0.5rem 1rem" onclick="filterGames('pg')">🀄 PG Soft</button>
+    <button class="tag" style="cursor:pointer;border:none;font-size:0.9rem;padding:0.5rem 1rem" onclick="filterGames('other')">🧪 其他</button>
+  </div>
+  <div id="game-list">
+    <!-- #1 戰神賽特2：覺醒之力 -->
+    <div class="card game-item" data-cat="atg" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#1</div>
+        <div class="score-big" style="font-size:2rem">9.8</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      </div>
+      <div class="rank-thumb"><img src="/images/seth2/seth2-card-thumbnail.webp" alt="戰神賽特2" /></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">戰神賽特2：覺醒之力</h3>
+          <span class="badge badge-gold">🥇 金8LA冠軍</span>
+        </div>
+        <p style="margin-bottom:0.8rem">ATG電子神話級續作！RTP 96.89%、最大x81000倍，全新覺醒系統搭配累積彩金，老虎機天花板等級的存在。</p>
+        <div class="tag-list">
+          <span class="tag">⚡ ATG電子</span><span class="tag">RTP 96.89%</span><span class="tag">最高 x81,000</span><span class="tag">累積彩金</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-1/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+    <!-- #2 奇幻魔藥 -->
+    <div class="card game-item" data-cat="other" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#2</div>
+        <div class="score-big" style="font-size:2rem">9.7</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      </div>
+      <div class="rank-thumb"><img src="/images/fantasy-potion/card-thumbnail.webp" alt="奇幻魔藥" /></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">奇幻魔藥</h3>
+          <span class="badge badge-safe">RTP 業界天花板</span>
+        </div>
+        <p style="margin-bottom:0.8rem">RG電子蜂巢消除老虎機！RTP 98.28% 業界最高返還率，連鎖反應爆分超爽，佛系玩家的最愛。</p>
+        <div class="tag-list">
+          <span class="tag">🧪 RG電子</span><span class="tag">RTP 98.28%</span><span class="tag">蜂巢消除</span><span class="tag">連鎖反應</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-2/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+    <!-- #3 魔龍傳奇 -->
+    <div class="card game-item" data-cat="other" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#3</div>
+        <div class="score-big" style="font-size:2rem">9.5</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      </div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#2a0a0a,#4a1515,#2a0505)"><i class="fas fa-dragon" style="color:#f87171"></i></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">魔龍傳奇</h3>
+          <span class="badge badge-warn">經典不敗</span>
+        </div>
+        <p style="margin-bottom:0.8rem">GR電子經典IP！3x5轉軸、20條賠付線單向連線，全台最多人玩的老虎機之一，入門首選。</p>
+        <div class="tag-list">
+          <span class="tag">🐉 GR電子</span><span class="tag">20條賠付線</span><span class="tag">經典轉軸</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-3/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+    <!-- #4 雷神之錘II -->
+    <div class="card game-item" data-cat="rsg" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#4</div>
+        <div class="score-big" style="font-size:2rem">9.5</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      </div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#0a1525,#1a2a4a,#0a1a35)"><i class="fas fa-hammer" style="color:#60a5fa"></i></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">雷神之錘II</h3>
+          <span class="badge badge-gold">GLI認證</span>
+        </div>
+        <p style="margin-bottom:0.8rem">RSG皇家電子北歐神話巨作！GLI認證、隨處支付、最大x25000倍，Free Game倍數累積不重置。</p>
+        <div class="tag-list">
+          <span class="tag">👑 RSG電子</span><span class="tag">最高 x25,000</span><span class="tag">隨處支付</span><span class="tag">GLI認證</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-4/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+    <!-- #5 麻將胡了 -->
+    <div class="card game-item" data-cat="pg" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#5</div>
+        <div class="score-big" style="font-size:2rem">9.4</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      </div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a1a0a,#3a3510,#2a2505)"><i class="fas fa-dice" style="color:#fbbf24"></i></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">麻將胡了</h3>
+          <span class="badge badge-safe">初代經典</span>
+        </div>
+        <p style="margin-bottom:0.8rem">PG Soft 1024 Ways麻將老虎機，全球爆紅的麻將主題Slot始祖，消除掉落搭配倍數連鎖超帶感。</p>
+        <div class="tag-list">
+          <span class="tag">🀄 PG Soft</span><span class="tag">1024 Ways</span><span class="tag">消除掉落</span><span class="tag">倍數連鎖</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-5/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+    <!-- #6 戰神呂布 -->
+    <div class="card game-item" data-cat="rsg" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#6</div>
+        <div class="score-big" style="font-size:2rem">9.4</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      </div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a0a0a,#3a1520,#2a0a15)"><i class="fas fa-shield-alt" style="color:#fb7185"></i></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">戰神呂布</h3>
+          <span class="badge badge-warn">三國迷必玩</span>
+        </div>
+        <p style="margin-bottom:0.8rem">RSG皇家電子三國志老虎機！隨處支付(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、Free Game最多100場倍數累積不重置。</p>
+        <div class="tag-list">
+          <span class="tag">👑 RSG電子</span><span class="tag">隨處支付</span><span class="tag">倍數 2x~500x</span><span class="tag">4級彩金</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-6/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+    <!-- #7 聚寶財神 -->
+    <div class="card game-item" data-cat="rsg" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#7</div>
+        <div class="score-big" style="font-size:2rem">9.3</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      </div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a0a00,#3a2010,#2a1505)"><i class="fas fa-coins" style="color:#f59e0b"></i></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">聚寶財神</h3>
+          <span class="badge badge-gold">🆕 新上架</span>
+        </div>
+        <p style="margin-bottom:0.8rem">RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。</p>
+        <div class="tag-list">
+          <span class="tag">👑 RSG電子</span><span class="tag">最多 32,400路</span><span class="tag">百搭進化</span><span class="tag">GLI認證</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-7/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+    <!-- #8 麻將胡了2 -->
+    <div class="card game-item" data-cat="pg" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#8</div>
+        <div class="score-big" style="font-size:2rem">9.2</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      </div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#0a1a1a,#153535,#0a2525)"><i class="fas fa-dice" style="color:#34d399"></i></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">麻將胡了2</h3>
+          <span class="badge badge-safe">UKGC+MGA雙執照</span>
+        </div>
+        <p style="margin-bottom:0.8rem">PG Soft 2000路消除掉落！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin第3軸全金倍數x2→x10，初代全面進化版。</p>
+        <div class="tag-list">
+          <span class="tag">🀄 PG Soft</span><span class="tag">2000 Ways</span><span class="tag">Gold Plated</span><span class="tag">雙執照認證</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-8/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+    <!-- #9 逛夜市3 -->
+    <div class="card game-item" data-cat="rsg" style="display:grid;grid-template-columns:auto 260px 1fr;gap:1.5rem;align-items:center">
+      <div style="text-align:center;min-width:80px">
+        <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#9</div>
+        <div class="score-big" style="font-size:2rem">9.2</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      </div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a1a0a,#2a3515,#1a2a0a)"><i class="fas fa-store" style="color:#a3e635"></i></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
+          <h3 style="font-size:1.2rem">逛夜市3</h3>
+          <span class="badge badge-gold">🆕 新上架</span>
+        </div>
+        <p style="margin-bottom:0.8rem">RSG皇家電子台灣夜市主題！243路中獎，Free Game倍數每局遞增最高x150、額外押注觸發率+100%、購買免遊僅50倍。門檻親民的歡樂爆分機。</p>
+        <div class="tag-list">
+          <span class="tag">👑 RSG電子</span><span class="tag">243路</span><span class="tag">倍數遞增 x150</span><span class="tag">GLI認證</span>
+        </div>
+        <div style="margin-top:1rem"><a href="/game-detail-9/" class="btn-primary" style="font-size:0.85rem;padding:0.5rem 1.2rem">查看詳細評測</a></div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2rem">
+    <a href="/" class="btn-outline">&larr; 回首頁</a>
+  </div>
+</div>
+<script>
+function filterGames(cat) {
+  document.querySelectorAll('.game-item').forEach(el => {
+    if(cat === 'all') { el.style.display = 'grid'; return; }
+    el.style.display = el.dataset.cat === cat ? 'grid' : 'none';
+  });
+  // highlight active filter button
+  document.querySelectorAll('.tag[onclick]').forEach(btn => {
+    btn.style.background = btn.getAttribute('onclick').includes("'"+cat+"'") ? 'rgba(57,255,20,0.4)' : '';
+  });
+}
+</script>
+</BaseLayout>
+
+<style is:global>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-primary:#121212;--bg-secondary:#1a1a1a;--bg-card:#1A1F1A;--bg-card-hover:#242924;
+  --gold:#39FF14;--gold-light:#39FF14;--gold-glow:rgba(57,255,20,0.35);
+  --guava-green:#39FF14;--guava-green-dark:#2bcc10;--guava-pink:#FF10F0;--guava-flesh:#ff6ef5;
+  --text-primary:#FFFFFF;--text-secondary:#cccccc;--text-muted:#999999;--border:#2a2a2a;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.8}
+a{color:var(--gold-light);text-decoration:none}a:hover{text-decoration:underline}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(18,18,18,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between}
+.navbar .logo{font-size:1.6rem;font-weight:900;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-decoration:none}
+
+.navbar .logo .logo-img{height:45px;width:auto;filter:drop-shadow(0 0 8px rgba(57,255,20,0.3));transition:filter 0.3s}
+.navbar .logo:hover .logo-img{filter:drop-shadow(0 0 14px rgba(57,255,20,0.5))}
+.nav-links{display:flex;gap:0.5rem;align-items:center}
+.nav-links a{color:var(--text-secondary);text-decoration:none;padding:0.5rem 1rem;border-radius:8px;font-size:0.95rem;transition:all 0.3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-light);background:rgba(57,255,20,0.1);text-decoration:none}
+.guava-border{position:relative}.guava-border::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--guava-green),var(--gold-light),var(--guava-pink),var(--gold-light),var(--guava-green))}
+.container{max-width:1100px;margin:0 auto;padding:100px 2rem 4rem}
+.page-hero{text-align:center;padding:3rem 0 2rem}
+.page-hero h1{font-size:2.5rem;font-weight:900;margin-bottom:0.8rem}
+.page-hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-hero p{color:var(--text-secondary);font-size:1.1rem;max-width:700px;margin:0 auto}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:1.5rem;transition:all 0.3s}
+.card:hover{border-color:rgba(57,255,20,0.3);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.card h3{font-size:1.2rem;margin-bottom:0.5rem;color:var(--text-primary)}
+.card p{color:var(--text-secondary);font-size:0.95rem}
+.badge{display:inline-block;padding:0.2rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:700}
+.badge-safe{background:var(--guava-green);color:white}
+.badge-warn{background:var(--gold);color:#000000}
+.badge-danger{background:#e74c3c;color:white}
+.badge-gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#000000}
+.score-big{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.rank-thumb{width:260px;border-radius:12px;overflow:hidden;flex-shrink:0}
+.rank-thumb img{width:100%;display:block;object-fit:contain}
+.rank-thumb-icon{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.5rem}
+@media(max-width:768px){
+  .game-item{grid-template-columns:1fr !important;gap:1rem !important}
+  .rank-thumb{width:100%}
+  .rank-thumb-icon{height:140px}
+}
+.stars{color:var(--gold-light);font-size:0.9rem}
+.stars .empty{color:var(--text-muted)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.btn-primary{display:inline-block;padding:0.8rem 2rem;background:linear-gradient(135deg,var(--gold-light),var(--gold),#2bcc10);color:#000000;font-weight:700;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;transition:all 0.3s;text-align:center}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--gold-glow);text-decoration:none}
+.btn-outline{display:inline-block;padding:0.8rem 2rem;background:transparent;border:2px solid var(--guava-green);color:var(--guava-green);border-radius:10px;cursor:pointer;font-size:1rem;font-weight:600;text-decoration:none;transition:all 0.3s;text-align:center}
+.btn-outline:hover{background:rgba(57,255,20,0.1);text-decoration:none}
+.tag-list{display:flex;gap:0.5rem;flex-wrap:wrap;margin:0.8rem 0}
+.tag{padding:0.3rem 0.8rem;background:rgba(57,255,20,0.15);color:var(--guava-green);border-radius:6px;font-size:0.85rem}
+.divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.section-title{font-size:1.6rem;font-weight:900;margin:2rem 0 1rem;display:flex;align-items:center;gap:0.5rem}
+.section-title::before{content:'';width:4px;height:28px;background:linear-gradient(to bottom,var(--gold-light),var(--guava-green));border-radius:2px}
+table{width:100%;border-collapse:collapse;margin:1rem 0}
+th,td{padding:1rem;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--gold-light);font-weight:700;background:var(--bg-secondary)}
+tr:hover{background:var(--bg-card-hover)}
+.footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:4rem}
+.back-link{display:inline-flex;align-items:center;gap:0.5rem;color:var(--gold-light);margin-bottom:1.5rem;font-size:0.95rem}
+.toc{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;margin:1.5rem 0}
+.toc h4{margin-bottom:0.8rem;color:var(--gold-light)}
+.toc ol{padding-left:1.5rem;color:var(--text-secondary)}
+.toc li{margin-bottom:0.4rem}
+.toc a{color:var(--text-secondary)}
+.toc a:hover{color:var(--gold-light)}
+.info-grid{display:grid;grid-template-columns:200px 1fr;gap:0.5rem 1.5rem;margin:1rem 0}
+.info-grid .label{color:var(--text-muted);font-weight:500}
+.info-grid .value{color:var(--text-primary)}
+.article-content{font-size:1rem;color:var(--text-secondary);line-height:2}
+.article-content h2{font-size:1.4rem;color:var(--text-primary);margin:2rem 0 1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.article-content h3{font-size:1.15rem;color:var(--gold-light);margin:1.5rem 0 0.8rem}
+.article-content p{margin-bottom:1rem}
+.article-content ul,.article-content ol{padding-left:1.5rem;margin-bottom:1rem}
+.article-content li{margin-bottom:0.5rem}
+.article-content blockquote{border-left:4px solid var(--gold);padding:1rem 1.5rem;background:var(--bg-card);border-radius:0 12px 12px 0;margin:1.5rem 0;font-style:italic;color:var(--text-secondary)}
+.article-content .tip-box{background:rgba(57,255,20,0.1);border:1px solid var(--guava-green);border-radius:12px;padding:1.2rem;margin:1.5rem 0}
+.article-content .warn-box{background:rgba(231,76,60,0.1);border:1px solid #e74c3c;border-radius:12px;padding:1.2rem;margin:1.5rem 0}
+.faq-section{margin:2rem 0}
+.faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;margin-bottom:1rem;overflow:hidden}
+.faq-q{padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;color:var(--text-primary)}
+.faq-q:hover{background:var(--bg-card-hover)}
+.faq-a{padding:0 1.5rem 1.2rem;color:var(--text-secondary);display:none}
+.faq-item.open .faq-a{display:block}
+.related-box{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-top:2rem}
+.related-box h3{color:var(--gold-light);margin-bottom:1rem}
+.related-links{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.related-links a{display:block;padding:1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-weight:600;transition:all 0.3s}
+.related-links a:hover{border-color:var(--gold);text-decoration:none;transform:translateY(-2px)}
+.related-links a small{display:block;color:var(--text-muted);font-weight:400;margin-top:0.3rem}
+.breadcrumb{color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem}
+.breadcrumb a{color:var(--text-muted)}.breadcrumb a:hover{color:var(--gold-light)}
+@media(max-width:768px){.grid-2,.grid-3,.related-links{grid-template-columns:1fr}.page-hero h1{font-size:1.8rem}.info-grid{grid-template-columns:1fr}.nav-links{display:none}}
+
+</style>
+
+<script is:inline>
+
+function filterGames(cat) {
+  document.querySelectorAll('.game-item').forEach(el => {
+    if(cat === 'all') { el.style.display = 'grid'; return; }
+    el.style.display = el.dataset.cat === cat ? 'grid' : 'none';
+  });
+  // highlight active filter button
+  document.querySelectorAll('.tag[onclick]').forEach(btn => {
+    btn.style.background = btn.getAttribute('onclick').includes("'"+cat+"'") ? 'rgba(57,255,20,0.4)' : '';
+  });
+}
+
+</script>

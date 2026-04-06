@@ -1,0 +1,550 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+---
+
+<BaseLayout 
+  title="奇幻魔藥｜RG電子RTP 98.28%蜂巢老虎機實測 - GAME8LA"
+  description="奇幻魔藥完整實測！RG電子蜂巢相鄰消除老虎機，RTP 98.28%業界天花板、最大x20000倍。6個相同符號相鄰即中獎，Wild累積倍數+魔藥缸加乘+15局Free Game全解析。"
+  ogImage="https://game8la.com/images/fantasy-potion/cover.webp"
+  currentPage="game-detail-2"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 奇幻魔藥</div>
+  <a href="/#games" class="back-link"><i class="fas fa-arrow-left"></i> 回遊戲列表</a>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">
+    <div style="background:linear-gradient(135deg,#0a1a2e,#0d3d2d,#0a2a1a);border-radius:16px;overflow:hidden;border:1px solid var(--border)">
+      <img src="/images/fantasy-potion/cover.webp" alt="奇幻魔藥 Fantasy Potion 遊戲封面" style="width:100%;display:block;border-radius:16px" />
+    </div>
+    <div>
+      <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 蜂巢相鄰消除</span>
+      <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">奇幻魔藥</h1>
+      <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
+        <span class="score-big">9.7</span>
+        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+        <span style="color:var(--text-muted)">(98,740 次瀏覽)</span>
+      </div>
+      <div class="info-grid">
+        <span class="label">遊戲供應商</span><span class="value">RG電子（RG Slot）</span>
+        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--guava-green)">98.28%（業界天花板）</span>
+        <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">高波動</span>
+        <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">x20,000</span>
+        <span class="label">盤面結構</span><span class="value">蜂巢六角格（Honeycomb）</span>
+        <span class="label">最低押注</span><span class="value">0.5 元起</span>
+        <span class="label">中獎條件</span><span class="value">6 個以上相同符號上下左右相鄰</span>
+        <span class="label">Wild</span><span class="value">常駐盤面中間，代替所有符號（Scatter 除外）</span>
+        <span class="label">Scatter</span><span class="value">出現即觸發 15 局免費遊戲，重觸 +5 局</span>
+        <span class="label">購買免遊</span><span class="value">5,000（100 倍押注）</span>
+      </div>
+      <div class="tag-list">
+        <span class="tag">奇幻魔藥</span><span class="tag">RG電子</span><span class="tag">98.28% RTP</span><span class="tag">x20000</span><span class="tag">蜂巢消除</span><span class="tag">Wild倍數累積</span><span class="tag">魔藥缸</span><span class="tag">購買免遊</span>
+      </div>
+      <div style="margin-top:1.5rem;display:flex;gap:1rem">
+        <a href="#intro" class="btn-primary" onclick="event.preventDefault();document.getElementById('intro').scrollIntoView({behavior:'smooth'})">🧪 看攻略</a>
+        <a href="javascript:void(0)" class="btn-outline" onclick="this.innerHTML='✅ 已收藏';this.style.borderColor='var(--gold)';this.style.color='var(--gold)'">📋 加入收藏</a>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0;color:var(--text-muted);font-size:0.85rem">
+    <span>📝 8LA 編輯部</span>
+    <span>|</span>
+    <span>⏱ 預估閱讀 8 分鐘</span>
+    <span>|</span>
+    <span>最後更新：2026-04-06</span>
+  </div>
+  <hr class="divider">
+  <!-- 目錄 -->
+  <div class="toc">
+    <h4>📑 本文目錄</h4>
+    <ol>
+      <li><a href="#intro">遊戲介紹</a></li>
+      <li><a href="#grid">蜂巢盤面與消除規則</a></li>
+      <li><a href="#wild">四大核心機制</a></li>
+      <li><a href="#paytable">完整賠率表</a></li>
+      <li><a href="#machine">選台技巧</a></li>
+      <li><a href="#tips">8LA攻略建議</a></li>
+      <li><a href="#faq">常見問題 FAQ</a></li>
+    </ol>
+  </div>
+  <div class="article-content">
+  <!-- 遊戲介紹 -->
+  <h2 id="intro">遊戲介紹</h2>
+  <p>各位8LA鄉民，如果你覺得老虎機的 RTP 都差不多，那你一定沒玩過《<strong>奇幻魔藥</strong>》。RG 電子這款暗黑魔法系老虎機，RTP 直接拉到 <strong>98.28%</strong>——沒打錯，九八趴，業界天花板等級。最大倍率 <strong>x20,000</strong>，高波動但理論回報率碾壓市面上九成以上的遊戲。</p>
+  <p>它跟傳統老虎機完全不同：盤面是<strong>蜂巢六角格</strong>（Honeycomb），像蜂窩一樣的六角形格子排列。中獎規則超直覺——只要 <strong>6 個以上相同符號上下左右相鄰</strong>就算中獎，不需要管什麼賠付線。中獎符號消除後自動補滿盤面，繼續判定直到沒有新的中獎組合為止。畫面走暗黑魔法風格，藥水瓶、魔法缸、神秘符文，整個畫面魔性十足。</p>
+  <div class="img-showcase" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+    <figure style="margin:0;text-align:center">
+      <img src="/images/fantasy-potion/gameplay-wild-2x.webp" alt="奇幻魔藥蜂巢盤面實機畫面 Wild 2x" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border)" />
+      <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 蜂巢盤面實機畫面，中間 Wild 已累積到 2x</figcaption>
+    </figure>
+    <figure style="margin:0;text-align:center">
+      <img src="/images/fantasy-potion/gameplay-mobile.webp" alt="奇幻魔藥手機版遊戲畫面" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border)" />
+      <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 手機版遊戲畫面，操作流暢</figcaption>
+    </figure>
+  </div>
+  <!-- 影片介紹 -->
+  <div class="video-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin:1.5rem 0;border:1px solid var(--border)">
+    <iframe src="https://www.youtube.com/embed/jSu1vLLMGy4" title="奇幻魔藥遊戲介紹影片" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
+  </div>
+  <p style="color:var(--text-muted);font-size:0.8rem;text-align:center;margin-top:-0.5rem">▲ 奇幻魔藥實機遊玩影片</p>
+  <!-- 蜂巢盤面 -->
+  <h2 id="grid">蜂巢盤面與消除規則</h2>
+  <p>奇幻魔藥的盤面不是傳統的橫列式滾輪，而是<strong>蜂巢六角格（Honeycomb Grid）</strong>。每個格子都是六角形，符號之間以「上、下、左、右」四個方向判定相鄰關係。</p>
+  <div class="card">
+    <h3>消除規則</h3>
+    <ul style="padding-left:1.5rem;color:var(--text-secondary)">
+      <li>盤面上<strong>6 個以上相同符號上下左右相鄰</strong>即算中獎（5 個以下不算）</li>
+      <li>中獎符號消除後，上方符號自動掉落填補空位</li>
+      <li>持續判定 → 持續消除 → 直到沒有新的中獎組合為止</li>
+      <li>每次消除都獨立計算獎金，連鎖消除 = 連鎖噴分</li>
+    </ul>
+  </div>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <img src="/images/fantasy-potion/home_img09.webp" alt="6個相同符號相鄰即中獎" loading="lazy" />
+      <figcaption>成功連線 6 個相同符號，即可贏得獎金！</figcaption>
+    </div>
+    <div class="feature-card">
+      <img src="/images/fantasy-potion/home_img08.webp" alt="分散不算中獎" loading="lazy" />
+      <figcaption>沒有連線成功，無法中獎！</figcaption>
+    </div>
+  </div>
+  <div class="tip-box">
+    <p>💡 <strong>8LA小知識：</strong>蜂巢消除跟傳統賠付線的思路完全不同。你不用去數「哪一條線中了」，只要看盤面上同色符號有沒有黏在一起就好。6 個一組是最低門檻，湊到 16 個以上就是噴射時刻。</p>
+  </div>
+  <!-- === 四大機制 2x2 卡片區 === -->
+  <h2 id="wild">四大核心機制</h2>
+  <p>奇幻魔藥的爆分系統由四大機制環環相扣：<strong>Scatter 觸發免費遊戲</strong>、<strong>Wild 百搭累積倍數</strong>、<strong>魔藥缸能量槽</strong>、以及<strong>購買免遊</strong>。以下用圖文卡片一次看懂。</p>
+
+  <div class="feature-grid" id="cauldron">
+    <div class="feature-card">
+      <img src="/images/fantasy-potion/scatter-symbol.webp" alt="Scatter 免費遊戲符號" loading="lazy" />
+      <h3 class="feature-title">免費遊戲符號</h3>
+      <ul class="feature-list">
+        <li>一般遊戲中出現免費遊戲符號，即可獲得 <strong>15 局</strong>免費遊戲。</li>
+        <li>免費遊戲中出現免費遊戲符號，可再獲得<strong>5局</strong>免費遊戲。</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <img src="/images/fantasy-potion/wild-3x.webp" alt="Wild 百搭符號連線玩法" loading="lazy" />
+      <h3 class="feature-title">百搭符號連線玩法</h3>
+      <ul class="feature-list">
+        <li>固定於盤面中間，可以代替所有符號連線贏分，但不包括免費遊戲（Scatter）。</li>
+        <li>連線中有包含百搭符號時，可累積魔藥至魔藥缸。</li>
+        <li>累積 <strong>2 次</strong>時獲得一次魔藥缸機會，且下一消時 Wild 倍數<strong>+1x</strong>。</li>
+        <li>若於免費遊戲時獲得，Wild 倍數可以<strong>累積至最終局</strong>。</li>
+      </ul>
+    </div>
+    <div class="feature-card" id="freegame">
+      <img src="/images/fantasy-potion/cauldron-wild.webp" alt="魔藥缸能量槽機制" loading="lazy" />
+      <h3 class="feature-title">魔藥缸能量槽</h3>
+      <ul class="feature-list">
+        <li>利用百搭符號消除贏分，能為魔藥缸注滿魔藥。</li>
+        <li>魔藥缸會<strong>隨機生成贏分符號</strong>，並有機會獲得<strong>獎金倍數</strong>。</li>
+        <li>盤面無法消除時，魔藥缸會<strong>替換至多 3 個符號</strong>續命。</li>
+        <li>倍數僅限當次消除有效，下一次補牌時失效。</li>
+      </ul>
+    </div>
+    <div class="feature-card" id="buyin">
+      <img src="/images/fantasy-potion/buy-freegame.webp" alt="購買免遊 5,000" loading="lazy" />
+      <h3 class="feature-title">購買免費遊戲</h3>
+      <ul class="feature-list">
+        <li>用當前下注金額的 <strong>100 倍</strong>，直接購買免遊進場。</li>
+        <li>以押注 50 為例 = 花費 5,000 直接進入 15 局 Free Game。</li>
+        <li>購買後規則與自然觸發完全相同，Wild 倍數照常累積。</li>
+        <li>建議本金至少準備 10 次購買的量，降低單次風險。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <p>⚠️ <strong>風險提示：</strong>Free Game 是奇幻魔藥的獎金集中區。高波動意味著主遊戲可能會經歷較長的乾旱期，大多數有意義的贏分都集中在 Free Game 裡。如果 Wild 倍數在 Free Game 中沒有順利疊上去，15 局結束後的回報可能低於預期。</p>
+  </div>
+  <div class="card">
+    <table>
+      <thead><tr><th>購買方式</th><th>費用</th><th>效果</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700">購買免費遊戲</td><td>100 倍押注（以押注 50 為例 = 5,000）</td><td>直接進入 15 局 Free Game</td></tr>
+      </tbody>
+    </table>
+    <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.8rem">※ 購買後 Free Game 的規則與自然觸發完全相同，Wild 倍數照常累積，魔藥缸照常運作。</p>
+  </div>
+  <!-- 賠率表 -->
+  <h2 id="paytable">完整賠率表（押注 50 基準）</h2>
+  <figure style="margin:1.5rem auto;text-align:center;max-width:500px">
+    <img src="/images/fantasy-potion/paytable-symbols.webp" alt="奇幻魔藥一般符號賠率表" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border);background:#0a0a0a" />
+    <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 遊戲內建賠率表截圖</figcaption>
+  </figure>
+  <h3>一般符號賠率（相鄰消除）</h3>
+  <table>
+    <thead><tr><th>符號</th><th>6-7 個</th><th>8-9 個</th><th>10-11 個</th><th>12-13 個</th><th>14-15 個</th><th>16+ 個</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-red-heart.webp" alt="紅色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />紅色藥水</td><td>100</td><td>200</td><td>300</td><td>500</td><td>1,000</td><td style="color:var(--gold-light);font-weight:700">10,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-purple.webp" alt="紫色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />紫色藥水</td><td>50</td><td>100</td><td>150</td><td>250</td><td>500</td><td style="color:var(--gold-light);font-weight:700">5,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-blue-round.webp" alt="藍色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />藍色藥水</td><td>25</td><td>50</td><td>75</td><td>125</td><td>250</td><td style="color:var(--gold-light);font-weight:700">2,500</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-green.webp" alt="綠色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />綠色藥水</td><td>10</td><td>20</td><td>30</td><td>50</td><td>100</td><td style="color:var(--gold-light)">1,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-orange.webp" alt="橘色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />橘色藥水</td><td>10</td><td>20</td><td>30</td><td>50</td><td>100</td><td style="color:var(--gold-light)">1,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-redbrown.webp" alt="紅棕色藥瓶" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />紅棕色藥瓶</td><td>5</td><td>10</td><td>15</td><td>25</td><td>50</td><td style="color:var(--gold-light)">500</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-blue-tube.webp" alt="藍色試管" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />藍色試管</td><td>5</td><td>10</td><td>15</td><td>25</td><td>50</td><td style="color:var(--gold-light)">500</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem">※ 以上為押注 50 時的賠率，與上方遊戲截圖一致。實際金額依押注大小等比例變動（如押注 100 則所有數值 ×2）。中獎門檻為 6 個相同符號相鄰，5 個以下不算中獎。</p>
+  <!-- 選台技巧 -->
+  <h2 id="machine">選台技巧 — 看數據挑機台</h2>
+  <p>進入奇幻魔藥前，別急著直接開轉。RG 電子的遊戲大廳會顯示每台機台的<strong>近 30 日數據</strong>，包含免費遊戲最高倍數、Free Game 次數、各倍率區間分佈等。善用這些數據可以幫你挑到「比較熟」的機台。</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+    <figure style="margin:0;text-align:center">
+      <img src="/images/fantasy-potion/machine-select.webp" alt="奇幻魔藥選台畫面" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border)" />
+      <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 遊戲大廳選台畫面</figcaption>
+    </figure>
+    <figure style="margin:0;text-align:center">
+      <img src="/images/fantasy-potion/machine-tips.webp" alt="奇幻魔藥選台技巧" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border)" />
+      <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 挑選未開次數高的機台是常見技巧</figcaption>
+    </figure>
+  </div>
+  <div class="tip-box">
+    <p>💡 <strong>8LA小知識：</strong>選台不是玄學，而是看數據。重點看「近 30 日免費遊戲最高倍」和「Free Game 觸發次數」。如果一台機台的未開 Free Game 次數特別高（代表很久沒觸發），理論上接下來觸發的機率會比較正常。但請記住，每一轉仍然是獨立事件，過去的數據不保證未來結果。</p>
+  </div>
+  <!-- 8LA攻略建議 -->
+  <h2 id="tips">⚡ 8LA攻略建議</h2>
+  <div class="card" style="background:rgba(57,255,20,0.08);border-color:var(--guava-green)">
+    <ol style="padding-left:1.5rem;color:var(--text-secondary)">
+      <li><strong>搞懂 Wild 累積倍數是關鍵</strong> — Wild 在盤面中間不會動，每次連線含 Wild 累積 2 次就觸發魔藥缸 + Wild 倍數 +1x。Free Game 裡倍數一路累積不重置，這是爆分的靈魂所在</li>
+      <li><strong>Free Game 是決勝關鍵</strong> — 15 局免費遊戲裡 Wild 倍數持續疊加，越後面的轉越猛。如果追加到 +5 局，後段的每一轉都有可能炸裂。主遊戲的乾旱期都是在等這一刻</li>
+      <li><strong>觀察小魔女的訊號</strong> — 連續消除或能量接近爆發時，盤面上方的小魔女會變得特別活潑，甚至偷看魔法書或魔藥缸，背景音樂也會從輕快轉為節奏加速。這些都是 Free Game 即將觸發的暗示，看到時別急著降注</li>
+      <li><strong>購買免遊的最佳時機</strong> — 100 倍押注直接進場很爽，但不要隨便買。根據實測經驗：如果過去 20 轉內達成 7 次以上連續消除，通常代表進入高機率爆擊期，這時候買免遊的回報期待值最高</li>
+      <li><strong>魔藥缸是續命利器</strong> — 盤面消不動的時候，魔藥缸會替換最多 3 個符號救場。在 Free Game 裡這等於多了幾次消除機會，配合 Wild 倍數效果翻倍</li>
+      <li><strong>設定停損停利再開打</strong> — 進遊戲前先規劃三個數字：今天可動用的資金上限、止盈點（贏到多少就收）、止損點（虧多少就走）。例如帶 1,000 元進場，設止盈 800、止損 500，碰到任一條件就離場，別讓情緒主導你的押注</li>
+      <li><strong>注意「6 個相鄰」門檻</strong> — 不是 4-5 個黏在一起就算中獎，至少要 6 個。高價值符號（紅色/紫色藥水）湊到 16 個以上才是真正的大獎時刻——16+ 個紅色藥水在押注 100 時直接噴 20,000</li>
+      <li><strong>高波動 = 要有耐心</strong> — 雖然 RTP 98.28% 是業界天花板，但高波動意味著獎金集中在少數幾轉。善用選台數據、控管資金、等 Free Game 裡 Wild 倍數疊起來再享受收割</li>
+    </ol>
+  </div>
+  <!-- FAQ -->
+  <h2 id="faq">常見問題 FAQ</h2>
+  <div class="faq-section">
+    <div class="faq-item">
+      <div class="faq-q">Q：RTP 98.28% 是真的嗎？為什麼這麼高？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-a">是的，RG 電子公布的理論 RTP 為 98.28%。這在老虎機界算是頂尖水準（業界平均大約 94%~96%）。高 RTP 代表長期理論上每投入 100 元會返還約 98.28 元，但這是統計期望值，短期內可能大贏或大輸，因為它同時是高波動。RTP 高不代表每轉都贏，而是長期的整體回報率比較友善。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q：蜂巢消除跟傳統老虎機差在哪？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-a">傳統老虎機靠「賠付線」判定中獎，符號要在特定的線上排列才算。奇幻魔藥用的是「相鄰消除」機制——只要 6 個以上相同符號上下左右黏在一起就算中獎，位置不限。消除後上方符號掉落、持續判定，形成連鎖反應。玩起來比較像消消樂，直覺好懂。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q：Wild 倍數在主遊戲也會累積嗎？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-a">主遊戲中 Wild 也有累積倍數的功能（每 2 次含 Wild 中獎就 +1x），但每一轉結束後倍數就會重置。只有在免費遊戲（Free Game）期間，Wild 倍數才會跨局累積到最終局不歸零。所以 Free Game 才是真正的爆分舞台。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q：魔藥缸的倍數跟 Wild 倍數是相乘還是相加？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-a">魔藥缸給的倍數是套用在「當次消除」上的額外加乘，而 Wild 倍數則是套用在「含 Wild 連線」的獎金上。兩者在各自的作用範圍內獨立運作。具體的交互計算方式建議以遊戲內的實際結算為準，不同情況下的疊加效果可能略有差異。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Q：有沒有什麼必勝打法？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-a">沒有。老虎機的結果完全由 RNG（隨機數生成器）決定，每一轉都是獨立事件。任何聲稱「必勝」「破解」的攻略都是詐騙。雖然 98.28% RTP 很高，但高波動的本質沒有變——獎金集中在少數幾轉。最好的策略就是設好預算、享受遊戲過程、輸到停損線就離場。</div>
+    </div>
+  </div>
+
+  <!-- 社群分享 -->
+  <div class="share-bar">
+    <span class="share-label">分享這篇攻略：</span>
+    <a href="https://social-plugins.line.me/lineit/share?url=https://game8la.com/game-detail-2/" target="_blank" rel="noopener noreferrer" class="share-btn share-line" aria-label="分享到 LINE">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      LINE
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://game8la.com/game-detail-2/" target="_blank" rel="noopener noreferrer" class="share-btn share-fb" aria-label="分享到 Facebook">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook
+    </a>
+  </div>
+
+  <!-- 延伸閱讀 -->
+  <div class="read-more-box">
+    <h3>📖 延伸閱讀</h3>
+    <ul class="read-more-list">
+      <li><a href="/article-slots/">老虎機新手攻略：RTP、波動率、選台一次搞懂</a></li>
+      <li><a href="/article-baccarat/">百家樂看路教學：大路、珠盤路、下三路完整圖解</a></li>
+      <li><a href="/game-detail-1/">戰神賽特2 完整攻略：覺醒之力、JACKPOT、購買特色全解析</a></li>
+      <li><a href="/game-detail-3/">魔龍傳奇攻略：連鎖倍數、魔龍之眼、幸運彩金機制拆解</a></li>
+    </ul>
+  </div>
+
+  </div><!-- end article-content -->
+  <div class="related-box"><h3>⚡ 你可能也想玩</h3><div class="related-links"><a href="/game-detail-1/">戰神賽特2：覺醒之力<small>ATG電子｜x81,000倍神話級｜8LA評分 9.8</small></a><a href="/game-detail-3/">魔龍傳奇<small>GR電子｜消除＋龍珠系統｜8LA評分 9.5</small></a><a href="/game-detail-8/">發財神2<small>RSG電子｜連環炸裂 x2,000｜8LA評分 9.3</small></a><a href="/game-detail-5/">麻將胡了<small>PG Soft｜Mahjong Ways 2｜8LA評分 9.4</small></a></div></div>
+  <div style="text-align:center;margin-top:2rem">
+    <a href="/#games" class="btn-outline">← 回遊戲列表</a>
+    <a href="/game-ranking/" class="btn-primary" style="margin-left:1rem">看遊戲推薦排名 →</a>
+  </div>
+</div>
+
+<!-- SCROLL TO TOP -->
+</BaseLayout>
+
+<style is:global>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-primary:#121212;--bg-secondary:#1a1a1a;--bg-card:#1A1F1A;--bg-card-hover:#242924;
+  --gold:#39FF14;--gold-light:#39FF14;--gold-glow:rgba(57,255,20,0.35);
+  --guava-green:#39FF14;--guava-green-dark:#2bcc10;--guava-pink:#FF10F0;--guava-flesh:#ff6ef5;
+  --text-primary:#FFFFFF;--text-secondary:#cccccc;--text-muted:#999999;--border:#2a2a2a;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.8}
+a{color:var(--gold-light);text-decoration:none}a:hover{text-decoration:underline}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(18,18,18,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between}
+.navbar .logo{font-size:1.6rem;font-weight:900;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-decoration:none}
+
+.navbar .logo .logo-img{height:45px;width:auto;filter:drop-shadow(0 0 8px rgba(57,255,20,0.3));transition:filter 0.3s}
+.navbar .logo:hover .logo-img{filter:drop-shadow(0 0 14px rgba(57,255,20,0.5))}
+.nav-links{display:flex;gap:0.5rem;align-items:center}
+.nav-links a{color:var(--text-secondary);text-decoration:none;padding:0.5rem 1rem;border-radius:8px;font-size:0.95rem;transition:all 0.3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-light);background:rgba(57,255,20,0.1);text-decoration:none}
+.guava-border{position:relative}.guava-border::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--guava-green),var(--gold-light),var(--guava-pink),var(--gold-light),var(--guava-green))}
+.container{max-width:1100px;margin:0 auto;padding:100px 2rem 4rem}
+.page-hero{text-align:center;padding:3rem 0 2rem}
+.page-hero h1{font-size:2.5rem;font-weight:900;margin-bottom:0.8rem}
+.page-hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-hero p{color:var(--text-secondary);font-size:1.1rem;max-width:700px;margin:0 auto}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:1.5rem;transition:all 0.3s}
+.card:hover{border-color:rgba(57,255,20,0.3);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.card h3{font-size:1.2rem;margin-bottom:0.5rem;color:var(--text-primary)}
+.card p{color:var(--text-secondary);font-size:0.95rem}
+.badge{display:inline-block;padding:0.2rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:700}
+.badge-safe{background:var(--guava-green);color:white}
+.badge-warn{background:var(--gold);color:#000000}
+.badge-danger{background:#e74c3c;color:white}
+.badge-gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#000000}
+.score-big{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stars{color:var(--gold-light);font-size:0.9rem}
+.stars .empty{color:var(--text-muted)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.btn-primary{display:inline-block;padding:0.8rem 2rem;background:linear-gradient(135deg,var(--gold-light),var(--gold),#2bcc10);color:#000000;font-weight:700;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;transition:all 0.3s;text-align:center}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--gold-glow);text-decoration:none}
+.btn-outline{display:inline-block;padding:0.8rem 2rem;background:transparent;border:2px solid var(--guava-green);color:var(--guava-green);border-radius:10px;cursor:pointer;font-size:1rem;font-weight:600;text-decoration:none;transition:all 0.3s;text-align:center}
+.btn-outline:hover{background:rgba(57,255,20,0.1);text-decoration:none}
+.tag-list{display:flex;gap:0.5rem;flex-wrap:wrap;margin:0.8rem 0}
+.tag{padding:0.3rem 0.8rem;background:rgba(57,255,20,0.15);color:var(--guava-green);border-radius:6px;font-size:0.85rem}
+.divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.section-title{font-size:1.6rem;font-weight:900;margin:2rem 0 1rem;display:flex;align-items:center;gap:0.5rem}
+.section-title::before{content:'';width:4px;height:28px;background:linear-gradient(to bottom,var(--gold-light),var(--guava-green));border-radius:2px}
+table{width:100%;border-collapse:collapse;margin:1rem 0}
+th,td{padding:1rem;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--gold-light);font-weight:700;background:var(--bg-secondary)}
+tr:hover{background:var(--bg-card-hover)}
+.progress-bar{width:100%;height:8px;background:var(--bg-secondary);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width 0.5s}
+.progress-fill.high{background:linear-gradient(90deg,var(--guava-green),var(--gold-light))}
+.progress-fill.mid{background:linear-gradient(90deg,var(--gold),var(--guava-pink))}
+.progress-fill.low{background:#e74c3c}
+.footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:4rem}
+.back-link{display:inline-flex;align-items:center;gap:0.5rem;color:var(--gold-light);margin-bottom:1.5rem;font-size:0.95rem}
+.toc{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem 2rem;margin:1.5rem 0}
+.toc h4{margin-bottom:0.8rem;color:var(--gold-light)}
+.toc ol{padding-left:1.5rem;color:var(--text-secondary)}
+.toc li{margin-bottom:0.4rem}
+.toc a{color:var(--text-secondary)}
+.toc a:hover{color:var(--gold-light)}
+.info-grid{display:grid;grid-template-columns:200px 1fr;gap:0.5rem 1.5rem;margin:1rem 0}
+.info-grid .label{color:var(--text-muted);font-weight:500}
+.info-grid .value{color:var(--text-primary)}
+.article-content{font-size:1rem;color:var(--text-secondary);line-height:2}
+.article-content h2{font-size:1.4rem;color:var(--text-primary);margin:2rem 0 1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.article-content h3{font-size:1.15rem;color:var(--gold-light);margin:1.5rem 0 0.8rem}
+.article-content p{margin-bottom:1rem}
+.article-content ul,.article-content ol{padding-left:1.5rem;margin-bottom:1rem}
+.article-content li{margin-bottom:0.5rem}
+.article-content blockquote{border-left:4px solid var(--gold);padding:1rem 1.5rem;background:var(--bg-card);border-radius:0 12px 12px 0;margin:1.5rem 0;font-style:italic;color:var(--text-secondary)}
+.article-content .tip-box{background:rgba(57,255,20,0.1);border:1px solid var(--guava-green);border-radius:12px;padding:1.2rem;margin:1.5rem 0}
+.article-content .warn-box{background:rgba(231,76,60,0.1);border:1px solid #e74c3c;border-radius:12px;padding:1.2rem;margin:1.5rem 0}
+.faq-section{margin:2rem 0}
+.faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;margin-bottom:1rem;overflow:hidden}
+.faq-q{padding:1.2rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;color:var(--text-primary)}
+.faq-q:hover{background:var(--bg-card-hover)}
+.faq-a{padding:0 1.5rem 1.2rem;color:var(--text-secondary);display:none}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+.related-box{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-top:2rem}
+.related-box h3{color:var(--gold-light);margin-bottom:1rem}
+.related-links{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.related-links a{display:block;padding:1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-weight:600;transition:all 0.3s}
+.related-links a:hover{border-color:var(--gold);text-decoration:none;transform:translateY(-2px)}
+.related-links a small{display:block;color:var(--text-muted);font-weight:400;margin-top:0.3rem}
+.breadcrumb{color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem}
+.breadcrumb a{color:var(--text-muted)}.breadcrumb a:hover{color:var(--gold-light)}
+@media(max-width:768px){.grid-2,.grid-3,.related-links{grid-template-columns:1fr}.page-hero h1{font-size:1.8rem}.info-grid{grid-template-columns:1fr}.nav-links{display:none}
+  .img-showcase, .feature-grid{grid-template-columns:1fr !important}
+}
+
+/* === FEATURE CARD GRID (fpotion style) === */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+.feature-card {
+  background: linear-gradient(135deg, #1a1040, #1e2a5a, #1a1040);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(100, 120, 200, 0.25);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover {
+  border-color: rgba(140, 160, 255, 0.4);
+  box-shadow: 0 4px 24px rgba(80, 100, 200, 0.2);
+}
+.feature-card img {
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  background: #0d1230;
+}
+.feature-card figcaption {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  padding: 0.8rem 1.2rem;
+  line-height: 1.6;
+}
+.feature-title {
+  color: var(--guava-green);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 1rem 1.2rem 0.3rem;
+  margin: 0;
+}
+.feature-list {
+  list-style: none;
+  padding: 0 1.2rem 1.2rem;
+  margin: 0;
+}
+.feature-list li {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  padding-left: 1.2rem;
+  position: relative;
+}
+.feature-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--guava-green);
+  font-size: 0.7rem;
+  top: 0.3rem;
+}
+@media (max-width: 768px) {
+  .feature-grid { grid-template-columns: 1fr; }
+}
+/* 社群分享列 */
+.share-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 2rem 0 1.5rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.share-label { color: var(--text-muted); font-size: 0.9rem; }
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.share-btn:hover { opacity: 0.85; }
+.share-line { background: #06C755; color: #fff; }
+.share-fb { background: #1877F2; color: #fff; }
+/* 延伸閱讀 */
+.read-more-box {
+  margin: 1.5rem 0 2rem;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(26,16,64,0.6), rgba(30,42,90,0.4));
+  border-radius: 14px;
+  border: 1px solid rgba(100,120,200,0.25);
+}
+.read-more-box h3 { color: var(--guava-green); font-size: 1.05rem; margin: 0 0 0.8rem; }
+.read-more-list { list-style: none; padding: 0; margin: 0; }
+.read-more-list li { margin-bottom: 0.5rem; }
+.read-more-list a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.92rem;
+  transition: color 0.2s;
+}
+.read-more-list a:hover { color: var(--guava-green); }
+.read-more-list li::before { content: '→ '; color: var(--guava-green); }
+
+/* === SCROLL TO TOP === */
+.scroll-top {
+  position: fixed; bottom: 30px; right: 30px; z-index: 999;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #39FF14, #39FF14);
+  border: none; color: #000000;
+  font-size: 1.2rem; cursor: pointer; transition: all 0.3s;
+  opacity: 0; pointer-events: none;
+  box-shadow: 0 4px 15px rgba(57,255,20,0.3);
+  display: flex; align-items: center; justify-content: center;
+}
+.scroll-top.visible { opacity: 1; pointer-events: auto; }
+.scroll-top:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(57,255,20,0.4); }
+@media (max-width: 768px) {
+  .scroll-top { bottom: 20px; right: 16px; width: 42px; height: 42px; font-size: 1rem; }
+}
+
+</style>
+
+<script is:inline type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "奇幻魔藥",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "description": "RG電子蜂巢相鄰消除老虎機，RTP 98.28%、最大x20000倍。6個符號相鄰即中獎，Wild累積倍數+魔藥缸加乘+Free Game",
+  "url": "https://game8la.com/game-detail-2/",
+  "datePublished": "2026-03-22",
+  "dateModified": "2026-04-06",
+  "author": { "@type": "Organization", "name": "RG電子" },
+  "publisher": { "@type": "Organization", "name": "GAME8LA", "url": "https://game8la.com" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "9.7",
+    "bestRating": "10",
+    "worstRating": "1",
+    "ratingCount": "128"
+  },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
+}
+</script>
+
+<script is:inline type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/"},
+    {"@type": "ListItem", "position": 2, "name": "熱門遊戲", "item": "https://game8la.com/#games"},
+    {"@type": "ListItem", "position": 3, "name": "奇幻魔藥", "item": "https://game8la.com/game-detail-2/"}
+  ]
+}
+</script>
+
+<script is:inline type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"奇幻魔藥 RTP 98.28% 是真的嗎？為什麼這麼高？","acceptedAnswer":{"@type":"Answer","text":"是的，RG 電子公布的理論 RTP 為 98.28%。這在老虎機界算是頂尖水準（業界平均大約 94%~96%）。高 RTP 代表長期理論上每投入 100 元會返還約 98.28 元，但這是統計期望值，短期內可能大贏或大輸，因為它同時是高波動。"}},{"@type":"Question","name":"蜂巢消除跟傳統老虎機差在哪？","acceptedAnswer":{"@type":"Answer","text":"傳統老虎機靠「賠付線」判定中獎，符號要在特定的線上排列才算。奇幻魔藥用的是「相鄰消除」機制——只要 6 個以上相同符號上下左右黏在一起就算中獎，位置不限。消除後上方符號掉落、持續判定，形成連鎖反應。"}},{"@type":"Question","name":"Wild 倍數在主遊戲也會累積嗎？","acceptedAnswer":{"@type":"Answer","text":"主遊戲中 Wild 也有累積倍數的功能（每 2 次含 Wild 中獎就 +1x），但每一轉結束後倍數就會重置。只有在免費遊戲（Free Game）期間，Wild 倍數才會跨局累積到最終局不歸零。"}},{"@type":"Question","name":"魔藥缸的倍數跟 Wild 倍數是相乘還是相加？","acceptedAnswer":{"@type":"Answer","text":"魔藥缸給的倍數是套用在「當次消除」上的額外加乘，而 Wild 倍數則是套用在「含 Wild 連線」的獎金上。兩者在各自的作用範圍內獨立運作。具體的交互計算方式建議以遊戲內的實際結算為準。"}},{"@type":"Question","name":"奇幻魔藥有沒有必勝打法？","acceptedAnswer":{"@type":"Answer","text":"沒有。老虎機的結果完全由 RNG（隨機數生成器）決定，每一轉都是獨立事件。任何聲稱「必勝」「破解」的攻略都是詐騙。最好的策略就是設好預算、享受遊戲過程、輸到停損線就離場。"}}]}
+</script>
+
+<script is:inline>
+document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{q.parentElement.classList.toggle('open')})});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 500);
+});
+
+</script>

@@ -1,0 +1,216 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = 'home' } = Astro.props;
+---
+
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">
+      <img src="/images/index/game8la_logo_21x9.webp" alt="GAME8LA Logo" class="logo-img">
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="/" class={currentPage === 'home' ? 'active' : ''}>首頁</a>
+    <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>遊戲推薦</a>
+    <a href="/casino-ranking/" class={currentPage === 'casinos' ? 'active' : ''}>娛樂城推薦</a>
+    <a href="/#games" class={currentPage === 'games' ? 'active' : ''}>熱門遊戲</a>
+    <a href="/#articles" class={currentPage === 'articles' ? 'active' : ''}>攻略評測</a>
+    <a href="/article-dealers/" class={currentPage === 'dealers' ? 'active' : ''}>荷官特輯</a>
+  </div>
+  <div class="nav-search" onclick="openSearch()">
+    <i class="fas fa-search"></i>
+    <input type="text" placeholder="搜尋遊戲..." readonly>
+  </div>
+</nav>
+
+<!-- SEARCH MODAL -->
+<div class="search-modal" id="searchModal" onclick="closeSearch(event)">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜尋遊戲、攻略、遊戲平台..." oninput="handleSearch(this.value)">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<style>
+  /* === NAVBAR === */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar .logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar .logo a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar .logo-img {
+    height: 45px;
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(57, 255, 20, 0.3));
+    transition: filter 0.3s;
+  }
+
+  .navbar .logo:hover .logo-img {
+    filter: drop-shadow(0 0 14px rgba(57, 255, 20, 0.5));
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--gold-light);
+    background: rgba(57, 255, 20, 0.1);
+    text-decoration: none;
+  }
+
+  .nav-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+
+  .nav-search input {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    outline: none;
+    width: 150px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+
+  .nav-search i {
+    color: var(--text-muted);
+  }
+
+  /* === SEARCH MODAL === */
+  .search-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 15vh;
+  }
+
+  .search-modal.open {
+    display: flex;
+  }
+
+  .search-box {
+    width: 90%;
+    max-width: 600px;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--gold);
+    overflow: hidden;
+    box-shadow: 0 0 40px var(--gold-glow);
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .search-results {
+    border-top: 1px solid var(--border);
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+
+    .navbar {
+      padding: 0 1rem;
+    }
+
+    .nav-search input {
+      width: 100px;
+      font-size: 0.8rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  function openSearch() {
+    const modal = document.getElementById('searchModal');
+    if (modal) {
+      modal.classList.add('open');
+      const input = document.getElementById('searchInput');
+      if (input) input.focus();
+    }
+  }
+
+  function closeSearch(event) {
+    if (event && event.target.id !== 'searchModal') return;
+    const modal = document.getElementById('searchModal');
+    if (modal) modal.classList.remove('open');
+  }
+
+  function handleSearch(value) {
+    const results = document.getElementById('searchResults');
+    if (!results || !value.trim()) {
+      results.innerHTML = '';
+      return;
+    }
+    // Placeholder: implement search logic here
+    results.innerHTML = `<div style="padding: 1rem; color: var(--text-muted);">搜尋中：${value}</div>`;
+  }
+
+  // Close search on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSearch(null);
+  });
+</script>

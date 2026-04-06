@@ -1,0 +1,27 @@
+{
+  "name": "game8la-astro",
+  "version": "1.0.0",
+  "description": "GAME8LA - Taiwan's most honest online game review platform",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "keywords": [
+    "game",
+    "review",
+    "slots",
+    "baccarat",
+    "casino"
+  ],
+  "author": "GAME8LA",
+  "license": "MIT",
+  "devDependencies": {
+    "astro": "^4.0.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1"
+  }
+}

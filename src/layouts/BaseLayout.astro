@@ -1,0 +1,84 @@
+---
+import NavBar from '../components/NavBar.astro';
+import FooterBar from '../components/FooterBar.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  currentPage?: string;
+}
+
+const {
+  title,
+  description = 'GAME8LA - 台灣最敢說真話的線上遊戲評測平台。不灌水、不業配，給你最真實的遊戲評價與遊戲攻略。',
+  ogImage = 'https://game8la.com/images/og-image.webp',
+  ogUrl = Astro.url.href,
+  currentPage = 'home'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={ogUrl}>
+    <meta property="og:image" content={ogImage}>
+    <meta property="og:site_name" content="GAME8LA">
+    <meta property="og:locale" content="zh_TW">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImage}>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/images/index/favicon_32x32.webp">
+    <link rel="icon" type="image/webp" sizes="192x192" href="/images/index/icon-192.webp">
+    <link rel="apple-touch-icon" href="/images/index/apple-touch-icon_180x180.webp">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DN9QHEM3GQ"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DN9QHEM3GQ');
+    </script>
+
+    <meta name="theme-color" content="#121212">
+    <link rel="canonical" href={ogUrl}>
+  </head>
+  <body>
+    <NavBar currentPage={currentPage} />
+
+    <main>
+      <slot />
+    </main>
+
+    <FooterBar />
+    <ScrollToTop />
+  </body>
+</html>
+
+<style is:global>
+  main {
+    min-height: calc(100vh - 70px - 300px);
+    margin-top: 70px;
+  }
+</style>

@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+---
+
+<BaseLayout 
+  title="404 迷路了啦！｜GAME8LA"
+  description="你走錯路了啦鄉民！這個頁面不存在，快回首頁繼續看遊戲評測。"
+  ogImage="https://game8la.com/images/og-image.webp"
+  currentPage="home"
+>
+<!-- NAVBAR -->
+<!-- 404 CONTENT -->
+<main class="error-wrapper">
+  <div class="error-container">
+    <div class="error-img">
+      <img src="/images/index/game8la-404-mascot.webp" alt="GAME8LA 404 芭樂子迷路了">
+    </div>
+    <div class="error-text">
+      <div class="error-code">404</div>
+      <h1 class="error-title">哈囉？這頁被吃掉了啦！</h1>
+      <p class="error-msg">
+        鄉民你好，你找的頁面已經<span class="pink">被芭樂子啃光了</span>，
+        可能是連結打錯、頁面搬家、或是被 Bug 怪獸吞掉了。<br><br>
+        別慌！<span class="highlight">GAME8LA</span> 首頁還有一堆好料等你挖，
+        老虎機評測、百家樂攻略、荷官排行榜⋯⋯全部免費看到飽。
+      </p>
+      <div class="error-actions">
+        <a href="/" class="btn-back">
+          <i class="fas fa-home"></i> 帶我回首頁
+        </a>
+        <a href="/#ranking" class="btn-ranking">
+          <i class="fas fa-trophy"></i> 看遊戲排行榜
+        </a>
+      </div>
+      <div class="easter-egg">
+        <i class="fas fa-lightbulb"></i>
+        <strong>芭樂子小提示：</strong>你可以用首頁上方的搜尋功能找到想看的遊戲，或是直接逛逛我們的遊戲排行榜，說不定會發現比你原本要找的更香的東西。
+      </div>
+    </div>
+  </div>
+</main>
+<!-- FOOTER -->
+</BaseLayout>
+
+<style is:global>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #121212;
+  --guava-green: #39FF14;
+  --guava-green-dark: #2bcc10;
+  --guava-pink: #FF10F0;
+  --text-primary: #FFFFFF;
+  --text-secondary: #cccccc;
+  --border: #2a2a2a;
+}
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(57,255,20,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 30%, rgba(255,16,240,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 50% 70%, rgba(57,255,20,0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #0a0a0a 0%, #121212 30%, #0e120e 60%, #121212 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* === NAVBAR === */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(18,18,18,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.navbar img {
+  height: 40px;
+}
+.nav-home {
+  color: var(--guava-green);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.3s;
+}
+.nav-home:hover { color: #fff; }
+
+/* === MAIN 404 CONTENT === */
+.error-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 1.5rem 3rem;
+}
+.error-container {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+.error-img {
+  flex: 0 0 340px;
+  text-align: center;
+}
+.error-img img {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(57,255,20,0.3)) drop-shadow(0 0 60px rgba(255,16,240,0.15));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.error-text {
+  flex: 1;
+}
+.error-code {
+  font-size: 7rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--guava-green), var(--guava-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  text-shadow: none;
+}
+.error-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.error-msg {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+.error-msg .highlight {
+  color: var(--guava-green);
+  font-weight: 700;
+}
+.error-msg .pink {
+  color: var(--guava-pink);
+  font-weight: 700;
+}
+
+/* Buttons */
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  background: linear-gradient(135deg, var(--guava-green), var(--guava-green-dark));
+  color: #000;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(57,255,20,0.3);
+}
+.btn-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(57,255,20,0.5);
+}
+.btn-ranking {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  background: transparent;
+  color: var(--guava-pink);
+  font-weight: 700;
+  font-size: 1rem;
+  border: 2px solid var(--guava-pink);
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-ranking:hover {
+  background: rgba(255,16,240,0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255,16,240,0.3);
+}
+
+/* Easter egg hint */
+.easter-egg {
+  margin-top: 2rem;
+  padding: 1rem 1.2rem;
+  background: rgba(57,255,20,0.05);
+  border: 1px solid rgba(57,255,20,0.15);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.easter-egg i {
+  color: var(--guava-green);
+  margin-right: 0.3rem;
+}
+
+/* === FOOTER === */
+.footer-mini {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: #666;
+  font-size: 0.85rem;
+}
+.footer-mini a {
+  color: var(--guava-green);
+  text-decoration: none;
+}
+
+/* === MOBILE === */
+@media (max-width: 768px) {
+  .error-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .error-img {
+    flex: none;
+    width: 100%;
+  }
+  .error-img img {
+    max-width: 260px;
+  }
+  .error-code {
+    font-size: 5rem;
+  }
+  .error-title {
+    font-size: 1.4rem;
+  }
+  .error-actions {
+    justify-content: center;
+  }
+  .easter-egg {
+    text-align: left;
+  }
+}
+
+@media (max-width: 420px) {
+  .error-code {
+    font-size: 4rem;
+  }
+  .error-img img {
+    max-width: 200px;
+  }
+  .error-actions {
+    flex-direction: column;
+  }
+  .btn-back, .btn-ranking {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+</style>
+
+<script is:inline>
+
+</script>
