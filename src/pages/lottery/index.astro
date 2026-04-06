@@ -3,16 +3,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="芭樂好彩 - 台灣彩券最新開獎結果｜大樂透、威力彩、今彩539" description="GAME8LA 芭樂好彩：每期自動更新台灣彩券最新開獎結果，包含大樂透、威力彩、今彩539、雙贏彩、3星彩、4星彩。" currentPage="lottery">
-  <main class="lottery-page">
-    <section class="page-header">
-      <div class="container">
-        <h1>🍈 芭樂好彩</h1>
+    <div class="container">
+      <div class="breadcrumb"><a href="/">首頁</a> &gt; 芭樂好彩</div>
+      <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
+      <div style="width:100%;height:220px;background:linear-gradient(135deg,#0a2e1a,#1b5032,#0a2e1a);border-radius:16px;margin-bottom:1.5rem"></div>
+      <div class="page-hero">
+        <h1>🍈 <em>芭樂好彩</em></h1>
         <p>台灣彩券最新開獎結果，每期開獎後自動更新</p>
         <p class="updated">最後更新：<span id="updateTime">載入中…</span></p>
       </div>
-    </section>
 
-    <section class="container lottery-grid">
+    <section class="lottery-grid">
       <!-- 大樂透 -->
       <div class="lottery-card" data-lottery="lotto649">
         <div class="card-head"><i class="fas fa-star"></i><h2>大樂透</h2><span class="period" id="lotto649-period">--</span></div>
@@ -71,7 +72,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
     </section>
 
-    <section class="container info-box">
+    <section class="info-box">
       <h3>📅 開獎時間</h3>
       <ul>
         <li><strong>大樂透</strong>：每週二、五晚間 20:30 開獎</li>
@@ -81,15 +82,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </ul>
       <p class="disclaimer">⚠️ 本頁資料僅供參考，實際中獎號碼請以 <a href="https://www.taiwanlottery.com/" target="_blank" rel="noopener">台灣彩券官方網站</a> 公告為準。</p>
     </section>
-  </main>
+    </div>
 
-  <style>
-    .lottery-page { padding-top: 90px; min-height: 100vh; }
-    .page-header { padding: 2rem 0 1rem; text-align: center; }
-    .page-header h1 { font-size: 2.5rem; color: var(--gold-light); margin-bottom: 0.5rem; }
-    .page-header p { color: var(--text-secondary); }
-    .page-header .updated { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  <style is:global>
+    body { line-height: 1.8 }
+    .lottery-page { min-height: 100vh; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 100px 2rem 4rem; }
+    .page-hero { text-align: center; padding: 3rem 0 2rem; }
+    .page-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 0.8rem; }
+    .page-hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-hero p { color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+    .breadcrumb { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .breadcrumb a { color: var(--text-muted); }
+    .breadcrumb a:hover { color: var(--gold-light); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold-light); margin-bottom: 1.5rem; font-size: 0.95rem; text-decoration: none; }
+    .page-hero .updated { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
 
     .lottery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; margin: 2rem auto; }
     .lottery-card {

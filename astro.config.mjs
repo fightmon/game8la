@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // Integrations
-  integrations: [],
+  integrations: [sitemap()],
 
   // Enable SSR or Static Site Generation
   output: 'static',

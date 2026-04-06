@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
 
@@ -13,9 +13,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 戰神賽特2：覺醒之力</div>
   <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem"><i class="fas fa-clock"></i> 最後更新：2026 年 4 月 5 日 ｜ <i class="fas fa-user-edit"></i> 作者：芭樂子 ｜ <i class="fas fa-book-reader"></i> 預估閱讀 7 分鐘</div>
   <a href="/#games" class="back-link"><i class="fas fa-arrow-left"></i> 回遊戲列表</a>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#1a0a2e">
-      <img loading="lazy" src="/images/seth2/seth2-cover.webp" alt="戰神賽特2：覺醒之力封面" style="width:100%;height:auto;display:block">
+      <img loading="lazy" src="/images/seth2/seth2-cover.webp" alt="戰神賽特2：覺醒之力封面" style="width:100%;height:auto;display:block" width="1200" height="675">
     </div>
     <div>
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 滾輪遊戲</span>
@@ -66,11 +66,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="article-content">
   <!-- 遊戲介紹 -->
   <h2 id="intro">遊戲介紹</h2>
-  <img loading="lazy" src="/images/seth2/seth2-gameplay-main.webp" alt="戰神賽特2 覺醒之力遊戲實際畫面" class="article-img">
+  <img loading="lazy" src="/images/seth2/seth2-gameplay-main.webp" alt="戰神賽特2 覺醒之力遊戲實際畫面" class="article-img" width="1200" height="675">
   <p class="article-img-caption">▲ 戰神賽特2：覺醒之力 實際遊戲畫面，左方為戰神賽特、右方為奈芙蒂絲</p>
   <p>各位8LA鄉民，《<strong>戰神賽特2：覺醒之力</strong>》回來了，而且這次不是小改版，是直接<strong>神話級進化</strong>。ATG 電子把初代賽特那套玩法整個翻新，新增「覺醒之力」雙模式系統——普通免費遊戲跟覺醒之力免費遊戲各有不同的爆分邏輯，搭配四色倍數球最高可升級到 <strong>x500</strong>，再乘上隨處支付的消除掉落機制，最大倍率直接拉到 <strong>x81,000</strong>。</p>
   <p>盤面採用隨處支付（Scatter Pays），只要同一種符號在盤面上累積 <strong>8 個以上</strong>就算中獎，不管在哪個位置。背景延續古埃及神話，戰神賽特（藍色男角）和奈芙蒂絲（紫色女角）分別代表「力量覺醒」和「鎖定覺醒」兩種技能路線。畫面炸裂程度，說是老虎機界的天花板也不為過。</p>
-  <img loading="lazy" src="/images/seth2/seth2-gameplay-board.webp" alt="戰神賽特2 盤面與倍數球" class="article-img">
+  <img loading="lazy" src="/images/seth2/seth2-gameplay-board.webp" alt="戰神賽特2 盤面與倍數球" class="article-img" width="1200" height="675">
   <p class="article-img-caption">▲ 遊戲盤面，上方顯示四級 JACKPOT 累積金額，中間可見倍數球與各類符號</p>
   <!-- 賽特1 vs 賽特2 比較 -->
   <h2 id="compare">戰神賽特 vs 戰神賽特2：差在哪？</h2>
@@ -164,19 +164,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <p>簡單說，普通免費遊戲的倍數是「最後一次性乘上去」，但覺醒之力是「每一次消除都乘上去再加總」——所以覺醒之力的爆分天花板遠高於普通免費遊戲。看到黃金聖甲蟲出現，請深呼吸，大的要來了。</p>
   <!-- 覺醒之力符號 -->
   <h2 id="awakening-symbols">覺醒之力符號</h2>
-  <img loading="lazy" src="/images/seth2/seth2-awakening-symbols.webp" alt="戰神賽特2 覺醒之力符號：力量覺醒與鎖定覺醒" class="article-img">
+  <img loading="lazy" src="/images/seth2/seth2-awakening-symbols.webp" alt="戰神賽特2 覺醒之力符號：力量覺醒與鎖定覺醒" class="article-img" width="120" height="120">
   <p class="article-img-caption">▲ 兩種覺醒符號：力量覺醒符號（賽特）與鎖定覺醒符號（奈芙蒂絲）</p>
   <p>覺醒之力中有兩種專屬角色符號，各自對應不同的「覺醒技能」：</p>
   <div class="grid-2">
     <div class="card awakening-card" style="text-align:center">
-      <img loading="lazy" src="/images/seth2/seth2-symbol-seth.webp" alt="力量覺醒符號 - 戰神賽特">
+      <img loading="lazy" src="/images/seth2/seth2-symbol-seth.webp" alt="力量覺醒符號 - 戰神賽特" width="120" height="120">
       <h3 style="color:var(--gold-light)">力量覺醒符號（賽特）</h3>
       <p>出現 <strong>3 個力量覺醒符號 + 倍數球</strong> → 觸發角色技能</p>
       <p style="color:var(--guava-green);font-weight:700">倍數球被「鎖定」在盤面數回合</p>
       <p>鎖住的倍數球不會消失，持續在接下來的消除中反覆乘分</p>
     </div>
     <div class="card awakening-card" style="text-align:center">
-      <img loading="lazy" src="/images/seth2/seth2-symbol-nephthys.webp" alt="鎖定覺醒符號 - 奈芙蒂絲">
+      <img loading="lazy" src="/images/seth2/seth2-symbol-nephthys.webp" alt="鎖定覺醒符號 - 奈芙蒂絲" width="120" height="120">
       <h3 style="color:var(--guava-pink)">鎖定覺醒符號（奈芙蒂絲）</h3>
       <p>出現 <strong>3 個鎖定覺醒符號 + 倍數球</strong> → 觸發角色技能</p>
       <p style="color:var(--guava-green);font-weight:700">倍數球「分裂」為多個相同倍數球</p>
@@ -208,7 +208,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <table>
     <thead><tr><th>JP 符號數量</th><th>彩金等級</th><th>說明</th></tr></thead>
     <tbody>
-      <tr><td><img loading="lazy" src="/images/seth2/seth2-jackpot-symbol.webp" alt="JP符號" style="width:32px;height:32px;vertical-align:middle;border-radius:6px;margin-right:4px">5 個</td><td style="color:#ff4444;font-weight:900">GRAND</td><td>最大獎池，累積金額最高（截圖實測約 19 萬+）</td></tr>
+      <tr><td><img loading="lazy" src="/images/seth2/seth2-jackpot-symbol.webp" alt="JP符號" style="width:32px;height:32px;vertical-align:middle;border-radius:6px;margin-right:4px" width="120" height="120">5 個</td><td style="color:#ff4444;font-weight:900">GRAND</td><td>最大獎池，累積金額最高（截圖實測約 19 萬+）</td></tr>
       <tr><td>4 個</td><td style="color:var(--gold-light);font-weight:900">MAJOR</td><td>第二大獎池（截圖實測約 7.3 萬+）</td></tr>
       <tr><td>3 個</td><td style="color:var(--guava-green);font-weight:700">MINOR</td><td>中型獎池（截圖實測約 1.2 萬+）</td></tr>
       <tr><td>2 個</td><td style="color:var(--text-secondary)">MINI</td><td>基礎獎池（截圖實測約 2,200+）</td></tr>
@@ -231,8 +231,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <tr><td rowspan="3" style="color:var(--gold-light);font-weight:700"><img loading="lazy" src="/images/seth2/seth2-scatter-blue.webp" alt="黃金聖甲蟲" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px">黃金聖甲蟲+聖甲蟲</td><td>5 個（含黃金）</td><td>2000</td></tr>
       <tr><td>4 個（含黃金）</td><td>100</td></tr>
       <tr><td>3 個（含黃金）</td><td>60</td></tr>
-      <tr><td style="font-weight:700"><img loading="lazy" src="/images/seth2/seth2-symbol-seth.webp" alt="力量覺醒符號" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px">力量覺醒符號</td><td>3 個</td><td>5</td></tr>
-      <tr><td style="font-weight:700"><img loading="lazy" src="/images/seth2/seth2-symbol-nephthys.webp" alt="鎖定覺醒符號" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px">鎖定覺醒符號</td><td>3 個</td><td>5</td></tr>
+      <tr><td style="font-weight:700"><img loading="lazy" src="/images/seth2/seth2-symbol-seth.webp" alt="力量覺醒符號" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" width="120" height="120">力量覺醒符號</td><td>3 個</td><td>5</td></tr>
+      <tr><td style="font-weight:700"><img loading="lazy" src="/images/seth2/seth2-symbol-nephthys.webp" alt="鎖定覺醒符號" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" width="120" height="120">鎖定覺醒符號</td><td>3 個</td><td>5</td></tr>
     </tbody>
   </table>
   <h3>一般符號賠率（隨處支付）</h3>
@@ -324,7 +324,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style is:global>
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 :root{

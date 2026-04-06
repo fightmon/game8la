@@ -7,25 +7,25 @@
     <!-- Logo & About Column -->
     <div class="footer-col">
       <div class="logo-footer">
-        <img src="/images/index/game8la_logo_21x9.webp" alt="GAME8LA" class="footer-logo-img">
+        <img src="/images/index/game8la_logo_21x9.webp" alt="GAME8LA" class="footer-logo-img" loading="lazy" width="210" height="90">
       </div>
       <p>GAME8LA是台灣最敢說真話的線上遊戲評測平台。不灌水、不業配，給你最真實的遊戲評價與遊戲攻略，幫助玩家安心選擇！</p>
       <div class="social-links">
-        <a href="javascript:void(0)" title="GAME8LA Facebook (即將開放)" onclick="alert('⚡ GAME8LA的 Facebook 粉專即將開放，敬請期待！')">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="javascript:void(0)" title="GAME8LA Instagram (即將開放)" onclick="alert('⚡ GAME8LA的 IG 即將開放，敬請期待！')">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="javascript:void(0)" title="GAME8LA YouTube (即將開放)" onclick="alert('⚡ GAME8LA的 YouTube 頻道即將開放，敬請期待！')">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="javascript:void(0)" title="GAME8LA LINE (即將開放)" onclick="alert('⚡ GAME8LA的 LINE 官方帳號即將開放，敬請期待！')">
-          <i class="fab fa-line"></i>
-        </a>
-        <a href="javascript:void(0)" title="GAME8LA Telegram (即將開放)" onclick="alert('⚡ GAME8LA的 Telegram 群組即將開放，敬請期待！')">
-          <i class="fab fa-telegram"></i>
-        </a>
+        <button type="button" aria-label="GAME8LA Facebook 即將開放" title="GAME8LA Facebook (即將開放)" onclick="alert('⚡ GAME8LA的 Facebook 粉專即將開放，敬請期待！')">
+          <i class="fab fa-facebook-f" aria-hidden="true"></i>
+        </button>
+        <button type="button" aria-label="GAME8LA Instagram 即將開放" title="GAME8LA Instagram (即將開放)" onclick="alert('⚡ GAME8LA的 IG 即將開放，敬請期待！')">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </button>
+        <button type="button" aria-label="GAME8LA YouTube 即將開放" title="GAME8LA YouTube (即將開放)" onclick="alert('⚡ GAME8LA的 YouTube 頻道即將開放，敬請期待！')">
+          <i class="fab fa-youtube" aria-hidden="true"></i>
+        </button>
+        <button type="button" aria-label="GAME8LA LINE 即將開放" title="GAME8LA LINE (即將開放)" onclick="alert('⚡ GAME8LA的 LINE 官方帳號即將開放，敬請期待！')">
+          <i class="fab fa-line" aria-hidden="true"></i>
+        </button>
+        <button type="button" aria-label="GAME8LA Telegram 即將開放" title="GAME8LA Telegram (即將開放)" onclick="alert('⚡ GAME8LA的 Telegram 群組即將開放，敬請期待！')">
+          <i class="fab fa-telegram" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
 
@@ -54,12 +54,18 @@
     <div class="footer-col">
       <h4>關於8LA</h4>
       <a href="/">平台介紹</a>
-      <a href="javascript:void(0)" onclick="alert('⚡ 合作洽談請來信：game8lala@gmail.com')">合作洽談</a>
+      <a href="mailto:game8lala@gmail.com?subject=合作洽談">合作洽談</a>
       <a href="/privacy/">隱私政策</a>
       <a href="/terms/">服務條款</a>
       <a href="/disclaimer/">免責聲明</a>
-      <a href="javascript:void(0)" onclick="alert('⚡ 聯絡我們：game8lala@gmail.com\n\n或在社群媒體上找到我們！')">聯絡我們</a>
+      <a href="mailto:game8lala@gmail.com?subject=聯絡我們">聯絡我們</a>
     </div>
+  </div>
+
+  <div class="footer-disclaimer">
+    <p><strong>⚠️ 免責聲明：</strong>本站為遊戲資訊評測與攻略分享平台，<strong>不提供任何博弈服務</strong>，亦不經營、代理、介紹或撮合任何線上博弈行為。所有內容僅供學術研究、產業觀察與娛樂閱讀參考之用。</p>
+    <p><strong>🔞 僅限 18 歲以上成年人瀏覽。</strong>未成年人請立即離開本站。請理性看待娛樂活動，切勿沉迷；如有博弈相關困擾，請撥打「亞洲公益社」諮詢專線 <a href="tel:0800080888">0800-080-888</a>。</p>
+    <p>依據中華民國法律，任何形式之賭博行為均屬違法。本站對讀者自行連結之第三方平台所產生之任何後果不負任何責任。</p>
   </div>
 
   <div class="footer-bottom">
@@ -111,6 +117,23 @@
     color: var(--gold-light);
   }
 
+  .footer-disclaimer {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+  .footer-disclaimer p { margin-bottom: 0.6rem; }
+  .footer-disclaimer strong { color: #ffb347; }
+  .footer-disclaimer a {
+    color: #ffd966;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
   .footer-bottom {
     max-width: 1300px;
     margin: 0 auto;
@@ -137,7 +160,8 @@
     margin-top: 1rem;
   }
 
-  .social-links a {
+  .social-links a,
+  .social-links button {
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -150,9 +174,12 @@
     transition: all 0.3s;
     text-decoration: none;
     padding: 0;
+    cursor: pointer;
+    font-size: 1rem;
   }
 
-  .social-links a:hover {
+  .social-links a:hover,
+  .social-links button:hover {
     background: var(--gold);
     color: #000000;
     border-color: var(--gold);

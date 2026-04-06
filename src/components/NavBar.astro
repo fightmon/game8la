@@ -9,7 +9,7 @@ const { currentPage = 'home' } = Astro.props;
 <nav class="navbar">
   <div class="logo">
     <a href="/">
-      <img src="/images/index/game8la_logo_21x9.webp" alt="GAME8LA Logo" class="logo-img">
+      <img src="/images/index/game8la_logo_21x9.webp" alt="GAME8LA Logo" class="logo-img" width="120" height="51" loading="eager" fetchpriority="high">
     </a>
   </div>
   <div class="nav-links">
@@ -19,16 +19,35 @@ const { currentPage = 'home' } = Astro.props;
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>芭樂好彩</a>
     <a href="/articles/dealers-guide/" class={currentPage === 'dealers' ? 'active' : ''}>荷官特輯</a>
   </div>
-  <div class="nav-search" onclick="openSearch()">
-    <i class="fas fa-search"></i>
-    <input type="text" placeholder="搜尋遊戲..." readonly>
+  <div class="nav-search" role="button" tabindex="0" aria-label="開啟搜尋" onclick="openSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')openSearch()">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <input type="text" placeholder="搜尋遊戲..." readonly aria-label="搜尋遊戲、攻略、遊戲平台">
+  </div>
+  <div class="mobile-actions">
+    <button type="button" class="icon-btn" aria-label="開啟搜尋" onclick="openSearch()">
+      <i class="fas fa-search" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="icon-btn" id="menuToggle" aria-label="開啟選單" aria-expanded="false" onclick="toggleMenu()">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE MENU PANEL -->
+<div class="mobile-menu" id="mobileMenu" onclick="closeMenu(event)">
+  <div class="mobile-menu-inner">
+    <a href="/" class={currentPage === 'home' ? 'active' : ''}>🏠 首頁</a>
+    <a href="/articles/" class={currentPage === 'articles' ? 'active' : ''}>📖 芭樂攻略</a>
+    <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>🎰 芭樂遊戲</a>
+    <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>🎱 芭樂好彩</a>
+    <a href="/articles/dealers-guide/" class={currentPage === 'dealers' ? 'active' : ''}>🎴 荷官特輯</a>
+  </div>
+</div>
 
 <!-- SEARCH MODAL -->
 <div class="search-modal" id="searchModal" onclick="closeSearch(event)">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="搜尋遊戲、攻略、遊戲平台..." oninput="handleSearch(this.value)">
+    <input type="text" id="searchInput" placeholder="搜尋遊戲、攻略、遊戲平台..." aria-label="搜尋輸入框" oninput="handleSearch(this.value)">
     <div class="search-results" id="searchResults"></div>
   </div>
 </div>
@@ -102,7 +121,8 @@ const { currentPage = 'home' } = Astro.props;
     gap: 0.5rem;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1rem;
+    min-height: 44px;
     border-radius: 25px;
     cursor: pointer;
   }
@@ -119,6 +139,71 @@ const { currentPage = 'home' } = Astro.props;
 
   .nav-search i {
     color: var(--text-muted);
+  }
+
+  /* Mobile actions (search + hamburger) - hidden on desktop */
+  .mobile-actions {
+    display: none;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover,
+  .icon-btn:focus-visible {
+    background: var(--bg-card);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  /* Mobile menu panel */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+  }
+  .mobile-menu.open {
+    display: block;
+  }
+  .mobile-menu-inner {
+    background: rgba(18, 18, 18, 0.98);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .mobile-menu-inner a {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    border: 1px solid transparent;
+  }
+  .mobile-menu-inner a:hover,
+  .mobile-menu-inner a.active {
+    background: rgba(57, 255, 20, 0.1);
+    border-color: rgba(57, 255, 20, 0.3);
+    color: var(--gold-light);
   }
 
   /* === SEARCH MODAL === */
@@ -175,9 +260,11 @@ const { currentPage = 'home' } = Astro.props;
       padding: 0 1rem;
     }
 
-    .nav-search input {
-      width: 100px;
-      font-size: 0.8rem;
+    .nav-search {
+      display: none;
+    }
+    .mobile-actions {
+      display: flex;
     }
   }
 </style>
@@ -198,14 +285,77 @@ const { currentPage = 'home' } = Astro.props;
     if (modal) modal.classList.remove('open');
   }
 
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('menuToggle');
+    if (!menu) return;
+    const opened = menu.classList.toggle('open');
+    if (btn) {
+      btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+      btn.innerHTML = opened
+        ? '<i class="fas fa-times" aria-hidden="true"></i>'
+        : '<i class="fas fa-bars" aria-hidden="true"></i>';
+      btn.setAttribute('aria-label', opened ? '關閉選單' : '開啟選單');
+    }
+  }
+
+  function closeMenu(event) {
+    const menu = document.getElementById('mobileMenu');
+    if (!menu) return;
+    // Close when clicking backdrop or a link
+    if (event.target === menu || event.target.tagName === 'A') {
+      menu.classList.remove('open');
+      const btn = document.getElementById('menuToggle');
+      if (btn) {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+        btn.setAttribute('aria-label', '開啟選單');
+      }
+    }
+  }
+
+  const SEARCH_INDEX = [
+    { t: '戰神賽特2：覺醒之力', d: 'ATG電子老虎機 RTP 96.89%', u: '/games/seth-2/', c: '遊戲' },
+    { t: '奇幻魔藥', d: 'RG電子蜂巢消除老虎機 RTP 98.28%', u: '/games/fantasy-potion/', c: '遊戲' },
+    { t: '2026 老虎機評分總排名', d: '9款熱門Slot完整評比', u: '/game-ranking/', c: '排行' },
+    { t: '芭樂攻略', d: '老虎機、百家樂、真人娛樂教學', u: '/articles/', c: '攻略' },
+    { t: '老虎機攻略完整指南', d: 'RTP、波動性、Free Game、爆分機制', u: '/articles/slots-guide/', c: '攻略' },
+    { t: '百家樂完整教學', d: '規則、算牌、投注法、常見迷思', u: '/articles/baccarat-guide/', c: '攻略' },
+    { t: '真人荷官大評比', d: '2026 各平台最美荷官盤點', u: '/articles/dealers-guide/', c: '攻略' },
+    { t: '芭樂好彩', d: '大樂透、威力彩、今彩539 開獎', u: '/lottery/', c: '彩券' },
+    { t: '富遊娛樂城', d: '台灣老牌娛樂城評測', u: '/casinos/fuyou/', c: '娛樂城' },
+    { t: 'MaiSpin 娛樂城', d: '完整平台評測', u: '/casinos/maispin/', c: '娛樂城' },
+    { t: 'bet365', d: '國際大廠評測', u: '/casinos/bet365/', c: '娛樂城' },
+    { t: 'Shuffle', d: '加密貨幣娛樂城', u: '/casinos/shuffle/', c: '娛樂城' },
+    { t: 'K8 娛樂城', d: '平台評測', u: '/casinos/k8/', c: '娛樂城' },
+    { t: 'U-Town 優創', d: '平台評測', u: '/casinos/utown/', c: '娛樂城' },
+    { t: 'YABO 亞博', d: '平台評測', u: '/casinos/yabo/', c: '娛樂城' },
+    { t: 'PM 娛樂城', d: '平台評測', u: '/casinos/pm/', c: '娛樂城' },
+  ];
+
   function handleSearch(value) {
     const results = document.getElementById('searchResults');
-    if (!results || !value.trim()) {
-      results.innerHTML = '';
+    if (!results) return;
+    const q = value.trim().toLowerCase();
+    if (!q) { results.innerHTML = ''; return; }
+    const hits = SEARCH_INDEX.filter(i =>
+      i.t.toLowerCase().includes(q) || i.d.toLowerCase().includes(q) || i.c.toLowerCase().includes(q)
+    ).slice(0, 10);
+    if (hits.length === 0) {
+      results.innerHTML = '<div style="padding:1rem;color:var(--text-muted)">找不到相關結果</div>';
       return;
     }
-    // Placeholder: implement search logic here
-    results.innerHTML = `<div style="padding: 1rem; color: var(--text-muted);">搜尋中：${value}</div>`;
+    results.innerHTML = hits.map(i => `
+      <a href="${i.u}" style="display:block;padding:0.9rem 1rem;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text-primary)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:0.8rem">
+          <div>
+            <div style="font-weight:600;margin-bottom:0.2rem">${i.t}</div>
+            <div style="font-size:0.82rem;color:var(--text-muted)">${i.d}</div>
+          </div>
+          <span style="font-size:0.7rem;padding:0.15rem 0.6rem;background:rgba(57,255,20,0.15);color:var(--gold-light);border-radius:10px;white-space:nowrap">${i.c}</span>
+        </div>
+      </a>
+    `).join('');
   }
 
   // Close search on Escape key

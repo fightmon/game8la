@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
 
@@ -12,9 +12,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 奇幻魔藥</div>
   <a href="/#games" class="back-link"><i class="fas fa-arrow-left"></i> 回遊戲列表</a>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#0a1a2e,#0d3d2d,#0a2a1a);border-radius:16px;overflow:hidden;border:1px solid var(--border)">
-      <img src="/images/fantasy-potion/cover.webp" alt="奇幻魔藥 Fantasy Potion 遊戲封面" style="width:100%;display:block;border-radius:16px" />
+      <img src="/images/fantasy-potion/cover.webp" alt="奇幻魔藥 Fantasy Potion 遊戲封面" style="width:100%;display:block;border-radius:16px;height:auto"  loading="lazy" width="1200" height="675" />
     </div>
     <div>
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 蜂巢相鄰消除</span>
@@ -71,13 +71,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <h2 id="intro">遊戲介紹</h2>
   <p>各位8LA鄉民，如果你覺得老虎機的 RTP 都差不多，那你一定沒玩過《<strong>奇幻魔藥</strong>》。RG 電子這款暗黑魔法系老虎機，RTP 直接拉到 <strong>98.28%</strong>——沒打錯，九八趴，業界天花板等級。最大倍率 <strong>x20,000</strong>，高波動但理論回報率碾壓市面上九成以上的遊戲。</p>
   <p>它跟傳統老虎機完全不同：盤面是<strong>蜂巢六角格</strong>（Honeycomb），像蜂窩一樣的六角形格子排列。中獎規則超直覺——只要 <strong>6 個以上相同符號上下左右相鄰</strong>就算中獎，不需要管什麼賠付線。中獎符號消除後自動補滿盤面，繼續判定直到沒有新的中獎組合為止。畫面走暗黑魔法風格，藥水瓶、魔法缸、神秘符文，整個畫面魔性十足。</p>
-  <div class="img-showcase" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+  <div class="img-showcase" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:1.5rem 0">
     <figure style="margin:0;text-align:center">
-      <img src="/images/fantasy-potion/gameplay-wild-2x.webp" alt="奇幻魔藥蜂巢盤面實機畫面 Wild 2x" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border)" />
+      <img src="/images/fantasy-potion/gameplay-wild-2x.webp" alt="奇幻魔藥蜂巢盤面實機畫面 Wild 2x" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border);height:auto" width="1200" height="675" />
       <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 蜂巢盤面實機畫面，中間 Wild 已累積到 2x</figcaption>
     </figure>
     <figure style="margin:0;text-align:center">
-      <img src="/images/fantasy-potion/gameplay-mobile.webp" alt="奇幻魔藥手機版遊戲畫面" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border)" />
+      <img src="/images/fantasy-potion/gameplay-mobile.webp" alt="奇幻魔藥手機版遊戲畫面" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border);height:auto" width="1200" height="675" />
       <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 手機版遊戲畫面，操作流暢</figcaption>
     </figure>
   </div>
@@ -117,7 +117,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <div class="feature-grid" id="cauldron">
     <div class="feature-card">
-      <img src="/images/fantasy-potion/scatter-symbol.webp" alt="Scatter 免費遊戲符號" loading="lazy" />
+      <img src="/images/fantasy-potion/scatter-symbol.webp" alt="Scatter 免費遊戲符號" loading="lazy" width="120" height="120" />
       <h3 class="feature-title">免費遊戲符號</h3>
       <ul class="feature-list">
         <li>一般遊戲中出現免費遊戲符號，即可獲得 <strong>15 局</strong>免費遊戲。</li>
@@ -171,33 +171,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- 賠率表 -->
   <h2 id="paytable">完整賠率表（押注 50 基準）</h2>
   <figure style="margin:1.5rem auto;text-align:center;max-width:500px">
-    <img src="/images/fantasy-potion/paytable-symbols.webp" alt="奇幻魔藥一般符號賠率表" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border);background:#0a0a0a" />
+    <img src="/images/fantasy-potion/paytable-symbols.webp" alt="奇幻魔藥一般符號賠率表" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border);background:#0a0a0a;height:auto" width="120" height="120" />
     <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 遊戲內建賠率表截圖</figcaption>
   </figure>
   <h3>一般符號賠率（相鄰消除）</h3>
   <table>
     <thead><tr><th>符號</th><th>6-7 個</th><th>8-9 個</th><th>10-11 個</th><th>12-13 個</th><th>14-15 個</th><th>16+ 個</th></tr></thead>
     <tbody>
-      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-red-heart.webp" alt="紅色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />紅色藥水</td><td>100</td><td>200</td><td>300</td><td>500</td><td>1,000</td><td style="color:var(--gold-light);font-weight:700">10,000</td></tr>
-      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-purple.webp" alt="紫色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />紫色藥水</td><td>50</td><td>100</td><td>150</td><td>250</td><td>500</td><td style="color:var(--gold-light);font-weight:700">5,000</td></tr>
-      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-blue-round.webp" alt="藍色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />藍色藥水</td><td>25</td><td>50</td><td>75</td><td>125</td><td>250</td><td style="color:var(--gold-light);font-weight:700">2,500</td></tr>
-      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-green.webp" alt="綠色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />綠色藥水</td><td>10</td><td>20</td><td>30</td><td>50</td><td>100</td><td style="color:var(--gold-light)">1,000</td></tr>
-      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-orange.webp" alt="橘色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />橘色藥水</td><td>10</td><td>20</td><td>30</td><td>50</td><td>100</td><td style="color:var(--gold-light)">1,000</td></tr>
-      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-redbrown.webp" alt="紅棕色藥瓶" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />紅棕色藥瓶</td><td>5</td><td>10</td><td>15</td><td>25</td><td>50</td><td style="color:var(--gold-light)">500</td></tr>
-      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-blue-tube.webp" alt="藍色試管" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" />藍色試管</td><td>5</td><td>10</td><td>15</td><td>25</td><td>50</td><td style="color:var(--gold-light)">500</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-red-heart.webp" alt="紅色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" width="120" height="120" />紅色藥水</td><td>100</td><td>200</td><td>300</td><td>500</td><td>1,000</td><td style="color:var(--gold-light);font-weight:700">10,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-purple.webp" alt="紫色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" width="120" height="120" />紫色藥水</td><td>50</td><td>100</td><td>150</td><td>250</td><td>500</td><td style="color:var(--gold-light);font-weight:700">5,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-blue-round.webp" alt="藍色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" width="120" height="120" />藍色藥水</td><td>25</td><td>50</td><td>75</td><td>125</td><td>250</td><td style="color:var(--gold-light);font-weight:700">2,500</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-green.webp" alt="綠色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" width="120" height="120" />綠色藥水</td><td>10</td><td>20</td><td>30</td><td>50</td><td>100</td><td style="color:var(--gold-light)">1,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-orange.webp" alt="橘色藥水" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" width="120" height="120" />橘色藥水</td><td>10</td><td>20</td><td>30</td><td>50</td><td>100</td><td style="color:var(--gold-light)">1,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-redbrown.webp" alt="紅棕色藥瓶" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" width="120" height="120" />紅棕色藥瓶</td><td>5</td><td>10</td><td>15</td><td>25</td><td>50</td><td style="color:var(--gold-light)">500</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/fantasy-potion/symbol-blue-tube.webp" alt="藍色試管" loading="lazy" style="width:36px;height:36px;vertical-align:middle;margin-right:0.4rem" width="120" height="120" />藍色試管</td><td>5</td><td>10</td><td>15</td><td>25</td><td>50</td><td style="color:var(--gold-light)">500</td></tr>
     </tbody>
   </table>
   <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem">※ 以上為押注 50 時的賠率，與上方遊戲截圖一致。實際金額依押注大小等比例變動（如押注 100 則所有數值 ×2）。中獎門檻為 6 個相同符號相鄰，5 個以下不算中獎。</p>
   <!-- 選台技巧 -->
   <h2 id="machine">選台技巧 — 看數據挑機台</h2>
   <p>進入奇幻魔藥前，別急著直接開轉。RG 電子的遊戲大廳會顯示每台機台的<strong>近 30 日數據</strong>，包含免費遊戲最高倍數、Free Game 次數、各倍率區間分佈等。善用這些數據可以幫你挑到「比較熟」的機台。</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:1.5rem 0">
     <figure style="margin:0;text-align:center">
-      <img src="/images/fantasy-potion/machine-select.webp" alt="奇幻魔藥選台畫面" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border)" />
+      <img src="/images/fantasy-potion/machine-select.webp" alt="奇幻魔藥選台畫面" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border);height:auto" />
       <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 遊戲大廳選台畫面</figcaption>
     </figure>
     <figure style="margin:0;text-align:center">
-      <img src="/images/fantasy-potion/machine-tips.webp" alt="奇幻魔藥選台技巧" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border)" />
+      <img src="/images/fantasy-potion/machine-tips.webp" alt="奇幻魔藥選台技巧" loading="lazy" style="width:100%;border-radius:12px;border:1px solid var(--border);height:auto" />
       <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">▲ 挑選未開次數高的機台是常見技巧</figcaption>
     </figure>
   </div>
@@ -280,7 +280,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style is:global>
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg-primary:#121212;--bg-secondary:#1a1a1a;--bg-card:#1A1F1A;--bg-card-hover:#242924;

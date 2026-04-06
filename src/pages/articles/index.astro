@@ -3,6 +3,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const articles = [
   {
+    slug: 'anti-scam-8la-guide',
+    title: '防詐騙 8LA 指南：2026 娛樂城詐騙 8 大手法完整解析',
+    excerpt: '芭樂子整理 2026 台灣娛樂城最常見的 8 大詐騙手法：黑網、出金卡關、洗碼陷阱、LINE 老師、代儲代操、退款二次詐騙全部拆給你看。懂詐騙才能防詐騙。',
+    category: 'live',
+    categoryLabel: '防詐必讀',
+    date: '2026-04-06',
+    views: 21580,
+    tags: ['最新', '熱門', '精選'],
+    icon: 'fa-shield-alt',
+    gradient: 'linear-gradient(135deg,#3d0a1a,#ff416c,#1a0a0a)'
+  },
+  {
     slug: 'slots-guide',
     title: '老虎機攻略完整指南：RTP、波動性、爆分機制一次看懂',
     excerpt: '新手到老手都適用的老虎機教學。解析 RTP、波動性、Free Game、Buy Feature、倍數符號等核心概念，選對機台爆分機率大增。',
@@ -42,15 +54,16 @@ const articles = [
 ---
 
 <BaseLayout title="芭樂攻略 - GAME8LA 遊戲教學與評測" description="GAME8LA 芭樂攻略：老虎機、百家樂、真人娛樂、體育、補魚、棋牌、電競完整教學與評測文章。" currentPage="articles">
-  <main class="article-list-page">
-    <section class="page-header">
-      <div class="container">
-        <h1>芭樂攻略</h1>
+    <div class="container">
+      <div class="breadcrumb"><a href="/">首頁</a> &gt; 芭樂攻略</div>
+      <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
+      <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a0a2e,#2d1b50,#1a0a2e);border-radius:16px;margin-bottom:1.5rem"></div>
+      <div class="page-hero">
+        <h1>📚 <em>芭樂攻略</em></h1>
         <p>最真實的遊戲攻略、技巧分析、平台評測，沒有廢話、不灌水。</p>
       </div>
-    </section>
 
-    <section class="container filter-section">
+    <section class="filter-section">
       <div class="filter-row">
         <span class="filter-label">類別：</span>
         <button class="filter-btn active" data-cat="all">全部</button>
@@ -70,11 +83,14 @@ const articles = [
       </div>
     </section>
 
-    <section class="container article-grid" id="articleGrid">
+    <section class="article-grid" id="articleGrid">
       {articles.map(a => (
         <a href={`/articles/${a.slug}/`} class="article-card" data-cat={a.category} data-tags={a.tags.join(',')} data-date={a.date} data-views={a.views}>
           <div class="article-thumb" style={`background:${a.gradient}`}>
-            <i class={`fas ${a.icon}`}></i>
+            {a.thumbnail
+              ? <img src={a.thumbnail} alt={a.title} loading="lazy" width="400" height="225" style="width:100%;height:100%;object-fit:cover;display:block" />
+              : <i class={`fas ${a.icon}`}></i>
+            }
           </div>
           <div class="article-body">
             <span class="cat-badge">{a.categoryLabel}</span>
@@ -95,14 +111,20 @@ const articles = [
     </div>
 
     <div class="pagination" id="pagination"></div>
-  </main>
+    </div>
 
-  <style>
-    .article-list-page { padding-top: 90px; min-height: 100vh; }
-    .page-header { padding: 2rem 0 1rem; text-align: center; }
-    .page-header h1 { font-size: 2.5rem; color: var(--gold-light); margin-bottom: 0.5rem; }
-    .page-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  <style is:global>
+    body { line-height: 1.8 }
+    .article-list-page { min-height: 100vh; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 100px 2rem 4rem; }
+    .page-hero { text-align: center; padding: 3rem 0 2rem; }
+    .page-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 0.8rem; }
+    .page-hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-hero p { color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+    .breadcrumb { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .breadcrumb a { color: var(--text-muted); }
+    .breadcrumb a:hover { color: var(--gold-light); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold-light); margin-bottom: 1.5rem; font-size: 0.95rem; text-decoration: none; }
 
     .filter-section { margin: 2rem auto; }
     .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.8rem; }

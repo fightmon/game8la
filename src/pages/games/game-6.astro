@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
 
@@ -12,7 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 戰神呂布</div>
   <a href="/#games" class="back-link"><i class="fas fa-arrow-left"></i> 回遊戲列表</a>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#1a0a0a,#3a1520,#2a0a15);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:300px;font-size:5rem;border:1px solid var(--border)">
       ⚔️
     </div>
@@ -216,7 +216,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style is:global>
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg-primary:#121212;--bg-secondary:#1a1a1a;--bg-card:#1A1F1A;--bg-card-hover:#242924;

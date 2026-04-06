@@ -1,10 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+/* Fonts and Font Awesome loaded via BaseLayout <link> with preconnect for performance */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Prevent horizontal page overflow on mobile */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* === MOBILE TABLE SCROLL === */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+  table th,
+  table td {
+    padding: 0.5rem 0.6rem !important;
+  }
+  table td img,
+  table th img {
+    width: 26px !important;
+    height: 26px !important;
+    margin-right: 0.3rem !important;
+  }
+  /* Prevent images from breaking layout */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* === CSS CUSTOM PROPERTIES === */

@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
 
@@ -12,9 +12,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/casino-ranking/">娛樂城推薦</a> &gt; bet365 台灣中文版</div>
   <a href="/casino-ranking/" class="back-link"><i class="fas fa-arrow-left"></i> 回娛樂城列表</a>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#0a1a2e,#0d1f3d,#0a2a1a);border-radius:16px;overflow:hidden;border:1px solid var(--border)">
-      <img src="/images/casino/bet365-cover.webp" alt="bet365 台灣中文版 封面" style="width:100%;display:block;border-radius:16px" />
+      <img src="/images/casino/bet365-cover.webp" alt="bet365 台灣中文版 封面" style="width:100%;display:block;border-radius:16px;height:auto"  loading="lazy" width="1200" height="675" />
     </div>
     <div>
       <span class="badge badge-gold" style="margin-bottom:0.8rem">國際綜合博弈 / 體育投注龍頭</span>
@@ -356,7 +356,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style is:global>
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 :root{

@@ -10,6 +10,7 @@ interface Props {
   ogImage?: string;
   ogUrl?: string;
   currentPage?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -17,7 +18,8 @@ const {
   description = 'GAME8LA - 台灣最敢說真話的線上遊戲評測平台。不灌水、不業配，給你最真實的遊戲評價與遊戲攻略。',
   ogImage = 'https://game8la.com/images/og-image.webp',
   ogUrl = Astro.url.href,
-  currentPage = 'home'
+  currentPage = 'home',
+  noindex = false
 } = Astro.props;
 ---
 
@@ -28,6 +30,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <meta name="description" content={description}>
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title}>
@@ -49,8 +52,18 @@ const {
     <link rel="icon" type="image/webp" sizes="192x192" href="/images/index/icon-192.webp">
     <link rel="apple-touch-icon" href="/images/index/apple-touch-icon_180x180.webp">
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Google Fonts (Noto Sans TC) - non-blocking with swap -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"></noscript>
+
+    <!-- Font Awesome - non-blocking -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DN9QHEM3GQ"></script>

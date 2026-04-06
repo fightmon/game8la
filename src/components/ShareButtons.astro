@@ -13,41 +13,18 @@ const {
 ---
 
 <div class="share-buttons">
-  <a
-    href="javascript:void(0)"
-    onclick="shareOnLINE()"
-    class="share-btn line-btn"
-    title="分享到 LINE"
-  >
-    <i class="fab fa-line"></i> LINE
-  </a>
-
-  <a
-    href="javascript:void(0)"
-    onclick="shareOnFacebook()"
-    class="share-btn facebook-btn"
-    title="分享到 Facebook"
-  >
-    <i class="fab fa-facebook-f"></i> Facebook
-  </a>
-
-  <a
-    href="javascript:void(0)"
-    onclick="shareOnTwitter()"
-    class="share-btn twitter-btn"
-    title="分享到 Twitter"
-  >
-    <i class="fab fa-twitter"></i> Twitter
-  </a>
-
-  <a
-    href="javascript:void(0)"
-    onclick="copyToClipboard()"
-    class="share-btn copy-btn"
-    title="複製連結"
-  >
-    <i class="fas fa-copy"></i> 複製連結
-  </a>
+  <button type="button" onclick="shareOnLINE()" class="share-btn line-btn" aria-label="分享到 LINE" title="分享到 LINE">
+    <i class="fab fa-line" aria-hidden="true"></i> LINE
+  </button>
+  <button type="button" onclick="shareOnFacebook()" class="share-btn facebook-btn" aria-label="分享到 Facebook" title="分享到 Facebook">
+    <i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook
+  </button>
+  <button type="button" onclick="shareOnTwitter()" class="share-btn twitter-btn" aria-label="分享到 Twitter" title="分享到 Twitter">
+    <i class="fab fa-twitter" aria-hidden="true"></i> Twitter
+  </button>
+  <button type="button" onclick="copyToClipboard()" class="share-btn copy-btn" aria-label="複製連結" title="複製連結">
+    <i class="fas fa-copy" aria-hidden="true"></i> 複製連結
+  </button>
 </div>
 
 <style>

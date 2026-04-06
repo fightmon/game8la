@@ -54,7 +54,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p>專業牌路分析、下注策略完整教學，從8LA新手到金8LA玩家的進階指南！</p>
         <div class="hero-btns">
           <a href="/articles/baccarat-guide/" class="btn-primary" style="text-decoration:none"><i class="fas fa-book"></i> 立即閱讀</a>
-          <a href="/games/game-3/" class="btn-outline" style="text-decoration:none"><i class="fas fa-play"></i> 免費試玩</a>
+          <a href="/games/game-3/" class="btn-outline" aria-label="免費試玩 game-3" style="text-decoration:none"><i class="fas fa-play" aria-hidden="true"></i> 免費試玩</a>
         </div>
       </div>
     </div>
@@ -66,15 +66,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </span></div>
         <p>幫你分辨真8LA和爛8LA！GLI認證廠商、RTP透明公開，玩得安心又放心！</p>
         <div class="hero-btns">
-          <a href="/game-ranking/" class="btn-primary" style="text-decoration:none"><i class="fas fa-shield-alt"></i> 查看遊戲評分</a>
+          <a href="/articles/anti-scam-8la-guide/" class="btn-primary" style="text-decoration:none"><i class="fas fa-shield-alt"></i> 懂詐騙才能防詐騙</a>
           <a href="/#articles" class="btn-outline" style="text-decoration:none"><i class="fas fa-exclamation-triangle"></i> 詐騙負評清單</a>
         </div>
       </div>
     </div>
   </div>
   <div class="hero-arrows">
-    <button onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-    <button onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+    <button type="button" aria-label="上一張輪播" onclick="changeSlide(-1)"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+    <button type="button" aria-label="下一張輪播" onclick="changeSlide(1)"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
   </div>
   <div class="hero-dots" id="heroDots">
     <span class="active" onclick="goToSlide(0)"></span>
@@ -110,7 +110,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="ranking-grid">
     <a href="/games/seth-2/" class="rank-card" style="text-decoration:none;color:inherit">
       <span class="rank-badge gold">1</span>
-      <div class="rank-img gc-1"><img src="/images/seth2/seth2-card-thumbnail.webp" alt="戰神賽特2：覺醒之力" style="width:100%;height:100%;object-fit:cover;border-radius:12px 12px 0 0"></div>
+      <div class="rank-img gc-1"><img src="/images/seth2/seth2-card-thumbnail.webp" alt="戰神賽特2：覺醒之力" style="width:100%;height:100%;object-fit:cover;border-radius:12px 12px 0 0;height:auto" loading="lazy" width="600" height="600"></div>
       <div class="rank-info">
         <h3>戰神賽特2：覺醒之力</h3>
         <div class="rank-score">
@@ -122,7 +122,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </a>
     <a href="/games/fantasy-potion/" class="rank-card" style="text-decoration:none;color:inherit">
       <span class="rank-badge silver">2</span>
-      <div class="rank-img gc-2"><img src="/images/fantasy-potion/card-thumbnail.webp" alt="奇幻魔藥" style="width:100%;height:100%;object-fit:cover;border-radius:12px" /></div>
+      <div class="rank-img gc-2"><img src="/images/fantasy-potion/card-thumbnail.webp" alt="奇幻魔藥" style="width:100%;height:100%;object-fit:cover;border-radius:12px;height:auto"  loading="lazy" width="600" height="600" /></div>
       <div class="rank-info">
         <h3>奇幻魔藥</h3>
         <div class="rank-score">
@@ -352,7 +352,7 @@ function renderGames(filter = 'all') {
       <div class="game-card-img ${g.gradient}" ${g.img ? `style="padding:0;overflow:hidden"` : ''}>
         ${g.badge === 'hot' ? '<span class="hot-badge">🔥 熱門</span>' : ''}
         ${g.badge === 'new' ? '<span class="new-badge">🆕 新上架</span>' : ''}
-        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block">` : `<i class="fas ${g.icon} game-icon"></i>`}
+        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : `<i class="fas ${g.icon} game-icon"></i>`}
         <span class="game-label">${g.label}</span>
       </div>
       <div class="game-card-body">
@@ -363,8 +363,8 @@ function renderGames(filter = 'all') {
         </div>
         <div class="game-desc">${g.desc}</div>
         <div class="game-actions">
-          <a href="/games/${g.slug}/" class="btn-play" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-play"></i> 免費試玩</a>
-          <a href="/games/${g.slug}/" class="btn-info" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-info-circle"></i> 更多資訊</a>
+          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-play" aria-hidden="true"></i> 免費試玩</a>
+          <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-info-circle" aria-hidden="true"></i> 更多資訊</a>
         </div>
       </div>
     </div>
@@ -427,7 +427,12 @@ let autoPlay = setInterval(() => changeSlide(1), 5000);
   slider.addEventListener('touchmove', e => onMove(e.touches[0].clientX), {passive: true});
   slider.addEventListener('touchend', onEnd);
   // Mouse drag events
-  slider.addEventListener('mousedown', e => { e.preventDefault(); onStart(e.clientX); });
+  slider.addEventListener('mousedown', e => {
+    // 不攔截連結/按鈕的點擊
+    if (e.target.closest('a, button')) return;
+    e.preventDefault();
+    onStart(e.clientX);
+  });
   slider.addEventListener('mousemove', e => onMove(e.clientX));
   slider.addEventListener('mouseup', onEnd);
   slider.addEventListener('mouseleave', () => { if (isDragging) onEnd(); });
@@ -544,8 +549,6 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
 </BaseLayout>
 
 <style is:global>
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -856,6 +859,35 @@ body {
 /* === Cyberpunk decorations (from video) === */
 
 /* Four-pointed twinkling stars */
+.cyber-star, .cyber-globe, .cyber-wave { pointer-events: none !important; }
+.hero::before, .hero::after { pointer-events: none !important; }
+.hero-slides { pointer-events: none; }
+.hero-slide, .hero-content, .hero-btns, .hero-btns * { pointer-events: auto; }
+/* Hero button text bulletproof visibility */
+.hero-btns .btn-primary,
+.hero-btns .btn-primary:hover,
+.hero-btns .btn-primary:focus,
+.hero-btns .btn-primary:active {
+  color: #000 !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-text-fill-color: #000 !important;
+  background: #39FF14 !important;
+}
+.hero-btns .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(57,255,20,0.6), 0 0 50px rgba(57,255,20,0.3);
+  background: #4aff2a !important;
+}
+.hero-btns .btn-outline,
+.hero-btns .btn-outline:hover {
+  color: #FF10F0 !important;
+  -webkit-text-fill-color: #FF10F0 !important;
+}
+.hero-title-frame, .hero-title-inner, .hero-content h1, .hero-content h1 em, .hero-content .tag, .hero-content p { pointer-events: none; }
+.hero-content { pointer-events: none; }
+.hero-btns, .hero-btns * { pointer-events: auto !important; }
+.hero-btns a, .hero-btns button { cursor: pointer !important; position: relative; z-index: 20; }
 .cyber-star {
   position: absolute; z-index: 3; width: 24px; height: 24px;
   color: #39FF14; filter: drop-shadow(0 0 8px currentColor);
@@ -1059,9 +1091,9 @@ body {
 }
 .game-card-img .new-badge {
   position: absolute; top: 10px; right: 10px;
-  background: var(--guava-green); color: white;
+  background: var(--guava-green); color: #0a2810;
   padding: 0.2rem 0.7rem; border-radius: 20px;
-  font-size: 0.75rem; font-weight: 700;
+  font-size: 0.75rem; font-weight: 900;
 }
 .game-card-body { padding: 1.2rem 1.4rem 1.4rem; }
 .game-card-body h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
@@ -1122,10 +1154,10 @@ body {
   padding: 0.2rem 0.8rem; border-radius: 20px;
   font-size: 0.75rem; font-weight: 700;
 }
-.cat-attack { background: var(--guava-pink); color: white; }
-.cat-review { background: var(--guava-green); color: white; }
+.cat-attack { background: var(--guava-pink); color: #2a0014; font-weight: 900; }
+.cat-review { background: var(--guava-green); color: #0a2810; font-weight: 900; }
 .cat-news { background: var(--gold); color: #000000; }
-.cat-tip { background: #e74c3c; color: white; }
+.cat-tip { background: #b32418; color: #ffffff; font-weight: 900; }
 .article-body { padding: 1.2rem; }
 .article-body h3 {
   font-size: 1rem; margin-bottom: 0.5rem;
@@ -1460,7 +1492,7 @@ function renderGames(filter = 'all') {
       <div class="game-card-img ${g.gradient}" ${g.img ? `style="padding:0;overflow:hidden"` : ''}>
         ${g.badge === 'hot' ? '<span class="hot-badge">🔥 熱門</span>' : ''}
         ${g.badge === 'new' ? '<span class="new-badge">🆕 新上架</span>' : ''}
-        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block">` : `<i class="fas ${g.icon} game-icon"></i>`}
+        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : `<i class="fas ${g.icon} game-icon"></i>`}
         <span class="game-label">${g.label}</span>
       </div>
       <div class="game-card-body">
@@ -1471,8 +1503,8 @@ function renderGames(filter = 'all') {
         </div>
         <div class="game-desc">${g.desc}</div>
         <div class="game-actions">
-          <a href="/games/${g.slug}/" class="btn-play" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-play"></i> 免費試玩</a>
-          <a href="/games/${g.slug}/" class="btn-info" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-info-circle"></i> 更多資訊</a>
+          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-play" aria-hidden="true"></i> 免費試玩</a>
+          <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-info-circle" aria-hidden="true"></i> 更多資訊</a>
         </div>
       </div>
     </div>
@@ -1542,7 +1574,12 @@ let autoPlay = setInterval(() => changeSlide(1), 5000);
   slider.addEventListener('touchend', onEnd);
 
   // Mouse drag events
-  slider.addEventListener('mousedown', e => { e.preventDefault(); onStart(e.clientX); });
+  slider.addEventListener('mousedown', e => {
+    // 不攔截連結/按鈕的點擊
+    if (e.target.closest('a, button')) return;
+    e.preventDefault();
+    onStart(e.clientX);
+  });
   slider.addEventListener('mousemove', e => onMove(e.clientX));
   slider.addEventListener('mouseup', onEnd);
   slider.addEventListener('mouseleave', () => { if (isDragging) onEnd(); });
