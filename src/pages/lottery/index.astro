@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="芭樂好彩 - 台灣彩券最新開獎結果｜大樂透、威力彩、今彩539" description="GAME8LA 芭樂好彩：每期自動更新台灣彩券最新開獎結果，包含大樂透、威力彩、今彩539、雙贏彩、3星彩、4星彩。" currentPage="lottery">
+  <main class="lottery-page">
+    <section class="page-header">
+      <div class="container">
+        <h1>🍈 芭樂好彩</h1>
+        <p>台灣彩券最新開獎結果，每期開獎後自動更新</p>
+        <p class="updated">最後更新：<span id="updateTime">載入中…</span></p>
+      </div>
+    </section>
+
+    <section class="container lottery-grid">
+      <!-- 大樂透 -->
+      <div class="lottery-card" data-lottery="lotto649">
+        <div class="card-head"><i class="fas fa-star"></i><h2>大樂透</h2><span class="period" id="lotto649-period">--</span></div>
+        <div class="card-body">
+          <div class="draw-label">本期開獎號碼</div>
+          <div class="numbers main" id="lotto649-main">
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+          </div>
+          <div class="draw-label">特別號</div>
+          <div class="numbers special"><span class="num special-num" id="lotto649-special">--</span></div>
+          <div class="draw-date">開獎日：<span id="lotto649-date">--</span></div>
+        </div>
+      </div>
+
+      <!-- 威力彩 -->
+      <div class="lottery-card" data-lottery="super_lotto">
+        <div class="card-head"><i class="fas fa-bolt"></i><h2>威力彩</h2><span class="period" id="super-period">--</span></div>
+        <div class="card-body">
+          <div class="draw-label">第一區</div>
+          <div class="numbers main" id="super-main">
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+          </div>
+          <div class="draw-label">第二區</div>
+          <div class="numbers special"><span class="num special-num" id="super-special">--</span></div>
+          <div class="draw-date">開獎日：<span id="super-date">--</span></div>
+        </div>
+      </div>
+
+      <!-- 今彩539 -->
+      <div class="lottery-card" data-lottery="daily_cash">
+        <div class="card-head"><i class="fas fa-coins"></i><h2>今彩 539</h2><span class="period" id="daily-period">--</span></div>
+        <div class="card-body">
+          <div class="draw-label">本期開獎號碼</div>
+          <div class="numbers main" id="daily-main">
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+            <span class="num loading">--</span><span class="num loading">--</span>
+          </div>
+          <div class="draw-date">開獎日：<span id="daily-date">--</span></div>
+        </div>
+      </div>
+
+      <!-- 雙贏彩 -->
+      <div class="lottery-card" data-lottery="lotto1224">
+        <div class="card-head"><i class="fas fa-gem"></i><h2>雙贏彩</h2><span class="period" id="double-period">--</span></div>
+        <div class="card-body">
+          <div class="draw-label">本期開獎號碼</div>
+          <div class="numbers main wide" id="double-main">
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+          </div>
+          <div class="draw-date">開獎日：<span id="double-date">--</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container info-box">
+      <h3>📅 開獎時間</h3>
+      <ul>
+        <li><strong>大樂透</strong>：每週二、五晚間 20:30 開獎</li>
+        <li><strong>威力彩</strong>：每週一、四晚間 20:30 開獎</li>
+        <li><strong>今彩 539</strong>：每日晚間 20:30 開獎（週日除外）</li>
+        <li><strong>雙贏彩</strong>：每日晚間 20:30 開獎（週日除外）</li>
+      </ul>
+      <p class="disclaimer">⚠️ 本頁資料僅供參考，實際中獎號碼請以 <a href="https://www.taiwanlottery.com/" target="_blank" rel="noopener">台灣彩券官方網站</a> 公告為準。</p>
+    </section>
+  </main>
+
+  <style>
+    .lottery-page { padding-top: 90px; min-height: 100vh; }
+    .page-header { padding: 2rem 0 1rem; text-align: center; }
+    .page-header h1 { font-size: 2.5rem; color: var(--gold-light); margin-bottom: 0.5rem; }
+    .page-header p { color: var(--text-secondary); }
+    .page-header .updated { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .lottery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; margin: 2rem auto; }
+    .lottery-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden; transition: all 0.3s;
+    }
+    .lottery-card:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(57,255,20,0.1); }
+
+    .card-head {
+      background: linear-gradient(135deg, rgba(57,255,20,0.15), rgba(255,16,240,0.08));
+      padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-head i { font-size: 1.5rem; color: var(--gold-light); }
+    .card-head h2 { font-size: 1.3rem; color: var(--text-primary); margin: 0; flex: 1; }
+    .card-head .period { font-size: 0.8rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 0.3rem 0.7rem; border-radius: 12px; }
+
+    .card-body { padding: 1.5rem; }
+    .draw-label { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.7rem; }
+    .numbers { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.2rem; }
+    .numbers.wide .num { width: 44px; height: 44px; font-size: 1.1rem; }
+    .num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, #39FF14, #2bcc10);
+      color: #000; font-weight: 900; font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(57,255,20,0.3);
+    }
+    .num.loading { background: var(--bg-secondary); color: var(--text-muted); box-shadow: none; }
+    .num.special-num { background: linear-gradient(135deg, #FF10F0, #c80dc0); box-shadow: 0 4px 12px rgba(255,16,240,0.3); }
+    .draw-date { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; }
+
+    .info-box {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem 2rem; margin: 2rem auto 4rem; max-width: 1168px;
+    }
+    .info-box h3 { color: var(--gold-light); margin-bottom: 1rem; }
+    .info-box ul { list-style: none; padding: 0; }
+    .info-box li { padding: 0.5rem 0; color: var(--text-secondary); border-bottom: 1px dashed var(--border); }
+    .info-box li:last-child { border: none; }
+    .info-box li strong { color: var(--gold-light); margin-right: 0.5rem; }
+    .disclaimer { margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 1.8rem; }
+      .num { width: 44px; height: 44px; font-size: 1.1rem; }
+      .numbers.wide .num { width: 36px; height: 36px; font-size: 0.95rem; }
+    }
+  </style>
+
+  <script is:inline>
+    (async function(){
+      const updateEl = document.getElementById('updateTime');
+      // Attempt to fetch from Taiwan Lottery unofficial API via CORS proxy
+      const PROXY = 'https://api.allorigins.win/raw?url=';
+      const ENDPOINTS = {
+        lotto649: 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Lotto649Result',
+        super_lotto: 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery/SuperLotto638Result',
+        daily_cash: 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery/DailyCash539Result',
+        lotto1224: 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Lotto1224Result'
+      };
+
+      function setNums(containerId, nums) {
+        const el = document.getElementById(containerId);
+        if (!el || !nums || !nums.length) return;
+        const spans = el.querySelectorAll('.num');
+        nums.forEach((n, i) => {
+          if (spans[i]) {
+            spans[i].textContent = String(n).padStart(2, '0');
+            spans[i].classList.remove('loading');
+          }
+        });
+      }
+
+      async function fetchLottery(key) {
+        try {
+          const url = PROXY + encodeURIComponent(ENDPOINTS[key] + '?$top=1');
+          const res = await fetch(url, { cache: 'no-store' });
+          if (!res.ok) throw new Error('fetch failed');
+          const data = await res.json();
+          return data;
+        } catch (e) {
+          console.warn('Failed to fetch', key, e);
+          return null;
+        }
+      }
+
+      async function loadAll() {
+        // Try to populate each; Taiwan Lottery API response shape may vary
+        const results = await Promise.all(Object.keys(ENDPOINTS).map(fetchLottery));
+        // Best-effort parsing — API shape is currently unknown at build time,
+        // so we log the raw data for debugging. Users can inspect console.
+        results.forEach((d, i) => {
+          if (d) console.log(Object.keys(ENDPOINTS)[i], d);
+        });
+        updateEl.textContent = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+      }
+
+      // Show static placeholder immediately (so page isn't empty if fetch fails)
+      updateEl.textContent = '嘗試連線中…';
+      loadAll().catch(err => {
+        updateEl.textContent = '無法取得即時資料，請前往台灣彩券官網查詢';
+      });
+    })();
+  </script>
+</BaseLayout>

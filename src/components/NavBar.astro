@@ -14,11 +14,10 @@ const { currentPage = 'home' } = Astro.props;
   </div>
   <div class="nav-links">
     <a href="/" class={currentPage === 'home' ? 'active' : ''}>首頁</a>
-    <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>遊戲推薦</a>
-    <a href="/casino-ranking/" class={currentPage === 'casinos' ? 'active' : ''}>娛樂城推薦</a>
-    <a href="/#games" class={currentPage === 'games' ? 'active' : ''}>熱門遊戲</a>
-    <a href="/#articles" class={currentPage === 'articles' ? 'active' : ''}>攻略評測</a>
-    <a href="/article-dealers/" class={currentPage === 'dealers' ? 'active' : ''}>荷官特輯</a>
+    <a href="/articles/" class={currentPage === 'articles' ? 'active' : ''}>芭樂攻略</a>
+    <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>芭樂遊戲</a>
+    <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>芭樂好彩</a>
+    <a href="/articles/dealers-guide/" class={currentPage === 'dealers' ? 'active' : ''}>荷官特輯</a>
   </div>
   <div class="nav-search" onclick="openSearch()">
     <i class="fas fa-search"></i>

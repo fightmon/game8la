@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const articles = [
+  {
+    slug: 'slots-guide',
+    title: '老虎機攻略完整指南：RTP、波動性、爆分機制一次看懂',
+    excerpt: '新手到老手都適用的老虎機教學。解析 RTP、波動性、Free Game、Buy Feature、倍數符號等核心概念，選對機台爆分機率大增。',
+    category: 'slots',
+    categoryLabel: '老虎機',
+    date: '2026-03-20',
+    views: 15420,
+    tags: ['熱門', '精選'],
+    icon: 'fa-dice',
+    gradient: 'linear-gradient(135deg,#f093fb,#f5576c)'
+  },
+  {
+    slug: 'baccarat-guide',
+    title: '百家樂完整教學：規則、算牌、投注法、常見迷思',
+    excerpt: '從零開始學百家樂。閒家、莊家、和局的賠率與機率，馬丁格爾、平注法、纜注法比較，拆解 90% 新手會踩的坑。',
+    category: 'baccarat',
+    categoryLabel: '百家樂',
+    date: '2026-03-15',
+    views: 12380,
+    tags: ['精選'],
+    icon: 'fa-money-bill',
+    gradient: 'linear-gradient(135deg,#4facfe,#00f2fe)'
+  },
+  {
+    slug: 'dealers-guide',
+    title: '真人荷官大評比：2026 台灣玩家最愛的直播娛樂城荷官',
+    excerpt: '盤點各大真人娛樂城平台熱門荷官。SEXY、DG、歐博、沙龍平台特色對比，附直播品質、語言、桌台分析。',
+    category: 'live',
+    categoryLabel: '真人娛樂',
+    date: '2026-03-10',
+    views: 9870,
+    tags: ['最新'],
+    icon: 'fa-user-tie',
+    gradient: 'linear-gradient(135deg,#fa709a,#fee140)'
+  }
+];
+---
+
+<BaseLayout title="芭樂攻略 - GAME8LA 遊戲教學與評測" description="GAME8LA 芭樂攻略：老虎機、百家樂、真人娛樂、體育、補魚、棋牌、電競完整教學與評測文章。" currentPage="articles">
+  <main class="article-list-page">
+    <section class="page-header">
+      <div class="container">
+        <h1>芭樂攻略</h1>
+        <p>最真實的遊戲攻略、技巧分析、平台評測，沒有廢話、不灌水。</p>
+      </div>
+    </section>
+
+    <section class="container filter-section">
+      <div class="filter-row">
+        <span class="filter-label">類別：</span>
+        <button class="filter-btn active" data-cat="all">全部</button>
+        <button class="filter-btn" data-cat="slots">老虎機</button>
+        <button class="filter-btn" data-cat="baccarat">百家樂</button>
+        <button class="filter-btn" data-cat="live">真人娛樂</button>
+        <button class="filter-btn" data-cat="sports">體育</button>
+        <button class="filter-btn" data-cat="fishing">捕魚</button>
+        <button class="filter-btn" data-cat="poker">棋牌</button>
+        <button class="filter-btn" data-cat="esports">電競</button>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">排序：</span>
+        <button class="sort-btn active" data-sort="hot">熱門</button>
+        <button class="sort-btn" data-sort="new">最新</button>
+        <button class="sort-btn" data-sort="featured">精選</button>
+      </div>
+    </section>
+
+    <section class="container article-grid" id="articleGrid">
+      {articles.map(a => (
+        <a href={`/articles/${a.slug}/`} class="article-card" data-cat={a.category} data-tags={a.tags.join(',')} data-date={a.date} data-views={a.views}>
+          <div class="article-thumb" style={`background:${a.gradient}`}>
+            <i class={`fas ${a.icon}`}></i>
+          </div>
+          <div class="article-body">
+            <span class="cat-badge">{a.categoryLabel}</span>
+            <h3>{a.title}</h3>
+            <p>{a.excerpt}</p>
+            <div class="meta">
+              <span><i class="fas fa-calendar"></i> {a.date}</span>
+              <span><i class="fas fa-eye"></i> {a.views.toLocaleString()}</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </section>
+
+    <div class="empty-state" id="emptyState" style="display:none">
+      <i class="fas fa-inbox"></i>
+      <p>這個類別暫時還沒有文章，我們正在努力寫！</p>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+  </main>
+
+  <style>
+    .article-list-page { padding-top: 90px; min-height: 100vh; }
+    .page-header { padding: 2rem 0 1rem; text-align: center; }
+    .page-header h1 { font-size: 2.5rem; color: var(--gold-light); margin-bottom: 0.5rem; }
+    .page-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .filter-section { margin: 2rem auto; }
+    .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.8rem; }
+    .filter-label { color: var(--text-secondary); font-size: 0.95rem; margin-right: 0.3rem; }
+    .filter-btn, .sort-btn {
+      background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
+      padding: 0.5rem 1.1rem; border-radius: 20px; cursor: pointer; font-size: 0.9rem;
+      font-family: inherit; transition: all 0.3s;
+    }
+    .filter-btn:hover, .sort-btn:hover { border-color: var(--gold); color: var(--gold-light); }
+    .filter-btn.active, .sort-btn.active {
+      background: var(--gold); color: #000; border-color: var(--gold); font-weight: 600;
+    }
+
+    .article-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem; margin: 2rem auto;
+    }
+    .article-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; text-decoration: none; color: inherit; transition: all 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .article-card:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(57,255,20,0.15); }
+    .article-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #fff; }
+    .article-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+    .cat-badge {
+      display: inline-block; background: rgba(57,255,20,0.15); color: var(--gold-light);
+      padding: 0.25rem 0.7rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;
+      margin-bottom: 0.6rem; align-self: flex-start;
+    }
+    .article-card h3 { font-size: 1.1rem; margin-bottom: 0.6rem; line-height: 1.4; }
+    .article-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; margin-bottom: 1rem; flex: 1; }
+    .article-card .meta { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--text-muted); }
+
+    .empty-state { text-align: center; padding: 4rem 1rem; color: var(--text-muted); }
+    .empty-state i { font-size: 3rem; margin-bottom: 1rem; display: block; }
+
+    .pagination {
+      display: flex; gap: 0.5rem; justify-content: center; margin: 3rem 0; flex-wrap: wrap;
+    }
+    .pagination button {
+      background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary);
+      padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-family: inherit; min-width: 40px;
+    }
+    .pagination button:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-light); }
+    .pagination button.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 600; }
+    .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 1.8rem; }
+      .article-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script is:inline>
+    (function(){
+      const PER_PAGE = 8;
+      const grid = document.getElementById('articleGrid');
+      const cards = Array.from(grid.querySelectorAll('.article-card'));
+      const pagination = document.getElementById('pagination');
+      const emptyState = document.getElementById('emptyState');
+      let currentCat = 'all';
+      let currentSort = 'hot';
+      let currentPage = 1;
+
+      function filterAndSort() {
+        let list = cards.slice();
+        if (currentCat !== 'all') list = list.filter(c => c.dataset.cat === currentCat);
+        if (currentSort === 'hot') list.sort((a,b) => Number(b.dataset.views) - Number(a.dataset.views));
+        else if (currentSort === 'new') list.sort((a,b) => b.dataset.date.localeCompare(a.dataset.date));
+        else if (currentSort === 'featured') list = list.filter(c => c.dataset.tags.includes('精選'));
+        return list;
+      }
+
+      function render() {
+        const list = filterAndSort();
+        cards.forEach(c => c.style.display = 'none');
+        const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+        if (currentPage > totalPages) currentPage = 1;
+        const start = (currentPage - 1) * PER_PAGE;
+        const slice = list.slice(start, start + PER_PAGE);
+        slice.forEach(c => c.style.display = 'flex');
+        emptyState.style.display = list.length === 0 ? 'block' : 'none';
+        renderPagination(totalPages);
+      }
+
+      function renderPagination(totalPages) {
+        pagination.innerHTML = '';
+        if (totalPages <= 1) return;
+        const mkBtn = (label, page, disabled, active) => {
+          const b = document.createElement('button');
+          b.textContent = label;
+          if (disabled) b.disabled = true;
+          if (active) b.classList.add('active');
+          b.addEventListener('click', () => { currentPage = page; render(); window.scrollTo({top: 0, behavior:'smooth'}); });
+          return b;
+        };
+        pagination.appendChild(mkBtn('‹', currentPage - 1, currentPage === 1));
+        for (let i = 1; i <= totalPages; i++) pagination.appendChild(mkBtn(String(i), i, false, i === currentPage));
+        pagination.appendChild(mkBtn('›', currentPage + 1, currentPage === totalPages));
+      }
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCat = btn.dataset.cat;
+          currentPage = 1;
+          render();
+        });
+      });
+      document.querySelectorAll('.sort-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentSort = btn.dataset.sort;
+          currentPage = 1;
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</BaseLayout>
