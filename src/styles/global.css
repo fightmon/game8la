@@ -221,7 +221,7 @@ a:hover {
 .page-hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .page-hero p{color:var(--text-secondary);font-size:1.1rem;max-width:700px;margin:0 auto}
 .badge{display:inline-block;padding:0.2rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:700}
-.badge-safe{background:var(--guava-green);color:white}
+.badge-safe{background:var(--guava-green);color:#0a2810;font-weight:900}
 .badge-warn{background:var(--gold);color:#000}
 .badge-danger{background:#e74c3c;color:white}
 .badge-gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:#000}
