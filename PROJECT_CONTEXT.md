@@ -182,3 +182,68 @@ npm install
 - 使用者的 Cloudflare 帳號是 `fightmon@gmail.com`
 - 使用者的 GSC 用「網域資源」驗證,提交 sitemap 要用完整網址(不會自動帶前綴)
 - Windows 沙盒的 npm registry 有時會 403,是網路問題不是專案問題
+
+## 新文章 SOP（每篇新文章都要照做）
+
+### 1. 檔案位置與命名
+- 路徑：`src/pages/articles/<slug>.astro`
+- slug 用 kebab-case，英文為主，方便 SEO
+
+### 2. 必備 frontmatter 結構
+```astro
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+
+const faqs = [
+  { q: '問題 1？', a: '答案 1。' },
+  { q: '問題 2？', a: '答案 2。' },
+  { q: '問題 3？', a: '答案 3。' },
+  // 3–8 題，答案要實質有用
+];
+---
+<FaqSchema faqs={faqs} />
+<BaseLayout title="..." description="...">
+  <!-- 內容 -->
+  <h2>常見問題</h2>
+  {faqs.map(f => (
+    <details>
+      <summary>{f.q}</summary>
+      <p>{f.a}</p>
+    </details>
+  ))}
+</BaseLayout>
+```
+
+### 3. FAQ Schema 規則（不能違反）
+- 最少 3 題，建議 5–8 題
+- HTML 顯示的 FAQ 文字必須與 `faqs` 陣列完全一致（Google 會比對）
+- 答案要實質有用，禁止「請洽官方」這類廢話
+- 上線後到 https://search.google.com/test/rich-results 驗證是否偵測到 FAQPage
+
+### 4. 標題層級規範
+- 文章主標：`<h1>`（BaseLayout 或文章模板內一個就好）
+- 章節標：`<h2>`
+- 子章節：`<h3>`
+- **禁止跳層級**（不可直接 `<h2>` 下接 `<h4>`）
+- 「本文懶人包」「常見問題」等段落標題用 `<h2>`
+
+### 5. 文章封面圖
+- 統一放 `public/images/article-covers/cover-<topic>.webp`
+- 主題對應：slots / baccarat / live / sports / fishing / poker / anti-scam / lottery
+- 尺寸建議 1200×675，webp quality 82，檔案大小 20–30 KiB
+- 加到 `src/pages/articles/index.astro` 的陣列時要填 `thumbnail` 欄位
+
+### 6. 內部連結
+- 每篇文章至少 2–3 條內部連結指向 /lottery/、相關攻略文、或 /articles/anti-scam-8la-guide/
+- 幫助 topic cluster 與權重集中
+
+### 7. 無障礙與對比度
+- Badge/按鈕文字需通過 WCAG AA（4.5:1）
+- 不要用淺色字配淺色底
+- 文字對比度不確定就用 https://webaim.org/resources/contrastchecker/ 檢查
+
+### 8. 部署後必做
+- GSC「網址審查」→ 要求建立索引
+- sitemap 確認有包含新 URL
+- PageSpeed 跑一次確認 LCP < 2.5s、CLS < 0.1
