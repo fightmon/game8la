@@ -52,14 +52,8 @@ const {
     <link rel="icon" type="image/webp" sizes="192x192" href="/images/index/icon-192.webp">
     <link rel="apple-touch-icon" href="/images/index/apple-touch-icon_180x180.webp">
 
-    <!-- Preconnect for faster font loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 使用系統字型，無需下載 Noto Sans TC，加速 LCP -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-
-    <!-- Google Fonts (Noto Sans TC) - non-blocking with swap -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"></noscript>
 
     <!-- Font Awesome - non-blocking -->
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
