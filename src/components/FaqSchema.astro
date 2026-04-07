@@ -1,0 +1,27 @@
+---
+// FAQ Schema component - 產生 FAQPage JSON-LD 結構化資料
+// 用法:
+//   <FaqSchema faqs={[{q: '問題', a: '答案'}, ...]} />
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+interface Props {
+  faqs: FaqItem[];
+}
+const { faqs } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a,
+    },
+  })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

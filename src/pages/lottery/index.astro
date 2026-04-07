@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="芭樂好彩 - 台灣彩券最新開獎結果｜大樂透、威力彩、今彩539" description="GAME8LA 芭樂好彩：每期自動更新台灣彩券最新開獎結果，包含大樂透、威力彩、今彩539、雙贏彩、3星彩、4星彩。" currentPage="lottery">
+<BaseLayout title="芭樂好彩 - 台灣彩券最新開獎結果｜大樂透、威力彩、今彩539" description="GAME8LA 芭樂好彩：每期自動更新台灣彩券最新開獎結果，包含威力彩、大樂透、今彩539、3星彩、4星彩、BINGO BINGO 賓果，附前 5 期歷史紀錄。" currentPage="lottery">
     <div class="container">
       <div class="breadcrumb"><a href="/">首頁</a> &gt; 芭樂好彩</div>
       <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
@@ -14,21 +14,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
 
     <section class="lottery-grid">
-      <!-- 大樂透 -->
-      <div class="lottery-card" data-lottery="lotto649">
-        <div class="card-head"><i class="fas fa-star"></i><h2>大樂透</h2><span class="period" id="lotto649-period">--</span></div>
-        <div class="card-body">
-          <div class="draw-label">本期開獎號碼</div>
-          <div class="numbers main" id="lotto649-main">
-            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
-            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
-          </div>
-          <div class="draw-label">特別號</div>
-          <div class="numbers special"><span class="num special-num" id="lotto649-special">--</span></div>
-          <div class="draw-date">開獎日：<span id="lotto649-date">--</span></div>
-        </div>
-      </div>
-
       <!-- 威力彩 -->
       <div class="lottery-card" data-lottery="super_lotto">
         <div class="card-head"><i class="fas fa-bolt"></i><h2>威力彩</h2><span class="period" id="super-period">--</span></div>
@@ -41,6 +26,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <div class="draw-label">第二區</div>
           <div class="numbers special"><span class="num special-num" id="super-special">--</span></div>
           <div class="draw-date">開獎日：<span id="super-date">--</span></div>
+        </div>
+      </div>
+
+      <!-- 大樂透 -->
+      <div class="lottery-card" data-lottery="lotto649">
+        <div class="card-head"><i class="fas fa-star"></i><h2>大樂透</h2><span class="period" id="lotto649-period">--</span></div>
+        <div class="card-body">
+          <div class="draw-label">本期開獎號碼</div>
+          <div class="numbers main" id="lotto649-main">
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+          </div>
+          <div class="draw-label">特別號</div>
+          <div class="numbers special"><span class="num special-num" id="lotto649-special">--</span></div>
+          <div class="draw-date">開獎日：<span id="lotto649-date">--</span></div>
         </div>
       </div>
 
@@ -57,19 +57,48 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- 雙贏彩 -->
-      <div class="lottery-card" data-lottery="lotto1224">
-        <div class="card-head"><i class="fas fa-gem"></i><h2>雙贏彩</h2><span class="period" id="double-period">--</span></div>
+      <!-- 3 星彩 -->
+      <div class="lottery-card" data-lottery="lotto3d">
+        <div class="card-head"><i class="fas fa-dice-three"></i><h2>3 星彩</h2><span class="period" id="lotto3d-period">--</span></div>
         <div class="card-body">
           <div class="draw-label">本期開獎號碼</div>
-          <div class="numbers main wide" id="double-main">
+          <div class="numbers main" id="lotto3d-main">
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+          </div>
+          <div class="draw-date">開獎日：<span id="lotto3d-date">--</span></div>
+        </div>
+      </div>
+
+      <!-- 4 星彩 -->
+      <div class="lottery-card" data-lottery="lotto4d">
+        <div class="card-head"><i class="fas fa-dice-four"></i><h2>4 星彩</h2><span class="period" id="lotto4d-period">--</span></div>
+        <div class="card-body">
+          <div class="draw-label">本期開獎號碼</div>
+          <div class="numbers main" id="lotto4d-main">
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+          </div>
+          <div class="draw-date">開獎日：<span id="lotto4d-date">--</span></div>
+        </div>
+      </div>
+
+      <!-- BINGO BINGO 賓果賓果 -->
+      <div class="lottery-card" data-lottery="bingo">
+        <div class="card-head"><i class="fas fa-bullseye"></i><h2>BINGO BINGO 賓果</h2><span class="period" id="bingo-period">--</span></div>
+        <div class="card-body">
+          <div class="draw-label">開出 20 號</div>
+          <div class="numbers main wide" id="bingo-main">
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
+            <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
             <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
             <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
             <span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span><span class="num loading">--</span>
           </div>
-          <div class="draw-date">開獎日：<span id="double-date">--</span></div>
+          <div class="draw-label">超級獎號</div>
+          <div class="numbers special"><span class="num special-num" id="bingo-special">--</span></div>
+          <div class="draw-date">開獎日：<span id="bingo-date">--</span></div>
         </div>
       </div>
+
     </section>
 
     <section class="info-box">
@@ -78,24 +107,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <li><strong>大樂透</strong>：每週二、五晚間 20:30 開獎</li>
         <li><strong>威力彩</strong>：每週一、四晚間 20:30 開獎</li>
         <li><strong>今彩 539</strong>：每日晚間 20:30 開獎（週日除外）</li>
-        <li><strong>雙贏彩</strong>：每日晚間 20:30 開獎（週日除外）</li>
+        <li><strong>3 星彩 / 4 星彩</strong>：每日晚間 20:30 開獎（週日除外）</li>
+        <li><strong>BINGO BINGO 賓果賓果</strong>：每日 12:05 起每 5 分鐘開獎一場至 23:55</li>
       </ul>
       <p class="disclaimer">⚠️ 本頁資料僅供參考，實際中獎號碼請以 <a href="https://www.taiwanlottery.com/" target="_blank" rel="noopener">台灣彩券官方網站</a> 公告為準。</p>
     </section>
     </div>
 
   <style is:global>
-    body { line-height: 1.8 }
-    .lottery-page { min-height: 100vh; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 100px 2rem 4rem; }
-    .page-hero { text-align: center; padding: 3rem 0 2rem; }
-    .page-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 0.8rem; }
-    .page-hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .page-hero p { color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
-    .breadcrumb { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
-    .breadcrumb a { color: var(--text-muted); }
-    .breadcrumb a:hover { color: var(--gold-light); }
-    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold-light); margin-bottom: 1.5rem; font-size: 0.95rem; text-decoration: none; }
     .page-hero .updated { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
 
     .lottery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; margin: 2rem auto; }
@@ -127,7 +146,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
     .num.loading { background: var(--bg-secondary); color: var(--text-muted); box-shadow: none; }
     .num.special-num { background: linear-gradient(135deg, #FF10F0, #c80dc0); box-shadow: 0 4px 12px rgba(255,16,240,0.3); }
+    .num.mini { width: 32px; height: 32px; font-size: 0.85rem; box-shadow: 0 2px 6px rgba(57,255,20,0.25); }
+    .num.mini.special-num { box-shadow: 0 2px 6px rgba(255,16,240,0.25); }
     .draw-date { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; }
+
+    .history-toggle {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      margin-top: 1rem; padding: 0.6rem; cursor: pointer;
+      background: rgba(57,255,20,0.06); border: 1px dashed var(--border); border-radius: 8px;
+      color: var(--gold-light); font-size: 0.85rem; font-weight: 600;
+      transition: all 0.2s; user-select: none;
+    }
+    .history-toggle:hover { background: rgba(57,255,20,0.12); border-color: var(--gold); }
+    .history-toggle .arrow { transition: transform 0.3s; }
+    .lottery-card.expanded .history-toggle .arrow { transform: rotate(180deg); }
+    .history-list { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border); }
+    .lottery-card.expanded .history-list { display: block; }
+    .history-row { padding: 0.7rem 0; border-bottom: 1px solid var(--border); }
+    .history-row:last-child { border-bottom: none; }
+    .history-meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.4rem; display: flex; gap: 0.8rem; }
+    .history-meta strong { color: var(--gold-light); }
+    .history-nums { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+    .history-sep { color: var(--text-muted); margin: 0 0.2rem; }
 
     .info-box {
       background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
@@ -150,56 +190,123 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <script is:inline>
     (async function(){
       const updateEl = document.getElementById('updateTime');
-      // Attempt to fetch from Taiwan Lottery unofficial API via CORS proxy
-      const PROXY = 'https://api.allorigins.win/raw?url=';
-      const ENDPOINTS = {
-        lotto649: 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Lotto649Result',
-        super_lotto: 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery/SuperLotto638Result',
-        daily_cash: 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery/DailyCash539Result',
-        lotto1224: 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Lotto1224Result'
-      };
+      updateEl.textContent = '載入中…';
 
       function setNums(containerId, nums) {
         const el = document.getElementById(containerId);
         if (!el || !nums || !nums.length) return;
         const spans = el.querySelectorAll('.num');
-        nums.forEach((n, i) => {
-          if (spans[i]) {
-            spans[i].textContent = String(n).padStart(2, '0');
-            spans[i].classList.remove('loading');
+        spans.forEach((sp, i) => {
+          if (nums[i] != null) {
+            sp.textContent = String(nums[i]).padStart(2, '0');
+            sp.classList.remove('loading');
           }
         });
       }
-
-      async function fetchLottery(key) {
-        try {
-          const url = PROXY + encodeURIComponent(ENDPOINTS[key] + '?$top=1');
-          const res = await fetch(url, { cache: 'no-store' });
-          if (!res.ok) throw new Error('fetch failed');
-          const data = await res.json();
-          return data;
-        } catch (e) {
-          console.warn('Failed to fetch', key, e);
-          return null;
+      function setText(id, val) {
+        const el = document.getElementById(id);
+        if (el && val != null) el.textContent = val;
+      }
+      function setSpecial(id, val) {
+        const el = document.getElementById(id);
+        if (el && val != null) {
+          el.textContent = String(val).padStart(2, '0');
+          el.classList.remove('loading');
         }
       }
-
-      async function loadAll() {
-        // Try to populate each; Taiwan Lottery API response shape may vary
-        const results = await Promise.all(Object.keys(ENDPOINTS).map(fetchLottery));
-        // Best-effort parsing — API shape is currently unknown at build time,
-        // so we log the raw data for debugging. Users can inspect console.
-        results.forEach((d, i) => {
-          if (d) console.log(Object.keys(ENDPOINTS)[i], d);
+      function pad(n) { return String(n).padStart(2, '0'); }
+      function buildHistoryRow(rec, opts) {
+        const mainCount = opts.mainCount;
+        const specialKey = opts.specialKey; // 'special' | 'area2' | null
+        const specialLabel = opts.specialLabel || '';
+        const main = (rec.numbers || []).slice(0, mainCount);
+        const sp = specialKey ? rec[specialKey] : null;
+        const numsHtml = main.map(n => `<span class="num mini">${pad(n)}</span>`).join('') +
+          (sp != null ? `<span class="history-sep">${specialLabel}</span><span class="num mini special-num">${pad(sp)}</span>` : '');
+        return `<div class="history-row">
+          <div class="history-meta"><strong>第 ${rec.period || '--'} 期</strong><span>${rec.date || ''}</span></div>
+          <div class="history-nums">${numsHtml}</div>
+        </div>`;
+      }
+      function renderHistory(cardSelector, history, opts) {
+        if (!history || history.length === 0) return;
+        const card = document.querySelector(cardSelector);
+        if (!card) return;
+        const body = card.querySelector('.card-body');
+        if (!body) return;
+        const rowsHtml = history.map(r => buildHistoryRow(r, opts)).join('');
+        const html = `
+          <div class="history-toggle">
+            <span class="label">查看前 ${history.length} 期</span>
+            <i class="fas fa-chevron-down arrow" aria-hidden="true"></i>
+          </div>
+          <div class="history-list">${rowsHtml}</div>
+        `;
+        body.insertAdjacentHTML('beforeend', html);
+        const toggle = body.querySelector('.history-toggle');
+        toggle.addEventListener('click', () => {
+          const expanded = card.classList.toggle('expanded');
+          toggle.querySelector('.label').textContent = expanded ? '收起' : `查看前 ${history.length} 期`;
         });
-        updateEl.textContent = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
       }
 
-      // Show static placeholder immediately (so page isn't empty if fetch fails)
-      updateEl.textContent = '嘗試連線中…';
-      loadAll().catch(err => {
+      try {
+        const res = await fetch('/api/lottery', { cache: 'no-store' });
+        if (!res.ok) throw new Error('api error');
+        const json = await res.json();
+        const d = json.data || {};
+
+        // 大樂透
+        if (d.lotto649) {
+          setNums('lotto649-main', d.lotto649.numbers);
+          setSpecial('lotto649-special', d.lotto649.special);
+          setText('lotto649-period', d.lotto649.period ? '第 ' + d.lotto649.period + ' 期' : '--');
+          setText('lotto649-date', d.lotto649.date || '--');
+          renderHistory('[data-lottery="lotto649"]', d.lotto649.history, { mainCount: 6, specialKey: 'special', specialLabel: '+' });
+        }
+        // 威力彩
+        if (d.super_lotto) {
+          setNums('super-main', d.super_lotto.numbers);
+          setSpecial('super-special', d.super_lotto.area2 ?? d.super_lotto.special);
+          setText('super-period', d.super_lotto.period ? '第 ' + d.super_lotto.period + ' 期' : '--');
+          setText('super-date', d.super_lotto.date || '--');
+          renderHistory('[data-lottery="super_lotto"]', d.super_lotto.history, { mainCount: 6, specialKey: 'area2', specialLabel: '+' });
+        }
+        // 今彩 539
+        if (d.daily_cash) {
+          setNums('daily-main', d.daily_cash.numbers);
+          setText('daily-period', d.daily_cash.period ? '第 ' + d.daily_cash.period + ' 期' : '--');
+          setText('daily-date', d.daily_cash.date || '--');
+          renderHistory('[data-lottery="daily_cash"]', d.daily_cash.history, { mainCount: 5, specialKey: null });
+        }
+        // 3 星彩
+        if (d.lotto3d) {
+          setNums('lotto3d-main', d.lotto3d.numbers);
+          setText('lotto3d-period', d.lotto3d.period ? '第 ' + d.lotto3d.period + ' 期' : '--');
+          setText('lotto3d-date', d.lotto3d.date || '--');
+          renderHistory('[data-lottery="lotto3d"]', d.lotto3d.history, { mainCount: 3, specialKey: null });
+        }
+        // 4 星彩
+        if (d.lotto4d) {
+          setNums('lotto4d-main', d.lotto4d.numbers);
+          setText('lotto4d-period', d.lotto4d.period ? '第 ' + d.lotto4d.period + ' 期' : '--');
+          setText('lotto4d-date', d.lotto4d.date || '--');
+          renderHistory('[data-lottery="lotto4d"]', d.lotto4d.history, { mainCount: 4, specialKey: null });
+        }
+        // BINGO BINGO
+        if (d.bingo) {
+          setNums('bingo-main', d.bingo.numbers);
+          setSpecial('bingo-special', d.bingo.special);
+          setText('bingo-period', d.bingo.period ? '第 ' + d.bingo.period + ' 期' : '--');
+          setText('bingo-date', d.bingo.date || '--');
+        }
+
+        const ts = json.updatedAt ? new Date(json.updatedAt) : new Date();
+        updateEl.textContent = ts.toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+      } catch (e) {
+        console.warn('lottery api failed', e);
         updateEl.textContent = '無法取得即時資料，請前往台灣彩券官網查詢';
-      });
+      }
     })();
   </script>
 </BaseLayout>

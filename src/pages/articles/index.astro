@@ -3,16 +3,43 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const articles = [
   {
+    slug: 'daily-cash-539-wheel-guide',
+    title: '今彩 539 包牌教學:成本、回本表、膽拖計算全解析',
+    excerpt: '包 6/7/8/9 碼成本怎麼算?中幾碼才回本?膽拖投注 C(m,5-k) 公式、保本門檻速查表,新手到老司機都用得上的完整 539 包牌教學。',
+    category: 'lottery',
+    categoryLabel: '彩券',
+    date: '2026-04-07',
+    views: 0,
+    tags: ['最新', '精選'],
+    icon: 'fa-ticket-alt',
+    gradient: 'linear-gradient(135deg,#0a1f0a,#0f3d1f,#1a8c3a)',
+    thumbnail: '/images/article-covers/cover-lottery.webp'
+  },
+  {
     slug: 'anti-scam-8la-guide',
     title: '防詐騙 8LA 指南：2026 娛樂城詐騙 8 大手法完整解析',
     excerpt: '芭樂子整理 2026 台灣娛樂城最常見的 8 大詐騙手法：黑網、出金卡關、洗碼陷阱、LINE 老師、代儲代操、退款二次詐騙全部拆給你看。懂詐騙才能防詐騙。',
-    category: 'live',
+    category: 'anti-scam',
     categoryLabel: '防詐必讀',
     date: '2026-04-06',
     views: 21580,
     tags: ['最新', '熱門', '精選'],
     icon: 'fa-shield-alt',
-    gradient: 'linear-gradient(135deg,#3d0a1a,#ff416c,#1a0a0a)'
+    gradient: 'linear-gradient(135deg,#3d0a1a,#ff416c,#1a0a0a)',
+    thumbnail: '/images/article-covers/cover-anti-scam.webp'
+  },
+  {
+    slug: 'lottery-odds-comparison',
+    title: '大樂透 vs 威力彩中獎機率比較：2026 期望值全解析',
+    excerpt: '兩大樂透到底買哪個比較划算?用數學算給你看頭獎機率、各獎項中獎率、每注期望值、玩法差異,附最新開獎結果連結。',
+    category: 'lottery',
+    categoryLabel: '彩券',
+    date: '2026-04-07',
+    views: 8650,
+    tags: ['最新', '精選'],
+    icon: 'fa-ticket-alt',
+    gradient: 'linear-gradient(135deg,#1a1505,#3d2f0a,#f5b800)',
+    thumbnail: '/images/article-covers/cover-lottery.webp'
   },
   {
     slug: 'slots-guide',
@@ -24,7 +51,8 @@ const articles = [
     views: 15420,
     tags: ['熱門', '精選'],
     icon: 'fa-dice',
-    gradient: 'linear-gradient(135deg,#f093fb,#f5576c)'
+    gradient: 'linear-gradient(135deg,#f093fb,#f5576c)',
+    thumbnail: '/images/article-covers/cover-slots.webp'
   },
   {
     slug: 'baccarat-guide',
@@ -36,7 +64,8 @@ const articles = [
     views: 12380,
     tags: ['精選'],
     icon: 'fa-money-bill',
-    gradient: 'linear-gradient(135deg,#4facfe,#00f2fe)'
+    gradient: 'linear-gradient(135deg,#4facfe,#00f2fe)',
+    thumbnail: '/images/article-covers/cover-baccarat.webp'
   },
   {
     slug: 'dealers-guide',
@@ -48,7 +77,8 @@ const articles = [
     views: 9870,
     tags: ['最新'],
     icon: 'fa-user-tie',
-    gradient: 'linear-gradient(135deg,#fa709a,#fee140)'
+    gradient: 'linear-gradient(135deg,#fa709a,#fee140)',
+    thumbnail: '/images/article-covers/cover-live.webp'
   }
 ];
 ---
@@ -57,7 +87,7 @@ const articles = [
     <div class="container">
       <div class="breadcrumb"><a href="/">首頁</a> &gt; 芭樂攻略</div>
       <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
-      <div style="width:100%;height:220px;background:linear-gradient(135deg,#1a0a2e,#2d1b50,#1a0a2e);border-radius:16px;margin-bottom:1.5rem"></div>
+      <div class="hero-banner" style="background:linear-gradient(135deg,#1a0a2e,#2d1b50,#1a0a2e)"></div>
       <div class="page-hero">
         <h1>📚 <em>芭樂攻略</em></h1>
         <p>最真實的遊戲攻略、技巧分析、平台評測，沒有廢話、不灌水。</p>
@@ -114,7 +144,6 @@ const articles = [
     </div>
 
   <style is:global>
-    body { line-height: 1.8 }
     .article-list-page { min-height: 100vh; }
     .container { max-width: 1100px; margin: 0 auto; padding: 100px 2rem 4rem; }
     .page-hero { text-align: center; padding: 3rem 0 2rem; }

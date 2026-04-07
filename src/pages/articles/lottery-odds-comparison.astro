@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+
+const faqs = [
+  { q: '電腦選號跟自選哪個中獎機率比較高?', a: '一樣高。每一組號碼出現的機率都是相同的,沒有任何號碼比較容易中。電腦選號的好處是不會跟一堆人撞號(像 1-2-3-4-5-6 或生日號碼),萬一中頭獎不用跟太多人分。' },
+  { q: '統計上最常開出的號碼可以拿來預測嗎?', a: '不行。每一期開獎都是獨立事件,過去開過幾次跟這期會不會開完全無關。這在統計學叫賭徒謬誤,是新手最常犯的錯。' },
+  { q: '買多注有比較划算嗎?', a: '沒有。買越多注中獎機率是線性增加,但期望回收率不變。買 10 注就是把 1 注的虧損放大 10 倍,沒有規模經濟可言。' },
+  { q: '派彩會被扣稅嗎?', a: '會。中獎金額超過 5,000 元就要扣 20% 的所得稅,超過 2,000 元也要繳印花稅。所以如果你看到頭獎 10 億,實際拿到手大概是 8 億上下。' },
+  { q: '在哪裡看最新開獎結果?', a: '直接到 GAME8LA 芭樂好彩 /lottery/,串接台彩官方 API 自動更新,大樂透、威力彩、今彩 539、3 星彩、4 星彩、BINGO BINGO 全部都有,還能展開前 5 期歷史紀錄。' },
+  { q: '大樂透跟威力彩的開獎時間不一樣嗎?', a: '對。大樂透每週二、五開,威力彩每週一、四開。兩個都是晚間 20:30,投注截止時間是當天 20:00。' },
+];
+---
+
+<FaqSchema faqs={faqs} />
+<BaseLayout
+  title="大樂透 vs 威力彩中獎機率比較｜2026 期望值、頭獎賠率全解析｜GAME8LA"
+  description="大樂透 vs 威力彩到底買哪個比較划算？GAME8LA 用數學算給你看：頭獎機率、各獎項中獎率、每注期望值、玩法差異、開獎時間一次比較。附 2026 最新開獎結果連結。"
+  ogImage="https://game8la.com/images/og-image.webp"
+  currentPage="articles"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 大樂透 vs 威力彩</div>
+  <a href="/articles/" class="back-link"><i class="fas fa-arrow-left"></i> 回文章列表</a>
+  <div style="width:100%;height:250px;background:linear-gradient(135deg,#1a1505,#3d2f0a,#1a1205);border-radius:16px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;font-size:5rem">🎰</div>
+  <div class="page-hero">
+    <span class="badge badge-safe" style="margin-bottom:1rem">攻略</span>
+    <h1>大樂透 vs 威力彩：<em>中獎機率全比較</em></h1>
+    <p style="margin-top:0.5rem"><i class="far fa-calendar"></i> 2026-04-07 &nbsp;|&nbsp; <i class="far fa-clock"></i> 閱讀時間約 8 分鐘</p>
+    <div class="tag-list" style="justify-content:center;margin-top:1rem">
+      <span class="tag">大樂透</span><span class="tag">威力彩</span><span class="tag">中獎機率</span><span class="tag">台灣彩券</span>
+    </div>
+  </div>
+
+  <div class="toc">
+    <h4>📋 本文懶人包</h4>
+    <ol>
+      <li><a href="#s1">大樂透 vs 威力彩,玩法差在哪?</a></li>
+      <li><a href="#s2">頭獎中獎機率,直接算給你看</a></li>
+      <li><a href="#s3">各獎項中獎機率全比較</a></li>
+      <li><a href="#s4">每注期望值哪個高?</a></li>
+      <li><a href="#s5">開獎時間、獎金結構速查</a></li>
+      <li><a href="#s6">該買哪個?芭樂子的真心建議</a></li>
+      <li><a href="#faq">常見問題 FAQ</a></li>
+    </ol>
+  </div>
+
+  <div class="article-content">
+    <p>各位 8LA 鄉民好,我是 GAME8LA 的芭樂子。每次頭獎累積到 10 億的時候,Line 群組就會開始洗版:「大樂透機率比較高吧?」「威力彩中得比較多錢啊!」——吵到最後沒人講得出真正的數字。</p>
+    <p>所以今天這篇,我直接把<strong>大樂透 vs 威力彩</strong>的數學算到底,讓你看完不用再被嘴。最新的開獎號碼可以到 <a href="/lottery/">芭樂好彩</a> 看,自動更新不用刷台彩官網。</p>
+
+    <h2 id="s1">1. 大樂透 vs 威力彩,玩法差在哪?</h2>
+    <p>先講最基本的玩法,因為很多人連兩個怎麼選號都搞不清楚。</p>
+    <ul>
+      <li><strong>大樂透</strong>:從 <strong>1–49</strong> 中選 6 個號碼,加上 1 個特別號(從剩下 43 個自動開出)。買一注 50 元。</li>
+      <li><strong>威力彩</strong>:分兩區。第一區從 <strong>1–38</strong> 選 6 個,第二區從 <strong>1–8</strong> 選 1 個。買一注 100 元。</li>
+    </ul>
+    <p>看出差別了嗎?威力彩多了「第二區」這個關卡,也就是頭獎要兩區號碼全中才算數。這就是為什麼威力彩頭獎機率會比大樂透難非常多——但獎金累積也更兇。</p>
+    <blockquote>⚡ 8LA 金句:大樂透是「考一科」,威力彩是「考兩科還要兩科都滿分」。</blockquote>
+
+    <h2 id="s2">2. 頭獎中獎機率,直接算給你看</h2>
+    <p>數學課時間。組合公式 C(n, k) = n! / (k! × (n-k)!)</p>
+
+    <h3>大樂透頭獎機率</h3>
+    <p>從 49 個號碼選中正確的 6 個:</p>
+    <p><strong>C(49, 6) = 13,983,816</strong></p>
+    <p>所以大樂透頭獎機率是 <strong>1 / 13,983,816</strong>,大約 <strong>1,398 萬分之 1</strong>。</p>
+
+    <h3>威力彩頭獎機率</h3>
+    <p>第一區從 38 個選中 6 個 × 第二區從 8 個選中 1 個:</p>
+    <p><strong>C(38, 6) × 8 = 2,760,681 × 8 = 22,085,448</strong></p>
+    <p>所以威力彩頭獎機率是 <strong>1 / 22,085,448</strong>,大約 <strong>2,209 萬分之 1</strong>。</p>
+
+    <div class="tip-box">
+      <strong>💡 直接比較:</strong>大樂透頭獎機率是威力彩的 <strong>約 1.58 倍</strong>。換句話說,同樣花 100 元(大樂透 2 注 vs 威力彩 1 注),你中大樂透頭獎的機會大概是中威力彩頭獎的 <strong>3.16 倍</strong>。
+    </div>
+
+    <h2 id="s3">3. 各獎項中獎機率全比較</h2>
+    <p>頭獎遠在天邊,實際上會中的多半是小獎。下面這張表整理了兩種彩券的所有獎項機率(數據以台灣彩券公布為準):</p>
+
+    <h3>大樂透各獎項中獎機率</h3>
+    <ul>
+      <li><strong>頭獎</strong>(6 個 + 0 特):1 / 13,983,816</li>
+      <li><strong>貳獎</strong>(5 個 + 1 特):1 / 2,330,636</li>
+      <li><strong>參獎</strong>(5 個 + 0 特):1 / 55,491</li>
+      <li><strong>肆獎</strong>(4 個 + 1 特):1 / 22,197</li>
+      <li><strong>伍獎</strong>(4 個 + 0 特):1 / 1,083</li>
+      <li><strong>陸獎</strong>(3 個 + 1 特):1 / 812</li>
+      <li><strong>柒獎</strong>(2 個 + 1 特):1 / 105</li>
+      <li><strong>普獎</strong>(3 個 + 0 特):1 / 61</li>
+      <li><strong>任一獎項</strong>:約 <strong>1 / 28</strong></li>
+    </ul>
+
+    <h3>威力彩各獎項中獎機率</h3>
+    <ul>
+      <li><strong>頭獎</strong>(第一區 6 + 第二區):1 / 22,085,448</li>
+      <li><strong>貳獎</strong>(第一區 6 + 第二區 ✗):1 / 3,154,350</li>
+      <li><strong>參獎</strong>(第一區 5 + 第二區 ✓):1 / 115,029</li>
+      <li><strong>肆獎</strong>(第一區 5 + 第二區 ✗):1 / 16,433</li>
+      <li><strong>伍獎</strong>(第一區 4 + 第二區 ✓):1 / 2,134</li>
+      <li><strong>陸獎</strong>(第一區 4 + 第二區 ✗):1 / 305</li>
+      <li><strong>柒獎</strong>(第一區 3 + 第二區 ✓):1 / 154</li>
+      <li><strong>捌獎</strong>(第一區 2 + 第二區 ✓):1 / 38</li>
+      <li><strong>玖獎</strong>(第一區 3 + 第二區 ✗):1 / 22</li>
+      <li><strong>任一獎項</strong>:約 <strong>1 / 9</strong></li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>💡 反直覺結論:</strong>雖然威力彩的「頭獎」比大樂透難中,但它的「任一獎項」中獎率反而<strong>高很多</strong>(1/9 vs 1/28)。原因是威力彩的小獎門檻更低——連第一區只對 2 個 + 第二區對 1 個就有獎,等於每買 9 注大概就會中一張。大樂透雖然頭獎好中,小獎的門檻相對嚴格。
+    </div>
+
+    <h2 id="s4">4. 每注期望值哪個高?</h2>
+    <p>「期望值」是賭博數學的核心概念,簡單說就是:<strong>你長期玩下來,平均每買一注會回收多少錢</strong>。算法是把每個獎項的中獎金額 × 該獎項機率,再全部加起來。</p>
+    <p>台灣彩券的兩大樂透,根據官方公布的獎金分配比例(扣掉公益金、稅金等):</p>
+    <ul>
+      <li><strong>大樂透</strong>:每注 50 元,長期期望回收約 <strong>27 元</strong>(回收率 ~54%)</li>
+      <li><strong>威力彩</strong>:每注 100 元,長期期望回收約 <strong>55 元</strong>(回收率 ~55%)</li>
+    </ul>
+    <p>注意,這是<strong>長期平均值</strong>,而且不含累積到天文數字的頭獎情境。當頭獎累積到 10 億、20 億的時候,期望值會大幅拉高,這也是為什麼老司機都會等「累積大期」才下手。</p>
+
+    <blockquote>⚡ 8LA 金句:期望值告訴你,你每丟 100 元進去,長期平均會掉 45 元水。所以彩券是「捐款給夢想」的活動,不是投資。</blockquote>
+
+    <h2 id="s5">5. 開獎時間、獎金結構速查</h2>
+    <p>如果你只是想知道什麼時候能買、什麼時候開,看下面這個對照:</p>
+
+    <h3>大樂透</h3>
+    <ul>
+      <li><strong>開獎時間</strong>:每週二、五晚間 20:30</li>
+      <li><strong>單注金額</strong>:50 元</li>
+      <li><strong>頭獎保證</strong>:1 億起跳(無人中獎則往下期累積)</li>
+      <li><strong>適合對象</strong>:預算有限、想多買幾注、希望小獎好中的玩家</li>
+    </ul>
+
+    <h3>威力彩</h3>
+    <ul>
+      <li><strong>開獎時間</strong>:每週一、四晚間 20:30</li>
+      <li><strong>單注金額</strong>:100 元</li>
+      <li><strong>頭獎保證</strong>:2 億起跳(無人中獎則往下期累積)</li>
+      <li><strong>適合對象</strong>:只想拼大獎、追求單筆爆擊感、累積期才出手的玩家</li>
+    </ul>
+
+    <p>想看這兩個彩種的<strong>最新開獎號碼</strong>,直接到 <a href="/lottery/">GAME8LA 芭樂好彩</a>,我們有自動串接台彩 API,每期開獎完就更新,還可以展開看前 5 期的歷史紀錄。</p>
+
+    <h2 id="s6">6. 該買哪個?芭樂子的真心建議</h2>
+    <p>講了一堆數字,結論其實很簡單:</p>
+    <ul>
+      <li><strong>想中小獎、長期玩</strong> → 買<strong>威力彩</strong>。每 9 注就中一張,雖然多半是小錢,但中獎的多巴胺次數比較頻繁。</li>
+      <li><strong>想多買幾注、預算少</strong> → 買<strong>大樂透</strong>。同樣 100 元可以買 2 注,頭獎機率還比威力彩 1 注高。</li>
+      <li><strong>頭獎累積到 10 億以上</strong> → <strong>哪個累積得多就買哪個</strong>。期望值會被拉爆,這時候才是真正划算的時機。</li>
+      <li><strong>「我想兩個都買」</strong> → 那就是台彩的最愛玩家,恭喜你貢獻公益。</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>⚠️ 芭樂子嚴肅提醒:</strong>不管是大樂透還是威力彩,都是<strong>負期望值的遊戲</strong>。長期來看一定虧錢,只是虧多虧少的問題。當作買個希望、捐個公益沒問題,但如果你開始用信用卡、借錢、賣資產去買彩券——那不叫買彩券,那叫<strong>賭博成癮</strong>,請去看一下我們的 <a href="/articles/anti-scam-8la-guide/">防詐騙指南</a>,裡面也有提到過度賭博的警訊。
+    </div>
+
+    <h2 id="faq">常見問題 FAQ</h2>
+
+    <h3>Q1:電腦選號跟自選哪個中獎機率比較高?</h3>
+    <p>一樣高。每一組號碼出現的機率都是相同的,沒有任何號碼比較「容易中」。電腦選號的好處是不會跟一堆人撞號(像 1-2-3-4-5-6 或生日號碼),萬一中頭獎不用跟太多人分。</p>
+
+    <h3>Q2:統計上「最常開出的號碼」可以拿來預測嗎?</h3>
+    <p>不行。每一期開獎都是獨立事件,過去開過幾次跟這期會不會開完全無關。這在統計學叫「賭徒謬誤」,是新手最常犯的錯。</p>
+
+    <h3>Q3:買多注有比較划算嗎?</h3>
+    <p>沒有。買越多注「中獎機率」是線性增加,但「期望回收率」不變。買 10 注就是把 1 注的虧損放大 10 倍,沒有規模經濟可言。</p>
+
+    <h3>Q4:派彩會被扣稅嗎?</h3>
+    <p>會。中獎金額超過 5,000 元就要扣 20% 的所得稅,超過 2,000 元也要繳印花稅。所以如果你看到頭獎 10 億,實際拿到手大概是 8 億上下。</p>
+
+    <h3>Q5:在哪裡看最新開獎結果?</h3>
+    <p>直接到 <a href="/lottery/">GAME8LA 芭樂好彩</a>,串接台彩官方 API 自動更新,大樂透、威力彩、今彩 539、3 星彩、4 星彩、BINGO BINGO 全部都有,還能展開前 5 期歷史紀錄。</p>
+
+    <h3>Q6:大樂透跟威力彩的開獎時間不一樣嗎?</h3>
+    <p>對。大樂透每週<strong>二、五</strong>開,威力彩每週<strong>一、四</strong>開。兩個都是晚間 20:30,投注截止時間是當天 20:00。</p>
+
+    <hr style="margin:2rem 0;border:0;border-top:1px solid var(--border)">
+
+    <p><strong>延伸閱讀:</strong></p>
+    <ul>
+      <li><a href="/lottery/">🍈 芭樂好彩 — 台灣彩券最新開獎結果</a></li>
+      <li><a href="/articles/anti-scam-8la-guide/">🛡️ 2026 娛樂城詐騙手法完整解析</a></li>
+      <li><a href="/articles/baccarat-guide/">🃏 百家樂看路教學</a></li>
+    </ul>
+  </div>
+</div>
+
+</BaseLayout>
