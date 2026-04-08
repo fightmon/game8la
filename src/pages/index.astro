@@ -402,7 +402,7 @@ function renderGames(filter = 'all') {
       <div class="game-card-img ${g.gradient}" ${g.img ? `style="padding:0;overflow:hidden"` : ''}>
         ${g.badge === 'hot' ? '<span class="hot-badge">🔥 熱門</span>' : ''}
         ${g.badge === 'new' ? '<span class="new-badge">🆕 新上架</span>' : ''}
-        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : `getSVGIcon(g.icon)`}
+        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : getSVGIcon(g.icon)}
         <span class="game-label">${g.label}</span>
       </div>
       <div class="game-card-body">
@@ -1577,7 +1577,7 @@ function renderGames(filter = 'all') {
       <div class="game-card-img ${g.gradient}" ${g.img ? `style="padding:0;overflow:hidden"` : ''}>
         ${g.badge === 'hot' ? '<span class="hot-badge">🔥 熱門</span>' : ''}
         ${g.badge === 'new' ? '<span class="new-badge">🆕 新上架</span>' : ''}
-        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : `getSVGIcon(g.icon)`}
+        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : getSVGIcon(g.icon)}
         <span class="game-label">${g.label}</span>
       </div>
       <div class="game-card-body">
