@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
@@ -10,7 +11,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/casino-ranking/">娛樂城推薦</a> &gt; 亞博娛樂城</div>
-  <a href="/casino-ranking/" class="back-link"><i class="fas fa-arrow-left"></i> 回娛樂城列表</a>
+  <a href="/casino-ranking/" class="back-link"><Icon name="arrow-left" /> 回娛樂城列表</a>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#1a0000,#330033,#1a0000);border-radius:16px;overflow:hidden;border:1px solid var(--border)">
@@ -21,7 +22,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">亞博娛樂城</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
         <span class="score-big">9.5</span>
-        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         <span style="color:var(--text-muted)">(45,320 次評價)</span>
       </div>
       <div class="info-grid">
@@ -225,23 +226,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <h2 id="faq">常見問題 FAQ</h2>
   <div class="faq-section">
     <div class="faq-item">
-      <div class="faq-q">Q：亞博和K8哪個更好？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：亞博和K8哪個更好？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">兩個都是業界老字號，各有優勢。K8走穩定親民路線，優惠相對激進。亞博是亞洲龍頭，自主研發系統（DB真人、熊貓體育）品質更優，整體遊戲生態更完整。如果你重視遊戲品質和平台穩定性，亞博是首選；如果看重新人優惠和客服親和力，K8也不錯。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：DB真人和AG真人有什麼差別？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：DB真人和AG真人有什麼差別？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">DB真人是亞博自主研發的百家樂系統，荷官、賠率、遊戲速度完全由亞博掌控，品質和回報率對玩家更有利。AG真人是第三方供應商，品質有保證但少了點自主掌控感。兩個都好玩，DB真人的優勢是「更透明」和「更穩定」。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：亞博的提款真的3-5分鐘到嗎？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：亞博的提款真的3-5分鐘到嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">銀行轉帳提款基本都在3-5分鐘內到帳，快的時候甚至1-2分鐘。虛擬貨幣會慢一些，約5-15分鐘。如果超過15分鐘還沒到，建議聯絡客服確認。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：熊貓體育的賠率跟其他體育平台比怎麼樣？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：熊貓體育的賠率跟其他體育平台比怎麼樣？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">熊貓體育是亞博自營系統，賠率基本跟國際水準一致。由於是自主研發，賠率調整的透明度和玩家友好度都比第三方平台好一些。特別是在亞洲賽事的賠率上，熊貓體育因為離地近，往往有更好的即時更新。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：亞博有沒有什麼隱藏費用？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：亞博有沒有什麼隱藏費用？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">亞博作為老牌龍頭娛樂城，基本沒有隱藏費用。存款和提款都是透明的，優惠活動也有清楚的條款。但建議存款前還是看清楚彩金的流水倍數，避免被天文數字的流水要求綁住。</div>
     </div>
   </div>
@@ -263,8 +264,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div style="margin:2.5rem 0 1.5rem;text-align:center">
     <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.8rem">覺得這篇有用？分享給你的牌友們 👇</p>
     <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap">
-      <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-line"></i> LINE</a>
-      <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="message-circle" /> LINE</a>
+      <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="facebook" /> Facebook</a>
     </div>
   </div>
 

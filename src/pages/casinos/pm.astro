@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
@@ -10,7 +11,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/casino-ranking/">娛樂城推薦</a> &gt; PM娛樂城</div>
-  <a href="/casino-ranking/" class="back-link"><i class="fas fa-arrow-left"></i> 回娛樂城列表</a>
+  <a href="/casino-ranking/" class="back-link"><Icon name="arrow-left" /> 回娛樂城列表</a>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#0d2a4d,#1a0d2a,#0d2a4d);border-radius:16px;overflow:hidden;border:1px solid var(--border)">
@@ -21,7 +22,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">PM娛樂城</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
         <span class="score-big">9.4</span>
-        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         <span style="color:var(--text-muted)">(34,180 次評價)</span>
       </div>
       <div class="info-grid">
@@ -225,23 +226,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <h2 id="faq">常見問題 FAQ</h2>
   <div class="faq-section">
     <div class="faq-item">
-      <div class="faq-q">Q：PM才成立5年，會不會是黑平台？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：PM才成立5年，會不會是黑平台？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">PM持有PAGCOR和馬耳他MGA雙認證，都是國際認可的合法執照。雖然成立時間較短，但短時間內能做到系統不卡頓、客服水準高、玩家口碑好，反而說明他們技術和服務實力強。比一些十年老牌但系統經常掉線的平台更值得信任。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：PM遊戲這麼多，系統會不會很複雜難上手？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：PM遊戲這麼多，系統會不會很複雜難上手？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">反而更簡單。PM的APP設計非常直觀，所有遊戲在首頁都能快速找到分類，不需要跳來跳去。客服也會手把手教新手，第一次玩也能快速上手。實測用戶體驗比某些老牌娛樂城還友善。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：提款真的2-5分鐘到嗎？有沒有審核或延遲？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：提款真的2-5分鐘到嗎？有沒有審核或延遲？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">銀行轉帳提款真的2-5分鐘內到帳，沒有審核廢話。虛擬貨幣會慢一些，約5-15分鐘。PM在這方面做得比老牌娛樂城都快，這也是年輕玩家愛用的原因之一。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：PM和亞博、K8比起來怎麼樣？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：PM和亞博、K8比起來怎麼樣？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">各有優勢。K8是穩定老字號，亞博是亞洲龍頭。PM則是新銳之星，特別是在「遊戲完整度」和「系統穩定度」上領先。如果你是雜食玩家想一站式遊戲，PM無敵。如果你只玩百家樂或體育投注，亞博或K8更專精。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：最低下注5元真的可以玩嗎？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：最低下注5元真的可以玩嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">可以。PM最低下注5元，最低提款50元。非常親民的設定，特別適合新手試水或想以小博大的玩家。老虎機、百家樂、體育投注都支援5元下注。</div>
     </div>
   </div>
@@ -263,8 +264,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div style="margin:2.5rem 0 1.5rem;text-align:center">
     <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.8rem">覺得這篇有用？分享給你的遊戲朋友們 👇</p>
     <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap">
-      <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-line"></i> LINE</a>
-      <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="message-circle" /> LINE</a>
+      <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="facebook" /> Facebook</a>
     </div>
   </div>
 

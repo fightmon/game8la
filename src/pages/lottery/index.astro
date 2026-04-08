@@ -1,11 +1,12 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="芭樂好彩 - 台灣彩券最新開獎結果｜大樂透、威力彩、今彩539" description="GAME8LA 芭樂好彩：每期自動更新台灣彩券最新開獎結果，包含威力彩、大樂透、今彩539、3星彩、4星彩、BINGO BINGO 賓果，附前 5 期歷史紀錄。" currentPage="lottery">
     <div class="container">
       <div class="breadcrumb"><a href="/">首頁</a> &gt; 芭樂好彩</div>
-      <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
+      <a href="/" class="back-link"><Icon name="arrow-left" /> 回首頁</a>
       <div style="width:100%;height:220px;background:linear-gradient(135deg,#0a2e1a,#1b5032,#0a2e1a);border-radius:16px;margin-bottom:1.5rem"></div>
       <div class="page-hero">
         <h1>🍈 <em>芭樂好彩</em></h1>
@@ -16,7 +17,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <section class="lottery-grid">
       <!-- 威力彩 -->
       <div class="lottery-card" data-lottery="super_lotto">
-        <div class="card-head"><i class="fas fa-bolt"></i><h2>威力彩</h2><span class="period" id="super-period">--</span></div>
+        <div class="card-head"><Icon name="zap" /><h2>威力彩</h2><span class="period" id="super-period">--</span></div>
         <div class="card-body">
           <div class="draw-label">第一區</div>
           <div class="numbers main" id="super-main">
@@ -31,7 +32,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <!-- 大樂透 -->
       <div class="lottery-card" data-lottery="lotto649">
-        <div class="card-head"><i class="fas fa-star"></i><h2>大樂透</h2><span class="period" id="lotto649-period">--</span></div>
+        <div class="card-head"><Icon name="star" /><h2>大樂透</h2><span class="period" id="lotto649-period">--</span></div>
         <div class="card-body">
           <div class="draw-label">本期開獎號碼</div>
           <div class="numbers main" id="lotto649-main">
@@ -46,7 +47,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <!-- 今彩539 -->
       <div class="lottery-card" data-lottery="daily_cash">
-        <div class="card-head"><i class="fas fa-coins"></i><h2>今彩 539</h2><span class="period" id="daily-period">--</span></div>
+        <div class="card-head"><Icon name="coins" /><h2>今彩 539</h2><span class="period" id="daily-period">--</span></div>
         <div class="card-body">
           <div class="draw-label">本期開獎號碼</div>
           <div class="numbers main" id="daily-main">
@@ -59,7 +60,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <!-- 3 星彩 -->
       <div class="lottery-card" data-lottery="lotto3d">
-        <div class="card-head"><i class="fas fa-dice-three"></i><h2>3 星彩</h2><span class="period" id="lotto3d-period">--</span></div>
+        <div class="card-head"><Icon name="dice-3" /><h2>3 星彩</h2><span class="period" id="lotto3d-period">--</span></div>
         <div class="card-body">
           <div class="draw-label">本期開獎號碼</div>
           <div class="numbers main" id="lotto3d-main">
@@ -71,7 +72,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <!-- 4 星彩 -->
       <div class="lottery-card" data-lottery="lotto4d">
-        <div class="card-head"><i class="fas fa-dice-four"></i><h2>4 星彩</h2><span class="period" id="lotto4d-period">--</span></div>
+        <div class="card-head"><Icon name="dice-4" /><h2>4 星彩</h2><span class="period" id="lotto4d-period">--</span></div>
         <div class="card-body">
           <div class="draw-label">本期開獎號碼</div>
           <div class="numbers main" id="lotto4d-main">
@@ -83,7 +84,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <!-- BINGO BINGO 賓果賓果 -->
       <div class="lottery-card" data-lottery="bingo">
-        <div class="card-head"><i class="fas fa-bullseye"></i><h2>BINGO BINGO 賓果</h2><span class="period" id="bingo-period">--</span></div>
+        <div class="card-head"><Icon name="target" /><h2>BINGO BINGO 賓果</h2><span class="period" id="bingo-period">--</span></div>
         <div class="card-body">
           <div class="draw-label">開出 20 號</div>
           <div class="numbers main wide" id="bingo-main">
@@ -238,7 +239,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         const html = `
           <div class="history-toggle">
             <span class="label">查看前 ${history.length} 期</span>
-            <i class="fas fa-chevron-down arrow" aria-hidden="true"></i>
+            <Icon name="chevron-down" />
           </div>
           <div class="history-list">${rowsHtml}</div>
         `;

@@ -1,5 +1,6 @@
 ---
 // Footer component - displays the 4-column footer with links and social media
+import Icon from './Icon.astro';
 ---
 
 <footer class="footer">
@@ -12,19 +13,19 @@
       <p>GAME8LA是台灣最敢說真話的線上遊戲評測平台。不灌水、不業配，給你最真實的遊戲評價與遊戲攻略，幫助玩家安心選擇！</p>
       <div class="social-links">
         <button type="button" aria-label="GAME8LA Facebook 即將開放" title="GAME8LA Facebook (即將開放)" onclick="alert('⚡ GAME8LA的 Facebook 粉專即將開放，敬請期待！')">
-          <i class="fab fa-facebook-f" aria-hidden="true"></i>
+          <Icon name="facebook" size="1rem" />
         </button>
         <button type="button" aria-label="GAME8LA Instagram 即將開放" title="GAME8LA Instagram (即將開放)" onclick="alert('⚡ GAME8LA的 IG 即將開放，敬請期待！')">
-          <i class="fab fa-instagram" aria-hidden="true"></i>
+          <Icon name="instagram" size="1rem" />
         </button>
         <button type="button" aria-label="GAME8LA YouTube 即將開放" title="GAME8LA YouTube (即將開放)" onclick="alert('⚡ GAME8LA的 YouTube 頻道即將開放，敬請期待！')">
-          <i class="fab fa-youtube" aria-hidden="true"></i>
+          <Icon name="youtube" size="1rem" />
         </button>
         <button type="button" aria-label="GAME8LA LINE 即將開放" title="GAME8LA LINE (即將開放)" onclick="alert('⚡ GAME8LA的 LINE 官方帳號即將開放，敬請期待！')">
-          <i class="fab fa-line" aria-hidden="true"></i>
+          <Icon name="message-circle" size="1rem" />
         </button>
         <button type="button" aria-label="GAME8LA Telegram 即將開放" title="GAME8LA Telegram (即將開放)" onclick="alert('⚡ GAME8LA的 Telegram 群組即將開放，敬請期待！')">
-          <i class="fab fa-telegram" aria-hidden="true"></i>
+          <Icon name="send" size="1rem" />
         </button>
       </div>
     </div>

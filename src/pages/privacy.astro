@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 ---
@@ -94,9 +95,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p>📧 Email：game8lala@gmail.com</p>
   </div>
   <div class="legal-nav">
-    <a href="/terms/"><i class="fas fa-file-contract"></i> 服務條款</a>
-    <a href="/disclaimer/"><i class="fas fa-exclamation-circle"></i> 免責聲明</a>
-    <a href="/"><i class="fas fa-home"></i> 回首頁</a>
+    <a href="/terms/"><Icon name="file-text" /> 服務條款</a>
+    <a href="/disclaimer/"><Icon name="alert-circle" /> 免責聲明</a>
+    <a href="/"><Icon name="home" /> 回首頁</a>
   </div>
 </div>
 </BaseLayout>

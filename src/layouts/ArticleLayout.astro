@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import Icon from '../components/Icon.astro';
 
 interface Props {
   title: string;
@@ -47,8 +48,8 @@ const {
     <header class="article-header">
       <h1>{title}</h1>
       <div class="article-meta">
-        {author && <span class="author"><i class="fas fa-user"></i> {author}</span>}
-        {publishDate && <span class="date"><i class="fas fa-calendar"></i> {publishDate}</span>}
+        {author && <span class="author"><Icon name="user" /> {author}</span>}
+        {publishDate && <span class="date"><Icon name="calendar" /> {publishDate}</span>}
       </div>
     </header>
 

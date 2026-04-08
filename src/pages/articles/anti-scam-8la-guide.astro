@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
@@ -10,14 +11,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 防詐騙 8LA 指南</div>
-  <a href="/articles/" class="back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> 回文章列表</a>
+  <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回文章列表</a>
 
   <div style="width:100%;height:260px;border-radius:16px;margin-bottom:1.5rem;background:linear-gradient(135deg,#1a0a0a,#3d0a1a,#1a0a0a);display:flex;align-items:center;justify-content:center;font-size:5rem">🛡️</div>
 
   <div class="page-hero">
     <span class="badge badge-danger" style="margin-bottom:1rem">🚨 防詐必讀</span>
     <h1>防詐騙 <em>8LA 指南</em>：懂詐騙，才能防詐騙</h1>
-    <p style="margin-top:0.5rem"><i class="far fa-calendar" aria-hidden="true"></i> 2026-04-06 &nbsp;|&nbsp; <i class="far fa-eye" aria-hidden="true"></i> 21,580 次瀏覽 &nbsp;|&nbsp; <i class="far fa-clock" aria-hidden="true"></i> 閱讀時間約 10 分鐘</p>
+    <p style="margin-top:0.5rem"><Icon name="calendar" /> 2026-04-06 &nbsp;|&nbsp; <Icon name="eye" /> 21,580 次瀏覽 &nbsp;|&nbsp; <Icon name="clock" /> 閱讀時間約 10 分鐘</p>
     <div class="tag-list" style="justify-content:center;margin-top:1rem">
       <span class="tag">防詐騙</span><span class="tag">娛樂城黑網</span><span class="tag">出金卡關</span><span class="tag">退款詐騙</span><span class="tag">必讀精選</span>
     </div>
@@ -234,23 +235,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <h2 id="faq">🤔 常見問題 FAQ</h2>
     <div class="faq-section">
       <div class="faq-item">
-        <div class="faq-q">我被娛樂城騙了，錢能追回來嗎？<span class="arrow"><i class="fas fa-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="faq-q">我被娛樂城騙了，錢能追回來嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
         <div class="faq-a"><p>坦白說，如果對方伺服器在海外、收款用人頭帳戶，追回機率很低。但你必須第一時間做三件事：① 撥 165 報案；② 到警局做筆錄、拿報案三聯單；③ 聯絡銀行申請款項攔截。動作越快，攔截到錢的機率越高。<strong>絕對不要相信任何「代追款律師」，那 100% 是二次詐騙</strong>。</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">怎麼分辨一家娛樂城是不是黑網？<span class="arrow"><i class="fas fa-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="faq-q">怎麼分辨一家娛樂城是不是黑網？<span class="arrow"><Icon name="chevron-down" /></span></div>
         <div class="faq-a"><p>最簡單的方法：<strong>小額存款 + 立刻測試出金</strong>。存 1,000 元玩幾把，立刻申請出金。正規娛樂城 24 小時內可以出，黑網會各種理由拖延。這招屢試不爽。</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">LINE 上的娛樂城「業務員」可以信嗎？<span class="arrow"><i class="fas fa-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="faq-q">LINE 上的娛樂城「業務員」可以信嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
         <div class="faq-a"><p>100% 不能。正規娛樂城不會派業務主動加你 LINE。所有自稱「業務」、「代辦」、「客服專員」主動聯絡你的，全部都是詐騙集團。遇到就封鎖檢舉。</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">娛樂城送的首儲優惠真的能領嗎？<span class="arrow"><i class="fas fa-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="faq-q">娛樂城送的首儲優惠真的能領嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
         <div class="faq-a"><p>有的能、有的不能，關鍵在<strong>洗碼倍數</strong>。20 倍以下、優惠金額合理（存多少送多少以下）的，大部分是可以領的。超過這個範圍就是陷阱，數學期望值會讓你玩不到門檻。</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">GAME8LA 會推薦黑網嗎？<span class="arrow"><i class="fas fa-chevron-down" aria-hidden="true"></i></span></div>
+        <div class="faq-q">GAME8LA 會推薦黑網嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
         <div class="faq-a"><p>不會。芭樂子的原則是<strong>沒實測過的不推薦，不合格的直接點名</strong>。我們的評測都會實測 RTP、測試出金、列真實數據。看我們的 <a href="/game-ranking/">遊戲排行榜</a> 就知道哪些是真 8LA、哪些是爛 8LA。</p></div>
       </div>
     </div>

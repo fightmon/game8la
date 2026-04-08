@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 
@@ -17,11 +18,11 @@ const faqs = [
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 戰神賽特完整教學</div>
     <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
-      <i class="fas fa-clock"></i> 發佈日：2026-04-08 ｜
-      <i class="fas fa-user-edit"></i> 作者：芭樂子 ｜
-      <i class="fas fa-book-reader"></i> 預估閱讀 8 分鐘
+      <Icon name="clock" /> 發佈日：2026-04-08 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 8 分鐘
     </div>
-    <a href="/articles/" class="back-link"><i class="fas fa-arrow-left"></i> 回攻略列表</a>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
     <div class="hero-banner" style="background:linear-gradient(135deg,#1a0a2e,#5a1b3a,#0a1a2e)"></div>
 
     <article class="article-content" style="max-width:820px;margin:0 auto">

@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
@@ -11,7 +12,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/casino-ranking/">娛樂城推薦</a> &gt; 富遊娛樂城</div>
-  <a href="/casino-ranking/" class="back-link"><i class="fas fa-arrow-left"></i> 回娛樂城列表</a>
+  <a href="/casino-ranking/" class="back-link"><Icon name="arrow-left" /> 回娛樂城列表</a>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#0a1a2e,#0d3d2d,#0a2a1a);border-radius:16px;overflow:hidden;border:1px solid var(--border)">
       <img src="/images/casino/rg-cover.webp" alt="富遊娛樂城 RG娛樂城 封面" style="width:100%;display:block;border-radius:16px;height:auto"  loading="lazy" width="1200" height="675" />
@@ -21,7 +22,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">富遊娛樂城</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
         <span class="score-big">9.8</span>
-        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         <span style="color:var(--text-muted)">(42,560 人評價)</span>
       </div>
       <div class="info-grid">

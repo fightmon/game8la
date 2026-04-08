@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
@@ -10,7 +11,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/casino-ranking/">娛樂城推薦</a> &gt; K8娛樂城</div>
-  <a href="/casino-ranking/" class="back-link"><i class="fas fa-arrow-left"></i> 回娛樂城列表</a>
+  <a href="/casino-ranking/" class="back-link"><Icon name="arrow-left" /> 回娛樂城列表</a>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#0a1a2e,#1a0033,#0a1a2e);border-radius:16px;overflow:hidden;border:1px solid var(--border)">
@@ -21,7 +22,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">K8娛樂城</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
         <span class="score-big">9.0</span>
-        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="fas fa-star-half-alt"></i></span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /><Icon name="star-half" /></span>
         <span style="color:var(--text-muted)">(12,480 次評價)</span>
       </div>
       <div class="info-grid">
@@ -225,23 +226,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <h2 id="faq">常見問題 FAQ</h2>
   <div class="faq-section">
     <div class="faq-item">
-      <div class="faq-q">Q：K8娛樂城安全嗎？會不會詐騙？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：K8娛樂城安全嗎？會不會詐騙？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">K8獲得菲律賓PAGCOR官方認證，在台灣經營11年有口碑。但需要注意的是，線上娛樂城本身具有法律風險，建議用小額資金試水，不要投入超過自己能承受的金額。選擇老牌娛樂城如K8會相對更穩妥。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：提款到底要多久？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：提款到底要多久？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">K8的提款速度業界一流，銀行轉帳申請後5-10分鐘即可到賬。虛擬貨幣會慢一些，約10-30分鐘。如果超過30分鐘還沒收到，建議馬上聯絡客服確認。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：最低存款和提款金額是多少？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：最低存款和提款金額是多少？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">最低存款10元起，最低提款100元。K8這個門檻算是業界最親民的，新手可以用小額開始試玩。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：真人百家樂的莊家會不會作弊？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：真人百家樂的莊家會不會作弊？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">K8合作的DB、AG、DG都是國際認證的遊戲商，荷官現場發牌全程錄影，結果由隨機演算法決定。不會有暗箱操作，但結果本質上還是賭博，輸贏都是正常的。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：有沒有什麼隱藏費用或黑心扣款？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：有沒有什麼隱藏費用或黑心扣款？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">K8作為老牌娛樂城，基本上沒有隱藏費用。存款和提款都是透明的，優惠活動也有明確的條款。但建議存款前還是先看清楚活動規則，避免被某些需要高流水倍數的彩金綁架。</div>
     </div>
   </div>
@@ -263,8 +264,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div style="margin:2.5rem 0 1.5rem;text-align:center">
     <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.8rem">覺得這篇有用？分享給你的牌友們 👇</p>
     <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap">
-      <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-line"></i> LINE</a>
-      <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="message-circle" /> LINE</a>
+      <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="facebook" /> Facebook</a>
     </div>
   </div>
 

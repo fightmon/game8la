@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 ---
@@ -27,14 +28,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       <div class="error-actions">
         <a href="/" class="btn-back">
-          <i class="fas fa-home"></i> 帶我回首頁
+          <Icon name="home" /> 帶我回首頁
         </a>
         <a href="/#ranking" class="btn-ranking">
-          <i class="fas fa-trophy"></i> 看遊戲排行榜
+          <Icon name="trophy" /> 看遊戲排行榜
         </a>
       </div>
       <div class="easter-egg">
-        <i class="fas fa-lightbulb"></i>
+        <Icon name="lightbulb" />
         <strong>芭樂子小提示：</strong>你可以用首頁上方的搜尋功能找到想看的遊戲，或是直接逛逛我們的遊戲排行榜，說不定會發現比你原本要找的更香的東西。
       </div>
     </div>

@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
@@ -11,7 +12,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 逛夜市3</div>
-  <a href="/#games" class="back-link"><i class="fas fa-arrow-left"></i> 回遊戲列表</a>
+  <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#1a1a0a,#2a3515,#1a2a0a);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:300px;font-size:5rem;border:1px solid var(--border)">
       🏮
@@ -21,7 +22,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">逛夜市3</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
         <span class="score-big">9.2</span>
-        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
         <span style="color:var(--text-muted)">(36,850 次瀏覽)</span>
       </div>
       <div class="info-grid">

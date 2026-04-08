@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 ---
@@ -11,7 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; 遊戲排名</div>
-  <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
+  <a href="/" class="back-link"><Icon name="arrow-left" /> 回首頁</a>
   <div class="hero-banner" style="background:linear-gradient(135deg,#1a1a1a,#2a2a2a,#1a1a1a)"></div>
   <div class="page-hero">
     <h1>🏆 2026 <em>老虎機評分總排名</em></h1>
@@ -29,7 +30,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#1</div>
         <div class="score-big" style="font-size:2rem">9.8</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></div>
       </div>
       <div class="rank-thumb"><img src="/images/seth2/seth2-card-thumbnail.webp" alt="戰神賽特2"  loading="lazy" width="600" height="600" /></div>
       <div>
@@ -49,7 +50,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#2</div>
         <div class="score-big" style="font-size:2rem">9.7</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></div>
       </div>
       <div class="rank-thumb"><img src="/images/fantasy-potion/card-thumbnail.webp" alt="奇幻魔藥"  loading="lazy" width="600" height="600" /></div>
       <div>
@@ -69,9 +70,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#3</div>
         <div class="score-big" style="font-size:2rem">9.5</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></div>
       </div>
-      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#2a0a0a,#4a1515,#2a0505)"><i class="fas fa-dragon" style="color:#f87171"></i></div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#2a0a0a,#4a1515,#2a0505)"><Icon name="flame" style="color:#f87171" /></div>
       <div>
         <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
           <h3 style="font-size:1.2rem">魔龍傳奇</h3>
@@ -89,9 +90,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#4</div>
         <div class="score-big" style="font-size:2rem">9.5</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></div>
       </div>
-      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#0a1525,#1a2a4a,#0a1a35)"><i class="fas fa-hammer" style="color:#60a5fa"></i></div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#0a1525,#1a2a4a,#0a1a35)"><Icon name="hammer" style="color:#60a5fa" /></div>
       <div>
         <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
           <h3 style="font-size:1.2rem">雷神之錘II</h3>
@@ -109,9 +110,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#5</div>
         <div class="score-big" style="font-size:2rem">9.4</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></div>
       </div>
-      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a1a0a,#3a3510,#2a2505)"><i class="fas fa-dice" style="color:#fbbf24"></i></div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a1a0a,#3a3510,#2a2505)"><Icon name="dice-5" style="color:#fbbf24" /></div>
       <div>
         <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
           <h3 style="font-size:1.2rem">麻將胡了</h3>
@@ -129,9 +130,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#6</div>
         <div class="score-big" style="font-size:2rem">9.4</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></div>
       </div>
-      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a0a0a,#3a1520,#2a0a15)"><i class="fas fa-shield-alt" style="color:#fb7185"></i></div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a0a0a,#3a1520,#2a0a15)"><Icon name="shield" style="color:#fb7185" /></div>
       <div>
         <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
           <h3 style="font-size:1.2rem">戰神呂布</h3>
@@ -149,9 +150,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#7</div>
         <div class="score-big" style="font-size:2rem">9.3</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></div>
       </div>
-      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a0a00,#3a2010,#2a1505)"><i class="fas fa-coins" style="color:#f59e0b"></i></div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a0a00,#3a2010,#2a1505)"><Icon name="coins" style="color:#f59e0b" /></div>
       <div>
         <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
           <h3 style="font-size:1.2rem">聚寶財神</h3>
@@ -169,9 +170,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#8</div>
         <div class="score-big" style="font-size:2rem">9.2</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></div>
       </div>
-      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#0a1a1a,#153535,#0a2525)"><i class="fas fa-dice" style="color:#34d399"></i></div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#0a1a1a,#153535,#0a2525)"><Icon name="dice-5" style="color:#34d399" /></div>
       <div>
         <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
           <h3 style="font-size:1.2rem">麻將胡了2</h3>
@@ -189,9 +190,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div style="text-align:center;min-width:80px">
         <div style="font-size:1.8rem;font-weight:900;color:var(--gold-light)">#9</div>
         <div class="score-big" style="font-size:2rem">9.2</div>
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></div>
       </div>
-      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a1a0a,#2a3515,#1a2a0a)"><i class="fas fa-store" style="color:#a3e635"></i></div>
+      <div class="rank-thumb rank-thumb-icon" style="background:linear-gradient(135deg,#1a1a0a,#2a3515,#1a2a0a)"><Icon name="store" style="color:#a3e635" /></div>
       <div>
         <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;flex-wrap:wrap">
           <h3 style="font-size:1.2rem">逛夜市3</h3>

@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const articles = [
@@ -11,7 +12,7 @@ const articles = [
     date: '2026-04-08',
     views: 0,
     tags: ['最新', '熱門', '精選'],
-    icon: 'fa-bolt',
+    icon: 'zap',
     gradient: 'linear-gradient(135deg,#1a0a2e,#5a1b3a,#0a1a2e)',
     thumbnail: '/images/article-covers/cover-slots.webp'
   },
@@ -24,7 +25,7 @@ const articles = [
     date: '2026-04-07',
     views: 0,
     tags: ['最新', '精選'],
-    icon: 'fa-ticket-alt',
+    icon: 'ticket-alt',
     gradient: 'linear-gradient(135deg,#0a1f0a,#0f3d1f,#1a8c3a)',
     thumbnail: '/images/article-covers/cover-lottery.webp'
   },
@@ -37,7 +38,7 @@ const articles = [
     date: '2026-04-06',
     views: 21580,
     tags: ['最新', '熱門', '精選'],
-    icon: 'fa-shield-alt',
+    icon: 'shield',
     gradient: 'linear-gradient(135deg,#3d0a1a,#ff416c,#1a0a0a)',
     thumbnail: '/images/article-covers/cover-anti-scam.webp'
   },
@@ -50,7 +51,7 @@ const articles = [
     date: '2026-04-07',
     views: 8650,
     tags: ['最新', '精選'],
-    icon: 'fa-ticket-alt',
+    icon: 'ticket-alt',
     gradient: 'linear-gradient(135deg,#1a1505,#3d2f0a,#f5b800)',
     thumbnail: '/images/article-covers/cover-lottery.webp'
   },
@@ -63,7 +64,7 @@ const articles = [
     date: '2026-03-20',
     views: 15420,
     tags: ['熱門', '精選'],
-    icon: 'fa-dice',
+    icon: 'dice-5',
     gradient: 'linear-gradient(135deg,#f093fb,#f5576c)',
     thumbnail: '/images/article-covers/cover-slots.webp'
   },
@@ -76,7 +77,7 @@ const articles = [
     date: '2026-03-15',
     views: 12380,
     tags: ['精選'],
-    icon: 'fa-money-bill',
+    icon: 'money-bill',
     gradient: 'linear-gradient(135deg,#4facfe,#00f2fe)',
     thumbnail: '/images/article-covers/cover-baccarat.webp'
   },
@@ -89,7 +90,7 @@ const articles = [
     date: '2026-03-10',
     views: 9870,
     tags: ['最新'],
-    icon: 'fa-user-tie',
+    icon: 'user-tie',
     gradient: 'linear-gradient(135deg,#fa709a,#fee140)',
     thumbnail: '/images/article-covers/cover-live.webp'
   }
@@ -99,7 +100,7 @@ const articles = [
 <BaseLayout title="芭樂攻略 - GAME8LA 遊戲教學與評測" description="GAME8LA 芭樂攻略：老虎機、百家樂、真人娛樂、體育、補魚、棋牌、電競完整教學與評測文章。" currentPage="articles">
     <div class="container">
       <div class="breadcrumb"><a href="/">首頁</a> &gt; 芭樂攻略</div>
-      <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
+      <a href="/" class="back-link"><Icon name="arrow-left" /> 回首頁</a>
       <div class="hero-banner" style="background:linear-gradient(135deg,#1a0a2e,#2d1b50,#1a0a2e)"></div>
       <div class="page-hero">
         <h1>📚 <em>芭樂攻略</em></h1>
@@ -132,7 +133,7 @@ const articles = [
           <div class="article-thumb" style={`background:${a.gradient}`}>
             {a.thumbnail
               ? <img src={a.thumbnail} alt={a.title} loading="lazy" width="400" height="225" style="width:100%;height:100%;object-fit:cover;display:block" />
-              : <i class={`fas ${a.icon}`}></i>
+              : <Icon name={a.icon} />
             }
           </div>
           <div class="article-body">
@@ -140,8 +141,8 @@ const articles = [
             <h3>{a.title}</h3>
             <p>{a.excerpt}</p>
             <div class="meta">
-              <span><i class="fas fa-calendar"></i> {a.date}</span>
-              <span><i class="fas fa-eye"></i> {a.views.toLocaleString()}</span>
+              <span><Icon name="calendar" /> {a.date}</span>
+              <span><Icon name="eye" /> {a.views.toLocaleString()}</span>
             </div>
           </div>
         </a>
@@ -149,7 +150,7 @@ const articles = [
     </section>
 
     <div class="empty-state" id="emptyState" style="display:none">
-      <i class="fas fa-inbox"></i>
+      <Icon name="inbox" />
       <p>這個類別暫時還沒有文章，我們正在努力寫！</p>
     </div>
 

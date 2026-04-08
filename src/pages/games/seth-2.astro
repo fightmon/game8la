@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
@@ -11,8 +12,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 戰神賽特2：覺醒之力</div>
-  <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem"><i class="fas fa-clock"></i> 最後更新：2026 年 4 月 5 日 ｜ <i class="fas fa-user-edit"></i> 作者：芭樂子 ｜ <i class="fas fa-book-reader"></i> 預估閱讀 7 分鐘</div>
-  <a href="/#games" class="back-link"><i class="fas fa-arrow-left"></i> 回遊戲列表</a>
+  <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem"><Icon name="clock" /> 最後更新：2026 年 4 月 5 日 ｜ <Icon name="user-pen" /> 作者：芭樂子 ｜ <Icon name="book-open" /> 預估閱讀 7 分鐘</div>
+  <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#1a0a2e">
       <img loading="lazy" src="/images/seth2/seth2-cover.webp" alt="戰神賽特2：覺醒之力封面" style="width:100%;height:auto;display:block" width="1200" height="675">
@@ -22,7 +23,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">戰神賽特2：覺醒之力</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
         <span class="score-big">9.8</span>
-        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         <span style="color:var(--text-muted)">(256 則評價)</span>
       </div>
       <div class="info-grid">
@@ -271,23 +272,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <h2 id="faq">常見問題 FAQ</h2>
   <div class="faq-section">
     <div class="faq-item">
-      <div class="faq-q">Q：戰神賽特2 跟初代差在哪？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：戰神賽特2 跟初代差在哪？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">最大的差異是新增「覺醒之力」雙模式系統和覺醒符號技能（鎖定/分裂）。初代只有普通免費遊戲，二代多了黃金聖甲蟲觸發的覺醒之力模式，贏分公式也不同（每次消除都乘倍數）。另外倍數球升級系統和三段購買特色也是二代新增的。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：RTP 96.89% 是高還是低？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：RTP 96.89% 是高還是低？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">在高波動老虎機中算是前段班。業界平均大約在 95%~96%，賽特2 的 96.89% 代表長期理論上每投入 100 元會返還約 96.89 元。當然這是長期統計值，短期內的體驗會有很大的波動。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：4 級 JACKPOT 怎麼觸發？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：4 級 JACKPOT 怎麼觸發？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">盤面上的 JP 符號出現 2 個以上即可獲獎：2 個 = MINI、3 個 = MINOR、4 個 = MAJOR、5 個 = GRAND。JACKPOT 是累積制的，金額會隨著所有玩家的投注持續增加。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：購買不朽覺醒 2000x 值不值得？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：購買不朽覺醒 2000x 值不值得？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">不朽覺醒保證起手就有 500x 倍數球，且有機會直接觸發覺醒技能。理論上爆分天花板最高，但 2000 倍押注的成本也非常高。適合資金充裕、追求極限爆分的玩家。一般玩家建議 200x 或 500x 就好。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：有沒有什麼必勝打法？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：有沒有什麼必勝打法？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">沒有。老虎機的結果完全由 RNG（隨機數生成器）決定，每一轉都是獨立事件。任何聲稱「必勝」「破解」的攻略都是詐騙。最好的策略就是設好預算、享受遊戲過程、輸到停損線就離場。</div>
     </div>
   </div>
@@ -296,10 +297,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div style="margin:2.5rem 0 1.5rem;text-align:center">
     <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:0.8rem">覺得這篇有用？分享給你的賭友們 👇</p>
     <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap">
-      <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-line"></i> LINE</a>
-      <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-facebook-f"></i> Facebook</a>
-      <a href="javascript:void(0)" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('戰神賽特2覺醒之力完整攻略｜GAME8LA'),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1DA1F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><i class="fab fa-twitter"></i> Twitter</a>
-      <a href="javascript:void(0)" onclick="navigator.clipboard.writeText(location.href).then(()=>{this.innerHTML='<i class=\'fas fa-check\'></i> 已複製';this.style.background='var(--guava-green)';this.style.color='#000'})" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;cursor:pointer"><i class="fas fa-link"></i> 複製連結</a>
+      <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="message-circle" /> LINE</a>
+      <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="facebook" /> Facebook</a>
+      <a href="javascript:void(0)" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('戰神賽特2覺醒之力完整攻略｜GAME8LA'),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1DA1F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="twitter" /> Twitter</a>
+      <a href="javascript:void(0)" onclick="navigator.clipboard.writeText(location.href).then(()=>{this.innerHTML='<svg viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline;vertical-align:middle\"><polyline points=\"20 6 9 17 4 12\"></polyline></svg> 已複製';this.style.background='var(--guava-green)';this.style.color='#000'})" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;cursor:pointer"><Icon name="link" /> 複製連結</a>
     </div>
   </div>
   <!-- 延伸閱讀 - 站內攻略 -->

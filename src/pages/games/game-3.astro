@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
@@ -11,7 +12,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 魔龍傳奇</div>
-  <a href="/#games" class="back-link"><i class="fas fa-arrow-left"></i> 回遊戲列表</a>
+  <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#2a0a0a,#4a1515,#2a0505);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:300px;font-size:5rem;border:1px solid var(--border)">
       🐉
@@ -21,7 +22,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">魔龍傳奇</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
         <span class="score-big">9.5</span>
-        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         <span style="color:var(--text-muted)">(87,650 次瀏覽)</span>
       </div>
       <div class="info-grid">
@@ -179,23 +180,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <h2 id="faq">常見問題 FAQ</h2>
   <div class="faq-section">
     <div class="faq-item">
-      <div class="faq-q">Q：魔龍傳奇的 RTP 是多少？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：魔龍傳奇的 RTP 是多少？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">GR 電子官方沒有公開 RTP 數據。這在部分亞洲遊戲供應商中是常見的做法。雖然無法確認確切的理論回報率，但從遊戲的中波動設計和玩家普遍的體驗來看，它的整體節奏比較穩定，不像高波動遊戲那樣大起大落。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：倍數連鎖最多可以連幾次？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：倍數連鎖最多可以連幾次？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">理論上沒有上限，只要消除後落下的符號繼續中獎就會持續連鎖。但倍率在第 4 次以上就固定在 x5，不會再往上升了。也就是說第 4 次、第 5 次、第 10 次都是 x5，但每次連鎖都會獨立計算一次獎金再乘上 x5，所以連鎖越多次、總獎金疊加越高。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：Free Game 裡面可以無限追加嗎？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：Free Game 裡面可以無限追加嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">理論上是可以的——只要在 Free Game 期間繼續出現 3 個魔龍之眼，每次追加 +10 局。但實際上能追加一次就已經很幸運了，連續追加的機率非常低。不過一旦追加成功，配合隕石百搭和倍數連鎖，那個場面會非常壯觀。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：隕石特效有辦法主動觸發嗎？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：隕石特效有辦法主動觸發嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">沒辦法，隕石是完全隨機觸發的，跟幸運彩金、喜從天降一樣屬於「驚喜型」機制。不過在 Free Game 期間，隕石出現的機率會比主遊戲更高，會隨機把盤面上的符號變成魔法陣（Wild），是 Free Game 爆分的重要推手。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：有沒有什麼必勝打法？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：有沒有什麼必勝打法？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">沒有。老虎機的結果完全由 RNG（隨機數生成器）決定，每一轉都是獨立事件。網路上那些「看路」「選台」的技巧都沒有數學根據。最好的策略就是設好預算、享受遊戲過程、輸到停損線就離場。中波動的好處是不會太快燒完，給你更多享受遊戲的時間。</div>
     </div>
   </div>

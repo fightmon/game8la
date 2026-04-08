@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 ---
@@ -11,7 +12,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 奇幻魔藥</div>
-  <a href="/#games" class="back-link"><i class="fas fa-arrow-left"></i> 回遊戲列表</a>
+  <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
     <div style="background:linear-gradient(135deg,#0a1a2e,#0d3d2d,#0a2a1a);border-radius:16px;overflow:hidden;border:1px solid var(--border)">
       <img src="/images/fantasy-potion/cover.webp" alt="奇幻魔藥 Fantasy Potion 遊戲封面" style="width:100%;display:block;border-radius:16px;height:auto"  loading="lazy" width="1200" height="675" />
@@ -21,7 +22,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">奇幻魔藥</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
         <span class="score-big">9.7</span>
-        <span class="stars" style="font-size:1.2rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         <span style="color:var(--text-muted)">(98,740 次瀏覽)</span>
       </div>
       <div class="info-grid">
@@ -222,23 +223,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <h2 id="faq">常見問題 FAQ</h2>
   <div class="faq-section">
     <div class="faq-item">
-      <div class="faq-q">Q：RTP 98.28% 是真的嗎？為什麼這麼高？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：RTP 98.28% 是真的嗎？為什麼這麼高？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">是的，RG 電子公布的理論 RTP 為 98.28%。這在老虎機界算是頂尖水準（業界平均大約 94%~96%）。高 RTP 代表長期理論上每投入 100 元會返還約 98.28 元，但這是統計期望值，短期內可能大贏或大輸，因為它同時是高波動。RTP 高不代表每轉都贏，而是長期的整體回報率比較友善。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：蜂巢消除跟傳統老虎機差在哪？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：蜂巢消除跟傳統老虎機差在哪？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">傳統老虎機靠「賠付線」判定中獎，符號要在特定的線上排列才算。奇幻魔藥用的是「相鄰消除」機制——只要 6 個以上相同符號上下左右黏在一起就算中獎，位置不限。消除後上方符號掉落、持續判定，形成連鎖反應。玩起來比較像消消樂，直覺好懂。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：Wild 倍數在主遊戲也會累積嗎？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：Wild 倍數在主遊戲也會累積嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">主遊戲中 Wild 也有累積倍數的功能（每 2 次含 Wild 中獎就 +1x），但每一轉結束後倍數就會重置。只有在免費遊戲（Free Game）期間，Wild 倍數才會跨局累積到最終局不歸零。所以 Free Game 才是真正的爆分舞台。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：魔藥缸的倍數跟 Wild 倍數是相乘還是相加？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：魔藥缸的倍數跟 Wild 倍數是相乘還是相加？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">魔藥缸給的倍數是套用在「當次消除」上的額外加乘，而 Wild 倍數則是套用在「含 Wild 連線」的獎金上。兩者在各自的作用範圍內獨立運作。具體的交互計算方式建議以遊戲內的實際結算為準，不同情況下的疊加效果可能略有差異。</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Q：有沒有什麼必勝打法？<span class="arrow"><i class="fas fa-chevron-down"></i></span></div>
+      <div class="faq-q">Q：有沒有什麼必勝打法？<span class="arrow"><Icon name="chevron-down" /></span></div>
       <div class="faq-a">沒有。老虎機的結果完全由 RNG（隨機數生成器）決定，每一轉都是獨立事件。任何聲稱「必勝」「破解」的攻略都是詐騙。雖然 98.28% RTP 很高，但高波動的本質沒有變——獎金集中在少數幾轉。最好的策略就是設好預算、享受遊戲過程、輸到停損線就離場。</div>
     </div>
   </div>

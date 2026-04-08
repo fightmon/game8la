@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 ---
@@ -37,10 +38,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p>收錄 6 大廠商、27 款老虎機完整數據，不灌水、不業配，最真實的遊戲評價都在這！</p>
         <div class="hero-btns">
           <button class="btn-primary" onclick="document.getElementById('rankings').scrollIntoView({behavior:'smooth'})">
-            <i class="fas fa-trophy"></i> 查看金8LA排行
+            <Icon name="trophy" /> 查看金8LA排行
           </button>
           <button class="btn-outline" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">
-            <i class="fas fa-gamepad"></i> 探索遊戲
+            <Icon name="gamepad-2" /> 探索遊戲
           </button>
         </div>
       </div>
@@ -53,8 +54,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </span></div>
         <p>專業牌路分析、下注策略完整教學，從8LA新手到金8LA玩家的進階指南！</p>
         <div class="hero-btns">
-          <a href="/articles/baccarat-guide/" class="btn-primary" style="text-decoration:none"><i class="fas fa-book"></i> 立即閱讀</a>
-          <a href="/games/game-3/" class="btn-outline" aria-label="免費試玩 game-3" style="text-decoration:none"><i class="fas fa-play" aria-hidden="true"></i> 免費試玩</a>
+          <a href="/articles/baccarat-guide/" class="btn-primary" style="text-decoration:none"><Icon name="book" /> 立即閱讀</a>
+          <a href="/games/game-3/" class="btn-outline" aria-label="免費試玩 game-3" style="text-decoration:none"><Icon name="play" /> 免費試玩</a>
         </div>
       </div>
     </div>
@@ -66,15 +67,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </span></div>
         <p>幫你分辨真8LA和爛8LA！GLI認證廠商、RTP透明公開，玩得安心又放心！</p>
         <div class="hero-btns">
-          <a href="/articles/anti-scam-8la-guide/" class="btn-primary" style="text-decoration:none"><i class="fas fa-shield-alt"></i> 懂詐騙才能防詐騙</a>
-          <a href="/#articles" class="btn-outline" style="text-decoration:none"><i class="fas fa-exclamation-triangle"></i> 詐騙負評清單</a>
+          <a href="/articles/anti-scam-8la-guide/" class="btn-primary" style="text-decoration:none"><Icon name="shield" /> 懂詐騙才能防詐騙</a>
+          <a href="/#articles" class="btn-outline" style="text-decoration:none"><Icon name="triangle-alert" /> 詐騙負評清單</a>
         </div>
       </div>
     </div>
   </div>
   <div class="hero-arrows">
-    <button type="button" aria-label="上一張輪播" onclick="changeSlide(-1)"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-    <button type="button" aria-label="下一張輪播" onclick="changeSlide(1)"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+    <button type="button" aria-label="上一張輪播" onclick="changeSlide(-1)"><Icon name="chevron-left" /></button>
+    <button type="button" aria-label="下一張輪播" onclick="changeSlide(1)"><Icon name="chevron-right" /></button>
   </div>
   <div class="hero-dots" id="heroDots">
     <span class="active" onclick="goToSlide(0)"></span>
@@ -105,7 +106,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="section" id="rankings">
   <div class="section-header">
     <h2>🏆 金8LA排行榜</h2>
-    <a href="/game-ranking/" class="more-link">查看完整排名 <i class="fas fa-arrow-right"></i></a>
+    <a href="/game-ranking/" class="more-link">查看完整排名 <Icon name="arrow-right" /></a>
   </div>
   <div class="ranking-grid">
     <a href="/games/seth-2/" class="rank-card" style="text-decoration:none;color:inherit">
@@ -115,7 +116,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h3>戰神賽特2：覺醒之力</h3>
         <div class="rank-score">
           <span class="score">9.8</span>
-          <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+          <span class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
         </div>
         <div class="rank-tags"><span>ATG電子</span><span>x81000</span><span>高波動</span></div>
       </div>
@@ -127,31 +128,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h3>奇幻魔藥</h3>
         <div class="rank-score">
           <span class="score">9.7</span>
-          <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+          <span class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         </div>
         <div class="rank-tags"><span>RG電子</span><span>RTP 98.28%</span><span>蜂巢</span></div>
       </div>
     </a>
     <a href="/games/game-3/" class="rank-card" style="text-decoration:none;color:inherit">
       <span class="rank-badge bronze">3</span>
-      <div class="rank-img gc-3"><i class="fas fa-dragon" style="color:#f87171;filter:drop-shadow(0 2px 8px rgba(248,113,113,0.6))"></i></div>
+      <div class="rank-img gc-3"><Icon name="flame" style="color:#f87171;filter:drop-shadow(0 2px 8px rgba(248,113,113,0.6))" /></div>
       <div class="rank-info">
         <h3>魔龍傳奇</h3>
         <div class="rank-score">
           <span class="score">9.5</span>
-          <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+          <span class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         </div>
         <div class="rank-tags"><span>GR電子</span><span>20線</span><span>經典IP</span></div>
       </div>
     </a>
     <a href="/games/game-4/" class="rank-card" style="text-decoration:none;color:inherit">
       <span class="rank-badge normal">4</span>
-      <div class="rank-img gc-4"><i class="fas fa-hammer" style="color:#60a5fa;filter:drop-shadow(0 2px 8px rgba(96,165,250,0.6))"></i></div>
+      <div class="rank-img gc-4"><Icon name="hammer" style="color:#60a5fa;filter:drop-shadow(0 2px 8px rgba(96,165,250,0.6))" /></div>
       <div class="rank-info">
         <h3>雷神之錘II</h3>
         <div class="rank-score">
           <span class="score">9.5</span>
-          <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+          <span class="stars"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
         </div>
         <div class="rank-tags"><span>RSG電子</span><span>x25000</span><span>GLI認證</span></div>
       </div>
@@ -162,7 +163,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="section" id="games">
   <div class="section-header">
     <h2>🎮 熱門遊戲精選</h2>
-    <a href="/game-ranking/" class="more-link">更多遊戲 <i class="fas fa-arrow-right"></i></a>
+    <a href="/game-ranking/" class="more-link">更多遊戲 <Icon name="arrow-right" /></a>
   </div>
   <div class="category-filters">
     <button class="cat-filter active" onclick="filterCat(this, 'all')">全部</button>
@@ -185,7 +186,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="section" id="articles">
   <div class="section-header">
     <h2>📝 最新攻略與評測</h2>
-    <a href="/game-ranking/" class="more-link">更多資訊 <i class="fas fa-arrow-right"></i></a>
+    <a href="/game-ranking/" class="more-link">更多資訊 <Icon name="arrow-right" /></a>
   </div>
   <div class="two-col">
     <div class="article-grid" style="grid-template-columns: repeat(2, 1fr);">
@@ -197,8 +198,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="article-body">
           <h3>戰神賽特完整教學：玩法、RTP、爆分機制全解析</h3>
           <div class="article-meta">
-            <span><i class="far fa-calendar"></i> 2026-04-08</span>
-            <span><i class="far fa-eye"></i> 0</span>
+            <span><Icon name="calendar" /> 2026-04-08</span>
+            <span><Icon name="eye" /> 0</span>
           </div>
           <p class="article-excerpt">ATG 電子戰神賽特完整攻略：隨處支付、消除掉落、覺醒技能、買免遊三段比較全解析...</p>
         </div>
@@ -211,8 +212,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="article-body">
           <h3>今彩 539 包牌教學:成本、回本表、膽拖計算全解析</h3>
           <div class="article-meta">
-            <span><i class="far fa-calendar"></i> 2026-04-07</span>
-            <span><i class="far fa-eye"></i> 0</span>
+            <span><Icon name="calendar" /> 2026-04-07</span>
+            <span><Icon name="eye" /> 0</span>
           </div>
           <p class="article-excerpt">包 6/7/8/9 碼成本怎麼算?中幾碼才回本?膽拖投注公式、保本門檻速查表全解析...</p>
         </div>
@@ -225,8 +226,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="article-body">
           <h3>大樂透 vs 威力彩中獎機率比較:2026 期望值全解析</h3>
           <div class="article-meta">
-            <span><i class="far fa-calendar"></i> 2026-04-07</span>
-            <span><i class="far fa-eye"></i> 8,650</span>
+            <span><Icon name="calendar" /> 2026-04-07</span>
+            <span><Icon name="eye" /> 8,650</span>
           </div>
           <p class="article-excerpt">兩大樂透到底買哪個比較划算?用數學算給你看頭獎機率、各獎項中獎率、每注期望值、玩法差異...</p>
         </div>
@@ -239,8 +240,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="article-body">
           <h3>百家樂牌路仙人指路:三路、大路、珠盤路完整教學</h3>
           <div class="article-meta">
-            <span><i class="far fa-calendar"></i> 2026-03-15</span>
-            <span><i class="far fa-eye"></i> 79,075</span>
+            <span><Icon name="calendar" /> 2026-03-15</span>
+            <span><Icon name="eye" /> 79,075</span>
           </div>
           <p class="article-excerpt">百家樂牌路分析工具完整解說，從新手到老手都適用的牌路觀察技巧...</p>
         </div>
@@ -253,8 +254,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="article-body">
           <h3>2026 年十大遊戲推薦排名，8LA玩家都在玩這 5 間</h3>
           <div class="article-meta">
-            <span><i class="far fa-calendar"></i> 2026-03-10</span>
-            <span><i class="far fa-eye"></i> 45,230</span>
+            <span><Icon name="calendar" /> 2026-03-10</span>
+            <span><Icon name="eye" /> 45,230</span>
           </div>
           <p class="article-excerpt">想找到最適合的線上遊戲平台？本文為你整理 2026 年最受歡迎的十大遊戲排名...</p>
         </div>
@@ -267,8 +268,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="article-body">
           <h3>RSG 雷神之錘老虎機實測：小資族也能輕鬆掌握的打法</h3>
           <div class="article-meta">
-            <span><i class="far fa-calendar"></i> 2026-03-08</span>
-            <span><i class="far fa-eye"></i> 12,840</span>
+            <span><Icon name="calendar" /> 2026-03-08</span>
+            <span><Icon name="eye" /> 12,840</span>
           </div>
           <p class="article-excerpt">RSG 雷神之錘實測打法技巧，從進場到出場的完整策略分析...</p>
         </div>
@@ -281,8 +282,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="article-body">
           <h3>6 種遊戲平台詐騙手法大公開，別被爛8LA騙了！</h3>
           <div class="article-meta">
-            <span><i class="far fa-calendar"></i> 2026-03-01</span>
-            <span><i class="far fa-eye"></i> 11,056</span>
+            <span><Icon name="calendar" /> 2026-03-01</span>
+            <span><Icon name="eye" /> 11,056</span>
           </div>
           <p class="article-excerpt">線上賭場詐騙案例多，教你辨別真假8LA，遠離詐騙陷阱...</p>
         </div>
@@ -309,11 +310,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h3>⚡ 丟出你的8LA評價</h3>
     <p>不怕辣就來丟8LA！你的真實評價將幫助更多玩家做出選擇！</p>
     <div class="user-stars" id="userStars">
-      <i class="far fa-star" data-star="1" onclick="setRating(1)" onmouseover="hoverRating(1)" onmouseout="resetRating()"></i>
-      <i class="far fa-star" data-star="2" onclick="setRating(2)" onmouseover="hoverRating(2)" onmouseout="resetRating()"></i>
-      <i class="far fa-star" data-star="3" onclick="setRating(3)" onmouseover="hoverRating(3)" onmouseout="resetRating()"></i>
-      <i class="far fa-star" data-star="4" onclick="setRating(4)" onmouseover="hoverRating(4)" onmouseout="resetRating()"></i>
-      <i class="far fa-star" data-star="5" onclick="setRating(5)" onmouseover="hoverRating(5)" onmouseout="resetRating()"></i>
+      <Icon name="star" />
+      <Icon name="star" />
+      <Icon name="star" />
+      <Icon name="star" />
+      <Icon name="star" />
     </div>
     <div class="rating-input">
       <input type="text" placeholder="丟一顆8LA，分享你的遊戲體驗..." id="reviewText">
@@ -325,7 +326,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="review-content">
           <div class="review-header">
             <span class="name">Alex_Gamer</span>
-            <span class="stars" style="font-size:0.75rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+            <span class="stars" style="font-size:0.75rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
             <span class="date">2026-03-20</span>
           </div>
           <div class="review-text">皇家遊戲平台的老虎機超好玩，介面流暢、出金速度也快，金8LA認證！</div>
@@ -336,7 +337,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="review-content">
           <div class="review-header">
             <span class="name">King_Poker</span>
-            <span class="stars" style="font-size:0.75rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star empty"></i></span>
+            <span class="stars" style="font-size:0.75rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
             <span class="date">2026-03-18</span>
           </div>
           <div class="review-text">鑽石俱樂部的真人百家樂畫質很棒，客服也很專業，就是優惠活動可以再多一些。</div>
@@ -347,7 +348,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="review-content">
           <div class="review-header">
             <span class="name">MiMi_Play</span>
-            <span class="stars" style="font-size:0.75rem"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+            <span class="stars" style="font-size:0.75rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
             <span class="date">2026-03-15</span>
           </div>
           <div class="review-text">在金沙國際玩捕魚遊戲，畫面精美而且獎金設定合理，丟顆好8LA給它！</div>
@@ -359,17 +360,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <!-- FOOTER -->
 <!-- SCROLL TO TOP -->
 <script>
+function getSVGIcon(name) {
+  // Map of lucide icon names to SVG content
+  const svgs = {
+    'zap': '<polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline>',
+    'flask': '<path d="M10.5 2h3m0 0v4h-3V2zm0 4v6.5A3.5 3.5 0 0 0 14 16H10a3.5 3.5 0 0 0 3.5-3.5V6h-3zm0 10h3v2h-3z"></path>',
+    'flame': '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.285-2.26.9-3.15"></path>',
+    'hammer': '<path d="M17.5 1a2 2 0 0 1 2 2v5h2v4h-2v2h-4v-2H9v-4h2V3a2 2 0 0 1 2-2h4.5z"></path>',
+    'dice-5': '<path d="M21 16.29v-5.12a2 2 0 0 0-1.18-1.77l-5-2.89a2 2 0 0 0-1.82 0l-5 2.88A2 2 0 0 0 3 11.17v5.12A2 2 0 0 0 4.82 18.1l5 2.89a2 2 0 0 0 1.82 0l5-2.88a2 2 0 0 0 1.18-1.78z"></path><circle cx="9" cy="11" r="1"></circle><circle cx="15" cy="15" r="1"></circle><circle cx="12" cy="13" r="1"></circle>',
+    'shield': '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
+    'coins': '<circle cx="8" cy="8" r="6"></circle><circle cx="16" cy="12" r="6"></circle><circle cx="20" cy="8" r="6" opacity="0.5"></circle>',
+    'store': '<path d="M2 8h20M3 8v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8M8 8V5a2 2 0 0 1 4 0v3M16 8V5a2 2 0 0 1 4 0v3M9 13h1M9 17h1M14 13h1M14 17h1"></path>',
+    'gamepad-2': '<path d="M6 12h12M12 6v12"></path><path d="M4 8c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V8z"></path><circle cx="9" cy="15" r="1"></circle><circle cx="15" cy="15" r="1"></circle>',
+    'book': '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6.5a2.5 2.5 0 0 1-2.5-2.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>',
+    'crown': '<path d="M11.26 3.674L3 13a2 2 0 0 0 .164 2.995l8.695 7.977a2 2 0 0 0 2.882-.164l8.695-7.977a2 2 0 0 0 .164-2.995l-8.26-9.326a2 2 0 0 0-2.914 0z"></path><path d="M8 11l4-6 4 6M6 13l6-8 6 8"></path>',
+    'gem': '<path d="M6 3h12l4 6-10 13L2 9l4-6z"></path><path d="M9 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>',
+  };
+  
+  const svg = svgs[name] || '<circle cx="12" cy="12" r="10" opacity="0.5"/>';
+  return `<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle">${svg}</svg>`;
+}
+
 // === GAME DATA ===
 const games = [
-  { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 89420, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'fa-bolt', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
-  { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 76230, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'fa-flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
-  { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 65180, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'fa-dragon', label: 'GR · 經典IP' },
-  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、隨處支付、最大x25000倍。倍數符號2x~1000x可升級、4級累積彩金、15局Free Game+Super Bonus。', badge: 'new', gradient: 'gc-4', icon: 'fa-hammer', label: 'RSG · x25000' },
-  { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 52400, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'fa-dice', label: 'PG · 1024 Ways' },
-  { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 48700, desc: 'RSG皇家電子三國志老虎機！隨處支付(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'fa-shield-alt', label: 'RSG · x500' },
-  { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 43200, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'fa-coins', label: 'RSG · 32400路' },
-  { id: 8, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.2, views: 39800, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: null, gradient: 'gc-8', icon: 'fa-dice', label: 'PG · 2000路' },
-  { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 36850, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'fa-store', label: 'RSG · x150' },
+  { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 89420, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
+  { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 76230, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
+  { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 65180, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'flame', label: 'GR · 經典IP' },
+  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、隨處支付、最大x25000倍。倍數符號2x~1000x可升級、4級累積彩金、15局Free Game+Super Bonus。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000' },
+  { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 52400, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'dice-5', label: 'PG · 1024 Ways' },
+  { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 48700, desc: 'RSG皇家電子三國志老虎機！隨處支付(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'shield', label: 'RSG · x500' },
+  { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 43200, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'coins', label: 'RSG · 32400路' },
+  { id: 8, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.2, views: 39800, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: null, gradient: 'gc-8', icon: 'dice-5', label: 'PG · 2000路' },
+  { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 36850, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
 ];
 // === RENDER GAMES ===
 function renderGames(filter = 'all') {
@@ -380,19 +402,19 @@ function renderGames(filter = 'all') {
       <div class="game-card-img ${g.gradient}" ${g.img ? `style="padding:0;overflow:hidden"` : ''}>
         ${g.badge === 'hot' ? '<span class="hot-badge">🔥 熱門</span>' : ''}
         ${g.badge === 'new' ? '<span class="new-badge">🆕 新上架</span>' : ''}
-        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : `<i class="fas ${g.icon} game-icon"></i>`}
+        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : `getSVGIcon(g.icon)`}
         <span class="game-label">${g.label}</span>
       </div>
       <div class="game-card-body">
         <h3>${g.name}</h3>
         <div class="game-meta">
           <div class="rating">⚡ ${g.rating}</div>
-          <div class="views"><i class="far fa-eye"></i> ${g.views.toLocaleString()}</div>
+          <div class="views"><Icon name="eye" /> ${g.views.toLocaleString()}</div>
         </div>
         <div class="game-desc">${g.desc}</div>
         <div class="game-actions">
-          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-play" aria-hidden="true"></i> 免費試玩</a>
-          <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-info-circle" aria-hidden="true"></i> 更多資訊</a>
+          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩</a>
+          <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="info" /> 更多資訊</a>
         </div>
       </div>
     </div>
@@ -490,13 +512,13 @@ observer.observe(document.querySelector('.stats-bar'));
 // === RATING SYSTEM ===
 let userRating = 0;
 function hoverRating(n) {
-  document.querySelectorAll('#userStars i').forEach((s, i) => {
-    s.className = i < n ? 'fas fa-star active' : 'far fa-star';
+  document.querySelectorAll('#userStars svg').forEach((s, i) => {
+    s.style.color = i < n ? 'var(--gold)' : 'var(--text-muted)';
   });
 }
 function resetRating() {
-  document.querySelectorAll('#userStars i').forEach((s, i) => {
-    s.className = i < userRating ? 'fas fa-star active' : 'far fa-star';
+  document.querySelectorAll('#userStars svg').forEach((s, i) => {
+    s.style.color = i < userRating ? 'var(--gold)' : 'var(--text-muted)';
   });
 }
 function setRating(n) { userRating = n; resetRating(); }
@@ -504,9 +526,10 @@ function submitReview() {
   const text = document.getElementById('reviewText').value.trim();
   if (!text || userRating === 0) { alert('先選星星再丟8LA！'); return; }
   const list = document.getElementById('reviewsList');
+  const starSvg = '<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><polygon points="12 2 15.09 10.26 24 10.27 17.18 16.70 20.27 24.97 12 18.54 3.73 24.98 6.82 16.71 0 10.27 8.91 10.26 12 2"></polygon></svg>';
+  const emptySvg = '<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted)"><polygon points="12 2 15.09 10.26 24 10.27 17.18 16.70 20.27 24.97 12 18.54 3.73 24.98 6.82 16.71 0 10.27 8.91 10.26 12 2"></polygon></svg>';
   const stars = Array(5).fill(0).map((_, i) =>
-    i < userRating ? '<i class="fas fa-star"></i>' :
-    '<i class="far fa-star empty"></i>'
+    i < userRating ? starSvg : emptySvg
   ).join('');
   const today = new Date().toISOString().split('T')[0];
   const html = `<div class="review-item animate-in">
@@ -526,14 +549,14 @@ function submitReview() {
 }
 // === SEARCH ===
 const searchData = [
-  ...games.map(g => ({ name: g.name, type: '遊戲', icon: 'fa-gamepad' })),
-  { name: '百家樂牌路攻略', type: '文章', icon: 'fa-book' },
-  { name: '2026 遊戲平台排行', type: '文章', icon: 'fa-book' },
-  { name: '老虎機 RTP 排行', type: '文章', icon: 'fa-book' },
-  { name: '防詐騙指南', type: '文章', icon: 'fa-shield-alt' },
-  { name: '皇家遊戲平台', type: '遊戲平台', icon: 'fa-crown' },
-  { name: '鑽石俱樂部', type: '遊戲平台', icon: 'fa-gem' },
-  { name: '金沙國際', type: '遊戲平台', icon: 'fa-dice' },
+  ...games.map(g => ({ name: g.name, type: '遊戲', icon: 'gamepad-2' })),
+  { name: '百家樂牌路攻略', type: '文章', icon: 'book' },
+  { name: '2026 遊戲平台排行', type: '文章', icon: 'book' },
+  { name: '老虎機 RTP 排行', type: '文章', icon: 'book' },
+  { name: '防詐騙指南', type: '文章', icon: 'shield' },
+  { name: '皇家遊戲平台', type: '遊戲平台', icon: 'crown' },
+  { name: '鑽石俱樂部', type: '遊戲平台', icon: 'gem' },
+  { name: '金沙國際', type: '遊戲平台', icon: 'dice-5' },
 ];
 function openSearch() {
   document.getElementById('searchModal').classList.add('open');
@@ -550,7 +573,7 @@ function handleSearch(q) {
   const filtered = searchData.filter(d => d.name.toLowerCase().includes(q.toLowerCase()));
   results.innerHTML = filtered.length ? filtered.map(d =>
     `<div class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('open')">
-      <i class="fas ${d.icon}"></i>
+      ${getSVGIcon(d.icon)}
       <div><strong>${d.name}</strong><br><small style="color:var(--text-muted)">${d.type}</small></div>
     </div>`
   ).join('') : '<div style="padding:1rem 1.5rem;color:var(--text-muted)">找不到相關8LA ⚡</div>';
@@ -1534,15 +1557,15 @@ body {
 <script is:inline>
 // === GAME DATA ===
 const games = [
-  { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 89420, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'fa-bolt', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
-  { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 76230, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'fa-flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
-  { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 65180, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'fa-dragon', label: 'GR · 經典IP' },
-  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、隨處支付、最大x25000倍。倍數符號2x~1000x可升級、4級累積彩金、15局Free Game+Super Bonus。', badge: 'new', gradient: 'gc-4', icon: 'fa-hammer', label: 'RSG · x25000' },
-  { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 52400, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'fa-dice', label: 'PG · 1024 Ways' },
-  { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 48700, desc: 'RSG皇家電子三國志老虎機！隨處支付(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'fa-shield-alt', label: 'RSG · x500' },
-  { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 43200, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'fa-coins', label: 'RSG · 32400路' },
-  { id: 8, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.2, views: 39800, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: null, gradient: 'gc-8', icon: 'fa-dice', label: 'PG · 2000路' },
-  { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 36850, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'fa-store', label: 'RSG · x150' },
+  { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 89420, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
+  { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 76230, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
+  { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 65180, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'flame', label: 'GR · 經典IP' },
+  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、隨處支付、最大x25000倍。倍數符號2x~1000x可升級、4級累積彩金、15局Free Game+Super Bonus。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000' },
+  { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 52400, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'dice-5', label: 'PG · 1024 Ways' },
+  { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 48700, desc: 'RSG皇家電子三國志老虎機！隨處支付(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'shield', label: 'RSG · x500' },
+  { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 43200, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'coins', label: 'RSG · 32400路' },
+  { id: 8, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.2, views: 39800, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: null, gradient: 'gc-8', icon: 'dice-5', label: 'PG · 2000路' },
+  { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 36850, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
 ];
 
 // === RENDER GAMES ===
@@ -1554,19 +1577,19 @@ function renderGames(filter = 'all') {
       <div class="game-card-img ${g.gradient}" ${g.img ? `style="padding:0;overflow:hidden"` : ''}>
         ${g.badge === 'hot' ? '<span class="hot-badge">🔥 熱門</span>' : ''}
         ${g.badge === 'new' ? '<span class="new-badge">🆕 新上架</span>' : ''}
-        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : `<i class="fas ${g.icon} game-icon"></i>`}
+        ${g.img ? `<img src="${g.img}" alt="${g.name}" style="width:100%;height:100%;object-fit:cover;display:block;height:auto" loading="lazy">` : `getSVGIcon(g.icon)`}
         <span class="game-label">${g.label}</span>
       </div>
       <div class="game-card-body">
         <h3>${g.name}</h3>
         <div class="game-meta">
           <div class="rating">⚡ ${g.rating}</div>
-          <div class="views"><i class="far fa-eye"></i> ${g.views.toLocaleString()}</div>
+          <div class="views"><Icon name="eye" /> ${g.views.toLocaleString()}</div>
         </div>
         <div class="game-desc">${g.desc}</div>
         <div class="game-actions">
-          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-play" aria-hidden="true"></i> 免費試玩</a>
-          <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><i class="fas fa-info-circle" aria-hidden="true"></i> 更多資訊</a>
+          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩</a>
+          <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="info" /> 更多資訊</a>
         </div>
       </div>
     </div>
@@ -1673,13 +1696,13 @@ observer.observe(document.querySelector('.stats-bar'));
 // === RATING SYSTEM ===
 let userRating = 0;
 function hoverRating(n) {
-  document.querySelectorAll('#userStars i').forEach((s, i) => {
-    s.className = i < n ? 'fas fa-star active' : 'far fa-star';
+  document.querySelectorAll('#userStars svg').forEach((s, i) => {
+    s.style.color = i < n ? 'var(--gold)' : 'var(--text-muted)';
   });
 }
 function resetRating() {
-  document.querySelectorAll('#userStars i').forEach((s, i) => {
-    s.className = i < userRating ? 'fas fa-star active' : 'far fa-star';
+  document.querySelectorAll('#userStars svg').forEach((s, i) => {
+    s.style.color = i < userRating ? 'var(--gold)' : 'var(--text-muted)';
   });
 }
 function setRating(n) { userRating = n; resetRating(); }
@@ -1688,9 +1711,10 @@ function submitReview() {
   const text = document.getElementById('reviewText').value.trim();
   if (!text || userRating === 0) { alert('先選星星再丟8LA！'); return; }
   const list = document.getElementById('reviewsList');
+  const starSvg = '<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><polygon points="12 2 15.09 10.26 24 10.27 17.18 16.70 20.27 24.97 12 18.54 3.73 24.98 6.82 16.71 0 10.27 8.91 10.26 12 2"></polygon></svg>';
+  const emptySvg = '<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted)"><polygon points="12 2 15.09 10.26 24 10.27 17.18 16.70 20.27 24.97 12 18.54 3.73 24.98 6.82 16.71 0 10.27 8.91 10.26 12 2"></polygon></svg>';
   const stars = Array(5).fill(0).map((_, i) =>
-    i < userRating ? '<i class="fas fa-star"></i>' :
-    '<i class="far fa-star empty"></i>'
+    i < userRating ? starSvg : emptySvg
   ).join('');
   const today = new Date().toISOString().split('T')[0];
   const html = `<div class="review-item animate-in">
@@ -1711,14 +1735,14 @@ function submitReview() {
 
 // === SEARCH ===
 const searchData = [
-  ...games.map(g => ({ name: g.name, type: '遊戲', icon: 'fa-gamepad' })),
-  { name: '百家樂牌路攻略', type: '文章', icon: 'fa-book' },
-  { name: '2026 遊戲平台排行', type: '文章', icon: 'fa-book' },
-  { name: '老虎機 RTP 排行', type: '文章', icon: 'fa-book' },
-  { name: '防詐騙指南', type: '文章', icon: 'fa-shield-alt' },
-  { name: '皇家遊戲平台', type: '遊戲平台', icon: 'fa-crown' },
-  { name: '鑽石俱樂部', type: '遊戲平台', icon: 'fa-gem' },
-  { name: '金沙國際', type: '遊戲平台', icon: 'fa-dice' },
+  ...games.map(g => ({ name: g.name, type: '遊戲', icon: 'gamepad-2' })),
+  { name: '百家樂牌路攻略', type: '文章', icon: 'book' },
+  { name: '2026 遊戲平台排行', type: '文章', icon: 'book' },
+  { name: '老虎機 RTP 排行', type: '文章', icon: 'book' },
+  { name: '防詐騙指南', type: '文章', icon: 'shield' },
+  { name: '皇家遊戲平台', type: '遊戲平台', icon: 'crown' },
+  { name: '鑽石俱樂部', type: '遊戲平台', icon: 'gem' },
+  { name: '金沙國際', type: '遊戲平台', icon: 'dice-5' },
 ];
 function openSearch() {
   document.getElementById('searchModal').classList.add('open');
@@ -1735,7 +1759,7 @@ function handleSearch(q) {
   const filtered = searchData.filter(d => d.name.toLowerCase().includes(q.toLowerCase()));
   results.innerHTML = filtered.length ? filtered.map(d =>
     `<div class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('open')">
-      <i class="fas ${d.icon}"></i>
+      ${getSVGIcon(d.icon)}
       <div><strong>${d.name}</strong><br><small style="color:var(--text-muted)">${d.type}</small></div>
     </div>`
   ).join('') : '<div style="padding:1rem 1.5rem;color:var(--text-muted)">找不到相關8LA ⚡</div>';
