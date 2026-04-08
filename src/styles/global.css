@@ -220,6 +220,13 @@ a:hover {
 .page-hero h1{font-size:2.5rem;font-weight:900;margin-bottom:0.8rem}
 .page-hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .page-hero p{color:var(--text-secondary);font-size:1.1rem;max-width:700px;margin:0 auto}
+.article-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.article-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.4)}
+.article-img{width:100%;height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.article-img img{width:100%;height:100%;object-fit:cover;display:block}
+.article-img .cat-badge{position:absolute;top:10px;left:10px;padding:0.2rem 0.8rem;border-radius:20px;font-size:0.75rem;font-weight:700;z-index:2}
+.article-body{padding:1.2rem}
+.article-body h3{font-size:1rem;margin-bottom:0.5rem}
 .badge{display:inline-block;padding:0.2rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:700}
 .badge-safe{background:var(--guava-green);color:#0a2810;font-weight:900}
 .badge-warn{background:var(--gold);color:#000}

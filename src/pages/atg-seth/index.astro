@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+
+const faqs = [
+  { q: '戰神賽特是哪一家做的？', a: '戰神賽特系列由台灣 ATG 電子（ATG Games）開發，是 2025–2026 年最熱門的本土老虎機品牌之一，最知名的版本是「戰神賽特 2：覺醒之力」，最大倍率高達 81,000 倍。' },
+  { q: '戰神賽特 RTP 是多少？算高嗎？', a: '戰神賽特 2 的 RTP 為 96.89%，略高於業界平均 96%。RTP 是長期統計值，短期內個人手氣與波動率影響更大。' },
+  { q: '戰神賽特和一般老虎機差在哪？', a: '戰神賽特採「隨處支付（Scatter Pays）」機制，畫面上只要出現 8 顆以上同符號就中獎，不限位置；搭配消除掉落、倍數累加與覺醒技能，比傳統線型老虎機節奏更刺激。' },
+  { q: '買免費遊戲值得嗎？', a: '戰神賽特 2 提供 200x、500x、2000x 三段購買選項。買免遊本質是「用更高成本換更穩的觸發機率」，並不會改變 RTP。預算少建議用 200x，預算充足且追求大倍率才考慮 2000x。' },
+  { q: '戰神賽特最高倍率真的有人中嗎？', a: 'x81,000 是理論最大倍率，實際觸發機率極低。多數玩家的單局贏分集中在 10–500 倍區間，遇到 1000 倍以上就算大爆。' },
+  { q: '玩戰神賽特要注意什麼？', a: '高波動機台容易連續不中、再連續大爆，務必設定「停損」與「停利」金額，並把它當娛樂而非投資。任何宣稱「保證中獎程式」「破解版本」皆為詐騙。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<BaseLayout title="金8LA賽特 | ATG 電子戰神賽特完整攻略 - GAME8LA" description="金8LA賽特專區：戰神賽特（ATG 電子）玩法教學、RTP 分析、爆分技巧、買免遊比較、覺醒之力 2 實測。台灣最熱門老虎機一站搞懂。" currentPage="atg-seth">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; 金8LA賽特</div>
+    <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> 回首頁</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a0a2e,#5a1b3a,#0a1a2e)"></div>
+
+    <div class="page-hero">
+      <h1>⚡ <em>金8LA賽特</em></h1>
+      <p>ATG 電子年度爆分王 — 玩法、技巧、實測、買免遊一次搞懂</p>
+    </div>
+
+    <!-- 遊戲基本資訊卡 -->
+    <section style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin:2rem 0">
+      <h2 style="margin-top:0">📊 戰神賽特 2：覺醒之力 — 30 秒快速看</h2>
+      <div class="info-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.8rem 1.5rem;margin-top:1rem">
+        <div><strong style="color:var(--text-muted)">遊戲商：</strong>ATG 電子</div>
+        <div><strong style="color:var(--text-muted)">RTP：</strong><span style="color:var(--guava-green)">96.89%</span></div>
+        <div><strong style="color:var(--text-muted)">波動率：</strong><span style="color:var(--guava-pink)">高波動</span></div>
+        <div><strong style="color:var(--text-muted)">最高倍率：</strong><span style="color:var(--gold-light)">x81,000</span></div>
+        <div><strong style="color:var(--text-muted)">中獎方式：</strong>隨處支付 8+</div>
+        <div><strong style="color:var(--text-muted)">買免遊：</strong>200x / 500x / 2000x</div>
+      </div>
+      <div style="margin-top:1.2rem;display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="/games/seth-2/" class="btn-primary">🎮 看遊戲詳細頁</a>
+        <a href="/articles/atg-seth-guide/" class="btn-outline">📖 完整攻略教學</a>
+      </div>
+    </section>
+
+    <!-- 相關文章網格 -->
+    <h2 class="section-title" style="margin-top:3rem">📚 戰神賽特攻略文章</h2>
+    <div class="article-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:1.5rem">
+
+      <a href="/articles/atg-seth-guide/" class="article-card" style="text-decoration:none;color:inherit">
+        <div class="article-img">
+          <img src="/images/article-covers/cover-slots.webp" alt="戰神賽特完整教學" loading="lazy" width="600" height="338">
+          <span class="cat-badge cat-attack">攻略</span>
+        </div>
+        <div class="article-body">
+          <h3>戰神賽特完整教學：玩法、RTP、爆分機制全解析</h3>
+          <p>從零開始認識 ATG 電子戰神賽特系列。隨處支付、覺醒技能、買免遊三段、4 級彩金一篇看懂。</p>
+        </div>
+      </a>
+
+      <a href="/games/seth-2/" class="article-card" style="text-decoration:none;color:inherit">
+        <div class="article-img">
+          <img src="/images/seth2/seth2-cover.webp" alt="戰神賽特 2 覺醒之力實測" loading="lazy" width="600" height="338">
+          <span class="cat-badge cat-review">評測</span>
+        </div>
+        <div class="article-body">
+          <h3>戰神賽特 2：覺醒之力 81,000 倍實測</h3>
+          <p>ATG 電子續作再進化，符號分裂、鎖倍技能、消除掉落全機制拆解。</p>
+        </div>
+      </a>
+
+      <a href="/articles/anti-scam-8la-guide/" class="article-card" style="text-decoration:none;color:inherit">
+        <div class="article-img">
+          <img src="/images/article-covers/cover-anti-scam.webp" alt="老虎機詐騙防範" loading="lazy" width="600" height="338">
+          <span class="cat-badge cat-tip">防詐</span>
+        </div>
+        <div class="article-body">
+          <h3>戰神賽特相關詐騙警示：破解版、外掛全是騙局</h3>
+          <p>老虎機沒有任何「保證中獎」程式，所有自稱破解戰神賽特的都是詐騙。</p>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- 常見問題 -->
+    <h2 class="section-title" style="margin-top:3rem">❓ 戰神賽特常見問題</h2>
+    <div style="margin-top:1rem">
+      {faqs.map(f => (
+        <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem">
+          <summary style="cursor:pointer;font-weight:700;font-size:1.05rem">{f.q}</summary>
+          <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,#1a0a2e,#2d1b50);border-radius:16px;padding:2rem;margin:3rem 0;text-align:center">
+      <h2 style="margin-top:0">想試身手？先挑對平台</h2>
+      <p style="color:var(--text-secondary)">慎選有牌照、出金穩定的合法娛樂城，避開黑網與詐騙站。</p>
+      <a href="/casino-ranking/" class="btn-primary" style="margin-top:1rem;display:inline-block">看娛樂城排行榜 →</a>
+    </section>
+
+  </div>
+</BaseLayout>

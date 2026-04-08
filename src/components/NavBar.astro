@@ -14,6 +14,7 @@ const { currentPage = 'home' } = Astro.props;
   </div>
   <div class="nav-links">
     <a href="/" class={currentPage === 'home' ? 'active' : ''}>首頁</a>
+    <a href="/atg-seth/" class={currentPage === 'atg-seth' ? 'active' : ''}>金8LA賽特</a>
     <a href="/articles/" class={currentPage === 'articles' ? 'active' : ''}>芭樂攻略</a>
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>芭樂遊戲</a>
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>芭樂好彩</a>
@@ -37,6 +38,7 @@ const { currentPage = 'home' } = Astro.props;
 <div class="mobile-menu" id="mobileMenu" onclick="closeMenu(event)">
   <div class="mobile-menu-inner">
     <a href="/" class={currentPage === 'home' ? 'active' : ''}>🏠 首頁</a>
+    <a href="/atg-seth/" class={currentPage === 'atg-seth' ? 'active' : ''}>⚡ 金8LA賽特</a>
     <a href="/articles/" class={currentPage === 'articles' ? 'active' : ''}>📖 芭樂攻略</a>
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>🎰 芭樂遊戲</a>
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>🎱 芭樂好彩</a>
