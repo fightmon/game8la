@@ -1489,6 +1489,29 @@ body {
   background: linear-gradient(90deg, var(--guava-green), var(--gold-light), var(--guava-pink), var(--gold-light), var(--guava-green));
 }
 
+/* 行動版效能優化：關閉 hero 裝飾動畫，減少 LCP render delay */
+@media (max-width: 768px) {
+  .cyber-star,
+  .cyber-globe,
+  .cyber-wave,
+  .scanline { display: none !important; }
+  .hero-content h1 em { animation: none !important; }
+  .hero-content h1 em::before,
+  .hero-content h1 em::after { display: none !important; }
+  .hero-title-frame::before,
+  .hero-title-frame::after,
+  .hero-title-inner::before,
+  .hero-title-inner::after { animation: none !important; }
+}
+/* 使用者若關閉動畫也尊重 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+  }
+}
+
 </style>
 
 <script is:inline type="application/ld+json">

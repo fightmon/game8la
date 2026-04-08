@@ -59,13 +59,26 @@ const {
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DN9QHEM3GQ"></script>
+    <!-- Google Analytics 4 (延後到首次互動或 3 秒後才載，改善 LCP/TBT) -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DN9QHEM3GQ');
+      (function(){
+        var loaded = false;
+        function loadGA(){
+          if (loaded) return; loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DN9QHEM3GQ';
+          document.head.appendChild(s);
+          gtag('js', new Date());
+          gtag('config', 'G-DN9QHEM3GQ');
+        }
+        ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
+          window.addEventListener(ev, loadGA, {once:true, passive:true});
+        });
+        setTimeout(loadGA, 4000);
+      })();
     </script>
 
     <meta name="theme-color" content="#121212">
