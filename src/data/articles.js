@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'atg-seth-1-vs-2-comparison',
+    title: '戰神賽特 1 vs 2 差在哪？ATG 電子兩代完整比較',
+    excerpt: '戰神賽特 1 代和 2 代覺醒之力到底差在哪？RTP、最大倍率、波動性、覺醒技能、符號分裂、買免遊價位全部攤開比，新手到老手都受用。',
+    category: 'slots',
+    categoryLabel: '老虎機',
+    badgeType: 'attack',
+    date: '2026-04-09',
+    views: 0,
+    tags: ['最新', '比較', '精選'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#1a0a2e,#5a1b3a,#0a1a2e)',
+    thumbnail: '/images/article-covers/cover-slots.webp'
+  },
+  {
     slug: 'casino-jackpot-tax-guide',
     title: '中娛樂城大獎要繳稅嗎？台灣完整課稅指南',
     excerpt: '娛樂城贏錢要繳稅嗎？台灣本土、海外娛樂城、USDT 出金、公益彩券差在哪？所得稅法第 14 條白話翻譯，附 5 月報稅實戰流程與海外所得門檻全解析。',
@@ -18,7 +32,7 @@ export const articles = [
   {
     slug: 'atg-seth-guide',
     title: '戰神賽特完整教學：玩法、RTP、爆分機制全解析',
-    excerpt: 'ATG 電子戰神賽特完整攻略：隨處支付規則、消除掉落機制、覺醒技能、買免遊三段比較、5 個實戰心法，新手到老司機都用得上。',
+    excerpt: 'ATG 電子戰神賽特完整攻略：自由配對規則、消除掉落機制、覺醒技能、買免遊 x100、5 個實戰心法，新手到老司機都用得上。',
     category: 'slots',
     categoryLabel: '老虎機',
     badgeType: 'attack',

@@ -5,7 +5,7 @@ import FaqSchema from '../../components/FaqSchema.astro';
 
 const faqs = [
   { q: '戰神賽特最少要押多少？', a: '大多數平台最低 1 元起跳，新手別衝動，先用最小押注摸個 50 轉熟悉節奏。沒摸熟就梭哈的，通常 10 分鐘就見底，別問芭樂子怎麼知道的。' },
-  { q: '戰神賽特的「隨處支付」是什麼意思？', a: '傳統老虎機要符號乖乖排成一條線你才中獎，戰神賽特直接擺爛——畫面上只要湊到 8 顆同符號，不管在哪都算你中。簡單說就是「眼睛看到就有錢」，比連線老虎機友善 100 倍。' },
+  { q: '戰神賽特的「自由配對」是什麼意思？', a: '傳統老虎機要符號乖乖排成一條線你才中獎，戰神賽特直接擺爛——畫面上只要湊到 8 顆同符號，不管在哪都算你中。簡單說就是「眼睛看到就有錢」，比連線老虎機友善 100 倍。' },
   { q: '消除掉落會一直連嗎？', a: '會，理論上沒有上限。中獎符號被消掉、新符號從上面噴下來，繼續中繼續掉，倍數一路疊。連鎖越長越爽，但臉黑的時候你會懷疑遊戲是不是壞了。' },
   { q: '免費遊戲怎麼觸發？', a: '湊到 4 顆以上 Scatter 就觸發免遊，免遊期間倍數不會歸零會一直疊。80% 的大爆分都從這裡出，沒進免遊基本上就是繳房租。' },
   { q: '買免遊一定比較划算嗎？', a: '不一定。買免遊只是花錢買「免等待」，數學上 RTP 不會變高，有時候還會略低。預算少自然轉就好；預算夠又想刺激再考慮買 200x。看到 2000x 直接買的，通常隔天 PTT 都會發廢文。' },
@@ -14,7 +14,7 @@ const faqs = [
 ];
 ---
 <FaqSchema faqs={faqs} />
-<BaseLayout title="戰神賽特完整教學：玩法、RTP、爆分機制全解析 - GAME8LA" description="ATG 電子戰神賽特鄉民實戰教學：隨處支付規則、消除掉落、覺醒技能、買免遊三段、芭樂子 5 個血淚心法，新手到老司機都用得上。">
+<BaseLayout title="戰神賽特完整教學：玩法、RTP、爆分機制全解析 - GAME8LA" description="ATG 電子戰神賽特鄉民實戰教學：自由配對規則、消除掉落、覺醒技能、買免遊 x100、芭樂子 5 個血淚心法，新手到老司機都用得上。">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 戰神賽特完整教學</div>
     <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
@@ -34,10 +34,10 @@ const faqs = [
         <h2 style="font-size:1.2rem;margin-top:0">📋 本文懶人包</h2>
         <ol>
           <li><a href="#s1">這台到底紅什麼？</a></li>
-          <li><a href="#s2">隨處支付規則：眼睛看到就有錢</a></li>
+          <li><a href="#s2">自由配對規則：眼睛看到就有錢</a></li>
           <li><a href="#s3">消除掉落＋倍數累加，連鎖到爽</a></li>
           <li><a href="#s4">免費遊戲與覺醒技能：大爆分發源地</a></li>
-          <li><a href="#s5">買免遊三段該選哪個？</a></li>
+          <li><a href="#s5">買免遊到底該不該買？</a></li>
           <li><a href="#s6">芭樂子血淚 5 心法</a></li>
           <li><a href="#s7">FAQ：你想問的都在這</a></li>
         </ol>
@@ -49,13 +49,13 @@ const faqs = [
       <ul>
         <li><strong>RTP 96.89%</strong>，比業界平均的 96% 高一咪咪，數據黨表示滿意</li>
         <li><strong>最大倍率 x81,000</strong>，理論上一注押 100 元能噴 810 萬，當然只是「理論」（咳咳）</li>
-        <li><strong>隨處支付（Scatter Pays）</strong>，跟線型老虎機說掰掰</li>
+        <li><strong>自由配對（Scatter Pays）</strong>，跟線型老虎機說掰掰</li>
         <li><strong>4 級彩金</strong>（GRAND / MAJOR / MINOR / MINI），中 GRAND 直接登出人生</li>
         <li><strong>覺醒技能 + 符號分裂</strong>，看起來很潮，玩起來真的有差</li>
       </ul>
       <p>數字看完先別流口水，往下看你會發現⋯它也是會吃人的。</p>
 
-      <h2 id="s2">二、隨處支付（Scatter Pays）：眼睛看到就有錢</h2>
+      <h2 id="s2">二、自由配對（Scatter Pays）：眼睛看到就有錢</h2>
       <p>傳統老虎機你要看那個從左到右連線連到頭暈，戰神賽特直接把規則砍掉重練：</p>
       <blockquote style="border-left:4px solid var(--guava-green);padding:0.8rem 1.2rem;background:var(--bg-card);margin:1rem 0">
         畫面上只要出現 <strong>8 顆以上相同符號</strong>，不管它們在哪、不管離多遠，全部算你中獎。
@@ -82,23 +82,15 @@ const faqs = [
       </ul>
       <p>講白了：<strong>沒進免遊基本上就是在繳房租</strong>。8 成的大爆都從免遊噴出來，自然觸發雖然要等，但這是賺最大的方式。下一段講買的。</p>
 
-      <h2 id="s5">五、買免遊三段該選哪個？</h2>
-      <p>戰神賽特 2 提供三段「直接買進免遊」的選項，懶人友善度滿分：</p>
-      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
-        <thead>
-          <tr style="background:var(--bg-card)">
-            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">方案</th>
-            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">成本（押注倍數）</th>
-            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">適合誰</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td style="padding:0.6rem;border:1px solid var(--border)">200x</td><td style="padding:0.6rem;border:1px solid var(--border)">基礎免遊</td><td style="padding:0.6rem;border:1px solid var(--border)">預算少、想穩穩玩、心臟比較弱的</td></tr>
-          <tr><td style="padding:0.6rem;border:1px solid var(--border)">500x</td><td style="padding:0.6rem;border:1px solid var(--border)">加強免遊</td><td style="padding:0.6rem;border:1px solid var(--border)">想要中倍數爆分、有點本事的</td></tr>
-          <tr><td style="padding:0.6rem;border:1px solid var(--border)">2000x</td><td style="padding:0.6rem;border:1px solid var(--border)">頂級免遊</td><td style="padding:0.6rem;border:1px solid var(--border)">預算爆量＋追求 x10000+ 的瘋子</td></tr>
-        </tbody>
-      </table>
-      <p><strong>芭樂子真心話：</strong>買免遊不會讓 RTP 變高，只是讓你「省下等待時間」。新手別逞強，從自然轉開始；想花錢買心情，從 200x 開始。直接梭哈 2000x 的大大們，麻煩記得鏡頭打開直播一下，我們愛看。</p>
+      <h2 id="s5">五、買免遊到底該不該買？</h2>
+      <p>根據 ATG 官方頁面，戰神賽特（含 1 代跟 2 代）的買免遊是<strong>單一價位：投注額 x100</strong>——沒有什麼 200x / 500x / 2000x 三段選項（那是網路上亂傳的，芭樂子之前也跟著搞錯，訂正一下）。意思是：</p>
+      <ul>
+        <li>下注 10 元 → 買免遊 1,000 元</li>
+        <li>下注 50 元 → 買免遊 5,000 元</li>
+        <li>下注 100 元 → 買免遊 10,000 元</li>
+      </ul>
+      <p>按下去之後，1 代會直接進聖甲蟲免遊；<strong>2 代則會「隨機進入」普通免遊或覺醒之力模式</strong>，運氣好就直接跳進分裂 / 鎖定倍數的強化版。</p>
+      <p><strong>芭樂子真心話：</strong>買免遊不會讓 RTP 變高，只是幫你省下等 Scatter 的時間。新手別逞強，從自然轉開始；想花錢買心情，選一個心臟承受得住的注額再按下去就好。看到實況主爆 5 萬倍就梭哈的大大，那叫倖存者偏差全餐，沒爆的那 99 個你永遠看不到。</p>
 
       <h2 id="s6">六、芭樂子血淚 5 心法</h2>
       <ol>

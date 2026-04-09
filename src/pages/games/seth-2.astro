@@ -31,14 +31,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--guava-green)">96.89%</span>
         <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">高波動</span>
         <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">x81,000</span>
-        <span class="label">中獎方式</span><span class="value">隨處支付（Scatter Pays）8+即中獎</span>
+        <span class="label">中獎方式</span><span class="value">自由配對（Scatter Pays）8+即中獎</span>
         <span class="label">贏分公式</span><span class="value">（押注額 / 20）× 符號賠率 × 總倍數</span>
         <span class="label">核心機制</span><span class="value">消除掉落 + 倍數升級 + 覺醒技能</span>
         <span class="label">累積彩金</span><span class="value">4級（GRAND / MAJOR / MINOR / MINI）</span>
-        <span class="label">購買免遊</span><span class="value">200x / 500x / 2000x 三段</span>
+        <span class="label">購買免遊</span><span class="value">投注額 x100（單段）</span>
       </div>
       <div class="tag-list">
-        <span class="tag">戰神賽特2</span><span class="tag">覺醒之力</span><span class="tag">ATG電子</span><span class="tag">隨處支付</span><span class="tag">x81000</span><span class="tag">倍數升級 x500</span><span class="tag">4級彩金</span><span class="tag">覺醒技能</span>
+        <span class="tag">戰神賽特2</span><span class="tag">覺醒之力</span><span class="tag">ATG電子</span><span class="tag">自由配對</span><span class="tag">x81000</span><span class="tag">倍數升級 x500</span><span class="tag">4級彩金</span><span class="tag">覺醒技能</span>
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:1rem">
         <a href="/game-ranking/" class="btn-primary" onclick="event.preventDefault();document.querySelector('.section-title').scrollIntoView({behavior:'smooth'})">⚡ 看攻略</a>
@@ -69,8 +69,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <h2 id="intro">遊戲介紹</h2>
   <img loading="lazy" src="/images/seth2/seth2-gameplay-main.webp" alt="戰神賽特2 覺醒之力遊戲實際畫面" class="article-img" width="1200" height="675">
   <p class="article-img-caption">▲ 戰神賽特2：覺醒之力 實際遊戲畫面，左方為戰神賽特、右方為奈芙蒂絲</p>
-  <p>各位8LA鄉民，《<strong>戰神賽特2：覺醒之力</strong>》回來了，而且這次不是小改版，是直接<strong>神話級進化</strong>。ATG 電子把初代賽特那套玩法整個翻新，新增「覺醒之力」雙模式系統——普通免費遊戲跟覺醒之力免費遊戲各有不同的爆分邏輯，搭配四色倍數球最高可升級到 <strong>x500</strong>，再乘上隨處支付的消除掉落機制，最大倍率直接拉到 <strong>x81,000</strong>。</p>
-  <p>盤面採用隨處支付（Scatter Pays），只要同一種符號在盤面上累積 <strong>8 個以上</strong>就算中獎，不管在哪個位置。背景延續古埃及神話，戰神賽特（藍色男角）和奈芙蒂絲（紫色女角）分別代表「力量覺醒」和「鎖定覺醒」兩種技能路線。畫面炸裂程度，說是老虎機界的天花板也不為過。</p>
+  <p>各位8LA鄉民，《<strong>戰神賽特2：覺醒之力</strong>》回來了，而且這次不是小改版，是直接<strong>神話級進化</strong>。ATG 電子把初代賽特那套玩法整個翻新，新增「覺醒之力」雙模式系統——普通免費遊戲跟覺醒之力免費遊戲各有不同的爆分邏輯，搭配四色倍數球最高可升級到 <strong>x500</strong>，再乘上自由配對的消除掉落機制，最大倍率直接拉到 <strong>x81,000</strong>。</p>
+  <p>盤面採用自由配對（Scatter Pays），只要同一種符號在盤面上累積 <strong>8 個以上</strong>就算中獎，不管在哪個位置。背景延續古埃及神話，戰神賽特（藍色男角）和奈芙蒂絲（紫色女角）分別代表「力量覺醒」和「鎖定覺醒」兩種技能路線。畫面炸裂程度，說是老虎機界的天花板也不為過。</p>
   <img loading="lazy" src="/images/seth2/seth2-gameplay-board.webp" alt="戰神賽特2 盤面與倍數球" class="article-img" width="1200" height="675">
   <p class="article-img-caption">▲ 遊戲盤面，上方顯示四級 JACKPOT 累積金額，中間可見倍數球與各類符號</p>
   <!-- 賽特1 vs 賽特2 比較 -->
@@ -81,11 +81,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <tbody>
       <tr><td>遊戲供應商</td><td>ATG 電子</td><td>ATG 電子</td></tr>
       <tr><td>最高倍率</td><td>x51,000</td><td style="color:var(--gold-light);font-weight:700">x81,000 ⬆</td></tr>
-      <tr><td>RTP</td><td>96.72%</td><td style="color:var(--guava-green)">96.89% ⬆</td></tr>
-      <tr><td>倍數球上限</td><td>x100</td><td style="color:var(--gold-light);font-weight:700">x500 ⬆</td></tr>
+      <tr><td>RTP</td><td>96.89%</td><td style="color:var(--guava-green)">96.89%（相同）</td></tr>
+      <tr><td>倍數球上限</td><td>x500（靈魂之火）</td><td style="color:var(--gold-light);font-weight:700">x500（稀有倍數可累加）⬆</td></tr>
       <tr><td>免費遊戲模式</td><td>普通免遊 1 種</td><td style="color:var(--guava-green)">普通免遊 + 覺醒之力 2 種 ⬆</td></tr>
-      <tr><td>覺醒技能</td><td>無</td><td style="color:var(--guava-pink);font-weight:700">力量覺醒（鎖定）+ 鎖定覺醒（分裂）🆕</td></tr>
-      <tr><td>購買特色</td><td>1 段（買免遊）</td><td style="color:var(--guava-green)">3 段（200x / 500x / 2000x）⬆</td></tr>
+      <tr><td>覺醒技能</td><td>無</td><td style="color:var(--guava-pink);font-weight:700">分裂倍數 + 鎖定倍數 🆕</td></tr>
+      <tr><td>購買免遊</td><td>投注額 x100</td><td style="color:var(--guava-green)">投注額 x100（隨機進覺醒之力）</td></tr>
       <tr><td>JACKPOT</td><td>4 級累積彩金</td><td>4 級累積彩金（相同）</td></tr>
       <tr><td>倍數計算方式</td><td>最後乘一次</td><td style="color:var(--guava-pink);font-weight:700">覺醒之力每次消除都乘 🆕</td></tr>
     </tbody>
@@ -95,7 +95,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </div>
   <!-- 核心機制 -->
   <h2 id="mechanics">核心機制拆解</h2>
-  <h3>隨處支付 + 消除掉落</h3>
+  <h3>自由配對 + 消除掉落</h3>
   <p>不看連線、不看賠付線，盤面上<strong>同一種符號出現 8 個以上即中獎</strong>。中獎符號消除後，上方符號會掉落填補空位，形成連鎖消除。每一次消除都是一次獨立計算的贏分機會。</p>
   <img loading="lazy" src="/images/seth2/seth2-rules-scoring.webp" alt="戰神賽特2 遊戲玩法與贏分計算說明" class="article-img">
   <p class="article-img-caption">▲ 遊戲玩法說明：消除符號即贏分，倍數符號累積相加形成總倍數</p>
@@ -188,18 +188,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <!-- 購買特色 -->
   <h2 id="buyin">購買特色</h2>
   <img loading="lazy" src="/images/seth2/seth2-buy-feature.webp" alt="戰神賽特2 購買特色：免費遊戲、覺醒之力、不朽覺醒" class="article-img">
-  <p class="article-img-caption">▲ 三種購買方案：200x 免費遊戲、500x 覺醒之力、2000x 不朽覺醒</p>
-  <p>不想慢慢等 Scatter？ATG 貼心提供三種購買方案，直接花錢買進特殊模式：</p>
+  <p class="article-img-caption">▲ 購買免遊：投注額 x100 單一價位，按下去隨機進普通免遊或覺醒之力</p>
+  <p>根據 ATG 官方頁面，戰神賽特 2 的購買免遊是<strong>單一價位：投注額 x100 倍</strong>，按下去之後會<strong>隨機進入</strong>「普通免費遊戲」或「覺醒之力 FREE GAME」：</p>
   <table>
     <thead><tr><th>購買項目</th><th>價格</th><th>效果</th></tr></thead>
     <tbody>
-      <tr><td style="color:var(--guava-green);font-weight:700">購買免費遊戲</td><td>200x 押注</td><td>直接觸發免費遊戲或覺醒之力</td></tr>
-      <tr><td style="color:var(--gold-light);font-weight:700">購買覺醒之力</td><td>500x 押注</td><td>直接啟動覺醒之力</td></tr>
-      <tr><td style="color:var(--guava-pink);font-weight:700">購買不朽覺醒</td><td>2000x 押注</td><td>必定掉落 500x 倍數球，且有機會觸發覺醒技能（分裂/鎖定）</td></tr>
+      <tr><td style="color:var(--guava-green);font-weight:700">購買免費遊戲</td><td>投注額 x100</td><td>隨機進入普通免遊或覺醒之力 FREE GAME</td></tr>
     </tbody>
   </table>
   <div class="tip-box">
-    <p>⚡ <strong>8LA觀點：</strong>200x 的購買免費遊戲是「有可能觸發覺醒也有可能只是普通免遊」，500x 才是保證進覺醒。2000x 的不朽覺醒直接送你 500x 倍數球起步，但代價是一次吃掉 2000 倍押注——口袋深的大佬專用，散戶請三思。</p>
+    <p>⚡ <strong>8LA觀點：</strong>原本網路流傳「200x / 500x / 2000x 三段」是舊版謠言，官方現在統一成 x100 單段。下注 10 元就是 1,000 元進免遊，下注 50 元就是 5,000 元——選你心臟承受得住的注額再按下去。運氣好會直接跳進覺醒之力，裡面才是真正的大獎來源。</p>
   </div>
   <!-- JACKPOT -->
   <h2 id="jackpot">JACKPOT 累積彩金</h2>
@@ -236,7 +234,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <tr><td style="font-weight:700"><img loading="lazy" src="/images/seth2/seth2-symbol-nephthys.webp" alt="鎖定覺醒符號" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" width="120" height="120">鎖定覺醒符號</td><td>3 個</td><td>5</td></tr>
     </tbody>
   </table>
-  <h3>一般符號賠率（隨處支付）</h3>
+  <h3>一般符號賠率（自由配對）</h3>
   <table>
     <thead><tr><th>符號</th><th>8~9 個</th><th>10~11 個</th><th>12+ 個</th></tr></thead>
     <tbody>
@@ -258,7 +256,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <li><strong>覺醒之力是一切</strong> — 賽特2 的大獎幾乎都在覺醒之力裡爆出來。普通免費遊戲的天花板跟覺醒之力差好幾個層級，看到黃金聖甲蟲出現就是「天選之轉」</li>
       <li><strong>倍數球升級是關鍵</strong> — 消除次數越多，倍數球升級的機會越大。如果看到倍數球從 6x 一路爬到 50x、100x 以上，請穩住心態繼續看戲</li>
       <li><strong>鎖定 + 分裂 = 核爆組合技</strong> — 力量覺醒鎖住倍數球不消失，鎖定覺醒把倍數球一顆變多顆。兩個技能在同一輪覺醒中觸發 = 傳說中的「神賜」時刻</li>
-      <li><strong>購買免遊的選擇</strong> — 200x 有機率進普通免遊或覺醒，想穩的話直接上 500x 保證覺醒。2000x 不朽覺醒口袋要夠深，但起手 500x 倍數球是真的香</li>
+      <li><strong>購買免遊是單段 x100</strong> — 就是投注額 x100 倍，按下去隨機進普通免遊或覺醒之力。別糾結段數，選你心臟承受得住的注額再按下去就對了</li>
       <li><strong>資金控管是生存之道</strong> — 高波動 = 會有乾旱期。建議單次預算控制在總資金的 5% 以內，輸到停損線就果斷離場，別被「下一轉就會爆」的幻覺帶走</li>
       <li><strong>先玩 Demo 版</strong> — ATG 有提供免費試玩，機制跟正式版完全一樣。先用試玩版摸清倍數球升級的節奏和覺醒技能的觸發感覺，不花錢也能抓手感</li>
     </ol>
@@ -273,7 +271,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div class="faq-section">
     <div class="faq-item">
       <div class="faq-q">Q：戰神賽特2 跟初代差在哪？<span class="arrow"><Icon name="chevron-down" /></span></div>
-      <div class="faq-a">最大的差異是新增「覺醒之力」雙模式系統和覺醒符號技能（鎖定/分裂）。初代只有普通免費遊戲，二代多了黃金聖甲蟲觸發的覺醒之力模式，贏分公式也不同（每次消除都乘倍數）。另外倍數球升級系統和三段購買特色也是二代新增的。</div>
+      <div class="faq-a">最大的差異是新增「覺醒之力」雙模式系統和覺醒符號技能（鎖定/分裂）。初代只有普通免費遊戲，二代多了黃金聖甲蟲觸發的覺醒之力模式，贏分公式也不同（每次消除都乘倍數）。另外倍數球升級系統和分裂/鎖定技能也是二代新增的。</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Q：RTP 96.89% 是高還是低？<span class="arrow"><Icon name="chevron-down" /></span></div>
@@ -314,7 +312,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </div>
   <!-- 你可能也想玩 -->
-  <div class="related-box"><h3>⚡ 你可能也想玩</h3><div class="related-links"><a href="/games/game-6/">戰神呂布<small>RSG電子｜隨處支付 + 500x倍數｜8LA評分 9.4</small></a><a href="/games/fantasy-potion/">奇幻魔藥<small>RG電子｜RTP 98.28% 業界最高｜8LA評分 9.7</small></a><a href="/games/game-4/">雷神之錘II<small>RSG電子｜最大 x25,000倍｜8LA評分 9.5</small></a><a href="/games/game-7/">聚寶財神<small>RSG電子｜最多 32,400路｜8LA評分 9.3</small></a></div></div>
+  <div class="related-box"><h3>⚡ 你可能也想玩</h3><div class="related-links"><a href="/games/game-6/">戰神呂布<small>RSG電子｜自由配對 + 500x倍數｜8LA評分 9.4</small></a><a href="/games/fantasy-potion/">奇幻魔藥<small>RG電子｜RTP 98.28% 業界最高｜8LA評分 9.7</small></a><a href="/games/game-4/">雷神之錘II<small>RSG電子｜最大 x25,000倍｜8LA評分 9.5</small></a><a href="/games/game-7/">聚寶財神<small>RSG電子｜最多 32,400路｜8LA評分 9.3</small></a></div></div>
   <div style="text-align:center;margin-top:2rem">
     <a href="/#games" class="btn-outline">← 回遊戲列表</a>
     <a href="/game-ranking/" class="btn-primary" style="margin-left:1rem">看遊戲推薦排名 →</a>
@@ -378,7 +376,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       "name": "戰神賽特2 跟初代差在哪？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "最大的差異是新增「覺醒之力」雙模式系統和覺醒符號技能（鎖定/分裂）。初代只有普通免費遊戲，二代多了黃金聖甲蟲觸發的覺醒之力模式，贏分公式也不同（每次消除都乘倍數）。另外倍數球升級系統和三段購買特色也是二代新增的。"
+        "text": "最大的差異是新增「覺醒之力」雙模式系統和覺醒符號技能（鎖定/分裂）。初代只有普通免費遊戲，二代多了黃金聖甲蟲觸發的覺醒之力模式，贏分公式也不同（每次消除都乘倍數）。另外倍數球升級系統和分裂/鎖定技能也是二代新增的。"
       }
     },
     {
