@@ -1,100 +1,8 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { articles } from '../../data/articles.js';
 
-const articles = [
-  {
-    slug: 'atg-seth-guide',
-    title: '戰神賽特完整教學：玩法、RTP、爆分機制全解析',
-    excerpt: 'ATG 電子戰神賽特完整攻略：隨處支付規則、消除掉落機制、覺醒技能、買免遊三段比較、5 個實戰心法，新手到老司機都用得上。',
-    category: 'slots',
-    categoryLabel: '老虎機',
-    date: '2026-04-08',
-    views: 0,
-    tags: ['最新', '熱門', '精選'],
-    icon: 'zap',
-    gradient: 'linear-gradient(135deg,#1a0a2e,#5a1b3a,#0a1a2e)',
-    thumbnail: '/images/article-covers/cover-slots.webp'
-  },
-  {
-    slug: 'daily-cash-539-wheel-guide',
-    title: '今彩 539 包牌教學:成本、回本表、膽拖計算全解析',
-    excerpt: '包 6/7/8/9 碼成本怎麼算?中幾碼才回本?膽拖投注 C(m,5-k) 公式、保本門檻速查表,新手到老司機都用得上的完整 539 包牌教學。',
-    category: 'lottery',
-    categoryLabel: '彩券',
-    date: '2026-04-07',
-    views: 0,
-    tags: ['最新', '精選'],
-    icon: 'ticket-alt',
-    gradient: 'linear-gradient(135deg,#0a1f0a,#0f3d1f,#1a8c3a)',
-    thumbnail: '/images/article-covers/cover-lottery.webp'
-  },
-  {
-    slug: 'anti-scam-8la-guide',
-    title: '防詐騙 8LA 指南：2026 娛樂城詐騙 8 大手法完整解析',
-    excerpt: '芭樂子整理 2026 台灣娛樂城最常見的 8 大詐騙手法：黑網、出金卡關、洗碼陷阱、LINE 老師、代儲代操、退款二次詐騙全部拆給你看。懂詐騙才能防詐騙。',
-    category: 'anti-scam',
-    categoryLabel: '防詐必讀',
-    date: '2026-04-06',
-    views: 21580,
-    tags: ['最新', '熱門', '精選'],
-    icon: 'shield',
-    gradient: 'linear-gradient(135deg,#3d0a1a,#ff416c,#1a0a0a)',
-    thumbnail: '/images/article-covers/cover-anti-scam.webp'
-  },
-  {
-    slug: 'lottery-odds-comparison',
-    title: '大樂透 vs 威力彩中獎機率比較：2026 期望值全解析',
-    excerpt: '兩大樂透到底買哪個比較划算?用數學算給你看頭獎機率、各獎項中獎率、每注期望值、玩法差異,附最新開獎結果連結。',
-    category: 'lottery',
-    categoryLabel: '彩券',
-    date: '2026-04-07',
-    views: 8650,
-    tags: ['最新', '精選'],
-    icon: 'ticket-alt',
-    gradient: 'linear-gradient(135deg,#1a1505,#3d2f0a,#f5b800)',
-    thumbnail: '/images/article-covers/cover-lottery.webp'
-  },
-  {
-    slug: 'slots-guide',
-    title: '老虎機攻略完整指南：RTP、波動性、爆分機制一次看懂',
-    excerpt: '新手到老手都適用的老虎機教學。解析 RTP、波動性、Free Game、Buy Feature、倍數符號等核心概念，選對機台爆分機率大增。',
-    category: 'slots',
-    categoryLabel: '老虎機',
-    date: '2026-03-20',
-    views: 15420,
-    tags: ['熱門', '精選'],
-    icon: 'dice-5',
-    gradient: 'linear-gradient(135deg,#f093fb,#f5576c)',
-    thumbnail: '/images/article-covers/cover-slots.webp'
-  },
-  {
-    slug: 'baccarat-guide',
-    title: '百家樂完整教學：規則、算牌、投注法、常見迷思',
-    excerpt: '從零開始學百家樂。閒家、莊家、和局的賠率與機率，馬丁格爾、平注法、纜注法比較，拆解 90% 新手會踩的坑。',
-    category: 'baccarat',
-    categoryLabel: '百家樂',
-    date: '2026-03-15',
-    views: 12380,
-    tags: ['精選'],
-    icon: 'money-bill',
-    gradient: 'linear-gradient(135deg,#4facfe,#00f2fe)',
-    thumbnail: '/images/article-covers/cover-baccarat.webp'
-  },
-  {
-    slug: 'dealers-guide',
-    title: '真人荷官大評比：2026 台灣玩家最愛的直播娛樂城荷官',
-    excerpt: '盤點各大真人娛樂城平台熱門荷官。SEXY、DG、歐博、沙龍平台特色對比，附直播品質、語言、桌台分析。',
-    category: 'live',
-    categoryLabel: '真人娛樂',
-    date: '2026-03-10',
-    views: 9870,
-    tags: ['最新'],
-    icon: 'user-tie',
-    gradient: 'linear-gradient(135deg,#fa709a,#fee140)',
-    thumbnail: '/images/article-covers/cover-live.webp'
-  }
-];
 ---
 
 <BaseLayout title="芭樂攻略 - GAME8LA 遊戲教學與評測" description="GAME8LA 芭樂攻略：老虎機、百家樂、真人娛樂、體育、補魚、棋牌、電競完整教學與評測文章。" currentPage="articles">
@@ -137,7 +45,7 @@ const articles = [
             }
           </div>
           <div class="article-body">
-            <span class="cat-badge">{a.categoryLabel}</span>
+            <span class={`cat-badge cat-${a.category}`}>{a.categoryLabel}</span>
             <h3>{a.title}</h3>
             <p>{a.excerpt}</p>
             <div class="meta">

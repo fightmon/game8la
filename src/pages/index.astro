@@ -1,7 +1,10 @@
 ---
 import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { articles } from '../data/articles.js';
 
+// 取最新 6 篇給首頁卡片
+const latestArticles = articles.slice(0, 6);
 ---
 
 <BaseLayout 
@@ -190,104 +193,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
   <div class="two-col">
     <div class="article-grid" style="grid-template-columns: repeat(2, 1fr);">
-      <a href="/articles/atg-seth-guide/" class="article-card" style="text-decoration:none;color:inherit">
-        <div class="article-img">
-          <img src="/images/article-covers/cover-slots.webp" alt="戰神賽特完整教學" loading="lazy" width="600" height="338">
-          <span class="cat-badge cat-attack">攻略</span>
-        </div>
-        <div class="article-body">
-          <h3>戰神賽特完整教學：玩法、RTP、爆分機制全解析</h3>
-          <div class="article-meta">
-            <span><Icon name="calendar" /> 2026-04-08</span>
-            <span><Icon name="eye" /> 0</span>
+      {latestArticles.map((a) => (
+        <a href={`/articles/${a.slug}/`} class="article-card" style="text-decoration:none;color:inherit">
+          <div class="article-img">
+            <img src={a.thumbnail} alt={a.title} loading="lazy" width="600" height="338" />
+            <span class={`cat-badge cat-${a.category}`}>{a.categoryLabel}</span>
           </div>
-          <p class="article-excerpt">ATG 電子戰神賽特完整攻略：隨處支付、消除掉落、覺醒技能、買免遊三段比較全解析...</p>
-        </div>
-      </a>
-      <a href="/articles/daily-cash-539-wheel-guide/" class="article-card" style="text-decoration:none;color:inherit">
-        <div class="article-img">
-          <img src="/images/article-covers/cover-lottery.webp" alt="今彩 539 包牌教學" loading="lazy" width="600" height="338">
-          <span class="cat-badge cat-attack">攻略</span>
-        </div>
-        <div class="article-body">
-          <h3>今彩 539 包牌教學:成本、回本表、膽拖計算全解析</h3>
-          <div class="article-meta">
-            <span><Icon name="calendar" /> 2026-04-07</span>
-            <span><Icon name="eye" /> 0</span>
+          <div class="article-body">
+            <h3>{a.title}</h3>
+            <div class="article-meta">
+              <span><Icon name="calendar" /> {a.date}</span>
+              <span><Icon name="eye" /> {a.views.toLocaleString()}</span>
+            </div>
+            <p class="article-excerpt">{a.excerpt}</p>
           </div>
-          <p class="article-excerpt">包 6/7/8/9 碼成本怎麼算?中幾碼才回本?膽拖投注公式、保本門檻速查表全解析...</p>
-        </div>
-      </a>
-      <a href="/articles/lottery-odds-comparison/" class="article-card" style="text-decoration:none;color:inherit">
-        <div class="article-img">
-          <img src="/images/article-covers/cover-lottery.webp" alt="大樂透 vs 威力彩中獎機率比較" loading="lazy" width="600" height="338">
-          <span class="cat-badge cat-attack">攻略</span>
-        </div>
-        <div class="article-body">
-          <h3>大樂透 vs 威力彩中獎機率比較:2026 期望值全解析</h3>
-          <div class="article-meta">
-            <span><Icon name="calendar" /> 2026-04-07</span>
-            <span><Icon name="eye" /> 8,650</span>
-          </div>
-          <p class="article-excerpt">兩大樂透到底買哪個比較划算?用數學算給你看頭獎機率、各獎項中獎率、每注期望值、玩法差異...</p>
-        </div>
-      </a>
-      <a href="/articles/baccarat-guide/" class="article-card" style="text-decoration:none;color:inherit">
-        <div class="article-img ac-1">
-          <img src="/images/article-covers/cover-baccarat.webp" alt="百家樂教學" loading="lazy" width="600" height="338">
-          <span class="cat-badge cat-attack">攻略</span>
-        </div>
-        <div class="article-body">
-          <h3>百家樂牌路仙人指路:三路、大路、珠盤路完整教學</h3>
-          <div class="article-meta">
-            <span><Icon name="calendar" /> 2026-03-15</span>
-            <span><Icon name="eye" /> 79,075</span>
-          </div>
-          <p class="article-excerpt">百家樂牌路分析工具完整解說，從新手到老手都適用的牌路觀察技巧...</p>
-        </div>
-      </a>
-      <a href="/game-ranking/" class="article-card" style="text-decoration:none;color:inherit">
-        <div class="article-img ac-2">
-          <img src="/images/article-covers/cover-slots.webp" alt="2026 老虎機評分總排名" loading="lazy" width="600" height="338">
-          <span class="cat-badge cat-review">評測</span>
-        </div>
-        <div class="article-body">
-          <h3>2026 年十大遊戲推薦排名，8LA玩家都在玩這 5 間</h3>
-          <div class="article-meta">
-            <span><Icon name="calendar" /> 2026-03-10</span>
-            <span><Icon name="eye" /> 45,230</span>
-          </div>
-          <p class="article-excerpt">想找到最適合的線上遊戲平台？本文為你整理 2026 年最受歡迎的十大遊戲排名...</p>
-        </div>
-      </a>
-      <a href="/articles/slots-guide/" class="article-card" style="text-decoration:none;color:inherit">
-        <div class="article-img ac-3">
-          <img src="/images/article-covers/cover-slots.webp" alt="老虎機完整教學" loading="lazy" width="600" height="338">
-          <span class="cat-badge cat-news">實測</span>
-        </div>
-        <div class="article-body">
-          <h3>RSG 雷神之錘老虎機實測：小資族也能輕鬆掌握的打法</h3>
-          <div class="article-meta">
-            <span><Icon name="calendar" /> 2026-03-08</span>
-            <span><Icon name="eye" /> 12,840</span>
-          </div>
-          <p class="article-excerpt">RSG 雷神之錘實測打法技巧，從進場到出場的完整策略分析...</p>
-        </div>
-      </a>
-      <a href="/articles/anti-scam-8la-guide/" class="article-card" style="text-decoration:none;color:inherit">
-        <div class="article-img ac-4">
-          <img src="/images/article-covers/cover-anti-scam.webp" alt="防詐騙 8LA 指南" loading="lazy" width="600" height="338">
-          <span class="cat-badge cat-tip">防詐</span>
-        </div>
-        <div class="article-body">
-          <h3>6 種遊戲平台詐騙手法大公開，別被爛8LA騙了！</h3>
-          <div class="article-meta">
-            <span><Icon name="calendar" /> 2026-03-01</span>
-            <span><Icon name="eye" /> 11,056</span>
-          </div>
-          <p class="article-excerpt">線上賭場詐騙案例多，教你辨別真假8LA，遠離詐騙陷阱...</p>
-        </div>
-      </a>
+        </a>
+      ))}
     </div>
     <!-- SIDEBAR -->
     <div>
@@ -1210,6 +1131,17 @@ body {
 .cat-review { background: var(--guava-green); color: #0a2810; font-weight: 900; }
 .cat-news { background: var(--gold); color: #000000; }
 .cat-tip { background: #b32418; color: #ffffff; font-weight: 900; }
+/* 以「文章類別」決定顏色，每個類別固定一色 */
+.cat-slots     { background: #f5b800; color: #1a0f00; font-weight: 900; }
+.cat-baccarat  { background: #4facfe; color: #001a2e; font-weight: 900; }
+.cat-live      { background: #fa709a; color: #2a0014; font-weight: 900; }
+.cat-lottery   { background: #1a8c3a; color: #ffffff; font-weight: 900; }
+.cat-anti-scam { background: #b32418; color: #ffffff; font-weight: 900; }
+.cat-finance   { background: #00c896; color: #002a1e; font-weight: 900; }
+.cat-sports    { background: #ff6b35; color: #2a0a00; font-weight: 900; }
+.cat-fishing   { background: #00d4ff; color: #001a2e; font-weight: 900; }
+.cat-poker     { background: #9b59b6; color: #ffffff; font-weight: 900; }
+.cat-other     { background: #888888; color: #ffffff; font-weight: 900; }
 .article-body { padding: 1.2rem; }
 .article-body h3 {
   font-size: 1rem; margin-bottom: 0.5rem;

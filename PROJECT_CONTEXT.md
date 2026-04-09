@@ -185,6 +185,16 @@ npm install
 
 ## 新文章 SOP（每篇新文章都要照做）
 
+### 0. 芭樂子人設與語氣（最重要！）
+- 芭樂子是個**可愛的女孩**，不是哥們，**不要用「兄弟」「老司機」「各位老鐵」**這類大叔詞
+- 對讀者一律稱呼「**親愛的大大**」「**各位大大**」「**大大們**」
+- 慣用語清單（每篇文章至少自然散落 2~3 個，別硬塞）：
+  - 「**有點鏘**」「**鏘鏘的**」 → 形容人或事很離譜、跳 tone
+  - 「**哎YO喂…**」 → 表達無奈、傻眼、不可置信，通常放句首
+  - 「**粉微妙**」 → 形容事情不太妙、處境尷尬（不要用「很微妙」）
+- 口吻要可愛、白話、帶點吐槽，但**不要油**、不要刻意賣萌
+- 嚴禁稱呼讀者為「兄弟」「哥們」「弟兄」「弟」「兄台」
+
 ### 1. 檔案位置與命名
 - 路徑：`src/pages/articles/<slug>.astro`
 - slug 用 kebab-case，英文為主，方便 SEO
@@ -231,8 +241,11 @@ const faqs = [
 ### 5. 文章封面圖
 - 統一放 `public/images/article-covers/cover-<topic>.webp`
 - 主題對應：slots / baccarat / live / sports / fishing / poker / anti-scam / lottery
+- **不屬於上述分類的文章（其他/財務知識/時事等）一律用 `cover-other.webp`**
 - 尺寸建議 1200×675，webp quality 82，檔案大小 20–30 KiB
-- 加到 `src/pages/articles/index.astro` 的陣列時要填 `thumbnail` 欄位
+- 加到 `src/data/articles.js` 陣列**最前面**時要填 `thumbnail` 欄位
+- ⚠️ 文章資料統一在 `src/data/articles.js`，首頁與 `/articles/` 列表會自動同步，**不要兩邊各改一次**
+- ⚠️ 文章頁的 `<BaseLayout>` 一定要加 `currentPage="articles"`，否則 nav 會誤亮在「首頁」
 
 ### 6. 內部連結
 - 每篇文章至少 2–3 條內部連結指向 /lottery/、相關攻略文、或 /articles/anti-scam-8la-guide/
