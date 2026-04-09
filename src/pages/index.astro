@@ -53,7 +53,7 @@ const latestArticles = articles.slice(0, 6);
       <div class="hero-content">
         <div class="tag">🔥 獨家攻略</div>
         <div class="hero-title-frame"><span class="hero-title-inner">
-          <h1>百家樂<em data-text="必勝攻略">必勝攻略</em>全解析</h1>
+          <h2 class="hero-h">百家樂<em data-text="必勝攻略">必勝攻略</em>全解析</h2>
         </span></div>
         <p>專業牌路分析、下注策略完整教學，從8LA新手到金8LA玩家的進階指南！</p>
         <div class="hero-btns">
@@ -66,7 +66,7 @@ const latestArticles = articles.slice(0, 6);
       <div class="hero-content">
         <div class="tag">🛡️ 安全守護</div>
         <div class="hero-title-frame"><span class="hero-title-inner">
-          <h1><em data-text="防詐騙">防詐騙</em>8LA指南</h1>
+          <h2 class="hero-h"><em data-text="防詐騙">防詐騙</em>8LA指南</h2>
         </span></div>
         <p>幫你分辨真8LA和爛8LA！GLI認證廠商、RTP透明公開，玩得安心又放心！</p>
         <div class="hero-btns">
@@ -648,13 +648,13 @@ body {
 }
 
 /* === MAIN TITLE — Neon Glow + Glitch === */
-.hero-content h1 {
+.hero-content :is(h1, h2.hero-h) {
   font-size: 3.4rem; font-weight: 900; margin-bottom: 0.5rem;
   line-height: 1.2; color: #fff;
   text-shadow: 0 0 10px rgba(255,255,255,0.3);
   position: relative;
 }
-.hero-content h1 em {
+.hero-content :is(h1, h2.hero-h) em {
   font-style: normal; color: #39FF14;
   text-shadow:
     0 0 7px #39FF14,
@@ -668,18 +668,18 @@ body {
   position: relative;
 }
 /* Glitch layers on the em text */
-.hero-content h1 em::before,
-.hero-content h1 em::after {
+.hero-content :is(h1, h2.hero-h) em::before,
+.hero-content :is(h1, h2.hero-h) em::after {
   content: attr(data-text); position: absolute; left: 0; top: 0;
   width: 100%; overflow: hidden;
   -webkit-text-fill-color: #39FF14;
 }
-.hero-content h1 em::before {
+.hero-content :is(h1, h2.hero-h) em::before {
   text-shadow: -2px 0 #FF10F0;
   animation: glitch1 3s infinite linear alternate-reverse;
   clip-path: inset(0 0 70% 0);
 }
-.hero-content h1 em::after {
+.hero-content :is(h1, h2.hero-h) em::after {
   text-shadow: 2px 0 #00e5ff;
   animation: glitch2 2.5s infinite linear alternate-reverse;
   clip-path: inset(70% 0 0 0);
@@ -856,7 +856,7 @@ body {
   color: #FF10F0 !important;
   -webkit-text-fill-color: #FF10F0 !important;
 }
-.hero-title-frame, .hero-title-inner, .hero-content h1, .hero-content h1 em, .hero-content .tag, .hero-content p { pointer-events: none; }
+.hero-title-frame, .hero-title-inner, .hero-content :is(h1, h2.hero-h), .hero-content :is(h1, h2.hero-h) em, .hero-content .tag, .hero-content p { pointer-events: none; }
 .hero-content { pointer-events: none; }
 .hero-btns, .hero-btns * { pointer-events: auto !important; }
 .hero-btns a, .hero-btns button { cursor: pointer !important; position: relative; z-index: 20; }
@@ -1364,7 +1364,7 @@ body {
 }
 @media (max-width: 768px) {
   .nav-links { display: none; }
-  .hero-content h1 { font-size: 2rem; }
+  .hero-content :is(h1, h2.hero-h) { font-size: 2rem; }
   .cyber-globe { width: 50px; height: 50px; }
   .cyber-star.s1 { left: 5%; } .cyber-star.s4 { right: 8%; }
   .hero-title-frame { padding: 0.5rem 1rem; }
@@ -1450,9 +1450,9 @@ body {
   .cyber-globe,
   .cyber-wave,
   .scanline { display: none !important; }
-  .hero-content h1 em { animation: none !important; }
-  .hero-content h1 em::before,
-  .hero-content h1 em::after { display: none !important; }
+  .hero-content :is(h1, h2.hero-h) em { animation: none !important; }
+  .hero-content :is(h1, h2.hero-h) em::before,
+  .hero-content :is(h1, h2.hero-h) em::after { display: none !important; }
   .hero-title-frame::before,
   .hero-title-frame::after,
   .hero-title-inner::before,

@@ -1,0 +1,63 @@
+---
+// Article + BreadcrumbList Schema component
+// 用法:
+//   <ArticleSchema
+//     url="https://game8la.com/articles/xxx/"
+//     title="文章標題"
+//     description="文章描述"
+//     image="https://game8la.com/images/xxx.webp"
+//     datePublished="2026-04-09"
+//     dateModified="2026-04-09"
+//     breadcrumbs={[{name:'首頁', url:'https://game8la.com/'}, {name:'金8LA賽特專區', url:'https://game8la.com/atg-seth/'}, {name:'戰神賽特 1 vs 2', url:'https://game8la.com/articles/atg-seth-1-vs-2-comparison/'}]}
+//   />
+export interface Crumb { name: string; url: string; }
+interface Props {
+  url: string;
+  title: string;
+  description: string;
+  image: string;
+  datePublished: string;
+  dateModified?: string;
+  breadcrumbs: Crumb[];
+  authorName?: string;
+  authorUrl?: string;
+}
+const {
+  url, title, description, image,
+  datePublished,
+  dateModified = datePublished,
+  breadcrumbs,
+  authorName = '芭樂子',
+  authorUrl = 'https://game8la.com/',
+} = Astro.props;
+
+const article = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "image": image,
+  "datePublished": datePublished,
+  "dateModified": dateModified,
+  "author": { "@type": "Person", "name": authorName, "url": authorUrl },
+  "publisher": {
+    "@type": "Organization",
+    "name": "GAME8LA",
+    "logo": { "@type": "ImageObject", "url": "https://game8la.com/images/index/icon-192.webp" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": url }
+};
+
+const crumbList = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((b, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": b.name,
+    "item": b.url,
+  })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(article)} />
+<script type="application/ld+json" set:html={JSON.stringify(crumbList)} />

@@ -2,6 +2,7 @@
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
 
 const faqs = [
   { q: '戰神賽特最少要押多少？', a: '大多數平台最低 1 元起跳，新手別衝動，先用最小押注摸個 50 轉熟悉節奏。沒摸熟就梭哈的，通常 10 分鐘就見底，別問芭樂子怎麼知道的。' },
@@ -14,6 +15,19 @@ const faqs = [
 ];
 ---
 <FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/atg-seth-guide/"
+  title="戰神賽特完整教學：玩法、RTP、爆分機制全解析"
+  description="ATG 電子戰神賽特鄉民實戰教學：自由配對規則、消除掉落、覺醒技能、買免遊 x100、芭樂子 5 個血淚心法。"
+  image="https://game8la.com/images/article-covers/cover-slots.webp"
+  datePublished="2026-04-05"
+  dateModified="2026-04-09"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '金8LA賽特專區', url: 'https://game8la.com/atg-seth/' },
+    { name: '戰神賽特完整教學', url: 'https://game8la.com/articles/atg-seth-guide/' },
+  ]}
+/>
 <BaseLayout title="戰神賽特完整教學：玩法、RTP、爆分機制全解析 - GAME8LA" description="ATG 電子戰神賽特鄉民實戰教學：自由配對規則、消除掉落、覺醒技能、買免遊 x100、芭樂子 5 個血淚心法，新手到老司機都用得上。">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/atg-seth/">金8LA賽特專區</a> &gt; 戰神賽特完整教學</div>

@@ -2,6 +2,7 @@
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
 
 const faqs = [
   { q: '戰神賽特 1 跟 2 哪個比較好玩？', a: '兩代 RTP 同樣 96.89%、同樣高波動率，差別在 2 代多了「分裂倍數 + 鎖定倍數」這兩個覺醒之力新機制，加上最大倍率從 x51,000 拉高到 x81,000、免遊回合上限衝到 100 回合。追求機制層層疊加、想看更複雜連鎖的大大選 2；單純愛看 8 顆消除、乾淨俐落爽感的選 1。' },
@@ -14,6 +15,18 @@ const faqs = [
 ];
 ---
 <FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/atg-seth-1-vs-2-comparison/"
+  title="戰神賽特 1 vs 2 差在哪？ATG 電子兩代完整比較"
+  description="戰神賽特 1 代和 2 代覺醒之力到底差在哪？RTP、最大倍率、覺醒之力、分裂倍數、鎖定倍數、買免遊價位全部攤開比。"
+  image="https://game8la.com/images/article-hero/atg-seth-1-vs-2-hero.webp"
+  datePublished="2026-04-09"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '金8LA賽特專區', url: 'https://game8la.com/atg-seth/' },
+    { name: '戰神賽特 1 vs 2 比較', url: 'https://game8la.com/articles/atg-seth-1-vs-2-comparison/' },
+  ]}
+/>
 <BaseLayout currentPage="articles" title="戰神賽特 1 vs 2 差在哪？ATG 電子兩代完整比較 - GAME8LA" description="戰神賽特 1 代和 2 代覺醒之力到底差在哪？RTP、最大倍率、覺醒之力、分裂倍數、鎖定倍數、買免遊價位全部攤開比。芭樂子幫大大們選出最適合自己的那一代。">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/atg-seth/">金8LA賽特專區</a> &gt; 戰神賽特 1 vs 2 比較</div>

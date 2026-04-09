@@ -2,6 +2,7 @@
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
 
 const faqs = [
   { q: '中娛樂城大獎到底要不要繳稅？', a: '法律上「要」。台灣《所得稅法》第 14 條第 1 項第 8 類「競技、競賽及機會中獎之獎金」明文規定屬於「其他所得」要報稅。但實務上絕大多數玩家都沒申報，原因不是不用報，而是國稅局根本拿不到海外娛樂城的扣繳憑單，後面 Q&A 會講。' },
@@ -15,6 +16,18 @@ const faqs = [
 ];
 ---
 <FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/casino-jackpot-tax-guide/"
+  title="中娛樂城大獎要繳稅嗎？台灣完整課稅指南"
+  description="娛樂城贏錢要繳稅嗎？台灣本土、海外娛樂城、USDT 出金、公益彩券差在哪？芭樂子用最白話的方式幫你拆解所得稅法第 14 條。"
+  image="https://game8la.com/images/article-hero/casino-tax-hero.webp"
+  datePublished="2026-04-07"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '中娛樂城大獎要繳稅嗎', url: 'https://game8la.com/articles/casino-jackpot-tax-guide/' },
+  ]}
+/>
 <BaseLayout currentPage="articles" title="中娛樂城大獎要繳稅嗎？台灣完整課稅指南｜境內 vs 海外 vs 加密貨幣 - GAME8LA" description="娛樂城贏錢要繳稅嗎？台灣本土、海外娛樂城、USDT 出金、公益彩券差在哪？芭樂子用最白話的方式幫你拆解所得稅法第 14 條，附 5 月報稅實戰流程、扣繳級距、海外所得 100/750 萬門檻全解析。">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 中娛樂城大獎要繳稅嗎？</div>
