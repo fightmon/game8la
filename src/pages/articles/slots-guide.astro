@@ -1,126 +1,411 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
 
+const faqs = [
+  { q: '老虎機有必勝技巧嗎？', a: '沒有。老虎機背後是 RNG（隨機數產生器），每一轉都是完全獨立事件，前面幾轉的結果不會影響下一轉的機率。所謂「熱機冷機」、「押滿幾轉就會噴」都是玄學。真正可以做的事情只有三件：選高 RTP 遊戲、控制單次投注額、設定停損停利。' },
+  { q: 'RTP 96% 是什麼意思？我丟 100 元就一定會拿回 96 元嗎？', a: '不是。RTP 96% 是指「長期大量樣本下的期望返還率」，通常是幾百萬甚至上億轉平均下來的結果。你個人玩 100 轉可能返還 50%、也可能返還 300%，完全看運氣。RTP 只能幫你比較不同遊戲的長期優劣，不能預測單次體驗。' },
+  { q: '高波動跟低波動差在哪？哪個比較好？', a: '沒有好壞之分，只有適不適合你的玩法跟預算。低波動中獎頻繁但獎金小，適合想慢慢玩、把時間拉長的玩家；高波動久久才爆但一爆就大，適合預算多、心臟強、追求大倍率爽感的玩家。高波動常常要撐 100~200 轉才進入狀況，本金不夠的話會先被洗到歸零。' },
+  { q: '買免遊（Buy Feature）值不值得按下去？', a: '看情境。買免遊的本質是「用錢換時間」，省下等 Scatter 的枯燥 spin，直接進免遊看結果。它不會提高 RTP（通常買完後的 RTP 跟慢慢等觸發差不多），但對於趕時間或想直接驗證遊戲特色的人很方便。新手不建議第一時間就買，先玩幾十轉熟悉節奏再說。' },
+  { q: '老虎機的最大倍率 x5000、x81000 到底有多少人看過？', a: '極少。最大倍率通常是理論極值，要各種機制同時爆發 + 免遊全程幸運才可能觸發。以 x81,000 為例，實況主打幾百小時可能只會看到 x10,000 上下。真看到神話級中獎記得錄影 tag 芭樂子朝聖。' },
+  { q: '老虎機真的有分「鬆機」跟「緊機」嗎？', a: '實體遊藝場的機台確實可以由場方調整 RTP 設定檔，但線上老虎機的 RTP 是由遊戲廠商寫死在程式裡的，平台方通常沒辦法動手腳（可以動的那種，叫黑網，請快逃）。所以只要你玩的是正規第三方認證的遊戲，鬆緊都是機率分布的錯覺，不是機台被調過。' },
+  { q: '免費試玩版的 RTP 跟真錢版一樣嗎？', a: '正規廠商是一樣的——Demo 模式與真錢模式跑的是同一份 RNG 邏輯。但要注意少數黑網會在免費試玩版偷調鬆，讓你體驗到「必中」的錯覺，進真錢就變吃分機。選平台看認證就對了。' },
+  { q: '什麼是自由配對（Scatter Pays）？跟傳統賠付線差在哪？', a: '傳統賠付線要求符號要從左到右連成一條預設的線才算中獎；自由配對（又叫 Cluster Pays / Ways Pays）只要盤面上有足夠數量的同符號（通常 8 顆以上），不分位置都算中獎並消除掉。ATG 戰神賽特、麻將胡了都是這種玩法，爆分上限比傳統賠付線高很多。' },
+  { q: '我應該玩哪一台 slot 比較容易上手？', a: '新手優先選「低到中波動 + 機制單純」的遊戲，例如奇幻魔藥（RTP 98.28%、低波動）就是好入門，輸贏慢、規則好懂。熟悉節奏後再挑戰高波動的戰神賽特 2、雷神之鎚 II 這類機制豐富款。' },
+  { q: '停損停利要怎麼設？有標準答案嗎？', a: '芭樂子自己的公式是「30% 停損、100% 停利」：本金輸掉 30% 就收手當天別玩了，賺到 100%（翻倍）就拿走至少一半出金。這不是什麼必勝公式，是「避免一次歸零 + 確定有收穫走人」的基本功，寫在手背上提醒自己。' },
+];
 ---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/slots-guide/"
+  title="老虎機攻略完整指南：RTP、波動性、爆分機制一次看懂"
+  description="新手到老手都適用的老虎機教學。解析 RTP、波動性、Free Game、Buy Feature、倍數符號等核心概念，附術語對照表與 GAME8LA 9 款 slot 快速比較。"
+  image="https://game8la.com/images/article-covers/cover-slots.webp"
+  datePublished="2026-03-20"
+  dateModified="2026-04-10"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '老虎機攻略完整指南', url: 'https://game8la.com/articles/slots-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="老虎機攻略完整指南｜RTP、波動性、爆分機制一次看懂 - GAME8LA" description="新手到老手都適用的老虎機教學。解析 RTP、波動性、Free Game、Buy Feature、倍數符號等核心概念，附術語對照表與 GAME8LA 9 款 slot 快速比較，選對機台爆分機率大增。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 老虎機攻略完整指南</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-03-20 ｜ 最後更新：2026-04-10 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 10 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a0a2e,#5a1b3a,#0a1a2e)"></div>
 
-<BaseLayout 
-  title="雷神之鎚老虎機實測｜200轉真實數據 - GAME8LA"
-  description="GAME8LA實測RSG雷神之鎚老虎機200轉！真實數據告訴你RTP、中獎率、爆分機率。2026線上老虎機推薦必看實測報告。"
-  ogImage="https://game8la.com/images/og-image.webp"
-  currentPage="articles"
->
-<div class="container">
-  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#articles">攻略評測</a> &gt; RSG 雷神之鎚實測</div>
-  <a href="/#articles" class="back-link"><Icon name="arrow-left" /> 回文章列表</a>
-  <div style="width:100%;height:250px;background:linear-gradient(135deg,#0a1525,#1a2a4a,#0a1a35);border-radius:16px;margin-bottom:1.5rem"></div>
-  <div class="page-hero">
-    <span class="badge badge-warn" style="margin-bottom:1rem">實測報告</span>
-    <h1>RSG 雷神之鎚 200 轉實測：<em>到底是送錢還是吃錢？</em></h1>
-    <p style="margin-top:0.5rem"><Icon name="calendar" /> 2026-03-10 &nbsp;|&nbsp; <Icon name="eye" /> 95,832 次瀏覽 &nbsp;|&nbsp; <Icon name="clock" /> 閱讀時間約 8 分鐘</p>
-    <div class="tag-list" style="justify-content:center;margin-top:1rem">
-      <span class="tag">老虎機實測</span><span class="tag">RSG 電子</span><span class="tag">遊戲推薦</span><span class="tag">老虎機技巧</span>
-    </div>
-  </div>
-  <div class="article-content">
-    <p>各位8LA鄉民，芭樂子又來了。這次要帶大家看的是在各大<strong>線上遊戲推薦</strong>榜單上出現率超高的一款老虎機——<strong>RSG 雷神之鎚（Thor's Hammer）</strong>。這款遊戲號稱「北歐神話級爆分」，到底是真的能讓你當雷神，還是被雷劈到外焦內嫩？</p>
-    <p>我們決定用最硬核的方式驗證——<strong>實打實轉 200 轉，用數據說話</strong>。以下就是完整的實測報告，保證比你在 Dcard 上看到的任何「心得分享」都真實。</p>
-    <h2>實測環境與規則</h2>
-    <div class="card">
-      <div class="info-grid">
-        <span class="label">測試遊戲</span><span class="value">RSG 雷神之鎚 Thor's Hammer</span>
-        <span class="label">測試平台</span><span class="value">某知名線上遊戲平台（8LA評分 9.5 以上）</span>
-        <span class="label">測試本金</span><span class="value">NT$5,000</span>
-        <span class="label">單次投注</span><span class="value">NT$25（固定不變）</span>
-        <span class="label">總轉數</span><span class="value">200 轉</span>
-        <span class="label">官方 RTP</span><span class="value" style="color:var(--guava-green)">96.50%</span>
-      </div>
-    </div>
-    <h2>200 轉數據總覽</h2>
-    <p>先上結論，怕你看不到最後（我知道你們的注意力跟金魚一樣短）：</p>
-    <div class="grid-3" style="margin:1.5rem 0">
-      <div class="card" style="text-align:center"><div class="score-big">NT$4,637</div><p>最終餘額</p></div>
-      <div class="card" style="text-align:center"><div class="score-big" style="background:linear-gradient(135deg,#e74c3c,var(--guava-pink));-webkit-background-clip:text">-7.3%</div><p>總報酬率</p></div>
-      <div class="card" style="text-align:center"><div class="score-big">92.7%</div><p>實測 RTP</p></div>
-    </div>
-    <p>翻譯成白話文：200 轉下來輸了 363 塊，實際返還率 92.7%，比官方宣稱的 96.5% 低了一些。不過樣本數只有 200 轉，統計學上還不夠顯著，但至少可以確認——<strong>這不是一台會讓你瞬間歸零的吃分機器</strong>。</p>
-    <h2>中獎分布分析</h2>
-    <table>
-      <tr><th>類型</th><th>次數</th><th>佔比</th><th>平均獎金</th></tr>
-      <tr><td>不中獎</td><td>118 轉</td><td>59%</td><td>-</td></tr>
-      <tr><td>小獎（< 投注額）</td><td>45 轉</td><td>22.5%</td><td>NT$12</td></tr>
-      <tr><td>中獎（1~5 倍）</td><td>28 轉</td><td>14%</td><td>NT$68</td></tr>
-      <tr><td>大獎（5~20 倍）</td><td>7 轉</td><td>3.5%</td><td>NT$215</td></tr>
-      <tr><td>免費旋轉觸發</td><td>2 次</td><td>1%</td><td>NT$387</td></tr>
-    </table>
-    <p>從這個數據可以看到，這台<strong>老虎機</strong>大約每 3~4 轉會中一次獎，但大部分都是小獎（贏回來的比你投出去的少）。真正讓你心跳加速的大獎和免費旋轉，加起來只佔 4.5%——也就是說，你要有耐心等，就像在等暗戀對象回你的訊息一樣煎熬。</p>
-    <div class="tip-box">
-      <strong>💡 爆分時刻記錄：</strong>第 127 轉觸發了 10 次免費旋轉，雷神之鎚的 Wild 擴展整列，一次贏了 NT$452！那個瞬間我的腎上腺素飆到可以去跑馬拉松。不過冷靜下來算一算，其實也只是之前輸掉的部分贏回來而已。
-    </div>
-    <h2>跟其他熱門老虎機的比較</h2>
-    <table>
-      <tr><th>遊戲</th><th>RTP</th><th>波動性</th><th>適合族群</th></tr>
-      <tr><td><strong>RSG 雷神之鎚</strong></td><td>96.5%</td><td>中</td><td>想要穩定遊戲體驗的人</td></tr>
-      <tr><td><a href="/games/seth-2/">戰神賽特</a></td><td>95.89%</td><td>高</td><td>追求高倍爆分的勇者</td></tr>
-      <tr><td><a href="/games/fantasy-potion/">奇幻魔藥</a></td><td>98.28%</td><td>低</td><td>喜歡細水長流的佛系玩家</td></tr>
-    </table>
-    <h2>8LA的老虎機生存指南</h2>
-    <ol>
-      <li><strong>選高 RTP 的遊戲</strong> — RTP 95% 以上的才值得玩。低於這個數字的，你不如去買樂透，至少開獎有電視可以看。</li>
-      <li><strong>固定投注額</strong> — 不要輸了就加倍，那叫做馬丁格爾策略，聽起來很厲害但實際上會讓你更快破產。</li>
-      <li><strong>200 轉法則</strong> — 一台老虎機如果轉了 200 轉還在持續虧損，建議換一台。運氣不好的時候不要硬撐。</li>
-      <li><strong>免費旋轉才是關鍵</strong> — 老虎機的大獎幾乎都在免費旋轉裡面。如果你選的<strong>線上遊戲平台</strong>有購買免遊功能，可以考慮直接買。</li>
-    </ol>
-    <h2 id="faq">常見問題</h2>
-    <div class="faq-section">
-      <div class="faq-item">
-        <div class="faq-q">RSG 雷神之鎚好贏嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
-        <div class="faq-a"><p>根據我們的 200 轉實測，實際 RTP 約 92.7%（樣本較小有偏差）。整體來說是波動性中等的老虎機，不會讓你大起大落，適合想穩穩玩的人。想要大爆分的建議看 <a href="/games/seth-2/">戰神賽特</a>。</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">線上老虎機有必勝技巧嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
-        <div class="faq-a"><p>沒有。老虎機是 RNG（隨機數生成器），每一轉都是獨立事件。但你可以透過選高 RTP 遊戲、固定投注額、設定停損這三招來延長遊戲壽命。記住，不要相信任何「老虎機破解」的謊言。</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">2026 年遊戲推薦玩哪款老虎機？<span class="arrow"><Icon name="chevron-down" /></span></div>
-        <div class="faq-a"><p>推薦嘗試 RSG、ATG、Pragmatic Play 等大廠出品的老虎機。這些遊戲經過第三方公正機構認證，RTP 透明。完整推薦清單看我們的 <a href="/#games">熱門遊戲頁面</a>。</p></div>
-      </div>
-    </div>
-  </div>
-  <div class="related-box"><h3>⚡ 延伸閱讀：8LA推薦</h3><div class="related-links"><a href="/articles/baccarat-guide/">百家樂看路教學<small>老司機都在用的牌路密技</small></a><a href="/game-ranking/">2026 遊戲推薦排名<small>十大線上遊戲平台完整評比</small></a><a href="/articles/dealers-guide/">遊戲平台詐騙手法大公開<small>六種黑網慣用套路解析</small></a></div></div>
-  <div style="text-align:center;margin-top:2rem">
-    <a href="/#articles" class="btn-outline">← 回文章列表</a>
-    <a href="/#games" class="btn-primary" style="margin-left:1rem">看更多遊戲推薦 →</a>
-  </div>
-</div>
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <span class="badge badge-safe" style="margin-bottom:1rem">完整教學</span>
+      <h1 style="font-size:2rem;line-height:1.3">老虎機攻略完整指南：RTP、波動性、爆分機制一次看懂</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">從最基本的「轉一下」到老司機在意的 RTP / 波動性 / 買免遊，芭樂子一次講完讓你看懂怎麼挑台。</p>
 
-<!-- SCROLL TO TOP -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文懶人包</h2>
+        <ol>
+          <li><a href="#s1">什麼是老虎機？30 秒快速了解</a></li>
+          <li><a href="#s2">老虎機 5 大類型對照表</a></li>
+          <li><a href="#s3">必學術語完整對照表</a></li>
+          <li><a href="#s4">RTP 返還率：最重要的數字</a></li>
+          <li><a href="#s5">波動性怎麼選？高/中/低對照</a></li>
+          <li><a href="#s6">免費遊戲 + 買免遊機制</a></li>
+          <li><a href="#s7">爆分核心：倍數、累積獎金、特殊技能</a></li>
+          <li><a href="#s8">老虎機 8 大迷思 vs 真相</a></li>
+          <li><a href="#s9">GAME8LA 9 款 slot 快速比較</a></li>
+          <li><a href="#s10">芭樂子新手生存心法</a></li>
+          <li><a href="#s11">FAQ：10 題老虎機常見問題</a></li>
+        </ol>
+      </div>
+
+      <h2 id="s1">一、什麼是老虎機？30 秒快速了解</h2>
+      <p>老虎機（Slot Machine）的祖宗是 1895 年美國人 Charles Fey 發明的「Liberty Bell」，三個機械轉輪、五種符號、拉一下拉桿看符號排列決定輸贏。那叫做機械式老虎機。</p>
+      <p>一百三十年後的今天，老虎機早就從實體遊藝場搬到線上了，背後的機械轉輪變成程式裡的 <strong>RNG（隨機數產生器）</strong>，每一次「轉」都是一組全新的隨機結果，遊戲廠商用數學模型控制長期返還率與獎金分布。<strong>本質不變——都是機率遊戲、都靠符號組合決定輸贏、都有莊家優勢</strong>，只是現代版的機制複雜程度已經進化到讓你一時半刻看不完規則。</p>
+      <blockquote style="border-left:4px solid var(--guava-green);padding:0.8rem 1.2rem;background:var(--bg-card);margin:1rem 0">
+        <strong>一句話總結：</strong>老虎機 = 你出錢讓 RNG 幫你隨機生成一組符號組合，符合中獎條件就拿獎金，不符合就進下一局。長期玩下來你會輸掉相當於（100% - RTP）那一部分的錢。
+      </blockquote>
+
+      <h2 id="s2">二、老虎機 5 大類型對照表</h2>
+      <p>線上老虎機看似百花齊放，其實主流就五大類型。先搞懂這五種你就能看懂 90% 的機台了：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">類型</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">盤面結構</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">中獎方式</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">代表作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>經典三軸</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">3x3</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">1~5 條預設賠付線</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">777、水果盤</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>5 軸視頻</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">5x3 或 5x4</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">9~243 條賠付線</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">Starburst、Book of Dead</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>Megaways™</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">6 軸 2~7 列可變</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">最高 117,649 中獎途徑</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">Bonanza、Gonzo's Quest</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>自由配對（Scatter Pays）</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">5x5 / 6x5 / 6x6</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">8 顆以上同符號即消除，<strong>無賠付線</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/seth-2/" style="color:var(--guava-green)">戰神賽特 2</a>、<a href="/games/mahjong-ways/" style="color:var(--guava-green)">麻將胡了</a></td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>消除掉落（Cascading）</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">多為 5x5 以上</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">中獎符號消除，上方符號掉落補位可連鎖</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">Sweet Bonanza、賽特系列</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>近年亞洲線上娛樂城最紅的是<strong>「自由配對 + 消除掉落」</strong>這對組合技，因為爽度極高——盤面一連鎖整片消掉、分數瘋狂跳，視覺衝擊比傳統賠付線強十倍。ATG 的戰神賽特系列、PG 的麻將胡了都是這類代表。</p>
+
+      <h2 id="s3">三、必學術語完整對照表</h2>
+      <p>打開任何一款老虎機的 Paytable 都會看到一堆縮寫，這邊一次講清楚：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">術語</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">中文</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">白話解釋</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>RTP</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">返還率</td><td style="padding:0.6rem;border:1px solid var(--border)">長期平均會還給玩家多少錢，96% 代表每 100 元平均退 96 元給所有玩家</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Volatility</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">波動性</td><td style="padding:0.6rem;border:1px solid var(--border)">獎金分布起伏大不大，高波動=久久爆一次大的、低波動=常中小獎</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Reel</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">轉軸</td><td style="padding:0.6rem;border:1px solid var(--border)">盤面上每一「直列」的符號帶，傳統是 5 軸現在有到 6~7 軸</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Payline</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">賠付線</td><td style="padding:0.6rem;border:1px solid var(--border)">符號要連成這條線才算中獎，自由配對型沒有這東西</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Wild</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">百搭符號</td><td style="padding:0.6rem;border:1px solid var(--border)">可以代替任何一般符號湊中獎，擴展 Wild（Expanding）會整列變百搭</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Scatter</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">散佈符號 / 免遊符號</td><td style="padding:0.6rem;border:1px solid var(--border)">集滿 N 個（通常 3~4 個）就觸發免費遊戲 / 彩金遊戲</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Free Spin</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">免費遊戲</td><td style="padding:0.6rem;border:1px solid var(--border)">不用花錢的附加回合，通常是老虎機的主要爆分來源</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Re-trigger</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">再次觸發</td><td style="padding:0.6rem;border:1px solid var(--border)">免遊進行中再次集滿 Scatter 可以加回合，有的遊戲有上限</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Multiplier</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">倍數符號</td><td style="padding:0.6rem;border:1px solid var(--border)">出現在盤面會乘上該局贏分，常見 x2~x500，稀有倍數更可怕</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Buy Feature</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">買免遊</td><td style="padding:0.6rem;border:1px solid var(--border)">花投注額的 80~500 倍直接進免遊，省去等 Scatter 的時間</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Jackpot</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">累積彩金 / JP</td><td style="padding:0.6rem;border:1px solid var(--border)">獨立於一般獎金的大獎池，常分 Mini / Minor / Major / Grand 四段</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Max Win</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">最高中獎倍率</td><td style="padding:0.6rem;border:1px solid var(--border)">理論上單局能贏到的最大倍數，通常是數千到十萬倍投注額</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>Hit Frequency</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">中獎頻率</td><td style="padding:0.6rem;border:1px solid var(--border)">平均多少轉會中一次（任何獎都算），20% 代表每 5 轉中一次</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="s4">四、RTP 返還率：最重要的數字</h2>
+      <p>如果你只能記住一個概念，就記 RTP。<strong>Return to Player（返還率）</strong>是決定一台老虎機長期期望值的唯一指標。公式很簡單：</p>
+      <blockquote style="border-left:4px solid var(--gold-light);padding:0.8rem 1.2rem;background:var(--bg-card);margin:1rem 0">
+        <strong>RTP = 總返還玩家的錢 ÷ 總投入的錢 × 100%</strong><br/>
+        例：RTP 96% 代表長期下來每 100 元投注中，有 96 元會以各種獎金形式回到玩家群體手中，剩下 4 元是娛樂城的利潤（House Edge）。
+      </blockquote>
+
+      <p>注意幾件事：</p>
+      <ul>
+        <li><strong>RTP 是長期平均，不是個人體感</strong>：你玩 100 轉可能返 0% 也可能返 300%，要數以萬計的樣本才會接近理論值</li>
+        <li><strong>正規廠商的 RTP 都有第三方認證</strong>（iTech Labs、GLI、eCOGRA 等），可以去官網驗證</li>
+        <li><strong>同一款遊戲可能有多個 RTP 版本</strong>：廠商會提供 96.89% / 95.5% / 94.0% 等版本讓平台選用，選低的就是俗稱的「緊機」</li>
+        <li><strong>96% 是業界及格線</strong>：低於 94% 的建議直接跳過，超過 97% 的已經是偏佛系善心遊戲</li>
+      </ul>
+
+      <p>以 ATG 電子為例，大部分熱門款 RTP 都落在 96.89% 這個標準值，少數機率如奇幻魔藥衝到 98.28%，是相對佛系的選擇。至於黑網平台會自己動 RTP 設定、或做假 RTP 標示，這就是為什麼<a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">選平台要看認證</a>這件事無法妥協。</p>
+
+      <h2 id="s5">五、波動性怎麼選？高/中/低對照</h2>
+      <p>RTP 決定長期期望值，<strong>波動性（Volatility / Variance）</strong>決定你坐這台會「怎麼輸怎麼贏」。一樣 RTP 96%，高波動跟低波動玩起來體感差十萬八千里：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">波動性</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">中獎頻率</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">單次獎金</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">適合族群</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">需要本金</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>低波動</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">頻繁（每 2~3 轉）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">小（0.5~2 倍投注）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">想拉長遊戲時間、預算有限、想練手感</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">投注額 x50 即可</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>中波動</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">中等（每 4~6 轉）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">中（1~10 倍投注）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">均衡派、不想大起大落</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">投注額 x100~200</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>高波動</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">稀少（每 8~15 轉，大獎更久）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">大（免遊動輒 50~1000 倍）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">追爆分爽感、心臟強、預算夠</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">投注額 x300 以上</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>芭樂子的選台建議：</strong>不要把「高波動 = 比較會中大獎」當成優勢，它同時意味著「更容易連續空轉到你懷疑人生」。本金不夠就玩高波動，最常見結局是還沒等到免遊觸發就已經歸零下樓買鹽酥雞解愁。如果你想體驗高波動的爽感又不想失血太快，可以把投注額降低到正常的 1/5，用時間換機會。</p>
+
+      <h2 id="s6">六、免費遊戲 + 買免遊機制</h2>
+      <p>免費遊戲（Free Spin / Free Game）是絕大多數老虎機的核心爆分來源，因為免遊期間通常會<strong>疊加一堆強化效果</strong>：倍數符號、擴展 Wild、鎖定倍數、分裂倍數、連鎖加成⋯⋯各種主遊戲沒有的魔法都在這裡發生。</p>
+
+      <p>觸發方式有兩種：</p>
+      <ol>
+        <li><strong>自然觸發</strong>：盤面集滿指定數量的 Scatter 符號（通常 3~4 個），免費。</li>
+        <li><strong>買免遊（Buy Feature）</strong>：花錢直接跳過等待時間，價位從投注額 x50 到 x500 都有。</li>
+      </ol>
+
+      <p>關於買免遊，有幾個冷知識你一定要知道：</p>
+      <ul>
+        <li><strong>買免遊不會提高 RTP</strong>：多數正規遊戲設計下，買免遊的期望值跟慢慢等自然觸發是一樣的，差別只在時間成本</li>
+        <li><strong>少數遊戲買免遊後 RTP 會略高</strong>（例如某些 Pragmatic Play 款），但差距通常在 0.3% 以內，不是什麼致富秘訣</li>
+        <li><strong>同一遊戲可能有多段價位</strong>：例如 x80、x200、x500 分別對應不同強度的免遊，但也有像 ATG 戰神賽特這種固定 x100 單段的款式</li>
+        <li><strong>新手不建議第一時間就買</strong>：還沒熟悉節奏就梭哈買免遊，就算爆分也不知道自己在爽什麼；先玩幾十轉摸熟規則再說</li>
+      </ul>
+
+      <h2 id="s7">七、爆分核心：倍數、累積獎金、特殊技能</h2>
+      <p>除了基本的符號連線 / 消除，現代老虎機還加入了各種「爆分機制」，這些才是你真正會拿到大獎的地方：</p>
+
+      <h3 style="font-size:1.15rem;margin-top:1.5rem">1. 倍數符號（Multiplier）</h3>
+      <p>盤面上隨機出現的倍數球，常見 x2~x10，稀有倍數可以到 x100~x500。當該局無法再連鎖時，所有倍數符號會加總（或相乘）起來乘上贏分。這是 ATG 戰神賽特系列的主要爆分邏輯。</p>
+
+      <h3 style="font-size:1.15rem;margin-top:1.5rem">2. 擴展 Wild（Expanding Wild）</h3>
+      <p>Wild 符號出現後整列變百搭，一次幫你湊齊好幾條賠付線。常見於傳統 5 軸視頻 slot，例如 RSG 雷神之鎚那種。</p>
+
+      <h3 style="font-size:1.15rem;margin-top:1.5rem">3. 累積彩金 Jackpot</h3>
+      <p>跟一般獎金分開的獨立獎池，由全球所有玩家的投注額共同累積。分四段 <strong>Mini / Minor / Major / Grand</strong>，觸發方式通常是盤面抓到 2~5 個 JP 符號，數量越多對應越高段。ATG 戰神賽特 2 就有完整的 JP 系統。</p>
+
+      <h3 style="font-size:1.15rem;margin-top:1.5rem">4. 特殊技能（廠商自創機制）</h3>
+      <p>現代老虎機各廠商都在比誰的花招多：ATG 的「分裂倍數」「鎖定倍數」、PG 的「Wild 重生」、Pragmatic 的「聚集 Wilds」⋯⋯這些都是廠商為了在紅海中做出差異化設計的獨家武器。看你喜歡哪一種爆分節奏，選對應的廠就對了。</p>
+
+      <h2 id="s8">八、老虎機 8 大迷思 vs 真相</h2>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">常見迷思</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">真相</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)">剛爆分過的機台短期不會再爆</td><td style="padding:0.6rem;border:1px solid var(--border)">錯。每轉獨立，上一秒爆了下一秒照樣可能再爆</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)">連續空轉很久「該中了」</td><td style="padding:0.6rem;border:1px solid var(--border)">錯。這叫「賭徒謬誤」，RNG 不記仇也不欠你</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)">某時段（深夜 / 週末）比較容易中</td><td style="padding:0.6rem;border:1px solid var(--border)">錯。RNG 24/7 運作，時段沒差</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)">快速點擊轉鍵可以改變結果</td><td style="padding:0.6rem;border:1px solid var(--border)">錯。結果在按下去的瞬間就決定了，後續只是動畫</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)">下大注容易中大獎</td><td style="padding:0.6rem;border:1px solid var(--border)">錯。機率跟注額無關，但獎金會等比放大</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)">免費試玩版會故意讓你贏</td><td style="padding:0.6rem;border:1px solid var(--border)">正規廠商不會，黑網會。選對平台就沒事</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)">高 RTP 遊戲就一定比較賺</td><td style="padding:0.6rem;border:1px solid var(--border)">長期才成立。短期內波動性影響比 RTP 大很多</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)">買免遊等於必中大獎</td><td style="padding:0.6rem;border:1px solid var(--border)">錯。買免遊也常常開出只回本甚至賠錢的結果</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="s9">九、GAME8LA 9 款 slot 快速比較</h2>
+      <p>以下是 GAME8LA 實測過的 9 款老虎機快速對照，想知道細節點進去看完整攻略：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">遊戲</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">廠商</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">RTP</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">波動</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">最大倍率</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">特色</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/atg-seth/" style="color:var(--guava-green)"><strong>戰神賽特</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">ATG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.89%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x51,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">8 顆消除、倍數符號疊加</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/seth-2/" style="color:var(--guava-green)"><strong>戰神賽特 2</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">ATG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.89%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x81,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">覺醒之力：分裂 + 鎖定倍數 + JP 彩金</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/thor-hammer-2/" style="color:var(--guava-green)"><strong>雷神之鎚 II</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">RSG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.50%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">中</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x25,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">北歐神話主題、Wild 擴展</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/dragon-legend/" style="color:var(--guava-green)"><strong>魔龍傳奇</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">ATG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.50%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x50,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">龍珠爆擊、連鎖加成</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/god-of-war-lubu/" style="color:var(--guava-green)"><strong>戰神呂布</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">ATG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.50%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x30,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">三國主題、方天畫戟 Wild</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/god-of-wealth/" style="color:var(--guava-green)"><strong>聚寶財神</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">ATG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.50%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">中</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x20,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">新年主題、金元寶爆擊</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/mahjong-ways/" style="color:var(--guava-green)"><strong>麻將胡了</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">PG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.95%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x2,500</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">麻將牌面、消除掉落</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/mahjong-ways-2/" style="color:var(--guava-green)"><strong>麻將胡了 2</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">PG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.95%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x100,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">升級版、更高爆分上限</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/night-market-3/" style="color:var(--guava-green)"><strong>逛夜市 3</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">JDB</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.50%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">中</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x5,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">台灣夜市主題、小吃連線</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><a href="/games/fantasy-potion/" style="color:var(--guava-green)"><strong>奇幻魔藥</strong></a></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">ATG</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">98.28%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">低</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x5,000</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">新手友善、高 RTP</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><em>※ 以上數據以各廠商官方公告為準，實際體感因個人運氣不同。最大倍率為理論極值，實戰中極難達成。</em></p>
+
+      <h2 id="s10">十、芭樂子新手生存心法</h2>
+      <ol>
+        <li><strong>本金 30% 停損、100% 停利</strong>：輸掉三成當天收手、翻倍拿走一半出金。寫在手背上別忘。</li>
+        <li><strong>固定投注額，不要追加</strong>：輸了就加倍下注的馬丁格爾是通往破產的最短路徑。</li>
+        <li><strong>先玩 Demo 試水溫</strong>：正規平台都有免費試玩版，至少轉 50 轉熟悉機制再下真錢。</li>
+        <li><strong>先挑高 RTP 遊戲</strong>：入門階段請從 96.5% 以上的遊戲開始，別碰 94% 以下的坑。</li>
+        <li><strong>選對平台就贏一半</strong>：RTP 再高，放在<a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">黑網平台</a>都沒用，選平台看的是出金記錄與第三方認證。</li>
+        <li><strong>把它當娛樂不是投資</strong>：今天設定的預算輸光就下樓吃鹽酥雞，不要跟祖先對話、不要跟機台拚命。</li>
+      </ol>
+
+      <h2 id="s11">十一、FAQ：10 題老虎機常見問題</h2>
+      {faqs.map((f) => (
+        <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem">
+          <summary style="cursor:pointer;font-weight:700">{f.q}</summary>
+          <p style="margin:0.8rem 0 0;color:var(--text-muted);line-height:1.75" set:html={f.a}></p>
+        </details>
+      ))}
+
+      <div style="background:#2a1a0a;border:1px solid #5a3a1a;border-radius:12px;padding:1.2rem 1.5rem;margin:2rem 0">
+        <p style="margin:0 0 0.5rem 0"><strong><Icon name="alert-triangle" /> 重要警語</strong></p>
+        <p style="margin:0;font-size:0.9rem;line-height:1.6">本文為遊戲機制科普，<strong>不鼓勵賭博</strong>。線上老虎機在台灣屬於娛樂性質，請理性投注、量力而為。若您或身邊親友出現賭博失控情況，請撥打<strong>1925 安心專線</strong>尋求協助。</p>
+      </div>
+
+      <div class="related-box" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin-top:2rem">
+        <h3 style="margin-top:0">⚡ 延伸閱讀</h3>
+        <ul style="margin:0">
+          <li><a href="/atg-seth/" style="color:var(--guava-green)">金8LA賽特專區</a> — ATG 戰神賽特系列完整攻略 hub</li>
+          <li><a href="/articles/atg-seth-1-vs-2-comparison/" style="color:var(--guava-green)">戰神賽特 1 vs 2 差在哪</a> — 兩代機制完整比較</li>
+          <li><a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">防詐騙 8LA 指南</a> — 選平台前必看</li>
+          <li><a href="/articles/casino-jackpot-tax-guide/" style="color:var(--guava-green)">中娛樂城大獎要繳稅嗎</a> — 中獎後的稅務問題</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <style>
+    .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+    .breadcrumb { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .breadcrumb a { color: var(--guava-green); text-decoration: none; }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--guava-green); text-decoration: none; font-size: 0.9rem; }
+    .hero-banner { height: 180px; border-radius: 16px; margin-bottom: 1.5rem; }
+    .article-content h2 { color: var(--guava-green); margin-top: 2rem; font-size: 1.5rem; border-left: 4px solid var(--guava-green); padding-left: 0.8rem; }
+    .article-content h3 { color: #fff; }
+    .article-content p { line-height: 1.85; color: var(--text); }
+    .article-content ul, .article-content ol { line-height: 1.85; padding-left: 1.5rem; }
+    .article-content li { margin-bottom: 0.4rem; }
+    .article-content table { overflow-x: auto; display: block; max-width: 100%; }
+    @media (min-width: 768px) { .article-content table { display: table; } }
+    .toc ol { margin: 0.5rem 0 0 1.2rem; padding: 0; }
+    .toc a { color: var(--guava-green); text-decoration: none; }
+  </style>
 </BaseLayout>
-
-<script is:inline type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
-    { "@type": "ListItem", "position": 2, "name": "攻略評測", "item": "https://game8la.com/game-ranking/" },
-    { "@type": "ListItem", "position": 3, "name": "老虎機實測攻略", "item": "https://game8la.com/articles/slots-guide/" }
-  ]
-}
-</script>
-
-<script is:inline type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"RSG雷神之鎚好贏嗎？","acceptedAnswer":{"@type":"Answer","text":"根據GAME8LA的200轉實測，RSG雷神之鎚的實際RTP接近官方公布的96.5%，中獎頻率約每3-4轉一次，但大獎出現頻率較低。整體來說是波動性中等的老虎機。"}},{"@type":"Question","name":"線上老虎機有技巧嗎？","acceptedAnswer":{"@type":"Answer","text":"老虎機本質是隨機數生成器(RNG)，沒有必勝技巧。但可以透過選擇高RTP遊戲、控制投注額、設定停損來提升整體遊戲體驗。"}},{"@type":"Question","name":"線上遊戲推薦玩哪款老虎機？","acceptedAnswer":{"@type":"Answer","text":"2026年推薦嘗試RSG、ATG、Pragmatic Play等大廠的老虎機，這些遊戲經過第三方公正機構認證，RTP透明且遊戲品質有保障。"}}]}
-</script>
-
-<script is:inline>
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    q.parentElement.classList.toggle('open');
-  });
-});
-
-window.addEventListener('scroll', () => {
-  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 500);
-});
-</script>
