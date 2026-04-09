@@ -3,7 +3,15 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // Integrations
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // 排除舊的 game-3~9 redirect 頁（它們是 301/meta-refresh，不該進 sitemap）
+      filter: (page) => !/\/games\/game-[3-9]\/?$/.test(page),
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
+  ],
 
   // Enable SSR or Static Site Generation
   output: 'static',
