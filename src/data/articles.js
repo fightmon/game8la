@@ -13,7 +13,7 @@ export const articles = [
     tags: ['最新', '必看', '精選'],
     icon: 'book-open',
     gradient: 'linear-gradient(135deg,#0a2a1e,#1a4a2e,#0a1a2e)',
-    thumbnail: '/images/article-covers/cover-other.webp'
+    thumbnail: '/images/article-covers/cover-casino-guide.webp'
   },
   {
     slug: 'atg-seth-1-vs-2-comparison',
