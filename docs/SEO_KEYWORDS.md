@@ -11,7 +11,7 @@
 | # | 關鍵字 | 類型 | 優先級 | 狀態 | 對應頁面 |
 |---|---|---|---|---|---|
 | 1 | 老虎機 | 產品母詞 | 🔴 P0 | ✅ **已做 pillar** | [/articles/slots-guide/](https://game8la.com/articles/slots-guide/) — 老虎機完整指南（2026-04-10 重寫） |
-| 2 | 娛樂城 | 產業母詞 | 🔴 P0 | ❌ 未做 pillar | 需要 `/articles/online-casino-guide/` 超長 pillar |
+| 2 | 娛樂城 | 產業母詞 | 🔴 P0 | ✅ **已做 pillar** | [/articles/online-casino-guide/](https://game8la.com/articles/online-casino-guide/) — 線上娛樂城完整指南（2026-04-10） |
 | 3 | 真人娛樂 | 產品類目 | 🟡 P1 | ⚠️ 部分覆蓋 | 已有 [baccarat-guide](https://game8la.com/articles/baccarat-guide/)、[dealers-guide](https://game8la.com/articles/dealers-guide/)，缺 `/live-casino/` hub |
 | 4 | 真人視訊 | 真人娛樂同義 | 🟡 P1 | ⚠️ 部分覆蓋 | 可併入 `/live-casino/` hub，目前只有子題文章 |
 | 5 | 體育投注 | 產品類目 | 🟡 P1 | ❌ 未做 | 有 [capcomcup-12 esports](https://game8la.com/articles/capcomcup-12-sahara-champion/) 但算邊緣，需要 `/sports/` hub + 體育投注教學文 |
@@ -67,7 +67,7 @@
 ## 🧭 建議下一步執行順序
 
 1. ✅ **老虎機 pillar** — 已完成 2026-04-10
-2. **娛樂城 pillar article**（P0，半天）→ 攻最大母詞
+2. ✅ **娛樂城 pillar** — 已完成 2026-04-10
 3. **真人娛樂 hub `/live-casino/`**（P1，2h）→ 整合 baccarat-guide + dealers-guide，補一篇真人娛樂入門
 4. **彩票投注 hub `/lottery/`**（P2，1h）→ 整合 539 + 樂透比較，補一篇彩票投注入門
 5. **體育投注 hub + 教學文**（P1，1 天）

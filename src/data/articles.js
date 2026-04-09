@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'online-casino-guide',
+    title: '線上娛樂城完整指南：新手到老司機的一本通',
+    excerpt: '2026 線上娛樂城終極指南：老虎機、真人、體育、彩票、棋牌、捕魚 6 大遊戲類型、挑娛樂城 8 大指標、入金/出金/KYC 完整流程、洗碼陷阱、法規白話、芭樂子 10 條鐵律。',
+    category: 'guide',
+    categoryLabel: '完整指南',
+    badgeType: 'attack',
+    date: '2026-04-10',
+    views: 0,
+    tags: ['最新', '必看', '精選'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a2a1e,#1a4a2e,#0a1a2e)',
+    thumbnail: '/images/article-covers/cover-other.webp'
+  },
+  {
     slug: 'atg-seth-1-vs-2-comparison',
     title: '戰神賽特 1 vs 2 差在哪？ATG 電子兩代完整比較',
     excerpt: '戰神賽特 1 代和 2 代覺醒之力到底差在哪？RTP、最大倍率、波動性、覺醒技能、符號分裂、買免遊價位全部攤開比，新手到老手都受用。',
