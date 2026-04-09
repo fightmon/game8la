@@ -1,0 +1,9 @@
+# Cloudflare Pages / Netlify 301 redirects
+# 2026-04-09 SEO: 遊戲頁非描述性 slug → 語意 slug
+/games/game-3/  /games/dragon-legend/    301
+/games/game-4/  /games/thor-hammer-2/    301
+/games/game-5/  /games/mahjong-ways/     301
+/games/game-6/  /games/god-of-war-lubu/  301
+/games/game-7/  /games/god-of-wealth/    301
+/games/game-8/  /games/mahjong-ways-2/   301
+/games/game-9/  /games/night-market-3/   301
