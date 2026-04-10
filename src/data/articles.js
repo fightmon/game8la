@@ -3,6 +3,7 @@
 export const articles = [
   {
     slug: 'live-casino-guide',
+    href: '/live-casino/', // hub 頁放根目錄，不走 /articles/ 預設路徑
     title: '真人娛樂完整指南：百家樂、輪盤、骰寶、龍虎新手一本通',
     excerpt: '2026 真人娛樂（真人視訊）完整指南：4 大玩法全拆解、5 大遊戲廠商比較、挑桌 6 大指標、荷官互動攻略、新手預算分配、芭樂子 8 條鐵律。',
     category: 'live',

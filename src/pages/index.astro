@@ -194,7 +194,7 @@ const latestArticles = articles.slice(0, 6);
   <div class="two-col">
     <div class="article-grid" style="grid-template-columns: repeat(2, 1fr);">
       {latestArticles.map((a) => (
-        <a href={`/articles/${a.slug}/`} class="article-card" style="text-decoration:none;color:inherit">
+        <a href={a.href || `/articles/${a.slug}/`} class="article-card" style="text-decoration:none;color:inherit">
           <div class="article-img">
             <img src={a.thumbnail} alt={a.title} loading="lazy" width="600" height="338" />
             <span class={`cat-badge cat-${a.category}`}>{a.categoryLabel}</span>

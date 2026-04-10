@@ -12,7 +12,7 @@
 |---|---|---|---|---|---|
 | 1 | 老虎機 | 產品母詞 | 🔴 P0 | ✅ **已做 pillar** | [/articles/slots-guide/](https://game8la.com/articles/slots-guide/) — 老虎機完整指南（2026-04-10 重寫） |
 | 2 | 娛樂城 | 產業母詞 | 🔴 P0 | ✅ **已做 pillar** | [/articles/online-casino-guide/](https://game8la.com/articles/online-casino-guide/) — 線上娛樂城完整指南（2026-04-10） |
-| 3 | 真人娛樂 | 產品類目 | 🟡 P1 | ✅ **已做 hub** | [/articles/live-casino-guide/](https://game8la.com/articles/live-casino-guide/) — 真人娛樂完整指南（2026-04-10），內鏈 baccarat-guide + dealers-guide |
+| 3 | 真人娛樂 | 產品類目 | 🟡 P1 | ✅ **已做 hub** | [/live-casino/](https://game8la.com/live-casino/) — 真人娛樂完整指南（2026-04-10），內鏈 baccarat-guide + dealers-guide |
 | 4 | 真人視訊 | 真人娛樂同義 | 🟡 P1 | ✅ **已併入 hub** | 同上，文章內有「真人視訊」說明段落 |
 | 5 | 體育投注 | 產品類目 | 🟡 P1 | ❌ 未做 | 有 [capcomcup-12 esports](https://game8la.com/articles/capcomcup-12-sahara-champion/) 但算邊緣，需要 `/sports/` hub + 體育投注教學文 |
 | 6 | 棋牌遊戲 | 產品類目 | 🟡 P2 | ❌ 未做 | 需要 `/card-games/` hub（可跟麻將胡了 slot 互相內鏈） |
@@ -76,6 +76,29 @@
 
 ---
 
+## 🏗️ URL 架構規則（2026-04-10 大毛決定）
+
+> **大關鍵字 hub 頁 → 根目錄扁平 URL**，子題文章 → 維持 `/articles/` 底下。
+
+| 頁面類型 | URL 格式 | 範例 |
+|---|---|---|
+| Hub 母頁（攻產業母詞 / 類目詞） | `/{keyword-slug}/` | `/live-casino/`、`/sports/`、`/lottery/` |
+| 子題文章（深入教學 / 評測） | `/articles/{slug}/` | `/articles/baccarat-guide/`、`/articles/dealers-guide/` |
+| 遊戲單頁 | `/games/{slug}/` | `/games/seth-1/` |
+
+**為什麼這樣分：**
+- 根目錄 URL 更短，Google 給更高權重，搜尋結果裡看起來像「專區」而非「一篇文章」
+- 競品 at99tw.com.tw 就是用 `/live-casino/`、`/sports-betting/` 等扁平結構搶到第一頁
+- Hub 頁未來可掛子路由（如 `/live-casino/baccarat-tips/`）形成 topic cluster
+- 子題文章維持在 `/articles/` 保持現有系統邏輯不用改
+
+**注意事項：**
+- Hub 頁在 `src/pages/` 根目錄建資料夾（如 `src/pages/live-casino/index.astro`）
+- Hub 頁不走 articles.js 列表系統，用獨立 layout 或直接寫
+- 如果已有 `/articles/xxx` 的頁面要升級為 hub，必須做 301 redirect + 更新所有內鏈
+
+---
+
 ## 📋 使用說明（給 Claude）
 
 每當大毛提出要寫新文章、或問「今天作什麼」時：
@@ -85,5 +108,6 @@
 3. **更新上方表格的狀態欄**（未做 → 進行中 → 已完成 + 連結）
 4. **根據優先級提醒大毛**「還有哪幾個 P0/P1 沒做」
 5. **完成任何一篇後**把對應項目打勾 + commit 更新這份文件
+6. **Hub 頁放根目錄、子題文章放 `/articles/`**（見上方 URL 架構規則）
 
 這樣能確保內容策略不會被忘記、優先級不會亂跑。
