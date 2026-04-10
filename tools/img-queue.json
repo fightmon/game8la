@@ -1,0 +1,32 @@
+[
+  {
+    "prompt": "芭樂子 standing in the center of a grand sports stadium, holding a book titled 'Sports Betting Guide', background shows a soccer field on the left, basketball hoop in the center, and a baseball diamond on the right, with neon green scoreboards and digital odds displays floating around her",
+    "output": "public/images/article-hero/sports-guide-hero.png",
+    "aspect": "16:9"
+  },
+  {
+    "prompt": "芭樂子 intensely studying a massive holographic screen showing live sports odds, numbers like 2.10, -5.5, O/U 215.5 floating in neon green, she is pointing at a highlighted value bet, dark control room background with multiple monitors",
+    "output": "public/images/article-hero/sports-odds-explained.png",
+    "aspect": "16:9"
+  },
+  {
+    "prompt": "芭樂子 sitting on a couch looking stressed, watching a live football match on a big screen, her phone shows a red 'LOSS' notification, empty snack bags around her, a clock showing late night, cautionary mood about live betting addiction",
+    "output": "public/images/article-hero/sports-live-betting-warning.png",
+    "aspect": "16:9"
+  },
+  {
+    "prompt": "芭樂子 holding giant golden lottery balls with numbers on them, surrounded by floating tickets labeled '大樂透' and '威力彩' and '539', confetti and sparkles, but she has a skeptical expression and holds a calculator in the other hand showing '期望值 55%', mixing excitement with mathematical reality",
+    "output": "public/images/article-hero/lottery-guide-hero.png",
+    "aspect": "16:9"
+  },
+  {
+    "prompt": "芭樂子 standing in front of a giant digital display showing rapid-fire lottery draws counting down '00:59, 00:58...', her expression is alarmed and she's reaching for an alarm clock, warning about quick-draw lottery addiction, red warning lights in background",
+    "output": "public/images/article-hero/lottery-quick-draw-warning.png",
+    "aspect": "16:9"
+  },
+  {
+    "prompt": "芭樂子 with a confident smile giving a thumbs up, standing next to a giant comparison table showing 大樂透 vs 威力彩 vs 539 statistics, mathematical formulas floating around, green holographic charts and probability graphs",
+    "output": "public/images/article-covers/cover-sports-guide.webp",
+    "aspect": "16:9"
+  }
+]
