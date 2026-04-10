@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'live-casino-guide',
+    title: '真人娛樂完整指南：百家樂、輪盤、骰寶、龍虎新手一本通',
+    excerpt: '2026 真人娛樂（真人視訊）完整指南：4 大玩法全拆解、5 大遊戲廠商比較、挑桌 6 大指標、荷官互動攻略、新手預算分配、芭樂子 8 條鐵律。',
+    category: 'live',
+    categoryLabel: '真人娛樂',
+    badgeType: 'attack',
+    date: '2026-04-10',
+    views: 0,
+    tags: ['最新', '必看'],
+    icon: 'video',
+    gradient: 'linear-gradient(135deg,#1a0a2e,#2d1b50,#1a0a2e)',
+    thumbnail: '/images/article-covers/cover-live.webp'
+  },
+  {
     slug: 'online-casino-guide',
     title: '線上娛樂城完整指南：新手到老司機的一本通',
     excerpt: '2026 線上娛樂城終極指南：老虎機、真人、體育、彩票、棋牌、捕魚 6 大遊戲類型、挑娛樂城 8 大指標、入金/出金/KYC 完整流程、洗碼陷阱、法規白話、芭樂子 10 條鐵律。',

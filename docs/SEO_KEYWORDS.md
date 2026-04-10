@@ -12,8 +12,8 @@
 |---|---|---|---|---|---|
 | 1 | 老虎機 | 產品母詞 | 🔴 P0 | ✅ **已做 pillar** | [/articles/slots-guide/](https://game8la.com/articles/slots-guide/) — 老虎機完整指南（2026-04-10 重寫） |
 | 2 | 娛樂城 | 產業母詞 | 🔴 P0 | ✅ **已做 pillar** | [/articles/online-casino-guide/](https://game8la.com/articles/online-casino-guide/) — 線上娛樂城完整指南（2026-04-10） |
-| 3 | 真人娛樂 | 產品類目 | 🟡 P1 | ⚠️ 部分覆蓋 | 已有 [baccarat-guide](https://game8la.com/articles/baccarat-guide/)、[dealers-guide](https://game8la.com/articles/dealers-guide/)，缺 `/live-casino/` hub |
-| 4 | 真人視訊 | 真人娛樂同義 | 🟡 P1 | ⚠️ 部分覆蓋 | 可併入 `/live-casino/` hub，目前只有子題文章 |
+| 3 | 真人娛樂 | 產品類目 | 🟡 P1 | ✅ **已做 hub** | [/articles/live-casino-guide/](https://game8la.com/articles/live-casino-guide/) — 真人娛樂完整指南（2026-04-10），內鏈 baccarat-guide + dealers-guide |
+| 4 | 真人視訊 | 真人娛樂同義 | 🟡 P1 | ✅ **已併入 hub** | 同上，文章內有「真人視訊」說明段落 |
 | 5 | 體育投注 | 產品類目 | 🟡 P1 | ❌ 未做 | 有 [capcomcup-12 esports](https://game8la.com/articles/capcomcup-12-sahara-champion/) 但算邊緣，需要 `/sports/` hub + 體育投注教學文 |
 | 6 | 棋牌遊戲 | 產品類目 | 🟡 P2 | ❌ 未做 | 需要 `/card-games/` hub（可跟麻將胡了 slot 互相內鏈） |
 | 7 | 彩票投注 | 產品類目 | 🟢 P2 | ⚠️ 部分覆蓋 | 已有 [539 包牌](https://game8la.com/articles/daily-cash-539-wheel-guide/)、[大樂透 vs 威力彩](https://game8la.com/articles/lottery-odds-comparison/)，缺 `/lottery/` hub |
@@ -68,7 +68,7 @@
 
 1. ✅ **老虎機 pillar** — 已完成 2026-04-10
 2. ✅ **娛樂城 pillar** — 已完成 2026-04-10
-3. **真人娛樂 hub `/live-casino/`**（P1，2h）→ 整合 baccarat-guide + dealers-guide，補一篇真人娛樂入門
+3. ✅ **真人娛樂 hub** — 已完成 2026-04-10（live-casino-guide，整合 baccarat-guide + dealers-guide）
 4. **彩票投注 hub `/lottery/`**（P2，1h）→ 整合 539 + 樂透比較，補一篇彩票投注入門
 5. **體育投注 hub + 教學文**（P1，1 天）
 6. **棋牌遊戲 hub**（P2，半天）
