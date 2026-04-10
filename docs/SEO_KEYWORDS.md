@@ -14,9 +14,9 @@
 | 2 | 娛樂城 | 產業母詞 | 🔴 P0 | ✅ **已做 pillar** | [/articles/online-casino-guide/](https://game8la.com/articles/online-casino-guide/) — 線上娛樂城完整指南（2026-04-10） |
 | 3 | 真人娛樂 | 產品類目 | 🟡 P1 | ✅ **已做 hub** | [/live-casino/](https://game8la.com/live-casino/) — 真人娛樂完整指南（2026-04-10），內鏈 baccarat-guide + dealers-guide |
 | 4 | 真人視訊 | 真人娛樂同義 | 🟡 P1 | ✅ **已併入 hub** | 同上，文章內有「真人視訊」說明段落 |
-| 5 | 體育投注 | 產品類目 | 🟡 P1 | ❌ 未做 | 有 [capcomcup-12 esports](https://game8la.com/articles/capcomcup-12-sahara-champion/) 但算邊緣，需要 `/sports/` hub + 體育投注教學文 |
+| 5 | 體育投注 | 產品類目 | 🟡 P1 | ✅ **已做 hub** | [/sports/](https://game8la.com/sports/) — 體育投注完整指南（2026-04-11），內鏈 capcomcup-12 |
 | 6 | 棋牌遊戲 | 產品類目 | 🟡 P2 | ❌ 未做 | 需要 `/card-games/` hub（可跟麻將胡了 slot 互相內鏈） |
-| 7 | 彩票投注 | 產品類目 | 🟢 P2 | ⚠️ 部分覆蓋 | 已有 [539 包牌](https://game8la.com/articles/daily-cash-539-wheel-guide/)、[大樂透 vs 威力彩](https://game8la.com/articles/lottery-odds-comparison/)，缺 `/lottery/` hub |
+| 7 | 彩票投注 | 產品類目 | 🟢 P2 | ✅ **已做 hub** | [/lottery/guide/](https://game8la.com/lottery/guide/) — 彩票投注完整指南（2026-04-11），/lottery/ 為開獎結果頁，內鏈 539 + 樂透比較 + 稅務 |
 | 8 | 遊藝場 | 傳統詞 | 🟢 P3 | ❌ 未做 | 單篇「遊藝場 vs 線上娛樂城」比較文 |
 
 ---
@@ -69,8 +69,8 @@
 1. ✅ **老虎機 pillar** — 已完成 2026-04-10
 2. ✅ **娛樂城 pillar** — 已完成 2026-04-10
 3. ✅ **真人娛樂 hub** — 已完成 2026-04-10（live-casino-guide，整合 baccarat-guide + dealers-guide）
-4. **彩票投注 hub `/lottery/`**（P2，1h）→ 整合 539 + 樂透比較，補一篇彩票投注入門
-5. **體育投注 hub + 教學文**（P1，1 天）
+4. ✅ **彩票投注 hub** — 已完成 2026-04-11（/lottery/guide/，/lottery/ 保留給芭樂好彩開獎頁）
+5. ✅ **體育投注 hub** — 已完成 2026-04-11（/sports/）
 6. **棋牌遊戲 hub**（P2，半天）
 7. **遊藝場比較文**（P3，1~2h）
 

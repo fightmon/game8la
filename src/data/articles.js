@@ -2,8 +2,38 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'lottery-guide',
+    href: '/lottery/guide/', // hub 頁，/lottery/ 已被芭樂好彩佔用
+    title: '彩票投注完整指南：大樂透、威力彩、539 玩法機率一本通',
+    excerpt: '2026 彩票投注完整指南：4 大官方彩種全比較、中獎機率數學計算、期望值、包牌教學、快開彩玩法、稅務須知、芭樂子 6 條彩票鐵律。',
+    category: 'lottery',
+    categoryLabel: '彩票投注',
+    badgeType: 'attack',
+    date: '2026-04-11',
+    views: 0,
+    tags: ['最新'],
+    icon: 'coins',
+    gradient: 'linear-gradient(135deg,#2a1a05,#4a3a0a,#1a1505)',
+    thumbnail: '/images/article-covers/cover-lottery.webp'
+  },
+  {
+    slug: 'sports-guide',
+    href: '/sports/', // hub 頁放根目錄
+    title: '體育投注完整指南：讓分、大小、走地新手入門到進階',
+    excerpt: '2026 體育投注完整指南：讓分盤、大小盤、走地 3 大玩法、5 大運動分析、賠率教學、資金管理、芭樂子 8 條體育鐵律。',
+    category: 'sports',
+    categoryLabel: '體育投注',
+    badgeType: 'attack',
+    date: '2026-04-11',
+    views: 0,
+    tags: ['最新'],
+    icon: 'trophy',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1b3a5a,#0a2a1e)',
+    thumbnail: '/images/article-covers/cover-sports.webp'
+  },
+  {
     slug: 'live-casino-guide',
-    href: '/live-casino/', // hub 頁放根目錄，不走 /articles/ 預設路徑
+    href: '/live-casino/', // hub 頁放根目錄
     title: '真人娛樂完整指南：百家樂、輪盤、骰寶、龍虎新手一本通',
     excerpt: '2026 真人娛樂（真人視訊）完整指南：4 大玩法全拆解、5 大遊戲廠商比較、挑桌 6 大指標、荷官互動攻略、新手預算分配、芭樂子 8 條鐵律。',
     category: 'live',
