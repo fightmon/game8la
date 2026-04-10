@@ -13,7 +13,7 @@ export const articles = [
     tags: ['最新', '必看'],
     icon: 'video',
     gradient: 'linear-gradient(135deg,#1a0a2e,#2d1b50,#1a0a2e)',
-    thumbnail: '/images/article-covers/cover-live.webp'
+    thumbnail: '/images/article-covers/cover-live-casino-guide.webp'
   },
   {
     slug: 'online-casino-guide',
