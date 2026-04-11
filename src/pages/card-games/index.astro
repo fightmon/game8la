@@ -1,0 +1,263 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+
+const faqs = [
+  { q: '棋牌遊戲跟真人娛樂有什麼差別？', a: '最大差別在「對手」。真人娛樂（百家樂、輪盤）你是跟莊家對賭，賠率固定、莊家永遠有優勢。棋牌遊戲（德州撲克、麻將）你是跟其他玩家對戰，平台只抽水（rake），技術好的人長期是贏的。簡單說：真人娛樂靠運氣佔大部分，棋牌遊戲靠技術佔大部分。' },
+  { q: '線上棋牌遊戲會不會有機器人（Bot）？', a: '會，這是線上棋牌最大的問題之一。低等級房間機器人比例特別高，有些小平台甚至官方自己放 Bot 來「陪玩」。辨別方式：Bot 通常反應速度非常固定、不會聊天、下注模式很機械化。芭樂子的建議：選有信譽的大平台、打中高等級房間、注意對手的行為模式。如果一桌上有人每手都在 3 秒內做決定，八成是 Bot。' },
+  { q: '德州撲克新手最重要的一件事是什麼？', a: '學會「棄牌」。新手最大的問題是捨不得蓋牌——「我都已經下注了，再看一張吧」，這種心態會讓你慢慢失血。職業牌手平均棄牌率在 70~80%，也就是說他們大部分時間都在等好牌。記住：不打爛牌就是在贏錢。' },
+  { q: '麻將跟德州撲克哪個比較容易贏錢？', a: '德州撲克。原因是德州撲克的技術天花板更高——你可以透過位置優勢、底池賠率計算、讀人技巧來持續獲利。麻將雖然也有技術成分（聽牌效率、防守意識），但運氣佔比更大（摸牌順序完全隨機），而且麻將的抽水通常比德州高。不過話說回來，如果你打麻將已經很厲害了，那就繼續打你的——換一個不熟的遊戲不一定比較好。' },
+  { q: '線上炸金花、搶莊牛牛這些會不會被操控？', a: '風險比較高。炸金花、搶莊牛牛、三公這類遊戲節奏極快（一局 30 秒~1 分鐘）、規則簡單、下注金額波動大，是平台最容易「調控」的遊戲類型。不是說每家都作弊，但因為這些遊戲的隨機性高、單局金額大，玩家很難用統計去驗證公平性。芭樂子的態度：小玩怡情可以，但不要把它當成「靠技術贏錢」的主戰場。' },
+  { q: '21 點（Blackjack）算棋牌遊戲嗎？', a: '看平台分類。傳統上 21 點是「桌上遊戲」，在娛樂城裡有時歸在真人區、有時歸在棋牌區。但不管歸在哪，21 點的本質是「玩家 vs 莊家」，而且有固定的最優策略（Basic Strategy），照著打莊家優勢只有 0.5%，是所有賭場遊戲中對玩家最友善的。如果你喜歡用策略打敗莊家的感覺，21 點是最好的選擇。' },
+  { q: '棋牌遊戲的「抽水」（rake）怎麼算？', a: '每家平台不一樣，但常見的有兩種：一是「底池抽成」（德州撲克最常見，每局從底池抽 2.5~5%，通常有上限）；二是「固定服務費」（麻將常見，每局固定收一個底注的費用）。抽水是平台的主要收入，也是你的隱形成本——抽水越高，你需要贏越多才能獲利。選平台時一定要比較抽水比例。' },
+  { q: '線上棋牌遊戲在台灣合法嗎？', a: '跟其他線上博弈一樣，灰色地帶。台灣法律禁止「公然賭博」和「經營賭場」，但對個人參與線上遊戲的執法幾乎沒有。不過要注意的是：如果涉及新台幣的儲值和提領，在法律定義上就是賭博而非「遊戲」。芭樂子的建議：選有國際牌照的平台、不要在社群公開炫耀贏錢、注意金流安全。真正的風險不是被抓，是遇到黑平台不出金。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/card-games/"
+  title="棋牌遊戲完整指南：德州撲克、麻將、21 點、炸金花新手到進階"
+  description="2026 棋牌遊戲完整指南：德州撲克、麻將、21 點、炸金花、搶莊牛牛 5 大遊戲全解析、技術 vs 運氣比較、抽水機制、Bot 防範、資金管理、芭樂子 8 條棋牌鐵律。"
+  image="https://game8la.com/images/article-covers/cover-card-games-guide.webp"
+  datePublished="2026-04-11"
+  dateModified="2026-04-11"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '棋牌遊戲', url: 'https://game8la.com/card-games/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="棋牌遊戲完整指南｜德州撲克、麻將、21點、炸金花新手一本通 - GAME8LA" description="2026 棋牌遊戲完整指南：5 大遊戲全解析、技術 vs 運氣比較、抽水機制、Bot 防範、芭樂子 8 條棋牌鐵律。新手到老司機都能用。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; 棋牌遊戲</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-11 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 13 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a2a0a,#2a4a1a,#0a1a0a)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <span class="badge badge-safe" style="margin-bottom:1rem">棋牌遊戲</span>
+      <img src="/images/article-hero/card-games-guide-hero.webp" alt="芭樂子棋牌遊戲完整指南：德州撲克、麻將、21 點" width="1200" height="492" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+      <h1 style="font-size:2rem;line-height:1.3">棋牌遊戲完整指南：德州撲克、麻將、21 點、炸金花，新手到老司機的一本通</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">大大你好，芭樂子今天要聊的是娛樂城裡唯一「技術能真正壓過運氣」的區域——棋牌遊戲。老虎機是純運氣、百家樂運氣佔九成、體育投注靠知識加一點運氣，但德州撲克？職業選手一年打幾十萬手，長期穩定獲利，靠的不是手氣而是腦子。當然，不是每個棋牌遊戲都這樣——有些就是披著「棋牌」外皮的賭博。這篇幫你分清楚。</p>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 懶人包目錄</h2>
+        <ol>
+          <li><a href="#s1">棋牌遊戲是什麼？跟其他博弈差在哪</a></li>
+          <li><a href="#s2">5 大棋牌遊戲全拆解</a></li>
+          <li><a href="#s3">技術 vs 運氣：哪些棋牌真的能靠實力贏</a></li>
+          <li><a href="#s4">線上棋牌的暗坑：Bot、合謀、操控</a></li>
+          <li><a href="#s5">抽水機制全解析：你的隱形成本</a></li>
+          <li><a href="#s6">新手常犯的 7 個錯</a></li>
+          <li><a href="#s7">資金管理：棋牌版本</a></li>
+          <li><a href="#s8">芭樂子棋牌 8 條鐵律</a></li>
+          <li><a href="#s9">延伸閱讀</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== CH1 ===== -->
+      <h2 id="s1">1. 棋牌遊戲是什麼？跟其他博弈差在哪</h2>
+      <p>娛樂城裡的「棋牌區」通常包含：德州撲克、麻將、21 點、炸金花、搶莊牛牛、三公、十三支等。這些遊戲的共同特色是「有牌、有策略、需要動腦」，跟純靠機率的老虎機或百家樂不一樣。</p>
+      <p>但這裡有一個很重要的分界線：<strong>你的對手是誰？</strong></p>
+      <ul>
+        <li><strong>玩家 vs 玩家</strong>（德州撲克、麻將、十三支）— 平台只抽水，你靠技術贏其他玩家的錢。理論上技術夠好可以長期獲利。</li>
+        <li><strong>玩家 vs 莊家</strong>（21 點、搶莊牛牛、炸金花部分版本）— 莊家有數學優勢，長期來看莊家一定贏。你能做的是降低莊家優勢，但不可能反轉。</li>
+      </ul>
+      <p>搞清楚這個分界線非常重要，因為它直接決定了「你有沒有可能長期贏錢」。芭樂子的白話翻譯：如果你想靠棋牌賺錢，只有「玩家對玩家」的遊戲有機會；「玩家對莊家」的遊戲跟百家樂一樣——玩久了一定輸。</p>
+
+      <!-- ===== CH2 ===== -->
+      <h2 id="s2">2. 5 大棋牌遊戲全拆解</h2>
+
+      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">遊戲</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">類型</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">技術佔比</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">單局時間</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">莊家優勢 / 抽水</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>德州撲克</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">玩家 vs 玩家</td><td style="padding:0.6rem;border:1px solid var(--border)">★★★★★</td><td style="padding:0.6rem;border:1px solid var(--border)">2~5 分鐘</td><td style="padding:0.6rem;border:1px solid var(--border)">抽水 2.5~5%（有上限）</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>麻將</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">玩家 vs 玩家</td><td style="padding:0.6rem;border:1px solid var(--border)">★★★☆☆</td><td style="padding:0.6rem;border:1px solid var(--border)">10~20 分鐘</td><td style="padding:0.6rem;border:1px solid var(--border)">固定服務費（每局 1 底）</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>21 點</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">玩家 vs 莊家</td><td style="padding:0.6rem;border:1px solid var(--border)">★★★★☆</td><td style="padding:0.6rem;border:1px solid var(--border)">30 秒~1 分鐘</td><td style="padding:0.6rem;border:1px solid var(--border)">莊家優勢 0.5%（最優策略下）</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>炸金花</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">玩家 vs 玩家*</td><td style="padding:0.6rem;border:1px solid var(--border)">★★☆☆☆</td><td style="padding:0.6rem;border:1px solid var(--border)">30 秒~1 分鐘</td><td style="padding:0.6rem;border:1px solid var(--border)">抽水 3~5%</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>搶莊牛牛</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">混合（搶莊制）</td><td style="padding:0.6rem;border:1px solid var(--border)">★☆☆☆☆</td><td style="padding:0.6rem;border:1px solid var(--border)">30 秒</td><td style="padding:0.6rem;border:1px solid var(--border)">抽水 3~5%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;color:var(--text-muted)">*炸金花雖然是玩家對玩家，但因為只有 3 張牌、策略空間極小，技術佔比很低，更接近賭運氣。</p>
+
+      <h3>德州撲克 — 棋牌之王</h3>
+      <p>德州撲克是全世界玩家人數最多的撲克遊戲，也是唯一被認可為「競技」的博弈項目（WSOP 世界撲克大賽每年獎金池超過 1 億美金）。遊戲規則很簡單：每人 2 張手牌 + 公共牌最多 5 張，湊出最好的 5 張牌組合。但簡單的規則下藏著極深的策略——位置、底池賠率、範圍分析、心理戰，每一個都能寫一本書。</p>
+      <p>新手起步建議：先學「起手牌表」（哪些牌值得玩、哪些該直接蓋），然後學「位置的重要性」（後位永遠比前位有優勢）。光這兩個概念就能讓你打贏 80% 的休閒玩家。</p>
+
+      <h3>麻將 — 台灣的國民棋牌</h3>
+      <p>線上麻將在台灣有巨大的市場——過年不打麻將跟沒過年一樣。線上版本通常是台灣 16 張麻將，有些平台也提供日本麻將（立直麻將）。</p>
+      <p>麻將的技術成分在於：聽牌效率（最快的路徑胡牌）、防守意識（看出下家在聽什麼、不放槍）、以及牌河讀取（推測其他人的手牌）。但因為摸牌順序完全隨機，運氣佔比還是比德州撲克高不少。線上麻將的另一個問題是「開桌速度慢」——一局要 10~20 分鐘，而且常常湊不滿 4 人，有些平台會用 Bot 補位。</p>
+
+      <h3>21 點 — 唯一能「正確打法」壓低莊家優勢的遊戲</h3>
+      <p>21 點的規則：你跟莊家比誰的牌面更接近 21 點但不超過。你可以選擇「要牌」（Hit）、「停牌」（Stand）、「加倍」（Double）、「分牌」（Split）。關鍵是有一套完整的「基本策略表」（Basic Strategy），照著表格打，莊家優勢只剩 0.5% 左右。</p>
+      <p>在實體賭場，高手甚至可以用算牌（Card Counting）把優勢反轉到玩家這邊。但線上 21 點因為每局都重新洗牌（或用 RNG），算牌完全沒用。所以線上 21 點的定位是：<strong>用最低的莊家優勢享受博弈的樂趣</strong>，但不要期待靠它賺錢。</p>
+
+      <h3>炸金花 — 刺激但技術含量低</h3>
+      <p>炸金花（又叫三張牌、贏三張）每人只發 3 張牌，比大小。你可以選擇「看牌」或「暗牌」（不看直接跟注，注額減半），最後比牌大的贏。</p>
+      <p>說白了，炸金花更接近「比大小 + 心理戰」。因為只有 3 張牌，策略空間非常有限——你能做的決策只有「跟」或「棄」。高手和新手的差距主要在「讀人」和「控制下注節奏」，但因為牌太少，運氣佔比還是很高。在娛樂城裡，炸金花的節奏快、單局金額大、刺激感強，很容易上頭。</p>
+
+      <h3>搶莊牛牛 — 最接近純賭博的「棋牌」</h3>
+      <p>牛牛的規則：5 張牌中取 3 張湊成 10 的倍數（這叫「有牛」），剩下 2 張的點數決定牛幾。搶莊牛牛多了一個「搶莊」環節——倍數最高的人當莊。</p>
+      <p>芭樂子直說：牛牛幾乎沒有技術可言。你拿到什麼牌就是什麼牌，唯一的「策略」是搶不搶莊、搶多少倍。這個遊戲的本質是追求「大起大落的刺激感」——搶到 5 倍莊、開牛牛，一局翻 5 倍；但反過來也是一局虧 5 倍。如果你喜歡腎上腺素噴發的感覺，牛牛可以小玩，但絕對不要當成「靠技術贏錢」的遊戲。</p>
+
+      <!-- ===== CH3 ===== -->
+      <img src="/images/article-hero/card-games-skill-vs-luck.webp" alt="棋牌遊戲技術 vs 運氣比較：芭樂子教你分辨哪些遊戲靠實力" width="1200" height="492" loading="lazy" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1.5rem auto" />
+      <h2 id="s3">3. 技術 vs 運氣：哪些棋牌真的能靠實力贏</h2>
+      <p>這是選擇棋牌遊戲時最重要的判斷標準。芭樂子把常見的棋牌遊戲按「技術佔比」排個序：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">遊戲</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">技術佔比</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">運氣佔比</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">長期獲利可能性</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">適合什麼人</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>德州撲克</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">70~80%</td><td style="padding:0.6rem;border:1px solid var(--border)">20~30%</td><td style="padding:0.6rem;border:1px solid var(--border)">✅ 高（職業選手存在）</td><td style="padding:0.6rem;border:1px solid var(--border)">願意花時間學習的人</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>21 點（基本策略）</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">60%</td><td style="padding:0.6rem;border:1px solid var(--border)">40%</td><td style="padding:0.6rem;border:1px solid var(--border)">⚠️ 中（只能降低虧損）</td><td style="padding:0.6rem;border:1px solid var(--border)">喜歡用策略對抗莊家的人</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>麻將</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">50~60%</td><td style="padding:0.6rem;border:1px solid var(--border)">40~50%</td><td style="padding:0.6rem;border:1px solid var(--border)">⚠️ 中（抽水吃掉利潤）</td><td style="padding:0.6rem;border:1px solid var(--border)">已經很會打的老手</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>十三支</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">40~50%</td><td style="padding:0.6rem;border:1px solid var(--border)">50~60%</td><td style="padding:0.6rem;border:1px solid var(--border)">⚠️ 低</td><td style="padding:0.6rem;border:1px solid var(--border)">朋友間娛樂</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>炸金花</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">20~30%</td><td style="padding:0.6rem;border:1px solid var(--border)">70~80%</td><td style="padding:0.6rem;border:1px solid var(--border)">❌ 低</td><td style="padding:0.6rem;border:1px solid var(--border)">追求刺激感的人</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>搶莊牛牛</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">5~10%</td><td style="padding:0.6rem;border:1px solid var(--border)">90~95%</td><td style="padding:0.6rem;border:1px solid var(--border)">❌ 極低</td><td style="padding:0.6rem;border:1px solid var(--border)">純粹想賭的人</td></tr>
+        </tbody>
+      </table>
+
+      <p>看到這個表格，結論很明確：<strong>如果你想在棋牌領域「靠技術吃飯」，德州撲克是唯一正解</strong>。麻將和 21 點有一定技術空間但受限於運氣和抽水；炸金花和牛牛就是披著棋牌皮的賭博。</p>
+      <p>但芭樂子要強調：「靠技術吃飯」不代表「輕鬆贏錢」。德州撲克的學習曲線非常陡峭，一個能穩定獲利的玩家通常已經投入了幾百小時的學習和實戰。如果你只是想放鬆娛樂，打打麻將、玩玩 21 點完全沒問題——重點是知道自己在做什麼，不要把「娛樂消費」當成「投資獲利」。</p>
+
+      <!-- ===== CH4 ===== -->
+      <img src="/images/article-hero/card-games-bot-warning.webp" alt="線上棋牌 Bot 機器人警告：芭樂子教你辨識假玩家" width="1200" height="492" loading="lazy" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1.5rem auto" />
+      <h2 id="s4">4. 線上棋牌的暗坑：Bot、合謀、操控</h2>
+      <p>線上棋牌最大的風險不是你技術不好，而是「環境不公平」。以下是三大暗坑：</p>
+
+      <h3>Bot（機器人玩家）</h3>
+      <p>有些平台會在低等級房間放 Bot 來維持桌子的活躍度。Bot 的棋力通常不強，但它們的優勢是「不會犯情緒性錯誤」——不會 tilt、不會追損、不會上頭。在德州撲克的微注額場，Bot 的比例可能高達 20~30%。</p>
+      <p>辨別 Bot 的方法：反應時間極固定（每次都是 2~3 秒做決定）、不回應聊天、下注模式機械化（比如永遠在同樣的位置加注同樣的金額）、以及多桌同時在線但風格一模一樣。</p>
+
+      <h3>合謀（Collusion）</h3>
+      <p>兩個或多個玩家坐在同一桌，透過第三方通訊工具分享手牌資訊，聯手對付其他玩家。這在線上特別難防——你看不到對面的人，也不知道他們是不是在開 Discord 語音。</p>
+      <p>正規平台會用演算法偵測合謀行為（比如兩個帳號總是同時出現在同一桌、對彼此的下注模式異常溫和），但小平台基本沒有這種機制。</p>
+
+      <h3>平台操控</h3>
+      <p>最恐怖的是平台本身動手腳。比如在搶莊牛牛裡讓「真人玩家」拿到的牌系統性地比「Bot 莊家」差；或者在德州撲克裡讓某些帳號的發牌機率不均等。這種操控很難被發現，因為你需要幾萬手的數據才能統計出異常。</p>
+      <p>芭樂子的防範建議：<strong>只打有國際牌照的平台（MGA、PAGCOR、Curaçao）</strong>，這些平台的發牌系統需要通過第三方審計機構（如 eCOGRA、iTech Labs）的認證。其次，避免在小型、沒聽過名字的平台大額遊玩。</p>
+
+      <!-- ===== CH5 ===== -->
+      <h2 id="s5">5. 抽水機制全解析：你的隱形成本</h2>
+      <p>不管你技術多好，抽水（rake）都是你的敵人。平台靠抽水賺錢，你的獲利必須高於抽水才能真正盈利。</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">遊戲</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">抽水方式</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">常見比例</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">每 100 局大約被抽多少</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>德州撲克</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">底池百分比（有上限）</td><td style="padding:0.6rem;border:1px solid var(--border)">2.5~5%，上限 3~15 BB</td><td style="padding:0.6rem;border:1px solid var(--border)">視底池大小，約 50~200 元</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>麻將</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">固定服務費</td><td style="padding:0.6rem;border:1px solid var(--border)">每局 1 底（房間底注）</td><td style="padding:0.6rem;border:1px solid var(--border)">100 底</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>炸金花</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">贏家抽成</td><td style="padding:0.6rem;border:1px solid var(--border)">3~5%</td><td style="padding:0.6rem;border:1px solid var(--border)">視勝負，約 100~300 元</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>搶莊牛牛</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">贏家抽成</td><td style="padding:0.6rem;border:1px solid var(--border)">3~5%</td><td style="padding:0.6rem;border:1px solid var(--border)">視勝負，約 150~500 元</td></tr>
+          <tr><td style="padding:0.6rem;border:1px solid var(--border)"><strong>21 點</strong></td><td style="padding:0.6rem;border:1px solid var(--border)">無抽水（莊家優勢代替）</td><td style="padding:0.6rem;border:1px solid var(--border)">莊家優勢 0.5%</td><td style="padding:0.6rem;border:1px solid var(--border)">約 50 元（每注 100 元時）</td></tr>
+        </tbody>
+      </table>
+
+      <p>看完這個表你會發現：<strong>抽水 5% 聽起來不多，但 100 局累積下來是一筆大數目</strong>。這就是為什麼你在棋牌遊戲裡需要「比其他玩家好很多」才能盈利——你不是只需要贏過其他玩家，你還需要贏過其他玩家 + 平台抽水。</p>
+
+      <!-- ===== CH6 ===== -->
+      <h2 id="s6">6. 新手常犯的 7 個錯</h2>
+      <ol>
+        <li><strong>什麼牌都想玩</strong> — 特別是德州撲克，新手最大的問題就是不捨得蓋牌。記住：棄牌就是在贏錢。</li>
+        <li><strong>不看位置</strong> — 德州撲克裡，後位比前位多 20~30% 的勝率，因為你能看到對手先行動。</li>
+        <li><strong>追損加碼</strong> — 連輸幾把就跳到更高級別的房間想扳回來。這是最快歸零的方式。</li>
+        <li><strong>忽略抽水</strong> — 以為自己在贏錢，但算上抽水其實一直在虧。</li>
+        <li><strong>tilt（情緒失控）</strong> — 被 Bad Beat（好牌被逆轉）之後情緒崩潰、開始亂打。職業牌手跟業餘最大的差別就在控制 tilt 的能力。</li>
+        <li><strong>在爛平台玩</strong> — 貪小便宜選了沒牌照的平台，結果 Bot 一堆、出金困難、甚至被操控。</li>
+        <li><strong>不記錄、不復盤</strong> — 不記錄自己的勝率、不回顧關鍵手牌，永遠在犯同樣的錯。</li>
+      </ol>
+
+      <!-- ===== CH7 ===== -->
+      <h2 id="s7">7. 資金管理：棋牌版本</h2>
+      <p>棋牌遊戲的資金管理跟體育投注不一樣，因為棋牌（尤其是德州撲克）的波動性極高——即使你是長期贏家，連輸 10 個 Buy-in 也完全正常。</p>
+      <ul>
+        <li><strong>德州撲克</strong> — 建議至少準備 20~30 個 Buy-in 的資金。打 1/2 的桌子（最大買入 200），你需要 4,000~6,000 元的專用資金。</li>
+        <li><strong>麻將</strong> — 準備 15~20 底的資金。如果底注 100 元，帶 1,500~2,000 元。</li>
+        <li><strong>21 點</strong> — 每注不超過總資金的 2%。資金 5,000 元 = 每注最多 100 元。</li>
+        <li><strong>炸金花 / 牛牛</strong> — 老實說，這類遊戲芭樂子建議「帶多少就玩多少」。設一個「今天最多虧 X 元」的天花板，到了就走。</li>
+      </ul>
+      <p>最重要的一條：<strong>棋牌的錢跟生活費要完全分開</strong>。用一個專門的帳戶或錢包管理你的棋牌資金，輸光了就是輸光了，絕對不要從生活費裡挖。</p>
+
+      <!-- ===== CH8 ===== -->
+      <h2 id="s8">8. 芭樂子棋牌 8 條鐵律</h2>
+      <div style="background:var(--bg-card);border:1px solid var(--guava-green);border-radius:12px;padding:1.5rem;margin:1.5rem 0">
+        <ol>
+          <li><strong>先搞清楚「你的對手是誰」</strong> — 玩家 vs 玩家的遊戲才有長期獲利的可能。</li>
+          <li><strong>德州撲克是唯一值得認真學的棋牌</strong> — 如果你想靠技術吃飯，這是唯一正解。</li>
+          <li><strong>學會棄牌比學會加注重要</strong> — 70% 的牌都不值得玩，捨得蓋牌就贏一半了。</li>
+          <li><strong>選平台看牌照不看優惠</strong> — 送你 1,000 元禮金的黑平台，可能讓你虧 10,000 元。</li>
+          <li><strong>抽水是你的第一個敵人</strong> — 選抽水低的平台，你的獲利空間就多一點。</li>
+          <li><strong>tilt 是你的第二個敵人</strong> — 情緒上頭的時候，站起來走一圈。輸的錢可以再賺，tilt 的時候多輸的錢是白虧。</li>
+          <li><strong>牛牛和炸金花小玩就好</strong> — 這些遊戲的技術天花板太低，不值得投入大量資金。</li>
+          <li><strong>記錄每一場的結果</strong> — 不記錄就不知道自己到底是贏是輸，不復盤就不會進步。</li>
+        </ol>
+      </div>
+
+      <!-- ===== CH9 ===== -->
+      <h2 id="s9">9. 延伸閱讀</h2>
+      <ul>
+        <li>🎰 <a href="/articles/online-casino-guide/">線上娛樂城完整指南</a> — 娛樂城六大遊戲類型總覽，包含棋牌區定位</li>
+        <li>🃏 <a href="/articles/baccarat-guide/">百家樂完整教學</a> — 另一個「牌桌遊戲」，但玩法完全不同</li>
+        <li>🛡️ <a href="/articles/anti-scam-8la-guide/">防詐指南</a> — 黑網辨識、出金卡關、Bot 平台避雷</li>
+        <li>👤 <a href="/live-casino/">真人娛樂完整指南</a> — 真人荷官的棋牌遊戲（真人 21 點、真人德州）怎麼玩</li>
+      </ul>
+
+      <!-- ===== FAQ ===== -->
+      <h2 id="faq">FAQ：棋牌遊戲常見問題</h2>
+      {faqs.map((f) => (
+        <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem">
+          <summary style="cursor:pointer;font-weight:700">{f.q}</summary>
+          <p style="margin:0.8rem 0 0;color:var(--text-muted);line-height:1.75" set:html={f.a}></p>
+        </details>
+      ))}
+
+      <div style="background:#2a1a0a;border:1px solid #5a3a1a;border-radius:12px;padding:1.2rem 1.5rem;margin:2rem 0">
+        <p style="margin:0 0 0.5rem 0"><strong><Icon name="alert-triangle" /> 重要警語</strong></p>
+        <p style="margin:0;font-size:0.9rem;line-height:1.6">本文為遊戲機制科普，<strong>不鼓勵賭博</strong>。線上棋牌遊戲在台灣線上娛樂城屬於娛樂性質，請理性投注、量力而為。若您或身邊親友出現賭博失控情況，請撥打<strong>1925 安心專線</strong>尋求協助。</p>
+      </div>
+    </article>
+  </div>
+
+  <style>
+  .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  .breadcrumb { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--guava-green); text-decoration: none; }
+  .back-link { display: inline-block; margin-bottom: 1rem; color: var(--guava-green); text-decoration: none; font-size: 0.9rem; }
+  .hero-banner { height: 180px; border-radius: 16px; margin-bottom: 1.5rem; }
+  .article-content h2 { color: var(--guava-green); margin-top: 2rem; font-size: 1.5rem; border-left: 4px solid var(--guava-green); padding-left: 0.8rem; }
+  .article-content h3 { color: #fff; }
+  .article-content p { line-height: 1.85; color: var(--text); }
+  .article-content ul, .article-content ol { line-height: 1.85; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.4rem; }
+  .toc ol { margin: 0.5rem 0 0 1.2rem; padding: 0; }
+  .toc a { color: var(--guava-green); text-decoration: none; }
+</style>
+</BaseLayout>

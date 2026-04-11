@@ -15,7 +15,7 @@
 | 3 | 真人娛樂 | 產品類目 | 🟡 P1 | ✅ **已做 hub** | [/live-casino/](https://game8la.com/live-casino/) — 真人娛樂完整指南（2026-04-10），內鏈 baccarat-guide + dealers-guide |
 | 4 | 真人視訊 | 真人娛樂同義 | 🟡 P1 | ✅ **已併入 hub** | 同上，文章內有「真人視訊」說明段落 |
 | 5 | 體育投注 | 產品類目 | 🟡 P1 | ✅ **已做 hub** | [/sports/](https://game8la.com/sports/) — 體育投注完整指南（2026-04-11），內鏈 capcomcup-12 |
-| 6 | 棋牌遊戲 | 產品類目 | 🟡 P2 | ❌ 未做 | 需要 `/card-games/` hub（可跟麻將胡了 slot 互相內鏈） |
+| 6 | 棋牌遊戲 | 產品類目 | 🟡 P2 | ✅ **已做 hub** | [/card-games/](https://game8la.com/card-games/) — 棋牌遊戲完整指南（2026-04-11），內鏈 baccarat-guide + live-casino + anti-scam |
 | 7 | 彩票投注 | 產品類目 | 🟢 P2 | ✅ **已做 hub** | [/lottery/guide/](https://game8la.com/lottery/guide/) — 彩票投注完整指南（2026-04-11），/lottery/ 為開獎結果頁，內鏈 539 + 樂透比較 + 稅務 |
 | 8 | 遊藝場 | 傳統詞 | 🟢 P3 | ❌ 未做 | 單篇「遊藝場 vs 線上娛樂城」比較文 |
 
@@ -71,7 +71,7 @@
 3. ✅ **真人娛樂 hub** — 已完成 2026-04-10（live-casino-guide，整合 baccarat-guide + dealers-guide）
 4. ✅ **彩票投注 hub** — 已完成 2026-04-11（/lottery/guide/，/lottery/ 保留給芭樂好彩開獎頁）
 5. ✅ **體育投注 hub** — 已完成 2026-04-11（/sports/）
-6. **棋牌遊戲 hub**（P2，半天）
+6. ✅ **棋牌遊戲 hub** — 已完成 2026-04-11（/card-games/）
 7. **遊藝場比較文**（P3，1~2h）
 
 ---

@@ -2,6 +2,21 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'card-games-guide',
+    href: '/card-games/', // hub 頁放根目錄
+    title: '棋牌遊戲完整指南：德州撲克、麻將、21 點、炸金花新手一本通',
+    excerpt: '2026 棋牌遊戲完整指南：5 大遊戲全解析、技術 vs 運氣比較、抽水機制、Bot 防範、資金管理、芭樂子 8 條棋牌鐵律。',
+    category: 'card-games',
+    categoryLabel: '棋牌遊戲',
+    badgeType: 'attack',
+    date: '2026-04-11',
+    views: 0,
+    tags: ['最新'],
+    icon: 'spade',
+    gradient: 'linear-gradient(135deg,#1a2a0a,#2a4a1a,#0a1a0a)',
+    thumbnail: '/images/article-covers/cover-card-games-guide.webp'
+  },
+  {
     slug: 'lottery-guide',
     href: '/lottery/guide/', // hub 頁，/lottery/ 已被芭樂好彩佔用
     title: '彩票投注完整指南：大樂透、威力彩、539 玩法機率一本通',
@@ -14,7 +29,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'coins',
     gradient: 'linear-gradient(135deg,#2a1a05,#4a3a0a,#1a1505)',
-    thumbnail: '/images/article-covers/cover-lottery.webp'
+    thumbnail: '/images/article-covers/cover-lottery-guide.webp'
   },
   {
     slug: 'sports-guide',
@@ -29,7 +44,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'trophy',
     gradient: 'linear-gradient(135deg,#0a1a2e,#1b3a5a,#0a2a1e)',
-    thumbnail: '/images/article-covers/cover-sports.webp'
+    thumbnail: '/images/article-covers/cover-sports-guide.webp'
   },
   {
     slug: 'live-casino-guide',
