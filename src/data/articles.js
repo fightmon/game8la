@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'arcade-vs-online',
+    title: '遊藝場 vs 線上娛樂城：2026 完整比較，到底差在哪？',
+    excerpt: '遊藝場和線上娛樂城差在哪？法規、遊戲種類、便利性、安全性、出金機制全面比較，甲類乙類分類說明，芭樂子白話整理兩者優缺點。',
+    category: 'guide',
+    categoryLabel: '比較分析',
+    badgeType: 'attack',
+    date: '2026-04-11',
+    views: 0,
+    tags: ['最新'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#1a1a0a,#3a3510,#2a2505)',
+    thumbnail: '/images/articles/arcade-vs-online-cover.webp'
+  },
+  {
     slug: 'card-games-guide',
     href: '/card-games/', // hub 頁放根目錄
     title: '棋牌遊戲完整指南：德州撲克、麻將、21 點、炸金花新手一本通',

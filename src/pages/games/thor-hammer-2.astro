@@ -14,8 +14,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 雷神之錘II 雷霆風暴</div>
   <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
-    <div style="background:linear-gradient(135deg,#0a1525,#1a2a4a,#0a1a35);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:300px;font-size:5rem;border:1px solid var(--border)">
-      ⚡
+    <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border)">
+      <img src="/images/thor2/thor2-hero.webp" alt="雷神之錘II 雷霆風暴 遊戲畫面" width="800" height="497" style="display:block;width:100%;height:auto" fetchpriority="high">
     </div>
     <div>
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 自由配對</span>
@@ -27,11 +27,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
       <div class="info-grid">
         <span class="label">遊戲供應商</span><span class="value">RSG 皇家電子（GLI 認證）</span>
-        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--text-muted)">官方未公開</span>
+        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--guava-green)">97.6%</span>
         <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">高波動</span>
         <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">x25,000</span>
-        <span class="label">遊戲類型</span><span class="value">自由配對老虎機（Scatter Pays）</span>
+        <span class="label">盤面結構</span><span class="value">6 軸 × 5 列（30 格）</span>
+        <span class="label">遊戲類型</span><span class="value">自由配對 + 掉落消除（Scatter Pays / Cascade）</span>
         <span class="label">累積彩金</span><span class="value" style="color:var(--gold-light)">4 級：GRAND / MAJOR / MINOR / MINI</span>
+        <span class="label">投注範圍</span><span class="value">0.2～1,000 元</span>
+        <span class="label">發行日期</span><span class="value">2026.01.28</span>
         <span class="label">核心機制</span><span class="value">倍數符號（2x~1000x）、Free Game 15 局、Super Bonus、購買免遊</span>
       </div>
       <div class="tag-list">
@@ -53,33 +56,42 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <hr class="divider">
   <h2 class="section-title">遊戲介紹</h2>
   <div class="article-content">
-    <p>《<strong>雷神之錘II 雷霆風暴</strong>》是 RSG 皇家電子的招牌續作，北歐雷神索爾帶著妙爾尼爾之錘再度降臨。這次採用<strong>自由配對</strong>機制——盤面上任意位置的相同符號總數決定獎金，不需要管賠付線怎麼排。最大贏分上限直接拉到 <strong>x25,000 倍</strong>，加上 4 級累積彩金（GRAND / MAJOR / MINOR / MINI），爆分上限非常可觀。</p>
-    <p>最狂的是<strong>倍數符號系統</strong>：盤面上會出現 2x 到 1000x 的倍數符號，消除結束後所有倍數加總再乘上得分。在 Free Game 裡面這些倍數還會持續累積，加上倍數升級機制可以連續升到 1000x……你就知道為什麼有人在這款裡面噴出天文數字了。</p>
+    <p>《<strong>雷神之錘II 雷霆風暴</strong>》是 RSG 皇家電子的招牌續作，北歐雷神索爾帶著妙爾尼爾之錘再度降臨。採用 <strong>6 軸 × 5 列</strong>盤面搭配<strong>自由配對</strong>機制——盤面上任意位置的相同符號達 8 個以上即可中獎，不需要管賠付線怎麼排。加上<strong>掉落消除</strong>（中獎符號消失、新符號從上方補位），一次旋轉可能觸發多輪連鎖。最大贏分上限直接拉到 <strong>x25,000 倍</strong>，加上 4 級累積彩金（GRAND / MAJOR / MINOR / MINI），爆分上限非常可觀。</p>
+    <p>最狂的是<strong>倍數符號系統</strong>：盤面上會隨機出現 2x 到 1000x 的倍數符號，消除結束後所有倍數加總再乘上得分。在 Free Game 裡面這些倍數還會鎖定在盤面上持續累積，滾雪球效應越滾越大……你就知道為什麼有人在這款裡面噴出天文數字了。</p>
   </div>
-  <h2 class="section-title">核心機制完整解析</h2>
+  <h2 class="section-title">倍數符號系統 — 這款的靈魂核心</h2>
   <div class="article-content">
-    <h3>💎 倍數符號 — 2x 到 1000x 隨機降臨</h3>
     <p>盤面上會隨機出現 5 種倍數符號：<strong>2x（綠）、12x（藍）、50x（紫）、100x（紅）、1000x（彩虹）</strong>。當一輪消除全部結束後，盤面上所有倍數符號的數值會加總起來，然後乘上你這輪的總得分。簡單說：倍數符號出越多、數值越大，最終獎金就越誇張。</p>
+    <img loading="lazy" src="/images/thor2/thor2-multiplier-symbols.webp" alt="雷神之錘II 倍數符號 5 級：2x 12x 50x 100x 1000x" class="content-img" width="800" height="300" style="max-width:600px">
+    <p class="article-img-caption">▲ 五級倍數符號：2x（綠）、12x（藍）、50x（紫）、100x（紅）、1000x（彩虹）</p>
+    <p>在 Free Game 中，盤面上出現的倍數符號會<strong>鎖定不消失</strong>，而且後續每一轉新出現的倍數會持續加進去，形成「Total Multiplier」滾雪球效應。連鎖消除次數越多、鎖定的倍數符號越多，爆發力就越驚人。這就是玩家能打出破萬倍數的關鍵。</p>
   </div>
-  <h2 class="section-title">倍數升級特色</h2>
   <div class="card">
     <table>
-      <thead><tr><th>升級路徑</th><th>倍數</th><th>說明</th></tr></thead>
+      <thead><tr><th>倍數符號</th><th>數值</th><th>特徵</th></tr></thead>
       <tbody>
-        <tr><td>等級 1</td><td style="color:var(--guava-green);font-weight:700">2x</td><td>綠色，基本倍數符號</td></tr>
-        <tr><td>等級 2</td><td style="color:#42a5f5;font-weight:700">12x</td><td>藍色，升級後倍數直接跳 6 倍</td></tr>
-        <tr><td>等級 3</td><td style="color:#ab47bc;font-weight:700">50x</td><td>紫色，開始有感的倍率</td></tr>
-        <tr><td>等級 4</td><td style="color:#e74c3c;font-weight:700">100x</td><td>紅色，大獎預備</td></tr>
-        <tr><td>等級 5</td><td style="color:var(--gold-light);font-weight:700">1000x</td><td>彩虹色，滿級神裝！一顆就夠炸</td></tr>
+        <tr><td style="color:var(--guava-green);font-weight:700">● 綠色倍數球</td><td style="font-weight:700">2x</td><td>最常見的基本倍數</td></tr>
+        <tr><td style="color:#42a5f5;font-weight:700">● 藍色倍數球</td><td style="font-weight:700">12x</td><td>出現頻率中等</td></tr>
+        <tr><td style="color:#ab47bc;font-weight:700">● 紫色倍數球</td><td style="font-weight:700">50x</td><td>開始有感的倍率</td></tr>
+        <tr><td style="color:#e74c3c;font-weight:700">● 紅色倍數球</td><td style="font-weight:700">100x</td><td>稀有，大獎預兆</td></tr>
+        <tr><td style="color:var(--gold-light);font-weight:700">● 彩虹倍數球</td><td style="font-weight:700">1000x</td><td>極稀有，一顆就夠炸</td></tr>
       </tbody>
     </table>
-    <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.8rem">※ Free Game 中含倍數符號得分時，有機率觸發倍數升級。可連續多次升級，最高 1000x。超級免費遊戲中升級機率提升。</p>
+    <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.8rem">※ 五種倍數符號各自獨立隨機出現，盤面上所有倍數加總後乘上該輪得分。</p>
   </div>
+  <div style="margin:2rem 0">
+    <img loading="lazy" src="/images/thor2/thor2-multiplier-action.webp" alt="雷神之錘II 倍數符號爆分實戰畫面" class="content-img" width="1200" height="675">
+    <p class="article-img-caption">▲ 實戰畫面：倍數符號（500x、50x、100x、8x、25x）同時出現，加總後乘上得分</p>
+  </div>
+
+  <h2 class="section-title">Free Game 與 Super Bonus</h2>
   <div class="article-content">
     <h3>⚡ Free Game（免費遊戲）— 15 局＋倍數累積到底</h3>
-    <p>盤面出現 <strong>4 / 5 / 6 個 Bonus 符號</strong>即觸發 15 場免費遊戲，同時分別獲得 <strong>3x / 5x / 100x 總投注</strong>的額外獎金。Free Game 期間所有倍數符號的數值會持續累積成「Total Multiplier」，新出現的倍數會直接加進去，然後整個乘上當轉得分。Free Game 期間再出 3~6 個 Bonus 可追加 +5 場，最多累積到 <strong>100 場</strong>。</p>
-    <h3>🌩️ Super Bonus（超級免費遊戲符號）</h3>
-    <p>觸發 Free Game 時如果同時出現 Super Bonus 符號，直接送你超級大禮：</p>
+    <img loading="lazy" src="/images/thor2/thor2-free-game-trigger.webp" alt="雷神之錘II 贏得免費遊戲 15 場" class="content-img" width="1200" height="675">
+    <p class="article-img-caption">▲ 觸發免費遊戲：盤面出現 4 個以上 Bonus 符號即獲得 15 場 Free Game</p>
+    <p>盤面出現 <strong>4 / 5 / 6 個</strong> <img src="/images/thor2/sym-bonus.webp" alt="Bonus" width="28" height="28" style="vertical-align:middle;margin:0 4px" loading="lazy"> <strong>Bonus 符號</strong>即觸發 15 場免費遊戲，同時分別獲得 <strong>3x / 5x / 100x 總投注</strong>的額外獎金。Free Game 期間所有倍數符號的數值會持續累積成「Total Multiplier」，新出現的倍數會直接加進去，然後整個乘上當轉得分。期間再出 3~6 個 Bonus 可追加 +5 場，最多累積到 <strong>100 場</strong>。</p>
+    <h3>🌩️ Super Bonus — 觸發瞬間直接噴獎</h3>
+    <p>觸發 Free Game 時如果同時出現 <img src="/images/thor2/sym-super-bonus.webp" alt="Super Bonus" width="28" height="28" style="vertical-align:middle;margin:0 4px" loading="lazy"> <strong>Super Bonus 符號</strong>，不用等旋轉，直接送你超級大禮。而且進入的是「超級免費遊戲」，高倍數符號出現機率大幅提升！</p>
   </div>
   <div class="card">
     <table>
@@ -92,43 +104,68 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </tbody>
     </table>
   </div>
+
+  <h2 class="section-title">購買功能、額外押注與累積彩金</h2>
   <div class="article-content">
     <h3>🏪 購買功能 — 三種直接進場方式</h3>
-    <p><strong>購買特色（100x 押注）</strong>：直接進入 15 場免費遊戲。<strong>超級購買（500x 押注）</strong>：直接進入超級免費遊戲，倍數升級機率更高。<strong>神運一擊（4,000x 押注）</strong>：旋轉一次，盤面上所有出現的倍數符號全部都是 1000x，一發入魂。</p>
-    <h3>📈 額外押注 — +25% 投注翻倍觸發率</h3>
-    <p>開啟「額外押注」後，每轉多付原本投注的 25%，但進入免費遊戲的機會提升至原本的 <strong>2 倍</strong>。適合想加速觸發 Free Game 的玩家。</p>
+    <img loading="lazy" src="/images/thor2/thor2-buy-feature.webp" alt="雷神之錘II 購買特色：免費遊戲 100x、超級免費遊戲 500x、神運一擊 4000x" class="content-img" width="1200" height="675">
+    <p class="article-img-caption">▲ 三種購買模式：免費遊戲 100x、超級免費遊戲 500x、神運一擊 4,000x</p>
+    <p><strong>購買特色（100x 押注）</strong>：直接進入 15 場免費遊戲。<strong>超級購買（500x 押注）</strong>：直接進入超級免費遊戲，高倍數符號出現機率更高。<strong>神運一擊（4,000x 押注）</strong>：旋轉一次，盤面上所有出現的倍數符號全部都是 1000x，一發入魂。</p>
+    <h3>📈 額外押注 — +20% 投注翻倍觸發率</h3>
+    <p>開啟「額外押注」後，每轉多付原本投注的 20%，但進入免費遊戲的機會提升至原本的 <strong>2 倍</strong>（觸發機率增加 100%）。適合想加速觸發 Free Game 的玩家。</p>
     <h3>🏆 4 級累積彩金</h3>
     <p>GRAND / MAJOR / MINOR / MINI 四級累積彩金，隨時有機會觸發。從截圖看到 GRAND 彩金池超過 84 萬、MAJOR 超過 15 萬，數字相當誘人。</p>
   </div>
-  <h2 class="section-title">賠率表（自由配對）</h2>
+
+  <h2 class="section-title">符號與賠率表</h2>
   <div class="card">
+    <table>
+      <thead><tr><th>符號</th><th>圖示</th><th>功能說明</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700">Bonus<br><span style="font-size:0.8rem;color:var(--text-muted)">免費遊戲符號</span></td>
+          <td style="text-align:center"><img src="/images/thor2/sym-bonus.webp" alt="Bonus 免費遊戲符號" width="64" height="64" style="border-radius:8px" loading="lazy"></td>
+          <td>盤面出現 4 / 5 / 6 個即觸發 15 場免費遊戲，同時獲得 3x / 5x / 100x 總投注額外獎金。賠率：6 個=100x、5 個=5x、4 個=3x。</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">Super Bonus<br><span style="font-size:0.8rem;color:var(--text-muted)">超級免費遊戲符號</span></td>
+          <td style="text-align:center"><img src="/images/thor2/sym-super-bonus.webp" alt="Super Bonus 超級免費遊戲符號" width="64" height="64" style="border-radius:8px" loading="lazy"></td>
+          <td>觸發 Free Game 時若同時出現，1 個=100x、2 個=500x、3 個=5,000x、4 個=<strong style="color:var(--guava-pink)">25,000x（封頂）</strong>。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="margin-top:1rem">
     <table>
       <thead><tr><th>符號</th><th>8-9 個</th><th>10-11 個</th><th>12+ 個</th></tr></thead>
       <tbody>
-        <tr><td>⚡ 雷神頭盔</td><td>200</td><td>500</td><td style="color:var(--gold-light);font-weight:700">1,000</td></tr>
-        <tr><td>🏹 神器寶箱</td><td>50</td><td>200</td><td style="color:var(--gold-light);font-weight:700">500</td></tr>
-        <tr><td>🛡️ 水晶護盾</td><td>40</td><td>100</td><td style="color:var(--gold-light);font-weight:700">300</td></tr>
-        <tr><td>🪙 金幣</td><td>30</td><td>40</td><td style="color:var(--gold-light)">240</td></tr>
-        <tr><td>🔴 紅寶石</td><td>20</td><td>30</td><td style="color:var(--gold-light)">200</td></tr>
-        <tr><td>🟣 紫寶石</td><td>16</td><td>24</td><td style="color:var(--gold-light)">160</td></tr>
-        <tr><td>🟡 金珠</td><td>10</td><td>20</td><td style="color:var(--gold-light)">100</td></tr>
-        <tr><td>🟢 綠寶石</td><td>8</td><td>18</td><td style="color:var(--gold-light)">80</td></tr>
-        <tr><td>🔷 藍鑽</td><td>5</td><td>15</td><td style="color:var(--gold-light)">40</td></tr>
+        <tr><td><img src="/images/thor2/sym-helmet.webp" alt="雷神頭盔" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">雷神頭盔</td><td>200</td><td>500</td><td style="color:var(--gold-light);font-weight:700">1,000</td></tr>
+        <tr><td><img src="/images/thor2/sym-hammer.webp" alt="雷神戰錘" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">雷神戰錘</td><td>50</td><td>200</td><td style="color:var(--gold-light);font-weight:700">500</td></tr>
+        <tr><td><img src="/images/thor2/sym-shield.webp" alt="雷神神盾" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">雷神神盾</td><td>40</td><td>100</td><td style="color:var(--gold-light);font-weight:700">300</td></tr>
+        <tr><td><img src="/images/thor2/sym-coins.webp" alt="金幣" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">金幣</td><td>30</td><td>40</td><td style="color:var(--gold-light)">240</td></tr>
+        <tr><td><img src="/images/thor2/sym-red.webp" alt="紅寶石" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">紅寶石</td><td>20</td><td>30</td><td style="color:var(--gold-light)">200</td></tr>
+        <tr><td><img src="/images/thor2/sym-purple.webp" alt="紫寶石" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">紫寶石</td><td>16</td><td>24</td><td style="color:var(--gold-light)">160</td></tr>
+        <tr><td><img src="/images/thor2/sym-yellow.webp" alt="金珠" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">金珠</td><td>10</td><td>20</td><td style="color:var(--gold-light)">100</td></tr>
+        <tr><td><img src="/images/thor2/sym-green.webp" alt="綠寶石" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">綠寶石</td><td>8</td><td>10</td><td style="color:var(--gold-light)">80</td></tr>
+        <tr><td><img src="/images/thor2/sym-blue.webp" alt="藍鑽" style="width:64px;height:64px;vertical-align:middle;border-radius:8px;margin-right:10px" loading="lazy">藍鑽</td><td>5</td><td>15</td><td style="color:var(--gold-light)">40</td></tr>
       </tbody>
     </table>
-    <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.8rem">※ 自由配對機制：盤面上任意位置相同符號總數決定獎金。Bonus 符號賠率：6 個=100x、5 個=5x、4 個=3x（乘以總投注）。</p>
+    <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.8rem">※ 自由配對機制：盤面上任意位置相同符號總數決定獎金，不需對齊賠付線。</p>
   </div>
+
   <h2 class="section-title">為什麼 GAME8LA推薦這款？</h2>
   <div class="article-content">
-    <p>機制密度超高，一款遊戲塞了倍數符號（5 級升級）、Free Game（最多 100 場）、Super Bonus（最大 25,000x）、4 級累積彩金、購買免遊（3 種模式）、額外押注、神運一擊……可能是目前台灣市場上機制最豐富的老虎機之一。RSG 有 GLI 認證，品質有保障。高波動設計讓追求大獎的玩家有盼頭，而累積彩金又增加了隨時中大獎的驚喜感。</p>
+    <p>機制密度超高，一款遊戲塞了倍數符號（2x~1000x 五種）、Free Game（最多 100 場＋倍數鎖定累積）、Super Bonus（最大 25,000x）、4 級累積彩金、購買免遊（3 種模式）、額外押注、神運一擊……可能是目前台灣市場上機制最豐富的老虎機之一。RSG 有 GLI 認證，品質有保障。高波動設計讓追求大獎的玩家有盼頭，而累積彩金又增加了隨時中大獎的驚喜感。</p>
+    <img loading="lazy" src="/images/thor2/thor2-big-win.webp" alt="雷神之錘II 大獎 x13000 實戰截圖" class="content-img" width="1200" height="675">
+    <p class="article-img-caption">▲ 實戰大獎：6.80 × 13,000 倍，倍數累積的威力</p>
   </div>
   <h2 class="section-title">⚡ 8LA攻略建議</h2>
   <div class="card" style="background:rgba(57,255,20,0.08);border-color:var(--guava-green)">
     <ol style="padding-left:1.5rem;color:var(--text-secondary)">
       <li><strong>倍數符號是一切的核心</strong> — 盤面上的倍數加總 × 得分 = 最終獎金。在 Free Game 裡面倍數會持續累積，所以 Free Game 越到後面越值錢</li>
-      <li><strong>Free Game 觸發要盯 Bonus</strong> — 4 個 Bonus 就能觸發 15 場免費遊戲。開額外押注（+25%）可以讓觸發機率翻倍，CP值看個人判斷</li>
+      <li><strong>Free Game 觸發要盯 Bonus</strong> — 4 個 Bonus 就能觸發 15 場免費遊戲。開額外押注（+20%）可以讓觸發機率翻倍，CP值看個人判斷</li>
       <li><strong>Super Bonus 是彩蛋中的彩蛋</strong> — 觸發 Free Game 時如果同時出現 Super Bonus，4 個直接 25,000 倍封頂。雖然機率極低但夢想要有的</li>
-      <li><strong>購買功能分三級</strong> — 100x 普通免遊、500x 超級免遊（升級機率高）、4,000x 神運一擊（全部 1000x）。依據本金量力而為</li>
+      <li><strong>購買功能分三級</strong> — 100x 普通免遊、500x 超級免遊（高倍數球機率高）、4,000x 神運一擊（全部 1000x）。依據本金量力而為</li>
       <li><strong>高波動 = 資金準備要充足</strong> — 至少準備 200 轉以上的資金，或是購買免遊 10 次的量。不要在乾旱期加碼追分</li>
     </ol>
   </div>
@@ -141,6 +178,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <!-- SCROLL TO TOP -->
 </BaseLayout>
 
+<style is:global>
+
+/* === CONTENT IMAGES === */
+.content-img {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0a1525;
+}
+.article-img-caption {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0.3rem 0 1.2rem;
+}
+
+</style>
+
 
 
 <script is:inline type="application/ld+json">
@@ -150,8 +209,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   "name": "雷神之錘II 雷霆風暴",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Web",
-  "description": "RSG皇家電子GLI認證，自由配對機制、最大x25000倍。倍數符號最高1000x、4級累積彩金、Free Game+Super Bonus",
+  "description": "RSG皇家電子GLI認證，RTP 97.6%，自由配對機制、最大x25000倍。倍數符號最高1000x、4級累積彩金、Free Game+Super Bonus",
   "url": "https://game8la.com/games/thor-hammer-2/",
+  "image": "https://game8la.com/images/thor2/thor2-hero.webp",
   "author": { "@type": "Organization", "name": "RSG電子" },
   "aggregateRating": {
     "@type": "AggregateRating",

@@ -150,7 +150,7 @@ const latestArticles = articles.slice(0, 6);
     </a>
     <a href="/games/thor-hammer-2/" class="rank-card" style="text-decoration:none;color:inherit">
       <span class="rank-badge normal">4</span>
-      <div class="rank-img gc-4"><Icon name="hammer" style="color:#60a5fa;filter:drop-shadow(0 2px 8px rgba(96,165,250,0.6))" /></div>
+      <div class="rank-img gc-4"><img src="/images/thor2/thor2-card-thumbnail.webp" alt="雷神之錘II" style="width:100%;height:100%;object-fit:cover;border-radius:12px;height:auto" loading="lazy" width="600" height="373"></div>
       <div class="rank-info">
         <h3>雷神之錘II</h3>
         <div class="rank-score">
@@ -307,7 +307,7 @@ const games = [
   { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 89420, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
   { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 76230, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
   { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 65180, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'flame', label: 'GR · 經典IP' },
-  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍。倍數符號2x~1000x可升級、4級累積彩金、15局Free Game+Super Bonus。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000' },
+  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
   { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 52400, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'dice-5', label: 'PG · 1024 Ways' },
   { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 48700, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'shield', label: 'RSG · x500' },
   { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 43200, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'coins', label: 'RSG · 32400路' },
@@ -1491,7 +1491,7 @@ const games = [
   { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 89420, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
   { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 76230, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
   { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 65180, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'flame', label: 'GR · 經典IP' },
-  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍。倍數符號2x~1000x可升級、4級累積彩金、15局Free Game+Super Bonus。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000' },
+  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
   { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 52400, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'dice-5', label: 'PG · 1024 Ways' },
   { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 48700, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'shield', label: 'RSG · x500' },
   { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 43200, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'coins', label: 'RSG · 32400路' },

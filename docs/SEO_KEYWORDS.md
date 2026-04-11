@@ -17,7 +17,7 @@
 | 5 | 體育投注 | 產品類目 | 🟡 P1 | ✅ **已做 hub** | [/sports/](https://game8la.com/sports/) — 體育投注完整指南（2026-04-11），內鏈 capcomcup-12 |
 | 6 | 棋牌遊戲 | 產品類目 | 🟡 P2 | ✅ **已做 hub** | [/card-games/](https://game8la.com/card-games/) — 棋牌遊戲完整指南（2026-04-11），內鏈 baccarat-guide + live-casino + anti-scam |
 | 7 | 彩票投注 | 產品類目 | 🟢 P2 | ✅ **已做 hub** | [/lottery/guide/](https://game8la.com/lottery/guide/) — 彩票投注完整指南（2026-04-11），/lottery/ 為開獎結果頁，內鏈 539 + 樂透比較 + 稅務 |
-| 8 | 遊藝場 | 傳統詞 | 🟢 P3 | ❌ 未做 | 單篇「遊藝場 vs 線上娛樂城」比較文 |
+| 8 | 遊藝場 | 傳統詞 | 🟢 P3 | ✅ **已做** | [/articles/arcade-vs-online/](https://game8la.com/articles/arcade-vs-online/) — 遊藝場 vs 線上娛樂城比較文（2026-04-11） |
 
 ---
 
@@ -72,7 +72,7 @@
 4. ✅ **彩票投注 hub** — 已完成 2026-04-11（/lottery/guide/，/lottery/ 保留給芭樂好彩開獎頁）
 5. ✅ **體育投注 hub** — 已完成 2026-04-11（/sports/）
 6. ✅ **棋牌遊戲 hub** — 已完成 2026-04-11（/card-games/）
-7. **遊藝場比較文**（P3，1~2h）
+7. ✅ **遊藝場比較文** — 已完成 2026-04-11（/articles/arcade-vs-online/）
 
 ---
 

@@ -1,0 +1,207 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+
+const faqs = [
+  { q: '遊藝場合法嗎？', a: '合法，但有嚴格分類。台灣的電子遊戲場依《電子遊戲場業管理條例》分為兩類：普通級（甲類）全年齡開放，只能放益智類機台；限制級（乙類）僅限 18 歲以上，可設置有獎項兌換功能的機台。兩者都需要營業許可證，且不得距離學校、醫院 50 公尺以內。' },
+  { q: '線上娛樂城在台灣合法嗎？', a: '目前台灣法律沒有明確開放線上賭博。刑法第 266 條針對「賭博場所或賭博網站」有罰則，但實務上針對「玩家」的執法案例極少，多數查緝對象是經營者。玩家自行評估風險，選擇有國際認證（如 MGA、PAGCOR、GLI）的平台至少能降低被黑網詐騙的風險。' },
+  { q: '遊藝場的機台可以換現金嗎？', a: '法律上不行。乙類遊藝場的機台只能兌換「代幣」或「獎品」，不能直接換現金。但實務上部分場所存在灰色地帶的兌換行為，這屬於違規經營，消費者應自行留意風險。' },
+  { q: '線上娛樂城的老虎機跟遊藝場的機台是同一款嗎？', a: '不一定。線上娛樂城的老虎機由國際遊戲廠商（如 ATG、RSG、PG Soft）開發，RTP 寫在程式裡且經第三方認證；遊藝場的機台由實體機台廠商生產，RTP 可由場方調整。兩者的遊戲邏輯、畫面、機制可能完全不同，即使名稱類似也不代表是同一款。' },
+  { q: '哪個比較適合新手？', a: '看你要什麼體驗。想要社交氛圍、實體觸感、零風險試水溫，去甲類遊藝場玩益智機台最安全。想要遊戲種類多、隨時能玩、追求高倍率爆分，線上娛樂城的選擇更豐富。但線上平台一定要挑有認證的，芭樂子的防詐指南可以幫你避開黑網。' },
+  { q: '遊藝場還有人去嗎？會不會被淘汰？', a: '不會馬上消失，但確實在萎縮。根據經濟部商業司統計，全台電子遊戲場家數從 2010 年的高峰逐年遞減。主要原因是：娛樂選項變多、年輕世代偏好手機遊戲、法規限制越來越嚴格。但夜市型的甲類（夾娃娃機、彈珠台）還是有穩定客群，短期內不會完全消失。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/arcade-vs-online/"
+  title="遊藝場 vs 線上娛樂城：2026 完整比較，到底差在哪？"
+  description="遊藝場和線上娛樂城差在哪？法規、遊戲種類、便利性、安全性、出金機制全面比較，芭樂子用白話幫你整理兩者優缺點。"
+  image="https://game8la.com/images/article-covers/cover-arcade-vs-online.webp"
+  datePublished="2026-04-11"
+  dateModified="2026-04-11"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '遊藝場 vs 線上娛樂城', url: 'https://game8la.com/articles/arcade-vs-online/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="遊藝場 vs 線上娛樂城｜2026 完整比較 - GAME8LA" description="遊藝場和線上娛樂城差在哪？法規、遊戲種類、便利性、安全性、出金機制全面比較。甲類乙類遊藝場分類、線上平台認證挑選、芭樂子白話整理兩者優缺點。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 遊藝場 vs 線上娛樂城</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-11 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 6 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a1a0a,#3a3510,#2a2505)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <span class="badge badge-attack" style="margin-bottom:1rem">比較分析</span>
+      <h1 style="font-size:2rem;line-height:1.3">遊藝場 vs 線上娛樂城：到底差在哪？</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">「遊藝場」跟「線上娛樂城」這兩個詞常常被搞混，但它們根本是不同世界的東西。芭樂子今天用最白話的方式，把兩邊攤開來比，讓你自己判斷哪個適合你。</p>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <p style="font-weight:700;margin-bottom:0.5rem">📋 本文快速導覽</p>
+        <ol style="padding-left:1.2rem;color:var(--text-secondary);font-size:0.9rem;line-height:1.8">
+          <li><a href="#what-is" style="color:var(--guava-green)">遊藝場是什麼？線上娛樂城又是什麼？</a></li>
+          <li><a href="#compare" style="color:var(--guava-green)">8 大面向完整比較</a></li>
+          <li><a href="#legal" style="color:var(--guava-green)">法律怎麼說？</a></li>
+          <li><a href="#who-fits" style="color:var(--guava-green)">哪種適合你？</a></li>
+          <li><a href="#8la-tips" style="color:var(--guava-green)">芭樂子的 5 個提醒</a></li>
+          <li><a href="#faq" style="color:var(--guava-green)">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== 第 1 節 ===== -->
+      <h2 id="what-is" style="margin-top:2.5rem">1. 遊藝場是什麼？線上娛樂城又是什麼？</h2>
+
+      <img loading="lazy" src="/images/articles/arcade-vs-online-cover.webp" alt="遊藝場 vs 線上娛樂城視覺比較" class="content-img" width="1200" height="675">
+      <p class="article-img-caption">▲ 兩個平行世界：暖色系的實體遊藝場 vs 冷色系的線上娛樂城</p>
+
+      <h3>🏢 遊藝場（電子遊戲場）</h3>
+      <p>就是你在夜市、商圈看到的那種「電子遊藝場」，裡面放著夾娃娃機、彈珠台、投幣式遊戲機。台灣法律把它分成兩類：</p>
+      <div class="card" style="margin:1rem 0">
+        <table>
+          <thead><tr><th>分類</th><th>對象</th><th>可設機台</th><th>常見場景</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;color:var(--guava-green)">普通級（甲類）</td><td>全年齡</td><td>益智類、娛樂類</td><td>夾娃娃機店、夜市遊戲攤</td></tr>
+            <tr><td style="font-weight:700;color:var(--guava-pink)">限制級（乙類）</td><td>18 歲以上</td><td>鋼珠類、獎品兌換類</td><td>傳統電子遊藝場（俗稱電動間）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>簡單說，甲類就是你帶小孩去夾娃娃的那種，乙類才是有「賭味」的場所。兩者都必須有營業許可證，而且不能開在學校、醫院附近 50 公尺內。</p>
+
+      <img loading="lazy" src="/images/articles/arcade-vs-online-arcade.webp" alt="傳統遊藝場氛圍示意" class="content-img" width="1200" height="675">
+      <p class="article-img-caption">▲ 傳統遊藝場：投幣機台、霓虹燈光、實體娛樂氛圍</p>
+
+      <h3>💻 線上娛樂城</h3>
+      <p>線上娛樂城就是透過網站或 APP 玩的平台，裡面通常有老虎機、真人百家樂、體育投注、彩票、棋牌等各式遊戲。遊戲由國際廠商（ATG、RSG、PG Soft、SA Gaming 等）開發，平台方負責營運和金流。正規的線上娛樂城會有國際博弈牌照和第三方認證（如 GLI、eCOGRA），但台灣本地目前沒有發放線上博弈執照。</p>
+
+      <img loading="lazy" src="/images/articles/arcade-vs-online-online.webp" alt="線上娛樂城介面示意" class="content-img" width="1200" height="675">
+      <p class="article-img-caption">▲ 線上娛樂城：老虎機、真人、體育、彩票、棋牌、捕魚，上千款遊戲隨選</p>
+
+      <!-- ===== 第 2 節 ===== -->
+      <h2 id="compare" style="margin-top:2.5rem">2. 8 大面向完整比較</h2>
+      <img loading="lazy" src="/images/articles/arcade-vs-online-compare.webp" alt="遊藝場 vs 線上娛樂城 8 大面向比較圖" class="content-img" width="1200" height="675">
+      <p class="article-img-caption">▲ 8 大面向一目了然：橘色為遊藝場優勢、綠色為線上娛樂城優勢</p>
+      <p>直接上表：</p>
+      <div class="card" style="margin:1rem 0">
+        <table>
+          <thead><tr><th style="min-width:100px">比較項目</th><th>遊藝場</th><th>線上娛樂城</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">📍 便利性</td><td>要出門、有營業時間限制</td><td>24/7 手機就能玩</td></tr>
+            <tr><td style="font-weight:700">🎮 遊戲種類</td><td>以實體機台為主，種類有限（彈珠台、夾娃娃、投幣機）</td><td>老虎機、真人、體育、彩票、棋牌、捕魚，上千款</td></tr>
+            <tr><td style="font-weight:700">💰 投注範圍</td><td>單次投幣 5~50 元為主</td><td>最低 0.2 元起，最高數萬元</td></tr>
+            <tr><td style="font-weight:700">🏆 獎金/回報</td><td>兌換獎品或代幣，無法直接換現金</td><td>現金出金、加密貨幣出金</td></tr>
+            <tr><td style="font-weight:700">⚖️ 合法性</td><td style="color:var(--guava-green)">有營業許可即合法</td><td style="color:var(--guava-pink)">台灣無線上博弈執照，法律灰色地帶</td></tr>
+            <tr><td style="font-weight:700">🔒 公平性</td><td>機台 RTP 可由場方調整</td><td>正規廠商 RTP 寫死程式，第三方認證（GLI 等）</td></tr>
+            <tr><td style="font-weight:700">👥 社交體驗</td><td>有實體氛圍、面對面互動</td><td>真人荷官有互動，但主要是獨自操作</td></tr>
+            <tr><td style="font-weight:700">🛡️ 風險</td><td>金額小、風險低</td><td>可能遇到黑網詐騙、出金卡關、沉迷風險較高</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ===== 第 3 節 ===== -->
+      <h2 id="legal" style="margin-top:2.5rem">3. 法律怎麼說？</h2>
+      <p>這是很多人最搞不清楚的部分，芭樂子幫你整理重點：</p>
+
+      <img loading="lazy" src="/images/articles/arcade-vs-online-arcade2.webp" alt="遊藝場實體場景" class="content-img" width="1200" height="675">
+      <p class="article-img-caption">▲ 遊藝場的實體娛樂體驗：有營業許可即為合法經營</p>
+
+      <h3>遊藝場的法律依據</h3>
+      <p>台灣有一部專門的法叫做《<strong>電子遊戲場業管理條例</strong>》（經濟部主管），明確規定了遊藝場的分類、營業條件、距離限制等。只要依法取得營業許可，經營遊藝場是完全合法的。但如果場內出現「賭博行為」（押注換現金），就會觸犯刑法第 266 條的賭博罪。</p>
+
+      <h3>線上娛樂城的法律現況</h3>
+      <p>台灣目前<strong>沒有線上博弈專法</strong>，也沒有發放線上博弈執照。刑法第 266 條規範的是「在公共場所或公眾得出入之場所賭博」以及「以電信設備、電子通訊、網際網路或其他相類之方法賭博」。經營線上賭場的人會觸法，但對於玩家，實務上被起訴的案例極少。話雖如此，法律風險依然存在，大家自行衡量。</p>
+
+      <div class="card" style="background:rgba(255,65,108,0.08);border-color:var(--guava-pink);margin:1rem 0">
+        <p style="margin:0"><strong>⚠️ 芭樂子聲明：</strong>本站提供的是遊戲資訊與評測，不鼓勵也不提供任何賭博行為。8LA 上的所有老虎機評測僅供教學參考，請遵守當地法規，量力而為。</p>
+      </div>
+
+      <!-- ===== 第 4 節 ===== -->
+      <h2 id="who-fits" style="margin-top:2.5rem">4. 哪種適合你？</h2>
+
+      <div class="card" style="background:rgba(57,255,20,0.06);border-color:var(--guava-green);margin:1rem 0">
+        <p style="font-weight:700;margin-bottom:0.5rem">🏢 遊藝場適合你，如果你：</p>
+        <ul style="padding-left:1.5rem;color:var(--text-secondary);margin:0">
+          <li>想帶朋友或家人出門放鬆，享受實體遊戲的氛圍</li>
+          <li>預算很小（一次花個 100~500 元），純粹當娛樂消遣</li>
+          <li>不想碰任何法律灰色地帶，只玩完全合法的東西</li>
+          <li>喜歡夾娃娃、彈珠台這類實體觸感的遊戲</li>
+        </ul>
+      </div>
+
+      <div class="card" style="background:rgba(79,172,254,0.06);border-color:#4facfe;margin:1rem 0">
+        <p style="font-weight:700;margin-bottom:0.5rem">💻 線上娛樂城適合你，如果你：</p>
+        <ul style="padding-left:1.5rem;color:var(--text-secondary);margin:0">
+          <li>想要更多遊戲選擇，老虎機、真人、體育、棋牌什麼都想玩</li>
+          <li>追求高倍率爆分的刺激感（x25,000、x81,000 那種）</li>
+          <li>在意 RTP 透明度，想玩經過 GLI 等第三方認證的遊戲</li>
+          <li>時間不固定，想隨時隨地用手機開一局</li>
+          <li>懂得挑平台、設停損停利、不會衝動加碼</li>
+        </ul>
+      </div>
+
+      <!-- ===== 第 5 節 ===== -->
+      <h2 id="8la-tips" style="margin-top:2.5rem">5. 芭樂子的 5 個提醒</h2>
+      <div class="card" style="background:rgba(57,255,20,0.08);border-color:var(--guava-green)">
+        <ol style="padding-left:1.5rem;color:var(--text-secondary)">
+          <li><strong>遊藝場 ≠ 賭場</strong> — 甲類遊藝場就是娛樂場所，跟賭博完全無關。不要把「遊藝場」跟「地下賭場」混在一起。</li>
+          <li><strong>線上平台一定要看認證</strong> — 沒有 MGA、PAGCOR、GLI 任何一張牌照的平台，直接跳過不要碰。詳細挑選方法看<a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">防詐騙 8LA 指南</a>。</li>
+          <li><strong>不管線上線下，預算管理都是第一課</strong> — 設定今天最多花多少，到了就停。沒有什麼「再衝一把就回本」這回事。</li>
+          <li><strong>遊藝場的機台 RTP 可以被調</strong> — 這是實體機台的特性，場方可以在合法範圍內調整返還率。線上正規遊戲的 RTP 寫死在程式裡，相對透明。</li>
+          <li><strong>未滿 18 歲請自覺</strong> — 乙類遊藝場和所有線上娛樂城都是 18 禁，這沒有討論空間。</li>
+        </ol>
+      </div>
+
+      <!-- ===== 第 6 節 FAQ ===== -->
+      <h2 id="faq" style="margin-top:2.5rem">6. 常見問題 FAQ</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <div class="related-box" style="margin-top:2rem">
+        <h3>📚 延伸閱讀</h3>
+        <div class="related-links">
+          <a href="/articles/online-casino-guide/">線上娛樂城完整指南<small>新手到老司機的一本通</small></a>
+          <a href="/articles/slots-guide/">老虎機攻略完整指南<small>RTP、波動性、爆分機制一次看懂</small></a>
+          <a href="/articles/anti-scam-8la-guide/">防詐騙 8LA 指南<small>2026 娛樂城詐騙 8 大手法全解析</small></a>
+          <a href="/articles/casino-jackpot-tax-guide/">中獎要繳稅嗎？<small>台灣完整課稅指南</small></a>
+        </div>
+      </div>
+    </article>
+
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/articles/" class="btn-outline">← 回攻略列表</a>
+      <a href="/" class="btn-primary" style="margin-left:1rem">回首頁 →</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+.content-img {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0a0a12;
+}
+.article-img-caption {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0.3rem 0 1.2rem;
+}
+</style>
