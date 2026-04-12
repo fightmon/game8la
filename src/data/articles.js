@@ -13,7 +13,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'book-open',
     gradient: 'linear-gradient(135deg,#2a1a05,#4a3a0a,#1a1505)',
-    thumbnail: '/images/articles/free-credit-cover.webp'
+    thumbnail: '/images/article-thumbs/thumb-free-credit-cover.webp'
   },
   {
     slug: 'slots-rtp-guide',
@@ -27,7 +27,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'book-open',
     gradient: 'linear-gradient(135deg,#1a0a2e,#2d1050,#1a0a2e)',
-    thumbnail: '/images/articles/slots-rtp-cover.webp'
+    thumbnail: '/images/article-thumbs/thumb-slots-rtp-cover.webp'
   },
   {
     slug: 'casino-payout-guide',
@@ -41,7 +41,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'book-open',
     gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a2e,#0a2a1a)',
-    thumbnail: '/images/articles/casino-payout-cover.webp'
+    thumbnail: '/images/article-thumbs/thumb-casino-payout-cover.webp'
   },
   {
     slug: 'arcade-vs-online',
@@ -55,7 +55,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'book-open',
     gradient: 'linear-gradient(135deg,#1a1a0a,#3a3510,#2a2505)',
-    thumbnail: '/images/articles/arcade-vs-online-cover.webp'
+    thumbnail: '/images/article-thumbs/thumb-arcade-vs-online-cover.webp'
   },
   {
     slug: 'card-games-guide',
@@ -70,7 +70,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'spade',
     gradient: 'linear-gradient(135deg,#1a2a0a,#2a4a1a,#0a1a0a)',
-    thumbnail: '/images/article-covers/cover-card-games-guide.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-card-games-guide.webp'
   },
   {
     slug: 'lottery-guide',
@@ -85,7 +85,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'coins',
     gradient: 'linear-gradient(135deg,#2a1a05,#4a3a0a,#1a1505)',
-    thumbnail: '/images/article-covers/cover-lottery-guide.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-lottery-guide.webp'
   },
   {
     slug: 'sports-guide',
@@ -100,7 +100,7 @@ export const articles = [
     tags: ['最新'],
     icon: 'trophy',
     gradient: 'linear-gradient(135deg,#0a1a2e,#1b3a5a,#0a2a1e)',
-    thumbnail: '/images/article-covers/cover-sports-guide.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-sports-guide.webp'
   },
   {
     slug: 'live-casino-guide',
@@ -115,7 +115,7 @@ export const articles = [
     tags: ['最新', '必看'],
     icon: 'video',
     gradient: 'linear-gradient(135deg,#1a0a2e,#2d1b50,#1a0a2e)',
-    thumbnail: '/images/article-covers/cover-live-casino-guide.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-live-casino-guide.webp'
   },
   {
     slug: 'online-casino-guide',
@@ -129,7 +129,7 @@ export const articles = [
     tags: ['最新', '必看', '精選'],
     icon: 'book-open',
     gradient: 'linear-gradient(135deg,#0a2a1e,#1a4a2e,#0a1a2e)',
-    thumbnail: '/images/article-covers/cover-casino-guide.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-casino-guide.webp'
   },
   {
     slug: 'atg-seth-1-vs-2-comparison',
@@ -143,7 +143,7 @@ export const articles = [
     tags: ['最新', '比較', '精選'],
     icon: 'zap',
     gradient: 'linear-gradient(135deg,#1a0a2e,#5a1b3a,#0a1a2e)',
-    thumbnail: '/images/article-covers/cover-slots.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-slots.webp'
   },
   {
     slug: 'casino-jackpot-tax-guide',
@@ -157,7 +157,7 @@ export const articles = [
     tags: ['最新', '報稅', '必看'],
     icon: 'receipt',
     gradient: 'linear-gradient(135deg,#0a2a1e,#1a4a2e,#0a1a2e)',
-    thumbnail: '/images/article-covers/cover-other.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-other.webp'
   },
   {
     slug: 'atg-seth-guide',
@@ -171,7 +171,7 @@ export const articles = [
     tags: ['最新', '熱門', '精選'],
     icon: 'zap',
     gradient: 'linear-gradient(135deg,#1a0a2e,#5a1b3a,#0a1a2e)',
-    thumbnail: '/images/article-covers/cover-slots.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-slots.webp'
   },
   {
     slug: 'daily-cash-539-wheel-guide',
@@ -185,7 +185,7 @@ export const articles = [
     tags: ['最新', '精選'],
     icon: 'ticket-alt',
     gradient: 'linear-gradient(135deg,#0a1f0a,#0f3d1f,#1a8c3a)',
-    thumbnail: '/images/article-covers/cover-lottery.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-lottery.webp'
   },
   {
     slug: 'anti-scam-8la-guide',
@@ -199,7 +199,7 @@ export const articles = [
     tags: ['最新', '熱門', '精選'],
     icon: 'shield',
     gradient: 'linear-gradient(135deg,#3d0a1a,#ff416c,#1a0a0a)',
-    thumbnail: '/images/article-covers/cover-anti-scam.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
   },
   {
     slug: 'lottery-odds-comparison',
@@ -213,7 +213,7 @@ export const articles = [
     tags: ['最新', '精選'],
     icon: 'ticket-alt',
     gradient: 'linear-gradient(135deg,#1a1505,#3d2f0a,#f5b800)',
-    thumbnail: '/images/article-covers/cover-lottery.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-lottery.webp'
   },
   {
     slug: 'slots-guide',
@@ -227,7 +227,7 @@ export const articles = [
     tags: ['熱門', '精選'],
     icon: 'dice-5',
     gradient: 'linear-gradient(135deg,#f093fb,#f5576c)',
-    thumbnail: '/images/article-covers/cover-slots.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-slots.webp'
   },
   {
     slug: 'baccarat-guide',
@@ -241,7 +241,7 @@ export const articles = [
     tags: ['精選'],
     icon: 'money-bill',
     gradient: 'linear-gradient(135deg,#4facfe,#00f2fe)',
-    thumbnail: '/images/article-covers/cover-baccarat.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-baccarat.webp'
   },
   {
     slug: 'dealers-guide',
@@ -255,6 +255,6 @@ export const articles = [
     tags: ['最新'],
     icon: 'user-tie',
     gradient: 'linear-gradient(135deg,#fa709a,#fee140)',
-    thumbnail: '/images/article-covers/cover-live.webp'
+    thumbnail: '/images/article-thumbs/thumb-cover-live.webp'
   }
 ];
