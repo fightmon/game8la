@@ -105,6 +105,46 @@ const latestArticles = articles.slice(0, 6);
     <div class="stat-label">🎰 收錄遊戲</div>
   </div>
 </div>
+<!-- ARTICLES with SIDEBAR -->
+<section class="section" id="articles">
+  <div class="section-header">
+    <h2>📝 最新8LA攻略與評測</h2>
+    <a href="/game-ranking/" class="more-link">更多資訊 <Icon name="arrow-right" /></a>
+  </div>
+  <div class="two-col">
+    <div class="article-grid" style="grid-template-columns: repeat(2, 1fr);">
+      {latestArticles.map((a) => (
+        <a href={a.href || `/articles/${a.slug}/`} class="article-card" style="text-decoration:none;color:inherit">
+          <div class="article-img">
+            <img src={a.thumbnail} alt={a.title} loading="lazy" width="600" height="338" />
+            <span class={`cat-badge cat-${a.category}`}>{a.categoryLabel}</span>
+          </div>
+          <div class="article-body">
+            <h3>{a.title}</h3>
+            <div class="article-meta">
+              <span><Icon name="calendar" /> {a.date}</span>
+              <span><Icon name="eye" /> {a.views.toLocaleString()}</span>
+            </div>
+            <p class="article-excerpt">{a.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+    <!-- SIDEBAR -->
+    <div>
+      <div class="hot-list">
+        <h3>🔥 8LA熱門排行</h3>
+        <a href="/articles/dealers-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top1">1</span><span class="hot-title">荷官女神排行榜</span><span class="hot-views">18,643</span></a>
+        <a href="/articles/baccarat-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top2">2</span><span class="hot-title">百家樂看路教學</span><span class="hot-views">12,450</span></a>
+        <a href="/game-ranking/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top3">3</span><span class="hot-title">遊戲推薦排名</span><span class="hot-views">20,374</span></a>
+        <div class="hot-item"><span class="hot-num rest">4</span><span class="hot-title">遊戲平台體驗金比較</span><span class="hot-views">5,421</span></div>
+        <div class="hot-item"><span class="hot-num rest">5</span><span class="hot-title">捕魚遊戲技巧</span><span class="hot-views">4,356</span></div>
+        <div class="hot-item"><span class="hot-num rest">6</span><span class="hot-title">21點基本策略</span><span class="hot-views">3,892</span></div>
+        <div class="hot-item"><span class="hot-num rest">7</span><span class="hot-title">德州撲克入門</span><span class="hot-views">3,145</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- RANKINGS -->
 <section class="section" id="rankings">
   <div class="section-header">
@@ -185,46 +225,6 @@ const latestArticles = articles.slice(0, 6);
   </div>
   <div class="game-grid" id="gameGrid"></div>
 </section>
-<!-- ARTICLES with SIDEBAR -->
-<section class="section" id="articles">
-  <div class="section-header">
-    <h2>📝 最新攻略與評測</h2>
-    <a href="/game-ranking/" class="more-link">更多資訊 <Icon name="arrow-right" /></a>
-  </div>
-  <div class="two-col">
-    <div class="article-grid" style="grid-template-columns: repeat(2, 1fr);">
-      {latestArticles.map((a) => (
-        <a href={a.href || `/articles/${a.slug}/`} class="article-card" style="text-decoration:none;color:inherit">
-          <div class="article-img">
-            <img src={a.thumbnail} alt={a.title} loading="lazy" width="600" height="338" />
-            <span class={`cat-badge cat-${a.category}`}>{a.categoryLabel}</span>
-          </div>
-          <div class="article-body">
-            <h3>{a.title}</h3>
-            <div class="article-meta">
-              <span><Icon name="calendar" /> {a.date}</span>
-              <span><Icon name="eye" /> {a.views.toLocaleString()}</span>
-            </div>
-            <p class="article-excerpt">{a.excerpt}</p>
-          </div>
-        </a>
-      ))}
-    </div>
-    <!-- SIDEBAR -->
-    <div>
-      <div class="hot-list">
-        <h3>🔥 8LA熱門排行</h3>
-        <a href="/articles/dealers-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top1">1</span><span class="hot-title">荷官女神排行榜</span><span class="hot-views">186,437</span></a>
-        <a href="/articles/baccarat-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top2">2</span><span class="hot-title">百家樂看路教學</span><span class="hot-views">124,508</span></a>
-        <a href="/game-ranking/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top3">3</span><span class="hot-title">遊戲推薦排名</span><span class="hot-views">203,741</span></a>
-        <div class="hot-item"><span class="hot-num rest">4</span><span class="hot-title">遊戲平台體驗金比較</span><span class="hot-views">54,210</span></div>
-        <div class="hot-item"><span class="hot-num rest">5</span><span class="hot-title">捕魚遊戲技巧</span><span class="hot-views">43,560</span></div>
-        <div class="hot-item"><span class="hot-num rest">6</span><span class="hot-title">21點基本策略</span><span class="hot-views">38,920</span></div>
-        <div class="hot-item"><span class="hot-num rest">7</span><span class="hot-title">德州撲克入門</span><span class="hot-views">31,450</span></div>
-      </div>
-    </div>
-  </div>
-</section>
 <!-- USER RATING SECTION -->
 <section class="section" id="rating">
   <div class="rating-section">
@@ -304,14 +304,14 @@ function getSVGIcon(name) {
 
 // === GAME DATA ===
 const games = [
-  { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 89420, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
-  { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 76230, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
-  { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 65180, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'flame', label: 'GR · 經典IP' },
-  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
-  { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 52400, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'dice-5', label: 'PG · 1024 Ways' },
-  { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 48700, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'shield', label: 'RSG · x500' },
-  { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 43200, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'coins', label: 'RSG · 32400路' },
-  { id: 8, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.2, views: 39800, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: null, gradient: 'gc-8', icon: 'dice-5', label: 'PG · 2000路' },
+  { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 8942, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
+  { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 7623, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
+  { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 6518, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'flame', label: 'GR · 經典IP' },
+  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 5890, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
+  { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 5240, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'dice-5', label: 'PG · 1024 Ways' },
+  { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 4870, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'shield', label: 'RSG · x500' },
+  { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 4320, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'coins', label: 'RSG · 32400路' },
+  { id: 8, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.2, views: 3980, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: null, gradient: 'gc-8', icon: 'dice-5', label: 'PG · 2000路' },
 ];
 // === RENDER GAMES ===
 function renderGames(filter = 'all') {
@@ -1488,15 +1488,15 @@ body {
 <script is:inline>
 // === GAME DATA ===
 const games = [
-  { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 89420, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
-  { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 76230, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
-  { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 65180, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'flame', label: 'GR · 經典IP' },
-  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 58900, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
-  { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 52400, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'dice-5', label: 'PG · 1024 Ways' },
-  { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 48700, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'shield', label: 'RSG · x500' },
-  { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 43200, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'coins', label: 'RSG · 32400路' },
-  { id: 8, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.2, views: 39800, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: null, gradient: 'gc-8', icon: 'dice-5', label: 'PG · 2000路' },
-  { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 36850, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
+  { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 8942, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
+  { id: 2, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.7, views: 7623, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-2', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
+  { id: 3, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 6518, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-3', icon: 'flame', label: 'GR · 經典IP' },
+  { id: 4, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.5, views: 5890, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-4', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
+  { id: 5, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 5240, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-5', icon: 'dice-5', label: 'PG · 1024 Ways' },
+  { id: 6, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 4870, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-6', icon: 'shield', label: 'RSG · x500' },
+  { id: 7, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 4320, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-7', icon: 'coins', label: 'RSG · 32400路' },
+  { id: 8, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.2, views: 3980, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: null, gradient: 'gc-8', icon: 'dice-5', label: 'PG · 2000路' },
+  { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 3685, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
 ];
 
 // === RENDER GAMES ===
