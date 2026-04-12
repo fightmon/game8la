@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'free-credit-guide',
+    title: '娛樂城體驗金怎麼用？流水倍數、提領陷阱、避雷 6 大重點',
+    excerpt: '體驗金真的免費嗎？流水倍數怎麼算？提領上限是什麼？芭樂子拆解體驗金 6 大常見陷阱，算給你看到底值不值，教你怎麼不被話術套路。',
+    category: 'guide',
+    categoryLabel: '避雷教學',
+    badgeType: 'attack',
+    date: '2026-04-12',
+    views: 0,
+    tags: ['最新'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#2a1a05,#4a3a0a,#1a1505)',
+    thumbnail: '/images/articles/free-credit-cover.webp'
+  },
+  {
     slug: 'slots-rtp-guide',
     title: '老虎機 RTP 是什麼？怎麼看？選遊戲前你一定要懂的數字',
     excerpt: 'RTP 是什麼意思？高 RTP 就比較容易贏嗎？波動度又是什麼？芭樂子白話教你看懂老虎機最重要的數字，附 2026 高 RTP 遊戲推薦和常見迷思破解。',
