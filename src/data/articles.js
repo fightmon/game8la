@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'casino-payout-guide',
+    title: '線上娛樂城出金完整攻略：方式比較、速度實測、避雷指南',
+    excerpt: '銀行轉帳、電子錢包、USDT 三大出金方式完整比較，速度實測排行、流水倍數計算教學、卡出金 6 大紅旗警訊，芭樂子教你安全把錢拿回來。',
+    category: 'guide',
+    categoryLabel: '出金教學',
+    badgeType: 'attack',
+    date: '2026-04-12',
+    views: 0,
+    tags: ['最新'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a2e,#0a2a1a)',
+    thumbnail: '/images/articles/casino-payout-cover.webp'
+  },
+  {
     slug: 'arcade-vs-online',
     title: '遊藝場 vs 線上娛樂城：2026 完整比較，到底差在哪？',
     excerpt: '遊藝場和線上娛樂城差在哪？法規、遊戲種類、便利性、安全性、出金機制全面比較，甲類乙類分類說明，芭樂子白話整理兩者優缺點。',
