@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'slots-rtp-guide',
+    title: '老虎機 RTP 是什麼？怎麼看？選遊戲前你一定要懂的數字',
+    excerpt: 'RTP 是什麼意思？高 RTP 就比較容易贏嗎？波動度又是什麼？芭樂子白話教你看懂老虎機最重要的數字，附 2026 高 RTP 遊戲推薦和常見迷思破解。',
+    category: 'guide',
+    categoryLabel: '觀念教學',
+    badgeType: 'attack',
+    date: '2026-04-12',
+    views: 0,
+    tags: ['最新'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#1a0a2e,#2d1050,#1a0a2e)',
+    thumbnail: '/images/articles/slots-rtp-cover.webp'
+  },
+  {
     slug: 'casino-payout-guide',
     title: '線上娛樂城出金完整攻略：方式比較、速度實測、避雷指南',
     excerpt: '銀行轉帳、電子錢包、USDT 三大出金方式完整比較，速度實測排行、流水倍數計算教學、卡出金 6 大紅旗警訊，芭樂子教你安全把錢拿回來。',
