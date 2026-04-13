@@ -1,0 +1,363 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+
+const faqs = [
+  { q: '贏財神的 RTP 是多少？', a: '根據 PG Soft 官方規格，贏財神（Caishen Wins）的預設 RTP 為 96.92%，屬於業界中上水準。不過 PG Soft 提供多個 RTP 版本讓平台選用，實際 RTP 請在遊戲內規則頁面確認。' },
+  { q: '贏財神的最大倍率是多少？', a: 'PG Soft 官方公布的最大贏獎倍率為 x100,000。根據 10 億次模擬旋轉，實測最高達到 4,936x。x100,000 是理論天花板，實際達成率極低。' },
+  { q: '贏財神的 Free Spin 怎麼觸發？', a: '盤面上出現 4 個以上奪寶符號（Scatter）即可觸發免費旋轉。基礎 8 轉，每多 1 個 Scatter 額外 +2 轉。觸發後可以選擇直接開始（x8 獎金倍數），或搏一搏挑戰更多轉數和更高倍數。' },
+  { q: '搏一搏機制是什麼？', a: '觸發免費旋轉後，玩家可以選擇「搏一搏」來賭更多免費轉數或更高的獎金倍數。成功的話：搏轉數 +2 轉、搏倍數 +2 倍。失敗的話直接結束免費旋轉（搏轉數）或停止加倍（搏倍數）。最高可以搏到 x20 獎金倍數，風險與回報並存。' },
+  { q: '多路連消百搭是什麼？', a: '在任何旋轉期間，第 2~5 軸上佔據 2~4 個位置的符號（不含百搭）可能被銀框包圍。上一輪贏獎中的銀框符號會變成金框，金框符號會變成 2~4 個百搭符號。這個連鎖機制讓中獎路數從 2,025 路最高膨脹到 32,400 路。' },
+  { q: '贏財神適合新手嗎？', a: '非常適合。中波動不會太極端，整體中獎率 35.46% 代表大約每 3 轉就有 1 次回饋。6 軸盤面雖然看起來複雜，但中獎路數多、連消機制直覺好懂。搏一搏機制增加趣味但不影響基本玩法，新手可以先選保守的 8 轉 x8 起步。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/games/caishen-wins/"
+  title="贏財神｜PG Soft 6軸32400路老虎機完整攻略 - GAME8LA"
+  description="贏財神完整攻略！RTP 96.92%、最大倍率 x100,000、6軸最高32,400路、多路連消百搭、橫財神變4Wild、Free Spin搏一搏最高x20倍。PG Soft 財神系列，8LA 芭樂子實測解析。"
+  image="https://game8la.com/images/caishen-wins/caishen-wins-cover.webp"
+  datePublished="2026-04-13"
+  dateModified="2026-04-13"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '熱門遊戲', url: 'https://game8la.com/#games' },
+    { name: '贏財神', url: 'https://game8la.com/games/caishen-wins/' },
+  ]}
+/>
+<BaseLayout
+  title="贏財神｜PG Soft 6軸32400路老虎機完整攻略 - GAME8LA"
+  description="贏財神完整攻略！RTP 96.92%、最大倍率 x100,000、6軸最高32,400路、多路連消百搭、橫財神變4Wild、Free Spin搏一搏最高x20倍。PG Soft 財神系列，8LA 芭樂子實測解析。"
+  ogImage="https://game8la.com/images/caishen-wins/caishen-wins-cover.webp"
+  currentPage="rankings"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 贏財神</div>
+  <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem"><Icon name="clock" /> 最後更新：2026 年 4 月 13 日 ｜ <Icon name="user-pen" /> 作者：芭樂子 ｜ <Icon name="book-open" /> 預估閱讀 9 分鐘</div>
+  <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
+    <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#0a1a1a">
+      <img src="/images/caishen-wins/caishen-wins-splash.webp" alt="贏財神 Caishen Wins 封面" style="width:100%;height:auto;display:block" width="500" height="500" loading="eager" fetchpriority="high">
+    </div>
+    <div>
+      <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 中國風・連消百搭・32,400路</span>
+      <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">贏財神</h1>
+      <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
+        <span class="score-big">9.0</span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
+        <span style="color:var(--text-muted)">(2,340 次瀏覽)</span>
+      </div>
+      <div class="info-grid">
+        <span class="label">遊戲供應商</span><span class="value">PG Soft（Pocket Games Soft）</span>
+        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--guava-green)">96.92%（預設）</span>
+        <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">中波動（對抗型）</span>
+        <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">x100,000</span>
+        <span class="label">盤面規格</span><span class="value">6 軸 5 列（第 2/3/4/5 軸頂部附加軸）</span>
+        <span class="label">中獎方式</span><span class="value"><a href="/articles/slots-guide/" style="color:var(--guava-green)">2,025~32,400 Ways</a>（連消百搭 Cascading）</span>
+        <span class="label">核心機制</span><span class="value">多路連消百搭、橫財神→4 Wild、Free Spin 搏一搏最高 x20</span>
+        <span class="label">最低/最高投注</span><span class="value">0.20 ~ 200（Base Bet 20）</span>
+        <span class="label">認證</span><span class="value">Gaming Associates 認證</span>
+      </div>
+      <div class="tag-list">
+        <span class="tag">贏財神</span>
+        <span class="tag">Caishen Wins</span>
+        <span class="tag">PG Soft</span>
+        <span class="tag">RTP 96.92%</span>
+        <span class="tag">32,400路</span>
+        <span class="tag">連消百搭</span>
+        <span class="tag">橫財神</span>
+        <span class="tag">x100,000</span>
+        <span class="tag">搏一搏 x20</span>
+      </div>
+      <div style="margin-top:1.5rem;display:flex;gap:1rem">
+        <a href="#" class="btn-primary" onclick="event.preventDefault();document.querySelector('.section-title').scrollIntoView({behavior:'smooth'})">⚡ 看攻略</a>
+        <a href="javascript:void(0)" class="btn-outline" onclick="this.innerHTML='✅ 已收藏';this.style.borderColor='var(--gold)';this.style.color='var(--gold)'">📋 加入收藏</a>
+      </div>
+    </div>
+  </div>
+  <hr class="divider">
+  <!-- 目錄 -->
+  <div class="toc">
+    <h4>📑 本文目錄</h4>
+    <ol>
+      <li><a href="#intro">遊戲介紹</a></li>
+      <li><a href="#grid">盤面與 32,400 路規則</a></li>
+      <li><a href="#paytable">符號賠率表</a></li>
+      <li><a href="#wilds-on-the-way">多路連消百搭</a></li>
+      <li><a href="#caishen-feature">橫財神模式</a></li>
+      <li><a href="#freespin">免費旋轉與搏一搏</a></li>
+      <li><a href="#buy-feature">購買獎金功能</a></li>
+      <li><a href="#recommend">推薦理由</a></li>
+      <li><a href="#tips">8LA攻略建議</a></li>
+      <li><a href="#faq">常見問題 FAQ</a></li>
+    </ol>
+  </div>
+
+  <div class="article-content">
+
+  <!-- ===== 第 1 節：遊戲介紹 ===== -->
+  <h2 class="section-title" id="intro">遊戲介紹</h2>
+  <div style="text-align:center;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_splash_screen.webp" alt="贏財神 Caishen Wins 遊戲啟動畫面" style="width:100%;max-width:360px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 贏財神 Caishen Wins——PG Soft 中國風財神系列，財神降臨搏一搏贏大獎</p>
+
+  <p>財神來了！PG Soft 推出的《<strong>贏財神（Caishen Wins）</strong>》是一款滿滿中國風的 6 軸老虎機，主角就是那個我們過年都要拜的財神爺。<a href="/articles/slots-rtp-guide/" style="color:var(--guava-green)">RTP</a> 為 <strong>96.92%</strong>，中波動設計，最大贏獎倍率 <strong>x100,000</strong>，聽起來是不是很有過年的感覺？</p>
+
+  <p>這款遊戲最吸引人的地方在於它的「<strong>搏一搏</strong>」機制——觸發免費旋轉後，你可以選擇安穩地拿 8 轉 x8 倍，或是搏一搏挑戰更多轉數和更高倍數，最高可以搏到 <strong>x20 獎金倍數</strong>。加上「<strong>多路連消百搭</strong>」讓中獎路數從 2,025 路最高膨脹到 <strong>32,400 路</strong>，以及「<strong>橫財神模式</strong>」一次變出 4 個 Wild，爆分能力相當驚人。</p>
+
+  <p>PG Soft 這款遊戲的整體中獎率高達 <strong>35.46%</strong>，大約每 3 轉就有 1 次回饋，不會讓你等到天荒地老。中波動的節奏剛剛好，不像超高波動那樣乾到懷疑人生，但 Free Spin 搏一搏成功後的爆發力又不輸高波動遊戲。</p>
+
+  <!-- ===== 第 2 節：盤面與路數規則 ===== -->
+  <h2 class="section-title" id="grid">盤面與 32,400 路規則</h2>
+  <div style="text-align:center;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_main_game.webp" alt="贏財神盤面與中獎路徑示意" style="width:100%;max-width:360px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 6 軸 5 列盤面，第 2/3/4/5 軸頂部有附加軸，最高可達 32,400 路</p>
+
+  <p>贏財神的盤面是 <strong>6 軸 5 列</strong>，而且第 2、3、4、5 軸的頂部各有一個<strong>附加軸位置</strong>。基礎遊戲有 <strong>2,025 路</strong>（20 條基礎中獎路），但透過「多路連消百搭」機制，符號可以展開成 2~4 個位置，讓中獎路數最高膨脹到 <strong>32,400 路</strong>。</p>
+  <div class="tip-box">
+    <strong>💡 中獎路數規則：</strong><br>
+    ① 贏分組合必須從<strong>最左邊的轉輪開始，由左至右相鄰</strong><br>
+    ② 每一轉輪上出現的贏分符號數量會相乘計算總路數<br>
+    ③ 所有贏獎符號在結算後消除，上方符號掉落進行新一輪結算<br>
+    ④ 額外的中獎組合都將計入每次旋轉的贏獎中，直到沒有其他中獎組合
+  </div>
+  <p>投注範圍 0.20 ~ 200，投注大小 0.01/0.05/0.1，投注倍數 1~10，彈性很大。6 軸的盤面比常見的 5 軸多了一軸，代表中獎組合的長度可以延伸到 6 連，賠率也跟著翻倍。</p>
+
+  <!-- ===== 第 3 節：符號賠率表 ===== -->
+  <h2 class="section-title" id="paytable">符號賠率表</h2>
+
+  <p>贏財神的符號分為<strong>高賠率符號</strong>（財神系列吉祥物）和<strong>低賠率符號</strong>（撲克牌 A/K/Q/J/10），另外還有百搭（Wild）、奪寶（Scatter）和橫財神（特殊 Wild）。以下賠率以 <strong>Base Bet 20</strong> 為基準：</p>
+
+  <h3>特殊符號</h3>
+  <table>
+    <thead><tr><th>符號</th><th>說明</th><th>功能</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:var(--gold-light)"><img src="/images/caishen-wins/symbols/caishen-wins_s_wild.webp" alt="Wild 百搭符號" width="48" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">百搭（Wild）</td><td>金色「百搭」卷軸</td><td>替代所有符號（奪寶除外），僅出現在<strong>第 2/3/4/5 軸</strong></td></tr>
+      <tr><td style="font-weight:700;color:var(--guava-pink)"><img src="/images/caishen-wins/symbols/caishen-wins_s_scatter.webp" alt="Scatter 奪寶符號" width="48" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">奪寶（Scatter）</td><td>金色元寶符號</td><td>4+ 個觸發免費旋轉，任意位置有效</td></tr>
+      <tr><td style="font-weight:700;color:var(--gold)"><img src="/images/caishen-wins/symbols/caishen-wins_s_wild_long.webp" alt="橫財神符號" width="80" height="21" style="vertical-align:middle;margin-right:6px" loading="lazy">橫財神</td><td>財神爺橫向積木</td><td>完整出現在附加軸時，變成 <strong>4 個百搭符號</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>高賠率符號</h3>
+  <table>
+    <thead><tr><th>符號</th><th>×3</th><th>×4</th><th>×5</th><th>×6</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:var(--gold-light)"><img src="/images/caishen-wins/symbols/caishen-wins_h_lion.webp" alt="獅子符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">獅子</td><td>30</td><td>40</td><td>50</td><td style="color:var(--gold-light);font-weight:700">80</td></tr>
+      <tr><td style="font-weight:700;color:var(--guava-pink)"><img src="/images/caishen-wins/symbols/caishen-wins_h_koi.webp" alt="錦鯉符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">錦鯉</td><td>20</td><td>25</td><td>30</td><td style="color:var(--gold-light);font-weight:700">50</td></tr>
+      <tr><td style="font-weight:700;color:var(--gold)"><img src="/images/caishen-wins/symbols/caishen-wins_h_cymbal.webp" alt="鈸符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">鈸</td><td>20</td><td>25</td><td>30</td><td style="color:var(--gold-light);font-weight:700">40</td></tr>
+      <tr><td style="font-weight:700;color:var(--guava-green)"><img src="/images/caishen-wins/symbols/caishen-wins_h_toad.webp" alt="金蟾符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">金蟾</td><td>8</td><td>15</td><td>20</td><td style="color:var(--gold-light);font-weight:700">30</td></tr>
+      <tr><td><img src="/images/caishen-wins/symbols/caishen-wins_h_purse.webp" alt="錢袋符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">錢袋</td><td>6</td><td>10</td><td>12</td><td style="color:var(--gold-light);font-weight:700">15</td></tr>
+      <tr><td><img src="/images/caishen-wins/symbols/caishen-wins_h_cracker.webp" alt="鞭炮符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">鞭炮</td><td>6</td><td>10</td><td>12</td><td style="color:var(--gold-light);font-weight:700">15</td></tr>
+    </tbody>
+  </table>
+
+  <h3>低賠率符號</h3>
+  <table>
+    <thead><tr><th>符號</th><th>×3</th><th>×4</th><th>×5</th><th>×6</th></tr></thead>
+    <tbody>
+      <tr><td><img src="/images/caishen-wins/symbols/caishen-wins_l_a.webp" alt="A 符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">A</td><td>4</td><td>6</td><td>8</td><td>10</td></tr>
+      <tr><td><img src="/images/caishen-wins/symbols/caishen-wins_l_k.webp" alt="K 符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">K</td><td>4</td><td>6</td><td>8</td><td>10</td></tr>
+      <tr><td><img src="/images/caishen-wins/symbols/caishen-wins_l_q.webp" alt="Q 符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">Q</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><td><img src="/images/caishen-wins/symbols/caishen-wins_l_j.webp" alt="J 符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">J</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><td><img src="/images/caishen-wins/symbols/caishen-wins_l_10.webp" alt="10 符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">10</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <strong>💡 賠率計算方式：</strong>上表金額 = 基於 Base Bet 的倍數。實際贏分 = 中獎金額 =（投注金額 ÷ 20）× 賠率 × 中獎路數。6 軸遊戲的 6 連線賠率是最高的，所以拼到 6 連是關鍵。百搭符號只出現在第 2~5 軸上。
+  </div>
+
+  <!-- ===== 第 4 節：多路連消百搭 ===== -->
+  <h2 class="section-title" id="wilds-on-the-way">多路連消百搭（Wilds on the Way）</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_wilds-on-the-way.webp" alt="贏財神 多路連消百搭 銀框符號" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_wilds-on-the-way2.webp" alt="贏財神 多路連消百搭 金框變百搭" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_wilds-on-the-way3.webp" alt="贏財神 多路連消百搭 百搭符號展開" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 多路連消百搭三連拍：銀框標記 → 金框升級 → 變成百搭符號展開中獎路數</p>
+
+  <p>這是贏財神最核心的機制，也是讓中獎路數從 2,025 路暴漲到 32,400 路的關鍵。運作方式分三步：</p>
+
+  <div class="card" style="border-color:var(--gold);text-align:center">
+    <h3 style="color:var(--gold-light);font-size:1.3rem">🔗 多路連消百搭三階段</h3>
+    <p style="font-size:1.05rem"><strong>① 銀框標記</strong>：在任何旋轉期間，第 2~5 軸上佔據 2~4 個位置的符號（不含百搭）可能被<strong>銀框</strong>包圍</p>
+    <p style="font-size:1.05rem"><strong>② 金框升級</strong>：消除掉落後，上一輪贏獎中的<strong>銀框符號</strong>會被轉換為隨機帶有<strong>金框</strong>的符號（百搭除外）</p>
+    <p style="font-size:1.05rem"><strong>③ 變百搭</strong>：金框符號在下一輪參與贏獎後，會被轉換為 <strong>2~4 個百搭符號</strong>，數量取決於該金框符號佔據的位置數</p>
+  </div>
+
+  <p>簡單來說：<strong>銀框→金框→百搭</strong>，每消除一輪就升級一次。百搭符號佔據多個位置意味著中獎路數倍增——原本只有 1 個位置的符號變成 2~4 個百搭，等於把那一軸的中獎機會翻了好幾倍。這就是為什麼連消越多輪，中獎路數可以從 2,025 路一路膨脹到 32,400 路。</p>
+
+  <blockquote>芭樂子的觀察：多路連消百搭讓每一輪消除都更有「後勁」。第一輪中獎可能只是小獎，但到了第二、三輪，大量百搭展開後路數暴漲，獎金會突然跳一個量級。這種「越消越大」的感覺非常過癮。</blockquote>
+
+  <!-- ===== 第 5 節：橫財神模式 ===== -->
+  <h2 class="section-title" id="caishen-feature">橫財神模式</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_success_caishen_feature.webp" alt="贏財神 橫財神模式觸發" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_success_caishen_feature2.webp" alt="贏財神 橫財神積木完整出現" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_success_caishen_feature3.webp" alt="贏財神 橫財神變4個百搭" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 橫財神模式：財神爺積木完整出現在附加軸 → 直接變成 4 個百搭符號！</p>
+
+  <p>在任何旋轉期間，最多 4 個符號組成的<strong>橫財神積木</strong>會隨機出現在第 2~5 軸頂部的<strong>附加軸</strong>上。如果橫財神積木<strong>完整出現</strong>（沒有被截斷），它就會直接變成 <strong>4 個百搭符號</strong>。</p>
+
+  <div class="tip-box">
+    <strong>💡 橫財神要點：</strong><br>
+    ① 橫財神積木由最多 4 個符號組成，橫向排列在附加軸上<br>
+    ② 必須完整出現（4 個符號都在附加軸範圍內）才會觸發<br>
+    ③ 觸發後直接變成 4 個百搭符號，一次在附加軸上鋪滿 Wild<br>
+    ④ 配合多路連消百搭，可以讓中獎路數瞬間暴漲
+  </div>
+  <p>橫財神模式不常觸發，但一旦觸發就是大場面——附加軸上一次出現 4 個 Wild，配合主盤面的消除連鎖，可以製造出極高的中獎路數和獎金。可以把它理解成這款遊戲的「大招」。</p>
+
+  <!-- ===== 第 6 節：免費旋轉與搏一搏 ===== -->
+  <h2 class="section-title" id="freespin">免費旋轉與搏一搏</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_4_scatters.webp" alt="贏財神 4個奪寶符號觸發免費旋轉" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_free_spin_won.webp" alt="贏財神 贏得免費旋轉 8轉x8倍" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 4 個奪寶符號觸發免費旋轉——贏得 8 次免費旋轉搭配 x8 獎金倍數</p>
+
+  <h3>觸發條件</h3>
+  <p>盤面上出現 <strong>4 個以上奪寶符號（Scatter）</strong>即可觸發免費旋轉。基礎是 8 轉，每多 1 個 Scatter 額外 +2 轉：</p>
+  <table>
+    <thead><tr><th>Scatter 數量</th><th>免費旋轉次數</th></tr></thead>
+    <tbody>
+      <tr><td>4 個</td><td><strong>8</strong> 轉</td></tr>
+      <tr><td>5 個</td><td><strong>10</strong> 轉</td></tr>
+      <tr><td>6 個</td><td><strong>12</strong> 轉</td></tr>
+      <tr><td>7 個以上</td><td><strong>12+</strong> 轉（每多 1 個 +2 轉）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>搏一搏機制</h3>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_gamble_feature.webp" alt="贏財神 搏一搏轉盤機制" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_gamble_feature2.webp" alt="贏財神 搏一搏成功 倍數x10" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 搏一搏轉盤——搏轉數或搏倍數，成功就加碼，失敗就結束！</p>
+
+  <p>觸發免費旋轉後，你不是只能乖乖拿 8 轉 x8。遊戲會給你一個<strong>搏一搏轉盤</strong>，讓你選擇挑戰更多：</p>
+
+  <div class="card" style="border-color:var(--guava-pink)">
+    <h3 style="color:var(--guava-pink)">🎰 搏一搏規則</h3>
+    <p><strong>搏轉數（免費旋轉次數）：</strong>成功 → +2 轉；失敗 → 免費旋轉結束</p>
+    <p><strong>搏倍數（獎金倍數）：</strong>成功 → 倍數 +2；失敗 → 免費旋轉結束</p>
+    <p style="margin-top:0.8rem;color:var(--gold-light);font-weight:700">最高可搏到 x20 獎金倍數！</p>
+  </div>
+
+  <p>搏一搏的風險很明確：<strong>搏成功就是加碼，搏失敗就直接結束免費旋轉</strong>。你可以在任何時候選擇「開始」來停止搏一搏，以當前的轉數和倍數開始免費旋轉。所以策略是：搏到你覺得夠滿意的數字就收手，別太貪心。</p>
+
+  <h3>免費旋轉期間</h3>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_free_spins.webp" alt="贏財神 免費旋轉遊戲中" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_free_spins2.webp" alt="贏財神 免費旋轉 x10倍獎金" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 免費旋轉進行中——搏到的獎金倍數套用在每一轉的獎金上</p>
+
+  <p>免費旋轉期間，你搏到的獎金倍數會套用在<strong>所有免費旋轉的獎金上</strong>。如果你搏到 x20 倍數，那每一轉的獎金都乘以 20，配合多路連消百搭和橫財神模式，獎金可以飛上天。</p>
+
+  <h3>重觸免費旋轉（Retrigger）</h3>
+  <p>免費旋轉期間，如果再出現 <strong>4 個奪寶符號</strong>，會額外獎勵 <strong>8 次免費旋轉</strong>，每多 1 個額外 +2 轉。重觸的免費旋轉使用相同的獎金倍數，不需要重新搏一搏。</p>
+
+  <div class="tip-box">
+    <strong>💡 免費旋轉投注額：</strong>免費旋轉使用觸發時的相同投注額和等級。所有旋轉會自動進行到場次用盡為止。
+  </div>
+
+  <h3>大獎實戰展示</h3>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_big_win.webp" alt="贏財神 大獎 Big Win 700" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_mega_win.webp" alt="贏財神 巨獎 Mega Win 960" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_super_mega_win.webp" alt="贏財神 超級巨獎 Super Mega Win 3408" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ Free Spin 搏一搏成功後的連鎖爆發：大獎 700 → 巨獎 960 → 超級巨獎 3,408！</p>
+
+  <!-- ===== 第 7 節：購買獎金功能 ===== -->
+  <h2 class="section-title" id="buy-feature">購買獎金功能</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_feature_buy.webp" alt="贏財神 購買獎金功能菜單" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/caishen-wins/caishen-wins_4_scatters_feature_buy.webp" alt="贏財神 購買獎金觸發免費旋轉" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 購買獎金功能——不想等 Scatter，直接花錢買免費旋轉入場券</p>
+
+  <p>不想慢慢等 Scatter？贏財神提供<strong>購買獎金功能</strong>，可以直接花費固定金額購買免費旋轉。點擊「購買獎金遊戲」按鈕，以菜單中顯示的價格直接進入免費旋轉模式，一樣可以搏一搏挑戰更高倍數。</p>
+
+  <div class="tip-box">
+    <strong>⚠️ 注意：</strong>購買獎金的價格通常是當前投注額的 25 倍左右。在使用此功能前，請確認你的預算足夠。買入後一樣會進入搏一搏環節，所以風險和回報與正常觸發一樣。
+  </div>
+
+  <!-- ===== 第 8 節：推薦理由 ===== -->
+  <h2 class="section-title" id="recommend">為什麼 GAME8LA 推薦這款？</h2>
+  <p>贏財神是 PG Soft 財神系列中很有特色的一款。6 軸盤面加上最高 32,400 路的中獎路數，讓每一轉都充滿可能性。搏一搏機制讓玩家有主動決策的空間——要保守還是要賭一把，由你自己決定，不像很多老虎機全部靠運氣。</p>
+  <p>中波動的設計讓遊戲節奏很舒服，35.46% 的中獎率代表不會太乾。Free Spin 搏到 x20 後的爆發力驚人，橫財神模式一次 4 個 Wild 更是讓人腎上腺素飆升。如果你喜歡中國風的遊戲主題，又想要有策略感的玩法，贏財神絕對值得一試。</p>
+  <p>想了解更多老虎機基本概念，可以看芭樂子的 <a href="/articles/slots-rtp-guide/" style="color:var(--guava-green)">RTP 完整教學</a>；如果想比較其他 PG Soft 遊戲，也可以看 <a href="/games/mahjong-ways-2/" style="color:var(--guava-green)">麻將胡了2 攻略</a> 和 <a href="/games/mahjong-ways/" style="color:var(--guava-green)">麻將胡了初代攻略</a>。</p>
+
+  <!-- ===== 第 9 節：攻略建議 ===== -->
+  <h2 class="section-title" id="tips">⚡ 8LA 攻略建議</h2>
+  <div class="card" style="background:rgba(57,255,20,0.08);border-color:var(--guava-green)">
+    <ol style="padding-left:1.5rem;color:var(--text-secondary)">
+      <li><strong>搏一搏要有策略</strong> — 不要每次都搏到底。建議搏到 x10~x12 就收手，x20 雖然夢幻但失敗率很高。搏一搏失敗 = 0 轉 = 什麼都沒有，切記風險管理</li>
+      <li><strong>連消百搭是核心</strong> — 銀框→金框→百搭的三階段機制讓連消越多輪越有價值。不要只看第一輪中獎的金額，真正的大獎在後面幾輪百搭展開後才會出現</li>
+      <li><strong>橫財神可遇不可求</strong> — 附加軸的橫財神積木完整出現 = 4 個 Wild，但觸發率不高。把它當驚喜就好，不要刻意追求</li>
+      <li><strong>善用購買功能試水溫</strong> — 如果你想快速體驗 Free Spin + 搏一搏的感覺，購買獎金功能可以省去等 Scatter 的時間。但注意成本是投注額的 25 倍左右</li>
+      <li><strong>6 軸的 6 連線很關鍵</strong> — 6 連線的賠率是 3 連線的 2~3 倍以上。百搭符號出現在中間軸（第 2~5 軸）可以幫你把短連線延伸成長連線，大幅提升獎金</li>
+      <li><strong>中波動的預算規劃</strong> — 中波動遊戲比高波動友善，建議準備至少 80~120 轉的預算。中獎率 35.46% 代表大約每 3 轉就有 1 次回饋，不會長時間空轉</li>
+      <li><strong>跟其他 PG Soft 遊戲比較</strong> — 喜歡消除掉落的可以試試 <a href="/games/mahjong-ways-2/" style="color:var(--guava-green)">麻將胡了2</a>（2,000 路 Gold Plated）；喜歡搏一搏的可以先試試贏財神，因為搏一搏是這款遊戲的最大特色</li>
+    </ol>
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <h2 class="section-title" id="faq">常見問題 FAQ</h2>
+  <div class="faq-list">
+    {faqs.map(f => (
+      <details class="faq-item">
+        <summary class="faq-q">{f.q}</summary>
+        <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
+      </details>
+    ))}
+  </div>
+
+  </div><!-- end article-content -->
+
+  <!-- 延伸閱讀 -->
+  <div class="related-box"><h3>⚡ 你可能也想玩</h3><div class="related-links"><a href="/games/mahjong-ways-2/">麻將胡了2<small>PG Soft｜2000 Ways｜8LA評分 9.2</small></a><a href="/games/mahjong-ways/">麻將胡了（初代）<small>PG Soft｜1024 Ways｜8LA評分 9.4</small></a><a href="/games/seth-2/">戰神賽特2：覺醒之力<small>ATG電子｜8LA評分 9.8</small></a><a href="/games/dragon-legend/">魔龍傳奇<small>GR電子｜經典國民老虎機｜8LA評分 9.5</small></a></div></div>
+
+  <!-- 延伸閱讀：文章 -->
+  <h3 style="margin-top:2rem">📚 延伸閱讀</h3>
+  <div class="related-links">
+    <a href="/articles/slots-rtp-guide/">老虎機 RTP 完整教學<small>RTP、RNG、波動度一次搞懂</small></a>
+    <a href="/articles/slots-guide/">老虎機新手完整指南<small>從零開始的 Slots 教學</small></a>
+    <a href="/articles/casino-payout-guide/">娛樂城出金完整攻略<small>怎麼安全把錢拿回來</small></a>
+    <a href="/articles/online-casino-guide/">線上娛樂城完整指南<small>選平台、選遊戲、防詐騙</small></a>
+  </div>
+
+  <div style="text-align:center;margin-top:2rem">
+    <a href="/#games" class="btn-outline">← 回遊戲列表</a>
+    <a href="/game-ranking/" class="btn-primary" style="margin-left:1rem">看遊戲推薦排名 →</a>
+  </div>
+</div>
+
+</BaseLayout>
+
+<script is:inline type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "贏財神 Caishen Wins",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "description": "PG Soft 6軸最高32,400路老虎機，RTP 96.92%、最大倍率 x100,000。多路連消百搭讓路數暴漲、橫財神模式一次4個Wild、Free Spin搏一搏最高x20獎金倍數。",
+  "url": "https://game8la.com/games/caishen-wins/",
+  "author": { "@type": "Organization", "name": "PG Soft" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "9.0",
+    "bestRating": "10",
+    "worstRating": "1",
+    "ratingCount": "2340"
+  }
+}
+</script>

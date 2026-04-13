@@ -309,10 +309,11 @@ const games = [
   { id: 3, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.6, views: 6518, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: 'hot', gradient: 'gc-3', icon: 'dice-5', label: 'PG · 2000路', img: 'images/mahjong-ways2/mahjong-ways2-cover.webp' },
   { id: 4, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.5, views: 5890, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-4', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
   { id: 5, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 5240, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-5', icon: 'flame', label: 'GR · 經典IP' },
-  { id: 6, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 4870, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-6', icon: 'dice-5', label: 'PG · 1024 Ways' },
+  { id: 6, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 4870, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-6', icon: 'dice-5', label: 'PG · 1024 Ways', img: 'images/mahjong-ways/mahjong-ways-card-thumbnail.webp' },
   { id: 7, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 4320, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-7', icon: 'shield', label: 'RSG · x500' },
   { id: 8, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 3980, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-8', icon: 'coins', label: 'RSG · 32400路' },
   { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 3685, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
+  { id: 10, slug: 'caishen-wins', name: '贏財神', cat: 'slots', rating: 9.0, views: 2340, desc: 'PG Soft 6軸最高32,400路老虎機！RTP 96.92%、最大x100,000倍，多路連消百搭（銀框→金框→Wild）、橫財神模式一次4個Wild、Free Spin搏一搏最高x20獎金倍數。中波動財神系列。', badge: 'new', gradient: 'gc-10', icon: 'coins', label: 'PG · 32400路', img: 'images/caishen-wins/caishen-wins-card-thumbnail.webp' },
 ];
 // === RENDER GAMES ===
 function renderGames(filter = 'all') {
@@ -1494,10 +1495,11 @@ const games = [
   { id: 3, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.6, views: 6518, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: 'hot', gradient: 'gc-3', icon: 'dice-5', label: 'PG · 2000路', img: 'images/mahjong-ways2/mahjong-ways2-cover.webp' },
   { id: 4, slug: 'fantasy-potion', name: '奇幻魔藥', cat: 'slots', rating: 9.5, views: 5890, desc: 'RG電子蜂巢消除老虎機！RTP 98.28%業界天花板，最大x20000倍，6個相同符號相鄰即中獎。Wild累積倍數+魔藥缸加乘+15局Free Game，高波動爆分核彈。', badge: 'hot', gradient: 'gc-4', icon: 'flask', label: 'RG · RTP 98.28%', img: 'images/fantasy-potion/card-thumbnail.webp' },
   { id: 5, slug: 'game-3', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 5240, desc: 'GR電子經典IP！3x5轉軸、20條賠付線單向連線，倍數連鎖最高x5、Free Game 10轉、隕石百搭、幸運彩金四大機制，國民老虎機。', badge: 'hot', gradient: 'gc-5', icon: 'flame', label: 'GR · 經典IP' },
-  { id: 6, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 4870, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-6', icon: 'dice-5', label: 'PG · 1024 Ways' },
+  { id: 6, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 4870, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-6', icon: 'dice-5', label: 'PG · 1024 Ways', img: 'images/mahjong-ways/mahjong-ways-card-thumbnail.webp' },
   { id: 7, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 4320, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。', badge: null, gradient: 'gc-7', icon: 'shield', label: 'RSG · x500' },
   { id: 8, slug: 'game-7', name: '聚寶財神', cat: 'slots', rating: 9.3, views: 3980, desc: 'RSG皇家電子6軸老虎機！2025-32400路中獎，多路連消百搭三階段進化（銀框→金框→Wild）、橫財神模式、搏一搏Free Game倍數最高x20+最多200場。GLI認證。', badge: 'new', gradient: 'gc-8', icon: 'coins', label: 'RSG · 32400路' },
   { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 3685, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
+  { id: 10, slug: 'caishen-wins', name: '贏財神', cat: 'slots', rating: 9.0, views: 2340, desc: 'PG Soft 6軸最高32,400路老虎機！RTP 96.92%、最大x100,000倍，多路連消百搭（銀框→金框→Wild）、橫財神模式一次4個Wild、Free Spin搏一搏最高x20獎金倍數。中波動財神系列。', badge: 'new', gradient: 'gc-10', icon: 'coins', label: 'PG · 32400路', img: 'images/caishen-wins/caishen-wins-card-thumbnail.webp' },
 ];
 
 // === RENDER GAMES ===
