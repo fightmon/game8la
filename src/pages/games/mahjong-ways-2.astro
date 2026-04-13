@@ -1,21 +1,45 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
 
+const faqs = [
+  { q: '麻將胡了2 的 RTP 是多少？', a: '根據 PG Soft 官方規格，麻將胡了2（Mahjong Ways 2）的預設 RTP 為 96.95%。不過 PG Soft 提供多個 RTP 版本讓平台選用，實際 RTP 請在遊戲內規則頁面確認。' },
+  { q: '麻將胡了2 跟初代差在哪？', a: '最大的差異有三點：路數從 1,024 路升級到 2,000 路、Free Spin 期間第 3 軸全部自動變成 Gold Plated（中獎即變 Wild）、Wild 不再出現在第 1 軸。二代 Free Spin 少了 2 轉（10 轉 vs 初代 12 轉），但第 3 軸全金的加強讓爆分能力更上一層。' },
+  { q: '麻將胡了2 的最大倍率是多少？', a: 'PG Soft 官方資料顯示，麻將胡了2 的最大贏獎倍率為 x100,000（即單次最大可贏下注額的 100,000 倍）。實際達成率極低，是 PG Soft 遊戲中天花板級的數字。' },
+  { q: '麻將胡了2 的 Free Spin 怎麼觸發？', a: '盤面上出現 3 個以上 Scatter 符號（「胡」字麻將牌）即可觸發。3 個 = 10 轉、4 個 = 12 轉、5 個 = 14 轉。Free Spin 期間還可以再觸發（Retrigger）。' },
+  { q: 'Gold Plated（金牌符號）是什麼？', a: 'Gold Plated 是麻將胡了系列的招牌機制。帶有金色外框的符號在參與中獎後會直接變成 Wild 符號。二代的 Free Spin 期間，第 3 軸（中央軸）的所有普通符號固定變成 Gold Plated，第 2、4 軸也會隨機追加金牌符號，大幅增加 Wild 來源。' },
+  { q: '麻將胡了2 適合新手嗎？', a: '很適合。2,000 路中獎路徑多、消除掉落機制直覺好懂、中高波動不會太極端。比 RSG 系列的超高波動遊戲更友善，小獎頻率還行，不會長時間完全沒有回饋。' },
+];
 ---
-
-<BaseLayout 
-  title="麻將胡了2｜PG Soft 2000路老虎機實測 - GAME8LA"
-  description="麻將胡了2完整評測！PG Soft 5軸2000路消除掉落老虎機，Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，8LA鄉民實測攻略。"
-  ogImage="https://game8la.com/images/og-image.webp"
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/games/mahjong-ways-2/"
+  title="麻將胡了2｜PG Soft 2000路老虎機完整攻略 - GAME8LA"
+  description="麻將胡了2 完整攻略！RTP 96.95%、最大倍率 x100,000、2000路消除掉落、Gold Plated 金牌變 Wild、Free Spin 第3軸全金倍數 x10。PG Soft 經典續作，8LA 芭樂子實測解析。"
+  image="https://game8la.com/images/mahjong-ways2/mahjong-ways2-cover.webp"
+  datePublished="2026-04-05"
+  dateModified="2026-04-13"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '熱門遊戲', url: 'https://game8la.com/#games' },
+    { name: '麻將胡了2', url: 'https://game8la.com/games/mahjong-ways-2/' },
+  ]}
+/>
+<BaseLayout
+  title="麻將胡了2｜PG Soft 2000路老虎機完整攻略 - GAME8LA"
+  description="麻將胡了2 完整攻略！RTP 96.95%、最大倍率 x100,000、2000路消除掉落、Gold Plated 金牌變 Wild、Free Spin 第3軸全金倍數 x10。PG Soft 經典續作，8LA 芭樂子實測解析。"
+  ogImage="https://game8la.com/images/mahjong-ways2/mahjong-ways2-cover.webp"
   currentPage="rankings"
 >
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 麻將胡了2</div>
+  <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem"><Icon name="clock" /> 最後更新：2026 年 4 月 13 日 ｜ <Icon name="user-pen" /> 作者：芭樂子 ｜ <Icon name="book-open" /> 預估閱讀 8 分鐘</div>
   <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
-    <div style="background:linear-gradient(135deg,#0a1a1a,#153535,#0a2525);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:300px;font-size:5rem;border:1px solid var(--border)">
-      🀄
+    <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#0a1a1a">
+      <img src="/images/mahjong-ways2/mahjong-ways2-splash.webp" alt="麻將胡了2 Mahjong Ways 2 封面" style="width:100%;height:auto;display:block" width="500" height="500" loading="eager" fetchpriority="high">
     </div>
     <div>
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 麻將・消除掉落・2000路</span>
@@ -27,23 +51,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
       <div class="info-grid">
         <span class="label">遊戲供應商</span><span class="value">PG Soft（Pocket Games Soft）</span>
-        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--text-muted)">官方未公開</span>
+        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--guava-green)">96.95%（預設）</span>
         <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">中高波動</span>
-        <span class="label">盤面規格</span><span class="value" style="color:var(--gold-light)">5 軸 4 列（第 2/3/4 軸額外+1 列）</span>
-        <span class="label">中獎方式</span><span class="value">2,000 Ways（消除掉落 Cascading）</span>
+        <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">x100,000</span>
+        <span class="label">盤面規格</span><span class="value">5 軸 4 列（第 2/3/4 軸額外+1 列）</span>
+        <span class="label">中獎方式</span><span class="value"><a href="/articles/slots-guide/" style="color:var(--guava-green)">2,000 Ways</a>（消除掉落 Cascading）</span>
         <span class="label">核心機制</span><span class="value">Gold Plated→Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金</span>
+        <span class="label">最低/最高投注</span><span class="value">0.20 ~ 100（Base Bet 20）</span>
+        <span class="label">認證</span><span class="value">UKGC + MGA 雙執照、GA/BMM 認證</span>
       </div>
       <div class="tag-list">
         <span class="tag">麻將胡了2</span>
         <span class="tag">Mahjong Ways 2</span>
         <span class="tag">PG Soft</span>
+        <span class="tag">RTP 96.95%</span>
         <span class="tag">2000路</span>
         <span class="tag">消除掉落</span>
         <span class="tag">Gold Plated</span>
+        <span class="tag">x100,000</span>
         <span class="tag">Free Spin x10</span>
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:1rem">
-        <a href="#" class="btn-primary" onclick="event.preventDefault();document.querySelector('.section-title').scrollIntoView({behavior:'smooth'})">🎮 查看攻略</a>
+        <a href="#" class="btn-primary" onclick="event.preventDefault();document.querySelector('.section-title').scrollIntoView({behavior:'smooth'})">⚡ 看攻略</a>
         <a href="javascript:void(0)" class="btn-outline" onclick="this.innerHTML='✅ 已收藏';this.style.borderColor='var(--gold)';this.style.color='var(--gold)'">📋 加入收藏</a>
       </div>
     </div>
@@ -55,6 +84,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <ol>
       <li><a href="#intro">遊戲介紹</a></li>
       <li><a href="#grid">盤面與 2000 路規則</a></li>
+      <li><a href="#paytable">符號賠率表</a></li>
       <li><a href="#cascade">消除掉落 Cascading</a></li>
       <li><a href="#multiplier">倍數連鎖系統</a></li>
       <li><a href="#goldplated">Gold Plated 金牌符號</a></li>
@@ -62,146 +92,263 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <li><a href="#vs1">跟初代麻將胡了的差異</a></li>
       <li><a href="#recommend">推薦理由</a></li>
       <li><a href="#tips">8LA攻略建議</a></li>
+      <li><a href="#faq">常見問題 FAQ</a></li>
     </ol>
   </div>
+
+  <div class="article-content">
+
+  <!-- ===== 第 1 節：遊戲介紹 ===== -->
   <h2 class="section-title" id="intro">遊戲介紹</h2>
-  <div class="article-content">
-    <p>初代《麻將胡了》紅遍全亞洲，PG Soft 趁勝追擊推出的《<strong>麻將胡了2（Mahjong Ways 2）</strong>》不只是換皮重出，而是從盤面架構就開始升級。初代是 5 軸 4 列 1024 路，二代變成 <strong>5 軸 4 列 + 第 2/3/4 軸額外多一列</strong>，路數直接翻倍到 <strong>2,000 路</strong>。</p>
-    <p>核心玩法不變——消除掉落（Cascading）搭配倍數連鎖，中獎符號消除後新符號掉落，倍數從 x1 一路升到 x5。最大的升級在 <strong>Free Spin</strong>：第 3 軸的所有符號全部變成金牌（Gold Plated），等於整條軸都是潛在的 Wild 來源，倍數更從 x2 起跳最高到 x10。</p>
-    <p>PG Soft 持有英國 UKGC、馬爾他 MGA 雙執照，通過 GA/BMM 認證，國際信譽沒話說。如果你玩過初代覺得爽但不夠爽，二代就是那個「剛好再多一點」的完美升級。</p>
+  <div style="text-align:center;margin:1.5rem 0">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2-splash.webp" alt="麻將胡了2 Mahjong Ways 2 遊戲封面" style="width:100%;max-width:500px;height:auto;border-radius:16px;border:1px solid var(--border)" width="500" height="500">
   </div>
+  <p class="article-img-caption">▲ 麻將胡了2 Mahjong Ways 2——PG Soft 經典麻將系列的全面進化版</p>
+
+  <p>初代《麻將胡了》紅遍全亞洲，PG Soft 趁勝追擊推出的《<strong>麻將胡了2（Mahjong Ways 2）</strong>》不只是換皮重出，而是從盤面架構就開始升級。初代是 5 軸 4 列 1,024 路，二代變成 <strong>5 軸 4 列 + 第 2/3/4 軸額外多一列</strong>，路數直接翻倍到 <strong>2,000 路</strong>。<a href="/articles/slots-rtp-guide/" style="color:var(--guava-green)">RTP</a> 為 <strong>96.95%</strong>，最大贏獎倍率 <strong>x100,000</strong>。</p>
+
+  <p>核心玩法不變——消除掉落（Cascading）搭配倍數連鎖，中獎符號消除後新符號掉落，倍數從 x1 一路升到 x5。最大的升級在 <strong>Free Spin</strong>：第 3 軸的所有符號固定變成金牌（Gold Plated），第 2、4 軸也會隨機追加金牌符號，等於多個軸都是潛在的 Wild 來源，倍數更從 x2 起跳最高到 x10。</p>
+
+  <p>PG Soft 持有英國 UKGC、馬爾他 MGA 雙執照，通過 GA/BMM 認證，國際信譽沒話說。如果你玩過初代覺得爽但不夠爽，二代就是那個「剛好再多一點」的完美升級。</p>
+
+  <!-- ===== 第 2 節：盤面與 2000 路規則 ===== -->
   <h2 class="section-title" id="grid">盤面與 2000 路規則</h2>
-  <div class="article-content">
-    <p>麻將胡了2 的盤面是 <strong>5 軸 4 列</strong>，但第 2、3、4 軸各多一列（額外列），總共形成 <strong>2,000 路</strong>固定中獎組合。比初代的 1024 路多了將近一倍的中獎路徑。</p>
-    <div class="tip-box">
-      <strong>💡 2000 路規則：</strong><br>
-      ① 贏分組合必須從<strong>最左邊的轉輪開始，由左至右相鄰</strong><br>
-      ② 每一轉輪上出現的贏分符號數量會相乘計算總路數<br>
-      ③ 同種符號只計算最高贏分組合<br>
-      ④ Base bet 20 = 2,000 ways（固定）
-    </div>
-    <p>Base bet 20 分，Bet Level 1~10，Bet Size 0.01~10,000，彈性很大。不管是小資玩家還是大佬都能找到適合的投注區間。</p>
+  <div style="text-align:center;margin:1.5rem 0">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_maingame_zh.webp" alt="麻將胡了2 盤面與中獎路徑示意" style="width:100%;max-width:360px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
   </div>
+  <p class="article-img-caption">▲ 5 軸 4 列盤面，第 2/3/4 軸各多一列，形成 2,000 路中獎組合</p>
+
+  <p>麻將胡了2 的盤面是 <strong>5 軸 4 列</strong>，但第 2、3、4 軸各多一列（額外列），總共形成 <strong>2,000 路</strong>固定中獎組合。比初代的 1,024 路多了將近一倍的中獎路徑。</p>
+  <div class="tip-box">
+    <strong>💡 2000 路規則：</strong><br>
+    ① 贏分組合必須從<strong>最左邊的轉輪開始，由左至右相鄰</strong><br>
+    ② 每一轉輪上出現的贏分符號數量會相乘計算總路數<br>
+    ③ 同種符號只計算最高贏分組合<br>
+    ④ Base bet 20 = 2,000 ways（固定）
+  </div>
+  <p>投注範圍 0.20 ~ 100，Bet Level 1~10，彈性很大。不管是小資玩家還是大佬都能找到適合的投注區間。</p>
+
+  <!-- ===== 第 3 節：符號賠率表 ===== -->
+  <h2 class="section-title" id="paytable">符號賠率表</h2>
+
+  <p>麻將胡了2 的符號分為<strong>高賠率符號</strong>（特殊麻將牌）和<strong>低賠率符號</strong>（筒子 & 條子），另外還有 Wild（百搭）和 Scatter（觸發免費旋轉）。以下賠率以 <strong>Base Bet 20</strong> 為基準：</p>
+
+  <h3>特殊符號</h3>
+  <table>
+    <thead><tr><th>符號</th><th>說明</th><th>功能</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:var(--gold-light)"><img src="/images/mahjong-ways2/symbols/mahjong-ways2_s_wild_zh.webp" alt="Wild 百搭符號" width="48" height="56" style="vertical-align:middle;margin-right:6px" loading="lazy">Wild（百搭）</td><td>「萬」字金色麻將牌</td><td>替代所有符號（Scatter 除外），僅出現在<strong>第 2/3/4/5 軸</strong></td></tr>
+      <tr><td style="font-weight:700;color:var(--guava-pink)"><img src="/images/mahjong-ways2/symbols/mahjong-ways2_s_scatter.webp" alt="Scatter 散佈符號" width="52" height="52" style="vertical-align:middle;margin-right:6px" loading="lazy">Scatter（散佈）</td><td>「胡」字紅色麻將牌</td><td>3+ 個觸發 Free Spin，任意位置有效</td></tr>
+    </tbody>
+  </table>
+
+  <h3>高賠率符號</h3>
+  <table>
+    <thead><tr><th>符號</th><th>×3</th><th>×4</th><th>×5</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:var(--guava-green)"><img src="/images/mahjong-ways2/symbols/mahjong-ways2_h_green.webp" alt="青發符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">青發</td><td>10</td><td>25</td><td style="color:var(--gold-light);font-weight:700">50</td></tr>
+      <tr><td style="font-weight:700;color:var(--guava-pink)"><img src="/images/mahjong-ways2/symbols/mahjong-ways2_h_red.webp" alt="紅中符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">紅中</td><td>8</td><td>20</td><td style="color:var(--gold-light);font-weight:700">40</td></tr>
+      <tr><td style="font-weight:700;color:#f5f5f5"><img src="/images/mahjong-ways2/symbols/mahjong-ways2_h_blue.webp" alt="白板符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">白板</td><td>6</td><td>15</td><td style="color:var(--gold-light);font-weight:700">30</td></tr>
+      <tr><td style="font-weight:700;color:var(--gold)"><img src="/images/mahjong-ways2/symbols/mahjong-ways2_h_8.webp" alt="八萬符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">八萬</td><td>5</td><td>10</td><td style="color:var(--gold-light);font-weight:700">15</td></tr>
+    </tbody>
+  </table>
+
+  <h3>低賠率符號</h3>
+  <table>
+    <thead><tr><th>符號</th><th>×3</th><th>×4</th><th>×5</th></tr></thead>
+    <tbody>
+      <tr><td><img src="/images/mahjong-ways2/symbols/mahjong-ways2_l_ball5.webp" alt="五筒符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">五筒</td><td>3</td><td>5</td><td>12</td></tr>
+      <tr><td><img src="/images/mahjong-ways2/symbols/mahjong-ways2_l_ball3.webp" alt="三筒符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">三筒</td><td>2</td><td>4</td><td>10</td></tr>
+      <tr><td><img src="/images/mahjong-ways2/symbols/mahjong-ways2_l_ball2.webp" alt="二筒符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">二筒</td><td>1</td><td>3</td><td>6</td></tr>
+      <tr><td><img src="/images/mahjong-ways2/symbols/mahjong-ways2_l_bamboo5.webp" alt="五條符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">五條</td><td>3</td><td>5</td><td>12</td></tr>
+      <tr><td><img src="/images/mahjong-ways2/symbols/mahjong-ways2_l_bamboo2.webp" alt="二條符號" width="40" height="48" style="vertical-align:middle;margin-right:6px" loading="lazy">二條</td><td>1</td><td>3</td><td>6</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <strong>💡 賠率計算方式：</strong>上表金額 = 基於 Base Bet 的倍數。實際贏分 = 中獎金額 =（投注金額 ÷ 20）× 中獎路數 × 成數（賠率）。例如：投注 100 元、青發×5 連 15 路，倍數 x3 的情況下 =（100 ÷ 20）× 15 × 50 × 3 = 11,250 元。
+  </div>
+
+  <!-- ===== 第 4 節：消除掉落 ===== -->
   <h2 class="section-title" id="cascade">消除掉落 Cascading</h2>
-  <div class="article-content">
-    <p>跟初代一樣，麻將胡了2 採用<strong>消除掉落（Cascading）</strong>機制——中獎的符號會從盤面上消除（爆開），上方的符號往下掉落填補空位，如果新的排列又形成中獎組合，就會<strong>再次消除、再次掉落</strong>，連鎖反應一直持續到沒有新的中獎為止。</p>
-    <blockquote>每一輪新的中獎組合都會被額外計算。你只花了一次旋轉的錢，但可能因為連鎖消除而得到好幾輪的獎金。這就是消除掉落遊戲讓人上癮的核心原因。</blockquote>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_gold-plated-symbols2_zh.webp" alt="麻將胡了2 消除掉落 x3 連鎖中" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_gold-plated-symbols3_zh.webp" alt="麻將胡了2 消除掉落 x5 連鎖結果" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
   </div>
+  <p class="article-img-caption">▲ 消除掉落連鎖示意——中獎符號爆開後新符號掉落，倍數從 x3 一路升到 x5</p>
+
+  <p>跟初代一樣，麻將胡了2 採用<strong>消除掉落（Cascading / Tumble）</strong>機制——中獎的符號會從盤面上消除（爆開），上方的符號往下掉落填補空位，如果新的排列又形成中獎組合，就會<strong>再次消除、再次掉落</strong>，連鎖反應一直持續到沒有新的中獎為止。</p>
+
+  <blockquote>每一輪新的中獎組合都會被額外計算。你只花了一次旋轉的錢，但可能因為連鎖消除而得到好幾輪的獎金。這就是消除掉落遊戲讓人上癮的核心原因。</blockquote>
+
+  <p>連鎖消除的每一輪不只是多賺一次獎金——它還會推動<strong>倍數指示器往上跳</strong>，這就接到下一個關鍵機制。</p>
+
+  <!-- ===== 第 5 節：倍數連鎖系統 ===== -->
   <h2 class="section-title" id="multiplier">倍數連鎖系統</h2>
-  <div class="article-content">
-    <p>每一次旋轉開始時，盤面上方會顯示<strong>倍數指示器</strong>，初始為 x1。每一輪消除掉落的中獎都會讓倍數往上跳一級：</p>
-    <h3>基礎遊戲倍數</h3>
-    <table>
-      <thead><tr><th>輪次</th><th>倍數</th><th>觸發條件</th></tr></thead>
-      <tbody>
-        <tr><td>第 1 輪</td><td><strong>x1</strong></td><td>初始倍數</td></tr>
-        <tr><td>第 2 輪</td><td><strong>x2</strong></td><td>第 1 輪有中獎</td></tr>
-        <tr><td>第 3 輪</td><td><strong>x3</strong></td><td>第 2 輪有中獎</td></tr>
-        <tr><td>第 4 輪以後</td><td><strong>x5</strong></td><td>第 3 輪有中獎</td></tr>
-      </tbody>
-    </table>
-    <h3>Free Spin 倍數（加倍版）</h3>
-    <table>
-      <thead><tr><th>輪次</th><th>倍數</th></tr></thead>
-      <tbody>
-        <tr><td>第 1 輪</td><td style="color:var(--gold-light)"><strong>x2</strong></td></tr>
-        <tr><td>第 2 輪</td><td style="color:var(--gold-light)"><strong>x4</strong></td></tr>
-        <tr><td>第 3 輪</td><td style="color:var(--gold-light)"><strong>x6</strong></td></tr>
-        <tr><td>第 4 輪以後</td><td style="color:var(--gold-light);font-weight:700"><strong>x10</strong></td></tr>
-      </tbody>
-    </table>
-    <p>Free Spin 的倍數是基礎遊戲的<strong>整整兩倍</strong>。第 4 輪以後直接 x10，配上消除掉落的連鎖效果，獎金數字會變得非常可觀。</p>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_multiplier-x2_zh.webp" alt="麻將胡了2 倍數 x2" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_multiplier-x3_zh.webp" alt="麻將胡了2 倍數 x3" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_multiplier-x5_zh.webp" alt="麻將胡了2 倍數 x5 大獎" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
   </div>
+  <p class="article-img-caption">▲ 倍數連鎖實戰：x2→x3→x5，消除到第 4 輪後直接跳 x5，獎金從 25 飆到 500</p>
+
+  <p>每一次旋轉開始時，盤面上方會顯示<strong>倍數指示器</strong>，初始為 x1。每一輪消除掉落的中獎都會讓倍數往上跳一級：</p>
+  <h3>基礎遊戲倍數</h3>
+  <table>
+    <thead><tr><th>輪次</th><th>倍數</th><th>觸發條件</th></tr></thead>
+    <tbody>
+      <tr><td>第 1 輪</td><td><strong>x1</strong></td><td>初始倍數</td></tr>
+      <tr><td>第 2 輪</td><td><strong>x2</strong></td><td>第 1 輪有中獎</td></tr>
+      <tr><td>第 3 輪</td><td><strong>x3</strong></td><td>第 2 輪有中獎</td></tr>
+      <tr><td>第 4 輪以後</td><td><strong>x5</strong></td><td>第 3 輪有中獎</td></tr>
+    </tbody>
+  </table>
+  <h3>Free Spin 倍數（加倍版）</h3>
+  <table>
+    <thead><tr><th>輪次</th><th>倍數</th><th>對比基礎遊戲</th></tr></thead>
+    <tbody>
+      <tr><td>第 1 輪</td><td style="color:var(--gold-light)"><strong>x2</strong></td><td>基礎 x1 的 2 倍</td></tr>
+      <tr><td>第 2 輪</td><td style="color:var(--gold-light)"><strong>x4</strong></td><td>基礎 x2 的 2 倍</td></tr>
+      <tr><td>第 3 輪</td><td style="color:var(--gold-light)"><strong>x6</strong></td><td>基礎 x3 的 2 倍</td></tr>
+      <tr><td>第 4 輪以後</td><td style="color:var(--gold-light);font-weight:700"><strong>x10</strong></td><td>基礎 x5 的 2 倍</td></tr>
+    </tbody>
+  </table>
+  <p>Free Spin 的倍數是基礎遊戲的<strong>整整兩倍</strong>。第 4 輪以後直接 x10，配上消除掉落的連鎖效果，獎金數字會變得非常可觀。這也是為什麼「連鎖消除到第 4 輪以後」是這款遊戲爆分的分水嶺。</p>
+
+  <!-- ===== 第 6 節：Gold Plated 金牌符號 ===== -->
   <h2 class="section-title" id="goldplated">Gold Plated 金牌符號</h2>
-  <div class="article-content">
-    <p>Gold Plated（金牌符號）是麻將胡了系列的招牌機制，二代當然也保留了，而且更強。</p>
-    <h3>基礎遊戲</h3>
-    <p>任何一轉中，<strong>第 2、3、4 軸</strong>上的部分符號（不含 Wild 和 Scatter）可能會以金色外框出現。消除掉落後，如果這些金牌符號在上一輪參與了中獎，它們就會<strong>直接變成 Wild 符號</strong>。</p>
-    <h3>Free Spin（大升級！）</h3>
-    <div class="card" style="border-color:var(--gold);text-align:center">
-      <h3 style="color:var(--gold-light);font-size:1.3rem">🌟 Free Spin 第 3 軸全金</h3>
-      <p style="font-size:1.1rem">Free Spin 期間，<strong>第 3 軸的所有符號</strong>（除了 Wild 和 Scatter）<br>全部自動變成 Gold Plated</p>
-      <p style="margin-top:0.5rem">= 中獎就變 Wild = <strong style="color:var(--gold-light);font-size:1.3rem">整條軸都可能變成 Wild</strong></p>
-    </div>
-    <p>這是二代相對初代最大的升級。初代的 Gold Plated 是隨機出現在第 2/3/4 軸，二代的 Free Spin 直接讓<strong>整個第 3 軸都是金牌</strong>。第 3 軸在 5 軸盤面中是正中央，它變成整排 Wild 的話，左右兩邊的符號幾乎都能湊出中獎組合。這就是為什麼二代的 Free Spin 比初代強這麼多的原因。</p>
+  <div style="text-align:center;margin:1.5rem 0">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_gold-plated-symbols1_zh.webp" alt="麻將胡了2 Gold Plated 金牌符號變 Wild 大獎 2897" style="width:100%;max-width:360px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
   </div>
+  <p class="article-img-caption">▲ Gold Plated 金牌符號中獎後變 Wild——x5 倍數連鎖爆出 2,897.50 大獎</p>
+
+  <p>Gold Plated（金牌符號）是麻將胡了系列的招牌機制，二代當然也保留了，而且更強。</p>
+  <h3>基礎遊戲</h3>
+  <p>任何一轉中，<strong>第 2、3、4 軸</strong>上的部分符號（不含 Wild 和 Scatter）可能會以金色外框出現。消除掉落後，如果這些金牌符號在上一輪參與了中獎，它們就會<strong>直接變成 Wild 符號</strong>，留在盤面上替代任何符號參與下一輪的中獎判定。</p>
+  <h3>Free Spin（大升級！）</h3>
+  <div class="card" style="border-color:var(--gold);text-align:center">
+    <h3 style="color:var(--gold-light);font-size:1.3rem">🌟 Free Spin 第 3 軸全金</h3>
+    <p style="font-size:1.1rem">Free Spin 期間，<strong>第 3 軸的所有符號</strong>（除了 Wild 和 Scatter）<br>固定變成 Gold Plated，第 2、4 軸隨機追加金牌符號</p>
+    <p style="margin-top:0.5rem">= 中獎就變 Wild = <strong style="color:var(--gold-light);font-size:1.3rem">多個軸都可能變成 Wild</strong></p>
+  </div>
+  <p>這是二代相對初代最大的升級。初代的 Gold Plated 是隨機出現在第 2/3/4 軸，二代的 Free Spin 直接讓<strong>整個第 3 軸都固定是金牌</strong>，第 2、4 軸也會隨機追加。第 3 軸在 5 軸盤面中是正中央，它變成整排 Wild 的話，左右兩邊的符號幾乎都能湊出中獎組合。加上第 2、4 軸的隨機金牌符號，Wild 來源大幅增加。這就是為什麼二代的 Free Spin 比初代強這麼多的原因。</p>
+
+  <!-- ===== 第 7 節：Free Spin 10 轉 ===== -->
   <h2 class="section-title" id="freespin">Free Spin 10 轉</h2>
-  <div class="article-content">
-    <h3>觸發條件</h3>
-    <p>盤面上出現 <strong>3 個 Scatter 符號</strong>（「胡」字麻將牌）即可觸發 Free Spin，每多 1 個 Scatter 額外 +2 轉：</p>
-    <table>
-      <thead><tr><th>Scatter 數量</th><th>Free Spin 場次</th></tr></thead>
-      <tbody>
-        <tr><td>3 個</td><td><strong>10</strong> 轉</td></tr>
-        <tr><td>4 個</td><td><strong>12</strong> 轉</td></tr>
-        <tr><td>5 個</td><td><strong>14</strong> 轉</td></tr>
-      </tbody>
-    </table>
-    <h3>Free Spin 期間的三大加強</h3>
-    <ol>
-      <li><strong>第 3 軸全金</strong> — 所有符號（除 Wild/Scatter）自動變成 Gold Plated，中獎就變 Wild</li>
-      <li><strong>倍數翻倍</strong> — 倍數從 x2 起跳，最高 x10（基礎遊戲是 x1→x5）</li>
-      <li><strong>可重觸</strong> — Free Spin 期間再出 3+ Scatter 可以重新觸發，再拿一輪免費旋轉</li>
-    </ol>
-    <div class="tip-box">
-      <strong>💡 Free Spin 投注額：</strong>Free Spin 使用觸發時的相同投注額和等級。按下旋轉鈕後會自動進行到場次用盡為止。
-    </div>
+  <div style="text-align:center;margin:1.5rem 0">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_feature1_zh.webp" alt="麻將胡了2 Free Spin 觸發 贏得免費旋轉 10" style="width:100%;max-width:360px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
   </div>
+  <p class="article-img-caption">▲ 贏得免費旋轉 10 次！金色麻將符號佈滿中軸，所有獎金乘數將翻倍</p>
+
+  <h3>觸發條件</h3>
+  <p>盤面上出現 <strong>3 個 Scatter 符號</strong>（「胡」字麻將牌）即可觸發 Free Spin，每多 1 個 Scatter 額外 +2 轉：</p>
+  <table>
+    <thead><tr><th>Scatter 數量</th><th>Free Spin 場次</th></tr></thead>
+    <tbody>
+      <tr><td>3 個</td><td><strong>10</strong> 轉</td></tr>
+      <tr><td>4 個</td><td><strong>12</strong> 轉</td></tr>
+      <tr><td>5 個</td><td><strong>14</strong> 轉</td></tr>
+    </tbody>
+  </table>
+  <h3>Free Spin 期間的三大加強</h3>
+  <ol>
+    <li><strong>第 3 軸全金，第 2、4 軸隨機追加</strong> — 第 3 軸所有符號（除 Wild/Scatter）固定變成 Gold Plated，第 2、4 軸隨機出現金牌，中獎就變 Wild</li>
+    <li><strong>倍數翻倍</strong> — 倍數從 x2 起跳，最高 x10（基礎遊戲是 x1→x5）</li>
+    <li><strong>可重觸（Retrigger）</strong> — Free Spin 期間再出 3+ Scatter 可以重新觸發，再拿一輪免費旋轉</li>
+  </ol>
+
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_freespins1_zh.webp" alt="麻將胡了2 Free Spin 第3軸全金牌" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_freespins3_zh.webp" alt="麻將胡了2 Free Spin x10 倍數大獎 750" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/mahjong-ways2/mahjong-ways2_freespins4_zh.webp" alt="麻將胡了2 Free Spin 超級巨獎 3130" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ Free Spin 實戰：第 3 軸全金 → x10 倍數贏得 750 → 超級巨獎 3,130！</p>
+
+  <div class="tip-box">
+    <strong>💡 Free Spin 投注額：</strong>Free Spin 使用觸發時的相同投注額和等級。按下旋轉鈕後會自動進行到場次用盡為止。
+  </div>
+
+  <!-- ===== 第 8 節：跟初代差異 ===== -->
   <h2 class="section-title" id="vs1">跟初代麻將胡了的差異</h2>
-  <div class="article-content">
-    <p>如果你已經玩過初代，以下是二代的關鍵升級整理：</p>
-    <div style="overflow-x:auto">
-    <table>
-      <thead><tr><th>項目</th><th>麻將胡了（初代）</th><th>麻將胡了2</th></tr></thead>
-      <tbody>
-        <tr><td>盤面</td><td>5 軸 4 列</td><td>5 軸 4 列 + <strong>第 2/3/4 軸額外+1 列</strong></td></tr>
-        <tr><td>路數</td><td>1,024 Ways</td><td style="color:var(--gold-light)"><strong>2,000 Ways</strong></td></tr>
-        <tr><td>基礎倍數</td><td>x1→x2→x3→x5</td><td>x1→x2→x3→x5（相同）</td></tr>
-        <tr><td>Free Spin 觸發</td><td>3 Scatter = 12 轉</td><td>3 Scatter = <strong>10 轉</strong></td></tr>
-        <tr><td>Free Spin 倍數</td><td>x2→x4→x6→x10</td><td>x2→x4→x6→x10（相同）</td></tr>
-        <tr><td>Free Spin Gold Plated</td><td>第 2/3/4 軸隨機</td><td style="color:var(--gold-light)"><strong>第 3 軸全部自動金牌</strong></td></tr>
-        <tr><td>Wild 出現位置</td><td>不限</td><td>第 2/3/4/5 軸</td></tr>
-      </tbody>
-    </table>
-    </div>
-    <p>二代的 Free Spin 少了 2 轉（12→10），但第 3 軸全金的加強遠遠補回來了。整條中央軸都是潛在 Wild 來源，配上 2000 路的更多中獎路徑，實際的爆分能力比初代明顯更強。</p>
+  <p>如果你已經玩過初代，以下是二代的關鍵升級整理：</p>
+  <div style="overflow-x:auto">
+  <table>
+    <thead><tr><th>項目</th><th>麻將胡了（初代）</th><th style="color:var(--gold-light)">麻將胡了2</th></tr></thead>
+    <tbody>
+      <tr><td>RTP</td><td>96.52%</td><td>96.95%</td></tr>
+      <tr><td>最大倍率</td><td>×???</td><td style="color:var(--gold-light);font-weight:700">x100,000</td></tr>
+      <tr><td>盤面</td><td>5 軸 4 列</td><td>5 軸 4 列 + <strong>第 2/3/4 軸額外+1 列</strong></td></tr>
+      <tr><td>路數</td><td>1,024 Ways</td><td style="color:var(--gold-light)"><strong>2,000 Ways</strong></td></tr>
+      <tr><td>基礎倍數</td><td>x1→x2→x3→x5</td><td>x1→x2→x3→x5（相同）</td></tr>
+      <tr><td>Free Spin 觸發</td><td>3 Scatter = 12 轉</td><td>3 Scatter = <strong>10 轉</strong></td></tr>
+      <tr><td>Free Spin 倍數</td><td>x2→x4→x6→x10</td><td>x2→x4→x6→x10（相同）</td></tr>
+      <tr><td>Free Spin Gold Plated</td><td>第 2/3/4 軸隨機</td><td style="color:var(--gold-light)"><strong>第 3 軸全部固定金牌，第 2、4 軸隨機追加</strong></td></tr>
+      <tr><td>Wild 出現位置</td><td>不限</td><td>第 2/3/4/5 軸（不含第 1 軸）</td></tr>
+    </tbody>
+  </table>
   </div>
-  <h2 class="section-title" id="recommend">為什麼 GAME8LA推薦這款？</h2>
-  <div class="article-content">
-    <p>麻將胡了2 是少數「續作比初代更好」的老虎機遊戲。2000 路比初代的 1024 路多了近一倍中獎機會，Free Spin 第 3 軸全金讓每一轉都有「整排變 Wild」的期待感，倍數連鎖 x10 封頂讓後期消除的每一輪都很有看頭。</p>
-    <p>PG Soft 的雙重國際執照（UKGC + MGA）加上 BMM 認證，品質和公平性都是業界頂標。如果你是麻將胡了初代的老玩家，二代的手感你一定會喜歡；如果是新玩家，直接從二代入門也完全沒問題。</p>
-  </div>
-  <h2 class="section-title" id="tips">⚡ 8LA攻略建議</h2>
+  <p>二代的 Free Spin 少了 2 轉（12→10），但第 3 軸全金的加強遠遠補回來了。整條中央軸都是潛在 Wild 來源，配上 2,000 路的更多中獎路徑，實際的爆分能力比初代明顯更強。</p>
+
+  <!-- ===== 第 9 節：推薦理由 ===== -->
+  <h2 class="section-title" id="recommend">為什麼 GAME8LA 推薦這款？</h2>
+  <p>麻將胡了2 是少數「續作比初代更好」的老虎機遊戲。2,000 路比初代的 1,024 路多了近一倍中獎機會，Free Spin 第 3 軸全金讓每一轉都有「整排變 Wild」的期待感，倍數連鎖 x10 封頂讓後期消除的每一輪都很有看頭。</p>
+  <p>PG Soft 的雙重國際執照（UKGC + MGA）加上 BMM 認證，品質和公平性都是業界頂標。如果你是麻將胡了初代的老玩家，二代的手感你一定會喜歡；如果是新玩家，直接從二代入門也完全沒問題——想了解更多老虎機基本概念，可以看芭樂子的 <a href="/articles/slots-rtp-guide/" style="color:var(--guava-green)">RTP 完整教學</a>。</p>
+
+  <!-- ===== 第 10 節：攻略建議 ===== -->
+  <h2 class="section-title" id="tips">⚡ 8LA 攻略建議</h2>
   <div class="card" style="background:rgba(57,255,20,0.08);border-color:var(--guava-green)">
     <ol style="padding-left:1.5rem;color:var(--text-secondary)">
-      <li><strong>Free Spin 是一切</strong> — 基礎遊戲穩穩打、等 Scatter，Free Spin 的第 3 軸全金 + x10 倍數才是真正噴分的地方</li>
+      <li><strong>Free Spin 是一切</strong> — 基礎遊戲穩穩打、等 Scatter，Free Spin 的第 3 軸固定全金加上第 2、4 軸隨機金牌 + x10 倍數才是真正噴分的地方</li>
       <li><strong>連鎖消除越多越好</strong> — 倍數是 x1→x2→x3→x5 跳的，連鎖到第 4 輪以後每一輪都是 x5（Free Spin 是 x10），所以消除越多輪獎金越誇張</li>
-      <li><strong>第 3 軸是核心</strong> — Free Spin 期間第 3 軸全金，中獎就變 Wild。中央整排 Wild 意味著左右兩側幾乎任何符號都能配對成功</li>
-      <li><strong>跟初代交替玩</strong> — 初代 1024 路 12 轉 vs 二代 2000 路 10 轉，手感稍有不同。初代觸發場次多但單次威力低，二代場次少但每轉威力大</li>
+      <li><strong>第 3 軸是核心</strong> — Free Spin 期間第 3 軸固定全金，第 2、4 軸也會隨機追加金牌，中獎就變 Wild。多軸全金大幅增加 Wild 來源，爆分威力驚人</li>
+      <li><strong>跟初代交替玩</strong> — 初代 1,024 路 12 轉 vs 二代 2,000 路 10 轉，手感稍有不同。初代觸發場次多但單次威力低，二代場次少但每轉威力大。詳細比較可以看 <a href="/games/mahjong-ways/" style="color:var(--guava-green)">初代麻將胡了攻略</a></li>
       <li><strong>注意 Wild 位置</strong> — 二代的 Wild 只出現在第 2/3/4/5 軸（不含第 1 軸），第 1 軸需要靠真實符號</li>
       <li><strong>中高波動的節奏</strong> — 不像 RSG 系列那種超高波動，PG Soft 的中高波動意味著小獎頻率還行，不會太乾，但大獎集中在 Free Spin</li>
+      <li><strong>預算管理</strong> — 中高波動遊戲建議準備至少 100~150 轉的預算。如果你的預算有限，<a href="/articles/free-credit-guide/" style="color:var(--guava-green)">善用平台體驗金</a>先摸清楚手感再投入</li>
     </ol>
   </div>
+
+  <!-- ===== FAQ ===== -->
+  <h2 class="section-title" id="faq">常見問題 FAQ</h2>
+  <div class="faq-list">
+    {faqs.map(f => (
+      <details class="faq-item">
+        <summary class="faq-q">{f.q}</summary>
+        <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
+      </details>
+    ))}
+  </div>
+
+  </div><!-- end article-content -->
+
+  <!-- 延伸閱讀 -->
   <div class="related-box"><h3>⚡ 你可能也想玩</h3><div class="related-links"><a href="/games/mahjong-ways/">麻將胡了（初代）<small>PG Soft｜1024 Ways｜8LA評分 9.4</small></a><a href="/games/fantasy-potion/">奇幻魔藥<small>RG電子｜蜂巢消除98.28%RTP｜8LA評分 9.7</small></a><a href="/games/seth-2/">戰神賽特2：覺醒之力<small>ATG電子｜8LA評分 9.8</small></a><a href="/games/dragon-legend/">魔龍傳奇<small>GR電子｜經典國民老虎機｜8LA評分 9.5</small></a></div></div>
+
+  <!-- 延伸閱讀：文章 -->
+  <h3 style="margin-top:2rem">📚 延伸閱讀</h3>
+  <div class="related-links">
+    <a href="/articles/slots-rtp-guide/">老虎機 RTP 完整教學<small>RTP、RNG、波動度一次搞懂</small></a>
+    <a href="/articles/slots-guide/">老虎機新手完整指南<small>從零開始的 Slots 教學</small></a>
+    <a href="/articles/casino-payout-guide/">娛樂城出金完整攻略<small>怎麼安全把錢拿回來</small></a>
+    <a href="/articles/online-casino-guide/">線上娛樂城完整指南<small>選平台、選遊戲、防詐騙</small></a>
+  </div>
+
   <div style="text-align:center;margin-top:2rem">
     <a href="/#games" class="btn-outline">← 回遊戲列表</a>
     <a href="/game-ranking/" class="btn-primary" style="margin-left:1rem">看遊戲推薦排名 →</a>
   </div>
 </div>
 
-<!-- SCROLL TO TOP -->
 </BaseLayout>
-
-
 
 <script is:inline type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "麻將胡了2",
+  "name": "麻將胡了2 Mahjong Ways 2",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Web",
-  "description": "PG Soft 5軸2000路消除掉落老虎機，Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin第3軸全金倍數x2→x10",
+  "description": "PG Soft 5軸2000路消除掉落老虎機，RTP 96.95%、最大倍率 x100,000。Gold Plated 中獎變 Wild、倍數連鎖 x1→x5、Free Spin 第3軸全金及第2、4軸隨機金牌倍數 x2→x10。",
   "url": "https://game8la.com/games/mahjong-ways-2/",
   "author": { "@type": "Organization", "name": "PG Soft" },
   "aggregateRating": {
