@@ -1,0 +1,362 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+
+const faqs = [
+  { q: '尋龍寶藏的 RTP 是多少？', a: '根據 PG Soft 官方規格，尋龍寶藏（Dragon\'s Treasure Quest）的預設 RTP 為 96.76%，屬於業界正常偏上的水準。PG Soft 提供多個 RTP 版本讓平台選用，實際 RTP 請在遊戲內規則頁面確認。' },
+  { q: '尋龍寶藏的最大倍率是多少？', a: 'PG Soft 官方公布的最大贏獎倍率為 x10,000。當主遊戲或免費旋轉模式的總贏獎達到投注金額的 10,000 倍時，旋轉就會自動結束並領獎。這個上限比其他 PG Soft 遊戲低，但配合高波動 + 獎金翻倍符號，達成率相對更高。' },
+  { q: '擴展卷軸窗口是什麼？', a: '每次旋轉開始時，每個軸都有 3 個大卷軸窗口。當大卷軸窗口中的符號參與贏獎後，它會分裂成 2 個小卷軸窗口，等於增加了那一軸的符號位置數。中獎路數從 243 路（3×3×3×3×3）最高可膨脹到 7,776 路（6×6×6×6×6）。小卷軸窗口無法再分裂。' },
+  { q: '獎金翻倍符號怎麼運作？', a: '在主遊戲和免費旋轉期間，卷軸上會隨機出現 x2 到 x100 的獎金翻倍符號。同一轉中所有翻倍符號的數值會「相加」，然後整轉的總贏獎乘以這個加總倍數。例如出現 x20 和 x5，總倍數就是 x25，所有贏獎金額都乘以 25。' },
+  { q: '免費旋轉怎麼觸發？', a: '盤面上出現 4 個以上奪寶符號（Scatter）即可觸發。基礎 15 轉，每多 1 個 Scatter 額外 +2 轉。如果只出現 1~3 個 Scatter，寶箱可能會隨機補上額外的 Scatter 幫你湊齊 4 個。免費旋轉期間收集的翻倍倍數會累加並保留到結束。' },
+  { q: '開運注值得開嗎？', a: '開運注讓投注額增加 1.5 倍，但進入免費旋轉的機會變成 3 倍。如果你的目標是追 Free Spin 的大獎，開運注的期望值是正的——用 1.5 倍的成本換 3 倍的觸發率。但如果預算有限，建議先用標準注熟悉遊戲節奏。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/games/dragons-treasure-quest/"
+  title="尋龍寶藏｜PG Soft 高波動消除老虎機完整攻略 - GAME8LA"
+  description="尋龍寶藏完整攻略！RTP 96.76%、最大倍率 x10,000、5軸最高7,776路、擴展卷軸窗口、獎金翻倍符號x2~x100相加、Free Spin 15轉倍數累積保留。PG Soft 歐美奇幻風，8LA 芭樂子實測解析。"
+  image="https://game8la.com/images/dragons-treasure-quest/dragons-treasure-quest-cover.webp"
+  datePublished="2026-04-13"
+  dateModified="2026-04-13"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '熱門遊戲', url: 'https://game8la.com/#games' },
+    { name: '尋龍寶藏', url: 'https://game8la.com/games/dragons-treasure-quest/' },
+  ]}
+/>
+<BaseLayout
+  title="尋龍寶藏｜PG Soft 高波動消除老虎機完整攻略 - GAME8LA"
+  description="尋龍寶藏完整攻略！RTP 96.76%、最大倍率 x10,000、5軸最高7,776路、擴展卷軸窗口、獎金翻倍符號x2~x100相加、Free Spin 15轉倍數累積保留。PG Soft 歐美奇幻風，8LA 芭樂子實測解析。"
+  ogImage="https://game8la.com/images/dragons-treasure-quest/dragons-treasure-quest-cover.webp"
+  currentPage="rankings"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 尋龍寶藏</div>
+  <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem"><Icon name="clock" /> 最後更新：2026 年 4 月 13 日 ｜ <Icon name="user-pen" /> 作者：芭樂子 ｜ <Icon name="book-open" /> 預估閱讀 9 分鐘</div>
+  <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
+    <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#0a1a1a">
+      <img src="/images/dragons-treasure-quest/dragons-treasure-quest-splash.webp" alt="尋龍寶藏 Dragon's Treasure Quest 封面" style="width:100%;height:auto;display:block" width="500" height="500" loading="eager" fetchpriority="high">
+    </div>
+    <div>
+      <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 歐美奇幻・擴展卷軸・7,776路</span>
+      <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">尋龍寶藏</h1>
+      <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
+        <span class="score-big">9.3</span>
+        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
+        <span style="color:var(--text-muted)">(3,120 次瀏覽)</span>
+      </div>
+      <div class="info-grid">
+        <span class="label">遊戲供應商</span><span class="value">PG Soft（Pocket Games Soft）</span>
+        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--guava-green)">96.76%（預設）</span>
+        <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">高波動（博弈型）</span>
+        <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">x10,000</span>
+        <span class="label">盤面規格</span><span class="value">5 軸 3 列（擴展卷軸窗口最高 6 列）</span>
+        <span class="label">中獎方式</span><span class="value"><a href="/articles/slots-guide/" style="color:var(--guava-green)">243~7,776 Ways</a>（消除掉落 Cascading）</span>
+        <span class="label">核心機制</span><span class="value">擴展卷軸窗口、獎金翻倍 x2~x100 相加、Free Spin 15轉倍數累積</span>
+        <span class="label">最低/最高投注</span><span class="value">0.20 ~ 100（Base Bet 20）</span>
+        <span class="label">認證</span><span class="value">Gaming Associates 認證</span>
+      </div>
+      <div class="tag-list">
+        <span class="tag">尋龍寶藏</span>
+        <span class="tag">Dragon's Treasure Quest</span>
+        <span class="tag">PG Soft</span>
+        <span class="tag">RTP 96.76%</span>
+        <span class="tag">7,776路</span>
+        <span class="tag">擴展卷軸</span>
+        <span class="tag">獎金翻倍 x100</span>
+        <span class="tag">x10,000</span>
+        <span class="tag">高波動</span>
+      </div>
+      <div style="margin-top:1.5rem;display:flex;gap:1rem">
+        <a href="#" class="btn-primary" onclick="event.preventDefault();document.querySelector('.section-title').scrollIntoView({behavior:'smooth'})">⚡ 看攻略</a>
+        <a href="javascript:void(0)" class="btn-outline" onclick="this.innerHTML='✅ 已收藏';this.style.borderColor='var(--gold)';this.style.color='var(--gold)'">📋 加入收藏</a>
+      </div>
+    </div>
+  </div>
+  <hr class="divider">
+  <!-- 目錄 -->
+  <div class="toc">
+    <h4>📑 本文目錄</h4>
+    <ol>
+      <li><a href="#intro">遊戲介紹</a></li>
+      <li><a href="#grid">盤面與 7,776 路規則</a></li>
+      <li><a href="#paytable">符號賠率表</a></li>
+      <li><a href="#expanding-reel">擴展卷軸窗口</a></li>
+      <li><a href="#multiplier">獎金翻倍符號</a></li>
+      <li><a href="#treasure-chest">收集寶箱</a></li>
+      <li><a href="#freespin">免費旋轉與倍數累積</a></li>
+      <li><a href="#ante-bet">開運注與購買獎金</a></li>
+      <li><a href="#recommend">推薦理由</a></li>
+      <li><a href="#tips">8LA攻略建議</a></li>
+      <li><a href="#faq">常見問題 FAQ</a></li>
+    </ol>
+  </div>
+
+  <div class="article-content">
+
+  <!-- ===== 第 1 節：遊戲介紹 ===== -->
+  <h2 class="section-title" id="intro">遊戲介紹</h2>
+  <div style="text-align:center;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_splash-screen_zh.webp" alt="尋龍寶藏 Dragon's Treasure Quest 啟動畫面" style="width:100%;max-width:360px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 尋龍寶藏 Dragon's Treasure Quest——與巨龍對決，奪取無盡寶藏！</p>
+
+  <p>這次 PG Soft 帶我們離開亞洲，直接殺進歐美奇幻世界。《<strong>尋龍寶藏（Dragon's Treasure Quest）</strong>》是一款暗黑系的高波動老虎機，場景是巨龍守護的寶藏洞穴，獵人、女巫、弓箭手組隊挑戰火龍。<a href="/articles/slots-rtp-guide/" style="color:var(--guava-green)">RTP</a> 為 <strong>96.76%</strong>，最大贏獎倍率 <strong>x10,000</strong>。</p>
+
+  <p>這款遊戲最猛的地方有兩個。第一是「<strong>擴展卷軸窗口</strong>」——中獎的大卷軸會分裂成兩個小卷軸，讓中獎路數從 243 路暴漲到 <strong>7,776 路</strong>。第二是「<strong>獎金翻倍符號</strong>」——盤面上會隨機出現 x2 到 x100 的倍數符號，而且是<strong>相加計算</strong>，同一轉出現 x20 和 x5 就是 x25 倍，整轉獎金全部乘上去。</p>
+
+  <p>Free Spin 15 轉更是恐怖——收集到的翻倍倍數會<strong>一直累積保留</strong>到免費旋轉結束，加上擴展卷軸持續分裂，後面幾轉的獎金數字可以飆得非常誇張。高波動愛好者的天堂，喜歡追大獎的玩家一定要試試。</p>
+
+  <!-- ===== 第 2 節：盤面規則 ===== -->
+  <h2 class="section-title" id="grid">盤面與 7,776 路規則</h2>
+  <div style="text-align:center;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_maingame_zh.webp" alt="尋龍寶藏盤面與中獎路徑示意" style="width:100%;max-width:360px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 5 軸 3 列起始盤面，每個軸有 3 個大卷軸窗口，最高可擴展到 6 列 7,776 路</p>
+
+  <p>尋龍寶藏的盤面是 <strong>5 軸 3 列</strong>，但這個「3 列」是動態的——每個軸一開始有 <strong>3 個大卷軸窗口</strong>，贏獎後大窗口會分裂成 2 個小窗口，等於那一軸變成更多列。路數從 <strong>243 路</strong>（3^5）最高可膨脹到 <strong>7,776 路</strong>（6^5）。</p>
+  <div class="tip-box">
+    <strong>💡 中獎路數規則：</strong><br>
+    ① 中獎組合從<strong>最左邊的卷軸開始，由左至右相鄰</strong><br>
+    ② 每軸的贏獎符號數量相乘 = 中獎路數（例如 3×3×3 = 27 路）<br>
+    ③ 中獎後所有贏獎符號消除，新符號掉落進行下一輪<br>
+    ④ 大卷軸窗口分裂後，路數大幅增加<br>
+    ⑤ 所有贏獎以現金顯示
+  </div>
+  <p>投注範圍 0.20 ~ 100，投注倍數 1~10，彈性很大。高波動的設計意味著小獎不多，但一旦進入擴展 + 翻倍的連鎖反應，獎金爆發力驚人。</p>
+
+  <!-- ===== 第 3 節：符號賠率表 ===== -->
+  <h2 class="section-title" id="paytable">符號賠率表</h2>
+
+  <p>尋龍寶藏的符號分為<strong>高賠率角色符號</strong>和<strong>低賠率花色符號</strong>，另外還有百搭（Wild）和奪寶（Scatter）。以下賠率以 <strong>Base Bet 20</strong> 為基準：</p>
+
+  <h3>特殊符號</h3>
+  <table>
+    <thead><tr><th>符號</th><th>說明</th><th>功能</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:var(--gold-light)"><img src="/images/dragons-treasure-quest/symbols/s_wild_b.webp" alt="Wild 百搭符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">百搭（Wild）</td><td>龍眼符號</td><td>替代所有符號（奪寶除外），僅出現在<strong>第 2/3/4 列卷軸</strong></td></tr>
+      <tr><td style="font-weight:700;color:var(--guava-pink)"><img src="/images/dragons-treasure-quest/symbols/s_scatter_b.webp" alt="Scatter 奪寶符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">奪寶（Scatter）</td><td>寶箱符號</td><td>4+ 個觸發免費旋轉，任意位置有效</td></tr>
+    </tbody>
+  </table>
+
+  <h3>高賠率符號（角色）</h3>
+  <table>
+    <thead><tr><th>符號</th><th>×3</th><th>×4</th><th>×5</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:var(--gold-light)"><img src="/images/dragons-treasure-quest/symbols/h1_hunter_b.webp" alt="獵人符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">獵人</td><td>15</td><td>60</td><td style="color:var(--gold-light);font-weight:700">100</td></tr>
+      <tr><td style="font-weight:700;color:var(--guava-pink)"><img src="/images/dragons-treasure-quest/symbols/h2_witch_b.webp" alt="女巫符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">女巫</td><td>10</td><td>40</td><td style="color:var(--gold-light);font-weight:700">80</td></tr>
+      <tr><td style="font-weight:700;color:var(--guava-green)"><img src="/images/dragons-treasure-quest/symbols/h3_archer_b.webp" alt="弓箭手符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">弓箭手</td><td>8</td><td>20</td><td style="color:var(--gold-light);font-weight:700">60</td></tr>
+      <tr><td><img src="/images/dragons-treasure-quest/symbols/h4_pouch_b.webp" alt="錢袋符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">錢袋</td><td>6</td><td>15</td><td style="color:var(--gold-light);font-weight:700">40</td></tr>
+      <tr><td><img src="/images/dragons-treasure-quest/symbols/h5_potion_b.webp" alt="魔藥符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">魔藥</td><td>6</td><td>15</td><td style="color:var(--gold-light);font-weight:700">40</td></tr>
+    </tbody>
+  </table>
+
+  <h3>低賠率符號（花色）</h3>
+  <table>
+    <thead><tr><th>符號</th><th>×3</th><th>×4</th><th>×5</th></tr></thead>
+    <tbody>
+      <tr><td><img src="/images/dragons-treasure-quest/symbols/l1_spade_b.webp" alt="黑桃符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">黑桃</td><td>4</td><td>10</td><td>20</td></tr>
+      <tr><td><img src="/images/dragons-treasure-quest/symbols/l2_heart_b.webp" alt="紅心符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">紅心</td><td>4</td><td>10</td><td>20</td></tr>
+      <tr><td><img src="/images/dragons-treasure-quest/symbols/l3_club_b.webp" alt="梅花符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">梅花</td><td>2</td><td>5</td><td>10</td></tr>
+      <tr><td><img src="/images/dragons-treasure-quest/symbols/l4_diamond_b.webp" alt="方塊符號" width="40" height="40" style="vertical-align:middle;margin-right:6px" loading="lazy">方塊</td><td>2</td><td>5</td><td>10</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <strong>💡 賠率計算：</strong>實際贏分 =（投注金額 ÷ 20）× 賠率 × 中獎路數 × 獎金翻倍倍數。獵人 5 連線在高路數 + 高倍數加持下，單轉就能噴出驚人獎金。
+  </div>
+
+  <!-- ===== 第 4 節：擴展卷軸窗口 ===== -->
+  <h2 class="section-title" id="expanding-reel">擴展卷軸窗口</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_expanding-reel-window1_zh.webp" alt="尋龍寶藏 擴展卷軸窗口 初始" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_expanding-reel-window2_zh.webp" alt="尋龍寶藏 擴展卷軸窗口 分裂中" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_expanding-reel-window3_zh.webp" alt="尋龍寶藏 擴展卷軸窗口 全展開" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 擴展卷軸窗口：大窗口→中獎分裂→路數從 243 暴漲到數千路</p>
+
+  <p>這是尋龍寶藏最獨特的機制，也是讓路數從 243 膨脹到 7,776 的關鍵。運作方式很直覺：</p>
+
+  <div class="card" style="border-color:var(--gold);text-align:center">
+    <h3 style="color:var(--gold-light);font-size:1.3rem">🔥 擴展卷軸三階段</h3>
+    <p style="font-size:1.05rem"><strong>① 初始狀態</strong>：每個軸都有 3 個<strong>大卷軸窗口</strong>（每軸 3 列）= 243 路</p>
+    <p style="font-size:1.05rem"><strong>② 分裂</strong>：中獎後，涉及贏獎的大卷軸窗口會分裂成 <strong>2 個小卷軸窗口</strong></p>
+    <p style="font-size:1.05rem"><strong>③ 路數暴漲</strong>：小窗口無法再分裂，但一個軸從 3 列變成 4~6 列 = 路數翻倍再翻倍</p>
+  </div>
+
+  <p>簡單算一下：如果 5 軸全部擴展到 6 列，路數就是 6×6×6×6×6 = <strong>7,776 路</strong>，比初始的 243 路多了 <strong>32 倍</strong>。連消越多輪、分裂越多，路數就越誇張。這跟消除掉落機制完美配合——中獎→消除→分裂→新符號掉落→更多中獎→更多分裂，正向循環一旦啟動就停不下來。</p>
+
+  <!-- ===== 第 5 節：獎金翻倍符號 ===== -->
+  <h2 class="section-title" id="multiplier">獎金翻倍符號</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_multiplier-symbol1_zh.webp" alt="尋龍寶藏 獎金翻倍符號 x20" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_multiplier-symbol2_zh.webp" alt="尋龍寶藏 獎金翻倍符號 x20+x2 相加" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_multiplier-symbol3_zh.webp" alt="尋龍寶藏 多個翻倍符號計算" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 獎金翻倍符號實戰：多個倍數符號相加，整轉獎金直接乘上總倍數</p>
+
+  <p>在任何旋轉期間，卷軸上會隨機出現 <strong>x2 到 x100</strong> 的獎金翻倍符號。重點是計算方式——同一轉中所有翻倍符號的數值<strong>相加</strong>，然後整轉的總贏獎乘以這個加總倍數。</p>
+
+  <table>
+    <thead><tr><th>情境</th><th>翻倍符號</th><th>總倍數</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td>單個出現</td><td>x20</td><td><strong>x20</strong></td><td>全部獎金 ×20</td></tr>
+      <tr><td>兩個出現</td><td>x20 + x5</td><td><strong>x25</strong></td><td>全部獎金 ×25</td></tr>
+      <tr><td>夢幻組合</td><td>x100 + x20 + x5</td><td><strong>x125</strong></td><td>全部獎金 ×125</td></tr>
+    </tbody>
+  </table>
+
+  <p>翻倍符號不需要參與中獎組合，只要出現在盤面上就生效。這代表即使是小額中獎，配上高倍數的翻倍符號，獎金也能瞬間起飛。x100 的翻倍符號雖然稀有，但一旦出現，哪怕只是低賠率符號中獎，金額都會變得非常可觀。</p>
+
+  <blockquote>芭樂子提醒：翻倍符號是「相加」不是「相乘」。x20 + x5 = x25，不是 x100。但即使是相加，x100 以上的總倍數配合擴展卷軸的高路數，爆分能力已經非常誇張了。</blockquote>
+
+  <!-- ===== 第 6 節：收集寶箱 ===== -->
+  <h2 class="section-title" id="treasure-chest">收集寶箱</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_treasure-chest-collection1_zh.webp" alt="尋龍寶藏 收集寶箱 補Scatter" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_treasure-chest-collection2_zh.webp" alt="尋龍寶藏 寶箱補齊4個Scatter觸發免費旋轉" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 收集寶箱：出現 1~3 個 Scatter 時，寶箱可能隨機補上額外的奪寶符號！</p>
+
+  <p>尋龍寶藏有一個貼心的機制——當盤面上出現 <strong>1~3 個奪寶符號（Scatter）</strong> 時，畫面上的寶箱可能會<strong>隨機添加額外的奪寶符號</strong>，幫你湊齊 4 個觸發免費旋轉。</p>
+
+  <p>這個機制讓差一點觸發 Free Spin 的遺憾感大幅降低。本來只出 3 個 Scatter 差 1 個觸發不了，寶箱可能幫你補上第 4 個直接進入免費旋轉。雖然不保證每次都會補，但多了一個額外的機會總是好的。</p>
+
+  <!-- ===== 第 7 節：免費旋轉 ===== -->
+  <h2 class="section-title" id="freespin">免費旋轉與倍數累積</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_free-spin1_zh.webp" alt="尋龍寶藏 觸發15次免費旋轉" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_free-spin2_zh.webp" alt="尋龍寶藏 免費旋轉進行中 倍數累積" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_free-spin3_zh.webp" alt="尋龍寶藏 免費旋轉結算 共贏得6725" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 免費旋轉 15 次觸發 → 倍數累積到 x18 → 共贏得 6,725！</p>
+
+  <h3>觸發條件</h3>
+  <p>盤面上出現 <strong>4 個以上奪寶符號（Scatter）</strong>即可觸發免費旋轉：</p>
+  <table>
+    <thead><tr><th>Scatter 數量</th><th>免費旋轉次數</th></tr></thead>
+    <tbody>
+      <tr><td>4 個</td><td><strong>15</strong> 轉</td></tr>
+      <tr><td>5 個</td><td><strong>17</strong> 轉</td></tr>
+      <tr><td>6 個以上</td><td><strong>17+</strong> 轉（每多 1 個 +2 轉）</td></tr>
+    </tbody>
+  </table>
+
+  <h3>免費旋轉的三大殺招</h3>
+  <div class="card" style="border-color:var(--guava-pink)">
+    <h3 style="color:var(--guava-pink)">🐉 免費旋轉核心機制</h3>
+    <p><strong>① 翻倍倍數累積保留</strong> — 免費旋轉期間收集到的獎金翻倍倍數會<strong>累加並保留</strong>到卷軸底部，直到免費旋轉結束。第 1 轉收集 x5，第 3 轉再收集 x10，後面每一轉的獎金都乘以 x15</p>
+    <p><strong>② 擴展卷軸持續分裂</strong> — 跟主遊戲一樣，免費旋轉期間的大卷軸窗口也會分裂，路數持續增加</p>
+    <p><strong>③ 可重觸（Retrigger）</strong> — 免費旋轉期間再出 4+ Scatter 可以重新觸發，再拿一輪免費旋轉</p>
+  </div>
+
+  <p>翻倍倍數的累積保留是這款遊戲最恐怖的地方。每次贏獎的免費旋轉結束時，該旋轉的總贏獎會乘以<strong>卷軸底部的累積倍數</strong>加上<strong>卷軸上翻倍符號的總和</strong>。隨著免費旋轉進行，累積倍數越來越高，後面幾轉即使只是小中獎，乘上高倍數後也變成大獎。最高可以累積到 <strong>x100 以上</strong>。</p>
+
+  <h3>大獎實戰</h3>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_maximum-win1_zh.webp" alt="尋龍寶藏 大獎 569300" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_maximum-win2_zh.webp" alt="尋龍寶藏 超級巨獎 1000000" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_maximum-win3_zh.webp" alt="尋龍寶藏 最高贏獎 x10000" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 擴展卷軸 + 翻倍累積的最終結果——超級巨獎 1,000,000！達到 x10,000 上限自動結束</p>
+
+  <div class="tip-box">
+    <strong>💡 最高贏獎上限：</strong>當主遊戲或免費旋轉的總贏獎達到投注金額的 <strong>10,000 倍</strong>時，旋轉會自動結束並領獎。這是遊戲設定的硬上限。
+  </div>
+
+  <!-- ===== 第 8 節：開運注與購買 ===== -->
+  <h2 class="section-title" id="ante-bet">開運注與購買獎金</h2>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_ante-bet1_zh.webp" alt="尋龍寶藏 開運注 主遊戲" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_ante-bet2_zh.webp" alt="尋龍寶藏 開運注觸發免費旋轉" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_ante-bet3_zh.webp" alt="尋龍寶藏 開運注 15次免費旋轉" style="width:100%;max-width:220px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 開運注模式：投注額 ×1.5 換取 3 倍觸發率，更容易進入免費旋轉</p>
+
+  <h3>開運注（Ante Bet）</h3>
+  <p>每次旋轉時，你可以選擇啟動<strong>開運注</strong>。啟動後投注金額增加 <strong>1.5 倍</strong>，但進入免費旋轉模式的機會變成 <strong>3 倍</strong>。對於目標明確要追 Free Spin 的玩家來說，這是值得開的功能。</p>
+
+  <h3>購買獎金遊戲</h3>
+  <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_feature-buy1_zh.webp" alt="尋龍寶藏 購買獎金遊戲" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+    <img loading="lazy" src="/images/dragons-treasure-quest/dragons-treasure-quest_feature-buy2_zh.webp" alt="尋龍寶藏 購買獎金 價格確認" style="width:100%;max-width:280px;height:auto;border-radius:12px;border:1px solid var(--border)" width="540" height="960">
+  </div>
+  <p class="article-img-caption">▲ 購買獎金遊戲——不想等 Scatter，直接花錢買入免費旋轉</p>
+
+  <p>不想慢慢等 Scatter？點擊「購買獎金遊戲」按鈕，以菜單中顯示的價格直接進入免費旋轉模式。購買價格通常是投注額的一定倍數，買入後直接獲得 15 次免費旋轉。</p>
+
+  <!-- ===== 第 9 節：推薦理由 ===== -->
+  <h2 class="section-title" id="recommend">為什麼 GAME8LA 推薦這款？</h2>
+  <p>尋龍寶藏是 PG Soft 少數走歐美暗黑風格的作品，跟麻將胡了系列的亞洲風完全不同。擴展卷軸窗口讓每一輪消除都有「路數翻倍」的快感，獎金翻倍符號的相加機制讓大獎可以在任何時候出現，免費旋轉的倍數累積保留更是讓後面幾轉變成「每轉都是大獎轉」。</p>
+  <p>高波動設計代表它不適合想要穩定小賺的玩家，但如果你享受「等待→爆發」的節奏感，尋龍寶藏會給你非常過癮的體驗。x10,000 的上限雖然比其他 PG Soft 遊戲低，但配合翻倍符號的相加機制，達成率比那些 x100,000 上限的遊戲反而更高。想了解更多老虎機基本概念，可以看芭樂子的 <a href="/articles/slots-rtp-guide/" style="color:var(--guava-green)">RTP 完整教學</a>。</p>
+
+  <!-- ===== 第 10 節：攻略建議 ===== -->
+  <h2 class="section-title" id="tips">⚡ 8LA 攻略建議</h2>
+  <div class="card" style="background:rgba(57,255,20,0.08);border-color:var(--guava-green)">
+    <ol style="padding-left:1.5rem;color:var(--text-secondary)">
+      <li><strong>Free Spin 是一切</strong> — 主遊戲的翻倍符號不會累積，Free Spin 才會。24.26% 的 RTP 貢獻來自免費旋轉，代表大部分獎金都在 Free Spin 裡面，基礎遊戲就是在等觸發</li>
+      <li><strong>開運注建議開</strong> — 1.5 倍成本換 3 倍觸發率，數學上是正期望值。但前提是你的預算能支撐更高的每轉成本</li>
+      <li><strong>擴展卷軸是路數倍增器</strong> — 連消越多輪，大窗口分裂越多，路數從 243 到 7,776 差距是 32 倍。所以「消除掉落能否持續」是每一轉的關鍵</li>
+      <li><strong>翻倍符號是「相加」</strong> — x20 + x5 = x25，不是 x100。但相加到 x50 以上已經非常猛了，配合高路數的中獎，獎金會飆很快</li>
+      <li><strong>高波動要有心理準備</strong> — 中獎率只有 21.98%，代表大約每 5 轉才有 1 次回饋。Free Spin 觸發率更是只有 0.28%，平均要轉 357 次才觸發一次。準備至少 150~200 轉的預算</li>
+      <li><strong>x10,000 是硬上限</strong> — 達到就自動結束，不像其他遊戲可以繼續累積。反過來說，這也代表遊戲設計上讓你「更容易」接近上限</li>
+      <li><strong>跟 PG Soft 其他遊戲比較</strong> — 喜歡消除掉落但偏好中波動的試試 <a href="/games/caishen-wins/" style="color:var(--guava-green)">贏財神</a>；想要更多路數的試試 <a href="/games/mahjong-ways-2/" style="color:var(--guava-green)">麻將胡了2</a>（2,000 路固定）</li>
+    </ol>
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <h2 class="section-title" id="faq">常見問題 FAQ</h2>
+  <div class="faq-list">
+    {faqs.map(f => (
+      <details class="faq-item">
+        <summary class="faq-q">{f.q}</summary>
+        <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
+      </details>
+    ))}
+  </div>
+
+  </div><!-- end article-content -->
+
+  <!-- 延伸閱讀 -->
+  <div class="related-box"><h3>⚡ 你可能也想玩</h3><div class="related-links"><a href="/games/mahjong-ways-2/">麻將胡了2<small>PG Soft｜2000 Ways｜8LA評分 9.2</small></a><a href="/games/caishen-wins/">贏財神<small>PG Soft｜32400路 搏一搏｜8LA評分 9.0</small></a><a href="/games/seth-2/">戰神賽特2：覺醒之力<small>ATG電子｜8LA評分 9.8</small></a><a href="/games/fantasy-potion/">奇幻魔藥<small>RG電子｜蜂巢消除 RTP 98.28%｜8LA評分 9.7</small></a></div></div>
+
+  <!-- 延伸閱讀：文章 -->
+  <h3 style="margin-top:2rem">📚 延伸閱讀</h3>
+  <div class="related-links">
+    <a href="/articles/slots-rtp-guide/">老虎機 RTP 完整教學<small>RTP、RNG、波動度一次搞懂</small></a>
+    <a href="/articles/slots-guide/">老虎機新手完整指南<small>從零開始的 Slots 教學</small></a>
+    <a href="/articles/casino-payout-guide/">娛樂城出金完整攻略<small>怎麼安全把錢拿回來</small></a>
+    <a href="/articles/online-casino-guide/">線上娛樂城完整指南<small>選平台、選遊戲、防詐騙</small></a>
+  </div>
+
+  <div style="text-align:center;margin-top:2rem">
+    <a href="/#games" class="btn-outline">← 回遊戲列表</a>
+    <a href="/game-ranking/" class="btn-primary" style="margin-left:1rem">看遊戲推薦排名 →</a>
+  </div>
+</div>
+
+</BaseLayout>
+
+<script is:inline type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "尋龍寶藏 Dragon's Treasure Quest",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "description": "PG Soft 5軸最高7,776路高波動消除老虎機，RTP 96.76%、最大倍率 x10,000。擴展卷軸窗口路數暴漲、獎金翻倍符號x2~x100相加、Free Spin 15轉倍數累積保留。",
+  "url": "https://game8la.com/games/dragons-treasure-quest/",
+  "author": { "@type": "Organization", "name": "PG Soft" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "9.3",
+    "bestRating": "10",
+    "worstRating": "1",
+    "ratingCount": "3120"
+  }
+}
+</script>
