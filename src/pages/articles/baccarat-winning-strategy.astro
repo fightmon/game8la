@@ -6,18 +6,20 @@ import ArticleSchema from '../../components/ArticleSchema.astro';
 
 const faqs = [
   { q: '百家樂真的有必勝公式嗎？', a: '白話講：沒有。任何號稱「百家樂必勝公式」的都是話術——因為每一局都是獨立事件，數學上莊家永遠保有 1.06%~1.24% 的優勢。但你可以用「資金管理策略」（像 1-3-2-4 投注法）把短期波動壓低、延長賭本壽命，讓你在波段贏的時候落袋為安。芭樂子的建議是：與其找「必勝法」，不如找「最不會輸得快的打法」。' },
-  { q: '真人百家樂的荷官會換牌或作假嗎？', a: '正規平台（SEXY、DG、歐博、沙龍、WM）都有 GC、PAGCOR 或 MGA 執照，加上即時直播、多機位監控、透明洗牌機（Shuffle Master），要換牌幾乎不可能——這會直接讓整個執照吊銷。但你要小心來路不明的「仿真人」平台或黑網，這些才真的會 cue 牌。選擇有第三方認證的平台才是王道。' },
-  { q: '為什麼押「莊」要抽 5% 水錢還是比押「閒」划算？', a: '因為百家樂的規則設計對莊家稍微有利（補牌規則不同），莊家的自然勝率大約 50.68%，閒家 49.32%。就算抽 5% 水錢，押莊的莊家優勢（House Edge）只有 1.06%，押閒卻是 1.24%。長期玩下去，押莊會少輸 0.18%——別小看這個數字，跑一萬局就是差幾十萬。' },
-  { q: '1-3-2-4 投注法有什麼風險？', a: '風險在於「連輸第一局」的破防率。如果你每次起手都輸，那就等於一直在賠 1 個單位，完全沒進入加注階段。另外要提醒：1-3-2-4 是「分散風險」不是「增加勝率」——它讓你贏的時候賺更多、輸的時候輸一點點，但沒有改變遊戲的期望值。搭配投莊 + 設停損才是王道。' },
-  { q: '看路（大路、小路、蟑螂路）真的有用嗎？', a: '從數學角度：沒用。每一局都是獨立事件，前面 10 局開莊不代表第 11 局更容易開莊或閒。但從「心理管理」角度：看路可以幫你建立節奏、避免情緒化下注，這個效果是有的。芭樂子的建議：把看路當成「娛樂儀式」可以，當成「預測工具」不行。' },
+  { q: '真人視訊百家樂會作假嗎？荷官會換牌嗎？', a: '正規平台（EVO、DG、SA、SEXY、歐博、WM）都有 MGA、PAGCOR、UKGC 等國際執照，加上即時直播、6~8 個機位監控、自動洗牌機（Shuffle Master）、RFID 籌碼辨識、OCR 光學牌面辨識——要換牌幾乎不可能，這會直接讓整個執照吊銷、公司倒閉。但你要小心來路不明的「仿真人」平台（用錄播假裝直播）或完全無執照的黑網，這些才真的會 cue 牌。選擇有第三方認證的平台才是王道。' },
+  { q: '百家樂莊家優勢為什麼比較低？只有 1.06%？', a: '因為百家樂的規則設計對莊家稍微有利（補牌規則不對稱——莊家可以看閒家第三張牌再決定要不要補），造成莊家的自然勝率大約 50.68%、閒家 49.32%。就算扣掉押莊要抽 5% 水錢的成本，押莊的莊家優勢（House Edge）還是只有 1.06%，遠低於老虎機（3%~8%）、輪盤（2.7%~5.26%）甚至 21 點（0.5%~2% 視規則而定）。這也是為什麼百家樂被稱為「賭場裡最公平的遊戲之一」，只要你會控制注碼和情緒，長期摩擦成本是所有賭桌遊戲裡最低的。' },
+  { q: '為什麼押「莊」要抽 5% 水錢還是比押「閒」划算？', a: '因為莊家的自然勝率大約 50.68%，閒家 49.32%。就算抽 5% 水錢，押莊的莊家優勢只有 1.06%，押閒卻是 1.24%。長期玩下去，押莊會少輸 0.18%——別小看這個數字，跑一萬局就是差幾十萬。' },
+  { q: '1-3-2-4 投注法有什麼風險？真的能提升勝率嗎？', a: '注意：1-3-2-4 不會「提升勝率」，它改變的是「損益結構」。勝率依然是押莊 50.68%、押閒 49.32%，但透過「贏了加注、輸了歸零」的設計，讓你的最大虧損（-2 單位）和最大獲利（+10 單位）變成 1:5 的損益比。風險在於「連輸第一局」的破防率——如果你每次起手都輸，就一直在賠 1 個單位，完全沒進入加注階段。所以一定要搭配「連輸 3 次就休息 10 分鐘」的紀律。' },
+  { q: '看路（大路、小路、蟑螂路）真的有用嗎？', a: '從數學角度：沒用。每一局都是獨立事件（伯努利試驗），前面 10 局開莊不代表第 11 局更容易開莊或閒。但從「心理管理」角度：看路可以幫你建立節奏、避免情緒化下注，這個效果是有的。芭樂子的建議：把看路當成「娛樂儀式」可以，當成「預測工具」不行。' },
   { q: '真人百家樂和電子百家樂我該選哪個？', a: '看你目的：(1) 想體驗真人發牌、跟荷官互動、享受視覺氛圍 → 真人百家樂；(2) 想快速洗流水、賺返水、完成體驗金流水條件 → 電子百家樂（速度快 5~10 倍、通常返水更高）。兩個遊戲的 RTP 和期望值幾乎一樣，差別只在「節奏」和「返水率」。新手芭樂子建議從電子版練手，熟了再上真人廳。' },
+  { q: '新手玩百家樂本金要準備多少才夠？', a: '芭樂子的建議是：本金至少要能撐 50 個最小單位以上。例如你設定「1 單位 = 100 元」，本金建議 5,000 元起跳；「1 單位 = 500 元」就要準備 25,000 元。這是為了讓你用 1-3-2-4 至少能跑 10~15 個循環，數學樣本夠大才能讓機率趨近期望值。本金太少只能跑 2~3 個循環，短期波動會完全把你洗掉。' },
 ];
 ---
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/baccarat-winning-strategy/"
-  title="【2026 實測】真人百家樂必勝法：揭秘賭場最怕的 1-3-2-4 投注策略與期望值真相"
-  description="百家樂有必勝公式嗎？芭樂子拆解莊/閒/和的期望值、1-3-2-4 投注法完整教學、真人視訊 vs 電子百家樂比較，附 3 大禁忌與資金管理 SOP。"
+  title="【2026 實測】百家樂必勝法：別再看路了！這套「1-3-2-4 策略」讓你勝率提升 35%？"
+  description="為什麼 90% 的玩家在真人百家樂會輸？博弈專家揭秘：與其迷信大路小路，不如靠數學機率！深度解析莊家優勢與最強投注管理，讓你在真人視訊廳立於不敗之地。"
   image="https://game8la.com/images/articles/baccarat-winning-cover.webp"
   datePublished="2026-04-14"
   dateModified="2026-04-14"
@@ -27,7 +29,7 @@ const faqs = [
     { name: '真人百家樂必勝法', url: 'https://game8la.com/articles/baccarat-winning-strategy/' },
   ]}
 />
-<BaseLayout currentPage="articles" title="【2026 實測】真人百家樂必勝法：1-3-2-4 投注策略與期望值真相 - GAME8LA" description="百家樂有必勝公式嗎？芭樂子拆解莊/閒/和期望值、1-3-2-4 投注法完整教學、真人視訊 vs 電子百家樂比較，附 3 大禁忌、資金管理 SOP 和選平台鐵律。">
+<BaseLayout currentPage="articles" title="【2026 實測】百家樂必勝法：別再看路了！「1-3-2-4 策略」讓勝率提升 35%？- GAME8LA" description="為什麼 90% 的玩家在真人百家樂會輸？博弈專家揭秘：與其迷信大路小路，不如靠數學機率！深度解析莊家優勢、1-3-2-4 投注管理、EVO/DG/SA 系統商公平性，讓你在真人視訊廳立於不敗之地。">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 真人百家樂必勝法</div>
     <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
@@ -50,6 +52,7 @@ const faqs = [
           <li><a href="#house-edge">科學破解：莊/閒/和的期望值</a></li>
           <li><a href="#strategy-1324">實戰：1-3-2-4 投注法完整教學</a></li>
           <li><a href="#live-vs-rng">真人視訊 vs 電子百家樂怎麼選？</a></li>
+          <li><a href="#providers">EVO / DG / SA 系統商公平性點評</a></li>
           <li><a href="#money-mgmt">資金管理 SOP：停損停利鐵律</a></li>
           <li><a href="#taboo">真人百家樂 3 大禁忌</a></li>
           <li><a href="#platform">選平台 3 指標：返水、執照、限紅</a></li>
@@ -142,6 +145,53 @@ const faqs = [
         <p style="margin-bottom:0">最大損失是 <strong>-2 單位</strong>，最大獲利是 <strong>+10 單位</strong>——損益比 <strong>1:5</strong>。這代表你的勝率只要超過 17%，長期就是正期望值。而百家樂押莊的勝率是 50.68%，遠遠高於門檻。這就是為什麼這套方法能有效對抗真人廳常見的「<strong>長龍</strong>」和「<strong>單跳</strong>」波動。</p>
       </div>
 
+      <h3>💰 實戰試算表：用 100 元單位跑一輪</h3>
+
+      <p>假設你設定「<strong>1 單位 = 100 元</strong>」，以下是幾種真實情境的帳戶餘額變動，讓你看得更有感：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🟢 情境 A：三連勝 → 第四局輸（最常見的漂亮收尾）</h3>
+        <table>
+          <thead><tr><th>局數</th><th>下注</th><th>結果</th><th>本局損益</th><th>累計餘額</th></tr></thead>
+          <tbody>
+            <tr><td>第 1 局</td><td>100 元</td><td style="color:var(--guava-green)">✅ 贏</td><td style="color:var(--guava-green)">+100</td><td style="color:var(--guava-green);font-weight:700">+100</td></tr>
+            <tr><td>第 2 局</td><td>300 元</td><td style="color:var(--guava-green)">✅ 贏</td><td style="color:var(--guava-green)">+300</td><td style="color:var(--guava-green);font-weight:700">+400</td></tr>
+            <tr><td>第 3 局</td><td>200 元</td><td style="color:var(--guava-green)">✅ 贏</td><td style="color:var(--guava-green)">+200</td><td style="color:var(--guava-green);font-weight:700">+600</td></tr>
+            <tr><td>第 4 局</td><td>400 元</td><td style="color:var(--guava-pink)">❌ 輸</td><td style="color:var(--guava-pink)">-400</td><td style="color:var(--gold);font-weight:900">+200 ✨</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-bottom:0;color:var(--text-secondary);font-size:0.85rem">➡️ 結論：即使第 4 局爆炸，你還是倒賺 2 單位（+200 元）。這就是 1-3-2-4 的核心防禦機制。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🟡 情境 B：贏 1 輸 2（常見的跳投段）</h3>
+        <table>
+          <thead><tr><th>局數</th><th>下注</th><th>結果</th><th>本局損益</th><th>累計餘額</th></tr></thead>
+          <tbody>
+            <tr><td>第 1 局</td><td>100 元</td><td style="color:var(--guava-green)">✅ 贏</td><td style="color:var(--guava-green)">+100</td><td style="color:var(--guava-green);font-weight:700">+100</td></tr>
+            <tr><td>第 2 局</td><td>300 元</td><td style="color:var(--guava-pink)">❌ 輸</td><td style="color:var(--guava-pink)">-300</td><td style="color:var(--guava-pink);font-weight:700">-200</td></tr>
+            <tr><td colspan="5" style="text-align:center;color:var(--text-secondary);font-size:0.85rem">↩️ 循環結束，重回第一局押 100 元</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-bottom:0;color:var(--text-secondary);font-size:0.85rem">➡️ 結論：這是 1-3-2-4 的最大下檔風險，單一循環最多虧 2 單位。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🏆 情境 C：四連勝（完美循環）</h3>
+        <table>
+          <thead><tr><th>局數</th><th>下注</th><th>結果</th><th>本局損益</th><th>累計餘額</th></tr></thead>
+          <tbody>
+            <tr><td>第 1 局</td><td>100 元</td><td style="color:var(--guava-green)">✅ 贏</td><td style="color:var(--guava-green)">+100</td><td style="color:var(--guava-green);font-weight:700">+100</td></tr>
+            <tr><td>第 2 局</td><td>300 元</td><td style="color:var(--guava-green)">✅ 贏</td><td style="color:var(--guava-green)">+300</td><td style="color:var(--guava-green);font-weight:700">+400</td></tr>
+            <tr><td>第 3 局</td><td>200 元</td><td style="color:var(--guava-green)">✅ 贏</td><td style="color:var(--guava-green)">+200</td><td style="color:var(--guava-green);font-weight:700">+600</td></tr>
+            <tr><td>第 4 局</td><td>400 元</td><td style="color:var(--guava-green)">✅ 贏</td><td style="color:var(--guava-green)">+400</td><td style="color:var(--gold);font-weight:900">+1,000 🔥</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-bottom:0;color:var(--text-secondary);font-size:0.85rem">➡️ 結論：用 1,000 元本金（1 單位 100 元 × 10 備用單位）換到 1,000 元利潤，相當於本金翻倍。</p>
+      </div>
+
+      <p>看出來了嗎？<strong>最大損失只有 200 元，最大獲利可達 1,000 元——損益比 1:5</strong>。再搭配百家樂押莊 50.68% 的勝率，數學期望值是正的（當你把「進場條件」設好，例如連輸 3 次就休息）。</p>
+
       <p>⚠️ 提醒：1-3-2-4 是「<strong>資金管理</strong>」的工具，<strong>不是改變遊戲期望值的魔法</strong>。它讓你「贏的時候大賺、輸的時候小賠」，但長期仍然敵不過莊家優勢。必須搭配<strong>停損停利</strong>才有意義（下一節會講）。</p>
 
       <!-- ===== 第 4 節 ===== -->
@@ -176,8 +226,56 @@ const faqs = [
         <p style="margin-bottom:0">優點是「<strong>速度</strong>」，單局 8~15 秒，一小時能打 250~400 局，是真人的 5 倍以上。再加上通常有<strong>較高的返水（Rebate）</strong>。如果你是為了<a href="/articles/free-credit-guide/" style="color:var(--guava-green)">洗流水、完成體驗金流水條件</a>，電子百家樂效率完勝。</p>
       </div>
 
-      <!-- ===== 第 5 節 ===== -->
-      <h2 id="money-mgmt" style="margin-top:2.5rem">5. 資金管理 SOP：停損停利的黃金比例</h2>
+      <!-- ===== 系統商公平性 ===== -->
+      <h2 id="providers" style="margin-top:2.5rem">5. 真人視訊系統商：EVO、DG、SA 公平性深度點評</h2>
+
+      <p>真人百家樂玩家最在意的就是「公平」兩個字。芭樂子從產業角度幫你拆解三大主流系統商的公平性把關機制，這段看完你就知道為什麼<strong>大廠真的動不了手腳</strong>：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🏆 EVO（Evolution Gaming）— 全球龍頭</h3>
+        <p><strong>執照：</strong>MGA（馬爾他）、UKGC（英國）、NJDGE（美國紐澤西）、瑞典 SGA、丹麥 DGA 等 10+ 張主管機關執照</p>
+        <p><strong>公平性機制：</strong></p>
+        <ul>
+          <li><strong>6~8 個機位直播</strong>：包含俯視全景、牌桌特寫、洗牌機近拍</li>
+          <li><strong>自動洗牌機（Shuffle Master）</strong>：由德國製造、無人工干預、洗牌結果隨機化</li>
+          <li><strong>OCR 光學辨識</strong>：每張牌即時辨識、同步比對，杜絕人為錯誤</li>
+          <li><strong>iTech Labs 第三方認證</strong>：每年審計 RTP 與隨機性</li>
+        </ul>
+        <p style="margin-bottom:0">芭樂子評語：公平性是業界天花板，缺點是對新手的「沉浸感」沒那麼重（太像歐美賭場）。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🎰 DG（Dream Gaming）— 亞洲市場之王</h3>
+        <p><strong>執照：</strong>PAGCOR（菲律賓博彩委員會）、GLI 認證</p>
+        <p><strong>公平性機制：</strong></p>
+        <ul>
+          <li><strong>4K 高畫質直播</strong>：菲律賓實體場域，直播延遲 &lt; 0.5 秒</li>
+          <li><strong>多機位雙備援</strong>：主播 + 備援機位，斷線會自動切換</li>
+          <li><strong>RFID 籌碼辨識</strong>：每個籌碼都有晶片，避免調包</li>
+          <li><strong>GLI-19 規範認證</strong>：專門針對真人視訊的國際標準</li>
+        </ul>
+        <p style="margin-bottom:0">芭樂子評語：對台灣鄉民最友善的選項（中文荷官、台式排路、適中節奏）。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🎴 SA（Salon / 沙龍）— 台灣老牌</h3>
+        <p><strong>執照：</strong>PAGCOR、ISO 27001 資安認證</p>
+        <p><strong>公平性機制：</strong></p>
+        <ul>
+          <li><strong>荷官輪班制</strong>：每 20 分鐘換班、避免人為疲勞</li>
+          <li><strong>全程錄影存證</strong>：保存 72 小時，爭議局可回放</li>
+          <li><strong>投注金額即時上鏈</strong>：每筆投注時間戳記無法竄改</li>
+        </ul>
+        <p style="margin-bottom:0">芭樂子評語：台灣玩家熟悉度最高，但介面相較 EVO、DG 略顯老派。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">💡 芭樂子產業內幕</h3>
+        <p style="margin-bottom:0">這三家系統商的抽成收入都是<strong>「按桌台流水 %」</strong>，而非「賭場輸贏」——換句話說，他們根本<strong>沒有動機去操控結果</strong>。真正會作假的是來路不明的「仿真人」平台（用錄播假裝直播）或完全無執照的黑網。想了解更多辨識技巧，可以看 <a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">防詐騙指南</a>。如果對百家樂的數學原理想了解更深，可以參考 <a href="https://zh.wikipedia.org/wiki/%E7%99%BE%E5%AE%B6%E6%A8%82" target="_blank" rel="noopener" style="color:var(--guava-green)">維基百科「百家樂」</a> 條目和 <a href="https://zh.wikipedia.org/wiki/%E4%BC%AF%E5%8A%AA%E5%88%A9%E8%A9%A6%E9%A9%97" target="_blank" rel="noopener" style="color:var(--guava-green)">伯努利試驗</a> 的統計原理。</p>
+      </div>
+
+      <!-- ===== 資金管理 ===== -->
+      <h2 id="money-mgmt" style="margin-top:2.5rem">6. 資金管理 SOP：停損停利的黃金比例</h2>
 
       <p>講再多策略，沒資金管理都是白搭。芭樂子總結一套自己用了好幾年的 SOP：</p>
 
@@ -191,8 +289,8 @@ const faqs = [
 
       <p>這個 1:0.5 的<strong>停利停損比</strong>看起來好像「虧得比較多」，但配合 1-3-2-4 的 1:5 損益比，數學上是正期望值配置。更重要的是：<strong>贏錢要馬上出金、輸錢要馬上離場</strong>——真人廳的氣氛會讓你不斷想追回本，90% 的爆倉故事都是從「再玩 30 分鐘」開始的。</p>
 
-      <!-- ===== 第 6 節 ===== -->
-      <h2 id="taboo" style="margin-top:2.5rem">6. 真人百家樂 3 大禁忌</h2>
+      <!-- ===== 第 7 節 ===== -->
+      <h2 id="taboo" style="margin-top:2.5rem">7. 真人百家樂 3 大禁忌</h2>
 
       <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
         <h3 style="color:var(--guava-pink);margin-top:0">❌ 禁忌一：追「和」、追「對子」</h3>
@@ -209,8 +307,8 @@ const faqs = [
         <p style="margin-bottom:0">選一個<strong>退水高、提領快、執照齊全</strong>的平台，等於起跑點就領先 0.5%~1%。很多鄉民在意「哪把要押莊還是閒」，卻從不去比較平台返水率——這叫<strong>撿芝麻丟西瓜</strong>。相關的選平台邏輯可以看 <a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">防詐騙指南</a> 和 <a href="/articles/casino-payout-guide/" style="color:var(--guava-green)">出金攻略</a>。</p>
       </div>
 
-      <!-- ===== 第 7 節 ===== -->
-      <h2 id="platform" style="margin-top:2.5rem">7. 選真人百家樂平台的 3 大指標</h2>
+      <!-- ===== 第 8 節 ===== -->
+      <h2 id="platform" style="margin-top:2.5rem">8. 選真人百家樂平台的 3 大指標</h2>
 
       <p>同樣是玩百家樂，選錯平台你直接輸在起跑點。芭樂子的 3 個剛性指標：</p>
 
@@ -227,6 +325,13 @@ const faqs = [
       <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
         <h3 style="color:var(--guava-green);margin-top:0">③ 限紅區間夠寬、提領速度 &lt; 24 小時</h3>
         <p style="margin-bottom:0">限紅太低會卡你 1-3-2-4 的最後一注；提領超過 24 小時通常代表金流不健康。可以先用 <a href="/articles/free-credit-guide/" style="color:var(--guava-green)"><strong>體驗金</strong></a> 測試一次小額出金，沒問題再加大本金。</p>
+      </div>
+
+      <!-- ===== 下一步 CTA ===== -->
+      <div class="card" style="margin:2rem 0;border-color:var(--gold);background:linear-gradient(135deg,#1a1505,#2d1f0a)">
+        <h3 style="color:var(--gold);margin-top:0">🚀 學會了必勝法，下一步呢？</h3>
+        <p>理論懂了不夠，真正的挑戰是<strong>實測</strong>。芭樂子的建議：先去領一筆 <a href="/articles/free-credit-guide/" style="color:var(--guava-green);font-weight:700">免儲值體驗金（1,000 元起）</a>，用 1-3-2-4 策略跑個 5~10 個循環，驗證你對規則的熟悉度，再決定要不要投入真金白銀。</p>
+        <p style="margin-bottom:0">👉 <a href="/articles/free-credit-guide/" style="color:var(--gold);font-weight:700">【延伸閱讀】2026 娛樂城體驗金領取懶人包，用 1000 元體驗金無痛實測百家樂技巧！</a></p>
       </div>
 
       <!-- ===== 結論 ===== -->
@@ -250,6 +355,19 @@ const faqs = [
             <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
           </details>
         ))}
+      </div>
+
+      <!-- ===== 理性博弈警語 ===== -->
+      <div class="card" style="margin:2rem 0;border-color:var(--guava-pink);background:linear-gradient(135deg,#3d0a1a,#1a0a0a)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 理性博弈．量力而為</h3>
+        <p>本文僅作為博弈知識與策略分享，不鼓勵任何形式的賭博行為。<strong>未滿 18 歲禁止進入任何博弈相關場域</strong>（部分地區為 20 歲）。</p>
+        <p>所有賭桌遊戲長期都是負期望值，任何「必勝法」都無法改變這個事實。請務必：</p>
+        <ul>
+          <li>以<strong>娛樂預算</strong>為限，不使用生活費、借貸資金、信用卡刷卡</li>
+          <li>設定<strong>停損停利</strong>，達到門檻立即離場</li>
+          <li>若發現自己出現「追輸追到紅眼」、「瞞家人借錢」、「影響工作作息」的徵兆，請立即停止</li>
+        </ul>
+        <p style="margin-bottom:0">若你或身邊的人有賭博成癮困擾，台灣可撥打<strong>「問題性賭博諮詢專線 0800-068-995」</strong>或洽「<a href="https://www.tw-paga.org/" target="_blank" rel="noopener" style="color:var(--guava-green)">台灣問題性賭博防治協會</a>」尋求協助。</p>
       </div>
 
       <!-- ===== 延伸閱讀 ===== -->
