@@ -2,191 +2,365 @@
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
 
 const faqs = [
-  { q: '今彩 539 包牌最少要包幾個號碼?', a: '最少包 6 碼,共 C(6,5)=6 注、成本 300 元。再往上常見有包 7 碼(21 注/1,050 元)、包 8 碼(56 注/2,800 元)、包 9 碼(126 注/6,300 元)。' },
-  { q: '包牌中獎一定回本嗎?', a: '不一定。包牌的回本要看你選的 n 個號碼裡,有幾碼跟開獎號碼吻合(命中數 k),再用 C(k,m)×C(n-k,5-m) 算出每個獎項的中獎注數,最後加總獎金跟成本比較。包 7 碼通常要中到 4 碼以上才有機會打平。' },
-  { q: '包 6 碼跟包 7 碼差很多嗎?', a: '差非常多。包 6 是 6 注 300 元,包 7 是 21 注 1,050 元——成本變 3.5 倍,但理論中獎機率也是 3.5 倍(線性關係),期望回收率不變,所以「不會更划算」,只是把波動拉大。' },
-  { q: '什麼是膽拖投注?跟全包有什麼不一樣?', a: '膽拖是固定 k 個「膽號」一定要中,再從 m 個「拖號」裡湊滿剩下的格子。注數 = C(m, 5-k),通常比同樣號碼數的全包便宜。代價是只要任何一個膽號沒中,整組都掛掉。' },
-  { q: '今彩 539 中頭獎機率多少?', a: '頭獎(中 5 碼)機率 = 1 / C(39,5) = 1 / 575,757,約 0.000174%。總中獎率約 11.4%,但裡面 10.39% 都是只回 50 元的肆獎(中 2 碼)。' },
-  { q: '包牌真的會比較容易中大獎嗎?', a: '會「比較容易」但仍然極低。包 8 碼一期 2,800 元中頭獎的機率 = 56 / 575,757 ≈ 1/10,281,還是萬分之一以下。包牌的真正用途是放大「中小獎組合」的機會,不是真的能買中頭獎。' },
+  { q: '今彩 539 養牌是什麼？真的能提高中獎率嗎？', a: '「養牌」是老玩家的術語，指的是「鎖定固定幾組自選號碼長期追下去」。邏輯是：每組號碼每期中頭獎機率都是 1/575,757，固定追一組長期下來期望值不變，但你拿到「集中命中」的心理預期會更穩定，不會追一次換一組白白浪費歷史累積。數學上沒有「越養越容易中」這回事（每期獨立事件），但對紀律型玩家來說，養牌是「避免情緒追號、鎖定預算上限」的實戰手段。' },
+  { q: '539 的期望值怎麼算？真的會虧錢嗎？', a: '539 每注 50 元，根據台彩公告的獎金結構（頭 800 萬 × 1/575,757 + 貳 2 萬 × 1/3,387 + 參 300 × 1/103 + 肆 50 × 1/9.6）加總計算，長期期望回收約 27.9 元——期望值 ≈ -22.1 元，回收率約 55.8%。簡單說你每丟 100 元進去，長期會掉 44 元水。這是結構性的負期望值，任何「穩賺包牌」都是數學不可能，千萬別信。' },
+  { q: '539 拖牌是什麼？和膽拖哪裡不一樣？', a: '「拖牌」在 539 圈有兩個意思：(1) 廣義的「膽拖投注」裡的「拖號」——即非固定、用來搭配膽號湊注的號碼；(2) 狹義的「追拖」——指「某組號碼沒中就繼續追著下一期買」。數學上第二種毫無意義（每期獨立），但第一種的拖牌（膽拖的拖號）是省錢的實戰玩法。職業玩家通常用「2 膽 6 拖」這種組合，把成本壓在 1,000 元內同時維持 20 注的覆蓋範圍。' },
+  { q: '今彩 539 包牌最少要包幾個號碼？', a: '最少包 6 碼，共 C(6,5)=6 注、成本 300 元。再往上常見有包 7 碼(21 注/1,050 元)、包 8 碼(56 注/2,800 元)、包 9 碼(126 注/6,300 元)。新手建議從包 6~7 碼起步。' },
+  { q: '包牌中獎一定回本嗎？', a: '不一定。包牌的回本要看你選的 n 個號碼裡，有幾碼跟開獎號碼吻合 (命中數 k)，再用 C(k,m)×C(n-k,5-m) 算出每個獎項的中獎注數，最後加總獎金跟成本比較。包 7 碼通常要中到 3 碼才能打平（見回本表）。' },
+  { q: '539 冷熱號統計真的有參考價值嗎？', a: '純粹娛樂用。每一期開獎都是獨立事件，號碼球不會記得過去被開過幾次——這在統計學叫「賭徒謬誤」。你可以看冷熱號當作「選號靈感」，但不要把它當做預測工具，更不要花錢買什麼「神準明牌」。真正能優化的只有包牌成本與膽拖策略，這是數學題不是占卜題。' },
+  { q: '可以靠 539 包牌穩定賺錢嗎？', a: '不行。539 跟所有彩券一樣是負期望值遊戲，長期回收率約 53%。包牌只是改變「中獎波動」的形狀，不會改變期望值。任何宣稱「穩賺包牌組」的群組、老師、軟體都是詐騙。想穩定獲利建議看老虎機（RTP 96~98%）+ 返水的結構，期望值直接逼近 100%。' },
 ];
 ---
 <FaqSchema faqs={faqs} />
-<BaseLayout
-  title="今彩 539 包牌教學｜成本、回本表、膽拖計算全解析｜GAME8LA"
-  description="今彩 539 包牌怎麼算才划算?GAME8LA 用組合數學算給你看:包 6/7/8/9 碼成本、命中幾碼才回本、膽拖投注公式、頭獎機率,新手到老司機都用得上的完整教學。"
-  ogImage="https://game8la.com/images/og-image.webp"
-  currentPage="articles"
->
-<div class="container">
-  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 今彩 539 包牌教學</div>
-  <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回文章列表</a>
-  <div style="width:100%;height:250px;background:linear-gradient(135deg,#0a1f0a,#0f3d1f,#0a1505);border-radius:16px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;font-size:5rem">🎟️</div>
-  <div class="page-hero">
-    <h1>今彩 539 <em>包牌教學</em>:成本、回本表、膽拖一次搞懂</h1>
-    <p style="margin-top:0.5rem"><Icon name="calendar" /> 2026-04-07 &nbsp;|&nbsp; <Icon name="clock" /> 閱讀時間約 10 分鐘</p>
-    <div class="tag-list" style="justify-content:center;margin-top:1rem">
-      <span class="tag">今彩539</span><span class="tag">包牌</span><span class="tag">膽拖</span><span class="tag">台灣彩券</span>
+<ArticleSchema
+  url="https://game8la.com/articles/daily-cash-539-wheel-guide/"
+  title="【2026 實測】539 必勝策略：養牌、期望值、拖牌三大職業玩法全解析"
+  description="539 真的有必勝法嗎？芭樂子用組合數學算給你看：養牌紀律、期望值拆解、膽拖/拖牌實戰公式、包 6~10 碼回本速查表，2026 最完整的 539 職業玩家攻略。"
+  image="https://game8la.com/images/articles/539-strategy-cover.webp"
+  datePublished="2026-04-14"
+  dateModified="2026-04-14"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '539 必勝策略', url: 'https://game8la.com/articles/daily-cash-539-wheel-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="【2026 實測】539 必勝策略：養牌、期望值、拖牌職業玩法全解析 - GAME8LA" description="539 真的有必勝法嗎？養牌紀律、期望值拆解、膽拖/拖牌實戰公式、包 6~10 碼回本速查表，2026 最完整的 539 職業玩家攻略。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 539 必勝策略</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-14 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 13 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a1f0a,#1a4a2e,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <h1 style="font-size:2rem;line-height:1.3">【2026 實測】539 必勝策略：養牌、期望值、拖牌三大職業玩法全解析</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">網路上一堆「539 必勝法」的 YouTube 和 LINE 群組，動不動就說「跟單包中」、「老師內線明牌」——看過 10 個有 9 個是詐騙。今天芭樂子<strong>只用數學</strong>，把 539 真正有效的三大職業玩法（<strong>養牌紀律、期望值計算、拖牌策略</strong>）一次拆給你看，學會這三招，至少能讓你輸得比較慢、玩得比較久。</p>
+
+      <img class="content-img" src="/images/articles/539-strategy-cover.webp" alt="539 必勝策略：養牌、期望值、拖牌三大職業玩法" width="1600" height="893" loading="eager" />
+      <p class="article-img-caption">芭樂子整理：2026 年 539 必勝策略三大核心——養牌、期望值、拖牌</p>
+
+      <!-- === 轉化 CTA Banner === -->
+      <a href="/game-ranking/" style="display:block;text-decoration:none;margin:1.5rem 0">
+        <div style="background:linear-gradient(135deg,#0a1f0a 0%,#1a4a2e 50%,#f5b800 100%);border:2px solid #f5b800;border-radius:14px;padding:1.2rem 1.5rem;box-shadow:0 4px 16px rgba(245,184,0,0.25)">
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+            <div style="font-size:2.4rem">🎰</div>
+            <div style="flex:1;min-width:240px">
+              <div style="color:#f5b800;font-weight:900;font-size:1.1rem;margin-bottom:0.3rem">539 中獎率只有 11%？RTP 只有 53%！</div>
+              <div style="color:#fff;font-size:0.95rem;margin-bottom:0.2rem">實測這款老虎機 RTP 高達 <strong style="color:#26c281">97%</strong>！同樣 100 元娛樂預算，回收率直接爆擊彩券 <strong style="color:#26c281">44%</strong>。</div>
+              <div style="color:#ec4899;font-size:0.9rem">想科學獲利別再包牌，點我看真正的數學優勢👉</div>
+            </div>
+            <div style="background:#f5b800;color:#0a1f0a;font-weight:900;padding:0.8rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.95rem">點我查看 2026 老虎機必勝清單 →</div>
+          </div>
+        </div>
+      </a>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#intro">今彩 539 玩法與獎金結構</a></li>
+          <li><a href="#expected-value">539 期望值：每注實際值多少錢？</a></li>
+          <li><a href="#bao-cost">包牌成本：C(n,5) 組合公式</a></li>
+          <li><a href="#payback">包牌回本表：中幾碼才打平？</a></li>
+          <li><a href="#yang-pai">539 養牌策略：紀律型玩家的選號法</a></li>
+          <li><a href="#dan-tuo">539 拖牌（膽拖）進階投注</a></li>
+          <li><a href="#rules">539 必勝策略 7 條鐵律</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== 第 1 節 ===== -->
+      <h2 id="intro" style="margin-top:2.5rem">1. 今彩 539 玩法與獎金結構</h2>
+
+      <p>各位 8LA 鄉民好，我是芭樂子。今彩 539 是台灣彩券發行的小型樂透，玩法很單純：從 <strong>01~39</strong> 號碼中挑 <strong>5 個</strong>，每注 50 元。每週一到週六晚上 20:30 開獎，一週開 6 次，是台彩開獎最頻繁的遊戲。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🎯 539 獎項與獎金結構</h3>
+        <table>
+          <thead><tr><th>獎項</th><th>對中號碼</th><th>單注獎金</th><th>單獎中獎機率</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">頭獎</td><td>5 碼全中</td><td style="color:var(--gold);font-weight:900">800 萬（春節加碼 1,000 萬）</td><td>約 1/575,757</td></tr>
+            <tr><td style="font-weight:700">貳獎</td><td>中 4 碼</td><td>20,000 元</td><td>約 1/3,387</td></tr>
+            <tr><td style="font-weight:700">參獎</td><td>中 3 碼</td><td>300 元</td><td>約 1/103</td></tr>
+            <tr><td style="font-weight:700">肆獎</td><td>中 2 碼</td><td>50 元</td><td>約 1/9.62</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>總中獎率約 <strong>11.4%</strong>，但裡面 <strong>10.39%</strong> 都是只回 50 元的肆獎——基本上等於「沒輸沒贏」。真正能「贏錢」的中獎（參獎以上）機率大約只有 <strong>1%</strong>。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">💡 先看重點</h3>
+        <p style="margin-bottom:0">539 頭獎機率 <strong>1/575,757</strong>，比威力彩（1/22,085,448）、大樂透（1/13,983,816）都高很多，所以才有「539 比較好中」的說法。但「比較高」是相對的——長期回收率還是負的，詳細比較可參考 <a href="/articles/lottery-odds-comparison/" style="color:var(--gold)">大樂透 vs 威力彩中獎機率比較</a>。</p>
+      </div>
+
+      <!-- ===== 第 2 節 ===== -->
+      <h2 id="expected-value" style="margin-top:2.5rem">2. 539 期望值：每注實際值多少錢？</h2>
+      <img class="content-img" src="/images/articles/539-strategy-ev.webp" alt="539 期望值拆解：每注 50 元的真實數學期望" width="1600" height="656" loading="lazy" />
+      <p class="article-img-caption">539 期望值實測：每注 50 元，長期平均只回 26.5 元</p>
+
+      <p>「期望值」（Expected Value，EV）是賭博數學的核心概念——它告訴你<strong>長期玩下來，每一注平均會回收多少錢</strong>。算法是把每個獎項的中獎金額 × 該獎項機率，再全部加起來。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🧮 539 期望值完整拆解</h3>
+        <table>
+          <thead><tr><th>獎項</th><th>獎金</th><th>中獎機率</th><th>期望貢獻</th></tr></thead>
+          <tbody>
+            <tr><td>頭獎（中 5）</td><td>8,000,000</td><td>1 / 575,757</td><td>≈ 13.89 元</td></tr>
+            <tr><td>貳獎（中 4）</td><td>20,000</td><td>1 / 3,387</td><td>≈ 5.91 元</td></tr>
+            <tr><td>參獎（中 3）</td><td>300</td><td>1 / 103</td><td>≈ 2.91 元</td></tr>
+            <tr><td>肆獎（中 2）</td><td>50</td><td>1 / 9.62</td><td>≈ 5.20 元</td></tr>
+            <tr><td colspan="3" style="text-align:right;font-weight:700">每注期望回收合計</td><td style="color:var(--guava-green);font-weight:900">≈ 27.9 元</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🧮 關鍵數字</h3>
+        <p style="margin-bottom:0">539 每注 <strong>50 元</strong>，期望回收 <strong>27.9 元</strong>——也就是<strong>每注期望虧損 22.1 元、回收率約 55.8%</strong>。換句話說你每丟 100 元買 539，長期會掉 44 元水。這是結構性的「負期望值遊戲」，任何包牌策略都只能改變「中獎波動」，<strong>無法改變期望值</strong>。</p>
+      </div>
+
+      <h3>期望值對「包牌」的意義</h3>
+      <p>很多人誤以為「包多幾碼就比較划算」——錯。包 <strong>n</strong> 碼的期望值計算是 <strong>C(n,5) × 每注期望回收</strong>：</p>
+      <ul>
+        <li>包 6 碼成本 300 元，期望回收 = 6 × 27.9 ≈ <strong>167 元</strong>（期望虧 133 元）</li>
+        <li>包 7 碼成本 1,050 元，期望回收 = 21 × 27.9 ≈ <strong>586 元</strong>（期望虧 464 元）</li>
+        <li>包 8 碼成本 2,800 元，期望回收 = 56 × 27.9 ≈ <strong>1,562 元</strong>（期望虧 1,238 元）</li>
+      </ul>
+      <p>看出來了嗎？<strong>包越多，絕對虧損越大</strong>，只是百分比一樣（虧 44%）。所以包牌的用途不是「提高期望值」，而是<strong>提高「任一獎項命中率」</strong>——後面會詳細說明。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 8LA 金句</h3>
+        <p style="margin-bottom:0">期望值告訴你真相，包牌只是調整情緒；能長期贏的玩家，都是在「情緒波動」和「數學真相」之間找到紀律的人。</p>
+      </div>
+
+      <!-- === 第二 CTA === -->
+      <div style="background:linear-gradient(135deg,rgba(38,194,129,0.12) 0%,rgba(245,184,0,0.12) 100%);border-left:4px solid #26c281;border-radius:10px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <div style="color:#f5b800;font-weight:900;font-size:1rem;margin-bottom:0.5rem">💡 同樣 100 元，誰才是你的真命天子？</div>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem;color:var(--text-secondary)">539 期望回收 55.8 元（虧 44.2 元）；RTP 97% 老虎機期望回收 97 元（只虧 3 元）。用<strong style="color:#26c281">「老虎機」當娛樂主軸</strong>，偶爾買張 539 當夢想，才是聰明玩法。</p>
+        <a href="/game-ranking/" style="display:inline-block;background:#26c281;color:#0a1426;font-weight:900;padding:0.7rem 1.2rem;border-radius:8px;text-decoration:none;font-size:0.92rem">📋 查看 2026 老虎機必勝清單 →</a>
+      </div>
+
+      <!-- ===== 第 3 節 ===== -->
+      <h2 id="bao-cost" style="margin-top:2.5rem">3. 包牌成本：C(n,5) 組合公式</h2>
+
+      <p>「包牌」就是你選超過 5 個號碼，系統幫你把所有可能的「5 碼一注」組合全買下來。數學上叫<strong>組合數</strong>，公式是 <code>C(n, 5)</code>：從你選的 n 個號碼裡挑 5 個有幾種選法。每種選法就是 1 注，每注 50 元。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 名詞釐清</h3>
+        <p style="margin-bottom:0">你在彩券行常聽到「N 連碰」這個詞——但要注意，大樂透/威力彩的「N 連碰」指的是 C(N, 6) 或 C(N, 7)，跟 539 的 C(N, 5) 不一樣！所以「8 連碰 1,400 元」是大樂透的價，539 的包 8 碼是 2,800 元。本文一律用「包 N 碼」這個直接好懂的講法。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">💰 常見包牌成本對照表</h3>
+        <table>
+          <thead><tr><th>包牌方式</th><th>注數 = C(n,5)</th><th>總成本</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">包 6 碼</td><td>6 注</td><td style="color:var(--guava-green);font-weight:700">300 元</td></tr>
+            <tr><td style="font-weight:700">包 7 碼</td><td>21 注</td><td style="color:var(--guava-green);font-weight:700">1,050 元</td></tr>
+            <tr><td style="font-weight:700">包 8 碼</td><td>56 注</td><td style="color:var(--gold);font-weight:700">2,800 元</td></tr>
+            <tr><td style="font-weight:700">包 9 碼</td><td>126 注</td><td style="color:var(--gold);font-weight:700">6,300 元</td></tr>
+            <tr><td style="font-weight:700">包 10 碼</td><td>252 注</td><td style="color:var(--guava-pink);font-weight:700">12,600 元</td></tr>
+            <tr><td style="font-weight:700">包 12 碼</td><td>792 注</td><td style="color:var(--guava-pink);font-weight:700">39,600 元</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>注意成本是<strong>非線性</strong>跳的——多包 1 個號碼，注數會放大很多倍。包 10 碼已經要 1.2 萬，包 12 碼直接快 4 萬，新手千萬不要看「只是多 2 個號碼」就衝。</p>
+
+      <!-- ===== 第 4 節 ===== -->
+      <h2 id="payback" style="margin-top:2.5rem">4. 包牌回本表：命中幾碼才打平？</h2>
+
+      <p>這是包牌教學裡最常被問、也最常被講錯的部分。重點公式只有一個：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">📐 中獎組合公式</h3>
+        <p>假設你包 <code>n</code> 個號碼，其中 <code>k</code> 個跟開獎號碼吻合（剩 <code>5-k</code> 個獎號落在你包牌外）：</p>
+        <p style="margin-bottom:0"><strong>你的彩券中 m 碼的注數 = C(k, m) × C(n-k, 5-m)</strong>，然後把每個 m 對應的獎金加總，就是這次的總彩金。</p>
+      </div>
+
+      <h3>實例 1：包 7 碼，命中 3 個獎號</h3>
+      <p>假設你包 7 個號碼，開獎後你有 3 個號碼中了（k=3、n-k=4）：</p>
+      <ul>
+        <li>中 3 碼的注數 = C(3,3) × C(4,2) = 1 × 6 = <strong>6 注</strong> → 6 × 300 = 1,800 元</li>
+        <li>中 2 碼的注數 = C(3,2) × C(4,3) = 3 × 4 = <strong>12 注</strong> → 12 × 50 = 600 元</li>
+        <li>總彩金 = 1,800 + 600 = <strong style="color:var(--guava-green)">2,400 元</strong></li>
+      </ul>
+      <p>包 7 碼成本 1,050 元，命中 3 碼回收 2,400，<strong style="color:var(--guava-green)">淨賺 1,350 元 ✓</strong></p>
+
+      <h3>實例 2：包 8 碼，只命中 2 個獎號</h3>
+      <p>k=2、n-k=6：</p>
+      <ul>
+        <li>中 2 碼的注數 = C(2,2) × C(6,3) = 1 × 20 = 20 注 → 20 × 50 = <strong>1,000 元</strong></li>
+        <li>總彩金 = <strong style="color:var(--guava-pink)">1,000 元</strong>（連 50 元的肆獎都只能拿 20 組）</li>
+      </ul>
+      <p>包 8 碼成本 2,800 元，只命中 2 碼 → <strong style="color:var(--guava-pink)">淨虧 1,800 元 ✗</strong></p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🎯 包牌「保本門檻」速查</h3>
+        <table>
+          <thead><tr><th>包牌方式</th><th>成本</th><th>剛好打平的最低命中數</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">包 6 碼</td><td>300 元</td><td>需中 3 碼（回 450 元）</td></tr>
+            <tr><td style="font-weight:700">包 7 碼</td><td>1,050 元</td><td>需中 3 碼（回 2,400 元）</td></tr>
+            <tr><td style="font-weight:700">包 8 碼</td><td>2,800 元</td><td>需中 3 碼（回 6,300 元）</td></tr>
+            <tr><td style="font-weight:700">包 9 碼</td><td>6,300 元</td><td>需中 4 碼（回 ~26,000 元）</td></tr>
+            <tr><td style="font-weight:700">包 10 碼</td><td>12,600 元</td><td>需中 4 碼（回 ~31,000 元）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>看出規律了嗎？包越多碼，需要命中的「最低保本門檻」就越高。包 6~8 還只要中 3 碼就能回本，但包到 9 碼以上，你就必須中到 4 碼才能打平——而中 4 碼的機率本身就只有 <strong>0.0295%</strong>（約 1/3,387）。</p>
+
+      <!-- ===== 第 5 節 ===== -->
+      <h2 id="yang-pai" style="margin-top:2.5rem">5. 539 養牌策略：紀律型玩家的選號法</h2>
+      <img class="content-img" src="/images/articles/539-strategy-yangpai.webp" alt="539 養牌策略：紀律型玩家的選號流程圖" width="1600" height="656" loading="lazy" />
+      <p class="article-img-caption">養牌心法：固定號碼、定額投注、長期紀律執行</p>
+
+      <p>「<strong>養牌</strong>」是 539 老玩家間流傳的術語——意思是<strong>鎖定一組自選號碼（通常 6~8 碼）長期追下去</strong>，不論開獎結果為何，一直買同一組。聽起來很傻？其實這是<strong>職業玩家對抗情緒賭博最有效的武器</strong>。</p>
+
+      <h3>為什麼要養牌？三個心理學 + 數學理由</h3>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🌱 養牌三大核心價值</h3>
+        <p style="margin:0.5rem 0"><strong>① 控制預算不失控</strong>：養一組固定號碼 = 每期固定支出（例如包 7 碼就是 1,050 元/期），跟「每次看冷熱號重選」相比，<strong>一個月的預算上限明確可控</strong>。失控才是輸到脫褲的主因，不是選號錯誤。</p>
+        <p style="margin:0.5rem 0"><strong>② 避免賭徒謬誤</strong>：很多人每期「換一組新號碼追」，其實是情緒驅動——剛輸完就換、連輸三期就全部砍掉重來。這種行為在數學上完全不會提高勝率（每期獨立事件），卻會大幅拉高情緒波動。</p>
+        <p style="margin:0"><strong>③ 心理期待更穩定</strong>：養一組熟悉的號碼，連中一個「中 2 碼回 50 元」都會覺得「這組牌會不會爆」，體感上比每期換新組合有趣。這也是把 539 當作「長期娛樂」而非「單次賭博」的關鍵心態。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 養牌常見迷思：「養越久越容易中？」</h3>
+        <p style="margin-bottom:0"><strong>錯！</strong>每一期開獎都是獨立事件，你連續買同一組號碼 100 期 vs 每期換新組合 100 期，期望值完全相同。養牌的價值不在「提高機率」，而在<strong>「提高紀律」</strong>。如果有人告訴你「這組號碼快要開了」，請直接封鎖——那是標準的詐騙話術。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">📅 芭樂子推薦的養牌節奏</h3>
+        <table>
+          <thead><tr><th>玩家等級</th><th>養牌配置</th><th>每期成本</th><th>每月預算</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">新手試水</td><td>包 6 碼 × 1 組</td><td>300 元</td><td>≈ 7,800 元</td></tr>
+            <tr><td style="font-weight:700">穩定玩家</td><td>包 7 碼 × 1 組</td><td>1,050 元</td><td>≈ 27,300 元</td></tr>
+            <tr><td style="font-weight:700">進階玩家</td><td>包 7 碼 × 2 組 或 膽拖</td><td>2,100 元</td><td>≈ 54,600 元</td></tr>
+            <tr><td style="font-weight:700;color:var(--guava-pink)">不建議</td><td style="color:var(--guava-pink)">包 9 碼以上</td><td style="color:var(--guava-pink)">6,300+ 元</td><td style="color:var(--guava-pink)">≈ 16 萬+</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0.6rem 0 0">※ 539 一週開 6 次，以 26 期/月估算。請依照自己可承受的<strong>娛樂預算</strong>選擇，切勿超支。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">💡 養牌實戰原則</h3>
+        <p style="margin:0.4rem 0">① 選號後<strong>至少養 20 期</strong>才評估要不要換（否則就是情緒換號）</p>
+        <p style="margin:0.4rem 0">② 預算設好就是上限，<strong>輸光就停止不加碼</strong></p>
+        <p style="margin:0.4rem 0 0">③ 中獎金額<strong>不再投入下一期</strong>，當作真正的「利潤」入袋</p>
+      </div>
+
+      <!-- ===== 第 6 節 ===== -->
+      <h2 id="dan-tuo" style="margin-top:2.5rem">6. 539 拖牌（膽拖）：進階投注玩法</h2>
+      <img class="content-img" src="/images/articles/539-strategy-dantuo.webp" alt="539 拖牌膽拖投注玩法示意圖" width="1600" height="656" loading="lazy" />
+      <p class="article-img-caption">膽拖公式：鎖定 1~2 個膽碼 × 多個拖碼，放大中獎範圍</p>
+
+      <p>在 539 的玩家社群，「<strong>拖牌</strong>」這個詞有兩個含意：</p>
+      <ol>
+        <li><strong>廣義拖牌 = 膽拖投注的「拖號」</strong>：指搭配膽號湊注的候選號碼。這是數學上<strong>真的有效的省錢策略</strong>，下面會詳細拆解。</li>
+        <li><strong>狹義「追拖」</strong>：指某組號碼沒中就追到下一期繼續買。這在數學上<strong>毫無意義</strong>（每期獨立事件），跟賭徒謬誤同類。</li>
+      </ol>
+      <p>本節專注在第一種——<strong>膽拖投注的科學用法</strong>。</p>
+
+      <h3>什麼是膽拖？</h3>
+      <p>膽拖（又叫「膽碼」）是包牌的「省錢版」。做法是：<strong>固定 k 個「膽號」一定要在每一注裡出現</strong>，再從另外 m 個「拖號」裡湊滿剩下的 (5-k) 格。</p>
+
+      <p>注數公式：<code>C(m, 5 − k)</code></p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🎲 膽拖 vs 全包對照</h3>
+        <table>
+          <thead><tr><th>玩法</th><th>選號</th><th>注數</th><th>成本</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">全包 8 碼</td><td>8 個號碼全等價</td><td>C(8,5)=56</td><td>2,800</td></tr>
+            <tr><td style="font-weight:700">膽 1 拖 7</td><td>1 膽 + 7 拖</td><td>C(7,4)=35</td><td>1,750</td></tr>
+            <tr><td style="font-weight:700">膽 2 拖 6</td><td>2 膽 + 6 拖</td><td>C(6,3)=20</td><td style="color:var(--guava-green);font-weight:700">1,000</td></tr>
+            <tr><td style="font-weight:700">膽 3 拖 5</td><td>3 膽 + 5 拖</td><td>C(5,2)=10</td><td style="color:var(--guava-green);font-weight:700">500</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 膽拖的代價</h3>
+        <p style="margin-bottom:0">只要你的<strong>任何一個膽號沒開出</strong>，整組投注全部歸零——因為每一注都包含那個膽號。所以膽拖是「對自己選號信心很高」時才用的玩法，不是無腦省錢方案。新手建議從全包 6 碼開始，別一上來就玩 3 膽 5 拖。</p>
+      </div>
+
+      <!-- ===== 第 7 節 ===== -->
+      <h2 id="rules" style="margin-top:2.5rem">7. 539 必勝策略：芭樂子的 7 條鐵律</h2>
+
+      <p>綜合前面的期望值計算、包牌數學、養牌紀律、膽拖技巧，芭樂子把 539 職業玩家的核心心法濃縮成 7 條鐵律——<strong>真正能讓你「輸得慢、玩得久」的唯一方法</strong>：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🏆 539 職業玩家 7 條鐵律</h3>
+        <p style="margin:0.5rem 0"><strong>① 先算期望值，再決定預算</strong>：539 每 100 元期望虧 44 元，先把這個事實刻在心裡。預算 = 娛樂金，不是投資金。</p>
+        <p style="margin:0.5rem 0"><strong>② 養牌 &gt; 追號</strong>：鎖定一組自選包 7 碼，至少養 20 期再評估要不要換。追號只會放大情緒波動，不會提高期望值。</p>
+        <p style="margin:0.5rem 0"><strong>③ 包 6~7 碼是新手甜蜜點</strong>：成本 300~1,050，命中 3 碼就能回本，還享受「多注同時中」的快感。不要一上來就衝包 9 碼。</p>
+        <p style="margin:0.5rem 0"><strong>④ 膽拖只用在「強信心」場合</strong>：如果你有強烈直覺某 2~3 個號會中，膽 2 拖 6 可以省下一半成本。但膽號沒中就歸零，要有心理準備。</p>
+        <p style="margin:0.5rem 0"><strong>⑤ 徹底忽略冷熱號、明牌、老師</strong>：每期獨立事件、過去開幾次 ≠ 未來會開。任何「跟單包中」「內線號碼」的群組都是詐騙，去看 <a href="/articles/anti-scam-8la-guide/" style="color:var(--gold)">防詐騙指南</a>。</p>
+        <p style="margin:0.5rem 0"><strong>⑥ 設好停損停利，中獎錢不再滾入</strong>：一期沒中就停，不要連追；中到大獎立刻入袋，不要「用中獎金繼續包」，那是把利潤還回去的最快方法。</p>
+        <p style="margin:0;"><strong>⑦ 接受負期望值現實</strong>：539 是娛樂，不是提款機。真的想「科學獲利」，建議看 RTP 97% + 返水 0.8% 的 <a href="/game-ranking/" style="color:var(--gold)">老虎機排行榜</a>，期望值結構完全不同。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 芭樂子嚴肅提醒</h3>
+        <p style="margin-bottom:0">539 是<strong>負期望值的遊戲</strong>，長期來看一定虧錢，只是虧多虧少的問題。當作買個希望、捐個公益沒問題，但如果你開始用信用卡、借錢、賣資產去買彩券——那不叫買彩券，那叫<strong>賭博成癮</strong>。台灣戒賭諮詢專線：<strong>02-2381-2361</strong>，也可以看 <a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-pink)">防詐騙指南</a>。</p>
+      </div>
+
+      <!-- ===== FAQ ===== -->
+      <h2 id="faq" style="margin-top:2.5rem">8. 常見問題 FAQ</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <h2 style="margin-top:2.5rem">延伸閱讀</h2>
+      <div class="related-links">
+        <a href="/lottery/">芭樂好彩<small>台灣彩券最新開獎結果</small></a>
+        <a href="/articles/lottery-odds-comparison/">大樂透 vs 威力彩中獎機率<small>頭獎機率 / 期望值全解析</small></a>
+        <a href="/articles/lottery-vs-slots-comparison/">威力彩 vs 老虎機勝率對決<small>科學獲利哪個強</small></a>
+        <a href="/game-ranking/">2026 老虎機排行榜<small>10 款實測評分</small></a>
+        <a href="/articles/free-credit-guide/">娛樂城體驗金怎麼用？<small>低流水提領技巧</small></a>
+        <a href="/articles/anti-scam-8la-guide/">娛樂城防詐騙指南<small>避開黑網必看</small></a>
+      </div>
+    </article>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
     </div>
   </div>
-
-  <div class="toc">
-    <h2 style="font-size:1.2rem;margin-top:0">📋 本文懶人包</h2>
-    <ol>
-      <li><a href="#s1">今彩 539 玩法與獎金結構</a></li>
-      <li><a href="#s2">包牌成本怎麼算?C(n,5) 公式</a></li>
-      <li><a href="#s3">包牌回本表:中幾碼才打平?</a></li>
-      <li><a href="#s4">膽拖投注是什麼?怎麼算注數</a></li>
-      <li><a href="#s5">包牌實戰建議</a></li>
-      <li><a href="#faq">常見問題 FAQ</a></li>
-    </ol>
-  </div>
-
-  <div class="article-content">
-
-    <h2 id="s1">一、今彩 539 玩法與獎金結構</h2>
-    <p>今彩 539 是台灣彩券發行的小型樂透,玩法很單純:從 <strong>01~39</strong> 號碼中挑 <strong>5 個</strong>,每注 50 元。每週一到週六晚上 20:30 開獎,一週開 6 次,是台彩開獎最頻繁的遊戲。</p>
-
-    <h3>獎項與獎金</h3>
-    <table>
-      <thead><tr><th>獎項</th><th>對中號碼</th><th>單注獎金</th><th>單獎中獎機率</th></tr></thead>
-      <tbody>
-        <tr><td>頭獎</td><td>5 碼全中</td><td>800 萬(春節加碼期 1,000 萬)</td><td>約 1/575,757</td></tr>
-        <tr><td>貳獎</td><td>中 4 碼</td><td>20,000</td><td>約 1/3,387</td></tr>
-        <tr><td>參獎</td><td>中 3 碼</td><td>300</td><td>約 1/103</td></tr>
-        <tr><td>肆獎</td><td>中 2 碼</td><td>50</td><td>約 1/9.6</td></tr>
-      </tbody>
-    </table>
-    <p>總中獎率約 <strong>11.4%</strong>,但你會發現裡面 <strong>10.39%</strong> 都是只回 50 元的肆獎,基本上等於「沒輸沒贏」。換句話說,真正能「贏錢」的中獎(參獎以上)機率大約只有 1%。</p>
-
-    <div class="tip-box">
-      <strong>🍈 芭樂子小提醒:</strong>頭獎機率 1/575,757 比威力彩(1/22,085,448)、大樂透(1/13,983,816)都高很多,所以才有「539 比較好中」的說法。但「比較高」是相對的——你花 50 元,期望回收率還是負的,長期玩一定虧錢。要看完整比較可參考 <a href="/articles/lottery-odds-comparison/">大樂透 vs 威力彩中獎機率比較</a>。
-    </div>
-
-    <h2 id="s2">二、包牌成本怎麼算?</h2>
-    <p>「包牌」就是你選超過 5 個號碼,系統幫你把所有可能的「5 碼一注」組合全買下來。數學上叫<strong>組合數</strong>,公式是 <code>C(n, 5)</code>:從你選的 n 個號碼裡挑 5 個有幾種選法。每種選法就是 1 注,每注 50 元。</p>
-
-    <div class="warn-box">
-      <strong>⚠️ 名詞釐清:</strong>你在彩券行常聽到「N 連碰」這個詞——但要注意,大樂透/威力彩的「N 連碰」指的是 C(N, 6) 或 C(N, 7),跟 539 的 C(N, 5) 不一樣!所以「8 連碰 1,400 元」是大樂透的價,539 的包 8 碼是 2,800 元。本文一律用「包 N 碼」這個直接好懂的講法。
-    </div>
-
-    <h3>常見包牌成本對照表</h3>
-    <table>
-      <thead><tr><th>包牌方式</th><th>注數 = C(n,5)</th><th>總成本</th></tr></thead>
-      <tbody>
-        <tr><td>包 6 碼</td><td>6 注</td><td><strong>300 元</strong></td></tr>
-        <tr><td>包 7 碼</td><td>21 注</td><td><strong>1,050 元</strong></td></tr>
-        <tr><td>包 8 碼</td><td>56 注</td><td><strong>2,800 元</strong></td></tr>
-        <tr><td>包 9 碼</td><td>126 注</td><td><strong>6,300 元</strong></td></tr>
-        <tr><td>包 10 碼</td><td>252 注</td><td><strong>12,600 元</strong></td></tr>
-        <tr><td>包 12 碼</td><td>792 注</td><td><strong>39,600 元</strong></td></tr>
-      </tbody>
-    </table>
-    <p>注意成本是<strong>非線性</strong>跳的——多包 1 個號碼,注數會放大很多倍。包 10 碼已經要 1.2 萬,包 12 碼直接快 4 萬,新手千萬不要看「只是多 2 個號碼」就衝。</p>
-
-    <h2 id="s3">三、包牌回本表:命中幾碼才打平?</h2>
-    <p>這是包牌教學裡最常被問、也最常被講錯的部分。重點公式只有一個:</p>
-
-    <div class="tip-box">
-      <strong>📐 中獎組合公式:</strong><br>
-      假設你包 <code>n</code> 個號碼,其中 <code>k</code> 個跟開獎號碼吻合(剩 <code>5-k</code> 個獎號落在你包牌外)——<br>
-      你的彩券中 <code>m</code> 碼的注數 = <code>C(k, m) × C(n-k, 5-m)</code><br>
-      然後把每個 m 對應的獎金加總,就是這次的總彩金。
-    </div>
-
-    <h3>實例 1:包 7 碼,命中 3 個獎號</h3>
-    <p>假設你包 7 個號碼,開獎後你有 3 個號碼中了(k=3、n-k=4):</p>
-    <ul>
-      <li>中 3 碼的注數 = C(3,3) × C(4,2) = 1 × 6 = <strong>6 注</strong> → 6 × 300 = 1,800 元</li>
-      <li>中 2 碼的注數 = C(3,2) × C(4,3) = 3 × 4 = <strong>12 注</strong> → 12 × 50 = 600 元</li>
-      <li>總彩金 = 1,800 + 600 = <strong>2,400 元</strong></li>
-    </ul>
-    <p>包 7 碼成本 1,050 元,命中 3 碼回收 2,400,<strong>淨賺 1,350 元</strong> ✓</p>
-
-    <h3>實例 2:包 8 碼,只命中 2 個獎號</h3>
-    <p>k=2、n-k=6:</p>
-    <ul>
-      <li>中 2 碼的注數 = C(2,2) × C(6,3) = 1 × 20 = 20 注 → 20 × 50 = 1,000 元</li>
-      <li>總彩金 = <strong>1,000 元</strong>(連 50 元的肆獎都只能拿 20 組)</li>
-    </ul>
-    <p>包 8 碼成本 2,800 元,只命中 2 碼 → <strong>淨虧 1,800 元 ✗</strong></p>
-
-    <h3>包牌「保本門檻」速查</h3>
-    <table>
-      <thead><tr><th>包牌方式</th><th>成本</th><th>剛好打平的最低命中數</th></tr></thead>
-      <tbody>
-        <tr><td>包 6 碼</td><td>300 元</td><td>需中 3 碼(回 450 元)</td></tr>
-        <tr><td>包 7 碼</td><td>1,050 元</td><td>需中 3 碼(回 2,400 元)</td></tr>
-        <tr><td>包 8 碼</td><td>2,800 元</td><td>需中 3 碼(回 6,300 元)</td></tr>
-        <tr><td>包 9 碼</td><td>6,300 元</td><td>需中 4 碼(回 ~26,000 元)</td></tr>
-        <tr><td>包 10 碼</td><td>12,600 元</td><td>需中 4 碼(回 ~31,000 元)</td></tr>
-      </tbody>
-    </table>
-    <p>看出規律了嗎?包越多碼,需要命中的「最低保本門檻」就越高。包 6~8 還只要中 3 碼就能回本,但包到 9 碼以上,你就必須中到 4 碼才能打平——而中 4 碼的機率本身就只有 0.0295%(約 1/3,387)。</p>
-
-    <h2 id="s4">四、膽拖投注:省成本但風險集中</h2>
-    <p>膽拖(又叫「膽碼」)是包牌的「省錢版」。做法是:<strong>固定 k 個「膽號」一定要在每一注裡出現</strong>,再從另外 m 個「拖號」裡湊滿剩下的 (5-k) 格。</p>
-
-    <p>注數公式: <code>C(m, 5 − k)</code></p>
-
-    <h3>膽拖 vs 全包對照</h3>
-    <table>
-      <thead><tr><th>玩法</th><th>選號</th><th>注數</th><th>成本</th></tr></thead>
-      <tbody>
-        <tr><td>全包 8 碼</td><td>8 個號碼全等價</td><td>C(8,5)=56</td><td>2,800</td></tr>
-        <tr><td>膽 1 拖 7</td><td>1 膽 + 7 拖</td><td>C(7,4)=35</td><td>1,750</td></tr>
-        <tr><td>膽 2 拖 6</td><td>2 膽 + 6 拖</td><td>C(6,3)=20</td><td>1,000</td></tr>
-        <tr><td>膽 3 拖 5</td><td>3 膽 + 5 拖</td><td>C(5,2)=10</td><td>500</td></tr>
-      </tbody>
-    </table>
-
-    <div class="warn-box">
-      <strong>⚠️ 膽拖的代價:</strong>只要你的<strong>任何一個膽號沒開出</strong>,整組投注全部歸零——因為每一注都包含那個膽號。所以膽拖是「對自己選號信心很高」時才用的玩法,不是無腦省錢方案。新手建議從全包 6 碼開始,別一上來就玩 3 膽 5 拖。
-    </div>
-
-    <h2 id="s5">五、實戰建議</h2>
-    <ol>
-      <li><strong>預算先設好,再決定包幾碼。</strong>把每個月願意花的娛樂金額切成 N 期,每期不超過該額度,千萬不要追加碼。</li>
-      <li><strong>包 6~7 碼是新手的甜蜜點。</strong>成本可控(300~1,050),命中 3 碼就能回本,還能享受到「多注同時中獎」的快感。</li>
-      <li><strong>不要迷信冷熱號。</strong>每一期開獎都是獨立事件,過去開了幾次跟下一期完全無關——這在統計學叫「賭徒謬誤」。</li>
-      <li><strong>不要「8 連碰」混用詞彙。</strong>在彩券行下注時直接講「539 包 7 碼」最不會誤會,連碰是大樂透/威力彩的習慣講法。</li>
-      <li><strong>負期望值遊戲,娛樂為主。</strong>539 的長期回收率約 53%(獎金總和 / 銷售額),你買越多注,理論上虧損越接近 47%。當作買希望沒問題,當投資就完蛋。</li>
-    </ol>
-
-    <div class="tip-box">
-      <strong>📅 開獎時間複習:</strong>今彩 539 每週一~六 20:30 開獎(週日不開),投注截止 20:00。最新開獎結果可以到 <a href="/lottery/">🍈 GAME8LA 芭樂好彩</a> 看,串接台彩官方 API 即時更新,還能展開前 5 期歷史。
-    </div>
-
-    <h2 id="faq">常見問題 FAQ</h2>
-
-    <h3>Q1:今彩 539 包牌最少要包幾個號碼?</h3>
-    <p>最少包 6 碼,共 C(6,5)=6 注、成本 300 元。再往上常見有包 7 碼(1,050)、包 8 碼(2,800)、包 9 碼(6,300)。</p>
-
-    <h3>Q2:包牌中獎一定回本嗎?</h3>
-    <p>不一定。回本要看你選的號碼有幾碼跟開獎吻合,再用 C(k,m)×C(n-k,5-m) 算出每個獎項的中獎注數加總。包 7 碼通常要中到 4 碼以上才有機會穩定打平。</p>
-
-    <h3>Q3:包 6 碼跟包 7 碼差很多嗎?</h3>
-    <p>差非常多。300 → 1,050,成本變 3.5 倍。理論中獎率也是 3.5 倍(線性),期望回收率不變,所以「不會更划算」,只是把波動拉大。</p>
-
-    <h3>Q4:膽拖跟全包哪個好?</h3>
-    <p>膽拖比較便宜,但「膽號沒中就全掛」。全包比較貴但每注獨立,不會因為一個號碼歪掉就整組崩。新手建議全包,膽拖留給對選號有強烈直覺的進階玩家。</p>
-
-    <h3>Q5:今彩 539 中頭獎機率多少?</h3>
-    <p>1 / C(39,5) = 1 / 575,757,約 0.000174%。比大樂透(1/1,398 萬)、威力彩(1/2,208 萬)都高很多,但仍是萬分之一以下的事件。</p>
-
-    <h3>Q6:可以靠包牌穩定賺錢嗎?</h3>
-    <p>不行。539 跟所有彩券一樣是<strong>負期望值</strong>遊戲,長期回收率約 53%。包牌只是改變「中獎波動」的形狀,不會改變期望值。任何宣稱「穩賺包牌組」的群組、老師、軟體都是詐騙——可以參考 <a href="/articles/anti-scam-8la-guide/">娛樂城詐騙 8 大手法</a>。</p>
-
-    <hr style="margin:2rem 0;border:0;border-top:1px solid var(--border)">
-
-    <p><strong>延伸閱讀:</strong></p>
-    <ul>
-      <li><a href="/lottery/">🍈 芭樂好彩 — 台灣彩券最新開獎結果</a></li>
-      <li><a href="/articles/lottery-odds-comparison/">📊 大樂透 vs 威力彩中獎機率比較</a></li>
-      <li><a href="/articles/anti-scam-8la-guide/">🛡️ 2026 娛樂城詐騙手法完整解析</a></li>
-    </ul>
-  </div>
-</div>
-
 </BaseLayout>
+
+<style is:global>
+.content-img {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 1.5rem auto 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0a0e1a;
+  height: auto;
+}
+.article-img-caption {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+}
+</style>
+</content>
+</invoke>

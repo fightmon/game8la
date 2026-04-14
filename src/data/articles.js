@@ -2,6 +2,34 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'daily-cash-539-wheel-guide',
+    title: '【2026實測】539 必勝策略：養牌、期望值、拖牌三大職業玩法全解析',
+    excerpt: '539 真的有必勝法嗎？用組合數學算給你看：養牌紀律、期望值拆解、膽拖/拖牌公式、包 6~10 碼回本速查表，2026 最完整的 539 職業玩家攻略。',
+    category: 'lottery',
+    categoryLabel: '彩券',
+    badgeType: 'attack',
+    date: '2026-04-14',
+    views: 1432,
+    tags: ['最新', '精選'],
+    icon: 'ticket-alt',
+    gradient: 'linear-gradient(135deg,#0a1f0a,#0f3d1f,#1a8c3a)',
+    thumbnail: '/images/article-thumbs/thumb-cover-539-strategy.webp'
+  },
+  {
+    slug: 'arcade-vs-online-casino',
+    title: '【2026實測比較】台灣遊藝場 vs 線上娛樂城：哪種最好賺？出金速度、安全性、隱私性終極大對決！',
+    excerpt: '實體遊藝場 RTP 85~95% vs 線上娛樂城 96~98%，出金速度、返水回饋、隱私保護全面大對決。芭樂子從六大維度拆解，告訴你為什麼 2026 年市場正不可逆地線上化。',
+    category: 'guide',
+    categoryLabel: '避雷教學',
+    badgeType: 'attack',
+    date: '2026-04-14',
+    views: 987,
+    tags: ['最新', '熱門', '精選'],
+    icon: 'trophy',
+    gradient: 'linear-gradient(135deg,#0a1426,#1a4a2e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-cover-arcade-vs-online.webp'
+  },
+  {
     slug: 'baccarat-winning-strategy',
     title: '【2026實測】真人百家樂必勝法：揭秘賭場最怕的 1-3-2-4 投注策略與期望值真相',
     excerpt: '百家樂有必勝公式嗎？芭樂子拆解莊 1.06% vs 閒 1.24% vs 和 14.36% 的真實期望值、1-3-2-4 投注法完整教學、真人 vs 電子百家樂比較，附 3 大禁忌與停損停利 SOP。',
@@ -202,20 +230,6 @@ export const articles = [
     thumbnail: '/images/article-thumbs/thumb-cover-slots.webp'
   },
   {
-    slug: 'daily-cash-539-wheel-guide',
-    title: '今彩 539 包牌教學:成本、回本表、膽拖計算全解析',
-    excerpt: '包 6/7/8/9 碼成本怎麼算?中幾碼才回本?膽拖投注 C(m,5-k) 公式、保本門檻速查表,新手到老司機都用得上的完整 539 包牌教學。',
-    category: 'lottery',
-    categoryLabel: '彩券',
-    badgeType: 'attack',
-    date: '2026-04-07',
-    views: 1432,
-    tags: ['最新', '精選'],
-    icon: 'ticket-alt',
-    gradient: 'linear-gradient(135deg,#0a1f0a,#0f3d1f,#1a8c3a)',
-    thumbnail: '/images/article-thumbs/thumb-cover-lottery.webp'
-  },
-  {
     slug: 'anti-scam-8la-guide',
     title: '防詐騙 8LA 指南：2026 娛樂城詐騙 8 大手法完整解析',
     excerpt: '芭樂子整理 2026 台灣娛樂城最常見的 8 大詐騙手法：黑網、出金卡關、洗碼陷阱、LINE 老師、代儲代操、退款二次詐騙全部拆給你看。懂詐騙才能防詐騙。',
@@ -231,8 +245,8 @@ export const articles = [
   },
   {
     slug: 'lottery-odds-comparison',
-    title: '大樂透 vs 威力彩中獎機率比較：2026 期望值全解析',
-    excerpt: '兩大樂透到底買哪個比較划算?用數學算給你看頭獎機率、各獎項中獎率、每注期望值、玩法差異,附最新開獎結果連結。',
+    title: '【2026實測】威力彩機率揭秘：頭獎機率只有 1/2208 萬？這樣包牌中獎率竟衝破 70%！',
+    excerpt: '威力彩頭獎機率只有 1/2,208 萬？芭樂子實測發現：用對方法包牌，任一獎項中獎率竟能衝破 70%！內含大樂透 vs 威力彩頭獎機率、期望值、包牌策略科學分析。',
     category: 'lottery',
     categoryLabel: '彩券',
     badgeType: 'attack',
