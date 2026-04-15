@@ -69,6 +69,15 @@ import Icon from './Icon.astro';
     <p>依據中華民國法律，任何形式之賭博行為均屬違法。本站對讀者自行連結之第三方平台所產生之任何後果不負任何責任。</p>
   </div>
 
+  <a href="/articles/game8la-manifesto/" class="trust-badge" aria-label="Game8la 100% Independent & No Referral Links 宣言">
+    <span class="tb-shield"><Icon name="shield" size="1.1rem" /></span>
+    <span class="tb-text">
+      <strong>100% Independent &amp; No Referral Links</strong>
+      <small>Game8la 零娛樂城外鏈・零 NGR 抽成・只給真評價</small>
+    </span>
+    <span class="tb-arrow">看宣言 →</span>
+  </a>
+
   <div class="footer-bottom">
     &copy; 2026 GAME8LA. All Rights Reserved. | 本站僅提供遊戲資訊評測與攻略分享。
   </div>
@@ -135,6 +144,47 @@ import Icon from './Icon.astro';
     font-weight: 700;
   }
 
+  .trust-badge {
+    max-width: 1300px;
+    margin: 1rem auto 0;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(255,16,240,0.06));
+    border: 1px solid rgba(57,255,20,0.35);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.25s;
+  }
+  .trust-badge:hover {
+    border-color: #39FF14;
+    box-shadow: 0 6px 20px rgba(57,255,20,0.18);
+    transform: translateY(-1px);
+  }
+  .trust-badge .tb-shield {
+    width: 40px; height: 40px; flex: 0 0 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(57,255,20,0.15);
+    border: 1px solid rgba(57,255,20,0.5);
+    border-radius: 50%;
+    color: #39FF14;
+  }
+  .trust-badge .tb-text { flex: 1; display: flex; flex-direction: column; gap: 0.15rem; line-height: 1.4; }
+  .trust-badge .tb-text strong {
+    color: #39FF14;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
+  .trust-badge .tb-text small { color: var(--text-muted); font-size: 0.8rem; }
+  .trust-badge .tb-arrow {
+    color: var(--gold-light);
+    font-weight: 800;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
   .footer-bottom {
     max-width: 1300px;
     margin: 0 auto;
@@ -198,6 +248,9 @@ import Icon from './Icon.astro';
       grid-template-columns: 1fr;
       gap: 1.5rem;
     }
+
+    .trust-badge { flex-wrap: wrap; padding: 0.9rem 1rem; }
+    .trust-badge .tb-arrow { width: 100%; text-align: right; }
 
     .footer {
       padding-bottom: 2.5rem;

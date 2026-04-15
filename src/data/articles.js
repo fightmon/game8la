@@ -2,6 +2,34 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'at99-blocked-analysis',
+    title: '【深度解析】AT99 遭刑事警察局封鎖！at99tw.com.tw 新網址是詐騙嗎？教你從「封鎖紅條」與「換殼黑網」看懂博弈產業風險',
+    excerpt: '刑事警察局刑詐防字第 1146166136 號函令封鎖 at99.com.tw，隨即疑似換殼至 at99tw.com.tw！芭樂子拆解被封真實原因、域名換殼識別特徵、玩家資金追討難度、4 大自保點與 165 檢舉 SOP，封鎖紅條背後的產業黑洞一次看懂。',
+    category: 'guide',
+    categoryLabel: '詐騙分析報告',
+    badgeType: 'attack',
+    date: '2026-04-15',
+    views: 2890,
+    tags: ['最新', '必讀', '熱門'],
+    icon: 'triangle-alert',
+    gradient: 'linear-gradient(135deg,#1a0505,#7a1616,#ec4899)',
+    thumbnail: '/images/article-thumbs/thumb-cover-at99.webp'
+  },
+  {
+    slug: 'game8la-manifesto',
+    title: '【創站宣言】為什麼 Game8la 不放任何娛樂城連結？我們想做博弈界的「最後淨土」。',
+    excerpt: '台灣 90% 博弈資訊站都是大總代、靠 NGR 抽成維生。Game8la 拒絕任何娛樂城外鏈與業配導流——我們不賺你的輸值，只賺你的信任。芭樂子親自解釋為什麼我們堅持零利益相關。',
+    category: 'guide',
+    categoryLabel: '創站宣言',
+    badgeType: 'featured',
+    date: '2026-04-15',
+    views: 3521,
+    tags: ['最新', '必讀', '精選'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a1f0a,#39FF14,#FF10F0)',
+    thumbnail: '/images/article-thumbs/thumb-cover-manifesto.webp'
+  },
+  {
     slug: 'atg-seth-copycat-exposed',
     title: '【老虎機內幕】戰神賽特 2 慘遭全業界抄襲？揭秘「正版 ATG 系統」與仿冒機台的驚人勝率落差！',
     excerpt: '市面 90% 的賽特都是山寨版！芭樂子揭密正版 ATG 戰神賽特 2 RTP 96.5~97.2% vs 仿冒版 88~92%，數學落差、GLI 認證差異、吃分陷阱，附 3 步驟辨真假方法，別再被白牌割韭菜。',

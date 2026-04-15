@@ -1,0 +1,395 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import AntiScamSeries from '../../components/AntiScamSeries.astro';
+
+const faqs = [
+  { q: 'AT99 是什麼？為什麼 2026 年初會被封鎖？', a: 'AT99（域名 at99.com.tw）是一家過去在台灣市場活躍的線上娛樂城。2026 年初，其網域遭到<strong>內政部警政署刑事警察局 詐欺犯罪防制中心</strong>依據《詐欺犯罪危害防制條例》，以「刑詐防字第 1146166136 號」函命令封鎖。封鎖理由通常涉及<strong>大量民眾報案、金流異常、或涉嫌違反博弈法規</strong>。目前使用者連線到該網域時，會直接看到紅色封鎖告示頁。' },
+  { q: '「網域被封鎖」和「娛樂城倒閉」有什麼差？', a: '這兩件事非常不一樣，一定要分清楚：<br><br><strong>① 網域被封鎖（Domain Block）</strong>——只是「這個網址進不去了」，但背後的公司、伺服器、資料庫可能還在運作，只是無法透過這個 URL 存取。玩家的會員資料、儲值金、沒提領的籌碼，<strong>理論上還存在資料庫裡，但你拿不到</strong>。<br><br><strong>② 伺服器關閉（Shutdown）</strong>——整個營運單位已經收攤、伺服器斷電、資料庫下線。這種情況下玩家的錢基本上<strong>一毛都要不回來</strong>。<br><br>AT99 目前的狀態是 ①，但歷史經驗顯示，被刑事警察局封鎖的黑網，絕大多數會在 <strong>3~6 個月內轉為 ② 狀態</strong>。' },
+  { q: '我還有錢留在 AT99 裡，拿得回來嗎？', a: '芭樂子必須誠實告訴你：<strong>機率極低</strong>。原因有三：<br><br>(1) 被《詐欺犯罪危害防制條例》封鎖的平台，通常銀行金流與第三方支付已經被凍結，它本身就提不出錢；<br>(2) 即使你向 165 檢舉、提告詐欺，AT99 這類境外黑網的<strong>實際營運者多半位於柬埔寨、緬甸或菲律賓</strong>，司法追訴非常困難；<br>(3) 他們可能會用另一個網域（例如 at99b.com、at99v2.net）通知你「重新登入領取餘額」——<strong>這幾乎 100% 是退款二次詐騙</strong>，千萬別信。正確做法：立即停損、保留交易紀錄、撥打 165 檢舉。' },
+  { q: 'AT99 的新網址 at99tw.com.tw 是真的嗎？可以繼續玩嗎？', a: '<strong>一律視為高風險黑網，不要登入、不要儲值</strong>。芭樂子實測觀察：原 <code>at99.com.tw</code> 被刑事警察局封鎖後，網路上隨即出現疑似換殼的新網域 <code>at99tw.com.tw</code>，這是黑網典型的「<strong>域名換殼（Domain Rotation）</strong>」手法——把 <code>.com.tw</code> 前後加字尾、或是把字母數字錯位（例如 at99b、at992、at99-2026、at99.cc、at9g 等），目的是規避 TWNIC 與 ISP 的封鎖名單。<br><br><strong>請注意</strong>：真正合法的博弈平台不會因為被封就換殼繼續營運，會換殼的基本上都是 ① 原本就是黑網、② 退款二次詐騙、③ 第三方仿冒詐騙集團劫持品牌。<strong>無論你是從 LINE、Telegram、老客服簡訊或 Google 搜尋結果看到這些新網址，都請當成詐騙處理</strong>。本文刻意<strong>不提供任何新網域的超連結</strong>，因為 Game8la 拒絕為任何疑似詐騙娛樂城導流。' },
+  { q: '如果我已經點進 at99tw.com.tw（或類似換殼網址）怎麼辦？', a: '先不要慌，但要立刻停損。芭樂子建議的 5 步驟自救 SOP：<br><br>(1) <strong>立刻關掉分頁</strong>——不要登入、不要輸入任何資料；<br>(2) <strong>如果已經輸入帳號密碼</strong>：請立刻到你有用相同密碼的其他網站（Google、臉書、銀行網銀等）<strong>更換密碼並開啟兩步驟驗證</strong>；<br>(3) <strong>如果已經輸入身分證、銀行帳號、信用卡</strong>：撥打 165 通報 + 通知發卡銀行 / 開戶銀行凍結異常交易；<br>(4) <strong>如果已經儲值</strong>：保留匯款單、截圖，撥打 165 與到戶籍地派出所提刑事告訴；<br>(5) <strong>檢查手機</strong>：是否被要求安裝「專屬 App」？若有，立即移除並掃毒——很多換殼黑網會搭配惡意 App 竊取簡訊驗證碼。' },
+  { q: '為什麼政府有權力封鎖娛樂城網域？法源是什麼？', a: '法源是 2024 年 7 月 31 日施行的《<strong>詐欺犯罪危害防制條例</strong>》。該條例第 14 條授權內政部警政署刑事警察局對涉嫌詐欺的網域，可以函請 TWNIC（台灣網路資訊中心）與各大 ISP 進行 DNS 封鎖。2026 年起，政府把「境外黑網娛樂城」視為優先打擊標的——因為這類平台通常兼具「非法博弈 + 洗錢 + 詐騙三罪合一」。這也是為什麼 2026 年你會發現「過去能開的娛樂城」一家一家進不去的原因。' },
+  { q: '看到類似 AT99 這種紅色封鎖告示頁，我還能繼續玩嗎？', a: '<strong>不行，千萬不要想辦法繞過</strong>。有些玩家會嘗試用 VPN、改 DNS、或從 Telegram 群組拿到新網址繼續登入——這是極度危險的行為，風險包括：<br><br>(1) <strong>金流完全暴露於境外黑網</strong>：你的銀行帳戶變成洗錢車手的中繼站，可能被凍結甚至遭受刑事調查；<br>(2) <strong>身分資料被賣給詐騙集團</strong>：你的姓名、身分證、手機號碼很可能已經在黑市流通；<br>(3) <strong>變成共犯證據</strong>：繼續儲值可能被認定「明知涉賭仍參與」，《刑法第 266 條》賭博罪最高可處 5 萬元罰金。' },
+  { q: '怎麼從一開始就避免踩到這種「即將被封的娛樂城」？', a: '芭樂子總結四個自我檢查點：<br><br><strong>① 看 GLI / iTech Labs / BMM 認證</strong>：正規營運商一定會在網站底部放這三個國際博弈實驗室的任一認證 logo，點下去能連到實驗室官網查證。沒有 = 99% 黑網。<br><strong>② 查網域註冊年齡</strong>：用 whois.whois.com.tw 查詢，註冊時間少於 2 年的娛樂城風險極高（黑網平均壽命 1.5~2.5 年就會被封、換殼重開）。<br><strong>③ 看出金速度實測紀錄</strong>：Google 搜尋「娛樂城名稱 + 出金」，看 PTT、Dcard、巴哈的玩家實測。出現大量「卡關」、「要求洗碼」、「聯絡不到客服」=<strong>金流已經有問題</strong>。<br><strong>④ 用 Game8la 防詐指南逐項對照</strong>：我們整理的《<a href="/articles/anti-scam-8la-guide/">娛樂城詐騙 8 大手法</a>》就是為了這件事寫的。' },
+  { q: '被 AT99 詐騙了，我該怎麼報案？', a: '<strong>立即執行以下 5 步驟</strong>，動作越快、追回機率越高：<br><br>(1) <strong>截圖保留所有交易紀錄</strong>：包含儲值時的銀行匯款單、娛樂城平台的存款/投注/出金頁面、與客服的對話紀錄；<br>(2) <strong>撥打 165 反詐騙專線</strong>或線上報案 <a href="https://165.npa.gov.tw/" target="_blank" rel="noopener">165.npa.gov.tw</a>，初步通報；<br>(3) <strong>到戶籍所在地派出所做筆錄</strong>，正式提出「詐欺罪」刑事告訴；<br>(4) <strong>通知銀行凍結可疑帳戶</strong>：如果對方仍在要求你匯款，立刻撥打 <a href="tel:165">165</a> 與銀行 24 小時客服請求凍結；<br>(5) <strong>向 FINCOS 金融機構聯防小組通報</strong>：透過 165 管道，警方會協調銀行端凍結可疑收款帳戶。' },
+  { q: 'Game8la 寫這篇是在「唱衰 AT99」嗎？你們收錢了嗎？', a: '沒有。Game8la 整站<strong>拒絕任何娛樂城業配、推薦碼、NGR 抽成</strong>——這也是我們敢把這篇寫出來的底氣。這篇文章引用的是<strong>刑事警察局公開函文編號</strong>、《詐欺犯罪危害防制條例》明文條款、以及實際網域封鎖截圖，全部是<strong>可驗證的客觀事實</strong>。其他博弈資訊站不寫這篇不是不知道，是怕得罪金主。我們<strong>沒金主要顧慮</strong>，所以敢寫。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/at99-blocked-analysis/"
+  title="【深度解析】AT99 遭刑事警察局封鎖！是詐騙還是金流漏洞？教你從「封鎖紅條」看懂博弈產業風險"
+  description="2026 年初 AT99 娛樂城（at99.com.tw）遭警政署刑事警察局依《詐欺犯罪危害防制條例》函令封鎖；隨即疑似換殼至 at99tw.com.tw 繼續營運。芭樂子從封鎖法源、金流異常徵兆、玩家求償機率、換殼黑網辨識、報案流程完整解析，附 4 大自查點。"
+  image="https://game8la.com/images/articles/at99-cover.webp"
+  datePublished="2026-04-15"
+  dateModified="2026-04-15"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: 'AT99 封鎖深度解析', url: 'https://game8la.com/articles/at99-blocked-analysis/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="【深度解析】AT99 娛樂城遭刑事警察局封鎖！at99tw.com.tw 新網址是真的嗎？法源、金流、玩家求償完整拆解 - GAME8LA" description="2026 年初 AT99（at99.com.tw）遭詐欺犯罪防制中心依《詐欺犯罪危害防制條例》函令封鎖，隨即疑似換殼至 at99tw.com.tw。芭樂子中立拆解：為什麼被封？換殼新網址能玩嗎？錢拿得回來嗎？如何避免下一個 AT99？">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; AT99 封鎖深度解析</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-15 ｜
+      <Icon name="user-pen" /> 作者：芭樂子｜
+      <Icon name="book-open" /> 預估閱讀 10 分鐘 ｜
+      <span style="color:#ec4899;font-weight:700">🚨 產業分析報告</span>
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a0000,#8b0000,#ff1744)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <h1 style="font-size:2rem;line-height:1.3">【深度解析】AT99 遭刑事警察局封鎖！是詐騙還是金流漏洞？<em>教你從「封鎖紅條」看懂博弈產業風險</em></h1>
+
+      <!-- === 封面視覺 === -->
+      <img class="content-img" src="/images/articles/at99-cover.webp" alt="芭樂子站長手持放大鏡調查 AT99 娛樂城遭刑事警察局封鎖事件——封面視覺" width="1400" height="781" loading="eager" fetchpriority="high" decoding="async" />
+
+      <!-- === 防詐三部曲系列導覽 === -->
+      <AntiScamSeries current={1} />
+
+      <p style="color:var(--text-muted);font-size:0.95rem">各位 8LA 鄉民好，我是芭樂子。今天不拆 RTP、不算機率，<strong>我們來做一場產業分析</strong>。2026 年初，台灣博弈圈傳出一件大事：<strong>AT99（域名 at99.com.tw）遭到警政署刑事警察局依《詐欺犯罪危害防制條例》函令封鎖</strong>。這篇不是八卦文，我會用<strong>陳述事實、不帶情緒</strong>的方式，帶你看懂這張紅條背後的法律、金流、與玩家保護邏輯——因為下一個被封的娛樂城，可能就是你現在正在玩的那一家。</p>
+
+      <!-- === 事件證據截圖 === -->
+      <img class="content-img" src="/images/articles/at99-block-evidence.webp" alt="AT99（at99.com.tw）2026 年初遭刑事警察局詐欺犯罪防制中心函令封鎖的紅色告示頁" width="1115" height="603" loading="lazy" decoding="async" />
+      <p class="article-img-caption">📸 事件證據：at99.com.tw 網址列出現紅色「此網域已經遭到 XXX 封鎖」告示，函令編號「刑詐防字第 1146166136 號」</p>
+
+      <!-- === 精選摘要：一張圖看懂 === -->
+      <div class="card" style="margin:1.5rem 0;border-color:#ec4899;background:linear-gradient(135deg,rgba(236,72,153,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#ec4899;margin-top:0">🚨 一張圖看懂 AT99 封鎖事件</h3>
+        <table>
+          <thead><tr><th>項目</th><th>事實資料</th><th>玩家風險等級</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">遭封鎖網域</td><td><code>at99.com.tw</code></td><td style="color:#ec4899;font-weight:800">🔴 極高</td></tr>
+            <tr><td style="font-weight:700">封鎖機關</td><td>內政部警政署刑事警察局 詐欺犯罪防制中心</td><td>官方直接下令</td></tr>
+            <tr><td style="font-weight:700">法源依據</td><td>《詐欺犯罪危害防制條例》</td><td>2024/7/31 起施行</td></tr>
+            <tr><td style="font-weight:700">函令字號</td><td>刑詐防字第 1146166136 號</td><td>公開可查</td></tr>
+            <tr><td style="font-weight:700">求償難度</td><td style="color:#ec4899">境外黑網、司法追訴困難</td><td style="color:#ec4899;font-weight:800">🔴 極高</td></tr>
+            <tr><td style="font-weight:700">檢舉管道</td><td>165 反詐騙專線 / 165rpz@cib.npa.gov.tw</td><td>應立即聯繫</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.9rem;color:var(--text-secondary)">👉 這不是「娛樂城維護中」，這是<strong style="color:#ec4899">政府級別的強制下架</strong>。封鎖紅條一出，95% 的機率代表「金流已經被鎖、營運已經癱瘓」。</p>
+      </div>
+
+      <!-- === TOC === -->
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);border:1px solid var(--border)">
+        <h3 style="margin-top:0">📋 本文懶人包</h3>
+        <ol style="line-height:1.9">
+          <li><a href="#fact">事件事實：刑事警察局函命令封鎖截圖</a></li>
+          <li><a href="#redirect">最新追蹤：AT99 疑似已轉址到 at99tw.com.tw</a></li>
+          <li><a href="#why">為什麼 AT99 會被封？兩大可能原因</a></li>
+          <li><a href="#money">玩家最關心的：我的錢還拿得回來嗎？</a></li>
+          <li><a href="#law">法律邏輯：政府憑什麼封一個娛樂城網域？</a></li>
+          <li><a href="#prevent">如何避免成為下一個受害者？4 大自查點</a></li>
+          <li><a href="#report">被騙了怎麼辦？165 報案 5 步驟</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- === Section 1 === -->
+      <h2 id="fact">📸 事件事實：刑事警察局函命令封鎖</h2>
+      <p>先讓我們看事實，不推測。依據 2026 年初警政署刑事警察局公開的封鎖告示頁：</p>
+
+      <blockquote style="border-left:4px solid #ec4899;padding:1rem 1.3rem;background:rgba(236,72,153,0.06);margin:1rem 0;color:var(--text-primary)">
+        此網域<strong>已經遭到內政部警政署刑事警察局 詐欺犯罪防制中心</strong>封鎖<br>
+        此網域涉及違反 <strong>《詐欺犯罪危害防制條例》</strong>，經 詐欺犯罪防制中心以 <strong>刑詐防字第 1146166136 號</strong> 函命令封鎖。<br>
+        若您對本封鎖行為有疑義，請與 <code>165rpz@cib.npa.gov.tw</code> 或 <code>(02)2822-5216 分機 8803</code> 聯繫。<br>
+        <em>（This Domain Name Has Been Blocked）</em>
+      </blockquote>
+
+      <p>這段文字<strong>不是民間或媒體爆料，是刑事警察局伺服器直接回傳的官方告示</strong>。有三個關鍵訊號值得產業工作者與玩家注意：</p>
+      <ul>
+        <li>✅ <strong>明確法源</strong>：援引 2024/7/31 施行的《詐欺犯罪危害防制條例》，代表案件已進入刑事偵查程序</li>
+        <li>✅ <strong>公開函文編號</strong>：刑詐防字第 1146166136 號，可公開查詢，非匿名封鎖</li>
+        <li>✅ <strong>提供檢舉信箱</strong>：代表<strong>政府主動鼓勵受害者報案</strong>，這類通常伴隨大量已受理中的詐欺案件</li>
+      </ul>
+
+      <!-- === Section 1.5：轉址追蹤 === -->
+      <h2 id="redirect">🔄 最新追蹤：AT99 疑似已轉址到 <code style="font-size:0.85em">at99tw.com.tw</code></h2>
+      <p>寫這篇的當下（2026 年初），芭樂子繼續追蹤 AT99 的動向，<strong>發現了一個典型的「黑網換殼」動作</strong>。先把事實攤開：</p>
+
+      <!-- === 轉址證據圖 === -->
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img class="content-img" src="/images/articles/at99-redirect-evidence.webp" alt="AT99 原網域 at99.com.tw 遭刑事警察局封鎖後，疑似轉址到新後綴 at99tw.com.tw 的畫面截圖" width="1400" height="905" loading="lazy" decoding="async" />
+        <figcaption style="font-size:0.88rem;color:var(--text-muted);margin-top:0.4rem">▲ 原 <code>at99.com.tw</code> 被封鎖後，疑似換殼至 <code>at99tw.com.tw</code> 繼續營運的截圖（2026 年初擷取）</figcaption>
+      </figure>
+
+      <div class="card" style="border-color:#ec4899;margin:1.2rem 0;background:rgba(236,72,153,0.04)">
+        <h4 style="margin-top:0;color:#ec4899">📌 芭樂子特別聲明（本文無任何對外連結）</h4>
+        <p style="margin:0"><strong>本文不會提供任何對 <code>at99tw.com.tw</code> 或任何疑似換殼網域的超連結</strong>。我們只在文字中提及這個網址，目的是讓正在搜尋「AT99 新網址 / AT99 轉址 / at99tw 是真的嗎」的玩家，<strong>能看到這篇警示文章</strong>，而不是搜到黑網的 SEO 養站頁。Game8la 全站拒絕為任何疑似詐騙娛樂城導流——這是我們的底線。</p>
+      </div>
+
+      <h3 style="color:#ec4899;margin-top:1.8rem">🧩 為什麼「換後綴」是黑網的典型特徵？</h3>
+      <p>這類「原網域被刑事局封 → 快速開一個相似網域繼續營運」的操作，在資安與博弈產業稱為「<strong>域名換殼（Domain Rotation / Cloaking）</strong>」。芭樂子拆解常見的換殼手法：</p>
+
+      <div class="card" style="margin:1rem 0">
+        <h4 style="margin-top:0">常見換殼模式（警示！）</h4>
+        <ul style="margin:0.5rem 0 0;padding-left:1.2rem;line-height:1.8">
+          <li><strong>後綴替換</strong>：<code>.com.tw</code> → <code>.cc</code> / <code>.cyou</code> / <code>.net</code> / <code>.online</code>，或加尾巴改成 <code>at99tw.com.tw</code>、<code>at99vip.net</code></li>
+          <li><strong>數字尾巴</strong>：原本是 <code>at99</code>，換殼成 <code>at992</code>、<code>at99b</code>、<code>at99-2026</code> 這類讓老玩家「一看就認得」的變體</li>
+          <li><strong>諧音/拼字混淆</strong>：換成 <code>at9g.com.tw</code>、<code>at99.xyz</code>、<code>at99-tw.com</code>，讓搜尋引擎演算法慢半拍</li>
+          <li><strong>LINE / Telegram 私訊通知</strong>：黑網客服會主動聯繫老會員「新網址請登入」，要你把錢繼續匯進去或「登入領回餘額」</li>
+        </ul>
+      </div>
+
+      <h3 style="color:#ec4899;margin-top:1.8rem">⚠️ 如果你收到「AT99 新網址」的邀請訊息，請當成詐騙處理</h3>
+      <p>產業實務上，真正合法的博弈平台<strong>不會因為「網域被封」就換殼繼續經營</strong>——因為它們本來就不會被封。會換殼的，基本上就三種狀況：</p>
+      <ol style="line-height:2">
+        <li>原本就是黑網，換個皮繼續吸玩家儲值（最常見）</li>
+        <li>營運方為了把舊玩家資金「導到新站」再做一次詐騙（退款二次詐騙手法）</li>
+        <li>第三方詐騙集團直接仿冒 AT99 品牌開假站，劫持搜尋流量</li>
+      </ol>
+      <p><strong>不管是哪一種，對玩家的結果都一樣——繼續儲值 = 錢再次蒸發</strong>。這也是芭樂子堅持不放連結的原因：<strong>任何一個讓你能點進去的按鈕，都可能是下一次被坑的起點</strong>。</p>
+
+      <blockquote style="border-left:4px solid #FFA500;padding:1rem 1.3rem;background:rgba(255,165,0,0.06);margin:1.2rem 0;color:var(--text-primary)">
+        🛡 <strong>芭樂子實戰守則</strong>：看到任何「<code>at99tw.com.tw</code>」、「<code>at99b.net</code>」、「<code>at99-2026.cc</code>」這類 AT99 的變體網址，<strong>無論透過 LINE、Telegram、老客服簡訊、或 Google 搜尋結果</strong>，一律視為高風險黑網，不要登入、不要儲值、不要輸入身分證與銀行資料。如果已經輸入，立即撥打 165 通報。
+      </blockquote>
+
+      <!-- === Section 2 === -->
+      <h2 id="why">🤔 為什麼 AT99 會被封？兩大可能原因</h2>
+      <p>芭樂子整理過去 6 個月內被刑事警察局封鎖的娛樂城案例，<strong>被封的原因通常不是「賭博」本身</strong>——因為單純的境外博弈，台灣法律很難直接切斷網域。會走到「函令封鎖」這一步，一定是觸碰了<strong>更嚴重的紅線</strong>，最常見兩大原因：</p>
+
+      <div class="card" style="border-color:#ec4899;margin:1.2rem 0;background:rgba(236,72,153,0.04)">
+        <h4 style="margin-top:0;color:#ec4899">① 金流異常 / 洗錢徵兆</h4>
+        <p style="margin:0">銀行端偵測到<strong>異常資金流動</strong>（例如大量小額集中入帳、短時間內密集分散匯出）、或有玩家向 165 通報「儲值後出金卡關、客服消失」。當這些訊號累積達到金管會與警政署的審查門檻，<strong>金流合作銀行會先凍結、警方隨後函令封鎖</strong>。這是近年最常見的封鎖路徑。</p>
+      </div>
+
+      <div class="card" style="border-color:#ec4899;margin:1.2rem 0;background:rgba(236,72,153,0.04)">
+        <h4 style="margin-top:0;color:#ec4899">② 反詐騙政策加速（2026 新趨勢）</h4>
+        <p style="margin:0">2024 年 7 月《詐欺犯罪危害防制條例》施行後，2025~2026 年政府進入「反詐爆發期」。過去要 3~6 個月才能封掉一個黑網，<strong>現在最快 72 小時</strong>。這意味著「過去能開、現在進不去」的娛樂城會越來越多——<strong>這不是意外，是制度正常化</strong>。</p>
+      </div>
+
+      <p><strong>芭樂子的分析</strong>：AT99 涉及哪一項或兩者皆有，目前刑事局尚未公開偵查細節。但「刑詐防字」而非「刑法博字」的函文字頭已經暗示——警方看到的重點是「詐欺」兩字，而不是「賭博」。這對受害玩家來說<strong>反而是好消息</strong>，因為詐欺罪的追訴力道比賭博罪強很多。</p>
+
+      <!-- === Section 3 === -->
+      <h2 id="money">💸 玩家最關心的：我的錢還拿得回來嗎？</h2>
+      <p>芭樂子先提醒，以下分析是<strong>基於過去判例與產業慣性的估計</strong>，不構成法律意見，個案請洽律師。</p>
+
+      <img class="content-img" src="/images/articles/at99-money-flow.webp" alt="AT99 玩家資金流向分析：已儲值資金 → 平台錢包 → 境外第三方支付 → 事後追討難度極高" width="1400" height="781" loading="lazy" />
+      <p class="article-img-caption">芭樂子拆解：從你按下「儲值」那一秒開始，錢就離開台灣金融體系了</p>
+
+      <p>第一個關鍵概念，要先理解<strong>「網域封鎖」與「伺服器關閉」的差別</strong>：</p>
+
+      <table style="margin:1rem 0">
+        <thead><tr><th>狀態</th><th>狀態描述</th><th>錢包餘額還在嗎</th><th>追回可能性</th></tr></thead>
+        <tbody>
+          <tr><td><strong>① 網域封鎖（目前 AT99 狀態）</strong></td><td>URL 進不去，但資料庫可能還在</td><td style="color:var(--gold-light)">帳上可能還顯示餘額</td><td style="color:var(--gold-light)">極低（< 5%）</td></tr>
+          <tr><td><strong>② 伺服器關閉</strong></td><td>整個營運收攤，人員跑路</td><td style="color:#ec4899">全部歸零</td><td style="color:#ec4899">趨近於 0</td></tr>
+          <tr><td><strong>③ 換殼重生</strong></td><td>用新網域（如 at99b.com）通知你「登入領餘額」</td><td style="color:#ec4899">幾乎 100% 是二次詐騙</td><td style="color:#ec4899">點進去會被騙更多</td></tr>
+        </tbody>
+      </table>
+
+      <div class="card" style="border-color:#ec4899;background:rgba(236,72,153,0.06);margin:1.2rem 0">
+        <h4 style="margin-top:0;color:#ec4899">🚨 芭樂子嚴肅提醒</h4>
+        <p style="margin:0">如果你最近收到任何聲稱「AT99 官方客服」、「AT99 新網址」、「登入領取餘額」的 LINE、Telegram、Email 訊息——<strong>100% 是退款二次詐騙</strong>。真正的刑事局告示頁不會叫你「重新登入」，只會叫你聯繫 165。</p>
+      </div>
+
+      <p><strong>那錢真的一毛都拿不回來嗎？</strong>也不是絕對。2025 年有少數判例，受害者透過<strong>集體提告 + 刑事附帶民事求償</strong>，成功從被扣押的車手帳戶分配到小額補償（通常 5~30% 本金不等）。但前提是：你要報案、要存證、要動作快。細節見本文最後一段的報案 5 步驟。</p>
+
+      <!-- === Section 4 === -->
+      <h2 id="law">⚖️ 法律邏輯：政府憑什麼封一個娛樂城網域？</h2>
+      <p>很多玩家會質疑：「我自己的錢想賭，政府為什麼要管？」芭樂子必須說明，政府封鎖 AT99 這類網域，<strong>動用的法源並不是賭博罪，而是詐欺防制法</strong>。邏輯不一樣，請聽我說：</p>
+
+      <div class="card" style="border-color:var(--guava-green);margin:1.2rem 0">
+        <h4 style="margin-top:0;color:var(--guava-green)">《詐欺犯罪危害防制條例》關鍵條文（2024/7/31 施行）</h4>
+        <ul style="margin:0;line-height:1.9">
+          <li><strong>第 14 條</strong>：主管機關（警政署）得就涉嫌詐欺之網域，函請台灣網路資訊中心（TWNIC）或 ISP 業者進行 DNS 封鎖</li>
+          <li><strong>第 44 條</strong>：以電子通訊、網路等方式對公眾散布詐欺訊息，加重刑責</li>
+          <li><strong>第 49 條</strong>：金融機構對高風險帳戶有主動通報與暫停交易的義務</li>
+        </ul>
+      </div>
+
+      <p>換句話說，<strong>AT99 被封不是因為「它讓人賭博」，而是因為「它被認定符合詐欺構成要件」</strong>——可能包含不出金、虛報賠率、後台修改玩家資料、或金流涉嫌洗錢。這是一條完全不同的法律戰線。對玩家有利的是：<strong>詐欺罪可以追債、可以刑事附帶民事、可以凍結對方車手帳戶</strong>——這比「賭博罪只罰你自己」好得多。</p>
+
+      <p>同時，2026 年你會看到這種封鎖越來越頻繁。<strong>這不是政府變嚴，是法律終於追上產業現實</strong>。</p>
+
+      <!-- === ManifestoBox === -->
+      <ManifestoBox slogan="這篇封鎖分析 = 零利益相關・純事實陳述・不怕得罪金主" />
+
+      <!-- === Section 5 === -->
+      <h2 id="prevent">🛡️ 如何避免成為下一個受害者？4 大自查點</h2>
+      <p>AT99 封了，下一個會是誰？芭樂子整理<strong>4 個 5 分鐘就能做完的自查動作</strong>，幫你判斷現在正在玩的娛樂城風險等級：</p>
+
+      <img class="content-img" src="/images/articles/at99-selfcheck-4points.webp" alt="芭樂子 4 大自查點：GLI 認證 / 網域年齡 / 出金實測 / 8LA 防詐指南對照" width="1400" height="781" loading="lazy" />
+      <p class="article-img-caption">把這四張檢查卡存下來，下次遇到新娛樂城逐項打勾</p>
+
+      <div class="card" style="border-color:var(--guava-green);margin:1.2rem 0">
+        <h4 style="margin-top:0;color:var(--guava-green)">✅ 自查點 ①：國際博弈實驗室認證</h4>
+        <p style="margin:0">捲到網站最底部，尋找 <strong>GLI（Gaming Laboratories International）</strong>、<strong>iTech Labs</strong>、或 <strong>BMM Testlabs</strong> 其中任一個 logo。點下去應該能連到實驗室官網的認證查詢頁。找不到、或點下去是假連結 = <strong>99% 是黑網</strong>。</p>
+      </div>
+
+      <div class="card" style="border-color:var(--guava-green);margin:1.2rem 0">
+        <h4 style="margin-top:0;color:var(--guava-green)">✅ 自查點 ②：網域註冊年齡</h4>
+        <p style="margin:0">到 <a href="https://whois.whois.com.tw" target="_blank" rel="noopener">whois.whois.com.tw</a> 查詢該網域的 Creation Date。<strong>少於 2 年 = 高風險</strong>。台灣黑網的平均壽命 1.5~2.5 年就會被封鎖然後換殼重開——註冊時間短代表它可能是某個更老黑網的「轉世版」。</p>
+      </div>
+
+      <div class="card" style="border-color:var(--guava-green);margin:1.2rem 0">
+        <h4 style="margin-top:0;color:var(--guava-green)">✅ 自查點 ③：出金速度實測紀錄</h4>
+        <p style="margin:0">Google 搜尋「<code>娛樂城名稱 + 出金</code>」或到 PTT Lottery 版、Dcard 搜尋。<strong>出現大量「卡關」、「要求洗碼」、「聯絡不到客服」關鍵字 = 金流已經有問題</strong>。正派娛樂城的出金抱怨比例通常低於 5%，如果一頁翻過去全是負評，就是紅旗。</p>
+      </div>
+
+      <div class="card" style="border-color:var(--guava-green);margin:1.2rem 0">
+        <h4 style="margin-top:0;color:var(--guava-green)">✅ 自查點 ④：用 Game8la 防詐指南對照</h4>
+        <p style="margin:0">我們整理的《<a href="/articles/anti-scam-8la-guide/">娛樂城詐騙 8 大手法</a>》把黑網的常見套路全部拆給你看（黑網 / 出金卡關 / 洗碼陷阱 / LINE 老師 / 代儲代操 / 退款二次詐騙等）。<strong>逐項打勾，中 3 項以上 = 立刻撤資</strong>。</p>
+      </div>
+
+      <!-- === Section 6 === -->
+      <h2 id="report">📞 被騙了怎麼辦？165 報案 5 步驟</h2>
+      <p>如果你已經是 AT99 或類似平台的受害者，芭樂子整理<strong>最快、最有用</strong>的 5 步行動清單：</p>
+
+      <ol style="line-height:2;font-size:0.98rem">
+        <li><strong>全面截圖保留證據</strong>：銀行匯款單、娛樂城平台的「存款 / 投注 / 出金」頁面、與客服的對話紀錄（LINE / Telegram / 網站 IM），<strong>全部存檔</strong>。這是後續提告的必要文件。</li>
+        <li><strong>撥打 165 反詐騙專線</strong>（24 小時）或線上報案 <a href="https://165.npa.gov.tw/" target="_blank" rel="noopener" style="color:var(--gold-light)">165.npa.gov.tw</a>，初步通報案件。</li>
+        <li><strong>到戶籍所在地派出所做筆錄</strong>，正式提出「<strong>詐欺罪</strong>」刑事告訴（《刑法第 339 條》）。</li>
+        <li><strong>通知銀行凍結可疑帳戶</strong>：如果你剛匯出款項，立刻撥打你的銀行 24 小時客服 + 165，請求<strong>緊急攔截轉帳</strong>。越快越有機會攔下。</li>
+        <li><strong>關注刑事局後續進度</strong>：保留函令編號（例如刑詐防字第 1146166136 號），後續若有分配款，警方會透過偵辦機關通知受害人。</li>
+      </ol>
+
+      <div class="card" style="border-color:var(--gold);background:rgba(245,184,0,0.06);margin:1.2rem 0">
+        <h4 style="margin-top:0;color:var(--gold)">🔔 重要提醒</h4>
+        <p style="margin:0">如果你還沒被騙、只是剛好看到這篇——<strong>請立刻把這篇分享給身邊有在玩黑網娛樂城的朋友</strong>。AT99 不是第一家被封的，也不會是最後一家。<strong>知識才是唯一的防詐盾牌</strong>。</p>
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div class="card" style="margin:2rem 0;background:rgba(60,60,60,0.3);border:1px dashed var(--text-muted)">
+        <h4 style="margin-top:0;color:var(--text-secondary)">⚖️ 免責聲明</h4>
+        <p style="margin:0;font-size:0.88rem;color:var(--text-muted);line-height:1.7">本站僅針對 <code>at99.com.tw</code> 網域遭內政部警政署刑事警察局依《詐欺犯罪危害防制條例》函令封鎖之<strong>公開事實</strong>進行產業分析，所有資料引用自刑事警察局官方封鎖告示頁及政府立法資料庫，<strong>不代表本站對 AT99 任何其他商業行為的評價</strong>。讀者應理性判斷博弈風險，並自行承擔法律責任。依據中華民國法律，任何形式之賭博行為均屬違法。本文不構成法律意見，個案建議諮詢律師或撥打 165 反詐騙專線。</p>
+      </div>
+
+      <!-- === FAQ === -->
+      <h2 id="faq">❓ 常見問題 FAQ</h2>
+      <details class="faq-item" open>
+        <summary class="faq-q">Q1. AT99 是什麼？為什麼 2026 年初會被封鎖？</summary>
+        <div class="faq-a" set:html={faqs[0].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q2. 「網域被封鎖」和「娛樂城倒閉」有什麼差？</summary>
+        <div class="faq-a" set:html={faqs[1].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q3. 我還有錢留在 AT99 裡，拿得回來嗎？</summary>
+        <div class="faq-a" set:html={faqs[2].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q4. AT99 的新網址 at99tw.com.tw 是真的嗎？可以繼續玩嗎？</summary>
+        <div class="faq-a" set:html={faqs[3].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q5. 如果我已經點進 at99tw.com.tw（或類似換殼網址）怎麼辦？</summary>
+        <div class="faq-a" set:html={faqs[4].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q6. 為什麼政府有權力封鎖娛樂城網域？法源是什麼？</summary>
+        <div class="faq-a" set:html={faqs[5].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q7. 看到類似 AT99 這種紅色封鎖告示頁，我還能繼續玩嗎？</summary>
+        <div class="faq-a" set:html={faqs[6].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q8. 怎麼從一開始就避免踩到這種「即將被封的娛樂城」？</summary>
+        <div class="faq-a" set:html={faqs[7].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q9. 被 AT99 詐騙了，我該怎麼報案？</summary>
+        <div class="faq-a" set:html={faqs[8].a} />
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q10. Game8la 寫這篇是在「唱衰 AT99」嗎？你們收錢了嗎？</summary>
+        <div class="faq-a" set:html={faqs[9].a} />
+      </details>
+
+      <!-- === Share Buttons === -->
+      <ShareButtons
+        title="【深度解析】AT99 遭刑事警察局封鎖！是詐騙還是金流漏洞？"
+        hashtag="#AT99封鎖 #娛樂城詐騙 #GAME8LA #165反詐騙"
+        heading="🛡 多一個人轉發，就少一個人被坑"
+      />
+
+      <!-- === Related Links === -->
+      <h2 style="margin-top:3rem">🔗 延伸閱讀：繼續武裝你的防詐知識</h2>
+      <div class="related-links">
+        <a href="/articles/anti-scam-8la-guide/" class="rl-item">
+          <span class="rl-cat">🛡️ 必讀</span>
+          <strong>娛樂城詐騙 8 大手法完整解析</strong>
+          <span class="rl-desc">黑網 / 出金卡關 / LINE 老師 / 退款二次詐騙全部拆給你看</span>
+        </a>
+        <a href="/articles/game8la-manifesto/" class="rl-item">
+          <span class="rl-cat">📢 創站宣言</span>
+          <strong>為什麼 Game8la 不放任何娛樂城連結？</strong>
+          <span class="rl-desc">零業配、零 NGR 抽成——這篇封鎖分析才敢寫</span>
+        </a>
+        <a href="/articles/slots-rtp-guide/" class="rl-item">
+          <span class="rl-cat">📊 硬核知識</span>
+          <strong>老虎機 RTP 完整指南：看懂這個數字就不會被割</strong>
+          <span class="rl-desc">學會看 GLI 認證與 RTP，是防詐第一步</span>
+        </a>
+        <a href="/articles/atg-seth-copycat-exposed/" class="rl-item">
+          <span class="rl-cat">🔥 產業內幕</span>
+          <strong>戰神賽特 2 慘遭全業界抄襲？</strong>
+          <span class="rl-desc">山寨老虎機如何把你的勝率砍半</span>
+        </a>
+        <a href="https://165.npa.gov.tw/" target="_blank" rel="noopener" class="rl-item">
+          <span class="rl-cat">🚨 官方管道</span>
+          <strong>165 反詐騙官方網站</strong>
+          <span class="rl-desc">線上報案、檢舉、查詢被害帳戶（政府官網）</span>
+        </a>
+        <a href="/articles/" class="rl-item">
+          <span class="rl-cat">📚 全部攻略</span>
+          <strong>芭樂攻略文章總覽</strong>
+          <span class="rl-desc">從機率到產業內幕，完整博弈知識庫</span>
+        </a>
+      </div>
+    </article>
+  </div>
+
+  <style is:global>
+    .content-img { display: block; max-width: 820px; width: 100%; height: auto; margin: 1.2rem auto 0.4rem; border-radius: 12px; }
+    .article-img-caption { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin: 0 0 1.5rem; font-style: italic; }
+
+    .faq-item {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: 0.8rem; padding: 0 1.2rem;
+    }
+    .faq-item[open] { border-color: #ec4899; }
+    .faq-q {
+      cursor: pointer; padding: 1rem 0; font-weight: 800; color: var(--text-primary);
+      list-style: none; display: flex; align-items: center; justify-content: space-between;
+    }
+    .faq-q::after { content: '+'; color: #ec4899; font-size: 1.3rem; font-weight: 900; }
+    .faq-item[open] .faq-q::after { content: '−'; }
+    .faq-a { padding: 0 0 1rem; color: var(--text-secondary); line-height: 1.8; }
+    .faq-a strong { color: #ec4899; }
+    .faq-a a { color: var(--gold-light); }
+    .faq-a code { background: rgba(0,0,0,0.3); padding: 0.1rem 0.4rem; border-radius: 4px; color: var(--guava-green); }
+
+    .related-links {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem; margin: 1.5rem 0 3rem;
+    }
+    .rl-item {
+      display: flex; flex-direction: column; gap: 0.4rem;
+      padding: 1.1rem 1.2rem;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      text-decoration: none; color: var(--text-primary);
+      transition: all 0.25s;
+    }
+    .rl-item:hover { border-color: #ec4899; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(236,72,153,0.12); }
+    .rl-cat { font-size: 0.75rem; color: #ec4899; font-weight: 700; }
+    .rl-item strong { font-size: 0.98rem; line-height: 1.45; color: var(--text-primary); }
+    .rl-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+
+    .article-content code {
+      background: rgba(0,0,0,0.35); padding: 0.1rem 0.45rem;
+      border-radius: 4px; font-size: 0.88em; color: var(--guava-green);
+      font-family: 'SF Mono', Consolas, monospace;
+    }
+  </style>
+</BaseLayout>

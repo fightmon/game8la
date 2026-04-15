@@ -3,6 +3,8 @@ import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 
 const faqs = [
   { q: '山寨賽特和正版 ATG 戰神賽特外觀真的一模一樣嗎？', a: '第一眼看幾乎一樣，但仔細比會差很多。仿冒版常見三個破綻：<strong>(1) 角色頭冠、翅膀的光影細節糊糊的、物理引擎飄</strong>；(2) 倍數符號掉落時「頓感」很重、沒有正版那種滑順的消除感；(3) 免費遊戲進場的過場動畫畫格數偏低、甚至直接跳過。正版 ATG 的美術是 4K 貼圖+粒子特效，仿版通常是 2K 壓縮素材，放大看就露餡。' },
@@ -265,6 +267,8 @@ const faqs = [
         <p style="margin-bottom:0">在老虎機世界裡，美術是行銷、數學是真相。看懂 RTP 的人能玩得久，只看美術的人每天在餵仿冒機台。</p>
       </div>
 
+      <ManifestoBox slogan="這篇抄襲揭密 = 零業配・零推薦碼・敢指名道姓的真相" />
+
       <!-- ===== 第 6 節 FAQ ===== -->
       <h2 id="faq" style="margin-top:2.5rem">7. 常見問題 FAQ</h2>
 
@@ -277,11 +281,18 @@ const faqs = [
         ))}
       </div>
 
+      <!-- === 分享按鈕 === -->
+      <ShareButtons
+        title="【老虎機內幕】戰神賽特 2 慘遭全業界抄襲？正版 vs 仿冒 RTP 落差大揭密"
+        hashtag="#戰神賽特2 #ATG老虎機 #仿冒機台 #GAME8LA"
+        heading="🎰 把這篇轉給還在玩仿冒賽特的朋友"
+      />
+
       <!-- === 延伸閱讀 === -->
       <h2 style="margin-top:2.5rem">📖 延伸閱讀</h2>
       <div class="related-links">
         <a href="/games/seth-2/">戰神賽特 2 完整攻略<small>正版 ATG 規格｜4 級 JACKPOT 打法｜不朽覺醒 Buy Feature 實測</small></a>
-        <a href="/articles/atg-seth-guide.html">戰神賽特初代打法教學<small>ATG 老虎機基本功｜倍數球累積心法</small></a>
+        <a href="/articles/atg-seth-guide/">戰神賽特初代打法教學<small>ATG 老虎機基本功｜倍數球累積心法</small></a>
         <a href="/articles/atg-seth-1-vs-2-comparison/">戰神賽特 1 vs 2 世代比較<small>Max Win 落差｜機制變革｜買免遊報酬比</small></a>
         <a href="/articles/slots-rtp-guide/">老虎機 RTP 完整指南<small>RTP 公式、波動性分級、樣本次數全拆解</small></a>
         <a href="/articles/slots-guide/">老虎機綜合攻略<small>類型、術語、免費遊戲、爆分機制一次懂</small></a>

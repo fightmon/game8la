@@ -2,145 +2,184 @@
 import Icon from './Icon.astro';
 
 interface Props {
+  /** 文章標題（X / Threads 帶文用） */
   title?: string;
+  /** 自訂分享導語（覆蓋預設） */
+  hashtag?: string;
+  /** 區塊標題，預設「覺得有用？分享給朋友」 */
+  heading?: string;
+  /** 向後相容：舊版 ArticleLayout 會傳 description / url */
   description?: string;
   url?: string;
 }
 
 const {
-  title = document.title || '戰神賽特2覺醒之力完整攻略｜GAME8LA',
-  description = 'GAME8LA - 台灣最敢說真話的線上遊戲評測平台',
-  url = typeof window !== 'undefined' ? location.href : 'https://game8la.com'
+  title = '',
+  hashtag = '#GAME8LA #博弈避雷',
+  heading = '🛡 覺得有用？把這篇傳給可能會中招的朋友'
 } = Astro.props;
 ---
 
-<div class="share-buttons">
-  <button type="button" onclick="shareOnLINE()" class="share-btn line-btn" aria-label="分享到 LINE" title="分享到 LINE">
-    <Icon name="message-circle" size="0.9em" /> LINE
-  </button>
-  <button type="button" onclick="shareOnFacebook()" class="share-btn facebook-btn" aria-label="分享到 Facebook" title="分享到 Facebook">
-    <Icon name="facebook" size="0.9em" /> Facebook
-  </button>
-  <button type="button" onclick="shareOnTwitter()" class="share-btn twitter-btn" aria-label="分享到 Twitter" title="分享到 Twitter">
-    <Icon name="twitter" size="0.9em" /> Twitter
-  </button>
-  <button type="button" onclick="copyToClipboard()" class="share-btn copy-btn" aria-label="複製連結" title="複製連結">
-    <Icon name="copy" size="0.9em" /> 複製連結
-  </button>
-</div>
+<section class="share-section" aria-label="社群分享">
+  <h3 class="share-heading">{heading}</h3>
+  <p class="share-sub">轉貼一秒、救人三年。Game8la 全站零業配，你的分享是我們最大的動力。</p>
+
+  <div class="share-buttons">
+    <button type="button" data-share="facebook" class="share-btn facebook-btn" aria-label="分享到 Facebook">
+      <Icon name="facebook" size="1em" /> Facebook
+    </button>
+
+    <button type="button" data-share="x" class="share-btn x-btn" aria-label="分享到 X（Twitter）">
+      <Icon name="x-twitter" size="1em" /> X
+    </button>
+
+    <button type="button" data-share="threads" class="share-btn threads-btn" aria-label="分享到 Threads">
+      <Icon name="threads" size="1em" /> Threads
+    </button>
+
+    <button type="button" data-share="instagram" class="share-btn instagram-btn" aria-label="分享到 Instagram（複製連結）">
+      <Icon name="instagram" size="1em" /> Instagram
+    </button>
+
+    <button type="button" data-share="copy" class="share-btn copy-btn" aria-label="複製文章連結">
+      <Icon name="link" size="1em" /> 複製連結
+    </button>
+  </div>
+
+  <div class="share-toast" id="shareToast" role="status" aria-live="polite"></div>
+</section>
 
 <style>
+  .share-section {
+    margin: 2.5rem 0 1.5rem;
+    padding: 1.6rem 1.5rem;
+    background: linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.06));
+    border: 1px solid rgba(57,255,20,0.25);
+    border-radius: 14px;
+    text-align: center;
+  }
+  .share-heading {
+    margin: 0 0 0.4rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-primary, #fff);
+  }
+  .share-sub {
+    margin: 0 0 1.2rem;
+    font-size: 0.9rem;
+    color: var(--text-muted, #aaa);
+  }
   .share-buttons {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.7rem;
     flex-wrap: wrap;
-    margin: 2rem 0;
+    justify-content: center;
   }
-
   .share-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
+    gap: 0.45rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 10px;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
     border: none;
     cursor: pointer;
     color: #fff;
+    line-height: 1;
   }
+  .share-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-  .line-btn {
-    background: #06C755;
+  .facebook-btn  { background: #1877F2; }
+  .facebook-btn:hover  { box-shadow: 0 6px 16px rgba(24,119,242,0.35); }
+
+  .x-btn         { background: #000; border: 1px solid #333; }
+  .x-btn:hover   { box-shadow: 0 6px 16px rgba(255,255,255,0.18); }
+
+  .threads-btn   { background: #101010; border: 1px solid #333; }
+  .threads-btn:hover { box-shadow: 0 6px 16px rgba(255,255,255,0.18); }
+
+  .instagram-btn { background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+  .instagram-btn:hover { box-shadow: 0 6px 16px rgba(220,39,67,0.4); }
+
+  .copy-btn      { background: var(--gold, #f5b800); color: #000; }
+  .copy-btn:hover{ box-shadow: 0 6px 16px rgba(245,184,0,0.4); }
+
+  .share-toast {
+    margin-top: 1rem;
+    min-height: 1.2rem;
+    font-size: 0.88rem;
+    color: var(--gold-light, #39FF14);
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.3s;
   }
+  .share-toast.visible { opacity: 1; }
 
-  .line-btn:hover {
-    background: #05a74a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3);
-  }
-
-  .facebook-btn {
-    background: #1877F2;
-  }
-
-  .facebook-btn:hover {
-    background: #1467da;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
-  }
-
-  .twitter-btn {
-    background: #1DA1F2;
-  }
-
-  .twitter-btn:hover {
-    background: #1a8cd8;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
-  }
-
-  .copy-btn {
-    background: var(--gold);
-    color: #000;
-  }
-
-  .copy-btn:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(57, 255, 20, 0.3);
-  }
-
-  /* === RESPONSIVE === */
   @media (max-width: 768px) {
-    .share-buttons {
-      gap: 0.5rem;
-    }
-
-    .share-btn {
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-    }
+    .share-section { padding: 1.2rem 1rem; }
+    .share-buttons { gap: 0.5rem; }
+    .share-btn { padding: 0.55rem 0.9rem; font-size: 0.85rem; }
   }
 </style>
 
-<script is:inline>
-  function shareOnLINE() {
-    const url = encodeURIComponent(window.location.href);
-    window.open(
-      `https://social-plugins.line.me/lineit/share?url=${url}`,
-      '_blank',
-      'width=600,height=500'
-    );
-  }
+<script is:inline define:vars={{ initialTitle: title, initialHashtag: hashtag }}>
+  (function () {
+    const section = document.currentScript.previousElementSibling;
+    if (!section || !section.classList || !section.classList.contains('share-section')) return;
 
-  function shareOnFacebook() {
-    const url = encodeURIComponent(window.location.href);
-    window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-      '_blank',
-      'width=600,height=500'
-    );
-  }
+    const toast = section.querySelector('#shareToast');
+    function showToast(msg) {
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 2400);
+    }
 
-  function shareOnTwitter() {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(document.title || 'Check this out!');
-    window.open(
-      `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
-      '_blank',
-      'width=600,height=500'
-    );
-  }
+    function getShareData() {
+      const url = window.location.href;
+      const title = initialTitle || document.title || 'GAME8LA';
+      const text = `${title} — ${initialHashtag}`;
+      return { url, title, text };
+    }
 
-  function copyToClipboard() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-      alert('連結已複製到剪貼板！');
-    }).catch(() => {
-      alert('複製失敗，請手動複製：' + url);
+    function openPopup(href) {
+      window.open(href, '_blank', 'width=640,height=560,noopener,noreferrer');
+    }
+
+    section.querySelectorAll('[data-share]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const kind = btn.getAttribute('data-share');
+        const { url, title, text } = getShareData();
+        const eUrl = encodeURIComponent(url);
+        const eText = encodeURIComponent(text);
+
+        if (kind === 'facebook') {
+          openPopup(`https://www.facebook.com/sharer/sharer.php?u=${eUrl}`);
+        } else if (kind === 'x') {
+          openPopup(`https://twitter.com/intent/tweet?url=${eUrl}&text=${eText}`);
+        } else if (kind === 'threads') {
+          openPopup(`https://www.threads.net/intent/post?text=${encodeURIComponent(text + ' ' + url)}`);
+        } else if (kind === 'instagram') {
+          // IG 不支援網頁分享 API，採用「複製連結 + 開啟 IG」雙動作
+          try {
+            await navigator.clipboard.writeText(url);
+            showToast('已複製連結！請貼到 IG 限動或私訊分享 📲');
+          } catch {
+            showToast('請手動複製：' + url);
+          }
+          setTimeout(() => window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer'), 600);
+        } else if (kind === 'copy') {
+          try {
+            await navigator.clipboard.writeText(url);
+            showToast('✅ 連結已複製到剪貼簿！');
+          } catch {
+            showToast('複製失敗，請手動複製：' + url);
+          }
+        }
+      });
     });
-  }
+  })();
 </script>

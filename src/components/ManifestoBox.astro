@@ -1,0 +1,185 @@
+---
+// ManifestoBox.astro
+// 「零業配宣言框」— 可重用元件，插在文章結尾導流回 /articles/game8la-manifesto/
+//
+// 用法：
+//   import ManifestoBox from '../../components/ManifestoBox.astro';
+//   <ManifestoBox />                           // 預設版本
+//   <ManifestoBox variant="compact" />         // 精簡版（高度更矮）
+//   <ManifestoBox slogan="為什麼這篇可信？" /> // 自訂上方標語
+import Icon from './Icon.astro';
+
+interface Props {
+  /** 顯示在頂部的小標語，預設為「這篇文章 = 零業配 · 零導流 · 只給真評價」 */
+  slogan?: string;
+  /** compact = 精簡版（1 行文案）；default = 完整版（含引言） */
+  variant?: 'default' | 'compact';
+}
+
+const { slogan = '這篇文章 = 零娛樂城外鏈・零 NGR 抽成・零業配五星推薦', variant = 'default' } = Astro.props;
+---
+
+<a href="/articles/game8la-manifesto/" class={`manifesto-box manifesto-${variant}`} aria-label="閱讀 Game8la 創站宣言：為什麼我們不放任何娛樂城連結">
+  <div class="mb-shield" aria-hidden="true">
+    <Icon name="shield" size="1.4rem" />
+  </div>
+  <div class="mb-body">
+    <div class="mb-slogan">
+      <span class="mb-badge">🛡 100% Independent</span>
+      <span class="mb-slogan-text">{slogan}</span>
+    </div>
+    {variant === 'default' && (
+      <blockquote class="mb-quote">
+        芭樂子：「我們不賺你的輸值，<strong>只賺你的信任</strong>。」
+      </blockquote>
+    )}
+    <div class="mb-cta">
+      看完整創站宣言 <Icon name="arrow-right" />
+    </div>
+  </div>
+</a>
+
+<style>
+  .manifesto-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem 1.4rem;
+    margin: 2rem 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(57,255,20,0.08) 0%, rgba(255,16,240,0.06) 100%);
+    border: 1px solid rgba(57,255,20,0.4);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .manifesto-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #39FF14 0%, #FFD700 50%, #FF10F0 100%);
+    transition: height 0.25s;
+  }
+
+  .manifesto-box:hover {
+    border-color: #39FF14;
+    box-shadow: 0 10px 30px rgba(57,255,20,0.18);
+    transform: translateY(-2px);
+  }
+
+  .manifesto-box:hover::before {
+    height: 5px;
+  }
+
+  .mb-shield {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(57,255,20,0.15);
+    border: 1px solid rgba(57,255,20,0.5);
+    border-radius: 50%;
+    color: #39FF14;
+    box-shadow: 0 0 12px rgba(57,255,20,0.3);
+  }
+
+  .mb-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .mb-slogan {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    line-height: 1.5;
+  }
+
+  .mb-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.65rem;
+    background: rgba(57,255,20,0.18);
+    color: #39FF14;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    border-radius: 999px;
+    border: 1px solid rgba(57,255,20,0.4);
+    white-space: nowrap;
+  }
+
+  .mb-slogan-text {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+  }
+
+  .mb-quote {
+    margin: 0;
+    padding: 0.5rem 0.9rem;
+    border-left: 3px solid #FF10F0;
+    background: rgba(255,16,240,0.06);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-style: italic;
+    line-height: 1.6;
+    border-radius: 4px;
+  }
+
+  .mb-quote strong {
+    color: #39FF14;
+    font-style: normal;
+  }
+
+  .mb-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--gold-light, #FFD700);
+    font-weight: 800;
+    font-size: 0.88rem;
+    margin-top: 0.2rem;
+  }
+
+  .manifesto-box:hover .mb-cta {
+    color: #39FF14;
+  }
+
+  /* Compact 變體：去掉引言，單行呈現 */
+  .manifesto-compact {
+    padding: 0.9rem 1.2rem;
+  }
+
+  .manifesto-compact .mb-body {
+    gap: 0.3rem;
+  }
+
+  @media (max-width: 640px) {
+    .manifesto-box {
+      padding: 1rem 1.1rem;
+      gap: 0.8rem;
+    }
+    .mb-shield {
+      flex: 0 0 36px;
+      width: 36px;
+      height: 36px;
+    }
+    .mb-slogan-text {
+      font-size: 0.85rem;
+    }
+    .mb-quote {
+      font-size: 0.82rem;
+    }
+  }
+</style>

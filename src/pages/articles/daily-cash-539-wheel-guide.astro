@@ -3,6 +3,8 @@ import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 
 const faqs = [
   { q: '今彩 539 養牌是什麼？真的能提高中獎率嗎？', a: '「養牌」是老玩家的術語，指的是「鎖定固定幾組自選號碼長期追下去」。邏輯是：每組號碼每期中頭獎機率都是 1/575,757，固定追一組長期下來期望值不變，但你拿到「集中命中」的心理預期會更穩定，不會追一次換一組白白浪費歷史累積。數學上沒有「越養越容易中」這回事（每期獨立事件），但對紀律型玩家來說，養牌是「避免情緒追號、鎖定預算上限」的實戰手段。' },
@@ -46,7 +48,7 @@ const faqs = [
       <h1 style="font-size:2rem;line-height:1.3">【539 包牌攻略】2026 最強系統號玩法：這樣包牌中獎率提升 10 倍？附期望值試算與避雷指南</h1>
       <p style="color:var(--text-muted);font-size:0.95rem">網路上一堆「539 必勝法」的 YouTube 和 LINE 群組，動不動就說「跟單包中」、「老師內線明牌」——看過 10 個有 9 個是詐騙。今天芭樂子<strong>只用數學</strong>，把 539 真正有效的三大職業玩法（<strong>養牌紀律、期望值計算、拖牌策略</strong>）一次拆給你看，學會這三招，至少能讓你輸得比較慢、玩得比較久。</p>
 
-      <img class="content-img" src="/images/articles/539-strategy-cover.webp" alt="539 包牌攻略：系統號、養牌、期望值、膽拖四大職業玩法" width="1600" height="893" loading="eager" />
+      <img class="content-img" src="/images/articles/539-strategy-cover.webp" alt="539 包牌攻略：系統號、養牌、期望值、膽拖四大職業玩法" width="1400" height="781" loading="eager" />
       <p class="article-img-caption">芭樂子整理：2026 年 539 包牌四大核心——系統號、養牌、期望值、膽拖</p>
 
       <!-- === 精選摘要：單注 vs 包牌 vs 威力彩 對比 === -->
@@ -370,6 +372,8 @@ const faqs = [
         <p style="margin-bottom:0">539 是<strong>負期望值的遊戲</strong>，長期來看一定虧錢，只是虧多虧少的問題。當作買個希望、捐個公益沒問題，但如果你開始用信用卡、借錢、賣資產去買彩券——那不叫買彩券，那叫<strong>賭博成癮</strong>。台灣戒賭諮詢專線：<strong>02-2381-2361</strong>，也可以看 <a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-pink)">防詐騙指南</a>。</p>
       </div>
 
+      <ManifestoBox slogan="這篇 539 包牌公式 = 純數學・零業配・沒有「加我 LINE 報牌」" />
+
       <!-- ===== FAQ ===== -->
       <h2 id="faq" style="margin-top:2.5rem">8. 常見問題 FAQ</h2>
       <div class="faq-list">
@@ -380,6 +384,13 @@ const faqs = [
           </details>
         ))}
       </div>
+
+      <!-- ===== 分享按鈕 ===== -->
+      <ShareButtons
+        title="【539 包牌攻略】2026 最強系統號玩法｜中獎率提升 10 倍？"
+        hashtag="#539包牌 #系統號 #期望值 #GAME8LA"
+        heading="🎯 有用的話把這篇丟到你的樂透群"
+      />
 
       <!-- ===== 延伸閱讀 ===== -->
       <h2 style="margin-top:2.5rem">延伸閱讀</h2>
