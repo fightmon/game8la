@@ -267,35 +267,35 @@ const faqs = [
       <h2 id="faq">❓ 常見問題 FAQ</h2>
       <details class="faq-item">
         <summary class="faq-q">Q1. 我被娛樂城騙了，錢能追回來嗎？</summary>
-        <div class="faq-a" set:html={faqs[0].a} />
+        <div class="faq-a" set:html={faqs[0].a}></div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Q2. 怎麼分辨一家娛樂城是不是黑網？</summary>
-        <div class="faq-a" set:html={faqs[1].a} />
+        <div class="faq-a" set:html={faqs[1].a}></div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Q3. LINE 上的娛樂城「業務員」可以信嗎？</summary>
-        <div class="faq-a" set:html={faqs[2].a} />
+        <div class="faq-a" set:html={faqs[2].a}></div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Q4. 娛樂城送的首儲優惠真的能領嗎？</summary>
-        <div class="faq-a" set:html={faqs[3].a} />
+        <div class="faq-a" set:html={faqs[3].a}></div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Q5. GAME8LA 會推薦黑網嗎？</summary>
-        <div class="faq-a" set:html={faqs[4].a} />
+        <div class="faq-a" set:html={faqs[4].a}></div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Q6. 為什麼洗碼倍數超過 20 倍就是陷阱？可以算給我看嗎？</summary>
-        <div class="faq-a" set:html={faqs[5].a} />
+        <div class="faq-a" set:html={faqs[5].a}></div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Q7. 被詐騙集團賣了名單，一直接到騷擾電話怎麼辦？</summary>
-        <div class="faq-a" set:html={faqs[6].a} />
+        <div class="faq-a" set:html={faqs[6].a}></div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Q8. 朋友或家人被詐騙，我要怎麼協助他？</summary>
-        <div class="faq-a" set:html={faqs[7].a} />
+        <div class="faq-a" set:html={faqs[7].a}></div>
       </details>
 
       <!-- === Share Buttons === -->
@@ -363,7 +363,8 @@ const faqs = [
     }
     .faq-q::after { content: '+'; color: #ec4899; font-size: 1.3rem; font-weight: 900; }
     .faq-item[open] .faq-q::after { content: '−'; }
-    .faq-a { padding: 0 0 1rem; color: var(--text-secondary); line-height: 1.8; }
+    .faq-item > .faq-a { padding: 0 0 1rem; color: var(--text-secondary); line-height: 1.8; display: none; }
+    .faq-item[open] > .faq-a { display: block; }
     .faq-a strong { color: #ec4899; }
     .faq-a a { color: var(--gold-light); }
     .faq-a code { background: rgba(0,0,0,0.3); padding: 0.1rem 0.4rem; border-radius: 4px; color: var(--guava-green); }

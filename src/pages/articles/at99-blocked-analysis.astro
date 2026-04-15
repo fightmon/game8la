@@ -8,6 +8,8 @@ import ShareButtons from '../../components/ShareButtons.astro';
 import AntiScamSeries from '../../components/AntiScamSeries.astro';
 
 const faqs = [
+  { q: 'AT99 官網為什麼打不開？是倒閉了嗎？', a: '<strong>AT99（<code>at99.com.tw</code>）不是單純倒閉，而是被政府「函令封鎖」</strong>。2026 年初，該網域因涉嫌違反 2024 年施行的《詐欺犯罪危害防制條例》，遭內政部警政署刑事警察局詐欺犯罪防制中心以「<strong>刑詐防字第 1146166136 號</strong>」函命令封鎖。使用者連入時會直接看到紅色封鎖告示頁，無法進入網站。<br><br><strong>重點差異</strong>：倒閉是營運單方面結束；封鎖是<strong>政府強制下架</strong>，代表案件已進入刑事偵查，性質比倒閉嚴重得多。' },
+  { q: 'AT99 有新網址嗎？at99tw.com.tw 能繼續儲值嗎？', a: '坊間傳聞有轉址到 <code>at99tw.com.tw</code>（以及 at99b、at99-2026 等變體），但 <strong>Game8la 嚴正提醒讀者：<span style="color:#ec4899">已被刑事警察局封鎖過的平台存在極高金流風險，切勿隨意嘗試</span></strong>。原因：<br><br>(1) 原平台的<strong>銀行合作帳戶已被列入警示名單</strong>，換網域不等於換金流——你匯進去的錢很可能當天就被凍結；<br>(2) <strong>真正合法的博弈平台不會因為被封就換殼繼續營運</strong>，會換殼的 99% 是黑網、退款二次詐騙、或仿冒品牌詐騙集團；<br>(3) <strong>頻繁換網域正是平台即將完全收攤的警訊</strong>——產業實務觀察，3 個月內換 2 次以上網址的平台，基本上就是收攤前的最後掙扎。<br><br><strong>本文刻意不提供任何新網域的超連結</strong>，因為 Game8la 拒絕為任何疑似詐騙娛樂城導流。' },
   { q: 'AT99 是什麼？為什麼 2026 年初會被封鎖？', a: 'AT99（域名 at99.com.tw）是一家過去在台灣市場活躍的線上娛樂城。2026 年初，其網域遭到<strong>內政部警政署刑事警察局 詐欺犯罪防制中心</strong>依據《詐欺犯罪危害防制條例》，以「刑詐防字第 1146166136 號」函命令封鎖。封鎖理由通常涉及<strong>大量民眾報案、金流異常、或涉嫌違反博弈法規</strong>。目前使用者連線到該網域時，會直接看到紅色封鎖告示頁。' },
   { q: '「網域被封鎖」和「娛樂城倒閉」有什麼差？', a: '這兩件事非常不一樣，一定要分清楚：<br><br><strong>① 網域被封鎖（Domain Block）</strong>——只是「這個網址進不去了」，但背後的公司、伺服器、資料庫可能還在運作，只是無法透過這個 URL 存取。玩家的會員資料、儲值金、沒提領的籌碼，<strong>理論上還存在資料庫裡，但你拿不到</strong>。<br><br><strong>② 伺服器關閉（Shutdown）</strong>——整個營運單位已經收攤、伺服器斷電、資料庫下線。這種情況下玩家的錢基本上<strong>一毛都要不回來</strong>。<br><br>AT99 目前的狀態是 ①，但歷史經驗顯示，被刑事警察局封鎖的黑網，絕大多數會在 <strong>3~6 個月內轉為 ② 狀態</strong>。' },
   { q: '我還有錢留在 AT99 裡，拿得回來嗎？', a: '芭樂子必須誠實告訴你：<strong>機率極低</strong>。原因有三：<br><br>(1) 被《詐欺犯罪危害防制條例》封鎖的平台，通常銀行金流與第三方支付已經被凍結，它本身就提不出錢；<br>(2) 即使你向 165 檢舉、提告詐欺，AT99 這類境外黑網的<strong>實際營運者多半位於柬埔寨、緬甸或菲律賓</strong>，司法追訴非常困難；<br>(3) 他們可能會用另一個網域（例如 at99b.com、at99v2.net）通知你「重新登入領取餘額」——<strong>這幾乎 100% 是退款二次詐騙</strong>，千萬別信。正確做法：立即停損、保留交易紀錄、撥打 165 檢舉。' },
@@ -58,7 +60,7 @@ const faqs = [
       <p style="color:var(--text-muted);font-size:0.95rem">各位 8LA 鄉民好，我是芭樂子。今天不拆 RTP、不算機率，<strong>我們來做一場產業分析</strong>。2026 年初，台灣博弈圈傳出一件大事：<strong>AT99（域名 at99.com.tw）遭到警政署刑事警察局依《詐欺犯罪危害防制條例》函令封鎖</strong>。這篇不是八卦文，我會用<strong>陳述事實、不帶情緒</strong>的方式，帶你看懂這張紅條背後的法律、金流、與玩家保護邏輯——因為下一個被封的娛樂城，可能就是你現在正在玩的那一家。</p>
 
       <!-- === 事件證據截圖 === -->
-      <img class="content-img" src="/images/articles/at99-block-evidence.webp" alt="AT99（at99.com.tw）2026 年初遭刑事警察局詐欺犯罪防制中心函令封鎖的紅色告示頁" width="1115" height="603" loading="lazy" decoding="async" />
+      <img class="content-img" src="/images/articles/at99-block-evidence.webp" alt="AT99 遭刑事警察局封鎖截圖-2026最新｜at99.com.tw 紅色告示頁｜函令編號 刑詐防字第 1146166136 號" width="1115" height="603" loading="lazy" decoding="async" />
       <p class="article-img-caption">📸 事件證據：at99.com.tw 網址列出現紅色「此網域已經遭到 XXX 封鎖」告示，函令編號「刑詐防字第 1146166136 號」</p>
 
       <!-- === 精選摘要：一張圖看懂 === -->
@@ -117,7 +119,7 @@ const faqs = [
 
       <!-- === 轉址證據圖 === -->
       <figure style="margin:1.5rem 0;text-align:center">
-        <img class="content-img" src="/images/articles/at99-redirect-evidence.webp" alt="AT99 原網域 at99.com.tw 遭刑事警察局封鎖後，疑似轉址到新後綴 at99tw.com.tw 的畫面截圖" width="1400" height="905" loading="lazy" decoding="async" />
+        <img class="content-img" src="/images/articles/at99-redirect-evidence.webp" alt="AT99 新網址 at99tw.com.tw 換殼截圖-2026最新｜at99.com.tw 封鎖後疑似換殼繼續營運畫面" width="1400" height="905" loading="lazy" decoding="async" />
         <figcaption style="font-size:0.88rem;color:var(--text-muted);margin-top:0.4rem">▲ 原 <code>at99.com.tw</code> 被封鎖後，疑似換殼至 <code>at99tw.com.tw</code> 繼續營運的截圖（2026 年初擷取）</figcaption>
       </figure>
 
@@ -137,6 +139,31 @@ const faqs = [
           <li><strong>諧音/拼字混淆</strong>：換成 <code>at9g.com.tw</code>、<code>at99.xyz</code>、<code>at99-tw.com</code>，讓搜尋引擎演算法慢半拍</li>
           <li><strong>LINE / Telegram 私訊通知</strong>：黑網客服會主動聯繫老會員「新網址請登入」，要你把錢繼續匯進去或「登入領回餘額」</li>
         </ul>
+      </div>
+
+      <h3 style="color:#ec4899;margin-top:1.8rem">🕵️ 為什麼換網域也沒用？<em style="color:var(--text-muted);font-weight:400">——從資安與金流角度拆給你看</em></h3>
+      <p>很多玩家會誤以為「換個網址繼續玩」只是不方便而已，芭樂子必須嚴肅提醒：<strong>換殼不只不會解決問題，反而是平台即將完全收攤的最大警訊</strong>。從資安角度看，有三件事情正在背後發生：</p>
+
+      <div class="card" style="border-color:#ec4899;margin:1.2rem 0;background:linear-gradient(135deg,rgba(236,72,153,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h4 style="margin-top:0;color:#ec4899">🧠 專家分析：雖然 AT99 試圖透過新網域 <code>at99tw.com.tw</code> 重新上線，但這種「貓抓老鼠」的行為代表其後端金流已經被刑事局監控中</h4>
+        <ol style="margin:0.6rem 0 0;padding-left:1.2rem;line-height:2">
+          <li><strong>銀行金流已被標記</strong>：刑事局函令封鎖網域的同時，<strong>合作銀行與金融科技業者（FinTech）會同步把該平台的收款帳戶列入警示名單</strong>。就算換了網域，玩家的儲值匯款一進到平台的車手帳戶，可能當天就被凍結——<strong>錢進得去，出不來</strong>。</li>
+          <li><strong>第三方支付通道已被切斷</strong>：合法支付閘道（綠界、藍新、街口等）不會接被警方鎖定的平台。換殼平台只能轉用<strong>私人車手帳戶、虛擬貨幣、超商點數代充</strong>這些高風險通道，任何一個環節出事，玩家的錢就直接蒸發。</li>
+          <li><strong>頻繁換域名 = 平台即將壽終</strong>：在博弈產業實務觀察中，<strong>一家平台 3 個月內換 2 次以上網域，基本上就是在收攤前的最後掙扎</strong>。繼續儲值，等於是把錢丟進一艘正在下沉的船——<strong>這種頻繁更換網域的行為，正是平台不穩定的最大警訊</strong>。</li>
+        </ol>
+        <p style="margin:1rem 0 0;padding-top:0.8rem;border-top:1px dashed rgba(236,72,153,0.3);font-size:0.92rem"><strong style="color:#ec4899">一句話結論</strong>：換網域後繼續儲值 = 把錢<strong>同時暴露在金流凍結、支付通道詐騙、平台落跑</strong>這三重風險中，幾乎不可能全身而退。</p>
+      </div>
+
+      <!-- === 專家避雷檢查清單 === -->
+      <div class="card" style="border:2px solid var(--guava-green);margin:1.5rem 0;background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%);box-shadow:0 0 20px rgba(57,255,20,0.08)">
+        <h3 style="margin-top:0;color:var(--guava-green)">💡 Game8la 專家避雷檢查（3 指標快篩）</h3>
+        <p style="margin:0 0 0.8rem;color:var(--text-secondary);font-size:0.92rem">懶得讀完全文？把這 3 個指標記在手機備忘錄，下次有人推薦你新娛樂城時，30 秒篩一次：</p>
+        <ol style="margin:0;padding-left:1.2rem;line-height:2.1;font-size:0.96rem">
+          <li><strong>網域是否頻繁更換</strong>？（例如從 <code>.com</code> 變成 <code>.com.tw</code>，或加尾巴變成 <code>at99tw.com.tw</code> / <code>at99b.net</code>）→ <strong style="color:#ec4899">中 = 極高風險</strong></li>
+          <li><strong>Google 搜尋品牌名</strong> 是否出現大量「詐騙 / 黑網 / 出金卡關 / 被封」相關投訴？→ <strong style="color:#ec4899">中 = 金流已出問題</strong></li>
+          <li><strong>是否被 165 全民防騙網（<a href="https://165.npa.gov.tw/" target="_blank" rel="noopener" style="color:var(--gold-light)">165.npa.gov.tw</a>）列入高風險名單？</strong>→ <strong style="color:#ec4899">中 = 政府級別紅旗</strong></li>
+        </ol>
+        <p style="margin:0.8rem 0 0;padding-top:0.6rem;border-top:1px dashed rgba(57,255,20,0.2);font-size:0.88rem;color:var(--text-muted)"><strong>3 項任中 1 項</strong>：暫停儲值、先撤資；<strong>中 2 項以上</strong>：立刻停損並撥 165 諮詢。</p>
       </div>
 
       <h3 style="color:#ec4899;margin-top:1.8rem">⚠️ 如果你收到「AT99 新網址」的邀請訊息，請當成詐騙處理</h3>
@@ -169,7 +196,7 @@ const faqs = [
       <p><strong>芭樂子的分析</strong>：AT99 涉及哪一項或兩者皆有，目前刑事局尚未公開偵查細節。但「刑詐防字」而非「刑法博字」的函文字頭已經暗示——警方看到的重點是「詐欺」兩字，而不是「賭博」。這對受害玩家來說<strong>反而是好消息</strong>，因為詐欺罪的追訴力道比賭博罪強很多。</p>
 
       <!-- === Section 3 === -->
-      <h2 id="money">💸 玩家最關心的：我的錢還拿得回來嗎？</h2>
+      <h2 id="money">💸 AT99 被封鎖後，我的錢拿得回來嗎？<em style="color:var(--text-muted);font-weight:400">揭秘博弈平台封鎖後的資金流向</em></h2>
       <p>芭樂子先提醒，以下分析是<strong>基於過去判例與產業慣性的估計</strong>，不構成法律意見，個案請洽律師。</p>
 
       <img class="content-img" src="/images/articles/at99-money-flow.webp" alt="AT99 玩家資金流向分析：已儲值資金 → 平台錢包 → 境外第三方支付 → 事後追討難度極高" width="1400" height="781" loading="lazy" />
@@ -214,8 +241,8 @@ const faqs = [
       <ManifestoBox slogan="這篇封鎖分析 = 零利益相關・純事實陳述・不怕得罪金主" />
 
       <!-- === Section 5 === -->
-      <h2 id="prevent">🛡️ 如何避免成為下一個受害者？4 大自查點</h2>
-      <p>AT99 封了，下一個會是誰？芭樂子整理<strong>4 個 5 分鐘就能做完的自查動作</strong>，幫你判斷現在正在玩的娛樂城風險等級：</p>
+      <h2 id="prevent">🛡️ 如何辨別詐騙娛樂城？<em style="color:var(--text-muted);font-weight:400">除了警政署紅條，你還應該看這 4 個指標</em></h2>
+      <p>AT99 封了，下一個會是誰？等到刑事局紅條出來已經太晚——芭樂子整理<strong>4 個 5 分鐘就能做完的自查動作</strong>，在紅條出現之前，就幫你判斷現在正在玩的娛樂城風險等級：</p>
 
       <img class="content-img" src="/images/articles/at99-selfcheck-4points.webp" alt="芭樂子 4 大自查點：GLI 認證 / 網域年齡 / 出金實測 / 8LA 防詐指南對照" width="1400" height="781" loading="lazy" />
       <p class="article-img-caption">把這四張檢查卡存下來，下次遇到新娛樂城逐項打勾</p>
@@ -266,44 +293,52 @@ const faqs = [
       <!-- === FAQ === -->
       <h2 id="faq">❓ 常見問題 FAQ</h2>
       <details class="faq-item" open>
-        <summary class="faq-q">Q1. AT99 是什麼？為什麼 2026 年初會被封鎖？</summary>
-        <div class="faq-a" set:html={faqs[0].a} />
+        <summary class="faq-q">Q1. AT99 官網為什麼打不開？是倒閉了嗎？</summary>
+        <div class="faq-a" set:html={faqs[0].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q2. 「網域被封鎖」和「娛樂城倒閉」有什麼差？</summary>
-        <div class="faq-a" set:html={faqs[1].a} />
+        <summary class="faq-q">Q2. AT99 有新網址嗎？at99tw.com.tw 能繼續儲值嗎？</summary>
+        <div class="faq-a" set:html={faqs[1].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q3. 我還有錢留在 AT99 裡，拿得回來嗎？</summary>
-        <div class="faq-a" set:html={faqs[2].a} />
+        <summary class="faq-q">Q3. AT99 是什麼？為什麼 2026 年初會被封鎖？</summary>
+        <div class="faq-a" set:html={faqs[2].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q4. AT99 的新網址 at99tw.com.tw 是真的嗎？可以繼續玩嗎？</summary>
-        <div class="faq-a" set:html={faqs[3].a} />
+        <summary class="faq-q">Q4. 「網域被封鎖」和「娛樂城倒閉」有什麼差？</summary>
+        <div class="faq-a" set:html={faqs[3].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q5. 如果我已經點進 at99tw.com.tw（或類似換殼網址）怎麼辦？</summary>
-        <div class="faq-a" set:html={faqs[4].a} />
+        <summary class="faq-q">Q5. 我還有錢留在 AT99 裡，拿得回來嗎？</summary>
+        <div class="faq-a" set:html={faqs[4].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q6. 為什麼政府有權力封鎖娛樂城網域？法源是什麼？</summary>
-        <div class="faq-a" set:html={faqs[5].a} />
+        <summary class="faq-q">Q6. AT99 的新網址 at99tw.com.tw 是真的嗎？可以繼續玩嗎？</summary>
+        <div class="faq-a" set:html={faqs[5].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q7. 看到類似 AT99 這種紅色封鎖告示頁，我還能繼續玩嗎？</summary>
-        <div class="faq-a" set:html={faqs[6].a} />
+        <summary class="faq-q">Q7. 如果我已經點進 at99tw.com.tw（或類似換殼網址）怎麼辦？</summary>
+        <div class="faq-a" set:html={faqs[6].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q8. 怎麼從一開始就避免踩到這種「即將被封的娛樂城」？</summary>
-        <div class="faq-a" set:html={faqs[7].a} />
+        <summary class="faq-q">Q8. 為什麼政府有權力封鎖娛樂城網域？法源是什麼？</summary>
+        <div class="faq-a" set:html={faqs[7].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q9. 被 AT99 詐騙了，我該怎麼報案？</summary>
-        <div class="faq-a" set:html={faqs[8].a} />
+        <summary class="faq-q">Q9. 看到類似 AT99 這種紅色封鎖告示頁，我還能繼續玩嗎？</summary>
+        <div class="faq-a" set:html={faqs[8].a}></div>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Q10. Game8la 寫這篇是在「唱衰 AT99」嗎？你們收錢了嗎？</summary>
-        <div class="faq-a" set:html={faqs[9].a} />
+        <summary class="faq-q">Q10. 怎麼從一開始就避免踩到這種「即將被封的娛樂城」？</summary>
+        <div class="faq-a" set:html={faqs[9].a}></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q11. 被 AT99 詐騙了，我該怎麼報案？</summary>
+        <div class="faq-a" set:html={faqs[10].a}></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Q12. Game8la 寫這篇是在「唱衰 AT99」嗎？你們收錢了嗎？</summary>
+        <div class="faq-a" set:html={faqs[11].a}></div>
       </details>
 
       <!-- === Share Buttons === -->
@@ -365,7 +400,8 @@ const faqs = [
     }
     .faq-q::after { content: '+'; color: #ec4899; font-size: 1.3rem; font-weight: 900; }
     .faq-item[open] .faq-q::after { content: '−'; }
-    .faq-a { padding: 0 0 1rem; color: var(--text-secondary); line-height: 1.8; }
+    .faq-item > .faq-a { padding: 0 0 1rem; color: var(--text-secondary); line-height: 1.8; display: none; }
+    .faq-item[open] > .faq-a { display: block; }
     .faq-a strong { color: #ec4899; }
     .faq-a a { color: var(--gold-light); }
     .faq-a code { background: rgba(0,0,0,0.3); padding: 0.1rem 0.4rem; border-radius: 4px; color: var(--guava-green); }
