@@ -113,6 +113,39 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </ul>
       <p class="disclaimer">⚠️ 本頁資料僅供參考，實際中獎號碼請以 <a href="https://www.taiwanlottery.com/" target="_blank" rel="noopener">台灣彩券官方網站</a> 公告為準。</p>
     </section>
+
+    <section class="lottery-read-more">
+      <div class="rm-head">
+        <h3>📚 樂透延伸閱讀</h3>
+        <p>對完號碼沒中？先別撕單！芭樂子整理的機率、包牌、RTP 實測攻略，看完再戰下一期。</p>
+      </div>
+      <div class="rm-grid">
+        <a class="rm-card gold" href="/lottery/guide/">
+          <span class="rm-tag">📘 新手必看</span>
+          <h4>彩票投注完整指南：大樂透、威力彩、539 玩法機率一本通</h4>
+          <p>4 大官方彩種全比較、中獎機率數學、包牌教學、快開彩玩法、稅務須知一次看完。</p>
+          <span class="rm-cta">閱讀完整攻略 <Icon name="arrow-right" /></span>
+        </a>
+        <a class="rm-card green" href="/articles/lottery-odds-comparison/">
+          <span class="rm-tag">🔥 熱門實測</span>
+          <h4>【2026 實測】威力彩 vs 大樂透機率大揭秘：頭獎差 4 倍？</h4>
+          <p>芭樂子拆解 1/2,208 萬 vs 1/1,398 萬的真相，附 RTP 與期望值對照表。</p>
+          <span class="rm-cta">看機率實測 <Icon name="arrow-right" /></span>
+        </a>
+        <a class="rm-card pink" href="/articles/daily-cash-539-wheel-guide/">
+          <span class="rm-tag">🎯 包牌攻略</span>
+          <h4>【539 包牌攻略】最強系統號玩法：中獎率提升 10 倍？</h4>
+          <p>系統號包牌、養牌紀律、膽拖公式，包 7 碼任一獎項命中率飆到 91%，附避雷清單。</p>
+          <span class="rm-cta">解鎖包牌公式 <Icon name="arrow-right" /></span>
+        </a>
+        <a class="rm-card purple" href="/articles/lottery-vs-slots-comparison/">
+          <span class="rm-tag">⚔️ 勝率對決</span>
+          <h4>【2026 實測】威力彩 vs 老虎機勝率大對決：差了 100 倍？</h4>
+          <p>威力彩 RTP 55% vs 老虎機 97%，用國際認證數據拆解「哪個比較好贏」的數學真相。</p>
+          <span class="rm-cta">看勝率比較 <Icon name="arrow-right" /></span>
+        </a>
+      </div>
+    </section>
     </div>
 
   <style is:global>
@@ -181,10 +214,75 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .info-box li strong { color: var(--gold-light); margin-right: 0.5rem; }
     .disclaimer { margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); }
 
+    /* 樂透延伸閱讀 */
+    .lottery-read-more {
+      max-width: 1168px; margin: 3rem auto 4rem;
+    }
+    .lottery-read-more .rm-head { text-align: center; margin-bottom: 1.8rem; }
+    .lottery-read-more .rm-head h3 {
+      font-size: 1.8rem; margin: 0 0 0.5rem;
+      background: linear-gradient(135deg, #FFD700, #39FF14);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .lottery-read-more .rm-head p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+    .rm-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .rm-card {
+      position: relative; display: flex; flex-direction: column;
+      padding: 1.4rem 1.3rem 1.2rem;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+      text-decoration: none; color: var(--text-primary);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      overflow: hidden;
+    }
+    .rm-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold); transition: height 0.25s;
+    }
+    .rm-card:hover { transform: translateY(-4px); }
+    .rm-card:hover::before { height: 5px; }
+    .rm-card.gold::before { background: linear-gradient(90deg, #FFD700, #FFA500); }
+    .rm-card.gold:hover { border-color: #FFD700; box-shadow: 0 10px 30px rgba(255,215,0,0.18); }
+    .rm-card.green::before { background: linear-gradient(90deg, #39FF14, #2bcc10); }
+    .rm-card.green:hover { border-color: #39FF14; box-shadow: 0 10px 30px rgba(57,255,20,0.18); }
+    .rm-card.pink::before { background: linear-gradient(90deg, #FF10F0, #c80dc0); }
+    .rm-card.pink:hover { border-color: #FF10F0; box-shadow: 0 10px 30px rgba(255,16,240,0.18); }
+    .rm-card.purple::before { background: linear-gradient(90deg, #a855f7, #ec4899); }
+    .rm-card.purple:hover { border-color: #a855f7; box-shadow: 0 10px 30px rgba(168,85,247,0.2); }
+    .rm-tag {
+      display: inline-block; align-self: flex-start;
+      padding: 0.25rem 0.7rem; border-radius: 999px;
+      background: rgba(57,255,20,0.1); color: var(--gold-light);
+      font-size: 0.75rem; font-weight: 700; margin-bottom: 0.7rem;
+    }
+    .rm-card.gold .rm-tag { background: rgba(255,215,0,0.12); color: #FFD700; }
+    .rm-card.pink .rm-tag { background: rgba(255,16,240,0.12); color: #FF10F0; }
+    .rm-card.purple .rm-tag { background: rgba(168,85,247,0.14); color: #c084fc; }
+    .rm-card h4 {
+      font-size: 1.05rem; line-height: 1.45; margin: 0 0 0.6rem;
+      color: var(--text-primary); font-weight: 800;
+    }
+    .rm-card p {
+      font-size: 0.88rem; color: var(--text-secondary);
+      line-height: 1.6; margin: 0 0 1rem; flex: 1;
+    }
+    .rm-cta {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.85rem; font-weight: 700; color: var(--gold-light);
+    }
+    .rm-card.gold .rm-cta { color: #FFD700; }
+    .rm-card.pink .rm-cta { color: #FF10F0; }
+    .rm-card.purple .rm-cta { color: #c084fc; }
+    .rm-card:hover .rm-cta i { transform: translateX(3px); transition: transform 0.2s; }
+
     @media (max-width: 768px) {
       .page-header h1 { font-size: 1.8rem; }
       .num { width: 44px; height: 44px; font-size: 1.1rem; }
       .numbers.wide .num { width: 36px; height: 36px; font-size: 0.95rem; }
+      .lottery-read-more .rm-head h3 { font-size: 1.4rem; }
+      .rm-grid { grid-template-columns: 1fr; }
     }
   </style>
 
