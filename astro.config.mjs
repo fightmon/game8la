@@ -5,8 +5,8 @@ export default defineConfig({
   // Integrations
   integrations: [
     sitemap({
-      // 排除舊的 game-3~9 redirect 頁（它們是 301/meta-refresh，不該進 sitemap）
-      filter: (page) => !/\/games\/game-[3-9]\/?$/.test(page),
+      // 排除舊 redirect 頁（它們是 301/meta-refresh，不該進 sitemap）
+      filter: (page) => !/\/games\/game-[3-9]\/?$/.test(page) && !/\/articles\/arcade-vs-online\/?$/.test(page),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -31,6 +31,8 @@ export default defineConfig({
     '/games/game-7/': '/games/god-of-wealth/',
     '/games/game-8/': '/games/mahjong-ways-2/',
     '/games/game-9/': '/games/night-market-3/',
+    // 2026-04-15 merge duplicate: arcade-vs-online (old) → arcade-vs-online-casino (new)
+    '/articles/arcade-vs-online/': '/articles/arcade-vs-online-casino/',
   },
 
   // Build configuration

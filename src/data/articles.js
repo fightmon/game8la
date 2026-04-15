@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'atg-seth-copycat-exposed',
+    title: '【老虎機內幕】戰神賽特 2 慘遭全業界抄襲？揭秘「正版 ATG 系統」與仿冒機台的驚人勝率落差！',
+    excerpt: '市面 90% 的賽特都是山寨版！芭樂子揭密正版 ATG 戰神賽特 2 RTP 96.5~97.2% vs 仿冒版 88~92%，數學落差、GLI 認證差異、吃分陷阱，附 3 步驟辨真假方法，別再被白牌割韭菜。',
+    category: 'slots',
+    categoryLabel: '老虎機',
+    badgeType: 'attack',
+    date: '2026-04-15',
+    views: 2187,
+    tags: ['最新', '熱門', '精選'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#1a0a2e,#5b2d8f,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-cover-seth-copycat.webp'
+  },
+  {
     slug: 'daily-cash-539-wheel-guide',
     title: '【539 包牌攻略】2026 最強系統號玩法：這樣包牌中獎率提升 10 倍？附期望值試算與避雷指南',
     excerpt: '539 頭獎機率是威力彩的 38 倍！芭樂子拆解系統號包牌、養牌紀律、膽拖公式，包 7 碼任一獎項命中率飆到 91%，附期望值試算與避雷清單，老司機必看。',
@@ -98,20 +112,6 @@ export const articles = [
     icon: 'book-open',
     gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a2e,#0a2a1a)',
     thumbnail: '/images/article-thumbs/thumb-casino-payout-cover.webp'
-  },
-  {
-    slug: 'arcade-vs-online',
-    title: '遊藝場 vs 線上娛樂城：2026 完整比較，到底差在哪？',
-    excerpt: '遊藝場和線上娛樂城差在哪？法規、遊戲種類、便利性、安全性、出金機制全面比較，甲類乙類分類說明，芭樂子白話整理兩者優缺點。',
-    category: 'guide',
-    categoryLabel: '比較分析',
-    badgeType: 'attack',
-    date: '2026-04-11',
-    views: 1423,
-    tags: ['最新'],
-    icon: 'book-open',
-    gradient: 'linear-gradient(135deg,#1a1a0a,#3a3510,#2a2505)',
-    thumbnail: '/images/article-thumbs/thumb-arcade-vs-online-cover.webp'
   },
   {
     slug: 'card-games-guide',

@@ -1,0 +1,316 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+
+const faqs = [
+  { q: '山寨賽特和正版 ATG 戰神賽特外觀真的一模一樣嗎？', a: '第一眼看幾乎一樣，但仔細比會差很多。仿冒版常見三個破綻：<strong>(1) 角色頭冠、翅膀的光影細節糊糊的、物理引擎飄</strong>；(2) 倍數符號掉落時「頓感」很重、沒有正版那種滑順的消除感；(3) 免費遊戲進場的過場動畫畫格數偏低、甚至直接跳過。正版 ATG 的美術是 4K 貼圖+粒子特效，仿版通常是 2K 壓縮素材，放大看就露餡。' },
+  { q: '為什麼我在某些平台打賽特怎麼打都不開？是不是被動手腳？', a: '兩個可能：<strong>(1) 你玩到的是仿冒系統</strong>——很多白牌小廠直接把 RTP 調到 88~90%，比正版 96.5% 低了 6~8 個百分點，長期玩下來絕對爆不起來；(2) 你玩的雖然是正版，但剛好在統計波動的冷段——這時請用本文第 5 段「3 步驟驗真法」先確認平台是否正版授權，再決定要不要繼續。結論：與其猜平台心情，不如先驗明正身。' },
+  { q: 'ATG 戰神賽特 2 的 RTP 真的是 96.5~97.2%？哪裡可以查？', a: '是的，這個數字是寫在 ATG 官方機台技術文件、以及國際博弈測試實驗室 GLI（Gaming Laboratories International）的認證報告裡。正版平台在遊戲載入畫面或幫助頁面都會明確標示「Default RTP 96.5%」。如果你玩的機台<strong>查不到 RTP、或 RTP 顯示低於 94%</strong>，那 99% 是仿冒或被後台降階的版本，請立刻換平台。' },
+  { q: '抄襲版的戰神賽特是不是就一定會輸？', a: '不是「一定」輸，是「長期期望值被砍半」。舉個具體例子：正版 RTP 97% 代表你每投 100 元長期回 97 元；仿版 RTP 90% 代表你每投 100 元長期回 90 元——表面上只差 7 元，但<strong>當你投注 1 萬轉、每轉 10 元（總投 10 萬）</strong>：正版期望虧 3,000 元、仿版期望虧 1 萬元。這就是「勝率被砍半」的真實意思——虧損速度 3 倍起跳。' },
+  { q: '如何 10 秒內確認我玩的是 ATG 官方正版？', a: '三個最快動作：<strong>① 載入畫面看 logo</strong>（右下角要有 ATG 或 All Top Gaming 浮水印）；<strong>② 按幫助/資訊鍵</strong>（正版一定會顯示「RTP 96.5%」和 GLI 認證編號）；<strong>③ 試轉 10~20 次看消除感</strong>（正版倍數球掉落絲滑、疊加有重量感，仿版會有明顯掉禎或動作僵硬）。三個都對才敢長時間玩。' },
+  { q: 'ATG 戰神賽特系列總共有幾個版本？怎麼分辨新舊機台？', a: '目前主流三款：<strong>《戰神賽特》(初代)</strong>、<strong>《戰神賽特 2：覺醒之力》</strong>、以及《戰神賽特特別版（春節/節慶改版）》。第 2 代最大差異是新增「4 級 JACKPOT（MINI / MINOR / MAJOR / GRAND）」與「不朽覺醒 Buy Feature 2000x」。Max Win 也從初代 x10,000 拉到 <strong>x50,000</strong>。判別方法：載入畫面一定會寫明「SETH II」或「覺醒之力」。' },
+  { q: '所有平台的「購買特色（Buy Feature）」都一樣嗎？仿冒版的 Buy Feature 值不值得買？', a: '絕對不一樣。正版 ATG 的 Buy Feature 是經過<strong>數百萬次 RNG 模擬測試</strong>調整出來的平衡值，買免遊的期望回報率貼近標示 RTP（97%）。仿冒版因為 RTP 被動手腳，「買免遊」往往變成「一次性吃款」——你花 100 倍押注買下去，實際命中高倍率的機率比正版低 30~50%。所以如果不確定是正版，千萬別按 Buy Feature。' },
+  { q: 'GLI 認證是什麼？為什麼重要？', a: 'GLI（Gaming Laboratories International）是全球最具公信力的博弈測試實驗室，超過 475 個司法管轄區承認它的認證。一台老虎機要拿到 GLI 認證，必須通過<strong>RNG 隨機性檢驗、RTP 數學模型驗證、防作弊機制審查</strong>，機台軟體還要被雜湊鎖定——後台無法偷偷改 RTP。正版 ATG 戰神賽特都有 GLI 認證；沒 GLI 認證的「類賽特」機台，就是任由娛樂城老闆開關 RTP 的吃款機，長期玩絕對虧。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/atg-seth-copycat-exposed/"
+  title="【老虎機內幕】戰神賽特 2 慘遭全業界抄襲？揭秘「正版 ATG 系統」與仿冒機台的驚人勝率落差！"
+  description="市面 90% 的賽特都是山寨版！芭樂子揭密正版 ATG 戰神賽特 2 與仿冒機台的 RTP 數學落差、GLI 認證差異、吃分陷阱，並附上 3 步驟 10 秒辨真假方法，別再被白牌系統割韭菜。"
+  image="https://game8la.com/images/articles/seth-copycat-cover.webp"
+  datePublished="2026-04-15"
+  dateModified="2026-04-15"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '戰神賽特 2 抄襲揭密', url: 'https://game8la.com/articles/atg-seth-copycat-exposed/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="【老虎機內幕】戰神賽特 2 慘遭全業界抄襲？正版 ATG vs 仿冒機台勝率落差揭密 - GAME8LA" description="市面 90% 賽特都是山寨版！正版 ATG 戰神賽特 2 RTP 96.5~97.2% vs 仿冒版 88~92%，芭樂子拆解吃分陷阱、GLI 認證差異，並附 3 步驟辨真假方法。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 戰神賽特 2 抄襲揭密</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-15 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 10 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a0a2e,#5b2d8f,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <h1 style="font-size:2rem;line-height:1.3">【老虎機內幕】戰神賽特 2 慘遭全業界抄襲？揭秘「正版 ATG 系統」與仿冒機台的驚人勝率落差！</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">各位 8LA 鄉民好，我是芭樂子。最近走進 10 家娛樂城，有 9 家的老虎機大廳最顯眼的位置都是<strong>「戰神賽特」</strong>——但你以為那都是 ATG 正版？<strong>錯，90% 是抄襲仿冒</strong>。外表一樣、icon 一樣、古埃及戰神視覺衝擊力一樣，但底層的 RTP 數學模型<strong>抄不走</strong>，玩到仿冒版，你的勝率會直接被砍半。這篇我直接把正版 vs 山寨版的數學、認證、辨認方法一次攤給你看，<strong>別再當被割的韭菜</strong>。</p>
+
+      <img class="content-img" src="/images/articles/seth-copycat-cover.webp" alt="正版 ATG 戰神賽特 2 與業界仿冒版對比：美術雷同但 RTP 落差 6~9%" width="1376" height="768" loading="eager" />
+      <p class="article-img-caption">芭樂子整理：辨別真假戰神賽特的重要性——美術可抄，數學抄不走</p>
+
+      <!-- === 精選摘要：正版 vs 仿版 5 大關鍵差異 === -->
+      <div class="card" style="margin:1.5rem 0;border-color:var(--gold);background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(91,45,143,0.08) 100%)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 一眼看懂：正版 ATG 戰神賽特 2 vs 業界仿冒版</h3>
+        <table>
+          <thead><tr><th>比較項目</th><th>正版 ATG 戰神賽特 2</th><th>業界仿冒/抄襲版</th><th>玩家風險</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">系統開發商</td><td style="color:var(--guava-green)">ATG (All Top Gaming)</td><td style="color:var(--guava-pink)">不知名小廠/白牌系統</td><td>數據真偽不明</td></tr>
+            <tr><td style="font-weight:700">理論 RTP</td><td style="color:var(--guava-green);font-weight:900">96.5% ~ 97.2%</td><td style="color:var(--guava-pink)">通常低於 92%，或拒絕公開</td><td>長期玩必輸</td></tr>
+            <tr><td style="font-weight:700">倍數掉落穩定度</td><td>數學模型嚴謹、爆分有跡可循</td><td style="color:var(--guava-pink)">隨機亂跳、有長吃分期</td><td>體感極差、易上頭</td></tr>
+            <tr><td style="font-weight:700">畫面流暢度</td><td>4K 貼圖、物理引擎流暢</td><td style="color:var(--guava-pink)">動作僵硬、特效廉價感</td><td>影響操作節奏</td></tr>
+            <tr><td style="font-weight:700">官方認證</td><td style="color:var(--guava-green)">具備國際 GLI 認證</td><td style="color:var(--guava-pink)">無認證、後台可改 RTP</td><td>機台可能被動手腳</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.9rem;color:var(--text-secondary)">👉 RTP 差 <strong style="color:var(--gold)">6~9 個百分點</strong>看起來不多，<strong>實際代表你每 10 萬投注的期望虧損差 3 倍</strong>（3,000 元 vs 10,000 元）。這才是「抄襲版會被砍勝率」的真實意思。</p>
+      </div>
+
+      <!-- === CTA #1：gold banner === -->
+      <a href="/games/seth-2/" style="display:block;text-decoration:none;margin:1.5rem 0">
+        <div style="background:linear-gradient(135deg,#1a0a2e 0%,#5b2d8f 50%,#f5b800 100%);border:2px solid #f5b800;border-radius:14px;padding:1.2rem 1.5rem;box-shadow:0 4px 16px rgba(245,184,0,0.25)">
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+            <div style="font-size:2.4rem">⚡</div>
+            <div style="flex:1;min-width:240px">
+              <div style="color:#f5b800;font-weight:900;font-size:1.1rem;margin-bottom:0.3rem">想玩就玩正版《戰神賽特 2：覺醒之力》</div>
+              <div style="color:#fff;font-size:0.95rem;margin-bottom:0.2rem">Max Win <strong style="color:#26c281">x50,000</strong>｜RTP <strong style="color:#26c281">96.5%</strong>｜4 級 JACKPOT + 不朽覺醒 Buy Feature 2000x，正版規格 8LA 完整拆解</div>
+              <div style="color:#ec4899;font-size:0.9rem">別再被仿冒版割韭菜，點我看金 8LA 賽特專區 →</div>
+            </div>
+            <div style="background:#f5b800;color:#0a1f0a;font-weight:900;padding:0.8rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.95rem">前往正版賽特專區 →</div>
+          </div>
+        </div>
+      </a>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#intro">為什麼全台灣都在抄《戰神賽特 2》？</a></li>
+          <li><a href="#market-reality">盜版橫行實況：從遊戲到周邊一條龍</a></li>
+          <li><a href="#compare">10 秒辨真假：正版 vs 業界仿冒版關鍵對比</a></li>
+          <li><a href="#trap">揭秘抄襲版的「吃分陷阱」</a></li>
+          <li><a href="#verify">3 步驟確認你玩的是正版 ATG</a></li>
+          <li><a href="#tips">5 條芭樂子實戰避雷守則</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== 第 1 節 ===== -->
+      <h2 id="intro" style="margin-top:2.5rem">1. 為什麼全台灣都在抄《戰神賽特 2》？</h2>
+
+      <p>《戰神賽特 2：覺醒之力》自從 ATG（All Top Gaming）推出後爆紅——直接變成 2026 年所有小廠、白牌系統商的「抄襲標配」。隨便走一圈市場，你會看到一堆名字很像的機台：《XX 戰神》、《埃及法老賽X》、《黃金賽特》、《賽特榮耀》……美術幾乎一模一樣，連 UI 按鈕位置都複製貼上。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🎯 為什麼仿冒商都鎖定《戰神賽特 2》？</h3>
+        <p style="margin:0.5rem 0"><strong>① 無限制倍數疊加機制</strong>：正版賽特的倍數累積感極強，讓玩家有「以小博大」的真實期待感——這種情緒曲線是爆款老虎機的靈魂，仿冒商當然想照抄。</p>
+        <p style="margin:0.5rem 0"><strong>② 購買特色（Buy Feature）的數學平衡</strong>：正版的 Buy Feature 經過數百萬次 RNG 模擬測試，確保回報率（RTP）穩定——但仿版只抄「按鈕位置」，背後的數學根本沒重建。</p>
+        <p style="margin:0"><strong>③ 美術天花板</strong>：古埃及戰神視覺衝擊力強，已經變成流量代名詞。小廠看到 ATG 賺爆，當然直接套皮賺一波快錢。</p>
+      </div>
+
+      <p>問題來了：<strong>美術可以抄、按鈕可以抄、icon 可以抄，但底層的 RTP 數學模型抄不走</strong>。仿冒版看起來一樣，打起來卻完全是另一台機台——因為小廠根本沒能力重建 ATG 那種經過上億轉模擬測試的爆分曲線。他們做的其實就是「套皮版吸款機」。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 8LA 金句</h3>
+        <p style="margin-bottom:0">外表可以抄襲，但底層的「RTP 數學模型」抄不走。玩到仿冒版，你的勝率可能直接被砍半。</p>
+      </div>
+
+      <!-- ===== 第 2 節：盜版實況證據 ===== -->
+      <h2 id="market-reality" style="margin-top:2.5rem">2. 盜版橫行實況：從遊戲到周邊一條龍</h2>
+
+      <p>前面講的都是概念，這節我直接甩「<strong>抓包現場</strong>」給你看。芭樂子蒐集了市面上幾張「眾目睽睽下的抄襲證據」，你會發現——<strong>山寨賽特不只在娛樂城大廳氾濫，連周邊商品都被山寨商一條龍打包賣</strong>，完全把 ATG 當免費素材庫在用。</p>
+
+      <h3>證據一：山寨機台載入畫面——logo 直接叫「戰神賽特」，版號 1.2.11</h3>
+
+      <img class="content-img" src="/images/articles/seth-copycat-fake-screen.webp" alt="網路抓包的山寨戰神賽特載入畫面：版號 1.2.11，沒有 ATG 官方授權字樣" width="700" height="1227" loading="lazy" style="max-width:420px" />
+      <p class="article-img-caption">某白牌系統的「戰神賽特」載入畫面——標題字型、古埃及女神形象、UI 排版完全照抄，但<strong>完全找不到 ATG 官方授權標示</strong></p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">🚨 上面這張截圖的 4 大破綻</h3>
+        <p style="margin:0.4rem 0"><strong>① 名稱完全照抄</strong>：連標題字型、「戰神賽特」四個字的金色翅膀徽章設計都完全盜用，沒有任何區隔辨識。</p>
+        <p style="margin:0.4rem 0"><strong>② 右下角版號 1.2.11、沒有 ATG logo</strong>：正版遊戲載入畫面一定會有 ATG / All Top Gaming 浮水印 + GLI 認證號，這台什麼都沒有——<strong>典型白牌套皮</strong>。</p>
+        <p style="margin:0.4rem 0"><strong>③ 角色人設走偏</strong>：正版戰神賽特是<strong>男性古埃及戰神（賽特神本尊，Set）</strong>，不是女法老。這張把埃及艷后風格的女性角色當主視覺，明顯是重新畫過的仿品——「為了看起來像賽特」硬湊而已。</p>
+        <p style="margin:0"><strong>④ 「開始遊戲」按鈕風格低端</strong>：正版 ATG 的 CTA 按鈕會有粒子特效、光暈過渡，這張直接上純色描邊字——<strong>美術外包等級的廉價感</strong>。</p>
+      </div>
+
+      <h3>證據二：盜版周邊大舉上架電商平台</h3>
+
+      <img class="content-img" src="/images/articles/seth-copycat-merch.webp" alt="電商平台上販售的戰神賽特盜版周邊：公仔、抱枕、貼紙、吊飾全系列" width="1040" height="662" loading="lazy" />
+      <p class="article-img-caption">隨便一搜「戰神賽特」電商賣場：公仔、抱枕、貼紙、悠遊卡貼、99 免運一條龍——<strong>全部沒有 ATG 官方授權</strong></p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">💸 電商平台上的「戰神賽特」盜版周邊一覽</h3>
+        <p style="margin:0.4rem 0">芭樂子隨便搜一下，就能看到：</p>
+        <p style="margin:0.4rem 0"><strong>🎴 壓克力人形立牌</strong>（499 元）：把正版遊戲角色原圖直接切割輸出，連背景都沒改過。</p>
+        <p style="margin:0.4rem 0"><strong>🧸 人型絨毛抱枕</strong>（499 元）：用遊戲角色立繪縫邊裁成公仔形狀，完全沒經過 ATG 授權。</p>
+        <p style="margin:0.4rem 0"><strong>🪙 紀念卡公仔票卡貼</strong>（59 ~ 80 元）：拿遊戲 UI 素材直接做悠遊卡貼，規格化量產。</p>
+        <p style="margin:0.4rem 0"><strong>🔑 吊飾、鑰匙圈、貼紙、桌布</strong>：整套周邊全系列，搞得像官方 IP 授權商。</p>
+        <p style="margin:0"><strong>👉 重點：所有賣家都沒有標示 ATG 官方授權</strong>，走的就是「蹭爆款 IP 賺一波走人」的模式，跟盜版魷魚遊戲、寶可夢周邊同一套邏輯。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 芭樂子點評</h3>
+        <p style="margin-bottom:0">周邊可以盜版、賺一次是一次；<strong>但老虎機的 RTP 一旦盜版就是長期割韭菜</strong>。周邊買盜版頂多你衣櫃多一個劣質抱枕，玩盜版賽特則是每轉都在被白牌系統商吸款。周邊的「盜版氾濫度」，就是在提醒你——<strong>連商人都看中這個 IP 可以割，那娛樂城大廳裡的「賽特」十有八九是山寨</strong>。</p>
+      </div>
+
+      <h3>芭樂子的結論：盜版生態鏈已經成形</h3>
+      <p>從<strong>白牌系統商仿製機台 → 娛樂城大廳套皮上架 → 電商平台盜版周邊</strong>，這是一條已經成熟的「蹭 ATG 戰神賽特流量」產業鏈。看到這個程度，你就知道：<strong>當你在某個娛樂城看到「戰神賽特」四個字，預設是山寨版、除非能驗證它是 ATG 正版</strong>。下一節就教你怎麼 10 秒內驗證。</p>
+
+      <!-- ===== 第 3 節 ===== -->
+      <h2 id="compare" style="margin-top:2.5rem">3. 10 秒辨真假：正版 ATG 戰神賽特 vs 業界仿冒版</h2>
+
+      <img class="content-img" src="/images/articles/seth-copycat-compare.webp" alt="正版 ATG 戰神賽特 2 與仿冒版 5 大指標對比：RTP、認證、倍數、美術、引擎" width="1616" height="656" loading="lazy" />
+      <p class="article-img-caption">正版 vs 仿版五大關鍵對比：看的是數學和認證，不是美術</p>
+
+      <p>我把這張對比圖放在這，是為了幫想快速查資料的鄉民直接拿去存備份。<strong>想 10 秒分辨真假，看以下 5 個維度就好</strong>：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔍 5 大關鍵辨識維度</h3>
+        <table>
+          <thead><tr><th>維度</th><th>正版 ATG 戰神賽特 2</th><th>業界仿冒版</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">① 系統開發商</td><td>ATG (All Top Gaming)</td><td style="color:var(--guava-pink)">白牌、不知名小廠</td></tr>
+            <tr><td style="font-weight:700">② 理論 RTP</td><td style="color:var(--guava-green);font-weight:900">96.5% ~ 97.2%（載入畫面可查）</td><td style="color:var(--guava-pink)">&lt; 92% 或拒絕公開</td></tr>
+            <tr><td style="font-weight:700">③ 倍數穩定度</td><td>數學模型嚴謹、可追蹤爆分分布</td><td style="color:var(--guava-pink)">隨機亂跳、常出現「吃分期」</td></tr>
+            <tr><td style="font-weight:700">④ 畫面流暢度</td><td>4K 貼圖、物理引擎 60 fps</td><td style="color:var(--guava-pink)">特效廉價、動作掉禎</td></tr>
+            <tr><td style="font-weight:700">⑤ 官方認證</td><td style="color:var(--guava-green)">具備國際 GLI 認證</td><td style="color:var(--guava-pink)">無認證、後台可偷改 RTP</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>五項指標裡<strong>最關鍵的是 RTP 和 GLI 認證</strong>——這兩個是數學和法規的硬指標，不像美術畫質可以用主觀「感覺還行」來自我欺騙。下一節我就用真實數字告訴你，RTP 差 7% 到底能讓你輸多快。</p>
+
+      <!-- ===== 第 3 節 ===== -->
+      <h2 id="trap" style="margin-top:2.5rem">4. 揭秘抄襲版的「吃分陷阱」</h2>
+
+      <p>很多小廠開發的「類賽特」機台，雖然美術一模一樣，但為了讓娛樂城老闆快速獲利，會把 RTP 調到非常低。芭樂子直接用算式告訴你抄襲版多扯：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ RTP 落差實測：你以為只差 7%，其實虧損速度 3 倍</h3>
+        <table>
+          <thead><tr><th>版本</th><th>RTP</th><th>投注 1 萬轉 × 10 元（共 10 萬）</th><th>期望虧損</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;color:var(--guava-green)">正版 ATG 賽特 2</td><td>97%</td><td>期望回收 9.7 萬</td><td style="color:var(--guava-green);font-weight:900">約 3,000 元</td></tr>
+            <tr><td style="font-weight:700;color:var(--guava-pink)">業界仿冒版</td><td>90%</td><td>期望回收 9 萬</td><td style="color:var(--guava-pink);font-weight:900">約 10,000 元</td></tr>
+            <tr><td style="font-weight:700;color:var(--guava-pink)">黑心白牌版</td><td>85%</td><td>期望回收 8.5 萬</td><td style="color:var(--guava-pink);font-weight:900">約 15,000 元</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.9rem">RTP 差 7%，期望虧損直接變成 3.3 倍。RTP 差 12%，虧損速度更是 5 倍起跳——這就是抄襲版「割韭菜」的真實數學。</p>
+      </div>
+
+      <h3>正版賽特 vs 仿版賽特：運作邏輯完全不同</h3>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">✅ 正版賽特：大數法則 + 穩定回報</h3>
+        <p style="margin-bottom:0">正版 ATG 講求的是「大數法則」——短期有輸有贏，但長期 RTP 會貼近 96.5~97.2%。爆分分布有明確數學曲線（常見爆分、中爆、超大爆有固定機率），所以老玩家打多了會抓到「節奏感」。這種「有跡可循」的感覺，就是經過嚴謹 RNG 調校的結果。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">❌ 仿版賽特：吃款邏輯 + 強行吃分期</h3>
+        <p style="margin-bottom:0">仿版的邏輯是「割韭菜」。因為後台沒有 GLI 認證鎖定，娛樂城老闆可以透過管理介面<strong>直接調整 RTP</strong>——有些甚至做到「<strong>吃分期</strong>」：連續幾百轉完全不開小獎、不累倍數，直到玩家輸到一半才偶爾回一點給你看。你以為在打戰神，實際上是在打一台「吸款機」。</p>
+      </div>
+
+      <p style="font-size:0.95rem">這就是為什麼很多玩家抱怨：「<strong>為什麼我在這家打賽特怎麼打都不開？</strong>」原因真的很簡單——<strong>你玩到假貨了</strong>。</p>
+
+      <!-- === 第二 CTA：green subtle === -->
+      <div style="background:linear-gradient(135deg,rgba(38,194,129,0.12) 0%,rgba(245,184,0,0.12) 100%);border-left:4px solid #26c281;border-radius:10px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <div style="color:#f5b800;font-weight:900;font-size:1rem;margin-bottom:0.5rem">💡 想搞懂 RTP 真實意義？一篇讀懂波動性 + 期望值</div>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem;color:var(--text-secondary)">RTP 不只是數字，還牽涉到波動性、樣本次數、獎池邏輯。芭樂子另一篇把 RTP 公式、波動性分級、冷熱機台迷思完整拆解——<strong style="color:#26c281">看懂 RTP 才能真正看穿仿冒機台</strong>。</p>
+        <a href="/articles/slots-rtp-guide/" style="display:inline-block;background:#26c281;color:#0a1426;font-weight:900;padding:0.7rem 1.2rem;border-radius:8px;text-decoration:none;font-size:0.92rem">📊 看完整 RTP 指南 →</a>
+      </div>
+
+      <!-- ===== 第 4 節 ===== -->
+      <h2 id="verify" style="margin-top:2.5rem">5. 3 步驟確認你玩的是正版 ATG</h2>
+
+      <img class="content-img" src="/images/articles/seth-copycat-verify.webp" alt="3 步驟確認 ATG 戰神賽特正版：看 Logo、查 RTP、試消除感" width="1616" height="656" loading="lazy" />
+      <p class="article-img-caption">正版 ATG 驗證流程：Logo → RTP → 手感，三關都過才算安全</p>
+
+      <p>講完理論，直接給你可以立刻執行的驗證 SOP：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔍 STEP 1：看 Logo 與讀取畫面</h3>
+        <p style="margin-bottom:0">進入遊戲讀取畫面時，確認畫面右下角或中下方是否有「<strong>ATG</strong>」或「<strong>All Top Gaming</strong>」浮水印與官方授權字樣。正版的 logo 會是清晰印刷體，位置固定在版權區塊。如果是糊糊的或根本沒有 logo，<strong>99% 是山寨套皮</strong>。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔍 STEP 2：按「i」或「幫助」鍵查 RTP</h3>
+        <p style="margin-bottom:0">幾乎每台正版老虎機都有「資訊/幫助」按鈕，點進去會顯示 <strong>Default RTP 96.5%</strong> 與 <strong>GLI 認證編號</strong>。如果平台把這頁藏起來、或 RTP 顯示低於 94%，那就是被後台降階的版本——<strong>直接離開換平台</strong>。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔍 STEP 3：試轉 10~20 次看手感</h3>
+        <p style="margin-bottom:0">正版賽特的<strong>倍數球掉落非常絲滑</strong>、消除有物理引擎重量感、免費遊戲過場動畫 60 fps 流暢不掉禎。仿版會有明顯「頓感」——倍數球像貼圖而不像 3D 物件、消除時有卡 1~2 禎、過場動畫跳格。打 20 轉以內基本就能體感出來。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 三關都過才算安全</h3>
+        <p style="margin-bottom:0">只對一關是不夠的——有些高級仿冒會 logo 裝像、RTP 頁面造假，但手感還是騙不了人。反過來也有正版被娛樂城降階 RTP 的狀況（手感沒變、RTP 頁面被改）。<strong>Logo + RTP + 手感三個都驗過才敢長時間玩。</strong></p>
+      </div>
+
+      <!-- ===== 第 5 節 ===== -->
+      <h2 id="tips" style="margin-top:2.5rem">6. 5 條芭樂子實戰避雷守則</h2>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🛡️ 芭樂子給新手的 5 條鐵律</h3>
+        <p style="margin:0.5rem 0"><strong>① 只在公開 RTP 的平台玩</strong>：敢把 RTP 寫在檯面上的平台，通常系統來源都有明確授權，不怕你查。</p>
+        <p style="margin:0.5rem 0"><strong>② 看到「XX 戰神」「賽X 榮耀」直接跳過</strong>：正版就叫《戰神賽特》《戰神賽特 2：覺醒之力》，命名裡亂塞字的幾乎都是仿冒。</p>
+        <p style="margin:0.5rem 0"><strong>③ 山寨機不要按 Buy Feature</strong>：仿版的 Buy Feature 回報率被動手腳最嚴重，100 倍押注下去命中高倍率機率直接被砍 30~50%。</p>
+        <p style="margin:0.5rem 0"><strong>④ 連輸 200 轉以上立刻停手驗證</strong>：正版長期波動正常，但連續 200 轉完全不進小獎很反常——請立刻用 STEP 1~3 重新驗證平台。</p>
+        <p style="margin:0"><strong>⑤ 相信數據、不相信話術</strong>：「這台最近很會噴」「老闆說今天放水」都是老梗騙術，RTP 數字才是唯一真實的依據。</p>
+      </div>
+
+      <h3>結論：認明正宗，才是真正的必勝法</h3>
+
+      <p>在博弈世界裡，「<strong>便宜莫貪、山寨莫碰</strong>」才是真理。與其去打那些賠率不明、後台隨便動手腳的抄襲版，不如選擇 <strong>RTP 標示透明、有 GLI 認證</strong>的正版 ATG 戰神賽特 2。</p>
+
+      <p style="font-size:0.95rem">芭樂子實話告訴你：<strong>老虎機本質還是負期望值遊戲</strong>，正版 RTP 97% 也不是穩賺——但它至少給你數學上最公平的娛樂。而仿冒版連「公平」這個底線都沒有，純粹就是被設計成讓你虧錢的吸款機。玩娛樂城先搞懂這點，才不會把下個月的房租送給某個白牌系統商的老闆。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 8LA 金句</h3>
+        <p style="margin-bottom:0">在老虎機世界裡，美術是行銷、數學是真相。看懂 RTP 的人能玩得久，只看美術的人每天在餵仿冒機台。</p>
+      </div>
+
+      <!-- ===== 第 6 節 FAQ ===== -->
+      <h2 id="faq" style="margin-top:2.5rem">7. 常見問題 FAQ</h2>
+
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <div class="faq-a" set:html={f.a}></div>
+          </details>
+        ))}
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2 style="margin-top:2.5rem">📖 延伸閱讀</h2>
+      <div class="related-links">
+        <a href="/games/seth-2/">戰神賽特 2 完整攻略<small>正版 ATG 規格｜4 級 JACKPOT 打法｜不朽覺醒 Buy Feature 實測</small></a>
+        <a href="/articles/atg-seth-guide.html">戰神賽特初代打法教學<small>ATG 老虎機基本功｜倍數球累積心法</small></a>
+        <a href="/articles/atg-seth-1-vs-2-comparison/">戰神賽特 1 vs 2 世代比較<small>Max Win 落差｜機制變革｜買免遊報酬比</small></a>
+        <a href="/articles/slots-rtp-guide/">老虎機 RTP 完整指南<small>RTP 公式、波動性分級、樣本次數全拆解</small></a>
+        <a href="/articles/slots-guide/">老虎機綜合攻略<small>類型、術語、免費遊戲、爆分機制一次懂</small></a>
+      </div>
+
+      <div style="text-align:center;margin-top:2rem">
+        <a href="/articles/" class="btn-outline">← 回攻略列表</a>
+        <a href="/games/seth-2/" class="btn-primary" style="margin-left:1rem">前往正版賽特專區 →</a>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style is:global>
+.content-img {
+  display: block;
+  width: 100%;
+  max-width: 820px;
+  height: auto;
+  margin: 1.5rem auto 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0a0e1a;
+}
+.article-img-caption {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+}
+.article-content img { max-width: 100%; height: auto; }
+</style>

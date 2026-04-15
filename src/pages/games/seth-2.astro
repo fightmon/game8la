@@ -298,16 +298,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="javascript:void(0)" onclick="window.open('https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#06C755;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="message-circle" /> LINE</a>
       <a href="javascript:void(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1877F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="facebook" /> Facebook</a>
       <a href="javascript:void(0)" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('戰神賽特2覺醒之力完整攻略｜GAME8LA'),'_blank','width=600,height=500')" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:#1DA1F2;color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s"><Icon name="twitter" /> Twitter</a>
-      <a href="javascript:void(0)" onclick="navigator.clipboard.writeText(location.href).then(()=>{this.innerHTML='<svg viewBox=\"0 0 24 24\" width=\"1em\" height=\"1em\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline;vertical-align:middle\"><polyline points=\"20 6 9 17 4 12\"></polyline></svg> 已複製';this.style.background='var(--guava-green)';this.style.color='#000'})" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;cursor:pointer"><Icon name="link" /> 複製連結</a>
+      <a href="javascript:void(0)" id="copy-link-btn" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.6rem 1.2rem;background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;cursor:pointer"><Icon name="link" /> <span>複製連結</span></a>
     </div>
   </div>
   <!-- 延伸閱讀 - 站內攻略 -->
   <div class="related-box" style="margin-bottom:1.5rem">
     <h3>📖 延伸閱讀</h3>
     <div class="related-links">
-      <a href="/articles/baccarat-guide/">百家樂看路教學<small>芭樂子的血淚經驗值｜新手到進階完整攻略</small></a>
+      <a href="/articles/atg-seth-copycat-exposed/">🔥 戰神賽特2抄襲揭密<small>正版 ATG vs 山寨版｜RTP 落差 7%、3 步驟辨真假</small></a>
+      <a href="/articles/atg-seth-1-vs-2-comparison/">戰神賽特 1 vs 2 世代比較<small>Max Win 落差｜機制變革｜Buy Feature 報酬比</small></a>
+      <a href="/articles/slots-rtp-guide/">老虎機 RTP 完整指南<small>RTP 公式、波動性分級、樣本次數全拆解</small></a>
       <a href="/articles/slots-guide/">RSG 雷神之鎚實測<small>北歐神話級爆分？芭樂子真實體驗報告</small></a>
-      <a href="/articles/dealers-guide/">真人荷官特輯<small>8LA嚴選荷官評比｜誰才是真正的發牌女神？</small></a>
       <a href="/game-ranking/">2026 金8LA遊戲排行<small>9 款老虎機完整評分｜誰是今年的8LA之王？</small></a>
     </div>
   </div>
@@ -319,6 +320,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </div>
 </div>
 <!-- SCROLL TO TOP -->
+<script is:inline>
+  document.getElementById('copy-link-btn')?.addEventListener('click', function() {
+    navigator.clipboard.writeText(location.href).then(() => {
+      const span = this.querySelector('span');
+      if (span) span.textContent = '✓ 已複製';
+      this.style.background = 'var(--guava-green)';
+      this.style.color = '#000';
+      setTimeout(() => {
+        if (span) span.textContent = '複製連結';
+        this.style.background = '';
+        this.style.color = '';
+      }, 2000);
+    });
+  });
+</script>
 </BaseLayout>
 
 <style is:global>

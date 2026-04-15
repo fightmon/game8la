@@ -47,24 +47,56 @@ const faqs = [
       <h1 style="font-size:2rem;line-height:1.3">線上娛樂城完整指南：新手到老司機的一本通</h1>
       <p style="color:var(--text-muted);font-size:0.95rem">親愛的大大，這篇是芭樂子花半天寫的超長 pillar 文，要把整個「娛樂城」這四個字背後的所有東西攤開講。沒空一次看完沒關係，用目錄跳段，吃鹹酥雞的時候滑一點也很讚。</p>
 
+      <!-- === 精選摘要對比表 === -->
+      <div class="card" style="margin:1.5rem 0;border-color:var(--gold);background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(13,61,45,0.12) 100%)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 一眼看懂：娛樂城 6 大重點</h3>
+        <table>
+          <thead><tr><th>主題</th><th>新手必懂</th><th>注意事項</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">遊戲類型</td><td>老虎機 / 真人 / 體育 / 彩票 / 棋牌 / 捕魚</td><td style="color:var(--guava-green)">百家樂 RTP 最高</td></tr>
+            <tr><td style="font-weight:700">挑平台</td><td>看牌照 + 出金記錄</td><td style="color:var(--guava-pink)">沒牌照 = 黑網</td></tr>
+            <tr><td style="font-weight:700">入金管道</td><td>銀行、超商、USDT</td><td style="color:var(--guava-pink)">拒絕 LINE 代儲</td></tr>
+            <tr><td style="font-weight:700">優惠</td><td>首儲要看流水倍數</td><td style="color:var(--guava-pink)">新手別領優惠</td></tr>
+            <tr><td style="font-weight:700">稅務</td><td>海外所得 670 萬以下免稅</td><td style="color:var(--guava-green)">主要是合法風險</td></tr>
+            <tr><td style="font-weight:700">法規</td><td>台灣個人使用未見實務起訴</td><td style="color:var(--text-secondary)">真風險是黑網詐騙</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.9rem;color:var(--text-secondary)">👉 <strong>芭樂子核心建議</strong>：選平台 &gt; 選遊戲；第一次玩本金 3,000~5,000 + 不領優惠 + 先測出金。</p>
+      </div>
+
+      <!-- === 轉化 CTA Banner #1 === -->
+      <a href="/game-ranking/" style="display:block;text-decoration:none;margin:1.5rem 0">
+        <div style="background:linear-gradient(135deg,#0a1426 0%,#0d3d2d 50%,#f5b800 100%);border:2px solid #f5b800;border-radius:14px;padding:1.2rem 1.5rem;box-shadow:0 4px 16px rgba(245,184,0,0.25)">
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+            <div style="font-size:2.4rem">🏆</div>
+            <div style="flex:1;min-width:240px">
+              <div style="color:#f5b800;font-weight:900;font-size:1.1rem;margin-bottom:0.3rem">先看哪家平台是合法的！別讓黑網吃掉你的本金</div>
+              <div style="color:#fff;font-size:0.95rem;margin-bottom:0.2rem">芭樂子實測 10 家娛樂城，<strong style="color:#26c281">合法執照 + 出金速度</strong>雙重驗證，新手選平台的第一步。</div>
+              <div style="color:#ec4899;font-size:0.9rem">看完這篇再決定要註冊哪家 👉</div>
+            </div>
+            <div style="background:#f5b800;color:#0a1426;font-weight:900;padding:0.8rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.95rem">看十大遊戲排名 →</div>
+          </div>
+        </div>
+      </a>
+
       <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
         <h2 style="font-size:1.2rem;margin-top:0">📋 懶人包目錄</h2>
         <ol>
-          <li><a href="#s1">線上娛樂城到底是什麼？30 秒搞懂</a></li>
-          <li><a href="#s2">娛樂城 6 大遊戲類型全解析</a></li>
-          <li><a href="#s3">怎麼挑娛樂城？8 大指標評分表</a></li>
-          <li><a href="#s4">入金出金 + KYC 完整流程</a></li>
-          <li><a href="#s5">優惠 5 大類型與洗碼陷阱</a></li>
-          <li><a href="#s6">新手 5 大地雷（千萬別踩）</a></li>
-          <li><a href="#s7">玩娛樂城合法嗎？台灣法律白話版</a></li>
-          <li><a href="#s8">中獎要繳稅嗎？30 秒快答</a></li>
-          <li><a href="#s9">娛樂城術語黑話對照表</a></li>
-          <li><a href="#s10">芭樂子 10 條鐵律</a></li>
-          <li><a href="#s11">FAQ：10 題常見問題</a></li>
+          <li><a href="#intro">線上娛樂城到底是什麼？30 秒搞懂</a></li>
+          <li><a href="#types">娛樂城 6 大遊戲類型全解析</a></li>
+          <li><a href="#criteria">怎麼挑娛樂城？8 大指標評分表</a></li>
+          <li><a href="#payments">入金出金 + KYC 完整流程</a></li>
+          <li><a href="#bonuses">優惠 5 大類型與洗碼陷阱</a></li>
+          <li><a href="#traps">新手 5 大地雷（千萬別踩）</a></li>
+          <li><a href="#legal">玩娛樂城合法嗎？台灣法律白話版</a></li>
+          <li><a href="#tax">中獎要繳稅嗎？30 秒快答</a></li>
+          <li><a href="#terms">娛樂城術語黑話對照表</a></li>
+          <li><a href="#rules">芭樂子 10 條鐵律</a></li>
+          <li><a href="#faq">FAQ：10 題常見問題</a></li>
         </ol>
       </div>
 
-      <h2 id="s1">一、線上娛樂城到底是什麼？30 秒搞懂</h2>
+      <h2 id="intro">一、線上娛樂城到底是什麼？30 秒搞懂</h2>
       <p>「娛樂城」這三個字在台灣的語境裡，其實是一個滿尷尬的翻譯。國外叫 <strong>Online Casino</strong>，直譯應該叫「線上賭場」，但這三個字在台灣太敏感，所以業界統一改叫「娛樂城」——聽起來像親子樂園，實際上是一個把實體賭場的所有遊戲都搬到網頁/APP 上的線上平台。</p>
       <p>跟實體娛樂場比起來，線上娛樂城有四個本質差異：</p>
       <ul>
@@ -73,11 +105,11 @@ const faqs = [
         <li><strong>遊戲選擇多到爆炸</strong>：一個平台通常有 1,000~3,000 款遊戲，拉斯維加斯的 Bellagio 也沒這麼多</li>
         <li><strong>完全沒人盯著你</strong>：這是最大的陷阱。實體賭場至少有保全會看你臉色勸你離開，線上的你自己一個人對著螢幕很容易玩到失控</li>
       </ul>
-      <blockquote style="border-left:4px solid var(--guava-green);padding:0.8rem 1.2rem;background:var(--bg-card);margin:1rem 0">
-        <strong>芭樂子翻譯：</strong>線上娛樂城 = 把實體賭場的吃喝玩樂拿掉、只留下「賭」的那一塊搬到網路上。方便性 +100、自制力需求 +1000。沒做好停損規劃進去的，結局通常是凌晨三點對著螢幕跟祖先對話。
-      </blockquote>
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <p style="margin:0"><strong>芭樂子翻譯：</strong>線上娛樂城 = 把實體賭場的吃喝玩樂拿掉、只留下「賭」的那一塊搬到網路上。方便性 +100、自制力需求 +1000。沒做好停損規劃進去的，結局通常是凌晨三點對著螢幕跟祖先對話。</p>
+      </div>
 
-      <h2 id="s2">二、娛樂城 6 大遊戲類型全解析</h2>
+      <h2 id="types">二、娛樂城 6 大遊戲類型全解析</h2>
       <p>打開任何一家娛樂城的首頁，你會看到一堆分類 Tab，看起來很嚇人但其實就 6 大類。這是完整對照：</p>
 
       <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
@@ -138,7 +170,7 @@ const faqs = [
         <li><strong>捕魚機是最容易上癮的類型</strong>，因為它有即時互動回饋（魚一隻一隻爆）。小心，這種「遊戲感」包裝下的賭博最會吃人。</li>
       </ul>
 
-      <h2 id="s3">三、怎麼挑娛樂城？8 大指標評分表</h2>
+      <h2 id="criteria">三、怎麼挑娛樂城？8 大指標評分表</h2>
       <p>這是全文最重要的一段。<strong>選錯平台，RTP 再高、遊戲再多都沒用</strong>——你贏的錢領不出來，等於零。以下是芭樂子這些年看過上百家娛樂城整理出來的 8 大指標：</p>
 
       <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem">
@@ -195,7 +227,7 @@ const faqs = [
 
       <p><strong>芭樂子的土法煉鋼檢查法</strong>：進到一個新娛樂城網站，第一件事不是看遊戲，是打開 Google 搜「<strong>XX娛樂城 出金</strong>」+「<strong>XX娛樂城 詐騙</strong>」+「<strong>XX娛樂城 Dcard</strong>」三組關鍵字。如果前三頁都是官方業配稿沒人分享真實體驗、或者全部都是抱怨文，那這家你就 pass 掉。真正口碑好的平台會有大量自發玩家在 Dcard 娛樂版分享提款截圖。</p>
 
-      <h2 id="s4">四、入金出金 + KYC 完整流程</h2>
+      <h2 id="payments">四、入金出金 + KYC 完整流程</h2>
       <p>這段是「第一次玩會卡住」的集中營。把流程搞清楚可以省掉你一半的撞牆時間。</p>
 
       <h3 style="font-size:1.15rem;margin-top:1.5rem">4-1. 入金方式 6 大管道</h3>
@@ -238,7 +270,7 @@ const faqs = [
       </ol>
       <p>如果每個步驟都卡住、或客服一直要你「補資料、解鎖、再入金」，<strong>立刻停損、截圖保留證據</strong>。詳細應對看<a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">防詐騙 8LA 指南</a>。</p>
 
-      <h2 id="s5">五、優惠 5 大類型與洗碼陷阱</h2>
+      <h2 id="bonuses">五、優惠 5 大類型與洗碼陷阱</h2>
       <p>娛樂城的優惠看起來都很香，實際上有一半是糖衣炮彈。先搞清楚 5 大類型：</p>
 
       <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
@@ -259,11 +291,25 @@ const faqs = [
         </tbody>
       </table>
 
-      <blockquote style="border-left:4px solid var(--guava-pink);padding:0.8rem 1.2rem;background:#2a1a0a;margin:1rem 0">
-        <strong>⚠️ 洗碼陷阱實例：</strong>「首儲 5,000 送 5,000（100% 優惠）」看起來賺爛，但<a href="/articles/free-credit-guide/" style="color:var(--guava-green)">流水要求 20 倍</a> = 你必須下注 20 萬台幣才能提款。假設你玩老虎機 RTP 96%，下注 20 萬平均會輸掉 8,000 元——優惠 5,000 減掉這 8,000，結果是倒賠 3,000。這就是為什麼芭樂子跟新手說「第一次玩別領優惠」的原因。
-      </blockquote>
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <p style="margin:0"><strong>⚠️ 洗碼陷阱實例：</strong>「首儲 5,000 送 5,000（100% 優惠）」看起來賺爛，但<a href="/articles/free-credit-guide/" style="color:var(--guava-green)">流水要求 20 倍</a> = 你必須下注 20 萬台幣才能提款。假設你玩老虎機 RTP 96%，下注 20 萬平均會輸掉 8,000 元——優惠 5,000 減掉這 8,000，結果是倒賠 3,000。這就是為什麼芭樂子跟新手說「第一次玩別領優惠」的原因。</p>
+      </div>
 
-      <h2 id="s6">六、新手 5 大地雷（千萬別踩）</h2>
+      <!-- === 轉化 CTA Banner #2（柔和款）=== -->
+      <a href="/articles/anti-scam-8la-guide/" style="display:block;text-decoration:none;margin:1.5rem 0">
+        <div style="background:rgba(236,72,153,0.08);border-left:4px solid var(--guava-pink);border-radius:10px;padding:1rem 1.2rem">
+          <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">
+            <div style="font-size:1.6rem">🚨</div>
+            <div style="flex:1;min-width:200px">
+              <div style="color:var(--guava-pink);font-weight:800;font-size:1rem;margin-bottom:0.2rem">8 大詐騙手法完整拆解，看完少被割 10 次</div>
+              <div style="color:var(--text-secondary);font-size:0.9rem">包含代儲、跟單老師、黑網話術、假客服等實戰案例</div>
+            </div>
+            <div style="color:var(--guava-pink);font-weight:800">看防詐騙指南 →</div>
+          </div>
+        </div>
+      </a>
+
+      <h2 id="traps">六、新手 5 大地雷（千萬別踩）</h2>
       <p>這段直接幫你擋掉 90% 的新手血崩場景：</p>
       <ol>
         <li><strong>黑網平台</strong>：沒牌照、沒認證、Google 搜不到正經資訊的，100% 是詐騙。唯一差別是早詐你還是晚詐你。</li>
@@ -274,7 +320,7 @@ const faqs = [
       </ol>
       <p>想看完整版請轉到<a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">防詐騙 8LA 指南</a>，裡面有 8 大手法的詳細拆解。</p>
 
-      <h2 id="s7">七、玩娛樂城合法嗎？台灣法律白話版</h2>
+      <h2 id="legal">七、玩娛樂城合法嗎？台灣法律白話版</h2>
       <p>這個問題幾乎每個新手都會問，芭樂子直接講白話（但要強調：<strong>我不是律師，以下是一般性資訊，真有法律問題請諮詢專業律師</strong>）：</p>
       <ul>
         <li>台灣《刑法》第 266 條有「賭博罪」，最高可罰 5 萬元</li>
@@ -284,7 +330,7 @@ const faqs = [
       </ul>
       <p>芭樂子的觀點：與其擔心警察，<strong>不如擔心黑網把你坑得一毛不剩還倒打一耙</strong>。真要玩就挑境外合法牌照、出金記錄乾淨的大平台，這樣風險曲線會從「失錢 + 被告 + 個資外洩」降到「單純機率輸錢的娛樂支出」。</p>
 
-      <h2 id="s8">八、中獎要繳稅嗎？30 秒快答</h2>
+      <h2 id="tax">八、中獎要繳稅嗎？30 秒快答</h2>
       <p>快答：<strong>要，但分兩種情況</strong>。</p>
       <ul>
         <li><strong>台灣本土娛樂城中獎</strong>：屬於「其他所得」，要併入綜合所得申報，有成本可扣（你投入的錢）</li>
@@ -293,7 +339,7 @@ const faqs = [
       </ul>
       <p>完整版看<a href="/articles/casino-jackpot-tax-guide/" style="color:var(--guava-green)">中娛樂城大獎要繳稅嗎</a>，芭樂子已經把所得稅法第 14 條翻譯成人話了。</p>
 
-      <h2 id="s9">九、娛樂城術語黑話對照表</h2>
+      <h2 id="terms">九、娛樂城術語黑話對照表</h2>
       <p>混娛樂城圈子久了會發現很多黑話，不懂就直接被當外行。這是常用的 15 個：</p>
 
       <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.88rem">
@@ -322,7 +368,7 @@ const faqs = [
         </tbody>
       </table>
 
-      <h2 id="s10">十、芭樂子 10 條鐵律</h2>
+      <h2 id="rules">十、芭樂子 10 條鐵律</h2>
       <p>這 10 條是這些年看了太多人歸零後總結出來的保命規則，沒一條廢話：</p>
       <ol>
         <li><strong>選平台 &gt; 選遊戲</strong>：黑網 RTP 99% 也拿不到錢，正規平台 RTP 95% 至少領得到</li>
@@ -336,50 +382,37 @@ const faqs = [
         <li><strong>不要在情緒不好時玩</strong>：失戀、壓力大、喝醉——這三個狀態下的決策 99% 是垃圾</li>
         <li><strong>把它當娛樂，不是投資</strong>：今天預算輸光就下樓吃鹽酥雞，明天太陽照樣升起</li>
       </ol>
-      <blockquote style="border-left:4px solid var(--guava-green);padding:0.8rem 1.2rem;background:var(--bg-card);margin:1rem 0">
-        <strong>芭樂子的碎碎念：</strong>以上 10 條你可能覺得無聊像爸媽在嘮叨，但我跟你打賭——會認真照做的人不到 5%，剩下 95% 的人會在半年內經歷至少一次「那次我要是聽勸就好了」的深夜懺悔。你要當那 5% 還是 95%，決定權在你手上。
-      </blockquote>
-
-      <h2 id="s11">十一、FAQ：10 題常見問題</h2>
-      {faqs.map((f) => (
-        <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem">
-          <summary style="cursor:pointer;font-weight:700">{f.q}</summary>
-          <p style="margin:0.8rem 0 0;color:var(--text-muted);line-height:1.75" set:html={f.a}></p>
-        </details>
-      ))}
-
-      <div style="background:#2a1a0a;border:1px solid #5a3a1a;border-radius:12px;padding:1.2rem 1.5rem;margin:2rem 0">
-        <p style="margin:0 0 0.5rem 0"><strong><Icon name="alert-triangle" /> 重要警語</strong></p>
-        <p style="margin:0;font-size:0.9rem;line-height:1.6">本文為產業科普指南，<strong>不鼓勵賭博</strong>。線上娛樂城屬於娛樂消費，請理性投注、量力而為。本文不構成任何法律、財務或投資建議。若您或身邊親友出現賭博失控情況，請撥打 <strong>1925 安心專線</strong>尋求協助。</p>
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <p style="margin:0"><strong>芭樂子的碎碎念：</strong>以上 10 條你可能覺得無聊像爸媽在嘮叨，但我跟你打賭——會認真照做的人不到 5%，剩下 95% 的人會在半年內經歷至少一次「那次我要是聽勸就好了」的深夜懺悔。你要當那 5% 還是 95%，決定權在你手上。</p>
       </div>
 
-      <div class="related-box" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin-top:2rem">
-        <h3 style="margin-top:0">⚡ 延伸閱讀</h3>
-        <ul style="margin:0">
-          <li><a href="/articles/slots-guide/" style="color:var(--guava-green)">老虎機攻略完整指南</a> — RTP、波動性、爆分機制一次看懂</li>
-          <li><a href="/articles/baccarat-guide/" style="color:var(--guava-green)">百家樂完整教學</a> — 真人娛樂的主戰場</li>
-          <li><a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">防詐騙 8LA 指南</a> — 8 大詐騙手法完整拆解</li>
-          <li><a href="/articles/casino-jackpot-tax-guide/" style="color:var(--guava-green)">中娛樂城大獎要繳稅嗎</a> — 稅務規劃看這篇</li>
-          <li><a href="/atg-seth/" style="color:var(--guava-green)">金8LA賽特專區</a> — ATG 戰神賽特系列完整 hub</li>
-        </ul>
+      <h2 id="faq" style="margin-top:2.5rem">十一、FAQ：10 題常見問題</h2>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p style="margin:0.8rem 0 0;color:var(--text-secondary)" set:html={f.a}></p>
+          </details>
+        ))}
+      </div>
+
+      <div class="card" style="margin:2rem 0;border-color:var(--guava-pink)">
+        <p style="margin:0 0 0.5rem 0"><strong><Icon name="alert-triangle" /> 重要警語</strong></p>
+        <p style="margin:0;font-size:0.9rem">本文為產業科普指南，<strong>不鼓勵賭博</strong>。線上娛樂城屬於娛樂消費，請理性投注、量力而為。本文不構成任何法律、財務或投資建議。若您或身邊親友出現賭博失控情況，請撥打 <strong>1925 安心專線</strong> 或戒賭專線 <strong>0800-080-888</strong> 尋求協助。</p>
+      </div>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <h2 style="margin-top:2.5rem">延伸閱讀</h2>
+      <div class="related-links">
+        <a href="/articles/slots-guide/">老虎機攻略完整指南<small>RTP、波動性、爆分機制一次看懂</small></a>
+        <a href="/articles/baccarat-guide/">百家樂完整教學<small>真人娛樂的主戰場</small></a>
+        <a href="/articles/anti-scam-8la-guide/">防詐騙 8LA 指南<small>8 大詐騙手法完整拆解</small></a>
+        <a href="/articles/casino-jackpot-tax-guide/">中獎要繳稅嗎<small>娛樂城稅務規劃</small></a>
+        <a href="/game-ranking/">2026 十大遊戲排名<small>合法娛樂城評比</small></a>
       </div>
     </article>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/articles/" class="btn-outline">&larr; 回文章列表</a>
+    </div>
   </div>
-
-  <style>
-    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
-    .breadcrumb { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
-    .breadcrumb a { color: var(--guava-green); text-decoration: none; }
-    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--guava-green); text-decoration: none; font-size: 0.9rem; }
-    .hero-banner { height: 180px; border-radius: 16px; margin-bottom: 1.5rem; }
-    .article-content h2 { color: var(--guava-green); margin-top: 2rem; font-size: 1.5rem; border-left: 4px solid var(--guava-green); padding-left: 0.8rem; }
-    .article-content h3 { color: #fff; }
-    .article-content p { line-height: 1.85; color: var(--text); }
-    .article-content ul, .article-content ol { line-height: 1.85; padding-left: 1.5rem; }
-    .article-content li { margin-bottom: 0.4rem; }
-    .article-content table { overflow-x: auto; display: block; max-width: 100%; }
-    @media (min-width: 768px) { .article-content table { display: table; } }
-    .toc ol { margin: 0.5rem 0 0 1.2rem; padding: 0; }
-    .toc a { color: var(--guava-green); text-decoration: none; }
-  </style>
 </BaseLayout>

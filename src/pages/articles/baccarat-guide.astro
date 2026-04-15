@@ -1,140 +1,220 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
 
+const faqs = [
+  { q: '百家樂看路真的有用嗎？', a: '牌路分析是「輔助工具」，可以幫你觀察趨勢、找到直覺出手的點，但不能保證勝率——因為每局獨立事件這件事在數學上沒有例外。就像看氣象預報不代表一定準，但總比抬頭看天空猜好。建議搭配資金管理策略一起用，別把看路當神明。' },
+  { q: '新手應該先學哪種百家樂牌路？', a: '先從「大路」開始。紅=莊藍=閒綠=和，這是所有牌路的爸爸，最直覺易懂。等你在線上平台玩過 50~100 場、對大路節奏有感後，再進階到珠盤路，最後才碰下三路（大眼仔/小路/蟑螂路）。千萬不要一次全學，新手看三條路會「分析癱瘓」——看到最後什麼都不敢下。' },
+  { q: '哪個線上遊戲平台玩百家樂最推薦？', a: '2026 年推薦標準：國際合法執照（庫拉索 / 馬爾他 / 菲律賓 PAGCOR）、有完整牌路介面（大路 + 下三路都要）、返水 0.5% 以上、出金 5~30 分鐘到帳。可以參考芭樂子整理的 10 大遊戲推薦排名，每家都實測過。' },
+  { q: '長龍最多可以連多久？看到就要跟嗎？', a: '理論上長龍沒有上限，歷史紀錄有連 30 局以上的「一條龍」。實戰建議：連 6 局以上的龍才開始「順勢跟」，並且<strong>每 2~3 局加碼一次、1-3-2-4 策略</strong>；看到不對勁就立刻停手。記住：龍會累，誰也不知道哪一局會斷。' },
+  { q: '和局可以押嗎？賠率很高欸', a: '和局賠率 8:1 看起來很誘人，但實際中獎機率只有 9.5%，期望值是百家樂三個選項中最差的（莊 98.94%、閒 98.76%、和 85.6%）。簡單說：押 100 元和局長期會虧 14.4 元，是「數學上最爛」的選項。偶爾玩玩 OK，別當主力。' },
+  { q: '百家樂穩贏的方法存在嗎？', a: '不存在。百家樂莊家優勢 1.06%（押莊）/ 1.24%（押閒），長期是負期望值遊戲，不可能「穩贏」。所謂的「必勝法」（1-3-2-4、馬丁格爾、倍投法）都是在<strong>控制資金曲線、不是改變期望值</strong>。任何 LINE 老師說有「內線牌路」「AI 預測」的都是詐騙。詳見芭樂子的 <a href="/articles/baccarat-winning-strategy/">百家樂必勝法 1-3-2-4 深度拆解</a>。' },
+];
 ---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/baccarat-guide/"
+  title="百家樂看路教學：大路、珠盤路、下三路完整牌路分析攻略"
+  description="2026 百家樂看路完整教學：大路、珠盤路、下三路（大眼仔/小路/蟑螂路）一次搞懂。芭樂子用鄉民聽得懂的方式教你百家樂牌路分析，新手到老司機必備技能。"
+  image="https://game8la.com/images/og-image.webp"
+  datePublished="2026-03-15"
+  dateModified="2026-04-15"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '百家樂看路教學', url: 'https://game8la.com/articles/baccarat-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="百家樂看路教學：大路、珠盤路、下三路完整牌路分析攻略 - GAME8LA" description="2026 百家樂看路完整教學：大路、珠盤路、下三路（大眼仔/小路/蟑螂路）一次搞懂。芭樂子用鄉民聽得懂的方式教你百家樂牌路分析。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 百家樂看路教學</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-03-15 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 10 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a1a15,#0d3d2d,#0a2a1a)"></div>
 
-<BaseLayout 
-  title="百家樂看路教學｜2026牌路分析攻略 - GAME8LA"
-  description="2026百家樂看路完整教學！大路、珠盤路、下三路一次搞懂。GAME8LA用鄉民看得懂的方式教你百家樂牌路分析，線上遊戲推薦必備技能。"
-  ogImage="https://game8la.com/images/og-image.webp"
-  currentPage="articles"
->
-<div class="container">
-  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#articles">攻略評測</a> &gt; 百家樂看路教學</div>
-  <a href="/#articles" class="back-link"><Icon name="arrow-left" /> 回文章列表</a>
-  <div style="width:100%;height:250px;background:linear-gradient(135deg,#0a1a15,#0d3d2d,#0a2a1a);border-radius:16px;margin-bottom:1.5rem"></div>
-  <div class="page-hero">
-    <h1>百家樂看路教學：<em>鄉民老司機的牌路仙人指路</em></h1>
-    <p style="margin-top:0.5rem"><Icon name="calendar" /> 2026-03-15 &nbsp;|&nbsp; <Icon name="eye" /> 12,450 次瀏覽 &nbsp;|&nbsp; <Icon name="clock" /> 閱讀時間約 10 分鐘</p>
-    <div class="tag-list" style="justify-content:center;margin-top:1rem">
-      <span class="tag">百家樂教學</span><span class="tag">牌路分析</span><span class="tag">線上遊戲平台</span><span class="tag">遊戲推薦</span>
-    </div>
-  </div>
-  <div class="toc">
-    <h4>📋 本文懶人包</h4>
-    <ol>
-      <li><a href="#s1">百家樂牌路是什麼？為什麼老司機都在看？</a></li>
-      <li><a href="#s2">大路 — 連你阿嬤都看得懂的基本盤</a></li>
-      <li><a href="#s3">珠盤路 — 懶人版快速掃描法</a></li>
-      <li><a href="#s4">下三路 — 大眼仔、小路、蟑螂路</a></li>
-      <li><a href="#s5">鄉民實戰心法五大招</a></li>
-      <li><a href="#s6">百家樂線上遊戲推薦怎麼選？</a></li>
-      <li><a href="#faq">常見問題 FAQ</a></li>
-    </ol>
-  </div>
-  <div class="article-content">
-    <p>各位8LA鄉民好，我是 GAME8LA的芭樂子。今天這篇<strong>百家樂看路教學</strong>，是我在各大<strong><a href="/articles/online-casino-guide/" style="color:var(--guava-green)">線上遊戲平台</a></strong>被割了無數次韭菜之後，用血淚換來的經驗值。如果你也在找「百家樂到底怎麼看路」、「那些紅紅藍藍的圈圈到底是什麼鬼」——恭喜你，這篇就是為你量身打造的。</p>
-    <p>先說結論：<strong>看路不是算命，是看氣氛</strong>。就像你去夜市看哪攤排最長一樣，牌路只是告訴你「目前的風向」，不保證下一把是莊是閒。但如果你連這個都不會，那你在<strong>遊戲推薦</strong>排行榜上找到再好的平台也是送頭仔。</p>
-    <h2 id="s1">1. 百家樂牌路是什麼？為什麼老司機都在看？</h2>
-    <p>簡單來說，百家樂牌路就是一種「戰績記錄表」。每一局的結果（莊贏、閒贏、和局）都會被畫成圈圈記錄在一個網格上。紅色是莊家贏，藍色是閒家贏，綠色是和局——沒錯就是紅綠燈的配色，非常有台灣特色（？）。</p>
-    <p>為什麼要看這個？因為百家樂雖然每一局都是獨立事件，但人類的大腦天生就愛找規律。當你看到連開 8 把莊的時候，你的直覺會告訴你：「欸，是不是該換閒了？」或是「龍都出來了，跟啊！」——而<strong>牌路分析</strong>就是把這種直覺系統化的工具。</p>
-    <blockquote>⚡ 8LA金句：不會看路的玩家，跟不會看 Google Map 還硬要開車上路一樣危險。在<strong>線上遊戲平台</strong>玩百家樂之前，請先學會這項基本功。</blockquote>
-    <h2 id="s2">2. 大路 — 連你阿嬤都看得懂的基本盤</h2>
-    <p><strong>大路</strong>是所有牌路的爸爸，是最基本也最重要的一條路。規則超簡單：</p>
-    <ul>
-      <li><strong>莊家贏</strong> → 畫一顆紅色圓球。連莊就往下疊</li>
-      <li><strong>閒家贏</strong> → 畫一顆藍色圓球。連閒也往下疊</li>
-      <li><strong>和局</strong> → 在最後一顆球上畫一條綠線（和局不換列）</li>
-      <li>換邊贏的時候？整個換到右邊新的一列重新開始疊</li>
-    </ul>
-    <p>重點來了：看大路你要注意兩個東西——<strong>長龍</strong>和<strong>單跳</strong>。長龍就是同一方連贏好幾把，畫面上會出現一長條紅色或藍色，視覺衝擊力十足。單跳則是莊閒交替出現，像在看乒乓球一樣來回彈。</p>
-    <div class="tip-box">
-      <strong>💡 老司機密技：</strong>在大多數<strong>遊戲推薦</strong>的真人百家樂中，當大路出現連續 6 局以上的長龍時，順勢跟注的勝率在統計上確實略高。但千萬不要以為龍會無限長——龍也會累的，見好就收才是贏家。
-    </div>
-    <h2 id="s3">3. 珠盤路 — 懶人版快速掃描法</h2>
-    <p><strong>珠盤路</strong>是給「我不想動腦只想看結果」的玩家準備的。每一格代表一局，從上到下、從左到右排列。紅珠 = 莊贏，藍珠 = 閒贏，綠珠 = 和局。</p>
-    <p>珠盤路的好處是你可以一秒看出最近的勝負比例。比如最近 30 局裡面，莊贏了 20 局——啊這不就是告訴你這張桌子莊很旺嗎？當然要不要跟就看你的膽量和錢包的厚度了。</p>
-    <p>在選擇<strong>線上遊戲平台</strong>的時候，建議挑有提供完整牌路顯示的平台，有些陽春的介面連珠盤路都沒有，那根本就是叫你矇著眼睛上戰場。</p>
-    <h2 id="s4">4. 下三路 — 大眼仔、小路、蟑螂路（進階版，非戰鬥人員可跳過）</h2>
-    <p>好，如果你看到這裡還沒有按上一頁，恭喜你已經比 87% 的新手強了。下三路是進階分析工具，包含<strong>大眼仔路、小路、蟑螂路</strong>。</p>
-    <h3>大眼仔路 — 比較前一列</h3>
-    <p>大眼仔路不是在記錄莊閒結果，而是在看大路的「排列規律」。它把大路每一列跟前一列做比較：結構一樣畫紅圈，不一樣畫藍圈。聽起來很玄？用白話文說就是——它在告訴你這張桌子走勢「穩不穩」。紅圈多 = 穩定，藍圈多 = 亂七八糟。</p>
-    <h3>小路 — 跳過一列比</h3>
-    <p>小路跟大眼仔一樣的邏輯，但它是跟前兩列比。就像看隔壁的隔壁在幹嘛，觀察更大週期的趨勢。</p>
-    <h3>蟑螂路 — 名字最噁但很有用</h3>
-    <p>蟑螂路是跟前三列比。雖然名字讓人起雞皮疙瘩，但它的用途是看整體「大趨勢」。如果三條路都顯示穩定（紅圈多），那恭喜你找到一張趨勢明確的桌子了。</p>
-    <div class="warn-box">
-      <strong>⚠️ 8LA警告：</strong>下三路看起來很厲害，但新手如果三條路一起看很容易「分析癱瘓」——就是看到最後什麼都不敢下。建議先專精大路，等到你在<strong>線上遊戲推薦</strong>的平台上玩了至少 100 場再來碰下三路。
-    </div>
-    <h2 id="s5">5. 鄉民實戰心法五大招</h2>
-    <p>看完理論，來點能直接用的東西。以下是 GAME8LA編輯部從 PTT 賭板、各大<strong>遊戲平台</strong>論壇、以及自己的荷包裡面歸納出來的五大心法：</p>
-    <ol>
-      <li><strong>順勢而為，跟龍不逆龍</strong> — 大路長龍出現時跟著下。什麼時候該走？你覺得「不太對」的時候就該走了。相信直覺，但更相信停損。</li>
-      <li><strong>先觀察 15 局再進場</strong> — 不要一進桌子就亂下。先看 15 局牌路，找到規律再出手。「衝動是魔鬼」這句話在百家樂桌上是真理。</li>
-      <li><strong>大路 + 大眼仔交叉驗證</strong> — 兩條路顯示同方向的時候可信度比較高。如果大路說跟莊，大眼仔也顯示穩定，那就大膽一點。</li>
-      <li><strong>止損止盈比什麼都重要</strong> — 輸了本金的 20% 就離場，贏了 3 倍也離場。這是在所有<strong>遊戲推薦</strong>攻略中最重要的一條，沒有之一。</li>
-      <li><strong>換桌是一種美德</strong> — 如果一張桌子的牌路亂到像你前任的感情史，不要留戀，直接換桌。</p></li>
-    </ol>
-    <h2 id="s6">6. 百家樂線上遊戲推薦怎麼選？</h2>
-    <p>會看路了，接下來就是找對場子。選擇<strong>線上遊戲平台</strong>玩百家樂，GAME8LA建議你注意這幾點：</p>
-    <ul>
-      <li>是否有國際合法執照（庫拉索、馬爾他、菲律賓 PAGCOR）</li>
-      <li>真人百家樂有沒有提供完整牌路介面（大路 + 下三路都要有）</li>
-      <li>出入金速度和客服反應速度</li>
-      <li>百家樂返水比例和優惠活動</li>
-    </ul>
-    <p>想看完整的<strong>2026 遊戲推薦排名</strong>？直接看我們的 <a href="/game-ranking/">十大遊戲推薦評比</a>，每一家都是8LA編輯親自測試過的，絕對不會讓你踩雷。如果擔心遇到黑網，也可以先看我們的 <a href="/#articles">遊戲平台負評清單</a> 和 <a href="/articles/dealers-guide/">詐騙手法大公開</a>。</p>
-    <h2 id="faq">常見問題 FAQ</h2>
-    <div class="faq-section">
-      <div class="faq-item">
-        <div class="faq-q">百家樂看路真的有用嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
-        <div class="faq-a"><p>牌路分析是輔助工具，可以幫助你觀察趨勢，但不能保證勝率。就像看氣象預報不代表一定準，但總比抬頭看天空猜好。建議搭配資金管理策略一起使用。在線上遊戲推薦的玩法中，看路是最基本的技能之一。</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">新手應該先學哪種百家樂牌路？<span class="arrow"><Icon name="chevron-down" /></span></div>
-        <div class="faq-a"><p>先從大路開始，因為最直覺易懂。等你在線上遊戲平台玩了幾十場之後，再進階到珠盤路和下三路分析。千萬不要一次想學全部，會消化不良。</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">哪個線上遊戲平台玩百家樂最推薦？<span class="arrow"><Icon name="chevron-down" /></span></div>
-        <div class="faq-a"><p>2026 年推薦選擇有國際執照、提供多種百家樂玩法的遊戲平台。可以參考 GAME8LA的 <a href="/game-ranking/">遊戲推薦排名</a>，裡面有詳細評比各家百家樂品質、返水優惠和<a href="/articles/casino-payout-guide/" style="color:var(--guava-green)">出金</a>速度。</p></div>
-      </div>
-    </div>
-  </div>
-  <div class="related-box"><h3>⚡ 延伸閱讀：8LA推薦</h3><div class="related-links"><a href="/game-ranking/">2026 遊戲推薦排名<small>十大線上遊戲平台完整評比</small></a><a href="/articles/slots-guide/">RSG 雷神之鎚實測<small>200 轉老虎機真實數據</small></a><a href="/articles/dealers-guide/">遊戲平台詐騙手法大公開<small>六種黑網慣用套路解析</small></a></div></div>
-  <div style="text-align:center;margin-top:2rem">
-    <a href="/#articles" class="btn-outline">← 回文章列表</a>
-    <a href="/game-ranking/" class="btn-primary" style="margin-left:1rem">看遊戲推薦排名 →</a>
-  </div>
-</div>
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <h1 style="font-size:2rem;line-height:1.3">百家樂看路教學：大路、珠盤路、下三路完整牌路分析攻略</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">各位 8LA 鄉民好，我是芭樂子。這篇<strong>百家樂看路教學</strong>是在各大線上平台被割了無數次韭菜後、用血淚換來的經驗值。如果你也在找「百家樂到底怎麼看路」、「那些紅紅藍藍的圈圈到底是什麼鬼」——這篇就是為你寫的。</p>
 
-<!-- SCROLL TO TOP -->
+      <!-- === 精選摘要對比表 === -->
+      <div class="card" style="margin:1.5rem 0;border-color:var(--gold);background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(13,61,45,0.12) 100%)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 一眼看懂：4 大牌路速覽</h3>
+        <table>
+          <thead><tr><th>牌路</th><th>功能</th><th>難度</th><th>推薦對象</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">大路</td><td>記錄莊閒勝負</td><td>⭐</td><td style="color:var(--guava-green)">所有玩家必學</td></tr>
+            <tr><td style="font-weight:700">珠盤路</td><td>快速掃描最近勝負比</td><td>⭐⭐</td><td style="color:var(--guava-green)">中階玩家</td></tr>
+            <tr><td style="font-weight:700">大眼仔路</td><td>比前一列走勢穩定度</td><td>⭐⭐⭐</td><td>進階玩家</td></tr>
+            <tr><td style="font-weight:700">小路 + 蟑螂路</td><td>看跨列大趨勢</td><td>⭐⭐⭐⭐</td><td style="color:var(--guava-pink)">老司機專屬</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.9rem;color:var(--text-secondary)">👉 <strong>新手守則</strong>：專精大路 100 場再碰下三路，一次學全會「分析癱瘓」——看到最後什麼都不敢下。</p>
+      </div>
+
+      <!-- === 轉化 CTA Banner === -->
+      <a href="/articles/baccarat-winning-strategy/" style="display:block;text-decoration:none;margin:1.5rem 0">
+        <div style="background:linear-gradient(135deg,#0a1426 0%,#0d3d2d 50%,#f5b800 100%);border:2px solid #f5b800;border-radius:14px;padding:1.2rem 1.5rem;box-shadow:0 4px 16px rgba(245,184,0,0.25)">
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+            <div style="font-size:2.4rem">🎴</div>
+            <div style="flex:1;min-width:240px">
+              <div style="color:#f5b800;font-weight:900;font-size:1.1rem;margin-bottom:0.3rem">光會看路還不夠！必勝法怎麼押才對？</div>
+              <div style="color:#fff;font-size:0.95rem;margin-bottom:0.2rem">百家樂 RTP 高達 <strong style="color:#26c281">98.94%</strong>，但沒策略 = 白白送莊家。芭樂子深度拆解 <strong style="color:#26c281">1-3-2-4 投注法</strong>，配合看路戰力直接翻倍。</div>
+              <div style="color:#ec4899;font-size:0.9rem">職業玩家都在用的投注策略 👉</div>
+            </div>
+            <div style="background:#f5b800;color:#0a1426;font-weight:900;padding:0.8rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.95rem">看百家樂必勝法 →</div>
+          </div>
+        </div>
+      </a>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#intro">百家樂牌路是什麼？</a></li>
+          <li><a href="#dalu">大路：連阿嬤都看得懂</a></li>
+          <li><a href="#zhupan">珠盤路：懶人版快速掃描</a></li>
+          <li><a href="#xiasanlu">下三路：大眼仔、小路、蟑螂路</a></li>
+          <li><a href="#rules">鄉民實戰心法五大招</a></li>
+          <li><a href="#platform">看路平台怎麼選？</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== 第 1 節 ===== -->
+      <h2 id="intro" style="margin-top:2.5rem">1. 百家樂牌路是什麼？為什麼老司機都在看？</h2>
+
+      <p>簡單來說，百家樂牌路就是一種「戰績記錄表」。每一局的結果（莊贏、閒贏、和局）都會被畫成圈圈記錄在一個網格上。<strong>紅色 = 莊家贏、藍色 = 閒家贏、綠色 = 和局</strong>——沒錯就是紅綠燈的配色，非常有台灣特色。</p>
+
+      <p>為什麼要看這個？因為百家樂雖然每一局都是獨立事件，但人類的大腦天生就愛找規律。當你看到連開 8 把莊的時候，直覺會告訴你：「欸，是不是該換閒了？」或是「龍都出來了，跟啊！」——而<strong>牌路分析就是把這種直覺系統化的工具</strong>。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 8LA 金句</h3>
+        <p style="margin-bottom:0">不會看路的玩家，跟不會看 Google Map 還硬要開車上路一樣危險。在線上遊戲平台玩百家樂之前，請先學會這項基本功——這是<strong>風險控管</strong>，不是迷信。</p>
+      </div>
+
+      <!-- ===== 第 2 節 ===== -->
+      <h2 id="dalu" style="margin-top:2.5rem">2. 大路：連你阿嬤都看得懂的基本盤</h2>
+
+      <p><strong>大路</strong>是所有牌路的爸爸，是最基本也最重要的一條路。規則超簡單：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🎯 大路畫法</h3>
+        <p style="margin:0.4rem 0"><strong>莊家贏</strong> → 畫一顆紅色圓球，連莊就往下疊</p>
+        <p style="margin:0.4rem 0"><strong>閒家贏</strong> → 畫一顆藍色圓球，連閒也往下疊</p>
+        <p style="margin:0.4rem 0"><strong>和局</strong> → 在最後一顆球上畫一條綠線（和局不換列）</p>
+        <p style="margin:0.4rem 0 0"><strong>換邊贏</strong> → 整個換到右邊新的一列重新開始疊</p>
+      </div>
+
+      <p>重點來了：看大路你要注意兩個東西——<strong>長龍</strong>和<strong>單跳</strong>。長龍就是同一方連贏好幾把，畫面上會出現一長條紅色或藍色，視覺衝擊力十足；單跳則是莊閒交替出現，像在看乒乓球一樣來回彈。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">💡 老司機密技</h3>
+        <p style="margin-bottom:0">真人百家樂中，當大路出現<strong>連續 6 局以上的長龍</strong>時，順勢跟注的勝率在統計上確實略高（因為洗牌後短期機率會有偏差）。但千萬不要以為龍會無限長——<strong>龍也會累的，見好就收才是贏家</strong>。</p>
+      </div>
+
+      <!-- ===== 第 3 節 ===== -->
+      <h2 id="zhupan" style="margin-top:2.5rem">3. 珠盤路：懶人版快速掃描法</h2>
+
+      <p><strong>珠盤路</strong>是給「我不想動腦只想看結果」的玩家準備的。每一格代表一局，從上到下、從左到右排列。<strong>紅珠 = 莊贏、藍珠 = 閒贏、綠珠 = 和局</strong>。</p>
+
+      <p>珠盤路的好處是你可以<strong>一秒看出最近的勝負比例</strong>。比如最近 30 局裡面莊贏了 20 局——這不就是告訴你這張桌子莊很旺嗎？當然要不要跟就看你的膽量和錢包的厚度了。</p>
+
+      <p>在選擇線上遊戲平台時，建議挑<strong>有提供完整牌路顯示</strong>的平台，有些陽春介面連珠盤路都沒有，那根本就是叫你矇著眼睛上戰場。</p>
+
+      <!-- ===== 第 4 節 ===== -->
+      <h2 id="xiasanlu" style="margin-top:2.5rem">4. 下三路：大眼仔、小路、蟑螂路（進階版）</h2>
+
+      <p>如果你看到這裡還沒按上一頁，恭喜你已經比 87% 的新手強了。下三路是進階分析工具，包含<strong>大眼仔路、小路、蟑螂路</strong>。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔍 大眼仔路：比前一列</h3>
+        <p style="margin-bottom:0">大眼仔路不是在記錄莊閒結果，而是在看大路的「<strong>排列規律</strong>」。它把大路每一列跟前一列做比較：結構一樣畫紅圈，不一樣畫藍圈。白話解釋——它在告訴你這張桌子走勢「<strong>穩不穩</strong>」。紅圈多 = 穩定，藍圈多 = 亂七八糟。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔍 小路：跳過一列比</h3>
+        <p style="margin-bottom:0">小路跟大眼仔一樣的邏輯，但它是跟<strong>前兩列比</strong>。就像看隔壁的隔壁在幹嘛，觀察更大週期的趨勢。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔍 蟑螂路：跟前三列比</h3>
+        <p style="margin-bottom:0">名字雖然讓人起雞皮疙瘩，但它的用途是看<strong>整體大趨勢</strong>。如果三條路都顯示穩定（紅圈多），那恭喜你找到一張趨勢明確的桌子了。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 8LA 警告：分析癱瘓症</h3>
+        <p style="margin-bottom:0">下三路看起來很厲害，但新手如果三條路一起看很容易「<strong>分析癱瘓</strong>」——就是看到最後什麼都不敢下。建議先專精大路，等到玩了至少 100 場再來碰下三路。</p>
+      </div>
+
+      <!-- ===== 第 5 節 ===== -->
+      <h2 id="rules" style="margin-top:2.5rem">5. 鄉民實戰心法五大招</h2>
+
+      <p>看完理論，來點能直接用的東西。以下是芭樂子從 PTT 賭板、各大論壇、自己的荷包裡面歸納出來的<strong>五大心法</strong>：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🏆 百家樂鄉民 5 大心法</h3>
+        <p style="margin:0.5rem 0"><strong>① 順勢而為，跟龍不逆龍</strong>：大路長龍出現時跟著下，覺得「不太對」的時候就該走。相信直覺，但更相信停損。</p>
+        <p style="margin:0.5rem 0"><strong>② 先觀察 15 局再進場</strong>：不要一進桌子就亂下。先看 15 局牌路，找到規律再出手。衝動是魔鬼。</p>
+        <p style="margin:0.5rem 0"><strong>③ 大路 + 大眼仔交叉驗證</strong>：兩條路顯示同方向時可信度較高。大路說跟莊、大眼仔也顯示穩定，那就大膽一點。</p>
+        <p style="margin:0.5rem 0"><strong>④ 止損止盈比什麼都重要</strong>：輸了本金的 20% 就離場，贏了 3 倍也離場。沒有之一。</p>
+        <p style="margin:0"><strong>⑤ 換桌是一種美德</strong>：如果一張桌子的牌路亂到像前任的感情史，不要留戀，直接換桌。</p>
+      </div>
+
+      <!-- === 第二 CTA === -->
+      <div style="background:linear-gradient(135deg,rgba(38,194,129,0.12) 0%,rgba(245,184,0,0.12) 100%);border-left:4px solid #26c281;border-radius:10px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <div style="color:#f5b800;font-weight:900;font-size:1rem;margin-bottom:0.5rem">💡 看完會看路，接下來就要會押注</div>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem;color:var(--text-secondary)">牌路告訴你「方向」，必勝法告訴你「金額」。芭樂子實測 1-3-2-4 投注策略在長龍段的報酬率，搭配看路技巧使用，回本速度快 <strong style="color:#26c281">2~3 倍</strong>。</p>
+        <a href="/articles/baccarat-winning-strategy/" style="display:inline-block;background:#26c281;color:#0a1426;font-weight:900;padding:0.7rem 1.2rem;border-radius:8px;text-decoration:none;font-size:0.92rem">📋 查看百家樂必勝法 1-3-2-4 →</a>
+      </div>
+
+      <!-- ===== 第 6 節 ===== -->
+      <h2 id="platform" style="margin-top:2.5rem">6. 百家樂線上平台怎麼選？</h2>
+
+      <p>會看路了，接下來就是找對場子。選擇線上遊戲平台玩百家樂，芭樂子建議你注意這幾點：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">✅ 選平台四大硬條件</h3>
+        <p style="margin:0.4rem 0"><strong>① 國際合法執照</strong>：庫拉索、馬爾他 MGA、菲律賓 PAGCOR 任一張</p>
+        <p style="margin:0.4rem 0"><strong>② 完整牌路介面</strong>：大路 + 珠盤 + 下三路全要有</p>
+        <p style="margin:0.4rem 0"><strong>③ 出金速度</strong>：5~30 分鐘到帳為合理值，超過 24 小時要警覺</p>
+        <p style="margin:0.4rem 0 0"><strong>④ 返水與優惠</strong>：百家樂返水至少 0.5%，低於這個數平台太摳</p>
+      </div>
+
+      <p>想看完整的 2026 遊戲平台排名？直接看 <a href="/game-ranking/" style="color:var(--gold);font-weight:700">十大遊戲推薦評比</a>，每一家都是芭樂子親自測試過的。擔心遇到黑網可以先看 <a href="/articles/anti-scam-8la-guide/" style="color:var(--gold);font-weight:700">娛樂城防詐騙指南</a>。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 芭樂子嚴肅提醒</h3>
+        <p style="margin-bottom:0">百家樂 RTP 雖然高達 98.94%（押莊），但<strong>長期還是負期望值</strong>——每押 100 元平均虧 1.06 元。看路、必勝法只是降低波動、延長娛樂時間的工具，不會把 RTP 變正。把它當娛樂 OK，當提款機會家破人亡。如果你或家人玩到影響生活，請撥 <strong>1925 安心專線</strong> 或戒賭專線 <strong>0800-080-888</strong>。</p>
+      </div>
+
+      <!-- ===== FAQ ===== -->
+      <h2 id="faq" style="margin-top:2.5rem">7. 常見問題 FAQ</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p style="margin:0.8rem 0 0;color:var(--text-secondary)" set:html={f.a}></p>
+          </details>
+        ))}
+      </div>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <h2 style="margin-top:2.5rem">延伸閱讀</h2>
+      <div class="related-links">
+        <a href="/articles/baccarat-winning-strategy/">百家樂必勝法 1-3-2-4<small>職業玩家投注策略</small></a>
+        <a href="/game-ranking/">2026 遊戲推薦排名<small>10 大線上遊戲平台評比</small></a>
+        <a href="/articles/casino-payout-guide/">娛樂城出金完整指南<small>出金速度與技巧</small></a>
+        <a href="/articles/free-credit-guide/">娛樂城體驗金怎麼用？<small>低流水提領技巧</small></a>
+        <a href="/articles/anti-scam-8la-guide/">娛樂城防詐騙指南<small>避開黑網必看</small></a>
+      </div>
+    </article>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
+    </div>
+  </div>
 </BaseLayout>
-
-<script is:inline type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
-    { "@type": "ListItem", "position": 2, "name": "攻略評測", "item": "https://game8la.com/game-ranking/" },
-    { "@type": "ListItem", "position": 3, "name": "百家樂看路教學", "item": "https://game8la.com/articles/baccarat-guide/" }
-  ]
-}
-</script>
-
-<script is:inline type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"百家樂看路真的有用嗎？","acceptedAnswer":{"@type":"Answer","text":"百家樂牌路分析是輔助工具，可以幫助觀察趨勢但不能保證勝率。建議搭配資金管理策略一起使用，線上遊戲推薦的玩法中，看路是最基本的技能之一。"}},{"@type":"Question","name":"新手應該先學哪種牌路？","acceptedAnswer":{"@type":"Answer","text":"建議新手先從大路開始學習，因為最直覺易懂。等熟悉後再進階到珠盤路和下三路分析，大部分線上遊戲平台都有提供這些牌路顯示功能。"}},{"@type":"Question","name":"哪個線上遊戲平台玩百家樂最好？","acceptedAnswer":{"@type":"Answer","text":"2026年推薦選擇有國際執照、提供多種百家樂玩法的遊戲平台。GAME8LA的遊戲推薦排名中有詳細評比各家百家樂品質與返水優惠。"}}]}
-</script>
-
-<script is:inline>
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    q.parentElement.classList.toggle('open');
-  });
-});
-
-window.addEventListener('scroll', () => {
-  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 500);
-});
-</script>
