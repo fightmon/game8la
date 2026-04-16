@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'domain-hopping-scam-truth',
+    title: '【產業深度】為什麼娛樂城網址一直換？揭秘博弈圈「金蟬脫殼」的暗黑真相',
+    excerpt: '「娛樂城新網址」這個關鍵字本身就是詐騙訊號！芭樂子拆解博弈圈金蟬脫殼 4 大暗黑原因：165 反詐打地鼠、SEO 負評清除術、躲避國際執法、代理商惡性競爭。為什麼 Game8la 永遠不換網址？正派品牌 vs 黑網域名池一張圖看懂。',
+    category: 'guide',
+    categoryLabel: '產業深度分析',
+    badgeType: 'featured',
+    date: '2026-04-16',
+    views: 1250,
+    tags: ['最新', '必讀', '深度'],
+    icon: 'triangle-alert',
+    gradient: 'linear-gradient(135deg,#1a0000,#4a0a2e,#ec4899)',
+    thumbnail: '/images/article-thumbs/thumb-cover-domain-hopping.webp'
+  },
+  {
     slug: 'at99-blocked-analysis',
     title: '【深度解析】AT99 遭刑事警察局封鎖！at99tw.com.tw 新網址是詐騙嗎？教你從「封鎖紅條」與「換殼黑網」看懂博弈產業風險',
     excerpt: '刑事警察局刑詐防字第 1146166136 號函令封鎖 at99.com.tw，隨即疑似換殼至 at99tw.com.tw！芭樂子拆解被封真實原因、域名換殼識別特徵、玩家資金追討難度、4 大自保點與 165 檢舉 SOP，封鎖紅條背後的產業黑洞一次看懂。',
