@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'power-lottery-vs-super-lotto',
+    title: '威力彩 vs 大樂透差別在哪？2026 完整比較：機率、獎金、玩法、稅務一篇搞懂',
+    excerpt: '威力彩和大樂透到底差在哪？芭樂子用 7 張對比表幫你搞懂：頭獎機率、任一獎項中獎率、獎金結構、開獎時間、稅務計算、包牌 CP 值全比較。新手該買哪個？同樣花 100 元哪個頭獎機率高 3 倍？',
+    category: 'lottery',
+    categoryLabel: '彩券科普',
+    badgeType: 'featured',
+    date: '2026-04-17',
+    views: 580,
+    tags: ['最新', '精選', '新手必看'],
+    icon: 'trophy',
+    gradient: 'linear-gradient(135deg,#1a1505,#3d2f0a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-cover-power-vs-super.webp'
+  },
+  {
     slug: 'domain-hopping-scam-truth',
     title: '【警告】娛樂城網址一直換？揭秘「金蟬脫殼」詐騙真相：你以為的新網址，其實是收網前兆！',
     excerpt: '娛樂城網址一直換？娛樂城登入連結打不開？芭樂子拆解金蟬脫殼 4 大暗黑原因：165 封鎖打地鼠、SEO 負評洗白、躲避國際執法、代理商惡性競爭。附「3 秒判斷黑網」視覺清單——網址換不停，出金一定停。',
