@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'casino-not-recommended-by-casinos',
+    title: '【2026 獨家調查】連娛樂城自己都不推薦的娛樂城！5 大排名站交叉比對，踩雷名單全公開',
+    excerpt: '芭樂子實測交叉比對 5 大娛樂城排名站，揭露排名站互相矛盾的真相：金大發自己的部落格給自己第一名、錢盈自己的排名把自己放榜首、同一間娛樂城在 A 站滿分 B 站零分。附「多站認證詐騙」踩雷名單＋停業娛樂城墓園。',
+    category: 'guide',
+    categoryLabel: '獨家調查',
+    badgeType: 'attack',
+    date: '2026-04-18',
+    views: 120,
+    tags: ['最新', '必讀', '獨家'],
+    icon: 'search',
+    gradient: 'linear-gradient(135deg,#1a0505,#4a0a0a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-casino-not-recommended.webp'
+  },
+  {
     slug: 'power-lottery-vs-super-lotto',
     title: '【2026 數據實測】威力彩和大樂透哪個比較好中？7 張對比表＋機率計算完整拆解',
     excerpt: '威力彩和大樂透機率差多少？芭樂子用純數據拆解：頭獎機率、中獎率、期望值、獎金結構、稅務全比較。不報明牌，只說真話——100 元該買哪個？同樣花 100 元大樂透頭獎機率竟是威力彩的 3.16 倍？',

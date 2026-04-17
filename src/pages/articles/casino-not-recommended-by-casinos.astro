@@ -1,0 +1,513 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '你們怎麼確認這些排名站就是娛樂城自己開的？', a: '<strong>從網域 WHOIS、網站底部版權聲明、以及「誰永遠排第一」就能判斷。</strong>例如 wof888.com 的版權歸金大發所有，而金大發在自己的排名裡永遠是第一名 ★★★★★；qywin88.com 是錢盈娛樂城的官方部落格，錢盈在自己的評比中每項都拿滿分。這不是巧合，這是<strong>球員兼裁判</strong>。' },
+  { q: '為什麼同一間娛樂城在不同站的評分差這麼多？', a: '因為排名的本質是<strong>廣告</strong>，不是評鑑。每個排名站都是某間娛樂城或代理的行銷工具，他們會把自家品牌和合作夥伴拉高，把競爭對手踩低。富遊在 wager.tw 拿 5 分滿分，在 wof888 卻排倒數第二只有 1 星——兩家都「言之鑿鑿」說自己是實測，但分數天差地遠。<strong>結論：兩邊的排名都不可信。</strong>' },
+  { q: '那有沒有真正客觀的娛樂城排名？', a: '<strong>在台灣，目前沒有。</strong>因為博弈產業處於法律灰色地帶，沒有像金管會、消保會這類官方機構做獨立評鑑。所有你在 Google 搜到的「娛樂城排名」、「娛樂城推薦」，背後 99% 都有利益關係——要嘛是娛樂城自己寫的，要嘛是領佣金的代理寫的。<strong>這就是 Game8la 存在的原因：我們不排名、不推薦、不導流，只給你判斷的工具。</strong>' },
+  { q: '被多站標記詐騙的娛樂城，是不是就一定是詐騙？', a: '多站一致標記詐騙的（例如大聖、拼多多、博到發），<strong>風險極高</strong>，強烈建議完全避開。但要注意：單一站的「詐騙標記」也可能是競爭對手的抹黑。這也是為什麼我們要<strong>交叉比對多站</strong>——當多個互相競爭的排名站都說某間有問題時，可信度就高很多。' },
+  { q: '我現在正在玩的娛樂城在你們的「不推薦名單」上怎麼辦？', a: '先深呼吸，不要恐慌。<strong>步驟 1</strong>：確認你的帳戶裡還有多少餘額，能提款就先提款；<strong>步驟 2</strong>：截圖保存所有交易紀錄、對話紀錄、帳戶畫面；<strong>步驟 3</strong>：到 <a href="https://165.npa.gov.tw" target="_blank" rel="noopener">165 反詐騙官網</a>查詢該平台是否已被通報；<strong>步驟 4</strong>：不要再加碼、不要相信「客服說提款要先儲值」這種話——那是二次詐騙。<br><br>最重要的：<strong>你的錢永遠比「回本」重要。能撤就撤，別等。</strong>' },
+];
+---
+
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/casino-not-recommended-by-casinos/"
+  title="【2026 獨家調查】連娛樂城自己都不推薦的娛樂城！5 大排名站交叉比對，踩雷名單全公開"
+  description="芭樂子實測交叉比對 5 大娛樂城排名站，揭露排名站互相矛盾的真相：同一間娛樂城在 A 站滿分、B 站零分。本文整理出「連娛樂城資訊站都不推薦」的高風險名單，以及排名站球員兼裁判的運作內幕。"
+  image="https://game8la.com/images/articles/casino-not-recommended-cover.webp"
+  datePublished="2026-04-18"
+  dateModified="2026-04-18"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '連娛樂城都不推薦的娛樂城', url: 'https://game8la.com/articles/casino-not-recommended-by-casinos/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="【2026 獨家調查】連娛樂城自己都不推薦的娛樂城！5站交叉比對踩雷名單 - GAME8LA" description="芭樂子交叉比對 5 大娛樂城排名站，發現排名全是自吹自擂：金大發自己的部落格給自己第一名、錢盈自己的排名把自己放榜首。連這些娛樂城都不推薦的品牌，你還敢入金嗎？附完整踩雷名單＋停業名單。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 連娛樂城都不推薦的娛樂城</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-18 ｜
+      <Icon name="user-pen" /> 作者：芭樂子｜
+      <Icon name="book-open" /> 預估閱讀 12 分鐘 ｜
+      <span style="color:#ef4444;font-weight:700">🔍 獨家產業調查</span>
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a0505,#4a0a0a,#ef4444)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <h1 style="font-size:2rem;line-height:1.3">🔍 連娛樂城自己都不推薦的娛樂城！<em>5 大排名站交叉比對，踩雷名單全公開</em></h1>
+
+      <!-- === 封面視覺 === -->
+      <img class="content-img"
+           src="/images/articles/casino-not-recommended-cover.webp"
+           srcset="/images/articles/casino-not-recommended-cover-768w.webp 768w, /images/articles/casino-not-recommended-cover.webp 1400w"
+           sizes="(max-width: 768px) 100vw, 820px"
+           alt="芭樂子手持放大鏡調查娛樂城排名站互相矛盾的黑幕-2026獨家交叉比對｜GAME8LA"
+           width="1400" height="781" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">芭樂子：所有「娛樂城排名」都是自己寫的——<strong style="color:#ef4444">球員兼裁判</strong>的遊戲，你還信嗎？</p>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">各位 8LA 鄉民好，我是芭樂子。你在 Google 搜「娛樂城推薦」，跳出來的排名文章一堆——但你有沒有想過，<strong>這些排名是誰寫的？</strong>答案是：<strong>娛樂城自己</strong>。今天芭樂子做了一件沒人做過的事——把 5 個娛樂城排名站的資料全部抓下來交叉比對，結果發現的真相比詐騙本身還精彩。</p>
+
+      <!-- === 懶人結論 === -->
+      <div class="card" style="border-left:4px solid #ef4444;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#ef4444">⚡ 10 秒懶人結論</h3>
+        <p style="margin:0 0 0.5rem"><strong>Google 搜到的「娛樂城排名」99% 都是娛樂城自己寫的，每家都把自己排第一。</strong></p>
+        <p style="margin:0 0 0.5rem;color:var(--text-secondary);font-size:0.93rem">當我們把 5 個排名站的分數攤開比對，發現<strong>同一間娛樂城在 A 站拿滿分、在 B 站被標詐騙</strong>——排名完全是行銷工具，不是客觀評鑑。</p>
+        <p style="margin:0;color:var(--text-secondary);font-size:0.93rem">👉 真正值得警覺的是：<strong style="color:#ef4444">連這些互相吹捧的排名站都不願意推薦的娛樂城——那才是真正的雷區。</strong></p>
+      </div>
+
+      <!-- === TOC === -->
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);border:1px solid var(--border)">
+        <h3 style="margin-top:0">📋 本文目錄</h3>
+        <ol style="line-height:1.9">
+          <li><a href="#method">研究方法：芭樂子怎麼做這份調查</a></li>
+          <li><a href="#finding-1">發現 ①：每家排名站都把自己排第一</a></li>
+          <li><a href="#finding-2">發現 ②：同一間娛樂城，A 站滿分 B 站零分</a></li>
+          <li><a href="#blacklist">發現 ③：「連娛樂城都不推薦」的踩雷名單</a></li>
+          <li><a href="#closed">已結束營業的娛樂城墓園</a></li>
+          <li><a href="#how-to-read">教你看穿排名文的 3 個技巧</a></li>
+          <li><a href="#conclusion">芭樂子勸世結論</a></li>
+        </ol>
+      </div>
+
+      <!-- ═══ 研究方法 ═══ -->
+      <h2 id="method">🔬 研究方法：芭樂子怎麼做這份調查</h2>
+      <p>我們從 Google 搜尋「娛樂城推薦」、「娛樂城排名」，選出排名前幾頁、具有代表性的 5 個資訊站，把它們的排名、評分、推薦名單全部記錄下來進行交叉比對：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border)">
+            <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--gold-light)">資訊站</th>
+            <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--gold-light)">收錄數量</th>
+            <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--gold-light)">排名類型</th>
+            <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--gold-light)">背後金主</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem">wager.tw</td>
+            <td style="padding:0.5rem">57 間</td>
+            <td style="padding:0.5rem">評分排名</td>
+            <td style="padding:0.5rem;color:#ef4444">疑似富遊/Maispin 關聯</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem">wof888.com</td>
+            <td style="padding:0.5rem">20 間</td>
+            <td style="padding:0.5rem">排行榜</td>
+            <td style="padding:0.5rem;color:#ef4444">金大發娛樂城</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem">qywin88.com</td>
+            <td style="padding:0.5rem">15 間</td>
+            <td style="padding:0.5rem">五大條件評比</td>
+            <td style="padding:0.5rem;color:#ef4444">錢盈娛樂城</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem">kyonline.com</td>
+            <td style="padding:0.5rem">10 間</td>
+            <td style="padding:0.5rem">排行榜</td>
+            <td style="padding:0.5rem;color:#ef4444">開元棋牌</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem">dupig03.com</td>
+            <td style="padding:0.5rem">51 間</td>
+            <td style="padding:0.5rem">詐騙黑名單</td>
+            <td style="padding:0.5rem;color:#ef4444">賭豬娛樂城</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;color:var(--text-muted)">※ 以上 5 站都不是政府機關或獨立評鑑單位，全部都是娛樂城業者或其關聯方經營的資訊站。</p>
+
+      <!-- ═══ 發現 1：自吹自擂 ═══ -->
+      <h2 id="finding-1">🏆 發現 ①：每家排名站都把自己排第一</h2>
+      <p>這是最震撼也最諷刺的發現——<strong>球員兼裁判</strong>，每個排名站的第一名都是自家品牌：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border)">
+            <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--gold-light)">排名站</th>
+            <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--gold-light)">自家品牌排名</th>
+            <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--gold-light)">自家品牌評分</th>
+            <th style="text-align:left;padding:0.6rem 0.5rem;color:var(--gold-light)">其他站怎麼評</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem">wof888（金大發）</td>
+            <td style="padding:0.5rem;color:#39FF14;font-weight:700">第 1 名 ★★★★★</td>
+            <td style="padding:0.5rem">滿分</td>
+            <td style="padding:0.5rem;color:#ef4444">wager.tw 只給 0.5 分</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem">qywin88（錢盈）</td>
+            <td style="padding:0.5rem;color:#39FF14;font-weight:700">第 1 名 5.0 分</td>
+            <td style="padding:0.5rem">全項滿分</td>
+            <td style="padding:0.5rem;color:#ef4444">wager.tw 只給 1 分</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem">kyonline（開元）</td>
+            <td style="padding:0.5rem;color:#39FF14;font-weight:700">第 1 名</td>
+            <td style="padding:0.5rem">最高推薦</td>
+            <td style="padding:0.5rem;color:#ef4444">其他 4 站完全沒收錄</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem">wager.tw（富遊相關）</td>
+            <td style="padding:0.5rem;color:#39FF14;font-weight:700">5.0 分（並列第 1）</td>
+            <td style="padding:0.5rem">滿分</td>
+            <td style="padding:0.5rem;color:#ef4444">wof888 排倒數第 2<br>dupig03 直接列詐騙</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <img class="content-img"
+           src="/images/articles/casino-not-recommended-referee.webp"
+           srcset="/images/articles/casino-not-recommended-referee-768w.webp 768w, /images/articles/casino-not-recommended-referee.webp 1376w"
+           sizes="(max-width: 768px) 100vw, 820px"
+           alt="芭樂子揭露娛樂城排名站球員兼裁判-自己頒獎給自己的荒謬場景｜GAME8LA"
+           width="1376" height="768" loading="lazy" decoding="async" />
+      <p class="article-img-caption">每座「第一名」獎盃，都是自己頒給自己的——這就是娛樂城排名的真相</p>
+
+      <blockquote style="border-left:3px solid #ef4444;margin:1.5rem 0;padding:0.8rem 1.2rem;color:var(--text-secondary)">
+        <strong style="color:#ef4444">芭樂子白話翻譯：</strong>這就像雞排店老闆自己寫了一篇「全台雞排排名」，然後把自己排第一——你覺得這個排名可信嗎？
+      </blockquote>
+
+      <!-- ═══ 發現 2：互相矛盾 ═══ -->
+      <h2 id="finding-2">🤯 發現 ②：同一間娛樂城，A 站滿分 B 站零分</h2>
+      <img class="content-img"
+           src="/images/articles/casino-not-recommended-contradiction.webp"
+           srcset="/images/articles/casino-not-recommended-contradiction-768w.webp 768w, /images/articles/casino-not-recommended-contradiction.webp 1376w"
+           sizes="(max-width: 768px) 100vw, 820px"
+           alt="同一間娛樂城在不同排名站的評分天差地遠-A站滿分B站零分的荒謬對比｜GAME8LA"
+           width="1376" height="768" loading="lazy" decoding="async" />
+      <p class="article-img-caption">左邊 ★★★★★ 滿分推薦，右邊 ☆☆☆☆☆ 詐騙警告——講的是同一間娛樂城</p>
+      <p>更荒謬的是，這些排名站不只自吹自擂，還會<strong>互相踩對方推薦的品牌</strong>。以下是最離譜的幾個案例：</p>
+
+      <div class="card" style="border:1px solid #ef4444;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#ef4444">🎭 矛盾案例 1：富遊娛樂城</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem;width:40%">wager.tw</td>
+            <td style="padding:0.4rem;color:#39FF14;font-weight:700">5.0 分（滿分）</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem">qywin88.com</td>
+            <td style="padding:0.4rem;color:#39FF14;font-weight:700">5.0 分（第 2 名）</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem">kyonline.com</td>
+            <td style="padding:0.4rem;color:#39FF14">第 2 名</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem">wof888.com</td>
+            <td style="padding:0.4rem;color:#ef4444;font-weight:700">第 19 名（倒數第 2）★☆☆☆☆</td>
+          </tr>
+          <tr>
+            <td style="padding:0.4rem">dupig03.com</td>
+            <td style="padding:0.4rem;color:#ef4444;font-weight:700">直接列入詐騙黑名單</td>
+          </tr>
+        </table>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0">同一間富遊，3 站說頂級、1 站排倒數、1 站說詐騙——到底誰在說真話？</p>
+      </div>
+
+      <div class="card" style="border:1px solid #ef4444;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#ef4444">🎭 矛盾案例 2：金大發娛樂城</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem;width:40%">wof888.com（自家部落格）</td>
+            <td style="padding:0.4rem;color:#39FF14;font-weight:700">第 1 名 ★★★★★</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem">qywin88.com</td>
+            <td style="padding:0.4rem;color:var(--text-muted)">第 7 名（4.0 分）</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem">kyonline.com</td>
+            <td style="padding:0.4rem;color:var(--text-muted)">第 3 名</td>
+          </tr>
+          <tr>
+            <td style="padding:0.4rem">wager.tw</td>
+            <td style="padding:0.4rem;color:#ef4444;font-weight:700">0.5 分（幾乎零分）</td>
+          </tr>
+        </table>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0">自家部落格：第一名！競爭對手的站：0.5 分。差距 10 倍。</p>
+      </div>
+
+      <div class="card" style="border:1px solid #ef4444;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#ef4444">🎭 矛盾案例 3：DG 娛樂城</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem;width:40%">wager.tw</td>
+            <td style="padding:0.4rem;color:#39FF14;font-weight:700">5.0 分（滿分）</td>
+          </tr>
+          <tr>
+            <td style="padding:0.4rem">wof888.com</td>
+            <td style="padding:0.4rem;color:#ef4444;font-weight:700">第 20 名（最後一名）★☆☆☆☆</td>
+          </tr>
+        </table>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0">A 站：滿分五星。B 站：最後一名一星。「實測評價」？你信嗎？</p>
+      </div>
+
+      <div class="card" style="border:1px solid #ef4444;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#ef4444">🎭 矛盾案例 4：鉅城娛樂城</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.4rem;width:40%">qywin88.com</td>
+            <td style="padding:0.4rem;color:#39FF14;font-weight:700">第 4 名（4.8 分）</td>
+          </tr>
+          <tr>
+            <td style="padding:0.4rem">wager.tw</td>
+            <td style="padding:0.4rem;color:#ef4444;font-weight:700">0 分（標記為詐騙）</td>
+          </tr>
+        </table>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0">一個說前五名，一個直接標詐騙。玩家到底該信誰？</p>
+      </div>
+
+      <!-- ═══ 發現 3：黑名單 ═══ -->
+      <h2 id="blacklist">💀 發現 ③：連娛樂城都不推薦的娛樂城</h2>
+      <img class="content-img"
+           src="/images/articles/casino-not-recommended-blacklist.webp"
+           srcset="/images/articles/casino-not-recommended-blacklist-768w.webp 768w, /images/articles/casino-not-recommended-blacklist.webp 1376w"
+           sizes="(max-width: 768px) 100vw, 820px"
+           alt="芭樂子站在數位墓園前警示讀者遠離多站認證詐騙的娛樂城踩雷名單｜GAME8LA"
+           width="1376" height="768" loading="lazy" decoding="async" />
+      <p class="article-img-caption">當互相競爭的排名站「難得達成共識」一致說某間有問題——那就是真正的雷區</p>
+      <p>看完互相矛盾的鬧劇後，我們來看真正有價值的部分——<strong>當互相競爭的排名站「難得達成共識」，一致不推薦某些品牌時</strong>，那些品牌的風險就真的非常高了。</p>
+
+      <h3 style="color:#ef4444">🚨 第一級：多站認證詐騙（強烈建議遠離）</h3>
+      <p>以下娛樂城在 dupig03 黑名單 <strong>+</strong> wager.tw 零分雙重認證為詐騙，且沒有任何一個排名站願意推薦：</p>
+
+      <div style="overflow-x:auto;margin:1rem 0">
+        <table style="width:100%;border-collapse:collapse;font-size:0.85rem;min-width:500px">
+          <thead>
+            <tr style="border-bottom:2px solid #ef4444">
+              <th style="text-align:left;padding:0.5rem;color:#ef4444">娛樂城名稱</th>
+              <th style="text-align:center;padding:0.5rem;color:var(--text-muted)">dupig03</th>
+              <th style="text-align:center;padding:0.5rem;color:var(--text-muted)">wager.tw</th>
+              <th style="text-align:center;padding:0.5rem;color:var(--text-muted)">其他站</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">大聖娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">皇家娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">拼多多娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">博到發娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">JY 娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">泊樂娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">玖天娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">必勝客娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">T9 / 帝遊娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">EG 逸遊娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">KG 娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">EVO 娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">來勝娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">冠天下娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.4rem">MBM 娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">無收錄</td></tr>
+            <tr><td style="padding:0.4rem">TU 娛樂城</td><td style="padding:0.4rem;text-align:center;color:#ef4444">詐騙</td><td style="padding:0.4rem;text-align:center;color:#ef4444">0 分</td><td style="padding:0.4rem;text-align:center;color:var(--text-muted)">wof888: 2星 / qywin88: 提及</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color:#f59e0b">⚠️ 第二級：多站低評價或只有自家推薦</h3>
+      <p>以下娛樂城雖然沒被所有站標詐騙，但在多數排名站中<strong>拿到極低分數</strong>，或<strong>只有自家部落格給高分</strong>：</p>
+
+      <div style="overflow-x:auto;margin:1rem 0">
+        <table style="width:100%;border-collapse:collapse;font-size:0.85rem;min-width:500px">
+          <thead>
+            <tr style="border-bottom:2px solid #f59e0b">
+              <th style="text-align:left;padding:0.5rem;color:#f59e0b">娛樂城</th>
+              <th style="text-align:left;padding:0.5rem;color:var(--text-muted)">各站評分摘要</th>
+              <th style="text-align:left;padding:0.5rem;color:var(--text-muted)">風險說明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:0.4rem">Q8 娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 0.3 分</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">僅一站收錄且極低分，其他站無資料</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:0.4rem">SWAG 娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 0.5 分</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">僅一站收錄且極低分</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:0.4rem">大老爺娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 0.5 分</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">極低分，其他站僅提及未推薦</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:0.4rem">通博娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 1.5 分</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">僅一站收錄且低分</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:0.4rem">HOYA 娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 1 分</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">僅一站收錄且低分</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:0.4rem">金鈦城娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 1 分</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">僅一站收錄且低分</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:0.4rem">掏金 / 淘金娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 1 分</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">僅一站收錄且低分</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border)">
+              <td style="padding:0.4rem">金合發娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 1.5 分</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">低分，其他站僅提及</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem">3A 娛樂城</td>
+              <td style="padding:0.4rem">wager.tw: 1~1.5 分 / wof888: 第 13 名 ★★</td>
+              <td style="padding:0.4rem;color:var(--text-muted)">多站低分，代理素質爭議多</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ═══ 已結束 ═══ -->
+      <h2 id="closed">🪦 已結束營業的娛樂城墓園</h2>
+      <p>以下是從各排名站交叉確認<strong>已經停止營運或疑似停業</strong>的娛樂城。如果還有人拿這些品牌的名號來拉你入金，那 100% 是詐騙：</p>
+
+      <div class="card" style="border:1px solid var(--border);margin:1.5rem 0">
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem;font-weight:700">九州娛樂城</td>
+            <td style="padding:0.5rem;color:var(--text-muted)">qywin88 標記已停業。曾是台灣最大現金版之一，後分裂為 LEO 和 THA。dupig03 列入詐騙黑名單。</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem;font-weight:700">金禾娛樂城</td>
+            <td style="padding:0.5rem;color:var(--text-muted)">wager.tw 標 0 分。已無法訪問。</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem;font-weight:700">17 娛樂城</td>
+            <td style="padding:0.5rem;color:var(--text-muted)">wager.tw 標 0 分。已無法訪問。</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card" style="border-left:4px solid #ef4444;margin:1.5rem 0">
+        <p style="margin:0;color:var(--text-secondary);font-size:0.93rem"><strong style="color:#ef4444">芭樂子提醒：</strong>娛樂城「停業」不代表名號消失。很多已停業的品牌會被其他詐騙集團「借殼」——用一樣的名字、一樣的 LOGO 重新開站，但背後老闆完全不同。如果有人說「九州回來了」、「新版九州上線」，<strong>99% 是假冒</strong>。</p>
+      </div>
+
+      <!-- ═══ 看穿排名 ═══ -->
+      <h2 id="how-to-read">🧠 教你看穿排名文的 3 個技巧</h2>
+      <p>下次你在 Google 看到「娛樂城推薦排名」，用這 3 招判斷它的可信度：</p>
+
+      <div class="card" style="border:1px solid var(--border);margin:1rem 0">
+        <p style="margin:0 0 1rem"><strong style="color:var(--gold-light)">技巧 1：看誰排第一</strong></p>
+        <p style="margin:0 0 1.2rem;color:var(--text-secondary);font-size:0.93rem">如果排名站 A 把品牌 X 排第一，用 WHOIS 查一下排名站的網域，或看網站底部的版權聲明——如果跟品牌 X 是同一個公司，那這篇排名就是廣告。</p>
+
+        <p style="margin:0 0 1rem"><strong style="color:var(--gold-light)">技巧 2：查有沒有負面評價</strong></p>
+        <p style="margin:0 0 1.2rem;color:var(--text-secondary);font-size:0.93rem">真正的評測會寫缺點。如果一篇排名文把第一名吹上天、找不到任何負面評價，那就是業配文。注意看「缺點」那欄是不是寫了等於沒寫的內容（例如「新平台知名度待提升」這種）。</p>
+
+        <p style="margin:0 0 0"><strong style="color:var(--gold-light)">技巧 3：交叉比對分數</strong></p>
+        <p style="margin:0;color:var(--text-secondary);font-size:0.93rem">把品牌名丟到 2~3 個不同的排名站去看——如果分數落差超過 3 分（滿分 5 分制），那至少有一方在說謊。兩邊都不可信時，你唯一能信的就是<strong>你自己的判斷</strong>。</p>
+      </div>
+
+      <!-- ═══ 結論 ═══ -->
+      <h2 id="conclusion">📢 芭樂子勸世結論</h2>
+
+      <blockquote style="border-left:3px solid var(--gold-light);margin:1.5rem 0;padding:0.8rem 1.2rem;color:var(--text-secondary)">
+        <p style="margin:0 0 0.5rem"><strong style="color:var(--gold-light)">「如果連賣雞排的都說隔壁的雞排不能吃，那你真的不應該去買。」</strong></p>
+        <p style="margin:0;font-size:0.93rem">這就是「連娛樂城都不推薦的娛樂城」的邏輯——當這些互相競爭、互相抹黑的排名站<strong>難得達成共識</strong>，一致認為某些品牌有問題時，那些品牌的風險是真的非常高。</p>
+      </blockquote>
+
+      <p>但芭樂子要說更重要的一件事：</p>
+
+      <div class="card" style="border:2px solid var(--gold-light);margin:1.5rem 0;padding:1.5rem">
+        <h3 style="margin-top:0;color:var(--gold-light)">🌿 這篇文章真正想告訴你的事</h3>
+        <p style="margin:0 0 0.8rem;color:var(--text-secondary)"><strong>不是哪些娛樂城安全、哪些不安全</strong>——因為芭樂子也不是神，沒辦法替你保證任何一間娛樂城明天不會跑路。</p>
+        <p style="margin:0 0 0.8rem;color:var(--text-secondary)">這篇文章真正想告訴你的是：<strong style="color:var(--gold-light)">你在 Google 搜到的所有「娛樂城排名」都是行銷工具，不是客觀評鑑。</strong></p>
+        <p style="margin:0;color:var(--text-secondary)">當你理解了這件事，你就不會再被「XX 娛樂城 2026 排名第一」這種標題騙進去了。<strong>保護你的方式，永遠不是找到「最好的娛樂城」，而是理解整個產業的運作方式。</strong></p>
+      </div>
+
+      <ManifestoBox />
+
+      <!-- ═══ FAQ ═══ -->
+      <h2 style="margin-top:3rem">❓ 常見問題（FAQ）</h2>
+      {faqs.map(f => (
+        <details class="faq-item">
+          <summary class="faq-q">{f.q}</summary>
+          <div class="faq-a" set:html={f.a} />
+        </details>
+      ))}
+
+      <ShareButtons title="連娛樂城自己都不推薦的娛樂城！5站交叉比對踩雷名單" url="https://game8la.com/articles/casino-not-recommended-by-casinos/" />
+
+      <!-- ═══ 延伸閱讀 ═══ -->
+      <h3 style="margin-top:2.5rem">📚 延伸閱讀</h3>
+      <div class="related-links">
+        <a href="/articles/domain-hopping-scam-truth/" class="rl-item">
+          <span class="rl-cat">產業深度分析</span>
+          <strong>娛樂城網址一直換？「金蟬脫殼」詐騙真相</strong>
+          <span class="rl-desc">黑網換網址的 4 大暗黑原因 + 3 秒判斷法</span>
+        </a>
+        <a href="/articles/at99-blocked-analysis/" class="rl-item">
+          <span class="rl-cat">詐騙分析報告</span>
+          <strong>AT99 遭刑事局封鎖！新網址是詐騙嗎？</strong>
+          <span class="rl-desc">被封真相 + 換殼識別 + 玩家自保 SOP</span>
+        </a>
+        <a href="/articles/anti-scam-8la-guide/" class="rl-item">
+          <span class="rl-cat">防詐百科</span>
+          <strong>芭樂子防詐完全指南</strong>
+          <span class="rl-desc">黑網話術全拆解 + 165 通報教學</span>
+        </a>
+        <a href="/articles/game8la-manifesto/" class="rl-item">
+          <span class="rl-cat">創站宣言</span>
+          <strong>為什麼 Game8la 不放任何娛樂城連結？</strong>
+          <span class="rl-desc">零業配、零導流——我們只賺你的信任</span>
+        </a>
+      </div>
+
+    </article>
+  </div>
+
+  <style is:global>
+    .content-img { display: block; max-width: 820px; width: 100%; height: auto; margin: 1.2rem auto 0.4rem; border-radius: 12px; }
+    .article-img-caption { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin: 0 0 1.5rem; font-style: italic; }
+
+    .faq-item {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: 0.8rem; padding: 0 1.2rem;
+    }
+    .faq-item[open] { border-color: #ef4444; }
+    .faq-q {
+      cursor: pointer; padding: 1rem 0; font-weight: 800; color: var(--text-primary);
+      list-style: none; display: flex; align-items: center; justify-content: space-between;
+    }
+    .faq-q::after { content: '+'; color: #ef4444; font-size: 1.3rem; font-weight: 900; }
+    .faq-item[open] .faq-q::after { content: '−'; }
+    .faq-item > .faq-a { padding: 0 0 1rem; color: var(--text-secondary); line-height: 1.8; display: none; }
+    .faq-item[open] > .faq-a { display: block; }
+    .faq-a strong { color: #ef4444; }
+    .faq-a a { color: var(--gold-light); }
+
+    .related-links {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem; margin: 1.5rem 0 3rem;
+    }
+    .rl-item {
+      display: flex; flex-direction: column; gap: 0.4rem;
+      padding: 1.1rem 1.2rem;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      text-decoration: none; color: var(--text-primary);
+      transition: all 0.25s;
+    }
+    .rl-item:hover { border-color: #ef4444; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(239,68,68,0.12); }
+    .rl-cat { font-size: 0.75rem; color: #ef4444; font-weight: 700; }
+    .rl-item strong { font-size: 0.98rem; line-height: 1.45; color: var(--text-primary); }
+    .rl-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+  </style>
+</BaseLayout>
