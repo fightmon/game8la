@@ -35,7 +35,32 @@ export async function onRequestGet(context) {
     });
 
     if (!rdapRes.ok) {
-      return jsonResponse(404, { error: `查無此網域資訊：${domain}` });
+      // RDAP 查不到 → 用 DNS 確認網域是否存在
+      try {
+        const dnsRes = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`, {
+          headers: { Accept: 'application/dns-json' }
+        });
+        if (dnsRes.ok) {
+          const dnsData = await dnsRes.json();
+          if (dnsData.Status === 0 && dnsData.Answer && dnsData.Answer.length > 0) {
+            // 網域存在但 RDAP 未收錄
+            return jsonResponse(200, {
+              domain,
+              registrationDate: null,
+              expirationDate: null,
+              registrar: '未知（RDAP 未收錄）',
+              ageMonths: null,
+              ageLabel: 'RDAP 未收錄（網域確實存在）',
+              riskLevel: 'unknown',
+              status: [],
+              nameServer: [],
+              dnsExists: true,
+              rdapMissing: true,
+            });
+          }
+        }
+      } catch (_) { /* DNS check failed, fall through to 404 */ }
+      return jsonResponse(404, { error: `查無此網域：${domain}` });
     }
 
     const data = await rdapRes.json();

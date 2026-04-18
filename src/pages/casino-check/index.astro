@@ -8,28 +8,33 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <a href="/" class="back-link"><Icon name="arrow-left" /> 回首頁</a>
     <div class="hero-banner" style="background:linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)"></div>
 
-    <div class="page-hero" style="text-align:center;margin-bottom:2rem">
+    <div class="page-hero" style="text-align:center;margin-bottom:0">
       <h1 style="font-size:2.2rem;line-height:1.3">🛡️ <em>娛樂城體檢</em></h1>
       <p style="color:var(--text-secondary);max-width:600px;margin:0.5rem auto 0">入金之前花 3 分鐘，讓芭樂子幫你檢查——這間娛樂城能不能信？</p>
     </div>
 
     <!-- ═══════════════════════════════════════════
-         模組 1：WHOIS 網域年齡檢測
+         Hero 搜尋框：最醒目的入口
          ═══════════════════════════════════════════ -->
+    <div class="hero-search">
+      <p class="hero-search-label">👇 貼上你要查的娛樂城網址</p>
+      <div class="hero-input-wrap">
+        <input type="text" id="whoisInput" placeholder="例如 bet888.com" autocomplete="off" spellcheck="false" />
+        <button type="button" id="whoisBtn" onclick="runWhois()">
+          <Icon name="search" /> 立即檢測
+        </button>
+      </div>
+      <p class="hero-search-hint">只要輸入網址、按下檢測，3 秒內告訴你這網站幾歲、能不能信</p>
+    </div>
+
+    <!-- WHOIS result + 判讀 (保留在模組1) -->
     <section class="check-module" id="whois-module">
       <div class="module-header">
         <span class="module-number">1</span>
         <div>
-          <h2 style="margin:0">🔎 網域年齡檢測</h2>
-          <p class="module-desc">輸入娛樂城網址，即時查詢網域註冊時間。剛開幾個月就狂灑優惠？高機率是黑網。</p>
+          <h2 style="margin:0">🔎 網域年齡檢測結果</h2>
+          <p class="module-desc">剛開幾個月就狂灑優惠？高機率是黑網。</p>
         </div>
-      </div>
-
-      <div class="input-group">
-        <input type="text" id="whoisInput" placeholder="輸入網址，例如 example.com" autocomplete="off" spellcheck="false" />
-        <button type="button" id="whoisBtn" onclick="runWhois()">
-          <Icon name="search" /> 立即檢測
-        </button>
       </div>
 
       <div id="whoisResult" class="result-area" style="display:none"></div>
@@ -138,6 +143,86 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
        STYLES
        ═══════════════════════════════════════════ -->
   <style is:global>
+    /* === Hero Search === */
+    .hero-search {
+      text-align: center;
+      margin: 1.5rem 0 2.5rem;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, rgba(245,184,0,0.06), rgba(245,184,0,0.02));
+      border: 2px solid rgba(245,184,0,0.35);
+      border-radius: 20px;
+      position: relative;
+      animation: heroGlow 3s ease-in-out infinite;
+    }
+    @keyframes heroGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(245,184,0,0.08), 0 0 60px rgba(245,184,0,0.04); }
+      50% { box-shadow: 0 0 30px rgba(245,184,0,0.15), 0 0 80px rgba(245,184,0,0.08); }
+    }
+    .hero-search-label {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #f5b800;
+      margin: 0 0 1rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-input-wrap {
+      display: flex;
+      gap: 0.6rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .hero-input-wrap input {
+      flex: 1;
+      padding: 1rem 1.2rem;
+      background: rgba(0,0,0,0.5);
+      border: 2px solid rgba(245,184,0,0.5);
+      border-radius: 14px;
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 600;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .hero-input-wrap input::placeholder {
+      color: rgba(245,184,0,0.5);
+      font-weight: 500;
+    }
+    .hero-input-wrap input:focus {
+      border-color: #f5b800;
+      box-shadow: 0 0 0 3px rgba(245,184,0,0.2);
+    }
+    .hero-input-wrap button {
+      padding: 1rem 1.8rem;
+      background: linear-gradient(135deg, #f5b800, #e09900);
+      border: none;
+      border-radius: 14px;
+      color: #000;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .hero-input-wrap button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245,184,0,0.35);
+    }
+    .hero-input-wrap button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .hero-search-hint {
+      margin: 0.8rem 0 0;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
     /* === Module card === */
     .check-module {
       background: var(--bg-card);
@@ -362,10 +447,131 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     /* === Responsive === */
     @media (max-width: 768px) {
-      .check-module { padding: 1.2rem; }
-      .input-group { flex-direction: column; }
-      .input-group button { width: 100%; justify-content: center; }
-      .calc-btn { width: 100%; justify-content: center; }
+      /* Page hero */
+      .page-hero h1 { font-size: 1.6rem !important; }
+      .page-hero p { font-size: 0.88rem !important; }
+
+      /* Hero search — even more prominent on mobile */
+      .hero-search {
+        margin: 1rem -0.5rem 1.5rem;
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+      }
+      .hero-search-label { font-size: 1.1rem; }
+      .hero-input-wrap {
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .hero-input-wrap input {
+        padding: 1rem;
+        font-size: 1.1rem;
+        text-align: center;
+        border-radius: 12px;
+      }
+      .hero-input-wrap button {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+        font-size: 1.05rem;
+        border-radius: 12px;
+      }
+
+      /* Module cards */
+      .check-module {
+        padding: 1rem;
+        border-radius: 12px;
+        margin-bottom: 1.2rem;
+      }
+
+      /* Module header — tighter */
+      .module-header {
+        gap: 0.7rem;
+        margin-bottom: 0.8rem;
+      }
+      .module-number {
+        width: 32px; height: 32px;
+        font-size: 1rem;
+      }
+      .module-header h2 { font-size: 1.15rem !important; }
+      .module-desc { font-size: 0.82rem; }
+
+      /* Calc grid — single column */
+      .calc-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      .calc-field label { font-size: 0.82rem; }
+      .calc-field input,
+      .calc-field select {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+      }
+      .calc-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.9rem;
+        font-size: 1rem;
+        border-radius: 10px;
+      }
+
+      /* Result area — tighter */
+      .result-area {
+        padding: 1rem;
+        border-radius: 10px;
+      }
+      .result-area > div:first-child {
+        font-size: 1.1rem !important;
+      }
+      .result-row {
+        flex-direction: column;
+        gap: 0.1rem;
+        padding: 0.5rem 0;
+      }
+      .result-value {
+        font-size: 0.95rem;
+      }
+
+      /* 165 buttons — full width stack */
+      #report-module > div {
+        flex-direction: column;
+      }
+      .external-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.9rem;
+        border-radius: 10px;
+        font-size: 0.95rem;
+      }
+
+      /* Module tips */
+      .module-tip { font-size: 0.78rem; line-height: 1.7; }
+
+      /* Bottom CTA */
+      .bottom-cta {
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
+      }
+      .bottom-cta p { font-size: 0.95rem; }
+      .cta-link {
+        display: block;
+        text-align: center;
+        font-size: 0.85rem;
+        padding: 0.7rem 1rem;
+      }
+
+      /* Hero banner — shorter */
+      .hero-banner { min-height: 80px !important; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 380px) {
+      .check-module { padding: 0.8rem; }
+      .module-header h2 { font-size: 1.05rem !important; }
+      .page-hero h1 { font-size: 1.35rem !important; }
+      .hero-search { padding: 1.2rem 0.8rem; }
+      .hero-search-label { font-size: 1rem; }
+      .hero-input-wrap input { font-size: 1rem; padding: 0.9rem; }
     }
   </style>
 
@@ -430,6 +636,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       };
     }
 
+    /* ── DNS 存在性檢查（透過 Cloudflare DoH） ── */
+    async function checkDnsExists(domain) {
+      try {
+        const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`, {
+          headers: { Accept: 'application/dns-json' }
+        });
+        if (!res.ok) return false;
+        const data = await res.json();
+        // Status 0 = NOERROR (域名存在), 3 = NXDOMAIN (不存在)
+        return data.Status === 0 && data.Answer && data.Answer.length > 0;
+      } catch (_) { return false; }
+    }
+
     /* ── WHOIS 檢測主函式 ── */
     async function runWhois() {
       const input = document.getElementById('whoisInput');
@@ -460,12 +679,78 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         try {
           data = await queryRdapDirect(domain);
         } catch (_) {
-          resultEl.className = 'result-area result-danger';
-          resultEl.innerHTML = `<p style="color:#ef4444;font-weight:700">❌ 查無此網域資訊：${domain}</p><p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem">請確認網址是否正確，例如輸入 example.com（不需要 https://）</p>`;
+          // RDAP 查不到 → 用 DNS 確認網域是否真的存在
+          const dnsExists = await checkDnsExists(domain);
+          if (dnsExists) {
+            // 網域存在但 RDAP 沒有收錄（常見於部分 .tw 註冊商）
+            resultEl.className = 'result-area result-warning';
+            resultEl.innerHTML = `
+              <div style="font-size:1.2rem;font-weight:900;margin-bottom:0.8rem">⚠️ 網域存在，但 RDAP 資料庫未收錄</div>
+              <div class="result-row">
+                <span class="result-label">查詢網域</span>
+                <span class="result-value">${domain}</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">DNS 狀態</span>
+                <span class="result-value" style="color:#22c55e">✅ 網域有解析（網站存在）</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">RDAP 狀態</span>
+                <span class="result-value" style="color:#f5b800">⚠️ 未收錄註冊資料</span>
+              </div>
+              <div style="margin-top:1rem;padding:0.8rem;background:rgba(245,184,0,0.1);border-radius:8px">
+                <p style="margin:0;font-size:0.88rem;color:var(--text-secondary)">
+                  <strong style="color:#f5b800">為什麼查不到？</strong><br>
+                  部分 .tw 等地區網域的註冊商尚未完整同步資料到 RDAP 資料庫。這不代表網站一定有問題，但也無法透過 RDAP 驗證其歷史。<br><br>
+                  <strong>建議：</strong>請搭配下方 165 反詐騙查詢 + Google 搜尋「${domain} 評價」「${domain} 詐騙」做交叉比對。
+                </p>
+              </div>
+              <p style="margin:1rem 0 0;font-size:0.85rem;color:var(--text-muted)">
+                💡 你也可以到 <a href="https://whois.twnic.net.tw/" target="_blank" rel="noopener" style="color:#f5b800">TWNIC WHOIS</a> 手動查詢 .tw 網域的完整資訊。
+              </p>
+            `;
+          } else {
+            // DNS 也查不到 → 網域真的不存在
+            resultEl.className = 'result-area result-danger';
+            resultEl.innerHTML = `<p style="color:#ef4444;font-weight:700">❌ 查無此網域：${domain}</p><p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem">DNS 查詢無結果，此網域可能不存在或已停用。請確認網址是否正確。</p>`;
+          }
           btn.disabled = false;
           btn.innerHTML = '🔎 立即檢測';
           return;
         }
+      }
+
+      // 如果 proxy 回傳 rdapMissing，顯示「網域存在但 RDAP 未收錄」
+      if (data.rdapMissing) {
+        resultEl.className = 'result-area result-warning';
+        resultEl.innerHTML = `
+          <div style="font-size:1.2rem;font-weight:900;margin-bottom:0.8rem">⚠️ 網域存在，但 RDAP 資料庫未收錄</div>
+          <div class="result-row">
+            <span class="result-label">查詢網域</span>
+            <span class="result-value">${data.domain}</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">DNS 狀態</span>
+            <span class="result-value" style="color:#22c55e">✅ 網域有解析（網站存在）</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">RDAP 狀態</span>
+            <span class="result-value" style="color:#f5b800">⚠️ 未收錄註冊資料</span>
+          </div>
+          <div style="margin-top:1rem;padding:0.8rem;background:rgba(245,184,0,0.1);border-radius:8px">
+            <p style="margin:0;font-size:0.88rem;color:var(--text-secondary)">
+              <strong style="color:#f5b800">為什麼查不到？</strong><br>
+              部分 .tw 等地區網域的註冊商尚未完整同步資料到 RDAP 資料庫。這不代表網站一定有問題，但也無法透過 RDAP 驗證其歷史。<br><br>
+              <strong>建議：</strong>請搭配下方 165 反詐騙查詢 + Google 搜尋「${data.domain} 評價」「${data.domain} 詐騙」做交叉比對。
+            </p>
+          </div>
+          <p style="margin:1rem 0 0;font-size:0.85rem;color:var(--text-muted)">
+            💡 你也可以到 <a href="https://whois.twnic.net.tw/" target="_blank" rel="noopener" style="color:#f5b800">TWNIC WHOIS</a> 手動查詢 .tw 網域的完整資訊。
+          </p>
+        `;
+        btn.disabled = false;
+        btn.innerHTML = '🔎 立即檢測';
+        return;
       }
 
       const riskClass = data.riskLevel === 'safe' ? 'result-safe'

@@ -11,7 +11,7 @@ const faqs = [
   { q: '為什麼我在某些平台打賽特怎麼打都不開？是不是被動手腳？', a: '兩個可能：<strong>(1) 你玩到的是仿冒系統</strong>——很多白牌小廠直接把 RTP 調到 88~90%，比正版 96.5% 低了 6~8 個百分點，長期玩下來絕對爆不起來；(2) 你玩的雖然是正版，但剛好在統計波動的冷段——這時請用本文第 5 段「3 步驟驗真法」先確認平台是否正版授權，再決定要不要繼續。結論：與其猜平台心情，不如先驗明正身。' },
   { q: 'ATG 戰神賽特 2 的 RTP 真的是 96.5~97.2%？哪裡可以查？', a: '是的，這個數字是寫在 ATG 官方機台技術文件、以及國際博弈測試實驗室 GLI（Gaming Laboratories International）的認證報告裡。正版平台在遊戲載入畫面或幫助頁面都會明確標示「Default RTP 96.5%」。如果你玩的機台<strong>查不到 RTP、或 RTP 顯示低於 94%</strong>，那 99% 是仿冒或被後台降階的版本，請立刻換平台。' },
   { q: '抄襲版的戰神賽特是不是就一定會輸？', a: '不是「一定」輸，是「長期期望值被砍半」。舉個具體例子：正版 RTP 97% 代表你每投 100 元長期回 97 元；仿版 RTP 90% 代表你每投 100 元長期回 90 元——表面上只差 7 元，但<strong>當你投注 1 萬轉、每轉 10 元（總投 10 萬）</strong>：正版期望虧 3,000 元、仿版期望虧 1 萬元。這就是「勝率被砍半」的真實意思——虧損速度 3 倍起跳。' },
-  { q: '如何 10 秒內確認我玩的是 ATG 官方正版？', a: '三個最快動作：<strong>① 載入畫面看 logo</strong>（右下角要有 ATG 或 All Top Gaming 浮水印）；<strong>② 按幫助/資訊鍵</strong>（正版一定會顯示「RTP 96.5%」和 GLI 認證編號）；<strong>③ 試轉 10~20 次看消除感</strong>（正版倍數球掉落絲滑、疊加有重量感，仿版會有明顯掉禎或動作僵硬）。三個都對才敢長時間玩。' },
+  { q: '如何 10 秒內確認我玩的是 ATG 官方正版？', a: '三個最快動作：<strong>① 載入畫面看 logo</strong>（右下角要有 ATG 或 Agile Titan Games 浮水印）；<strong>② 按幫助/資訊鍵</strong>（正版一定會顯示「RTP 96.5%」和 GLI 認證編號）；<strong>③ 試轉 10~20 次看消除感</strong>（正版倍數球掉落絲滑、疊加有重量感，仿版會有明顯掉禎或動作僵硬）。三個都對才敢長時間玩。' },
   { q: 'ATG 戰神賽特系列總共有幾個版本？怎麼分辨新舊機台？', a: '目前主流三款：<strong>《戰神賽特》(初代)</strong>、<strong>《戰神賽特 2：覺醒之力》</strong>、以及《戰神賽特特別版（春節/節慶改版）》。第 2 代最大差異是新增「4 級 JACKPOT（MINI / MINOR / MAJOR / GRAND）」與「不朽覺醒 Buy Feature 2000x」。Max Win 也從初代 x10,000 拉到 <strong>x50,000</strong>。判別方法：載入畫面一定會寫明「SETH II」或「覺醒之力」。' },
   { q: '所有平台的「購買特色（Buy Feature）」都一樣嗎？仿冒版的 Buy Feature 值不值得買？', a: '絕對不一樣。正版 ATG 的 Buy Feature 是經過<strong>數百萬次 RNG 模擬測試</strong>調整出來的平衡值，買免遊的期望回報率貼近標示 RTP（97%）。仿冒版因為 RTP 被動手腳，「買免遊」往往變成「一次性吃款」——你花 100 倍押注買下去，實際命中高倍率的機率比正版低 30~50%。所以如果不確定是正版，千萬別按 Buy Feature。' },
   { q: 'GLI 認證是什麼？為什麼重要？', a: 'GLI（Gaming Laboratories International）是全球最具公信力的博弈測試實驗室，超過 475 個司法管轄區承認它的認證。一台老虎機要拿到 GLI 認證，必須通過<strong>RNG 隨機性檢驗、RTP 數學模型驗證、防作弊機制審查</strong>，機台軟體還要被雜湊鎖定——後台無法偷偷改 RTP。正版 ATG 戰神賽特都有 GLI 認證；沒 GLI 認證的「類賽特」機台，就是任由娛樂城老闆開關 RTP 的吃款機，長期玩絕對虧。' },
@@ -55,7 +55,7 @@ const faqs = [
         <table>
           <thead><tr><th>比較項目</th><th>正版 ATG 戰神賽特 2</th><th>業界仿冒/抄襲版</th><th>玩家風險</th></tr></thead>
           <tbody>
-            <tr><td style="font-weight:700">系統開發商</td><td style="color:var(--guava-green)">ATG (All Top Gaming)</td><td style="color:var(--guava-pink)">不知名小廠/白牌系統</td><td>數據真偽不明</td></tr>
+            <tr><td style="font-weight:700">系統開發商</td><td style="color:var(--guava-green)">ATG (Agile Titan Games)</td><td style="color:var(--guava-pink)">不知名小廠/白牌系統</td><td>數據真偽不明</td></tr>
             <tr><td style="font-weight:700">理論 RTP</td><td style="color:var(--guava-green);font-weight:900">96.5% ~ 97.2%</td><td style="color:var(--guava-pink)">通常低於 92%，或拒絕公開</td><td>長期玩必輸</td></tr>
             <tr><td style="font-weight:700">倍數掉落穩定度</td><td>數學模型嚴謹、爆分有跡可循</td><td style="color:var(--guava-pink)">隨機亂跳、有長吃分期</td><td>體感極差、易上頭</td></tr>
             <tr><td style="font-weight:700">畫面流暢度</td><td>4K 貼圖、物理引擎流暢</td><td style="color:var(--guava-pink)">動作僵硬、特效廉價感</td><td>影響操作節奏</td></tr>
@@ -96,7 +96,7 @@ const faqs = [
       <!-- ===== 第 1 節 ===== -->
       <h2 id="intro" style="margin-top:2.5rem">1. 為什麼全台灣都在抄《戰神賽特 2》？</h2>
 
-      <p>《戰神賽特 2：覺醒之力》自從 ATG（All Top Gaming）推出後爆紅——直接變成 2026 年所有小廠、白牌系統商的「抄襲標配」。隨便走一圈市場，你會看到一堆名字很像的機台：《XX 戰神》、《埃及法老賽X》、《黃金賽特》、《賽特榮耀》……美術幾乎一模一樣，連 UI 按鈕位置都複製貼上。</p>
+      <p>《戰神賽特 2：覺醒之力》自從 ATG（Agile Titan Games）推出後爆紅——直接變成 2026 年所有小廠、白牌系統商的「抄襲標配」。隨便走一圈市場，你會看到一堆名字很像的機台：《XX 戰神》、《埃及法老賽X》、《黃金賽特》、《賽特榮耀》……美術幾乎一模一樣，連 UI 按鈕位置都複製貼上。</p>
 
       <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
         <h3 style="color:var(--guava-green);margin-top:0">🎯 為什麼仿冒商都鎖定《戰神賽特 2》？</h3>
@@ -125,7 +125,7 @@ const faqs = [
       <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
         <h3 style="color:var(--guava-pink);margin-top:0">🚨 上面這張截圖的 4 大破綻</h3>
         <p style="margin:0.4rem 0"><strong>① 名稱完全照抄</strong>：連標題字型、「戰神賽特」四個字的金色翅膀徽章設計都完全盜用，沒有任何區隔辨識。</p>
-        <p style="margin:0.4rem 0"><strong>② 右下角版號 1.2.11、沒有 ATG logo</strong>：正版遊戲載入畫面一定會有 ATG / All Top Gaming 浮水印 + GLI 認證號，這台什麼都沒有——<strong>典型白牌套皮</strong>。</p>
+        <p style="margin:0.4rem 0"><strong>② 右下角版號 1.2.11、沒有 ATG logo</strong>：正版遊戲載入畫面一定會有 ATG / Agile Titan Games 浮水印 + GLI 認證號，這台什麼都沒有——<strong>典型白牌套皮</strong>。</p>
         <p style="margin:0.4rem 0"><strong>③ 角色人設走偏</strong>：正版戰神賽特是<strong>男性古埃及戰神（賽特神本尊，Set）</strong>，不是女法老。這張把埃及艷后風格的女性角色當主視覺，明顯是重新畫過的仿品——「為了看起來像賽特」硬湊而已。</p>
         <p style="margin:0"><strong>④ 「開始遊戲」按鈕風格低端</strong>：正版 ATG 的 CTA 按鈕會有粒子特效、光暈過渡，這張直接上純色描邊字——<strong>美術外包等級的廉價感</strong>。</p>
       </div>
@@ -166,7 +166,7 @@ const faqs = [
         <table>
           <thead><tr><th>維度</th><th>正版 ATG 戰神賽特 2</th><th>業界仿冒版</th></tr></thead>
           <tbody>
-            <tr><td style="font-weight:700">① 系統開發商</td><td>ATG (All Top Gaming)</td><td style="color:var(--guava-pink)">白牌、不知名小廠</td></tr>
+            <tr><td style="font-weight:700">① 系統開發商</td><td>ATG (Agile Titan Games)</td><td style="color:var(--guava-pink)">白牌、不知名小廠</td></tr>
             <tr><td style="font-weight:700">② 理論 RTP</td><td style="color:var(--guava-green);font-weight:900">96.5% ~ 97.2%（載入畫面可查）</td><td style="color:var(--guava-pink)">&lt; 92% 或拒絕公開</td></tr>
             <tr><td style="font-weight:700">③ 倍數穩定度</td><td>數學模型嚴謹、可追蹤爆分分布</td><td style="color:var(--guava-pink)">隨機亂跳、常出現「吃分期」</td></tr>
             <tr><td style="font-weight:700">④ 畫面流暢度</td><td>4K 貼圖、物理引擎 60 fps</td><td style="color:var(--guava-pink)">特效廉價、動作掉禎</td></tr>
@@ -226,7 +226,7 @@ const faqs = [
 
       <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
         <h3 style="color:var(--guava-green);margin-top:0">🔍 STEP 1：看 Logo 與讀取畫面</h3>
-        <p style="margin-bottom:0">進入遊戲讀取畫面時，確認畫面右下角或中下方是否有「<strong>ATG</strong>」或「<strong>All Top Gaming</strong>」浮水印與官方授權字樣。正版的 logo 會是清晰印刷體，位置固定在版權區塊。如果是糊糊的或根本沒有 logo，<strong>99% 是山寨套皮</strong>。</p>
+        <p style="margin-bottom:0">進入遊戲讀取畫面時，確認畫面右下角或中下方是否有「<strong>ATG</strong>」或「<strong>Agile Titan Games</strong>」浮水印與官方授權字樣。正版的 logo 會是清晰印刷體，位置固定在版權區塊。如果是糊糊的或根本沒有 logo，<strong>99% 是山寨套皮</strong>。</p>
       </div>
 
       <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
