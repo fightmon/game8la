@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: '5-tips-spot-casino-scam',
+    title: '【2026 避坑指南】5招識破娛樂城詐騙套路！WHOIS＋流水陷阱＋支付安全完整拆解',
+    excerpt: '高手不看優惠看細節！芭樂子教你 5 招實測識破不出金黑網：WHOIS 查網域年齡辨識跑路前兆、洗碼量流水數學拆解（40 倍流水 = 數學上不可能提款）、支付管道安全性判斷（私人轉帳 = 警示帳戶風險）、客服壓力測試問 USDT 匯率和 RTP、交叉比對同業評價。附入金前 5 項檢核表。',
+    category: 'guide',
+    categoryLabel: '防詐實戰教學',
+    badgeType: 'featured',
+    date: '2026-04-18',
+    views: 85,
+    tags: ['最新', '必讀', '精選'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-cover-5-tips-scam.webp'
+  },
+  {
     slug: 'casino-not-recommended-by-casinos',
     title: '【2026 避坑指南】連娛樂城都怕的黑名單！交叉比對 5 大導流站，地雷娛樂城千萬別碰',
     excerpt: '娛樂城排名越前面越好？看「排名墊底」才是大學問。芭樂子交叉比對 5 大博弈導流站：金大發自己部落格給自己第一名、錢盈把自己放榜首、富遊在A站滿分B站被標詐騙。附多站認證詐騙踩雷名單＋停業墓園＋殺豬盤警示。',

@@ -1,0 +1,602 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout currentPage="casino-check" title="娛樂城體檢｜入金前 3 分鐘安全檢測工具 - GAME8LA" description="免費線上娛樂城安全檢測工具：WHOIS 網域年齡即時查詢、洗碼量流水計算器、165 反詐騙快查。入金前花 3 分鐘，避開 90% 的不出金黑網。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; 娛樂城體檢</div>
+    <a href="/" class="back-link"><Icon name="arrow-left" /> 回首頁</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)"></div>
+
+    <div class="page-hero" style="text-align:center;margin-bottom:2rem">
+      <h1 style="font-size:2.2rem;line-height:1.3">🛡️ <em>娛樂城體檢</em></h1>
+      <p style="color:var(--text-secondary);max-width:600px;margin:0.5rem auto 0">入金之前花 3 分鐘，讓芭樂子幫你檢查——這間娛樂城能不能信？</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         模組 1：WHOIS 網域年齡檢測
+         ═══════════════════════════════════════════ -->
+    <section class="check-module" id="whois-module">
+      <div class="module-header">
+        <span class="module-number">1</span>
+        <div>
+          <h2 style="margin:0">🔎 網域年齡檢測</h2>
+          <p class="module-desc">輸入娛樂城網址，即時查詢網域註冊時間。剛開幾個月就狂灑優惠？高機率是黑網。</p>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="whoisInput" placeholder="輸入網址，例如 example.com" autocomplete="off" spellcheck="false" />
+        <button type="button" id="whoisBtn" onclick="runWhois()">
+          <Icon name="search" /> 立即檢測
+        </button>
+      </div>
+
+      <div id="whoisResult" class="result-area" style="display:none"></div>
+
+      <div class="module-tip">
+        <strong>判讀標準：</strong>
+        <span class="dot dot-green"></span> 超過 2 年 = 相對安全 ·
+        <span class="dot dot-yellow"></span> 6 月–2 年 = 需警覺 ·
+        <span class="dot dot-red"></span> 不到 6 個月 = 高風險
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         模組 2：流水倍數計算器
+         ═══════════════════════════════════════════ -->
+    <section class="check-module" id="turnover-module">
+      <div class="module-header">
+        <span class="module-number">2</span>
+        <div>
+          <h2 style="margin:0">🧮 流水倍數計算器</h2>
+          <p class="module-desc">輸入存款金額、優惠金額、流水倍數，幫你算出要投注多少才能提款——以及你的錢有多大機率蒸發。</p>
+        </div>
+      </div>
+
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label for="depositAmt">💰 你的存款金額（NTD）</label>
+          <input type="number" id="depositAmt" placeholder="例如 10000" min="0" />
+        </div>
+        <div class="calc-field">
+          <label for="bonusAmt">🎁 優惠/彩金金額（NTD）</label>
+          <input type="number" id="bonusAmt" placeholder="例如 10000" min="0" />
+        </div>
+        <div class="calc-field">
+          <label for="turnoverX">🔄 流水倍數</label>
+          <input type="number" id="turnoverX" placeholder="例如 30" min="1" step="1" />
+        </div>
+        <div class="calc-field">
+          <label for="houseEdge">🏦 莊家優勢 %（可選）</label>
+          <select id="houseEdge">
+            <option value="1.06">百家樂 莊閒（1.06%）</option>
+            <option value="2.7">輪盤 歐式（2.7%）</option>
+            <option value="5.0" selected>老虎機 平均（5%）</option>
+            <option value="8.0">老虎機 高抽（8%）</option>
+            <option value="0">我自己算（0%）</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" class="calc-btn" onclick="runCalc()">📊 計算結果</button>
+
+      <div id="calcResult" class="result-area" style="display:none"></div>
+
+      <div class="module-tip">
+        <strong>判讀標準：</strong>
+        <span class="dot dot-green"></span> 15–25 倍 = 合理 ·
+        <span class="dot dot-yellow"></span> 25–35 倍 = 偏高 ·
+        <span class="dot dot-red"></span> 40 倍以上 = 陷阱
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         模組 3：165 警示帳戶快查
+         ═══════════════════════════════════════════ -->
+    <section class="check-module" id="report-module">
+      <div class="module-header">
+        <span class="module-number">3</span>
+        <div>
+          <h2 style="margin:0">🚨 165 反詐騙快查</h2>
+          <p class="module-desc">直接連到內政部警政署 165 反詐騙官網，查詢你要入金的平台是否已經被通報。</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:1rem">
+        <a href="https://165.npa.gov.tw/#/articles/subjectlist/2" target="_blank" rel="noopener" class="external-btn">
+          🔍 查詢詐騙網站公告
+        </a>
+        <a href="https://165.npa.gov.tw/#/report/report" target="_blank" rel="noopener" class="external-btn external-btn-outline">
+          📝 我要檢舉通報
+        </a>
+      </div>
+
+      <div class="module-tip" style="margin-top:1.2rem">
+        <strong>提醒：</strong>165 是官方反詐騙專線。如果你已經被騙，<strong style="color:#ef4444">請立即撥打 165 或 110 報案</strong>，並保留所有交易紀錄、對話截圖。
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         底部提示
+         ═══════════════════════════════════════════ -->
+    <div class="bottom-cta">
+      <p>💡 <strong>想了解更多防詐知識？</strong></p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:0.8rem">
+        <a href="/articles/5-tips-spot-casino-scam/" class="cta-link">5 招識破娛樂城詐騙套路</a>
+        <a href="/articles/casino-not-recommended-by-casinos/" class="cta-link">連娛樂城都怕的黑名單</a>
+        <a href="/articles/domain-hopping-scam-truth/" class="cta-link">換網址詐騙真相</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       STYLES
+       ═══════════════════════════════════════════ -->
+  <style is:global>
+    /* === Module card === */
+    .check-module {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    .module-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .module-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f5b800, #e09900);
+      color: #000;
+      font-weight: 900;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .module-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin: 0.3rem 0 0;
+      line-height: 1.6;
+    }
+
+    /* === Input group (WHOIS) === */
+    .input-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .input-group input {
+      flex: 1;
+      padding: 0.85rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input-group input:focus {
+      border-color: #f5b800;
+    }
+    .input-group button,
+    .calc-btn {
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, #f5b800, #e09900);
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .input-group button:hover,
+    .calc-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(245, 184, 0, 0.3);
+    }
+    .input-group button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .calc-btn {
+      margin-top: 1rem;
+    }
+
+    /* === Calc grid === */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .calc-field label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+    .calc-field input,
+    .calc-field select {
+      width: 100%;
+      padding: 0.75rem 0.8rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .calc-field input:focus,
+    .calc-field select:focus {
+      border-color: #f5b800;
+    }
+
+    /* === Result area === */
+    .result-area {
+      margin-top: 1rem;
+      padding: 1.2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      line-height: 1.8;
+    }
+    .result-safe   { background: rgba(34,197,94,0.08);  border-color: rgba(34,197,94,0.3); }
+    .result-warning { background: rgba(245,184,0,0.08); border-color: rgba(245,184,0,0.3); }
+    .result-danger  { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.3); }
+    .result-neutral { background: var(--bg-secondary); }
+
+    .result-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+    .result-value {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .result-row:last-child { border-bottom: none; }
+
+    /* === Dots === */
+    .module-tip {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      margin-right: 2px;
+      vertical-align: middle;
+    }
+    .dot-green  { background: #22c55e; }
+    .dot-yellow { background: #f5b800; }
+    .dot-red    { background: #ef4444; }
+
+    /* === External buttons === */
+    .external-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .external-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(239,68,68,0.3);
+    }
+    .external-btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+    .external-btn-outline:hover {
+      border-color: #ef4444;
+      color: #ef4444;
+      box-shadow: 0 4px 16px rgba(239,68,68,0.1);
+    }
+
+    /* === Bottom CTA === */
+    .bottom-cta {
+      text-align: center;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    .cta-link {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: rgba(245,184,0,0.1);
+      border: 1px solid rgba(245,184,0,0.3);
+      border-radius: 8px;
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .cta-link:hover {
+      background: rgba(245,184,0,0.2);
+      border-color: #f5b800;
+      transform: translateY(-1px);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .check-module { padding: 1.2rem; }
+      .input-group { flex-direction: column; }
+      .input-group button { width: 100%; justify-content: center; }
+      .calc-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPTS
+       ═══════════════════════════════════════════ -->
+  <script is:inline>
+    /* ── 清理網域 ── */
+    function cleanDomain(raw) {
+      return raw.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].split('?')[0].toLowerCase();
+    }
+
+    /* ── 計算網域年齡與風險 ── */
+    function calcAge(regDateStr) {
+      if (!regDateStr) return { ageMonths: null, ageLabel: '未知', riskLevel: 'unknown' };
+      const regDate = new Date(regDateStr);
+      const now = new Date();
+      const ageMonths = Math.floor((now - regDate) / (1000 * 60 * 60 * 24 * 30.44));
+      if (ageMonths < 6) return { ageMonths, ageLabel: `${ageMonths} 個月（⚠️ 高風險）`, riskLevel: 'danger' };
+      if (ageMonths < 24) return { ageMonths, ageLabel: `${ageMonths} 個月（⚡ 需警覺）`, riskLevel: 'warning' };
+      const y = Math.floor(ageMonths / 12), m = ageMonths % 12;
+      return { ageMonths, ageLabel: `${y} 年 ${m} 個月（✅ 相對安全）`, riskLevel: 'safe' };
+    }
+
+    /* ── 根據 TLD 選擇 RDAP 端點 ── */
+    function getRdapUrl(domain) {
+      // .tw 網域走 TWNIC 的 RDAP
+      if (domain.endsWith('.tw')) return `https://ccrdap.twnic.tw/tw/domain/${domain}`;
+      // .cn 網域走 CNNIC
+      if (domain.endsWith('.cn')) return `https://rdap.cnnic.cn/rdap/domain/${domain}`;
+      // .jp 網域走 JPRS
+      if (domain.endsWith('.jp')) return `https://rdap.jprs.jp/rdap/domain/${domain}`;
+      // .kr 網域走 KISA
+      if (domain.endsWith('.kr')) return `https://rdap.kisa.or.kr/rdap/domain/${domain}`;
+      // 其他走國際 RDAP bootstrap
+      return `https://rdap.org/domain/${domain}`;
+    }
+
+    /* ── 直接呼叫 RDAP（fallback / 本機開發用） ── */
+    async function queryRdapDirect(domain) {
+      const url = getRdapUrl(domain);
+      const res = await fetch(url, {
+        headers: { Accept: 'application/rdap+json' }
+      });
+      if (!res.ok) throw new Error('not found');
+      const data = await res.json();
+      const events = data.events || [];
+      const regEvent = events.find(e => e.eventAction === 'registration');
+      const expEvent = events.find(e => e.eventAction === 'expiration');
+      const registrarEntity = (data.entities || []).find(e => (e.roles || []).includes('registrar'));
+      const registrar = registrarEntity?.vcardArray?.[1]?.find(v => v[0] === 'fn')?.[3]
+                     || registrarEntity?.handle || '未知';
+      const nameServer = (data.nameservers || []).map(ns => ns.ldhName).filter(Boolean).slice(0, 4);
+      const age = calcAge(regEvent?.eventDate);
+      return {
+        domain,
+        registrationDate: regEvent?.eventDate || null,
+        expirationDate: expEvent?.eventDate || null,
+        registrar,
+        nameServer,
+        ...age
+      };
+    }
+
+    /* ── WHOIS 檢測主函式 ── */
+    async function runWhois() {
+      const input = document.getElementById('whoisInput');
+      const btn = document.getElementById('whoisBtn');
+      const resultEl = document.getElementById('whoisResult');
+      const raw = (input.value || '').trim();
+      if (!raw) { input.focus(); return; }
+      const domain = cleanDomain(raw);
+
+      btn.disabled = true;
+      btn.textContent = '查詢中…';
+      resultEl.style.display = 'block';
+      resultEl.className = 'result-area result-neutral';
+      resultEl.innerHTML = '<p style="text-align:center;color:var(--text-muted)">⏳ 正在查詢 RDAP 資料庫…</p>';
+
+      let data = null;
+      try {
+        // 優先走 Cloudflare Pages Function proxy
+        const res = await fetch(`/api/whois?domain=${encodeURIComponent(domain)}`);
+        if (res.ok) {
+          data = await res.json();
+          if (data.error) data = null; // proxy 回傳錯誤，走 fallback
+        }
+      } catch (_) { /* proxy 不可用，走 fallback */ }
+
+      // Fallback：直接從瀏覽器呼叫 RDAP
+      if (!data) {
+        try {
+          data = await queryRdapDirect(domain);
+        } catch (_) {
+          resultEl.className = 'result-area result-danger';
+          resultEl.innerHTML = `<p style="color:#ef4444;font-weight:700">❌ 查無此網域資訊：${domain}</p><p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem">請確認網址是否正確，例如輸入 example.com（不需要 https://）</p>`;
+          btn.disabled = false;
+          btn.innerHTML = '🔎 立即檢測';
+          return;
+        }
+      }
+
+      const riskClass = data.riskLevel === 'safe' ? 'result-safe'
+                      : data.riskLevel === 'warning' ? 'result-warning'
+                      : data.riskLevel === 'danger' ? 'result-danger'
+                      : 'result-neutral';
+
+      const regDate = data.registrationDate ? new Date(data.registrationDate).toLocaleDateString('zh-TW') : '未知';
+      const expDate = data.expirationDate ? new Date(data.expirationDate).toLocaleDateString('zh-TW') : '未知';
+
+      const riskIcon = data.riskLevel === 'safe' ? '✅'
+                     : data.riskLevel === 'warning' ? '⚡'
+                     : data.riskLevel === 'danger' ? '🔴' : '❓';
+
+      resultEl.className = `result-area ${riskClass}`;
+      resultEl.innerHTML = `
+        <div style="font-size:1.3rem;font-weight:900;margin-bottom:0.8rem">${riskIcon} ${data.ageLabel}</div>
+        <div class="result-row">
+          <span class="result-label">查詢網域</span>
+          <span class="result-value">${data.domain}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">註冊日期</span>
+          <span class="result-value">${regDate}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">到期日期</span>
+          <span class="result-value">${expDate}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">註冊商</span>
+          <span class="result-value" style="font-size:0.9rem">${data.registrar}</span>
+        </div>
+        ${(data.nameServer || []).length ? `
+        <div class="result-row">
+          <span class="result-label">DNS 伺服器</span>
+          <span class="result-value" style="font-size:0.85rem">${data.nameServer.join(', ')}</span>
+        </div>` : ''}
+        <p style="margin:1rem 0 0;font-size:0.85rem;color:var(--text-muted)">
+          💡 芭樂子提醒：網域年齡只是第一關。請搭配下方流水計算器和 165 查詢做完整體檢。
+        </p>
+      `;
+
+      btn.disabled = false;
+      btn.innerHTML = '🔎 立即檢測';
+    }
+
+    // Enter key to trigger WHOIS
+    document.getElementById('whoisInput')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') runWhois();
+    });
+
+
+    /* ── 流水計算器 ── */
+    function runCalc() {
+      const deposit = parseFloat(document.getElementById('depositAmt').value) || 0;
+      const bonus = parseFloat(document.getElementById('bonusAmt').value) || 0;
+      const turnover = parseFloat(document.getElementById('turnoverX').value) || 0;
+      const edge = parseFloat(document.getElementById('houseEdge').value) || 0;
+      const resultEl = document.getElementById('calcResult');
+
+      if (deposit <= 0 || turnover <= 0) {
+        resultEl.style.display = 'block';
+        resultEl.className = 'result-area result-danger';
+        resultEl.innerHTML = '<p style="color:#ef4444;font-weight:700">請填入存款金額和流水倍數。</p>';
+        return;
+      }
+
+      const base = deposit + bonus;
+      const requiredWager = base * turnover;
+      const expectedLoss = requiredWager * (edge / 100);
+      const remaining = base - expectedLoss;
+      const lossPercent = base > 0 ? ((expectedLoss / base) * 100).toFixed(1) : 0;
+
+      // Per-hand stats (assume 1000/hand)
+      const betPerHand = 1000;
+      const handsNeeded = Math.ceil(requiredWager / betPerHand);
+      const minutesNeeded = Math.ceil(handsNeeded * 0.5); // ~30sec per hand
+
+      // Risk level
+      let riskClass, riskIcon, riskLabel;
+      if (turnover <= 25) {
+        riskClass = 'result-safe';
+        riskIcon = '✅';
+        riskLabel = '流水倍數在合理範圍內';
+      } else if (turnover <= 35) {
+        riskClass = 'result-warning';
+        riskIcon = '⚡';
+        riskLabel = '流水偏高，優惠的甜頭大部分會蒸發';
+      } else {
+        riskClass = 'result-danger';
+        riskIcon = '🔴';
+        riskLabel = '數學陷阱！幾乎不可能帶錢走';
+      }
+
+      resultEl.style.display = 'block';
+      resultEl.className = `result-area ${riskClass}`;
+      resultEl.innerHTML = `
+        <div style="font-size:1.3rem;font-weight:900;margin-bottom:0.8rem">${riskIcon} ${riskLabel}</div>
+        <div class="result-row">
+          <span class="result-label">本金 + 優惠</span>
+          <span class="result-value">NT$ ${base.toLocaleString()}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">需完成投注額</span>
+          <span class="result-value" style="color:#f5b800">NT$ ${requiredWager.toLocaleString()}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">預期損失（莊家優勢 ${edge}%）</span>
+          <span class="result-value" style="color:#ef4444">- NT$ ${Math.round(expectedLoss).toLocaleString()}（${lossPercent}%）</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">理論剩餘金額</span>
+          <span class="result-value" style="color:${remaining > 0 ? '#22c55e' : '#ef4444'}">NT$ ${Math.round(remaining).toLocaleString()}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">預估需要玩</span>
+          <span class="result-value">${handsNeeded.toLocaleString()} 手（約 ${minutesNeeded > 60 ? (minutesNeeded / 60).toFixed(1) + ' 小時' : minutesNeeded + ' 分鐘'}）</span>
+        </div>
+        ${remaining <= 0 ? `
+        <div style="margin-top:1rem;padding:0.8rem;background:rgba(239,68,68,0.15);border-radius:8px">
+          <p style="margin:0;color:#ef4444;font-weight:700">⚠️ 以此流水倍數和莊家優勢計算，你的本金＋優惠在完成流水之前就會<strong>全部輸光</strong>。這不是優惠，是陷阱。</p>
+        </div>` : ''}
+        ${remaining > 0 && remaining < deposit ? `
+        <div style="margin-top:1rem;padding:0.8rem;background:rgba(245,184,0,0.15);border-radius:8px">
+          <p style="margin:0;color:#f5b800;font-weight:700">⚠️ 即使跑完流水，你拿回的錢比你原本存入的還少。這個「優惠」實際上讓你<strong>倒虧 NT$ ${Math.round(deposit - remaining).toLocaleString()}</strong>。</p>
+        </div>` : ''}
+        <p style="margin:1rem 0 0;font-size:0.85rem;color:var(--text-muted)">
+          💡 以上為數學期望值計算。實際結果會因運氣波動而不同，但長期而言數學不會騙人。
+        </p>
+      `;
+    }
+  </script>
+</BaseLayout>
