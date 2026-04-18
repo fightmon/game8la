@@ -1,8 +1,13 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { scamList, lastUpdated } from '../../data/scam-list.js';
+
+const totalBrands = scamList.length;
+const totalUrls = scamList.reduce((sum, s) => sum + s.urls.length, 0);
+const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
 ---
-<BaseLayout currentPage="casino-check" title="娛樂城體檢｜入金前 3 分鐘安全檢測工具 - GAME8LA" description="免費線上娛樂城安全檢測工具：WHOIS 網域年齡即時查詢、洗碼量流水計算器、165 反詐騙快查。入金前花 3 分鐘，避開 90% 的不出金黑網。">
+<BaseLayout currentPage="casino-check" title="娛樂城體檢｜入金前 3 分鐘安全檢測 + 詐騙黑名單 - GAME8LA" description="免費線上娛樂城安全檢測工具：165 詐騙黑名單即時比對、WHOIS 網域年齡查詢、流水計算器。收錄 90 個詐騙品牌、369 個網址。入金前花 3 分鐘，避開黑網。">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; 娛樂城體檢</div>
     <a href="/" class="back-link"><Icon name="arrow-left" /> 回首頁</a>
@@ -24,10 +29,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <Icon name="search" /> 立即檢測
         </button>
       </div>
-      <p class="hero-search-hint">只要輸入網址、按下檢測，3 秒內告訴你這網站幾歲、能不能信</p>
+      <p class="hero-search-hint">按下檢測 → 自動比對 165 詐騙黑名單 + 查詢網域年齡，3 秒出結果</p>
+      <p class="hero-search-stats">📊 已收錄 <strong>{totalBrands}</strong> 個詐騙品牌 · <strong>{totalUrls}</strong> 個網址 · 資料更新：{lastUpdated}</p>
     </div>
 
-    <!-- WHOIS result + 判讀 (保留在模組1) -->
+    <!-- ═══════════════════════════════════════════
+         模組 0：165 黑名單比對結果
+         ═══════════════════════════════════════════ -->
+    <section class="check-module" id="blacklist-module" style="display:none">
+      <div class="module-header">
+        <span class="module-number" style="background:linear-gradient(135deg,#ef4444,#dc2626)">!</span>
+        <div>
+          <h2 style="margin:0">🚨 165 詐騙黑名單比對</h2>
+          <p class="module-desc">比對內政部警政署 165 反詐騙通報資料庫</p>
+        </div>
+      </div>
+      <div id="blacklistResult"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         模組 1：WHOIS 網域年齡檢測
+         ═══════════════════════════════════════════ -->
     <section class="check-module" id="whois-module">
       <div class="module-header">
         <span class="module-number">1</span>
@@ -121,6 +143,43 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <div class="module-tip" style="margin-top:1.2rem">
         <strong>提醒：</strong>165 是官方反詐騙專線。如果你已經被騙，<strong style="color:#ef4444">請立即撥打 165 或 110 報案</strong>，並保留所有交易紀錄、對話截圖。
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         模組 4：完整詐騙名單瀏覽
+         ═══════════════════════════════════════════ -->
+    <section class="check-module" id="full-list-module">
+      <div class="module-header">
+        <span class="module-number">4</span>
+        <div>
+          <h2 style="margin:0">📋 165 詐騙娛樂城完整名單</h2>
+          <p class="module-desc">內政部警政署 165 通報資料彙整，共 {totalBrands} 個品牌。輸入關鍵字即時篩選。</p>
+        </div>
+      </div>
+
+      <input type="text" id="listFilter" placeholder="搜尋品牌名稱或網址…" oninput="filterList(this.value)" style="width:100%;padding:0.75rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-size:0.95rem;font-family:inherit;outline:none;margin-bottom:1rem" />
+
+      <div id="scamListContainer" class="scam-list-grid">
+        {scamList.map(s => (
+          <div class="scam-card" data-name={s.name.toLowerCase()} data-urls={s.urls.join(' ')}>
+            <div class="scam-card-head">
+              <strong>{s.name}</strong>
+              <span class="scam-reports">{s.totalReports} 件通報</span>
+            </div>
+            <div class="scam-card-date">最近通報：{s.latestDate}</div>
+            <div class="scam-card-urls">
+              {s.urls.slice(0, 3).map(u => <span>{u}</span>)}
+              {s.urls.length > 3 && <span class="more">+{s.urls.length - 3} 個網址</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="module-tip" style="margin-top:1rem">
+        <strong>資料來源：</strong>內政部警政署 165 全民防騙網 · 搜尋關鍵字「娛樂城」 · 類別「假投資（博弈）網站」 · 最後更新：{lastUpdated}<br>
+        <strong>注意：</strong>查詢結果僅限 165 近 2 年通報資料。未被通報不代表安全，請搭配上方工具做完整體檢。
       </div>
     </section>
 
@@ -221,6 +280,130 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       margin: 0.8rem 0 0;
       font-size: 0.82rem;
       color: var(--text-muted);
+    }
+
+    .hero-search-stats {
+      margin: 0.5rem 0 0;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .hero-search-stats strong {
+      color: #f5b800;
+    }
+
+    /* === Blacklist result === */
+    .blacklist-hit {
+      padding: 1.2rem;
+      background: rgba(239,68,68,0.1);
+      border: 2px solid rgba(239,68,68,0.4);
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+    }
+    .blacklist-hit-title {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #ef4444;
+      margin-bottom: 0.6rem;
+    }
+    .blacklist-hit-meta {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .blacklist-hit-meta strong {
+      color: var(--text-primary);
+    }
+    .blacklist-hit-urls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .blacklist-hit-urls span {
+      padding: 0.2rem 0.6rem;
+      background: rgba(239,68,68,0.15);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: #fca5a5;
+      font-family: monospace;
+    }
+    .blacklist-safe {
+      padding: 1rem;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .blacklist-safe p {
+      margin: 0;
+      font-weight: 700;
+      color: #22c55e;
+    }
+    .blacklist-safe .sub {
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* === Scam list grid === */
+    .scam-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.8rem;
+      max-height: 600px;
+      overflow-y: auto;
+      padding-right: 0.3rem;
+    }
+    .scam-list-grid::-webkit-scrollbar { width: 6px; }
+    .scam-list-grid::-webkit-scrollbar-thumb { background: rgba(245,184,0,0.3); border-radius: 3px; }
+    .scam-card {
+      padding: 0.8rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.2s;
+    }
+    .scam-card:hover { border-color: #ef4444; }
+    .scam-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .scam-card-head strong {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+    .scam-reports {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.5rem;
+      background: rgba(239,68,68,0.15);
+      color: #fca5a5;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .scam-card-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin: 0.3rem 0;
+    }
+    .scam-card-urls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .scam-card-urls span {
+      font-size: 0.72rem;
+      padding: 0.1rem 0.4rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+    .scam-card-urls .more {
+      color: #f5b800;
+      font-family: inherit;
     }
 
     /* === Module card === */
@@ -578,7 +761,75 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <!-- ═══════════════════════════════════════════
        SCRIPTS
        ═══════════════════════════════════════════ -->
-  <script is:inline>
+  <!-- 將 scamList 注入到客戶端 -->
+  <script is:inline define:vars={{ scamListJSON: JSON.stringify(scamList.map(s => ({ n: s.name, u: s.urls, r: s.totalReports, d: s.latestDate }))) }}>
+    const _scamDB = JSON.parse(scamListJSON);
+
+    /* ── 黑名單比對 ── */
+    function checkBlacklist(domain) {
+      const module = document.getElementById('blacklist-module');
+      const resultEl = document.getElementById('blacklistResult');
+      const domainLower = domain.toLowerCase();
+
+      // 比對：輸入的網域是否在任何品牌的 urls 清單中（完全匹配或包含）
+      const hits = [];
+      for (const brand of _scamDB) {
+        for (const u of brand.u) {
+          // 完全匹配或輸入網域包含黑名單網址
+          if (u === domainLower || domainLower.endsWith('.' + u) || u.endsWith('.' + domainLower)) {
+            hits.push(brand);
+            break;
+          }
+        }
+      }
+
+      // 也做品牌名模糊匹配（如果使用者輸入的是品牌名而非網址）
+      if (hits.length === 0) {
+        for (const brand of _scamDB) {
+          for (const u of brand.u) {
+            // 檢查主域名是否部分匹配
+            const mainDomain = u.replace(/^(www|m|app|h5|t|tx|vip\d*|ag\d*|seo\d*)\./i, '');
+            if (domainLower === mainDomain || domainLower.includes(mainDomain.split('.')[0])) {
+              hits.push(brand);
+              break;
+            }
+          }
+        }
+      }
+
+      module.style.display = 'block';
+
+      if (hits.length > 0) {
+        let html = '';
+        for (const h of hits) {
+          const urlTags = h.u.map(u => `<span>${u}</span>`).join('');
+          html += `
+            <div class="blacklist-hit">
+              <div class="blacklist-hit-title">🚨 命中黑名單：${h.n}</div>
+              <div class="blacklist-hit-meta">
+                <strong>通報件數：</strong>${h.r} 件 · <strong>最近通報：</strong>${h.d}<br>
+                <strong>已知使用網址：</strong>
+              </div>
+              <div class="blacklist-hit-urls">${urlTags}</div>
+            </div>
+          `;
+        }
+        html += `<p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">⚠️ 以上資料來自內政部警政署 165 反詐騙通報。如已受害，請立即撥打 165 或 110 報案。</p>`;
+        resultEl.innerHTML = html;
+        // 滾動到黑名單結果
+        module.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return true; // 有命中
+      } else {
+        resultEl.innerHTML = `
+          <div class="blacklist-safe">
+            <p>✅ 未在 165 詐騙黑名單中找到「${domain}」</p>
+            <p class="sub">未被通報不代表 100% 安全，請繼續查看下方 WHOIS 年齡檢測。</p>
+          </div>
+        `;
+        return false; // 沒命中
+      }
+    }
+
     /* ── 清理網域 ── */
     function cleanDomain(raw) {
       return raw.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].split('?')[0].toLowerCase();
@@ -658,6 +909,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       if (!raw) { input.focus(); return; }
       const domain = cleanDomain(raw);
 
+      // 第一步：先比對黑名單（即時，不需等 RDAP）
+      checkBlacklist(domain);
+
+      // 第二步：WHOIS 查詢
       btn.disabled = true;
       btn.textContent = '查詢中…';
       resultEl.style.display = 'block';
@@ -882,6 +1137,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           💡 以上為數學期望值計算。實際結果會因運氣波動而不同，但長期而言數學不會騙人。
         </p>
       `;
+    }
+
+    /* ── 名單篩選 ── */
+    function filterList(keyword) {
+      const kw = keyword.toLowerCase().trim();
+      const cards = document.querySelectorAll('.scam-card');
+      cards.forEach(card => {
+        const name = card.dataset.name || '';
+        const urls = card.dataset.urls || '';
+        const match = !kw || name.includes(kw) || urls.includes(kw);
+        card.style.display = match ? '' : 'none';
+      });
     }
   </script>
 </BaseLayout>

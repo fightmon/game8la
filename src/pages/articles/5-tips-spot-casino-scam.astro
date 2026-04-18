@@ -321,6 +321,15 @@ const faqs = [
 
       <ShareButtons title="5招識破娛樂城詐騙套路！WHOIS＋流水陷阱＋支付安全完整拆解" url="https://game8la.com/articles/5-tips-spot-casino-scam/" />
 
+      <!-- ═══ 娛樂城體檢 CTA ═══ -->
+      <section class="casino-check-cta">
+        <div class="cta-icon">🛡️</div>
+        <h3>看完 5 招，不如直接幫你查</h3>
+        <p>與其記住所有辨識技巧，不如把你正在考慮入金的娛樂城網址丟進來——<strong style="color:#f5b800">3 秒鐘</strong>幫你查網域年齡、算流水陷阱、比對 165 詐騙通報。</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:0.3rem">已有超過上千名玩家在入金前先來這裡體檢，避開了不出金黑網。</p>
+        <a href="/casino-check/" class="cta-check-btn">🔎 前往娛樂城體檢 — 免費即時檢測</a>
+      </section>
+
       <!-- ═══ 延伸閱讀 ═══ -->
       <h3 style="margin-top:2.5rem">📚 延伸閱讀</h3>
       <div class="related-links">
@@ -384,5 +393,51 @@ const faqs = [
     .rl-cat { font-size: 0.75rem; color: #f5b800; font-weight: 700; }
     .rl-item strong { font-size: 0.98rem; line-height: 1.45; color: var(--text-primary); }
     .rl-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* === Casino Check CTA === */
+    .casino-check-cta {
+      margin: 2.5rem 0;
+      padding: 2rem 1.8rem;
+      background: linear-gradient(135deg, rgba(245,184,0,0.06), rgba(245,184,0,0.02));
+      border: 2px solid rgba(245,184,0,0.35);
+      border-radius: 16px;
+      text-align: center;
+    }
+    .casino-check-cta .cta-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .casino-check-cta h3 {
+      margin: 0 0 0.8rem;
+      font-size: 1.3rem;
+      color: var(--text-primary);
+    }
+    .casino-check-cta p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .cta-check-btn {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.95rem 2rem;
+      background: linear-gradient(135deg, #f5b800, #e09900);
+      border-radius: 12px;
+      color: #000;
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cta-check-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245,184,0,0.35);
+    }
+    @media (max-width: 768px) {
+      .casino-check-cta { padding: 1.5rem 1.2rem; }
+      .casino-check-cta h3 { font-size: 1.15rem; }
+      .cta-check-btn { font-size: 0.95rem; padding: 0.85rem 1.5rem; width: 100%; }
+    }
   </style>
 </BaseLayout>

@@ -319,7 +319,9 @@ const games = [
 // === RENDER GAMES ===
 function renderGames(filter = 'all') {
   const grid = document.getElementById('gameGrid');
-  const filtered = filter === 'all' ? games : games.filter(g => g.cat === filter);
+  const allFiltered = filter === 'all' ? games : games.filter(g => g.cat === filter);
+  const maxShow = window.innerWidth <= 768 ? 4 : 8;
+  const filtered = allFiltered.slice(0, maxShow);
   grid.innerHTML = filtered.map(g => `
     <div class="game-card animate-in" data-cat="${g.cat}">
       <div class="game-card-img ${g.gradient}" ${g.img ? `style="padding:0;overflow:hidden"` : ''}>
@@ -1549,7 +1551,9 @@ const games = [
 // === RENDER GAMES ===
 function renderGames(filter = 'all') {
   const grid = document.getElementById('gameGrid');
-  const filtered = filter === 'all' ? games : games.filter(g => g.cat === filter);
+  const allFiltered = filter === 'all' ? games : games.filter(g => g.cat === filter);
+  const maxShow = window.innerWidth <= 768 ? 4 : 8;
+  const filtered = allFiltered.slice(0, maxShow);
   grid.innerHTML = filtered.map(g => `
     <div class="game-card animate-in" data-cat="${g.cat}">
       <div class="game-card-img ${g.gradient}" ${g.img ? `style="padding:0;overflow:hidden"` : ''}>
