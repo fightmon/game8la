@@ -157,9 +157,9 @@ const { currentPage = 'home' } = Astro.props;
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e5e5ea;
     font-size: 1.1rem;
     display: flex;
     align-items: center;
@@ -167,9 +167,13 @@ const { currentPage = 'home' } = Astro.props;
     cursor: pointer;
     transition: all 0.2s;
   }
+  .icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
   .icon-btn:hover,
   .icon-btn:focus-visible {
-    background: var(--bg-card);
+    background: rgba(245, 184, 0, 0.15);
     border-color: var(--gold);
     color: var(--gold-light);
   }

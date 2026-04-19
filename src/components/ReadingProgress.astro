@@ -1,0 +1,68 @@
+---
+// Reading progress bar for article pages
+// Only activates when .article-content exists on the page
+---
+
+<div class="reading-progress" id="readingProgress" aria-hidden="true">
+  <div class="reading-progress-bar" id="readingProgressBar"></div>
+</div>
+
+<style>
+  .reading-progress {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.06);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .reading-progress.active {
+    opacity: 1;
+  }
+  .reading-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--guava-green, #39ff14), var(--gold, #f5b800));
+    border-radius: 0 2px 2px 0;
+    transition: width 0.1s linear;
+    will-change: width;
+  }
+
+  @media (max-width: 768px) {
+    .reading-progress {
+      top: 70px;
+      height: 2px;
+    }
+  }
+</style>
+
+<script is:inline>
+(function () {
+  var bar = document.getElementById('readingProgressBar');
+  var wrap = document.getElementById('readingProgress');
+  var article = document.querySelector('.article-content');
+  if (!bar || !wrap || !article) return;
+
+  wrap.classList.add('active');
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        var rect = article.getBoundingClientRect();
+        var articleTop = rect.top + window.pageYOffset - 120;
+        var articleHeight = article.offsetHeight;
+        var scrolled = window.pageYOffset - articleTop;
+        var pct = Math.max(0, Math.min(100, (scrolled / (articleHeight - window.innerHeight + 120)) * 100));
+        bar.style.width = pct + '%';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+</script>
