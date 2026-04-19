@@ -55,11 +55,14 @@ import Icon from './Icon.astro';
     <div class="footer-col">
       <h4>關於8LA</h4>
       <a href="/">平台介紹</a>
-      <a href="mailto:game8lala@gmail.com?subject=合作洽談">合作洽談</a>
       <a href="/privacy/">隱私政策</a>
       <a href="/terms/">服務條款</a>
       <a href="/disclaimer/">免責聲明</a>
-      <a href="mailto:game8lala@gmail.com?subject=聯絡我們">聯絡我們</a>
+      <a href="https://docs.google.com/forms/d/1UhHI6PBNmH3BMSi9SMa02u2z9_xc8Yhn8Nl2Z67G5y0/viewform" target="_blank" rel="noopener">問題回報 / 合作提案</a>
+      <div class="footer-email">
+        <Icon name="mail" size="0.9rem" />
+        <a href="mailto:hello@game8la.tw">hello@game8la.tw</a>
+      </div>
     </div>
   </div>
 
@@ -203,6 +206,28 @@ import Icon from './Icon.astro';
     height: 100px;
     width: auto;
     filter: drop-shadow(0 0 6px rgba(57, 255, 20, 0.25));
+  }
+
+  .footer-email {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+    padding: 0.5rem 0.7rem;
+    background: rgba(57, 255, 20, 0.06);
+    border: 1px solid rgba(57, 255, 20, 0.2);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .footer-email a {
+    color: var(--gold-light) !important;
+    font-weight: 600;
+    padding: 0 !important;
+    display: inline !important;
+  }
+  .footer-email a:hover {
+    color: #39FF14 !important;
   }
 
   .social-links {
