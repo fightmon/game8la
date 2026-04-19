@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'casino-payout-guide',
+    title: '【出金攻略】娛樂城提款失敗？5 大卡關原因與自救 SOP',
+    excerpt: '出金卡關怎麼辦？拆解流水沒跑完、KYC 退件、風控凍結、出金管道故障、黑網不出金 5 大原因，每個都附自救步驟。入金前先查 165 黑名單，避開不出金黑網。',
+    category: 'guide',
+    categoryLabel: '出金教學',
+    badgeType: 'featured',
+    date: '2026-04-19',
+    views: 1654,
+    tags: ['最新', '必讀'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a2e,#0a2a1a)',
+    thumbnail: '/images/article-thumbs/thumb-casino-payout-cover.webp'
+  },
+  {
     slug: 'casino-beginner-guide',
     title: '【新手必讀】第一次玩娛樂城？10 個入金前必知的潛規則',
     excerpt: '現金版 vs 信用版只能碰一個、流水倍數是最大的坑、網域年齡是防詐第一關、KYC 要在確認平台之後才交、代操帶牌 100% 是詐騙、出金軟釘子的經典話術、RTP 選機三原則、註冊資料二次轉賣風險、165 名單隨身查、博弈期望值永遠是負的。芭樂子整理新手 10 大保命知識，看懂再玩。',
@@ -210,20 +224,6 @@ export const articles = [
     icon: 'book-open',
     gradient: 'linear-gradient(135deg,#1a0a2e,#2d1050,#1a0a2e)',
     thumbnail: '/images/article-thumbs/thumb-slots-rtp-cover.webp'
-  },
-  {
-    slug: 'casino-payout-guide',
-    title: '線上娛樂城出金完整攻略：方式比較、速度實測、避雷指南',
-    excerpt: '銀行轉帳、電子錢包、USDT 三大出金方式完整比較，速度實測排行、流水倍數計算教學、卡出金 6 大紅旗警訊，芭樂子教你安全把錢拿回來。',
-    category: 'guide',
-    categoryLabel: '出金教學',
-    badgeType: 'attack',
-    date: '2026-04-12',
-    views: 1654,
-    tags: ['最新'],
-    icon: 'book-open',
-    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a2e,#0a2a1a)',
-    thumbnail: '/images/article-thumbs/thumb-casino-payout-cover.webp'
   },
   {
     slug: 'card-games-guide',
