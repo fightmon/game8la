@@ -2,6 +2,34 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'casino-beginner-guide',
+    title: '【新手必讀】第一次玩娛樂城？10 個入金前必知的潛規則',
+    excerpt: '現金版 vs 信用版只能碰一個、流水倍數是最大的坑、網域年齡是防詐第一關、KYC 要在確認平台之後才交、代操帶牌 100% 是詐騙、出金軟釘子的經典話術、RTP 選機三原則、註冊資料二次轉賣風險、165 名單隨身查、博弈期望值永遠是負的。芭樂子整理新手 10 大保命知識，看懂再玩。',
+    category: 'guide',
+    categoryLabel: '新手避坑',
+    badgeType: 'featured',
+    date: '2026-04-19',
+    views: 0,
+    tags: ['最新', '必讀', '精選'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-cover-casino-beginner.webp'
+  },
+  {
+    slug: '165-weekly-2026-w16',
+    title: '【165 週報】2026 第 16 週：新增 3 個詐騙娛樂城品牌，3 個既有品牌換新網址',
+    excerpt: '內政部 165 全民防騙網 4/2–4/8 通報彙整：新增 BBIN娛樂城、金盈匯娛樂城、藍海俱樂部 3 個全新詐騙品牌。朕天下娛樂城、金沙娛樂、新葡京等 3 個既有品牌啟用新網址。冒用知名品牌、子網域代理戰術、.tw 域名濫用三大趨勢持續。',
+    category: 'anti-scam',
+    categoryLabel: '165 監測站',
+    badgeType: 'attack',
+    date: '2026-04-19',
+    views: 0,
+    tags: ['最新', '165週報'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
+  },
+  {
     slug: '5-tips-spot-casino-scam',
     title: '【2026 避坑指南】5招識破娛樂城詐騙套路！WHOIS＋流水陷阱＋支付安全完整拆解',
     excerpt: '高手不看優惠看細節！芭樂子教你 5 招實測識破不出金黑網：WHOIS 查網域年齡辨識跑路前兆、洗碼量流水數學拆解（40 倍流水 = 數學上不可能提款）、支付管道安全性判斷（私人轉帳 = 警示帳戶風險）、客服壓力測試問 USDT 匯率和 RTP、交叉比對同業評價。附入金前 5 項檢核表。',

@@ -6,6 +6,22 @@ import { scamList, lastUpdated } from '../../data/scam-list.js';
 const totalBrands = scamList.length;
 const totalUrls = scamList.reduce((sum, s) => sum + s.urls.length, 0);
 const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
+
+// 最近 30 天內被通報的品牌
+const now = new Date();
+const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+const recentBrands = scamList.filter(s => s.latestDate >= thirtyDaysAgo).length;
+// 通報超過 10 次的高危品牌
+const highRiskBrands = scamList.filter(s => s.totalReports >= 10).length;
+
+// 為每個品牌計算風險標籤
+const enrichedList = scamList.map(s => {
+  const tags: string[] = [];
+  if (s.latestDate >= thirtyDaysAgo) tags.push('最新通報');
+  if (s.totalReports >= 10) tags.push('高風險');
+  if (s.urls.length >= 5) tags.push('疑似換殼');
+  return { ...s, tags };
+});
 ---
 <BaseLayout currentPage="casino-check" title="娛樂城體檢｜入金前 3 分鐘安全檢測 + 詐騙黑名單 - GAME8LA" description="免費線上娛樂城安全檢測工具：165 詐騙黑名單即時比對、WHOIS 網域年齡查詢、流水計算器。收錄 90 個詐騙品牌、369 個網址。入金前花 3 分鐘，避開黑網。">
   <div class="container">
@@ -16,21 +32,43 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
     <div class="page-hero" style="text-align:center;margin-bottom:0">
       <h1 style="font-size:2.2rem;line-height:1.3">🛡️ <em>娛樂城體檢</em></h1>
       <p style="color:var(--text-secondary);max-width:600px;margin:0.5rem auto 0">入金之前花 3 分鐘，讓芭樂子幫你檢查——這間娛樂城能不能信？</p>
+      <p class="last-sync">📡 數據最後同步時間：<strong>{lastUpdated}</strong> · 資料來源：內政部警政署 165</p>
     </div>
 
     <!-- ═══════════════════════════════════════════
          Hero 搜尋框：最醒目的入口
          ═══════════════════════════════════════════ -->
     <div class="hero-search">
-      <p class="hero-search-label">👇 貼上你要查的娛樂城網址</p>
+      <p class="hero-search-label">輸入網址或品牌名稱，1 秒診斷安全性</p>
       <div class="hero-input-wrap">
-        <input type="text" id="whoisInput" placeholder="例如 bet888.com" autocomplete="off" spellcheck="false" />
+        <input type="text" id="whoisInput" placeholder="例如 bet888.com 或 金沙娛樂城" autocomplete="off" spellcheck="false" oninput="heroLiveFilter(this.value)" />
         <button type="button" id="whoisBtn" onclick="runWhois()">
           <Icon name="search" /> 立即檢測
         </button>
       </div>
       <p class="hero-search-hint">按下檢測 → 自動比對 165 詐騙黑名單 + 查詢網域年齡，3 秒出結果</p>
-      <p class="hero-search-stats">📊 已收錄 <strong>{totalBrands}</strong> 個詐騙品牌 · <strong>{totalUrls}</strong> 個網址 · 資料更新：{lastUpdated}</p>
+      <!-- 數據亮點 -->
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <span class="hero-stat-num">{totalBrands}</span>
+          <span class="hero-stat-label">詐騙品牌</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">{totalUrls}</span>
+          <span class="hero-stat-label">詐騙網址</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">{totalReports}</span>
+          <span class="hero-stat-label">通報件數</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" style="color:#ef4444">{recentBrands}</span>
+          <span class="hero-stat-label">近期活躍</span>
+        </div>
+      </div>
     </div>
 
     <!-- ═══════════════════════════════════════════
@@ -159,14 +197,36 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
         </div>
       </div>
 
+      <!-- 快速篩選按鈕 -->
+      <div class="quick-filters">
+        <button type="button" class="qf-btn qf-active" onclick="quickFilter('all', this)">全部 ({totalBrands})</button>
+        <button type="button" class="qf-btn" onclick="quickFilter('最新通報', this)">🔴 最新通報 ({recentBrands})</button>
+        <button type="button" class="qf-btn" onclick="quickFilter('高風險', this)">⚠️ 高風險 ({highRiskBrands})</button>
+        <button type="button" class="qf-btn" onclick="quickFilter('疑似換殼', this)">🔄 疑似換殼</button>
+      </div>
+
       <input type="text" id="listFilter" placeholder="搜尋品牌名稱或網址…" oninput="filterList(this.value)" style="width:100%;padding:0.75rem 1rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:10px;color:var(--text-primary);font-size:0.95rem;font-family:inherit;outline:none;margin-bottom:1rem" />
 
+      <!-- 搜尋無結果提示 -->
+      <div id="noResultHint" class="no-result-hint" style="display:none">
+        <p>🔍 找不到符合「<strong id="noResultKeyword"></strong>」的品牌</p>
+        <p class="no-result-sub">這不代表該網站安全！請使用上方搜尋框輸入網址，進行 WHOIS 年齡檢測 + 165 黑名單比對。</p>
+        <button type="button" class="no-result-btn" onclick="document.getElementById('whoisInput').value=document.getElementById('listFilter').value;document.getElementById('whoisInput').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>window.runWhois(),400)">🔎 立即檢測這個網址</button>
+      </div>
+
       <div id="scamListContainer" class="scam-list-grid">
-        {scamList.map(s => (
-          <div class="scam-card" data-name={s.name.toLowerCase()} data-urls={s.urls.join(' ')}>
+        {enrichedList.map(s => (
+          <div class="scam-card" data-name={s.name.toLowerCase()} data-urls={s.urls.join(' ')} data-tags={s.tags.join(',')}>
+            {s.tags.length > 0 && (
+              <div class="scam-card-tags">
+                {s.tags.map(t => (
+                  <span class={`risk-tag ${t === '最新通報' ? 'tag-recent' : t === '高風險' ? 'tag-danger' : 'tag-shell'}`}>{t}</span>
+                ))}
+              </div>
+            )}
             <div class="scam-card-head">
               <strong>{s.name}</strong>
-              <span class="scam-reports">{s.totalReports} 件通報</span>
+              <span class={`scam-reports ${s.totalReports >= 50 ? 'reports-critical' : s.totalReports >= 10 ? 'reports-high' : ''}`}>{s.totalReports} 件通報</span>
             </div>
             <div class="scam-card-date">最近通報：{s.latestDate}</div>
             <div class="scam-card-urls">
@@ -196,6 +256,12 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
       </div>
     </div>
 
+  </div>
+
+  <!-- Sticky 安全警示浮條 -->
+  <div class="sticky-warning" id="stickyWarning">
+    <span class="sticky-warning-text">⚠️ 入金前先檢查！任何要你先存錢的「客服」都是詐騙高風險</span>
+    <button type="button" class="sticky-warning-btn" onclick="document.getElementById('whoisInput').scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('whoisInput').focus()">🔎 立即檢測</button>
   </div>
 
   <!-- ═══════════════════════════════════════════
@@ -288,6 +354,52 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
       color: var(--text-muted);
     }
     .hero-search-stats strong {
+      color: #f5b800;
+    }
+
+    /* === Hero Stats Row === */
+    .hero-stats-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(245,184,0,0.15);
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .hero-stat-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #f5b800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .hero-stat-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(245,184,0,0.2);
+    }
+
+    /* === Last Sync === */
+    .last-sync {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin: 0.6rem auto 0;
+      max-width: 600px;
+    }
+    .last-sync strong {
       color: #f5b800;
     }
 
@@ -404,6 +516,121 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
     .scam-card-urls .more {
       color: #f5b800;
       font-family: inherit;
+    }
+
+    /* === Risk Tags === */
+    .scam-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .risk-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.12rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .tag-recent {
+      background: rgba(245,184,0,0.2);
+      color: #f5b800;
+      border: 1px solid rgba(245,184,0,0.4);
+    }
+    .tag-danger {
+      background: rgba(239,68,68,0.2);
+      color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.4);
+    }
+    .tag-shell {
+      background: rgba(168,85,247,0.15);
+      color: #c4b5fd;
+      border: 1px solid rgba(168,85,247,0.35);
+    }
+    .scam-reports.reports-high {
+      background: rgba(239,68,68,0.25);
+      color: #fca5a5;
+      font-weight: 700;
+    }
+    .scam-reports.reports-critical {
+      background: rgba(239,68,68,0.4);
+      color: #fff;
+      font-weight: 900;
+      animation: reportPulse 2s ease-in-out infinite;
+    }
+    @keyframes reportPulse {
+      0%, 100% { box-shadow: none; }
+      50% { box-shadow: 0 0 8px rgba(239,68,68,0.4); }
+    }
+
+    /* === Quick Filters === */
+    .quick-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .qf-btn {
+      padding: 0.45rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .qf-btn:hover {
+      border-color: #f5b800;
+      color: #f5b800;
+    }
+    .qf-btn.qf-active {
+      background: rgba(245,184,0,0.15);
+      border-color: #f5b800;
+      color: #f5b800;
+    }
+
+    /* === No Result Hint === */
+    .no-result-hint {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: rgba(245,184,0,0.05);
+      border: 1px dashed rgba(245,184,0,0.3);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    .no-result-hint p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    .no-result-hint strong {
+      color: #f5b800;
+    }
+    .no-result-sub {
+      font-size: 0.82rem !important;
+      color: var(--text-muted) !important;
+      margin-top: 0.5rem !important;
+    }
+    .no-result-btn {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background: linear-gradient(135deg, #f5b800, #e09900);
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .no-result-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(245,184,0,0.3);
     }
 
     /* === Module card === */
@@ -628,6 +855,53 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
       transform: translateY(-1px);
     }
 
+    /* === Sticky Warning === */
+    .sticky-warning {
+      position: fixed;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.7rem 1.2rem;
+      background: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(239,68,68,0.4);
+      border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(239,68,68,0.1);
+      transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 680px;
+      width: calc(100% - 2rem);
+    }
+    .sticky-warning.visible {
+      bottom: 1.2rem;
+    }
+    .sticky-warning-text {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      flex: 1;
+    }
+    .sticky-warning-btn {
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #f5b800, #e09900);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: 800;
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .sticky-warning-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245,184,0,0.3);
+    }
+
     /* === Responsive === */
     @media (max-width: 768px) {
       /* Page hero */
@@ -658,6 +932,18 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
         font-size: 1.05rem;
         border-radius: 12px;
       }
+
+      /* Hero stats row */
+      .hero-stats-row {
+        gap: 0.6rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        flex-wrap: wrap;
+      }
+      .hero-stat-num { font-size: 1.3rem; }
+      .hero-stat-label { font-size: 0.7rem; }
+      .hero-stat-divider { height: 24px; }
+      .last-sync { font-size: 0.72rem; }
 
       /* Module cards */
       .check-module {
@@ -745,6 +1031,15 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
 
       /* Hero banner — shorter */
       .hero-banner { min-height: 80px !important; }
+
+      /* Quick filters — scroll horizontal */
+      .quick-filters { gap: 0.35rem; }
+      .qf-btn { font-size: 0.75rem; padding: 0.4rem 0.7rem; }
+
+      /* Sticky warning — compact */
+      .sticky-warning { padding: 0.6rem 0.8rem; gap: 0.5rem; }
+      .sticky-warning-text { font-size: 0.72rem; }
+      .sticky-warning-btn { font-size: 0.72rem; padding: 0.4rem 0.8rem; }
     }
 
     /* Extra small phones */
@@ -900,8 +1195,8 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
       } catch (_) { return false; }
     }
 
-    /* ── WHOIS 檢測主函式 ── */
-    async function runWhois() {
+    /* ── WHOIS 檢測主函式（掛到 window 以便 onclick 調用） ── */
+    window.runWhois = async function() {
       const input = document.getElementById('whoisInput');
       const btn = document.getElementById('whoisBtn');
       const resultEl = document.getElementById('whoisResult');
@@ -1051,16 +1346,28 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
 
       btn.disabled = false;
       btn.innerHTML = '🔎 立即檢測';
-    }
+    };
 
     // Enter key to trigger WHOIS
     document.getElementById('whoisInput')?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') runWhois();
+      if (e.key === 'Enter') window.runWhois();
     });
 
+    /* ── Hero 搜尋框即時連動模組 4 ── */
+    window.heroLiveFilter = function(value) {
+      const kw = value.toLowerCase().trim();
+      if (!kw) return; // 空值不動作，避免干擾
+      // 同步模組 4 的文字篩選
+      const filterInput = document.getElementById('listFilter');
+      if (filterInput) filterInput.value = value;
+      window.filterList(value);
+      // 重置快速篩選按鈕
+      document.querySelectorAll('.qf-btn').forEach(b => b.classList.remove('qf-active'));
+    };
 
-    /* ── 流水計算器 ── */
-    function runCalc() {
+
+    /* ── 流水計算器（掛到 window 以便 onclick 調用） ── */
+    window.runCalc = function() {
       const deposit = parseFloat(document.getElementById('depositAmt').value) || 0;
       const bonus = parseFloat(document.getElementById('bonusAmt').value) || 0;
       const turnover = parseFloat(document.getElementById('turnoverX').value) || 0;
@@ -1137,18 +1444,80 @@ const totalReports = scamList.reduce((sum, s) => sum + s.totalReports, 0);
           💡 以上為數學期望值計算。實際結果會因運氣波動而不同，但長期而言數學不會騙人。
         </p>
       `;
-    }
+    };
 
-    /* ── 名單篩選 ── */
-    function filterList(keyword) {
+    /* ── 名單篩選（掛到 window 以便 oninput 調用） ── */
+    window.filterList = function(keyword) {
       const kw = keyword.toLowerCase().trim();
       const cards = document.querySelectorAll('.scam-card');
+      let visibleCount = 0;
       cards.forEach(card => {
         const name = card.dataset.name || '';
         const urls = card.dataset.urls || '';
         const match = !kw || name.includes(kw) || urls.includes(kw);
         card.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
       });
-    }
+      // 無結果提示
+      const hint = document.getElementById('noResultHint');
+      const kwEl = document.getElementById('noResultKeyword');
+      if (hint) {
+        if (kw && visibleCount === 0) {
+          hint.style.display = 'block';
+          if (kwEl) kwEl.textContent = keyword.trim();
+        } else {
+          hint.style.display = 'none';
+        }
+      }
+      // 重置快速篩選按鈕狀態
+      if (kw) {
+        document.querySelectorAll('.qf-btn').forEach(b => b.classList.remove('qf-active'));
+      }
+    };
+
+    /* ── Sticky 警示浮條 ── */
+    (function() {
+      const sticky = document.getElementById('stickyWarning');
+      const heroSearch = document.querySelector('.hero-search');
+      if (!sticky || !heroSearch) return;
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            const heroBottom = heroSearch.getBoundingClientRect().bottom;
+            if (heroBottom < -100) {
+              sticky.classList.add('visible');
+            } else {
+              sticky.classList.remove('visible');
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+
+    /* ── 快速篩選（依 tag） ── */
+    window.quickFilter = function(tag, btnEl) {
+      // 清空文字輸入
+      const filterInput = document.getElementById('listFilter');
+      if (filterInput) filterInput.value = '';
+      // 隱藏無結果提示
+      const hint = document.getElementById('noResultHint');
+      if (hint) hint.style.display = 'none';
+      // 切換按鈕 active 狀態
+      document.querySelectorAll('.qf-btn').forEach(b => b.classList.remove('qf-active'));
+      if (btnEl) btnEl.classList.add('qf-active');
+      // 篩選卡片
+      const cards = document.querySelectorAll('.scam-card');
+      cards.forEach(card => {
+        if (tag === 'all') {
+          card.style.display = '';
+        } else {
+          const tags = (card.dataset.tags || '').split(',');
+          card.style.display = tags.includes(tag) ? '' : 'none';
+        }
+      });
+    };
   </script>
 </BaseLayout>

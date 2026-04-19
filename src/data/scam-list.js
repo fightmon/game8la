@@ -2,25 +2,25 @@
  * 娛樂城詐騙黑名單
  * 資料來源：內政部警政署 165 全民防騙網（假投資/博弈網站類別）
  * 搜尋關鍵字：娛樂城
- * 最後更新：2026-04-18
- * 品牌數：90
- * 原始通報筆數：458（同品牌同網址合併後 369 筆，再依品牌合併為 90 個）
+ * 最後更新：2026-04-19
+ * 品牌數：93
+ * 原始通報筆數：458 + 週報補充（同品牌同網址合併後，再依品牌合併為 93 個）
  */
 
-export const lastUpdated = '2026-04-18';
+export const lastUpdated = '2026-04-19';
 
 export const scamList = [
   { name: 'GF攻富娛樂城', urls: ['pc.billynational.vip'], totalReports: 1, latestDate: '2026-01-07' },
   { name: '無界娛樂城', urls: ['infinity168.bet'], totalReports: 1, latestDate: '2025-12-31' },
-  { name: '金沙娛樂城', urls: ['m.jsylc5.com', 'm.sandss2.vip', 'm.sandsq1.vip', 'm.sandss11.vip', 'm.sandss9.vip', 'm.sds88.top', 't.sads55.top', 'm.jsylc1.com', 'm.sads2.vip', 'm.sads99.vip', 't.sads77.top', 'm.sads3.vip', 'h5.best-sands.cc', 'm.sand999.cc', 'jsylvg.com', 't.sads66.top', 'm.sads99.cc', 'm.sds88.vip', 'm.sds88.cc', 'h5.sandswins.cc', 'app.csaedes.cc', 'app.csased.cc'], totalReports: 35, latestDate: '2025-12-24' },
+  { name: '金沙娛樂城', urls: ['m.jsylc5.com', 'm.sandss2.vip', 'm.sandsq1.vip', 'm.sandss11.vip', 'm.sandss9.vip', 'm.sds88.top', 't.sads55.top', 'm.jsylc1.com', 'm.sads2.vip', 'm.sads99.vip', 't.sads77.top', 'm.sads3.vip', 'h5.best-sands.cc', 'm.sand999.cc', 'jsylvg.com', 't.sads66.top', 'm.sads99.cc', 'm.sds88.vip', 'm.sds88.cc', 'h5.sandswins.cc', 'app.csaedes.cc', 'app.csased.cc', 'www.jinsha889.com'], totalReports: 36, latestDate: '2026-04-08' },
   { name: '3A娛樂城', urls: ['3a1888.com', 'seo188.3a1788.bet', 'ag002.3a5168.com', 'www.aaa1788.casino', 'aaawin.page', 'ag003.aaawin88.com', 'www.aaawin99.com', '3a5688.com', 'aaa1778.com', 'aaa1788.net', 'www.3a88.net', 'www.aaa1788.com', 'vip118.aaa1788.net'], totalReports: 21, latestDate: '2025-12-17' },
   { name: '必發娛樂城', urls: ['betfairos.com', 'betfairse.com', 'www.betfairo.com'], totalReports: 5, latestDate: '2025-11-19' },
   { name: '國際娛樂城', urls: ['www.947877.cc', 'tjyl888.top', 'wap.wns4489.xyz', 'wap.wns4169.xyz', 'wap.wns4269.xyz'], totalReports: 7, latestDate: '2025-10-08' },
-  { name: '新葡京娛樂城', urls: ['k9856825.com', 'm.kqxs88.top', 'm.kqxs66.top', 'n.ylhg82.xyz', 'xpj19208.com', 'm.kqxs323.xyz', 'm.kqxs567.xyz', 'm.kqxs23.top', 'm.kqxs3.top', 'm.kqxs99.cc', 'm.xin6868.com', 'm.xp99999.com', 'b.bycp26.com', 'a.bycp23.com', 'm.bycp27.com', 'm.bycp232.com', 'm.bycp1188.com', 'm.bycp1788.com', 'm.bycp28.com', 'm.bycp2233.com', 'm.bycp2266.com', 'm.bycp235.com', 'm.bycp238.com', 'm.bycp256.com', 'm.bycp21.com', 'm.bycp2688.com', 'm.bycp2988.com', 'm.bycp268.com', 'm.bycp298.com', 'm.bycp378.com', 'm.bycp2688.net', 'm.bycp38.com', 'app.bycp2688.com', 'app.bycp568.com', 'm.bycp2388.com', 'app.bycp278.com', 'm.bycp336.com', 'm.bycp326.com', 'm.bycp658.com', 'm.bycp6688.com', 'm.bycp338.com', 'm.bycp3588.com', 'm.bycp728.com', 'm.bycp398.com', 'm.bycp3988.com', 'm.kqxs9.top', 'm.bycp788.com', 'm.kqxs1.top', 'm.kqxs6.top', 'm.bycp29.com', 'm.bycp31.com', 'm.bycp36.com', 'm.bycp25.com', 'm.bycp1588.com', 'm.bycp1388.com', 'm.bycp26.net', 'm.bycp139.com', 'm.bycp1288.com', 'm.bycp1188.net'], totalReports: 216, latestDate: '2025-10-08' },
+  { name: '新葡京娛樂城', urls: ['k9856825.com', 'm.kqxs88.top', 'm.kqxs66.top', 'n.ylhg82.xyz', 'xpj19208.com', 'm.kqxs323.xyz', 'm.kqxs567.xyz', 'm.kqxs23.top', 'm.kqxs3.top', 'm.kqxs99.cc', 'm.xin6868.com', 'm.xp99999.com', 'b.bycp26.com', 'a.bycp23.com', 'm.bycp27.com', 'm.bycp232.com', 'm.bycp1188.com', 'm.bycp1788.com', 'm.bycp28.com', 'm.bycp2233.com', 'm.bycp2266.com', 'm.bycp235.com', 'm.bycp238.com', 'm.bycp256.com', 'm.bycp21.com', 'm.bycp2688.com', 'm.bycp2988.com', 'm.bycp268.com', 'm.bycp298.com', 'm.bycp378.com', 'm.bycp2688.net', 'm.bycp38.com', 'app.bycp2688.com', 'app.bycp568.com', 'm.bycp2388.com', 'app.bycp278.com', 'm.bycp336.com', 'm.bycp326.com', 'm.bycp658.com', 'm.bycp6688.com', 'm.bycp338.com', 'm.bycp3588.com', 'm.bycp728.com', 'm.bycp398.com', 'm.bycp3988.com', 'm.kqxs9.top', 'm.bycp788.com', 'm.kqxs1.top', 'm.kqxs6.top', 'm.bycp29.com', 'm.bycp31.com', 'm.bycp36.com', 'm.bycp25.com', 'm.bycp1588.com', 'm.bycp1388.com', 'm.bycp26.net', 'm.bycp139.com', 'm.bycp1288.com', 'm.bycp1188.net', 'm.xpj3338.com'], totalReports: 217, latestDate: '2026-04-08' },
   { name: '澳門賭王娛樂城', urls: ['539222.net'], totalReports: 1, latestDate: '2025-09-24' },
   { name: 'AT99娛樂城', urls: ['www.at99.io'], totalReports: 2, latestDate: '2025-09-03' },
   { name: '英皇娛樂城', urls: ['www.royaloaks-game.com'], totalReports: 1, latestDate: '2025-09-03' },
-  { name: 'BCR娛樂城', urls: ['www.bcr1688.com', 'www.bcr6688.com', 'www.bcr2288.com', 'www.bcr7888.com'], totalReports: 6, latestDate: '2025-06-11' },
+  { name: 'BCR娛樂城', urls: ['www.bcr1688.com', 'www.bcr6688.com', 'www.bcr2288.com', 'www.bcr7888.com', 'www.bcr56899.com'], totalReports: 7, latestDate: '2025-06-11' },
   { name: '雲頂娛樂城', urls: ['www.gdas3.com'], totalReports: 1, latestDate: '2025-05-28' },
   { name: '永利娛樂城', urls: ['m.wyn11.vip', 'm.wyn33.vip', 'm.wyn55.vip', 'm.wynn27.cc', 'm.wynn288.cc', 'm.wynn366.cc', 'www.wyn168.vip', 'www.wynn268.cc', 'www.wynnbet365.cc', 'm.wynn1688.vip', 'm.wynn6868.com', 'www.wynn1688.cc', 'm.xc5168.vip', 'm.wynn886.cc', 'm.wynn588.cc', 'm.wynn666.cc', 'm.wynn86.cc', 'm.wynn168.cc', 'm.wynn577.cc'], totalReports: 51, latestDate: '2025-05-07' },
   { name: '華譽娛樂城', urls: ['www.hyc0707.com', 'www.hyc0606.com'], totalReports: 2, latestDate: '2025-04-30' },
@@ -28,7 +28,7 @@ export const scamList = [
   { name: '銀河娛樂城（銀河國際）', urls: ['www.jcai539.top', 'ylc7.shop', 'ylc07.shop', 'ylc8.shop', 'www.galaxy1888.com', 'm.ylcg888.cc', 'www.galaxyw168.com', 'galaxyr.shop', 'galaxy5.shop', 'ylc5.shop', 'www.galaxy6868.com'], totalReports: 17, latestDate: '2025-04-17' },
   { name: '國輝娛樂城', urls: ['www.gh0930.com', 'gh1688.cc', 'www.gh6838.com', 'www.gh7788.com', 'www.gh8838.com'], totalReports: 12, latestDate: '2025-03-28' },
   { name: '澳門MGM娛樂城', urls: ['m.mgm1266.cc', 'www.mgm369.cc', 'm.mgm686.cc', 'm.mgm767.cc'], totalReports: 6, latestDate: '2025-03-07' },
-  { name: 'DG娛樂城（Dream Gaming）', urls: ['dgnew168.com', 'dg1688.org', 'dg3388.org', 'dg5588.org', 'www.dgbet888.com', 'www.dgbet777.com', 'www.dgbet666.com'], totalReports: 11, latestDate: '2025-02-28' },
+  { name: 'DG娛樂城（Dream Gaming）', urls: ['dgnew168.com', 'dg1688.org', 'dg3388.org', 'dg5588.org', 'www.dgbet888.com', 'www.dgbet777.com', 'www.dgbet666.com', 'dg18.cc'], totalReports: 12, latestDate: '2025-02-28' },
   { name: '騰富娛樂城', urls: ['tffconeyone.com', 'tffmoneyone.com', 'tff-oneyone.com', 'tff-moneyone.com', 'tff-foneyone.com'], totalReports: 9, latestDate: '2025-02-28' },
   { name: '富豪娛樂城', urls: ['www.fh2266.com'], totalReports: 7, latestDate: '2025-02-21' },
   { name: '飛達娛樂城', urls: ['faithda.net', 'www.faithda888.com'], totalReports: 2, latestDate: '2025-01-31' },
@@ -66,7 +66,7 @@ export const scamList = [
   { name: 'Demo娛樂城', urls: ['demoslot888.com'], totalReports: 1, latestDate: '2023-11-27' },
   { name: '多金娛樂城', urls: ['gold8888.club'], totalReports: 1, latestDate: '2023-11-21' },
   { name: '必贏娛樂城', urls: ['www.bw8168.com', 'bw8168.com'], totalReports: 3, latestDate: '2023-11-21' },
-  { name: '朕天下娛樂城', urls: ['www.zztx168.com'], totalReports: 1, latestDate: '2023-11-14' },
+  { name: '朕天下娛樂城', urls: ['www.zztx168.com', 'ez0516.mw1688.tw'], totalReports: 2, latestDate: '2026-04-08' },
   { name: '洪運娛樂城', urls: ['vnn18.goodluck988.com'], totalReports: 2, latestDate: '2023-10-31' },
   { name: '大鑫娛樂城', urls: ['www.dx9138.com'], totalReports: 1, latestDate: '2023-10-24' },
   { name: '17play娛樂城', urls: ['www.17-play55.com', 'www.17play00.com', 'www.17play135.com', 'www.17play275.com', 'www.17-play88.com', 'www.17play98.com', '17-play01.com', '17play275.com', 'www.17play99.com', 'www.17play66.com'], totalReports: 51, latestDate: '2023-10-17' },
@@ -100,4 +100,7 @@ export const scamList = [
   { name: '金好運娛樂城', urls: ['www.gh5588.com'], totalReports: 2, latestDate: '2022-02-27' },
   { name: '天擇娛樂城（TNZE）', urls: ['tnze.cc'], totalReports: 3, latestDate: '2022-01-16' },
   { name: '安博娛樂城', urls: ['anbo288.com'], totalReports: 2, latestDate: '2022-01-16' },
+  { name: 'BBIN娛樂城', urls: ['k58023.com'], totalReports: 1, latestDate: '2026-04-08' },
+  { name: '金盈匯娛樂城', urls: ['v088.gw1688.net'], totalReports: 1, latestDate: '2026-04-08' },
+  { name: '藍海俱樂部', urls: ['www.lanhaiclub.com'], totalReports: 1, latestDate: '2026-04-08' },
 ];

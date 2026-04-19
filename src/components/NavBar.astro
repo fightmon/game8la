@@ -21,7 +21,7 @@ const { currentPage = 'home' } = Astro.props;
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>芭樂遊戲</a>
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>芭樂好彩</a>
     <a href="/articles/dealers-guide/" class={currentPage === 'dealers' ? 'active' : ''}>荷官特輯</a>
-    <a href="/casino-check/" class={currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800">🛡️ 體檢</a>
+    <a href="/casino-check/" class={currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800">🛡️ 娛樂城體檢</a>
   </div>
   <div class="nav-search" role="button" tabindex="0" aria-label="開啟搜尋" onclick="openSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')openSearch()">
     <Icon name="search" />
@@ -336,6 +336,7 @@ const { currentPage = 'home' } = Astro.props;
     { t: '娛樂城體檢', d: 'WHOIS查網域、流水計算器、165反詐騙快查', u: '/casino-check/', c: '工具' },
     { t: '5招識破娛樂城詐騙套路', d: 'WHOIS、流水陷阱、支付安全完整拆解', u: '/articles/5-tips-spot-casino-scam/', c: '攻略' },
     { t: '連娛樂城都怕的黑名單', d: '5大導流站交叉比對地雷名單', u: '/articles/casino-not-recommended-by-casinos/', c: '攻略' },
+    { t: '第一次玩娛樂城 10 個新手必知', d: '現金版信用版、流水陷阱、KYC、代操詐騙', u: '/articles/casino-beginner-guide/', c: '攻略' },
   ];
 
   function handleSearch(value) {

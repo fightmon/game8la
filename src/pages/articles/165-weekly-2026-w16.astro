@@ -1,0 +1,199 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const weekLabel = '2026 第 16 週（4/2–4/8）';
+const publishDate = '2026-04-19';
+
+/* ── 本週新增/更新品牌 ── */
+const newBrands = [
+  { name: '朕天下娛樂城', url: 'ez0516.mw1688.tw', isNew: false, note: '既有品牌新增網址，以 mw1688.tw 子網域運作' },
+  { name: '新加坡金沙娛樂', url: 'www.jinsha889.com', isNew: false, note: '與「金沙娛樂城」同品牌家族，使用 jinsha（金沙拼音）網域' },
+  { name: '澳門新葡京', url: 'm.xpj3338.com', isNew: false, note: '與「新葡京娛樂城」同品牌家族，xpj 為新葡京縮寫' },
+  { name: 'BBIN娛樂城', url: 'k58023.com', isNew: true, note: 'BBIN 為知名博弈平台供應商，本站為冒用品牌的詐騙網站' },
+  { name: '金盈匯娛樂城', url: 'v088.gw1688.net', isNew: true, note: '網域含 gw1688 典型博弈模式，疑似資金盤' },
+  { name: '藍海俱樂部', url: 'www.lanhaiclub.com', isNew: true, note: '以「俱樂部」包裝的博弈詐騙平台' },
+];
+
+const newCount = newBrands.filter(b => b.isNew).length;
+const updatedCount = newBrands.filter(b => !b.isNew).length;
+---
+
+<ArticleSchema
+  url="https://game8la.com/articles/165-weekly-2026-w16/"
+  title={`【165 週報】${weekLabel}：新增 ${newCount} 個詐騙娛樂城品牌，${updatedCount} 個既有品牌換新網址`}
+  description={`內政部警政署 165 全民防騙網 ${weekLabel} 詐騙通報週報。本週新增 BBIN娛樂城、金盈匯娛樂城、藍海俱樂部等 ${newCount} 個全新詐騙品牌，另有朕天下娛樂城、金沙娛樂、新葡京等 ${updatedCount} 個既有品牌啟用新網址。GAME8LA 165 監測站即時追蹤更新。`}
+  image="https://game8la.com/images/articles/165-weekly-default-cover.webp"
+  datePublished={publishDate}
+  dateModified={publishDate}
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '165 週報', url: 'https://game8la.com/articles/165-weekly-2026-w16/' },
+  ]}
+/>
+<BaseLayout
+  currentPage="articles"
+  title={`【165 週報】${weekLabel}新增 ${newCount} 個詐騙娛樂城｜GAME8LA 165 監測站`}
+  description={`165 全民防騙網 ${weekLabel} 通報彙整：新增 ${newCount} 個詐騙娛樂城品牌、${updatedCount} 個既有品牌換新網址。芭樂子每週追蹤整理，保護你的錢包。`}
+>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 165 週報</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：{publishDate} ｜
+      <Icon name="user-pen" /> 作者：芭樂子｜
+      <Icon name="book-open" /> 預估閱讀 3 分鐘 ｜
+      <span style="color:#f5b800;font-weight:700">🔍 165 監測站週報</span>
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <h1 style="font-size:1.8rem;line-height:1.3">🔍 165 監測站週報｜{weekLabel}<br /><em>新增 {newCount} 個詐騙娛樂城，{updatedCount} 個老品牌又換新網址</em></h1>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">各位 8LA 鄉民好，我是芭樂子。每週我會從<strong>內政部警政署 165 全民防騙網</strong>的最新通報中，篩選出跟娛樂城、博弈相關的詐騙品牌，整理成這份週報。目的很簡單——<strong>讓你在入金之前，多一道防線</strong>。</p>
+
+      <!-- === 本週摘要 === -->
+      <div class="card" style="border-left:4px solid #ef4444;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#ef4444">⚠️ 本週摘要</h3>
+        <p style="margin:0">165 全民防騙網本週公布了約 <strong>130 筆</strong>假投資／博弈詐騙網站通報。芭樂子從中篩選出 <strong>{newBrands.length} 個</strong>與娛樂城相關的品牌：其中 <strong>{newCount} 個全新品牌</strong>首次出現在我們的黑名單中，另有 <strong>{updatedCount} 個既有品牌</strong>被發現啟用了新的詐騙網址。</p>
+      </div>
+
+      <!-- === 全新品牌 === -->
+      <h2 id="new-brands" style="color:#ef4444">🆕 本週新增詐騙品牌（{newCount} 個）</h2>
+      <p>以下品牌是<strong>首次</strong>被 165 通報、並由芭樂子確認為娛樂城／博弈類型的詐騙網站：</p>
+
+      <div class="weekly-brand-list">
+        {newBrands.filter(b => b.isNew).map(brand => (
+          <div class="weekly-brand-card new-brand">
+            <div class="brand-header">
+              <span class="brand-badge new">🆕 新增</span>
+              <strong>{brand.name}</strong>
+            </div>
+            <div class="brand-url">🌐 <code>{brand.url}</code></div>
+            <p class="brand-note">💡 {brand.note}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- === 既有品牌更新 === -->
+      <h2 id="updated-brands" style="color:#f5b800">🔄 既有品牌新增網址（{updatedCount} 個）</h2>
+      <p>這些品牌已經在我們的黑名單中，但<strong>本週被發現使用了新的網域</strong>——這是典型的「金蟬脫殼」行為，舊網址被封就換新的繼續騙：</p>
+
+      <div class="weekly-brand-list">
+        {newBrands.filter(b => !b.isNew).map(brand => (
+          <div class="weekly-brand-card updated-brand">
+            <div class="brand-header">
+              <span class="brand-badge updated">🔄 更新</span>
+              <strong>{brand.name}</strong>
+            </div>
+            <div class="brand-url">🌐 新網址：<code>{brand.url}</code></div>
+            <p class="brand-note">💡 {brand.note}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- === 趨勢觀察 === -->
+      <h2 id="trend">📊 本週趨勢觀察</h2>
+      <div class="card" style="border-left:4px solid #f5b800;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#f5b800">芭樂子觀察筆記</h3>
+        <p><strong>1. 「冒用知名品牌」依然是主流手法</strong>——本週的「澳門新葡京」、「新加坡金沙娛樂」、「BBIN」都是冒用國際知名博弈品牌的名號來取信玩家。提醒大家：<strong>名字像不代表是真的</strong>，請務必用我們的<a href="/casino-check/">娛樂城體檢工具</a>查詢網域。</p>
+        <p><strong>2. 子網域戰術持續進化</strong>——「朕天下娛樂城」這次使用 <code>ez0516.mw1688.tw</code> 這種帶有代理編號的子網域格式，代表詐騙集團正在用「一人一網址」的方式分散風險，增加被追查的難度。</p>
+        <p style="margin-bottom:0"><strong>3. .tw 域名被濫用</strong>——本週出現了 <code>.mw1688.tw</code> 這類使用台灣國碼域名的詐騙網站。提醒大家：<strong>.tw 結尾不等於合法</strong>，任何人都可以註冊 .tw 域名。</p>
+      </div>
+
+      <!-- === CTA === -->
+      <div class="casino-check-cta" style="background:linear-gradient(135deg,#0a1a2e,#1a2a4a);border:2px solid #f5b800;border-radius:12px;padding:2rem;text-align:center;margin:2rem 0">
+        <h3 style="color:#f5b800;margin-top:0;font-size:1.3rem">🔍 擔心你玩的娛樂城在黑名單上？</h3>
+        <p style="color:#ccc;margin-bottom:1.2rem">使用「娛樂城體檢」工具，一秒比對 165 詐騙黑名單 + WHOIS 網域資訊</p>
+        <a href="/casino-check/" class="cta-button" style="display:inline-block;background:#f5b800;color:#000;padding:0.8rem 2rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.1rem">立即查詢 →</a>
+      </div>
+
+      <!-- === 資料來源 === -->
+      <div style="margin-top:2rem;padding:1rem;background:rgba(255,255,255,0.05);border-radius:8px;font-size:0.85rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>📋 資料來源</strong>：<a href="https://165.npa.gov.tw/#/article/9/1756" target="_blank" rel="noopener noreferrer">內政部警政署 165 全民防騙網 — 115/4/2-115/4/8 民眾通報假投資(博弈)詐騙網站</a></p>
+        <p style="margin:0.5rem 0 0">本站僅整理娛樂城／博弈相關通報，完整名單請參考 165 官方公告。資料更新時間：{publishDate}</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2>📚 延伸閱讀</h2>
+      <ul style="line-height:2">
+        <li><a href="/casino-check/">🔍 娛樂城體檢工具 — 一鍵查詢 165 黑名單 + WHOIS</a></li>
+        <li><a href="/articles/5-tips-spot-casino-scam/">🛡️ 5 招識破娛樂城詐騙套路</a></li>
+        <li><a href="/articles/domain-hopping-scam-truth/">🔗 娛樂城網址一直換？金蟬脫殼詐騙真相</a></li>
+        <li><a href="/articles/anti-scam-8la-guide/">🚨 防詐騙 8LA 指南：8 大手法完整解析</a></li>
+      </ul>
+
+      <ShareButtons />
+      <ManifestoBox />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .weekly-brand-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .weekly-brand-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 1.2rem;
+    border-left: 4px solid;
+  }
+  .weekly-brand-card.new-brand {
+    border-left-color: #ef4444;
+  }
+  .weekly-brand-card.updated-brand {
+    border-left-color: #f5b800;
+  }
+  .brand-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  .brand-badge {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .brand-badge.new {
+    background: rgba(239,68,68,0.2);
+    color: #ef4444;
+  }
+  .brand-badge.updated {
+    background: rgba(245,184,0,0.2);
+    color: #f5b800;
+  }
+  .brand-url {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+  .brand-url code {
+    background: rgba(255,255,255,0.08);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #ff9999;
+  }
+  .brand-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+  @media (max-width: 768px) {
+    .weekly-brand-card { padding: 1rem; }
+    .brand-header { font-size: 1rem; }
+  }
+</style>

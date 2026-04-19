@@ -1,0 +1,422 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '現金版和信用版差在哪？', a: '現金版是先存錢再玩，花完就停；信用版是先玩後付，類似賒帳。信用版容易讓人不知不覺越陷越深、甚至被暴力討債，芭樂子強烈建議新手只碰現金版。' },
+  { q: '娛樂城要求傳身分證安全嗎？', a: '正規平台要求 KYC（身分驗證）是為了防洗錢、確認本人出金，這是合規要求。但只應該在你確認過平台信譽（WHOIS 查網域年齡、165 比對黑名單）之後才提供。絕對不要把證件傳給來路不明的「客服」。' },
+  { q: '流水倍數多少算合理？', a: '業界一般在 15～25 倍之間。超過 30 倍就偏高，40 倍以上幾乎是數學陷阱——你的本金加優惠在跑完流水之前大概率歸零。可以用我們的流水計算器實際算一次就知道了。' },
+  { q: '有人在 LINE 上說可以帶我贏錢，是真的嗎？', a: '100% 是詐騙。常見手法包括：正妹帳號加好友、老師帶牌群組、保證獲利截圖。邏輯很簡單——如果真的穩賺，他自己下注就好，為什麼要分你？看到這類訊息請立刻封鎖。' },
+  { q: '提款一直沒到帳怎麼辦？', a: '正規平台通常 30 分鐘到 24 小時內會完成出金。如果超過 24 小時還沒到帳，客服用「系統維護」「IP 異常」「注單審核」推託，很可能就是黑網準備跑路。立刻截圖保存所有對話和交易紀錄，撥打 165 或 110 報案。' },
+  { q: '線上娛樂城在台灣合法嗎？', a: '台灣法律目前對線上博弈處於灰色地帶。經營線上賭場是違法的，但「玩家」端的法律責任在實務上很少被追訴。不過這不代表零風險——如果你涉及的平台被查獲，你的帳戶和資金都可能被凍結。芭樂子建議了解風險後再做決定。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/casino-beginner-guide/"
+  title="【新手必讀】第一次玩娛樂城？10 個入金前必知的潛規則"
+  description="第一次接觸線上娛樂城？芭樂子整理 10 個入金前一定要知道的潛規則：現金版 vs 信用版、流水陷阱、KYC 身分驗證、代操詐騙、出金軟釘子、RTP 選機秘訣。看懂再玩，別當大肥羊。"
+  image="https://game8la.com/images/article-thumbs/thumb-cover-casino-beginner.webp"
+  datePublished="2026-04-19"
+  dateModified="2026-04-19"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '娛樂城新手 10 大必知', url: 'https://game8la.com/articles/casino-beginner-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="【新手必讀】第一次玩娛樂城？10 個入金前必知的潛規則 - GAME8LA" description="第一次接觸線上娛樂城？芭樂子整理 10 個入金前一定要知道的潛規則：現金版 vs 信用版、流水陷阱、KYC 身分驗證、代操詐騙、出金軟釘子、RTP 選機秘訣、165 黑名單比對。看懂再玩，別當大肥羊。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 娛樂城新手 10 大必知</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-19 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 12 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <img src="/images/articles/casino-beginner-cover.webp" alt="芭樂子站在娛樂城大門前，手持放大鏡做出停止手勢" width="2752" height="1536" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+      <h1 style="font-size:2rem;line-height:1.3">【新手必讀】第一次玩娛樂城？10 個入金前必知的潛規則</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">剛註冊完，客服就噓寒問暖送優惠？先別急著高興。博弈產業水很深，新手最常犯的錯就是看著「高額贈點」就衝動入金。芭樂子為你整理了 10 個保命知識，看懂了再玩，才不會讓錢包變祭品。</p>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#cash-vs-credit">現金版 vs 信用版：只有一個能碰</a></li>
+          <li><a href="#turnover">洗碼量（流水）是什麼？為什麼它是最大的坑</a></li>
+          <li><a href="#domain-age">網域年齡是防詐第一關</a></li>
+          <li><a href="#kyc">為什麼要傳身分證和存摺？</a></li>
+          <li><a href="#scam-groups">代操、帶牌群組 100% 是詐騙</a></li>
+          <li><a href="#payout-traps">出金的「軟釘子」長什麼樣？</a></li>
+          <li><a href="#rtp">RTP：選遊戲不要只看畫面好不好看</a></li>
+          <li><a href="#data-leak">你的註冊資料可能被二次轉賣</a></li>
+          <li><a href="#165">165 名單是你的隨身護身符</a></li>
+          <li><a href="#mindset">期望值永遠是負的——把它當娛樂</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== 知識 1 ===== -->
+      <h2 id="cash-vs-credit" style="margin-top:2.5rem">1. 現金版 vs 信用版：只有一個能碰</h2>
+
+      <p>台灣的線上娛樂城分成兩種模式：<strong>現金版</strong>和<strong>信用版</strong>。這是你進場前最該搞清楚的第一件事。</p>
+
+      <div class="card" style="margin:1rem 0">
+        <table>
+          <thead><tr><th style="min-width:100px">項目</th><th>現金版</th><th>信用版</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">運作方式</td><td>先存錢再玩，花完就停</td><td>先玩後付，類似賒帳</td></tr>
+            <tr><td style="font-weight:700">資金風險</td><td>最多輸掉存入的錢</td><td>可能欠下遠超預算的債</td></tr>
+            <tr><td style="font-weight:700">討債方式</td><td>不適用</td><td>常涉及地下暴力催收</td></tr>
+            <tr><td style="font-weight:700">芭樂子評語</td><td style="color:var(--guava-green);font-weight:700">可以碰</td><td style="color:var(--guava-pink);font-weight:700">碰都不要碰</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>信用版最恐怖的地方在於：你輸的不是你帳戶裡的錢，你輸的是一筆「還沒發生的債務」。而且這類平台的上家通常跟地下錢莊掛鉤，一旦你還不出來，來找你的不是客服，是討債集團。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 芭樂子白話總結</h3>
+        <p style="margin-bottom:0">信用版 = 賭場幫你開額度讓你賒 = 賭到傾家蕩產的特快車。<br>新手只玩<strong>現金版</strong>，存多少玩多少，花完就收手。</p>
+      </div>
+
+      <!-- ===== 知識 2 ===== -->
+      <h2 id="turnover" style="margin-top:2.5rem">2. 洗碼量（流水）是什麼？為什麼它是最大的坑</h2>
+
+      <p>幾乎每一間娛樂城都會用優惠吸引你入金：「首儲送 100%」「週週存千送千」。看起來很爽對吧？先別急，翻開細則看一個數字：<strong>流水倍數</strong>。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🧮 實際算給你看</h3>
+        <p>你存 <strong>1,000 元</strong>，平台送你 <strong>1,000 元</strong>（首儲 100%），流水倍數 <strong>30 倍</strong>：</p>
+        <p style="font-size:1.3rem;text-align:center;margin:1rem 0">
+          (1,000 + 1,000) × 30 = <span style="color:var(--guava-pink);font-weight:900">60,000 元</span>
+        </p>
+        <p>你必須下注滿 <strong>6 萬元</strong>才能提款。假設你玩老虎機（莊家優勢 5%），光是跑完流水的過程中，數學期望你會損失 60,000 × 5% = <strong>3,000 元</strong>。</p>
+        <p style="margin-bottom:0;color:var(--guava-pink);font-weight:700">你的本金加優惠才 2,000 元，但跑流水的預期損失是 3,000 元——還沒提款就已經虧了。</p>
+      </div>
+
+      <p>這就是為什麼芭樂子一直說：<strong>優惠送太誇張（送 200%、300%）通常都伴隨著天價流水，那是「看得到領不到」的數字遊戲。</strong></p>
+
+      <p>想知道你正在看的優惠到底划不划算？直接用芭樂子做的工具算一次：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <p style="margin:0">👉 <a href="/casino-check/#turnover-module" style="color:var(--guava-green);font-weight:700">流水倍數計算器 → 輸入數字 3 秒出結果</a></p>
+      </div>
+
+      <img loading="lazy" src="/images/articles/casino-beginner-turnover.webp" alt="芭樂子指向×30流水漩渦，金幣被吸走，旁邊是首儲送100%霓虹招牌和空錢包" class="content-img" width="2752" height="1536">
+      <p class="article-img-caption">▲ 流水倍數就像金色漩渦——優惠送越多，你的錢被吸走得越快</p>
+
+      <!-- ===== 知識 3 ===== -->
+      <h2 id="domain-age" style="margin-top:2.5rem">3. 網域年齡是防詐第一關</h2>
+
+      <p>詐騙娛樂城有一個通病：<strong>網站開不久</strong>。因為他們的商業模式就是開站→收錢→跑路→換網址再來。如果一個網站的網域才註冊幾個月就大灑優惠要你入金，紅旗直接插好插滿。</p>
+
+      <p>怎麼查？兩個方法：</p>
+
+      <div class="card" style="margin:1rem 0">
+        <p><strong>方法 1：用芭樂子的娛樂城體檢工具</strong>（最快）<br>
+        把網址貼進去，3 秒自動查 WHOIS 網域年齡 + 165 黑名單比對，一站搞定。</p>
+        <p style="margin-bottom:0"><strong>方法 2：自己查 WHOIS</strong><br>
+        到 <code>who.is</code> 或 <code>whois.domaintools.com</code> 輸入網址，看 <code>Creation Date</code>（註冊日期）。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔎 芭樂子判讀標準</h3>
+        <p><span style="color:var(--guava-green);font-weight:700">超過 2 年</span> = 相對安全，至少經營得夠久<br>
+        <span style="color:var(--gold);font-weight:700">6 個月～2 年</span> = 需要警覺，搭配其他指標判斷<br>
+        <span style="color:var(--guava-pink);font-weight:700">不到 6 個月</span> = 高風險，很可能是新開的黑網</p>
+        <p style="margin-bottom:0">👉 <a href="/casino-check/" style="color:var(--guava-green);font-weight:700">立即用娛樂城體檢工具查一下</a></p>
+      </div>
+
+      <!-- ===== 知識 4 ===== -->
+      <h2 id="kyc" style="margin-top:2.5rem">4. 為什麼要傳身分證和存摺？</h2>
+
+      <p>新手第一次碰到這步通常會嚇到：「我只是想玩遊戲，為什麼要傳身分證？」這個擔心很正常，但先別急著跑。</p>
+
+      <p><strong>KYC（Know Your Customer）</strong>是金融監管的標準流程，目的是防洗錢、確認你是本人、確保出金打到你自己的帳戶。不只娛樂城，銀行開戶、證券開戶都要做一樣的事。正規平台要求 KYC 反而是好事——至少表示它在走合規路線。</p>
+
+      <p>但問題來了：<strong>你要確認對方是正規平台之後才能交個資。</strong></p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">🚨 交個資之前的 3 項檢查</h3>
+        <p>1. <strong>先查網域年齡</strong>（上一節教的）——不到 6 個月的不要交<br>
+        2. <strong>先比對 165 黑名單</strong>——已被通報的不要交<br>
+        3. <strong>先 Google「平台名 + 詐騙」</strong>——看有沒有其他受害者分享</p>
+        <p style="margin-bottom:0">三項都通過了再傳。傳的時候在證件照片上加浮水印「僅供 XX 平台驗證使用」，防止被挪用。</p>
+      </div>
+
+      <!-- ===== 知識 5 ===== -->
+      <h2 id="scam-groups" style="margin-top:2.5rem">5. 代操、帶牌群組 100% 是詐騙</h2>
+
+      <p>如果你有在用 LINE 或 Telegram，一定碰過這些：</p>
+
+      <div class="card" style="margin:1rem 0">
+        <p style="margin:0"><strong>「我是 XX 戰隊分析師，跟著我的單包你贏」</strong><br>
+        <strong>「老師帶牌群組，每天穩定獲利 3%」</strong><br>
+        <strong>「美女帳號加你好友，說她在娛樂城賺了很多想分享」</strong></p>
+      </div>
+
+      <p>芭樂子只有一句話：<strong>如果真的穩賺，他自己賺就好，幹嘛分你？</strong></p>
+
+      <p>這些群組的商業模式通常是這樣的：他們跟某間娛樂城有分潤協議，你透過他們的連結註冊入金，他們抽佣。更惡劣的是直接跟黑網合作，你入的金根本出不來。那些「獲利截圖」全部可以 P 圖造假，那些「群裡的其他人」大部分是暱稱機器人。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">🚫 看到這些關鍵字直接封鎖</h3>
+        <p style="margin-bottom:0">「保證獲利」「穩定日報酬」「老師帶單」「分析師推薦」「名額有限」「跟著下注就對了」——任何跟你保證能在賭博贏錢的人，不是騙子就是瘋子。博弈的結果是<strong>數學加隨機</strong>決定的，沒有任何人能預測。</p>
+      </div>
+
+      <!-- ===== 知識 6 ===== -->
+      <h2 id="payout-traps" style="margin-top:2.5rem">6. 出金的「軟釘子」長什麼樣？</h2>
+
+      <p>入金很快，出金很慢——這是黑網最經典的特徵。但他們不會直接告訴你「我們不打算給你錢」，而是用一堆看似合理的理由拖延：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🎭 黑網客服的經典話術</h3>
+        <p><strong>「系統維護中，請稍後再試」</strong> → 一直維護到你放棄<br>
+        <strong>「您的 IP 異常，需重新驗證」</strong> → 永遠驗證不完<br>
+        <strong>「注單審核中，請耐心等候」</strong> → 審核到天荒地老<br>
+        <strong>「需再存一筆才能啟動提款」</strong> → 經典的追加詐騙<br>
+        <strong>「您的帳號被偵測到套利行為」</strong> → 你贏太多他不想付</p>
+        <p style="margin-bottom:0;color:var(--guava-pink);font-weight:700">超過 24 小時沒到帳 + 客服持續推託 = 黑網跑路前兆，立刻截圖保存所有紀錄。</p>
+      </div>
+
+      <p>正規平台的出金通常在 30 分鐘到 24 小時以內完成。如果你第一次小額提款就遇到推託，後面大額更不用指望了。芭樂子的建議是：<strong>入金後先做一次小額出金測試</strong>，確認金流是通的，再考慮是否繼續玩。</p>
+
+      <img loading="lazy" src="/images/articles/casino-beginner-redflags.webp" alt="左邊戴面具狐狸客服說系統維護中，右邊芭樂子拿盾牌比讚" class="content-img" width="2752" height="1536">
+      <p class="article-img-caption">▲ 左：黑網客服的經典推託話術 vs 右：芭樂子認證的安全平台</p>
+
+      <!-- ===== 知識 7 ===== -->
+      <h2 id="rtp" style="margin-top:2.5rem">7. RTP：選遊戲不要只看畫面好不好看</h2>
+
+      <p>RTP（Return To Player）是每款電子遊戲的「玩家回報率」。RTP 96% 表示長期而言每投注 100 元，理論上有 96 元會回到玩家手中、平台賺 4 元。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">💡 芭樂子選機三原則</h3>
+        <p><strong>1. RTP 低於 94% 的不碰</strong> — 平台吃太多了<br>
+        <strong>2. 波動度要配你的預算</strong> — 預算少選低波動（常中小獎），預算足選高波動（衝大獎）<br>
+        <strong>3. 在遊戲內確認 RTP</strong> — 同一款遊戲在不同平台可能有不同版本</p>
+        <p style="margin-bottom:0">想深入了解 RTP 和波動度怎麼看？<br>👉 <a href="/articles/slots-rtp-guide/" style="color:var(--guava-green);font-weight:700">老虎機 RTP 完整教學 → 拆解 RNG、波動度、實測數據</a></p>
+      </div>
+
+      <p>很多新手選遊戲只看「畫面好不好看」「主題喜不喜歡」，完全忽略 RTP。這就像是買車只看外觀不看油耗——長期下來差很多。花 30 秒確認一下 RTP，可以讓你的本金撐更久、碰到大獎的機會更多。</p>
+
+      <!-- ===== 知識 8 ===== -->
+      <h2 id="data-leak" style="margin-top:2.5rem">8. 你的註冊資料可能被二次轉賣</h2>
+
+      <p>這是大部分新手完全沒意識到的風險。</p>
+
+      <p>當你在一個來路不明的娛樂城註冊帳號，你交出去的不只是一組帳密，還有：手機號碼、Email、銀行帳號（出金用）、甚至身分證照片。如果這個平台是黑網，你的這些資料不會被刪除——它們會被<strong>打包轉賣</strong>。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">📱 註冊資料被轉賣後你會遇到什麼？</h3>
+        <p><strong>投資詐騙電話</strong> — 「您好，這裡是 XX 證券⋯」<br>
+        <strong>貸款推銷簡訊</strong> — 「恭喜您有一筆 30 萬額度⋯」<br>
+        <strong>更多娛樂城推銷</strong> — 你的號碼在名單上被輪流打<br>
+        <strong>身分被冒用</strong> — 最嚴重的情況：你的證件被拿去當人頭開帳戶</p>
+        <p style="margin-bottom:0;color:var(--guava-pink);font-weight:700">一旦個資外洩就收不回來。所以在交出任何資料之前，請先用第 3、4 節的方法確認平台是否可信。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔒 芭樂子的自保建議</h3>
+        <p style="margin-bottom:0">1. <strong>不同平台用不同密碼</strong>（用密碼管理器，別全部用同一組）<br>
+        2. <strong>註冊用次要 Email</strong>，不要用主力信箱<br>
+        3. <strong>手機開啟來電過濾</strong>（Whoscall 之類的 App）<br>
+        4. <strong>身分證浮水印</strong>每次傳都加，防止被挪用</p>
+      </div>
+
+      <!-- ===== 知識 9 ===== -->
+      <h2 id="165" style="margin-top:2.5rem">9. 165 名單是你的隨身護身符</h2>
+
+      <p>165 是內政部警政署的<strong>反詐騙諮詢專線</strong>，同時也有一個線上資料庫，持續更新被民眾通報的詐騙網站。這是你在入金前最應該做的事之一：<strong>查一下你要玩的平台有沒有在名單上</strong>。</p>
+
+      <p>芭樂子已經把 165 資料庫裡的娛樂城詐騙名單全部整理好了，不用你自己一筆一筆翻：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🛡️ 芭樂子的 165 監測工具</h3>
+        <p><a href="/casino-check/" style="color:var(--guava-green);font-weight:700">娛樂城體檢 → 輸入網址自動比對 165 黑名單 + WHOIS 查詢</a></p>
+        <p style="margin-bottom:0">目前收錄 <strong>93 個詐騙品牌、369+ 個詐騙網址</strong>，每週同步 165 最新通報。建議把這個頁面<strong>加入書籤</strong>，每次入金前花 10 秒查一下。</p>
+      </div>
+
+      <p>記住：<strong>沒有在 165 名單上不代表安全</strong>——可能只是還沒被通報。所以 165 查詢要搭配網域年齡、出金測試、口碑搜尋，做完整體檢才能降低風險。</p>
+
+      <!-- ===== 知識 10 ===== -->
+      <h2 id="mindset" style="margin-top:2.5rem">10. 期望值永遠是負的——把它當娛樂</h2>
+
+      <p>最後一個知識，也是最重要的一個。</p>
+
+      <p>不管你玩的是老虎機、百家樂、體育投注還是彩票，<strong>所有博弈遊戲的長期期望值都是負的</strong>。這不是芭樂子在唱衰，這是數學。每一款遊戲都有 House Edge（莊家優勢），平台就是靠這個賺錢。沒有例外。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🎯 健康的博弈心態</h3>
+        <p><strong>贏了是運氣，輸了是門票。</strong></p>
+        <p>把它當成一種<strong>娛樂消費</strong>——就像你去看電影花 350 元、去唱 KTV 花 1,000 元。你不會期待看完電影之後電影院退你錢吧？</p>
+        <p style="margin-bottom:0">入金之前先問自己一個問題：「<strong>這筆錢全部輸掉，我的生活會受影響嗎？</strong>」如果答案是會，那你不應該入金。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">🚨 出現這些狀況請立刻停下來</h3>
+        <p style="margin-bottom:0">• 輸了一直想「再下一把就能翻本」<br>
+        • 開始借錢、刷信用卡來入金<br>
+        • 贏了不想走、輸了更不想走<br>
+        • 影響到日常作息、工作、人際關係<br><br>
+        如果你或身邊的人有以上狀況，可以撥打衛生福利部安心專線 <strong>1925</strong>，或加入問題賭博諮詢服務。承認自己需要幫助不丟臉，堅持不放手才真的會輸到什麼都不剩。</p>
+      </div>
+
+      <!-- ===== 芭樂子總結 ===== -->
+      <h2 style="margin-top:2.5rem">芭樂子的 10 點總結清單</h2>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <p style="margin:0;line-height:2.2">
+          <strong style="color:var(--gold)">✅ 1.</strong> 只玩現金版，不碰信用版<br>
+          <strong style="color:var(--gold)">✅ 2.</strong> 看到優惠先算流水，送越多坑越大<br>
+          <strong style="color:var(--gold)">✅ 3.</strong> 入金前查網域年齡，不到 6 個月不碰<br>
+          <strong style="color:var(--gold)">✅ 4.</strong> KYC 是正常的，但要先確認平台再交資料<br>
+          <strong style="color:var(--gold)">✅ 5.</strong> 代操帶牌 100% 是詐騙，直接封鎖<br>
+          <strong style="color:var(--gold)">✅ 6.</strong> 出金超過 24 小時沒到帳就是警訊<br>
+          <strong style="color:var(--gold)">✅ 7.</strong> 選遊戲看 RTP，低於 94% 不碰<br>
+          <strong style="color:var(--gold)">✅ 8.</strong> 不同平台用不同密碼，保護個資<br>
+          <strong style="color:var(--gold)">✅ 9.</strong> 入金前用 165 名單比對一次<br>
+          <strong style="color:var(--gold)">✅ 10.</strong> 這是娛樂不是投資，輸得起才玩
+        </p>
+      </div>
+
+      <ManifestoBox slogan="這篇新手指南 = 數據查證 + 實戰經驗・零娛樂城業配置入" />
+
+      <!-- ===== FAQ ===== -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <ShareButtons title="【新手必讀】第一次玩娛樂城？10 個入金前必知的潛規則" url="https://game8la.com/articles/casino-beginner-guide/" />
+
+      <!-- ═══ 娛樂城體檢 CTA ═══ -->
+      <section class="casino-check-cta">
+        <div class="cta-icon">🛡️</div>
+        <h3>看完 10 點，不如直接幫你查</h3>
+        <p>與其背下所有潛規則，不如把你正在考慮入金的娛樂城網址丟進來——<strong style="color:#f5b800">3 秒鐘</strong>幫你查網域年齡、算流水陷阱、比對 165 詐騙通報。</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:0.3rem">已有超過上千名玩家在入金前先來這裡體檢，避開了不出金黑網。</p>
+        <a href="/casino-check/" class="cta-check-btn">🔎 前往娛樂城體檢 — 免費即時檢測</a>
+      </section>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <h3 style="margin-top:2.5rem">📚 延伸閱讀</h3>
+      <div class="related-links">
+        <a href="/casino-check/" class="rl-item">
+          <span class="rl-cat">免費工具</span>
+          <strong>娛樂城體檢工具</strong>
+          <span class="rl-desc">WHOIS + 165 黑名單一鍵查詢</span>
+        </a>
+        <a href="/articles/5-tips-spot-casino-scam/" class="rl-item">
+          <span class="rl-cat">防詐進階</span>
+          <strong>5 招識破娛樂城詐騙套路</strong>
+          <span class="rl-desc">WHOIS、流水陷阱、支付安全完整拆解</span>
+        </a>
+        <a href="/articles/slots-rtp-guide/" class="rl-item">
+          <span class="rl-cat">老虎機教學</span>
+          <strong>老虎機 RTP 完整教學</strong>
+          <span class="rl-desc">RNG、波動度、選機鐵律</span>
+        </a>
+        <a href="/articles/online-casino-guide/" class="rl-item">
+          <span class="rl-cat">產業入門</span>
+          <strong>線上娛樂城完整指南</strong>
+          <span class="rl-desc">娛樂城產業從零認識</span>
+        </a>
+      </div>
+    </article>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
+    </div>
+  </div>
+
+<style is:global>
+.content-img {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 1.5rem auto 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0a0e1a;
+  height: auto;
+}
+.article-img-caption {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 auto 1.5rem;
+  max-width: 900px;
+}
+
+/* FAQ */
+.faq-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+  margin-bottom: 0.8rem; padding: 0 1.2rem;
+}
+.faq-item[open] { border-color: #f5b800; }
+.faq-q {
+  cursor: pointer; padding: 1rem 0; font-weight: 800; color: var(--text-primary);
+  list-style: none; display: flex; align-items: center; justify-content: space-between;
+}
+.faq-q::after { content: '+'; color: #f5b800; font-size: 1.3rem; font-weight: 900; }
+.faq-item[open] .faq-q::after { content: '−'; }
+
+/* Related Links */
+.related-links {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem; margin: 1.5rem 0 3rem;
+}
+.rl-item {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  text-decoration: none; color: var(--text-primary);
+  transition: all 0.25s;
+}
+.rl-item:hover { border-color: #f5b800; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(245,184,0,0.12); }
+.rl-cat { font-size: 0.75rem; color: #f5b800; font-weight: 700; }
+.rl-item strong { font-size: 0.98rem; line-height: 1.45; color: var(--text-primary); }
+.rl-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+
+/* Casino Check CTA */
+.casino-check-cta {
+  margin: 2.5rem 0;
+  padding: 2rem 1.8rem;
+  background: linear-gradient(135deg, rgba(245,184,0,0.06), rgba(245,184,0,0.02));
+  border: 2px solid rgba(245,184,0,0.35);
+  border-radius: 16px;
+  text-align: center;
+}
+.casino-check-cta .cta-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.casino-check-cta h3 { margin: 0 0 0.8rem; font-size: 1.3rem; color: var(--text-primary); }
+.casino-check-cta p { color: var(--text-secondary); line-height: 1.8; max-width: 520px; margin: 0 auto; }
+.cta-check-btn {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.95rem 2rem;
+  background: linear-gradient(135deg, #f5b800, #e09900);
+  border-radius: 12px;
+  color: #000;
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.cta-check-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,184,0,0.35); }
+@media (max-width: 768px) {
+  .casino-check-cta { padding: 1.5rem 1.2rem; }
+  .casino-check-cta h3 { font-size: 1.15rem; }
+  .cta-check-btn { font-size: 0.95rem; padding: 0.85rem 1.5rem; width: 100%; }
+}
+</style>
+</BaseLayout>

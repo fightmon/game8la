@@ -25,7 +25,7 @@
 
 ### 🛡️ 新手避坑類
 - [x] 防詐騙 8LA 指南（/articles/anti-scam-8la-guide/）
-- [ ] 第一次玩娛樂城 10 個新手必知
+- [x] 第一次玩娛樂城 10 個新手必知（/articles/casino-beginner-guide/）
 - [ ] 娛樂城出金卡關原因 Top 5 與解法
 - [ ] 娛樂城代儲是什麼？為什麼不要用？
 

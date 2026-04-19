@@ -2,9 +2,15 @@
 import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { articles } from '../data/articles.js';
+import { scamList, lastUpdated } from '../data/scam-list.js';
 
 // 取最新 6 篇給首頁卡片
 const latestArticles = articles.slice(0, 6);
+
+// 取最新通報 10 筆（依日期排序）
+const latestScams = [...scamList]
+  .sort((a, b) => b.latestDate.localeCompare(a.latestDate))
+  .slice(0, 10);
 ---
 
 <BaseLayout 
@@ -141,6 +147,22 @@ const latestArticles = articles.slice(0, 6);
         <a href="/articles/casino-jackpot-tax-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">5</span><span class="hot-title">娛樂城獎金課稅指南</span><span class="hot-views">650</span></a>
         <a href="/articles/atg-seth-copycat-exposed/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">6</span><span class="hot-title">戰神賽特抄襲揭密</span><span class="hot-views">2,187</span></a>
         <a href="/articles/baccarat-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">7</span><span class="hot-title">百家樂看路教學</span><span class="hot-views">1,245</span></a>
+      </div>
+      <!-- 最新詐騙通報 -->
+      <div class="scam-alert-widget">
+        <h3>🚨 最新詐騙通報</h3>
+        <p class="scam-alert-sub">165 監測站 · 更新 {lastUpdated}</p>
+        {latestScams.map((s, i) => (
+          <div class="scam-alert-item">
+            <span class="scam-alert-idx">{i + 1}</span>
+            <div class="scam-alert-info">
+              <span class="scam-alert-name">{s.name}</span>
+              <span class="scam-alert-url">{s.urls[0]}</span>
+            </div>
+            <span class="scam-alert-date">{s.latestDate.slice(5)}</span>
+          </div>
+        ))}
+        <a href="/casino-check/" class="scam-alert-cta">查看完整黑名單 →</a>
       </div>
     </div>
   </div>
@@ -1263,6 +1285,56 @@ body {
 .hot-num.rest { background: var(--bg-secondary); color: var(--text-muted); }
 .hot-item .hot-title { font-size: 0.9rem; }
 .hot-item .hot-views { color: var(--text-muted); font-size: 0.8rem; margin-left: auto; white-space: nowrap; }
+
+/* === SIDEBAR SCAM ALERT WIDGET === */
+.scam-alert-widget {
+  background: var(--bg-card); border-radius: 16px;
+  padding: 1.5rem; border: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+.scam-alert-widget h3 {
+  font-size: 1.1rem; margin-bottom: 0.3rem;
+  padding-bottom: 0.8rem; border-bottom: 1px solid var(--border);
+}
+.scam-alert-sub {
+  font-size: 0.75rem; color: var(--text-muted); margin: 0 0 0.8rem;
+}
+.scam-alert-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0; border-bottom: 1px solid rgba(42,51,32,0.3);
+}
+.scam-alert-item:last-of-type { border-bottom: none; }
+.scam-alert-idx {
+  width: 22px; height: 22px; border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.7rem; flex-shrink: 0;
+  background: rgba(239,68,68,0.15); color: #ef4444;
+}
+.scam-alert-info {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem;
+}
+.scam-alert-name {
+  font-size: 0.85rem; font-weight: 600; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.scam-alert-url {
+  font-size: 0.7rem; color: #ef4444; opacity: 0.7;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: monospace;
+}
+.scam-alert-date {
+  font-size: 0.7rem; color: var(--text-muted); white-space: nowrap; flex-shrink: 0;
+}
+.scam-alert-cta {
+  display: block; text-align: center; margin-top: 1rem;
+  padding: 0.6rem; background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3); border-radius: 8px;
+  color: #ef4444; font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+}
+.scam-alert-cta:hover {
+  background: rgba(239,68,68,0.2); border-color: #ef4444;
+}
 
 /* === CATEGORY FILTER === */
 .category-filters {
