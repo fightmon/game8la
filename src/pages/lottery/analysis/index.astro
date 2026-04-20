@@ -87,10 +87,10 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- 心水號碼組合器 -->
+  <!-- 自選號碼組合器 -->
   <section class="analysis-section picker-section collapsible">
     <div class="section-head" onclick="toggleSection(this)">
-      <h2>💖 我的心水號碼 <span class="section-chevron">▾</span></h2>
+      <h2>💖 我的自選號碼 <span class="section-chevron">▾</span></h2>
       <p>點選號碼組成你的一組，看看歷史上表現如何</p>
     </div>
     <div class="section-body">
@@ -1406,7 +1406,7 @@ function tickCountdown() {
     `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
 
-// === PICKER (心水號碼) ===
+// === PICKER (自選號碼) ===
 let pickerSelected = [];
 
 function renderPicker() {
@@ -1858,7 +1858,7 @@ init();
   font-variant-numeric: tabular-nums;
 }
 
-/* === Picker (心水號碼) === */
+/* === Picker (自選號碼) === */
 .picker-section {
   background: linear-gradient(135deg, rgba(255,105,180,0.06), rgba(255,215,0,0.04));
   border-color: rgba(255,105,180,0.3);
@@ -2426,7 +2426,7 @@ init();
   .countdown-bar { flex-direction: column; gap: 0.3rem; padding: 0.6rem 0.8rem; }
   .countdown-timer { font-size: 1.3rem; }
 
-  /* === 心水號碼 手機版 === */
+  /* === 自選號碼 手機版 === */
   .pk-num { width: 40px; height: 40px; font-size: 0.95rem; }
   .picker-selected { flex-direction: column; align-items: stretch; gap: 0.5rem; }
   .picker-balls { justify-content: center; }

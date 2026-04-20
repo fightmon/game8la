@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'lottery-data-tool-guide',
+    title: '拒絕瞎猜！2026 最強免費彩券回測工具：用歷史大數據看透 539、威力彩、大樂透冷熱規律',
+    excerpt: '還在聽明牌？GAME8LA 樂透數據站用歷史開獎大數據，幫你回測冷熱號、追蹤遺漏值、自動包牌、模擬勝率。6 大免費工具完整教學，3 步驟上手，不報明牌只給數據。',
+    category: 'lottery',
+    categoryLabel: '彩券工具',
+    badgeType: 'featured',
+    date: '2026-04-20',
+    views: 0,
+    tags: ['最新', '精選', '必讀'],
+    icon: 'bar-chart',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-cover-lottery-data-tool.webp'
+  },
+  {
     slug: 'casino-payout-guide',
     title: '【出金攻略】娛樂城提款失敗？5 大卡關原因與自救 SOP',
     excerpt: '出金卡關怎麼辦？拆解流水沒跑完、KYC 退件、風控凍結、出金管道故障、黑網不出金 5 大原因，每個都附自救步驟。入金前先查 165 黑名單，避開不出金黑網。',
