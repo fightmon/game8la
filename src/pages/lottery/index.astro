@@ -114,6 +114,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p class="disclaimer">⚠️ 本頁資料僅供參考，實際中獎號碼請以 <a href="https://www.taiwanlottery.com/" target="_blank" rel="noopener">台灣彩券官方網站</a> 公告為準。</p>
     </section>
 
+    <!-- 號碼分析入口 -->
+    <section class="analysis-cta">
+      <a href="/lottery/analysis/" class="analysis-cta-link">
+        <span class="cta-icon">🧊</span>
+        <div class="cta-text">
+          <strong>冷數據專區 — 歷史開獎趨勢回測</strong>
+          <span>同號連開回測 · 冷熱號排行 · 遺漏值追蹤 · 號碼組合統計</span>
+        </div>
+        <span class="cta-arrow">進入冷數據 →</span>
+      </a>
+    </section>
+
     <section class="lottery-read-more">
       <div class="rm-head">
         <h3>📚 樂透延伸閱讀</h3>
@@ -202,6 +214,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .history-meta strong { color: var(--gold-light); }
     .history-nums { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
     .history-sep { color: var(--text-muted); margin: 0 0.2rem; }
+
+    /* Analysis CTA */
+    .analysis-cta { max-width: 1168px; margin: 2rem auto; }
+    .analysis-cta-link {
+      display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem;
+      background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(255,215,0,0.06));
+      border: 1px solid rgba(57,255,20,0.3); border-radius: 14px;
+      text-decoration: none; color: var(--text-primary); transition: all 0.25s;
+    }
+    .analysis-cta-link:hover {
+      border-color: #39FF14; box-shadow: 0 6px 20px rgba(57,255,20,0.18); transform: translateY(-2px);
+    }
+    .cta-icon { font-size: 2rem; }
+    .cta-text { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
+    .cta-text strong { font-size: 1.1rem; color: var(--gold-light); }
+    .cta-text span { font-size: 0.85rem; color: var(--text-muted); }
+    .cta-arrow { color: var(--gold-light); font-weight: 800; font-size: 0.9rem; white-space: nowrap; }
+    @media (max-width: 600px) {
+      .analysis-cta-link { flex-wrap: wrap; }
+      .cta-arrow { width: 100%; text-align: right; }
+    }
 
     .info-box {
       background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;

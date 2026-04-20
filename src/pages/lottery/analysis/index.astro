@@ -1,0 +1,2036 @@
+---
+import Icon from '../../../components/Icon.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="冷數據專區｜539・威力彩・大樂透歷史開獎趨勢回測 - 芭樂好彩 GAME8LA"
+  description="芭樂好彩冷數據專區：今彩539、威力彩、大樂透歷史開獎回測，同號連開機率、冷熱號排行、遺漏值追蹤、號碼組合統計。不報明牌，只給冷數據。"
+  currentPage="lottery"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/lottery/">芭樂好彩</a> &gt; 冷數據專區</div>
+  <a href="/lottery/" class="back-link"><Icon name="arrow-left" /> 回芭樂好彩</a>
+
+  <div class="page-hero">
+    <h1>🧊 <em>冷數據專區</em></h1>
+    <p class="hero-sub">歷史開獎趨勢回測 — 不報明牌，只給冷數據</p>
+    <p class="updated">資料更新至：<span id="updateTime">載入中…</span>｜共 <span id="totalDraws">--</span> 期</p>
+  </div>
+
+  <!-- 彩種切換 -->
+  <div class="lottery-tabs">
+    <button class="lot-tab active" data-lottery="daily_cash_539" onclick="switchLottery(this)">
+      <Icon name="coins" /> 今彩 539
+    </button>
+    <button class="lot-tab" data-lottery="super_lotto" onclick="switchLottery(this)">
+      <Icon name="zap" /> 威力彩
+    </button>
+    <button class="lot-tab" data-lottery="lotto649" onclick="switchLottery(this)">
+      <Icon name="star" /> 大樂透
+    </button>
+  </div>
+
+  <!-- 期數篩選 -->
+  <div class="range-selector">
+    <span class="range-label">統計範圍：</span>
+    <button class="range-btn" data-range="10" onclick="setRange(this)">近 10 期</button>
+    <button class="range-btn" data-range="30" onclick="setRange(this)">近 30 期</button>
+    <button class="range-btn active" data-range="50" onclick="setRange(this)">近 50 期</button>
+    <button class="range-btn" data-range="0" onclick="setRange(this)">全部</button>
+  </div>
+
+  <!-- 芭樂選號參考 -->
+  <section class="analysis-section suggestion-section collapsible">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>🎱 芭樂選號參考 <span class="section-chevron">▾</span></h2>
+      <p>根據近 <span id="suggestRange">50</span> 期冷熱號、同號連開、遺漏值交叉評分 — 僅供娛樂參考</p>
+    </div>
+    <div class="section-body">
+      <div id="suggestionResult"></div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：這組號碼是根據歷史數據的統計趨勢產生，<strong>不是預測</strong>，也不保證中獎。每期開獎都是獨立事件，球沒有記憶。請理性投注，開心就好！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 芭樂包牌產生器 -->
+  <section class="analysis-section wheel-section collapsible">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>🎰 芭樂包牌產生器 <span class="section-chevron">▾</span></h2>
+      <p>根據選號參考的高分號碼，自動展開縮水包牌組合</p>
+    </div>
+    <div class="section-body">
+      <div class="wheel-budget">
+        <span class="wheel-budget-label">投注預算：</span>
+        <button class="whl-btn active" data-budget="1000" onclick="event.stopPropagation();setBudget(this)">$1,000</button>
+        <button class="whl-btn" data-budget="3000" onclick="event.stopPropagation();setBudget(this)">$3,000</button>
+        <button class="whl-btn" data-budget="5000" onclick="event.stopPropagation();setBudget(this)">$5,000</button>
+        <div class="whl-custom">
+          <input type="number" id="customBudget" placeholder="自訂金額" min="100" step="100" onclick="event.stopPropagation()">
+          <button class="whl-btn whl-custom-go" onclick="event.stopPropagation();setCustomBudget()">套用</button>
+        </div>
+      </div>
+      <div class="wheel-summary" id="wheelSummary"></div>
+      <div class="wheel-pool" id="wheelPool"></div>
+      <div class="wheel-combos" id="wheelCombos"></div>
+      <div class="wheel-review" id="wheelReview"></div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：包牌只是提高號碼覆蓋率，<strong>不是提高中獎率</strong>。彩券期望值永遠是負的，買越多賠越多是數學事實。請量力而為，把它當娛樂就好！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 同號連開回測 -->
+  <section class="analysis-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>🔄 同號連開回測 <span class="section-chevron">▸</span></h2>
+      <p>某號碼本期開出後，下一期再開出同號的歷史機率</p>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="repeat-summary" id="repeatSummary"></div>
+      <div class="repeat-grid" id="repeatGrid"></div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：同號連開的歷史機率大多趨近理論值（<span id="theoryNote">1/39</span>），正好驗證了「球沒有記憶」。數據有趣歸有趣，但別當作下注依據。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 冷熱號排行 -->
+  <section class="analysis-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>🔥 冷熱號排行 <span class="section-chevron">▸</span></h2>
+      <p>出現次數最多的「熱號」與最少的「冷號」</p>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="hot-cold-grid">
+        <div class="hc-card hot">
+          <h3>🔥 熱門號碼 TOP 10</h3>
+          <div class="hc-list" id="hotNumbers"></div>
+        </div>
+        <div class="hc-card cold">
+          <h3>🧊 冷門號碼 TOP 10</h3>
+          <div class="hc-list" id="coldNumbers"></div>
+        </div>
+      </div>
+      <div class="special-stats" id="specialStats" style="display:none">
+        <h3 id="specialTitle">🎯 第二區號碼統計</h3>
+        <div class="hc-list" id="specialNumbers"></div>
+      </div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：熱號只代表「過去常出現」，不代表「未來會繼續」。冷號也不會因為「該出了」就真的出現。每顆球被抽中的機率永遠相同。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 冷熱號回測模擬 -->
+  <section class="analysis-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>🧪 冷熱號回測模擬 <span class="section-chevron">▸</span></h2>
+      <p>如果每期都用前 N 期的「熱號」或「冷號」去買，歷史上到底中了幾期？</p>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="backtest-toggle">
+        <button class="bt-btn active" data-strategy="hot" onclick="switchStrategy(this)">🔥 買熱號</button>
+        <button class="bt-btn" data-strategy="cold" onclick="switchStrategy(this)">🧊 買冷號</button>
+      </div>
+      <div class="backtest-summary" id="backtestSummary"></div>
+      <div class="backtest-table-wrap">
+        <table class="backtest-table" id="backtestTable"></table>
+      </div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：回測結果僅代表歷史，不保證未來。就算某策略「看起來有用」，那也只是隨機波動。真正的結論是：不管買熱號還是冷號，長期命中率都會趨近隨機值。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 號碼頻率圖表 -->
+  <section class="analysis-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>📊 號碼出現頻率 <span class="section-chevron">▸</span></h2>
+      <p>每個號碼在統計範圍內的出現次數</p>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="chart-container">
+        <div class="freq-chart" id="freqChart"></div>
+      </div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：圖表中紅色（熱）和藍色（冷）是相對於平均線而言，不是預測指標。統計期數越短，偏差越大；拉長到全歷史，會趨近均勻分布。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 遺漏值統計 -->
+  <section class="analysis-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>⏳ 遺漏值排行 <span class="section-chevron">▸</span></h2>
+      <p>連續幾期沒有開出的號碼，遺漏值越大代表越久沒出現</p>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="missing-grid" id="missingGrid"></div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：<span id="topMissNote">某號碼</span>已經很久沒開了，但下期它出現的機率跟其他號碼完全一樣。「遲早會開」是賭徒謬誤，不是數學事實。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 號碼組合統計 -->
+  <section class="analysis-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>🔗 常見號碼組合 <span class="section-chevron">▸</span></h2>
+      <p>歷史上最常同時出現的兩個號碼組合</p>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="combo-list" id="comboList"></div>
+    </div>
+  </section>
+
+  <!-- 近期開獎一覽 -->
+  <section class="analysis-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>📋 近期開獎一覽 <span class="section-chevron">▸</span></h2>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="recent-draws" id="recentDraws"></div>
+    </div>
+  </section>
+
+  <!-- 總免責 -->
+  <div class="analysis-disclaimer">
+    <p>⚠️ <strong>免責聲明：</strong>以上統計僅為歷史數據呈現，每次開獎皆為獨立事件，過去的號碼分布不代表未來的開獎結果。請理性購買彩券，量力而為。實際開獎結果請以 <a href="https://www.taiwanlottery.com/" target="_blank" rel="noopener">台灣彩券官方網站</a> 公告為準。</p>
+  </div>
+
+  <!-- 跨區導流 -->
+  <section class="cross-sell">
+    <h3>🎯 對機率遊戲有興趣？</h3>
+    <div class="cross-grid">
+      <a class="cross-card" href="/articles/slots-guide/">
+        <span class="cross-icon">🎰</span>
+        <div>
+          <strong>老虎機 RTP 科學分析</strong>
+          <p>彩券 RTP 約 55%，老虎機可達 96%+。用數據看懂兩者差距。</p>
+        </div>
+        <span class="cross-arrow">→</span>
+      </a>
+      <a class="cross-card" href="/casino-check/">
+        <span class="cross-icon">🛡️</span>
+        <div>
+          <strong>娛樂城安全體檢</strong>
+          <p>準備投注前，先查一下平台安不安全，保護你的個資和資金。</p>
+        </div>
+        <span class="cross-arrow">→</span>
+      </a>
+      <a class="cross-card" href="/articles/anti-scam-8la-guide/">
+        <span class="cross-icon">🚨</span>
+        <div>
+          <strong>防詐騙 8LA 指南</strong>
+          <p>號碼分析群組 99% 是詐騙。學會辨識，別讓你的血汗錢飛了。</p>
+        </div>
+        <span class="cross-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 延伸閱讀 -->
+  <section class="lottery-read-more" style="max-width:1168px;margin:2rem auto 3rem">
+    <div class="rm-head">
+      <h3>📚 延伸閱讀</h3>
+    </div>
+    <div class="rm-grid">
+      <a class="rm-card gold" href="/lottery/">
+        <span class="rm-tag">🍈 芭樂好彩</span>
+        <h4>最新開獎結果</h4>
+        <p>威力彩、大樂透、539 各期開獎號碼即時更新</p>
+        <span class="rm-cta">查看開獎 →</span>
+      </a>
+      <a class="rm-card green" href="/articles/lottery-odds-comparison/">
+        <span class="rm-tag">🔥 機率實測</span>
+        <h4>威力彩 vs 大樂透機率大揭秘</h4>
+        <p>頭獎差 4 倍？RTP 與期望值完整對照</p>
+        <span class="rm-cta">看機率分析 →</span>
+      </a>
+      <a class="rm-card pink" href="/articles/daily-cash-539-wheel-guide/">
+        <span class="rm-tag">🎯 包牌攻略</span>
+        <h4>539 包牌攻略：系統號玩法</h4>
+        <p>包 7 碼任一獎項命中率 91%</p>
+        <span class="rm-cta">解鎖包牌公式 →</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+// === CONFIG ===
+const LOTTERY_CONFIG = {
+  daily_cash_539: { file: '/data/daily-cash-539.json', label: '今彩 539', maxNum: 39, count: 5, hasSpecial: false, specialLabel: '' },
+  super_lotto:    { file: '/data/super-lotto.json',    label: '威力彩',   maxNum: 38, count: 6, hasSpecial: true,  specialLabel: '第二區', specialMax: 8 },
+  lotto649:       { file: '/data/lotto649.json',       label: '大樂透',   maxNum: 49, count: 6, hasSpecial: true,  specialLabel: '特別號', specialMax: 49 },
+};
+
+let currentLottery = 'daily_cash_539';
+let currentRange = 50;
+let lotteryData = {};
+
+// === INIT ===
+async function init() {
+  await loadData(currentLottery);
+  render();
+}
+
+async function loadData(key) {
+  if (lotteryData[key]) return;
+  try {
+    const res = await fetch(LOTTERY_CONFIG[key].file);
+    lotteryData[key] = await res.json();
+  } catch (e) {
+    console.error('Failed to load lottery data:', e);
+  }
+}
+
+function switchLottery(btn) {
+  document.querySelectorAll('.lot-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentLottery = btn.dataset.lottery;
+  loadData(currentLottery).then(() => render());
+}
+
+function setRange(btn) {
+  document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRange = parseInt(btn.dataset.range);
+  render();
+}
+
+// === CORE ANALYSIS ===
+function getDraws() {
+  const data = lotteryData[currentLottery];
+  if (!data) return [];
+  const draws = data.draws;
+  return currentRange === 0 ? draws : draws.slice(0, currentRange);
+}
+
+function calcFrequency(draws, maxNum) {
+  const freq = {};
+  for (let i = 1; i <= maxNum; i++) freq[i] = 0;
+  draws.forEach(d => d.numbers.forEach(n => freq[n]++));
+  return freq;
+}
+
+function calcSpecialFrequency(draws, maxNum) {
+  const freq = {};
+  for (let i = 1; i <= maxNum; i++) freq[i] = 0;
+  draws.forEach(d => { if (d.special) freq[d.special]++; });
+  return freq;
+}
+
+function calcMissing(allDraws, maxNum) {
+  // Calculate from ALL draws (not range-limited) for accuracy
+  const missing = {};
+  for (let i = 1; i <= maxNum; i++) {
+    missing[i] = 0;
+    for (let j = 0; j < allDraws.length; j++) {
+      if (allDraws[j].numbers.includes(i)) break;
+      missing[i]++;
+    }
+  }
+  return missing;
+}
+
+function calcRepeat(allDraws, maxNum) {
+  // For each number: how many times it appeared in draw[i] AND draw[i+1] consecutively
+  const stats = {};
+  for (let n = 1; n <= maxNum; n++) {
+    stats[n] = { appeared: 0, repeated: 0 };
+  }
+  for (let i = 0; i < allDraws.length - 1; i++) {
+    const curr = allDraws[i].numbers;
+    const next = allDraws[i + 1].numbers;
+    curr.forEach(n => {
+      stats[n].appeared++;
+      if (next.includes(n)) stats[n].repeated++;
+    });
+  }
+  return stats;
+}
+
+function calcCombos(draws) {
+  const combos = {};
+  draws.forEach(d => {
+    const nums = d.numbers;
+    for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+        const key = `${nums[i]}-${nums[j]}`;
+        combos[key] = (combos[key] || 0) + 1;
+      }
+    }
+  });
+  return Object.entries(combos)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 15);
+}
+
+// === RENDER ===
+function render() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const data = lotteryData[currentLottery];
+  if (!data) return;
+
+  const draws = getDraws();
+  const allDraws = data.draws;
+  const freq = calcFrequency(draws, cfg.maxNum);
+  const missing = calcMissing(allDraws, cfg.maxNum);
+  const combos = calcCombos(draws);
+
+  // Update meta
+  document.getElementById('updateTime').textContent = data.lastUpdated;
+  document.getElementById('totalDraws').textContent = draws.length;
+
+  // Suggestions & Wheel (first sections)
+  renderSuggestions();
+  renderWheel();
+
+  // Theory note
+  const theory = (1 / cfg.maxNum * 100).toFixed(2);
+  document.getElementById('theoryNote').textContent = `1/${cfg.maxNum} ≈ ${theory}%`;
+
+  // Repeat analysis (use filtered draws, not allDraws)
+  const repeatStats = calcRepeat(draws, cfg.maxNum);
+  renderRepeat(repeatStats, cfg.maxNum);
+
+  // Hot/Cold
+  const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+  const hot = sorted.slice(0, 10);
+  const cold = sorted.slice(-10).reverse();
+
+  renderHotCold('hotNumbers', hot, draws.length, 'hot');
+  renderHotCold('coldNumbers', cold, draws.length, 'cold');
+
+  // Special numbers
+  const specialEl = document.getElementById('specialStats');
+  if (cfg.hasSpecial) {
+    specialEl.style.display = 'block';
+    document.getElementById('specialTitle').textContent = `🎯 ${cfg.specialLabel}統計`;
+    const specFreq = calcSpecialFrequency(draws, cfg.specialMax);
+    const specSorted = Object.entries(specFreq).sort((a, b) => b[1] - a[1]);
+    renderHotCold('specialNumbers', specSorted, draws.length, 'special');
+  } else {
+    specialEl.style.display = 'none';
+  }
+
+  // Frequency chart
+  renderFreqChart(freq, cfg.maxNum, draws.length);
+
+  // Missing values
+  renderMissing(missing, cfg.maxNum);
+
+  // Update missing disclaimer dynamically
+  const missingSorted = Object.entries(missing).sort((a, b) => b[1] - a[1]);
+  if (missingSorted.length > 0 && missingSorted[0][1] > 0) {
+    document.getElementById('topMissNote').textContent =
+      `${missingSorted[0][0]} 號已經 ${missingSorted[0][1]} 期沒開`;
+  }
+
+  // Combos
+  renderCombos(combos, draws.length);
+
+  // Backtest
+  renderBacktest();
+
+  // Recent draws
+  renderRecentDraws(draws.slice(0, 10), cfg);
+}
+
+function renderRepeat(stats, maxNum) {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const theory = (1 / maxNum * 100).toFixed(2);
+  const entries = Object.entries(stats)
+    .filter(([_, s]) => s.appeared >= 3) // only show numbers with enough data
+    .map(([num, s]) => {
+      const rate = s.appeared > 0 ? (s.repeated / s.appeared * 100) : 0;
+      return { num: parseInt(num), appeared: s.appeared, repeated: s.repeated, rate };
+    })
+    .sort((a, b) => b.rate - a.rate);
+
+  // Summary
+  const totalAppeared = entries.reduce((a, e) => a + e.appeared, 0);
+  const totalRepeated = entries.reduce((a, e) => a + e.repeated, 0);
+  const avgRate = totalAppeared > 0 ? (totalRepeated / totalAppeared * 100).toFixed(2) : 0;
+
+  document.getElementById('repeatSummary').innerHTML = `
+    <div class="repeat-summary-inner">
+      <div class="rs-item">
+        <span class="rs-val">${avgRate}%</span>
+        <span class="rs-label">整體同號連開率</span>
+      </div>
+      <div class="rs-item">
+        <span class="rs-val">${theory}%</span>
+        <span class="rs-label">理論機率 (1/${maxNum})</span>
+      </div>
+      <div class="rs-item">
+        <span class="rs-val ${Math.abs(parseFloat(avgRate) - parseFloat(theory)) < 1 ? 'match' : 'diff'}">${Math.abs(parseFloat(avgRate) - parseFloat(theory)).toFixed(2)}%</span>
+        <span class="rs-label">與理論值差距</span>
+      </div>
+    </div>`;
+
+  // Top repeat + bottom repeat
+  const top5 = entries.slice(0, 8);
+  const bottom5 = entries.slice(-8).reverse();
+
+  document.getElementById('repeatGrid').innerHTML = `
+    <div class="repeat-cols">
+      <div class="repeat-col">
+        <h4>📈 同號連開率最高</h4>
+        ${top5.map(e => `
+          <div class="repeat-row">
+            <span class="num-ball">${e.num}</span>
+            <div class="repeat-bar-wrap">
+              <div class="repeat-bar" style="width:${Math.min(e.rate * 2, 100)}%"></div>
+              <div class="repeat-theory" style="left:${Math.min(parseFloat(theory) * 2, 100)}%"></div>
+            </div>
+            <span class="repeat-rate">${e.rate.toFixed(1)}%</span>
+            <span class="repeat-detail">${e.repeated}/${e.appeared}</span>
+          </div>`).join('')}
+      </div>
+      <div class="repeat-col">
+        <h4>📉 同號連開率最低</h4>
+        ${bottom5.map(e => `
+          <div class="repeat-row">
+            <span class="num-ball">${e.num}</span>
+            <div class="repeat-bar-wrap">
+              <div class="repeat-bar low" style="width:${Math.min(e.rate * 2, 100)}%"></div>
+              <div class="repeat-theory" style="left:${Math.min(parseFloat(theory) * 2, 100)}%"></div>
+            </div>
+            <span class="repeat-rate">${e.rate.toFixed(1)}%</span>
+            <span class="repeat-detail">${e.repeated}/${e.appeared}</span>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// === BACKTEST ===
+let currentStrategy = 'hot';
+function switchStrategy(btn) {
+  document.querySelectorAll('.bt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentStrategy = btn.dataset.strategy;
+  renderBacktest();
+}
+
+function runBacktest(allDraws, numCount, maxNum, strategy) {
+  // For each draw i (from index 0 = newest), use draws i+1..i+lookback to determine hot/cold
+  // Then check how many of those picks appeared in draw i
+  const lookback = 20; // use past 20 draws to calc hot/cold
+  const results = [];
+
+  for (let i = 0; i < allDraws.length - lookback; i++) {
+    const pastDraws = allDraws.slice(i + 1, i + 1 + lookback);
+    const freq = {};
+    for (let n = 1; n <= maxNum; n++) freq[n] = 0;
+    pastDraws.forEach(d => d.numbers.forEach(n => freq[n]++));
+
+    const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+    let picks;
+    if (strategy === 'hot') {
+      picks = sorted.slice(0, numCount).map(e => parseInt(e[0]));
+    } else {
+      picks = sorted.slice(-numCount).map(e => parseInt(e[0]));
+    }
+
+    const actual = allDraws[i].numbers;
+    const hits = picks.filter(n => actual.includes(n));
+
+    results.push({
+      period: allDraws[i].period,
+      date: allDraws[i].date,
+      picks: picks.sort((a, b) => a - b),
+      actual: actual,
+      hits: hits,
+      hitCount: hits.length
+    });
+  }
+  return results;
+}
+
+function renderBacktest() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const data = lotteryData[currentLottery];
+  if (!data) return;
+
+  const results = runBacktest(data.draws, cfg.count, cfg.maxNum, currentStrategy);
+  if (results.length === 0) return;
+
+  // Summary stats
+  const totalHits = results.reduce((a, r) => a + r.hitCount, 0);
+  const totalPicks = results.length * cfg.count;
+  const avgHit = (totalHits / results.length).toFixed(2);
+  const hitRate = (totalHits / totalPicks * 100).toFixed(2);
+  const expectedHit = (cfg.count * cfg.count / cfg.maxNum).toFixed(2);
+  const expectedRate = (cfg.count / cfg.maxNum * 100).toFixed(2);
+  const anyHitDraws = results.filter(r => r.hitCount > 0).length;
+  const anyHitPct = (anyHitDraws / results.length * 100).toFixed(1);
+  const bestDraw = results.reduce((a, r) => r.hitCount > a.hitCount ? r : a, results[0]);
+  const label = currentStrategy === 'hot' ? '熱號' : '冷號';
+
+  document.getElementById('backtestSummary').innerHTML = `
+    <div class="bt-summary">
+      <div class="bt-stat">
+        <span class="bt-val">${avgHit}</span>
+        <span class="bt-label">每期平均命中</span>
+      </div>
+      <div class="bt-stat">
+        <span class="bt-val">${expectedHit}</span>
+        <span class="bt-label">隨機期望值</span>
+      </div>
+      <div class="bt-stat">
+        <span class="bt-val ${parseFloat(avgHit) > parseFloat(expectedHit) ? 'win' : 'lose'}">${avgHit > expectedHit ? '+' : ''}${(avgHit - expectedHit).toFixed(2)}</span>
+        <span class="bt-label">${label}策略 vs 隨機</span>
+      </div>
+      <div class="bt-stat">
+        <span class="bt-val">${anyHitPct}%</span>
+        <span class="bt-label">有命中的期數</span>
+      </div>
+    </div>
+    <p class="bt-verdict">${parseFloat(avgHit) > parseFloat(expectedHit)
+      ? `📊 在這 ${results.length} 期回測中，買${label}平均每期多中 ${(avgHit - expectedHit).toFixed(2)} 個——但這只是隨機波動，不代表策略有效。`
+      : `📊 在這 ${results.length} 期回測中，買${label}甚至不如隨機選號。最佳一期是第 ${bestDraw.period} 期命中 ${bestDraw.hitCount} 個。`
+    }</p>`;
+
+  // Table: show top results (most hits first)
+  const sorted = [...results].sort((a, b) => b.hitCount - a.hitCount);
+  const show = sorted.slice(0, 15);
+
+  document.getElementById('backtestTable').innerHTML = `
+    <thead>
+      <tr>
+        <th>期別</th>
+        <th>日期</th>
+        <th>${label}選號</th>
+        <th>實際開獎</th>
+        <th>命中</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${show.map(r => `
+        <tr class="${r.hitCount >= 3 ? 'highlight' : ''}">
+          <td>${r.period}</td>
+          <td>${r.date}</td>
+          <td class="td-nums">${r.picks.map(n =>
+            `<span class="num-mini ${r.hits.includes(n) ? 'hit' : ''}">${n}</span>`
+          ).join('')}</td>
+          <td class="td-nums">${r.actual.map(n =>
+            `<span class="num-mini ${r.hits.includes(n) ? 'hit' : ''}">${n}</span>`
+          ).join('')}</td>
+          <td><span class="hit-badge h${r.hitCount}">${r.hitCount}</span></td>
+        </tr>`).join('')}
+    </tbody>`;
+}
+
+function renderHotCold(elId, items, total, type) {
+  const el = document.getElementById(elId);
+  el.innerHTML = items.map(([num, count], i) => {
+    const pct = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
+    const barWidth = total > 0 ? Math.max(5, (count / total) * 100 * (type === 'special' ? 3 : 1.5)) : 0;
+    const numClass = type === 'special' ? 'num-ball special-ball' : 'num-ball';
+    return `
+      <div class="hc-row">
+        <span class="hc-rank">${i + 1}</span>
+        <span class="${numClass}">${num}</span>
+        <div class="hc-bar-wrap">
+          <div class="hc-bar ${type}" style="width:${Math.min(barWidth, 100)}%"></div>
+        </div>
+        <span class="hc-count">${count} 次</span>
+        <span class="hc-pct">${pct}%</span>
+      </div>`;
+  }).join('');
+}
+
+function renderFreqChart(freq, maxNum, total) {
+  const el = document.getElementById('freqChart');
+  const maxFreq = Math.max(...Object.values(freq), 1);
+  const avg = total > 0 ? (Object.values(freq).reduce((a, b) => a + b, 0) / maxNum) : 0;
+  const maxBarPx = 160; // max bar height in pixels
+
+  el.innerHTML = Object.entries(freq).map(([num, count]) => {
+    const heightPx = maxFreq > 0 ? Math.max((count / maxFreq) * maxBarPx, 4) : 4;
+    const isHot = count > avg * 1.3;
+    const isCold = count < avg * 0.7;
+    const cls = isHot ? 'bar hot' : isCold ? 'bar cold' : 'bar';
+    return `
+      <div class="freq-col">
+        <div class="freq-value">${count}</div>
+        <div class="${cls}" style="height:${heightPx}px"></div>
+        <div class="freq-num">${num}</div>
+      </div>`;
+  }).join('') + `<div class="avg-line" style="bottom:${20 + (avg / maxFreq) * maxBarPx}px"><span>平均 ${avg.toFixed(1)}</span></div>`;
+}
+
+function renderMissing(missing, maxNum) {
+  const el = document.getElementById('missingGrid');
+  const sorted = Object.entries(missing).sort((a, b) => b[1] - a[1]);
+
+  el.innerHTML = sorted.map(([num, count]) => {
+    const level = count === 0 ? 'just' : count <= 3 ? 'low' : count <= 8 ? 'mid' : count <= 15 ? 'high' : 'extreme';
+    return `
+      <div class="miss-item ${level}">
+        <span class="miss-num">${num}</span>
+        <span class="miss-val">${count}</span>
+        <span class="miss-label">${count === 0 ? '剛開' : count + ' 期'}</span>
+      </div>`;
+  }).join('');
+}
+
+function renderCombos(combos, total) {
+  const el = document.getElementById('comboList');
+  el.innerHTML = combos.map(([key, count], i) => {
+    const [a, b] = key.split('-');
+    const pct = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
+    return `
+      <div class="combo-row">
+        <span class="combo-rank">#${i + 1}</span>
+        <span class="num-ball">${a}</span>
+        <span class="combo-plus">+</span>
+        <span class="num-ball">${b}</span>
+        <span class="combo-count">${count} 次 (${pct}%)</span>
+      </div>`;
+  }).join('');
+}
+
+function renderRecentDraws(draws, cfg) {
+  const el = document.getElementById('recentDraws');
+  const showFirst = 5;
+  const rowHtml = (d) => `
+    <div class="recent-row">
+      <div class="recent-meta">
+        <span class="recent-period">第 ${d.period} 期</span>
+        <span class="recent-date">${d.date}</span>
+      </div>
+      <div class="recent-nums">
+        ${d.numbers.map(n => `<span class="num mini">${n}</span>`).join('')}
+        ${cfg.hasSpecial && d.special != null ? `<span class="num mini special-num">${d.special}</span>` : ''}
+      </div>
+    </div>`;
+  const visible = draws.slice(0, showFirst).map(rowHtml).join('');
+  const hidden = draws.length > showFirst
+    ? `<div class="recent-hidden" id="recentHidden" style="display:none">${draws.slice(showFirst).map(rowHtml).join('')}</div>
+       <button class="whl-show-more" id="recentToggle" onclick="toggleRecentDraws()">顯示更多（共 ${draws.length} 期）</button>`
+    : '';
+  el.innerHTML = visible + hidden;
+}
+
+function toggleRecentDraws() {
+  const el = document.getElementById('recentHidden');
+  const btn = document.getElementById('recentToggle');
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    btn.textContent = '收合';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = '顯示更多';
+  }
+}
+
+// === SUGGESTION ENGINE ===
+function calcSuggestions(draws, allDraws, cfg) {
+  const { maxNum, count } = cfg;
+  const freq = calcFrequency(draws, maxNum);
+  const missing = calcMissing(allDraws, maxNum);
+  const repeatStats = calcRepeat(draws, maxNum);
+  const lastDraw = allDraws.length > 0 ? allDraws[0].numbers : [];
+
+  // Normalize helpers
+  const vals = arr => arr.length ? arr : [0];
+  const minMax = (arr) => {
+    const mn = Math.min(...vals(arr)), mx = Math.max(...vals(arr));
+    return { min: mn, max: mx, range: mx - mn || 1 };
+  };
+
+  const freqVals = Object.values(freq);
+  const missVals = Object.values(missing);
+  const fNorm = minMax(freqVals);
+  const mNorm = minMax(missVals);
+
+  // Score each number
+  const scores = [];
+  for (let n = 1; n <= maxNum; n++) {
+    // 1) Frequency score (0~100): higher freq = higher score (hot bias)
+    const freqScore = ((freq[n] - fNorm.min) / fNorm.range) * 100;
+
+    // 2) Missing score (0~100): higher missing = higher score (overdue)
+    const missScore = ((missing[n] - mNorm.min) / mNorm.range) * 100;
+
+    // 3) Repeat score (0~100): if number was in last draw, use its repeat rate
+    let repeatScore = 0;
+    if (lastDraw.includes(n) && repeatStats[n]) {
+      const s = repeatStats[n];
+      repeatScore = s.appeared > 0 ? (s.repeated / s.appeared) * 100 : 0;
+      // Boost: multiply by 2 for "recent momentum" but cap at 100
+      repeatScore = Math.min(repeatScore * 2, 100);
+    }
+
+    // Weighted combination:
+    // - Frequency 40%: hot numbers appear more
+    // - Missing 35%: overdue numbers due for return
+    // - Repeat 25%: last draw momentum (only applies to numbers in last draw)
+    const total = freqScore * 0.40 + missScore * 0.35 + repeatScore * 0.25;
+
+    scores.push({
+      num: n,
+      total: Math.round(total * 10) / 10,
+      freqScore: Math.round(freqScore),
+      missScore: Math.round(missScore),
+      repeatScore: Math.round(repeatScore),
+      freq: freq[n],
+      missing: missing[n],
+      inLastDraw: lastDraw.includes(n)
+    });
+  }
+
+  // Sort by total score descending
+  scores.sort((a, b) => b.total - a.total);
+
+  // Pick top `count` numbers for the main suggestion
+  const mainPicks = scores.slice(0, count);
+
+  // Also return a "balanced" set: top 3 hot + top (count-3) overdue (or split evenly for 5-pick)
+  const hotSorted = [...scores].sort((a, b) => b.freqScore - a.freqScore);
+  const missSorted = [...scores].sort((a, b) => b.missScore - a.missScore);
+  const hotCount = Math.ceil(count / 2);
+  const coldCount = count - hotCount;
+  const balancedSet = new Set();
+  for (const s of hotSorted) { if (balancedSet.size < hotCount) balancedSet.add(s.num); }
+  for (const s of missSorted) { if (balancedSet.size < count && !balancedSet.has(s.num)) balancedSet.add(s.num); }
+  // Fill remaining if needed
+  for (const s of scores) { if (balancedSet.size < count && !balancedSet.has(s.num)) balancedSet.add(s.num); }
+  const balancedPicks = scores.filter(s => balancedSet.has(s.num)).sort((a, b) => a.num - b.num);
+
+  return { mainPicks, balancedPicks, allScores: scores };
+}
+
+function renderSuggestions() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const data = lotteryData[currentLottery];
+  if (!data) return;
+
+  const draws = getDraws();
+  const allDraws = data.draws;
+  const { mainPicks, balancedPicks, allScores } = calcSuggestions(draws, allDraws, cfg);
+
+  // Update range display
+  const rangeLabel = currentRange === 0 ? '全部' : currentRange;
+  document.getElementById('suggestRange').textContent = rangeLabel;
+
+  const el = document.getElementById('suggestionResult');
+  const maxScore = mainPicks.length > 0 ? mainPicks[0].total : 1;
+
+  // Special number suggestion (for 威力彩/大樂透)
+  let specialHtml = '';
+  if (cfg.hasSpecial) {
+    const specFreq = calcSpecialFrequency(draws, cfg.specialMax);
+    const specMissing = {};
+    for (let i = 1; i <= cfg.specialMax; i++) {
+      specMissing[i] = 0;
+      for (let j = 0; j < allDraws.length; j++) {
+        if (allDraws[j].special === i) break;
+        specMissing[i]++;
+      }
+    }
+    // Score special numbers
+    const specScores = [];
+    const sfVals = Object.values(specFreq);
+    const smVals = Object.values(specMissing);
+    const sfN = { min: Math.min(...sfVals), max: Math.max(...sfVals), range: Math.max(...sfVals) - Math.min(...sfVals) || 1 };
+    const smN = { min: Math.min(...smVals), max: Math.max(...smVals), range: Math.max(...smVals) - Math.min(...smVals) || 1 };
+    for (let i = 1; i <= cfg.specialMax; i++) {
+      const fs = ((specFreq[i] - sfN.min) / sfN.range) * 100;
+      const ms = ((specMissing[i] - smN.min) / smN.range) * 100;
+      specScores.push({ num: i, total: Math.round((fs * 0.5 + ms * 0.5) * 10) / 10 });
+    }
+    specScores.sort((a, b) => b.total - a.total);
+    const topSpec = specScores[0];
+    specialHtml = `
+      <div class="suggest-special">
+        <span class="suggest-special-label">${cfg.specialLabel}推薦</span>
+        <span class="num-ball special-ball suggest-special-ball">${topSpec.num}</span>
+        <span class="suggest-special-score">評分 ${topSpec.total}</span>
+      </div>`;
+  }
+
+  el.innerHTML = `
+    <div class="suggest-tabs">
+      <button class="sg-tab active" onclick="switchSuggestMode(this,'weighted')">📊 綜合評分</button>
+      <button class="sg-tab" onclick="switchSuggestMode(this,'balanced')">⚖️ 冷熱平衡</button>
+    </div>
+
+    <div class="suggest-set" id="suggestWeighted" style="display:block">
+      <div class="suggest-balls">
+        ${mainPicks.map(s => `
+          <div class="suggest-ball-wrap">
+            <div class="suggest-ball">${s.num}</div>
+            <div class="suggest-score">${s.total}</div>
+            <div class="suggest-tags">
+              ${s.freqScore >= 70 ? '<span class="sg-tag hot">熱</span>' : ''}
+              ${s.missScore >= 70 ? '<span class="sg-tag miss">遺</span>' : ''}
+              ${s.inLastDraw ? '<span class="sg-tag repeat">連</span>' : ''}
+            </div>
+          </div>`).join('')}
+      </div>
+      ${specialHtml}
+      <div class="suggest-detail">
+        <table class="suggest-table">
+          <thead>
+            <tr><th>號碼</th><th>出現次數</th><th>遺漏期數</th><th>熱度</th><th>遺漏</th><th>連開</th><th>總分</th></tr>
+          </thead>
+          <tbody>
+            ${mainPicks.map(s => `
+              <tr>
+                <td><span class="num-ball sg-ball">${s.num}</span></td>
+                <td>${s.freq} 次</td>
+                <td>${s.missing} 期</td>
+                <td><div class="sg-bar-mini"><div class="sg-bar-fill hot" style="width:${s.freqScore}%"></div></div></td>
+                <td><div class="sg-bar-mini"><div class="sg-bar-fill miss" style="width:${s.missScore}%"></div></div></td>
+                <td><div class="sg-bar-mini"><div class="sg-bar-fill repeat" style="width:${s.repeatScore}%"></div></div></td>
+                <td><strong>${s.total}</strong></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="suggest-set" id="suggestBalanced" style="display:none">
+      <div class="suggest-balls">
+        ${balancedPicks.map(s => `
+          <div class="suggest-ball-wrap">
+            <div class="suggest-ball">${s.num}</div>
+            <div class="suggest-score">${s.total}</div>
+            <div class="suggest-tags">
+              ${s.freqScore >= 70 ? '<span class="sg-tag hot">熱</span>' : ''}
+              ${s.missScore >= 70 ? '<span class="sg-tag miss">遺</span>' : ''}
+              ${s.inLastDraw ? '<span class="sg-tag repeat">連</span>' : ''}
+            </div>
+          </div>`).join('')}
+      </div>
+      ${specialHtml}
+      <p class="suggest-explain">⚖️ 冷熱平衡模式：取 ${Math.ceil(cfg.count/2)} 個最熱號 + ${cfg.count - Math.ceil(cfg.count/2)} 個最久未開號，兼顧趨勢與回歸。</p>
+    </div>
+
+    <div class="suggest-algo-note">
+      <details>
+        <summary>📐 評分公式說明</summary>
+        <p>每個號碼的綜合評分 = <strong>熱度 × 40%</strong> + <strong>遺漏值 × 35%</strong> + <strong>連開動能 × 25%</strong></p>
+        <p>熱度：該號碼在選定範圍內的出現頻率歸一化(0~100)。遺漏值：距離上次開出的期數歸一化。連開動能：若該號碼出現在最近一期，則依其歷史連開率加權。</p>
+      </details>
+    </div>`;
+}
+
+function switchSuggestMode(btn, mode) {
+  document.querySelectorAll('.sg-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('suggestWeighted').style.display = mode === 'weighted' ? 'block' : 'none';
+  document.getElementById('suggestBalanced').style.display = mode === 'balanced' ? 'block' : 'none';
+}
+
+// === WHEEL GENERATOR ===
+let currentBudget = 1000;
+
+const BET_COST = {
+  daily_cash_539: 50,
+  super_lotto: 50,
+  lotto649: 50,
+};
+
+function setBudget(btn) {
+  document.querySelectorAll('.whl-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBudget = parseInt(btn.dataset.budget);
+  document.getElementById('customBudget').value = '';
+  renderWheel();
+}
+
+function setCustomBudget() {
+  const input = document.getElementById('customBudget');
+  const val = parseInt(input.value);
+  if (!val || val < 100) { input.focus(); return; }
+  document.querySelectorAll('.whl-btn[data-budget]').forEach(b => b.classList.remove('active'));
+  currentBudget = val;
+  renderWheel();
+}
+
+// Generate all C(n,k) combinations from an array
+function combinations(arr, k) {
+  if (k === 0) return [[]];
+  if (arr.length < k) return [];
+  const result = [];
+  function helper(start, combo) {
+    if (combo.length === k) { result.push([...combo]); return; }
+    for (let i = start; i <= arr.length - (k - combo.length); i++) {
+      combo.push(arr[i]);
+      helper(i + 1, combo);
+      combo.pop();
+    }
+  }
+  helper(0, []);
+  return result;
+}
+
+// Determine pool size to keep combos manageable
+function getPoolSize(maxBets, pickCount) {
+  // Find the largest pool where C(pool, pick) is reasonable
+  // but pick at least pickCount+2
+  const minPool = pickCount + 2;
+  let pool = minPool;
+  for (let n = minPool; n <= 20; n++) {
+    let c = 1;
+    for (let i = 0; i < pickCount; i++) c = c * (n - i) / (i + 1);
+    if (c > maxBets * 3) break; // pool too large, stop
+    pool = n;
+  }
+  return pool;
+}
+
+function generateWheel(draws, allDraws, cfg) {
+  const betCost = BET_COST[currentLottery];
+  const maxBets = Math.floor(currentBudget / betCost);
+  if (maxBets < 1) return { pool: [], combos: [], maxBets: 0, betCost, poolSize: 0 };
+
+  // Get scored numbers
+  const { allScores } = calcSuggestions(draws, allDraws, cfg);
+  const poolSize = getPoolSize(maxBets, cfg.count);
+  const pool = allScores.slice(0, poolSize);
+  const poolNums = pool.map(s => s.num);
+
+  // Generate all combos from pool
+  let allCombos = combinations(poolNums, cfg.count);
+
+  // Score each combo: sum of individual scores
+  allCombos = allCombos.map(combo => {
+    const score = combo.reduce((sum, n) => {
+      const s = pool.find(p => p.num === n);
+      return sum + (s ? s.total : 0);
+    }, 0);
+    // Count tags
+    const hotCount = combo.filter(n => { const s = pool.find(p => p.num === n); return s && s.freqScore >= 70; }).length;
+    const missCount = combo.filter(n => { const s = pool.find(p => p.num === n); return s && s.missScore >= 70; }).length;
+    return { nums: combo, score: Math.round(score * 10) / 10, hotCount, missCount };
+  });
+
+  // Sort by score, take top maxBets
+  allCombos.sort((a, b) => b.score - a.score);
+  const combos = allCombos.slice(0, maxBets);
+
+  return { pool, combos, maxBets, betCost, poolSize, totalCombos: allCombos.length };
+}
+
+function renderWheel() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const data = lotteryData[currentLottery];
+  if (!data) return;
+
+  const draws = getDraws();
+  const allDraws = data.draws;
+  const betCost = BET_COST[currentLottery];
+  const { pool, combos, maxBets, poolSize, totalCombos } = generateWheel(draws, allDraws, cfg);
+
+  // Summary
+  const actualCost = combos.length * betCost;
+  document.getElementById('wheelSummary').innerHTML = `
+    <div class="whl-summary-grid">
+      <div class="whl-stat">
+        <span class="whl-stat-val">$${currentBudget.toLocaleString()}</span>
+        <span class="whl-stat-label">投注預算</span>
+      </div>
+      <div class="whl-stat">
+        <span class="whl-stat-val">${combos.length} 注</span>
+        <span class="whl-stat-label">包牌組合（每注 $${betCost}）</span>
+      </div>
+      <div class="whl-stat">
+        <span class="whl-stat-val">${poolSize} 碼</span>
+        <span class="whl-stat-label">候選號碼池</span>
+      </div>
+      <div class="whl-stat">
+        <span class="whl-stat-val">$${actualCost.toLocaleString()}</span>
+        <span class="whl-stat-label">實際花費</span>
+      </div>
+    </div>`;
+
+  // Pool display
+  document.getElementById('wheelPool').innerHTML = `
+    <h4>🎯 候選號碼池（TOP ${poolSize} 高分號碼）</h4>
+    <div class="whl-pool-balls">
+      ${pool.map((s, i) => `
+        <div class="whl-pool-item">
+          <div class="whl-pool-ball">${s.num}</div>
+          <div class="whl-pool-score">${s.total}</div>
+          <div class="suggest-tags">
+            ${s.freqScore >= 70 ? '<span class="sg-tag hot">熱</span>' : ''}
+            ${s.missScore >= 70 ? '<span class="sg-tag miss">遺</span>' : ''}
+            ${s.inLastDraw ? '<span class="sg-tag repeat">連</span>' : ''}
+          </div>
+        </div>`).join('')}
+    </div>`;
+
+  // Combos table
+  if (combos.length === 0) {
+    document.getElementById('wheelCombos').innerHTML = '<p class="whl-empty">預算不足，至少需要 $' + betCost + ' 才能買一注。</p>';
+  } else {
+    // Show first 50 combos, with "show more" if needed
+    const showFirst = 5;
+    const hasMore = combos.length > showFirst;
+
+    // Special number for 威力彩/大樂透
+    let specialCol = '';
+    let specialHeader = '';
+    if (cfg.hasSpecial) {
+      const specFreq = calcSpecialFrequency(draws, cfg.specialMax);
+      const specScores = [];
+      for (let i = 1; i <= cfg.specialMax; i++) specScores.push({ num: i, freq: specFreq[i] });
+      specScores.sort((a, b) => b.freq - a.freq);
+      const topSpec = specScores[0].num;
+      specialHeader = `<th>${cfg.specialLabel}</th>`;
+      specialCol = `<td><span class="num-mini hit">${topSpec}</span></td>`;
+    }
+
+    const comboRow = (c, i) => `
+      <tr>
+        <td class="whl-idx">${i + 1}</td>
+        <td class="td-nums">${c.nums.map(n => `<span class="num-mini">${n}</span>`).join('')}</td>
+        ${specialCol}
+        <td><span class="whl-strength">${c.score}</span></td>
+        <td class="whl-composition">
+          ${c.hotCount > 0 ? `<span class="sg-tag hot">${c.hotCount}熱</span>` : ''}
+          ${c.missCount > 0 ? `<span class="sg-tag miss">${c.missCount}遺</span>` : ''}
+        </td>
+      </tr>`;
+
+    document.getElementById('wheelCombos').innerHTML = `
+      <h4>📋 包牌組合表${totalCombos > combos.length ? `（從 ${totalCombos} 種組合中選出最強 ${combos.length} 注）` : ''}</h4>
+      <div class="whl-table-wrap">
+        <table class="whl-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>號碼組合</th>
+              ${specialHeader}
+              <th>強度</th>
+              <th>組成</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${combos.slice(0, showFirst).map((c, i) => comboRow(c, i)).join('')}
+          </tbody>
+          ${hasMore ? `<tbody id="wheelHiddenRows" style="display:none">
+            ${combos.slice(showFirst).map((c, i) => comboRow(c, i + showFirst)).join('')}
+          </tbody>` : ''}
+        </table>
+      </div>
+      ${hasMore ? `<button class="whl-show-more" id="wheelToggle" onclick="toggleWheelCombos()">顯示全部 ${combos.length} 注</button>` : ''}`;
+  }
+
+  // Last draw review
+  renderWheelReview(draws, allDraws, cfg);
+}
+
+function toggleWheelCombos() {
+  const el = document.getElementById('wheelHiddenRows');
+  const btn = document.getElementById('wheelToggle');
+  if (!el || !btn) return;
+  if (el.style.display === 'none') {
+    el.style.display = '';
+    btn.textContent = '收合';
+  } else {
+    el.style.display = 'none';
+    const total = el.querySelectorAll('tr').length + 5;
+    btn.textContent = '顯示全部 ' + total + ' 注';
+  }
+}
+
+function renderWheelReview(draws, allDraws, cfg) {
+  const el = document.getElementById('wheelReview');
+  if (allDraws.length < 2) { el.innerHTML = ''; return; }
+
+  // Simulate: what if we had used this system for the LAST draw?
+  // Use draws[1..] (excluding latest) to generate wheel, then check against draws[0]
+  const pastDraws = draws.length > 1 ? draws.slice(1) : allDraws.slice(1);
+  const pastAllDraws = allDraws.slice(1);
+  if (pastDraws.length < 5) { el.innerHTML = ''; return; }
+
+  const lastDraw = allDraws[0];
+  const { pool: simPool, combos: simCombos } = generateWheel(pastDraws, pastAllDraws, cfg);
+
+  if (simCombos.length === 0) { el.innerHTML = ''; return; }
+
+  // Check hits
+  const actual = lastDraw.numbers;
+  let bestHit = 0;
+  let bestCombo = null;
+  const hitCombos = simCombos.map(c => {
+    const hits = c.nums.filter(n => actual.includes(n));
+    if (hits.length > bestHit) { bestHit = hits.length; bestCombo = c; }
+    return { ...c, hits, hitCount: hits.length };
+  });
+
+  const anyHit = hitCombos.filter(c => c.hitCount > 0).length;
+  const poolHits = simPool.filter(s => actual.includes(s.num));
+
+  // Special number check
+  let specialHit = '';
+  if (cfg.hasSpecial && lastDraw.special != null) {
+    const specFreq = calcSpecialFrequency(pastDraws, cfg.specialMax);
+    const specScores = [];
+    for (let i = 1; i <= cfg.specialMax; i++) specScores.push({ num: i, freq: specFreq[i] });
+    specScores.sort((a, b) => b.freq - a.freq);
+    const suggestedSpec = specScores[0].num;
+    specialHit = lastDraw.special === suggestedSpec
+      ? `<span class="whl-review-hit">✅ ${cfg.specialLabel} ${suggestedSpec} 命中！</span>`
+      : `<span class="whl-review-miss">❌ ${cfg.specialLabel}推薦 ${suggestedSpec}，實際開 ${lastDraw.special}</span>`;
+  }
+
+  el.innerHTML = `
+    <h4>📋 上期回顧 — 第 ${lastDraw.period} 期 (${lastDraw.date})</h4>
+    <div class="whl-review-grid">
+      <div class="whl-review-item">
+        <span class="whl-review-label">實際開獎</span>
+        <div class="td-nums">${actual.map(n => `<span class="num-mini ${simPool.some(s => s.num === n) ? 'hit' : ''}">${n}</span>`).join('')}
+        ${cfg.hasSpecial && lastDraw.special != null ? `<span class="num-mini special-num">${lastDraw.special}</span>` : ''}</div>
+      </div>
+      <div class="whl-review-item">
+        <span class="whl-review-label">號碼池命中</span>
+        <span class="whl-review-val">${poolHits.length} / ${simPool.length} 個號碼在池中</span>
+      </div>
+      <div class="whl-review-item">
+        <span class="whl-review-label">最佳單注</span>
+        <span class="whl-review-val">${bestCombo ? `命中 ${bestHit} 個：${bestCombo.nums.map(n => actual.includes(n) ? `<span class="num-mini hit">${n}</span>` : `<span class="num-mini">${n}</span>`).join('')}` : '—'}</span>
+      </div>
+      <div class="whl-review-item">
+        <span class="whl-review-label">有命中的注數</span>
+        <span class="whl-review-val">${anyHit} / ${simCombos.length} 注</span>
+      </div>
+      ${specialHit ? `<div class="whl-review-item"><span class="whl-review-label">${cfg.specialLabel}</span>${specialHit}</div>` : ''}
+    </div>
+    <p class="whl-review-note">💡 以上是假設用同樣的演算法和預算 $${currentBudget.toLocaleString()} 回測上一期的結果。</p>`;
+}
+
+// === COLLAPSIBLE SECTIONS ===
+function toggleSection(headEl) {
+  const section = headEl.closest('.collapsible');
+  if (!section) return;
+  const body = section.querySelector('.section-body');
+  const chevron = section.querySelector('.section-chevron');
+  if (!body) return;
+  const isCollapsed = body.style.display === 'none';
+  body.style.display = isCollapsed ? '' : 'none';
+  section.classList.toggle('collapsed', !isCollapsed);
+  if (chevron) chevron.textContent = isCollapsed ? '▾' : '▸';
+}
+
+// GO
+init();
+</script>
+
+<style is:global>
+/* === ANALYSIS PAGE === */
+.page-hero { text-align: center; margin-bottom: 1rem; }
+.page-hero h1 { font-size: 2rem; margin-bottom: 0.3rem; }
+.page-hero h1 em { font-style: normal; background: linear-gradient(135deg, #FFD700, #39FF14); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.page-hero p { color: var(--text-secondary); }
+.page-hero .updated { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+/* Tabs */
+.lottery-tabs {
+  display: flex; gap: 0.6rem; justify-content: center; margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+.lot-tab {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1.5rem; border-radius: 12px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; transition: all 0.25s;
+}
+.lot-tab:hover { border-color: var(--gold); color: var(--text-primary); }
+.lot-tab.active {
+  background: linear-gradient(135deg, rgba(57,255,20,0.15), rgba(255,215,0,0.1));
+  border-color: var(--gold); color: var(--gold-light);
+  box-shadow: 0 4px 15px rgba(57,255,20,0.15);
+}
+
+/* Range selector */
+.range-selector {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;
+}
+.range-label { color: var(--text-muted); font-size: 0.9rem; }
+.range-btn {
+  padding: 0.4rem 1rem; border-radius: 8px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.85rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.range-btn:hover { border-color: var(--gold); }
+.range-btn.active {
+  background: var(--gold); color: #000; font-weight: 700;
+  border-color: var(--gold);
+}
+
+/* Section */
+.analysis-section {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.8rem; margin-bottom: 1.5rem;
+}
+.section-head { margin-bottom: 1.2rem; }
+.section-head h2 { font-size: 1.3rem; color: var(--text-primary); margin-bottom: 0.3rem; }
+.section-head p { color: var(--text-muted); font-size: 0.9rem; }
+
+/* Collapsible */
+.collapsible > .section-head {
+  cursor: pointer; user-select: none; transition: opacity 0.2s;
+}
+.collapsible > .section-head:hover { opacity: 0.8; }
+.collapsible.collapsed > .section-head { margin-bottom: 0; }
+.section-chevron {
+  font-size: 0.85rem; color: var(--text-muted); margin-left: 0.3rem;
+  display: inline-block; transition: transform 0.2s;
+}
+.section-body { transition: all 0.2s; }
+
+/* Hot/Cold grid */
+.hot-cold-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.hc-card { padding: 1.2rem; border-radius: 12px; }
+.hc-card.hot { background: rgba(255, 68, 68, 0.06); border: 1px solid rgba(255, 68, 68, 0.2); }
+.hc-card.cold { background: rgba(68, 170, 255, 0.06); border: 1px solid rgba(68, 170, 255, 0.2); }
+.hc-card h3 { font-size: 1rem; margin-bottom: 0.8rem; color: var(--text-primary); }
+.hc-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0; font-size: 0.85rem;
+}
+.hc-rank { width: 20px; color: var(--text-muted); font-weight: 700; text-align: center; }
+.num-ball {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, #39FF14, #2bcc10);
+  color: #000; font-weight: 900; font-size: 0.85rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.num-ball.special-ball {
+  background: linear-gradient(135deg, #FF10F0, #c80dc0);
+}
+.hc-bar-wrap { flex: 1; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+.hc-bar { height: 100%; border-radius: 4px; transition: width 0.5s; }
+.hc-bar.hot { background: linear-gradient(90deg, #ff4444, #ff8800); }
+.hc-bar.cold { background: linear-gradient(90deg, #44aaff, #4488ff); }
+.hc-bar.special { background: linear-gradient(90deg, #FF10F0, #c80dc0); }
+.hc-count { color: var(--text-secondary); min-width: 40px; text-align: right; }
+.hc-pct { color: var(--text-muted); min-width: 40px; text-align: right; }
+
+/* Special stats */
+.special-stats {
+  margin-top: 1.2rem; padding: 1.2rem; border-radius: 12px;
+  background: rgba(255, 16, 240, 0.06); border: 1px solid rgba(255, 16, 240, 0.2);
+}
+.special-stats h3 { font-size: 1rem; margin-bottom: 0.8rem; color: var(--text-primary); }
+
+/* Frequency chart */
+.chart-container { position: relative; overflow-x: auto; padding-bottom: 0.5rem; }
+.freq-chart {
+  display: flex; align-items: stretch; gap: 2px;
+  height: 220px; position: relative; min-width: fit-content;
+  padding: 0 0.5rem;
+}
+.freq-col {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: flex-end;
+  flex: 1; min-width: 22px; position: relative;
+}
+.freq-value { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 2px; }
+.freq-col .bar {
+  width: 100%; min-width: 16px; max-width: 28px; border-radius: 3px 3px 0 0;
+  background: rgba(57, 255, 20, 0.4); transition: height 0.5s;
+}
+.freq-col .bar.hot { background: linear-gradient(to top, #ff4444, #ff8800); }
+.freq-col .bar.cold { background: linear-gradient(to top, #44aaff, #2266cc); }
+.freq-num { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+.avg-line {
+  position: absolute; left: 0; right: 0;
+  border-top: 2px dashed rgba(255, 215, 0, 0.5);
+  pointer-events: none;
+}
+.avg-line span {
+  position: absolute; right: 0; top: -16px;
+  font-size: 0.7rem; color: var(--gold-light);
+  background: var(--bg-card); padding: 0 4px;
+}
+
+/* Missing grid */
+.missing-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+  gap: 0.5rem;
+}
+.miss-item {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.6rem 0.3rem; border-radius: 10px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.miss-item.just { border-color: #39FF14; background: rgba(57,255,20,0.08); }
+.miss-item.low { border-color: rgba(57,255,20,0.3); }
+.miss-item.mid { }
+.miss-item.high { border-color: rgba(255,136,0,0.4); background: rgba(255,136,0,0.06); }
+.miss-item.extreme { border-color: rgba(255,68,68,0.5); background: rgba(255,68,68,0.08); }
+.miss-num { font-weight: 900; font-size: 1.1rem; color: var(--text-primary); }
+.miss-val { font-size: 1.3rem; font-weight: 900; color: var(--gold-light); }
+.miss-label { font-size: 0.7rem; color: var(--text-muted); }
+.miss-item.just .miss-val { color: #39FF14; }
+.miss-item.extreme .miss-val { color: #ff4444; }
+
+/* Combo list */
+.combo-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.5rem; }
+.combo-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 0.8rem; border-radius: 10px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+}
+.combo-rank { color: var(--gold-light); font-weight: 800; font-size: 0.85rem; min-width: 28px; }
+.combo-plus { color: var(--text-muted); font-weight: 600; }
+.combo-count { color: var(--text-secondary); font-size: 0.85rem; margin-left: auto; }
+
+/* Recent draws */
+.recent-draws { display: flex; flex-direction: column; gap: 0.5rem; }
+.recent-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.8rem 1rem; border-radius: 10px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.recent-meta { display: flex; flex-direction: column; min-width: 120px; }
+.recent-period { font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+.recent-date { font-size: 0.8rem; color: var(--text-muted); }
+.recent-nums { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+
+/* Disclaimer */
+/* Guava notes (inline disclaimers) */
+.guava-note {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  margin-top: 1.2rem; padding: 1rem 1.2rem;
+  background: rgba(57, 255, 20, 0.05);
+  border: 1px dashed rgba(57, 255, 20, 0.25);
+  border-radius: 10px; font-size: 0.85rem; color: var(--text-secondary);
+  line-height: 1.6;
+}
+.guava-note .gn-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+.guava-note p { margin: 0; }
+
+/* Repeat analysis */
+.repeat-summary-inner {
+  display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.rs-item {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 1rem 1.5rem; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  min-width: 140px;
+}
+.rs-val { font-size: 1.8rem; font-weight: 900; color: var(--gold-light); }
+.rs-val.match { color: #39FF14; }
+.rs-val.diff { color: #ffb347; }
+.rs-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+.repeat-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.repeat-col h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.repeat-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0; font-size: 0.85rem;
+}
+.repeat-bar-wrap {
+  flex: 1; height: 8px; background: rgba(255,255,255,0.05);
+  border-radius: 4px; overflow: visible; position: relative;
+}
+.repeat-bar {
+  height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, #39FF14, #FFD700);
+  transition: width 0.5s;
+}
+.repeat-bar.low {
+  background: linear-gradient(90deg, #44aaff, #4488ff);
+}
+.repeat-theory {
+  position: absolute; top: -4px; width: 2px; height: 16px;
+  background: #ff4444; border-radius: 1px;
+}
+.repeat-rate { color: var(--gold-light); font-weight: 700; min-width: 45px; text-align: right; }
+.repeat-detail { color: var(--text-muted); font-size: 0.75rem; min-width: 35px; text-align: right; }
+
+/* Backtest */
+.backtest-toggle {
+  display: flex; gap: 0.5rem; margin-bottom: 1.2rem;
+}
+.bt-btn {
+  padding: 0.5rem 1.2rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.bt-btn:hover { border-color: var(--gold); }
+.bt-btn.active {
+  background: var(--gold); color: #000; border-color: var(--gold);
+}
+.bt-summary {
+  display: flex; gap: 0.8rem; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap;
+}
+.bt-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem 1.2rem; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  min-width: 120px;
+}
+.bt-val { font-size: 1.5rem; font-weight: 900; color: var(--gold-light); }
+.bt-val.win { color: #39FF14; }
+.bt-val.lose { color: #ff4444; }
+.bt-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; text-align: center; }
+.bt-verdict {
+  text-align: center; font-size: 0.9rem; color: var(--text-secondary);
+  margin: 0.8rem 0 1.2rem; line-height: 1.6;
+}
+
+.backtest-table-wrap { overflow-x: auto; }
+.backtest-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.backtest-table th {
+  text-align: left; padding: 0.6rem 0.5rem;
+  border-bottom: 2px solid var(--border); color: var(--text-muted);
+  font-size: 0.8rem; white-space: nowrap;
+}
+.backtest-table td {
+  padding: 0.5rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); white-space: nowrap;
+}
+.backtest-table tr.highlight { background: rgba(57, 255, 20, 0.06); }
+.td-nums { display: flex; gap: 3px; flex-wrap: wrap; }
+.num-mini {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-muted); font-weight: 700; font-size: 0.75rem;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.num-mini.hit {
+  background: linear-gradient(135deg, #39FF14, #2bcc10);
+  color: #000; border-color: #39FF14;
+  box-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
+}
+.hit-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  font-weight: 900; font-size: 0.85rem;
+  background: var(--bg-secondary); color: var(--text-muted); border: 1px solid var(--border);
+}
+.hit-badge.h0 { opacity: 0.4; }
+.hit-badge.h1 { color: var(--gold-light); border-color: var(--gold); }
+.hit-badge.h2 { color: #39FF14; border-color: #39FF14; background: rgba(57,255,20,0.1); }
+.hit-badge.h3, .hit-badge.h4, .hit-badge.h5, .hit-badge.h6 {
+  background: linear-gradient(135deg, #39FF14, #FFD700);
+  color: #000; border-color: #39FF14;
+  box-shadow: 0 0 10px rgba(57,255,20,0.4);
+}
+
+/* Cross-sell */
+.cross-sell {
+  margin: 2rem 0; padding: 1.8rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+}
+.cross-sell h3 { font-size: 1.2rem; margin-bottom: 1.2rem; color: var(--text-primary); }
+.cross-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.cross-card {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 1.2rem; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  text-decoration: none; color: var(--text-primary);
+  transition: all 0.25s;
+}
+.cross-card:hover {
+  border-color: var(--gold); transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(57,255,20,0.1);
+}
+.cross-icon { font-size: 2rem; flex-shrink: 0; }
+.cross-card div { flex: 1; }
+.cross-card strong { display: block; font-size: 0.95rem; color: var(--gold-light); margin-bottom: 0.2rem; }
+.cross-card p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.4; }
+.cross-arrow { color: var(--gold-light); font-size: 1.2rem; font-weight: 800; flex-shrink: 0; }
+
+/* Disclaimer */
+.analysis-disclaimer {
+  padding: 1.2rem; margin: 2rem 0;
+  background: rgba(255, 136, 0, 0.08); border: 1px solid rgba(255, 136, 0, 0.3);
+  border-radius: 12px; font-size: 0.85rem; color: var(--text-secondary);
+}
+.analysis-disclaimer strong { color: #ffb347; }
+.analysis-disclaimer a { color: #ffd966; text-decoration: underline; }
+
+/* Hero sub */
+.hero-sub { color: var(--text-muted); font-size: 1rem; font-weight: 500; }
+
+/* Suggestion section */
+.suggestion-section {
+  background: linear-gradient(135deg, rgba(255,215,0,0.06), rgba(57,255,20,0.04));
+  border-color: rgba(255,215,0,0.3);
+}
+.suggest-tabs {
+  display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+}
+.sg-tab {
+  padding: 0.5rem 1.2rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.sg-tab:hover { border-color: var(--gold); }
+.sg-tab.active {
+  background: linear-gradient(135deg, #FFD700, #ff8800); color: #000;
+  border-color: #FFD700; font-weight: 700;
+}
+.suggest-balls {
+  display: flex; gap: 1rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.suggest-ball-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+}
+.suggest-ball {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, #FFD700, #ff8800);
+  color: #000; font-weight: 900; font-size: 1.3rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+  animation: ballPulse 2s ease-in-out infinite;
+}
+@keyframes ballPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(255,215,0,0.4); }
+  50% { box-shadow: 0 4px 25px rgba(255,215,0,0.7); }
+}
+.suggest-score {
+  font-size: 0.75rem; font-weight: 700; color: var(--gold-light);
+}
+.suggest-tags {
+  display: flex; gap: 0.2rem;
+}
+.sg-tag {
+  font-size: 0.6rem; padding: 0.1rem 0.35rem; border-radius: 4px;
+  font-weight: 700;
+}
+.sg-tag.hot { background: rgba(255,68,68,0.2); color: #ff6666; }
+.sg-tag.miss { background: rgba(68,170,255,0.2); color: #66bbff; }
+.sg-tag.repeat { background: rgba(57,255,20,0.2); color: #39FF14; }
+
+/* Special suggestion */
+.suggest-special {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.8rem; margin: 1rem 0; padding: 0.8rem;
+  background: rgba(255,16,240,0.06); border: 1px solid rgba(255,16,240,0.25);
+  border-radius: 10px;
+}
+.suggest-special-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.suggest-special-ball { width: 44px; height: 44px; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(255,16,240,0.3); }
+.suggest-special-score { font-size: 0.85rem; color: #FF10F0; font-weight: 700; }
+
+/* Detail table */
+.suggest-detail { overflow-x: auto; margin-top: 1rem; }
+.suggest-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.suggest-table th {
+  text-align: left; padding: 0.5rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.suggest-table td {
+  padding: 0.5rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); white-space: nowrap;
+}
+.sg-ball { width: 28px; height: 28px; font-size: 0.78rem; }
+.sg-bar-mini {
+  width: 60px; height: 6px; background: rgba(255,255,255,0.08);
+  border-radius: 3px; overflow: hidden;
+}
+.sg-bar-fill {
+  height: 100%; border-radius: 3px; transition: width 0.4s;
+}
+.sg-bar-fill.hot { background: linear-gradient(90deg, #ff4444, #ff8800); }
+.sg-bar-fill.miss { background: linear-gradient(90deg, #44aaff, #4488ff); }
+.sg-bar-fill.repeat { background: linear-gradient(90deg, #39FF14, #2bcc10); }
+
+.suggest-explain {
+  text-align: center; font-size: 0.85rem; color: var(--text-muted);
+  margin-top: 0.5rem; line-height: 1.5;
+}
+
+.suggest-algo-note {
+  margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted);
+}
+.suggest-algo-note summary {
+  cursor: pointer; color: var(--text-secondary); font-weight: 600;
+}
+.suggest-algo-note p {
+  margin: 0.4rem 0; line-height: 1.6;
+}
+
+/* Wheel Generator */
+.wheel-section {
+  background: linear-gradient(135deg, rgba(255,136,0,0.05), rgba(255,215,0,0.04));
+  border-color: rgba(255,136,0,0.25);
+}
+.wheel-budget {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.wheel-budget-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.whl-btn {
+  padding: 0.5rem 1.2rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-btn:hover { border-color: var(--gold); }
+.whl-btn.active {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; font-weight: 700;
+}
+.whl-custom {
+  display: flex; gap: 0.3rem; align-items: center;
+}
+.whl-custom input {
+  width: 100px; padding: 0.45rem 0.6rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-primary); font-size: 0.85rem;
+}
+.whl-custom input::placeholder { color: var(--text-muted); }
+.whl-custom-go { padding: 0.45rem 0.8rem; font-size: 0.85rem; }
+
+/* Wheel summary */
+.whl-summary-grid {
+  display: flex; gap: 0.8rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.whl-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem 1.2rem; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.whl-stat-val { font-size: 1.4rem; font-weight: 900; color: #ff8800; }
+.whl-stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; text-align: center; }
+
+/* Wheel pool */
+.wheel-pool { margin-bottom: 1.5rem; }
+.wheel-pool h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.whl-pool-balls {
+  display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
+}
+.whl-pool-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+}
+.whl-pool-ball {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #ff8800, #FFD700);
+  color: #000; font-weight: 900; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(255,136,0,0.3);
+}
+.whl-pool-score { font-size: 0.7rem; color: var(--gold-light); font-weight: 700; }
+
+/* Wheel combos table */
+.wheel-combos { margin-bottom: 1.5rem; }
+.wheel-combos h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.whl-table-wrap { overflow-x: auto; }
+.whl-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.whl-table th {
+  text-align: left; padding: 0.5rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.whl-table td {
+  padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); white-space: nowrap;
+}
+.whl-idx { color: var(--text-muted); font-weight: 600; width: 30px; }
+.whl-strength {
+  font-weight: 800; color: #ff8800;
+}
+.whl-composition { display: flex; gap: 0.2rem; }
+.whl-empty {
+  text-align: center; color: var(--text-muted); font-size: 0.9rem;
+  padding: 2rem; background: var(--bg-secondary); border-radius: 10px;
+}
+.whl-show-more {
+  display: block; width: 100%; margin-top: 0.8rem;
+  padding: 0.6rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--gold-light); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-show-more:hover { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+
+/* Wheel review */
+.wheel-review { margin-bottom: 1rem; }
+.wheel-review h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.whl-review-grid {
+  display: flex; flex-direction: column; gap: 0.6rem;
+  padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.whl-review-item {
+  display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
+}
+.whl-review-label {
+  font-size: 0.82rem; color: var(--text-muted); font-weight: 600;
+  min-width: 90px;
+}
+.whl-review-val { font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 3px; flex-wrap: wrap; }
+.whl-review-hit { color: #39FF14; font-weight: 700; font-size: 0.85rem; }
+.whl-review-miss { color: var(--text-muted); font-size: 0.85rem; }
+.whl-review-note {
+  font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem;
+  text-align: center;
+}
+.special-num {
+  background: linear-gradient(135deg, #FF10F0, #c80dc0) !important;
+  color: #fff !important; border-color: #FF10F0 !important;
+}
+
+/* Read-more cards (延伸閱讀) */
+.lottery-read-more .rm-head h3 {
+  font-size: 1.5rem; margin: 0 0 0.3rem;
+  background: linear-gradient(135deg, #FFD700, #39FF14);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lottery-read-more .rm-head p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+.rm-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+}
+.rm-card {
+  position: relative; display: flex; flex-direction: column;
+  padding: 1.4rem 1.3rem 1.2rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  text-decoration: none; color: var(--text-primary);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  overflow: hidden;
+}
+.rm-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--gold); transition: height 0.25s;
+}
+.rm-card:hover { transform: translateY(-4px); }
+.rm-card:hover::before { height: 5px; }
+.rm-card.gold::before { background: linear-gradient(90deg, #FFD700, #FFA500); }
+.rm-card.gold:hover { border-color: #FFD700; box-shadow: 0 10px 30px rgba(255,215,0,0.18); }
+.rm-card.green::before { background: linear-gradient(90deg, #39FF14, #2bcc10); }
+.rm-card.green:hover { border-color: #39FF14; box-shadow: 0 10px 30px rgba(57,255,20,0.18); }
+.rm-card.pink::before { background: linear-gradient(90deg, #FF10F0, #c80dc0); }
+.rm-card.pink:hover { border-color: #FF10F0; box-shadow: 0 10px 30px rgba(255,16,240,0.18); }
+.rm-tag {
+  display: inline-block; align-self: flex-start;
+  padding: 0.25rem 0.7rem; border-radius: 999px;
+  background: rgba(57,255,20,0.1); color: var(--gold-light);
+  font-size: 0.75rem; font-weight: 700; margin-bottom: 0.7rem;
+}
+.rm-card.gold .rm-tag { background: rgba(255,215,0,0.12); color: #FFD700; }
+.rm-card.pink .rm-tag { background: rgba(255,16,240,0.12); color: #FF10F0; }
+.rm-card h4 {
+  font-size: 1.05rem; line-height: 1.45; margin: 0 0 0.6rem;
+  color: var(--text-primary); font-weight: 800;
+}
+.rm-card p {
+  font-size: 0.88rem; color: var(--text-secondary);
+  line-height: 1.6; margin: 0 0 1rem; flex: 1;
+}
+.rm-cta {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.85rem; font-weight: 700; color: var(--gold-light);
+}
+.rm-card.gold .rm-cta { color: #FFD700; }
+.rm-card.pink .rm-cta { color: #FF10F0; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .rm-grid { grid-template-columns: 1fr; }
+  .hot-cold-grid { grid-template-columns: 1fr; }
+  .hc-pct { display: none; }
+  .missing-grid { grid-template-columns: repeat(auto-fill, minmax(55px, 1fr)); }
+  .combo-list { grid-template-columns: 1fr; }
+  .freq-chart { height: 150px; }
+  .page-hero h1 { font-size: 1.5rem; }
+  .analysis-section { padding: 1.2rem; }
+  .repeat-cols { grid-template-columns: 1fr; }
+  .repeat-detail { display: none; }
+  .cross-grid { grid-template-columns: 1fr; }
+
+  /* === 選號參考手機版 === */
+  .suggest-ball { width: 48px; height: 48px; font-size: 1.2rem; }
+  .suggest-score { font-size: 0.85rem; }
+  .sg-tag { font-size: 0.7rem; padding: 0.15rem 0.4rem; }
+  .suggest-balls { gap: 0.8rem; }
+  /* 手機隱藏詳細表格，球已經夠清楚 */
+  .suggest-detail { display: none; }
+  .sg-tab { padding: 0.6rem 1.2rem; font-size: 0.95rem; }
+
+  /* === 包牌產生器手機版 === */
+  .whl-summary-grid { gap: 0.5rem; }
+  .whl-stat { min-width: 0; flex: 1 1 40%; padding: 0.7rem 0.5rem; }
+  .whl-stat-val { font-size: 1.2rem; }
+  .whl-stat-label { font-size: 0.72rem; }
+  .whl-pool-balls { gap: 0.6rem; }
+  .whl-pool-ball { width: 40px; height: 40px; font-size: 1rem; }
+  .whl-pool-score { font-size: 0.75rem; }
+  .whl-table { font-size: 0.82rem; }
+  .whl-composition { display: none; }
+  .whl-show-more { padding: 0.7rem; font-size: 0.9rem; }
+
+  /* === 回測手機版 === */
+  .bt-btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+  .bt-summary { gap: 0.5rem; }
+  .bt-stat { min-width: 0; flex: 1 1 40%; padding: 0.6rem 0.5rem; }
+  .bt-val { font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+  /* === 全域：更大的觸控區域和文字 === */
+  .analysis-section { padding: 1rem 0.8rem; }
+  .section-head h2 { font-size: 1.2rem; }
+  .section-head p { font-size: 0.85rem; }
+  .guava-note { font-size: 0.82rem; padding: 0.8rem; }
+
+  /* === 彩種切換：一排三個大按鈕 === */
+  .lottery-tabs { gap: 0.4rem; }
+  .lot-tab {
+    padding: 0.7rem 0.6rem; font-size: 0.9rem;
+    flex: 1; justify-content: center; min-height: 44px;
+  }
+
+  /* === 範圍選擇：大按鈕好按 === */
+  .range-selector { gap: 0.4rem; }
+  .range-label { width: 100%; text-align: center; margin-bottom: 0.2rem; }
+  .range-btn {
+    flex: 1; padding: 0.55rem 0.5rem; font-size: 0.9rem;
+    text-align: center; min-height: 42px;
+  }
+
+  /* === 選號參考 === */
+  .suggest-balls { gap: 0.6rem; }
+  .suggest-ball { width: 52px; height: 52px; font-size: 1.3rem; }
+  .suggest-score { font-size: 0.85rem; }
+  .sg-tab {
+    flex: 1; text-align: center; padding: 0.65rem 0.8rem;
+    font-size: 0.9rem; min-height: 42px;
+  }
+  .suggest-special { flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+  .suggest-algo-note { font-size: 0.78rem; }
+
+  /* === 包牌預算：兩排排列 === */
+  .wheel-budget {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.4rem;
+  }
+  .wheel-budget-label {
+    grid-column: 1 / -1; text-align: center; margin-bottom: 0.2rem;
+  }
+  .whl-btn {
+    padding: 0.6rem 0.4rem; font-size: 0.9rem;
+    text-align: center; min-height: 42px;
+  }
+  .whl-custom {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: 1fr auto; gap: 0.4rem;
+  }
+  .whl-custom input {
+    width: 100%; padding: 0.55rem 0.6rem; font-size: 0.9rem;
+    min-height: 42px;
+  }
+  .whl-custom-go { min-height: 42px; font-size: 0.9rem; padding: 0.55rem 1rem; }
+
+  /* === 包牌摘要：兩行兩列 === */
+  .whl-summary-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;
+  }
+  .whl-stat { padding: 0.6rem 0.4rem; }
+  .whl-stat-val { font-size: 1.15rem; }
+  .whl-stat-label { font-size: 0.7rem; }
+
+  /* === 號碼池：加大間距，允許自然換行 === */
+  .whl-pool-balls { gap: 1rem 1.2rem; padding: 0.5rem 0; }
+  .whl-pool-ball { width: 46px; height: 46px; font-size: 1.15rem; }
+  .whl-pool-score { font-size: 0.8rem; margin-top: 0.15rem; }
+  .whl-pool-item .suggest-tags { margin-top: 0.1rem; }
+
+  /* === 包牌表格 === */
+  .whl-table { font-size: 0.8rem; }
+  .whl-table th, .whl-table td { padding: 0.4rem 0.3rem; }
+  .num-mini { width: 28px; height: 28px; font-size: 0.78rem; }
+  .whl-show-more {
+    padding: 0.75rem; font-size: 0.95rem;
+    min-height: 44px; font-weight: 700;
+  }
+
+  /* === 回測 === */
+  .backtest-toggle { gap: 0.4rem; }
+  .bt-btn {
+    flex: 1; text-align: center; padding: 0.6rem 0.6rem;
+    font-size: 0.9rem; min-height: 42px;
+  }
+  .bt-summary {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;
+  }
+  .bt-stat { padding: 0.6rem 0.4rem; min-width: 0; }
+  .bt-val { font-size: 1.15rem; }
+  .bt-label { font-size: 0.7rem; }
+  .bt-verdict { font-size: 0.85rem; }
+  .backtest-table { font-size: 0.78rem; }
+  .backtest-table th, .backtest-table td { padding: 0.4rem 0.3rem; }
+
+  /* === 同號連開 === */
+  .repeat-summary-inner { gap: 0.4rem; }
+  .rs-item { padding: 0.7rem 0.6rem; min-width: 0; flex: 1; }
+  .rs-val { font-size: 1.3rem; }
+  .rs-label { font-size: 0.72rem; }
+
+  /* === 冷熱號 === */
+  .hc-card { padding: 0.8rem; }
+  .hc-card h3 { font-size: 0.95rem; }
+  .num-ball { width: 34px; height: 34px; font-size: 0.85rem; }
+  .hc-count { font-size: 0.82rem; }
+
+  /* === 遺漏值 === */
+  .missing-grid { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 0.4rem; }
+  .miss-num { font-size: 1rem; }
+  .miss-val { font-size: 1.2rem; }
+
+  /* === 近期開獎 === */
+  .recent-row {
+    flex-direction: column; align-items: flex-start;
+    gap: 0.4rem; padding: 0.7rem 0.8rem;
+  }
+  .recent-period { font-size: 0.95rem; }
+  .num.mini { width: 30px; height: 30px; font-size: 0.85rem; }
+
+  /* === 上期回顧：改成上下排列，字放大 === */
+  .whl-review-grid { padding: 0.8rem; gap: 0.7rem; }
+  .whl-review-item {
+    flex-direction: column; align-items: flex-start; gap: 0.3rem;
+  }
+  .whl-review-label { font-size: 0.9rem; font-weight: 700; min-width: auto; }
+  .whl-review-val { font-size: 0.95rem; }
+  .whl-review-val .num-mini { width: 30px; height: 30px; font-size: 0.82rem; }
+  .whl-review-note { font-size: 0.85rem; }
+  .whl-review-hit { font-size: 0.95rem; }
+  .whl-review-miss { font-size: 0.9rem; }
+
+  /* === 收合按鈕區更好按 === */
+  .collapsible > .section-head { padding: 0.3rem 0; min-height: 44px; }
+  .section-chevron { font-size: 1rem; }
+}
+</style>
+</BaseLayout>
