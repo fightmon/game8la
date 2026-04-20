@@ -117,12 +117,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <!-- 號碼分析入口 -->
     <section class="analysis-cta">
       <a href="/lottery/analysis/" class="analysis-cta-link">
-        <span class="cta-icon">🧊</span>
+        <span class="cta-icon">🔢</span>
         <div class="cta-text">
-          <strong>冷數據專區 — 歷史開獎趨勢回測</strong>
-          <span>同號連開回測 · 冷熱號排行 · 遺漏值追蹤 · 號碼組合統計</span>
+          <strong>GAME8LA 樂透數據站</strong>
+          <span>選號參考 · 包牌產生器 · 冷熱號回測 · 遺漏值追蹤 · 心水號碼</span>
         </div>
-        <span class="cta-arrow">進入冷數據 →</span>
+        <span class="cta-arrow">進入數據站 →</span>
       </a>
     </section>
 
@@ -218,22 +218,39 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     /* Analysis CTA */
     .analysis-cta { max-width: 1168px; margin: 2rem auto; }
     .analysis-cta-link {
-      display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem;
-      background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(255,215,0,0.06));
-      border: 1px solid rgba(57,255,20,0.3); border-radius: 14px;
-      text-decoration: none; color: var(--text-primary); transition: all 0.25s;
+      display: flex; align-items: center; gap: 1.2rem; padding: 1.4rem 1.8rem;
+      background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(57,255,20,0.1));
+      border: 2px solid rgba(255,215,0,0.5); border-radius: 16px;
+      text-decoration: none; color: var(--text-primary); transition: all 0.3s;
+      position: relative; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(255,215,0,0.1);
+    }
+    .analysis-cta-link::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #FFD700, #39FF14, #FFD700);
+      background-size: 200% 100%;
+      animation: ctaShimmer 3s ease-in-out infinite;
+    }
+    @keyframes ctaShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
     .analysis-cta-link:hover {
-      border-color: #39FF14; box-shadow: 0 6px 20px rgba(57,255,20,0.18); transform: translateY(-2px);
+      border-color: #FFD700; box-shadow: 0 8px 30px rgba(255,215,0,0.25); transform: translateY(-3px);
     }
-    .cta-icon { font-size: 2rem; }
-    .cta-text { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
-    .cta-text strong { font-size: 1.1rem; color: var(--gold-light); }
-    .cta-text span { font-size: 0.85rem; color: var(--text-muted); }
-    .cta-arrow { color: var(--gold-light); font-weight: 800; font-size: 0.9rem; white-space: nowrap; }
+    .cta-icon { font-size: 2.5rem; }
+    .cta-text { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+    .cta-text strong { font-size: 1.2rem; color: #FFD700; }
+    .cta-text span { font-size: 0.88rem; color: var(--text-secondary); }
+    .cta-arrow {
+      color: #000; font-weight: 900; font-size: 0.95rem; white-space: nowrap;
+      background: linear-gradient(135deg, #FFD700, #ff8800); padding: 0.6rem 1.2rem;
+      border-radius: 10px; transition: all 0.25s;
+    }
+    .analysis-cta-link:hover .cta-arrow { box-shadow: 0 4px 15px rgba(255,215,0,0.4); }
     @media (max-width: 600px) {
-      .analysis-cta-link { flex-wrap: wrap; }
-      .cta-arrow { width: 100%; text-align: right; }
+      .analysis-cta-link { flex-wrap: wrap; padding: 1.2rem; }
+      .cta-arrow { width: 100%; text-align: center; }
     }
 
     .info-box {

@@ -19,8 +19,15 @@ const { currentPage = 'home' } = Astro.props;
     <a href="/atg-seth/" class={currentPage === 'atg-seth' ? 'active' : ''}>金8LA賽特</a>
     <a href="/articles/" class={currentPage === 'articles' ? 'active' : ''}>芭樂攻略</a>
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>芭樂遊戲</a>
-    <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>芭樂好彩</a>
-    <a href="/articles/dealers-guide/" class={currentPage === 'dealers' ? 'active' : ''}>荷官特輯</a>
+    <div class="nav-dropdown">
+      <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>芭樂好彩 <span class="dd-arrow">▾</span></a>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-menu-inner">
+          <a href="/lottery/">🎱 最新開獎</a>
+          <a href="/lottery/analysis/">🔢 樂透數據站</a>
+        </div>
+      </div>
+    </div>
     <a href="/casino-check/" class={currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800">🛡️ 娛樂城體檢</a>
   </div>
   <div class="nav-search" role="button" tabindex="0" aria-label="開啟搜尋" onclick="openSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')openSearch()">
@@ -45,7 +52,7 @@ const { currentPage = 'home' } = Astro.props;
     <a href="/articles/" class={currentPage === 'articles' ? 'active' : ''}>📖 芭樂攻略</a>
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>🎰 芭樂遊戲</a>
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>🎱 芭樂好彩</a>
-    <a href="/articles/dealers-guide/" class={currentPage === 'dealers' ? 'active' : ''}>🎴 荷官特輯</a>
+    <a href="/lottery/analysis/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🔢 樂透數據站</a>
     <a href="/casino-check/" class={currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800;font-weight:700">🛡️ 娛樂城體檢</a>
   </div>
 </div>
@@ -260,6 +267,59 @@ const { currentPage = 'home' } = Astro.props;
     overflow-y: auto;
   }
 
+  /* === NAV DROPDOWN === */
+  .nav-dropdown {
+    position: relative;
+  }
+  .nav-dropdown > a {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .dd-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+  .nav-dropdown:hover .dd-arrow {
+    transform: rotate(180deg);
+  }
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 0.5rem; /* invisible bridge so hover doesn't break */
+    z-index: 1001;
+  }
+  .nav-dropdown-menu-inner {
+    background: rgba(30, 30, 30, 0.98);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.4rem;
+    min-width: 180px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu {
+    display: block;
+  }
+  .nav-dropdown-menu a {
+    padding: 0.6rem 0.8rem !important;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s;
+    display: block;
+  }
+  .nav-dropdown-menu a:hover {
+    background: rgba(57, 255, 20, 0.1);
+    color: var(--gold-light);
+  }
+
   /* === RESPONSIVE === */
   @media (max-width: 768px) {
     .nav-links {
@@ -329,6 +389,7 @@ const { currentPage = 'home' } = Astro.props;
     { t: '百家樂完整教學', d: '規則、算牌、投注法、常見迷思', u: '/articles/baccarat-guide/', c: '攻略' },
     { t: '真人荷官大評比', d: '2026 各平台最美荷官盤點', u: '/articles/dealers-guide/', c: '攻略' },
     { t: '芭樂好彩', d: '大樂透、威力彩、今彩539 開獎', u: '/lottery/', c: '彩券' },
+    { t: '樂透數據站', d: '威力彩・大樂透・539 冷熱號回測、選號參考、包牌產生器', u: '/lottery/analysis/', c: '彩券' },
     { t: '富遊娛樂城', d: '台灣老牌娛樂城評測', u: '/casinos/fuyou/', c: '娛樂城' },
     { t: 'MaiSpin 娛樂城', d: '完整平台評測', u: '/casinos/maispin/', c: '娛樂城' },
     { t: 'bet365', d: '國際大廠評測', u: '/casinos/bet365/', c: '娛樂城' },

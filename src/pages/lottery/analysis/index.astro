@@ -4,18 +4,22 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="冷數據專區｜539・威力彩・大樂透歷史開獎趨勢回測 - 芭樂好彩 GAME8LA"
-  description="芭樂好彩冷數據專區：今彩539、威力彩、大樂透歷史開獎回測，同號連開機率、冷熱號排行、遺漏值追蹤、號碼組合統計。不報明牌，只給冷數據。"
+  title="2026 威力彩・大樂透・539 開獎號碼分析｜冷熱門號碼回測與選號工具 - GAME8LA"
+  description="GAME8LA 彩券數據分析：威力彩、大樂透、今彩539 歷史開獎號碼回測，冷熱門號碼排行、遺漏值追蹤、同號連開機率、AI 選號參考與包牌產生器。不報明牌，只給冷數據。"
   currentPage="lottery"
 >
 <div class="container">
-  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/lottery/">芭樂好彩</a> &gt; 冷數據專區</div>
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/lottery/">芭樂好彩</a> &gt; 樂透數據站</div>
   <a href="/lottery/" class="back-link"><Icon name="arrow-left" /> 回芭樂好彩</a>
 
   <div class="page-hero">
-    <h1>🧊 <em>冷數據專區</em></h1>
-    <p class="hero-sub">歷史開獎趨勢回測 — 不報明牌，只給冷數據</p>
+    <h1>🔢 <em>GAME8LA 樂透數據站</em></h1>
+    <p class="hero-sub">威力彩・大樂透・539 歷史回測 — 不報明牌，只給數據</p>
     <p class="updated">資料更新至：<span id="updateTime">載入中…</span>｜共 <span id="totalDraws">--</span> 期</p>
+    <div class="countdown-bar" id="countdownBar">
+      <span class="countdown-label">⏰ 距離下次 <span id="countdownLottery">539</span> 開獎</span>
+      <span class="countdown-timer" id="countdownTimer">--:--:--</span>
+    </div>
   </div>
 
   <!-- 彩種切換 -->
@@ -40,10 +44,10 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
     <button class="range-btn" data-range="0" onclick="setRange(this)">全部</button>
   </div>
 
-  <!-- 芭樂選號參考 -->
+  <!-- GAME8LA 選號參考 -->
   <section class="analysis-section suggestion-section collapsible">
     <div class="section-head" onclick="toggleSection(this)">
-      <h2>🎱 芭樂選號參考 <span class="section-chevron">▾</span></h2>
+      <h2>🎱 GAME8LA 選號參考 <span class="section-chevron">▾</span></h2>
       <p>根據近 <span id="suggestRange">50</span> 期冷熱號、同號連開、遺漏值交叉評分 — 僅供娛樂參考</p>
     </div>
     <div class="section-body">
@@ -55,10 +59,10 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- 芭樂包牌產生器 -->
+  <!-- GAME8LA 包牌產生器 -->
   <section class="analysis-section wheel-section collapsible">
     <div class="section-head" onclick="toggleSection(this)">
-      <h2>🎰 芭樂包牌產生器 <span class="section-chevron">▾</span></h2>
+      <h2>🎰 GAME8LA 包牌產生器 <span class="section-chevron">▾</span></h2>
       <p>根據選號參考的高分號碼，自動展開縮水包牌組合</p>
     </div>
     <div class="section-body">
@@ -80,6 +84,24 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
         <span class="gn-icon">🍈</span>
         <p>芭樂子提醒：包牌只是提高號碼覆蓋率，<strong>不是提高中獎率</strong>。彩券期望值永遠是負的，買越多賠越多是數學事實。請量力而為，把它當娛樂就好！</p>
       </div>
+    </div>
+  </section>
+
+  <!-- 心水號碼組合器 -->
+  <section class="analysis-section picker-section collapsible">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>💖 我的心水號碼 <span class="section-chevron">▾</span></h2>
+      <p>點選號碼組成你的一組，看看歷史上表現如何</p>
+    </div>
+    <div class="section-body">
+      <div class="picker-grid" id="pickerGrid"></div>
+      <div class="picker-selected">
+        <span class="picker-label">已選 <span id="pickerCount">0</span> / <span id="pickerMax">5</span> 個：</span>
+        <div class="picker-balls" id="pickerBalls"></div>
+        <button class="picker-clear" onclick="clearPicker()">清除</button>
+        <button class="picker-check" id="pickerCheckBtn" onclick="checkMyNumbers()" disabled>查歷史命中</button>
+      </div>
+      <div id="pickerResult"></div>
     </div>
   </section>
 
@@ -201,6 +223,99 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
       <div class="recent-draws" id="recentDraws"></div>
     </div>
   </section>
+
+  <!-- 入金前安全提醒 (casino-check 導流) -->
+  <div class="safety-cta">
+    <div class="safety-cta-inner">
+      <span class="safety-cta-icon">🛡️</span>
+      <div class="safety-cta-text">
+        <strong>選好號碼了？線上投注前請先確認平台安全！</strong>
+        <p>號碼分析群組 99% 是詐騙入口，投注前先查一下平台有沒有問題。</p>
+      </div>
+      <a href="/casino-check/" class="safety-cta-btn">立即體檢 →</a>
+    </div>
+  </div>
+
+  <!-- FAQ 常見問答 -->
+  <section class="analysis-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>❓ 常見問答 <span class="section-chevron">▸</span></h2>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>威力彩開獎號碼有規律嗎？</summary>
+          <p>根據 GAME8LA 對歷史開獎號碼的回測分析，雖然短期內特定號碼會出現冷熱之分，但拉長到全歷史來看，每個號碼的出現頻率都會趨近理論機率值。統計上不存在可預測的「規律」，每次開獎都是獨立事件。</p>
+        </details>
+        <details class="faq-item">
+          <summary>大樂透冷熱門號碼真的有用嗎？</summary>
+          <p>冷熱門號碼是根據歷史數據的統計結果，反映的是「過去」而非「未來」。GAME8LA 的回測模擬顯示，不管用熱號還是冷號策略，長期命中率都會趨近隨機選號。數據可以當參考，但不應該當作投注依據。</p>
+        </details>
+        <details class="faq-item">
+          <summary>539 遺漏值很高的號碼是不是快要開了？</summary>
+          <p>這是常見的「賭徒謬誤」。每顆球被抽中的機率永遠相同，不會因為某個號碼很久沒開就「該出現了」。遺漏值只是歷史紀錄，不具有預測能力。</p>
+        </details>
+        <details class="faq-item">
+          <summary>GAME8LA 的選號參考是怎麼算的？</summary>
+          <p>我們的選號參考綜合三項指標加權評分：熱度（出現頻率）佔 40%、遺漏值佔 35%、同號連開動能佔 25%。所有計算完全基於歷史數據，沒有任何主觀預測成分。評分公式公開透明，僅供娛樂參考。</p>
+        </details>
+        <details class="faq-item">
+          <summary>包牌真的能提高中獎率嗎？</summary>
+          <p>包牌能提高「號碼覆蓋率」，也就是你買的組合涵蓋更多號碼。但彩券的數學期望值永遠是負的（每投注 100 元，長期平均只拿回約 55 元），買越多注只是覆蓋越廣，不代表期望報酬會變正。請量力而為。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Schema (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "威力彩開獎號碼有規律嗎？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "根據 GAME8LA 對歷史開獎號碼的回測分析，雖然短期內特定號碼會出現冷熱之分，但拉長到全歷史來看，每個號碼的出現頻率都會趨近理論機率值。統計上不存在可預測的「規律」，每次開獎都是獨立事件。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "大樂透冷熱門號碼真的有用嗎？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "冷熱門號碼是根據歷史數據的統計結果，反映的是「過去」而非「未來」。GAME8LA 的回測模擬顯示，不管用熱號還是冷號策略，長期命中率都會趨近隨機選號。數據可以當參考，但不應該當作投注依據。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "539 遺漏值很高的號碼是不是快要開了？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "這是常見的「賭徒謬誤」。每顆球被抽中的機率永遠相同，不會因為某個號碼很久沒開就「該出現了」。遺漏值只是歷史紀錄，不具有預測能力。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "GAME8LA 的選號參考是怎麼算的？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "選號參考綜合三項指標加權評分：熱度（出現頻率）佔 40%、遺漏值佔 35%、同號連開動能佔 25%。所有計算完全基於歷史數據，沒有任何主觀預測成分。評分公式公開透明，僅供娛樂參考。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "包牌真的能提高中獎率嗎？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "包牌能提高「號碼覆蓋率」，也就是你買的組合涵蓋更多號碼。但彩券的數學期望值永遠是負的，買越多注只是覆蓋越廣，不代表期望報酬會變正。請量力而為。"
+        }
+      }
+    ]
+  }
+  </script>
 
   <!-- 總免責 -->
   <div class="analysis-disclaimer">
@@ -445,6 +560,10 @@ function render() {
 
   // Recent draws
   renderRecentDraws(draws.slice(0, 10), cfg);
+
+  // Countdown & Picker
+  updateCountdown();
+  renderPicker();
 }
 
 function renderRepeat(stats, maxNum) {
@@ -1229,6 +1348,159 @@ function toggleSection(headEl) {
   if (chevron) chevron.textContent = isCollapsed ? '▾' : '▸';
 }
 
+// === COUNTDOWN TIMER ===
+let countdownInterval = null;
+function updateCountdown() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  document.getElementById('countdownLottery').textContent = cfg.label;
+  if (countdownInterval) clearInterval(countdownInterval);
+  countdownInterval = setInterval(tickCountdown, 1000);
+  tickCountdown();
+}
+
+function getNextDrawTime() {
+  const now = new Date();
+  const drawHour = 20, drawMin = 30;
+  // 539: daily, 威力彩: Mon(1)/Thu(4), 大樂透: Tue(2)/Fri(5)
+  let drawDays;
+  if (currentLottery === 'daily_cash_539') {
+    drawDays = [0,1,2,3,4,5,6]; // every day
+  } else if (currentLottery === 'super_lotto') {
+    drawDays = [1, 4]; // Mon, Thu
+  } else {
+    drawDays = [2, 5]; // Tue, Fri
+  }
+
+  let target = new Date(now);
+  target.setHours(drawHour, drawMin, 0, 0);
+
+  // If today is a draw day and we haven't passed draw time, use today
+  if (drawDays.includes(target.getDay()) && target > now) {
+    return target;
+  }
+
+  // Otherwise find the next draw day
+  for (let i = 1; i <= 7; i++) {
+    let next = new Date(now);
+    next.setDate(now.getDate() + i);
+    next.setHours(drawHour, drawMin, 0, 0);
+    if (drawDays.includes(next.getDay())) {
+      return next;
+    }
+  }
+  return target;
+}
+
+function tickCountdown() {
+  const next = getNextDrawTime();
+  const now = new Date();
+  const diff = next - now;
+  if (diff <= 0) {
+    document.getElementById('countdownTimer').textContent = '開獎中！';
+    return;
+  }
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('countdownTimer').textContent =
+    `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+// === PICKER (心水號碼) ===
+let pickerSelected = [];
+
+function renderPicker() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  pickerSelected = [];
+  document.getElementById('pickerMax').textContent = cfg.count;
+  document.getElementById('pickerCount').textContent = '0';
+  document.getElementById('pickerBalls').innerHTML = '';
+  document.getElementById('pickerResult').innerHTML = '';
+  document.getElementById('pickerCheckBtn').disabled = true;
+
+  let html = '';
+  for (let i = 1; i <= cfg.maxNum; i++) {
+    html += `<button class="pk-num" data-num="${i}" onclick="togglePickerNum(${i})">${i}</button>`;
+  }
+  document.getElementById('pickerGrid').innerHTML = html;
+}
+
+function togglePickerNum(num) {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const idx = pickerSelected.indexOf(num);
+  if (idx > -1) {
+    pickerSelected.splice(idx, 1);
+  } else {
+    if (pickerSelected.length >= cfg.count) return; // max reached
+    pickerSelected.push(num);
+  }
+  pickerSelected.sort((a, b) => a - b);
+
+  // Update grid highlights
+  document.querySelectorAll('#pickerGrid .pk-num').forEach(btn => {
+    btn.classList.toggle('selected', pickerSelected.includes(parseInt(btn.dataset.num)));
+  });
+
+  // Update selected balls display
+  document.getElementById('pickerCount').textContent = pickerSelected.length;
+  document.getElementById('pickerBalls').innerHTML = pickerSelected.map(n =>
+    `<span class="num-mini pk-ball">${n}</span>`
+  ).join('');
+
+  // Enable/disable check button
+  document.getElementById('pickerCheckBtn').disabled = pickerSelected.length < cfg.count;
+}
+
+function clearPicker() {
+  pickerSelected = [];
+  renderPicker();
+}
+
+function checkMyNumbers() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const data = lotteryData[currentLottery];
+  if (!data || pickerSelected.length < cfg.count) return;
+
+  const allDraws = data.draws;
+  let hits = [];
+
+  allDraws.forEach(draw => {
+    const matched = pickerSelected.filter(n => draw.numbers.includes(n));
+    if (matched.length >= 2) {
+      hits.push({ date: draw.date, period: draw.period, numbers: draw.numbers, matched, count: matched.length });
+    }
+  });
+
+  hits.sort((a, b) => b.count - a.count || b.date.localeCompare(a.date));
+
+  let html = `<div class="picker-result-box">`;
+  html += `<h4>歷史命中結果（共 ${allDraws.length} 期）</h4>`;
+
+  if (hits.length === 0) {
+    html += `<p class="picker-no-hit">這組號碼在歷史開獎中命中不到 2 個號碼 😅 換一組試試？</p>`;
+  } else {
+    const maxShow = 10;
+    const display = hits.slice(0, maxShow);
+    html += `<p class="picker-hit-summary">命中 2+ 個號碼的期數：<strong>${hits.length}</strong> 期</p>`;
+    html += `<div class="picker-hit-list">`;
+    display.forEach(h => {
+      html += `<div class="picker-hit-row">
+        <span class="picker-hit-date">${h.date}</span>
+        <span class="picker-hit-nums">${h.numbers.map(n =>
+          `<span class="num-mini ${h.matched.includes(n) ? 'hit' : ''}">${n}</span>`
+        ).join('')}</span>
+        <span class="picker-hit-count">中 ${h.count} 個</span>
+      </div>`;
+    });
+    html += `</div>`;
+    if (hits.length > maxShow) {
+      html += `<p class="picker-more">… 還有 ${hits.length - maxShow} 期有命中</p>`;
+    }
+  }
+  html += `</div>`;
+  document.getElementById('pickerResult').innerHTML = html;
+}
+
 // GO
 init();
 </script>
@@ -1570,6 +1842,124 @@ init();
 }
 .analysis-disclaimer strong { color: #ffb347; }
 .analysis-disclaimer a { color: #ffd966; text-decoration: underline; }
+
+/* === Countdown Timer === */
+.countdown-bar {
+  display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+  margin-top: 0.8rem; padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(57,255,20,0.08));
+  border: 1px solid rgba(255,215,0,0.25); border-radius: 10px;
+}
+.countdown-label { font-size: 0.9rem; color: var(--text-secondary); }
+.countdown-timer {
+  font-size: 1.5rem; font-weight: 900; letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #FFD700, #39FF14); -webkit-background-clip: text;
+  background-clip: text; color: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+/* === Picker (心水號碼) === */
+.picker-section {
+  background: linear-gradient(135deg, rgba(255,105,180,0.06), rgba(255,215,0,0.04));
+  border-color: rgba(255,105,180,0.3);
+}
+.picker-grid {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-bottom: 1rem;
+}
+.pk-num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--bg-secondary); border: 2px solid var(--border);
+  color: var(--text-secondary); font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.pk-num:hover { border-color: #ff69b4; color: #ff69b4; }
+.pk-num.selected {
+  background: linear-gradient(135deg, #ff69b4, #ff1493); color: #fff;
+  border-color: #ff69b4; box-shadow: 0 3px 12px rgba(255,105,180,0.4);
+  transform: scale(1.08);
+}
+.picker-selected {
+  display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
+  padding: 0.8rem; background: var(--bg-secondary); border-radius: 10px; margin-bottom: 1rem;
+}
+.picker-label { font-size: 0.9rem; color: var(--text-muted); white-space: nowrap; }
+.picker-balls { display: flex; gap: 0.4rem; flex-wrap: wrap; flex: 1; }
+.pk-ball {
+  background: linear-gradient(135deg, #ff69b4, #ff1493) !important;
+  color: #fff !important; font-weight: 700;
+}
+.picker-clear, .picker-check {
+  padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; border: none;
+}
+.picker-clear { background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border); }
+.picker-clear:hover { border-color: var(--text-muted); }
+.picker-check {
+  background: linear-gradient(135deg, #ff69b4, #ff1493); color: #fff;
+}
+.picker-check:disabled { opacity: 0.4; cursor: not-allowed; }
+.picker-check:not(:disabled):hover { box-shadow: 0 4px 15px rgba(255,105,180,0.4); }
+.picker-result-box {
+  padding: 1rem; background: var(--bg-secondary); border-radius: 10px;
+  border: 1px solid rgba(255,105,180,0.2);
+}
+.picker-result-box h4 { font-size: 1rem; margin-bottom: 0.8rem; color: var(--text-primary); }
+.picker-no-hit { color: var(--text-muted); font-size: 0.9rem; }
+.picker-hit-summary { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.8rem; }
+.picker-hit-summary strong { color: #ff69b4; }
+.picker-hit-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.picker-hit-row {
+  display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.6rem;
+  background: var(--bg-card); border-radius: 8px;
+}
+.picker-hit-date { font-size: 0.82rem; color: var(--text-muted); min-width: 90px; }
+.picker-hit-nums { display: flex; gap: 0.25rem; flex-wrap: wrap; flex: 1; }
+.picker-hit-nums .num-mini.hit {
+  background: linear-gradient(135deg, #ff69b4, #ff1493) !important;
+  color: #fff !important; font-weight: 700;
+}
+.picker-hit-count { font-size: 0.85rem; font-weight: 700; color: #ff69b4; white-space: nowrap; }
+.picker-more { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+/* === Safety CTA === */
+.safety-cta {
+  margin: 2rem 0; padding: 1.2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(255,215,0,0.06));
+  border: 2px solid rgba(57,255,20,0.3); border-radius: 14px;
+}
+.safety-cta-inner {
+  display: flex; align-items: center; gap: 1rem;
+}
+.safety-cta-icon { font-size: 2rem; flex-shrink: 0; }
+.safety-cta-text { flex: 1; }
+.safety-cta-text strong { font-size: 1rem; color: var(--text-primary); display: block; margin-bottom: 0.3rem; }
+.safety-cta-text p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+.safety-cta-btn {
+  display: inline-block; padding: 0.7rem 1.5rem; border-radius: 10px;
+  background: linear-gradient(135deg, #39FF14, #00e676); color: #000;
+  font-weight: 800; font-size: 0.95rem; text-decoration: none;
+  transition: all 0.25s; white-space: nowrap; flex-shrink: 0;
+}
+.safety-cta-btn:hover { box-shadow: 0 4px 20px rgba(57,255,20,0.4); transform: translateY(-1px); }
+
+/* === FAQ === */
+.faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.faq-item {
+  background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden;
+}
+.faq-item summary {
+  padding: 1rem 1.2rem; font-size: 1rem; font-weight: 700; color: var(--text-primary);
+  cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.5rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before { content: '▸'; color: var(--gold); transition: transform 0.2s; }
+.faq-item[open] summary::before { transform: rotate(90deg); }
+.faq-item p {
+  padding: 0 1.2rem 1rem; font-size: 0.9rem; color: var(--text-secondary);
+  line-height: 1.7; margin: 0;
+}
 
 /* Hero sub */
 .hero-sub { color: var(--text-muted); font-size: 1rem; font-weight: 500; }
@@ -2031,6 +2421,25 @@ init();
   /* === 收合按鈕區更好按 === */
   .collapsible > .section-head { padding: 0.3rem 0; min-height: 44px; }
   .section-chevron { font-size: 1rem; }
+
+  /* === 倒數計時器 手機版 === */
+  .countdown-bar { flex-direction: column; gap: 0.3rem; padding: 0.6rem 0.8rem; }
+  .countdown-timer { font-size: 1.3rem; }
+
+  /* === 心水號碼 手機版 === */
+  .pk-num { width: 40px; height: 40px; font-size: 0.95rem; }
+  .picker-selected { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+  .picker-balls { justify-content: center; }
+  .picker-clear, .picker-check { min-height: 44px; font-size: 0.95rem; }
+  .picker-hit-row { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+
+  /* === Safety CTA 手機版 === */
+  .safety-cta-inner { flex-direction: column; text-align: center; gap: 0.8rem; }
+  .safety-cta-btn { width: 100%; text-align: center; }
+
+  /* === FAQ 手機版 === */
+  .faq-item summary { font-size: 0.95rem; padding: 0.8rem; min-height: 44px; }
+  .faq-item p { font-size: 0.9rem; }
 }
 </style>
 </BaseLayout>

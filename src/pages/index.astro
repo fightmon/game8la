@@ -10,7 +10,7 @@ const latestArticles = articles.slice(0, 6);
 // 取最新通報 10 筆（依日期排序）
 const latestScams = [...scamList]
   .sort((a, b) => b.latestDate.localeCompare(a.latestDate))
-  .slice(0, 10);
+  .slice(0, 5);
 ---
 
 <BaseLayout 
@@ -147,6 +147,24 @@ const latestScams = [...scamList]
         <a href="/articles/casino-jackpot-tax-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">5</span><span class="hot-title">娛樂城獎金課稅指南</span><span class="hot-views">650</span></a>
         <a href="/articles/atg-seth-copycat-exposed/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">6</span><span class="hot-title">戰神賽特抄襲揭密</span><span class="hot-views">2,187</span></a>
         <a href="/articles/baccarat-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">7</span><span class="hot-title">百家樂看路教學</span><span class="hot-views">1,245</span></a>
+      </div>
+      <!-- 今日推薦彩號 -->
+      <div class="lottery-preview-widget">
+        <h3>🎱 今日推薦彩號</h3>
+        <div class="lp-tabs">
+          <button class="lp-tab active" data-lp="daily_cash_539" onclick="switchLP(this)">539</button>
+          <button class="lp-tab" data-lp="super_lotto" onclick="switchLP(this)">威力彩</button>
+          <button class="lp-tab" data-lp="lotto649" onclick="switchLP(this)">大樂透</button>
+        </div>
+        <div class="lp-recommend">
+          <p class="lp-rec-label">📊 數據推薦號碼</p>
+          <div class="lp-balls" id="lpRec"><span class="lp-loading">載入中…</span></div>
+          <p class="lp-rec-note">根據近 50 期冷熱 + 遺漏值加權</p>
+        </div>
+        <div class="lp-meta">
+          <span class="lp-update">更新至 <span id="lpDate">--</span></span>
+        </div>
+        <a href="/lottery/analysis/" class="lp-cta-sidebar">查看完整數據分析 →</a>
       </div>
       <!-- 最新詐騙通報 -->
       <div class="scam-alert-widget">
@@ -1591,6 +1609,67 @@ body {
   .check-cta-body h2 span { display: block; margin-top: 0.2rem; }
 }
 
+/* === LOTTERY PREVIEW SIDEBAR WIDGET === */
+.lottery-preview-widget {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
+}
+.lottery-preview-widget h3 {
+  font-size: 1.05rem; margin-bottom: 0.8rem; color: var(--text-primary);
+}
+.lp-tabs {
+  display: flex; gap: 0.35rem; margin-bottom: 1rem;
+}
+.lp-tab {
+  flex: 1; text-align: center;
+  padding: 0.35rem 0.5rem; border-radius: 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.lp-tab:hover { border-color: var(--gold); }
+.lp-tab.active {
+  background: linear-gradient(135deg, #FFD700, #ff8800); color: #000;
+  border-color: #FFD700; font-weight: 700;
+}
+.lp-recommend { margin-bottom: 0.8rem; }
+.lp-rec-label {
+  font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;
+}
+.lp-balls {
+  display: flex; gap: 0.4rem; flex-wrap: wrap;
+}
+.lp-ball {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.95rem;
+}
+.lp-ball.rec {
+  background: linear-gradient(135deg, #FFD700, #ff8800);
+  color: #000; box-shadow: 0 3px 10px rgba(255,215,0,0.35);
+}
+.lp-loading { font-size: 0.82rem; color: var(--text-muted); }
+.lp-rec-note {
+  font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;
+  font-style: italic;
+}
+.lp-meta {
+  margin-bottom: 0.6rem;
+}
+.lp-update { font-size: 0.75rem; color: var(--text-muted); }
+.lp-cta-sidebar {
+  display: block; text-align: center;
+  padding: 0.55rem 0.8rem; border-radius: 8px;
+  background: linear-gradient(135deg, rgba(57,255,20,0.12), rgba(255,215,0,0.08));
+  border: 1px solid rgba(57,255,20,0.3); color: var(--gold-light);
+  font-size: 0.85rem; font-weight: 700; text-decoration: none;
+  transition: all 0.25s;
+}
+.lp-cta-sidebar:hover { box-shadow: 0 4px 15px rgba(57,255,20,0.2); }
+
 </style>
 
 <script is:inline type="application/ld+json">
@@ -1869,4 +1948,72 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
     a.classList.add('active');
   });
 });
+
+// === LOTTERY PREVIEW ===
+const LP_CONFIG = {
+  daily_cash_539: { file: '/data/daily-cash-539.json', maxNum: 39, count: 5 },
+  super_lotto:    { file: '/data/super-lotto.json',    maxNum: 38, count: 6 },
+  lotto649:       { file: '/data/lotto649.json',       maxNum: 49, count: 6 },
+};
+let lpData = {};
+let lpCurrent = 'daily_cash_539';
+
+async function loadLP(key) {
+  if (lpData[key]) return;
+  try {
+    const res = await fetch(LP_CONFIG[key].file);
+    lpData[key] = await res.json();
+  } catch(e) { console.error('LP load error:', e); }
+}
+
+function renderLP() {
+  const data = lpData[lpCurrent];
+  if (!data) return;
+  const cfg = LP_CONFIG[lpCurrent];
+  var draws = data.draws.slice(0, 50);
+  var allDraws = data.draws;
+  var count = cfg.count || 5;
+
+  // Frequency
+  var freq = {};
+  for (var i = 1; i <= cfg.maxNum; i++) freq[i] = 0;
+  draws.forEach(function(d) { d.numbers.forEach(function(n) { freq[n]++; }); });
+  var maxFreq = Math.max.apply(null, Object.values(freq));
+
+  // Missing
+  var missing = {};
+  for (var i = 1; i <= cfg.maxNum; i++) {
+    missing[i] = 0;
+    for (var j = 0; j < allDraws.length; j++) {
+      if (allDraws[j].numbers.indexOf(i) !== -1) break;
+      missing[i]++;
+    }
+  }
+  var maxMiss = Math.max.apply(null, Object.values(missing));
+
+  // Score: freq 50% + missing 50%
+  var scores = [];
+  for (var n = 1; n <= cfg.maxNum; n++) {
+    var fScore = maxFreq > 0 ? freq[n] / maxFreq : 0;
+    var mScore = maxMiss > 0 ? missing[n] / maxMiss : 0;
+    scores.push({ num: n, score: fScore * 0.5 + mScore * 0.5 });
+  }
+  scores.sort(function(a, b) { return b.score - a.score; });
+  var picks = scores.slice(0, count).sort(function(a, b) { return a.num - b.num; });
+
+  document.getElementById('lpRec').innerHTML = picks.map(function(p) {
+    return '<span class="lp-ball rec">' + p.num + '</span>';
+  }).join('');
+  document.getElementById('lpDate').textContent = data.lastUpdated || '--';
+}
+
+function switchLP(btn) {
+  document.querySelectorAll('.lp-tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  lpCurrent = btn.dataset.lp;
+  loadLP(lpCurrent).then(function() { renderLP(); });
+}
+
+// Init lottery preview
+loadLP('daily_cash_539').then(function() { renderLP(); });
 </script>
