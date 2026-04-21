@@ -76,10 +76,30 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
           <button class="whl-btn whl-custom-go" onclick="event.stopPropagation();setCustomBudget()">套用</button>
         </div>
       </div>
+      <!-- 號碼來源切換 -->
+      <div class="whl-source-toggle">
+        <span class="whl-source-label">號碼來源：</span>
+        <button class="whl-src-btn active" data-src="auto" onclick="event.stopPropagation();setWheelSource('auto',this)">🎱 系統推薦</button>
+        <button class="whl-src-btn" data-src="custom" onclick="event.stopPropagation();setWheelSource('custom',this)">✋ 自選號碼</button>
+      </div>
+      <!-- 自選號碼面板 -->
+      <div class="whl-custom-pool" id="whlCustomPool" style="display:none">
+        <p class="whl-cp-hint">點選你要包牌的號碼（至少選 <strong id="whlCpMin">6</strong> 個）：</p>
+        <div class="whl-cp-grid" id="whlCpGrid"></div>
+        <div class="whl-cp-status">
+          <span>已選 <strong id="whlCpCount">0</strong> / 12 個</span>
+          <button class="whl-cp-clear" onclick="event.stopPropagation();clearCustomPool()">清除</button>
+        </div>
+        <div class="whl-cp-warn" id="whlCpWarn" style="display:none"></div>
+      </div>
       <div class="wheel-summary" id="wheelSummary"></div>
       <div class="wheel-pool" id="wheelPool"></div>
       <div class="wheel-combos" id="wheelCombos"></div>
       <div class="wheel-review" id="wheelReview"></div>
+
+      <!-- 包牌機率模擬 -->
+      <div class="wheel-sim" id="wheelSim"></div>
+
       <div class="guava-note">
         <span class="gn-icon">🍈</span>
         <p>芭樂子提醒：包牌只是提高號碼覆蓋率，<strong>不是提高中獎率</strong>。彩券期望值永遠是負的，買越多賠越多是數學事實。請量力而為，把它當娛樂就好！</p>
@@ -413,6 +433,9 @@ function switchLottery(btn) {
   document.querySelectorAll('.lot-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   currentLottery = btn.dataset.lottery;
+  // Reset custom pool when switching lottery type
+  customPoolNums = [];
+  if (wheelSource === 'custom') renderCustomPoolGrid();
   loadData(currentLottery).then(() => render());
 }
 
@@ -1057,6 +1080,86 @@ function switchSuggestMode(btn, mode) {
 
 // === WHEEL GENERATOR ===
 let currentBudget = 1000;
+let wheelSource = 'auto'; // 'auto' or 'custom'
+let customPoolNums = [];  // user-selected numbers for custom wheel
+
+function setWheelSource(src, btn) {
+  wheelSource = src;
+  btn.parentElement.querySelectorAll('.whl-src-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cpPanel = document.getElementById('whlCustomPool');
+  if (src === 'custom') {
+    cpPanel.style.display = '';
+    renderCustomPoolGrid();
+  } else {
+    cpPanel.style.display = 'none';
+  }
+  renderWheel();
+}
+
+function renderCustomPoolGrid() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const grid = document.getElementById('whlCpGrid');
+  document.getElementById('whlCpMin').textContent = cfg.count + 1;
+  let html = '';
+  for (let i = 1; i <= cfg.maxNum; i++) {
+    const sel = customPoolNums.includes(i) ? ' selected' : '';
+    html += '<div class="whl-cp-num' + sel + '" data-n="' + i + '" onclick="event.stopPropagation();toggleCustomPoolNum(' + i + ')">' + i + '</div>';
+  }
+  grid.innerHTML = html;
+  document.getElementById('whlCpCount').textContent = customPoolNums.length;
+}
+
+const MAX_CUSTOM_POOL = 12;
+
+function toggleCustomPoolNum(n) {
+  const idx = customPoolNums.indexOf(n);
+  if (idx >= 0) {
+    customPoolNums.splice(idx, 1);
+  } else {
+    if (customPoolNums.length >= MAX_CUSTOM_POOL) {
+      // Already at max — shake the warning
+      const warn = document.getElementById('whlCpWarn');
+      if (warn) { warn.classList.remove('shake'); void warn.offsetWidth; warn.classList.add('shake'); }
+      return;
+    }
+    customPoolNums.push(n);
+  }
+  customPoolNums.sort((a, b) => a - b);
+  renderCustomPoolGrid();
+  updateCustomPoolWarn();
+  renderWheel();
+}
+
+function updateCustomPoolWarn() {
+  const warn = document.getElementById('whlCpWarn');
+  if (!warn) return;
+  const cnt = customPoolNums.length;
+  if (cnt >= 11) {
+    const cfg = LOTTERY_CONFIG[currentLottery];
+    const betCost = BET_COST[currentLottery] || 50;
+    const combos = C(cnt, cfg.count);
+    const cost = combos * betCost;
+    warn.style.display = '';
+    warn.innerHTML = `
+      <div class="whl-cp-warn-icon">⚠️</div>
+      <div class="whl-cp-warn-body">
+        <strong>芭樂子提醒：選超過 10 碼的包牌長期來看不划算</strong>
+        <p>${cnt} 碼包牌 = ${combos.toLocaleString()} 種組合 = 每期花費 $${cost.toLocaleString()}</p>
+        <p>539 頭獎上限 800 萬，若多人中獎還要均分。只要約 ${Math.ceil(8000000 / cost)} 期沒中頭獎，累積成本就超過單次頭獎獎金。小獎（貳獎 2 萬、參獎 300 元）通常遠不夠回本。</p>
+        <p>🎯 建議控制在 <strong>7～10 碼</strong>，用更少的錢覆蓋更高的期望值。</p>
+      </div>`;
+  } else {
+    warn.style.display = 'none';
+    warn.innerHTML = '';
+  }
+}
+
+function clearCustomPool() {
+  customPoolNums = [];
+  renderCustomPoolGrid();
+  renderWheel();
+}
 
 const BET_COST = {
   daily_cash_539: 50,
@@ -1113,37 +1216,100 @@ function getPoolSize(maxBets, pickCount) {
   return pool;
 }
 
-function generateWheel(draws, allDraws, cfg) {
+function generateWheel(draws, allDraws, cfg, forceAuto) {
   const betCost = BET_COST[currentLottery];
   const maxBets = Math.floor(currentBudget / betCost);
-  if (maxBets < 1) return { pool: [], combos: [], maxBets: 0, betCost, poolSize: 0 };
+  if (maxBets < 1) return { pool: [], combos: [], maxBets: 0, betCost, poolSize: 0, isCustom: false };
 
-  // Get scored numbers
   const { allScores } = calcSuggestions(draws, allDraws, cfg);
-  const poolSize = getPoolSize(maxBets, cfg.count);
-  const pool = allScores.slice(0, poolSize);
-  const poolNums = pool.map(s => s.num);
+  const useCustom = !forceAuto && wheelSource === 'custom' && customPoolNums.length > cfg.count;
 
-  // Generate all combos from pool
-  let allCombos = combinations(poolNums, cfg.count);
+  let pool, poolNums, poolSize;
 
-  // Score each combo: sum of individual scores
-  allCombos = allCombos.map(combo => {
-    const score = combo.reduce((sum, n) => {
-      const s = pool.find(p => p.num === n);
-      return sum + (s ? s.total : 0);
-    }, 0);
-    // Count tags
-    const hotCount = combo.filter(n => { const s = pool.find(p => p.num === n); return s && s.freqScore >= 70; }).length;
-    const missCount = combo.filter(n => { const s = pool.find(p => p.num === n); return s && s.missScore >= 70; }).length;
+  if (useCustom) {
+    // Custom mode: use user-selected numbers, attach scores from allScores
+    poolNums = [...customPoolNums];
+    poolSize = poolNums.length;
+    pool = poolNums.map(n => {
+      const found = allScores.find(s => s.num === n);
+      return found || { num: n, total: 0, freqScore: 0, missScore: 0, inLastDraw: false };
+    });
+  } else {
+    // Auto mode: use top-scored numbers
+    poolSize = getPoolSize(maxBets, cfg.count);
+    pool = allScores.slice(0, poolSize);
+    poolNums = pool.map(s => s.num);
+  }
+
+  // Compute total combos count (without generating)
+  const totalCombosCount = C(poolSize, cfg.count);
+
+  // Safety: cap combos generation to prevent browser crash
+  // Full enum up to 5000; above that, sample smartly
+  const MAX_ENUM = 5000;
+  let allCombos;
+
+  // Build a score lookup map for O(1) access
+  const scoreMap = new Map();
+  pool.forEach(p => scoreMap.set(p.num, p));
+
+  function scoreCombo(combo) {
+    let score = 0, hotCount = 0, missCount = 0;
+    for (const n of combo) {
+      const s = scoreMap.get(n);
+      if (s) {
+        score += s.total;
+        if (s.freqScore >= 70) hotCount++;
+        if (s.missScore >= 70) missCount++;
+      }
+    }
     return { nums: combo, score: Math.round(score * 10) / 10, hotCount, missCount };
-  });
+  }
 
-  // Sort by score, take top maxBets
+  // Cap how many combos we actually need: maxBets or MAX_ENUM, whichever is smaller
+  const needCombos = Math.min(maxBets, MAX_ENUM);
+
+  if (totalCombosCount <= MAX_ENUM) {
+    // Full enumeration — safe, pool is small enough
+    allCombos = combinations(poolNums, cfg.count).map(scoreCombo);
+  } else {
+    // Pool too large for full enum — sample from top-scored numbers + random
+    const sampleTarget = Math.min(needCombos * 3, MAX_ENUM);
+    const seen = new Set();
+    const sampled = [];
+    const sorted = [...poolNums].sort((a, b) => {
+      return (scoreMap.get(b)?.total || 0) - (scoreMap.get(a)?.total || 0);
+    });
+    // Greedy: combos from top-scored numbers first
+    const topN = Math.min(sorted.length, 12);
+    const topCombos = combinations(sorted.slice(0, topN), cfg.count);
+    for (const c of topCombos) {
+      const key = c.join(',');
+      if (!seen.has(key)) { seen.add(key); sampled.push(scoreCombo(c)); }
+      if (sampled.length >= sampleTarget) break;
+    }
+    // Fill remaining with random combos
+    let attempts = 0;
+    while (sampled.length < sampleTarget && attempts < sampleTarget * 10) {
+      attempts++;
+      const combo = [];
+      const used = new Set();
+      while (combo.length < cfg.count) {
+        const idx = Math.floor(Math.random() * poolNums.length);
+        if (!used.has(idx)) { used.add(idx); combo.push(poolNums[idx]); }
+      }
+      combo.sort((a, b) => a - b);
+      const key = combo.join(',');
+      if (!seen.has(key)) { seen.add(key); sampled.push(scoreCombo(combo)); }
+    }
+    allCombos = sampled;
+  }
+
+  // Sort by score, take top needed
   allCombos.sort((a, b) => b.score - a.score);
-  const combos = allCombos.slice(0, maxBets);
+  const combos = allCombos.slice(0, needCombos);
 
-  return { pool, combos, maxBets, betCost, poolSize, totalCombos: allCombos.length };
+  return { pool, combos, maxBets, betCost, poolSize, totalCombos: totalCombosCount, isCustom: useCustom };
 }
 
 function renderWheel() {
@@ -1154,7 +1320,20 @@ function renderWheel() {
   const draws = getDraws();
   const allDraws = data.draws;
   const betCost = BET_COST[currentLottery];
-  const { pool, combos, maxBets, poolSize, totalCombos } = generateWheel(draws, allDraws, cfg);
+  const { pool, combos, maxBets, poolSize, totalCombos, isCustom } = generateWheel(draws, allDraws, cfg);
+
+  // Custom mode: show hint if not enough numbers selected
+  if (wheelSource === 'custom' && customPoolNums.length <= cfg.count) {
+    document.getElementById('wheelSummary').innerHTML = '';
+    document.getElementById('wheelPool').innerHTML = `
+      <div class="whl-cp-not-enough">
+        <span>✋</span> 請至少選 <strong>${cfg.count + 1}</strong> 個號碼才能組成包牌（目前選了 ${customPoolNums.length} 個）
+      </div>`;
+    document.getElementById('wheelCombos').innerHTML = '';
+    document.getElementById('wheelReview').innerHTML = '';
+    document.getElementById('wheelSim').innerHTML = '';
+    return;
+  }
 
   // Summary
   const actualCost = combos.length * betCost;
@@ -1170,7 +1349,7 @@ function renderWheel() {
       </div>
       <div class="whl-stat">
         <span class="whl-stat-val">${poolSize} 碼</span>
-        <span class="whl-stat-label">候選號碼池</span>
+        <span class="whl-stat-label">${isCustom ? '自選號碼' : '候選號碼池'}</span>
       </div>
       <div class="whl-stat">
         <span class="whl-stat-val">$${actualCost.toLocaleString()}</span>
@@ -1178,9 +1357,29 @@ function renderWheel() {
       </div>
     </div>`;
 
+  // Custom mode: budget overflow notice
+  if (isCustom && totalCombos > combos.length) {
+    const fullCost = totalCombos * betCost;
+    document.getElementById('wheelSummary').innerHTML += `
+      <div class="whl-budget-overflow">
+        <div class="whl-bo-icon">⚠️</div>
+        <div class="whl-bo-text">
+          <strong>預算不足以包完所有組合</strong>
+          <p>你選了 <strong>${poolSize} 碼</strong>，共可產生 <strong>${totalCombos} 種組合</strong>，全包需要 <strong>$${fullCost.toLocaleString()}</strong>。</p>
+          <p>目前預算 $${currentBudget.toLocaleString()} 只能買 <strong>${combos.length} 注</strong>（已按強度排序取最強組合）。</p>
+        </div>
+        <button class="whl-bo-btn" onclick="adjustBudgetForCustom(${fullCost})">
+          💰 調整預算為 $${fullCost.toLocaleString()}（全包 ${totalCombos} 注）
+        </button>
+      </div>`;
+  }
+
   // Pool display
+  const poolTitle = isCustom
+    ? `✋ 你的自選號碼（${poolSize} 碼）`
+    : `🎯 候選號碼池（TOP ${poolSize} 高分號碼）`;
   document.getElementById('wheelPool').innerHTML = `
-    <h4>🎯 候選號碼池（TOP ${poolSize} 高分號碼）</h4>
+    <h4>${poolTitle}</h4>
     <div class="whl-pool-balls">
       ${pool.map((s, i) => `
         <div class="whl-pool-item">
@@ -1198,9 +1397,12 @@ function renderWheel() {
   if (combos.length === 0) {
     document.getElementById('wheelCombos').innerHTML = '<p class="whl-empty">預算不足，至少需要 $' + betCost + ' 才能買一注。</p>';
   } else {
-    // Show first 50 combos, with "show more" if needed
+    // Show first 5, expand up to 200 max to protect DOM performance
     const showFirst = 5;
-    const hasMore = combos.length > showFirst;
+    const MAX_DISPLAY = 100;
+    const displayCombos = combos.slice(0, MAX_DISPLAY);
+    const hasMore = displayCombos.length > showFirst;
+    const truncated = combos.length > MAX_DISPLAY;
 
     // Special number for 威力彩/大樂透
     let specialCol = '';
@@ -1228,7 +1430,7 @@ function renderWheel() {
       </tr>`;
 
     document.getElementById('wheelCombos').innerHTML = `
-      <h4>📋 包牌組合表${totalCombos > combos.length ? `（從 ${totalCombos} 種組合中選出最強 ${combos.length} 注）` : ''}</h4>
+      <h4>📋 包牌組合表${totalCombos > combos.length ? `（從 ${totalCombos.toLocaleString()} 種組合中選出最強 ${combos.length.toLocaleString()} 注）` : ''}</h4>
       <div class="whl-table-wrap">
         <table class="whl-table">
           <thead>
@@ -1241,18 +1443,31 @@ function renderWheel() {
             </tr>
           </thead>
           <tbody>
-            ${combos.slice(0, showFirst).map((c, i) => comboRow(c, i)).join('')}
+            ${displayCombos.slice(0, showFirst).map((c, i) => comboRow(c, i)).join('')}
           </tbody>
           ${hasMore ? `<tbody id="wheelHiddenRows" style="display:none">
-            ${combos.slice(showFirst).map((c, i) => comboRow(c, i + showFirst)).join('')}
+            ${displayCombos.slice(showFirst).map((c, i) => comboRow(c, i + showFirst)).join('')}
           </tbody>` : ''}
         </table>
       </div>
-      ${hasMore ? `<button class="whl-show-more" id="wheelToggle" onclick="toggleWheelCombos()">顯示全部 ${combos.length} 注</button>` : ''}`;
+      ${hasMore ? `<button class="whl-show-more" id="wheelToggle" onclick="toggleWheelCombos()">顯示前 ${displayCombos.length} 注</button>` : ''}
+      ${truncated ? `<p class="whl-trunc-note">⚠️ 共 ${combos.length.toLocaleString()} 注，為保持頁面流暢僅顯示前 ${MAX_DISPLAY} 注（已按強度排序）</p>` : ''}`;
   }
 
   // Last draw review
   renderWheelReview(draws, allDraws, cfg);
+
+  // Probability simulation (539 only)
+  renderWheelSim(poolSize, combos, BET_COST[currentLottery]);
+}
+
+function adjustBudgetForCustom(fullCost) {
+  currentBudget = fullCost;
+  // Deselect preset buttons, fill custom budget input
+  document.querySelectorAll('.whl-btn[data-budget]').forEach(b => b.classList.remove('active'));
+  const input = document.getElementById('customBudget');
+  if (input) input.value = fullCost;
+  renderWheel();
 }
 
 function toggleWheelCombos() {
@@ -1280,7 +1495,8 @@ function renderWheelReview(draws, allDraws, cfg) {
   if (pastDraws.length < 5) { el.innerHTML = ''; return; }
 
   const lastDraw = allDraws[0];
-  const { pool: simPool, combos: simCombos } = generateWheel(pastDraws, pastAllDraws, cfg);
+  const isCustomReview = wheelSource === 'custom' && customPoolNums.length > cfg.count;
+  const { pool: simPool, combos: simCombos } = generateWheel(pastDraws, pastAllDraws, cfg, !isCustomReview);
 
   if (simCombos.length === 0) { el.innerHTML = ''; return; }
 
@@ -1332,7 +1548,307 @@ function renderWheelReview(draws, allDraws, cfg) {
       </div>
       ${specialHit ? `<div class="whl-review-item"><span class="whl-review-label">${cfg.specialLabel}</span>${specialHit}</div>` : ''}
     </div>
-    <p class="whl-review-note">💡 以上是假設用同樣的演算法和預算 $${currentBudget.toLocaleString()} 回測上一期的結果。</p>`;
+    <p class="whl-review-note">💡 以上是假設用${isCustomReview ? '你的自選號碼池' : '同樣的演算法'}和預算 $${currentBudget.toLocaleString()} 回測上一期的結果。</p>`;
+}
+
+// === WHEEL PROBABILITY SIMULATION (包牌機率模擬) ===
+
+// 539 prize structure: { match: N, prize: $, label }
+const PRIZE_539 = [
+  { match: 5, prize: 8000000, label: '頭獎（5 中 5）' },
+  { match: 4, prize: 20000,   label: '貳獎（5 中 4）' },
+  { match: 3, prize: 300,     label: '參獎（5 中 3）' },
+  { match: 2, prize: 50,      label: '肆獎（5 中 2）' },
+];
+
+// C(n,k) with memoization
+const _cMemo = {};
+function C(n, k) {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+  const key = n + ',' + k;
+  if (_cMemo[key]) return _cMemo[key];
+  _cMemo[key] = C(n - 1, k - 1) + C(n - 1, k);
+  return _cMemo[key];
+}
+
+// Exact probability: given poolSize numbers covering the draw space,
+// with numBets = C(poolSize, pickCount) bets, what's P(at least one bet hits exactly matchK)?
+// For a single bet: P(match exactly k) = C(5,k)*C(34,5-k) / C(39,5) for 539
+// For poolSize-covered wheel: P(at least one bet hits k+) uses inclusion-exclusion
+// Simpler approach: for a wheel of poolSize numbers, P(exactly m of them are in the draw)
+// = C(poolSize, m) * C(39-poolSize, 5-m) / C(39, 5)
+// Then, given m numbers hit in pool, how many bets have >= k matches?
+function calcWheelProbabilities(poolSize, pickCount, maxNum) {
+  const totalC = C(maxNum, pickCount); // C(39,5)
+  const results = [];
+
+  // For each prize tier (match 5,4,3,2)
+  for (const tier of PRIZE_539) {
+    const k = tier.match;
+    if (k > pickCount || k > poolSize) {
+      results.push({ ...tier, probSingle: 0, probWheel: 0 });
+      continue;
+    }
+
+    // P(single bet matches exactly k) = C(pickCount,k) * C(maxNum-pickCount, pickCount-k) / C(maxNum, pickCount)
+    const pSingle = C(pickCount, k) * C(maxNum - pickCount, pickCount - k) / totalC;
+
+    // For the wheel: P(at least one bet matches >= k numbers)
+    // We sum over m = k..min(poolSize, pickCount):
+    // P(exactly m pool numbers are drawn) * (1 if m >= k, since at least one C(m,k) bet will have those k)
+    // P(exactly m from pool) = C(poolSize, m) * C(maxNum - poolSize, pickCount - m) / C(maxNum, pickCount)
+    let probAtLeastK = 0;
+    for (let m = k; m <= Math.min(poolSize, pickCount); m++) {
+      probAtLeastK += C(poolSize, m) * C(maxNum - poolSize, pickCount - m) / totalC;
+    }
+
+    results.push({ ...tier, probSingle: pSingle, probWheel: probAtLeastK });
+  }
+  return results;
+}
+
+// Expected Value calculation
+function calcWheelEV(poolSize, numBets, betCost, pickCount, maxNum) {
+  const totalC = C(maxNum, pickCount);
+  let expectedReturn = 0;
+
+  // For each prize tier, expected count of winning bets
+  for (const tier of PRIZE_539) {
+    const k = tier.match;
+    if (k > pickCount || k > poolSize) continue;
+
+    // Expected winning bets = numBets * P(single bet matches exactly k)
+    // But bets share pool numbers, so we need a smarter approach:
+    // For each possible "m numbers from pool hit", compute how many bets match >= k
+    for (let m = k; m <= Math.min(poolSize, pickCount); m++) {
+      const pM = C(poolSize, m) * C(maxNum - poolSize, pickCount - m) / totalC;
+      // Given m pool numbers are drawn: bets with exactly k of those m =
+      // C(m, k) * C(poolSize - m, pickCount - k) / C(poolSize, pickCount) * numBets
+      // But this counts "exactly k from the m winners", we want exactly tier.match matched
+      const betsWithExactK = C(m, k) * C(poolSize - m, pickCount - k) / C(poolSize, pickCount) * numBets;
+      if (m === k && m === pickCount) {
+        // head prize: only bets that are exactly the winning numbers
+        expectedReturn += pM * (m === pickCount ? 1 : 0) * tier.prize;
+      }
+    }
+  }
+
+  // Simplified EV: use Monte Carlo for accuracy, exact formula for display
+  // Let's use the simpler per-bet EV * numBets
+  let evPerBet = 0;
+  for (const tier of PRIZE_539) {
+    const k = tier.match;
+    const pSingle = C(pickCount, k) * C(maxNum - pickCount, pickCount - k) / totalC;
+    evPerBet += pSingle * tier.prize;
+  }
+  const totalEV = evPerBet * numBets;
+  const totalCost = numBets * betCost;
+  const roi = ((totalEV - totalCost) / totalCost * 100);
+
+  return { evPerBet: Math.round(evPerBet * 100) / 100, totalEV: Math.round(totalEV), totalCost, roi: Math.round(roi * 10) / 10 };
+}
+
+// Monte Carlo simulation
+function monteCarloSim(poolNums, combosList, maxNum, pickCount, iterations) {
+  // Count distribution: how many iterations result in best-bet hitting 0,1,2,3,4,5 numbers
+  const dist = new Array(pickCount + 1).fill(0);
+  let totalPrize = 0;
+
+  for (let i = 0; i < iterations; i++) {
+    // Random draw: pick `pickCount` unique numbers from 1..maxNum
+    const draw = [];
+    const used = new Set();
+    while (draw.length < pickCount) {
+      const n = Math.floor(Math.random() * maxNum) + 1;
+      if (!used.has(n)) { used.add(n); draw.push(n); }
+    }
+
+    // Check all combos, find best match
+    let bestMatch = 0;
+    let iterPrize = 0;
+    for (const combo of combosList) {
+      const hits = combo.nums.filter(n => draw.includes(n)).length;
+      if (hits > bestMatch) bestMatch = hits;
+      // Sum prizes for ALL winning bets this draw
+      for (const tier of PRIZE_539) {
+        if (hits === tier.match) { iterPrize += tier.prize; break; }
+      }
+    }
+    dist[bestMatch]++;
+    totalPrize += iterPrize;
+  }
+
+  // Convert to percentages
+  const pct = dist.map(d => Math.round(d / iterations * 10000) / 100);
+  const avgReturn = Math.round(totalPrize / iterations);
+  return { dist, pct, avgReturn, iterations };
+}
+
+function renderWheelSim(poolSize, combos, betCost) {
+  const el = document.getElementById('wheelSim');
+  if (!el) return;
+  if (currentLottery !== 'daily_cash_539' || combos.length === 0) {
+    el.innerHTML = currentLottery !== 'daily_cash_539'
+      ? '<div class="sim-coming-soon"><span class="sim-icon">🔮</span><p>包牌機率模擬目前僅支援 <strong>今彩 539</strong>，威力彩與大樂透版本開發中。</p></div>'
+      : '';
+    return;
+  }
+
+  const maxNum = 39, pickCount = 5;
+  const numBets = combos.length;
+  const totalCost = numBets * betCost;
+
+  // 1. Exact probabilities
+  const probs = calcWheelProbabilities(poolSize, pickCount, maxNum);
+
+  // 2. EV calculation
+  const ev = calcWheelEV(poolSize, numBets, betCost, pickCount, maxNum);
+
+  // 3. Monte Carlo (10,000 iterations)
+  const mc = monteCarloSim([], combos, maxNum, pickCount, 10000);
+
+  // Build HTML
+  let html = `
+    <div class="sim-panel">
+      <h4>🔮 包牌機率模擬 <span class="sim-badge">539 專屬</span></h4>
+      <p class="sim-subtitle">用 ${poolSize} 碼包 ${numBets} 注（$${totalCost.toLocaleString()}），到底有多少機會中獎？</p>
+
+      <!-- Tab buttons -->
+      <div class="sim-tabs">
+        <button class="sim-tab active" onclick="switchSimTab(this,'simProb')">精算機率</button>
+        <button class="sim-tab" onclick="switchSimTab(this,'simEV')">期望值</button>
+        <button class="sim-tab" onclick="switchSimTab(this,'simMC')">萬次模擬</button>
+      </div>
+
+      <!-- Tab 1: Exact Probability -->
+      <div class="sim-content" id="simProb">
+        <table class="sim-table">
+          <thead>
+            <tr>
+              <th>獎項</th>
+              <th>單注機率</th>
+              <th>${numBets} 注至少中一次</th>
+              <th>獎金</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${probs.map(p => `
+              <tr>
+                <td class="sim-tier">${p.label}</td>
+                <td>${p.probSingle > 0 ? formatProb(p.probSingle) : '—'}</td>
+                <td class="sim-highlight">${p.probWheel > 0 ? formatProb(p.probWheel) : '—'}</td>
+                <td>$${p.prize.toLocaleString()}</td>
+              </tr>`).join('')}
+            <tr class="sim-total-row">
+              <td class="sim-tier">任一獎項</td>
+              <td>—</td>
+              <td class="sim-highlight">${formatProb(probs[probs.length - 1].probWheel)}</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="sim-note">※ 「至少中一次」是指 ${numBets} 注中任一注達到該獎項的機率（考慮號碼池覆蓋）</p>
+      </div>
+
+      <!-- Tab 2: Expected Value -->
+      <div class="sim-content" id="simEV" style="display:none">
+        <div class="sim-ev-grid">
+          <div class="sim-ev-card">
+            <span class="sim-ev-label">投注成本</span>
+            <span class="sim-ev-val cost">-$${totalCost.toLocaleString()}</span>
+          </div>
+          <div class="sim-ev-card">
+            <span class="sim-ev-label">單注期望回收</span>
+            <span class="sim-ev-val">$${ev.evPerBet.toFixed(1)}</span>
+          </div>
+          <div class="sim-ev-card">
+            <span class="sim-ev-label">${numBets} 注期望回收</span>
+            <span class="sim-ev-val">$${ev.totalEV.toLocaleString()}</span>
+          </div>
+          <div class="sim-ev-card ${ev.roi >= 0 ? 'positive' : 'negative'}">
+            <span class="sim-ev-label">期望報酬率</span>
+            <span class="sim-ev-val">${ev.roi > 0 ? '+' : ''}${ev.roi}%</span>
+          </div>
+        </div>
+        <div class="sim-ev-bar-wrap">
+          <div class="sim-ev-bar-label">
+            <span>投入 $${totalCost.toLocaleString()}</span>
+            <span>期望回收 $${ev.totalEV.toLocaleString()}</span>
+          </div>
+          <div class="sim-ev-bar-track">
+            <div class="sim-ev-bar-fill" style="width:${Math.min(100, ev.totalEV / totalCost * 100)}%"></div>
+          </div>
+          <p class="sim-ev-verdict">每花 $100，平均拿回 $${Math.round(ev.totalEV / totalCost * 100)}<br>
+          <strong style="color:var(--text-muted);font-weight:400">（期望值為負 = 長期一定虧，這是數學事實，跟運氣無關）</strong></p>
+        </div>
+      </div>
+
+      <!-- Tab 3: Monte Carlo -->
+      <div class="sim-content" id="simMC" style="display:none">
+        <p class="sim-mc-title">🎲 模擬 ${mc.iterations.toLocaleString()} 次開獎結果</p>
+        <div class="sim-mc-chart">
+          ${mc.pct.map((p, i) => {
+            const barH = Math.max(2, p / Math.max(...mc.pct) * 100);
+            const tierLabel = i === 0 ? '槓龜' : i === 1 ? '中1' : i === 2 ? '肆獎' : i === 3 ? '參獎' : i === 4 ? '貳獎' : '頭獎';
+            const tierColor = i === 0 ? '#555' : i <= 1 ? '#666' : i === 2 ? '#f5b800' : i === 3 ? '#ff8800' : i === 4 ? '#39FF14' : '#ec4899';
+            return `<div class="sim-mc-col">
+              <span class="sim-mc-pct">${p > 0 ? p + '%' : '0%'}</span>
+              <div class="sim-mc-bar" style="height:${barH}%;background:${tierColor}"></div>
+              <span class="sim-mc-label">${tierLabel}</span>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="sim-mc-summary">
+          <div class="sim-mc-stat">
+            <span class="sim-mc-stat-label">每次開獎平均回收</span>
+            <span class="sim-mc-stat-val">$${mc.avgReturn.toLocaleString()}</span>
+          </div>
+          <div class="sim-mc-stat">
+            <span class="sim-mc-stat-label">每次開獎投入</span>
+            <span class="sim-mc-stat-val cost">$${totalCost.toLocaleString()}</span>
+          </div>
+          <div class="sim-mc-stat">
+            <span class="sim-mc-stat-label">模擬淨損益</span>
+            <span class="sim-mc-stat-val ${mc.avgReturn >= totalCost ? 'positive' : 'negative'}">
+              ${mc.avgReturn >= totalCost ? '+' : '-'}$${Math.abs(mc.avgReturn - totalCost).toLocaleString()}
+            </span>
+          </div>
+        </div>
+        <button class="sim-rerun" onclick="rerunMonteCarlo()">🔄 重跑一次模擬</button>
+        <p class="sim-note">※ 每次模擬結果略有不同（隨機性），但趨勢一致：長期期望值為負</p>
+      </div>
+    </div>`;
+
+  el.innerHTML = html;
+}
+
+function formatProb(p) {
+  if (p >= 0.01) return (p * 100).toFixed(2) + '%';
+  if (p >= 0.0001) return '1/' + Math.round(1 / p).toLocaleString();
+  if (p > 0) return '1/' + Math.round(1 / p).toLocaleString();
+  return '0';
+}
+
+function switchSimTab(btn, tabId) {
+  btn.parentElement.querySelectorAll('.sim-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.sim-panel').querySelectorAll('.sim-content').forEach(c => c.style.display = 'none');
+  document.getElementById(tabId).style.display = '';
+}
+
+function rerunMonteCarlo() {
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const data = lotteryData[currentLottery];
+  if (!data || currentLottery !== 'daily_cash_539') return;
+  const draws = getDraws();
+  const allDraws = data.draws;
+  const { pool, combos, poolSize } = generateWheel(draws, allDraws, cfg);
+  const betCost = BET_COST[currentLottery];
+  renderWheelSim(poolSize, combos, betCost);
+  // Auto-switch to MC tab
+  const mcBtn = document.querySelector('.sim-tab:last-child');
+  if (mcBtn) switchSimTab(mcBtn, 'simMC');
 }
 
 // === COLLAPSIBLE SECTIONS ===
@@ -1843,6 +2359,220 @@ init();
 .analysis-disclaimer strong { color: #ffb347; }
 .analysis-disclaimer a { color: #ffd966; text-decoration: underline; }
 
+/* === Wheel Source Toggle + Custom Pool === */
+.whl-source-toggle {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1rem;
+}
+.whl-source-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.whl-src-btn {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-src-btn:hover { border-color: var(--gold); }
+.whl-src-btn.active {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; font-weight: 700;
+}
+
+.whl-custom-pool {
+  margin-bottom: 1.2rem; padding: 1rem;
+  background: rgba(255,136,0,0.04); border: 1px dashed rgba(255,136,0,0.3);
+  border-radius: 12px;
+}
+.whl-cp-hint { font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 0.8rem; }
+.whl-cp-hint strong { color: var(--gold-light); }
+.whl-cp-grid {
+  display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center; margin-bottom: 0.8rem;
+}
+.whl-cp-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg-secondary); border: 2px solid var(--border);
+  color: var(--text-secondary); font-size: 0.92rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.whl-cp-num:hover { border-color: #ff8800; color: #ff8800; }
+.whl-cp-num.selected {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; box-shadow: 0 3px 10px rgba(255,136,0,0.35);
+  transform: scale(1.08);
+}
+.whl-cp-status {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  font-size: 0.88rem; color: var(--text-muted);
+}
+.whl-cp-status strong { color: #ff8800; font-size: 1.05rem; }
+.whl-cp-clear {
+  padding: 0.3rem 0.8rem; border-radius: 6px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.8rem; cursor: pointer;
+}
+.whl-cp-clear:hover { border-color: var(--text-muted); }
+
+/* Custom pool warning */
+.whl-cp-warn {
+  margin-top: 0.8rem; padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 2px solid #ff9800; border-radius: 12px;
+  display: flex; gap: 0.8rem; align-items: flex-start;
+}
+[data-theme="dark"] .whl-cp-warn {
+  background: linear-gradient(135deg, rgba(255,152,0,0.15) 0%, rgba(255,152,0,0.06) 100%);
+}
+.whl-cp-warn-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+.whl-cp-warn-body { font-size: 0.85rem; line-height: 1.6; }
+.whl-cp-warn-body strong { color: #e65100; display: block; margin-bottom: 0.3rem; font-size: 0.92rem; }
+[data-theme="dark"] .whl-cp-warn-body strong { color: #ffab40; }
+.whl-cp-warn-body p { margin: 0.25rem 0; color: #5d4037; }
+[data-theme="dark"] .whl-cp-warn-body p { color: #ffcc80; }
+.whl-cp-warn.shake { animation: whl-shake 0.4s ease-in-out; }
+@keyframes whl-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.whl-cp-not-enough {
+  padding: 1rem; text-align: center; font-size: 0.92rem;
+  color: var(--text-muted); background: rgba(255,136,0,0.04);
+  border: 1px dashed rgba(255,136,0,0.25); border-radius: 10px;
+}
+.whl-cp-not-enough strong { color: #ff8800; }
+
+/* === Wheel Probability Simulation === */
+.wheel-sim { margin-top: 1.5rem; }
+.sim-panel {
+  background: linear-gradient(135deg, rgba(138,43,226,0.06), rgba(255,215,0,0.04));
+  border: 1px solid rgba(138,43,226,0.3);
+  border-radius: 14px; padding: 1.5rem;
+}
+.sim-panel h4 {
+  font-size: 1.1rem; color: var(--text-primary); margin: 0 0 0.3rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.sim-badge {
+  font-size: 0.65rem; font-weight: 900; color: #fff;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  padding: 0.15rem 0.6rem; border-radius: 999px; letter-spacing: 0.5px;
+}
+.sim-subtitle { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 1rem; }
+.sim-tabs {
+  display: flex; gap: 0.4rem; margin-bottom: 1.2rem;
+  border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+}
+.sim-tab {
+  padding: 0.5rem 1rem; border-radius: 8px 8px 0 0;
+  background: transparent; border: 1px solid transparent;
+  color: var(--text-muted); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.sim-tab:hover { color: var(--text-primary); }
+.sim-tab.active {
+  background: rgba(138,43,226,0.12); border-color: rgba(138,43,226,0.4);
+  color: #a855f7; font-weight: 700;
+}
+
+/* Probability table */
+.sim-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.sim-table th {
+  text-align: left; padding: 0.5rem 0.6rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.sim-table td {
+  padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem;
+}
+.sim-tier { font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+.sim-highlight { color: #a855f7; font-weight: 700; }
+.sim-total-row td { border-top: 2px solid var(--border); font-weight: 700; }
+.sim-total-row .sim-highlight { color: #39FF14; font-size: 1rem; }
+.sim-note { font-size: 0.78rem; color: var(--text-muted); margin: 0.6rem 0 0; font-style: italic; }
+
+/* EV cards */
+.sim-ev-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem; margin-bottom: 1.2rem;
+}
+.sim-ev-card {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem; border-radius: 10px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+}
+.sim-ev-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+.sim-ev-val { font-size: 1.2rem; font-weight: 900; color: var(--gold-light); }
+.sim-ev-val.cost { color: #ef4444; }
+.sim-ev-card.negative .sim-ev-val { color: #ef4444; }
+.sim-ev-card.positive .sim-ev-val { color: #39FF14; }
+
+/* EV bar */
+.sim-ev-bar-wrap { margin: 1rem 0; }
+.sim-ev-bar-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem;
+}
+.sim-ev-bar-track {
+  height: 24px; background: rgba(239,68,68,0.15);
+  border-radius: 12px; overflow: hidden; border: 1px solid rgba(239,68,68,0.3);
+}
+.sim-ev-bar-fill {
+  height: 100%; background: linear-gradient(90deg, #ef4444, #f97316, #FFD700);
+  border-radius: 12px; transition: width 0.5s;
+}
+.sim-ev-verdict {
+  text-align: center; font-size: 0.92rem; color: var(--text-secondary);
+  margin: 0.6rem 0 0; line-height: 1.6;
+}
+
+/* Monte Carlo chart */
+.sim-mc-title { font-size: 0.95rem; color: var(--text-primary); font-weight: 700; margin: 0 0 1rem; }
+.sim-mc-chart {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 0.5rem; height: 160px; margin-bottom: 1rem;
+  padding: 0.5rem; background: var(--bg-secondary); border-radius: 10px;
+}
+.sim-mc-col {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; max-width: 60px; height: 100%;
+  justify-content: flex-end;
+}
+.sim-mc-pct { font-size: 0.7rem; color: var(--text-secondary); font-weight: 700; margin-bottom: 0.2rem; }
+.sim-mc-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 2px; transition: height 0.3s; }
+.sim-mc-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; font-weight: 600; }
+.sim-mc-summary {
+  display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0;
+}
+.sim-mc-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.6rem 1rem; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-radius: 10px; min-width: 120px;
+}
+.sim-mc-stat-label { font-size: 0.72rem; color: var(--text-muted); }
+.sim-mc-stat-val { font-size: 1.1rem; font-weight: 900; color: var(--gold-light); margin-top: 0.2rem; }
+.sim-mc-stat-val.cost { color: #ef4444; }
+.sim-mc-stat-val.negative { color: #ef4444; }
+.sim-mc-stat-val.positive { color: #39FF14; }
+.sim-rerun {
+  display: block; margin: 0.8rem auto 0; padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7); color: #fff;
+  border: none; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.sim-rerun:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(138,43,226,0.4); }
+
+/* Coming soon */
+.sim-coming-soon {
+  display: flex; align-items: center; gap: 0.8rem; padding: 1rem;
+  background: rgba(138,43,226,0.06); border: 1px dashed rgba(138,43,226,0.3);
+  border-radius: 10px; margin-top: 1.5rem;
+}
+.sim-coming-soon .sim-icon { font-size: 1.5rem; }
+.sim-coming-soon p { margin: 0; font-size: 0.88rem; color: var(--text-muted); }
+
 /* === Countdown Timer === */
 .countdown-bar {
   display: flex; align-items: center; justify-content: center; gap: 0.8rem;
@@ -2113,6 +2843,35 @@ init();
 .whl-stat-val { font-size: 1.4rem; font-weight: 900; color: #ff8800; }
 .whl-stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; text-align: center; }
 
+/* Budget overflow notice */
+.whl-budget-overflow {
+  margin-top: 1rem; padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 2px solid #ff9800; border-radius: 12px;
+  text-align: center;
+}
+[data-theme="dark"] .whl-budget-overflow {
+  background: linear-gradient(135deg, rgba(255,152,0,0.15) 0%, rgba(255,152,0,0.08) 100%);
+  border-color: #ff9800;
+}
+.whl-bo-icon { font-size: 1.6rem; margin-bottom: 0.3rem; }
+.whl-bo-text { font-size: 0.88rem; color: #5d4037; line-height: 1.6; }
+[data-theme="dark"] .whl-bo-text { color: #ffcc80; }
+.whl-bo-text strong { color: #e65100; }
+[data-theme="dark"] .whl-bo-text strong { color: #ffab40; }
+.whl-bo-text p { margin: 0.2rem 0; }
+.whl-bo-btn {
+  margin-top: 0.8rem; padding: 0.6rem 1.4rem;
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: #fff; border: none; border-radius: 8px;
+  font-size: 0.9rem; font-weight: 700; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.whl-bo-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255,152,0,0.4);
+}
+
 /* Wheel pool */
 .wheel-pool { margin-bottom: 1.5rem; }
 .wheel-pool h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
@@ -2163,6 +2922,12 @@ init();
   cursor: pointer; transition: all 0.2s;
 }
 .whl-show-more:hover { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+.whl-trunc-note {
+  margin-top: 0.6rem; padding: 0.5rem 0.8rem;
+  font-size: 0.8rem; color: #ff9800;
+  background: rgba(255,152,0,0.08); border-radius: 8px;
+  text-align: center;
+}
 
 /* Wheel review */
 .wheel-review { margin-bottom: 1rem; }
@@ -2279,6 +3044,26 @@ init();
   .whl-table { font-size: 0.82rem; }
   .whl-composition { display: none; }
   .whl-show-more { padding: 0.7rem; font-size: 0.9rem; }
+
+  /* === 自選包牌手機版 === */
+  .whl-cp-num { width: 38px; height: 38px; font-size: 0.85rem; }
+  .whl-cp-grid { gap: 0.3rem; }
+
+  /* === 包牌機率模擬手機版 === */
+  .sim-panel { padding: 1rem; }
+  .sim-tabs { gap: 0.3rem; }
+  .sim-tab { padding: 0.4rem 0.7rem; font-size: 0.8rem; }
+  .sim-ev-grid { grid-template-columns: 1fr 1fr; }
+  .sim-ev-val { font-size: 1rem; }
+  .sim-mc-chart { height: 130px; gap: 0.3rem; }
+  .sim-mc-col { max-width: 50px; }
+  .sim-mc-pct { font-size: 0.65rem; }
+  .sim-mc-label { font-size: 0.65rem; }
+  .sim-mc-summary { gap: 0.5rem; }
+  .sim-mc-stat { min-width: 90px; padding: 0.5rem 0.6rem; }
+  .sim-table { font-size: 0.78rem; }
+  .sim-table th { font-size: 0.7rem; padding: 0.4rem; }
+  .sim-table td { padding: 0.4rem; font-size: 0.8rem; }
 
   /* === 回測手機版 === */
   .bt-btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }

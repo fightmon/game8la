@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'daily-cash-539-wheel-strategy',
+    title: '【539 包牌懶人包】7 碼到 12 碼成本 vs 命中率完整比較｜幾碼最划算？',
+    excerpt: '今彩 539 包牌選幾碼最划算？芭樂子用組合數學拆解 7～12 碼的注數、成本、各獎項命中率與期望值。結論：7～9 碼是甜蜜點，超過 10 碼長期穩虧。附一鍵試算工具。',
+    category: 'lottery',
+    categoryLabel: '包牌策略',
+    badgeType: 'featured',
+    date: '2026-04-21',
+    views: 0,
+    tags: ['最新', '精選', '必讀'],
+    icon: 'bar-chart',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a5c,#4caf50)',
+    thumbnail: '/images/article-thumbs/thumb-539-wheel-strategy.webp'
+  },
+  {
     slug: 'lottery-data-tool-guide',
     title: '拒絕瞎猜！2026 最強免費彩券回測工具：用歷史大數據看透 539、威力彩、大樂透冷熱規律',
     excerpt: '還在聽明牌？GAME8LA 樂透數據站用歷史開獎大數據，幫你回測冷熱號、追蹤遺漏值、自動包牌、模擬勝率。6 大免費工具完整教學，3 步驟上手，不報明牌只給數據。',
