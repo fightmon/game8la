@@ -7,15 +7,6 @@
 		"directory": "./dist",
 		"binding": "ASSETS",
 		"not_found_handling": "404-page",
-		"run_worker_first": [
-			"/api/*"
-		]
-	},
-	"kv_namespaces": [
-		{
-			"binding": "LOTTERY_KV",
-			"id": "9dd8622881bc45598dc3720a1906e553",
-			"remote": true
-		}
-	]
+		"run_worker_first": true
+	}
 }

@@ -70,15 +70,21 @@ export default {
       return new Response('OK — cron executed manually', { status: 200 });
     }
 
-    // GET /data/{filename} — 直接從 KV 讀取 JSON（給前端備用）
+    // GET /data/{filename} — 直接從 KV 讀取 JSON（給前端即時讀取）
     if (url.pathname.startsWith('/data/')) {
       const file = url.pathname.replace('/data/', '');
       const data = await env.LOTTERY_KV.get(`json:${file}`, 'text');
       if (!data) return new Response('Not found', { status: 404 });
+
+      // CORS：允許正式站 + localhost 開發
+      const origin = request.headers.get('Origin') || '';
+      const allowedOrigins = ['https://game8la.com', 'http://localhost:4321', 'http://localhost:3000'];
+      const corsOrigin = allowedOrigins.includes(origin) ? origin : 'https://game8la.com';
+
       return new Response(data, {
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': corsOrigin,
           'Cache-Control': 'public, max-age=300',
         },
       });

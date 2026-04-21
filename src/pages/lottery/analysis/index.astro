@@ -287,6 +287,54 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- 彩券術語小百科 -->
+  <section class="analysis-section glossary-section collapsible collapsed">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>📖 彩券術語小百科 <span class="section-chevron">▸</span></h2>
+      <p>搞懂這些詞，看數據不再霧煞煞</p>
+    </div>
+    <div class="section-body" style="display:none">
+      <div class="glossary-grid">
+        <details class="glossary-item">
+          <summary>🔥 熱號（Hot Number）</summary>
+          <p>在指定期數範圍內，出現次數明顯高於平均值的號碼。例如平均每個號碼應出現 6.4 次，但某號出現了 10 次以上，就被歸類為熱號。<strong>注意：熱號只是歷史描述，不代表未來更容易開出。</strong></p>
+        </details>
+        <details class="glossary-item">
+          <summary>🧊 冷號（Cold Number）</summary>
+          <p>出現次數明顯低於平均值的號碼。有些彩迷相信「冷號該回溫了」，但這是典型的賭徒謬誤——每顆球被抽中的機率永遠相同，不會因為「很久沒開」就更容易開出。</p>
+        </details>
+        <details class="glossary-item">
+          <summary>📊 遺漏值（Missing Count）</summary>
+          <p>某個號碼距離上次被開出已經間隔了幾期。例如「遺漏 15 期」代表這個號碼已經連續 15 期沒有出現。遺漏值是觀察號碼活躍度的指標，但不具預測能力。</p>
+        </details>
+        <details class="glossary-item">
+          <summary>🔄 同號連開（Repeat / Back-to-Back）</summary>
+          <p>某個號碼在連續兩期（或更多期）都被開出的現象。以 539 為例，理論上同號連開的機率約為 5/39 ≈ 12.8%，歷史數據也驗證了這個比例。</p>
+        </details>
+        <details class="glossary-item">
+          <summary>🎱 包牌（Wheeling System）</summary>
+          <p>一次選取多個號碼（例如 7 碼），把所有可能的組合都買下來的策略。7 碼包牌 = C(7,5) = 21 注。好處是提高號碼覆蓋率，壞處是成本隨碼數指數成長。</p>
+        </details>
+        <details class="glossary-item">
+          <summary>📈 RTP（Return To Player）</summary>
+          <p>返還率，即每投注 100 元長期平均能拿回多少。539 的 RTP 約 55.8%，代表每投注 $100 長期只回收約 $55.8。RTP 低於 100% 代表莊家（彩券公司）有優勢。</p>
+        </details>
+        <details class="glossary-item">
+          <summary>🎯 拖出（Drag Out）</summary>
+          <p>號碼在遺漏一段時間後重新被開出的現象。例如「08 號遺漏 12 期後拖出」。彩迷常用此術語討論號碼「回歸」，但統計上每期開獎都是獨立事件。</p>
+        </details>
+        <details class="glossary-item">
+          <summary>🔢 組合數 C(n,k)</summary>
+          <p>從 n 個號碼中選 k 個的方式數。539 的總組合數為 C(39,5) = 575,757，代表每注的頭獎機率是 1/575,757。包牌就是利用組合數來計算需要買幾注。</p>
+        </details>
+      </div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：搞懂術語是第一步，但記住最重要的那句話——<strong>「球沒有記憶」</strong>。所有歷史數據只能描述過去，無法預測未來。</p>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ Schema (JSON-LD) -->
   <script type="application/ld+json">
   {
@@ -403,6 +451,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 
 <script is:inline>
 // === CONFIG ===
+const WORKER_URL = 'https://lottery-cron.fightmon.workers.dev';
 const LOTTERY_CONFIG = {
   daily_cash_539: { file: '/data/daily-cash-539.json', label: '今彩 539', maxNum: 39, count: 5, hasSpecial: false, specialLabel: '' },
   super_lotto:    { file: '/data/super-lotto.json',    label: '威力彩',   maxNum: 38, count: 6, hasSpecial: true,  specialLabel: '第二區', specialMax: 8 },
@@ -412,20 +461,75 @@ const LOTTERY_CONFIG = {
 let currentLottery = 'daily_cash_539';
 let currentRange = 50;
 let lotteryData = {};
+let dataSource = 'static'; // 'worker' or 'static'
 
 // === INIT ===
 async function init() {
+  showSkeleton();
   await loadData(currentLottery);
+  hideSkeleton();
   render();
+}
+
+function showSkeleton() {
+  const containers = ['freqChart', 'missingGrid', 'hotNumbers', 'coldNumbers'];
+  containers.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = '<div class="skeleton-loader"></div>';
+  });
+}
+
+function hideSkeleton() {
+  document.querySelectorAll('.skeleton-loader').forEach(el => el.remove());
 }
 
 async function loadData(key) {
   if (lotteryData[key]) return;
+  const fileName = LOTTERY_CONFIG[key].file.replace('/data/', '');
+  let workerData = null;
+  let staticData = null;
+
+  // 先嘗試從 Worker KV 讀取即時資料
+  try {
+    const res = await fetch(`${WORKER_URL}/data/${fileName}`);
+    if (res.ok) {
+      workerData = await res.json();
+      console.log(`[${key}] Worker KV 回應成功，lastUpdated: ${workerData.lastUpdated}`);
+    }
+  } catch (e) {
+    console.warn(`[${key}] Worker 連線失敗:`, e.message);
+  }
+
+  // 也讀取靜態 JSON
   try {
     const res = await fetch(LOTTERY_CONFIG[key].file);
-    lotteryData[key] = await res.json();
+    if (res.ok) {
+      staticData = await res.json();
+      console.log(`[${key}] 靜態 JSON lastUpdated: ${staticData.lastUpdated}`);
+    }
   } catch (e) {
-    console.error('Failed to load lottery data:', e);
+    console.warn(`[${key}] 靜態 JSON 讀取失敗:`, e.message);
+  }
+
+  // 比較兩邊資料，取較新的
+  if (workerData && staticData) {
+    if (workerData.lastUpdated >= staticData.lastUpdated) {
+      lotteryData[key] = workerData;
+      dataSource = 'worker';
+      console.log(`[${key}] 使用 Worker KV（較新或相同）`);
+    } else {
+      lotteryData[key] = staticData;
+      dataSource = 'static';
+      console.log(`[${key}] 使用靜態 JSON（比 Worker 新）`);
+    }
+  } else if (workerData) {
+    lotteryData[key] = workerData;
+    dataSource = 'worker';
+  } else if (staticData) {
+    lotteryData[key] = staticData;
+    dataSource = 'static';
+  } else {
+    console.error(`[${key}] 兩個來源都讀取失敗`);
   }
 }
 
@@ -527,7 +631,8 @@ function render() {
   const combos = calcCombos(draws);
 
   // Update meta
-  document.getElementById('updateTime').textContent = data.lastUpdated;
+  const srcTag = dataSource === 'worker' ? ' (即時)' : ' (靜態)';
+  document.getElementById('updateTime').textContent = data.lastUpdated + srcTag;
   document.getElementById('totalDraws').textContent = draws.length;
 
   // Suggestions & Wheel (first sections)
@@ -2014,6 +2119,16 @@ function checkMyNumbers() {
     }
   }
   html += `</div>`;
+  // Contextual CTA — 號碼選好了，平台選對了嗎？
+  html += `<div class="picker-cta" style="margin-top:1.2rem;padding:1rem 1.2rem;background:linear-gradient(135deg,rgba(245,184,0,0.06),rgba(245,184,0,0.02));border:2px solid rgba(245,184,0,0.25);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+    <div>
+      <strong style="color:#f5b800">🛡️ 號碼選好了，平台選對了嗎？</strong>
+      <p style="margin:0.3rem 0 0;font-size:0.85rem;color:var(--text-muted)">入金前先查一下——有沒有被 165 通報？網域才幾個月？</p>
+    </div>
+    <a href="/casino-check/" style="text-decoration:none">
+      <div style="background:linear-gradient(135deg,#f5b800,#e09900);color:#000;font-weight:900;padding:0.6rem 1rem;border-radius:10px;white-space:nowrap;font-size:0.88rem">一鍵體檢 →</div>
+    </a>
+  </div>`;
   document.getElementById('pickerResult').innerHTML = html;
 }
 
@@ -2140,8 +2255,10 @@ init();
   width: 100%; min-width: 16px; max-width: 28px; border-radius: 3px 3px 0 0;
   background: rgba(57, 255, 20, 0.4); transition: height 0.5s;
 }
-.freq-col .bar.hot { background: linear-gradient(to top, #ff4444, #ff8800); }
-.freq-col .bar.cold { background: linear-gradient(to top, #44aaff, #2266cc); }
+.freq-col .bar.hot { background: linear-gradient(to top, #ff4444, #ff8800); box-shadow: 0 0 8px rgba(255,68,68,0.4); }
+.freq-col .bar.cold { background: linear-gradient(to top, #44aaff, #2266cc); box-shadow: 0 0 8px rgba(68,170,255,0.3); }
+.freq-col .bar.hot + .freq-num { color: #ff8800; font-weight: 700; }
+.freq-col .bar.cold + .freq-num { color: #44aaff; font-weight: 700; }
 .freq-num { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
 .avg-line {
   position: absolute; left: 0; right: 0;
@@ -2175,6 +2292,10 @@ init();
 .miss-label { font-size: 0.7rem; color: var(--text-muted); }
 .miss-item.just .miss-val { color: #39FF14; }
 .miss-item.extreme .miss-val { color: #ff4444; }
+.miss-item.extreme { animation: miss-pulse 2s ease-in-out infinite; }
+@keyframes miss-pulse { 0%,100% { box-shadow: 0 0 0 rgba(255,68,68,0); } 50% { box-shadow: 0 0 12px rgba(255,68,68,0.25); } }
+.miss-item.just { animation: miss-glow 2s ease-in-out infinite; }
+@keyframes miss-glow { 0%,100% { box-shadow: 0 0 0 rgba(57,255,20,0); } 50% { box-shadow: 0 0 12px rgba(57,255,20,0.2); } }
 
 /* Combo list */
 .combo-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.5rem; }
@@ -3226,5 +3347,58 @@ init();
   .faq-item summary { font-size: 0.95rem; padding: 0.8rem; min-height: 44px; }
   .faq-item p { font-size: 0.9rem; }
 }
+
+/* Skeleton loading */
+.skeleton-loader {
+  height: 120px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, rgba(255,255,255,0.04) 50%, var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Glossary */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.8rem;
+}
+.glossary-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0 1rem;
+  transition: border-color 0.2s;
+}
+.glossary-item[open] { border-color: #f5b800; }
+.glossary-item summary {
+  cursor: pointer;
+  padding: 0.8rem 0;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.glossary-item summary::after { content: '+'; color: #f5b800; font-size: 1.2rem; font-weight: 900; }
+.glossary-item[open] summary::after { content: '−'; }
+.glossary-item summary::-webkit-details-marker { display: none; }
+.glossary-item p {
+  padding: 0 0 0.8rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .glossary-grid { grid-template-columns: 1fr; }
+}
+
 </style>
 </BaseLayout>
