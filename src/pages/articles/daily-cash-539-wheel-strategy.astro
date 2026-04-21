@@ -3,14 +3,16 @@ import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 
 const faqs = [
-  { q: '539 包牌到底幾碼最划算？', a: '從<strong>成本效益比</strong>來看，<strong>7～9 碼</strong>是最佳甜蜜點。7 碼每期只花 $1,050（21 注），就能把「至少中一個肆獎」的機率拉到約 73%；9 碼花 $6,300（126 注），貳獎以上命中率已經相當可觀。超過 10 碼之後，組合數呈指數爆炸（C(12,5)=792 注 = $39,600），但頭獎期望值並沒有等比提升，長期下來幾乎不可能靠小獎回本。' },
-  { q: '包牌一定比單注買更容易中獎嗎？', a: '<strong>對，但只限「至少中一個小獎」的機率</strong>。包牌的本質是用更多錢買更多注，覆蓋更多號碼組合，所以「任一獎項命中率」確實會比單注高。但要注意兩件事：(1) <strong>每一注的中獎機率完全沒變</strong>，頭獎永遠是 1/575,757；(2) <strong>小獎獎金通常遠低於包牌成本</strong>，例如 9 碼包牌花 $6,300，中 3 注參獎只回收 $900。包牌提升的是「中獎體驗」，不是「賺錢機率」。' },
-  { q: '「全包」39 碼可以穩賺嗎？', a: '<strong>絕對不行</strong>。全包 39 碼 = C(39,5) = 575,757 注 = 每期花 <strong>$28,787,850</strong>（近 2,900 萬）。頭獎上限 800 萬，就算中了也只回收不到三成。而且頭獎若多人中獎還要均分。全包是<strong>數學上保證虧損</strong>的策略，539 的整體 RTP（返還率）約 55.8%，意思是每投入 $100 長期只回收約 $55.8。' },
-  { q: '系統推薦的號碼跟自選號碼，哪個比較準？', a: '從機率角度來說，<strong>兩者完全一樣</strong>。539 每期開獎是獨立隨機事件，不會因為你選了「熱門號」就更容易開出。系統推薦的價值在於幫你<strong>省去手動篩選的時間</strong>，並提供冷熱趨勢作為參考。自選號碼的價值是<strong>心理層面</strong>：買自己選的號碼更有參與感。兩種方式的數學期望值是相同的。' },
-  { q: '我每期固定包 7 碼，長期下來會賺嗎？', a: '大概率<strong>不會</strong>。7 碼每期花 $1,050，一年 104 期 = $109,200。539 的 RTP 約 55.8%，所以期望回收約 $60,934，<strong>預期年虧損約 $48,266</strong>。包牌不是投資工具，而是一種<strong>用固定預算提升中獎體驗</strong>的方式。芭樂子建議把它當「娛樂預算」而非「投資策略」。' },
-  { q: '包牌的預算應該怎麼分配？', a: '芭樂子建議用「<strong>月娛樂預算法</strong>」：先決定每月能承受的彩券娛樂預算（例如 $2,000），再除以當月期數（通常 8～9 期）得出單期預算。例如月預算 $2,000 ÷ 8 期 ≈ $250/期，對應 7 碼包牌的 $1,050 顯然超出，那就降到 6 碼（$150）或單期少買幾注。<strong>永遠不要為了「湊到 N 碼」而超出預算</strong>。' },
+  { q: '539 包牌到底幾碼最划算？', a: '從成本效益比來看，7～9 碼是最佳甜蜜點。7 碼每期只花 $1,050（21 注），就能把「至少中一個肆獎」的機率拉到約 73%；9 碼花 $6,300（126 注），貳獎以上命中率已經相當可觀。超過 10 碼之後，組合數呈指數爆炸（C(12,5)=792 注 = $39,600），但頭獎期望值並沒有等比提升，長期下來幾乎不可能靠小獎回本。' },
+  { q: '包牌一定比單注買更容易中獎嗎？', a: '對，但只限「至少中一個小獎」的機率。包牌的本質是用更多錢買更多注，覆蓋更多號碼組合，所以「任一獎項命中率」確實會比單注高。但要注意兩件事：(1) 每一注的中獎機率完全沒變，頭獎永遠是 1/575,757；(2) 小獎獎金通常遠低於包牌成本，例如 9 碼包牌花 $6,300，中 3 注參獎只回收 $900。包牌提升的是「中獎體驗」，不是「賺錢機率」。' },
+  { q: '「全包」39 碼可以穩賺嗎？', a: '絕對不行。全包 39 碼 = C(39,5) = 575,757 注 = 每期花 $28,787,850（近 2,900 萬）。頭獎上限 800 萬，就算中了也只回收不到三成。而且頭獎若多人中獎還要均分。全包是數學上保證虧損的策略，539 的整體 RTP（返還率）約 55.8%，意思是每投入 $100 長期只回收約 $55.8。' },
+  { q: '系統推薦的號碼跟自選號碼，哪個比較準？', a: '從機率角度來說，兩者完全一樣。539 每期開獎是獨立隨機事件，不會因為你選了「熱門號」就更容易開出。系統推薦的價值在於幫你省去手動篩選的時間，並提供冷熱趨勢作為參考。自選號碼的價值是心理層面：買自己選的號碼更有參與感。兩種方式的數學期望值是相同的。' },
+  { q: '我每期固定包 7 碼，長期下來會賺嗎？', a: '大概率不會。7 碼每期花 $1,050，一年 104 期 = $109,200。539 的 RTP 約 55.8%，所以期望回收約 $60,934，預期年虧損約 $48,266。包牌不是投資工具，而是一種用固定預算提升中獎體驗的方式。芭樂子建議把它當「娛樂預算」而非「投資策略」。' },
+  { q: '包牌的預算應該怎麼分配？', a: '芭樂子建議用「月娛樂預算法」：先決定每月能承受的彩券娛樂預算（例如 $2,000），再除以當月期數（通常 8～9 期）得出單期預算。例如月預算 $2,000 ÷ 8 期 ≈ $250/期，對應 7 碼包牌的 $1,050 顯然超出，那就降到 6 碼（$150）或單期少買幾注。永遠不要為了「湊到 N 碼」而超出預算。' },
 ];
 ---
 <FaqSchema faqs={faqs} />
@@ -32,17 +34,16 @@ const faqs = [
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 539 包牌策略</div>
     <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
       <Icon name="clock" /> 發佈日：2026-04-21 ｜
-      <Icon name="user-pen" /> 作者：芭樂子｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
       <Icon name="book-open" /> 預估閱讀 8 分鐘
     </div>
     <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
     <div class="hero-banner" style="background:linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)"></div>
 
     <article class="article-content" style="max-width:820px;margin:0 auto">
+      <img src="/images/articles/539-wheel-strategy-cover.webp" alt="芭樂子站長拿著計算機分析 539 包牌策略——7碼到12碼成本命中率比較封面" width="1400" height="781" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
       <h1 style="font-size:2rem;line-height:1.3">【539 包牌懶人包】7 碼到 12 碼成本 vs 命中率完整比較<em>芭樂子用數學算給你看，幾碼最划算</em></h1>
-
-      <!-- === 封面視覺 === -->
-      <img class="content-img" src="/images/articles/539-wheel-strategy-cover.webp" alt="芭樂子站長拿著計算機分析 539 包牌策略——7碼到12碼成本命中率比較封面" width="1400" height="781" loading="eager" fetchpriority="high" decoding="async" />
+      <p style="color:var(--text-muted);font-size:0.95rem">包牌到底要選幾碼？PTT 跟各大論壇每隔幾天就吵一次。有人堅持 7 碼「小資最強」，有人覺得 12 碼「命中率 99% 穩賺」。芭樂子今天不嘴砲，直接用組合數學 + 精算數據，幫你拆解 7～12 碼的注數、成本、各獎項命中率與期望值——讓數字說話。</p>
 
       <!-- === 精選摘要 === -->
       <div class="card" style="margin:1.5rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
@@ -63,22 +64,22 @@ const faqs = [
       </div>
 
       <!-- === 目錄 === -->
-      <div class="card" style="margin:1.5rem 0">
-        <h3 style="margin-top:0">📑 本文目錄</h3>
-        <p style="line-height:2">
-          <a href="#what">1. 什麼是「包牌」？30 秒搞懂</a><br>
-          <a href="#math">2. 包牌的數學本質：C(n,5) 組合爆炸</a><br>
-          <a href="#compare">3. 7～12 碼完整比較：成本、命中率、期望值</a><br>
-          <a href="#sweet">4. 芭樂子的結論：甜蜜點在哪？</a><br>
-          <a href="#budget">5. 預算分配實戰策略</a><br>
-          <a href="#myth">6. 四個最常見的包牌迷思</a><br>
-          <a href="#faq">7. FAQ 常見問答</a>
-        </p>
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#what">什麼是「包牌」？30 秒搞懂</a></li>
+          <li><a href="#math">包牌的數學本質：C(n,5) 組合爆炸</a></li>
+          <li><a href="#compare">7～12 碼完整比較：成本、命中率、期望值</a></li>
+          <li><a href="#sweet">芭樂子的結論：甜蜜點在哪？</a></li>
+          <li><a href="#budget">預算分配實戰策略</a></li>
+          <li><a href="#myth">四個最常見的包牌迷思</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
       </div>
 
       <!-- === 正文開始 === -->
 
-      <h2 id="what">1. 什麼是「包牌」？30 秒搞懂</h2>
+      <h2 id="what" style="margin-top:2.5rem">什麼是「包牌」？30 秒搞懂</h2>
 
       <p>各位 8LA 鄉民好，我是芭樂子。今天來聊一個彩迷圈永遠吵不完的話題：<strong>539 包牌到底選幾碼？</strong></p>
 
@@ -97,7 +98,7 @@ const faqs = [
         </a>
       </div>
 
-      <h2 id="math">2. 包牌的數學本質：C(n,5) 組合爆炸</h2>
+      <h2 id="math" style="margin-top:2.5rem">包牌的數學本質：C(n,5) 組合爆炸</h2>
 
       <p>包牌的核心公式是<strong>組合數 C(n,5)</strong>，也就是「從 n 個號碼裡選 5 個，有幾種選法」。這個數字的成長速度比你想像得快很多：</p>
 
@@ -105,7 +106,7 @@ const faqs = [
 
       <p>但獎金呢？<strong>獎金結構是固定的</strong>：頭獎 $8,000,000（5 中 5）、貳獎 $20,000（5 中 4）、參獎 $300（5 中 3）、肆獎 $50（5 中 2）。你多花 3 倍的錢，獎金不會變 3 倍。這就是包牌的根本矛盾：<strong>成本指數成長，收益線性成長</strong>。</p>
 
-      <h2 id="compare">3. 7～12 碼完整比較：成本、命中率、期望值</h2>
+      <h2 id="compare" style="margin-top:2.5rem">7～12 碼完整比較：成本、命中率、期望值</h2>
 
       <p>芭樂子幫你算好了。以下是每個碼數的關鍵數據，基於 539 的精確組合數學（不是模擬，是精算）：</p>
 
@@ -157,10 +158,10 @@ const faqs = [
       </div>
 
       <!-- === 內文圖 === -->
-      <img class="content-img" src="/images/articles/539-wheel-strategy-content.webp" alt="芭樂子用圖表解釋 539 包牌碼數與成本命中率的關係" width="1400" height="781" loading="lazy" decoding="async" />
-      <p class="article-img-caption">📸 碼數越多不一定越好——成本指數成長，但獎金結構是固定的</p>
+      <img loading="lazy" src="/images/articles/539-wheel-strategy-content.webp" alt="芭樂子用圖表解釋 539 包牌碼數與成本命中率的關係" class="content-img" width="1400" height="781">
+      <p class="article-img-caption">▲ 碼數越多不一定越好——成本指數成長，但獎金結構是固定的</p>
 
-      <h2 id="sweet">4. 芭樂子的結論：甜蜜點在哪？</h2>
+      <h2 id="sweet" style="margin-top:2.5rem">芭樂子的結論：甜蜜點在哪？</h2>
 
       <p><strong>7 碼是入門首選，8 碼是進階最佳</strong>。理由有三：</p>
 
@@ -195,7 +196,7 @@ const faqs = [
         </a>
       </div>
 
-      <h2 id="budget">5. 預算分配實戰策略</h2>
+      <h2 id="budget" style="margin-top:2.5rem">預算分配實戰策略</h2>
 
       <p>芭樂子看過太多人犯的錯是：<strong>先決定碼數，再去湊預算</strong>。正確的順序應該反過來。</p>
 
@@ -207,7 +208,7 @@ const faqs = [
 
       <p>重點：<strong>包牌不是「每期都要買」</strong>。你可以一個月只挑 1～2 期用包牌，其他期數買單注或不買。靈活運用比固定碼數更聰明。</p>
 
-      <h2 id="myth">6. 四個最常見的包牌迷思</h2>
+      <h2 id="myth" style="margin-top:2.5rem">四個最常見的包牌迷思</h2>
 
       <p><strong>迷思一：「包越多碼越容易中頭獎」</strong></p>
       <p>技術上是對的，但幅度小到可以忽略。7 碼的頭獎機率是 0.0037%，12 碼是 0.1115%——看起來翻了 30 倍，但其實還是「萬分之一」等級。你多花了 38 倍的錢（$1,050 → $39,600），頭獎機率只多了 0.1%。</p>
@@ -232,36 +233,50 @@ const faqs = [
         </a>
       </div>
 
+      <ManifestoBox slogan="這篇包牌攻略 = 組合數學精算 + 數據驅動・零明牌販售" />
+
       <!-- === FAQ === -->
-      <h2 id="faq">7. FAQ 常見問答</h2>
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
+          </details>
+        ))}
+      </div>
 
-      {faqs.map((f, i) => (
-        <details class="faq-item">
-          <summary class="faq-q">Q{i + 1}. {f.q}</summary>
-          <div class="faq-a" set:html={f.a} />
-        </details>
-      ))}
+      <ShareButtons title="【539 包牌懶人包】7 碼到 12 碼成本 vs 命中率完整比較" url="https://game8la.com/articles/daily-cash-539-wheel-strategy/" />
 
-      <!-- === 相關連結 === -->
-      <h2 style="margin-top:2.5rem">📎 相關推薦</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin:1rem 0">
+      <!-- ═══ 樂透數據站 CTA ═══ -->
+      <section class="casino-check-cta">
+        <div class="cta-icon">🎱</div>
+        <h3>看完理論，直接上手試算</h3>
+        <p>芭樂子的樂透數據站內建包牌產生器、機率模擬器、冷熱號分析三大工具。輸入你的預算和碼數，<strong style="color:#f5b800">3 秒鐘</strong>自動生成最強組合 + 精算各獎項命中率。</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:0.3rem">已有超過上千名彩迷用這套工具規劃包牌策略，理性投注。</p>
+        <a href="/lottery/analysis/#wheel" class="cta-check-btn">🔢 前往樂透數據站 — 免費包牌試算</a>
+      </section>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <h3 style="margin-top:2.5rem">📚 延伸閱讀</h3>
+      <div class="related-links">
         <a href="/lottery/analysis/" class="rl-item">
-          <span class="rl-cat">🔢 免費工具</span>
+          <span class="rl-cat">免費工具</span>
           <strong>樂透數據站</strong>
           <span class="rl-desc">冷熱號分析、包牌產生器、機率模擬一站搞定</span>
         </a>
-        <a href="/articles/lottery-data-tool-guide/" class="rl-item">
-          <span class="rl-cat">📖 教學文</span>
-          <strong>樂透數據站完整教學</strong>
-          <span class="rl-desc">6 大工具使用教學，3 步驟上手</span>
+        <a href="/articles/lottery-odds-comparison/" class="rl-item">
+          <span class="rl-cat">數據分析</span>
+          <strong>各彩種中獎率完整比較</strong>
+          <span class="rl-desc">539、威力彩、大樂透的期望值與機率拆解</span>
         </a>
-        <a href="/articles/daily-cash-539-wheel-guide/" class="rl-item">
-          <span class="rl-cat">📖 教學文</span>
-          <strong>539 包牌入門教學</strong>
-          <span class="rl-desc">從零開始學包牌，附工具操作教學</span>
+        <a href="/articles/lottery-vs-slots-comparison/" class="rl-item">
+          <span class="rl-cat">觀念文</span>
+          <strong>彩券 vs 老虎機：誰比較坑？</strong>
+          <span class="rl-desc">從 RTP、波動性、心理陷阱三維度比較</span>
         </a>
         <a href="/lottery/guide/" class="rl-item">
-          <span class="rl-cat">📖 指南</span>
+          <span class="rl-cat">新手指南</span>
           <strong>彩券新手指南</strong>
           <span class="rl-desc">539、威力彩、大樂透規則與獎金結構</span>
         </a>
@@ -273,49 +288,91 @@ const faqs = [
       </div>
 
     </article>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
+    </div>
   </div>
-</BaseLayout>
 
 <style is:global>
 .content-img {
-  width: 100%; height: auto; border-radius: 12px;
-  margin: 1.2rem 0 0.4rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 1.5rem auto 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0a0e1a;
+  height: auto;
 }
 .article-img-caption {
-  text-align: center; font-size: 0.82rem;
-  color: var(--text-muted); margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 auto 1.5rem;
+  max-width: 900px;
 }
+
+/* FAQ */
 .faq-item {
-  margin: 0.8rem 0; border: 1px solid var(--border);
-  border-radius: 10px; overflow: hidden;
-  background: var(--bg-secondary);
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+  margin-bottom: 0.8rem; padding: 0 1.2rem;
 }
+.faq-item[open] { border-color: #f5b800; }
 .faq-q {
-  padding: 1rem 1.2rem; cursor: pointer;
-  font-weight: 700; font-size: 0.95rem;
-  color: var(--text-primary); list-style: none;
+  cursor: pointer; padding: 1rem 0; font-weight: 800; color: var(--text-primary);
+  list-style: none; display: flex; align-items: center; justify-content: space-between;
 }
-.faq-q::before { content: '▶ '; color: #f5b800; font-size: 0.8rem; margin-right: 0.3rem; }
-.faq-item[open] .faq-q::before { content: '▼ '; }
-.faq-q::-webkit-details-marker { display: none; }
-.faq-a {
-  padding: 0 1.2rem 1rem; font-size: 0.92rem;
-  color: var(--text-secondary); line-height: 1.8;
+.faq-q::after { content: '+'; color: #f5b800; font-size: 1.3rem; font-weight: 900; }
+.faq-item[open] .faq-q::after { content: '−'; }
+
+/* Related Links */
+.related-links {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem; margin: 1.5rem 0 3rem;
 }
 .rl-item {
-  display: flex; flex-direction: column; gap: 0.3rem;
-  padding: 1rem; border-radius: 10px;
-  background: var(--bg-secondary); border: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 0.4rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
   text-decoration: none; color: var(--text-primary);
+  transition: all 0.25s;
+}
+.rl-item:hover { border-color: #f5b800; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(245,184,0,0.12); }
+.rl-cat { font-size: 0.75rem; color: #f5b800; font-weight: 700; }
+.rl-item strong { font-size: 0.98rem; line-height: 1.45; color: var(--text-primary); }
+.rl-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+
+/* Lottery Analysis CTA */
+.casino-check-cta {
+  margin: 2.5rem 0;
+  padding: 2rem 1.8rem;
+  background: linear-gradient(135deg, rgba(245,184,0,0.06), rgba(245,184,0,0.02));
+  border: 2px solid rgba(245,184,0,0.35);
+  border-radius: 16px;
+  text-align: center;
+}
+.casino-check-cta .cta-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.casino-check-cta h3 { margin: 0 0 0.8rem; font-size: 1.3rem; color: var(--text-primary); }
+.casino-check-cta p { color: var(--text-secondary); line-height: 1.8; max-width: 520px; margin: 0 auto; }
+.cta-check-btn {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.95rem 2rem;
+  background: linear-gradient(135deg, #f5b800, #e09900);
+  border-radius: 12px;
+  color: #000;
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-decoration: none;
   transition: all 0.2s;
 }
-.rl-item:hover { border-color: var(--gold); transform: translateY(-2px); }
-.rl-cat { font-size: 0.75rem; color: var(--text-muted); }
-.rl-desc { font-size: 0.82rem; color: var(--text-secondary); }
-.article-content code {
-  background: rgba(255,136,0,0.12); color: #ff8800;
-  padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.88rem;
+.cta-check-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,184,0,0.35); }
+@media (max-width: 768px) {
+  .casino-check-cta { padding: 1.5rem 1.2rem; }
+  .casino-check-cta h3 { font-size: 1.15rem; }
+  .cta-check-btn { font-size: 0.95rem; padding: 0.85rem 1.5rem; width: 100%; }
 }
+
 .article-content table {
   width: 100%; border-collapse: collapse; font-size: 0.88rem;
 }
@@ -327,8 +384,13 @@ const faqs = [
   background: var(--bg-secondary); color: var(--text-primary);
   font-weight: 700;
 }
+.article-content code {
+  background: rgba(255,136,0,0.12); color: #ff8800;
+  padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.88rem;
+}
 @media (max-width: 600px) {
   .article-content table { font-size: 0.78rem; }
   .article-content th, .article-content td { padding: 0.4rem; }
 }
 </style>
+</BaseLayout>
