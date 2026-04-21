@@ -135,7 +135,7 @@ function jsonResponse(status, body) {
     status,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': 'https://game8la.com',
       'Cache-Control': 'public, max-age=3600',
     },
   });

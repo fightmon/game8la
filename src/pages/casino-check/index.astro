@@ -1060,6 +1060,13 @@ const enrichedList = scamList.map(s => {
   <script is:inline define:vars={{ scamListJSON: JSON.stringify(scamList.map(s => ({ n: s.name, u: s.urls, r: s.totalReports, d: s.latestDate }))) }}>
     const _scamDB = JSON.parse(scamListJSON);
 
+    /* ── HTML escape 防 XSS ── */
+    function escHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
     /* ── 黑名單比對 ── */
     function checkBlacklist(domain) {
       const module = document.getElementById('blacklist-module');
@@ -1117,7 +1124,7 @@ const enrichedList = scamList.map(s => {
       } else {
         resultEl.innerHTML = `
           <div class="blacklist-safe">
-            <p>✅ 未在 165 詐騙黑名單中找到「${domain}」</p>
+            <p>✅ 未在 165 詐騙黑名單中找到「${escHtml(domain)}」</p>
             <p class="sub">未被通報不代表 100% 安全，請繼續查看下方 WHOIS 年齡檢測。</p>
           </div>
         `;
@@ -1238,7 +1245,7 @@ const enrichedList = scamList.map(s => {
               <div style="font-size:1.2rem;font-weight:900;margin-bottom:0.8rem">⚠️ 網域存在，但 RDAP 資料庫未收錄</div>
               <div class="result-row">
                 <span class="result-label">查詢網域</span>
-                <span class="result-value">${domain}</span>
+                <span class="result-value">${escHtml(domain)}</span>
               </div>
               <div class="result-row">
                 <span class="result-label">DNS 狀態</span>
@@ -1252,7 +1259,7 @@ const enrichedList = scamList.map(s => {
                 <p style="margin:0;font-size:0.88rem;color:var(--text-secondary)">
                   <strong style="color:#f5b800">為什麼查不到？</strong><br>
                   部分 .tw 等地區網域的註冊商尚未完整同步資料到 RDAP 資料庫。這不代表網站一定有問題，但也無法透過 RDAP 驗證其歷史。<br><br>
-                  <strong>建議：</strong>請搭配下方 165 反詐騙查詢 + Google 搜尋「${domain} 評價」「${domain} 詐騙」做交叉比對。
+                  <strong>建議：</strong>請搭配下方 165 反詐騙查詢 + Google 搜尋「${escHtml(domain)} 評價」「${escHtml(domain)} 詐騙」做交叉比對。
                 </p>
               </div>
               <p style="margin:1rem 0 0;font-size:0.85rem;color:var(--text-muted)">
@@ -1262,7 +1269,7 @@ const enrichedList = scamList.map(s => {
           } else {
             // DNS 也查不到 → 網域真的不存在
             resultEl.className = 'result-area result-danger';
-            resultEl.innerHTML = `<p style="color:#ef4444;font-weight:700">❌ 查無此網域：${domain}</p><p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem">DNS 查詢無結果，此網域可能不存在或已停用。請確認網址是否正確。</p>`;
+            resultEl.innerHTML = `<p style="color:#ef4444;font-weight:700">❌ 查無此網域：${escHtml(domain)}</p><p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem">DNS 查詢無結果，此網域可能不存在或已停用。請確認網址是否正確。</p>`;
           }
           btn.disabled = false;
           btn.innerHTML = '🔎 立即檢測';
