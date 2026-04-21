@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: '165-weekly-2026-w17',
+    title: '【165 週報】2026 第 17 週：新增 3 個詐騙娛樂城品牌，通博、T8、卡利全上榜',
+    excerpt: '內政部 165 全民防騙網 4/9–4/15 通報彙整：新增通博娛樂城、T8娛樂城、卡利系統（CaliBet）3 個全新詐騙品牌。本週 165 共通報約 130 個詐騙網站，假投資平台佔大宗，假購物冒用 SHEIN、Walmart 等國際品牌激增。',
+    category: 'anti-scam',
+    categoryLabel: '165 監測站',
+    badgeType: 'attack',
+    date: '2026-04-22',
+    views: 0,
+    tags: ['最新', '165週報'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
+  },
+  {
     slug: 'daily-cash-539-wheel-strategy',
     title: '【539 包牌懶人包】7 碼到 12 碼成本 vs 命中率完整比較｜幾碼最划算？',
     excerpt: '今彩 539 包牌選幾碼最划算？芭樂子用組合數學拆解 7～12 碼的注數、成本、各獎項命中率與期望值。結論：7～9 碼是甜蜜點，超過 10 碼長期穩虧。附一鍵試算工具。',
@@ -101,8 +115,8 @@ export const articles = [
   },
   {
     slug: 'power-lottery-vs-super-lotto',
-    title: '【2026 數據實測】威力彩和大樂透哪個比較好中？7 張對比表＋機率計算完整拆解',
-    excerpt: '威力彩和大樂透機率差多少？芭樂子用純數據拆解：頭獎機率、中獎率、期望值、獎金結構、稅務全比較。不報明牌，只說真話——100 元該買哪個？同樣花 100 元大樂透頭獎機率竟是威力彩的 3.16 倍？',
+    title: '威力彩 vs 大樂透差別在哪？2026 機率、獎金、玩法、稅務完整比較',
+    excerpt: '威力彩和大樂透到底差在哪？頭獎機率差 1.58 倍、獎金結構完全不同、稅後實拿金額怎麼算？芭樂子用 7 張對比表幫你拆解，100 元該買哪個看完就懂。',
     category: 'lottery',
     categoryLabel: '彩券科普',
     badgeType: 'featured',
@@ -385,8 +399,8 @@ export const articles = [
   },
   {
     slug: 'lottery-odds-comparison',
-    title: '【2026實測】威力彩機率揭秘：頭獎機率只有 1/2208 萬？這樣包牌中獎率竟衝破 70%！',
-    excerpt: '威力彩頭獎機率只有 1/2,208 萬？芭樂子實測發現：用對方法包牌，任一獎項中獎率竟能衝破 70%！內含大樂透 vs 威力彩頭獎機率、期望值、包牌策略科學分析。',
+    title: '威力彩頭獎機率 1/2,208 萬 vs 大樂透 1/1,398 萬｜2026 中獎機率完整比較',
+    excerpt: '威力彩頭獎機率只有 1/22,085,448，大樂透則是 1/13,983,816。各獎項命中率、期望值、RTP 全比較，100 元該買哪個一篇搞懂。',
     category: 'lottery',
     categoryLabel: '彩券',
     badgeType: 'attack',

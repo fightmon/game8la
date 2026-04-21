@@ -2,12 +2,12 @@
  * 娛樂城詐騙黑名單
  * 資料來源：內政部警政署 165 全民防騙網（假投資/博弈網站類別）
  * 搜尋關鍵字：娛樂城
- * 最後更新：2026-04-19
- * 品牌數：93
- * 原始通報筆數：458 + 週報補充（同品牌同網址合併後，再依品牌合併為 93 個）
+ * 最後更新：2026-04-22
+ * 品牌數：96
+ * 原始通報筆數：458 + 週報補充（同品牌同網址合併後，再依品牌合併為 96 個）
  */
 
-export const lastUpdated = '2026-04-19';
+export const lastUpdated = '2026-04-22';
 
 export const scamList = [
   { name: 'GF攻富娛樂城', urls: ['pc.billynational.vip'], totalReports: 1, latestDate: '2026-01-07' },
@@ -103,4 +103,7 @@ export const scamList = [
   { name: 'BBIN娛樂城', urls: ['k58023.com'], totalReports: 1, latestDate: '2026-04-08' },
   { name: '金盈匯娛樂城', urls: ['v088.gw1688.net'], totalReports: 1, latestDate: '2026-04-08' },
   { name: '藍海俱樂部', urls: ['www.lanhaiclub.com'], totalReports: 1, latestDate: '2026-04-08' },
+  { name: '通博娛樂城', urls: ['tb657.com'], totalReports: 1, latestDate: '2026-04-15' },
+  { name: 'T8娛樂城', urls: ['t8super8.com'], totalReports: 1, latestDate: '2026-04-15' },
+  { name: '卡利系統（CaliBet）', urls: ['www.cali9999.net'], totalReports: 3, latestDate: '2026-04-15' },
 ];
