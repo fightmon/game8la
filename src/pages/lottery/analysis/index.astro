@@ -4,8 +4,8 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="2026 威力彩・大樂透・539 開獎分析｜冷熱號回測・選號工具・彩券術語小百科 - GAME8LA"
-  description="GAME8LA 彩券數據分析：威力彩、大樂透、今彩539 歷史開獎號碼回測，冷熱門號碼排行、遺漏值追蹤、同號連開機率、選號參考與包牌產生器。附彩券術語小百科：熱號、冷號、遺漏值、拖出、包牌一次搞懂。"
+  title="2026 威力彩・大樂透・539 開獎分析｜冷熱號回測・拖出號統計・選號工具 - GAME8LA"
+  description="GAME8LA 彩券數據分析：威力彩、大樂透、今彩539 歷史開獎號碼回測，冷熱門號碼排行、拖出號關聯統計、遺漏值追蹤、同號連開機率、選號參考與包牌產生器。附彩券術語小百科：熱號、冷號、遺漏值、拖出、包牌一次搞懂。"
   currentPage="lottery"
 >
 <div class="container">
@@ -122,6 +122,23 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
         <button class="picker-check" id="pickerCheckBtn" onclick="checkMyNumbers()" disabled>查歷史命中</button>
       </div>
       <div id="pickerResult"></div>
+    </div>
+  </section>
+
+  <!-- 拖出號分析 -->
+  <section class="analysis-section dragout-section collapsible collapsed" id="dragoutSection">
+    <div class="section-head" onclick="toggleSection(this)">
+      <h2>🎯 拖出號分析 <span class="section-chevron">▸</span></h2>
+      <p>點選一個號碼，看它開出後下一期最常帶出哪些號碼</p>
+    </div>
+    <div class="section-body" style="display:none">
+      <p class="dragout-intro">點選下方號碼球，系統會掃描所有歷史開獎紀錄，統計「當該號碼開出時，下一期最常出現的號碼」。</p>
+      <div class="dragout-picker" id="dragoutPicker"></div>
+      <div class="dragout-result" id="dragoutResult" style="display:none"></div>
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：拖出號只是歷史上的條件頻率統計，<strong>不代表因果關係</strong>。大部分號碼的拖出率都非常接近理論隨機值（<span id="dragoutTheory">5/39 ≈ 12.82%</span>），這反而證明了「球沒有記憶」。數據好玩歸好玩，別當作下注依據。</p>
+      </div>
     </div>
   </section>
 
@@ -537,8 +554,9 @@ function switchLottery(btn) {
   document.querySelectorAll('.lot-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   currentLottery = btn.dataset.lottery;
-  // Reset custom pool when switching lottery type
+  // Reset custom pool & dragout when switching lottery type
   customPoolNums = [];
+  dragoutSelected = null;
   if (wheelSource === 'custom') renderCustomPoolGrid();
   loadData(currentLottery).then(() => render());
 }
@@ -618,6 +636,126 @@ function calcCombos(draws) {
     .slice(0, 15);
 }
 
+// === DRAG-OUT (拖出號) ===
+function calcDragOut(triggerNum, allDraws, maxNum) {
+  // When triggerNum appears in draw[i], count which numbers appear in draw[i-1] (newer draw)
+  // allDraws[0] = newest, so draw[i+1] is older, draw[i-1] is newer
+  // We want: triggerNum in draw N → what appears in draw N+1
+  // In array: allDraws[i] = draw N (older) → allDraws[i-1] = draw N+1 (newer)
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const followUp = {};
+  for (let n = 1; n <= maxNum; n++) followUp[n] = 0;
+
+  let triggerCount = 0;
+  for (let i = 1; i < allDraws.length; i++) {
+    // allDraws[i] is an older draw; if triggerNum is in it,
+    // check allDraws[i-1] (the next draw after it)
+    if (allDraws[i].numbers.includes(triggerNum)) {
+      triggerCount++;
+      allDraws[i - 1].numbers.forEach(n => followUp[n]++);
+    }
+  }
+
+  // Theory: each draw picks cfg.count numbers from maxNum balls,
+  // so P(any specific number in next draw) = count/maxNum
+  // e.g. 539: 5/39 ≈ 12.82%, 威力彩: 6/38 ≈ 15.79%, 大樂透: 6/49 ≈ 12.24%
+  const theory = triggerCount > 0 ? (cfg.count / maxNum) : 0;
+  const results = Object.entries(followUp)
+    .map(([num, count]) => {
+      const rate = triggerCount > 0 ? count / triggerCount : 0;
+      const deviation = rate - theory;
+      return { num: parseInt(num), count, rate, deviation, triggerCount };
+    })
+    .sort((a, b) => b.count - a.count);
+
+  return { results, triggerCount, theory };
+}
+
+let dragoutSelected = null;
+
+function selectDragOut(num) {
+  dragoutSelected = num;
+  // Update active state
+  document.querySelectorAll('.dragout-ball').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.num) === num);
+  });
+  // Calculate and render
+  const cfg = LOTTERY_CONFIG[currentLottery];
+  const data = lotteryData[currentLottery];
+  if (!data) return;
+  const { results, triggerCount, theory } = calcDragOut(num, data.draws, cfg.maxNum);
+  renderDragOutResult(num, results, triggerCount, theory, cfg);
+}
+
+function renderDragOutResult(triggerNum, results, triggerCount, theory, cfg) {
+  const el = document.getElementById('dragoutResult');
+  if (triggerCount === 0) {
+    el.style.display = 'block';
+    el.innerHTML = `<p class="dragout-empty">號碼 <strong>${triggerNum}</strong> 在統計範圍內沒有出現過，無法計算拖出號。</p>`;
+    return;
+  }
+
+  const top10 = results.slice(0, 10);
+  const theoryPct = (theory * 100).toFixed(2);
+
+  // Sample size indicator
+  let sampleLabel, sampleClass;
+  if (triggerCount >= 80) { sampleLabel = '樣本量：大（可信度高）'; sampleClass = 'sample-lg'; }
+  else if (triggerCount >= 30) { sampleLabel = '樣本量：中（僅供參考）'; sampleClass = 'sample-md'; }
+  else { sampleLabel = '樣本量：小（統計波動大，參考就好）'; sampleClass = 'sample-sm'; }
+
+  el.style.display = 'block';
+  el.innerHTML = `
+    <div class="dragout-header">
+      <div class="dragout-trigger-ball">${triggerNum}</div>
+      <div class="dragout-header-text">
+        <strong>當 ${triggerNum} 號開出後，下一期最常出現的號碼</strong>
+        <span>共統計 ${triggerCount} 次出現，理論隨機值 = ${theoryPct}%（${cfg.count}/${cfg.maxNum}）</span>
+        <span class="dragout-sample ${sampleClass}">${sampleLabel}</span>
+      </div>
+    </div>
+    <div class="dragout-top10">
+      ${top10.map((r, i) => {
+        const pct = (r.rate * 100).toFixed(1);
+        const devPct = (r.deviation * 100).toFixed(1);
+        const isHigh = r.deviation > theory * 0.3; // deviation > 30% above theory
+        const barW = Math.min(r.rate / (theory * 2.5) * 100, 100); // scale bar relative to theory
+        const theoryLinePos = Math.min(1 / 2.5 * 100, 100); // theory line at 1x position
+        return `
+          <div class="dragout-row ${isHigh ? 'highlight' : ''}">
+            <span class="dragout-rank">${i + 1}</span>
+            <span class="num-ball">${r.num}</span>
+            <div class="dragout-bar-wrap">
+              <div class="dragout-bar" style="width:${barW}%"></div>
+              <div class="dragout-theory-line" style="left:${theoryLinePos}%"></div>
+            </div>
+            <span class="dragout-pct">${pct}%</span>
+            <span class="dragout-count">${r.count}/${triggerCount}</span>
+            <span class="dragout-dev ${r.deviation > 0 ? 'pos' : 'neg'}">${r.deviation > 0 ? '+' : ''}${devPct}%</span>
+          </div>`;
+      }).join('')}
+    </div>
+    <p class="dragout-footnote">⬆ 白色豎線 = 理論隨機值 (${theoryPct}%)。偏差 = 實際出現率 − 理論值。正偏差不代表「更容易開出」，僅為歷史巧合。</p>`;
+}
+
+function renderDragOutPicker(cfg) {
+  const picker = document.getElementById('dragoutPicker');
+  let html = '';
+  for (let n = 1; n <= cfg.maxNum; n++) {
+    html += `<button class="dragout-ball ${dragoutSelected === n ? 'active' : ''}" data-num="${n}" onclick="selectDragOut(${n})">${n}</button>`;
+  }
+  picker.innerHTML = html;
+  // Update theory note (each draw picks cfg.count from cfg.maxNum)
+  const theoryEl = document.getElementById('dragoutTheory');
+  if (theoryEl) theoryEl.textContent = `${cfg.count}/${cfg.maxNum} ≈ ${(cfg.count / cfg.maxNum * 100).toFixed(2)}%`;
+  // Reset result if lottery changed
+  if (dragoutSelected) {
+    selectDragOut(dragoutSelected);
+  } else {
+    document.getElementById('dragoutResult').style.display = 'none';
+  }
+}
+
 // === RENDER ===
 function render() {
   const cfg = LOTTERY_CONFIG[currentLottery];
@@ -688,6 +826,9 @@ function render() {
 
   // Recent draws
   renderRecentDraws(draws.slice(0, 10), cfg);
+
+  // Drag-out picker
+  renderDragOutPicker(cfg);
 
   // Countdown & Picker
   updateCountdown();
@@ -3398,6 +3539,149 @@ init();
 }
 @media (max-width: 600px) {
   .glossary-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   拖出號分析
+   ============================================================ */
+.dragout-intro {
+  color: var(--text-muted); font-size: 0.9rem; margin: 0 0 1rem;
+}
+.dragout-picker {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem;
+  justify-content: center;
+}
+.dragout-ball {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--bg-card); border: 2px solid var(--border);
+  color: var(--text-primary); font-weight: 800; font-size: 0.88rem;
+  cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.dragout-ball:hover {
+  border-color: var(--gold); transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255,215,0,0.3);
+}
+.dragout-ball.active {
+  background: linear-gradient(135deg, #FFD700, #ff8800);
+  color: #000; border-color: #FFD700;
+  transform: scale(1.15);
+  box-shadow: 0 0 16px rgba(255,215,0,0.5);
+}
+
+/* Result panel */
+.dragout-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.03));
+  border: 1px solid rgba(255,215,0,0.25);
+  border-radius: 12px;
+}
+.dragout-trigger-ball {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, #FFD700, #ff8800);
+  color: #000; font-weight: 900; font-size: 1.3rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(255,215,0,0.3);
+}
+.dragout-header-text {
+  display: flex; flex-direction: column; gap: 0.2rem;
+}
+.dragout-header-text strong {
+  color: var(--gold-light); font-size: 1rem;
+}
+.dragout-header-text span {
+  color: var(--text-muted); font-size: 0.82rem;
+}
+
+/* Top 10 list */
+.dragout-top10 {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.dragout-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+.dragout-row.highlight {
+  border-color: rgba(255,215,0,0.4);
+  background: linear-gradient(135deg, rgba(255,215,0,0.08), transparent);
+}
+.dragout-rank {
+  width: 22px; color: var(--text-muted); font-size: 0.78rem;
+  font-weight: 700; text-align: center; flex-shrink: 0;
+}
+.dragout-row:nth-child(1) .dragout-rank,
+.dragout-row:nth-child(2) .dragout-rank,
+.dragout-row:nth-child(3) .dragout-rank { color: var(--gold-light); }
+
+.dragout-bar-wrap {
+  flex: 1; height: 18px; background: rgba(255,255,255,0.05);
+  border-radius: 9px; position: relative; overflow: hidden; min-width: 80px;
+}
+.dragout-bar {
+  height: 100%; border-radius: 9px;
+  background: linear-gradient(90deg, #FFD700, #ff8800);
+  transition: width 0.4s ease;
+}
+.dragout-row.highlight .dragout-bar {
+  background: linear-gradient(90deg, #FFD700, #ff4444);
+}
+.dragout-theory-line {
+  position: absolute; top: 0; bottom: 0; width: 2px;
+  background: rgba(255,255,255,0.5);
+}
+.dragout-pct {
+  width: 48px; text-align: right; font-weight: 800;
+  color: var(--text-primary); font-size: 0.85rem; flex-shrink: 0;
+}
+.dragout-count {
+  width: 52px; text-align: center; color: var(--text-muted);
+  font-size: 0.78rem; flex-shrink: 0;
+}
+.dragout-dev {
+  width: 52px; text-align: right; font-size: 0.78rem;
+  font-weight: 700; flex-shrink: 0;
+}
+.dragout-dev.pos { color: #ff6b6b; }
+.dragout-dev.neg { color: #69db7c; }
+.dragout-footnote {
+  color: var(--text-muted); font-size: 0.8rem; margin: 0.8rem 0 0;
+  font-style: italic;
+}
+/* Sample size badge */
+.dragout-sample {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  padding: 0.15rem 0.55rem; border-radius: 999px; margin-top: 0.2rem;
+}
+.dragout-sample.sample-lg {
+  background: rgba(57,255,20,0.15); color: #69db7c; border: 1px solid rgba(57,255,20,0.3);
+}
+.dragout-sample.sample-md {
+  background: rgba(255,215,0,0.12); color: #FFD700; border: 1px solid rgba(255,215,0,0.3);
+}
+.dragout-sample.sample-sm {
+  background: rgba(255,107,107,0.12); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.3);
+}
+
+.dragout-empty {
+  text-align: center; color: var(--text-muted); padding: 2rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .dragout-ball { width: 38px; height: 38px; font-size: 0.82rem; }
+  .dragout-header { flex-direction: column; text-align: center; gap: 0.6rem; }
+  .dragout-trigger-ball { width: 44px; height: 44px; font-size: 1.1rem; }
+  .dragout-row { gap: 0.3rem; padding: 0.4rem 0.5rem; }
+  .dragout-count { display: none; }
+  .dragout-pct { width: 42px; font-size: 0.8rem; }
+  .dragout-dev { width: 46px; font-size: 0.75rem; }
 }
 
 </style>
