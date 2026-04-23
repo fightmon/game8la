@@ -30,9 +30,9 @@ const { currentPage = 'home' } = Astro.props;
     </div>
     <a href="/casino-check/" class={currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800">🛡️ 娛樂城體檢</a>
   </div>
-  <div class="nav-search" role="button" tabindex="0" aria-label="開啟搜尋" onclick="openSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')openSearch()">
+  <div class="nav-search" role="button" tabindex="0" aria-label="搜尋遊戲、攻略、遊戲平台" onclick="openSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')openSearch()">
     <Icon name="search" />
-    <input type="text" placeholder="搜尋遊戲..." readonly aria-label="搜尋遊戲、攻略、遊戲平台">
+    <span class="nav-search-text">搜尋遊戲...</span>
   </div>
   <div class="mobile-actions">
     <button type="button" class="icon-btn" aria-label="開啟搜尋" onclick="openSearch()">
@@ -140,14 +140,13 @@ const { currentPage = 'home' } = Astro.props;
     cursor: pointer;
   }
 
-  .nav-search input {
-    background: none;
-    border: none;
-    color: var(--text-primary);
-    outline: none;
+  .nav-search-text {
+    color: var(--text-muted);
     width: 150px;
     font-size: 0.9rem;
     font-family: inherit;
+    pointer-events: none;
+    user-select: none;
   }
 
   .nav-search i {

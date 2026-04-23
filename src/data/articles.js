@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'lottery-dragout-guide',
+    title: '拖出號是什麼？從 539 歷史數據看號碼之間的連動規律｜芭樂好彩分析器教學',
+    excerpt: '拖出號是進階彩券分析術語：當 A 號碼開出後，下一期最常跟著出現的是誰？芭樂子用歷史開獎數據拆解條件機率，教你看懂偏差值和樣本量，搭配免費工具 3 步驟實測。',
+    category: 'lottery',
+    categoryLabel: '彩券進階',
+    badgeType: 'featured',
+    date: '2026-04-23',
+    views: 0,
+    tags: ['最新', '精選', '必讀'],
+    icon: 'bar-chart',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a5c,#7c3aed)',
+    thumbnail: '/images/article-thumbs/thumb-lottery-dragout.webp'
+  },
+  {
     slug: '165-weekly-2026-w17',
     title: '【165 週報】2026 第 17 週：新增 3 個詐騙娛樂城品牌，通博、T8、卡利全上榜',
     excerpt: '內政部 165 全民防騙網 4/9–4/15 通報彙整：新增通博娛樂城、T8娛樂城、卡利系統（CaliBet）3 個全新詐騙品牌。本週 165 共通報約 130 個詐騙網站，假投資平台佔大宗，假購物冒用 SHEIN、Walmart 等國際品牌激增。',

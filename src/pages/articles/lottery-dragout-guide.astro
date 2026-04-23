@@ -1,0 +1,455 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '拖出號真的能預測下一期開獎嗎？', a: '不能。拖出號是歷史數據的統計結果，反映的是「過去某個號碼開出之後，下一期其他號碼出現的頻率」。每期開獎都是獨立事件，球不會記得上一期開了什麼。拖出號的價值在於幫你縮小觀察範圍，不是幫你預測結果。' },
+  { q: '拖出號跟冷熱號有什麼不同？', a: '冷熱號看的是「單一號碼在某段時間內出現幾次」，是一維統計。拖出號看的是「A 開出之後，下一期 B 出現幾次」，是號碼與號碼之間的二維條件統計。簡單說，冷熱號告訴你誰最常出現，拖出號告訴你誰跟誰最常一前一後出現。' },
+  { q: '偏差值多少才算有參考價值？', a: '通常偏差值超過 ±5% 才開始有觀察價值，但前提是樣本量要夠大（觸發次數 80 次以上）。如果樣本量小（例如只有 20 次），就算偏差 +15% 也可能只是隨機波動。我們的工具會標示樣本量等級，幫你判斷。' },
+  { q: '539、大樂透、威力彩都可以查拖出號嗎？', a: '可以。芭樂好彩分析器支援三種彩種的拖出號查詢，切換彩種後號碼球數量會自動調整（539 是 1～39、大樂透是 1～49、威力彩一般號是 1～38）。歷史資料越多的彩種，統計結果越可靠。' },
+  { q: '我應該只看排名前幾的拖出號來選號嗎？', a: '不建議。排名靠前的號碼只是歷史上跟著出現的頻率較高，不代表下一期一定會開。比較好的做法是把拖出號當作「候選名單」的一個參考維度，搭配冷熱號、遺漏值、你自己的偏好號碼一起看，最後再用包牌產生器展開組合。' },
+  { q: '拖出號的數據多久更新一次？', a: '跟隨台彩官方開獎時間同步更新。539 每天更新、威力彩每週一四、大樂透每週二五。每次新開獎後，拖出號的統計結果會自動納入最新一期數據。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/lottery-dragout-guide/"
+  title="拖出號是什麼？從 539 歷史數據看號碼之間的連動規律｜芭樂好彩分析器教學"
+  description="拖出號是進階彩券數據分析術語：當 A 號碼開出後，下一期最常跟著出現的號碼是誰？芭樂子用歷史開獎數據拆解條件機率，教你看懂偏差值和樣本量，搭配免費工具實測。"
+  image="https://game8la.com/images/articles/lottery-dragout-cover.webp"
+  datePublished="2026-04-23"
+  dateModified="2026-04-23"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '拖出號分析教學', url: 'https://game8la.com/articles/lottery-dragout-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="拖出號是什麼？從 539 歷史數據看號碼之間的連動規律｜芭樂好彩分析器教學 - GAME8LA" description="拖出號是進階彩券數據分析術語：當 A 號碼開出後，下一期最常跟著出現的號碼是誰？芭樂子用歷史開獎數據拆解條件機率，教你看懂偏差值和樣本量，搭配免費工具實測。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 拖出號分析教學</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-23 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 8 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a1a2e,#1a3a5c,#7c3aed)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <img src="/images/articles/lottery-dragout-cover.webp" alt="芭樂子拿放大鏡觀察 539 號碼球之間的電光連線關係圖" width="1376" height="768" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+      <h1 style="font-size:2rem;line-height:1.3">拖出號是什麼？從 539 歷史數據看號碼之間的連動規律</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">上禮拜有個讀者在留言區問了一句話：「我發現每次 02 號開出來，下一期 07 號好像特別容易跟著開，這是錯覺嗎？」芭樂子去拉了 539 從 2007 年到現在將近四千期的歷史紀錄，算了一下——還真的不完全是錯覺。在彩券數據圈裡，這種「號碼帶號碼」的現象有個術語叫<strong>拖出號</strong>。今天這篇就把它的統計原理拆開來講，然後教你怎麼用我們的免費工具自己查。</p>
+
+      <!-- ===== 快捷工具列 ===== -->
+      <div class="quick-tool-bar">
+        <span>不想看文章？直接用工具：</span>
+        <a href="/lottery/analysis/#dragoutSection">拖出號查詢</a>
+        <a href="/lottery/analysis/">選號參考</a>
+        <a href="/lottery/analysis/#hotCold">冷熱號回測</a>
+        <a href="/lottery/analysis/#wheel">包牌產生器</a>
+      </div>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#what">什麼是拖出號？一句話解釋</a></li>
+          <li><a href="#why">為什麼值得看？從條件機率說起</a></li>
+          <li><a href="#vs-hotcold">拖出號 vs 冷熱號：差在哪裡？</a></li>
+          <li><a href="#tutorial">工具實測：3 步驟查出你的拖出號</a></li>
+          <li><a href="#read-data">如何解讀數據？偏差值與樣本量</a></li>
+          <li><a href="#strategy">實戰應用：拖出號怎麼搭配其他數據？</a></li>
+          <li><a href="#truth">芭樂子的真心話：數據不等於預測</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== 什麼是拖出號 ===== -->
+      <h2 id="what" style="margin-top:2.5rem">什麼是拖出號？一句話解釋</h2>
+
+      <p>拖出號的概念很簡單：<strong>當某個號碼在這一期開出之後，下一期最常跟著出現的號碼是哪些？</strong></p>
+
+      <p>舉個例子。假設我們去翻 539 所有的歷史開獎紀錄，找出所有「02 號有開出」的期數，然後看這些期數的<strong>下一期</strong>開出了哪些號碼。如果在 100 次裡面，07 號跟著出現了 22 次，而隨機機率只有 12.82%（約 13 次），那 07 號相對於 02 號就有一個正向偏差——統計上出現的頻率比隨機預期高。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🧮 白話版公式</h3>
+        <p style="text-align:center;font-size:1.1rem;margin:0.5rem 0">
+          拖出率 = <span style="color:var(--guava-pink);font-weight:900">A 開出後下一期 B 出現的次數</span> ÷ <span style="color:var(--guava-green);font-weight:900">A 總共開出的次數</span>
+        </p>
+        <p style="margin-bottom:0">理論隨機值（539）：每期開 5 顆球、共 39 個號碼 → 5 ÷ 39 ≈ <strong>12.82%</strong><br>
+        如果某組配對的拖出率明顯高於 12.82%，我們就說它有「正偏差」。</p>
+      </div>
+
+      <p>換句話說，冷熱號問的是「07 號最近常不常開？」，拖出號問的是「02 號開了之後，07 號會不會比平常更容易跟著開？」——觀察的層次不一樣。</p>
+
+      <!-- ===== 為什麼值得看 ===== -->
+      <h2 id="why" style="margin-top:2.5rem">為什麼值得看？從條件機率說起</h2>
+
+      <p>先把最重要的事講清楚：<strong>彩券每期開獎都是獨立事件</strong>。球從機器裡滾出來的那一刻，它不知道上一期開了什麼，也不在乎你查了多少數據。這是物理事實，不是芭樂子的個人意見。那些跟你講「號碼有記憶」「宇宙有磁場」的，你可以直接關掉視窗。</p>
+
+      <p>那為什麼還要看拖出號？因為當你把 539 從 2007 年到現在將近四千期的資料攤開來，某些號碼配對出現的頻率確實比隨機預期高。這不代表球跟球之間真的有什麼神秘連結——在這麼大量的數據裡面，出現一些偏離平均值的配對本來就很正常。但既然偏差存在，而且有些偏差還蠻穩定的，把它當作選號參考的其中一條線索，總比什麼都不看強。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">💡 所以拖出號到底能幹嘛？</h3>
+        <p>先把醜話講完：沒有任何工具能預測下一期開什麼，拖出號也不行。</p>
+        <p>但它能做一件事——幫你從 39 個號碼裡面，撈出一份跟你錨定號碼歷史上比較常前後出現的候選清單。你本來只看冷熱號（誰最近常開），現在多了一個「誰跟誰常一起開」的角度，選號的時候至少有兩條線索交叉比對，而不是閉著眼睛戳。</p>
+        <p style="margin-bottom:0">至於最後能不能中獎？那還是得看運氣。工具管選號，運氣管開獎，這兩件事別搞混。</p>
+      </div>
+
+      <!-- ===== 拖出號 vs 冷熱號 ===== -->
+      <h2 id="vs-hotcold" style="margin-top:2.5rem">拖出號 vs 冷熱號：差在哪裡？</h2>
+
+      <p>很多人第一次聽到拖出號會問：「這跟冷熱號不是差不多嗎？」其實差很多。</p>
+
+      <div class="card" style="margin:1rem 0">
+        <table>
+          <thead><tr><th style="min-width:100px">比較項目</th><th>🔥 冷熱號</th><th>🎯 拖出號</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">在看什麼</td><td>單一號碼出現次數</td><td>兩個號碼的先後關聯</td></tr>
+            <tr><td style="font-weight:700">統計維度</td><td>一維（出現頻率）</td><td>二維（條件機率）</td></tr>
+            <tr><td style="font-weight:700">問的問題</td><td>「07 號最近常開嗎？」</td><td>「02 開了之後，07 容易跟著開嗎？」</td></tr>
+            <tr><td style="font-weight:700">適合場景</td><td>快速掃描整體趨勢</td><td>已有錨定號碼，想找搭配</td></tr>
+            <tr><td style="font-weight:700">進階程度</td><td>入門級</td><td style="color:var(--guava-pink);font-weight:700">進階級</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>所以這兩個東西是拿來搭配用的。比如你用冷熱號發現 07、13、22 最近很活躍，接著拿 07 去查拖出號，發現 13 跟 22 歷史上也常跟在 07 後面開——那這三個號碼同時出現在你的候選清單裡，就不只是巧合了，而是兩條獨立線索指向同一個方向。</p>
+
+      <!-- ===== 安全提醒 CTA ===== -->
+      <div class="safety-warning-cta">
+        <div class="safety-icon">⚠️</div>
+        <div class="safety-body">
+          <strong>芭樂子提醒：工具選好號碼，也要確認投注平台安全</strong>
+          <p>選號選得再漂亮，結果入金到黑網娛樂城？不出金詐騙正是靠玩家「贏了才發現」來獲利。入金前花 3 分鐘，用 165 黑名單比對你的平台。</p>
+          <a href="/casino-check/">立即檢測平台安全性 →</a>
+        </div>
+      </div>
+
+      <!-- ===== 工具實測 ===== -->
+      <h2 id="tutorial" style="margin-top:2.5rem">工具實測：3 步驟查出你的拖出號</h2>
+
+      <p>講了這麼多原理，不如直接打開<a href="/lottery/analysis/#dragoutSection" style="color:var(--guava-green);font-weight:700">芭樂好彩分析器的拖出號功能</a>自己點點看。操作很簡單，三個步驟就搞定：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">📊 Step 1：選擇你的錨定號碼</h3>
+        <p style="margin-bottom:0">頁面上會顯示 1～39 的號碼球（539 為例），點擊你想查的號碼。比如你對 02 號特別有感覺，或者 02 號是上一期的開獎號碼——點下去，系統就會開始掃描所有歷史紀錄。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">📊 Step 2：看排行榜</h3>
+        <p style="margin-bottom:0">系統會列出所有號碼在「02 開出後的下一期」出現的次數和頻率，從高到低排序。排在最前面的就是歷史上最常跟著 02 號出現的號碼。右邊的橫條圖讓你一眼看出哪些號碼的出現率特別突出。</p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">📊 Step 3：注意偏差值和樣本量</h3>
+        <p><strong>偏差值（紅色 / 綠色數字）</strong> — 正偏差代表出現頻率高於隨機預期，負偏差代表低於預期。例如 <span style="color:var(--guava-pink);font-weight:700">+8.5%</span> 表示這個號碼出現率比理論值高了 8.5 個百分點。</p>
+        <p style="margin-bottom:0"><strong>樣本量標籤</strong> — 工具會根據觸發次數標示「大 / 中 / 小」。樣本量大（80 次以上）的結果比較穩定，樣本量小的僅供娛樂參考。</p>
+      </div>
+
+      <p style="text-align:center;margin:1.5rem 0">
+        <a href="/lottery/analysis/#dragoutSection" class="btn-primary" style="font-size:1.05rem;padding:0.9rem 2.5rem">📊 立即體驗：539 拖出號大數據查詢</a>
+      </p>
+
+      <!-- ===== 解讀數據 ===== -->
+      <h2 id="read-data" style="margin-top:2.5rem">如何解讀數據？偏差值與樣本量</h2>
+
+      <p>工具跑出一整排數字之後，最常見的反應是「排第一的那個就對了吧？直接買！」——先等一下。那排數字裡面有些真的值得參考，有些純粹是樣本太小造成的雜訊。怎麼分辨？看兩個東西。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">📐 指標 1：偏差值</h3>
+        <p>偏差值 = 實際出現率 − 理論隨機值</p>
+        <p>以 539 為例，理論隨機值是 5/39 ≈ 12.82%。如果某個配對的實際出現率是 21%，偏差值就是 +8.18%。</p>
+        <p style="margin-bottom:0">
+          <span style="color:var(--guava-pink);font-weight:700">偏差 > +5%</span>：值得觀察，歷史上明顯偏高<br>
+          <span style="color:var(--text-muted)">偏差 ±5% 以內</span>：接近隨機，沒有明顯傾向<br>
+          <span style="color:var(--guava-green);font-weight:700">偏差 < −5%</span>：歷史上偏低，但不代表以後不會開
+        </p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">📏 指標 2：樣本量</h3>
+        <p>這是很多人會忽略的重點。偏差值再高，如果觸發次數太少，統計上就不穩定。</p>
+        <p style="margin-bottom:0">
+          <span style="background:#2d4a2d;color:#4caf50;padding:0.2rem 0.6rem;border-radius:6px;font-size:0.85rem;font-weight:700">樣本量：大（≥80 次）</span> 結果較穩定，有一定參考價值<br>
+          <span style="background:#4a3a00;color:#f5b800;padding:0.2rem 0.6rem;border-radius:6px;font-size:0.85rem;font-weight:700;margin-top:0.3rem;display:inline-block">樣本量：中（30～79 次）</span> 僅供參考，可能有波動<br>
+          <span style="background:#4a1a1a;color:#ef5350;padding:0.2rem 0.6rem;border-radius:6px;font-size:0.85rem;font-weight:700;margin-top:0.3rem;display:inline-block">樣本量：小（＜30 次）</span> 統計波動大，別太當真
+        </p>
+      </div>
+
+      <p>重點來了：這兩個數字要一起看才有意義。舉個實際的例子——你查到 02 → 35 的偏差是 +15%，看起來超高，但觸發次數只有 18 次。18 次裡面多開 3 次就能讓偏差飆到 +15%，這很可能只是巧合。反過來，02 → 07 的偏差只有 +6%，但觸發次數有 120 次。120 次裡面穩定多開 7、8 次，這個趨勢就比較不容易是隨機波動。</p>
+
+      <!-- ===== 實戰應用 ===== -->
+      <h2 id="strategy" style="margin-top:2.5rem">實戰應用：拖出號怎麼搭配其他數據？</h2>
+
+      <p>光看拖出號就直接下注，跟光看冷熱號就下注一樣粗糙。芭樂子自己選號的時候會跑這個流程，把幾種數據交叉比對一輪：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold);padding:1.5rem">
+        <div style="display:flex;flex-direction:column;gap:0.8rem">
+          <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">
+            <span style="background:var(--gold);color:#000;font-weight:900;padding:0.3rem 0.7rem;border-radius:8px;white-space:nowrap">Step 1</span>
+            <span>先看<a href="/lottery/analysis/#hotCold" style="color:var(--gold)">冷熱號回測</a> → 找出近期活躍的號碼群</span>
+          </div>
+          <div style="border-left:2px solid var(--border);margin-left:1.5rem;height:12px"></div>
+          <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">
+            <span style="background:var(--gold);color:#000;font-weight:900;padding:0.3rem 0.7rem;border-radius:8px;white-space:nowrap">Step 2</span>
+            <span>拿上一期的開獎號碼去查<a href="/lottery/analysis/#dragoutSection" style="color:var(--gold)">拖出號</a> → 看哪些號碼歷史上常跟著出現</span>
+          </div>
+          <div style="border-left:2px solid var(--border);margin-left:1.5rem;height:12px"></div>
+          <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">
+            <span style="background:var(--gold);color:#000;font-weight:900;padding:0.3rem 0.7rem;border-radius:8px;white-space:nowrap">Step 3</span>
+            <span>交叉比對 → 兩邊都出現的號碼優先考慮，列入候選名單</span>
+          </div>
+          <div style="border-left:2px solid var(--border);margin-left:1.5rem;height:12px"></div>
+          <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">
+            <span style="background:var(--gold);color:#000;font-weight:900;padding:0.3rem 0.7rem;border-radius:8px;white-space:nowrap">Step 4</span>
+            <span>用<a href="/lottery/analysis/#myPick" style="color:var(--gold)">自選號碼</a>功能回測 → 看你挑的號碼歷史命中表現</span>
+          </div>
+          <div style="border-left:2px solid var(--border);margin-left:1.5rem;height:12px"></div>
+          <div style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">
+            <span style="background:var(--guava-green);color:#fff;font-weight:900;padding:0.3rem 0.7rem;border-radius:8px;white-space:nowrap">Step 5</span>
+            <span>送進<a href="/lottery/analysis/#wheel" style="color:var(--guava-green)">包牌產生器</a> → 自動展開組合，算好注數和成本</span>
+          </div>
+        </div>
+      </div>
+
+      <p>整套跑下來大概花十分鐘。不保證中獎，但至少你站在彩券行的時候，手上拿的那張紙有個來歷，而不是剛才在門口隨便想的。</p>
+
+      <!-- ===== 芭樂子的真心話 ===== -->
+      <h2 id="truth" style="margin-top:2.5rem">芭樂子的真心話：數據不等於預測</h2>
+
+      <p>芭樂子每隔幾天就會收到私訊問「你們的工具到底準不準？」，所以這段話我大概講了不下五十次，但還是要再講一次：<strong>沒有人能預測彩券開獎結果，我們也不行</strong>。</p>
+
+      <p>拖出號是翻歷史紀錄算出來的統計數字，冷熱號也是，包牌就是排列組合的數學。這些東西能幫你做的事情，就是讓你選號的時候有個根據可以參考，而不是每次站在彩券行裡面對著號碼板乾瞪眼。但開獎那一刻，每顆球被抽中的機率還是一模一樣。工具改變不了這件事。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">🚨 如果有人跟你說這些話，立刻閃</h3>
+        <p style="margin-bottom:0">
+        <strong>「我有內線，保證中獎」</strong> — 台彩是電腦隨機開獎，沒有內線<br>
+        <strong>「跟著我的號碼買，上期中了 XX 萬」</strong> — 倖存者偏差，他不會告訴你虧了多少期<br>
+        <strong>「交學費加 VIP 群看明牌」</strong> — 100% 詐騙，真能穩贏的人不需要賣群<br>
+        <strong>「這個軟體能破解開獎規律」</strong> — 物理隨機過程無法被軟體破解</p>
+      </div>
+
+      <p>芭樂子做這些工具的原因其實很單純：我自己買彩券的時候，比起聽隔壁阿伯報明牌，更想知道「這個號碼上一次開是什麼時候」「它跟哪些號碼常前後出現」。查著查著覺得蠻好玩的，就乾脆做成工具讓大家都能用。你中不中獎我管不了，但至少選號的過程可以有點樂趣，而不是每次都在擲骰子。</p>
+
+      <ManifestoBox slogan="這篇拖出號教學 = 統計原理 + 免費工具實測・零明牌零業配" />
+
+      <!-- ===== FAQ ===== -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p style="margin:0.8rem 0 0;color:var(--text-secondary)" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+
+      <ShareButtons title="拖出號是什麼？從 539 歷史數據看號碼之間的連動規律" url="https://game8la.com/articles/lottery-dragout-guide/" />
+
+      <!-- ═══ 工具 CTA ═══ -->
+      <section class="casino-check-cta" style="border-color:rgba(124,58,237,0.35);background:linear-gradient(135deg,rgba(124,58,237,0.06),rgba(124,58,237,0.02))">
+        <div class="cta-icon">🎯</div>
+        <h3>講這麼多，不如自己查一次</h3>
+        <p>挑一個你常買的號碼，點下去看看歷史上它後面最常跟著誰。539、威力彩、大樂透都能查，不用註冊、不用付錢。</p>
+        <a href="/lottery/analysis/#dragoutSection" class="cta-check-btn" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff">🎯 前往拖出號查詢工具 — 免費即時分析</a>
+      </section>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <h3 style="margin-top:2.5rem">📚 延伸閱讀</h3>
+      <div class="related-links">
+        <a href="/lottery/analysis/" class="rl-item">
+          <span class="rl-cat">免費工具</span>
+          <strong>芭樂好彩分析器</strong>
+          <span class="rl-desc">選號參考・冷熱號回測・包牌產生器・拖出號分析</span>
+        </a>
+        <a href="/articles/lottery-data-tool-guide/" class="rl-item">
+          <span class="rl-cat">完整教學</span>
+          <strong>2026 最強免費彩券回測工具完整教學</strong>
+          <span class="rl-desc">6 大免費功能一次搞懂，3 步驟上手</span>
+        </a>
+        <a href="/articles/daily-cash-539-wheel-strategy/" class="rl-item">
+          <span class="rl-cat">包牌策略</span>
+          <strong>539 包牌懶人包：7～12 碼成本 vs 命中率</strong>
+          <span class="rl-desc">組合數學拆解，幾碼最划算算給你看</span>
+        </a>
+        <a href="/articles/lottery-odds-comparison/" class="rl-item">
+          <span class="rl-cat">機率比較</span>
+          <strong>威力彩 vs 大樂透：同樣 100 元該買哪個？</strong>
+          <span class="rl-desc">頭獎機率差 1.58 倍，小獎命中率完全相反</span>
+        </a>
+      </div>
+
+      <!-- ===== 好奇缺口結尾 CTA ===== -->
+      <div class="next-read-cta">
+        <p class="next-read-label">📖 彩券數據玩家都在接著看：</p>
+        <a href="/articles/daily-cash-539-wheel-strategy/" class="next-read-link">
+          <strong>539 包牌懶人包：10 碼包牌只要 $6,300，覆蓋率算給你看</strong>
+          <span>→ 膽拖公式＋期望值試算，不懂包牌的先看這篇</span>
+        </a>
+        <a href="/articles/lottery-odds-comparison/" class="next-read-link">
+          <strong>威力彩 vs 大樂透：同樣 100 元該買哪個？</strong>
+          <span>→ 頭獎機率差 1.58 倍，但小獎命中率完全相反</span>
+        </a>
+      </div>
+    </article>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
+    </div>
+  </div>
+
+<style is:global>
+/* Quick Tool Bar */
+.quick-tool-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  padding: 0.8rem 1rem;
+  background: rgba(245,184,0,0.06);
+  border: 1px solid rgba(245,184,0,0.2);
+  border-radius: 10px;
+  margin: 1rem 0 0.5rem;
+  font-size: 0.88rem;
+}
+.quick-tool-bar span { color: var(--text-muted); white-space: nowrap; }
+.quick-tool-bar a {
+  padding: 0.3rem 0.7rem;
+  background: rgba(245,184,0,0.12);
+  border-radius: 6px;
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.quick-tool-bar a:hover { background: rgba(245,184,0,0.25); }
+
+/* Safety Warning CTA */
+.safety-warning-cta {
+  display: flex;
+  gap: 1rem;
+  padding: 1.2rem 1.4rem;
+  margin: 2rem 0;
+  background: linear-gradient(135deg, rgba(245,184,0,0.06), rgba(239,68,68,0.04));
+  border: 1px solid rgba(245,184,0,0.25);
+  border-radius: 14px;
+}
+.safety-icon { font-size: 2rem; flex-shrink: 0; }
+.safety-body strong { display: block; margin-bottom: 0.4rem; color: var(--gold); font-size: 0.95rem; }
+.safety-body p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; margin: 0 0 0.6rem; }
+.safety-body a {
+  color: var(--guava-green); font-weight: 700; font-size: 0.9rem; text-decoration: none;
+}
+.safety-body a:hover { text-decoration: underline; }
+
+/* Next Read CTA */
+.next-read-cta {
+  margin: 2rem 0 1rem;
+  padding: 1.2rem 1.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.next-read-label { font-weight: 700; margin: 0 0 0.8rem; font-size: 0.95rem; }
+.next-read-link {
+  display: block; padding: 0.8rem 1rem; margin-bottom: 0.6rem;
+  border: 1px solid var(--border); border-radius: 10px;
+  text-decoration: none; color: var(--text-primary);
+  transition: all 0.2s;
+}
+.next-read-link:last-child { margin-bottom: 0; }
+.next-read-link:hover { border-color: var(--gold); transform: translateX(4px); }
+.next-read-link strong { display: block; font-size: 0.92rem; line-height: 1.5; }
+.next-read-link span { display: block; font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+/* Content images */
+.content-img {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin: 1.5rem auto 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0a0e1a;
+  height: auto;
+}
+.article-img-caption {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 auto 1.5rem;
+  max-width: 900px;
+}
+
+/* FAQ */
+.faq-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+  margin-bottom: 0.8rem; padding: 0 1.2rem;
+}
+.faq-item[open] { border-color: #f5b800; }
+.faq-q {
+  cursor: pointer; padding: 1rem 0; font-weight: 800; color: var(--text-primary);
+  list-style: none; display: flex; align-items: center; justify-content: space-between;
+}
+.faq-q::after { content: '+'; color: #f5b800; font-size: 1.3rem; font-weight: 900; }
+.faq-item[open] .faq-q::after { content: '−'; }
+
+/* Related Links */
+.related-links {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem; margin: 1.5rem 0 3rem;
+}
+.rl-item {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  text-decoration: none; color: var(--text-primary);
+  transition: all 0.25s;
+}
+.rl-item:hover { border-color: #f5b800; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(245,184,0,0.12); }
+.rl-cat { font-size: 0.75rem; color: #f5b800; font-weight: 700; }
+.rl-item strong { font-size: 0.98rem; line-height: 1.45; color: var(--text-primary); }
+.rl-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+
+/* Casino Check CTA (reused for tool CTA) */
+.casino-check-cta {
+  margin: 2.5rem 0;
+  padding: 2rem 1.8rem;
+  background: linear-gradient(135deg, rgba(245,184,0,0.06), rgba(245,184,0,0.02));
+  border: 2px solid rgba(245,184,0,0.35);
+  border-radius: 16px;
+  text-align: center;
+}
+.casino-check-cta .cta-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.casino-check-cta h3 { margin: 0 0 0.8rem; font-size: 1.3rem; color: var(--text-primary); }
+.casino-check-cta p { color: var(--text-secondary); line-height: 1.8; max-width: 520px; margin: 0 auto; }
+.cta-check-btn {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.95rem 2rem;
+  background: linear-gradient(135deg, #f5b800, #e09900);
+  border-radius: 12px;
+  color: #000;
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.cta-check-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,184,0,0.35); color: #000; }
+@media (max-width: 768px) {
+  .casino-check-cta { padding: 1.5rem 1.2rem; }
+  .casino-check-cta h3 { font-size: 1.15rem; }
+  .cta-check-btn { font-size: 0.95rem; padding: 0.85rem 1.5rem; width: 100%; }
+}
+@media (max-width: 600px) {
+  .quick-tool-bar { font-size: 0.82rem; gap: 0.4rem; }
+  .safety-warning-cta { flex-direction: column; gap: 0.5rem; }
+  .next-read-link strong { font-size: 0.88rem; }
+}
+</style>
+</BaseLayout>

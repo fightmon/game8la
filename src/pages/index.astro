@@ -64,7 +64,7 @@ const latestScams = [...scamList]
         <p>專業牌路分析、下注策略完整教學，從8LA新手到金8LA玩家的進階指南！</p>
         <div class="hero-btns">
           <a href="/articles/baccarat-guide/" class="btn-primary" style="text-decoration:none"><Icon name="book" /> 立即閱讀</a>
-          <a href="/games/dragon-legend/" class="btn-outline" aria-label="免費試玩 魔龍傳奇" style="text-decoration:none"><Icon name="play" /> 免費試玩</a>
+          <a href="/games/dragon-legend/" class="btn-outline" aria-label="免費試玩 魔龍傳奇" style="text-decoration:none"><Icon name="play" /> 免費試玩 魔龍傳奇</a>
         </div>
       </div>
     </div>
@@ -378,7 +378,7 @@ function renderGames(filter = 'all') {
         </div>
         <div class="game-desc">${g.desc}</div>
         <div class="game-actions">
-          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩</a>
+          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩<span class="sr-only"> ${g.name}</span></a>
           <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="info" /> 更多資訊</a>
         </div>
       </div>
@@ -1185,7 +1185,7 @@ body {
 .cat-slots     { background: #f5b800; color: #1a0f00; font-weight: 900; }
 .cat-baccarat  { background: #4facfe; color: #001a2e; font-weight: 900; }
 .cat-live      { background: #fa709a; color: #2a0014; font-weight: 900; }
-.cat-lottery   { background: #1a8c3a; color: #ffffff; font-weight: 900; }
+.cat-lottery   { background: #157a2e; color: #ffffff; font-weight: 900; }
 .cat-anti-scam { background: #b32418; color: #ffffff; font-weight: 900; }
 .cat-finance   { background: #00c896; color: #002a1e; font-weight: 900; }
 .cat-sports    { background: #ff6b35; color: #2a0a00; font-weight: 900; }
@@ -1342,7 +1342,7 @@ body {
   overflow: hidden; text-overflow: ellipsis;
 }
 .scam-alert-url {
-  font-size: 0.7rem; color: #ef4444; opacity: 0.7;
+  font-size: 0.7rem; color: #f87171;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   font-family: monospace;
 }
@@ -1353,11 +1353,11 @@ body {
   display: block; text-align: center; margin-top: 1rem;
   padding: 0.6rem; background: rgba(239,68,68,0.1);
   border: 1px solid rgba(239,68,68,0.3); border-radius: 8px;
-  color: #ef4444; font-size: 0.85rem; font-weight: 600;
+  color: #f87171; font-size: 0.85rem; font-weight: 600;
   text-decoration: none; transition: all 0.2s;
 }
 .scam-alert-cta:hover {
-  background: rgba(239,68,68,0.2); border-color: #ef4444;
+  background: rgba(239,68,68,0.2); border-color: #f87171; color: #f87171;
 }
 
 /* === CATEGORY FILTER === */
@@ -1747,7 +1747,7 @@ function renderGames(filter = 'all') {
         </div>
         <div class="game-desc">${g.desc}</div>
         <div class="game-actions">
-          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩</a>
+          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩<span class="sr-only"> ${g.name}</span></a>
           <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="info" /> 更多資訊</a>
         </div>
       </div>
