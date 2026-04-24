@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout
+  currentPage="tools"
+  title="8LA 工具箱｜老虎機 RTP 紀錄器・樂透數據站・娛樂城體檢 - GAME8LA"
+  description="Game8la 免費博弈工具箱：老虎機 RTP 實測紀錄器、539/威力彩/大樂透冷熱號回測與包牌產生器、娛樂城安全體檢。不報明牌，只給你用得上的數據工具。"
+>
+<div class="container">
+  <div class="tools-hero">
+    <h1>🔧 8LA 工具箱</h1>
+    <p class="tools-sub">不報明牌，只給你用得上的數據工具。</p>
+    <p class="tools-desc">以下所有工具完全免費、不需要註冊。你的數據留在你自己的瀏覽器裡，我們不會收集任何個人資訊。</p>
+  </div>
+
+  <div class="tools-grid">
+    <a href="/tools/bankroll-calculator/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(57,255,20,0.35)"></div>
+      <div class="tile-icon" style="background:linear-gradient(135deg,#39FF14,#2bcc10)">🧮</div>
+      <h2>資金<br>管理器</h2>
+      <p>算你能撐多久</p>
+    </a>
+    <a href="/tools/rtp-tracker/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(245,184,0,0.35)"></div>
+      <div class="tile-icon" style="background:linear-gradient(135deg,#f5b800,#e09900)">🎰</div>
+      <h2>老虎機<br>RTP 紀錄器</h2>
+      <p>看你自己的數據</p>
+    </a>
+    <a href="/lottery/analysis/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(124,58,237,0.35)"></div>
+      <div class="tile-icon" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">🔢</div>
+      <h2>樂透<br>數據站</h2>
+      <p>用歷史數據選號</p>
+    </a>
+    <a href="/casino-check/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(239,68,68,0.35)"></div>
+      <div class="tile-icon" style="background:linear-gradient(135deg,#ef4444,#b91c1c)">🛡️</div>
+      <h2>娛樂城<br>體檢</h2>
+      <p>入金前查一下</p>
+    </a>
+  </div>
+
+  <!-- 底部提示 -->
+  <div class="tools-footer-note">
+    <p>🌿 更多工具持續開發中。如果你有想要的功能，歡迎到我們的社群告訴芭樂子。</p>
+  </div>
+
+  <div style="text-align:center;margin:2rem 0">
+    <a href="/" class="btn-outline">&larr; 回首頁</a>
+  </div>
+</div>
+
+<style>
+  .tools-hero {
+    text-align: center;
+    padding: 3rem 1rem 0.5rem;
+  }
+  .tools-hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .tools-sub {
+    font-size: 1.15rem;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .tools-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* === TILE GRID === */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin: 2.5rem auto 0;
+    max-width: 820px;
+  }
+
+  .tool-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2.2rem 1.2rem 1.8rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+
+  /* Glow effect on hover */
+  .tile-glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: radial-gradient(circle at 50% 40%, var(--glow-color, rgba(57,255,20,0.2)), transparent 70%);
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+  .tool-tile:hover .tile-glow {
+    opacity: 1;
+  }
+  .tool-tile:hover {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+
+  .tile-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .tool-tile h2 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.4;
+    margin: 0 0 0.4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tool-tile p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    line-height: 1.4;
+  }
+
+  .tools-footer-note {
+    text-align: center;
+    margin: 3rem auto 0;
+    padding: 1rem;
+    max-width: 720px;
+  }
+  .tools-footer-note p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* === TABLET === */
+  @media (max-width: 768px) {
+    .tools-grid {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 420px;
+      gap: 1rem;
+    }
+    .tile-icon {
+      width: 60px;
+      height: 60px;
+      font-size: 1.8rem;
+      border-radius: 14px;
+    }
+    .tool-tile {
+      padding: 1.8rem 1rem 1.5rem;
+    }
+    .tool-tile h2 { font-size: 0.95rem; }
+  }
+
+  /* === MOBILE === */
+  @media (max-width: 480px) {
+    .tools-hero { padding: 2rem 1rem 0.5rem; }
+    .tools-hero h1 { font-size: 1.6rem; }
+    .tools-sub { font-size: 1rem; }
+
+    .tools-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.7rem;
+      max-width: 100%;
+      padding: 0 0.2rem;
+    }
+    .tool-tile {
+      padding: 1.4rem 0.6rem 1.2rem;
+      border-radius: 14px;
+    }
+    .tile-icon {
+      width: 48px;
+      height: 48px;
+      font-size: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 0.7rem;
+    }
+    .tool-tile h2 {
+      font-size: 0.82rem;
+    }
+    .tool-tile p {
+      font-size: 0.7rem;
+    }
+  }
+</style>
+</BaseLayout>

@@ -1,0 +1,447 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout
+  currentPage="tools"
+  title="老虎機資金管理計算器｜算出你的錢能撐多久，設好停損再上桌 - GAME8LA"
+  description="輸入你的本金、每轉注額和遊戲 RTP，系統幫你算出預計可玩轉數、遊玩時間、建議停損停利金額。坐下來之前先算一遍，別讓腎上腺素替你管錢。"
+>
+<div class="container">
+  <div class="bk-hero">
+    <h1><Icon name="calculator" /> 老虎機資金管理計算器</h1>
+    <p class="bk-slogan">坐下來之前，先算你的錢能撐多久。</p>
+    <p class="bk-desc">輸入本金、注額、RTP，系統幫你算出預計遊玩時間和建議停損停利線。不是教你贏，是教你不要一次輸光。</p>
+  </div>
+
+  <div class="bk-layout">
+    <!-- 左欄：輸入 -->
+    <div class="bk-input-panel">
+      <h2>📝 設定條件</h2>
+
+      <label class="bk-label">💰 今天帶多少錢（NT$）</label>
+      <input type="number" id="bankroll" class="bk-input" placeholder="例如：3000" min="1" step="1" value="" />
+
+      <label class="bk-label">🎰 每轉注額（NT$）</label>
+      <input type="number" id="betSize" class="bk-input" placeholder="例如：10" min="1" step="1" value="" />
+
+      <label class="bk-label">📊 遊戲 RTP（%）</label>
+      <div class="bk-rtp-row">
+        <select id="rtpPreset" class="bk-select" style="flex:1">
+          <option value="" disabled selected>-- 選擇遊戲 --</option>
+          <option value="97.2">戰神賽特 2（97.2%）</option>
+          <option value="96.5">戰神賽特（96.5%）</option>
+          <option value="96.5">麻將胡了 2（96.5%）</option>
+          <option value="98.28">奇幻魔藥（98.28%）</option>
+          <option value="96.0">魔龍傳奇（96%）</option>
+          <option value="96.5">雷神之鎚（96.5%）</option>
+          <option value="custom">自訂 RTP</option>
+        </select>
+        <input type="number" id="rtpCustom" class="bk-input" placeholder="96.5" min="50" max="100" step="0.01" style="width:90px;display:none" />
+      </div>
+
+      <label class="bk-label">⏱️ 每轉大約幾秒？</label>
+      <select id="spinSpeed" class="bk-select">
+        <option value="3">快速（約 3 秒/轉）</option>
+        <option value="5" selected>正常（約 5 秒/轉）</option>
+        <option value="8">慢慢玩（約 8 秒/轉）</option>
+      </select>
+
+      <button class="bk-btn-calc" onclick="calculate()">🧮 開始計算</button>
+    </div>
+
+    <!-- 右欄：結果 -->
+    <div class="bk-result-panel" id="resultPanel" style="display:none">
+      <!-- 核心數字 -->
+      <div class="bk-stats-row">
+        <div class="bk-stat-card">
+          <span class="bk-stat-label">預計可玩</span>
+          <span class="bk-stat-value" id="resSpins">--</span>
+          <span class="bk-stat-unit">轉</span>
+        </div>
+        <div class="bk-stat-card">
+          <span class="bk-stat-label">預計時間</span>
+          <span class="bk-stat-value" id="resTime">--</span>
+          <span class="bk-stat-unit" id="resTimeUnit">分鐘</span>
+        </div>
+        <div class="bk-stat-card">
+          <span class="bk-stat-label">每小時預期虧損</span>
+          <span class="bk-stat-value" id="resLossHr">--</span>
+          <span class="bk-stat-unit">元/hr</span>
+        </div>
+      </div>
+
+      <!-- 停損停利建議 -->
+      <div class="bk-limits">
+        <h3>🎯 建議停損停利</h3>
+        <div class="bk-limit-row">
+          <div class="bk-limit-card bk-limit-loss">
+            <span class="bk-limit-label">停損線</span>
+            <span class="bk-limit-desc">虧到這個數字就走人</span>
+            <span class="bk-limit-value" id="resStopLoss">--</span>
+          </div>
+          <div class="bk-limit-card bk-limit-win">
+            <span class="bk-limit-label">停利線</span>
+            <span class="bk-limit-desc">贏到這個數字就收手</span>
+            <span class="bk-limit-value" id="resStopWin">--</span>
+          </div>
+        </div>
+        <p class="bk-limit-note">停損設在本金的 50%，停利設在本金的 30%。這不是唯一的設法，但對多數玩家來說是比較不容易失控的起點。</p>
+      </div>
+
+      <!-- 資金曲線模擬 -->
+      <div class="bk-chart-wrap">
+        <h3>📉 資金消耗曲線（理論值）</h3>
+        <canvas id="bkChart"></canvas>
+        <p class="bk-chart-note">綠色實線：你的本金在理論 RTP 下的消耗速度 ｜ 紅色虛線：停損線 ｜ 金色虛線：停利線</p>
+      </div>
+
+      <!-- 情境比較 -->
+      <div class="bk-compare">
+        <h3>💡 如果你換個注額？</h3>
+        <div class="bk-compare-table-wrap">
+          <table class="bk-compare-table" id="compareTable">
+            <thead>
+              <tr>
+                <th>每轉注額</th>
+                <th>可玩轉數</th>
+                <th>預計時間</th>
+                <th>每小時虧損</th>
+              </tr>
+            </thead>
+            <tbody id="compareBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 提醒 -->
+      <div class="guava-note" style="margin-top:1.5rem">
+        <p>🌿 <strong>芭樂子提醒：</strong>以上數字是基於 RTP 的統計期望值，實際結果會因為波動性而上下震盪。你可能第 50 轉就爆了 500 倍，也可能 300 轉都在吃分。這個工具幫你抓的是「最壞的情況下你的錢能撐多久」，不是預測你會贏還是輸。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Casino Check CTA -->
+  <section class="casino-check-cta" style="margin-top:2rem">
+    <div class="cta-icon">🛡️</div>
+    <h3>算完資金，也算一下平台安不安全</h3>
+    <p>你精心計劃了停損停利，結果平台不讓你出金——那什麼計劃都白搭。入金前先確認平台有沒有被 165 通報過。</p>
+    <a href="/casino-check/" class="cta-check-btn">🔎 前往娛樂城體檢 — 免費即時檢測</a>
+  </section>
+
+  <div style="text-align:center;margin:2rem 0">
+    <a href="/tools/" class="btn-outline">&larr; 回工具箱</a>
+  </div>
+</div>
+
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script is:inline>
+var chart = null;
+
+document.getElementById('rtpPreset').addEventListener('change', function() {
+  var custom = document.getElementById('rtpCustom');
+  if (this.value === 'custom') {
+    custom.style.display = 'block';
+    custom.focus();
+  } else {
+    custom.style.display = 'none';
+  }
+});
+
+function calculate() {
+  var bankroll = parseFloat(document.getElementById('bankroll').value);
+  var betSize = parseFloat(document.getElementById('betSize').value);
+  var rtpSel = document.getElementById('rtpPreset').value;
+  var rtp;
+
+  if (rtpSel === 'custom' || rtpSel === '') {
+    rtp = parseFloat(document.getElementById('rtpCustom').value);
+    if (rtpSel === '' && isNaN(rtp)) return alert('請選擇遊戲或輸入 RTP');
+  } else {
+    rtp = parseFloat(rtpSel);
+  }
+
+  var spinSpeed = parseInt(document.getElementById('spinSpeed').value);
+
+  if (isNaN(bankroll) || bankroll <= 0) return alert('請輸入有效的本金');
+  if (isNaN(betSize) || betSize <= 0) return alert('請輸入有效的注額');
+  if (isNaN(rtp) || rtp <= 0 || rtp >= 100) return alert('請輸入合理的 RTP（0～100）');
+  if (betSize > bankroll) return alert('注額不能比本金大');
+
+  var houseEdge = (100 - rtp) / 100; // e.g. 0.035 for 96.5% RTP
+  var lossPerSpin = betSize * houseEdge;
+  var estSpins = Math.floor(bankroll / lossPerSpin);
+  var estSeconds = estSpins * spinSpeed;
+  var estMinutes = Math.round(estSeconds / 60);
+  var estHours = estMinutes / 60;
+  var lossPerHour = Math.round((3600 / spinSpeed) * lossPerSpin);
+
+  // 停損停利
+  var stopLoss = Math.round(bankroll * 0.5);
+  var stopWin = Math.round(bankroll * 0.3);
+
+  // 顯示結果
+  document.getElementById('resultPanel').style.display = 'block';
+  document.getElementById('resSpins').textContent = estSpins.toLocaleString();
+
+  if (estMinutes >= 60) {
+    var hrs = Math.floor(estMinutes / 60);
+    var mins = estMinutes % 60;
+    document.getElementById('resTime').textContent = hrs + '時' + (mins > 0 ? mins + '分' : '');
+    document.getElementById('resTimeUnit').textContent = '';
+  } else {
+    document.getElementById('resTime').textContent = estMinutes;
+    document.getElementById('resTimeUnit').textContent = '分鐘';
+  }
+
+  document.getElementById('resLossHr').textContent = '$' + lossPerHour.toLocaleString();
+  document.getElementById('resStopLoss').textContent = '虧 $' + stopLoss.toLocaleString() + ' 就走';
+  document.getElementById('resStopWin').textContent = '贏 $' + stopWin.toLocaleString() + ' 就收';
+
+  renderChart(bankroll, lossPerSpin, estSpins, stopLoss, stopWin);
+  renderCompare(bankroll, rtp, houseEdge, spinSpeed, betSize);
+
+  // Scroll to result
+  document.getElementById('resultPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderChart(bankroll, lossPerSpin, estSpins, stopLoss, stopWin) {
+  var ctx = document.getElementById('bkChart');
+  var labels = [];
+  var balanceLine = [];
+  var stopLossLine = [];
+  var stopWinLine = [];
+
+  var maxPoints = Math.min(estSpins, 500);
+  var step = Math.max(1, Math.floor(estSpins / maxPoints));
+
+  var bal = bankroll;
+  for (var i = 0; i <= estSpins; i += step) {
+    labels.push(i);
+    bal = bankroll - (i * lossPerSpin);
+    balanceLine.push(Math.max(0, Math.round(bal)));
+    stopLossLine.push(bankroll - stopLoss);
+    stopWinLine.push(bankroll + stopWin);
+  }
+
+  var config = {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: '預期餘額',
+          data: balanceLine,
+          borderColor: '#39FF14',
+          backgroundColor: 'rgba(57,255,20,0.05)',
+          borderWidth: 2.5,
+          pointRadius: 0,
+          tension: 0,
+          fill: true,
+        },
+        {
+          label: '停損線',
+          data: stopLossLine,
+          borderColor: '#ef4444',
+          borderWidth: 2,
+          borderDash: [8, 4],
+          pointRadius: 0,
+          fill: false,
+        },
+        {
+          label: '停利線',
+          data: stopWinLine,
+          borderColor: '#f5b800',
+          borderWidth: 2,
+          borderDash: [8, 4],
+          pointRadius: 0,
+          fill: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#ccc', font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            title: function(ctx) { return '第 ' + ctx[0].label + ' 轉'; },
+            label: function(ctx) { return ctx.dataset.label + '：$' + ctx.parsed.y.toLocaleString(); }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: '轉數', color: '#999' },
+          ticks: { color: '#999', maxTicksLimit: 10 },
+          grid: { color: 'rgba(255,255,255,0.05)' }
+        },
+        y: {
+          title: { display: true, text: '餘額（NT$）', color: '#999' },
+          ticks: { color: '#999', callback: function(v) { return '$' + v.toLocaleString(); } },
+          grid: { color: 'rgba(255,255,255,0.08)' },
+          min: 0,
+        }
+      }
+    }
+  };
+
+  if (chart) {
+    chart.data = config.data;
+    chart.options = config.options;
+    chart.update();
+  } else {
+    chart = new Chart(ctx, config);
+  }
+}
+
+function renderCompare(bankroll, rtp, houseEdge, spinSpeed, currentBet) {
+  var bets = [1, 5, 10, 20, 50, 100];
+  // 確保目前注額在列表裡
+  if (bets.indexOf(currentBet) === -1) {
+    bets.push(currentBet);
+    bets.sort(function(a, b) { return a - b; });
+  }
+
+  var tbody = document.getElementById('compareBody');
+  var html = '';
+  bets.forEach(function(bet) {
+    if (bet > bankroll) return;
+    var loss = bet * houseEdge;
+    var spins = Math.floor(bankroll / loss);
+    var mins = Math.round(spins * spinSpeed / 60);
+    var lhr = Math.round((3600 / spinSpeed) * loss);
+    var isCurrent = (bet === currentBet);
+    var timeStr = mins >= 60 ? Math.floor(mins/60) + '時' + (mins%60 > 0 ? mins%60 + '分' : '') : mins + ' 分鐘';
+
+    html += '<tr' + (isCurrent ? ' style="background:rgba(57,255,20,0.08);font-weight:700"' : '') + '>';
+    html += '<td>$' + bet + (isCurrent ? ' ← 目前' : '') + '</td>';
+    html += '<td>' + spins.toLocaleString() + ' 轉</td>';
+    html += '<td>' + timeStr + '</td>';
+    html += '<td style="color:#ef4444">-$' + lhr.toLocaleString() + '</td>';
+    html += '</tr>';
+  });
+  tbody.innerHTML = html;
+}
+</script>
+
+<style>
+/* ===== Bankroll Calculator Styles ===== */
+.bk-hero { text-align: center; padding: 2.5rem 1rem 1.5rem; }
+.bk-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+.bk-slogan { font-size: 1.2rem; color: var(--gold); font-weight: 700; margin-bottom: 0.5rem; }
+.bk-desc { color: var(--text-muted); font-size: 0.92rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+.bk-layout { display: grid; grid-template-columns: 340px 1fr; gap: 2rem; margin-top: 1.5rem; }
+
+/* 左欄 */
+.bk-input-panel {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 1.5rem; position: sticky; top: 80px; align-self: start;
+}
+.bk-input-panel h2 { font-size: 1.15rem; margin: 0 0 1rem; }
+.bk-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.3rem; margin-top: 0.8rem; }
+.bk-label:first-of-type { margin-top: 0; }
+.bk-input, .bk-select {
+  width: 100%; padding: 0.7rem 0.9rem; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary);
+  font-size: 0.95rem; font-family: inherit; outline: none; transition: border-color 0.2s;
+}
+.bk-input:focus, .bk-select:focus { border-color: var(--gold); }
+.bk-rtp-row { display: flex; gap: 0.5rem; align-items: center; }
+
+.bk-btn-calc {
+  display: block; width: 100%; margin-top: 1.5rem; padding: 0.9rem;
+  background: var(--gold); color: #000; border: none; border-radius: 10px;
+  font-size: 1.05rem; font-weight: 800; font-family: inherit; cursor: pointer; transition: all 0.2s;
+}
+.bk-btn-calc:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(57,255,20,0.3); }
+
+/* 右欄 */
+.bk-result-panel { min-width: 0; }
+
+.bk-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+.bk-stat-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1rem; text-align: center; display: flex; flex-direction: column; gap: 0.2rem;
+}
+.bk-stat-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+.bk-stat-value { font-size: 1.5rem; font-weight: 900; color: var(--text-primary); }
+.bk-stat-unit { font-size: 0.7rem; color: var(--text-muted); }
+
+/* 停損停利 */
+.bk-limits { margin-top: 1.2rem; }
+.bk-limits h3 { font-size: 1.05rem; margin-bottom: 0.8rem; }
+.bk-limit-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.bk-limit-card {
+  padding: 1.2rem; border-radius: 12px; text-align: center;
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.bk-limit-loss { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); }
+.bk-limit-win { background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.2); }
+.bk-limit-label { font-size: 0.85rem; font-weight: 700; }
+.bk-limit-loss .bk-limit-label { color: #f87171; }
+.bk-limit-win .bk-limit-label { color: #39FF14; }
+.bk-limit-desc { font-size: 0.75rem; color: var(--text-muted); }
+.bk-limit-value { font-size: 1.1rem; font-weight: 900; color: var(--text-primary); margin-top: 0.3rem; }
+.bk-limit-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.6rem; line-height: 1.5; }
+
+/* 圖表 */
+.bk-chart-wrap {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.2rem; margin-top: 1.2rem; height: 320px; position: relative;
+}
+.bk-chart-wrap h3 { font-size: 1rem; margin: 0 0 0.8rem; }
+.bk-chart-note { font-size: 0.72rem; color: var(--text-muted); text-align: center; margin: 0.5rem 0 0; }
+
+/* 比較表 */
+.bk-compare { margin-top: 1.2rem; }
+.bk-compare h3 { font-size: 1.05rem; margin-bottom: 0.8rem; }
+.bk-compare-table-wrap { overflow-x: auto; }
+.bk-compare-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.bk-compare-table th {
+  text-align: left; padding: 0.7rem 0.6rem; color: var(--gold); font-weight: 700;
+  border-bottom: 2px solid var(--border); font-size: 0.8rem; white-space: nowrap;
+}
+.bk-compare-table td { padding: 0.6rem; border-bottom: 1px solid var(--border); color: var(--text-secondary); white-space: nowrap; }
+.bk-compare-table tr:hover td { background: var(--bg-card-hover); }
+
+/* CTA reuse */
+.casino-check-cta {
+  margin: 2.5rem 0; padding: 2rem 1.8rem;
+  background: linear-gradient(135deg, rgba(245,184,0,0.06), rgba(245,184,0,0.02));
+  border: 2px solid rgba(245,184,0,0.35); border-radius: 16px; text-align: center;
+}
+.casino-check-cta .cta-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.casino-check-cta h3 { margin: 0 0 0.8rem; font-size: 1.3rem; color: var(--text-primary); }
+.casino-check-cta p { color: var(--text-secondary); line-height: 1.8; max-width: 520px; margin: 0 auto; }
+.cta-check-btn {
+  display: inline-block; margin-top: 1.2rem; padding: 0.95rem 2rem;
+  background: linear-gradient(135deg, #f5b800, #e09900); border-radius: 12px;
+  color: #000; font-weight: 800; font-size: 1.05rem; text-decoration: none; transition: all 0.2s;
+}
+.cta-check-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,184,0,0.35); color: #000; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .bk-layout { grid-template-columns: 1fr; }
+  .bk-input-panel { position: static; }
+}
+@media (max-width: 600px) {
+  .bk-hero h1 { font-size: 1.5rem; }
+  .bk-slogan { font-size: 1rem; }
+  .bk-stats-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .bk-stat-value { font-size: 1.3rem; }
+  .bk-limit-row { grid-template-columns: 1fr; }
+  .bk-chart-wrap { height: 260px; }
+  .bk-rtp-row { flex-direction: column; }
+  .bk-rtp-row .bk-select { width: 100%; }
+  #rtpCustom { width: 100% !important; }
+  .casino-check-cta { padding: 1.5rem 1.2rem; }
+  .casino-check-cta h3 { font-size: 1.15rem; }
+  .cta-check-btn { font-size: 0.95rem; padding: 0.85rem 1.5rem; width: 100%; }
+}
+</style>
+</BaseLayout>

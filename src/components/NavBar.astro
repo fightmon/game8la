@@ -28,7 +28,17 @@ const { currentPage = 'home' } = Astro.props;
         </div>
       </div>
     </div>
-    <a href="/casino-check/" class={currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800">🛡️ 娛樂城體檢</a>
+    <div class="nav-dropdown">
+      <a href="/tools/" class={currentPage === 'tools' || currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800">🔧 8LA 工具箱 <span class="dd-arrow">▾</span></a>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-menu-inner">
+          <a href="/tools/rtp-tracker/">🎰 老虎機 RTP 紀錄器</a>
+          <a href="/tools/bankroll-calculator/">🧮 資金管理計算器</a>
+          <a href="/lottery/analysis/">🔢 樂透數據站</a>
+          <a href="/casino-check/">🛡️ 娛樂城體檢</a>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="nav-search" role="button" tabindex="0" aria-label="搜尋遊戲、攻略、遊戲平台" onclick="openSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')openSearch()">
     <Icon name="search" />
@@ -53,7 +63,11 @@ const { currentPage = 'home' } = Astro.props;
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>🎰 芭樂遊戲</a>
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>🎱 芭樂好彩</a>
     <a href="/lottery/analysis/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🔢 樂透數據站</a>
-    <a href="/casino-check/" class={currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800;font-weight:700">🛡️ 娛樂城體檢</a>
+    <a href="/tools/" class={currentPage === 'tools' ? 'active' : ''} style="color:#f5b800;font-weight:700">🔧 8LA 工具箱</a>
+    <a href="/tools/rtp-tracker/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎰 老虎機 RTP 紀錄器</a>
+    <a href="/tools/bankroll-calculator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🧮 資金管理計算器</a>
+    <a href="/lottery/analysis/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🔢 樂透數據站</a>
+    <a href="/casino-check/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🛡️ 娛樂城體檢</a>
   </div>
 </div>
 
@@ -397,6 +411,9 @@ const { currentPage = 'home' } = Astro.props;
     { t: 'U-Town 優創', d: '平台評測', u: '/casinos/utown/', c: '娛樂城' },
     { t: 'YABO 亞博', d: '平台評測', u: '/casinos/yabo/', c: '娛樂城' },
     { t: 'PM 娛樂城', d: '平台評測', u: '/casinos/pm/', c: '娛樂城' },
+    { t: '8LA 工具箱', d: '老虎機 RTP 紀錄器、樂透數據站、娛樂城體檢', u: '/tools/', c: '工具' },
+    { t: '老虎機 RTP 實測紀錄器', d: '記錄投入回收，算出實測 RTP，比對官方理論值', u: '/tools/rtp-tracker/', c: '工具' },
+    { t: '老虎機資金管理計算器', d: '算出你的錢能撐多久，設好停損停利再上桌', u: '/tools/bankroll-calculator/', c: '工具' },
     { t: '娛樂城體檢', d: 'WHOIS查網域、流水計算器、165反詐騙快查', u: '/casino-check/', c: '工具' },
     { t: '娛樂城出金攻略', d: '5大卡關原因與自救SOP、流水、KYC、風控、黑網', u: '/articles/casino-payout-guide/', c: '攻略' },
     { t: '5招識破娛樂城詐騙套路', d: 'WHOIS、流水陷阱、支付安全完整拆解', u: '/articles/5-tips-spot-casino-scam/', c: '攻略' },
