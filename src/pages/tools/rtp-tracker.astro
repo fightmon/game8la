@@ -831,15 +831,67 @@ function clearAll() {
   }
 }
 @media (max-width: 600px) {
-  .rtp-hero h1 { font-size: 1.5rem; }
-  .rtp-slogan { font-size: 1rem; }
+  .rtp-hero { padding: 1.5rem 0.5rem 0.8rem; }
+  .rtp-hero h1 { font-size: 1.4rem; }
+  .rtp-slogan { font-size: 0.95rem; }
+  .rtp-desc { font-size: 0.82rem; }
+
+  .rtp-layout { gap: 1rem; margin-top: 0.8rem; }
+
+  /* 輸入面板：去卡片感 */
+  .rtp-input-panel {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 0.3rem;
+  }
+  .rtp-input-panel h2 { font-size: 1.05rem; }
+
+  .rtp-label {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* 輸入框：app 風格大觸控區 */
+  .rtp-select, .rtp-input {
+    padding: 0.95rem 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    min-height: 50px;
+  }
+
+  /* 新增按鈕 */
+  .rtp-btn-add {
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 14px;
+    min-height: 54px;
+    margin-top: 1.5rem;
+  }
+
+  /* IO 按鈕 */
+  .rtp-io-row { flex-direction: row; gap: 0.5rem; }
+  .rtp-btn-io {
+    padding: 0.7rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    min-height: 44px;
+  }
+
+  /* 統計卡 */
   .rtp-stats-row { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-  .rtp-stat-value { font-size: 1.3rem; }
-  .rtp-chart-wrap { height: 260px; }
-  .rtp-io-row { flex-direction: column; }
-  .casino-check-cta { padding: 1.5rem 1.2rem; }
-  .casino-check-cta h3 { font-size: 1.15rem; }
-  .cta-check-btn { font-size: 0.95rem; padding: 0.85rem 1.5rem; width: 100%; }
+  .rtp-stat-card { padding: 0.8rem 0.5rem; border-radius: 14px; }
+  .rtp-stat-value { font-size: 1.2rem; }
+  .rtp-stat-label { font-size: 0.7rem; }
+
+  /* 圖表 */
+  .rtp-chart-wrap { height: 240px; padding: 0.8rem; border-radius: 14px; }
+
+  /* CTA */
+  .casino-check-cta { padding: 1.3rem 1rem; border-radius: 14px; }
+  .casino-check-cta h3 { font-size: 1.05rem; }
+  .cta-check-btn { font-size: 0.95rem; padding: 0.85rem 1.5rem; width: 100%; border-radius: 14px; }
 }
 </style>
 </BaseLayout>

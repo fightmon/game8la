@@ -151,6 +151,40 @@ a:hover {
   text-decoration: none;
 }
 
+/* === GAME PAGE FAQ ACCORDION === */
+.faq-section { margin-bottom: 2rem; }
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+}
+.faq-item.open { border-color: #f5b800; }
+.faq-q {
+  cursor: pointer;
+  padding: 1rem 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.faq-q .arrow {
+  transition: transform 0.25s;
+  color: #f5b800;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+.faq-a {
+  display: none;
+  padding: 0 1.2rem 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.faq-item.open .faq-a { display: block; }
+
 /* === UTILITIES === */
 .sr-only {
   position: absolute;

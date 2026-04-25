@@ -117,6 +117,17 @@ const {
     <FooterBar />
     <ReadingProgress />
     <ScrollToTop />
+
+    <!-- Global FAQ accordion toggle -->
+    <script is:inline>
+      document.addEventListener('click', function(e) {
+        var q = e.target.closest('.faq-q');
+        if (!q) return;
+        var item = q.closest('.faq-item');
+        if (!item) return;
+        item.classList.toggle('open');
+      });
+    </script>
   </body>
 </html>
 

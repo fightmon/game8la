@@ -424,24 +424,107 @@ function renderCompare(bankroll, rtp, houseEdge, spinSpeed, currentBet) {
 }
 .cta-check-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,184,0,0.35); color: #000; }
 
-/* Responsive */
+/* Responsive — tablet */
 @media (max-width: 900px) {
   .bk-layout { grid-template-columns: 1fr; }
   .bk-input-panel { position: static; }
 }
+
+/* Responsive — mobile app-like */
 @media (max-width: 600px) {
-  .bk-hero h1 { font-size: 1.5rem; }
-  .bk-slogan { font-size: 1rem; }
-  .bk-stats-row { grid-template-columns: 1fr; gap: 0.5rem; }
-  .bk-stat-value { font-size: 1.3rem; }
-  .bk-limit-row { grid-template-columns: 1fr; }
-  .bk-chart-wrap { height: 260px; }
-  .bk-rtp-row { flex-direction: column; }
+  .bk-hero { padding: 1.5rem 0.5rem 0.8rem; }
+  .bk-hero h1 { font-size: 1.4rem; }
+  .bk-slogan { font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .bk-desc { font-size: 0.82rem; }
+
+  .bk-layout { gap: 1rem; margin-top: 0.8rem; }
+
+  /* 輸入面板：去掉卡片感，拉滿寬度 */
+  .bk-input-panel {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 0.3rem;
+  }
+  .bk-input-panel h2 { font-size: 1.05rem; margin-bottom: 0.8rem; }
+
+  .bk-label {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* 輸入框：加大觸控區域，圓潤感 */
+  .bk-input, .bk-select {
+    padding: 0.95rem 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    min-height: 50px;
+  }
+
+  .bk-rtp-row { flex-direction: column; gap: 0.5rem; }
   .bk-rtp-row .bk-select { width: 100%; }
   #rtpCustom { width: 100% !important; }
-  .casino-check-cta { padding: 1.5rem 1.2rem; }
-  .casino-check-cta h3 { font-size: 1.15rem; }
-  .cta-check-btn { font-size: 0.95rem; padding: 0.85rem 1.5rem; width: 100%; }
+
+  /* 計算按鈕：大而圓，像 app 的主要 action */
+  .bk-btn-calc {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 14px;
+    min-height: 54px;
+  }
+
+  /* 統計卡：兩欄排列 */
+  .bk-stats-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  .bk-stat-card {
+    padding: 0.8rem 0.5rem;
+    border-radius: 14px;
+  }
+  .bk-stat-value { font-size: 1.2rem; }
+  .bk-stat-label { font-size: 0.7rem; }
+
+  /* 停損停利：保持雙欄 */
+  .bk-limits h3 { font-size: 1rem; }
+  .bk-limit-row { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .bk-limit-card {
+    padding: 1rem 0.6rem;
+    border-radius: 14px;
+  }
+  .bk-limit-value { font-size: 0.95rem; }
+
+  /* 圖表 */
+  .bk-chart-wrap {
+    height: 240px;
+    padding: 0.8rem;
+    border-radius: 14px;
+  }
+  .bk-chart-wrap h3 { font-size: 0.95rem; }
+
+  /* 比較表 */
+  .bk-compare h3 { font-size: 1rem; }
+  .bk-compare-table { font-size: 0.82rem; }
+  .bk-compare-table th { padding: 0.6rem 0.4rem; font-size: 0.75rem; }
+  .bk-compare-table td { padding: 0.55rem 0.4rem; }
+
+  /* CTA */
+  .casino-check-cta {
+    padding: 1.3rem 1rem;
+    border-radius: 14px;
+  }
+  .casino-check-cta h3 { font-size: 1.05rem; }
+  .cta-check-btn {
+    font-size: 0.95rem;
+    padding: 0.85rem 1.5rem;
+    width: 100%;
+    border-radius: 14px;
+  }
+
+  /* 芭樂提醒也圓潤一點 */
+  .guava-note { border-radius: 14px; }
 }
 </style>
 </BaseLayout>

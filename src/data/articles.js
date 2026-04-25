@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'cash-vs-credit-casino-guide',
+    title: '現金版 vs 信用版差在哪？破解「免費額度、輸不用付」的行銷話術',
+    excerpt: '娛樂城現金版和信用版差在哪？「開版享 20000 額度」「輸真的不用付」是真的嗎？芭樂子拆解信用版 5 大風險、逐條破解廣告話術，告訴你為什麼只有現金版能碰。',
+    category: 'guide',
+    categoryLabel: '防詐實戰',
+    badgeType: 'featured',
+    date: '2026-04-25',
+    views: 0,
+    tags: ['最新', '精選', '必讀'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#1a0505,#4a0a0a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-cash-vs-credit.webp'
+  },
+  {
     slug: 'seth-rng-myth-busted',
     title: '戰神賽特有規律嗎？拆解 RNG 運作原理，打臉 3 個社群最紅的必勝打法',
     excerpt: '賽特連開 3 把大獎是規律還是運氣？芭樂子從 RNG 原理講起，拆解吃分期吐分期、空轉計數法、Buy Bonus 時機論三大迷思，告訴你玩家真正能控制的事。',
