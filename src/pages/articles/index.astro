@@ -30,8 +30,8 @@ import { articles } from '../../data/articles.js';
       </div>
       <div class="filter-row">
         <span class="filter-label">排序：</span>
-        <button class="sort-btn active" data-sort="hot">熱門</button>
-        <button class="sort-btn" data-sort="new">最新</button>
+        <button class="sort-btn" data-sort="hot">熱門</button>
+        <button class="sort-btn active" data-sort="new">最新</button>
         <button class="sort-btn" data-sort="featured">精選</button>
       </div>
     </section>
@@ -140,7 +140,7 @@ import { articles } from '../../data/articles.js';
       const pagination = document.getElementById('pagination');
       const emptyState = document.getElementById('emptyState');
       let currentCat = 'all';
-      let currentSort = 'hot';
+      let currentSort = 'new';
       let currentPage = 1;
 
       function filterAndSort() {
