@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'online-casino-legal-taiwan',
+    title: '台灣玩娛樂城違法嗎？刑法 266 條白話解析、罰金實例、收到傳票怎麼辦',
+    excerpt: '2022 年修法後網路賭博正式入罪，玩家初犯罰金 1-3 萬、帳戶可能被凍結。芭樂子把刑法 266 條翻譯成白話、整理判決實例、比較合法博弈差異，附收到傳票 5 步驟 SOP。',
+    category: 'guide',
+    categoryLabel: '法律科普',
+    badgeType: 'featured',
+    date: '2026-04-26',
+    views: 90,
+    tags: ['最新', '精選', '必讀'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a2e,#1a1a4a,#2d1b50)',
+    thumbnail: '/images/article-thumbs/thumb-online-casino-legal.webp'
+  },
+  {
     slug: 'seth2-slot-simulator-rtp',
     title: '戰神賽特2模擬器實測：自己調 RTP，親手拆解老虎機怎麼吃錢',
     excerpt: '全台唯一可調 RTP 的賽特2模擬器！親手調整回報率 80~200%，體驗倍數球分裂、覺醒鎖定、消除掉落全機制。轉 1000 局看懂大數法則，搞懂為什麼你總是輸。',

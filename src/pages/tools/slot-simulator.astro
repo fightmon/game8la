@@ -952,6 +952,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     autoTotal = count;
     $btnAuto.textContent = 'STOP (0/' + autoTotal + ')';
     $btnAuto.dataset.count = count;
+    $btnAuto.classList.add('auto-running');
     // 隱藏其他選項按鈕
     document.querySelectorAll('.btn-auto-opt').forEach(b => b.style.display = 'none');
     if (gameState === 'idle') spin();
@@ -961,6 +962,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     isAutoSpin = false;
     autoRemaining = 0;
     $btnAuto.textContent = 'AUTO ×' + autoCount;
+    $btnAuto.classList.remove('auto-running');
     document.querySelectorAll('.btn-auto-opt').forEach(b => b.style.display = '');
   }
 
@@ -998,6 +1000,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     $btnSpin.textContent = 'SPIN';
     $btnAuto.textContent = 'AUTO ×50';
     $btnAuto.dataset.count = '50';
+    $btnAuto.classList.remove('auto-running');
     document.querySelectorAll('.btn-auto-opt').forEach(b => b.style.display = '');
   });
 
@@ -1371,6 +1374,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   border-radius:10px; cursor:pointer; transition:border-color 0.2s, color 0.2s;
 }
 .btn-auto:hover, .btn-reset:hover { border-color:var(--gold); color:var(--gold); }
+.btn-auto.auto-running {
+  border-radius:10px; border-color:#ef4444; color:#ef4444;
+  background:rgba(239,68,68,0.1); min-width:140px;
+}
+.btn-auto.auto-running:hover { border-color:#f87171; color:#f87171; background:rgba(239,68,68,0.2); }
 
 /* 覺醒預約按鈕 */
 .awaken-btns {
