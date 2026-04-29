@@ -11,8 +11,20 @@
     "max": 8
   },
   "hasSpecial": true,
-  "lastUpdated": "2026-04-20",
+  "lastUpdated": "2026-04-27",
   "draws": [
+    {
+      "period": "115034",
+      "date": "2026-04-27",
+      "numbers": [6, 8, 27, 33, 35, 38],
+      "special": 2
+    },
+    {
+      "period": "115033",
+      "date": "2026-04-23",
+      "numbers": [10, 14, 15, 16, 27, 33],
+      "special": 5
+    },
     {
       "period": "115032",
       "date": "2026-04-20",

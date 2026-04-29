@@ -32,7 +32,10 @@ const { currentPage = 'home' } = Astro.props;
       <a href="/tools/" class={currentPage === 'tools' || currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800">🔧 8LA 工具箱 <span class="dd-arrow">▾</span></a>
       <div class="nav-dropdown-menu">
         <div class="nav-dropdown-menu-inner">
-          <a href="/tools/slot-simulator/">🎲 8LA 老虎機 RTP 測試器</a>
+          <div class="dropdown-group-label">🎰 模擬器</div>
+          <a href="/tools/slot-simulator/">🎲 賽特2 RTP 模擬器</a>
+          <a href="/tools/thor-hammer-2-simulator/">⚡ 雷神之錘2 模擬器</a>
+          <div class="dropdown-group-label">🔧 計算工具</div>
           <a href="/tools/bankroll-calculator/">🧮 資金管理計算器</a>
           <a href="/tools/rtp-tracker/">🎰 老虎機 RTP 紀錄器</a>
           <a href="/lottery/analysis/">🔢 樂透數據站</a>
@@ -65,7 +68,10 @@ const { currentPage = 'home' } = Astro.props;
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>🎱 芭樂好彩</a>
     <a href="/lottery/analysis/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🔢 樂透數據站</a>
     <a href="/tools/" class={currentPage === 'tools' ? 'active' : ''} style="color:#f5b800;font-weight:700">🔧 8LA 工具箱</a>
-    <a href="/tools/slot-simulator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎲 8LA 老虎機 RTP 測試器</a>
+    <div style="padding-left:2.5rem;font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:0.4rem 0 0.2rem">🎰 模擬器</div>
+    <a href="/tools/slot-simulator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎲 賽特2 RTP 模擬器</a>
+    <a href="/tools/thor-hammer-2-simulator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">⚡ 雷神之錘2 模擬器</a>
+    <div style="padding-left:2.5rem;font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:0.6rem 0 0.2rem">🔧 計算工具</div>
     <a href="/tools/bankroll-calculator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🧮 資金管理計算器</a>
     <a href="/tools/rtp-tracker/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎰 老虎機 RTP 紀錄器</a>
     <a href="/lottery/analysis/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🔢 樂透數據站</a>
@@ -319,6 +325,18 @@ const { currentPage = 'home' } = Astro.props;
   }
   .nav-dropdown:hover .nav-dropdown-menu {
     display: block;
+  }
+  .dropdown-group-label {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.4rem;
+  }
+  .dropdown-group-label:first-child {
+    margin-top: 0;
   }
   .nav-dropdown-menu a {
     padding: 0.6rem 0.8rem !important;

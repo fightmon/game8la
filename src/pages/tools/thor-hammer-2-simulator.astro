@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 <BaseLayout
-  title="芭樂轉轉機｜RTP 體感模擬器 — 自己當老虎機的神 - GAME8LA"
-  description="自己設定 RTP 和波動度，親手體驗老虎機的數學真相。芭樂轉轉機是一台教育用模擬器，讓你用身體感受 RTP 97% 和 85% 的差別。"
+  title="雷神之錘 II｜RTP 體感模擬器 — 神之力量降臨 - GAME8LA"
+  description="雷神之錘 II 是一台教育用模擬器，讓你自己設定 RTP 和波動度，親手體驗倍數球鎖定、Free Game 連鎖的數學真相。"
   currentPage="tools"
   noindex={true}
 >
@@ -11,8 +11,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <!-- === 頂部說明 === -->
   <div class="sim-header">
     <a href="/tools/" style="color:var(--text-muted);font-size:0.85rem;text-decoration:none">← 回工具箱</a>
-    <h1>🎰 芭樂轉轉機<span>RTP 體感模擬器</span></h1>
-    <p class="sim-disclaimer">⚠️ 這不是賭博遊戲，沒有真錢、沒有儲值、沒有獎金。這是一台讓你「當老虎機的神」的教育模擬器——自己設定 RTP，看數學怎麼吃掉你的餘額。</p>
+    <h1>⚡ 雷神之錘 II<span>RTP 體感模擬器</span></h1>
+    <p class="sim-disclaimer">⚠️ 這不是賭博遊戲，沒有真錢、沒有儲值、沒有獎金。這是一台讓你「當老虎機的神」的教育模擬器——自己設定 RTP，看倍數球如何在免費遊戲中狂增。</p>
   </div>
 
   <!-- === 控制面板 === -->
@@ -20,8 +20,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="ctrl-group">
       <label>🎯 RTP（你是神，你決定）</label>
       <div class="ctrl-row">
-        <input type="range" id="rtp-slider" min="80" max="99" value="96" step="1" />
-        <span id="rtp-val" class="ctrl-val">96%</span>
+        <input type="range" id="rtp-slider" min="80" max="99" value="97" step="1" />
+        <span id="rtp-val" class="ctrl-val">97%</span>
       </div>
       <div class="rtp-hint" id="rtp-hint">接近真實老虎機水準</div>
     </div>
@@ -45,6 +45,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <label>🏦 餘額</label>
       <span id="balance-val" class="ctrl-val balance-display">10,000</span>
     </div>
+    <div class="ctrl-group">
+      <label>✨ Extra Bet</label>
+      <button id="btn-extra-bet" class="extra-bet-toggle">OFF</button>
+      <span class="extra-bet-info">+20% 下注 = 2x Free Game 機率</span>
+    </div>
   </div>
 
   <!-- === 遊戲盤面 === -->
@@ -65,7 +70,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
     <!-- Free Game 提示 -->
     <div class="free-game-bar" id="fg-bar" style="display:none">
-      <span>🪲 FREE GAME</span>
+      <span>⚡ FREE GAME</span>
       <span id="fg-count">0 / 0</span>
     </div>
     <!-- 按鈕區 -->
@@ -78,25 +83,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
       <button id="btn-reset" class="btn-reset">重置餘額</button>
     </div>
-    <!-- 覺醒預約按鈕 -->
-    <div class="awaken-btns">
-      <button id="btn-awk-pow" class="btn-awaken btn-awk-pow" title="下一回合盤面強制出現 3 個力量覺醒符號＋倍數球，觸發分裂">⚡ 力量覺醒</button>
-      <button id="btn-awk-lck" class="btn-awaken btn-awk-lck" title="下一回合盤面強制出現 3 個鎖定覺醒符號＋倍數球，觸發鎖定">🔒 鎖定覺醒</button>
+    <!-- Buy Features 按鈕 -->
+    <div class="buy-feature-btns">
+      <button id="btn-buy-free" class="btn-buy-feature btn-buy-free" title="購買 15 場免費遊戲">🎁 購買 Free Game (100×)</button>
+      <button id="btn-buy-super" class="btn-buy-feature btn-buy-super" title="購買超級免費遊戲">💎 購買 Super Free (500×)</button>
+      <button id="btn-buy-strike" class="btn-buy-feature btn-buy-strike" title="購買一次全倍數球">⚡ 購買 God Strike (4000×)</button>
     </div>
   </div>
 
   <!-- === 即時統計 === -->
   <div class="stats-panel">
     <h3>📊 即時數據</h3>
-    <div class="stat-row"><span>設定 RTP</span><span id="s-rtp-set">96%</span></div>
-    <div class="stat-row"><span>實際 RTP</span><span id="s-rtp-actual" style="color:var(--guava-green)">—</span></div>
+    <div class="stat-row"><span>設定 RTP</span><span id="s-rtp-set">97%</span></div>
+    <div class="stat-row"><span>實際 RTP</span><span id="s-rtp-actual" style="color:var(--text-primary)">—</span></div>
     <div class="stat-row"><span>總轉數</span><span id="s-spins">0</span></div>
     <div class="stat-row"><span>總下注</span><span id="s-total-bet">0</span></div>
     <div class="stat-row"><span>總回收</span><span id="s-total-win">0</span></div>
     <div class="stat-row"><span>淨輸贏</span><span id="s-net" style="color:var(--text-muted)">—</span></div>
     <div class="stat-row"><span>最大單次獎金</span><span id="s-max-win" style="color:var(--gold)">0</span></div>
-    <div class="stat-row"><span>最長乾旱（連續不中）</span><span id="s-max-drought" style="color:var(--guava-pink)">0</span></div>
+    <div class="stat-row"><span>最長乾旱（連續不中）</span><span id="s-max-drought" style="color:#ff6b6b">0</span></div>
     <div class="stat-row"><span>Free Game 觸發次數</span><span id="s-fg-count">0</span></div>
+    <div class="stat-row"><span>Cascade 總次數</span><span id="s-cascade-total">0</span></div>
     <canvas id="balance-chart" width="360" height="180"></canvas>
     <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">餘額走勢圖（轉數 vs 餘額）</p>
   </div>
@@ -107,7 +114,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="cta-sub" id="ctaSub"></div>
     <div>
       <a class="cta-btn" id="ctaBtn" href="/articles/seth-rng-myth-busted/">📖 看真相文</a>
-      <a class="cta-btn-secondary" id="ctaBtn2" href="/articles/atg-seth-guide/">🎮 賽特完整攻略</a>
+      <a class="cta-btn-secondary" id="ctaBtn2" href="/articles/thor-hammer-2-guide/">🎮 雷神完整攻略</a>
     </div>
   </div>
 
@@ -133,29 +140,29 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 (function(){
   'use strict';
 
-  /* ===== 符號定義（賽特2 賠率表） ===== */
+  /* ===== 符號定義（雷神之錘 II） ===== */
   const SYMS = [
-    { id:'eye',  label:'👁',  name:'荷魯斯之眼', color:'#f5b800', bg:'#3d2f0a', pay:{8:200,10:500,12:1000}, tier:1 },
-    { id:'snake',label:'🐍',  name:'權杖',       color:'#f5b800', bg:'#3d2f0a', pay:{8:50, 10:200,12:500},  tier:1 },
-    { id:'bow',  label:'🏹',  name:'弓箭',       color:'#f5b800', bg:'#3d2f0a', pay:{8:40, 10:100,12:300},  tier:2 },
-    { id:'blade',label:'⚔️',  name:'彎刀',       color:'#c0c0c0', bg:'#2a2a2a', pay:{8:30, 10:40, 12:240},  tier:2 },
-    { id:'org',  label:'🟠',  name:'橘寶石',     color:'#ff8c00', bg:'#2a1a00', pay:{8:20, 10:30, 12:200},  tier:3 },
-    { id:'red',  label:'🔴',  name:'紅寶石',     color:'#ef4444', bg:'#2a0505', pay:{8:16, 10:24, 12:160},  tier:3 },
-    { id:'pur',  label:'🟣',  name:'紫寶石',     color:'#a855f7', bg:'#1a0a2e', pay:{8:10, 10:20, 12:100},  tier:4 },
-    { id:'blu',  label:'🔵',  name:'藍寶石',     color:'#3b82f6', bg:'#0a1a2e', pay:{8:8,  10:18, 12:80},   tier:4 },
-    { id:'grn',  label:'🟢',  name:'綠寶石',     color:'#22c55e', bg:'#0a1a0a', pay:{8:5,  10:15, 12:40},   tier:4 },
+    { id:'helmet',  label:'⛑️',  name:'雷神頭盔', color:'#f5b800', bg:'#3d2f0a', pay:{8:200, 10:500, 12:1000}, tier:1 },
+    { id:'hammer',  label:'🔨',  name:'雷神戰錘', color:'#f5b800', bg:'#3d2f0a', pay:{8:50,  10:200, 12:500},  tier:1 },
+    { id:'shield',  label:'🛡️',  name:'雷神神盾', color:'#c0c0c0', bg:'#2a2a2a', pay:{8:40,  10:100, 12:300},  tier:2 },
+    { id:'coins',   label:'🪙',  name:'金幣',     color:'#f5b800', bg:'#3d2f0a', pay:{8:30,  10:40,  12:240},  tier:2 },
+    { id:'red-gem', label:'🔴',  name:'紅寶石',   color:'#ef4444', bg:'#2a0505', pay:{8:20,  10:30,  12:200},  tier:3 },
+    { id:'pur-gem', label:'🟣',  name:'紫寶石',   color:'#a855f7', bg:'#1a0a2e', pay:{8:16,  10:24,  12:160},  tier:3 },
+    { id:'yel-gem', label:'🟡',  name:'金珠',     color:'#eab308', bg:'#2a1a00', pay:{8:10,  10:20,  12:100},  tier:4 },
+    { id:'grn-gem', label:'🟢',  name:'綠寶石',   color:'#22c55e', bg:'#0a1a0a', pay:{8:8,   10:10,  12:80},   tier:4 },
+    { id:'blu-gem', label:'🔵',  name:'藍鑽',     color:'#3b82f6', bg:'#0a1a2e', pay:{8:5,   10:15,  12:40},   tier:4 },
   ];
-  const SCATTER = { id:'scat', label:'🪲', name:'聖甲蟲', color:'#f5b800', bg:'#4a0a2e' };
-  // 4 色倍數球（依倍率範圍分色，對應賽特 2 配色）
-  const MULTI_COLORS = [
-    { id:'multi-g', color:'#39ff14', bg:'#0a2a0a', glow:'rgba(57,255,20,0.5)',  name:'綠倍數球', ring:'#22c55e' },
-    { id:'multi-b', color:'#60a5fa', bg:'#0a1a3a', glow:'rgba(96,165,250,0.5)', name:'藍倍數球', ring:'#3b82f6' },
-    { id:'multi-p', color:'#c084fc', bg:'#1a0a3a', glow:'rgba(192,132,252,0.5)',name:'紫倍數球', ring:'#a855f7' },
-    { id:'multi-r', color:'#fb7185', bg:'#3a0a1a', glow:'rgba(251,113,133,0.5)',name:'紅倍數球', ring:'#ef4444' },
+  const BONUS = { id:'bonus', label:'⚡', name:'獎勵符號', color:'#f59e0b', bg:'#3d2f0a' };
+  const SUPER_BONUS = { id:'super-bonus', label:'🌩️', name:'超級獎勵', color:'#ff6b6b', bg:'#4a0a0a' };
+
+  // 倍數球：固定值（不升級，但在 Free Game 中會鎖定並累積）
+  const MULTI_BALLS = [
+    { id:'multi-g', value:2,    color:'#39ff14', bg:'#0a2a0a', glow:'rgba(57,255,20,0.5)',   name:'綠倍數球', ring:'#22c55e' },
+    { id:'multi-b', value:12,   color:'#60a5fa', bg:'#0a1a3a', glow:'rgba(96,165,250,0.5)',  name:'藍倍數球', ring:'#3b82f6' },
+    { id:'multi-p', value:50,   color:'#c084fc', bg:'#1a0a3a', glow:'rgba(192,132,252,0.5)', name:'紫倍數球', ring:'#a855f7' },
+    { id:'multi-r', value:100,  color:'#fb7185', bg:'#3a0a1a', glow:'rgba(251,113,133,0.5)', name:'紅倍數球', ring:'#ef4444' },
+    { id:'multi-gold', value:1000, color:'#fbbf24', bg:'#4a3a0a', glow:'rgba(251,191,36,0.6)', name:'金虹倍數球', ring:'#f59e0b' },
   ];
-  // 覺醒之力符號（Free Game 限定）
-  const AWAKEN_POWER = { id:'awk-pow', label:'⚡', name:'力量覺醒', color:'#f59e0b', bg:'#2a1a00', glow:'rgba(245,158,11,0.5)' };
-  const AWAKEN_LOCK  = { id:'awk-lck', label:'🔒', name:'鎖定覺醒', color:'#c084fc', bg:'#1a0030', glow:'rgba(192,132,252,0.5)' };
 
   const ROWS = 5, COLS = 6, TOTAL = ROWS * COLS;
 
@@ -163,45 +170,38 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   let balance = 10000, bet = 20;
   let totalBet = 0, totalWin = 0, spinCount = 0;
   let maxSingleWin = 0, currentDrought = 0, maxDrought = 0;
-  let fgTriggered = 0;
-  let board = [];        // flat array[20] of symbol objects
-  let multiOnBoard = []; // {pos, value, colorIdx, locked} 倍數球位置
-  let gameState = 'idle'; // idle | spinning | cascading | freegame
+  let fgTriggered = 0, cascadeTotal = 0;
+  let board = [];
+  let multiOnBoard = [];
+  let gameState = 'idle';
   let freeSpinsLeft = 0, freeSpinsTotal = 0;
-  let lockedMultis = []; // {pos, value, rounds} 鎖定的倍數球，rounds 倒數到 0 解鎖
-  let pendingAwaken = null; // 'power' | 'lock' | null — 預約下一回合強制觸發覺醒
-  const LOCK_ROUNDS = 3; // 鎖定覺醒鎖定回合數
+  let lockedMultis = [];
   let isAutoSpin = false, autoRemaining = 0, autoTotal = 0;
   function autoDelay(ms) { return delay(isAutoSpin ? Math.max(ms * 0.25, 30) : ms); }
-  let spinWin = 0; // current spin total win
+  let spinWin = 0;
   let cascadeCount = 0;
+  let extraBetEnabled = false;
+  let inSuperFreeGame = false;
+  let godStrikeActive = false;
 
   // Chart
-  let chartData = { labels: [0], datasets: [{ label:'餘額', data:[10000], borderColor:'#39ff14', backgroundColor:'rgba(57,255,20,0.1)', fill:true, tension:0.3, pointRadius:0 }] };
+  let chartData = { labels: [0], datasets: [{ label:'餘額', data:[10000], borderColor:'#4a90d9', backgroundColor:'rgba(74,144,217,0.1)', fill:true, tension:0.3, pointRadius:0 }] };
   let balanceChart;
 
   /* ===== RTP & 波動度控制 ===== */
-  let targetRTP = 96;
-  let volatility = 'mid'; // low | mid | high
+  let targetRTP = 97;
+  let volatility = 'mid';
 
-  /**
-   * 動態 RTP 回饋：根據實際 RTP 與目標的偏差調整出牌傾向
-   * drift > 0 表示玩家贏太多 → 壓低高賠符號/倍數球
-   * drift < 0 表示玩家輸太多 → 拉高高賠符號/倍數球
-   * 回傳 -1 ~ +1 的修正值
-   */
   function getRtpDrift() {
-    if (totalBet < 60) return 0; // 只跳過前 3 轉
+    if (totalBet < 60) return 0;
     const actualRTP = (totalWin / totalBet) * 100;
     const diff = actualRTP - targetRTP;
-    // RTP-Audit fix: 響應從 ÷8 改 ÷4,上限 ±1.5,讓短場 session 防線更快收斂
     const raw = diff / 4;
     let d = Math.max(-1.5, Math.min(1.5, raw));
     if (freeSpinsLeft > 0 && d > 0) d = Math.min(1.5, d * 1.5);
     return d;
   }
 
-  // RTP 基礎因子：0（80%）→ 1（99%），影響倍數球/scatter 的「底線」出現率
   function getRtpBase() {
     return Math.max(0, Math.min(1, (targetRTP - 80) / 19));
   }
@@ -211,110 +211,63 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   function getAdjustedWeights() {
-    // RTP-Audit fix: 不在低 RTP 膨脹低分符號權重
-    // 舊版本 (1.5 - rtpFactor*0.5) 在 RTP 80% 把低分權重 ×1.5,造成 hit rate 90% 的虛假爽感
-    // 改用「固定基礎權重 + drift 微調」, RTP 高低靠 payout 縮放控制 (見 getPayout)
     const base = getBaseWeights();
     const drift = getRtpDrift();
     const adjusted = base.map((w, i) => {
       const tier = SYMS[i].tier;
       if (tier <= 2) {
-        // 高賠符號：drift 控制 (贏太多 → 壓低高賠出現率)
         let v = w * (1 - drift * 0.6);
         return Math.max(v, 0.3);
       }
-      // 低賠符號：固定權重,僅 drift 微調 (不再依 RTP 縮放)
       let v = w * (1 + drift * 0.3);
       return v;
     });
     return adjusted;
   }
 
-  function getScatterWeight() {
+  function getBonusWeight() {
     const totalSymWeight = getAdjustedWeights().reduce((a,b) => a+b, 0);
     const drift = getRtpDrift();
     const rtpBase = getRtpBase();
-    // RTP 80%→1%, RTP 99%→3%，drift 再修正
     const baseRate = 0.01 + rtpBase * 0.02;
     const rate = baseRate * (1 - Math.max(0, drift) * 0.5);
     return totalSymWeight * Math.max(rate, 0.003);
   }
 
   function getMultiWeight() {
-    // RTP-Audit fix: 反轉 volatility 出現率,符合業界「高波 = 憋大招」
-    // 舊版本: low=0.01 / mid=0.02 / high=0.03 (高波出現率最高,加上球值最大,雙倍放大)
-    // 新版本: 高波球少但值大,低波球多但值小
     const volRates = { low: 0.025, mid: 0.015, high: 0.008 };
     const totalSymWeight = getAdjustedWeights().reduce((a,b) => a+b, 0);
     const drift = getRtpDrift();
     const rtpBase = getRtpBase();
-    // RTP 80%→基礎×0.2, RTP 99%→基礎×1.0, drift 再修正
     const volRate = volRates[volatility] || 0.015;
     const baseRate = volRate * (0.2 + rtpBase * 0.8);
     const rate = baseRate * (1 - Math.max(0, drift) * 0.7);
-    return totalSymWeight * Math.max(rate, 0.001);
-  }
+    let weight = totalSymWeight * Math.max(rate, 0.001);
 
-  function getAwakenWeight() {
-    if (freeSpinsLeft <= 0) return 0;
-    const totalSymWeight = getAdjustedWeights().reduce((a,b) => a+b, 0);
-    const rtpBase = getRtpBase();
-    // RTP 低時覺醒也少出
-    return totalSymWeight * (0.005 + rtpBase * 0.01);
+    // Super Free Game 中倍數球出現率翻倍
+    if (inSuperFreeGame) weight *= 2;
+    return weight;
   }
 
   function pickSymbol() {
     const weights = getAdjustedWeights();
-    const scatW = getScatterWeight();
+    const bonusW = getBonusWeight();
     const multiW = getMultiWeight();
-    const awkPowW = getAwakenWeight();
-    const awkLckW = getAwakenWeight();
-    const all = [...weights, scatW, multiW, awkPowW, awkLckW];
+    const all = [...weights, bonusW, multiW];
     const total = all.reduce((a,b) => a+b, 0);
     let r = Math.random() * total;
     for (let i = 0; i < all.length; i++) {
       r -= all[i];
       if (r <= 0) {
         if (i < SYMS.length) return { ...SYMS[i], type: 'sym' };
-        if (i === SYMS.length) return { ...SCATTER, type: 'scatter' };
+        if (i === SYMS.length) return { ...BONUS, type: 'bonus' };
         if (i === SYMS.length + 1) {
-          // multiplier ball
-          const val = pickMultiValue();
-          const ci = getMultiColorIdx(val);
-          return { ...MULTI_COLORS[ci], type: 'multi', label: '×' + val, multiVal: val, colorIdx: ci };
+          const ball = MULTI_BALLS[Math.floor(Math.random() * MULTI_BALLS.length)];
+          return { ...ball, type: 'multi', label: '×' + ball.value, multiVal: ball.value };
         }
-        if (i === SYMS.length + 2) return { ...AWAKEN_POWER, type: 'awaken-pow' };
-        if (i === SYMS.length + 3) return { ...AWAKEN_LOCK, type: 'awaken-lck' };
       }
     }
     return { ...SYMS[SYMS.length-1], type: 'sym' };
-  }
-
-  function pickMultiValue() {
-    const rtpBase = getRtpBase();
-    // RTP 低時高倍數球權重大幅降低
-    const highCut = rtpBase; // 0 at 80%, 1 at 99%
-    const volWeights = {
-      low:  [[2,50],[3,30],[5,15 * highCut],[10,4 * highCut],[25,1 * highCut]],
-      mid:  [[2,30],[3,25],[5,20 * highCut],[10,15 * highCut],[25,7 * highCut],[50,2 * highCut],[100,1 * highCut]],
-      high: [[2,15],[5,20 * highCut],[10,20 * highCut],[25,15 * highCut],[50,15 * highCut],[100,10 * highCut],[200,4 * highCut],[500,1 * highCut]],
-    };
-    const table = (volWeights[volatility] || volWeights.mid).filter(([v,w]) => w > 0.01);
-    const total = table.reduce((a,b) => a + b[1], 0);
-    let r = Math.random() * total;
-    for (const [val, w] of table) {
-      r -= w;
-      if (r <= 0) return val;
-    }
-    return 2;
-  }
-
-  function getMultiColorIdx(val) {
-    // 綠(小) → 藍(中) → 紫(大) → 紅(超大)
-    if (val <= 5)   return 0; // green
-    if (val <= 25)  return 1; // blue
-    if (val <= 100) return 2; // purple
-    return 3;                 // red
   }
 
   /* ===== 盤面操作 ===== */
@@ -322,32 +275,41 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     board = [];
     multiOnBoard = [];
 
-    // 鎖定倍數球倒數：每次 fillBoard（=每次 spin）扣 1 回合
-    lockedMultis = lockedMultis.filter(lm => {
-      lm.rounds--;
-      return lm.rounds > 0;
-    });
+    // Free Game 期間倍數球鎖定不消失；Free Game 結束後清空
+    if (freeSpinsLeft <= 0) {
+      lockedMultis = [];
+    }
 
-    // 先放置還在鎖定中的倍數球
     const lockedPositions = new Set();
     for (const lm of lockedMultis) {
-      const ci = getMultiColorIdx(lm.value);
-      board[lm.pos] = { ...MULTI_COLORS[ci], type: 'multi', label: '×' + lm.value, multiVal: lm.value, colorIdx: ci, locked: true };
-      multiOnBoard.push({ pos: lm.pos, value: lm.value, colorIdx: ci, locked: true });
-      lockedPositions.add(lm.pos);
+      const ball = MULTI_BALLS.find(b => b.value === lm.value);
+      if (ball) {
+        board[lm.pos] = { ...ball, type: 'multi', label: '×' + lm.value, multiVal: lm.value, locked: true };
+        multiOnBoard.push({ pos: lm.pos, value: lm.value, locked: true });
+        lockedPositions.add(lm.pos);
+      }
     }
     for (let i = 0; i < TOTAL; i++) {
       if (lockedPositions.has(i)) continue;
       const s = pickSymbol();
       board[i] = s;
-      if (s.type === 'multi') multiOnBoard.push({ pos: i, value: s.multiVal, colorIdx: s.colorIdx, locked: false });
+      if (s.type === 'multi') {
+        // God Strike: 所有倍數球強制變 1000x
+        if (godStrikeActive) {
+          const ball = MULTI_BALLS.find(b => b.value === 1000);
+          if (ball) {
+            board[i] = { ...ball, type: 'multi', label: '×1000', multiVal: 1000, locked: false };
+            multiOnBoard.push({ pos: i, value: 1000, locked: false });
+          }
+        } else {
+          multiOnBoard.push({ pos: i, value: s.multiVal, locked: false });
+        }
+      }
     }
+    if (godStrikeActive) godStrikeActive = false;
   }
 
   function fillEmpty() {
-    // RTP-Audit fix: cascade 補牌不再補倍數球,避免單轉內倍數球無限累積
-    // 舊版本 cascade 過程中可能掉新倍數球 → getTotalMultiplier 加總爆衝 → RTP 過 100%
-    // 新版本: 倍數球只在「初始開盤」與「覺醒分裂」出現,cascade 補的牌全部是普通符號
     const newDist = new Array(TOTAL).fill(0);
     for (let c = 0; c < COLS; c++) {
       let emptyCount = 0;
@@ -358,7 +320,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       for (let r = 0; r < ROWS; r++) {
         const idx = r * COLS + c;
         if (!board[idx]) {
-          // 重抽直到拿到非倍數球符號 (最多 20 次防無窮迴圈)
           let s, attempts = 0;
           do { s = pickSymbol(); attempts++; }
           while (s.type === 'multi' && attempts < 20);
@@ -372,7 +333,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   function cascadeDown() {
-    // 回傳每格掉了幾行（用於掉落動畫）
     const dropDist = new Array(TOTAL).fill(0);
     for (let c = 0; c < COLS; c++) {
       let writeRow = ROWS - 1;
@@ -394,7 +354,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     return dropDist;
   }
 
-  /* ===== 中獎偵測（Scatter Pays） ===== */
+  /* ===== 中獎偵測（8+ Scatter Pays） ===== */
   function findMatches() {
     const counts = {};
     for (let i = 0; i < TOTAL; i++) {
@@ -412,16 +372,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     return matches;
   }
 
-  function countScatters() {
-    let count = 0;
-    const positions = [];
+  function countBonus() {
+    let count = 0, superCount = 0;
+    const positions = [], superPositions = [];
     for (let i = 0; i < TOTAL; i++) {
-      if (board[i] && board[i].type === 'scatter') {
+      if (board[i] && board[i].type === 'bonus') {
         count++;
         positions.push(i);
       }
+      if (board[i] && board[i].type === 'super-bonus') {
+        superCount++;
+        superPositions.push(i);
+      }
     }
-    return { count, positions };
+    return { count, positions, superCount, superPositions };
   }
 
   function getPayout(symId, count) {
@@ -431,20 +395,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     if (count >= 12) pay = sym.pay[12];
     else if (count >= 10) pay = sym.pay[10];
     else if (count >= 8) pay = sym.pay[8];
-    // RTP-Audit fix v2: 線性縮放對齊「天然 RTP」
-    // Monte Carlo 實測:本機天然 RTP (PAYOUT_K=1.0) ≈ 98.4%
-    // 線性公式 (0.81 + rtpBase * 0.20): RTP 80%→×0.81 / RTP 96%→×0.978 / RTP 99%→×1.01
-    // 這個公式讓「設定的 RTP」跟「實際 RTP」誤差落在 ±2pp 內
     const rtpBase = getRtpBase();
     return pay * (0.81 + rtpBase * 0.20);
   }
 
   function getTotalMultiplier() {
     if (multiOnBoard.length === 0) return 1;
-    return multiOnBoard.reduce((sum, m) => sum + m.value, 0);
+    return multiOnBoard.reduce((sum, m) => sum + m.value, 1);
   }
 
-  /* ===== 贏分計算 ===== */
   function calculateSpinResult(matches) {
     let win = 0;
     for (const m of matches) {
@@ -452,90 +411,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       win += (bet / 20) * payout;
     }
     return win;
-  }
-
-  /* ===== 倍數球升級 ===== */
-  function upgradeMultiBalls() {
-    const upgrades = [2,3,5,6,8,10,15,20,25,30,50,75,100,150,200,250,300,500];
-    const drift = getRtpDrift();
-    // 升級機率：基礎 30%，贏太多時降到最低 5%，輸太多時拉到 50%
-    const upgradeChance = Math.max(0.05, Math.min(0.5, 0.3 * (1 - drift * 0.8)));
-    for (const m of multiOnBoard) {
-      if (Math.random() < upgradeChance) {
-        const curIdx = upgrades.indexOf(m.value);
-        if (curIdx >= 0 && curIdx < upgrades.length - 1) {
-          m.value = upgrades[curIdx + 1];
-          m.colorIdx = getMultiColorIdx(m.value);
-          const cell = board[m.pos];
-          if (cell) {
-            cell.label = '×' + m.value;
-            cell.multiVal = m.value;
-            cell.colorIdx = m.colorIdx;
-            // 更新顏色
-            const mc = MULTI_COLORS[m.colorIdx];
-            cell.color = mc.color;
-            cell.bg = mc.bg;
-            cell.glow = mc.glow;
-            cell.ring = mc.ring;
-          }
-        }
-      }
-    }
-  }
-
-  /* ===== 覺醒之力觸發偵測 ===== */
-  function detectAwaken() {
-    // 偵測覺醒條件，不修改盤面，只回傳資料
-    let powCount = 0, lckCount = 0;
-    const powPos = [], lckPos = [];
-    for (let i = 0; i < TOTAL; i++) {
-      if (board[i] && board[i].type === 'awaken-pow') { powCount++; powPos.push(i); }
-      if (board[i] && board[i].type === 'awaken-lck') { lckCount++; lckPos.push(i); }
-    }
-    if (powCount >= 3 && multiOnBoard.length > 0) return { kind: 'power', positions: powPos };
-    if (lckCount >= 3 && multiOnBoard.length > 0) return { kind: 'lock', positions: lckPos };
-    return null;
-  }
-
-  function executeAwaken(info) {
-    // 執行覺醒效果（在動畫之後呼叫）
-    if (info.kind === 'power') {
-      // 力量覺醒（賽特）：倍數球分裂（替換普通符號或空位）
-      // 先清掉覺醒符號，讓那些位置也可以被分裂使用
-      for (const p of info.positions) board[p] = null;
-      // 收集可用位置：空位 + 普通符號位置
-      const availPositions = [];
-      for (let i = 0; i < TOTAL; i++) {
-        if (!board[i] || board[i].type === 'sym') availPositions.push(i);
-      }
-      const toClone = [...multiOnBoard];
-      const newBalls = [];
-      const SPLIT_COPIES = 2; // 每顆分裂出 2 顆（1→3）
-      for (const m of toClone) {
-        for (let c = 0; c < SPLIT_COPIES; c++) {
-          if (availPositions.length === 0) break;
-          const randIdx = Math.floor(Math.random() * availPositions.length);
-          const newPos = availPositions.splice(randIdx, 1)[0];
-          const ci = getMultiColorIdx(m.value);
-          board[newPos] = { ...MULTI_COLORS[ci], type: 'multi', label: '×' + m.value, multiVal: m.value, colorIdx: ci, locked: false };
-          multiOnBoard.push({ pos: newPos, value: m.value, colorIdx: ci, locked: false });
-          newBalls.push(newPos);
-        }
-      }
-      return newBalls; // 回傳新分裂球的位置
-    } else {
-      // 鎖定覺醒（奈芙蒂絲）：鎖定所有倍數球
-      for (const m of multiOnBoard) {
-        m.locked = true;
-        if (!lockedMultis.find(lm => lm.pos === m.pos)) {
-          lockedMultis.push({ pos: m.pos, value: m.value, rounds: LOCK_ROUNDS + 1 });
-        }
-        const cell = board[m.pos];
-        if (cell) cell.locked = true;
-      }
-      for (const p of info.positions) board[p] = null;
-      return multiOnBoard.map(m => m.pos); // 回傳被鎖定球的位置
-    }
   }
 
   /* ===== DOM 操作 ===== */
@@ -549,13 +424,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   const $fgCount = document.getElementById('fg-count');
   const $multiCounter = document.getElementById('multi-counter');
   const $multiValue = document.getElementById('multi-value');
-  const $btnAwkPow = document.getElementById('btn-awk-pow');
-  const $btnAwkLck = document.getElementById('btn-awk-lck');
   const $rtpSlider = document.getElementById('rtp-slider');
   const $rtpVal = document.getElementById('rtp-val');
   const $rtpHint = document.getElementById('rtp-hint');
   const $betVal = document.getElementById('bet-val');
   const $balanceVal = document.getElementById('balance-val');
+  const $btnExtraBet = document.getElementById('btn-extra-bet');
+  const $btnBuyFree = document.getElementById('btn-buy-free');
+  const $btnBuySuper = document.getElementById('btn-buy-super');
+  const $btnBuyStrike = document.getElementById('btn-buy-strike');
 
   function renderBoard(highlightPositions, removePositions, dropData, spinIn) {
     $board.innerHTML = '';
@@ -571,7 +448,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
         if (s.type === 'multi') {
           cell.classList.add('cell-multi');
-          const glow = s.glow || 'rgba(57,255,20,0.3)';
+          const glow = s.glow || 'rgba(74,144,217,0.3)';
           const ring = s.ring || s.color;
           cell.style.borderColor = ring + '88';
           cell.style.boxShadow = '0 0 14px ' + glow + ', inset 0 0 10px ' + glow;
@@ -581,18 +458,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             cell.innerHTML += '<span class="multi-lock-icon">🔒</span>';
             cell.classList.add('cell-locked');
           }
-        } else if (s.type === 'scatter') {
+        } else if (s.type === 'bonus') {
           cell.textContent = s.label;
-          cell.classList.add('cell-scatter');
-          cell.style.borderColor = '#f5b80066';
-          cell.style.boxShadow = '0 0 12px rgba(245,184,0,0.3)';
-        } else if (s.type === 'awaken-pow' || s.type === 'awaken-lck') {
-          cell.classList.add('cell-awaken');
-          const glow = s.glow || 'rgba(245,158,11,0.4)';
-          cell.style.borderColor = s.color + '88';
-          cell.style.boxShadow = '0 0 16px ' + glow;
-          cell.style.background = 'radial-gradient(circle at 50% 40%, ' + s.color + '44, ' + s.bg + ')';
-          cell.innerHTML = '<span style="font-size:1.4rem">' + s.label + '</span><span class="awaken-name">' + (s.type === 'awaken-pow' ? '力量' : '鎖定') + '</span>';
+          cell.classList.add('cell-bonus');
+          cell.style.borderColor = '#f59e0b66';
+          cell.style.boxShadow = '0 0 12px rgba(245,158,11,0.3)';
+        } else if (s.type === 'super-bonus') {
+          cell.textContent = s.label;
+          cell.classList.add('cell-super-bonus');
+          cell.style.borderColor = '#ff6b6b99';
+          cell.style.boxShadow = '0 0 16px rgba(255,107,107,0.5)';
         } else {
           cell.textContent = s.label;
         }
@@ -603,7 +478,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         if (removePositions && removePositions.includes(i)) {
           cell.classList.add('cell-removing');
         }
-        // 掉落動畫
         if (dropData && dropData[i] > 0) {
           const rows = dropData[i];
           cell.style.setProperty('--drop-rows', rows);
@@ -614,7 +488,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         cell.style.background = '#111';
         cell.style.opacity = '0.3';
       }
-      // 新局掉入動畫（鎖定球不動，其餘從上方掉入）
       if (spinIn && !spinIn.has(i)) {
         const col = i % COLS;
         const row = Math.floor(i / COLS);
@@ -635,13 +508,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     $actual.textContent = totalBet > 0 ? actualRTP + '%' : '—';
     if (totalBet > 0) {
       const diff = parseFloat(actualRTP) - targetRTP;
-      $actual.style.color = Math.abs(diff) < 5 ? 'var(--guava-green)' : 'var(--guava-pink)';
+      $actual.style.color = Math.abs(diff) < 5 ? '#39ff14' : '#ff6b6b';
     }
     document.getElementById('s-spins').textContent = spinCount;
     document.getElementById('s-total-bet').textContent = totalBet.toLocaleString();
     document.getElementById('s-total-win').textContent = totalWin.toLocaleString();
-    // RTP-Audit fix: 加「淨輸贏」顯示,讓玩家看到真實虧損
-    // 即使 hit rate 90% 看起來都在贏,實際 RTP 80% 是緩慢虧損 — 數字攤開玩家才看得懂
     const $net = document.getElementById('s-net');
     if ($net) {
       const net = totalWin - totalBet;
@@ -650,15 +521,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         $net.style.color = 'var(--text-muted)';
       } else {
         $net.textContent = (net >= 0 ? '+' : '') + net.toLocaleString();
-        $net.style.color = net >= 0 ? 'var(--guava-green)' : 'var(--guava-pink)';
+        $net.style.color = net >= 0 ? '#39ff14' : '#ff6b6b';
       }
     }
     document.getElementById('s-max-win').textContent = maxSingleWin.toLocaleString();
     document.getElementById('s-max-drought').textContent = maxDrought;
     document.getElementById('s-fg-count').textContent = fgTriggered;
+    document.getElementById('s-cascade-total').textContent = cascadeTotal;
     $balanceVal.textContent = balance.toLocaleString();
     $betVal.textContent = bet;
-    // 情境導流 CTA：轉超過 20 局後顯示，根據輸贏切換文案
     updateContextCta();
   }
 
@@ -674,21 +545,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     const actualRTP = totalBet > 0 ? (totalWin / totalBet * 100) : 100;
     if (net >= 0) {
       $hook.textContent = '你贏了 ' + net.toLocaleString() + ' 元？先別開心太早。';
-      $sub.textContent = '短期波動讓你「感覺」在贏，但 RNG 不在乎你的運氣。看芭樂子用數學拆解這場騙局。';
-      $btn.textContent = '🔍 看 RNG 真相拆解';
+      $sub.textContent = '短期波動讓你「感覺」在贏，但數學才是真神。看雷神如何用倍數球的假象欺騙玩家。';
+      $btn.textContent = '🔍 看倍數球陷阱';
       $btn.href = '/articles/seth-rng-myth-busted/';
-      $btn2.textContent = '📊 賽特 RTP 完整分析';
-      $btn2.href = '/articles/atg-seth-guide/';
+      $btn2.textContent = '⚡ 雷神完整攻略';
+      $btn2.href = '/articles/thor-hammer-2-guide/';
     } else {
-      $hook.textContent = '已經虧了 ' + Math.abs(net).toLocaleString() + ' 元，這就是數學。';
-      if (actualRTP < 90) {
-        $sub.textContent = '你設的 RTP 只有 ' + targetRTP + '%，長期每 100 元就吃掉 ' + (100 - targetRTP) + ' 元。想知道真實老虎機的 RTP 落在哪？';
-      } else {
-        $sub.textContent = '即使 RTP 設到 ' + targetRTP + '%，長轉還是會虧。想知道為什麼「96% 回報率」其實是穩輸？';
-      }
+      $hook.textContent = '已經虧了 ' + Math.abs(net).toLocaleString() + ' 元，Free Game 也救不了。';
+      $sub.textContent = '即使倍數球在 Free Game 中鎖定並累積，長期 RTP ' + targetRTP + '% 仍會穩輸。想看看真實數據？';
       $btn.textContent = '💡 看懂為什麼你一直輸';
       $btn.href = '/articles/seth-rng-myth-busted/';
-      $btn2.textContent = '🛡️ 用 RTP 紀錄器追蹤實戰';
+      $btn2.textContent = '📊 用 RTP 紀錄器追蹤實戰';
       $btn2.href = '/tools/rtp-tracker/';
     }
   }
@@ -697,12 +564,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     if (!balanceChart) return;
     chartData.labels.push(spinCount);
     chartData.datasets[0].data.push(balance);
-    // Keep last 300 points
     if (chartData.labels.length > 300) {
       chartData.labels.shift();
       chartData.datasets[0].data.shift();
     }
-    // 自動轉時每 5 轉才重繪圖表，省 GPU
     if (isAutoSpin && spinCount % 5 !== 0) return;
     balanceChart.update('none');
   }
@@ -731,10 +596,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
   }
 
-  /* ===== 主遊戲流程 ===== */
+  /* ===== 主遊戲流程 === */
   async function spin() {
     if (gameState !== 'idle') return;
-    if (balance < bet && freeSpinsLeft <= 0) {
+
+    const actualBet = Math.round(bet * (extraBetEnabled ? 1.2 : 1));
+    if (balance < actualBet && freeSpinsLeft <= 0) {
       $btnSpin.textContent = '餘額不足';
       setTimeout(() => { $btnSpin.textContent = 'SPIN'; }, 1500);
       isAutoSpin = false;
@@ -747,20 +614,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     spinWin = 0;
     cascadeCount = 0;
 
-    // Deduct bet (not in free game)
     if (freeSpinsLeft <= 0) {
-      balance -= bet;
-      totalBet += bet;
+      balance -= actualBet;
+      totalBet += actualBet;
     } else {
       freeSpinsLeft--;
       $fgCount.textContent = (freeSpinsTotal - freeSpinsLeft) + ' / ' + freeSpinsTotal;
       if (freeSpinsLeft <= 0) {
         $fgBar.style.display = 'none';
+        inSuperFreeGame = false;
       }
     }
     spinCount++;
 
-    // === 新局動畫：舊符號飛出 → 新符號掉入 ===
     const lockedPositions = new Set(lockedMultis.map(lm => lm.pos));
     if (!isAutoSpin) {
       const cells = $board.querySelectorAll('.cell');
@@ -770,85 +636,62 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       await delay(180);
     }
 
-    // Generate new board
     fillBoard();
 
-    // 預約覺醒：強制放 3 個覺醒符號 + 至少 1 顆倍數球，讓 cascadeLoop 自然觸發
-    if (pendingAwaken) {
-      // 確保盤面至少有 1 顆倍數球
-      if (multiOnBoard.length === 0) {
-        const symSlots = [];
-        for (let i = 0; i < TOTAL; i++) { if (board[i] && board[i].type === 'sym') symSlots.push(i); }
-        if (symSlots.length > 0) {
-          const fp = symSlots[Math.floor(Math.random() * symSlots.length)];
-          const fv = pickMultiValue();
-          const ci = getMultiColorIdx(fv);
-          board[fp] = { ...MULTI_COLORS[ci], type: 'multi', label: '×' + fv, multiVal: fv, colorIdx: ci, locked: false };
-          multiOnBoard.push({ pos: fp, value: fv, colorIdx: ci, locked: false });
+    // Free Game 核心機制：新出現的倍數球自動鎖定到 lockedMultis
+    if (freeSpinsLeft > 0 || freeSpinsTotal > 0) {
+      for (const m of multiOnBoard) {
+        if (!m.locked && !lockedMultis.find(lm => lm.pos === m.pos)) {
+          m.locked = true;
+          lockedMultis.push({ pos: m.pos, value: m.value });
+          const cell = board[m.pos];
+          if (cell) cell.locked = true;
         }
       }
-      // 找普通符號位置放覺醒符號（避開倍數球和 scatter）
-      const awkTemplate = pendingAwaken === 'power' ? AWAKEN_POWER : AWAKEN_LOCK;
-      const awkType = pendingAwaken === 'power' ? 'awaken-pow' : 'awaken-lck';
-      const availSlots = [];
-      for (let i = 0; i < TOTAL; i++) {
-        if (board[i] && board[i].type === 'sym') availSlots.push(i);
-      }
-      // 放 3 個覺醒符號
-      const count = Math.min(3, availSlots.length);
-      for (let n = 0; n < count; n++) {
-        const ri = Math.floor(Math.random() * availSlots.length);
-        const pos = availSlots.splice(ri, 1)[0];
-        board[pos] = { ...awkTemplate, type: awkType };
-      }
-      pendingAwaken = null;
-      $btnAwkPow.classList.remove('awk-armed');
-      $btnAwkLck.classList.remove('awk-armed');
     }
 
     renderBoard(null, null, null, isAutoSpin ? null : lockedPositions);
     updateMultiBar();
     await autoDelay(350);
 
-    // Cascade loop
     await cascadeLoop();
 
-    // Check scatter for free game trigger
-    const scatResult = countScatters();
-    if (scatResult.count >= 4 && freeSpinsLeft <= 0) {
-      freeSpinsLeft = 15;
-      freeSpinsTotal = 15;
+    const bonusResult = countBonus();
+    const extraBetMult = extraBetEnabled ? 2 : 1;
+
+    if (bonusResult.count >= 4 && freeSpinsLeft <= 0) {
+      const bonusMultiplier = bonusResult.count === 4 ? 3 : bonusResult.count === 5 ? 5 : 100;
+      spinWin += bet * bonusMultiplier;
+      balance += bet * bonusMultiplier;
+      totalWin += bet * bonusMultiplier;
+
+      freeSpinsLeft = 15 * extraBetMult;
+      freeSpinsTotal = 15 * extraBetMult;
       fgTriggered++;
       $fgBar.style.display = 'flex';
-      $fgCount.textContent = '0 / 15';
-      renderBoard(scatResult.positions);
+      $fgCount.textContent = '0 / ' + freeSpinsTotal;
+      renderBoard(bonusResult.positions);
       await autoDelay(800);
-    } else if (scatResult.count >= 3 && freeSpinsLeft > 0) {
-      freeSpinsLeft += 5;
-      freeSpinsTotal += 5;
+    } else if (bonusResult.count >= 3 && freeSpinsLeft > 0) {
+      freeSpinsLeft += 5 * extraBetMult;
+      freeSpinsTotal += 5 * extraBetMult;
       $fgCount.textContent = (freeSpinsTotal - freeSpinsLeft) + ' / ' + freeSpinsTotal;
-      renderBoard(scatResult.positions);
+      renderBoard(bonusResult.positions);
       await autoDelay(500);
     }
 
-    // Apply multiplier + RTP 三道防線
     if (spinWin > 0) {
       let multi = getTotalMultiplier();
       const drift = getRtpDrift();
 
-      // 防線 1：壓制倍數球乘數（最大推手）
-      // drift 1.0 → 乘數效果歸零（退化成 ×1）
-      // drift 0.5 → 乘數效果剩一半
       if (drift > 0 && multi > 1) {
         multi = 1 + (multi - 1) * Math.max(0, 1 - drift);
       } else if (drift < 0 && multi > 1) {
-        // 輸太多：小幅加成倍數
         multi = multi * (1 + Math.abs(drift) * 0.3);
       }
 
       spinWin = Math.round(spinWin * multi);
 
-      // 防線 2：贏分縮放（更陡峭）
       if (drift > 0.05) {
         const scale = Math.max(0.05, 1 - drift * 0.9);
         spinWin = Math.round(spinWin * scale);
@@ -857,14 +700,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         spinWin = Math.round(spinWin * boost);
       }
 
-      // 防線 3：單轉硬上限（防止單筆爆衝）
       const maxBetMultiple = drift > 0.5 ? 8 : drift > 0 ? 25 : 150;
-      spinWin = Math.min(spinWin, bet * maxBetMultiple);
+      spinWin = Math.min(spinWin, actualBet * maxBetMultiple);
 
-      // RTP-Audit fix: 防線 4 — 短場累積 RTP 鉗位
-      // 前 500 轉內,如果這次贏會讓累積 RTP 超過 target × 1.05,直接砍到剛好不超過
-      // 解決短場 200 轉玩家 57% 機率賺錢的問題
-      if (totalBet > 0 && totalBet < 500 * bet && spinWin > 0) {
+      if (totalBet > 0 && totalBet < 500 * actualBet && spinWin > 0) {
         const cap = (targetRTP * 1.05) / 100;
         const allowed = Math.max(0, cap * totalBet - totalWin);
         spinWin = Math.min(spinWin, allowed);
@@ -895,7 +734,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     $btnSpin.textContent = freeSpinsLeft > 0 ? 'FREE SPIN' : 'SPIN';
     $btnSpin.classList.toggle('btn-free', freeSpinsLeft > 0);
 
-    // Auto spin or free game continue
     if (freeSpinsLeft > 0 || (isAutoSpin && autoRemaining > 0)) {
       if (isAutoSpin && freeSpinsLeft <= 0) {
         autoRemaining--;
@@ -912,40 +750,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   async function cascadeLoop() {
     let hasMatch = true;
     while (hasMatch) {
-      // 先檢查覺醒觸發（免費遊戲中自然出現，或強制按鈕放置）
-      const awkInfo = detectAwaken();
-      if (awkInfo) {
-        // 階段 1：覺醒符號高亮脈動
-        renderBoard(awkInfo.positions);
-        await autoDelay(500);
-
-        // 階段 2：覺醒符號爆炸消失
-        renderBoard(null, awkInfo.positions);
-        await autoDelay(350);
-
-        // 階段 3：執行覺醒效果（分裂 or 鎖定）
-        const affectedPos = executeAwaken(awkInfo);
-        renderBoard();
-        updateMultiBar();
-
-        // 階段 4：受影響的倍數球閃爍高亮
-        if (affectedPos.length > 0) {
-          const cells = $board.querySelectorAll('.cell');
-          for (const pos of affectedPos) {
-            if (cells[pos]) {
-              cells[pos].classList.add(awkInfo.kind === 'power' ? 'cell-split-in' : 'cell-lock-in');
-            }
-          }
-          await autoDelay(600);
-        }
-      }
-
       const matches = findMatches();
       if (matches.length === 0) {
         hasMatch = false;
         break;
       }
       cascadeCount++;
+      cascadeTotal++;
 
       const cascadeWin = calculateSpinResult(matches);
       spinWin += cascadeWin;
@@ -954,7 +765,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       renderBoard(allPositions);
       await autoDelay(400);
 
-      // Remove matched（但鎖定的倍數球不移除）
       for (const pos of allPositions) {
         const isLocked = multiOnBoard.some(m => m.pos === pos && m.locked);
         if (!isLocked) board[pos] = null;
@@ -964,10 +774,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       renderBoard(null, allPositions);
       await autoDelay(300);
 
-      if (multiOnBoard.length > 0) upgradeMultiBalls();
       updateMultiBar();
 
-      // 下落 + 補充，帶動畫
       const dropDist = cascadeDown();
       const newDist = fillEmpty();
       const combinedDrop = new Array(TOTAL).fill(0);
@@ -986,7 +794,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     if (gameState === 'idle') spin();
   });
 
-  let autoCount = 50; // 預設自動轉次數
+  let autoCount = 50;
 
   function startAuto(count) {
     isAutoSpin = true;
@@ -996,7 +804,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     $btnAuto.textContent = 'STOP (0/' + autoTotal + ')';
     $btnAuto.dataset.count = count;
     $btnAuto.classList.add('auto-running');
-    // 隱藏其他選項按鈕
     document.querySelectorAll('.btn-auto-opt').forEach(b => b.style.display = 'none');
     if (gameState === 'idle') spin();
   }
@@ -1029,7 +836,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     balance = 10000;
     totalBet = 0; totalWin = 0; spinCount = 0;
     maxSingleWin = 0; currentDrought = 0; maxDrought = 0;
-    fgTriggered = 0; freeSpinsLeft = 0;
+    fgTriggered = 0; freeSpinsLeft = 0; cascadeTotal = 0;
     lockedMultis = [];
     isAutoSpin = false; autoRemaining = 0; autoCount = 50;
     chartData.labels = [0];
@@ -1047,6 +854,58 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     document.querySelectorAll('.btn-auto-opt').forEach(b => b.style.display = '');
     var $ctaReset = document.getElementById('contextCta');
     if ($ctaReset) $ctaReset.classList.remove('visible');
+  });
+
+  $btnExtraBet.addEventListener('click', () => {
+    extraBetEnabled = !extraBetEnabled;
+    $btnExtraBet.textContent = extraBetEnabled ? 'ON' : 'OFF';
+    $btnExtraBet.classList.toggle('extra-bet-active', extraBetEnabled);
+  });
+
+  $btnBuyFree.addEventListener('click', () => {
+    const cost = Math.round(bet * 100);
+    if (gameState === 'idle' && balance >= cost) {
+      balance -= cost;
+      totalBet += cost;
+      lockedMultis = [];
+      freeSpinsLeft = 15;
+      freeSpinsTotal = 15;
+      fgTriggered++;
+      $fgBar.style.display = 'flex';
+      $fgCount.textContent = '0 / 15';
+      inSuperFreeGame = false;
+      updateStats();
+      spin();
+    }
+  });
+
+  $btnBuySuper.addEventListener('click', () => {
+    const cost = Math.round(bet * 500);
+    if (gameState === 'idle' && balance >= cost) {
+      balance -= cost;
+      totalBet += cost;
+      lockedMultis = [];
+      freeSpinsLeft = 15;
+      freeSpinsTotal = 15;
+      fgTriggered++;
+      $fgBar.style.display = 'flex';
+      $fgCount.textContent = '0 / 15';
+      inSuperFreeGame = true;
+      updateStats();
+      spin();
+    }
+  });
+
+  $btnBuyStrike.addEventListener('click', () => {
+    const cost = Math.round(bet * 4000);
+    if (gameState === 'idle' && balance >= cost) {
+      balance -= cost;
+      totalBet += cost;
+      // God Strike：強制開盤，所有倍數球位置變 1000x
+      godStrikeActive = true;
+      updateStats();
+      spin();
+    }
   });
 
   $rtpSlider.addEventListener('input', function() {
@@ -1073,28 +932,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     });
   });
 
-  // 覺醒預約按鈕
-  $btnAwkPow.addEventListener('click', () => {
-    if (pendingAwaken === 'power') {
-      pendingAwaken = null;
-      $btnAwkPow.classList.remove('awk-armed');
-    } else {
-      pendingAwaken = 'power';
-      $btnAwkPow.classList.add('awk-armed');
-      $btnAwkLck.classList.remove('awk-armed');
-    }
-  });
-  $btnAwkLck.addEventListener('click', () => {
-    if (pendingAwaken === 'lock') {
-      pendingAwaken = null;
-      $btnAwkLck.classList.remove('awk-armed');
-    } else {
-      pendingAwaken = 'lock';
-      $btnAwkLck.classList.add('awk-armed');
-      $btnAwkPow.classList.remove('awk-armed');
-    }
-  });
-
   document.querySelectorAll('.bet-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       const d = parseInt(this.dataset.d);
@@ -1103,7 +940,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     });
   });
 
-  // Keyboard shortcut
   document.addEventListener('keydown', e => {
     if (e.code === 'Space' && gameState === 'idle') { e.preventDefault(); spin(); }
   });
@@ -1113,7 +949,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     if (typeof gtag === 'function') gtag('event', name, params);
   }
 
-  // RTP 滑桿：debounce，放開後才送
   let rtpDebounce = null;
   $rtpSlider.addEventListener('change', function() {
     clearTimeout(rtpDebounce);
@@ -1122,35 +957,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }, 300);
   });
 
-  // 波動度切換
   document.querySelectorAll('.vol-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       trackEvent('sim_volatility', { volatility: this.dataset.vol });
     });
   });
 
-  // SPIN（只追蹤手動，auto 不送避免灌爆）
-  const origSpin = $btnSpin.onclick;
   $btnSpin.addEventListener('click', () => {
     if (!isAutoSpin && gameState === 'idle') trackEvent('sim_spin', { spin_type: 'manual' });
   });
 
-  // AUTO 啟動
-  const origAutoClick = $btnAuto.onclick;
   $btnAuto.addEventListener('click', () => {
     if (!isAutoSpin) trackEvent('sim_auto_start', { auto_count: parseInt($btnAuto.dataset.count) || 50 });
   });
+
   document.querySelectorAll('.btn-auto-opt').forEach(btn => {
     btn.addEventListener('click', () => {
       trackEvent('sim_auto_start', { auto_count: parseInt(btn.dataset.count) });
     });
   });
 
-  // 覺醒按鈕
-  $btnAwkPow.addEventListener('click', () => trackEvent('sim_awaken', { awaken_type: 'power' }));
-  $btnAwkLck.addEventListener('click', () => trackEvent('sim_awaken', { awaken_type: 'lock' }));
-
-  // 重置
   $btnReset.addEventListener('click', () => trackEvent('sim_reset', {}));
 
   /* ===== 賠率表渲染 ===== */
@@ -1162,21 +988,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       html += '<td>'+s.pay[8]+'</td><td>'+s.pay[10]+'</td><td>'+s.pay[12]+'</td></tr>';
     }
     html += '</tbody></table>';
-    // 倍數球說明
-    html += '<div class="pt-section"><h4>🔮 倍數球</h4>';
+    html += '<div class="pt-section"><h4>⚡ 倍數球（固定值）</h4>';
     html += '<div class="pt-multi-row">';
-    html += '<span class="pt-ball" style="background:#39ff14;color:#000">×2~5</span> ';
-    html += '<span class="pt-ball" style="background:#60a5fa;color:#000">×6~25</span> ';
-    html += '<span class="pt-ball" style="background:#c084fc;color:#000">×26~100</span> ';
-    html += '<span class="pt-ball" style="background:#fb7185;color:#000">×101~500</span>';
+    html += '<span class="pt-ball" style="background:#39ff14;color:#000">×2</span> ';
+    html += '<span class="pt-ball" style="background:#60a5fa;color:#000">×12</span> ';
+    html += '<span class="pt-ball" style="background:#c084fc;color:#000">×50</span> ';
+    html += '<span class="pt-ball" style="background:#fb7185;color:#000">×100</span> ';
+    html += '<span class="pt-ball" style="background:#fbbf24;color:#000">×1000</span>';
     html += '</div>';
-    html += '<p>盤面上出現倍數球，當回合贏分 × 所有倍數球加總。<br>每次消除後，倍數球有 30% 機會升級。</p></div>';
-    // 覺醒之力說明
-    html += '<div class="pt-section"><h4>⚡ 覺醒之力（Free Game 限定）</h4>';
-    html += '<p><span style="color:#f59e0b">⚡ 力量覺醒（賽特）</span> ×3 + 倍數球 → 倍數球分裂為多顆相同倍數<br>';
-    html += '<span style="color:#c084fc">🔒 鎖定覺醒（奈芙蒂絲）</span> ×3 + 倍數球 → 倍數球鎖定 ' + LOCK_ROUNDS + ' 回合，期間不消失</p></div>';
-    // 基本公式
-    html += '<div class="pt-section"><p>贏分公式：（單注÷20）× 符號賠率 × 盤面總倍數<br>Scatter 🪲 出現 4 個以上 → 觸發 15 場 FREE GAME</p></div>';
+    html += '<p>盤面上出現倍數球，當回合贏分 × 所有倍數球加總。<br>';
+    html += '<strong>Free Game 中倍數球鎖定並持續累積到 Free Game 結束。</strong></p></div>';
+    html += '<div class="pt-section"><h4>🎁 獎勵符號（Bonus）</h4>';
+    html += '<p>4 個：3× bet 獎金 + 15 場 Free Game<br>';
+    html += '5 個：5× bet 獎金 + 15 場 Free Game<br>';
+    html += '6 個：100× bet 獎金 + 15 場 Free Game（Super Bonus 不計入此）<br>';
+    html += 'Free Game 中 3+ Bonus → +5 場免費遊戲</p></div>';
+    html += '<div class="pt-section"><h4>🎮 購買功能</h4>';
+    html += '<p>購買 Free Game：100× 下注 → 15 場免費遊戲<br>';
+    html += '購買 Super Free Game：500× 下注 → 15 場 + 倍數球出現率翻倍<br>';
+    html += '購買 God Strike（神運一擊）：4000× 下注 → 一次轉，盤面所有倍數球變成 ×1000</p></div>';
+    html += '<div class="pt-section"><h4>✨ Extra Bet</h4>';
+    html += '<p>啟動時 +20% 下注成本，但 Free Game 觸發機率翻倍。</p></div>';
+    html += '<div class="pt-section"><p>贏分公式：（單注÷20）× 符號賠率 × 盤面總倍數</p></div>';
     $pt.innerHTML = html;
   }
 
@@ -1187,7 +1020,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     renderPaytable();
     updateStats();
 
-    // Init chart
     const ctx = document.getElementById('balance-chart').getContext('2d');
     balanceChart = new Chart(ctx, {
       type: 'line',
@@ -1216,8 +1048,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .sim-header h1 { font-size:2rem; margin:0.5rem 0; color:var(--text-primary); }
 .sim-header h1 span { display:block; font-size:0.9rem; color:var(--text-muted); font-weight:400; margin-top:0.3rem; }
 .sim-disclaimer {
-  font-size:0.82rem; color:var(--text-muted); background:rgba(245,184,0,0.06);
-  border:1px solid rgba(245,184,0,0.15); border-radius:10px; padding:0.8rem 1rem;
+  font-size:0.82rem; color:var(--text-muted); background:rgba(74,144,217,0.06);
+  border:1px solid rgba(74,144,217,0.15); border-radius:10px; padding:0.8rem 1rem;
   max-width:700px; margin:0.8rem auto 0; line-height:1.6;
 }
 
@@ -1230,30 +1062,39 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .ctrl-group { flex:1; min-width:150px; }
 .ctrl-group label { display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem; }
 .ctrl-row { display:flex; align-items:center; gap:0.5rem; }
-.ctrl-val { font-size:1.3rem; font-weight:900; color:var(--gold); }
-.balance-display { color:var(--guava-green) !important; }
+.ctrl-val { font-size:1.3rem; font-weight:900; color:#4a90d9; }
+.balance-display { color:#39ff14 !important; }
 .rtp-hint { font-size:0.75rem; color:var(--text-muted); margin-top:0.2rem; }
-#rtp-slider { flex:1; accent-color:var(--gold); }
+#rtp-slider { flex:1; accent-color:#4a90d9; }
 .vol-btns { display:flex; gap:0.4rem; }
 .vol-btn {
   padding:0.4rem 0.8rem; border:1px solid var(--border); border-radius:8px;
   background:transparent; color:var(--text-muted); font-size:0.82rem; cursor:pointer;
   transition:all 0.2s;
 }
-.vol-btn.active { background:var(--gold); color:#000; border-color:var(--gold); font-weight:700; }
+.vol-btn.active { background:#4a90d9; color:#fff; border-color:#4a90d9; font-weight:700; }
 .bet-btn {
   width:36px; height:36px; border:1px solid var(--border); border-radius:8px;
   background:transparent; color:var(--text-primary); font-size:1.2rem; cursor:pointer;
   transition:all 0.2s;
 }
-.bet-btn:hover { border-color:var(--gold); color:var(--gold); }
+.bet-btn:hover { border-color:#4a90d9; color:#4a90d9; }
+.extra-bet-toggle {
+  padding:0.35rem 0.8rem; border:1px solid var(--border); border-radius:8px;
+  background:transparent; color:var(--text-muted); font-size:0.8rem; font-weight:700;
+  cursor:pointer; transition:all 0.2s;
+}
+.extra-bet-toggle.extra-bet-active {
+  background:#4a90d9; color:#fff; border-color:#4a90d9;
+}
+.extra-bet-info { display:block; font-size:0.65rem; color:var(--text-muted); margin-top:0.2rem; }
 
 /* === 遊戲區域 === */
 .game-area { display:flex; flex-direction:column; align-items:center; margin-bottom:1.5rem; }
 .board-frame {
-  position:relative; background:linear-gradient(135deg,#0a0a1a,#1a1a2a);
-  border:2px solid var(--border); border-radius:16px; padding:12px;
-  box-shadow:0 0 30px rgba(0,0,0,0.5), inset 0 0 30px rgba(0,0,0,0.3);
+  position:relative; background:linear-gradient(135deg,#0a0f1a,#1a2a3a);
+  border:2px solid #4a90d9; border-radius:16px; padding:12px;
+  box-shadow:0 0 30px rgba(74,144,217,0.3), inset 0 0 30px rgba(0,0,0,0.3);
 }
 .board {
   display:grid; grid-template-columns:repeat(6,1fr);
@@ -1267,34 +1108,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 }
 .cell-matched {
   animation:cellPulse 0.4s ease infinite alternate;
-  border-color:var(--gold) !important; box-shadow:0 0 16px rgba(245,184,0,0.5) !important;
+  border-color:#f5b800 !important; box-shadow:0 0 16px rgba(245,184,0,0.5) !important;
 }
 .cell-removing { opacity:0; transform:scale(0.3); }
-.cell-awaken.cell-matched {
-  animation:awakenActivate 0.4s ease infinite alternate;
-  border-color:#fff !important;
-}
-@keyframes awakenActivate {
-  from { transform:scale(1); box-shadow:0 0 20px rgba(255,255,255,0.4); }
-  to   { transform:scale(1.15); box-shadow:0 0 40px rgba(255,255,255,0.9), 0 0 60px rgba(245,184,0,0.5); }
-}
-.cell-awaken.cell-removing {
-  animation:awakenExplode 0.35s ease-out forwards;
-}
-@keyframes awakenExplode {
-  0%   { transform:scale(1.15); opacity:1; box-shadow:0 0 40px rgba(255,255,255,0.9); }
-  50%  { transform:scale(1.6); opacity:0.7; box-shadow:0 0 60px rgba(255,255,255,1); }
-  100% { transform:scale(0); opacity:0; box-shadow:none; }
-}
-.cell-fly-out {
-  animation:cellFlyOut 0.18s ease-in forwards;
-}
-@keyframes cellFlyOut {
-  to { transform:translateY(120%) scale(0.5); opacity:0; }
-}
+.cell-fly-out { animation:cellFlyOut 0.18s ease-in forwards; }
+@keyframes cellFlyOut { to { transform:translateY(120%) scale(0.5); opacity:0; } }
 .cell-drop {
   animation-name:cellDrop;
-  animation-timing-function:cubic-bezier(0.34,1.2,0.64,1); /* 微彈跳 */
+  animation-timing-function:cubic-bezier(0.34,1.2,0.64,1);
   animation-fill-mode:both;
 }
 @keyframes cellDrop {
@@ -1310,45 +1131,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   position:absolute; bottom:2px; right:2px; font-size:0.5rem; line-height:1;
 }
 .cell-locked { animation:lockedPulse 1.5s ease infinite alternate; }
-@keyframes lockedPulse { from{box-shadow:0 0 8px rgba(192,132,252,0.3)} to{box-shadow:0 0 20px rgba(192,132,252,0.7)} }
-/* 分裂覺醒：新球從原球爆開出現 */
-.cell-split-in {
-  animation:splitBurst 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
-}
-@keyframes splitBurst {
-  0%   { transform:scale(0); opacity:0; box-shadow:0 0 40px rgba(57,255,20,0.8); }
-  50%  { transform:scale(1.3); opacity:1; box-shadow:0 0 30px rgba(57,255,20,0.6); }
-  100% { transform:scale(1); box-shadow:none; }
-}
-/* 鎖定覺醒：球被鎖住的收縮→鎖定效果 */
-.cell-lock-in {
-  animation:lockDown 0.5s ease both;
-}
-@keyframes lockDown {
-  0%   { box-shadow:0 0 0px rgba(192,132,252,0); }
-  40%  { transform:scale(1.2); box-shadow:0 0 35px rgba(192,132,252,0.9); }
-  70%  { transform:scale(0.9); }
-  100% { transform:scale(1); box-shadow:0 0 20px rgba(192,132,252,0.5); }
-}
-.cell-awaken { border-radius:14px !important; }
-.cell-awaken .awaken-name {
-  display:block; font-size:0.45rem; font-weight:700; letter-spacing:1px;
-  color:currentColor; opacity:0.8; margin-top:-2px;
-}
-.cell-scatter { animation:scatterGlow 1s ease infinite alternate; }
-
+@keyframes lockedPulse { from{box-shadow:0 0 8px rgba(74,144,217,0.3)} to{box-shadow:0 0 20px rgba(74,144,217,0.7)} }
+.cell-bonus { animation:bonusGlow 1s ease infinite alternate; }
+.cell-super-bonus { animation:superBonusGlow 0.6s ease infinite alternate; }
 @keyframes cellPulse { from{transform:scale(1)} to{transform:scale(1.1)} }
-@keyframes scatterGlow { from{box-shadow:0 0 8px rgba(245,184,0,0.3)} to{box-shadow:0 0 20px rgba(245,184,0,0.6)} }
+@keyframes bonusGlow { from{box-shadow:0 0 8px rgba(245,158,11,0.3)} to{box-shadow:0 0 20px rgba(245,158,11,0.6)} }
+@keyframes superBonusGlow { from{box-shadow:0 0 8px rgba(255,107,107,0.3)} to{box-shadow:0 0 24px rgba(255,107,107,0.7)} }
 
 /* Win display */
 .win-display {
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  background:rgba(0,0,0,0.85); border:2px solid var(--gold); border-radius:16px;
+  background:rgba(0,0,0,0.85); border:2px solid #f5b800; border-radius:16px;
   padding:1rem 2rem; display:flex; flex-direction:column; align-items:center;
   z-index:10; pointer-events:none;
 }
-.win-amount { font-size:2.2rem; font-weight:900; color:var(--gold); }
-.win-label { font-size:0.9rem; color:var(--gold); letter-spacing:4px; }
+.win-amount { font-size:2.2rem; font-weight:900; color:#f5b800; }
+.win-label { font-size:0.9rem; color:#f5b800; letter-spacing:4px; }
 .win-pop { animation:winPop 0.4s ease; }
 @keyframes winPop { from{transform:translate(-50%,-50%) scale(0.5);opacity:0} to{transform:translate(-50%,-50%) scale(1);opacity:1} }
 
@@ -1356,34 +1154,34 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .free-game-bar {
   display:flex; align-items:center; justify-content:space-between; gap:1rem;
   width:min(480px,90vw); padding:0.6rem 1rem; margin-top:0.5rem;
-  background:linear-gradient(90deg,rgba(245,184,0,0.15),rgba(245,184,0,0.05));
-  border:1px solid rgba(245,184,0,0.3); border-radius:10px;
-  color:var(--gold); font-weight:700; font-size:0.9rem;
+  background:linear-gradient(90deg,rgba(74,144,217,0.15),rgba(245,158,11,0.05));
+  border:1px solid rgba(74,144,217,0.3); border-radius:10px;
+  color:#4a90d9; font-weight:700; font-size:0.9rem;
   box-sizing:border-box;
 }
 
-/* 右上角倍數計數器（仿賽特 2） */
+/* 右上角倍數計數器 */
 .multi-counter {
   position:absolute; top:-18px; right:-18px; z-index:5;
   width:52px; height:52px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
-  background:radial-gradient(circle at 40% 35%, #2a2a3a, #0a0a1a);
-  border:2px solid rgba(245,184,0,0.3);
+  background:radial-gradient(circle at 40% 35%, #2a3a4a, #0a1a2a);
+  border:2px solid rgba(74,144,217,0.3);
   box-shadow:0 0 12px rgba(0,0,0,0.5);
   transition:border-color 0.3s, box-shadow 0.3s;
 }
 .multi-counter.multi-active {
-  border-color:rgba(245,184,0,0.8);
-  box-shadow:0 0 20px rgba(245,184,0,0.4), 0 0 40px rgba(245,184,0,0.15);
+  border-color:rgba(74,144,217,0.8);
+  box-shadow:0 0 20px rgba(74,144,217,0.4), 0 0 40px rgba(74,144,217,0.15);
   animation:multiGlow 1.5s ease infinite alternate;
 }
 @keyframes multiGlow {
-  from { box-shadow:0 0 16px rgba(245,184,0,0.3), 0 0 30px rgba(245,184,0,0.1); }
-  to   { box-shadow:0 0 24px rgba(245,184,0,0.6), 0 0 50px rgba(245,184,0,0.2); }
+  from { box-shadow:0 0 16px rgba(74,144,217,0.3), 0 0 30px rgba(74,144,217,0.1); }
+  to   { box-shadow:0 0 24px rgba(74,144,217,0.6), 0 0 50px rgba(74,144,217,0.2); }
 }
 .multi-counter-val {
-  font-size:1rem; font-weight:900; color:var(--gold);
-  text-shadow:0 0 8px rgba(245,184,0,0.5);
+  font-size:1rem; font-weight:900; color:#4a90d9;
+  text-shadow:0 0 8px rgba(74,144,217,0.5);
   line-height:1;
 }
 
@@ -1391,16 +1189,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .action-bar { display:flex; gap:0.8rem; margin-top:1rem; width:min(480px,90vw); justify-content:center; box-sizing:border-box; }
 .btn-spin {
   padding:0.8rem 0; font-size:1.1rem; font-weight:900;
-  background:linear-gradient(135deg,var(--gold),#e09900); color:#000;
+  background:linear-gradient(135deg,#4a90d9,#2e5a9e); color:#fff;
   border:none; border-radius:12px; cursor:pointer;
   letter-spacing:2px; width:160px; text-align:center;
 }
-.btn-spin:hover:not(:disabled) { box-shadow:0 6px 20px rgba(245,184,0,0.4); }
+.btn-spin:hover:not(:disabled) { box-shadow:0 6px 20px rgba(74,144,217,0.4); }
 .btn-spin:disabled { opacity:0.5; cursor:not-allowed; }
-.btn-spin.btn-free { background:linear-gradient(135deg,#39ff14,#22c55e); }
-.auto-group {
-  display:flex; gap:0.3rem; align-items:center;
-}
+.btn-spin.btn-free { background:linear-gradient(135deg,#39ff14,#22c55e); color:#000; }
+.auto-group { display:flex; gap:0.3rem; align-items:center; }
 .btn-auto {
   padding:0.6rem 0; font-size:0.85rem; font-weight:700; width:100px; text-align:center;
   background:transparent; color:var(--text-muted); border:1px solid var(--border);
@@ -1412,46 +1208,34 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   border-left:none; cursor:pointer; transition:border-color 0.2s, color 0.2s;
 }
 .btn-auto-opt:last-child { border-radius:0 10px 10px 0; }
-.btn-auto-opt:hover { border-color:var(--gold); color:var(--gold); }
+.btn-auto-opt:hover { border-color:#4a90d9; color:#4a90d9; }
 .btn-reset {
   padding:0.6rem 1.2rem; font-size:0.85rem; font-weight:700;
   background:transparent; color:var(--text-muted); border:1px solid var(--border);
   border-radius:10px; cursor:pointer; transition:border-color 0.2s, color 0.2s;
 }
-.btn-auto:hover, .btn-reset:hover { border-color:var(--gold); color:var(--gold); }
+.btn-auto:hover, .btn-reset:hover { border-color:#4a90d9; color:#4a90d9; }
 .btn-auto.auto-running {
   border-radius:10px; border-color:#ef4444; color:#ef4444;
   background:rgba(239,68,68,0.1); min-width:140px;
 }
 .btn-auto.auto-running:hover { border-color:#f87171; color:#f87171; background:rgba(239,68,68,0.2); }
 
-/* 覺醒預約按鈕 */
-.awaken-btns {
+/* Buy Feature Buttons */
+.buy-feature-btns {
   display:flex; gap:0.6rem; margin-top:0.6rem;
   width:min(480px,90vw); justify-content:center; box-sizing:border-box;
+  flex-wrap:wrap;
 }
-.btn-awaken {
-  padding:0.45rem 1rem; font-size:0.78rem; font-weight:700;
+.btn-buy-feature {
+  padding:0.5rem 0.9rem; font-size:0.75rem; font-weight:700;
   background:transparent; border:1px solid var(--border);
   border-radius:10px; cursor:pointer; color:var(--text-muted);
   transition:border-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
-.btn-awk-pow:hover { border-color:#f59e0b; color:#f59e0b; }
-.btn-awk-lck:hover { border-color:#c084fc; color:#c084fc; }
-.btn-awk-pow.awk-armed {
-  border-color:#f59e0b; color:#f59e0b;
-  box-shadow:0 0 12px rgba(245,158,11,0.3);
-  animation:awkPulse 1.2s ease infinite alternate;
-}
-.btn-awk-lck.awk-armed {
-  border-color:#c084fc; color:#c084fc;
-  box-shadow:0 0 12px rgba(192,132,252,0.3);
-  animation:awkPulse 1.2s ease infinite alternate;
-}
-@keyframes awkPulse {
-  from { box-shadow:0 0 8px rgba(245,184,0,0.2); }
-  to   { box-shadow:0 0 18px rgba(245,184,0,0.5); }
-}
+.btn-buy-free:hover { border-color:#f59e0b; color:#f59e0b; }
+.btn-buy-super:hover { border-color:#c084fc; color:#c084fc; }
+.btn-buy-strike:hover { border-color:#4a90d9; color:#4a90d9; }
 
 /* === 統計面板 === */
 .stats-panel {
@@ -1474,7 +1258,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 }
 .paytable-toggle summary { font-weight:700; color:var(--text-primary); font-size:0.95rem; }
 .paytable table { width:100%; border-collapse:collapse; margin-top:0.8rem; font-size:0.88rem; }
-.paytable th { text-align:left; padding:0.5rem; border-bottom:2px solid var(--border); color:var(--gold); }
+.paytable th { text-align:left; padding:0.5rem; border-bottom:2px solid var(--border); color:#4a90d9; }
 .paytable td { padding:0.4rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-secondary); }
 .pt-sym {
   display:inline-flex; align-items:center; justify-content:center;
@@ -1495,18 +1279,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .sim-cta p { color:var(--text-muted); font-size:0.9rem; margin-bottom:0.8rem; }
 .cta-links { display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap; }
 .cta-links a {
-  padding:0.6rem 1.2rem; background:rgba(245,184,0,0.08);
-  border:1px solid rgba(245,184,0,0.2); border-radius:10px;
-  color:var(--gold); font-weight:700; font-size:0.88rem; text-decoration:none;
+  padding:0.6rem 1.2rem; background:rgba(74,144,217,0.08);
+  border:1px solid rgba(74,144,217,0.2); border-radius:10px;
+  color:#4a90d9; font-weight:700; font-size:0.88rem; text-decoration:none;
   transition:all 0.2s;
 }
-.cta-links a:hover { background:rgba(245,184,0,0.15); transform:translateY(-2px); }
+.cta-links a:hover { background:rgba(74,144,217,0.15); transform:translateY(-2px); }
 
 /* === 情境導流 CTA === */
 .context-cta {
   display:none; margin:1.5rem 0; padding:1.2rem 1.5rem;
-  background:linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.06));
-  border:1px solid rgba(245,184,0,0.25); border-radius:14px;
+  background:linear-gradient(135deg, rgba(74,144,217,0.06), rgba(245,158,11,0.06));
+  border:1px solid rgba(74,144,217,0.25); border-radius:14px;
   text-align:center; animation:ctaFadeIn 0.4s ease;
 }
 .context-cta.visible { display:block; }
@@ -1514,17 +1298,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .context-cta .cta-sub { font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; }
 .context-cta .cta-btn {
   display:inline-block; padding:0.7rem 1.8rem;
-  background:var(--gold); color:#000; font-weight:800; font-size:0.95rem;
+  background:#4a90d9; color:#fff; font-weight:800; font-size:0.95rem;
   border-radius:10px; text-decoration:none; transition:all 0.2s;
 }
-.context-cta .cta-btn:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(245,184,0,0.3); }
+.context-cta .cta-btn:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(74,144,217,0.3); }
 .context-cta .cta-btn-secondary {
   display:inline-block; padding:0.5rem 1.2rem; margin-left:0.5rem;
-  background:transparent; color:var(--gold); font-weight:600; font-size:0.85rem;
-  border:1px solid rgba(245,184,0,0.3); border-radius:10px; text-decoration:none;
+  background:transparent; color:#4a90d9; font-weight:600; font-size:0.85rem;
+  border:1px solid rgba(74,144,217,0.3); border-radius:10px; text-decoration:none;
   transition:all 0.2s;
 }
-.context-cta .cta-btn-secondary:hover { background:rgba(245,184,0,0.08); }
+.context-cta .cta-btn-secondary:hover { background:rgba(74,144,217,0.08); }
 @keyframes ctaFadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
 /* === RWD === */
@@ -1535,10 +1319,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .board { gap:4px; }
   .cell { font-size:1.2rem; border-radius:8px; }
   .cell-multi .multi-ball-val { font-size:0.7rem; }
-  .cell-awaken .awaken-name { font-size:0.4rem; }
   .btn-spin { padding:0.7rem 2rem; font-size:1rem; }
   .stats-panel { padding:1rem; }
   .action-bar { flex-wrap:wrap; justify-content:center; }
+  .buy-feature-btns { flex-direction:column; }
+  .btn-buy-feature { width:100%; }
   .multi-counter { width:42px; height:42px; top:-14px; right:-14px; }
   .multi-counter-val { font-size:0.8rem; }
   .context-cta .cta-btn-secondary { margin-left:0; margin-top:0.5rem; }

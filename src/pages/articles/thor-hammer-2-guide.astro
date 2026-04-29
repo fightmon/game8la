@@ -1,0 +1,323 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+
+const faqs = [
+  { q: '雷神之錘II最少要押多少？', a: '最低 0.2 元起跳，新手別被倍數迷惑，先用最小投注跑個 100 轉摸個手感。看到有人噴出天文數字就想梭哈的，最後通常輸最慘。' },
+  { q: '雷神之錘II（雷神之鎚）的自由配對是什麼意思？', a: '傳統老虎機要符號乖乖排成一條線才算中獎，雷神直接砍掉這個規則——盤面上只要湊到 8 顆同符號，不管在哪裡都算你中。簡單說就是「眼睛看到就有錢」，比連線老虎機友善 200%。' },
+  { q: 'Free Game 裡的倍數符號到底怎麼累積？', a: '出現的倍數符號會鎖定在盤面上不消失，每一轉新倍數持續加進去。5 種倍數球各自獨立：2x+12x+50x+100x+1000x 可能同時出現。盤面倍數加總後乘上該輪得分，倍數疊越高爆分越兇——玩家噴出 x25000 的傳說就是這麼來的。' },
+  { q: '買免遊一定比自然轉划算嗎？', a: '不一定。買免遊只是花錢買「免等 Scatter」的時間，RTP 不會因此變高。如果本金夠大且心臟強，買 100x 偶爾可以刺激一下；如果預算不夠寬裕，乖乖轉等 Bonus 出現反而比較不會破產。' },
+  { q: '玩雷神之錘II為什麼一直輸？', a: 'RTP 97.6% 看起來不錯，但長期每轉還是虧 2.4%。這是數學設計，跟你運氣好不好沒關係。所有老虎機廠商造出來就是為了賺你的錢。把它當花錢看電影就好，想當提款機的人最後都在 PTT 發文問怎麼辦。' },
+  { q: '雷神之錘 vs 戰神賽特哪個更容易爆分？', a: '雷神倍數符號最高 1000x、總倍率 x25000，穩定又爆發；賽特倍數最高 x500、總倍率 x81000，極限更高但波動更兇。喜歡穩健爆分選雷神，追求極限倍率選賽特。沒有絕對答案，取決於你的心臟有多強。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/thor-hammer-2-guide/"
+  title="雷神之錘II（雷神之鎚）完整攻略：RTP、倍數符號、買免遊值不值得？"
+  description="雷神之錘II雷神之鎚完整攻略：RSG GLI認證、97.6% RTP、自由配對機制、倍數符號1000x、Free Game倍數累積、購買免遊三種模式CP值分析、實戰心法。"
+  image="https://game8la.com/images/article-covers/cover-thor-hammer-2-guide.webp"
+  datePublished="2026-04-28"
+  dateModified="2026-04-29"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '雷神之錘II完整攻略', url: 'https://game8la.com/articles/thor-hammer-2-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="雷神之錘II（雷神之鎚）完整攻略：RTP、倍數符號、買免遊值不值得？(2026) - GAME8LA" description="雷神之錘II（雷神之鎚）完整攻略：RSG皇家電子97.6% RTP、GLI認證、自由配對、倍數符號1000x、4級累積彩金、Free Game倍數累積機制、買免遊三種模式對比、實戰5心法。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 雷神之錘II完整攻略</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-04-28 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 10 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a0a2e,#1a1a4a,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <img src="/images/article-covers/cover-thor-hammer-2-guide.webp" alt="雷神之錘II 完整攻略 — 芭樂子帶你拆解倍數符號系統" width="1200" height="675" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+      <h1 style="font-size:2rem;line-height:1.3">雷神之錘II 完整攻略</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">最近娛樂城群組是不是被一台北歐風老虎機洗版？截圖上倍數球滿天飛、動不動就 x10000、x15000，朋友說「雷神之錘爆瘋了」結果自己去玩輸到脫褲——沒錯，就是這款<strong>雷神之錘II（雷神之鎚）</strong>。芭樂子把它拆開來講清楚，看完你自己判斷要不要碰。</p>
+
+      <!-- === 精選摘要對比表 === -->
+      <div class="card" style="margin:1.5rem 0;border-color:var(--gold);background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(107,44,58,0.12) 100%)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 雷神之錘II規格快覽</h3>
+        <table>
+          <thead><tr><th>項目</th><th>數值</th><th>備註</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">遊戲商</td><td>RSG 皇家電子</td><td>GLI 官方認證</td></tr>
+            <tr><td style="font-weight:700">RTP</td><td style="color:var(--guava-green);font-weight:900">97.6%</td><td>高於業界平均</td></tr>
+            <tr><td style="font-weight:700">波動率</td><td>高波動</td><td>容易輸多贏少</td></tr>
+            <tr><td style="font-weight:700">最高倍率</td><td style="color:var(--gold-light);font-weight:900">x25,000</td><td>理論上限，別當預期</td></tr>
+            <tr><td style="font-weight:700">盤面結構</td><td>6 軸 × 5 列</td><td>30 格自由配對</td></tr>
+            <tr><td style="font-weight:700">中獎方式</td><td>自由配對 (Scatter Pays)</td><td>8 顆同符號即中</td></tr>
+            <tr><td style="font-weight:700">累積彩金</td><td>4 級</td><td>GRAND / MAJOR / MINOR / MINI</td></tr>
+            <tr><td style="font-weight:700">免遊觸發</td><td>4~6 個 Bonus</td><td>15 局起跳、可追加到 100 場</td></tr>
+            <tr><td style="font-weight:700">買免遊價格</td><td>100x / 500x / 4000x</td><td>三種模式 CP 值差很大</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#quick-intro">30 秒認識雷神之錘II</a></li>
+          <li><a href="#scatter-pays">自由配對怎麼玩？跟傳統線型差在哪</a></li>
+          <li><a href="#multiplier">倍數符號系統深度解析</a></li>
+          <li><a href="#freegame">Free Game 與 Super Bonus 觸發條件</a></li>
+          <li><a href="#buy-feature">購買免遊三種模式 CP 值分析</a></li>
+          <li><a href="#vs-seth">雷神之錘 vs 戰神賽特比較</a></li>
+          <li><a href="#rules">芭樂子 5 個實戰心法</a></li>
+          <li><a href="#truth">芭樂子底線：老虎機長期必輸的數學</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== 第 1 節 ===== -->
+      <h2 id="quick-intro" style="margin-top:2.5rem">1. 30 秒認識雷神之錘II</h2>
+
+      <p>雷神之錘II 是 <a href="/games/thor-hammer-2/" style="color:var(--guava-pink)">RSG 皇家電子的招牌續作</a>，一款結合北歐雷神索爾傳說、自由配對機制、倍數符號爆分系統的高波動老虎機。簡單來說：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">🔥 雷神之錘II四大看點</h3>
+        <p style="margin:0.5rem 0"><strong>① RTP 97.6%</strong>：高於業界平均的 96%，初看不錯，長期下來還是會虧 2.4%。</p>
+        <p style="margin:0.5rem 0"><strong>② 最大倍率 x25,000</strong>：押 100 元理論上限噴 250 萬——記住「理論」兩個字要刻起來。</p>
+        <p style="margin:0.5rem 0"><strong>③ 倍數符號系統（2x ~ 1000x）</strong>：這是爆分的靈魂。盤面倍數加總後乘上得分，倍數越多越瘋。</p>
+        <p style="margin:0"><strong>④ Free Game 倍數持續累積</strong>：進免遊後倍數鎖定不消失、還會持續疊新倍數，滾雪球效應才是真正的爆發點。</p>
+      </div>
+
+      <p>為什麼紅？倍數符號夠兇、Free Game 機制夠爽、RTP 看起來還不差。結果就是一堆人玩到破產——包括芭樂子身邊至少三個朋友，別問怎麼知道的。</p>
+
+      <!-- ===== 第 2 節 ===== -->
+      <h2 id="scatter-pays" style="margin-top:2.5rem">2. 自由配對怎麼玩？跟傳統線型老虎機差在哪</h2>
+
+      <p>「自由配對」是雷神最直觀的改革。傳統老虎機要符號排成一條線才中獎，20 條線眼花撩亂算到你想吐。雷神？直接把「線」這個概念砍了：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">💡 自由配對核心規則</h3>
+        <p style="margin:0.5rem 0"><strong>盤面上只要出現 8 顆以上相同符號，不管在哪裡、不管離多遠，全部算你中獎。</strong></p>
+        <p style="margin:0">沒有線、沒有方向、沒有複雜賠付表——眼睛看到就有錢。</p>
+      </div>
+
+      <p>舉個例子：8 顆紫水晶符號散落在盤面各角落，不管怎麼亂擺就是中。好處是<strong>中獎頻率高</strong>，眼睛會一直看到 win 動畫；壞處是<strong>每次噴的都是小錢</strong>，贏到你想罵人。一直贏小錢贏到火大？那就對了——自由配對本來就是靠倍數符號才能真正翻身。</p>
+
+      <p>加上<strong>消除掉落（Cascade）</strong>機制：中獎符號被消掉、新符號從上面掉下來，有可能再湊出一組中獎、再消、再掉——理論上無限連鎖。連鎖期間倍數會持續累加，這才是爆分的開始。</p>
+
+      <!-- ===== 第 3 節 ===== -->
+      <h2 id="multiplier" style="margin-top:2.5rem">3. 倍數符號系統深度解析 — 這才是爆分關鍵</h2>
+
+      <p>重點來了，雷神之錘II 最兇的就是這套倍數系統。盤面上隨機掉落 5 種倍數球：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">⭐ 五級倍數符號表</h3>
+        <table>
+          <thead><tr><th>倍數符號</th><th>數值</th><th>出現頻率</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--guava-green);font-weight:700"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--guava-green);margin-right:6px;vertical-align:middle"></span>綠色倍數球</td><td style="font-weight:700">2x</td><td>最常見</td><td>基本倍數，隨便出現</td></tr>
+            <tr><td style="color:#42a5f5;font-weight:700"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#42a5f5;margin-right:6px;vertical-align:middle"></span>藍色倍數球</td><td style="font-weight:700">12x</td><td>中等</td><td>開始有感的倍率</td></tr>
+            <tr><td style="color:#ab47bc;font-weight:700"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#ab47bc;margin-right:6px;vertical-align:middle"></span>紫色倍數球</td><td style="font-weight:700">50x</td><td>偏少</td><td>爆分預兆</td></tr>
+            <tr><td style="color:#e74c3c;font-weight:700"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#e74c3c;margin-right:6px;vertical-align:middle"></span>紅色倍數球</td><td style="font-weight:700">100x</td><td>稀有</td><td>大獎信號</td></tr>
+            <tr><td style="color:var(--gold-light);font-weight:700"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444,#a855f7,#3b82f6);margin-right:6px;vertical-align:middle"></span>彩虹倍數球</td><td style="font-weight:700">1000x</td><td>極稀有</td><td>一顆就能夠炸、多顆直接爆表</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.9rem">※ 五種倍數符號各自獨立隨機出現，出現後盤面上所有倍數的數值會加總，然後整個乘上該輪的得分。</p>
+
+      <div style="margin:1.5rem 0">
+        <img src="/images/thor2/thor2-multi-system.webp" alt="雷神之錘II 倍數符號計算示意圖 — 盤面倍數加總 × 得分 = 最終獎金" width="1200" height="675" loading="lazy" style="display:block;width:100%;max-width:800px;height:auto;margin:0 auto;border-radius:12px;border:1px solid var(--border)">
+        <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem">▲ 倍數符號計算機制：五種倍數球（2x → 1000x），盤面加總後乘上該輪得分</p>
+      </div>
+
+      <p><strong>倍數如何計算？舉個具體例子：</strong></p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold);background:rgba(245,184,0,0.08)">
+        <h3 style="color:var(--gold);margin-top:0">💰 爆分計算公式範例</h3>
+        <p style="margin-bottom:0">假如盤面同時出現了：</p>
+        <p style="margin:0.3rem 0"><strong>2x</strong> 倍數球 × 1 顆</p>
+        <p style="margin:0.3rem 0"><strong>12x</strong> 倍數球 × 1 顆</p>
+        <p style="margin:0.3rem 0"><strong>50x</strong> 倍數球 × 1 顆</p>
+        <p style="margin:0.8rem 0"><strong>總倍數 = 2 + 12 + 50 = 64x</strong></p>
+        <p style="margin:0.3rem 0">然後這一轉中獎 200 分</p>
+        <p style="margin:0.8rem 0"><strong>最終得分 = 200 × 64 = 12,800 分</strong></p>
+        <p style="margin:0;color:var(--text-muted);font-size:0.9rem">※ 實際上可能同時出現多顆同倍數球（例如 2 顆 1000x），那就是 1000 + 1000 = 2000x 再乘上得分。光一次就能噴到破萬倍。</p>
+      </div>
+
+      <p>看起來數字很簡單對吧？但真正恐怖的在<strong>Free Game 裡</strong>。進免遊後，倍數符號直接<strong>鎖死在盤面不消失</strong>，每轉新出的繼續堆。第一轉鎖了 500x、第二轉加 100x、第三轉再來 1000x…… 累計 1600x、2600x 都有可能。然後某一轉剛好中了大獎——那數字就直接噴到你不敢看。</p>
+
+      <!-- === CTA #1 === -->
+      <div style="background:linear-gradient(135deg,rgba(38,194,129,0.12) 0%,rgba(245,184,0,0.12) 100%);border-left:4px solid #26c281;border-radius:10px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <div style="color:#f5b800;font-weight:900;font-size:1rem;margin-bottom:0.5rem">🎁 玩雷神之錘想算倍數？用模擬器試試</div>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem;color:var(--text-secondary)">不想真金白銀試水，用 <a href="/tools/thor-hammer-2-simulator/" style="color:#26c281;font-weight:700">雷神之錘 II 模擬器</a>自己調 RTP，體驗倍數球鎖定、Free Game 連鎖的滾雪球效應。也可以試試 <a href="/tools/slot-simulator/" style="color:#26c281">賽特2模擬器</a>做個比較。</p>
+      </div>
+
+      <!-- ===== 第 4 節 ===== -->
+      <h2 id="freegame" style="margin-top:2.5rem">4. Free Game 與 Super Bonus 觸發條件完整拆解</h2>
+
+      <p>倍數符號講完了，接下來才是真正讓人噴分或破產的分水嶺——<strong>Free Game</strong>。進不進得了免遊、進去後倍數疊不疊得起來，基本上決定了你這場是賺還是虧。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ Free Game 觸發條件與獎金</h3>
+        <p style="margin:0.5rem 0"><img src="/images/thor2/sym-bonus.webp" alt="Bonus" width="28" height="28" style="vertical-align:middle;margin-right:6px;border-radius:4px" loading="lazy"><strong>4 個 Bonus 符號</strong> → 15 場免遊 + 3x 總投注獎金</p>
+        <p style="margin:0.5rem 0"><img src="/images/thor2/sym-bonus.webp" alt="Bonus" width="28" height="28" style="vertical-align:middle;margin-right:6px;border-radius:4px" loading="lazy"><strong>5 個 Bonus 符號</strong> → 15 場免遊 + 5x 總投注獎金</p>
+        <p style="margin:0"><img src="/images/thor2/sym-bonus.webp" alt="Bonus" width="28" height="28" style="vertical-align:middle;margin-right:6px;border-radius:4px" loading="lazy"><strong>6 個 Bonus 符號</strong> → 15 場免遊 + 100x 總投注獎金</p>
+      </div>
+
+      <p>進免遊後所有倍數符號直接鎖死在盤面、不消失，每一轉新出的倍數繼續往上疊。15 場免遊跑完，倍數堆到 1000x、2000x、5000x 都有可能。然後某一轉剛好中了高賠率符號——帳戶數字就噴了。當然，倍數一顆都沒出的時候也很常見，那 15 場就跟白打一樣，別問芭樂子怎麼知道的。</p>
+
+      <div style="margin:1.5rem 0">
+        <img src="/images/thor2/thor2-freegame-lock.webp" alt="雷神之錘II Free Game 倍數鎖定累積示意圖 — 第1轉到第15轉倍數滾雪球效應" width="1200" height="500" loading="lazy" style="display:block;width:100%;max-width:800px;height:auto;margin:0 auto;border-radius:12px;border:1px solid var(--border)">
+        <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem">▲ Free Game 倍數鎖定累積：第 1 轉只有 2 顆 → 第 5 轉累積到 6 顆 → 第 15 轉堆到 Total ×380</p>
+      </div>
+
+      <p><strong>可以追加免遊嗎？</strong>可以。Free Game 途中再出 3~6 個 Bonus 就多送 5 場，最多能堆到 <strong>100 場</strong>。100 場免遊 + 倍數一直疊 + 連鎖不停——能噴出 x25000 倍的人就是這樣來的。但你不是那個人的機率大概 99.97%。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">🌩️ Super Bonus — 老天爺發怒了</h3>
+        <p style="margin-bottom:0">如果觸發 Free Game 時同時出現 <img src="/images/thor2/sym-super-bonus.webp" alt="Super Bonus" width="28" height="28" style="vertical-align:middle;margin:0 4px;border-radius:4px" loading="lazy"><strong>Super Bonus 符號</strong>，不用等旋轉，直接送你額外獎金——而且會進入「超級免遊」版本，高倍數符號（100x、1000x）出現機率大幅提升。一顆 Super Bonus 送 100 倍投注、兩顆 500 倍、三顆以上 1000 倍。這時候進免遊爆分機率變得很高。</p>
+      </div>
+
+      <p>芭樂子觀察：免遊前 5~10 場通常倍數還不夠肥，真正堆起來是後半段。你前面看到帳戶沒什麼變化是正常的，不要急——大爆通常在最後幾場才來。當然也可能整場都不爆，那就認了吧。</p>
+
+      <!-- ===== 第 5 節 ===== -->
+      <h2 id="buy-feature" style="margin-top:2.5rem">5. 購買免遊值不值得？三種模式 CP 值比較</h2>
+
+      <p>雷神之錘II 提供三種買免遊選項，價格和 Bonus 獎金都不一樣。這裡芭樂子就直接幫你分析 CP 值：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-green)">
+        <h3 style="color:var(--guava-green);margin-top:0">💰 三種買免遊模式對比</h3>
+        <table>
+          <thead><tr><th>模式</th><th>購買價格</th><th>獎金規模</th><th>倍數符號機率</th><th>推薦指數</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">100x 一般免遊</td><td style="font-weight:700">投注額 × 100</td><td>3~100x 投注</td><td>中等</td><td>⭐⭐⭐⭐</td></tr>
+            <tr><td style="font-weight:700">500x 超級免遊</td><td style="font-weight:700">投注額 × 500</td><td>50~500x 投注</td><td>偏高</td><td>⭐⭐⭐</td></tr>
+            <tr><td style="font-weight:700">4000x 神運一擊</td><td style="font-weight:700">投注額 × 4000</td><td>全 1000x 倍數</td><td>極高</td><td>⭐⭐</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>100x 一般免遊：</strong>最划算的選項。花 100 倍投注進免遊，倍數符號機率正常，需要靠自己的手氣疊倍數。這個模式適合大部分人。如果下注 100 元，就是花 10,000 元買一場免遊——看起來很貴，但這是「免等 Scatter」的代價。</p>
+
+      <p><strong>500x 超級免遊：</strong>中等選項。花 500 倍投注，進免遊時倍數符號出現頻率提高、初始倍數可能也比較高。如果你本金充足（至少 5 萬元以上）且想提高爆分機率，可以考慮偶爾買一次。</p>
+
+      <p><strong>4000x 神運一擊：</strong>最貴也最神經病的選項。花 4000 倍投注，進免遊時直接開局倍數就是 1000x……聽起來爽對吧？講白了就是花大錢買「保證高倍數」。但問題是：如果你能承受 4000x 的投注，為什麼不用這筆錢多玩幾輪自然轉？數學上回本機率並不會因為倍數一開始就高就變高，只是讓你「早點爆」或「早點破產」。芭樂子的建議：<strong>除非你預算一時膨風到不知道怎麼花，否則不要買 4000x</strong>。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold);background:rgba(245,184,0,0.08)">
+        <h3 style="color:var(--gold);margin-top:0">⚡ 芭樂子真心話</h3>
+        <p style="margin:0.5rem 0"><strong>買 100x 算盤：</strong>投注 100 元買免遊要花 10,000 元，但能省下平均等 Scatter 的 50~100 轉。如果每轉 100 元，那就省了 5,000~10,000 元的「等待成本」——算盤還湊得攏。</p>
+        <p style="margin:0.5rem 0"><strong>買 500x 算盤：</strong>花 50,000 元買免遊，高倍數出現率高，假設能多疊 500x 倍數（比自然進免遊多），那這 50,000 元就能回本——但前提是你要真的出現那些倍數，而不是一樓就掉成破財。</p>
+        <p style="margin:0"><strong>買 4000x 算盤：</strong>花 400,000 元保證 1000x 開局，聽起來很爽，但除非你第一轉就中爆炸性獎金，否則 400,000 元足夠你玩平常的老虎機 100 轉以上。買 4000x 的人通常都是運氣爆棚的人，而你很難判斷自己是不是那個人——通常的結果就是破產。</p>
+      </div>
+
+      <!-- === CTA #2 === -->
+      <div style="background:linear-gradient(135deg,rgba(231,76,60,0.12) 0%,rgba(52,152,219,0.12) 100%);border-left:4px solid #e74c3c;border-radius:10px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <div style="color:#e74c3c;font-weight:900;font-size:1rem;margin-bottom:0.5rem">💔 擔心玩太兇賠不起？學資金管理</div>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem;color:var(--text-secondary)">買免遊、加倍、All In……最後賠的都是沒有預算規劃的人。用 <a href="/tools/bankroll-calculator/" style="color:#e74c3c;font-weight:700">資金管理計算器</a>算出你的本金應該怎麼分配、停損線訂在哪、贏了多少才能安心收手。芭樂子認識最會控制的玩家，都用這套邏輯。</p>
+      </div>
+
+      <!-- ===== 第 6 節 ===== -->
+      <h2 id="vs-seth" style="margin-top:2.5rem">6. 雷神之錘 vs 戰神賽特 — 台灣兩大爆分老虎機比較</h2>
+
+      <p>「雷神還是賽特？」這大概是芭樂子被問到第 87 次了。講白了兩台都是吃人機器，沒有哪個「更好」，只有哪個更適合你的口味跟本金厚度。</p>
+
+      <div class="card" style="margin:1rem 0">
+        <table>
+          <thead><tr><th>項目</th><th style="color:var(--guava-pink)">雷神之錘II</th><th style="color:var(--guava-green)">戰神賽特</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">遊戲商</td><td style="color:var(--guava-pink)"><a href="/games/thor-hammer-2/" style="color:var(--guava-pink)">RSG 皇家電子</a></td><td style="color:var(--guava-green)"><a href="/atg-seth/" style="color:var(--guava-green)">ATG 電子</a></td></tr>
+            <tr><td style="font-weight:700">認證</td><td style="color:var(--guava-pink)">GLI 官方認證</td><td style="color:var(--guava-green)">合法授權</td></tr>
+            <tr><td style="font-weight:700">RTP</td><td style="color:var(--guava-pink);font-weight:700">97.6%</td><td style="color:var(--guava-green);font-weight:700">96.89%</td></tr>
+            <tr><td style="font-weight:700">最高倍率</td><td style="color:var(--guava-pink);font-weight:700">x25,000</td><td style="color:var(--guava-green);font-weight:700">x81,000</td></tr>
+            <tr><td style="font-weight:700">倍數符號最高值</td><td style="color:var(--guava-pink);font-weight:700">1000x</td><td style="color:var(--guava-green);font-weight:700">x500</td></tr>
+            <tr><td style="font-weight:700">波動率</td><td style="color:var(--guava-pink)">高波動（容易輸多）</td><td style="color:var(--guava-green)">中高波動（更容易爆分）</td></tr>
+            <tr><td style="font-weight:700">免遊觸發</td><td style="color:var(--guava-pink)">4~6 Bonus = 15 局</td><td style="color:var(--guava-green)">4 Scatter = 免遊（無固定場數）</td></tr>
+            <tr><td style="font-weight:700">買免遊價格</td><td style="color:var(--guava-pink)">100x / 500x / 4000x</td><td style="color:var(--guava-green)">單一 100x</td></tr>
+            <tr><td style="font-weight:700">倍數累積機制</td><td style="color:var(--guava-pink)">Free Game 鎖定倍數</td><td style="color:var(--guava-green)">Free Game 倍數不歸零</td></tr>
+            <tr><td style="font-weight:700">視覺特效</td><td style="color:var(--guava-pink)">北歐雷神風格</td><td style="color:var(--guava-green)">埃及神話風格</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>選雷神之錘的理由：</strong>RTP 更高（97.6% vs 96.89%），倍數符號最高 1000x 看起來更單純直接，不用擔心倍數符號機制有多複雜。推薦給想要<strong>相對穩健爆分</strong>的玩家。</p>
+
+      <p><strong>選戰神賽特的理由：</strong>極限倍率更高（x81000 vs x25000），爆分頻率相對更高、視覺刺激更猛。推薦給<strong>追求極限倍率、心臟夠強</strong>的玩家。</p>
+
+      <p><strong>芭樂子怎麼選：</strong>新手先碰雷神，規則單純、RTP 友善一點。已經玩過幾台機、知道自己底線在哪、心臟也夠強的，再去挑戰賽特的極限倍率。兩台都玩過的人通常最後會在某個深夜同時開兩台……然後隔天後悔。<a href="/articles/atg-seth-guide/" style="color:var(--guava-green)">更多賽特分析看這篇</a>。</p>
+
+      <!-- ===== 第 7 節 ===== -->
+      <h2 id="rules" style="margin-top:2.5rem">7. 芭樂子的 5 個實戰心法</h2>
+
+      <p>機制講完了，下面 5 條是芭樂子跟一堆朋友輸到罵髒話後整理出來的。看得進去至少能少虧 30%，看不進去……嗯，那下次再來看：</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--gold)">
+        <h3 style="color:var(--gold);margin-top:0">🏆 雷神玩家 5 大心法</h3>
+        <p style="margin:0.5rem 0"><strong>① 資金管理第一位</strong>：本金 30% 停損、100% 停利。本金 10,000 元輸到剩 7,000 元馬上跑，贏到 20,000 元也馬上跑。聽起來簡單對吧？做得到的人都不在你下方留言罵芭樂子。</p>
+        <p style="margin:0.5rem 0"><strong>② 從最小注開始摸</strong>：連輸 30 轉就換機台或休息。臉黑日就是臉黑日，加碼不會把黑臉變歐皇，只會加速見底。</p>
+        <p style="margin:0.5rem 0"><strong>③ 買免遊後不要貪心</strong>：買了 100x 進免遊後，倍數沒疊起來就別期待大爆。乖乖收下 10 倍、20 倍的小獎就離場，不要硬等「一定會有 1000x」——1000x 是給有準備的人的，不是給賭徒的。</p>
+        <p style="margin:0.5rem 0"><strong>④ 別被「神運一擊」迷惑</strong>：4000x 買免遊看起來爽，實際上是花大錢買「早點看到結果」而已，不會提高你贏的機率，只是讓結果來得快——無論是贏還是輸。</p>
+        <p style="margin:0"><strong>⑤ 它是娛樂不是工作</strong>：所有老虎機長期 RTP &lt; 100%，意思是長期一定虧。把它當花錢買刺激和娛樂，輸了就當看了一場電影——想把老虎機當提款機的，最後都很慘。</p>
+      </div>
+
+      <p><strong>額外補充：</strong>玩雷神之錘的時候一定要確認是不是<strong>正版 RSG</strong>，因為有一堆黑網在抄襲賣假 RSG 遊戲，賠率更差、倍數更難出。<a href="/articles/atg-seth-copycat-exposed/" style="color:var(--guava-pink)">怎麼辨認正版假版看這篇</a>。</p>
+
+      <!-- ===== 第 8 節 ===== -->
+      <h2 id="truth" style="margin-top:2.5rem">8. 芭樂子底線：老虎機長期必輸的數學真相</h2>
+
+      <p>這段芭樂子不開玩笑了。</p>
+
+      <p><strong>97.6% RTP 代表什麼？</strong>投 100 元，長期平均拿回 97.6 元，每轉虧 2.4%。這裡「長期」是指 100 萬轉以上——你這輩子大概玩不到那麼多，所以短期波動會讓你產生「我好像能贏」的幻覺。</p>
+
+      <p>現實是：大部分人不是短期爆分然後跑了（這種人很少），就是輸到底褲才停。沒有人能靠老虎機穩定獲利，除非你開娛樂城。</p>
+
+      <div class="card" style="margin:1rem 0;border-color:var(--guava-pink)">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚠️ 芭樂子嚴肅提醒</h3>
+        <p style="margin:0.5rem 0"><strong>如果你或家人玩到影響生活、借錢去玩、欠債不敢回家——請立刻尋求幫助：</strong></p>
+        <p style="margin:0.5rem 0">• <strong>1925 安心專線</strong>（撥打安心、獲得幫助）</p>
+        <p style="margin:0.5rem 0">• <strong>1995 生命線</strong>（心理危機協談專線）</p>
+        <p style="margin:0"><strong>• 台灣戒賭專線：0800-080-888</strong></p>
+      </div>
+
+      <p>玩老虎機可以，但要知道自己在玩什麼——一款會吃人的遊戲，不是投資工具。</p>
+
+      <p><strong>延伸資源：</strong></p>
+      <ul>
+        <li><a href="/articles/slots-rtp-guide/" style="color:var(--guava-pink)">完整的 RTP 和波動率教學</a>——理解這兩個參數，選機台才能更聰明。</li>
+        <li><a href="/tools/rtp-tracker/" style="color:var(--guava-pink)">RTP 紀錄器工具</a>——玩了多少轉、贏了多少、實際 RTP 是多少，一目瞭然。</li>
+        <li><a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-pink)">娛樂城防詐騙指南</a>——別被黑網騙，至少選個合法的地方玩。</li>
+      </ul>
+
+      <!-- ===== FAQ ===== -->
+      <h2 id="faq" style="margin-top:2.5rem">9. 常見問題 FAQ</h2>
+      <div class="faq-list">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p style="margin:0.8rem 0 0;color:var(--text-secondary)">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <h2 style="margin-top:2.5rem">延伸閱讀</h2>
+      <div class="related-links">
+        <a href="/games/thor-hammer-2/">雷神之錘II 遊戲詳細頁<small>完整規格與評測</small></a>
+        <a href="/atg-seth/">金8LA戰神賽特專區<small>另一款爆分老虎機</small></a>
+        <a href="/articles/atg-seth-guide/">戰神賽特完整攻略<small>賽特怎麼玩</small></a>
+        <a href="/articles/slots-rtp-guide/">老虎機 RTP 完整指南<small>選機看這篇</small></a>
+        <a href="/articles/atg-seth-copycat-exposed/">正版假版怎麼分？<small>避開黑網遊戲</small></a>
+        <a href="/tools/slot-simulator/">免費老虎機模擬器<small>試玩不花錢</small></a>
+        <a href="/tools/bankroll-calculator/">資金管理計算器<small>算出安心停損線</small></a>
+        <a href="/tools/rtp-tracker/">RTP 紀錄器<small>追蹤實際回報率</small></a>
+        <a href="/articles/anti-scam-8la-guide/">娛樂城防詐騙指南<small>玩之前必讀</small></a>
+      </div>
+    </article>
+    <div style="text-align:center;margin-top:2rem">
+      <a href="/articles/" class="btn-outline">&larr; 回攻略列表</a>
+    </div>
+  </div>
+</BaseLayout>

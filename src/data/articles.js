@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'thor-hammer-2-guide',
+    title: '雷神之錘II（雷神之鎚）完整攻略：RTP、倍數符號、買免遊值不值得？',
+    excerpt: 'RSG 皇家電子雷神之錘II 完整拆解：GLI 認證 97.6% RTP、6×5 自由配對機制、倍數符號最高 1000x、Free Game 倍數累積爆分原理、買免遊三種模式 CP 值分析、雷神 vs 賽特對比，附 5 個不讓你破產的實戰心法。',
+    category: 'slots',
+    categoryLabel: '老虎機攻略',
+    badgeType: 'featured',
+    date: '2026-04-28',
+    views: 0,
+    tags: ['最新', '精選'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#0a0a2e,#1a1a4a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-thor-hammer-2.webp'
+  },
+  {
     slug: 'online-casino-legal-taiwan',
     title: '台灣玩娛樂城違法嗎？刑法 266 條白話解析、罰金實例、收到傳票怎麼辦',
     excerpt: '2022 年修法後網路賭博正式入罪，玩家初犯罰金 1-3 萬、帳戶可能被凍結。芭樂子把刑法 266 條翻譯成白話、整理判決實例、比較合法博弈差異，附收到傳票 5 步驟 SOP。',
