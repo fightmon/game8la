@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'power-lottery-odds-explained',
+    title: '威力彩中獎機率完整拆解：頭獎 1/22,085,448 到底多高？9 個獎項逐一計算',
+    excerpt: '威力彩頭獎機率 1/22085448 怎麼算的？芭樂子用組合數學從 C(38,6)×8 算起，9 個獎項中獎機率、期望值、稅後實拿全部拆開來看。附生活化比喻表＋包牌成本試算。',
+    category: 'lottery',
+    categoryLabel: '彩券機率科普',
+    badgeType: 'featured',
+    date: '2026-05-02',
+    views: 0,
+    tags: ['最新', '精選', '科普'],
+    icon: 'target',
+    gradient: 'linear-gradient(135deg,#0a0a2e,#1a1a4a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-power-lottery-odds.webp'
+  },
+  {
     slug: 'labor-day-power-lottery-2026',
     title: '2026 勞動節威力彩頭獎上看 3.5 億！芭樂子用機率告訴你：該衝嗎？',
     excerpt: '威力彩頭獎連 16 期槓龜，獎金滾到 3.5 億剛好遇上勞動節開獎。別人報明牌看星座，芭樂子算機率：頭獎 1/2209 萬有多難中？包牌怎麼買最聰明？各獎項期望值拆解＋4 個數學上比較不虧的做法。',
