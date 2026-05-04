@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'slot-pool-theory-explained',
+    title: '老虎機怎麼挑才會爆金？水池理論、波動率、RTP 魔改——芭樂子拆給你看',
+    excerpt: '老虎機到底要玩什麼才容易爆？看水池？看波動？還是先看平台有沒有問題？芭樂子從遊戲經營端拆解：水池是真的但你看不到水位、熱門遊戲為什麼比冷門遊戲有利、高低波動率怎麼選、RTP 魔改黑網怎麼讓你穩虧。附選機台三步驟。',
+    category: 'slots',
+    categoryLabel: '老虎機科普',
+    badgeType: 'featured',
+    date: '2026-05-04',
+    views: 0,
+    tags: ['最新', '精選', '科普'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#0a1a0a,#1a2a1a,#39ff14)',
+    thumbnail: '/images/article-thumbs/thumb-slot-pool-theory.webp'
+  },
+  {
     slug: 'power-lottery-odds-explained',
     title: '威力彩中獎機率完整拆解：頭獎 1/22,085,448 到底多高？9 個獎項逐一計算',
     excerpt: '威力彩頭獎機率 1/22085448 怎麼算的？芭樂子用組合數學從 C(38,6)×8 算起，9 個獎項中獎機率、期望值、稅後實拿全部拆開來看。附生活化比喻表＋包牌成本試算。',
