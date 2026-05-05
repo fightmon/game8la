@@ -1,0 +1,438 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: 'RTP 是什麼的縮寫？', a: 'RTP 是 <strong>Return To Player</strong> 的縮寫，中文叫「玩家回報率」或「返還率」。它是一個百分比數字，代表每投入 100 元，長期平均能拿回多少錢。例如 RTP 96% 就是平均拿回 96 元、平台賺 4 元。' },
+  { q: 'RTP 跟勝率是一樣的東西嗎？', a: '完全不同。RTP 是<strong>金額的回收比例</strong>，不是「贏的次數÷玩的次數」。一款 RTP 96% 的遊戲，你可能 100 次裡面只中 15 次，但其中一次爆了大獎把金額拉回來。所以 RTP 高不代表你常贏，只代表你的錢<strong>長期消耗得比較慢</strong>。' },
+  { q: '彩券的 RTP 為什麼這麼低？', a: '因為台灣彩券收入的大約 45% 會被分配到公益盈餘、印花稅、所得稅和營運費用。遊戲的錢不是全部拿來開獎的，所以 RTP 只剩約 55%。相比之下，線上老虎機沒有這些額外支出，純粹是數學回饋，所以 RTP 可以高達 96~98%。' },
+  { q: '百家樂的 RTP 比老虎機高，為什麼大家還是輸？', a: '百家樂莊家的 RTP 高達 98.94%，確實是賭場遊戲裡最高的之一。但問題出在<strong>翻桌速度</strong>——你一分鐘可以下好幾把，每把都在被抽 1% 的水，累積起來消耗就很驚人。加上很多人會加注追損，實際體驗的虧損遠比 1% 大得多。' },
+  { q: '有沒有 RTP 超過 100% 的遊戲？', a: '理論上沒有。如果一款遊戲 RTP > 100%，代表平台在<strong>虧錢營運</strong>，不可能長期存在。但有些累積獎金（Progressive Jackpot）遊戲在獎池累積到很高的時候，理論 RTP 會暫時超過 100%——不過這種情況非常罕見，而且你中到 Jackpot 的機率本身就極低。' },
+  { q: 'RTP 會被娛樂城偷改嗎？', a: '正版遊戲商的 RTP 是寫死在伺服器端的，平台改不了。但部分遊戲商會提供同一款遊戲的「不同 RTP 版本」讓平台選用，所以同一款遊戲在不同平台的 RTP 可能不同。至於<strong>盜版遊戲</strong>，什麼都能改——這就是為什麼芭樂子一直說要先用 <a href="/casino-check/">娛樂城體檢</a> 查一下平台。' },
+  { q: '怎麼知道自己玩的遊戲 RTP 是多少？', a: '三個方法：1. 遊戲內點「資訊」或「規則」頁面，通常會標示；2. 到遊戲廠商官網查（如 Pragmatic Play 官網有全部遊戲的 RTP）；3. 搜尋「遊戲名 + RTP」。要注意的是確認你玩的平台用的是哪個 RTP 版本。' },
+  { q: '知道 RTP 之後到底能幹嘛？', a: '三件事：<strong>①</strong> 選 RTP 高的遊戲，讓你的錢消耗得慢一點；<strong>②</strong> 搭配波動率選擇你喜歡的節奏（頻繁小獎 or 偶爾大獎）；<strong>③</strong> 用 RTP 算出你的理論虧損，設好停損線。芭樂子的公式：理論虧損 = 總投注 ×（100% − RTP）。' },
+];
+---
+
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/rtp-explained/"
+  title="RTP 是什麼？博弈遊戲回報率完整拆解｜老虎機、百家樂、彩券一次搞懂"
+  description="RTP（Return To Player）到底是什麼意思？芭樂子用白話文拆解博弈遊戲回報率：老虎機 RTP 96% 跟彩券 RTP 55% 差在哪？百家樂莊閒和的 RTP 各多少？為什麼知道 RTP 就能少虧一半？附 RTP 比較表和實用公式。"
+  image="https://game8la.com/images/articles/rtp-explained-cover.webp"
+  datePublished="2026-05-05"
+  dateModified="2026-05-05"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: 'RTP 是什麼', url: 'https://game8la.com/articles/rtp-explained/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="RTP 是什麼？博弈遊戲回報率完整拆解｜老虎機、百家樂、彩券一次搞懂 - GAME8LA" description="RTP（Return To Player）到底是什麼意思？芭樂子用白話文拆解博弈遊戲回報率：老虎機 RTP 96% 跟彩券 RTP 55% 差在哪？百家樂莊閒和的 RTP 各多少？為什麼知道 RTP 就能少虧一半？附 RTP 比較表和實用公式。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; RTP 是什麼</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-05 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 12 分鐘 ｜
+      <span style="color:#39ff14;font-weight:700">📚 觀念科普</span>
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a0e1a,#1a1040,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <!-- === 封面圖 === -->
+      <img class="content-img"
+           src="/images/articles/rtp-explained-cover.webp"
+           alt="芭樂子拿著計算機解說 RTP 回報率概念｜GAME8LA"
+           width="1400" height="772" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">RTP 三個英文字母，搞懂了少虧一半——芭樂子拆給你聽</p>
+
+      <h1 style="font-size:2rem;line-height:1.3">RTP 是什麼？搞懂這三個字母，<em>你在博弈遊戲裡至少能少虧一半</em></h1>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">RTP 博弈遊戲裡最重要的三個英文字母，但十個玩家裡面大概有八個搞不清楚它到底在講什麼。「RTP 96% 是什麼意思？我投 100 塊就能拿回 96 塊？」「百家樂的 RTP 比老虎機高，那我幹嘛不去玩百家樂？」「彩券 RTP 才 55%，那不就是搶劫？」</p>
+
+      <p>以上三個問題，芭樂子每週至少被問一次。今天一次講清楚。這篇不只教你 RTP 是什麼，還要告訴你：不同遊戲的 RTP 差多少、為什麼知道 RTP 就能做出更聰明的選擇、以及那些用 RTP 來騙你的套路長什麼樣子。</p>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#what-is-rtp">RTP 是什麼？白話文版本</a></li>
+          <li><a href="#house-edge">House Edge 莊家優勢：RTP 的另一面</a></li>
+          <li><a href="#rtp-compare">老虎機 vs 百家樂 vs 彩券——RTP 大比拼</a></li>
+          <li><a href="#why-still-lose">RTP 96% 為什麼你還是輸光？</a></li>
+          <li><a href="#rtp-tampered">RTP 會被偷改嗎？黑網的骯髒手法</a></li>
+          <li><a href="#rtp-formula">芭樂子的 RTP 實用公式</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== 第 1 節 ===== -->
+      <h2 id="what-is-rtp" style="margin-top:2.5rem">RTP 是什麼意思？三秒鐘白話文讓你聽懂</h2>
+
+      <p>RTP，全名 <strong>Return To Player</strong>，中文翻成「玩家回報率」或「返還率」。</p>
+
+      <p>講人話就是：<strong>你丟進去的錢，長期下來平均能拿回多少。</strong></p>
+
+      <p>假設一款老虎機的 RTP 是 96%，意思是你投進去 100 塊，跑個幾百萬轉之後，理論上平均會拿回 96 塊。剩下那 4 塊？進了平台口袋，叫做 House Edge。</p>
+
+      <div class="card" style="margin:1.2rem 0">
+        <p style="font-size:1.1rem;text-align:center;margin:0.8rem 0;line-height:1.8">
+          <strong>RTP 96%</strong> = 每 100 元投注 →
+          <span style="color:var(--guava-green);font-weight:900">96 元</span> 回到你口袋 ｜
+          <span style="color:var(--guava-pink);font-weight:900">4 元</span> 被平台收走
+        </p>
+      </div>
+
+      <p>聽起來好像還不錯對吧？96% 欸，快要全拿回來了。</p>
+
+      <p>先別急著開心。這個 96% 有兩個你必須搞懂的前提：</p>
+
+      <p><strong>第一，這是「幾百萬轉」的平均值。</strong>不是你轉 100 次就能看到的結果。你可能轉 200 次贏 3,000 塊，也可能轉 200 次輸光本金——這兩種情況都不影響 RTP 96% 的成立，因為它是統計數學，不是單次保證。</p>
+
+      <p><strong>第二，RTP 算的是「金額比例」，不是「勝率」。</strong>很多人把 RTP 96% 理解成「100 次裡面會贏 96 次」，大錯特錯。你可能 100 次只中了 15 次，但其中一次爆了個 500 倍大獎，把金額比例拉回 96%。RTP 管的是<em>錢</em>，不是<em>次數</em>。</p>
+
+      <!-- ===== 第 2 節 ===== -->
+      <h2 id="house-edge" style="margin-top:2.5rem">House Edge 是什麼？RTP 的另一面，平台靠這個賺錢</h2>
+
+      <p>RTP 跟 House Edge 是一體兩面：</p>
+
+      <div class="card" style="margin:1.2rem 0">
+        <p style="text-align:center;font-size:1.1rem;margin:0.5rem 0"><strong>House Edge = 100% − RTP</strong></p>
+      </div>
+
+      <p>RTP 96% → House Edge 4%。意思是平台從這款遊戲裡，每 100 塊抽走 4 塊。</p>
+
+      <p>你可能覺得 4% 聽起來沒什麼，但魔鬼在細節裡：你不是只轉一次就走人。假設你帶 1,000 塊去玩，每次押 10 塊，轉了 300 次，你的<strong>總投注額</strong>是 3,000 塊（因為贏回來的錢你又拿去轉了）。平台的理論收入 = 3,000 × 4% = <strong>120 塊</strong>。</p>
+
+      <p>看到了嗎？你帶 1,000 塊，理論上虧 120 塊，而不是 40 塊。因為 House Edge 是用<strong>「總投注額」</strong>去算，不是用你的本金去算。這就是為什麼你明明只帶一千塊，玩一個小時卻感覺虧了好幾百——因為你的錢在裡面滾了好幾圈。</p>
+
+      <p>芭樂子把它叫做<strong>「磨損效應」</strong>：House Edge 像砂紙一樣，你的錢每滾一圈就被磨掉一層。RTP 越低，砂紙越粗，磨得越快。</p>
+
+      <!-- ===== 第 3 節 ===== -->
+      <h2 id="rtp-compare" style="margin-top:2.5rem">老虎機、百家樂、彩券的 RTP 差多少？一張表秒懂</h2>
+
+      <p>不同類型的遊戲，RTP 天差地遠。芭樂子整理了一張比較表，讓你一眼看出差距：</p>
+
+      <!-- RTP 比較表 -->
+      <img class="content-img"
+           src="/images/articles/rtp-explained-infographic.webp"
+           alt="芭樂子解說各類博弈遊戲 RTP 比較表：老虎機 94-98%、百家樂莊 98.94%、輪盤 94.74-97.3%、彩券 55%｜GAME8LA"
+           width="1200" height="669" loading="lazy" decoding="async" />
+      <p class="article-img-caption">各類遊戲 RTP 一覽——看完你就知道彩券到底多坑了</p>
+
+      <div class="rtp-table-wrap">
+        <table class="rtp-table">
+          <thead>
+            <tr><th>遊戲類型</th><th>RTP 範圍</th><th>House Edge</th><th>備註</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🎰 老虎機（正版）</td><td style="color:var(--guava-green);font-weight:700">94~98%</td><td>2~6%</td><td>看遊戲商跟平台選用版本</td></tr>
+            <tr><td>🃏 百家樂 — 押莊</td><td style="color:var(--guava-green);font-weight:700">98.94%</td><td>1.06%</td><td>扣 5% 佣金後的實際值</td></tr>
+            <tr><td>🃏 百家樂 — 押閒</td><td style="color:var(--guava-green);font-weight:700">98.76%</td><td>1.24%</td><td>不抽佣，但莊家多一張牌優勢</td></tr>
+            <tr><td>🃏 百家樂 — 押和</td><td style="color:#ff6b6b;font-weight:700">85.64%</td><td>14.36%</td><td>芭樂子：拜託不要押</td></tr>
+            <tr><td>🎡 歐式輪盤</td><td>97.30%</td><td>2.70%</td><td>單零輪盤</td></tr>
+            <tr><td>🎡 美式輪盤</td><td>94.74%</td><td>5.26%</td><td>多一格 00，RTP 直接掉</td></tr>
+            <tr><td>🎲 骰寶（大小）</td><td>97.22%</td><td>2.78%</td><td>押大或小</td></tr>
+            <tr><td>🎟️ 威力彩</td><td style="color:#ff6b6b;font-weight:700">≈ 55%</td><td>≈ 45%</td><td>公益金 + 稅 + 營運成本</td></tr>
+            <tr><td>🎟️ 大樂透</td><td style="color:#ff6b6b;font-weight:700">≈ 55%</td><td>≈ 45%</td><td>跟威力彩一樣結構</td></tr>
+            <tr><td>🎟️ 今彩 539</td><td style="color:#ff6b6b;font-weight:700">≈ 55%</td><td>≈ 45%</td><td>不管哪種彩券都差不多</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>看到了嗎？老虎機跟百家樂的 RTP 在 95~99% 之間，而彩券只有大約 55%。兩者差了將近 <strong>40 個百分點</strong>。</p>
+
+      <p>換個說法：你拿 100 塊去買彩券，理論上有 45 塊是直接捐掉的；但你拿同樣 100 塊去玩一款 RTP 96% 的老虎機，理論上只虧 4 塊。這不是芭樂子在嘴彩券，而是數學就是這樣。（想看完整機率拆解，可以去看<a href="/articles/lottery-odds-comparison/">威力彩 vs 大樂透機率比較</a>那篇。）</p>
+
+      <p>不過這邊要補一句公道話：彩券 RTP 低是有原因的。那 45% 裡面有一大塊是公益彩券盈餘，拿去做社會福利了。所以彩券本質上是「花錢買一個做夢的機會 + 順便做公益」，用 RTP 去衡量它其實不太公平。但如果你是<strong>認真想從機率遊戲裡找到最佳策略</strong>，RTP 就是你的第一個篩選條件。</p>
+
+      <div class="cta-inline" style="margin:1.5rem 0;padding:1rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px">
+        <p style="margin:0 0 0.5rem"><strong>🎰 想親手感受 RTP 96% 跟 88% 差多少？</strong></p>
+        <p style="margin:0;color:var(--text-secondary);font-size:0.9rem"><a href="/tools/slot-simulator/">芭樂轉轉機</a> 讓你自己調 RTP，跑 500 轉看你的錢怎麼被磨掉的。比看十篇文章有用。</p>
+      </div>
+
+      <!-- ===== 第 4 節 ===== -->
+      <h2 id="why-still-lose" style="margin-top:2.5rem">RTP 96% 為什麼你還是輸光了？因為你搞混了三件事</h2>
+
+      <p>這是新手最容易踩的坑：「RTP 96% 不是說我幾乎能拿回全部嗎？為什麼我帶 1,000 塊玩半小時就歸零了？」</p>
+
+      <p>因為你搞混了三件事：</p>
+
+      <h3>搞混一：短期 ≠ 長期</h3>
+
+      <p>RTP 是<strong>幾百萬轉</strong>的統計結果。你坐下來玩半小時可能只轉了 200~300 次，這個樣本數根本不夠 RTP 發揮作用。短期內什麼事都可能發生——你可以大贏，也可以大虧，都不影響 RTP 的正確性。</p>
+
+      <p>打個比方：擲硬幣正面機率是 50%。但你擲 10 次，出現 8 正 2 反很正常吧？這不代表硬幣壞了，只是樣本太少。RTP 也是一樣的道理。</p>
+
+      <h3>搞混二：RTP ≠ 勝率</h3>
+
+      <p>再說一次，RTP 算的是<strong>金額的回收比例</strong>，不是你贏的次數。一款高波動老虎機可能你轉 50 次都不中，然後第 51 次爆出一個 200 倍大獎，RTP 照樣達標。所以你不能用「我連續輸了好幾把」來判斷一款遊戲的 RTP 是不是有問題。</p>
+
+      <h3>搞混三：忘了算「總投注額」</h3>
+
+      <p>很多人以為「我帶 1,000 塊，RTP 96%，所以我只會虧 40 塊」。錯！你忘了你贏回來的錢又拿去轉了。</p>
+
+      <p>來，芭樂子算給你看：</p>
+
+      <div class="card" style="margin:1.2rem 0">
+        <p style="font-weight:700;margin-bottom:0.5rem">📊 情境：帶 1,000 元，每次押 10 元，玩一小時（約 600 轉）</p>
+        <p>→ 總投注額 ≈ 6,000 元（因為贏回來的錢又投進去了）</p>
+        <p>→ 理論虧損 = 6,000 × 4% = <strong style="color:var(--guava-pink)">240 元</strong></p>
+        <p style="font-size:0.85rem;color:var(--text-muted)">看到了嗎？你帶 1,000 塊，理論上會虧 240，不是 40。磨損效應就是這麼回事。</p>
+      </div>
+
+      <p>所以記好：RTP 不是騙人的，但你得用對的方式去理解它。它不保證你短期會贏，但它<strong>保證你選對遊戲的長期虧損會比較少</strong>。</p>
+
+      <!-- ===== 第 5 節 ===== -->
+      <h2 id="rtp-tampered" style="margin-top:2.5rem">黑網怎麼改你的 RTP？這才是你該擔心的事</h2>
+
+      <p>RTP 的數學很公平。但人不公平。</p>
+
+      <p>芭樂子在這個圈子混了夠久，見過太多黑網的操作方式。正規遊戲商（ATG、PG Soft、Pragmatic Play 這些）的 RTP 是<strong>寫死在遊戲伺服器端</strong>的，平台方碰不到。但問題來了：</p>
+
+      <h3>手法一：選用低 RTP 版本</h3>
+
+      <p>有些遊戲商會提供同一款遊戲的 2~3 個 RTP 版本。比如某款遊戲有 96.5% / 94.5% / 92% 三種版本，平台可以自己選用哪一版。黑心平台當然選 92% 那版，然後畫面長得跟 96.5% 一模一樣，你根本分辨不出來。</p>
+
+      <h3>手法二：直接用盜版遊戲</h3>
+
+      <p>這個更狠。盜版遊戲畫面抄得跟正版一模一樣，但後端程式完全重寫。RTP 想設多少就多少——芭樂子聽過設到 <strong>80%</strong> 甚至更低的。你玩的是「假雷神」「假賽特」，贏的機率被砍了一大截，你還以為自己運氣差。</p>
+
+      <p>（想看正版 vs 盜版到底差多少，可以去翻<a href="/articles/atg-seth-copycat-exposed/">戰神賽特 2 慘遭全業界抄襲</a>那篇。）</p>
+
+      <h3>手法三：API 參數動手腳</h3>
+
+      <p>部分不肖平台會在 API 串接時加入額外的參數，讓遊戲的獎金分配機制產生偏差。從玩家端你完全看不出來，但你的 RTP 已經被偷偷抽水了。這就像你游泳池的水被暗管抽走——池子看起來一樣大，但水就是不夠。</p>
+
+      <div class="cta-inline" style="margin:1.5rem 0;padding:1rem 1.5rem;background:rgba(245,184,0,0.06);border:1px solid rgba(245,184,0,0.25);border-radius:12px">
+        <p style="margin:0 0 0.5rem"><strong>🛡️ 入金之前先體檢</strong></p>
+        <p style="margin:0;color:var(--text-secondary);font-size:0.9rem">不確定你玩的平台安不安全？<a href="/casino-check/">GAME8LA 娛樂城體檢</a>幫你查 165 詐騙黑名單 + 網域年齡，3 秒出結果。</p>
+      </div>
+
+      <!-- ===== 第 6 節 ===== -->
+      <h2 id="rtp-formula" style="margin-top:2.5rem">芭樂子的 RTP 實用公式：帶多少錢、玩多久、會虧多少</h2>
+
+      <p>好，理論講完了，來點實戰的。芭樂子教你一條公式，以後你坐下來玩之前，花 10 秒鐘算一下就知道自己大概會虧多少：</p>
+
+      <div class="card" style="margin:1.2rem 0;text-align:center">
+        <p style="font-size:1.2rem;font-weight:800;margin:0.8rem 0;color:var(--guava-green)">理論虧損 = 每注金額 × 預計轉數 ×（1 − RTP）</p>
+      </div>
+
+      <p>來幾個實際案例：</p>
+
+      <div class="rtp-table-wrap">
+        <table class="rtp-table">
+          <thead>
+            <tr><th>遊戲</th><th>每注</th><th>轉數</th><th>RTP</th><th>理論虧損</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>戰神賽特2 覺醒之力</td><td>10 元</td><td>500 轉</td><td>96.49%</td><td style="color:var(--guava-pink);font-weight:700">≈ 176 元</td></tr>
+            <tr><td>雷神 II 雷霆風暴</td><td>10 元</td><td>500 轉</td><td>97.60%</td><td style="color:var(--guava-green);font-weight:700">≈ 120 元</td></tr>
+            <tr><td>百家樂（押莊）</td><td>100 元</td><td>100 把</td><td>98.94%</td><td style="color:var(--guava-green);font-weight:700">≈ 106 元</td></tr>
+            <tr><td>威力彩（1 注）</td><td>100 元</td><td>10 期</td><td>≈ 55%</td><td style="color:#ff6b6b;font-weight:700">≈ 450 元</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>看出來了嗎？同樣花 1,000 塊本金，玩老虎機理論虧損 120~176 元，玩百家樂虧 106 元，買威力彩虧 450 元。RTP 這三個字母，就是讓你能做出這種比較的工具。</p>
+
+      <p>芭樂子不是要你不買彩券——偶爾花 100 塊買個夢很正常。但如果你是每個禮拜固定花 500 塊買威力彩，你得知道那 500 塊裡面有 225 塊是回不來的。這就是 RTP 告訴你的真話。</p>
+
+      <div class="cta-inline" style="margin:1.5rem 0;padding:1rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px">
+        <p style="margin:0 0 0.5rem"><strong>📊 想看更深入的老虎機 RTP 攻略？</strong></p>
+        <p style="margin:0;color:var(--text-secondary);font-size:0.9rem">芭樂子寫了一篇專門講老虎機 RTP 的文章，包含台灣熱門遊戲 RTP 一覽表、波動率搭配、高 RTP 遊戲推薦：<a href="/articles/slots-rtp-guide/">老虎機 RTP 完整指南</a>。</p>
+      </div>
+
+      <!-- ===== FAQ ===== -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+
+      {faqs.map((faq, i) => (
+        <details class="faq-item">
+          <summary class="faq-q">
+            <span class="faq-icon">Q{i + 1}</span>
+            <span>{faq.q}</span>
+          </summary>
+          <div class="faq-a" set:html={faq.a} />
+        </details>
+      ))}
+
+      <hr style="margin:2rem 0;border:0;border-top:1px solid var(--border)">
+
+      <!-- ===== 贊助區塊 ===== -->
+      <section class="donate-section">
+        <div class="donate-content">
+          <div class="donate-text">
+            <h3>🍈 請芭樂子喝一杯芭樂汁</h3>
+            <p>這篇 RTP 科普沒有任何娛樂城連結、沒有業配、沒有導流抽成。芭樂子做模擬器、跑數據、寫科普，全部都是自掏腰包扛伺服器費用在做的。</p>
+            <p>如果這篇幫你搞懂了 RTP，讓你以後選遊戲不再亂選，歡迎轉帳請芭樂子補充一下芭樂汁。</p>
+            <div class="donate-bank">
+              <div class="donate-bank-row"><span class="donate-label">銀行代碼</span><span class="donate-value">008（華南銀行）</span></div>
+              <div class="donate-bank-row"><span class="donate-label">銀行帳號</span><span class="donate-value" id="donate-account">4252-0026-2111</span><button class="donate-copy-btn" onclick="navigator.clipboard.writeText('42520026211');this.textContent='已複製 ✓';setTimeout(()=>this.textContent='複製',1500)">複製</button></div>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.5rem">金額隨意，一杯芭樂汁 30 塊就夠芭樂子開心一整天了。</p>
+          </div>
+          <div class="donate-img">
+            <img src="/images/articles/guava-juice-donate.webp" alt="芭樂子拿著芭樂汁｜請芭樂子喝一杯" width="400" height="400" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 延伸閱讀 ===== -->
+      <h3 style="margin-top:2.5rem">📚 延伸閱讀</h3>
+      <div class="related-links">
+        <a href="/articles/slots-rtp-guide/" class="rl-item">
+          <span class="rl-cat">深入攻略</span>
+          <strong>老虎機 RTP 完整指南：怎麼查、怎麼選、2026 高 RTP 遊戲推薦</strong>
+          <span class="rl-desc">台灣熱門遊戲 RTP 一覽表、波動度搭配、選機台三原則</span>
+        </a>
+        <a href="/articles/slot-pool-theory-explained/" class="rl-item">
+          <span class="rl-cat">老虎機科普</span>
+          <strong>老虎機怎麼挑才會爆金？水池理論、波動率、RTP 魔改拆給你看</strong>
+          <span class="rl-desc">水池確實存在但你看不到水位、高低波動怎麼選、黑網 RTP 魔改手法</span>
+        </a>
+        <a href="/articles/lottery-odds-comparison/" class="rl-item">
+          <span class="rl-cat">機率拆解</span>
+          <strong>威力彩 vs 大樂透機率大揭秘：頭獎差 4 倍？</strong>
+          <span class="rl-desc">各獎項命中率、期望值、RTP 全比較，100 元該買哪個一篇搞懂</span>
+        </a>
+        <a href="/tools/slot-simulator/" class="rl-item">
+          <span class="rl-cat">互動工具</span>
+          <strong>芭樂轉轉機：RTP 體感模擬器</strong>
+          <span class="rl-desc">自己調 RTP 和波動率，跑 500 轉親手感受差多少</span>
+        </a>
+        <a href="/casino-check/" class="rl-item">
+          <span class="rl-cat">安全工具</span>
+          <strong>娛樂城體檢：入金前 3 分鐘安全檢測</strong>
+          <span class="rl-desc">165 黑名單比對 + WHOIS 網域年齡查詢</span>
+        </a>
+      </div>
+
+      <ShareButtons title="RTP 是什麼？博弈遊戲回報率完整拆解" url="https://game8la.com/articles/rtp-explained/" />
+
+      <ManifestoBox />
+
+    </article>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .content-img {
+    display: block;
+    width: 100%;
+    max-width: 820px;
+    height: auto;
+    margin: 1.5rem auto 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #0a0e1a;
+  }
+  .article-img-caption {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0 0 2rem;
+  }
+  .article-content img { max-width: 100%; height: auto; }
+
+  /* RTP Table */
+  .rtp-table-wrap { overflow-x: auto; margin: 1.2rem 0; }
+  .rtp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .rtp-table th, .rtp-table td {
+    padding: 0.7rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .rtp-table th {
+    background: var(--bg-card);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .rtp-table td { white-space: nowrap; }
+  .rtp-table tbody tr:hover { background: rgba(245,184,0,0.04); }
+
+  /* FAQ */
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+  }
+  .faq-q {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none;
+    background: var(--bg-card);
+    transition: background 0.2s;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q:hover { background: rgba(245,184,0,0.06); }
+  .faq-icon {
+    background: var(--gold);
+    color: #000;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    height: fit-content;
+  }
+  .faq-a {
+    padding: 0 1rem 1rem 3rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 0.92rem;
+  }
+
+  /* Related links */
+  .related-links { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
+  .rl-item {
+    display: flex; flex-direction: column; gap: 0.2rem;
+    padding: 1rem 1.2rem; border-radius: 10px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    text-decoration: none; color: var(--text-primary);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .rl-item:hover { border-color: var(--gold); transform: translateX(4px); }
+  .rl-cat { font-size: 0.75rem; color: var(--gold-light); font-weight: 700; text-transform: uppercase; }
+  .rl-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* Donate section */
+  .donate-section { margin: 2.5rem 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, rgba(57,255,20,0.04), rgba(245,184,0,0.04)); }
+  .donate-content { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem 1.8rem; }
+  .donate-text { flex: 1; }
+  .donate-text h3 { font-size: 1.15rem; margin: 0 0 0.6rem; color: var(--guava-green); }
+  .donate-text p { font-size: 0.92rem; line-height: 1.7; margin: 0.4rem 0; }
+  .donate-bank { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin-top: 0.8rem; }
+  .donate-bank-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.3rem 0; font-size: 0.9rem; }
+  .donate-label { color: var(--text-muted); min-width: 70px; }
+  .donate-value { font-weight: 700; font-family: 'SF Mono', 'Fira Code', monospace; letter-spacing: 1px; }
+  .donate-copy-btn { background: var(--guava-green); color: #000; border: none; border-radius: 6px; padding: 3px 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer; margin-left: 0.5rem; transition: opacity 0.15s; }
+  .donate-copy-btn:hover { opacity: 0.8; }
+  .donate-img { flex-shrink: 0; width: 180px; }
+  .donate-img img { width: 100%; height: auto; border-radius: 12px; }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.5rem; }
+    .article-content h2 { font-size: 1.2rem; }
+    .donate-content { flex-direction: column; padding: 1.2rem; }
+    .donate-img { width: 140px; }
+    .rtp-table { font-size: 0.82rem; }
+    .rtp-table th, .rtp-table td { padding: 0.5rem; }
+  }
+</style>

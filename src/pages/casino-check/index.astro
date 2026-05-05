@@ -258,6 +258,21 @@ const enrichedList = scamList.map(s => {
 
   </div>
 
+  <!-- 贊助區塊 -->
+  <div class="donate-banner">
+    <div class="donate-banner-inner">
+      <div class="donate-banner-icon">🍈</div>
+      <div class="donate-banner-body">
+        <p><strong>芭樂子幫你擋掉一個坑了嗎？</strong></p>
+        <p>娛樂城體檢工具免費用、沒有業配、沒有導流。165 名單比對、WHOIS 查詢、流水計算全部自己扛伺服器費用在做。覺得有幫助的話，歡迎請芭樂子喝一杯芭樂汁補充體力：</p>
+        <div class="donate-banner-bank">
+          <span>華南(008) <strong>4252-0026-2111</strong></span>
+          <button class="donate-banner-copy" onclick="navigator.clipboard.writeText('42520026211');this.textContent='已複製 ✓';setTimeout(()=>this.textContent='複製',1500)">複製</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Sticky 安全警示浮條 -->
   <div class="sticky-warning" id="stickyWarning">
     <span class="sticky-warning-text">⚠️ 入金前先檢查！任何要你先存錢的「客服」都是詐騙高風險</span>
@@ -1050,6 +1065,41 @@ const enrichedList = scamList.map(s => {
       .hero-search { padding: 1.2rem 0.8rem; }
       .hero-search-label { font-size: 1rem; }
       .hero-input-wrap input { font-size: 1rem; padding: 0.9rem; }
+    }
+
+    /* Donate banner (medium) */
+    .donate-banner { max-width: 900px; margin: 2rem auto; }
+    .donate-banner-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.04));
+      border: 1px solid rgba(57,255,20,0.25);
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .donate-banner-icon { font-size: 2rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .donate-banner-body p { margin: 0 0 0.4rem; color: var(--text-secondary); }
+    .donate-banner-body p strong { color: var(--text-primary); }
+    .donate-banner-bank {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.4rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'SF Mono','Fira Code',monospace;
+      font-size: 0.88rem;
+    }
+    .donate-banner-bank strong { color: var(--guava-green); letter-spacing: 0.5px; }
+    .donate-banner-copy { background: var(--guava-green); color: #000; border: none; border-radius: 6px; padding: 2px 10px; font-size: 0.76rem; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+    .donate-banner-copy:hover { opacity: 0.8; }
+    @media (max-width: 600px) {
+      .donate-banner-inner { flex-direction: column; padding: 1rem; font-size: 0.85rem; }
     }
   </style>
 

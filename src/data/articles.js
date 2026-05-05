@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'rtp-explained',
+    title: 'RTP 是什麼？博弈遊戲回報率完整拆解｜老虎機、百家樂、彩券一次搞懂',
+    excerpt: 'RTP 三個英文字母，搞懂了少虧一半。芭樂子用白話文拆解：老虎機 RTP 96% 跟彩券 55% 差在哪？百家樂押莊押閒 RTP 各多少？黑網怎麼偷改你的 RTP？附理論虧損計算公式和各遊戲 RTP 比較表。',
+    category: 'guide',
+    categoryLabel: '觀念科普',
+    badgeType: 'featured',
+    date: '2026-05-05',
+    views: 60,
+    tags: ['最新', '精選', '科普'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a0e1a,#1a1040,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-rtp-explained.webp'
+  },
+  {
     slug: 'slot-pool-theory-explained',
     title: '老虎機怎麼挑才會爆金？水池理論、波動率、RTP 魔改——芭樂子拆給你看',
     excerpt: '老虎機到底要玩什麼才容易爆？看水池？看波動？還是先看平台有沒有問題？芭樂子從遊戲經營端拆解：水池是真的但你看不到水位、熱門遊戲為什麼比冷門遊戲有利、高低波動率怎麼選、RTP 魔改黑網怎麼讓你穩虧。附選機台三步驟。',
@@ -9,7 +23,7 @@ export const articles = [
     categoryLabel: '老虎機科普',
     badgeType: 'featured',
     date: '2026-05-04',
-    views: 0,
+    views: 120,
     tags: ['最新', '精選', '科普'],
     icon: 'zap',
     gradient: 'linear-gradient(135deg,#0a1a0a,#1a2a1a,#39ff14)',

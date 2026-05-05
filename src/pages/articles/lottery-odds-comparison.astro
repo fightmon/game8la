@@ -302,6 +302,24 @@ const faqs = [
 
     <hr style="margin:2rem 0;border:0;border-top:1px solid var(--border)">
 
+    <section class="donate-section">
+      <div class="donate-content">
+        <div class="donate-text">
+          <h3>🍈 請芭樂子喝一杯芭樂汁</h3>
+          <p>這篇機率分析沒有任何娛樂城連結、沒有業配、沒有導流抽成。芭樂子算期望值、跑模擬、做圖表，全部都是自掏腰包扛伺服器費用在做的。</p>
+          <p>如果這些數據幫你搞懂威力彩跟大樂透到底差在哪、少花冤枉錢去買 CP 值更低的彩券，歡迎轉帳請芭樂子補充一下體力。</p>
+          <div class="donate-bank">
+            <div class="donate-bank-row"><span class="donate-label">銀行代碼</span><span class="donate-value">008（華南銀行）</span></div>
+            <div class="donate-bank-row"><span class="donate-label">銀行帳號</span><span class="donate-value" id="donate-account">4252-0026-2111</span><button class="donate-copy-btn" onclick="navigator.clipboard.writeText('42520026211');this.textContent='已複製 ✓';setTimeout(()=>this.textContent='複製',1500)">複製</button></div>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-top:0.5rem">金額隨意，一杯芭樂汁 30 塊就夠芭樂子開心一整天了。</p>
+        </div>
+        <div class="donate-img">
+          <img src="/images/articles/guava-juice-donate.webp" alt="芭樂子拿著芭樂汁｜請芭樂子喝一杯" width="400" height="400" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </section>
+
     <h2 style="margin-top:2.5rem">📖 延伸閱讀</h2>
     <div class="related-links">
       <a href="/articles/atg-seth-copycat-exposed/">🔥 戰神賽特 2 慘遭全業界抄襲<small>正版 ATG vs 仿冒勝率差多少？10 秒辨真假</small></a>
@@ -334,6 +352,25 @@ const faqs = [
   margin: 0 0 2rem;
 }
 .article-content img { max-width: 100%; height: auto; }
+
+/* Donate section */
+.donate-section { margin: 2.5rem 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, rgba(57,255,20,0.04), rgba(245,184,0,0.04)); }
+.donate-content { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem 1.8rem; }
+.donate-text { flex: 1; }
+.donate-text h3 { font-size: 1.15rem; margin: 0 0 0.6rem; color: var(--guava-green); }
+.donate-text p { font-size: 0.92rem; line-height: 1.7; margin: 0.4rem 0; }
+.donate-bank { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin-top: 0.8rem; }
+.donate-bank-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.3rem 0; font-size: 0.9rem; }
+.donate-label { color: var(--text-muted); min-width: 70px; }
+.donate-value { font-weight: 700; font-family: 'SF Mono', 'Fira Code', monospace; letter-spacing: 1px; }
+.donate-copy-btn { background: var(--guava-green); color: #000; border: none; border-radius: 6px; padding: 3px 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer; margin-left: 0.5rem; transition: opacity 0.15s; }
+.donate-copy-btn:hover { opacity: 0.8; }
+.donate-img { flex-shrink: 0; width: 180px; }
+.donate-img img { width: 100%; height: auto; border-radius: 12px; }
+@media (max-width: 600px) {
+  .donate-content { flex-direction: column; padding: 1.2rem; }
+  .donate-img { width: 140px; }
+}
 </style>
 
 </BaseLayout>
