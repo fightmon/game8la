@@ -7,8 +7,18 @@
     "count": 5
   },
   "hasSpecial": false,
-  "lastUpdated": "2026-05-02",
+  "lastUpdated": "2026-05-05",
   "draws": [
+    {
+      "period": "115110",
+      "date": "2026-05-05",
+      "numbers": [8, 16, 24, 27, 37]
+    },
+    {
+      "period": "115109",
+      "date": "2026-05-04",
+      "numbers": [8, 22, 26, 36, 39]
+    },
     {
       "period": "115053",
       "date": "2026-05-02",

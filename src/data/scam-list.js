@@ -2,12 +2,12 @@
  * 娛樂城詐騙黑名單
  * 資料來源：內政部警政署 165 全民防騙網（假投資/博弈網站類別）
  * 搜尋關鍵字：娛樂城
- * 最後更新：2026-04-22
- * 品牌數：96
- * 原始通報筆數：458 + 週報補充（同品牌同網址合併後，再依品牌合併為 96 個）
+ * 最後更新：2026-05-06
+ * 品牌數：97
+ * 原始通報筆數：461 + 週報補充（同品牌同網址合併後，再依品牌合併為 97 個）
  */
 
-export const lastUpdated = '2026-04-22';
+export const lastUpdated = '2026-05-06';
 
 export const scamList = [
   { name: 'GF攻富娛樂城', urls: ['pc.billynational.vip'], totalReports: 1, latestDate: '2026-01-07' },
@@ -100,10 +100,11 @@ export const scamList = [
   { name: '金好運娛樂城', urls: ['www.gh5588.com'], totalReports: 2, latestDate: '2022-02-27' },
   { name: '天擇娛樂城（TNZE）', urls: ['tnze.cc'], totalReports: 3, latestDate: '2022-01-16' },
   { name: '安博娛樂城', urls: ['anbo288.com'], totalReports: 2, latestDate: '2022-01-16' },
-  { name: 'BBIN娛樂城', urls: ['k58023.com'], totalReports: 1, latestDate: '2026-04-08' },
+  { name: '鑫浩盛娛樂城', urls: ['0001.goodplay.asia'], totalReports: 1, latestDate: '2026-04-29' },
+  { name: 'BBIN娛樂城', urls: ['k58023.com', 'k55185.com'], totalReports: 2, latestDate: '2026-04-29' },
   { name: '金盈匯娛樂城', urls: ['v088.gw1688.net'], totalReports: 1, latestDate: '2026-04-08' },
   { name: '藍海俱樂部', urls: ['www.lanhaiclub.com'], totalReports: 1, latestDate: '2026-04-08' },
   { name: '通博娛樂城', urls: ['tb657.com'], totalReports: 1, latestDate: '2026-04-15' },
   { name: 'T8娛樂城', urls: ['t8super8.com'], totalReports: 1, latestDate: '2026-04-15' },
-  { name: '卡利系統（CaliBet）', urls: ['www.cali9999.net'], totalReports: 3, latestDate: '2026-04-15' },
+  { name: '卡利系統（CaliBet、CaliGroup）', urls: ['www.cali9999.net'], totalReports: 5, latestDate: '2026-04-29' },
 ];

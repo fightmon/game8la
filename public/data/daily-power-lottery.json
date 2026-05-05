@@ -1,0 +1,23 @@
+{
+  "lottery": "power_lottery",
+  "description": "威力彩",
+  "numberRange": {
+    "min": 1,
+    "max": 38,
+    "count": 6
+  },
+  "specialRange": {
+    "min": 1,
+    "max": 8
+  },
+  "hasSpecial": true,
+  "lastUpdated": "2026-05-04",
+  "draws": [
+    {
+      "period": "115000036",
+      "date": "2026-05-04",
+      "numbers": [9, 21, 29, 32, 36, 38],
+      "special": 2
+    }
+  ]
+}

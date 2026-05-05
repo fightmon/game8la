@@ -142,6 +142,20 @@ export const articles = [
     thumbnail: '/images/article-thumbs/thumb-lottery-dragout.webp'
   },
   {
+    slug: '165-weekly-2026-w18',
+    title: '【165 週報】2026 第 18 週（4/23–4/29）：鑫浩盛娛樂城上榜、卡利系統連兩週被通報',
+    excerpt: '內政部 165 全民防騙網 4/23–4/29 通報彙整：新增鑫浩盛娛樂城、卡利系統新增變種（CaliGroup），BBIN 娛樂城啟用新網址。本週 165 共通報約 125 個詐騙網站，跨境博弈與詐騙娛樂城仍為大宗。',
+    category: 'anti-scam',
+    categoryLabel: '165 監測站',
+    badgeType: 'attack',
+    date: '2026-05-06',
+    views: 0,
+    tags: ['最新', '165週報'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
+  },
+  {
     slug: '165-weekly-2026-w17',
     title: '【165 週報】2026 第 17 週：新增 3 個詐騙娛樂城品牌，通博、T8、卡利全上榜',
     excerpt: '內政部 165 全民防騙網 4/9–4/15 通報彙整：新增通博娛樂城、T8娛樂城、卡利系統（CaliBet）3 個全新詐騙品牌。本週 165 共通報約 130 個詐騙網站，假投資平台佔大宗，假購物冒用 SHEIN、Walmart 等國際品牌激增。',

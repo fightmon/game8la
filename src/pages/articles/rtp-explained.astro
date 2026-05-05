@@ -146,6 +146,16 @@ const faqs = [
         </table>
       </div>
 
+      <!-- RTP 分級速查 -->
+      <div class="rtp-grade-wrap">
+        <h3 style="margin-top:0;font-size:1rem;margin-bottom:0.8rem">🚦 芭樂子的 RTP 分級速查</h3>
+        <div class="rtp-grade-row">
+          <div class="rtp-grade green"><span class="rtp-grade-label">96% 以上</span><span class="rtp-grade-tag">✅ 優</span><span class="rtp-grade-desc">磨損最低，長線友善</span></div>
+          <div class="rtp-grade orange"><span class="rtp-grade-label">92 ~ 96%</span><span class="rtp-grade-tag">⚠️ 普通</span><span class="rtp-grade-desc">可接受，注意波動率</span></div>
+          <div class="rtp-grade red"><span class="rtp-grade-label">92% 以下</span><span class="rtp-grade-tag">🚨 謹慎</span><span class="rtp-grade-desc">House Edge 偏高，留意平台來源</span></div>
+        </div>
+      </div>
+
       <p>看到了嗎？老虎機跟百家樂的 RTP 在 95~99% 之間，而彩券只有大約 55%。兩者差了將近 <strong>40 個百分點</strong>。</p>
 
       <p>換個說法：你拿 100 塊去買彩券，理論上有 45 塊是直接捐掉的；但你拿同樣 100 塊去玩一款 RTP 96% 的老虎機，理論上只虧 4 塊。這不是芭樂子在嘴彩券，而是數學就是這樣。（想看完整機率拆解，可以去看<a href="/articles/lottery-odds-comparison/">威力彩 vs 大樂透機率比較</a>那篇。）</p>
@@ -160,9 +170,18 @@ const faqs = [
       <!-- ===== 第 4 節 ===== -->
       <h2 id="why-still-lose" style="margin-top:2.5rem">RTP 96% 為什麼你還是輸光了？因為你搞混了三件事</h2>
 
-      <p>這是新手最容易踩的坑：「RTP 96% 不是說我幾乎能拿回全部嗎？為什麼我帶 1,000 塊玩半小時就歸零了？」</p>
+      <div class="chat-bubble-wrap">
+        <div class="chat-bubble player-bubble">
+          <span class="chat-role player-role">🙋 玩家</span>
+          <p>RTP 96% 不是說我幾乎能拿回全部嗎？為什麼我帶 1,000 塊玩半小時就歸零了？</p>
+        </div>
+        <div class="chat-bubble guava-bubble">
+          <span class="chat-role guava-role">🍈 芭樂子</span>
+          <p>因為你搞混了三件事。RTP 是百萬轉的平均值，不是你轉 200 次就能兌現的承諾。短線上你更該看的是<strong>波動率</strong>跟<a href="/articles/slot-pool-theory-explained/">水池水位</a>——數據不會騙人，但你得學會怎麼看懂它。</p>
+        </div>
+      </div>
 
-      <p>因為你搞混了三件事：</p>
+      <p>來，芭樂子把這三件事拆開來講：</p>
 
       <h3>搞混一：短期 ≠ 長期</h3>
 
@@ -269,8 +288,8 @@ const faqs = [
         <div class="donate-content">
           <div class="donate-text">
             <h3>🍈 請芭樂子喝一杯芭樂汁</h3>
-            <p>這篇 RTP 科普沒有任何娛樂城連結、沒有業配、沒有導流抽成。芭樂子做模擬器、跑數據、寫科普，全部都是自掏腰包扛伺服器費用在做的。</p>
-            <p>如果這篇幫你搞懂了 RTP，讓你以後選遊戲不再亂選，歡迎轉帳請芭樂子補充一下芭樂汁。</p>
+            <p>RTP 實測需要跑大量樣本、開發模擬器、維護伺服器——這些全都是芭樂子自掏腰包在做的，沒有業配、沒有導流抽成。</p>
+            <p>如果這篇幫你搞懂了 RTP，讓你以後選遊戲不再亂選，歡迎請芭樂子補充一下芭樂汁。</p>
             <div class="donate-bank">
               <div class="donate-bank-row"><span class="donate-label">銀行代碼</span><span class="donate-value">008（華南銀行）</span></div>
               <div class="donate-bank-row"><span class="donate-label">銀行帳號</span><span class="donate-value" id="donate-account">4252-0026-2111</span><button class="donate-copy-btn" onclick="navigator.clipboard.writeText('42520026211');this.textContent='已複製 ✓';setTimeout(()=>this.textContent='複製',1500)">複製</button></div>
@@ -427,6 +446,30 @@ const faqs = [
   .donate-img { flex-shrink: 0; width: 180px; }
   .donate-img img { width: 100%; height: auto; border-radius: 12px; }
 
+  /* Chat bubbles */
+  .chat-bubble-wrap { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+  .chat-bubble { border-radius: 12px; padding: 1rem 1.2rem; max-width: 88%; line-height: 1.7; }
+  .chat-bubble p { margin: 0.3rem 0 0; font-size: 0.95rem; }
+  .chat-role { font-size: 0.78rem; font-weight: 700; }
+  .player-bubble { background: rgba(255,255,255,0.06); border: 1px solid var(--border); align-self: flex-start; }
+  .player-role { color: var(--text-muted); }
+  .guava-bubble { background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.2); align-self: flex-end; }
+  .guava-role { color: var(--guava-green); }
+
+  /* RTP Grade */
+  .rtp-grade-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .rtp-grade-row { display: flex; gap: 0.8rem; }
+  .rtp-grade { flex: 1; border-radius: 10px; padding: 0.8rem; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; text-align: center; }
+  .rtp-grade.green { background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); }
+  .rtp-grade.orange { background: rgba(245,184,0,0.08); border: 1px solid rgba(245,184,0,0.25); }
+  .rtp-grade.red { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); }
+  .rtp-grade-label { font-weight: 800; font-size: 1rem; }
+  .rtp-grade.green .rtp-grade-label { color: var(--guava-green); }
+  .rtp-grade.orange .rtp-grade-label { color: #f5b800; }
+  .rtp-grade.red .rtp-grade-label { color: #ef4444; }
+  .rtp-grade-tag { font-size: 0.85rem; font-weight: 700; }
+  .rtp-grade-desc { font-size: 0.78rem; color: var(--text-muted); }
+
   @media (max-width: 600px) {
     .article-content h1 { font-size: 1.5rem; }
     .article-content h2 { font-size: 1.2rem; }
@@ -434,5 +477,7 @@ const faqs = [
     .donate-img { width: 140px; }
     .rtp-table { font-size: 0.82rem; }
     .rtp-table th, .rtp-table td { padding: 0.5rem; }
+    .rtp-grade-row { flex-direction: column; }
+    .chat-bubble { max-width: 95%; }
   }
 </style>
