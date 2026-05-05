@@ -1,21 +1,53 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 
+const faqs = [
+  { q: '戰神呂布老虎機最高可以贏多少倍？', a: 'RSG 皇家電子官方資料顯示，戰神呂布最高獎金倍數為 51,000 倍總投注額。透過 Free Game 倍數累積機制搭配多個高倍數符號同時出現，理論上有機會觸及這個上限。' },
+  { q: '戰神呂布的 RTP（返還率）是多少？', a: '官方未公開具體 RTP 數值。但 RSG 皇家電子旗下遊戲多數經 GLI 認證，業界推估在 95%–97% 區間。建議以官方公佈為準，遊戲內設定頁面通常可查看。' },
+  { q: 'RSG 版和 GR 版戰神呂布有什麼差別？', a: 'RSG（皇家電子）版最高 51,000 倍、購買免遊 100 倍、有選房功能和免費試玩；GR（好路電子）版最高 60,000 倍、購買免遊 125 倍（加碼注 1.25 倍）、無選房和試玩。兩版核心玩法相同，差在倍數上限和附加功能。' },
+  { q: '戰神呂布的自由配對（Scatter Pays）怎麼玩？', a: '不需要傳統的左到右連線。盤面上同一種符號出現 8 個以上就算中獎，不限位置。數量分三個等級：8–9 個、10–11 個、12 個以上，數量越多賠率越高。' },
+  { q: '戰神呂布 Free Game 怎麼觸發？最多幾場？', a: '盤面出現 4 個以上 Bonus 符號即觸發 15 場 Free Game，同時獲得即時獎金（4 個 = 3 倍、5 個 = 5 倍、6 個 = 100 倍總投注）。Free Game 中再出現 3–6 個 Bonus 可額外 +5 場，最多累積到 100 場。' },
+  { q: '戰神呂布倍數符號怎麼計算？', a: '盤面上隨機出現綠（2x–5x）、藍（5x–10x）、紫（10x–50x）、紅（50x–500x）四色倍數符號。中獎時如果盤面有倍數符號，所有倍數值相加後乘上獎金。Free Game 期間倍數會持續累積不重置。' },
+  { q: '戰神呂布購買免遊值得買嗎？', a: '購買免遊價格為 100 倍總投注，直接進入 15 場 Free Game。因為免遊期間倍數會累積，理論上爆分機率較高，但 100 倍的門檻不低。資金充裕可以嘗試，資金不深建議等自然觸發。' },
+  { q: '戰神呂布跟雷神之錘 II 哪個比較好？', a: '兩款核心引擎相同（自由配對 + 倍數符號 + 4 級彩金 + Free Game），但雷神之錘 II 倍數上限 1000x、最高 25,000 倍；呂布倍數上限 500x、最高 51,000 倍。呂布整體爆分上限更高，雷神單次倍數天花板更高。看你喜歡三國還是北歐神話。' },
+];
 ---
 
-<BaseLayout 
-  title="戰神呂布｜RSG電子三國老虎機500倍實測 - GAME8LA"
-  description="戰神呂布完整評測！RSG皇家電子三國志老虎機，自由配對(Scatter Pays)、倍數符號最高500倍、4級累積彩金、15場Free Game可重觸最多100場。購買免遊100倍。8LA鄉民實測攻略。"
-  ogImage="https://game8la.com/images/og-image.webp"
+<BaseLayout
+  title="戰神呂布老虎機攻略｜RSG 皇家電子 51000 倍・倍數符號・免費遊戲完整拆解"
+  description="戰神呂布完整攻略！RSG 皇家電子三國老虎機最高 51,000 倍，自由配對 Scatter Pays、倍數符號 2x–500x 相加計算、Free Game 倍數累積最多 100 場、4 級累積彩金。附 RSG vs GR 版本比較、完整賠率表、芭樂子實測建議。"
+  ogImage="https://game8la.com/images/games/god-of-war-lubu/lubu-screenshot-1.webp"
   currentPage="rankings"
 >
+
+<ArticleSchema
+  url="https://game8la.com/games/god-of-war-lubu/"
+  title="戰神呂布老虎機攻略｜RSG 皇家電子 51000 倍完整拆解"
+  description="戰神呂布完整攻略：自由配對、倍數符號 2x–500x、Free Game 倍數累積最多 100 場、4 級累積彩金、RSG vs GR 版本比較。"
+  image="https://game8la.com/images/games/god-of-war-lubu/lubu-screenshot-1.webp"
+  datePublished="2026-04-05"
+  dateModified="2026-05-05"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '熱門遊戲', url: 'https://game8la.com/#games' },
+    { name: '戰神呂布', url: 'https://game8la.com/games/god-of-war-lubu/' }
+  ]}
+/>
+<FaqSchema faqs={faqs} />
+
 <div class="container">
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 戰神呂布</div>
   <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
+
+  <!-- Hero: 遊戲主圖 + 基本資訊 -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
-    <div style="background:linear-gradient(135deg,#1a0a0a,#3a1520,#2a0a15);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:300px;font-size:5rem;border:1px solid var(--border)">
-      ⚔️
+    <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border)">
+      <img src="/images/games/god-of-war-lubu/lubu-screenshot-1.webp" alt="戰神呂布老虎機 RSG 皇家電子遊戲畫面" width="800" height="450" style="display:block;width:100%;height:auto" fetchpriority="high" loading="eager">
     </div>
     <div>
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 三國志・自由配對</span>
@@ -26,21 +58,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <span style="color:var(--text-muted)">(5,832 次瀏覽)</span>
       </div>
       <div class="info-grid">
-        <span class="label">遊戲供應商</span><span class="value">RSG電子（皇家電子）</span>
+        <span class="label">遊戲供應商</span><span class="value">RSG 皇家電子</span>
         <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--text-muted)">官方未公開</span>
         <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">高波動</span>
+        <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">x51,000</span>
+        <span class="label">盤面結構</span><span class="value">6 軸 × 5 列（30 格）</span>
         <span class="label">基本投注</span><span class="value" style="color:var(--gold-light)">20 分</span>
         <span class="label">遊戲類型</span><span class="value">自由配對（Scatter Pays）</span>
-        <span class="label">核心機制</span><span class="value">倍數符號2x~500x、4級累積彩金、15場Free Game</span>
+        <span class="label">核心機制</span><span class="value">倍數符號 2x–500x、4 級累積彩金、15 場 Free Game</span>
       </div>
       <div class="tag-list">
         <span class="tag">戰神呂布</span>
         <span class="tag">RSG電子</span>
         <span class="tag">皇家電子</span>
         <span class="tag">自由配對</span>
+        <span class="tag">51000倍</span>
         <span class="tag">倍數符號500x</span>
         <span class="tag">累積彩金</span>
         <span class="tag">Free Game</span>
+        <span class="tag">三國老虎機</span>
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:1rem">
         <a href="/game-ranking/" class="btn-primary" onclick="event.preventDefault();document.querySelector('.section-title').scrollIntoView({behavior:'smooth'})">🎮 查看攻略</a>
@@ -48,69 +84,94 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
     </div>
   </div>
+
+  <!-- 遊戲截圖輪播 -->
+  <div class="screenshot-gallery">
+    <h3 style="color:var(--text-secondary);margin-bottom:1rem">📸 遊戲實機截圖</h3>
+    <div class="gallery-scroll">
+      <img src="/images/games/god-of-war-lubu/lubu-screenshot-2.webp" alt="戰神呂布倍數符號畫面" width="800" height="450" loading="lazy">
+      <img src="/images/games/god-of-war-lubu/lubu-screenshot-3.webp" alt="戰神呂布免費遊戲畫面" width="800" height="450" loading="lazy">
+      <img src="/images/games/god-of-war-lubu/lubu-screenshot-4.webp" alt="戰神呂布中獎畫面" width="800" height="450" loading="lazy">
+      <img src="/images/games/god-of-war-lubu/lubu-gameplay.webp" alt="戰神呂布遊戲進行中" width="597" height="449" loading="lazy">
+    </div>
+  </div>
+
   <hr class="divider">
+
   <!-- 目錄 -->
   <div class="toc">
     <h4>📑 本文目錄</h4>
     <ol>
-      <li><a href="#intro">遊戲介紹</a></li>
-      <li><a href="#scatter-pays">自由配對機制</a></li>
-      <li><a href="#multiplier">倍數符號 2x~500x</a></li>
-      <li><a href="#freegame">Free Game 15 場</a></li>
+      <li><a href="#intro">戰神呂布攻略：遊戲介紹</a></li>
+      <li><a href="#scatter-pays">自由配對機制怎麼玩</a></li>
+      <li><a href="#multiplier">戰神呂布倍數符號 2x–500x</a></li>
+      <li><a href="#freegame">戰神呂布免費遊戲 Free Game</a></li>
       <li><a href="#jackpot">4 級累積彩金</a></li>
-      <li><a href="#purchase">購買免遊</a></li>
-      <li><a href="#paytable">完整賠率表</a></li>
-      <li><a href="#recommend">推薦理由</a></li>
-      <li><a href="#tips">8LA攻略建議</a></li>
+      <li><a href="#rsg-vs-gr">RSG vs GR 戰神呂布差別</a></li>
+      <li><a href="#purchase">購買免遊值不值得</a></li>
+      <li><a href="#paytable">完整賠率表（附符號圖）</a></li>
+      <li><a href="#recommend">芭樂子推薦理由</a></li>
+      <li><a href="#tips">8LA 實戰攻略建議</a></li>
+      <li><a href="#faq">常見問題 FAQ</a></li>
     </ol>
   </div>
-  <h2 class="section-title" id="intro">遊戲介紹</h2>
+
+  <!-- § 1 遊戲介紹 -->
+  <h2 class="section-title" id="intro">戰神呂布攻略：三國最強猛將上老虎機</h2>
   <div class="article-content">
-    <p>三國迷注意了！RSG皇家電子的《<strong>戰神呂布</strong>》把最強猛將搬上老虎機，而且不是那種隨便貼個呂布圖就了事的換皮作品。這款跟同門的《雷神之錘II》一樣採用<strong>自由配對（Scatter Pays）</strong>機制——符號不需要連線，只要盤面上湊到 8 個以上相同符號就中獎，自由度拉滿。</p>
-    <p>核心爆點在<strong>倍數符號</strong>，綠/藍/紫/紅四種顏色，隨機給你 2x 到 500x 的加乘。中獎的時候如果盤面上有倍數符號，所有倍數相加直接套到獎金上，那個「等等，怎麼突然多這麼多」的感覺，就是這款遊戲讓人上癮的原因。再加上<strong>4 級累積彩金</strong>和 <strong>15 場 Free Game</strong>，完整度非常高。</p>
-    <p>基本投注 20 分，獎金計算公式是<strong>押注額 ÷ 20 × 賠率</strong>。呂布在三國裡就是那個「人中呂布，馬中赤兔」的存在，這款遊戲也完美還原了這種霸氣——盤面全是赤兔馬加高倍數符號的時候，真的有種天下無雙的感覺。</p>
+    <p><strong>戰神呂布</strong>是 RSG 皇家電子旗下的三國主題老虎機，最高獎金 <strong>51,000 倍</strong>——沒在跟你客氣。跟同門的<a href="/games/thor-hammer-2/" style="color:var(--guava-green)">雷神之錘 II</a> 一樣採用<strong>自由配對（Scatter Pays）</strong>機制，符號不用連線，盤面上湊到 8 個以上相同符號就中獎，自由度拉滿。</p>
+    <p>核心爆點在<strong>倍數符號</strong>，綠、藍、紫、紅四種顏色，隨機給你 2x 到 500x 的加乘。中獎的時候如果盤面上有倍數符號，所有倍數相加直接套到獎金上——那個「等等，怎麼突然多這麼多」的感覺，就是這款讓人戒不掉的原因。再加上 <strong>4 級累積彩金</strong>和 <strong>15 場 Free Game（最多 100 場）</strong>，完整度非常高。</p>
+    <p>盤面結構 6 軸 × 5 列共 30 格，基本投注 20 分，獎金計算公式是<strong>押注額 ÷ 20 × 賠率</strong>。呂布在三國裡就是那個「人中呂布，馬中赤兔」的存在，RSG 把這種霸氣完美還原——盤面全是赤兔馬加高倍數符號的時候，真的有種天下無雙的感覺。</p>
+    <img src="/images/games/god-of-war-lubu/lubu-symbols-overview-1.webp" alt="戰神呂布老虎機符號總覽" width="400" height="300" loading="lazy" class="content-img">
   </div>
-  <h2 class="section-title" id="scatter-pays">自由配對機制</h2>
+
+  <!-- § 2 自由配對 -->
+  <h2 class="section-title" id="scatter-pays">自由配對機制怎麼玩？Scatter Pays 完整說明</h2>
   <div class="article-content">
-    <p>跟傳統老虎機需要「左到右連線」不同，戰神呂布用的是<strong><a href="/articles/slots-guide/" style="color:var(--guava-green)">自由配對（Scatter Pays）</a></strong>，也就是說符號出現在盤面的任何位置都算數，只要同一種符號的數量達到門檻就中獎。</p>
+    <p>跟傳統老虎機要「左到右連線」不同，戰神呂布用的是<strong><a href="/articles/slots-guide/" style="color:var(--guava-green)">自由配對（Scatter Pays）</a></strong>，符號出現在盤面的任何位置都算數，只要同一種符號的數量達到門檻就中獎。</p>
     <div class="tip-box">
       <strong>💡 自由配對規則：</strong><br>
-      盤面上相同符號達到 <strong>8 個以上</strong>即中獎，不限位置、不需要連線。數量越多賠率越高，分為 8-9 個、10-11 個、12 個以上三個等級。
+      盤面上相同符號達到 <strong>8 個以上</strong>即中獎，不限位置、不需要連線。數量越多賠率越高，分為 8–9 個、10–11 個、12 個以上三個等級。
     </div>
-    <p>這個機制最爽的地方是你不用盯著賠付線看，只要數符號數量就好。而且因為不限位置，所以大獎出現的可能性其實比傳統連線更高——只要整個盤面夠多相同符號，直接噴分。</p>
+    <p>這個機制最爽的地方是你不用盯著賠付線看，只要數符號數量就好。因為不限位置，大獎出現的可能性其實比傳統連線更高——只要整個盤面夠多相同符號，直接噴分。跟雷神之錘 II 的<strong>掉落消除</strong>不同，呂布是純 Scatter Pays、一次結算，節奏更明快。</p>
   </div>
-  <h2 class="section-title" id="multiplier">倍數符號 2x~500x</h2>
+
+  <!-- § 3 倍數符號 -->
+  <h2 class="section-title" id="multiplier">戰神呂布倍數符號 2x–500x 怎麼算</h2>
   <div class="article-content">
     <p>戰神呂布的靈魂就在<strong>倍數符號</strong>。盤面上會隨機出現四種顏色的倍數符號，每種攜帶不同範圍的隨機倍數：</p>
     <div class="grid-2" style="margin:1.5rem 0">
       <div class="card" style="text-align:center;border-color:#4caf50">
         <div style="font-size:2rem;margin-bottom:0.5rem">🟢</div>
         <h3 style="color:#4caf50">綠色倍數</h3>
-        <p>低倍數範圍<br><strong style="color:var(--text-primary)">2x ~ 小倍數</strong></p>
+        <p>低倍數範圍<br><strong style="color:var(--text-primary)">2x – 5x</strong></p>
       </div>
       <div class="card" style="text-align:center;border-color:#2196f3">
         <div style="font-size:2rem;margin-bottom:0.5rem">🔵</div>
         <h3 style="color:#2196f3">藍色倍數</h3>
-        <p>中低倍數範圍<br><strong style="color:var(--text-primary)">中等倍數</strong></p>
+        <p>中低倍數範圍<br><strong style="color:var(--text-primary)">5x – 10x</strong></p>
       </div>
       <div class="card" style="text-align:center;border-color:#9c27b0">
         <div style="font-size:2rem;margin-bottom:0.5rem">🟣</div>
         <h3 style="color:#9c27b0">紫色倍數</h3>
-        <p>中高倍數範圍<br><strong style="color:var(--text-primary)">較高倍數</strong></p>
+        <p>中高倍數範圍<br><strong style="color:var(--text-primary)">10x – 50x</strong></p>
       </div>
       <div class="card" style="text-align:center;border-color:#f44336">
         <div style="font-size:2rem;margin-bottom:0.5rem">🔴</div>
         <h3 style="color:#f44336">紅色倍數</h3>
-        <p>高倍數範圍<br><strong style="color:var(--text-primary)">最高 500x</strong></p>
+        <p>高倍數範圍<br><strong style="color:var(--text-primary)">50x – 500x</strong></p>
       </div>
     </div>
-    <blockquote>倍數符號的計算方式：當盤面出現中獎組合時，如果同時有倍數符號存在，<strong>所有倍數符號的倍數值會相加</strong>，然後乘上你的獎金。比如盤面上有一個 5x 和一個 10x，加起來就是 15x 直接套在獎金上。</blockquote>
-    <p>跟雷神之錘II 的倍數符號最高 1000x 比起來，呂布的 500x 看似較低，但因為倍數是<strong>相加計算</strong>的，如果同時出現多個高倍數符號，總倍數可以飆到很誇張的數字。這也是為什麼這款遊戲的爆分截圖總是讓人眼睛瞪大的原因。</p>
+    <img src="/images/games/god-of-war-lubu/lubu-multiplier.webp" alt="戰神呂布倍數符號實機畫面" width="978" height="186" loading="lazy" class="content-img">
+    <blockquote>倍數符號計算方式：當盤面出現中獎組合時，如果同時有倍數符號存在，<strong>所有倍數符號的倍數值會相加</strong>，然後乘上你的獎金。比如盤面上有一個 5x 和一個 10x，加起來就是 15x 直接套在獎金上。</blockquote>
+    <p>跟雷神之錘 II 的倍數符號最高 1000x 比起來，呂布的 500x 看似較低，但因為倍數是<strong>相加計算</strong>的，如果同時出現多個高倍數符號，總倍數可以飆到很誇張的數字。而且呂布的最高獎金倍數 51,000 倍比雷神的 25,000 倍還高一倍——所以別看單一倍數上限比較低，整體爆分天花板其實更高。</p>
   </div>
-  <h2 class="section-title" id="freegame">Free Game 15 場</h2>
+
+  <!-- § 4 Free Game -->
+  <h2 class="section-title" id="freegame">戰神呂布免費遊戲 Free Game：倍數累積最多 100 場</h2>
   <div class="article-content">
     <h3>觸發條件</h3>
-    <p>盤面上出現 <strong>Bonus 符號</strong>即可觸發 Free Game，同時還會給你一筆即時獎金：</p>
+    <p>盤面上出現 <strong>4 個以上 Bonus 符號</strong>即可觸發 Free Game，同時還會給你一筆即時獎金：</p>
     <table>
       <thead><tr><th>Bonus 數量</th><th>即時獎金</th><th>Free Game</th></tr></thead>
       <tbody>
@@ -120,18 +181,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </tbody>
     </table>
     <p>沒看錯，6 個 Bonus 直接送你 <strong>100 倍總投注</strong>的即時獎金，光是觸發獎金就已經回本了。</p>
+    <img src="/images/games/god-of-war-lubu/lubu-freegame.webp" alt="戰神呂布免費遊戲模式畫面" width="413" height="320" loading="lazy" class="content-img">
+
     <h3>Free Game 倍數累積機制</h3>
-    <p>Free Game 期間是這款遊戲最核心的爆分場景。在免費遊戲中，所有出現的倍數符號會<strong>累積進一個 Total Multiplier（總倍數）</strong>，而且這個總倍數<strong>不會重置</strong>，會一直疊加到 Free Game 結束為止。</p>
+    <p>Free Game 期間是這款遊戲最核心的爆分場景。所有出現的倍數符號會<strong>累積進一個 Total Multiplier（總倍數）</strong>，而且<strong>不會重置</strong>，一直疊加到 Free Game 結束為止。</p>
     <div class="tip-box">
       <strong>💡 Free Game 倍數累積：</strong><br>
       每一場 Free Game 中出現的倍數符號，其倍數值都會累積到總倍數中。假設前 5 場累積了 50x，第 6 場又出現 20x，總倍數就變成 70x，後面每一場的獎金都會乘上這個 70x。<strong>越後面的場次獎金越誇張。</strong>
     </div>
+
     <h3>Free Game 重新觸發</h3>
-    <p>Free Game 期間如果再次出現 3~6 個 Bonus 符號，可以<strong>額外獲得 5 場</strong> Free Game，最多累積到 <strong>100 場</strong>。想像一下：100 場 Free Game 配上不斷累積的倍數，這就是呂布真正展現天下無雙的時刻。</p>
+    <p>Free Game 期間如果再次出現 3–6 個 Bonus 符號，可以<strong>額外獲得 5 場</strong> Free Game，最多累積到 <strong>100 場</strong>。100 場 Free Game 配上不斷累積的倍數——這就是呂布真正展現天下無雙的時刻，也是 51,000 倍上限存在的理由。</p>
   </div>
-  <h2 class="section-title" id="jackpot">4 級累積彩金</h2>
+
+  <!-- § 5 累積彩金 -->
+  <h2 class="section-title" id="jackpot">4 級累積彩金 Progressive Jackpot</h2>
   <div class="article-content">
-    <p>跟雷神之錘II 一樣，戰神呂布也配備了<strong><a href="/articles/casino-payout-guide/" style="color:var(--guava-green)">四級累積彩金（Progressive Jackpot）</a></strong>，隨時有機會在任何一轉觸發：</p>
+    <p>跟雷神之錘 II 一樣，戰神呂布也配備了<strong>四級累積彩金</strong>，任何一轉都有機會隨機觸發：</p>
     <div class="grid-2" style="margin:1.5rem 0">
       <div class="card" style="text-align:center;border-color:var(--gold)">
         <h3 style="color:var(--gold-light);font-size:1.3rem">🏆 GRAND</h3>
@@ -150,72 +216,225 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>小獎池<br><strong style="color:var(--text-secondary);font-size:1.5rem">7,000+</strong></p>
       </div>
     </div>
-    <p>累積彩金的金額會隨著所有玩家的投注持續增長，直到有人中獎為止。GRAND 獎池動輒 50 萬以上，中到一次直接改變人生（好啦，至少改變當天的心情）。</p>
+    <p>累積彩金的金額會隨著所有玩家的投注持續增長，直到有人中獎為止。GRAND 獎池動輒 50 萬以上，中到一次直接改變人生——好啦，至少改變當天的心情。彩金觸發是隨機的，不用刻意追，當作遊戲的 bonus surprise 就好。</p>
   </div>
-  <h2 class="section-title" id="purchase">購買免遊</h2>
+
+  <!-- § 6 RSG vs GR 比較 -->
+  <h2 class="section-title" id="rsg-vs-gr">RSG vs GR 戰神呂布差別：兩個版本到底差在哪</h2>
   <div class="article-content">
-    <p>等不及 Bonus 自然觸發？戰神呂布提供<strong>購買免遊</strong>功能，讓你直接花錢進入 Free Game：</p>
+    <p>市面上的戰神呂布其實有兩個版本：<strong>RSG 皇家電子</strong>的原版和 <strong>GR 好路電子</strong>的版本。兩者核心玩法幾乎一樣——自由配對、倍數符號、4 級彩金、Free Game 都有——但細節差了不少，芭樂子幫你列清楚：</p>
+    <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr><th>比較項目</th><th style="color:var(--guava-green)">RSG 皇家電子</th><th style="color:var(--guava-pink)">GR 好路電子</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>最高獎金倍數</strong></td><td>51,000 倍</td><td>60,000 倍</td></tr>
+        <tr><td><strong>倍數符號上限</strong></td><td>500x</td><td>500x</td></tr>
+        <tr><td><strong>購買免遊價格</strong></td><td>100 倍總投注</td><td>125 倍總投注（加碼注 1.25x）</td></tr>
+        <tr><td><strong>Free Game</strong></td><td>15 場，最多 100 場</td><td>15 場，最多 100 場</td></tr>
+        <tr><td><strong>選房功能</strong></td><td>✅ 有</td><td>❌ 無</td></tr>
+        <tr><td><strong>免費試玩</strong></td><td>✅ 有</td><td>❌ 無</td></tr>
+        <tr><td><strong>累積彩金</strong></td><td>4 級</td><td>4 級</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>簡單說：GR 版的爆分天花板更高（60,000 倍 vs 51,000 倍），但購買免遊也更貴（125 倍 vs 100 倍），而且沒有選房功能和免費試玩。RSG 版多了選房和試玩，對新手比較友善。如果你想先試水溫，選 RSG 版；如果你是老手、追求極限爆分，GR 版的上限更高。</p>
+    <div class="warn-box">
+      <strong>⚠️ 芭樂子提醒：</strong>不管 RSG 還是 GR 版，都要確認你玩的平台是不是<a href="/casino-check/" style="color:var(--guava-green)">合法正規的娛樂城</a>。盜版遊戲可以偷改 RTP 和爆分機率，版本選對了但平台選錯一樣白搭。
+    </div>
+  </div>
+
+  <!-- § 7 購買免遊 -->
+  <h2 class="section-title" id="purchase">購買免遊值不值得？100 倍的門檻算一筆帳</h2>
+  <div class="article-content">
+    <p>等不及 Bonus 自然觸發？戰神呂布提供<strong>購買免遊</strong>功能，直接花錢進入 Free Game：</p>
     <table>
       <thead><tr><th>購買項目</th><th>價格</th><th>效果</th></tr></thead>
       <tbody>
         <tr><td>購買 Free Game</td><td>總投注 × <strong>100</strong></td><td>直接進入 15 場 Free Game</td></tr>
       </tbody>
     </table>
+    <p>100 倍是什麼概念？如果你一注 10 塊，買一次就是 1,000 塊。Free Game 期間倍數會累積，理論上爆分機率比基本遊戲高很多，但畢竟是高波動遊戲，花了 100 倍進去結果倍數累積不起來的情況也是有的。</p>
     <div class="warn-box">
-      <strong>⚠️ 8LA提醒：</strong>購買免遊 100 倍是一筆不小的花費。如果你的資金不夠深，建議還是等自然觸發比較穩。購買免遊適合資金充裕、想快速進入高倍數累積階段的玩家。
+      <strong>⚠️ 芭樂子建議：</strong>資金深度至少準備 300–500 倍基本注額再考慮購買免遊。資金不夠深就老老實實等自然觸發，別把「買」當成「穩賺」——那是兩回事。
     </div>
   </div>
-  <h2 class="section-title" id="paytable">完整賠率表</h2>
+
+  <!-- § 8 完整賠率表 -->
+  <h2 class="section-title" id="paytable">戰神呂布完整賠率表（附符號圖）</h2>
   <div class="article-content">
-    <p>以下是戰神呂布 9 種一般符號的賠率表（基本投注 20 分，獎金 = 押注額 ÷ 20 × 賠率）：</p>
-    <div style="overflow-x:auto">
-    <table>
-      <thead>
-        <tr><th>符號</th><th>8-9 個</th><th>10-11 個</th><th>12 個以上</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>🐎 赤兔馬</td><td style="color:var(--gold-light)">200</td><td style="color:var(--gold-light)">500</td><td style="color:var(--gold-light);font-weight:700">1,000</td></tr>
-        <tr><td>🔱 方天畫戟</td><td>50</td><td>200</td><td style="color:var(--gold-light)">500</td></tr>
-        <tr><td>🚩 戰旗</td><td>40</td><td>100</td><td style="color:var(--gold-light)">300</td></tr>
-        <tr><td>🏅 令牌</td><td>30</td><td>40</td><td>240</td></tr>
-        <tr><td>🔴 紅寶石</td><td>20</td><td>30</td><td>200</td></tr>
-        <tr><td>🟣 紫寶石</td><td>16</td><td>24</td><td>160</td></tr>
-        <tr><td>🟡 金珠</td><td>10</td><td>20</td><td>100</td></tr>
-        <tr><td>🟢 綠寶石</td><td>8</td><td>18</td><td>80</td></tr>
-        <tr><td>🔷 藍鑽</td><td>5</td><td>15</td><td>40</td></tr>
-      </tbody>
-    </table>
+    <p>以下是戰神呂布 9 種一般符號的賠率表。獎金計算公式：<strong>押注額 ÷ 20 × 賠率</strong>（基本投注 20 分）。</p>
+
+    <!-- 高賠符號 -->
+    <h3>🔥 高賠符號</h3>
+    <div class="symbol-row">
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-horse.webp" alt="赤兔馬符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">赤兔馬</span>
+        <span class="symbol-pay">8–9: <strong>200</strong> ｜ 10–11: <strong>500</strong> ｜ 12+: <strong style="color:var(--gold-light)">1,000</strong></span>
+      </div>
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-halberd.webp" alt="方天畫戟符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">方天畫戟</span>
+        <span class="symbol-pay">8–9: <strong>50</strong> ｜ 10–11: <strong>200</strong> ｜ 12+: <strong style="color:var(--gold-light)">500</strong></span>
+      </div>
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-flag.webp" alt="戰旗符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">戰旗</span>
+        <span class="symbol-pay">8–9: <strong>40</strong> ｜ 10–11: <strong>100</strong> ｜ 12+: <strong style="color:var(--gold-light)">300</strong></span>
+      </div>
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-token.webp" alt="令符符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">令符</span>
+        <span class="symbol-pay">8–9: <strong>30</strong> ｜ 10–11: <strong>40</strong> ｜ 12+: <strong style="color:var(--gold-light)">240</strong></span>
+      </div>
     </div>
-    <p>赤兔馬是最高賠的符號，12 個以上直接賠率 1,000，如果再配上倍數符號的加乘⋯⋯嗯，你懂的。方天畫戟和戰旗分別是第二、第三高賠，完美呼應呂布的武器和軍旗，三國考據做得到位。</p>
+
+    <!-- 低賠符號 -->
+    <h3>💎 寶石符號</h3>
+    <div class="symbol-row">
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-red-gem.webp" alt="紅寶石符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">紅寶石</span>
+        <span class="symbol-pay">8–9: <strong>20</strong> ｜ 10–11: <strong>30</strong> ｜ 12+: <strong>200</strong></span>
+      </div>
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-purple-gem.webp" alt="紫寶石符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">紫寶石</span>
+        <span class="symbol-pay">8–9: <strong>16</strong> ｜ 10–11: <strong>24</strong> ｜ 12+: <strong>160</strong></span>
+      </div>
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-yellow-gem.webp" alt="黃寶石符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">黃寶石</span>
+        <span class="symbol-pay">8–9: <strong>10</strong> ｜ 10–11: <strong>20</strong> ｜ 12+: <strong>100</strong></span>
+      </div>
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-green-gem.webp" alt="綠寶石符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">綠寶石</span>
+        <span class="symbol-pay">8–9: <strong>8</strong> ｜ 10–11: <strong>18</strong> ｜ 12+: <strong>80</strong></span>
+      </div>
+      <div class="symbol-card">
+        <img src="/images/games/god-of-war-lubu/symbol-blue-gem.webp" alt="藍寶石符號" width="80" height="80" loading="lazy">
+        <span class="symbol-name">藍寶石</span>
+        <span class="symbol-pay">8–9: <strong>5</strong> ｜ 10–11: <strong>15</strong> ｜ 12+: <strong>40</strong></span>
+      </div>
+    </div>
+
+    <img src="/images/games/god-of-war-lubu/lubu-symbols-overview-2.webp" alt="戰神呂布符號賠率總覽" width="400" height="300" loading="lazy" class="content-img">
+    <p>赤兔馬是最高賠的符號，12 個以上直接賠率 1,000，如果再配上倍數符號的加乘——嗯，你懂的。方天畫戟和戰旗分別是第二、第三高賠，完美呼應呂布的武器和軍旗，三國考據做得到位。</p>
   </div>
-  <h2 class="section-title" id="recommend">為什麼 GAME8LA推薦這款？</h2>
+
+  <!-- § 9 推薦理由 -->
+  <h2 class="section-title" id="recommend">芭樂子推薦理由：為什麼這款值得試</h2>
   <div class="article-content">
-    <p>戰神呂布跟同門雷神之錘II 的引擎幾乎一模一樣——自由配對、倍數符號、4 級累積彩金、15 場 Free Game，但主題換成了華語圈更有共鳴的三國志。如果你玩過雷神覺得手感不錯但對北歐神話無感，呂布就是你的菜。</p>
-    <p>倍數符號最高 500x（雷神是 1000x），看似縮水但其實實戰差異不大，因為 500x 出現的機率相對更高。Free Game 的倍數累積機制才是真正的爆分核心，15 場加上重觸最多 100 場，後期每一轉的獎金都會被誇張的總倍數放大。</p>
+    <p>戰神呂布跟同門雷神之錘 II 的引擎幾乎一模一樣——自由配對、倍數符號、4 級累積彩金、15 場 Free Game，但主題換成了華語圈更有共鳴的三國志。如果你玩過雷神覺得手感不錯但對北歐神話無感，呂布就是你的菜。</p>
+    <p>51,000 倍的爆分上限比雷神的 25,000 倍高出一倍，單次倍數上限雖然低一點（500x vs 1000x），但實戰差異不大，因為 Free Game 的倍數<strong>累積機制</strong>才是真正的爆分核心。15 場加上重觸最多 100 場，後期每一轉的獎金都會被誇張的總倍數放大。</p>
     <p>三國主題的美術、赤兔馬和方天畫戟的高賠符號設計，讓這款遊戲不只是個「換皮雷神」，而是有自己的風格和辨識度。推薦給所有喜歡自由配對玩法的三國迷。</p>
   </div>
-  <h2 class="section-title" id="tips">⚡ 8LA攻略建議</h2>
+
+  <!-- § 10 攻略建議 -->
+  <h2 class="section-title" id="tips">⚡ 8LA 實戰攻略建議</h2>
   <div class="card" style="background:rgba(57,255,20,0.08);border-color:var(--guava-green)">
     <ol style="padding-left:1.5rem;color:var(--text-secondary)">
-      <li><strong>盯倍數符號顏色</strong> — 紅色倍數是最高的（最高 500x），看到紅色出現在盤面上就準備興奮了</li>
-      <li><strong>Free Game 才是核心</strong> — 基礎遊戲賺小錢，Free Game 的倍數累積才是真正噴分的地方。耐心等觸發，或者用 100x 購買直接進入</li>
-      <li><strong>重觸 Free Game 很重要</strong> — Free Game 期間再出 3~6 個 Bonus 可以+5 場，最多累積 100 場。場次越多，倍數累積越誇張，後期每一轉都是重擊</li>
-      <li><strong>跟雷神之錘II 交替玩</strong> — 兩款引擎相同、手感類似但主題不同，可以交替遊玩避免疲勞感</li>
-      <li><strong>資金管理最重要</strong> — 高波動遊戲一定有乾旱期，設好止損線。購買免遊 100 倍不便宜，資金不夠深不要硬買</li>
-      <li><strong>累積彩金是額外驚喜</strong> — 4 級 Jackpot 隨機觸發，不用刻意追，當作遊戲的 bonus surprise</li>
+      <li><strong>盯倍數符號顏色</strong> — 紅色倍數是最高的（50x–500x），看到紅色出現在盤面上就準備心跳加速了</li>
+      <li><strong>Free Game 才是核心</strong> — 基礎遊戲賺小錢，Free Game 的倍數累積才是真正噴分的地方。耐心等觸發，或者用 100 倍購買直接進入</li>
+      <li><strong>重觸 Free Game 很重要</strong> — Free Game 期間再出 3–6 個 Bonus 可以 +5 場，最多累積 100 場。場次越多，倍數累積越誇張，後期每一轉都是重擊</li>
+      <li><strong>RSG 版先試玩再投錢</strong> — RSG 版有免費試玩功能，先摸熟手感再決定要不要投入。GR 版沒有這個功能</li>
+      <li><strong>跟雷神之錘 II 交替玩</strong> — 兩款引擎相同、手感類似但主題不同，可以交替遊玩避免疲勞感</li>
+      <li><strong>資金管理最重要</strong> — 高波動遊戲一定有乾旱期，設好止損線。想用<a href="/tools/bankroll-calculator/" style="color:var(--guava-green)">資金管理計算器</a>算好你的注額，別 all-in 當呂布</li>
+      <li><strong>確認平台正規性</strong> — 不管玩什麼遊戲，先用<a href="/casino-check/" style="color:var(--guava-green)">娛樂城體檢工具</a>查一下你的平台有沒有問題，盜版遊戲的 RTP 跟正版差很多</li>
     </ol>
   </div>
-  <div class="related-box"><h3>⚡ 你可能也想玩</h3><div class="related-links"><a href="/games/thor-hammer-2/">雷神之錘II 雷霆風暴<small>RSG電子｜自由配對同門｜8LA評分 9.7</small></a><a href="/games/seth-2/">戰神賽特2：覺醒之力<small>ATG電子｜8LA評分 9.8</small></a><a href="/games/dragons-treasure-quest/">尋龍寶藏<small>PG Soft｜7776路高波動尋寶｜8LA評分 9.3</small></a><a href="/games/caishen-wins/">贏財神<small>PG Soft｜32400路財神系列｜8LA評分 9.0</small></a></div></div>
+
+  <!-- § 11 FAQ -->
+  <h2 class="section-title" id="faq">❓ 戰神呂布常見問題 FAQ</h2>
+  <div class="article-content">
+    {faqs.map((faq) => (
+      <details class="faq-item">
+        <summary>{faq.q}</summary>
+        <p>{faq.a}</p>
+      </details>
+    ))}
+  </div>
+
+  <!-- 延伸閱讀 -->
+  <div class="related-box">
+    <h3>⚡ 你可能也想看</h3>
+    <div class="related-links">
+      <a href="/games/thor-hammer-2/">雷神之錘 II 雷霆風暴<small>RSG 電子｜自由配對同門｜8LA 評分 9.5</small></a>
+      <a href="/articles/rtp-explained/">RTP 是什麼？博弈遊戲回報率完整拆解<small>觀念科普｜搞懂 RTP 少虧一半</small></a>
+      <a href="/articles/slot-pool-theory-explained/">老虎機爆金機率底層邏輯<small>觀念科普｜水池理論拆解</small></a>
+      <a href="/games/seth-2/">戰神賽特 2：覺醒之力<small>ATG 電子｜8LA 評分 9.8</small></a>
+      <a href="/casino-check/">娛樂城體檢工具<small>免費查詢平台安全性</small></a>
+    </div>
+  </div>
+
+  <!-- 贊助區 -->
+  <div class="donate-section">
+    <div class="donate-content">
+      <div class="donate-text">
+        <p>🍈 <strong>芭樂子用愛發電中</strong></p>
+        <p>這篇戰神呂布攻略花了芭樂子一整天整理官方資料、比對 RSG 跟 GR 兩個版本的差異、截圖標註每個符號的賠率。全站零業配、零導流連結，所有資訊都是自己查的。覺得有幫到你的話，歡迎轉帳請芭樂子喝一杯芭樂汁補充體力：</p>
+        <p class="donate-bank"><strong>華南(008) 4252-0026-2111</strong><button class="donate-copy" onclick="navigator.clipboard.writeText('42520026211');this.textContent='已複製 ✓';setTimeout(()=>this.textContent='複製帳號',1500)">複製帳號</button></p>
+      </div>
+    </div>
+  </div>
+
+  <ShareButtons title="戰神呂布老虎機攻略｜RSG 皇家電子 51000 倍完整拆解" hashtag="#GAME8LA #戰神呂布 #RSG電子" />
+  <ManifestoBox />
+
   <div style="text-align:center;margin-top:2rem">
     <a href="/#games" class="btn-outline">← 回遊戲列表</a>
     <a href="/game-ranking/" class="btn-primary" style="margin-left:1rem">看遊戲推薦排名 →</a>
   </div>
 </div>
 
-<!-- SCROLL TO TOP -->
 </BaseLayout>
 
+<style is:global>
+/* 截圖輪播 */
+.screenshot-gallery{margin:1.5rem 0}
+.gallery-scroll{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:0.5rem}
+.gallery-scroll img{flex:0 0 auto;width:320px;height:auto;border-radius:12px;border:1px solid var(--border);scroll-snap-align:start}
+.gallery-scroll::-webkit-scrollbar{height:6px}
+.gallery-scroll::-webkit-scrollbar-track{background:var(--bg-card);border-radius:3px}
+.gallery-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
+/* 文內圖 */
+.content-img{display:block;max-width:100%;height:auto;border-radius:12px;border:1px solid var(--border);margin:1.5rem auto}
+
+/* 符號賠率卡 */
+.symbol-row{display:flex;flex-wrap:wrap;gap:1rem;margin:1rem 0 1.5rem}
+.symbol-card{display:flex;align-items:center;gap:0.8rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1rem;flex:1 1 calc(50% - 0.5rem);min-width:280px}
+.symbol-card img{width:60px;height:60px;border-radius:8px;object-fit:contain;flex-shrink:0}
+.symbol-name{font-weight:700;color:var(--text-primary);white-space:nowrap;min-width:4em}
+.symbol-pay{font-size:0.85rem;color:var(--text-secondary);line-height:1.5}
+
+/* FAQ */
+.faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;margin-bottom:0.8rem;overflow:hidden}
+.faq-item summary{padding:1rem 1.2rem;cursor:pointer;font-weight:600;color:var(--text-primary);list-style:none;display:flex;align-items:center;gap:0.5rem}
+.faq-item summary::before{content:'▸';color:var(--guava-green);font-size:1.1rem;transition:transform 0.2s}
+.faq-item[open] summary::before{transform:rotate(90deg)}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item p{padding:0 1.2rem 1rem;color:var(--text-secondary);line-height:1.8;margin:0}
+
+/* 贊助區 */
+.donate-section{background:linear-gradient(135deg,rgba(57,255,20,0.06),rgba(245,184,0,0.06));border:1px solid var(--guava-green);border-radius:16px;padding:2rem;margin:2rem 0}
+.donate-content{max-width:640px}
+.donate-text p{margin:0 0 0.8rem;color:var(--text-secondary);line-height:1.8}
+.donate-text p:first-child{font-size:1.1rem}
+.donate-bank{display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;margin-top:1rem}
+.donate-bank strong{color:var(--guava-green);font-size:1.1rem;letter-spacing:0.5px}
+.donate-copy{background:var(--guava-green);color:#000;border:none;padding:0.4rem 1rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.85rem;transition:opacity 0.2s}
+.donate-copy:hover{opacity:0.85}
+
+/* RWD */
+@media(max-width:768px){
+  .symbol-card{flex:1 1 100%}
+  .gallery-scroll img{width:260px}
+}
+</style>
 
 <script is:inline type="application/ld+json">
 {
@@ -224,9 +443,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   "name": "戰神呂布",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Web",
-  "description": "RSG皇家電子三國志老虎機，自由配對(Scatter Pays)、倍數符號最高500倍、4級累積彩金、15場Free Game",
+  "description": "RSG 皇家電子三國志老虎機，自由配對 Scatter Pays、倍數符號 2x–500x、最高 51,000 倍、4 級累積彩金、15 場 Free Game 最多 100 場",
   "url": "https://game8la.com/games/god-of-war-lubu/",
-  "author": { "@type": "Organization", "name": "RSG皇家電子" },
+  "author": { "@type": "Organization", "name": "RSG 皇家電子" },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "9.4",
