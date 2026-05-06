@@ -31,7 +31,7 @@ export const articles = [
   },
   {
     slug: 'power-lottery-odds-explained',
-    title: '威力彩中獎機率完整拆解：頭獎 1/22,085,448 到底多高？9 個獎項逐一計算',
+    title: '威力彩頭獎機率 1/22,085,448 有多難中？9 個獎項中獎機率・期望值・稅後實拿一次算完',
     excerpt: '威力彩頭獎機率 1/22085448 怎麼算的？芭樂子用組合數學從 C(38,6)×8 算起，9 個獎項中獎機率、期望值、稅後實拿全部拆開來看。附生活化比喻表＋包牌成本試算。',
     category: 'lottery',
     categoryLabel: '彩券機率科普',
@@ -129,7 +129,7 @@ export const articles = [
   },
   {
     slug: 'lottery-dragout-guide',
-    title: '拖出號是什麼？從 539 歷史數據看號碼之間的連動規律｜芭樂好彩分析器教學',
+    title: '拖出號是什麼意思？彩券術語「拖出・隔1期」白話解釋＋539 歷史數據實測',
     excerpt: '拖出號是進階彩券分析術語：當 A 號碼開出後，下一期最常跟著出現的是誰？芭樂子用歷史開獎數據拆解條件機率，教你看懂偏差值和樣本量，搭配免費工具 3 步驟實測。',
     category: 'lottery',
     categoryLabel: '彩券進階',
@@ -553,7 +553,7 @@ export const articles = [
   },
   {
     slug: 'lottery-odds-comparison',
-    title: '威力彩頭獎機率 1/2,208 萬 vs 大樂透 1/1,398 萬｜2026 中獎機率完整比較',
+    title: '威力彩跟大樂透中獎機率差多少？頭獎差 1.58 倍，但 100 元期望值誰比較高？',
     excerpt: '威力彩頭獎機率只有 1/22,085,448，大樂透則是 1/13,983,816。各獎項命中率、期望值、RTP 全比較，100 元該買哪個一篇搞懂。',
     category: 'lottery',
     categoryLabel: '彩券',
