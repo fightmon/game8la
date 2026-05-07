@@ -1,0 +1,388 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '大樂透包牌幾碼最划算？', a: '從成本效益比來看，<strong>7～9 碼</strong>是最佳甜蜜點。7 碼每期花 $350（7 注），覆蓋了 C(7,6)=7 種組合，把「至少中一個六獎」的機率從單注的 17.5% 拉高到約 66%。9 碼花 $4,200（84 注），命中率已經相當可觀，但超過 10 碼之後組合數爆炸（C(12,6)=924 注 = $46,200），長期幾乎不可能靠小獎回本。' },
+  { q: '大樂透包牌一定比單注容易中嗎？', a: '「至少中一個小獎」的機率確實會提高，但每一注的中獎機率完全沒變。頭獎永遠是 1/13,983,816。包牌的本質是用更多錢覆蓋更多組合，提升的是「中獎體驗」而不是「賺錢機率」。更重要的是：小獎獎金通常遠低於包牌成本，例如 9 碼包牌花 $4,200，中幾注六獎只回收幾百塊。' },
+  { q: '大樂透全包 49 碼可以穩賺嗎？', a: '絕對不行。全包 49 碼 = C(49,6) = 13,983,816 注 = 每期花 <strong>$699,190,800</strong>（近 7 億）。大樂透頭獎保證獎金只有 5,000 萬起跳，就算加碼到 10 億，扣稅後也只有 8 億左右，而且還可能多人均分。況且大樂透的整體 RTP 約 55%，全包就是數學上保證虧損的行為。' },
+  { q: '大樂透跟 539 哪個比較適合包牌？', a: '<strong>539 更適合。</strong>539 從 39 碼選 5 個，大樂透從 49 碼選 6 個。同樣包 7 碼，539 只要 21 注（$1,050），大樂透要 7 注（$350）——看起來大樂透更便宜？但大樂透的頭獎機率是 1/1,398 萬，而 539 頭獎機率是 1/57.5 萬，差了 24 倍。加上 539 小獎比較容易中，長期回本率較高。詳見 <a href="/articles/daily-cash-539-wheel-strategy/">539 包牌懶人包</a>。' },
+  { q: '大樂透「連碰」跟「包牌」一樣嗎？', a: '一樣的意思。彩券行常說的「連碰」就是包牌，「10 連碰」就是從 10 個號碼取所有 6 碼組合。C(10,6) = 210 注 = $10,500。有些彩券行會把連碰的投注單幫你劃好，你只需要圈號碼就行，但本質就是數學上的排列組合。' },
+  { q: '包牌的預算應該怎麼分配？', a: '芭樂子建議用「月娛樂預算法」：先決定每月能承受的彩券娛樂預算（例如 $3,000），再除以當月期數（大樂透每週二、五開，一個月約 8～9 期）。例如月預算 $3,000 ÷ 8 期 ≈ $375/期，這大約是 7 碼包牌的預算（$350）。永遠不要為了「湊到 N 碼」而超出預算，包牌是娛樂不是投資。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/super-lotto-wheeling-guide/"
+  title="大樂透包牌要多少錢？6碰到全餐注數、花費、期望值一次算完｜芭樂子數學拆解"
+  description="大樂透包牌到底要花多少錢？芭樂子用組合數學拆解 7～12 碼的注數、花費、各獎項命中率與期望值。7 碼只要 $350 但頭獎機率幾乎沒變、10 連碰要 $10,500——包越多虧越多的數學真相。"
+  image="https://game8la.com/images/articles/super-lotto-wheeling-cover.webp"
+  datePublished="2026-05-07"
+  dateModified="2026-05-07"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '大樂透包牌攻略', url: 'https://game8la.com/articles/super-lotto-wheeling-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="大樂透包牌要多少錢？6碰到全餐注數・花費・期望值一次算完｜芭樂子數學拆解 - GAME8LA" description="大樂透包牌到底要花多少錢？芭樂子用組合數學拆解 7～12 碼的注數、花費、各獎項命中率與期望值。7 碼只要 $350 但頭獎機率幾乎沒變、10 連碰要 $10,500——包越多虧越多的數學真相。" ogImage="https://game8la.com/images/articles/super-lotto-wheeling-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 大樂透包牌攻略</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-07 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 9 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">大樂透包牌要多少錢？<em>6碰到全餐注數、花費、期望值一次算完</em></h1>
+
+      <!-- === 封面圖 === -->
+      <img class="content-img"
+           src="/images/articles/super-lotto-wheeling-cover.webp"
+           alt="大樂透包牌完整攻略｜7碼到全餐注數花費期望值｜芭樂子用數學算給你看｜GAME8LA"
+           width="1400" height="772" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">芭樂子算給你看：10 連碰要 $10,500，但 640 年才統計上中一次頭獎</p>
+
+      <!-- === 快速工具入口 === -->
+      <div class="quick-tool-bar">
+        <span>不想看文章？直接用工具：</span>
+        <a href="/lottery/analysis/#wheel">包牌產生器</a>
+        <a href="/lottery/analysis/#wheelSim">機率模擬器</a>
+        <a href="/lottery/analysis/">冷熱號分析</a>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。每次大樂透頭獎飆到上億，彩券行門口排隊的人就開始喊「10 連碰！」「全餐伺候！」。但你有算過那張投注單到底多少錢嗎？有人以為 10 連碰就是 $500，開出來帳單嚇到臉綠。今天芭樂子把 6 碰到全餐的數學全部拆開，讓你走進彩券行之前就知道自己的荷包會不會陣亡。</p>
+
+      <!-- === 精選摘要 === -->
+      <div class="card" style="margin:1.5rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">一張圖看懂：大樂透包牌花費表</h3>
+        <table>
+          <thead><tr><th>碼數</th><th>組合數</th><th>每期花費</th><th>頭獎機率</th><th>芭樂評語</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">6 碼</td><td>1 注</td><td>$50</td><td>1/1,398 萬</td><td style="color:var(--text-muted)">就是單注</td></tr>
+            <tr style="background:rgba(76,175,80,0.08)"><td style="font-weight:700;color:#4caf50">7 碼 ⭐</td><td>7 注</td><td>$350</td><td>7/1,398 萬</td><td style="color:#4caf50;font-weight:700">入門甜蜜點</td></tr>
+            <tr style="background:rgba(76,175,80,0.08)"><td style="font-weight:700;color:#4caf50">8 碼 ⭐</td><td>28 注</td><td>$1,400</td><td>28/1,398 萬</td><td style="color:#4caf50;font-weight:700">小資進階</td></tr>
+            <tr style="background:rgba(76,175,80,0.05)"><td style="font-weight:700;color:#8bc34a">9 碼</td><td>84 注</td><td>$4,200</td><td>84/1,398 萬</td><td style="color:#8bc34a">口袋深的可考慮</td></tr>
+            <tr><td style="font-weight:700;color:#ff9800">10 碼</td><td>210 注</td><td>$10,500</td><td>210/1,398 萬</td><td style="color:#ff9800">開始心痛了</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">11 碼</td><td>462 注</td><td>$23,100</td><td>462/1,398 萬</td><td style="color:#f44336">比中獎還難回本</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">12 碼</td><td>924 注</td><td>$46,200</td><td>924/1,398 萬</td><td style="color:#f44336;font-weight:700">數學保證虧到哭</td></tr>
+            <tr style="border-top:2px solid var(--border)"><td style="font-weight:700;color:#9c27b0">49 碼（全餐）</td><td>13,983,816 注</td><td>$699,190,800</td><td>100%</td><td style="color:#9c27b0">恭喜，穩虧 6 億</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">※ 每注 $50。大樂透從 01~49 中選 6 個號碼。頭獎機率 = 注數 / C(49,6) = 注數 / 13,983,816。</p>
+      </div>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#what">什麼是大樂透「連碰」？跟包牌一樣嗎？</a></li>
+          <li><a href="#math">C(n,6) 組合爆炸：為什麼多選 1 碼錢就翻 3 倍？</a></li>
+          <li><a href="#compare">7～12 碼完整比較：注數、花費、命中率、期望值</a></li>
+          <li><a href="#ev">期望值真相：包 10 碼花 $10,500，數學上能回收多少？</a></li>
+          <li><a href="#vs539">大樂透 vs 539 包牌：哪個 CP 值高？</a></li>
+          <li><a href="#sweet">芭樂子的結論：買幾碼不會後悔</a></li>
+          <li><a href="#myth">三個最常見的大樂透包牌迷思</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- === 正文開始 === -->
+
+      <h2 id="what" style="margin-top:2.5rem">什麼是大樂透「連碰」？跟包牌一樣嗎？</h2>
+
+      <p>先把名詞統一。你在彩券行聽到的「10 連碰」「7 連碰」，就是包牌。正式名稱叫<strong>系統號投注（Wheeling System）</strong>，但彩迷都叫它「連碰」或「全車」。</p>
+
+      <p>大樂透的規則：從 01～49 選 6 個號碼，每注 $50。所謂「包 N 碼」就是<strong>從你看好的 N 個號碼裡，把所有可能的 6 碼組合全部買下來</strong>。數學上就是 C(N,6)——「從 N 個裡面取 6 個有幾種取法」。</p>
+
+      <p>舉個例子：你看好 01、07、13、22、35、41、49 這 7 個號碼。它們能組成 C(7,6) = 7 種六碼組合，全部買下來就是 7 注 × $50 = $350。如果開獎號碼「剛好全部落在這 7 個號碼裡面」，你就保證中頭獎。</p>
+
+      <p>聽起來很美對吧？問題在後面。</p>
+
+      <!-- CTA 1 -->
+      <div style="margin:1.5rem 0;padding:1rem 1.2rem;background:linear-gradient(135deg,rgba(245,184,0,0.06),rgba(255,136,0,0.06));border:1px solid rgba(245,184,0,0.3);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <div>
+          <strong style="color:#f5b800">想先體驗包牌？</strong>
+          <p style="margin:0.3rem 0 0;font-size:0.88rem;color:var(--text-secondary)">芭樂子的包牌產生器幫你自動組號，不用自己算組合數。</p>
+        </div>
+        <a href="/lottery/analysis/#wheel" style="text-decoration:none">
+          <div style="background:linear-gradient(135deg,#FFD700,#ff8800);color:#000;font-weight:900;padding:0.7rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.9rem">立即試算 →</div>
+        </a>
+      </div>
+
+      <h2 id="math" style="margin-top:2.5rem">C(n,6) 組合爆炸：為什麼多選 1 碼錢就翻好幾倍？</h2>
+
+      <p>包牌的核心公式是 <strong>C(n,6) = n! / (6! × (n-6)!)</strong>。你不用會算，芭樂子幫你把重點翻譯成白話：<strong>每多選 1 碼，花費大概翻 2.5～4 倍</strong>。</p>
+
+      <p>來看實際數字：</p>
+
+      <div class="card" style="margin:1.5rem 0;overflow-x:auto">
+        <h3 style="margin-top:0;color:#f5b800">大樂透包牌組合數成長表</h3>
+        <table>
+          <thead><tr><th>碼數</th><th>組合數 C(n,6)</th><th>花費</th><th>跟前一碼比</th></tr></thead>
+          <tbody>
+            <tr><td>6 碼</td><td>1 注</td><td>$50</td><td>—</td></tr>
+            <tr><td>7 碼</td><td>7 注</td><td>$350</td><td>×7.0</td></tr>
+            <tr><td>8 碼</td><td>28 注</td><td>$1,400</td><td>×4.0</td></tr>
+            <tr><td>9 碼</td><td>84 注</td><td>$4,200</td><td>×3.0</td></tr>
+            <tr><td>10 碼</td><td>210 注</td><td>$10,500</td><td>×2.5</td></tr>
+            <tr><td>11 碼</td><td>462 注</td><td>$23,100</td><td>×2.2</td></tr>
+            <tr><td>12 碼</td><td>924 注</td><td>$46,200</td><td>×2.0</td></tr>
+            <tr><td>15 碼</td><td>5,005 注</td><td>$250,250</td><td>—</td></tr>
+            <tr><td>20 碼</td><td>38,760 注</td><td>$1,938,000</td><td>—</td></tr>
+            <tr style="border-top:2px solid var(--border)"><td style="font-weight:700">49 碼（全餐）</td><td style="font-weight:700">13,983,816 注</td><td style="font-weight:700">$699,190,800</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>看到了嗎？從 7 碼到 10 碼，花費從 $350 跳到 $10,500，漲了 30 倍。但你的頭獎機率只從 7/1,398 萬 變成 210/1,398 萬——從「幾乎不可能」變成「還是幾乎不可能」。</p>
+
+      <p>芭樂子白話翻譯：<strong>你的錢在指數成長，但你的中獎機率只在線性成長。這就是包牌的根本矛盾。</strong></p>
+
+      <h2 id="compare" style="margin-top:2.5rem">7～12 碼完整比較：注數、花費、命中率、期望值</h2>
+
+      <p>接下來是正式的數據表。這不是模擬，是用組合數學精算出來的。大樂透獎金結構：頭獎（6 中 6）獎金浮動、貳獎（6 中 5 + 特別號）約 $1,500,000、參獎（6 中 5）$50,000、肆獎（6 中 4）$5,000、伍獎（6 中 3）$400、陸獎（6 中 2 + 特別號）$400。</p>
+
+      <p>以下用<strong>頭獎 1 億元</strong>作為基準來算期望值（比較常見的加碼獎金水位）：</p>
+
+      <div class="card" style="margin:1.5rem 0;overflow-x:auto">
+        <h3 style="margin-top:0;color:#f5b800">大樂透包牌完整數據表（頭獎假設 1 億）</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>碼數</th>
+              <th>注數</th>
+              <th>花費</th>
+              <th>任一獎項<br><span style="font-weight:400;font-size:0.75rem">命中率</span></th>
+              <th>伍獎↑<br><span style="font-weight:400;font-size:0.75rem">(≥3中)</span></th>
+              <th>肆獎↑<br><span style="font-weight:400;font-size:0.75rem">(≥4中)</span></th>
+              <th>頭獎<br><span style="font-weight:400;font-size:0.75rem">(6中6)</span></th>
+              <th>期望回收</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight:700">6</td><td>1</td><td>$50</td><td>17.5%</td><td>2.4%</td><td>0.11%</td><td>0.000007%</td><td>$28</td></tr>
+            <tr style="background:rgba(76,175,80,0.1)"><td style="font-weight:700;color:#4caf50">7 ⭐</td><td>7</td><td>$350</td><td>66.2%</td><td>12.2%</td><td>0.74%</td><td>0.00005%</td><td>$193</td></tr>
+            <tr style="background:rgba(76,175,80,0.1)"><td style="font-weight:700;color:#4caf50">8 ⭐</td><td>28</td><td>$1,400</td><td>89.1%</td><td>31.4%</td><td>2.71%</td><td>0.0002%</td><td>$772</td></tr>
+            <tr style="background:rgba(76,175,80,0.05)"><td style="font-weight:700;color:#8bc34a">9</td><td>84</td><td>$4,200</td><td>97.0%</td><td>53.8%</td><td>6.88%</td><td>0.0006%</td><td>$2,315</td></tr>
+            <tr><td style="font-weight:700;color:#ff9800">10</td><td>210</td><td>$10,500</td><td>99.3%</td><td>73.3%</td><td>13.7%</td><td>0.0015%</td><td>$5,788</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">11</td><td>462</td><td>$23,100</td><td>99.9%</td><td>86.8%</td><td>23.2%</td><td>0.0033%</td><td>$12,733</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">12</td><td>924</td><td>$46,200</td><td>≈100%</td><td>94.0%</td><td>34.6%</td><td>0.0066%</td><td>$25,466</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">※ 期望回收 ≈ 花費 × 55%（大樂透 RTP 約 55%）。命中率為精算組合數學結果。頭獎假設 1 億未扣稅。</p>
+      </div>
+
+      <p>看最右邊那欄——<strong>每一排的期望回收都大約是花費的 55%</strong>。包 7 碼花 $350 期望回收 $193；包 12 碼花 $46,200 期望回收 $25,466。不管包幾碼，你的數學期望值永遠是虧 45% 左右。</p>
+
+      <p>這就是台灣公益彩券的結構性真相：<strong>約 45% 的錢會被分配到公益金、稅金和營運費用</strong>。不管你怎麼包，這個比例不會改變。</p>
+
+      <h2 id="ev" style="margin-top:2.5rem">期望值真相：包 10 碼花 $10,500，數學上能回收多少？</h2>
+
+      <p>很多彩迷覺得「包多一點，中大獎的機率就高很多」。來，芭樂子幫你算一筆很殘忍的帳。</p>
+
+      <p><strong>10 碼包牌，每期 $10,500。</strong>大樂透每週開 2 期（週二、週五），一個月約 8 期，一年約 104 期。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#ff9800">
+        <h3 style="margin-top:0;color:#ff9800">10 碼包牌年度帳本</h3>
+        <table>
+          <thead><tr><th>項目</th><th>金額</th></tr></thead>
+          <tbody>
+            <tr><td>年度總投入</td><td style="font-weight:700">$10,500 × 104 = $1,092,000</td></tr>
+            <tr><td>期望年度回收（RTP 55%）</td><td>$1,092,000 × 55% = $600,600</td></tr>
+            <tr><td style="color:#f44336;font-weight:700">期望年度虧損</td><td style="color:#f44336;font-weight:700">-$491,400</td></tr>
+            <tr><td>年度中頭獎機率</td><td>1 - (1 - 210/13,983,816)^104 ≈ 0.156%</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">※ 白話翻譯：每年燒 109 萬，期望拿回 60 萬，穩虧 49 萬。中頭獎的機率是 0.156%，大約 640 年會中一次。</p>
+      </div>
+
+      <p>640 年。你的曾曾曾曾曾曾曾曾祖父開始買，買到你孫子的孫子，統計上才會中一次頭獎。中間每年穩定虧 49 萬。</p>
+
+      <p>芭樂子不是要掃你的興——買彩券本來就是花錢買一個夢。但你得搞清楚這個夢的價格，才不會做到傾家蕩產的噩夢。</p>
+
+      <h2 id="vs539" style="margin-top:2.5rem">大樂透 vs 539 包牌：哪個 CP 值高？</h2>
+
+      <p>這題很多人問，芭樂子直接列表比給你看：</p>
+
+      <div class="card" style="margin:1.5rem 0;overflow-x:auto">
+        <h3 style="margin-top:0;color:#f5b800">同樣包 7 碼：大樂透 vs 539</h3>
+        <table>
+          <thead><tr><th>項目</th><th>大樂透 7 碼</th><th>539 7 碼</th></tr></thead>
+          <tbody>
+            <tr><td>組合數</td><td>C(7,6) = 7 注</td><td>C(7,5) = 21 注</td></tr>
+            <tr><td>每期花費</td><td>$350</td><td>$1,050</td></tr>
+            <tr><td>頭獎機率</td><td>7 / 13,983,816 ≈ 1/200 萬</td><td>21 / 575,757 ≈ 1/27,417</td></tr>
+            <tr><td>任一獎項命中率</td><td>~66%</td><td>~73%</td></tr>
+            <tr><td>期望回收</td><td>$193（55%）</td><td>$586（56%）</td></tr>
+            <tr style="background:rgba(76,175,80,0.1)"><td style="font-weight:700">CP 值結論</td><td>花少錢、但中大獎超難</td><td style="color:#4caf50;font-weight:700">花多一點、但中獎率高 73 倍</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>結論很清楚：<strong>如果你包牌的目的是「提高中獎體驗」，539 的 CP 值遠高於大樂透。</strong>539 包 7 碼多花 $700，但頭獎機率高了 73 倍，小獎也更容易回血。</p>
+
+      <p>大樂透包牌適合的人是：<strong>你就是想搏那個上億頭獎的夢，而且預算控制得住</strong>。如果是這種心態，7～8 碼花 $350～$1,400 是最理性的選擇。</p>
+
+      <!-- CTA 2：導流到 539 包牌文 -->
+      <div style="margin:1.5rem 0;padding:1rem 1.2rem;background:linear-gradient(135deg,rgba(76,175,80,0.06),rgba(57,255,20,0.04));border:1px solid rgba(76,175,80,0.3);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <div>
+          <strong style="color:#4caf50">想看 539 包牌的完整拆解？</strong>
+          <p style="margin:0.3rem 0 0;font-size:0.88rem;color:var(--text-secondary)">7～12 碼的命中率、期望值、甜蜜點分析，芭樂子都算好了。</p>
+        </div>
+        <a href="/articles/daily-cash-539-wheel-strategy/" style="text-decoration:none">
+          <div style="background:linear-gradient(135deg,#4caf50,#2e7d32);color:#fff;font-weight:900;padding:0.7rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.9rem">看 539 包牌懶人包 →</div>
+        </a>
+      </div>
+
+      <h2 id="sweet" style="margin-top:2.5rem">芭樂子的結論：買幾碼不會後悔</h2>
+
+      <p>講了一堆數學，直接給你結論：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#4caf50;background:linear-gradient(135deg,rgba(76,175,80,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#4caf50;margin-top:0">芭樂子的大樂透包牌建議</h3>
+        <p><strong style="font-size:1.1rem;color:#4caf50">7～8 碼：最理性的選擇</strong></p>
+        <p>7 碼 $350、8 碼 $1,400。花得起，輸得起，中了開心，沒中不痛。以月娛樂預算 $3,000 來說，每期 7 碼（$350 × 8 期 = $2,800）剛好控制在預算內。</p>
+        <p style="margin-top:1rem"><strong style="font-size:1.1rem;color:#8bc34a">9 碼：口袋比較深的選項</strong></p>
+        <p>$4,200/期，月投入超過 3 萬。如果這筆錢對你來說是零用錢等級，那 9 碼的命中率（任一獎 97%）確實很有感。但請永遠記得：期望回收還是 55%。</p>
+        <p style="margin-top:1rem"><strong style="font-size:1.1rem;color:#f44336">10 碼以上：不建議</strong></p>
+        <p>10 碼 $10,500/期，一年燒 109 萬。除非你是開著藍寶堅尼去買彩券的那種人，否則這筆錢拿去吃好料、投資、甚至買 539 包 7 碼都更划算。數學不會騙你：包越多，虧越多。</p>
+      </div>
+
+      <img src="/images/articles/super-lotto-wheeling-comparison.webp" alt="芭樂子用巨大的天秤比較大樂透包牌碼數——左邊7碼寫著$350笑臉，右邊12碼寫著$46,200哭臉" width="1400" height="772" loading="lazy" decoding="async" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1.5rem auto" />
+
+      <h2 id="myth" style="margin-top:2.5rem">三個最常見的大樂透包牌迷思</h2>
+
+      <h3>迷思一：「上期沒開的號碼，這期比較容易開」</h3>
+
+      <p>這叫<a href="https://zh.wikipedia.org/wiki/%E8%B3%AD%E5%BE%92%E8%AC%AC%E8%AA%A4" target="_blank" rel="noopener">賭徒謬誤</a>，是人腦最容易踩的坑。每一期開獎都是獨立事件，開獎球不會記得上一期開了什麼。號碼 07 已經連 20 期沒開？下一期它出現的機率還是一模一樣。你拿「遺漏值」去選號，就跟拿昨天的天氣預測明天一樣——聽起來有道理，數學上完全站不住腳。</p>
+
+      <h3>迷思二：「包 12 碼命中率接近 100%，穩賺」</h3>
+
+      <p>命中率接近 100% 沒錯，但命中的是什麼獎？大部分是<strong>伍獎 $400 和陸獎 $400</strong>。你花 $46,200 去中幾注 $400，回收可能只有幾千塊。命中率高 ≠ 賺錢，這是包牌新手最大的認知陷阱。</p>
+
+      <h3>迷思三：「大樂透比 539 包牌便宜，所以比較划算」</h3>
+
+      <p>表面上看，同樣包 7 碼，大樂透 $350 確實比 539 的 $1,050 便宜。但大樂透的頭獎機率是 1/200 萬，539 是 1/27,417——<strong>539 頭獎機率高了 73 倍</strong>。便宜的東西不一定划算，貴的東西不一定虧。要比就要比「每塊錢買到多少中獎機率」，這才是 CP 值。</p>
+
+      <!-- CTA 3：導流到樂透數據站 -->
+      <div style="margin:2rem 0;padding:1.2rem 1.5rem;background:linear-gradient(135deg,rgba(245,184,0,0.08),rgba(57,255,20,0.04));border:1px solid rgba(245,184,0,0.3);border-radius:12px;text-align:center">
+        <p style="font-size:1.1rem;font-weight:700;color:#f5b800;margin:0 0 0.5rem">想用歷史數據挑號碼？</p>
+        <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 1rem">芭樂子的樂透數據站有大樂透冷熱號分析、拖出號統計、自動包牌產生器——免費、不用註冊、不報明牌。</p>
+        <a href="/lottery/analysis/" style="text-decoration:none">
+          <div style="display:inline-block;background:linear-gradient(135deg,#FFD700,#ff8800);color:#000;font-weight:900;padding:0.8rem 2rem;border-radius:12px;font-size:1rem">進入樂透數據站 →</div>
+        </a>
+      </div>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.82rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子免責聲明：</strong>本文所有數據皆基於組合數學精算，不構成投注建議。彩券是負期望值遊戲，長期下來一定虧錢。包牌不是投資策略，是用固定預算買一個夢——請控制預算，量力而為。如果你覺得自己「必須」買彩券才能過日子，請撥打戒賭專線 1925。</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <div class="card" style="margin:2rem 0;border-color:var(--border)">
+        <h3 style="margin-top:0">延伸閱讀</h3>
+        <ul style="margin:0;padding-left:1.2rem">
+          <li><a href="/articles/daily-cash-539-wheel-strategy/">539 包牌懶人包：7～12 碼成本 vs 命中率完整比較</a></li>
+          <li><a href="/articles/daily-cash-539-wheel-guide/">539 包牌攻略：系統號玩法完整教學</a></li>
+          <li><a href="/articles/lottery-odds-comparison/">威力彩 vs 大樂透中獎機率完整比較</a></li>
+          <li><a href="/articles/power-lottery-odds-explained/">威力彩頭獎機率 1/22,085,448 有多難中？</a></li>
+          <li><a href="/articles/lottery-dragout-guide/">拖出號是什麼？彩券術語白話解釋＋539 歷史數據實測</a></li>
+          <li><a href="/lottery/analysis/">樂透數據站：冷熱號分析・選號參考・包牌產生器</a></li>
+        </ul>
+      </div>
+
+      <ManifestoBox />
+      <ShareButtons title="大樂透包牌要多少錢？6碰到全餐注數、花費、期望值一次算完" url="https://game8la.com/articles/super-lotto-wheeling-guide/" />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 1.2rem 3rem; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: 1.4rem; }
+  .article-content p { font-size: 1rem; line-height: 1.85; margin: 1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0.5rem; }
+  .article-img-caption { text-align: center; font-size: 0.82rem; color: var(--text-muted); margin: 0 0 1.5rem; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.1rem; }
+  .card p { font-size: 0.95rem; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.85rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 4px 10px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .casino-check-cta { background: linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.06)); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; text-align: center; margin: 2rem 0; }
+  .casino-check-cta .cta-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .casino-check-cta h3 { font-size: 1.2rem; margin: 0.5rem 0; }
+  .casino-check-cta p { color: var(--text-secondary); font-size: 0.92rem; margin: 0.5rem 0 1rem; }
+  .cta-check-btn { display: inline-block; background: var(--guava-green); color: #000; padding: 12px 28px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: transform 0.15s; }
+  .cta-check-btn:hover { transform: translateY(-2px); }
+
+  .faq-list { margin: 1rem 0 2rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1rem 1.2rem; cursor: pointer; font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.2rem 1rem; color: var(--text-secondary); font-size: 0.93rem; line-height: 1.7; }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.75rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 0.95rem; }
+  .rl-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+  .donate-section { margin: 2.5rem 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, rgba(57,255,20,0.04), rgba(245,184,0,0.04)); }
+  .donate-content { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem 1.8rem; }
+  .donate-text { flex: 1; }
+  .donate-text h3 { font-size: 1.15rem; margin: 0 0 0.6rem; color: var(--guava-green); }
+  .donate-text p { font-size: 0.92rem; line-height: 1.7; margin: 0.4rem 0; }
+  .donate-bank { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin-top: 0.8rem; }
+  .donate-bank-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.3rem 0; font-size: 0.9rem; }
+  .donate-label { color: var(--text-muted); min-width: 70px; }
+  .donate-value { font-weight: 700; font-family: 'SF Mono', 'Fira Code', monospace; letter-spacing: 1px; }
+  .donate-copy-btn { background: var(--guava-green); color: #000; border: none; border-radius: 6px; padding: 3px 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer; margin-left: 0.5rem; transition: opacity 0.15s; }
+  .donate-copy-btn:hover { opacity: 0.8; }
+  .donate-img { flex-shrink: 0; width: 180px; }
+  .donate-img img { width: 100%; height: auto; border-radius: 12px; }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.5rem; }
+    .article-content h2 { font-size: 1.2rem; }
+    .donate-content { flex-direction: column; padding: 1.2rem; }
+    .donate-img { width: 140px; }
+  }
+</style>

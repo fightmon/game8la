@@ -1,11 +1,45 @@
 ---
 import Icon from './Icon.astro';
+import { articles } from '../data/articles.js';
 
 interface Props {
   currentPage?: string;
 }
 
 const { currentPage = 'home' } = Astro.props;
+
+// 靜態頁面（非文章）搜尋索引
+const staticSearchItems = [
+  { t: '戰神賽特2：覺醒之力', d: 'ATG電子老虎機 RTP 96.89%', u: '/games/seth-2/', c: '遊戲' },
+  { t: '奇幻魔藥', d: 'RG電子蜂巢消除老虎機 RTP 98.28%', u: '/games/fantasy-potion/', c: '遊戲' },
+  { t: '2026 老虎機評分總排名', d: '9款熱門Slot完整評比', u: '/game-ranking/', c: '排行' },
+  { t: '芭樂攻略', d: '老虎機、百家樂、真人娛樂教學', u: '/articles/', c: '攻略' },
+  { t: '芭樂好彩', d: '大樂透、威力彩、今彩539 開獎', u: '/lottery/', c: '彩券' },
+  { t: '樂透數據站', d: '威力彩・大樂透・539 冷熱號回測、選號參考、包牌產生器', u: '/lottery/analysis/', c: '彩券' },
+  { t: '富遊娛樂城', d: '台灣老牌娛樂城評測', u: '/casinos/fuyou/', c: '娛樂城' },
+  { t: 'MaiSpin 娛樂城', d: '完整平台評測', u: '/casinos/maispin/', c: '娛樂城' },
+  { t: 'bet365', d: '國際大廠評測', u: '/casinos/bet365/', c: '娛樂城' },
+  { t: 'Shuffle', d: '加密貨幣娛樂城', u: '/casinos/shuffle/', c: '娛樂城' },
+  { t: 'K8 娛樂城', d: '平台評測', u: '/casinos/k8/', c: '娛樂城' },
+  { t: 'U-Town 優創', d: '平台評測', u: '/casinos/utown/', c: '娛樂城' },
+  { t: 'YABO 亞博', d: '平台評測', u: '/casinos/yabo/', c: '娛樂城' },
+  { t: 'PM 娛樂城', d: '平台評測', u: '/casinos/pm/', c: '娛樂城' },
+  { t: '8LA 工具箱', d: '老虎機 RTP 紀錄器、樂透數據站、娛樂城體檢', u: '/tools/', c: '工具' },
+  { t: '老虎機 RTP 實測紀錄器', d: '記錄投入回收，算出實測 RTP，比對官方理論值', u: '/tools/rtp-tracker/', c: '工具' },
+  { t: '老虎機資金管理計算器', d: '算出你的錢能撐多久，設好停損停利再上桌', u: '/tools/bankroll-calculator/', c: '工具' },
+  { t: '8LA 老虎機 RTP 測試器', d: '自己設定 RTP 和波動度，體驗老虎機的數學真相', u: '/tools/slot-simulator/', c: '工具' },
+  { t: '娛樂城體檢', d: 'WHOIS查網域、流水計算器、165反詐騙快查', u: '/casino-check/', c: '工具' },
+];
+
+// 從 articles.js 自動生成文章搜尋索引
+const articleSearchItems = articles.map(a => ({
+  t: a.title,
+  d: a.excerpt.substring(0, 80),
+  u: a.href || `/articles/${a.slug}/`,
+  c: a.categoryLabel
+}));
+
+const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]);
 ---
 
 <nav class="navbar">
@@ -372,6 +406,10 @@ const { currentPage = 'home' } = Astro.props;
   }
 </style>
 
+<script define:vars={{ searchIndex }}>
+  window.__SEARCH_INDEX = JSON.parse(searchIndex);
+</script>
+
 <script is:inline>
   function openSearch() {
     const modal = document.getElementById('searchModal');
@@ -413,34 +451,7 @@ const { currentPage = 'home' } = Astro.props;
     }
   }
 
-  const SEARCH_INDEX = [
-    { t: '戰神賽特2：覺醒之力', d: 'ATG電子老虎機 RTP 96.89%', u: '/games/seth-2/', c: '遊戲' },
-    { t: '奇幻魔藥', d: 'RG電子蜂巢消除老虎機 RTP 98.28%', u: '/games/fantasy-potion/', c: '遊戲' },
-    { t: '2026 老虎機評分總排名', d: '9款熱門Slot完整評比', u: '/game-ranking/', c: '排行' },
-    { t: '芭樂攻略', d: '老虎機、百家樂、真人娛樂教學', u: '/articles/', c: '攻略' },
-    { t: '老虎機攻略完整指南', d: 'RTP、波動性、Free Game、爆分機制', u: '/articles/slots-guide/', c: '攻略' },
-    { t: '百家樂完整教學', d: '規則、算牌、投注法、常見迷思', u: '/articles/baccarat-guide/', c: '攻略' },
-    { t: '真人荷官大評比', d: '2026 各平台最美荷官盤點', u: '/articles/dealers-guide/', c: '攻略' },
-    { t: '芭樂好彩', d: '大樂透、威力彩、今彩539 開獎', u: '/lottery/', c: '彩券' },
-    { t: '樂透數據站', d: '威力彩・大樂透・539 冷熱號回測、選號參考、包牌產生器', u: '/lottery/analysis/', c: '彩券' },
-    { t: '富遊娛樂城', d: '台灣老牌娛樂城評測', u: '/casinos/fuyou/', c: '娛樂城' },
-    { t: 'MaiSpin 娛樂城', d: '完整平台評測', u: '/casinos/maispin/', c: '娛樂城' },
-    { t: 'bet365', d: '國際大廠評測', u: '/casinos/bet365/', c: '娛樂城' },
-    { t: 'Shuffle', d: '加密貨幣娛樂城', u: '/casinos/shuffle/', c: '娛樂城' },
-    { t: 'K8 娛樂城', d: '平台評測', u: '/casinos/k8/', c: '娛樂城' },
-    { t: 'U-Town 優創', d: '平台評測', u: '/casinos/utown/', c: '娛樂城' },
-    { t: 'YABO 亞博', d: '平台評測', u: '/casinos/yabo/', c: '娛樂城' },
-    { t: 'PM 娛樂城', d: '平台評測', u: '/casinos/pm/', c: '娛樂城' },
-    { t: '8LA 工具箱', d: '老虎機 RTP 紀錄器、樂透數據站、娛樂城體檢', u: '/tools/', c: '工具' },
-    { t: '老虎機 RTP 實測紀錄器', d: '記錄投入回收，算出實測 RTP，比對官方理論值', u: '/tools/rtp-tracker/', c: '工具' },
-    { t: '老虎機資金管理計算器', d: '算出你的錢能撐多久，設好停損停利再上桌', u: '/tools/bankroll-calculator/', c: '工具' },
-    { t: '8LA 老虎機 RTP 測試器', d: '自己設定 RTP 和波動度，體驗老虎機的數學真相', u: '/tools/slot-simulator/', c: '工具' },
-    { t: '娛樂城體檢', d: 'WHOIS查網域、流水計算器、165反詐騙快查', u: '/casino-check/', c: '工具' },
-    { t: '娛樂城出金攻略', d: '5大卡關原因與自救SOP、流水、KYC、風控、黑網', u: '/articles/casino-payout-guide/', c: '攻略' },
-    { t: '5招識破娛樂城詐騙套路', d: 'WHOIS、流水陷阱、支付安全完整拆解', u: '/articles/5-tips-spot-casino-scam/', c: '攻略' },
-    { t: '連娛樂城都怕的黑名單', d: '5大導流站交叉比對地雷名單', u: '/articles/casino-not-recommended-by-casinos/', c: '攻略' },
-    { t: '第一次玩娛樂城 10 個新手必知', d: '現金版信用版、流水陷阱、KYC、代操詐騙', u: '/articles/casino-beginner-guide/', c: '攻略' },
-  ];
+  const SEARCH_INDEX = window.__SEARCH_INDEX || [];
 
   function handleSearch(value) {
     const results = document.getElementById('searchResults');
