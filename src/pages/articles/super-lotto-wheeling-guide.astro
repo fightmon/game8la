@@ -61,6 +61,20 @@ const faqs = [
 
       <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。每次大樂透頭獎飆到上億，彩券行門口排隊的人就開始喊「10 連碰！」「全餐伺候！」。但你有算過那張投注單到底多少錢嗎？有人以為 10 連碰就是 $500，開出來帳單嚇到臉綠。今天芭樂子把 6 碰到全餐的數學全部拆開，讓你走進彩券行之前就知道自己的荷包會不會陣亡。</p>
 
+      <!-- === 30 秒看懂：單注 vs 包牌 === -->
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0;font-size:1rem">30 秒看懂：單注 vs 包牌差多少？</h3>
+        <table>
+          <thead><tr><th>方式</th><th>花費</th><th>頭獎機率</th><th>任一獎命中率</th></tr></thead>
+          <tbody>
+            <tr><td>單注（6 碼）</td><td>$50</td><td>1 / 1,398 萬</td><td>17.5%</td></tr>
+            <tr style="background:rgba(76,175,80,0.1)"><td style="font-weight:700;color:#4caf50">7 碼包牌 ⭐</td><td>$350</td><td>7 / 1,398 萬</td><td style="font-weight:700">66.2%</td></tr>
+            <tr style="background:rgba(255,152,0,0.08)"><td style="font-weight:700;color:#ff9800">10 碼包牌</td><td style="color:#ff9800">$10,500</td><td>210 / 1,398 萬</td><td>99.3%</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--text-muted)">花 30 倍的錢，命中率從 66% 拉到 99%——但期望回收永遠是花費的 55%。包越多、虧越多。</p>
+      </div>
+
       <!-- === 精選摘要 === -->
       <div class="card" style="margin:1.5rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
         <h3 style="color:#f5b800;margin-top:0">一張圖看懂：大樂透包牌花費表</h3>
@@ -84,11 +98,11 @@ const faqs = [
       <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
         <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
         <ol>
-          <li><a href="#what">什麼是大樂透「連碰」？跟包牌一樣嗎？</a></li>
-          <li><a href="#math">C(n,6) 組合爆炸：為什麼多選 1 碼錢就翻 3 倍？</a></li>
-          <li><a href="#compare">7～12 碼完整比較：注數、花費、命中率、期望值</a></li>
-          <li><a href="#ev">期望值真相：包 10 碼花 $10,500，數學上能回收多少？</a></li>
-          <li><a href="#vs539">大樂透 vs 539 包牌：哪個 CP 值高？</a></li>
+          <li><a href="#what">大樂透連碰是什麼意思？跟包牌一樣嗎？</a></li>
+          <li><a href="#math">大樂透包牌費用怎麼算？C(n,6) 組合爆炸解釋</a></li>
+          <li><a href="#compare">大樂透 7 碼到 12 碼包牌機率、注數、花費完整比較</a></li>
+          <li><a href="#ev">大樂透 10 連碰多少錢？$10,500 的期望回收真相</a></li>
+          <li><a href="#vs539">大樂透包牌 vs 539 包牌：同樣花錢哪個 CP 值高？</a></li>
           <li><a href="#sweet">芭樂子的結論：買幾碼不會後悔</a></li>
           <li><a href="#myth">三個最常見的大樂透包牌迷思</a></li>
           <li><a href="#faq">常見問題 FAQ</a></li>
@@ -97,7 +111,7 @@ const faqs = [
 
       <!-- === 正文開始 === -->
 
-      <h2 id="what" style="margin-top:2.5rem">什麼是大樂透「連碰」？跟包牌一樣嗎？</h2>
+      <h2 id="what" style="margin-top:2.5rem">大樂透連碰是什麼意思？跟包牌一樣嗎？</h2>
 
       <p>先把名詞統一。你在彩券行聽到的「10 連碰」「7 連碰」，就是包牌。正式名稱叫<strong>系統號投注（Wheeling System）</strong>，但彩迷都叫它「連碰」或「全車」。</p>
 
@@ -118,7 +132,7 @@ const faqs = [
         </a>
       </div>
 
-      <h2 id="math" style="margin-top:2.5rem">C(n,6) 組合爆炸：為什麼多選 1 碼錢就翻好幾倍？</h2>
+      <h2 id="math" style="margin-top:2.5rem">大樂透包牌費用怎麼算？C(n,6) 組合爆炸解釋</h2>
 
       <p>包牌的核心公式是 <strong>C(n,6) = n! / (6! × (n-6)!)</strong>。你不用會算，芭樂子幫你把重點翻譯成白話：<strong>每多選 1 碼，花費大概翻 2.5～4 倍</strong>。</p>
 
@@ -147,7 +161,7 @@ const faqs = [
 
       <p>芭樂子白話翻譯：<strong>你的錢在指數成長，但你的中獎機率只在線性成長。這就是包牌的根本矛盾。</strong></p>
 
-      <h2 id="compare" style="margin-top:2.5rem">7～12 碼完整比較：注數、花費、命中率、期望值</h2>
+      <h2 id="compare" style="margin-top:2.5rem">大樂透 7 碼到 12 碼包牌機率、注數、花費完整比較</h2>
 
       <p>接下來是正式的數據表。這不是模擬，是用組合數學精算出來的。大樂透獎金結構：頭獎（6 中 6）獎金浮動、貳獎（6 中 5 + 特別號）約 $1,500,000、參獎（6 中 5）$50,000、肆獎（6 中 4）$5,000、伍獎（6 中 3）$400、陸獎（6 中 2 + 特別號）$400。</p>
 
@@ -185,7 +199,7 @@ const faqs = [
 
       <p>這就是台灣公益彩券的結構性真相：<strong>約 45% 的錢會被分配到公益金、稅金和營運費用</strong>。不管你怎麼包，這個比例不會改變。</p>
 
-      <h2 id="ev" style="margin-top:2.5rem">期望值真相：包 10 碼花 $10,500，數學上能回收多少？</h2>
+      <h2 id="ev" style="margin-top:2.5rem">大樂透 10 連碰多少錢？$10,500 的期望回收真相</h2>
 
       <p>很多彩迷覺得「包多一點，中大獎的機率就高很多」。來，芭樂子幫你算一筆很殘忍的帳。</p>
 
@@ -209,7 +223,7 @@ const faqs = [
 
       <p>芭樂子不是要掃你的興——買彩券本來就是花錢買一個夢。但你得搞清楚這個夢的價格，才不會做到傾家蕩產的噩夢。</p>
 
-      <h2 id="vs539" style="margin-top:2.5rem">大樂透 vs 539 包牌：哪個 CP 值高？</h2>
+      <h2 id="vs539" style="margin-top:2.5rem">大樂透包牌 vs 539 包牌：同樣花錢哪個 CP 值高？</h2>
 
       <p>這題很多人問，芭樂子直接列表比給你看：</p>
 
