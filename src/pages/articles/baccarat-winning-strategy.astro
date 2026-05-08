@@ -1,5 +1,6 @@
 ---
 import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
@@ -15,6 +16,7 @@ const faqs = [
   { q: '新手玩百家樂本金要準備多少才夠？', a: '芭樂子的建議是：本金至少要能撐 50 個最小單位以上。例如你設定「1 單位 = 100 元」，本金建議 5,000 元起跳；「1 單位 = 500 元」就要準備 25,000 元。這是為了讓你用 1-3-2-4 至少能跑 10~15 個循環，數學樣本夠大才能讓機率趨近期望值。本金太少只能跑 2~3 個循環，短期波動會完全把你洗掉。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/baccarat-winning-strategy/"
@@ -380,7 +382,9 @@ const faqs = [
         <a href="/live-casino/">真人娛樂完整指南<small>SEXY、DG、歐博平台比較</small></a>
         <a href="/articles/anti-scam-8la-guide/">2026 防詐騙指南<small>8 大黑網手法拆解</small></a>
       </div>
-    </article>
+      <ManifestoBox />
+        <ToolBox preset="baccarat" />
+</article>
     <div style="text-align:center;margin-top:2rem">
       <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
     </div>

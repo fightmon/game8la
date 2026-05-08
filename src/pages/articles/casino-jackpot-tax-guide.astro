@@ -1,5 +1,6 @@
 ---
 import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
@@ -15,6 +16,7 @@ const faqs = [
   { q: '小玩怡情的人需要申報嗎？', a: '實務上不會。少量出金、累積金額不大、沒有引起銀行異常通報，國稅局根本不會理你。但「實務上不會」是觀察結論，不是法律豁免，重點是別越玩越大。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/casino-jackpot-tax-guide/"
@@ -267,7 +269,9 @@ const faqs = [
         <a href="/game-ranking/">2026 遊戲推薦排名<small>10 大線上平台評比</small></a>
         <a href="/articles/daily-cash-539-wheel-guide/">539 包牌攻略<small>系統號玩法完整解析</small></a>
       </div>
-    </article>
+      <ManifestoBox />
+        <ToolBox preset="casino-full" />
+</article>
     <div style="text-align:center;margin-top:2rem">
       <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
     </div>

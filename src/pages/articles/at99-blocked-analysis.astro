@@ -22,6 +22,7 @@ const faqs = [
   { q: 'Game8la 寫這篇是在「唱衰 AT99」嗎？你們收錢了嗎？', a: '沒有。Game8la 整站<strong>拒絕任何娛樂城業配、推薦碼、NGR 抽成</strong>——這也是我們敢把這篇寫出來的底氣。這篇文章引用的是<strong>刑事警察局公開函文編號</strong>、《詐欺犯罪危害防制條例》明文條款、以及實際網域封鎖截圖，全部是<strong>可驗證的客觀事實</strong>。其他博弈資訊站不寫這篇不是不知道，是怕得罪金主。我們<strong>沒金主要顧慮</strong>，所以敢寫。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/at99-blocked-analysis/"
@@ -399,7 +400,8 @@ const faqs = [
           <span class="rl-desc">從機率到產業內幕，完整博弈知識庫</span>
         </a>
       </div>
-    </article>
+        <ToolBox preset="casino" />
+</article>
   </div>
 
   <style is:global>

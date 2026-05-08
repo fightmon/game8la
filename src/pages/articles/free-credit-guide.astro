@@ -1,5 +1,6 @@
 ---
 import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
@@ -13,6 +14,7 @@ const faqs = [
   { q: '體驗金跟首儲優惠有什麼不同？', a: '體驗金 = 註冊就送，不用先存錢。首儲優惠 = 你先存一筆錢，平台再「加碼」一定比例（例如首存 1,000 送 500）。首儲優惠的金額通常比體驗金大，但前提是你要先掏錢。兩者都會有流水倍數門檻，但首儲優惠因為金額大，實際流水門檻也會更高。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/free-credit-guide/"
@@ -285,7 +287,9 @@ const faqs = [
         <a href="/articles/slots-rtp-guide/">老虎機 RTP 教學<small>選遊戲前必懂的數字</small></a>
         <a href="/articles/online-casino-guide/">線上娛樂城完整指南<small>新手到老司機的一本通</small></a>
       </div>
-    </article>
+      <ManifestoBox />
+        <ToolBox preset="casino" />
+</article>
     <div style="text-align:center;margin-top:2rem">
       <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
     </div>

@@ -78,6 +78,34 @@ const {
     <meta name="theme-color" content="#121212">
     <link rel="canonical" href={ogUrl}>
 
+    <!-- Organization Schema (全站) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Game8la",
+      "alternateName": "GAME8LA 真評價",
+      "url": "https://game8la.com",
+      "logo": "https://game8la.com/images/index/game8la_logo_21x9.webp",
+      "description": "台灣最敢說真話的線上遊戲評測平台",
+      "founder": { "@type": "Person", "name": "芭樂子", "url": "https://game8la.com/author/baluazi/" },
+      "contactPoint": { "@type": "ContactPoint", "email": "hello@game8la.tw", "contactType": "customer service" }
+    })} />
+
+    {/* WebSite + SearchAction — 僅首頁 */}
+    {currentPage === 'home' && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Game8la",
+        "url": "https://game8la.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://game8la.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      })} />
+    )}
+
     <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://www.clarity.ms" crossorigin>

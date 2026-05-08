@@ -1,0 +1,378 @@
+---
+import Icon from '../../../components/Icon.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { articles } from '../../../data/articles.js';
+
+// 精選 6 篇最高流量文章
+const featured = articles
+  .filter(a => a.views > 0)
+  .sort((a, b) => (b.views || 0) - (a.views || 0))
+  .slice(0, 6);
+
+const tools = [
+  { name: '娛樂城體檢', desc: '165 黑名單比對 + WHOIS + 流水計算', href: '/casino-check/', icon: 'shield' },
+  { name: '芭樂好彩數據站', desc: '539・大樂透・威力彩冷熱號 + 包牌產生器', href: '/lottery/analysis/', icon: 'bar-chart' },
+  { name: '芭樂轉轉機', desc: 'RTP 視覺化模擬老虎機', href: '/tools/slot-simulator/', icon: 'play' },
+  { name: '雷神之錘 2 模擬器', desc: '體驗雷神爆分機制', href: '/tools/thor-hammer-2-simulator/', icon: 'zap' },
+  { name: 'RTP 實測紀錄器', desc: '記錄每局輸贏、自動算 RTP', href: '/tools/rtp-tracker/', icon: 'clipboard' },
+  { name: '資金管理計算器', desc: '設定停損停利、計算風險', href: '/tools/bankroll-calculator/', icon: 'calculator' },
+  { name: '百家樂策略模擬器', desc: '五種下注策略實測，跑 1000 局看結果', href: '/tools/baccarat-simulator/', icon: 'bar-chart' },
+];
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "芭樂子",
+  "alternateName": "Game8la Baluazi",
+  "url": "https://game8la.com/author/baluazi/",
+  "jobTitle": "博弈評測平台創辦人 / 主筆",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Game8la",
+    "url": "https://game8la.com"
+  },
+  "knowsAbout": ["線上博弈評測", "老虎機 RTP 分析", "樂透機率計算", "娛樂城防詐", "博弈數據分析"],
+  "description": "Game8la 創辦人，專注用數據拆解博弈產業真相。全站零業配、零娛樂城導流連結。"
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "關於芭樂子", "item": "https://game8la.com/author/baluazi/" }
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<BaseLayout
+  currentPage="about"
+  title="芭樂子｜Game8la 創辦人 / 主筆——用數據拆解博弈真相 - GAME8LA"
+  description="芭樂子是 Game8la 創辦人兼主筆，專注用數學和數據拆解博弈產業真相。全站零業配、零娛樂城導流連結、零 NGR 抽成。已產出 40+ 篇深度文章與 7 個免費工具。"
+>
+  <div class="author-container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; 關於芭樂子</div>
+
+    <!-- ===== Hero ===== -->
+    <section class="author-hero">
+      <div class="author-avatar">🍈</div>
+      <div class="author-intro">
+        <h1>芭樂子</h1>
+        <p class="author-role">Game8la 創辦人 / 主筆</p>
+        <div class="author-badge">
+          <Icon name="shield" size="0.9rem" />
+          <span>100% Independent &amp; No Referral Links</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 我是誰 ===== -->
+    <section class="author-section">
+      <h2>我是誰</h2>
+      <p>我是芭樂子，Game8la 的創辦人兼唯一主筆。</p>
+      <p>會做這個站，是因為看膩了「每一間娛樂城都是五顆星推薦」的評測網站。那些站的商業模式很簡單——幫娛樂城導流，賺你輸的錢的分潤（NGR 抽成）。在這種利益結構下，他們不可能告訴你真話。</p>
+      <p>Game8la 從 Day 1 就決定不接娛樂城業配、不放註冊連結、不賺 NGR。我用數學和數據說話——RTP 模擬跑 100 萬轉、彩券機率用組合公式精算、娛樂城流水用數學拆解。所有內容都是我自己查、自己算、自己寫的。</p>
+      <p>我不是來當你的朋友的，我是來讓你少被騙的。</p>
+      <a href="/articles/game8la-manifesto/" class="manifesto-link">
+        <Icon name="shield" size="0.9rem" /> 看完整宣言：為什麼 Game8la 不推薦任何娛樂城
+      </a>
+    </section>
+
+    <!-- ===== 精選文章 ===== -->
+    <section class="author-section">
+      <h2>我寫過什麼</h2>
+      <p class="section-sub">以下是流量最高的 6 篇，全站共 {articles.length} 篇深度文章。</p>
+      <div class="article-grid">
+        {featured.map(a => (
+          <a href={`/articles/${a.slug}/`} class="article-card">
+            <span class="ac-cat">{a.categoryLabel}</span>
+            <strong class="ac-title">{a.title}</strong>
+            <span class="ac-views"><Icon name="eye" size="0.75rem" /> {a.views?.toLocaleString()} 次閱讀</span>
+          </a>
+        ))}
+      </div>
+      <a href="/articles/" class="more-link">看全部文章 <Icon name="arrow-right" size="0.85rem" /></a>
+    </section>
+
+    <!-- ===== 我的工具 ===== -->
+    <section class="author-section">
+      <h2>我做的工具</h2>
+      <p class="section-sub">全部免費、沒有廣告、沒有業配。</p>
+      <div class="tool-grid">
+        {tools.map(t => (
+          <a href={t.href} class="tool-card">
+            <div class="tc-icon"><Icon name={t.icon} size="1.2rem" /></div>
+            <div class="tc-body">
+              <strong>{t.name}</strong>
+              <span>{t.desc}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <a href="/tools/" class="more-link">看全部工具 <Icon name="arrow-right" size="0.85rem" /></a>
+    </section>
+
+    <!-- ===== 找到我 ===== -->
+    <section class="author-section contact-section">
+      <h2>找到我</h2>
+      <div class="contact-row">
+        <a href="mailto:hello@game8la.tw" class="contact-item">
+          <Icon name="mail" size="1rem" />
+          <span>hello@game8la.tw</span>
+        </a>
+        <a href="https://docs.google.com/forms/d/1UhHI6PBNmH3BMSi9SMa02u2z9_xc8Yhn8Nl2Z67G5y0/viewform" target="_blank" rel="noopener" class="contact-item">
+          <Icon name="message-circle" size="1rem" />
+          <span>問題回報 / 合作提案</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .author-container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 3rem;
+  }
+  .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--gold-light); }
+
+  /* Hero */
+  .author-hero {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.04));
+    border: 1px solid rgba(57,255,20,0.2);
+    border-radius: 16px;
+    margin-bottom: 2.5rem;
+  }
+  .author-avatar {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: rgba(57,255,20,0.1);
+    border: 2px solid rgba(57,255,20,0.3);
+    border-radius: 50%;
+  }
+  .author-intro h1 {
+    font-size: 1.8rem;
+    margin: 0 0 0.3rem;
+    color: var(--text-primary);
+  }
+  .author-role {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0 0 0.6rem;
+  }
+  .author-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(57,255,20,0.08);
+    border: 1px solid rgba(57,255,20,0.3);
+    border-radius: 20px;
+    color: #39FF14;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  /* Sections */
+  .author-section {
+    margin-bottom: 2.5rem;
+  }
+  .author-section h2 {
+    font-size: 1.3rem;
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+  .author-section p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin: 0.6rem 0;
+    font-size: 0.95rem;
+  }
+  .section-sub {
+    color: var(--text-muted) !important;
+    font-size: 0.88rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .manifesto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(57,255,20,0.08);
+    border: 1px solid rgba(57,255,20,0.25);
+    border-radius: 10px;
+    color: #39FF14;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .manifesto-link:hover {
+    background: rgba(57,255,20,0.15);
+    border-color: #39FF14;
+  }
+
+  /* Article Grid */
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1rem 1.2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .article-card:hover {
+    border-color: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .ac-cat {
+    font-size: 0.72rem;
+    color: var(--gold-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .ac-title {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .ac-views {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: auto;
+  }
+
+  /* Tool Grid */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .tool-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .tool-card:hover {
+    border-color: var(--guava-green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(57,255,20,0.1);
+  }
+  .tc-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(57,255,20,0.1);
+    border-radius: 10px;
+    color: #39FF14;
+  }
+  .tc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .tc-body strong {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+  }
+  .tc-body span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .more-link:hover { color: #39FF14; }
+
+  /* Contact */
+  .contact-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .contact-item:hover {
+    border-color: var(--gold-light);
+    color: var(--gold-light);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .author-hero { flex-direction: column; text-align: center; padding: 1.5rem; }
+    .author-intro h1 { font-size: 1.5rem; }
+    .article-grid, .tool-grid { grid-template-columns: 1fr; }
+    .author-container { padding: 1rem; }
+  }
+</style>

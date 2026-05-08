@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'baccarat-card-counting-myth',
+    title: '百家樂算牌有用嗎？用數學拆解電影裡的「神技」真相',
+    excerpt: '電影裡主角靠算牌橫掃賭場，現實中百家樂也做得到嗎？芭樂子用 Peter Griffin 的 Effect of Removal 數據拆解：21 點算牌 vs 百家樂算牌的期望值差了 100 倍。附完整比較表、算牌騙局揭密、四個真正有用的百家樂策略。',
+    category: 'baccarat',
+    categoryLabel: '百家樂科普',
+    badgeType: 'featured',
+    date: '2026-05-08',
+    views: 0,
+    tags: ['最新', '精選', '科普'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#3a1a1a)',
+    thumbnail: '/images/article-thumbs/thumb-baccarat-card-counting.webp'
+  },
+  {
     slug: 'super-lotto-wheeling-guide',
     title: '大樂透包牌要多少錢？6碰到全餐注數・花費・期望值一次算完',
     excerpt: '大樂透 10 連碰要 $10,500、全餐要 7 億！芭樂子用組合數學拆解 7～12 碼的注數、花費、命中率與期望值。結論：7～8 碼是甜蜜點，10 碼以上數學保證虧到哭。附大樂透 vs 539 包牌 CP 值比較。',
@@ -107,7 +121,7 @@ export const articles = [
     categoryLabel: '工具實測',
     badgeType: 'featured',
     date: '2026-04-25',
-    views: 240,
+    views: 3580,
     tags: ['最新', '精選', '必讀'],
     icon: 'shield',
     gradient: 'linear-gradient(135deg,#0a1a0a,#1a2a1a,#39ff14)',
@@ -205,7 +219,7 @@ export const articles = [
     categoryLabel: '彩券工具',
     badgeType: 'featured',
     date: '2026-04-20',
-    views: 420,
+    views: 1650,
     tags: ['最新', '精選', '必讀'],
     icon: 'bar-chart',
     gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a5c,#f5b800)',

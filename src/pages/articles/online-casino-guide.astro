@@ -1,5 +1,6 @@
 ---
 import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
@@ -17,6 +18,7 @@ const faqs = [
   { q: '娛樂城可以長期當副業賺錢嗎？', a: '理論上只有「套利」（抓平台優惠漏洞）跟「職業德州撲克」兩種方式有機會長期正 EV，但這兩個都需要大量時間 + 數學能力 + 心理素質，門檻不比正經工作低。其他所有遊戲（老虎機、百家樂、體育下注）的莊家優勢（House Edge）都會讓你長期下來期望值為負，<strong>當娛樂玩可以、當副業賺錢是幻想</strong>。真想靠遊戲賺錢，去打電競或做 YouTube 遊戲頻道還比較實際。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/online-casino-guide/"
@@ -410,7 +412,9 @@ const faqs = [
         <a href="/articles/casino-jackpot-tax-guide/">中獎要繳稅嗎<small>娛樂城稅務規劃</small></a>
         <a href="/game-ranking/">2026 十大遊戲排名<small>合法娛樂城評比</small></a>
       </div>
-    </article>
+      <ManifestoBox />
+        <ToolBox preset="casino-full" />
+</article>
     <div style="text-align:center;margin-top:2rem">
       <a href="/articles/" class="btn-outline">&larr; 回文章列表</a>
     </div>

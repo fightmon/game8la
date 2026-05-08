@@ -1,5 +1,6 @@
 ---
 import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
@@ -14,6 +15,7 @@ const faqs = [
   { q: '買免遊該買哪一代？', a: '兩代的買免遊都是<strong>單一價位、x100 投注額</strong>——沒有 200x/500x/2000x 這種分段設計（那是芭樂子之前搞錯的，已訂正）。所以不用選段，手癢想直接看免遊就按下去，差別只在於 2 代進去後會隨機觸發覺醒之力，獎分結構比較立體。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/atg-seth-1-vs-2-comparison/"
@@ -198,7 +200,9 @@ const faqs = [
         <p style="margin:0 0 0.5rem 0"><strong><Icon name="alert-triangle" /> 重要警語</strong></p>
         <p style="margin:0;font-size:0.9rem;line-height:1.6">本文為遊戲機制科普，<strong>不鼓勵賭博</strong>。ATG 電子遊戲在台灣線上娛樂城屬於娛樂性質，請理性投注、量力而為。若您或身邊親友出現賭博失控情況，請撥打<strong>1925 安心專線</strong>尋求協助。</p>
       </div>
-    </article>
+      <ManifestoBox />
+        <ToolBox preset="slots" />
+</article>
   </div>
 
   <style>

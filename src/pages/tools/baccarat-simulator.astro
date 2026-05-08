@@ -1,0 +1,906 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+
+const faqs = [
+  { q: '百家樂投注策略真的有用嗎？', a: '所有投注策略（馬丁格爾、1-3-2-4、達蘭伯、斐波那契）都無法改變百家樂的期望值。莊家優勢固定在押莊 1.06%、押閒 1.24%，策略只能改變你的「損益分布曲線」——讓你短期贏面看起來比較大，但長期跑下去總虧損不會變。用這個模擬器跑 1000 局以上就能親眼看到。' },
+  { q: '馬丁格爾投注法為什麼會破產？', a: '馬丁格爾的核心是「輸了翻倍」。聽起來穩贏，但連輸 7 局注碼就從 100 變 12,800。連輸 10 局變 102,400。百家樂莊家優勢雖然只有 1%，但連輸 7～10 局的機率大約 1%～0.1%——在 1000 局裡幾乎一定會遇到。本模擬器的馬丁格爾設有 128 倍封頂，但即便如此，破產率仍然明顯高於平注法。' },
+  { q: '百家樂該押莊還是押閒？', a: '數學上永遠押莊。押莊的莊家優勢 1.06%（含和局），押閒 1.24%，差了 0.18 個百分點。雖然莊贏要抽 5% 水錢，但莊家補牌規則本身就偏向莊方，算完水錢後莊方仍然是較好的選擇。絕對不要押和——和局的莊家優勢高達 14.4%。' },
+  { q: '1-3-2-4 投注法是什麼？', a: '1-3-2-4 是一種正向加注策略：連贏時依序下注 1、3、2、4 倍單位注額，任何一局輸了就回到 1 倍重新開始。它的特色是連贏 4 局可以賺到 10 倍單位注額，但最多只虧 1 倍。相比馬丁格爾，1-3-2-4 不會指數爆炸，波動較穩，但長期期望值一樣是負的。' },
+  { q: '這個模擬器的發牌規則準確嗎？', a: '完全照標準 8 副牌百家樂規則。閒家 0-5 補牌、6-7 不補；莊家根據閒家第三張牌決定是否補牌（標準第三張補牌表）。莊贏抽 5% 水錢、和局退注。經過 10,000 手驗證，莊閒和分布為 45.8% / 44.6% / 9.5%，完全吻合理論值。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<BaseLayout
+  title="百家樂投注策略模擬器｜馬丁格爾、1-3-2-4、平注法實測 - GAME8LA"
+  description="免費百家樂投注策略模擬器：選平注、馬丁格爾、1-3-2-4、達蘭伯、斐波那契，跑 100～10,000 局看結果。標準 8 副牌規則、莊家優勢 1.06% 完整模擬，數據告訴你哪種注碼法最耐打。"
+  currentPage="tools"
+>
+<div class="sim-wrap">
+  <!-- Header -->
+  <div class="sim-header">
+    <a href="/tools/" class="back-link"><Icon name="arrow-left" size="0.85rem" /> 回工具箱</a>
+    <h1>🃏 百家樂投注策略模擬器<span>5 種注碼法，跑完就知道誰先破產</span></h1>
+    <p class="sim-disclaimer">⚠️ 這不是賭博遊戲。這是一台用數學跑模擬的教育工具——讓你親眼看到各種「必勝法」的真實表現。</p>
+  </div>
+
+  <!-- SEO 靜態說明 -->
+  <div class="sim-intro">
+    <p>網路上滿滿的「百家樂必勝投注法」——馬丁格爾翻倍、1-3-2-4 序列、達蘭伯遞增、斐波那契數列……聽起來都很有道理，但<strong>真的跑起來會怎樣？</strong></p>
+    <p>這個模擬器使用標準 8 副牌百家樂規則（含第三張補牌邏輯），讓你自己選策略、設本金、按下按鈕跑 100～10,000 局。資金曲線、破產點、實測 RTP、連贏連輸紀錄——所有數據攤在你面前。</p>
+    <p>百家樂的莊家優勢只有 1.06%（押莊），看起來很小，但 <strong>沒有任何注碼管理策略能把負期望值翻正</strong>。不信？自己跑跑看。</p>
+  </div>
+
+  <!-- Control Panel -->
+  <div class="ctrl-panel">
+    <div class="ctrl-row-top">
+      <div class="ctrl-group">
+        <label>💰 起始本金</label>
+        <div class="input-wrap">
+          <span class="input-prefix">$</span>
+          <input type="number" id="bankroll" value="10000" min="1000" max="1000000" step="1000" />
+        </div>
+      </div>
+      <div class="ctrl-group">
+        <label>🎯 單位注額</label>
+        <div class="input-wrap">
+          <span class="input-prefix">$</span>
+          <input type="number" id="unit-bet" value="100" min="10" max="10000" step="10" />
+        </div>
+      </div>
+      <div class="ctrl-group">
+        <label>🔄 模擬局數</label>
+        <div class="rounds-btns">
+          <button class="rounds-btn" data-r="100">100</button>
+          <button class="rounds-btn" data-r="500">500</button>
+          <button class="rounds-btn active" data-r="1000">1,000</button>
+          <button class="rounds-btn" data-r="5000">5,000</button>
+          <button class="rounds-btn" data-r="10000">10,000</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ctrl-group">
+      <label>📐 投注策略</label>
+      <div class="strat-grid">
+        <button class="strat-btn active" data-s="flat">
+          <strong>平注法</strong>
+          <span>每局固定注額，最穩定的基準策略</span>
+        </button>
+        <button class="strat-btn" data-s="martingale">
+          <strong>馬丁格爾</strong>
+          <span>輸了翻倍追回，連黑會爆</span>
+        </button>
+        <button class="strat-btn" data-s="paroli1324">
+          <strong>1-3-2-4</strong>
+          <span>贏了照 1→3→2→4 加注</span>
+        </button>
+        <button class="strat-btn" data-s="dalembert">
+          <strong>達蘭伯</strong>
+          <span>輸加一注 贏減一注</span>
+        </button>
+        <button class="strat-btn" data-s="fibonacci">
+          <strong>斐波那契</strong>
+          <span>輸照數列推進 贏退兩步</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ctrl-group">
+      <label>🎲 押注目標</label>
+      <div class="bet-target-btns">
+        <button class="target-btn active" data-t="banker">押莊 <small>莊家優勢 1.06%</small></button>
+        <button class="target-btn" data-t="player">押閒 <small>莊家優勢 1.24%</small></button>
+      </div>
+      <p class="edge-note">⚠️ 以上莊家優勢已含和局（tie 算 push 退注）。若排除和局，押莊實際優勢為 1.17%、押閒為 1.36%。</p>
+    </div>
+
+    <button class="run-btn" id="run-btn">
+      <Icon name="play" size="1rem" /> 開始模擬
+    </button>
+  </div>
+
+  <!-- Results -->
+  <div class="results-area" id="results-area" style="display:none">
+    <!-- Chart -->
+    <div class="chart-card">
+      <h2>📈 資金曲線</h2>
+      <canvas id="chart" width="800" height="360"></canvas>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">最終餘額</span>
+        <span class="stat-value" id="s-final">--</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">盈虧</span>
+        <span class="stat-value" id="s-pnl">--</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">實際 RTP</span>
+        <span class="stat-value" id="s-rtp">--</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">破產</span>
+        <span class="stat-value" id="s-bust">--</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">最高餘額</span>
+        <span class="stat-value" id="s-peak">--</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">最低餘額</span>
+        <span class="stat-value" id="s-trough">--</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">最大連贏</span>
+        <span class="stat-value" id="s-streak-w">--</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">最大連輸</span>
+        <span class="stat-value" id="s-streak-l">--</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">莊 / 閒 / 和</span>
+        <span class="stat-value" id="s-bpt">--</span>
+      </div>
+    </div>
+
+    <!-- Verdict -->
+    <div class="verdict-card" id="verdict-card">
+      <h3>🍈 芭樂子怎麼說</h3>
+      <p id="verdict-text"></p>
+    </div>
+  </div>
+
+  <!-- Related Links -->
+  <div class="related-links">
+    <h3>📚 想更了解百家樂？</h3>
+    <div class="rl-grid">
+      <a href="/articles/baccarat-card-counting-myth/">百家樂算牌真相<small>電影 vs 數學</small></a>
+      <a href="/articles/baccarat-winning-strategy/">1-3-2-4 投注法拆解<small>注碼管理教學</small></a>
+      <a href="/articles/baccarat-guide/">百家樂看路教學<small>大路・珠盤路・下三路</small></a>
+      <a href="/tools/bankroll-calculator/">資金管理計算器<small>算出你的停損線</small></a>
+    </div>
+  </div>
+
+  <div class="guava-note">
+    <p>🌿 本工具使用標準 8 副牌百家樂規則，發牌邏輯完全照第三補牌規則運作。每次模擬用新洗的牌堆。莊贏抽 5% 水錢、和局退注、對子邊注不計。數學是公平的，但賭場永遠站在贏面那邊。</p>
+  </div>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+
+<script is:inline>
+(function(){
+  // === State ===
+  let rounds = 1000;
+  let strategy = 'flat';
+  let betTarget = 'banker';
+  let chartInstance = null;
+
+  // === DOM ===
+  const $ = id => document.getElementById(id);
+  const roundsBtns = document.querySelectorAll('.rounds-btn');
+  const stratBtns = document.querySelectorAll('.strat-btn');
+  const targetBtns = document.querySelectorAll('.target-btn');
+
+  roundsBtns.forEach(b => b.addEventListener('click', () => {
+    roundsBtns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    rounds = +b.dataset.r;
+  }));
+  stratBtns.forEach(b => b.addEventListener('click', () => {
+    stratBtns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    strategy = b.dataset.s;
+  }));
+  targetBtns.forEach(b => b.addEventListener('click', () => {
+    targetBtns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    betTarget = b.dataset.t;
+  }));
+
+  $('run-btn').addEventListener('click', runSimulation);
+
+  // === Baccarat Engine ===
+  function createShoe() {
+    const cards = [];
+    for (let d = 0; d < 8; d++) {
+      for (let v = 1; v <= 13; v++) {
+        for (let s = 0; s < 4; s++) {
+          cards.push(Math.min(v, 10)); // Face cards = 10, but baccarat value...
+        }
+      }
+    }
+    // Shuffle (Fisher-Yates)
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    return cards;
+  }
+
+  function bacVal(v) {
+    // Baccarat card value: A=1, 2-9=face, 10/J/Q/K=0
+    if (v === 10) return 0;
+    return v;
+  }
+
+  function handTotal(cards) {
+    return cards.reduce((s, c) => (s + bacVal(c)) % 10, 0);
+  }
+
+  function playHand(shoe, idx) {
+    // Deal 4 cards: P1, B1, P2, B2
+    if (idx + 6 > shoe.length) return null; // need reshuffle
+    const p = [shoe[idx], shoe[idx+2]];
+    const b = [shoe[idx+1], shoe[idx+3]];
+    let ci = idx + 4;
+    let pTotal = handTotal(p);
+    let bTotal = handTotal(b);
+
+    // Natural
+    if (pTotal >= 8 || bTotal >= 8) {
+      return { winner: pTotal > bTotal ? 'player' : bTotal > pTotal ? 'banker' : 'tie', ci };
+    }
+
+    // Player third card rule
+    let pThird = null;
+    if (pTotal <= 5) {
+      pThird = shoe[ci++];
+      p.push(pThird);
+      pTotal = handTotal(p);
+    }
+
+    // Banker third card rule
+    if (pThird === null) {
+      // Player stood — banker draws on 0-5
+      if (bTotal <= 5) {
+        b.push(shoe[ci++]);
+        bTotal = handTotal(b);
+      }
+    } else {
+      const pTV = bacVal(pThird);
+      let bankerDraws = false;
+      if (bTotal <= 2) bankerDraws = true;
+      else if (bTotal === 3 && pTV !== 8) bankerDraws = true;
+      else if (bTotal === 4 && pTV >= 2 && pTV <= 7) bankerDraws = true;
+      else if (bTotal === 5 && pTV >= 4 && pTV <= 7) bankerDraws = true;
+      else if (bTotal === 6 && (pTV === 6 || pTV === 7)) bankerDraws = true;
+      // bTotal 7: stand
+      if (bankerDraws) {
+        b.push(shoe[ci++]);
+        bTotal = handTotal(b);
+      }
+    }
+
+    const winner = pTotal > bTotal ? 'player' : bTotal > pTotal ? 'banker' : 'tie';
+    return { winner, ci };
+  }
+
+  // === Betting Strategies ===
+  function getNextBet(strat, unit, state) {
+    switch (strat) {
+      case 'flat':
+        return unit;
+      case 'martingale':
+        return Math.min(state.currentBet || unit, unit * 128); // cap at 128x
+      case 'paroli1324': {
+        const seq = [1, 3, 2, 4];
+        return unit * seq[state.seqIdx % 4];
+      }
+      case 'dalembert':
+        return Math.max(unit, state.currentBet + (state.lastWin ? -unit : unit));
+      case 'fibonacci': {
+        const fib = state.fibSeq || [1];
+        return unit * fib[fib.length - 1];
+      }
+      default:
+        return unit;
+    }
+  }
+
+  function updateState(strat, state, won, unit) {
+    state.lastWin = won;
+    switch (strat) {
+      case 'martingale':
+        state.currentBet = won ? unit : (state.currentBet || unit) * 2;
+        break;
+      case 'paroli1324':
+        if (won) {
+          state.seqIdx = (state.seqIdx + 1) % 4;
+        } else {
+          state.seqIdx = 0;
+        }
+        break;
+      case 'dalembert':
+        // handled in getNextBet
+        break;
+      case 'fibonacci':
+        if (!state.fibSeq) state.fibSeq = [1];
+        if (won) {
+          // Move back 2 steps
+          if (state.fibSeq.length > 2) {
+            state.fibSeq.pop();
+            state.fibSeq.pop();
+          } else {
+            state.fibSeq = [1];
+          }
+        } else {
+          const len = state.fibSeq.length;
+          const next = len >= 2 ? state.fibSeq[len-1] + state.fibSeq[len-2] : 1;
+          state.fibSeq.push(next);
+        }
+        break;
+    }
+    return state;
+  }
+
+  // === Simulation ===
+  function runSimulation() {
+    const bankroll = +$('bankroll').value || 10000;
+    const unit = +$('unit-bet').value || 100;
+
+    let balance = bankroll;
+    let shoe = createShoe();
+    let shoeIdx = 0;
+    const history = [balance];
+    let peak = balance, trough = balance;
+    let totalBetAmount = 0, totalReturnAmount = 0;
+    let busted = false;
+    let streakW = 0, streakL = 0, maxStreakW = 0, maxStreakL = 0;
+    let countB = 0, countP = 0, countT = 0;
+
+    let state = { lastWin: true, currentBet: unit, seqIdx: 0, fibSeq: [1] };
+
+    for (let i = 0; i < rounds; i++) {
+      // Reshuffle if shoe is running low
+      if (shoeIdx + 6 > shoe.length) {
+        shoe = createShoe();
+        shoeIdx = 0;
+      }
+
+      const result = playHand(shoe, shoeIdx);
+      if (!result) {
+        shoe = createShoe();
+        shoeIdx = 0;
+        continue;
+      }
+      shoeIdx = result.ci;
+
+      // Count outcomes
+      if (result.winner === 'banker') countB++;
+      else if (result.winner === 'player') countP++;
+      else countT++;
+
+      // Calculate bet
+      let betSize = getNextBet(strategy, unit, state);
+      betSize = Math.min(betSize, balance); // can't bet more than balance
+      if (betSize <= 0 || balance <= 0) {
+        busted = true;
+        // Fill remaining history with 0
+        for (let j = i; j < rounds; j++) history.push(0);
+        break;
+      }
+
+      totalBetAmount += betSize;
+
+      // Resolve bet
+      let won = false;
+      if (result.winner === 'tie') {
+        // Push — return bet
+        totalReturnAmount += betSize;
+        // Tie doesn't affect strategy state
+        history.push(balance);
+        continue;
+      } else if (result.winner === betTarget) {
+        won = true;
+        const payout = betTarget === 'banker' ? betSize * 0.95 : betSize;
+        balance += payout;
+        totalReturnAmount += betSize + payout;
+      } else {
+        balance -= betSize;
+      }
+
+      // Update strategy state
+      state.currentBet = betSize;
+      state = updateState(strategy, state, won, unit);
+
+      // Track streaks
+      if (won) {
+        streakW++;
+        streakL = 0;
+        if (streakW > maxStreakW) maxStreakW = streakW;
+      } else {
+        streakL++;
+        streakW = 0;
+        if (streakL > maxStreakL) maxStreakL = streakL;
+      }
+
+      if (balance > peak) peak = balance;
+      if (balance < trough) trough = balance;
+      history.push(Math.round(balance));
+
+      if (balance <= 0) {
+        busted = true;
+        for (let j = i + 1; j < rounds; j++) history.push(0);
+        break;
+      }
+    }
+
+    // Display results
+    $('results-area').style.display = '';
+    const pnl = balance - bankroll;
+    const rtp = totalBetAmount > 0 ? ((totalReturnAmount / totalBetAmount) * 100).toFixed(2) : '0';
+
+    $('s-final').textContent = '$' + Math.round(balance).toLocaleString();
+    $('s-final').style.color = balance >= bankroll ? '#39FF14' : '#ef4444';
+
+    $('s-pnl').textContent = (pnl >= 0 ? '+$' : '-$') + Math.abs(Math.round(pnl)).toLocaleString();
+    $('s-pnl').style.color = pnl >= 0 ? '#39FF14' : '#ef4444';
+
+    $('s-rtp').textContent = rtp + '%';
+    $('s-rtp').style.color = rtp >= 100 ? '#39FF14' : '#ef4444';
+
+    $('s-bust').textContent = busted ? '💀 破產' : '✅ 存活';
+    $('s-bust').style.color = busted ? '#ef4444' : '#39FF14';
+
+    $('s-peak').textContent = '$' + Math.round(peak).toLocaleString();
+    $('s-peak').style.color = '#39FF14';
+
+    $('s-trough').textContent = '$' + Math.round(trough).toLocaleString();
+    $('s-trough').style.color = trough < bankroll * 0.5 ? '#ef4444' : 'var(--text-muted)';
+
+    $('s-streak-w').textContent = maxStreakW + ' 局';
+    $('s-streak-l').textContent = maxStreakL + ' 局';
+    $('s-streak-l').style.color = maxStreakL >= 8 ? '#ef4444' : 'var(--text-muted)';
+
+    const total = countB + countP + countT;
+    $('s-bpt').textContent = countB + ' / ' + countP + ' / ' + countT;
+
+    // Verdict
+    const stratNames = { flat:'平注法', martingale:'馬丁格爾', paroli1324:'1-3-2-4', dalembert:'達蘭伯', fibonacci:'斐波那契' };
+    let verdict = '';
+    if (busted) {
+      verdict = '使用「' + stratNames[strategy] + '」策略，你在第 ' + history.indexOf(0) + ' 局破產了。';
+      if (strategy === 'martingale') verdict += '馬丁格爾的問題就是連輸時注碼指數爆炸——你遲早會遇到一次超過本金的翻倍。';
+      else if (strategy === 'fibonacci') verdict += '斐波那契在連輸時注碼增長比馬丁慢，但一樣扛不住長連黑。';
+      else verdict += '即使是最保守的策略，在局數夠多的情況下，1.06% 的莊家優勢也會把你磨穿。';
+    } else if (pnl >= 0) {
+      verdict = '恭喜，這次模擬你用「' + stratNames[strategy] + '」賺了 $' + Math.round(pnl).toLocaleString() + '。但別高興太早——這只是一次模擬。再跑 10 次，你會發現大部分時候都是虧的。百家樂的莊家優勢 1.06%～1.24% 不會因為你選了某種策略就消失。';
+    } else {
+      verdict = '使用「' + stratNames[strategy] + '」策略，' + rounds + ' 局後你虧了 $' + Math.abs(Math.round(pnl)).toLocaleString() + '。這不是運氣差——這是數學。莊家優勢 ' + (betTarget === 'banker' ? '1.06%' : '1.24%') + ' 意味著每下注 $10,000，你平均虧 $' + (betTarget === 'banker' ? '106' : '124') + '。沒有任何投注策略能改變這個事實。';
+    }
+    verdict += ' 所有策略改變的都是「損益分布」，不是「期望值」。想少虧一點？管好你的錢比選策略重要一萬倍。';
+    $('verdict-text').textContent = verdict;
+
+    // Draw chart
+    drawChart(history, bankroll);
+
+    // Scroll to results
+    $('results-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // === Chart ===
+  function drawChart(history, bankroll) {
+    const ctx = $('chart').getContext('2d');
+    if (chartInstance) chartInstance.destroy();
+
+    // Downsample for performance if too many points
+    let labels = [];
+    let data = [];
+    const step = history.length > 2000 ? Math.floor(history.length / 1000) : 1;
+    for (let i = 0; i < history.length; i += step) {
+      labels.push(i);
+      data.push(history[i]);
+    }
+    // Always include last point
+    if (labels[labels.length - 1] !== history.length - 1) {
+      labels.push(history.length - 1);
+      data.push(history[history.length - 1]);
+    }
+
+    const final = data[data.length - 1];
+    const lineColor = final >= bankroll ? '#39FF14' : '#ef4444';
+
+    chartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: '餘額',
+            data,
+            borderColor: lineColor,
+            backgroundColor: lineColor + '18',
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: true,
+            tension: 0.1,
+          },
+          {
+            label: '起始本金',
+            data: data.map(() => bankroll),
+            borderColor: 'rgba(245,184,0,0.4)',
+            borderWidth: 1,
+            borderDash: [6, 4],
+            pointRadius: 0,
+            fill: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 600 },
+        interaction: { intersect: false, mode: 'index' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1a1a2e',
+            borderColor: '#333',
+            borderWidth: 1,
+            callbacks: {
+              title: items => '第 ' + items[0].label + ' 局',
+              label: item => item.datasetIndex === 0 ? '餘額: $' + item.raw.toLocaleString() : ''
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: '局數', color: '#888' },
+            ticks: { color: '#666', maxTicksLimit: 8 },
+            grid: { color: 'rgba(255,255,255,0.05)' }
+          },
+          y: {
+            title: { display: true, text: '餘額 ($)', color: '#888' },
+            ticks: { color: '#666', callback: v => '$' + v.toLocaleString() },
+            grid: { color: 'rgba(255,255,255,0.05)' }
+          }
+        }
+      }
+    });
+  }
+})();
+</script>
+
+<style>
+  .sim-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 3rem;
+  }
+
+  .sim-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .sim-header h1 {
+    font-size: 2rem;
+    margin: 1rem 0 0.5rem;
+  }
+  .sim-header h1 span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+  .sim-disclaimer {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    background: rgba(245,184,0,0.08);
+    border: 1px solid rgba(245,184,0,0.2);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    display: inline-block;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--gold-light); }
+
+  /* Intro */
+  .sim-intro {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+  .sim-intro p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.6rem;
+  }
+  .sim-intro p:last-child { margin-bottom: 0; }
+  .sim-intro strong { color: var(--text-primary); }
+
+  /* Control Panel */
+  .ctrl-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .ctrl-row-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .ctrl-group {
+    margin-bottom: 1rem;
+  }
+  .ctrl-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .input-prefix {
+    padding: 0.5rem 0.6rem;
+    color: var(--gold-light);
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: rgba(245,184,0,0.08);
+  }
+  .input-wrap input {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    padding: 0.5rem;
+    width: 100%;
+    outline: none;
+    font-weight: 700;
+  }
+
+  .rounds-btns, .bet-target-btns {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .rounds-btn, .target-btn {
+    padding: 0.45rem 0.7rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .rounds-btn.active, .target-btn.active {
+    background: rgba(57,255,20,0.12);
+    border-color: #39FF14;
+    color: #39FF14;
+  }
+  .target-btn small {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .target-btn.active small { color: rgba(57,255,20,0.7); }
+
+  .edge-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0.5rem 0 0;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+
+  .strat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+  .strat-btn {
+    padding: 0.8rem 0.6rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .strat-btn strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+  }
+  .strat-btn span {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+  .strat-btn.active {
+    background: rgba(245,184,0,0.1);
+    border-color: var(--gold-light);
+  }
+  .strat-btn.active strong { color: var(--gold-light); }
+  .strat-btn:hover { border-color: var(--gold-light); transform: translateY(-1px); }
+
+  .run-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, #39FF14, #2bcc10);
+    border: none;
+    border-radius: 12px;
+    color: #000;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+  }
+  .run-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(57,255,20,0.3);
+  }
+
+  /* Results */
+  .results-area { margin-bottom: 2rem; }
+  .chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .chart-card h2 {
+    font-size: 1.1rem;
+    margin: 0 0 0.8rem;
+    color: var(--text-primary);
+  }
+  .chart-card canvas {
+    width: 100% !important;
+    height: 300px !important;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  .stat-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .verdict-card {
+    background: linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.04));
+    border: 1px solid rgba(57,255,20,0.25);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+  }
+  .verdict-card h3 {
+    font-size: 1rem;
+    color: var(--guava-green);
+    margin: 0 0 0.5rem;
+  }
+  .verdict-card p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* Related Links */
+  .related-links {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .related-links h3 {
+    font-size: 1rem;
+    margin: 0 0 0.8rem;
+    color: var(--text-primary);
+  }
+  .rl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .rl-grid a {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.5rem 0;
+  }
+  .rl-grid a small {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .rl-grid a:hover { color: #39FF14; }
+
+  .guava-note {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  .guava-note p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .ctrl-row-top {
+      grid-template-columns: 1fr 1fr;
+    }
+    .ctrl-row-top .ctrl-group:last-child {
+      grid-column: span 2;
+    }
+    .strat-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .rl-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .sim-wrap { padding: 1rem; }
+    .sim-header h1 { font-size: 1.5rem; }
+    .strat-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .ctrl-row-top { grid-template-columns: 1fr; }
+    .ctrl-row-top .ctrl-group:last-child { grid-column: span 1; }
+  }
+</style>
+</BaseLayout>

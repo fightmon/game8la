@@ -7,6 +7,19 @@ import { scamList, lastUpdated } from '../data/scam-list.js';
 // 取最新 6 篇給首頁卡片
 const latestArticles = articles.slice(0, 6);
 
+// 🔥 熱門排行 — 依 views 降序，取前 7 篇（views > 0）
+const hotExclude = ['dealers-guide'];
+const hotArticles = [...articles]
+  .filter(a => a.views > 0 && !hotExclude.includes(a.slug))
+  .sort((a, b) => (b.views || 0) - (a.views || 0))
+  .slice(0, 7);
+
+// 短標題：去掉【】前綴，截取到第一個分隔符或 14 字
+function shortTitle(t) {
+  const cut = t.replace(/^【[^】]+】/, '').split(/[：｜—|？！]/)[0].trim();
+  return cut.length > 14 ? cut.slice(0, 13) + '…' : cut;
+}
+
 // 取最新通報 10 筆（依日期排序）
 const latestScams = [...scamList]
   .sort((a, b) => b.latestDate.localeCompare(a.latestDate))
@@ -140,13 +153,13 @@ const latestScams = [...scamList]
     <div>
       <div class="hot-list">
         <h3>🔥 8LA熱門排行</h3>
-        <a href="/articles/at99-blocked-analysis/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top1">1</span><span class="hot-title">AT99封鎖內幕解析</span><span class="hot-views">2,890</span></a>
-        <a href="/articles/lottery-odds-comparison/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top2">2</span><span class="hot-title">威力彩機率完整比較</span><span class="hot-views">865</span></a>
-        <a href="/articles/domain-hopping-scam-truth/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num top3">3</span><span class="hot-title">金蟬脫殼暗黑真相</span><span class="hot-views">1,250</span></a>
-        <a href="/lottery/analysis/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">4</span><span class="hot-title">🔢 樂透數據站</span><span class="hot-views">NEW</span></a>
-        <a href="/articles/daily-cash-539-wheel-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">5</span><span class="hot-title">539包牌攻略</span><span class="hot-views">780</span></a>
-        <a href="/articles/atg-seth-copycat-exposed/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">6</span><span class="hot-title">戰神賽特抄襲揭密</span><span class="hot-views">2,187</span></a>
-        <a href="/articles/baccarat-guide/" class="hot-item" style="text-decoration:none;color:inherit"><span class="hot-num rest">7</span><span class="hot-title">百家樂看路教學</span><span class="hot-views">1,245</span></a>
+        {hotArticles.map((a, i) => (
+          <a href={`/articles/${a.slug}/`} class="hot-item" style="text-decoration:none;color:inherit">
+            <span class={`hot-num ${i === 0 ? 'top1' : i === 1 ? 'top2' : i === 2 ? 'top3' : 'rest'}`}>{i + 1}</span>
+            <span class="hot-title">{shortTitle(a.title)}</span>
+            <span class="hot-views">{a.views.toLocaleString()}</span>
+          </a>
+        ))}
       </div>
       <!-- 今日推薦彩號 -->
       <div class="lottery-preview-widget">

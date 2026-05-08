@@ -1,0 +1,390 @@
+---
+import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ToolBox from '../../components/ToolBox.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+
+const faqs = [
+  { q: '百家樂算牌真的有用嗎？', a: '從數學角度來說：幾乎沒用。學者 Peter Griffin 和 John May 都做過計算，就算你完美追蹤 8 副牌的每一張剩餘牌，能獲得的期望值優勢大約只有 0.01%～0.02%。換算成錢就是每下注 10,000 元多賺 1～2 元，連一杯咖啡都賺不回來。原因在於百家樂補牌規則幾乎對稱，單張牌對結果的影響微乎其微。' },
+  { q: '為什麼 21 點算牌有效、百家樂卻沒用？', a: '關鍵差異在「玩家決策權」。21 點玩家可以決定要不要補牌、加注、分牌、投降，而且剩牌中大牌（10/J/Q/K/A）的比例越高，玩家優勢越大——這就是 Hi-Lo 系統的原理。百家樂的補牌規則是完全固定的（莊閒都照表操課），玩家唯一能決定的就是押莊、押閒、押和，沒有任何操作空間能利用算牌結果。' },
+  { q: '電影《決勝21點》裡面的算牌是真的嗎？', a: '《決勝21點》（21，2008）改編自 MIT Blackjack Team 的真實故事，他們在 1980～2000 年代用 Hi-Lo 算牌系統在拉斯維加斯賺了數百萬美金。這是 21 點，不是百家樂。電影的核心數學是真的：當 True Count 升高時加重注碼，但電影誇大了獲利速度和戲劇性——真實的算牌是漫長、無聊、而且隨時會被賭場請出去。' },
+  { q: '007《皇家夜總會》裡 Bond 贏百家樂的橋段合理嗎？', a: '完全不合理。在《007首部曲：皇家夜總會》（2006）裡，Bond 在最後一手用弱牌逆轉擊敗 Le Chiffre，從機率角度來說那手牌的勝率極低。但更重要的是：電影裡演的像是百家樂加上了撲克的心理戰元素，真實的百家樂沒有「bluff」這回事，因為補牌規則是自動的，不存在策略博弈。Ian Fleming 寫這段的時候，追求的是戲劇張力而非數學正確性。' },
+  { q: '那百家樂到底該怎麼玩才不虧？', a: '首先接受一個事實：百家樂是負期望值遊戲（莊家優勢 1.06%～1.24%），長期一定會虧。但你可以做到「虧得最慢」：(1) 永遠押莊，莊家優勢最低；(2) 絕對不押和，和局莊家優勢 14.4%；(3) 用 <a href="/articles/baccarat-winning-strategy/">1-3-2-4 資金管理策略</a> 控制注碼；(4) 設好停損停利線，用 <a href="/tools/bankroll-calculator/">資金管理計算器</a> 算出你的上限。' },
+  { q: '有沒有百家樂策略是數學上有效的？', a: '沒有任何策略能把百家樂的負期望值翻正。1-3-2-4、馬丁格爾、達蘭伯、斐波那契……這些全部都是「注碼管理」系統，改變的是你的「損益分布曲線」而非「期望值」。簡單說：它們可以讓你短期贏面看起來比較大，但長期跑下去總虧損不會變。唯一「數學上有效」的策略是：設好停損線，贏了就走。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/baccarat-card-counting-myth/"
+  title="百家樂算牌有用嗎？用數學拆解電影裡的「神技」真相"
+  description="電影裡主角靠算牌贏百家樂，現實中做得到嗎？芭樂子用數學拆解：21 點 Hi-Lo 算牌 vs 百家樂算牌的期望值差異、Peter Griffin 的學術計算、為什麼 8 副牌追蹤到底只多賺 0.01%。附 21 點 vs 百家樂算牌效益比較表。"
+  image="https://game8la.com/images/articles/baccarat-card-counting-cover.webp"
+  datePublished="2026-05-08"
+  dateModified="2026-05-08"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '百家樂算牌', url: 'https://game8la.com/articles/baccarat-card-counting-myth/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="百家樂算牌有用嗎？用數學拆解電影裡的「神技」真相 - GAME8LA" description="電影裡主角靠算牌贏百家樂，現實中做得到嗎？芭樂子用數學拆解：21 點算牌 vs 百家樂算牌的期望值差異，為什麼追蹤 8 副牌只多賺 0.01%。附比較表。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 百家樂算牌真相</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-08 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 15 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a0a1a,#1a1a3a,#3a1a1a)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <img src="/images/articles/baccarat-card-counting-cover.webp" alt="百家樂算牌真相：電影 vs 數學" width="1400" height="781" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+      <h1 style="font-size:2rem;line-height:1.3">百家樂算牌有用嗎？用數學拆解電影裡的「神技」真相</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">James Bond 穿著西裝坐在百家樂桌前，冷靜翻開最後一張牌逆轉勝——你一定看過這種畫面。《決勝21點》的 MIT 天才團隊靠算牌橫掃拉斯維加斯 21 點桌，更讓所有人相信：只要夠聰明，就能靠數學在賭場穩穩賺。</p>
+      <p style="color:var(--guava-green);font-weight:700;font-size:1.05rem">但你有沒有想過：Bond 打的是百家樂，MIT 算的是 21 點——這兩個遊戲的算牌效果，差了 100 倍以上。</p>
+      <p style="color:var(--text-secondary)">芭樂子今天要做一件事：用數學拆解「百家樂算牌」到底有沒有用。不賣課程、不推薦娛樂城、不灌你心靈雞湯——純粹用數字說話。看完這篇，你就會知道為什麼那些賣你「算牌教學」的人，賺的不是賭場的錢，而是你的學費。</p>
+
+      <!-- TOC -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#movie">電影裡的「神機妙算」：哪些是真的？</a></li>
+          <li><a href="#blackjack">21 點算牌為什麼有效？Hi-Lo 系統拆解</a></li>
+          <li><a href="#baccarat">百家樂算牌為什麼沒用？數學證明</a></li>
+          <li><a href="#compare">一張表看懂：21 點 vs 百家樂算牌效益</a></li>
+          <li><a href="#scam">算牌教學是怎麼騙你的？</a></li>
+          <li><a href="#real">不算牌，百家樂到底該怎麼玩？</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ====== 第一幕：電影裡的神機妙算 ====== -->
+      <h2 id="movie" style="margin-top:2.5rem">🎬 第一幕：電影裡的「神機妙算」</h2>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <h3 style="color:var(--gold);margin-top:0">🎥 電影場景回顧</h3>
+        <p style="margin:0.5rem 0;color:var(--text-secondary)"><strong>《決勝21點》（21，2008）</strong>——MIT 數學系學生 Ben Campbell 被教授 Micky Rosa 招入算牌團隊，用 Hi-Lo 計數系統在拉斯維加斯 21 點桌上贏了數百萬美金。團隊分工：「觀察手」在桌上低注慢打、計算 Running Count；「大玩家」收到暗號後進場加重注碼。</p>
+        <figure style="margin:1rem 0;text-align:center">
+          <img src="/images/articles/baccarat-card-counting-21.webp" alt="《決勝21點》電影劇照——Ben Campbell 算牌場景" width="500" height="333" loading="lazy" style="width:100%;max-width:500px;height:auto;border-radius:10px;border:1px solid var(--border)" />
+          <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">截圖來源：《決勝21點》（21，2008），Columbia Pictures</figcaption>
+        </figure>
+        <p style="margin:0.5rem 0;color:var(--text-secondary)"><strong>《007首部曲：皇家夜總會》（Casino Royale，2006）</strong>——James Bond 在蒙特內哥羅的皇家賭場與恐怖組織財務官 Le Chiffre 對決百家樂。最後一手 Bond 用一對弱牌逆轉贏得整場比賽，帥到不行——但這裡打的是百家樂，不是 21 點，而且完全沒有算牌。</p>
+        <figure style="margin:1rem 0;text-align:center">
+          <img src="/images/articles/baccarat-card-counting-bond.webp" alt="《007首部曲：皇家夜總會》電影劇照——James Bond 在賭桌前" width="879" height="575" loading="lazy" style="width:100%;max-width:600px;height:auto;border-radius:10px;border:1px solid var(--border)" />
+          <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">截圖來源：《007首部曲：皇家夜總會》（2006），Sony Pictures / Eon Productions</figcaption>
+        </figure>
+        <p style="margin:0.5rem 0;color:var(--text-secondary)"><strong>《醉後大丈夫》（The Hangover，2009）</strong>——Alan 在維加斯靠「天才算牌」贏了 $82,400，然後被賭場請了出去。這裡算的也是 21 點。</p>
+        <figure style="margin:1rem 0;text-align:center">
+          <img src="/images/articles/baccarat-card-counting-hangover.webp" alt="《醉後大丈夫》（The Hangover）電影劇照——Alan 算牌場景" width="646" height="962" loading="lazy" style="width:100%;max-width:400px;height:auto;border-radius:10px;border:1px solid var(--border)" />
+          <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">截圖來源：《醉後大丈夫》（The Hangover，2009），Warner Bros. Pictures</figcaption>
+        </figure>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">如果你看過這些電影，你一定會覺得：靠數學就能在賭場穩穩賺。但真相是——《決勝21點》和《醉後大丈夫》算的都是 21 點，Bond 打的百家樂根本沒在算牌。三部電影，沒有一部證明「百家樂算牌」有用。</p>
+      </div>
+
+      <p>先釐清一件事：<strong>算牌（Card Counting）最早是為 21 點（Blackjack）發明的</strong>。1962 年數學家 Edward O. Thorp 出版了《Beat the Dealer》，用數學證明了當牌堆中大牌（10、J、Q、K、A）比例偏高時，玩家的期望值會翻正。這本書改變了整個博弈產業——賭場因此開始用 6～8 副牌、設切牌點、加強監控。</p>
+      <p>但很多人看了電影之後，把「算牌」這個概念直接搬到百家樂上，以為同樣的邏輯可以用。這就是問題所在。</p>
+
+      <!-- ====== 第二幕：21 點算牌為什麼有效 ====== -->
+      <h2 id="blackjack" style="margin-top:2.5rem">🃏 第二幕：21 點算牌為什麼有效？</h2>
+
+      <p>要理解為什麼百家樂算牌沒用，你得先懂 21 點算牌為什麼有用。核心原理只有一句話：</p>
+
+      <div class="card" style="margin:1.5rem 0;text-align:center;padding:1.5rem;border-color:var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="font-size:1.15rem;font-weight:700;color:var(--guava-green);margin:0">「剩牌中大牌比例越高 → 玩家優勢越大」</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0.5rem 0 0">——Edward O. Thorp《Beat the Dealer》，1962</p>
+      </div>
+
+      <h3>Hi-Lo 計數系統：最經典的算牌法</h3>
+      <p>Hi-Lo 是 Harvey Dubner 在 1963 年發明、後經 Stanford Wong 等人改良的系統。規則很簡單：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card)">
+        <table>
+          <thead><tr><th>牌面</th><th>計數值</th><th>原因</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;color:var(--guava-green)">2、3、4、5、6</td><td style="color:var(--guava-green);font-weight:700">+1</td><td>小牌離開牌堆 → 剩大牌比例↑ → 對玩家有利</td></tr>
+            <tr><td style="font-weight:700;color:var(--text-muted)">7、8、9</td><td>0</td><td>中性牌，影響不大</td></tr>
+            <tr><td style="font-weight:700;color:var(--guava-pink)">10、J、Q、K、A</td><td style="color:var(--guava-pink);font-weight:700">-1</td><td>大牌離開牌堆 → 剩大牌比例↓ → 對玩家不利</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Running Count（RC）</strong>：把每張出現的牌加減，得到一個累計值。<br/>
+      <strong>True Count（TC）</strong>：RC ÷ 剩餘副數。例如 RC = +8，剩 4 副牌，TC = +2。</p>
+
+      <p>當 TC ≥ +2 時，玩家的期望值開始翻正（大約每多 +1 TC，期望值增加 0.5%）。這時候加重注碼，就是電影裡「大玩家」進場的時機。</p>
+
+      <h3>為什麼這在 21 點有效？三個關鍵</h3>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card)">
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--gold)">① 玩家有決策權</strong>——要不要補牌（Hit）、停牌（Stand）、加倍（Double Down）、分牌（Split）、投降（Surrender）。你可以根據算牌結果調整策略。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--gold)">② 大牌對玩家更有利</strong>——大牌多 → Blackjack（21 點）的機率上升 → 賠率 3:2 → 玩家獲利更多。同時，莊家被迫補牌時更容易爆牌（Bust）。</p>
+        <p style="margin:0"><strong style="color:var(--gold)">③ 你可以調整注碼</strong>——TC 低的時候下最小注（偽裝），TC 高的時候加到 10～20 倍。這個「注碼跨度」是獲利的核心。</p>
+      </div>
+
+      <p>MIT 團隊在 1980～2000 年代用這套系統，實際獲利估計超過 500 萬美金。這不是都市傳說，Ben Mezrich 的《Bringing Down the House》和團隊成員的訪談都有記錄。</p>
+
+      <!-- ====== 第三幕：百家樂算牌為什麼沒用 ====== -->
+      <h2 id="baccarat" style="margin-top:2.5rem">📊 第三幕：百家樂算牌為什麼沒用？</h2>
+
+      <p>好，現在你懂了 21 點算牌的邏輯。那我們來看百家樂，看看同樣的思路搬過來會發生什麼。</p>
+
+      <h3>百家樂的遊戲結構：為什麼算牌失靈？</h3>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--guava-pink);background:rgba(255,16,240,0.05)">
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-pink)">問題 ①：沒有玩家決策</strong><br/>百家樂的補牌規則是完全固定的。閒家前兩張合計 0～5 就補，6～7 不補，8～9 天牌。莊家的補牌規則更複雜，但同樣是照表操課——沒有任何一個環節讓你「決定」要不要補牌。你唯一能選的就是押莊、押閒、押和。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-pink)">問題 ②：補牌規則幾乎對稱</strong><br/>在 21 點裡，大牌多對玩家有利是因為 Blackjack 的 3:2 賠率和莊家爆牌機率。但百家樂的莊閒補牌規則設計得極度對稱——任何單張牌被移除後，對莊家優勢的影響微乎其微。</p>
+        <p style="margin:0"><strong style="color:var(--guava-pink)">問題 ③：8 副牌 + 切牌</strong><br/>百家樂通常使用 8 副牌（416 張），加上切牌會切掉最後 14～16 張。就算你追蹤了 400 張牌的出現順序，剩下的十幾張牌給你的資訊量幾乎等於零。</p>
+      </div>
+
+      <h3>數學怎麼說？學者的研究結果</h3>
+
+      <p>博弈數學領域有兩位學者認真算過這件事：</p>
+
+      <p><strong>Peter Griffin</strong>（《The Theory of Blackjack》作者）計算了每張牌從 8 副牌中移除後，對百家樂莊家優勢的影響（Effect of Removal, EoR）。結果如下：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card)">
+        <h3 style="color:var(--gold);margin-top:0">📐 百家樂 Effect of Removal（每移除一張牌的影響）</h3>
+        <table>
+          <thead><tr><th>牌面</th><th>對「押莊」的影響</th><th>對「押閒」的影響</th><th>影響程度</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>+0.0045%</td><td>-0.0045%</td><td rowspan="10" style="text-align:center;color:var(--text-muted);font-style:italic;vertical-align:middle">每張牌的影響<br/>都在 ±0.01% 以內<br/><br/>對比 21 點<br/>每張牌影響<br/>±0.5%～±0.7%</td></tr>
+            <tr><td>2</td><td>-0.0040%</td><td>+0.0037%</td></tr>
+            <tr><td>3</td><td>+0.0044%</td><td>-0.0051%</td></tr>
+            <tr><td>4</td><td>+0.0056%</td><td>-0.0074%</td></tr>
+            <tr><td>5</td><td>-0.0083%</td><td>+0.0094%</td></tr>
+            <tr><td>6</td><td>-0.0037%</td><td>+0.0053%</td></tr>
+            <tr><td>7</td><td>+0.0018%</td><td>-0.0009%</td></tr>
+            <tr><td>8</td><td>-0.0016%</td><td>+0.0029%</td></tr>
+            <tr><td>9</td><td>+0.0050%</td><td>-0.0039%</td></tr>
+            <tr><td>10/J/Q/K</td><td>-0.0018%</td><td>+0.0005%</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">資料來源：Peter Griffin, The Theory of Blackjack (6th ed.)；John May, Baccarat for the Clueless。數值為每移除 1 張牌對莊家優勢的影響百分比。</p>
+      </div>
+
+      <p>看到了嗎？最大的影響是 4 號牌對「押閒」的 -0.0074%。在 21 點裡面，移除一張 5 對玩家優勢的影響是 +0.67%——<strong>差了 90 倍</strong>。</p>
+
+      <h3>實際換算：算牌到底能多賺多少？</h3>
+
+      <div class="card" style="margin:1.5rem 0;padding:1.5rem;text-align:center;border-color:var(--guava-pink);background:linear-gradient(135deg,rgba(255,16,240,0.06) 0%,rgba(245,184,0,0.04) 100%)">
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0 0 0.5rem">假設你用完美算牌策略、每手下注 $1,000</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0">
+          <div style="background:rgba(57,255,20,0.08);border-radius:10px;padding:1rem">
+            <p style="font-size:0.8rem;color:var(--text-muted);margin:0 0 0.3rem">21 點（Hi-Lo）</p>
+            <p style="font-size:1.8rem;font-weight:900;color:var(--guava-green);margin:0">+$5～$15</p>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">每小時（約 60 手）</p>
+          </div>
+          <div style="background:rgba(255,16,240,0.08);border-radius:10px;padding:1rem">
+            <p style="font-size:0.8rem;color:var(--text-muted);margin:0 0 0.3rem">百家樂</p>
+            <p style="font-size:1.8rem;font-weight:900;color:var(--guava-pink);margin:0">+$0.1～$0.2</p>
+            <p style="font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">每小時（約 70 手）</p>
+          </div>
+        </div>
+        <p style="font-size:0.95rem;font-weight:700;color:var(--text-primary);margin:0.5rem 0 0">百家樂算牌的優勢，大約等於每小時多賺一顆糖果。</p>
+      </div>
+
+      <p>而且這還是<strong>理想狀態</strong>——假設你能完美追蹤 416 張牌的每一張，沒有算錯、不會分心。現實中，就算是職業算牌手也有 2%～5% 的出錯率，一旦算錯，那 0.01% 的微弱優勢瞬間蒸發。</p>
+
+      <!-- ====== 比較表 ====== -->
+      <h2 id="compare" style="margin-top:2.5rem">⚖️ 一張表看懂：21 點 vs 百家樂算牌效益</h2>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/baccarat-card-counting-compare.webp" alt="21 點 vs 百家樂算牌效益視覺化比較" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Blackjack 算牌優勢 +0.5%～+2.0% vs 百家樂算牌優勢 +0.01%——差了 100 倍</figcaption>
+      </figure>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <table>
+          <thead><tr><th>比較項目</th><th style="color:var(--guava-green)">21 點（Blackjack）</th><th style="color:var(--guava-pink)">百家樂（Baccarat）</th></tr></thead>
+          <tbody>
+            <tr><td><strong>基礎莊家優勢</strong></td><td>0.5%（基本策略）</td><td>1.06%（押莊）/ 1.24%（押閒）</td></tr>
+            <tr><td><strong>算牌可獲得的優勢</strong></td><td style="color:var(--guava-green);font-weight:700">+0.5% ～ +2.0%</td><td style="color:var(--guava-pink);font-weight:700">+0.01% ～ +0.02%</td></tr>
+            <tr><td><strong>單張牌 EoR</strong></td><td>±0.5% ～ ±0.7%</td><td>±0.004% ～ ±0.009%</td></tr>
+            <tr><td><strong>玩家決策空間</strong></td><td>Hit/Stand/Double/Split/Surrender</td><td>押莊 / 押閒 / 押和（僅此而已）</td></tr>
+            <tr><td><strong>算牌系統複雜度</strong></td><td>Hi-Lo（簡單）、Omega II（進階）</td><td>無公認有效系統</td></tr>
+            <tr><td><strong>每小時預期獲利<br/><span style="font-size:0.8rem;color:var(--text-muted)">（$1,000/手）</span></strong></td><td style="color:var(--guava-green);font-weight:700">+$5 ～ $15</td><td style="color:var(--guava-pink);font-weight:700">+$0.1 ～ $0.2</td></tr>
+            <tr><td><strong>賭場反制</strong></td><td>極嚴格（禁入、後台標記）</td><td>幾乎不管（因為沒用）</td></tr>
+            <tr><td><strong>學術支持</strong></td><td>Thorp (1962)、Griffin (1979)</td><td>Griffin 計算後結論：不值得</td></tr>
+            <tr><td><strong>芭樂子結論</strong></td><td style="color:var(--guava-green)">數學上可行，但需大量練習</td><td style="color:var(--guava-pink)">數學上幾乎無效，別浪費時間</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>一句話總結這張表：<strong>21 點算牌是用數學打賭場，百家樂算牌是用數學騙自己</strong>。</p>
+
+      <!-- ====== 算牌騙局 ====== -->
+      <h2 id="scam" style="margin-top:2.5rem">🚨 算牌教學是怎麼騙你的？</h2>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/baccarat-card-counting-scam.webp" alt="芭樂子揭發百家樂算牌詐騙教學" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+      </figure>
+
+      <p>市面上有大量「百家樂算牌教學」，收費從幾千到幾萬不等。芭樂子告訴你他們的套路：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid #e74c3c;background:rgba(231,76,60,0.06)">
+        <p style="margin:0 0 0.8rem"><strong style="color:#e74c3c">套路 ①：混淆 21 點和百家樂</strong><br/>他們會引用 Edward Thorp 的研究證明「算牌有效」，但刻意不說 Thorp 研究的是 21 點而不是百家樂。這就像用飛機的空氣動力學論文，來證明你的腳踏車可以飛。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:#e74c3c">套路 ②：誇大微小優勢</strong><br/>他們會說「經過精密計算，可以獲得對賭場的優勢」——技術上沒有說謊，0.01% 也是「優勢」。但他們不告訴你這個優勢小到連停車費都付不起。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:#e74c3c">套路 ③：賣配套軟體</strong><br/>一堆 APP 宣稱可以「自動追蹤牌面、即時計算最佳下注」。但就算你的 APP 算得 100% 正確，那個 0.01% 的優勢還是 0.01%。更別說很多線上百家樂用 RNG（隨機數生成器）發牌，根本沒有「剩牌」的概念。</p>
+        <p style="margin:0"><strong style="color:#e74c3c">套路 ④：真正的獲利模式</strong><br/>這些教學的老師，賺的不是賭場的錢——他們賺的是你的學費、你的會員費、和你透過他們推薦連結註冊娛樂城後輸掉的 NGR 分潤。</p>
+      </div>
+
+      <p>如果你遇到任何「老師」告訴你百家樂算牌可以穩贏，先丟他的網站去 <a href="/casino-check/" style="color:var(--guava-green);font-weight:700">娛樂城體檢</a> 查一查。</p>
+
+      <!-- ====== 那到底該怎麼玩 ====== -->
+      <h2 id="real" style="margin-top:2.5rem">💡 不算牌，百家樂到底該怎麼玩？</h2>
+
+      <p>既然算牌沒用，那百家樂玩家到底能做什麼？芭樂子給你四個<strong>數學上真正有意義</strong>的建議：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card)">
+        <p style="margin:0 0 1rem"><strong style="color:var(--gold);font-size:1.05rem">① 永遠押莊</strong><br/>莊家優勢 1.06%（扣掉 5% 水錢）、閒家 1.24%、和局 14.4%。長期來看，押莊是百家樂裡最划算的選擇。別迷信看路、別追長龍——<a href="/articles/baccarat-guide/" style="color:var(--gold)">看路是娛樂，不是策略</a>。</p>
+        <p style="margin:0 0 1rem"><strong style="color:var(--gold);font-size:1.05rem">② 絕對不押和</strong><br/>和局賠率 8:1 看起來誘人，但機率只有 9.5%。莊家優勢 14.4%，是押莊的 13.6 倍。每押 100 元和局，你長期虧 14.4 元。這是百家樂裡「數學上最爛」的選項。</p>
+        <p style="margin:0 0 1rem"><strong style="color:var(--gold);font-size:1.05rem">③ 用注碼管理控制波動</strong><br/><a href="/articles/baccarat-winning-strategy/" style="color:var(--gold)">1-3-2-4 投注法</a>不能改變期望值，但可以改變你的損益分布——讓你在短期贏面較大時鎖住利潤，而最大虧損被壓在 2 個單位。搭配停損停利紀律使用。</p>
+        <p style="margin:0"><strong style="color:var(--gold);font-size:1.05rem">④ 算好你的停損線</strong><br/>百家樂能做的最重要的事不是贏更多，而是在該走的時候走。用 <a href="/tools/bankroll-calculator/" style="color:var(--gold)">資金管理計算器</a> 算出你的本金應該下多大注、撐多少局、虧多少就停。沒有停損線就上桌，跟沒穿救生衣就下水一樣。</p>
+      </div>
+
+      <!-- ====== FAQ ====== -->
+      <h2 id="faq" style="margin-top:2.5rem">❓ 常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(f => (
+          <div class="faq-item">
+            <button class="faq-q"><span>{f.q}</span><Icon name="chevron-down" /></button>
+            <div class="faq-a"><p set:html={f.a} /></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- ====== 結語 ====== -->
+      <div class="card" style="margin:2rem 0;padding:1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(245,184,0,0.04) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">🍈 芭樂子的結論</h3>
+        <p style="margin:0.5rem 0;color:var(--text-secondary)">百家樂算牌不是「很難」，而是「數學上幾乎沒有意義」。它跟 21 點算牌的差距，不是 10%，是 100 倍。</p>
+        <p style="margin:0.5rem 0;color:var(--text-secondary)">如果你真的想靠數學在賭場賺錢，去學 21 點 Hi-Lo——但那是一條漫長、枯燥、而且隨時會被請出賭場的路。如果你只是想玩百家樂玩得聰明一點，那<strong>管好你的錢比算牌重要一萬倍</strong>。</p>
+        <p style="margin:0.5rem 0;font-weight:700;color:var(--guava-green)">算牌省下來的優勢，還不夠付你一杯咖啡。但管好資金省下來的錢，可能夠你多玩三個月。</p>
+      </div>
+
+      <!-- 延伸閱讀 -->
+      <div style="margin:2rem 0;padding:1.2rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px">
+        <h3 style="margin-top:0;font-size:1rem">📚 延伸閱讀</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem">
+          <a href="/articles/baccarat-guide/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">百家樂看路教學<small style="display:block;color:var(--text-muted)">大路・珠盤路・下三路</small></a>
+          <a href="/articles/baccarat-winning-strategy/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">1-3-2-4 投注法拆解<small style="display:block;color:var(--text-muted)">注碼管理完整教學</small></a>
+          <a href="/articles/rtp-explained/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">RTP 是什麼？<small style="display:block;color:var(--text-muted)">博弈遊戲回報率完整拆解</small></a>
+          <a href="/articles/free-credit-guide/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">體驗金領取陷阱<small style="display:block;color:var(--text-muted)">流水倍數怎麼算</small></a>
+        </div>
+      </div>
+
+      <ToolBox preset="baccarat" />
+      <ManifestoBox />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .container { max-width: 960px; margin: 0 auto; padding: 1rem 1.5rem; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--gold-light); }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: var(--gold-light); text-decoration: none; font-size: 0.88rem; font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .back-link:hover { color: var(--guava-green); }
+  .hero-banner { width: 100%; height: 6px; border-radius: 4px; margin-bottom: 1.5rem; }
+
+  .article-content h1 { color: var(--text-primary); }
+  .article-content h2 {
+    font-size: 1.4rem; color: var(--text-primary);
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    margin-top: 2.5rem;
+  }
+  .article-content h3 { font-size: 1.15rem; color: var(--gold-light); margin-top: 1.5rem; }
+  .article-content p { color: var(--text-secondary); line-height: 1.85; margin: 0.8rem 0; font-size: 0.95rem; }
+  .article-content a { color: var(--gold-light); }
+  .article-content strong { color: var(--text-primary); }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  th, td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: rgba(245,184,0,0.08);
+    color: var(--gold-light);
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+  }
+  td { color: var(--text-secondary); }
+
+  .toc ol {
+    padding-left: 1.2rem;
+    margin: 0.5rem 0 0;
+  }
+  .toc li {
+    margin: 0.4rem 0;
+    font-size: 0.9rem;
+  }
+  .toc a { color: var(--gold-light); text-decoration: none; }
+  .toc a:hover { color: var(--guava-green); }
+
+  /* FAQ */
+  .faq-section { margin: 1.5rem 0; }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+  }
+  .faq-q {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    background: var(--bg-card);
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+  }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .faq-item.open .faq-a {
+    max-height: 600px;
+  }
+  .faq-a p {
+    padding: 0 1.2rem 1rem;
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 1rem; }
+    .article-content h1 { font-size: 1.5rem; }
+    .article-content h2 { font-size: 1.2rem; }
+    table { font-size: 0.8rem; }
+    th, td { padding: 0.5rem 0.6rem; }
+  }
+</style>

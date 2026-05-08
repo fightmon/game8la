@@ -17,6 +17,7 @@ const faqs = [
   { q: 'GLI 認證是什麼？為什麼重要？', a: 'GLI（Gaming Laboratories International）是全球最具公信力的博弈測試實驗室，超過 475 個司法管轄區承認它的認證。一台老虎機要拿到 GLI 認證，必須通過<strong>RNG 隨機性檢驗、RTP 數學模型驗證、防作弊機制審查</strong>，機台軟體還要被雜湊鎖定——後台無法偷偷改 RTP。正版 ATG 戰神賽特都有 GLI 認證；沒 GLI 認證的「類賽特」機台，就是任由娛樂城老闆開關 RTP 的吃款機，長期玩絕對虧。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/atg-seth-copycat-exposed/"
@@ -302,7 +303,8 @@ const faqs = [
         <a href="/articles/" class="btn-outline">← 回攻略列表</a>
         <a href="/games/seth-2/" class="btn-primary" style="margin-left:1rem">前往正版賽特專區 →</a>
       </div>
-    </article>
+        <ToolBox preset="slots" />
+</article>
   </div>
 </BaseLayout>
 

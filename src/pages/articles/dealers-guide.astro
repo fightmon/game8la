@@ -1,5 +1,6 @@
 ---
 import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
@@ -13,6 +14,7 @@ const faqs = [
   { q: '我遇到喜歡的荷官，可以私訊互動嗎？', a: '不行，也不建議。所有正規平台都禁止玩家與荷官建立私人聯繫，荷官也會被公司嚴格監管。如果有「荷官」私訊你說可以給你「內線牌路」「必中壓注」——那 <strong>100% 是詐騙</strong>，請立刻封鎖，並參考 <a href="/articles/anti-scam-8la-guide/">娛樂城防詐騙指南</a>。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/dealers-guide/"
@@ -364,7 +366,9 @@ const faqs = [
         <a href="/articles/casino-payout-guide/">娛樂城出金完整指南<small>出金速度與技巧</small></a>
         <a href="/articles/anti-scam-8la-guide/">娛樂城防詐騙指南<small>避開黑網必看</small></a>
       </div>
-    </article>
+      <ManifestoBox />
+        <ToolBox preset="baccarat" />
+</article>
     <div style="text-align:center;margin-top:2rem">
       <a href="/articles/" class="btn-outline">&larr; 回文章列表</a>
     </div>

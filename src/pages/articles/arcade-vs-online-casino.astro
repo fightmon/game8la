@@ -1,5 +1,6 @@
 ---
 import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
@@ -13,6 +14,7 @@ const faqs = [
   { q: '遊藝場和線上娛樂城的返水差多少？', a: '差超大。實體遊藝場幾乎沒有「返水」這個概念，頂多老闆熟了請你喝飲料。線上娛樂城則普遍提供 0.4%~0.8% 的洗流水返水，VIP 玩家甚至能拿到 1% 以上。什麼意思？假設你一天下注 10 萬（不管輸贏），光返水就有 400~1000 元進帳。對老手來說，返水就是「把 RTP 從 97% 拉到 97.8%」的關鍵武器，也是實體店永遠追不上的結構性優勢。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/arcade-vs-online-casino/"
@@ -237,7 +239,9 @@ const faqs = [
         <a href="/game-ranking/">2026 老虎機排行榜<small>10 款實測評分</small></a>
         <a href="/articles/baccarat-winning-strategy/">真人百家樂必勝法<small>1-3-2-4 投注策略</small></a>
       </div>
-    </article>
+      <ManifestoBox />
+        <ToolBox preset="casino-full" />
+</article>
     <div style="text-align:center;margin-top:2rem">
       <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
     </div>

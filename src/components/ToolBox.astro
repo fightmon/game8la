@@ -1,0 +1,170 @@
+---
+// ToolBox.astro
+// 「相關工具推薦框」— 可重用元件，根據文章主題推薦 1-3 個免費工具
+//
+// 用法：
+//   import ToolBox from '../../components/ToolBox.astro';
+//   <ToolBox preset="slots" />        // 老虎機文章 → 轉轉機 + RTP紀錄器 + 資金管理
+//   <ToolBox preset="baccarat" />     // 百家樂文章 → 資金管理 + RTP紀錄器
+//   <ToolBox preset="casino" />       // 娛樂城防詐 → 娛樂城體檢
+//   <ToolBox preset="casino-full" />  // 娛樂城綜合 → 體檢 + 資金管理
+//   <ToolBox preset="lottery" />      // 彩券文章   → 數據站
+import Icon from './Icon.astro';
+
+type Preset = 'slots' | 'baccarat' | 'casino' | 'casino-full' | 'lottery';
+
+interface Tool {
+  name: string;
+  desc: string;
+  href: string;
+  icon: string;
+}
+
+interface Props {
+  /** 預設工具組合 */
+  preset: Preset;
+}
+
+const toolMap: Record<string, Tool> = {
+  'casino-check':  { name: '娛樂城體檢', desc: '165 黑名單比對 + WHOIS 查驗', href: '/casino-check/', icon: 'shield' },
+  'lottery':       { name: '芭樂好彩數據站', desc: '冷熱號分析 + 包牌產生器', href: '/lottery/analysis/', icon: 'bar-chart' },
+  'slot-sim':      { name: '芭樂轉轉機', desc: 'RTP 視覺化模擬，免費試跑', href: '/tools/slot-simulator/', icon: 'play' },
+  'thor-sim':      { name: '雷神之錘 2 模擬器', desc: '體驗倍數球鎖定爆分', href: '/tools/thor-hammer-2-simulator/', icon: 'zap' },
+  'rtp-tracker':   { name: 'RTP 實測紀錄器', desc: '記錄每局輸贏，自動算 RTP', href: '/tools/rtp-tracker/', icon: 'clipboard' },
+  'bankroll':      { name: '資金管理計算器', desc: '停損停利線一鍵算好', href: '/tools/bankroll-calculator/', icon: 'calculator' },
+  'baccarat-sim': { name: '百家樂策略模擬器', desc: '五種策略跑 1000 局，看清莊家優勢', href: '/tools/baccarat-simulator/', icon: 'bar-chart' },
+};
+
+const presetMap: Record<Preset, string[]> = {
+  'slots':       ['slot-sim', 'rtp-tracker', 'bankroll'],
+  'baccarat':    ['baccarat-sim', 'bankroll', 'rtp-tracker'],
+  'casino':      ['casino-check'],
+  'casino-full': ['casino-check', 'bankroll'],
+  'lottery':     ['lottery'],
+};
+
+const { preset } = Astro.props;
+const tools = presetMap[preset].map(k => toolMap[k]);
+---
+
+<div class="toolbox">
+  <div class="tb-header">
+    <Icon name="play" size="1rem" />
+    <span>免費工具，不花錢直接用</span>
+  </div>
+  <div class="tb-grid">
+    {tools.map(t => (
+      <a href={t.href} class="tb-card">
+        <div class="tb-icon"><Icon name={t.icon} size="1.1rem" /></div>
+        <div class="tb-body">
+          <strong>{t.name}</strong>
+          <span>{t.desc}</span>
+        </div>
+        <div class="tb-arrow"><Icon name="arrow-right" size="0.8rem" /></div>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .toolbox {
+    margin: 2rem 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(57,255,20,0.05) 0%, rgba(245,184,0,0.04) 100%);
+    border: 1px solid rgba(57,255,20,0.25);
+    overflow: hidden;
+  }
+
+  .tb-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    background: rgba(57,255,20,0.1);
+    border-bottom: 1px solid rgba(57,255,20,0.2);
+    color: #39FF14;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+  }
+
+  .tb-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tb-card {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 1.2rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .tb-card:last-child {
+    border-bottom: none;
+  }
+
+  .tb-card:hover {
+    background: rgba(57,255,20,0.08);
+  }
+
+  .tb-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(57,255,20,0.12);
+    border: 1px solid rgba(57,255,20,0.3);
+    border-radius: 10px;
+    color: #39FF14;
+  }
+
+  .tb-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .tb-body strong {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+  }
+
+  .tb-body span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .tb-arrow {
+    flex-shrink: 0;
+    color: var(--gold-light, #FFD700);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s;
+  }
+
+  .tb-card:hover .tb-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 640px) {
+    .tb-card {
+      padding: 0.8rem 1rem;
+    }
+    .tb-icon {
+      width: 32px;
+      height: 32px;
+    }
+  }
+</style>

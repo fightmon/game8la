@@ -17,6 +17,7 @@ const faqs = [
   { q: '如果朋友推薦我某個娛樂城，我怎麼快速判斷是不是金蟬脫殼黑網？', a: '芭樂子的 30 秒快篩 3 步驟：<br><br>(1) <strong>用 <a href="https://whois.whois.com.tw" target="_blank" rel="noopener">whois.whois.com.tw</a> 查網域註冊日</strong>：少於 2 年 = 紅旗；<br>(2) <strong>Google 搜「品牌名 + 舊網址」</strong>：如果搜到一堆 <code>.com</code>、<code>.net</code>、<code>.cc</code>、<code>.xyz</code> 的網址變體 = 金蟬脫殼確認；<br>(3) <strong>搜「品牌名 + 詐騙 / 被封 / 出金卡關」</strong>：PTT、Dcard、Google 評論如果一頁翻下去全是負評 = 直接拒絕。<br><br>3 項中 2 項 = 立刻撤資、封鎖推薦你的朋友（他可能是下線代理）。' },
 ];
 ---
+import ToolBox from '../../components/ToolBox.astro';
 
 <FaqSchema faqs={faqs} />
 <ArticleSchema
@@ -307,7 +308,8 @@ const faqs = [
           <span class="rl-desc">從機率到產業內幕，完整博弈知識庫</span>
         </a>
       </div>
-    </article>
+        <ToolBox preset="casino" />
+</article>
   </div>
 
   <style is:global>
