@@ -156,7 +156,7 @@ const latestScams = [...scamList]
         {hotArticles.map((a, i) => (
           <a href={`/articles/${a.slug}/`} class="hot-item" style="text-decoration:none;color:inherit">
             <span class={`hot-num ${i === 0 ? 'top1' : i === 1 ? 'top2' : i === 2 ? 'top3' : 'rest'}`}>{i + 1}</span>
-            <span class="hot-title">{shortTitle(a.title)}</span>
+            <span class="hot-title">{a.hotTitle || shortTitle(a.title)}</span>
             <span class="hot-views">{a.views.toLocaleString()}</span>
           </a>
         ))}

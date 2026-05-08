@@ -115,6 +115,7 @@ export const articles = [
   },
   {
     slug: 'seth2-slot-simulator-rtp',
+    hotTitle: '自己調 RTP 看老虎機怎麼吃錢',
     title: '戰神賽特2模擬器實測：自己調 RTP，親手拆解老虎機怎麼吃錢',
     excerpt: '全台唯一可調 RTP 的賽特2模擬器！親手調整回報率 80~200%，體驗倍數球分裂、覺醒鎖定、消除掉落全機制。轉 1000 局看懂大數法則，搞懂為什麼你總是輸。',
     category: 'slots',
@@ -213,6 +214,7 @@ export const articles = [
   },
   {
     slug: 'lottery-data-tool-guide',
+    hotTitle: '2026 最強免費彩券回測工具',
     title: '拒絕瞎猜！2026 最強免費彩券回測工具：用歷史大數據看透 539、威力彩、大樂透冷熱規律',
     excerpt: '還在聽明牌？GAME8LA 樂透數據站用歷史開獎大數據，幫你回測冷熱號、追蹤遺漏值、自動包牌、模擬勝率。6 大免費工具完整教學，3 步驟上手，不報明牌只給數據。',
     category: 'lottery',
@@ -325,6 +327,7 @@ export const articles = [
   },
   {
     slug: 'at99-blocked-analysis',
+    hotTitle: 'AT99 被封！你的錢還在嗎',
     title: '【深度解析】AT99 遭刑事警察局封鎖！at99tw.com.tw 新網址是詐騙嗎？教你從「封鎖紅條」與「換殼黑網」看懂博弈產業風險',
     excerpt: '刑事警察局刑詐防字第 1146166136 號函令封鎖 at99.com.tw，隨即疑似換殼至 at99tw.com.tw！芭樂子拆解被封真實原因、域名換殼識別特徵、玩家資金追討難度、4 大自保點與 165 檢舉 SOP，封鎖紅條背後的產業黑洞一次看懂。',
     category: 'guide',
@@ -423,6 +426,7 @@ export const articles = [
   },
   {
     slug: 'free-credit-guide',
+    hotTitle: '體驗金 6 大陷阱你踩了幾個',
     title: '娛樂城體驗金怎麼用？流水倍數、提領陷阱、避雷 6 大重點',
     excerpt: '體驗金真的免費嗎？流水倍數怎麼算？提領上限是什麼？芭樂子拆解體驗金 6 大常見陷阱，算給你看到底值不值，教你怎麼不被話術套路。',
     category: 'guide',
@@ -437,6 +441,7 @@ export const articles = [
   },
   {
     slug: 'slots-rtp-guide',
+    hotTitle: '搞懂 RTP 少虧一半',
     title: '老虎機 RTP 是什麼？怎麼看？選遊戲前你一定要懂的數字',
     excerpt: 'RTP 是什麼意思？高 RTP 就比較容易贏嗎？波動度又是什麼？芭樂子白話教你看懂老虎機最重要的數字，附 2026 高 RTP 遊戲推薦和常見迷思破解。',
     category: 'guide',
@@ -525,6 +530,7 @@ export const articles = [
   },
   {
     slug: 'atg-seth-1-vs-2-comparison',
+    hotTitle: '賽特1代 vs 2代誰更能爆',
     title: '戰神賽特 1 vs 2 差在哪？ATG 電子兩代完整比較',
     excerpt: '戰神賽特 1 代和 2 代覺醒之力到底差在哪？RTP、最大倍率、波動性、覺醒技能、符號分裂、買免遊價位全部攤開比，新手到老手都受用。',
     category: 'slots',
@@ -581,6 +587,7 @@ export const articles = [
   },
   {
     slug: 'lottery-odds-comparison',
+    hotTitle: '100元買威力彩還是大樂透',
     title: '威力彩跟大樂透中獎機率差多少？頭獎差 1.58 倍，但 100 元期望值誰比較高？',
     excerpt: '威力彩頭獎機率只有 1/22,085,448，大樂透則是 1/13,983,816。各獎項命中率、期望值、RTP 全比較，100 元該買哪個一篇搞懂。',
     category: 'lottery',
