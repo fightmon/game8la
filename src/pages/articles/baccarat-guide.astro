@@ -14,6 +14,7 @@ const faqs = [
   { q: '百家樂穩贏的方法存在嗎？', a: '不存在。百家樂莊家優勢 1.06%（押莊）/ 1.24%（押閒），長期是負期望值遊戲，不可能「穩贏」。所謂的「必勝法」（1-3-2-4、馬丁格爾、倍投法）都是在<strong>控制資金曲線、不是改變期望值</strong>。任何 LINE 老師說有「內線牌路」「AI 預測」的都是詐騙。詳見芭樂子的 <a href="/articles/baccarat-winning-strategy/">百家樂必勝法 1-3-2-4 深度拆解</a>。' },
 ];
 import ToolBox from '../../components/ToolBox.astro';
+import NewsletterCTA from '../../components/NewsletterCTA.astro';
 ---
 <FaqSchema faqs={faqs} />
 <ArticleSchema
@@ -216,6 +217,7 @@ import ToolBox from '../../components/ToolBox.astro';
       </div>
       <ManifestoBox />
         <ToolBox preset="baccarat" />
+    <NewsletterCTA variant="article" />
 </article>
     <div style="text-align:center;margin-top:2rem">
       <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>

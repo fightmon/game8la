@@ -1,5 +1,5 @@
 ---
-// Footer component - displays the 4-column footer with links and social media
+// Footer component - displays footer with links and newsletter
 import Icon from './Icon.astro';
 ---
 
@@ -13,7 +13,7 @@ import Icon from './Icon.astro';
       <p>GAME8LA是台灣最敢說真話的線上遊戲評測平台。不灌水、不業配，給你最真實的遊戲評價與遊戲攻略，幫助玩家安心選擇！</p>
       <div class="footer-email">
         <Icon name="mail" size="0.9rem" />
-        <a href="mailto:hello@game8la.tw">📧 hello@game8la.tw</a>
+        <a href="mailto:hello@game8la.tw">hello@game8la.tw</a>
       </div>
     </div>
 
@@ -28,16 +28,6 @@ import Icon from './Icon.astro';
       <a href="/#games">♟️ 棋牌遊戲</a>
     </div>
 
-    <!-- Popular Sections Column -->
-    <div class="footer-col">
-      <h4>熱門專區</h4>
-      <a href="/game-ranking/">🏆 金8LA排行榜</a>
-      <a href="/articles/baccarat-guide/">📖 遊戲攻略</a>
-      <a href="/">🌱 新手教學</a>
-      <a href="/#articles">🛡️ 防詐指南</a>
-      <a href="/articles/dealers-guide/">🎁 荷官排行榜</a>
-    </div>
-
     <!-- About Column -->
     <div class="footer-col">
       <h4>關於8LA</h4>
@@ -46,9 +36,14 @@ import Icon from './Icon.astro';
       <a href="/terms/">服務條款</a>
       <a href="/disclaimer/">免責聲明</a>
       <a href="https://docs.google.com/forms/d/1UhHI6PBNmH3BMSi9SMa02u2z9_xc8Yhn8Nl2Z67G5y0/viewform" target="_blank" rel="noopener">問題回報 / 合作提案</a>
-      <div class="footer-email">
-        <Icon name="mail" size="0.9rem" />
-        <a href="mailto:hello@game8la.tw">hello@game8la.tw</a>
+    </div>
+
+    <!-- Newsletter Column -->
+    <div class="footer-col footer-col-newsletter">
+      <h4>訂閱芭樂子電子報</h4>
+      <p class="newsletter-sub">每週博弈防詐 + 樂透分析，鐵粉先看獨家</p>
+      <div class="newsletter-form-wrap">
+        <div data-bme-form-id="WOZykcfC7_M7Dzy1vRYjr"></div>
       </div>
     </div>
   </div>
@@ -86,7 +81,7 @@ import Icon from './Icon.astro';
     max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
     gap: 2rem;
     margin-bottom: 2rem;
   }
@@ -217,6 +212,33 @@ import Icon from './Icon.astro';
     color: #39FF14 !important;
   }
 
+  /* === Newsletter Column === */
+  .footer-col-newsletter h4 {
+    color: var(--guava-green);
+    font-size: 0.95rem;
+  }
+
+  .newsletter-sub {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.6rem;
+    line-height: 1.4;
+  }
+
+  .newsletter-form-wrap {
+    filter: invert(0.88) hue-rotate(180deg);
+    border-radius: 6px;
+    overflow: hidden;
+    transform: scale(0.72);
+    transform-origin: top left;
+    width: calc(100% / 0.72);
+    margin-bottom: -60px;
+  }
+
+  .newsletter-form-wrap :global(.u_content_text div) {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+  }
 
   /* === RESPONSIVE === */
   @media (max-width: 1024px) {
@@ -229,6 +251,10 @@ import Icon from './Icon.astro';
     .footer-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
+    }
+
+    .newsletter-form-wrap {
+      transform: scale(1);
     }
 
     .trust-badge { flex-wrap: wrap; padding: 0.9rem 1rem; }

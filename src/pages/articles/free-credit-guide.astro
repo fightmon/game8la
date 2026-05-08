@@ -14,6 +14,7 @@ const faqs = [
   { q: '體驗金跟首儲優惠有什麼不同？', a: '體驗金 = 註冊就送，不用先存錢。首儲優惠 = 你先存一筆錢，平台再「加碼」一定比例（例如首存 1,000 送 500）。首儲優惠的金額通常比體驗金大，但前提是你要先掏錢。兩者都會有流水倍數門檻，但首儲優惠因為金額大，實際流水門檻也會更高。' },
 ];
 import ToolBox from '../../components/ToolBox.astro';
+import NewsletterCTA from '../../components/NewsletterCTA.astro';
 ---
 <FaqSchema faqs={faqs} />
 <ArticleSchema
@@ -289,6 +290,7 @@ import ToolBox from '../../components/ToolBox.astro';
       </div>
       <ManifestoBox />
         <ToolBox preset="casino" />
+    <NewsletterCTA variant="article" />
 </article>
     <div style="text-align:center;margin-top:2rem">
       <a href="/#articles" class="btn-outline">&larr; 回文章列表</a>
