@@ -1,0 +1,676 @@
+---
+// ============================================================================
+// DailyFortune — 芭樂子今日運勢浮動元件
+// ----------------------------------------------------------------------------
+// 放在 TOP 按鈕上方，點擊展開翻牌卡片
+// 用天干地支 seed 每日自動抽取 宜/忌/金句/幸運數字
+// ============================================================================
+---
+
+<!-- 浮動按鈕（TOP 上方） -->
+<button class="fortune-btn" id="fortuneBtn" type="button" aria-label="芭樂子今日運勢" title="今日運勢">
+  <span class="fortune-btn-text">今日</span>
+  <span class="fortune-btn-text">運勢</span>
+</button>
+
+<!-- 運勢卡片 -->
+<div class="fortune-overlay" id="fortuneOverlay">
+  <div class="fortune-card" id="fortuneCard">
+    <!-- 卡片正面（未翻） -->
+    <div class="fortune-front" id="fortuneFront">
+      <div class="fortune-front-glow"></div>
+      <span class="fortune-front-icon">🌿</span>
+      <p class="fortune-front-title">芭樂子今日運勢</p>
+      <p class="fortune-front-sub">點擊翻牌</p>
+    </div>
+
+    <!-- 卡片背面（結果） -->
+    <div class="fortune-back" id="fortuneBack">
+      <div class="fortune-header">
+        <span class="fortune-date" id="fortuneDate"></span>
+        <button class="fortune-close" id="fortuneClose" type="button" aria-label="關閉">&times;</button>
+      </div>
+
+      <div class="fortune-ganzhi" id="fortuneGanzhi"></div>
+
+      <div class="fortune-yi-ji">
+        <div class="fortune-yi">
+          <span class="fortune-tag fortune-tag-yi">宜</span>
+          <span class="fortune-yi-text" id="fortuneYi"></span>
+        </div>
+        <div class="fortune-ji">
+          <span class="fortune-tag fortune-tag-ji">忌</span>
+          <span class="fortune-ji-text" id="fortuneJi"></span>
+        </div>
+      </div>
+
+      <div class="fortune-quote" id="fortuneQuote"></div>
+
+      <div class="fortune-lucky">
+        <p class="fortune-lucky-title">今日幸運號碼</p>
+        <div class="fortune-lucky-row">
+          <span class="fortune-lucky-label">威力彩</span>
+          <span class="fortune-lucky-nums" id="fortunePower"></span>
+        </div>
+        <div class="fortune-lucky-row">
+          <span class="fortune-lucky-label">539</span>
+          <span class="fortune-lucky-nums" id="fortune539"></span>
+        </div>
+        <p class="fortune-lucky-note">以上號碼純屬娛樂，中獎機率不會因此改變</p>
+      </div>
+
+      <div class="fortune-disclaimer">
+        本運勢純屬娛樂，芭樂子不保證農民曆能打敗機率。
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* === 浮動按鈕 === */
+  .fortune-btn {
+    position: fixed;
+    bottom: 96px;
+    right: 30px;
+    z-index: 998;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #39FF14, #FF10F0);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .fortune-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .fortune-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(57, 255, 20, 0.4);
+  }
+
+  .fortune-btn-text {
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #000;
+    line-height: 1.15;
+    display: block;
+  }
+
+  /* 呼吸燈動畫 */
+  .fortune-btn.visible {
+    animation: fortunePulse 3s ease-in-out infinite;
+  }
+
+  @keyframes fortunePulse {
+    0%, 100% { box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3); }
+    50% { box-shadow: 0 4px 25px rgba(255, 16, 240, 0.4); }
+  }
+
+  /* === 遮罩層 === */
+  .fortune-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .fortune-overlay.open {
+    display: flex;
+  }
+
+  /* === 卡片 === */
+  .fortune-card {
+    width: 360px;
+    min-height: 480px;
+    perspective: 1000px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .fortune-card.flipped {
+    cursor: default;
+  }
+
+  .fortune-front,
+  .fortune-back {
+    width: 100%;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease;
+  }
+
+  .fortune-front {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a1a1a, #121212);
+    border: 2px solid rgba(57, 255, 20, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 40px;
+    transform: rotateY(0deg);
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .fortune-card.flipped .fortune-front {
+    transform: rotateY(180deg);
+    pointer-events: none;
+  }
+
+  .fortune-front-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(57,255,20,0.12), transparent 70%);
+    animation: fortuneGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes fortuneGlow {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.3); opacity: 1; }
+  }
+
+  .fortune-front-icon {
+    font-size: 3.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .fortune-front-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #39FF14;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .fortune-front-sub {
+    font-size: 0.85rem;
+    color: #999;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    animation: fortuneBlink 2s ease-in-out infinite;
+  }
+
+  @keyframes fortuneBlink {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* === 卡片背面 === */
+  .fortune-back {
+    background: linear-gradient(135deg, #1a1a1a, #121212);
+    border: 2px solid rgba(57, 255, 20, 0.4);
+    padding: 22px 26px;
+    transform: rotateY(-180deg);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .fortune-card.flipped .fortune-back {
+    transform: rotateY(0deg);
+  }
+
+  .fortune-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fortune-date {
+    font-size: 1rem;
+    color: #ddd;
+  }
+
+  .fortune-close {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .fortune-close:hover {
+    color: #fff;
+  }
+
+  .fortune-ganzhi {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #39FF14;
+    letter-spacing: 4px;
+    padding: 6px 0;
+  }
+
+  /* 宜忌 */
+  .fortune-yi-ji {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fortune-yi,
+  .fortune-ji {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .fortune-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .fortune-tag-yi {
+    background: rgba(57, 255, 20, 0.2);
+    color: #39FF14;
+    border: 1px solid rgba(57, 255, 20, 0.4);
+  }
+
+  .fortune-tag-ji {
+    background: rgba(255, 16, 240, 0.15);
+    color: #FF10F0;
+    border: 1px solid rgba(255, 16, 240, 0.35);
+  }
+
+  .fortune-yi-text,
+  .fortune-ji-text {
+    font-size: 1.1rem;
+    color: #fff;
+  }
+
+  /* 金句 */
+  .fortune-quote {
+    background: rgba(57, 255, 20, 0.06);
+    border-left: 3px solid #39FF14;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #fff;
+    font-style: italic;
+  }
+
+  /* 幸運號碼 */
+  .fortune-lucky {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .fortune-lucky-title {
+    font-size: 1rem;
+    color: #f5b800;
+    margin: 0 0 10px;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .fortune-lucky-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .fortune-lucky-label {
+    font-size: 1rem;
+    color: #eee;
+    min-width: 50px;
+    font-weight: 600;
+  }
+
+  .fortune-lucky-nums {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .fortune-lucky-note {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin: 10px 0 0;
+    text-align: center;
+  }
+
+  /* 免責 */
+  .fortune-disclaimer {
+    font-size: 0.9rem;
+    color: #ccc;
+    text-align: center;
+    line-height: 1.6;
+    padding-top: 8px;
+    border-top: 1px solid #444;
+  }
+
+  /* === RWD === */
+  @media (max-width: 768px) {
+    .fortune-btn {
+      bottom: 78px;
+      right: 16px;
+      width: 48px;
+      height: 48px;
+    }
+    .fortune-btn-text { font-size: 0.65rem; }
+    .fortune-card { width: 340px; min-height: 440px; }
+    .fortune-back { padding: 18px 20px; gap: 14px; }
+  }
+</style>
+
+<script is:inline>
+(function() {
+  // === 素材池 ===
+  var YI = [
+    '小注怡情','研究冷熱號','看數據不看感覺','跟朋友合資分攤','設好停損再出手',
+    '換一組新號碼','重新算一次期望值','複習 RTP 觀念','回頭看資金管理','記錄今天的投注',
+    '只買一注試手氣','用包牌計算器算過','相信直覺一次（但只一次）','拿零錢買彩券','存錢不下注',
+    '把預算花在吃的','看完芭樂子文章再決定','查一下 165 黑名單','跟不懂的人解釋 RTP','默默觀察不出手',
+    '拿去年的號碼回測','把中獎幻想寫下來笑一笑','計算包牌成本','看一場球賽就好','學一個新的彩券術語',
+    '清理一下投注紀錄','做功課不做夢','跟家人聊天比研究號碼實在','算算這個月花了多少','把運氣留給明天'
+  ];
+
+  var JI = [
+    '追殺回本','借錢下注','聽明牌','加碼攤平','熬夜看盤',
+    '信「保證獲利」','押身家','跟風買熱門號','贏了就想加倍','輸了怪運氣',
+    '一次買超過 500 元','點來路不明的連結','註冊沒聽過的平台','相信代操老師','用信用卡儲值',
+    '跟另一半隱瞞投注','在 LINE 群跟單','沉迷不回頭','以為今天一定會中','把生活費拿去買彩券',
+    '不設停損','連續加碼超過三次','相信「必勝公式」','用生日當幸運號就好','忽略機率只看獎金',
+    '在心情差的時候下注','想靠博弈翻身','把電子報退訂（開玩笑的）','跟陌生人分享帳號','覺得「這次不一樣」'
+  ];
+
+  var QUOTES = [
+    '今天月德星入位，但 RTP 不會因此變高。',
+    '沖太歲歸沖太歲，機率歸機率。',
+    '農民曆說今日宜出行，沒說宜 all-in。',
+    '天干逢甲，適合回頭看看你的資金管理。',
+    '就算紫微斗數排得再好，莊家抽水不會少。',
+    '今天黃道吉日，最吉的事是不賭。',
+    '你的幸運數字跟中獎機率無關，但看了心情好也值得。',
+    '芭樂子算過了，今天最划算的投資是一碗滷肉飯。',
+    '記住：彩券是娛樂稅，不是理財工具。',
+    '運勢再好，也不會改變 1/22,085,448。',
+    '今天適合做功課，不適合做夢。',
+    '吉時已過，但芭樂子的文章 24 小時都在。',
+    '天機不可洩漏，但機率可以——都寫在我文章裡了。',
+    '今天的你比昨天的你更了解 RTP，這就是進步。',
+    '別問芭樂子今天會不會中，我連統一發票都沒中過。',
+    '農民曆說忌動土，我說忌動存款。',
+    '星座運勢說財運旺，你的期望值說不是。',
+    '如果算命有用，莊家早就倒了。',
+    '今天你能做的最聰明的事：看完這段然後關掉投注頁面。',
+    '幸運數字僅供娛樂，真正的幸運是你還沒被詐騙。',
+    '芭樂子每日一句：贏了是運氣，輸了是常態。',
+    '天干地支算得出日子好壞，算不出老虎機的 RNG。',
+    '今天月破，不宜衝動。其實每天都不宜衝動。',
+    '你的手氣不會因為看了這個運勢就變好，但至少你笑了。',
+    '農民曆：宜嫁娶。芭樂子：宜嫁娶，忌嫁給娛樂城。',
+    '大數法則不管你今天運勢幾顆星。',
+    '把看運勢的時間拿去看我的文章，報酬率更高。',
+    '求神拜佛不如搞懂賠率。',
+    '如果你今天真的很想下注，至少先用包牌計算器算一下。',
+    '今日財位在北方，但你的錢包在你自己手上。',
+    '芭樂子溫馨提示：中獎是意外，不中才是日常。',
+    '這個運勢的準確率跟你中頭獎的機率差不多。',
+    '今天的幸運色是綠色——跟芭樂子的 Logo 一樣，不是叫你加碼。',
+    '農民曆翻完了嗎？翻完去看我的〈機率拆解〉。',
+    '今天歲德合，最適合的事是把 Game8la 加入書籤。',
+    '你的運勢歸你的運勢，莊家的數學歸莊家的數學。',
+    '今天刑沖破害全齊了，跟你的娛樂城帳戶一樣危險。',
+    '有人靠運勢賺錢嗎？有，寫運勢的人。',
+    '芭樂子誠心建議：今天最好的投資是 ctrl+D 收藏本站。',
+    '天氣好心情好，但跟你的勝率沒有關係。',
+    '據說今天土星逆行，不過老虎機每天都在逆行你的錢包。',
+    '運勢五顆星又怎樣，期望值還是負的。',
+    '今天帶驛馬星，適合出門走走，不適合出門儲值。',
+    '如果這個運勢讓你想下注，那你完全看錯重點了。',
+    '農民曆建議今天安床，芭樂子建議今天安心。',
+    '你今天的運氣都用在打開這個網站了，別浪費在別的地方。',
+    '比起幸運數字，你更需要的是停損數字。',
+    '芭樂子看了看天象：今天最適合退訂詐騙 LINE 群。',
+    '黃曆沒寫但芭樂子要說：每天都是遠離詐騙的好日子。',
+    '數字會說話，但不會說「今天一定會中」。',
+    '今天的運勢由農民曆提供，準確度由你自己負責。',
+    '問：運勢有用嗎？答：娛樂有用。',
+    '就算把所有幸運物都帶在身上，機率還是機率。',
+    '月老管姻緣，芭樂子管你別被騙。',
+    '今天三合局成形，最佳三合：你、Game8la、理性。',
+    '有人說今天水逆結束了。莊家說：抽水永遠不會結束。',
+    '宜閱讀，忌衝動。這八個字每天都適用。',
+    '你今天最需要的不是幸運，是資訊。而你來對地方了。',
+    '這是一個免費的運勢，跟免費的娛樂城體驗金不同——這個真的免費。',
+    '最後提醒：看完運勢笑一笑就好，認真你就輸了（字面意義上）。'
+  ];
+
+  // === 天干地支 ===
+  var TIAN_GAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  var DI_ZHI = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+
+  // 計算天干地支（簡化：以 2024-02-10 甲辰年正月初一為基準日）
+  function getDayGanZhi(date) {
+    var base = new Date(2024, 1, 10); // 2024-02-10
+    var diff = Math.floor((date.getTime() - base.getTime()) / 86400000);
+    // 基準日天干地支序號（甲辰日 = 甲0, 辰4 → 干支序 = 0*12+4 不對，用查表）
+    // 2024-02-10 是甲子日（干支序第1天）
+    var ganIdx = ((diff % 10) + 10) % 10;
+    var zhiIdx = ((diff % 12) + 12) % 12;
+    return {
+      gan: TIAN_GAN[ganIdx],
+      zhi: DI_ZHI[zhiIdx],
+      ganIdx: ganIdx,
+      zhiIdx: zhiIdx,
+      text: TIAN_GAN[ganIdx] + DI_ZHI[zhiIdx] + '日'
+    };
+  }
+
+  // 簡易 seeded random（線性同餘）
+  function seededRandom(seed) {
+    var s = seed;
+    return function() {
+      s = (s * 1664525 + 1013904223) & 0x7fffffff;
+      return s / 0x7fffffff;
+    };
+  }
+
+  // 從陣列中用 seed 選一個
+  function pick(arr, rng) {
+    return arr[Math.floor(rng() * arr.length)];
+  }
+
+  // 產生不重複的幸運號碼
+  function luckyNums(rng, max, count) {
+    var nums = [];
+    while (nums.length < count) {
+      var n = Math.floor(rng() * max) + 1;
+      if (nums.indexOf(n) === -1) nums.push(n);
+    }
+    return nums.sort(function(a, b) { return a - b; });
+  }
+
+  // 產生號碼球 HTML
+  function numBall(n, cls) {
+    return '<span class="fortune-ball ' + (cls || '') + '">' + (n < 10 ? '0' + n : n) + '</span>';
+  }
+
+  // === 主邏輯 ===
+  function generateFortune() {
+    var now = new Date();
+    var gz = getDayGanZhi(now);
+
+    // seed = 年月日組合 + 干支
+    var dayKey = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+    var seed = dayKey * 60 + gz.ganIdx * 12 + gz.zhiIdx;
+    var rng = seededRandom(seed);
+
+    var yi = pick(YI, rng);
+    var ji = pick(JI, rng);
+    var quote = pick(QUOTES, rng);
+
+    var powerNums = luckyNums(rng, 38, 2);
+    var powerSpecial = Math.floor(rng() * 8) + 1;
+    var nums539 = luckyNums(rng, 39, 2);
+
+    // 日期格式
+    var dateStr = now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate();
+
+    return {
+      date: dateStr,
+      ganzhi: gz.text,
+      yi: yi,
+      ji: ji,
+      quote: quote,
+      power: powerNums,
+      powerSpecial: powerSpecial,
+      n539: nums539
+    };
+  }
+
+  // === DOM 操作 ===
+  var btn = document.getElementById('fortuneBtn');
+  var overlay = document.getElementById('fortuneOverlay');
+  var card = document.getElementById('fortuneCard');
+  var closeBtn = document.getElementById('fortuneClose');
+
+  if (!btn || !overlay || !card) return;
+
+  // 跟隨 ScrollToTop 的顯示邏輯
+  window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 300) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+
+  // 點按鈕開啟
+  btn.addEventListener('click', function() {
+    overlay.classList.add('open');
+    card.classList.remove('flipped');
+
+    // 預先填入資料
+    var f = generateFortune();
+    document.getElementById('fortuneDate').textContent = f.date;
+    document.getElementById('fortuneGanzhi').textContent = f.ganzhi;
+    document.getElementById('fortuneYi').textContent = f.yi;
+    document.getElementById('fortuneJi').textContent = f.ji;
+    document.getElementById('fortuneQuote').textContent = '「' + f.quote + '」';
+
+    // 威力彩號碼
+    var pH = f.power.map(function(n) { return numBall(n, 'ball-power'); }).join('') +
+      '<span class="fortune-ball-plus">+</span>' +
+      numBall(f.powerSpecial, 'ball-special');
+    document.getElementById('fortunePower').innerHTML = pH;
+
+    // 539號碼
+    var h539 = f.n539.map(function(n) { return numBall(n, 'ball-539'); }).join('');
+    document.getElementById('fortune539').innerHTML = h539;
+  });
+
+  // 點卡片翻牌
+  card.addEventListener('click', function(e) {
+    if (!card.classList.contains('flipped') && !e.target.closest('.fortune-close')) {
+      card.classList.add('flipped');
+    }
+  });
+
+  // 關閉
+  function closeFortune() {
+    overlay.classList.remove('open');
+    setTimeout(function() { card.classList.remove('flipped'); }, 300);
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closeFortune();
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeFortune();
+  });
+
+  // ESC 關閉
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeFortune();
+  });
+})();
+</script>
+
+<!-- 號碼球樣式（放在 script 後面避免 scoped 問題） -->
+<style is:global>
+  .fortune-ball {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 2px;
+  }
+
+  .ball-power {
+    background: rgba(57, 255, 20, 0.2);
+    color: #39FF14;
+    border: 1px solid rgba(57, 255, 20, 0.4);
+  }
+
+  .ball-special {
+    background: rgba(255, 16, 240, 0.2);
+    color: #FF10F0;
+    border: 1px solid rgba(255, 16, 240, 0.4);
+  }
+
+  .ball-539 {
+    background: rgba(245, 184, 0, 0.2);
+    color: #f5b800;
+    border: 1px solid rgba(245, 184, 0, 0.4);
+  }
+
+  .fortune-ball-plus {
+    color: #ddd;
+    font-size: 1rem;
+    margin: 0 4px;
+  }
+</style>
