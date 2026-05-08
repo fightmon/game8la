@@ -5,8 +5,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout 
-  title="魔龍傳奇｜GR電子20線經典老虎機實測評價 - GAME8LA"
-  description="魔龍傳奇完整評測！GR電子經典IP，5軸20條賠付線單向連線老虎機。倍數連鎖最高x5、魔龍之眼觸發10局Free Game、隕石隨機變百搭、幸運彩金+喜從天降雙驚喜。8LA鄉民帶你搞懂國民老虎機。"
+  title="魔龍傳奇｜GR Gaming 20線經典老虎機實測評價 - GAME8LA"
+  description="魔龍傳奇完整評測！GR Gaming經典IP，RTP 96.35%、最高 625 倍、命中率 28.33%。5軸20線消除掉落老虎機，倍數連鎖最高x5、魔龍之眼觸發Free Game、隕石百搭、幸運彩金+喜從天降。"
   ogImage="https://game8la.com/images/og-image.webp"
   currentPage="rankings"
 >
@@ -14,8 +14,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/#games">熱門遊戲</a> &gt; 魔龍傳奇</div>
   <a href="/#games" class="back-link"><Icon name="arrow-left" /> 回遊戲列表</a>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem">
-    <div style="background:linear-gradient(135deg,#2a0a0a,#4a1515,#2a0505);border-radius:16px;display:flex;align-items:center;justify-content:center;min-height:300px;font-size:5rem;border:1px solid var(--border)">
-      🐉
+    <div class="hero-img-wrap">
+      <img src="/images/games/dragon-legend/hero-cover.webp" alt="魔龍傳奇 Dragon Legend GR Gaming老虎機封面" width="372" height="372" loading="eager" fetchpriority="high" class="hero-cover" />
+      <img src="/images/games/dragon-legend/game-icon.webp" alt="魔龍傳奇遊戲圖標" width="80" height="80" loading="eager" class="hero-icon" />
     </div>
     <div>
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 單向連線</span>
@@ -26,19 +27,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <span style="color:var(--text-muted)">(8,765 次瀏覽)</span>
       </div>
       <div class="info-grid">
-        <span class="label">遊戲供應商</span><span class="value">GR電子（好路電子）</span>
-        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--text-muted)">官方未公開</span>
-        <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">中波動</span>
-        <span class="label">盤面結構</span><span class="value">5 軸，由左至右單向連線</span>
+        <span class="label">遊戲供應商</span><span class="value">GR Gaming（Gaming Revolution）</span>
+        <span class="label">返還率 (RTP)</span><span class="value" style="color:var(--guava-green);font-weight:700">96.35%</span>
+        <span class="label">波動率</span><span class="value" style="color:var(--guava-pink)">中波動（Medium）</span>
+        <span class="label">盤面結構</span><span class="value">5x3（5 軸 3 列），由左至右單向連線</span>
         <span class="label">賠付線</span><span class="value">20 條固定賠付線</span>
-        <span class="label">基礎押注</span><span class="value">50</span>
-        <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">全盤 6,250（魔法書）× 倍數連鎖 x5</span>
+        <span class="label">命中率</span><span class="value">28.33%</span>
+        <span class="label">最高倍率</span><span class="value" style="color:var(--gold-light)">625x（官方公佈）</span>
         <span class="label">Wild</span><span class="value">魔法陣 — 代替所有符號（Scatter 除外）</span>
-        <span class="label">Scatter</span><span class="value">魔龍之眼 — 第 1、3、5 軸出現 → 10 局 Free Game</span>
+        <span class="label">Scatter</span><span class="value">魔龍之眼 — 3 個觸發 Free Game</span>
         <span class="label">核心機制</span><span class="value">倍數連鎖（x1→x2→x3→x5）、隕石百搭、幸運彩金、喜從天降</span>
       </div>
       <div class="tag-list">
-        <span class="tag">魔龍傳奇</span><span class="tag">GR電子</span><span class="tag">20賠付線</span><span class="tag">倍數連鎖 x5</span><span class="tag">Free Game</span><span class="tag">隕石百搭</span><span class="tag">幸運彩金</span><span class="tag">喜從天降</span>
+        <span class="tag">魔龍傳奇</span><span class="tag">GR Gaming</span><span class="tag">20賠付線</span><span class="tag">倍數連鎖 x5</span><span class="tag">Free Game</span><span class="tag">隕石百搭</span><span class="tag">幸運彩金</span><span class="tag">喜從天降</span>
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:1rem">
         <a href="#intro" class="btn-primary" onclick="event.preventDefault();document.getElementById('intro').scrollIntoView({behavior:'smooth'})">🐉 看攻略</a>
@@ -65,11 +66,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div class="article-content">
   <!-- 遊戲介紹 -->
   <h2 id="intro">遊戲介紹</h2>
-  <p>講到台灣線上老虎機的「國民神機」，《<strong>魔龍傳奇</strong>》（Dragon Legend）絕對排得上前三。GR 電子（好路電子）的招牌中的招牌，<strong>5 軸、20 條<a href="/articles/slots-guide/" style="color:var(--guava-green)">賠付線</a></strong>的「由左至右單向連線」老虎機——圖案從最左邊的轉軸開始往右連，連到幾個就算幾個，規則簡單到不行。</p>
+  <p>講到台灣線上老虎機的「國民神機」，《<strong>魔龍傳奇</strong>》（Dragon Legend）絕對排得上前三。GR Gaming（Gaming Revolution）的招牌中的招牌，<strong>5 軸、20 條<a href="/articles/slots-guide/" style="color:var(--guava-green)">賠付線</a></strong>的「由左至右單向連線」老虎機——圖案從最左邊的轉軸開始往右連，連到幾個就算幾個，規則簡單到不行。</p>
+  <figure class="img-figure">
+    <img src="/images/games/dragon-legend/gameplay-main.webp" alt="魔龍傳奇主遊戲畫面：5軸盤面、左青龍右紅龍、倍數連鎖指示器" width="526" height="902" loading="lazy" />
+    <figcaption>魔龍傳奇主遊戲畫面 — Wild 百搭中獎連線，底部可見 x1→x2→x3→x5 倍數指示器</figcaption>
+  </figure>
   <p>但簡單不代表無聊。這款遊戲的靈魂在於<strong>倍數連鎖系統</strong>：中獎後圖案消除、上方符號落下，連鎖次數越多倍率越高——1 次 x1、2 次 x2、3 次 x3、<strong>4 次以上直接 x5</strong>。加上魔龍之眼觸發的 Free Game、隕石隨機變出百搭、<a href="/articles/casino-payout-guide/" style="color:var(--guava-green)">幸運彩金</a>和喜從天降兩大驚喜機制，爆分的瞬間是真的會讓人喊出來。畫面走暗黑龍族風格，左青龍右紅龍，魔性十足。</p>
+  <div class="tip-box">
+    <p>💡 <strong>官方數據（gaming-revolution.net）：</strong>GR Gaming 官網公佈魔龍傳奇 <a href="/articles/rtp-explained/" style="color:var(--guava-green)">RTP</a> 為 <strong>96.35%</strong>，最高獎金倍數 <strong>625x</strong>，命中率 <strong>28.33%</strong>。中波動搭配近三成命中率，適合喜歡穩定出分節奏的玩家。</p>
+  </div>
   <!-- 賠付線規則 -->
   <h2 id="paylines">賠付線與連線規則</h2>
   <p>魔龍傳奇是經典的<strong>由左至右單向連線老虎機</strong>。盤面上共有 <strong>20 條固定賠付線</strong>，每一條路徑上的圖示連線均可以依中獎符號贏得彩金。</p>
+  <figure class="img-figure img-figure--sm">
+    <img src="/images/games/dragon-legend/paylines-diagram.webp" alt="魔龍傳奇 20 條賠付線路徑圖" width="299" height="192" loading="lazy" />
+    <figcaption>20 條固定賠付線路徑示意圖（第 1–20 線）</figcaption>
+  </figure>
   <div class="card">
     <h3>連線規則</h3>
     <ul style="padding-left:1.5rem;color:var(--text-secondary)">
@@ -97,21 +109,42 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </table>
     <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.8rem">※ 盤面底部會顯示 x1 → x2 → x3 → x5 的倍數指示器，當前生效的倍率會高亮。</p>
   </div>
+  <figure class="img-figure">
+    <img src="/images/games/dragon-legend/feature-multiplier-x5.webp" alt="魔龍傳奇獎金翻倍特色：倍數連鎖 x1→x2→x3→x5 指示器" width="700" height="458" loading="lazy" />
+    <figcaption>獎金翻倍特色 — 連鎖到第 4 次以上，倍率直接跳到 x5</figcaption>
+  </figure>
   <blockquote>重點：倍數連鎖不只在主遊戲有效，<strong>Free Game 期間也完全適用</strong>。所以 Free Game 裡連鎖到 x5 的話，那個數字會非常可觀。</blockquote>
   <!-- Scatter & Free Game -->
   <h2 id="scatter">魔龍之眼（Scatter）& Free Game</h2>
   <p>「魔龍之眼」是遊戲中的分散符號（Scatter），一顆藍色的龍眼球，辨識度極高。</p>
+  <div class="symbol-showcase">
+    <img src="/images/games/dragon-legend/symbol-scatter-eye.webp" alt="魔龍之眼 Scatter 符號" width="120" height="92" loading="lazy" />
+  </div>
   <div class="card">
     <h3>觸發條件與規則</h3>
     <ul style="padding-left:1.5rem;color:var(--text-secondary)">
       <li><strong>第 1、3、5 軸</strong>同時出現魔龍之眼 → 觸發 <strong>10 局免費遊戲（Free Game）</strong></li>
-      <li>Free Game 期間再出現 <strong>3 個魔龍之眼</strong>（分散符號）→ 追加 <strong>+10 局</strong></li>
+      <li>Free Game 期間再出現 <strong>3 個魔龍之眼</strong>（分散符號）→ 追加免費遊戲局數</li>
       <li>Free Game 期間倍數連鎖照常運作（x1→x2→x3→x5）</li>
       <li>Free Game 期間「隕石」會隨機將盤面符號變成<strong>魔法陣（Wild 百搭）</strong>，機率比主遊戲更高</li>
     </ul>
   </div>
+  <div class="game-screenshots">
+    <figure class="img-figure img-figure--sm">
+      <img src="/images/games/dragon-legend/gameplay-freespin-trigger.webp" alt="魔龍傳奇 FREE SPINS 觸發畫面" width="526" height="922" loading="lazy" />
+      <figcaption>Free Spins 觸發瞬間</figcaption>
+    </figure>
+    <figure class="img-figure img-figure--sm">
+      <img src="/images/games/dragon-legend/gameplay-freespin-wild.webp" alt="魔龍傳奇 Free Game 中隕石百搭滿盤" width="526" height="902" loading="lazy" />
+      <figcaption>Free Game 中隕石製造大量 Wild</figcaption>
+    </figure>
+    <figure class="img-figure img-figure--sm">
+      <img src="/images/games/dragon-legend/gameplay-bigwin.webp" alt="魔龍傳奇 Free Game 結算大獎 187,125" width="526" height="917" loading="lazy" />
+      <figcaption>Free Game 結算 — 贏得分數 187,125</figcaption>
+    </figure>
+  </div>
   <div class="tip-box">
-    <p>💡 <strong>8LA解讀：</strong>Free Game 是魔龍傳奇的獎金集中區。隕石在 Free Game 裡更容易出現，配合倍數連鎖，後段幾轉的爆發力非常驚人。能追加 +10 局更是夢幻時刻。</p>
+    <p>💡 <strong>8LA解讀：</strong>Free Game 是魔龍傳奇的獎金集中區。隕石在 Free Game 裡更容易出現，配合倍數連鎖，後段幾轉的爆發力非常驚人。能追加成功是真正的夢幻時刻。</p>
   </div>
   <!-- Wild & 隕石 -->
   <h2 id="wild">魔法陣（Wild）& 隕石特效</h2>
@@ -119,6 +152,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <p>魔法陣可以<strong>代替所有符號</strong>，與不同符號串聯贏得彩金，<strong>但不包括魔龍之眼（分散符號）</strong>。出現在賠付線上時，會自動替換成該線上獎金最高的符號來計算。</p>
   <h3>☄️ 隕石特效 — 隨機製造百搭</h3>
   <p>轉動過程中會隨機出現隕石特效，砸中的位置會把普通符號直接<strong>變成魔法陣（Wild）</strong>。這是完全隨機的機制，沒有固定觸發條件，但在 Free Game 期間出現的機率更高。隕石可以一次變出多個 Wild，等於直接幫你在盤面上灑百搭，非常暴力。</p>
+  <figure class="img-figure">
+    <img src="/images/games/dragon-legend/feature-meteor-wild.webp" alt="魔龍傳奇隕石特效：隨機將符號變成 Wild 百搭" width="380" height="233" loading="lazy" />
+    <figcaption>隕石特效 — 火球砸下，盤面符號瞬間變成 Wild 百搭</figcaption>
+  </figure>
   <!-- 幸運彩金 & 喜從天降 -->
   <h2 id="bonus">幸運彩金 & 喜從天降</h2>
   <h3>🎰 幸運彩金（Lucky Jackpot）</h3>
@@ -129,6 +166,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <li>觸發時直接獲得額外獎金，金額可能非常可觀</li>
     </ul>
   </div>
+  <figure class="img-figure img-figure--sm">
+    <img src="/images/games/dragon-legend/feature-treasure.webp" alt="魔龍傳奇喜從天降寶箱獎金" width="600" height="337" loading="lazy" />
+    <figcaption>喜從天降 — 寶箱出現在盤面，點擊即可獲得額外獎金</figcaption>
+  </figure>
   <h3>🎁 喜從天降（Treasure Drop）</h3>
   <div class="card">
     <ul style="padding-left:1.5rem;color:var(--text-secondary)">
@@ -138,7 +179,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </ul>
   </div>
   <div class="tip-box">
-    <p>💡 <strong>8LA補充：</strong>幸運彩金和喜從天降都是「驚喜型」機制，沒有固定觸發規律。它們是 GR 電子給玩家的隨機 bonus，出現時就是直接加分，不需要做任何操作（喜從天降除外，要點寶箱）。</p>
+    <p>💡 <strong>8LA補充：</strong>幸運彩金和喜從天降都是「驚喜型」機制，沒有固定觸發規律。它們是 GR Gaming 給玩家的隨機 bonus，出現時就是直接加分，不需要做任何操作（喜從天降除外，要點寶箱）。</p>
   </div>
   <!-- 賠率表 -->
   <h2 id="paytable">完整賠率表（押注 50 基準）</h2>
@@ -146,13 +187,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <table>
     <thead><tr><th>符號</th><th>5 連線</th><th>4 連線</th><th>3 連線</th><th>全盤</th></tr></thead>
     <tbody>
-      <tr><td style="color:var(--guava-pink);font-weight:700">📕 魔法書</td><td>312.5</td><td>87.5</td><td>25</td><td style="color:var(--gold-light);font-weight:700">6,250</td></tr>
-      <tr><td style="color:var(--guava-green);font-weight:700">🧪 綠藥水</td><td>200</td><td>57.5</td><td>17.5</td><td style="color:var(--gold-light);font-weight:700">4,000</td></tr>
-      <tr><td style="color:#b0bec5;font-weight:700">💰 銀幣堆</td><td>125</td><td>37.5</td><td>12.5</td><td style="color:var(--gold-light);font-weight:700">2,500</td></tr>
-      <tr><td style="font-weight:700">🅰️ A</td><td>100</td><td>30</td><td>10</td><td style="color:var(--gold-light)">2,000</td></tr>
-      <tr><td style="font-weight:700">🔤 K</td><td>62.5</td><td>20</td><td>7.5</td><td style="color:var(--gold-light)">1,250</td></tr>
-      <tr><td>🔤 Q</td><td>50</td><td>15</td><td>5</td><td style="color:var(--gold-light)">1,000</td></tr>
-      <tr><td>🔤 J</td><td>50</td><td>15</td><td>5</td><td style="color:var(--gold-light)">1,000</td></tr>
+      <tr><td style="color:var(--guava-pink);font-weight:700"><img src="/images/games/dragon-legend/symbol-book.webp" alt="魔法書" width="32" height="25" loading="lazy" class="sym-icon" /> 魔法書</td><td>312.5</td><td>87.5</td><td>25</td><td style="color:var(--gold-light);font-weight:700">6,250</td></tr>
+      <tr><td style="color:var(--guava-green);font-weight:700"><img src="/images/games/dragon-legend/symbol-potion.webp" alt="綠藥水" width="32" height="25" loading="lazy" class="sym-icon" /> 綠藥水</td><td>200</td><td>57.5</td><td>17.5</td><td style="color:var(--gold-light);font-weight:700">4,000</td></tr>
+      <tr><td style="color:#b0bec5;font-weight:700"><img src="/images/games/dragon-legend/symbol-coins.webp" alt="銀幣堆" width="32" height="25" loading="lazy" class="sym-icon" /> 銀幣堆</td><td>125</td><td>37.5</td><td>12.5</td><td style="color:var(--gold-light);font-weight:700">2,500</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/games/dragon-legend/symbol-a.webp" alt="A符號" width="28" height="22" loading="lazy" class="sym-icon" /> A</td><td>100</td><td>30</td><td>10</td><td style="color:var(--gold-light)">2,000</td></tr>
+      <tr><td style="font-weight:700"><img src="/images/games/dragon-legend/symbol-k.webp" alt="K符號" width="28" height="22" loading="lazy" class="sym-icon" /> K</td><td>62.5</td><td>20</td><td>7.5</td><td style="color:var(--gold-light)">1,250</td></tr>
+      <tr><td><img src="/images/games/dragon-legend/symbol-q.webp" alt="Q符號" width="28" height="22" loading="lazy" class="sym-icon" /> Q</td><td>50</td><td>15</td><td>5</td><td style="color:var(--gold-light)">1,000</td></tr>
+      <tr><td><img src="/images/games/dragon-legend/symbol-j.webp" alt="J符號" width="28" height="22" loading="lazy" class="sym-icon" /> J</td><td>50</td><td>15</td><td>5</td><td style="color:var(--gold-light)">1,000</td></tr>
     </tbody>
   </table>
   <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.5rem">※ 以上為押注 50 時的賠率，實際金額依押注大小等比例變動。全盤 = 20 條賠付線全部同一符號中獎的最大獎。連線彩金會再乘以倍數連鎖倍率（x1/x2/x3/x5）。</p>
@@ -160,7 +201,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <table>
     <thead><tr><th>符號</th><th>功能</th><th>說明</th></tr></thead>
     <tbody>
-      <tr><td style="color:#64b5f6;font-weight:700">👁️ 魔龍之眼（Scatter）</td><td>觸發 Free Game</td><td>第 1、3、5 軸出現 → 10 局免費遊戲；Free Game 中再 3 個 → +10 局</td></tr>
+      <tr><td style="color:#64b5f6;font-weight:700"><img src="/images/games/dragon-legend/symbol-scatter-eye.webp" alt="魔龍之眼" width="32" height="25" loading="lazy" class="sym-icon" /> 魔龍之眼（Scatter）</td><td>觸發 Free Game</td><td>3 個出現即觸發免費遊戲；Free Game 中再出現 3 個可追加局數</td></tr>
       <tr><td style="color:#b39ddb;font-weight:700">🔮 魔法陣（Wild）</td><td>百搭替代</td><td>代替所有符號組成連線（Scatter 除外）；隕石特效也會隨機生成</td></tr>
     </tbody>
   </table>
@@ -171,7 +212,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <li><strong>搞懂倍數連鎖是關鍵</strong> — 這款的爆分核心就是連鎖消除。圖案落下 4 次以上 = x5，所以高價值符號（魔法書、綠藥水）在連鎖 x5 時中獎才是真正的大獎時刻</li>
       <li><strong>Free Game 是決勝點</strong> — 盯好第 1、3、5 軸的魔龍之眼 Scatter。觸發 10 轉免費遊戲後，隕石出現機率更高，配合倍數連鎖 x5 的話獎金會非常誇張。能追加 +10 局更是夢幻</li>
       <li><strong>隕石百搭可遇不可求</strong> — 隕石是隨機觸發的，出現時會把符號變成百搭幫你湊線。純看運氣，但 Free Game 裡面出現機率更高，是大獎的催化劑</li>
-      <li><strong>全盤獎金超猛</strong> — 魔法書全盤在押注 50 時高達 6,250，如果再搭配倍數連鎖 x5，那就是 31,250。雖然機率極低，但夢還是要做的</li>
+      <li><strong>全盤獎金超猛</strong> — 魔法書全盤在押注 50 時高達 6,250，如果再搭配倍數連鎖 x5，那就是 31,250。官方最大倍數 625x，雖然機率極低，但夢還是要做的</li>
       <li><strong>幸運彩金和喜從天降是 bonus</strong> — 這兩個都是隨機驚喜，不用刻意去觸發。喜從天降出現時記得點寶箱，別讓獎金飛了</li>
       <li><strong>中波動適合長時間遊玩</strong> — 不會像高波動遊戲一樣突然歸零，設定好單次押注上限，耐心等連鎖和 Free Game 的機會。先玩 Demo 版摸清節奏再上場</li>
     </ol>
@@ -181,7 +222,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div class="faq-section">
     <div class="faq-item">
       <div class="faq-q">Q：魔龍傳奇的 RTP 是多少？<span class="arrow"><Icon name="chevron-down" /></span></div>
-      <div class="faq-a">GR 電子官方沒有公開 RTP 數據。這在部分亞洲遊戲供應商中是常見的做法。雖然無法確認確切的理論回報率，但從遊戲的中波動設計和玩家普遍的體驗來看，它的整體節奏比較穩定，不像高波動遊戲那樣大起大落。</div>
+      <div class="faq-a">GR Gaming 官網（gaming-revolution.net）公佈魔龍傳奇的 RTP 為 <strong>96.35%</strong>，命中率 <strong>28.33%</strong>。這在老虎機中算是中等偏上的水準，多數老虎機 RTP 落在 94–97% 之間。理論上每投注 100 元長期平均回收約 96.35 元，但實際體驗會因波動率和運氣產生很大差異。</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Q：倍數連鎖最多可以連幾次？<span class="arrow"><Icon name="chevron-down" /></span></div>
@@ -189,7 +230,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
     <div class="faq-item">
       <div class="faq-q">Q：Free Game 裡面可以無限追加嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
-      <div class="faq-a">理論上是可以的——只要在 Free Game 期間繼續出現 3 個魔龍之眼，每次追加 +10 局。但實際上能追加一次就已經很幸運了，連續追加的機率非常低。不過一旦追加成功，配合隕石百搭和倍數連鎖，那個場面會非常壯觀。</div>
+      <div class="faq-a">Free Game 期間只要繼續出現 3 個魔龍之眼就能追加免費遊戲局數。實際上能追加一次就已經很幸運了，連續追加的機率非常低。不過一旦追加成功，配合隕石百搭和倍數連鎖，那個場面會非常壯觀。</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Q：隕石特效有辦法主動觸發嗎？<span class="arrow"><Icon name="chevron-down" /></span></div>
@@ -209,6 +250,131 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </div>
 
 <!-- SCROLL TO TOP -->
+
+<style is:global>
+/* === HERO IMAGE === */
+.hero-img-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0d0a1a 0%, #1a0a2e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 230px;
+}
+.hero-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
+.hero-icon {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  border: 3px solid var(--gold, #ffd700);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  background: #1a0a2e;
+  object-fit: contain;
+}
+
+/* === CONTENT IMAGES === */
+.img-figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.img-figure img {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 1px solid var(--border, #2a2a3e);
+  background: #1a0a2e;
+}
+.img-figure figcaption {
+  color: var(--text-muted, #888);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+.img-figure--sm img {
+  max-width: 400px;
+}
+
+/* === SYMBOL SHOWCASE === */
+.symbol-showcase {
+  display: flex;
+  justify-content: center;
+  margin: 1.2rem 0;
+}
+.symbol-showcase img {
+  border-radius: 12px;
+  border: 2px solid var(--gold, #ffd700);
+  box-shadow: 0 0 20px rgba(255,215,0,0.15);
+  background: #1a0a2e;
+}
+
+/* === GAME SCREENSHOTS GRID === */
+.game-screenshots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.game-screenshots .img-figure {
+  margin: 0;
+}
+.game-screenshots .img-figure img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+.game-screenshots .img-figure figcaption {
+  font-size: 0.78rem;
+}
+@media (max-width: 768px) {
+  .game-screenshots {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .game-screenshots .img-figure img {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+/* === INLINE SYMBOL ICONS IN PAYTABLE === */
+.sym-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+  border-radius: 4px;
+}
+
+/* === SCROLL TO TOP === */
+.scroll-top {
+  position: fixed; bottom: 30px; right: 30px; z-index: 999;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #39FF14, #39FF14);
+  border: none; color: #000;
+  font-size: 1.2rem; cursor: pointer; transition: all 0.3s;
+  opacity: 0; pointer-events: none;
+  box-shadow: 0 4px 15px rgba(57,255,20,0.3);
+  display: flex; align-items: center; justify-content: center;
+}
+.scroll-top.visible { opacity: 1; pointer-events: auto; }
+.scroll-top:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(57,255,20,0.4); }
+@media (max-width: 768px) {
+  .scroll-top { bottom: 20px; right: 16px; width: 42px; height: 42px; font-size: 1rem; }
+  .hero-icon { width: 56px; height: 56px; bottom: 8px; right: 8px; border-radius: 12px; }
+  .img-figure--sm img { max-width: 300px; }
+}
+</style>
 </BaseLayout>
 
 
@@ -220,9 +386,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   "name": "魔龍傳奇",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Web",
-  "description": "GR電子經典IP，5軸20條賠付線單向連線老虎機。倍數連鎖x5、Free Game 10局、隕石百搭、幸運彩金四大機制",
+  "description": "GR Gaming經典IP，RTP 96.35%，最高 625 倍，命中率 28.33%。5x3盤面20線消除掉落老虎機，倍數連鎖x5、Free Game、隕石百搭、幸運彩金四大機制",
   "url": "https://game8la.com/games/dragon-legend/",
-  "author": { "@type": "Organization", "name": "GR電子（好路電子）" },
+  "author": { "@type": "Organization", "name": "GR Gaming" },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "9.5",
