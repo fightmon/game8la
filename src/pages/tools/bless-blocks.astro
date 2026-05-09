@@ -18,22 +18,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <!-- 問題選擇區 -->
   <div class="bless-section">
-    <h2 class="bless-section-title">🙏 先想好你的問題</h2>
-    <div class="bless-questions" id="questionList">
-      <button class="bless-q active" data-q="0">今天適合買彩券嗎？</button>
-      <button class="bless-q" data-q="1">這個娛樂城能信嗎？</button>
-      <button class="bless-q" data-q="2">我的投注策略對嗎？</button>
-      <button class="bless-q" data-q="3">今天會有財運嗎？</button>
-      <button class="bless-q" data-q="4">該不該加碼？</button>
-      <button class="bless-q" data-q="5">我該收手了嗎？</button>
-    </div>
-    <div class="bless-custom-wrap">
-      <input type="text" id="customQ" class="bless-custom-input" placeholder="或自己輸入問題⋯" maxlength="40" />
+    <div class="bless-select-wrap">
+      <select id="questionSelect" class="bless-select">
+        <option value="heart" selected>😌 默唸心中疑問</option>
+        <option value="0">今天運勢如何？</option>
+        <option value="1">這個決定對嗎？</option>
+        <option value="2">今天會有好事嗎？</option>
+        <option value="3">我該改變方向嗎？</option>
+        <option value="4">今天適合買彩券嗎？</option>
+        <option value="5">今天手氣好不好？</option>
+      </select>
     </div>
   </div>
 
-  <!-- 擲筊互動區 -->
+  <!-- 擲筊互動區（結果合併顯示） -->
   <div class="bless-arena" id="arena">
+    <!-- 筊上方：擲前提示 / 擲後結果（等高切換，避免跳動） -->
+    <div class="bless-result-header" id="resultHeader">
+      <div class="bless-result-type bless-pre-hint" id="resultType">🙏 虔誠默念，準備好再擲</div>
+      <div class="bless-result-desc" id="resultDesc"></div>
+    </div>
+
     <!-- 筊杯 SVG ×2 -->
     <div class="bless-blocks-wrap" id="blocksWrap">
       <div class="bless-block" id="block1">
@@ -42,26 +47,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="woodYang1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#d4a056"/>
-                  <stop offset="50%" stop-color="#b8860b"/>
-                  <stop offset="100%" stop-color="#8B6914"/>
+                  <stop offset="0%" stop-color="#d43a2a"/>
+                  <stop offset="50%" stop-color="#b82318"/>
+                  <stop offset="100%" stop-color="#8c1a10"/>
                 </linearGradient>
               </defs>
-              <path d="M10,45 Q10,5 50,5 Q90,5 90,45 Z" fill="url(#woodYang1)" stroke="#7a5a1e" stroke-width="1.5"/>
-              <path d="M20,42 Q20,14 50,14 Q80,14 80,42" fill="none" stroke="#c9983a" stroke-width="0.8" opacity="0.4"/>
+              <path d="M10,45 Q10,5 50,5 Q90,5 90,45 Z" fill="url(#woodYang1)" stroke="#6b1510" stroke-width="1.5"/>
+              <path d="M20,42 Q20,14 50,14 Q80,14 80,42" fill="none" stroke="#e85a4a" stroke-width="0.8" opacity="0.35"/>
             </svg>
           </div>
           <div class="block-face block-yin">
-            <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="woodYin1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#a07030"/>
-                  <stop offset="50%" stop-color="#8B6914"/>
-                  <stop offset="100%" stop-color="#704c14"/>
+                  <stop offset="0%" stop-color="#8c1a10"/>
+                  <stop offset="50%" stop-color="#701510"/>
+                  <stop offset="100%" stop-color="#55100c"/>
                 </linearGradient>
               </defs>
-              <rect x="5" y="2" width="90" height="16" rx="3" fill="url(#woodYin1)" stroke="#5a3e10" stroke-width="1.5"/>
-              <line x1="15" y1="10" x2="85" y2="10" stroke="#9a7a3a" stroke-width="0.6" opacity="0.3"/>
+              <path d="M10,5 Q10,45 50,45 Q90,45 90,5 Z" fill="url(#woodYin1)" stroke="#4a0e0a" stroke-width="1.5"/>
+              <path d="M20,8 Q20,36 50,36 Q80,36 80,8" fill="none" stroke="#a03020" stroke-width="0.8" opacity="0.3"/>
             </svg>
           </div>
         </div>
@@ -72,46 +77,55 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="woodYang2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#d4a056"/>
-                  <stop offset="50%" stop-color="#b8860b"/>
-                  <stop offset="100%" stop-color="#8B6914"/>
+                  <stop offset="0%" stop-color="#d43a2a"/>
+                  <stop offset="50%" stop-color="#b82318"/>
+                  <stop offset="100%" stop-color="#8c1a10"/>
                 </linearGradient>
               </defs>
-              <path d="M10,45 Q10,5 50,5 Q90,5 90,45 Z" fill="url(#woodYang2)" stroke="#7a5a1e" stroke-width="1.5"/>
-              <path d="M20,42 Q20,14 50,14 Q80,14 80,42" fill="none" stroke="#c9983a" stroke-width="0.8" opacity="0.4"/>
+              <path d="M10,45 Q10,5 50,5 Q90,5 90,45 Z" fill="url(#woodYang2)" stroke="#6b1510" stroke-width="1.5"/>
+              <path d="M20,42 Q20,14 50,14 Q80,14 80,42" fill="none" stroke="#e85a4a" stroke-width="0.8" opacity="0.35"/>
             </svg>
           </div>
           <div class="block-face block-yin">
-            <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="woodYin2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#a07030"/>
-                  <stop offset="50%" stop-color="#8B6914"/>
-                  <stop offset="100%" stop-color="#704c14"/>
+                  <stop offset="0%" stop-color="#8c1a10"/>
+                  <stop offset="50%" stop-color="#701510"/>
+                  <stop offset="100%" stop-color="#55100c"/>
                 </linearGradient>
               </defs>
-              <rect x="5" y="2" width="90" height="16" rx="3" fill="url(#woodYin2)" stroke="#5a3e10" stroke-width="1.5"/>
-              <line x1="15" y1="10" x2="85" y2="10" stroke="#9a7a3a" stroke-width="0.6" opacity="0.3"/>
+              <path d="M10,5 Q10,45 50,45 Q90,45 90,5 Z" fill="url(#woodYin2)" stroke="#4a0e0a" stroke-width="1.5"/>
+              <path d="M20,8 Q20,36 50,36 Q80,36 80,8" fill="none" stroke="#a03020" stroke-width="0.8" opacity="0.3"/>
             </svg>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- 擲筊按鈕 -->
     <button class="bless-throw-btn" id="throwBtn" type="button">
       擲筊
     </button>
 
-    <p class="bless-hint" id="hintText">心中默念問題，然後按下「擲筊」</p>
-  </div>
-
-  <!-- 結果區 -->
-  <div class="bless-result" id="resultArea" style="display:none">
-    <div class="bless-result-type" id="resultType"></div>
-    <div class="bless-result-desc" id="resultDesc"></div>
-    <div class="bless-result-quote" id="resultQuote"></div>
-    <div class="bless-streak" id="streakArea" style="display:none"></div>
-    <button class="bless-again-btn" id="againBtn" type="button">再擲一次</button>
+    <!-- 擲筊後：結果詳情在筊下方 -->
+    <div class="bless-result-footer" id="resultFooter" style="display:none">
+      <div class="bless-result-quote" id="resultQuote"></div>
+      <div class="bless-streak" id="streakArea" style="display:none"></div>
+      <div class="bless-result-actions">
+        <button class="bless-again-btn" id="againBtn" type="button">再擲一次</button>
+        <button class="bless-share-btn" id="shareToggle" type="button">📤 分享結果</button>
+      </div>
+      <div class="bless-share-panel" id="sharePanel" style="display:none">
+        <div class="bless-share-buttons">
+          <button type="button" data-bless-share="facebook" class="bshare-btn bshare-fb">Facebook</button>
+          <button type="button" data-bless-share="x" class="bshare-btn bshare-x">X</button>
+          <button type="button" data-bless-share="threads" class="bshare-btn bshare-threads">Threads</button>
+          <button type="button" data-bless-share="ig" class="bshare-btn bshare-ig">Instagram</button>
+          <button type="button" data-bless-share="copy" class="bshare-btn bshare-copy">複製連結</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- 今日紀錄（可收合卡片） -->
@@ -212,7 +226,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   /* === SECTIONS === */
   .bless-section {
-    max-width: 600px;
+    max-width: 500px;
     margin: 2rem auto;
   }
   .bless-section-title {
@@ -221,54 +235,38 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     color: #eee;
   }
 
-  /* === QUESTIONS === */
-  .bless-questions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
+  /* === QUESTION SELECT === */
+  .bless-select-wrap {
+    max-width: 500px;
+    margin: 0 auto;
   }
-  .bless-q {
-    background: rgba(255,255,255,0.05);
-    border: 1.5px solid #333;
-    border-radius: 10px;
-    color: #ddd;
-    font-size: 1rem;
-    padding: 10px 18px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .bless-q:hover {
-    border-color: var(--guava-green, #39FF14);
-    color: #fff;
-  }
-  .bless-q.active {
-    border-color: var(--guava-green, #39FF14);
-    background: rgba(57,255,20,0.1);
-    color: var(--guava-green, #39FF14);
-    font-weight: 700;
-  }
-  .bless-custom-wrap {
-    max-width: 400px;
-    margin: 12px auto 0;
-  }
-  .bless-custom-input {
+  .bless-select {
     width: 100%;
     background: rgba(255,255,255,0.05);
     border: 1.5px solid #333;
     border-radius: 10px;
     color: #eee;
-    font-size: 1rem;
-    padding: 10px 16px;
-    text-align: center;
+    font-size: 1.05rem;
+    padding: 12px 18px;
     outline: none;
+    cursor: pointer;
     transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23888' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 12px;
+    font-family: inherit;
   }
-  .bless-custom-input:focus {
+  .bless-select:focus,
+  .bless-select:hover {
     border-color: var(--guava-green, #39FF14);
   }
-  .bless-custom-input::placeholder {
-    color: #666;
+  .bless-select option {
+    background: #1a1a1a;
+    color: #eee;
+    padding: 8px;
   }
 
   /* === ARENA === */
@@ -276,16 +274,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     max-width: 500px;
     margin: 2rem auto;
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
     background: rgba(255,255,255,0.02);
     border-radius: 16px;
     border: 1px solid #2a2a2a;
-    min-height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   /* === JIAO BEI (BLOCKS) === */
@@ -295,7 +292,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     justify-content: center;
     align-items: center;
     perspective: 600px;
-    min-height: 140px;
+    min-height: 100px;
   }
   .bless-block {
     width: 100px;
@@ -338,53 +335,78 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     transform: rotateX(0deg);
   }
 
-  /* Throwing animation */
+  /* === 一段式擲筊動畫：下蹲 → 上拋 → 頂點懸停 → 落地 bounce === */
   .bless-block.throwing .block-inner {
-    animation: blockThrow 1.2s ease-out forwards;
+    animation: blockThrow 2.5s linear forwards;
   }
   .bless-block.throwing-alt .block-inner {
-    animation: blockThrowAlt 1.2s ease-out forwards;
+    animation: blockThrowAlt 2.65s linear forwards;
   }
 
+  /*
+    時間軸 (2.5s, linear timing — 由 keyframe 自控曲線)：
+    0-8%    下蹲蓄力
+    8-28%   平滑上升＋翻轉
+    28-48%  頂點懸停（Y 幾乎不動，轉速趨緩）
+    48-72%  自由落體加速
+    72-100% 落地 + 微彈歸位
+  */
   @keyframes blockThrow {
-    0% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
-    15% { transform: translateY(-120px) rotateX(180deg) rotateY(40deg); }
-    30% { transform: translateY(-150px) rotateX(360deg) rotateY(80deg); }
-    50% { transform: translateY(-80px) rotateX(540deg) rotateY(120deg); }
-    70% { transform: translateY(0px) rotateX(var(--final-x)) rotateY(var(--final-y)); }
-    85% { transform: translateY(-15px) rotateX(var(--final-x)) rotateY(var(--final-y)); }
-    95% { transform: translateY(3px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1.02); }
+    0%   { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+    8%   { transform: translateY(4px) rotateX(0deg) rotateY(0deg) scale(0.98); }
+    18%  { transform: translateY(-120px) rotateX(200deg) rotateY(45deg); }
+    28%  { transform: translateY(-190px) rotateX(380deg) rotateY(85deg); }
+    33%  { transform: translateY(-195px) rotateX(400deg) rotateY(90deg); }
+    38%  { transform: translateY(-195px) rotateX(415deg) rotateY(93deg); }
+    43%  { transform: translateY(-193px) rotateX(425deg) rotateY(96deg); }
+    48%  { transform: translateY(-188px) rotateX(435deg) rotateY(98deg); }
+    55%  { transform: translateY(-150px) rotateX(510deg) rotateY(120deg); }
+    63%  { transform: translateY(-80px) rotateX(610deg) rotateY(148deg); }
+    72%  { transform: translateY(0px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1.06); }
+    80%  { transform: translateY(-5px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1); }
+    90%  { transform: translateY(1px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1.01); }
     100% { transform: translateY(0) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1); }
   }
 
   @keyframes blockThrowAlt {
-    0% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
-    15% { transform: translateY(-130px) rotateX(-200deg) rotateY(-50deg); }
-    30% { transform: translateY(-140px) rotateX(-380deg) rotateY(-90deg); }
-    50% { transform: translateY(-60px) rotateX(-520deg) rotateY(-130deg); }
-    70% { transform: translateY(0px) rotateX(var(--final-x)) rotateY(var(--final-y)); }
-    85% { transform: translateY(-12px) rotateX(var(--final-x)) rotateY(var(--final-y)); }
-    95% { transform: translateY(3px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1.02); }
+    0%   { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+    8%   { transform: translateY(4px) rotateX(0deg) rotateY(0deg) scale(0.98); }
+    18%  { transform: translateY(-130px) rotateX(-220deg) rotateY(-50deg); }
+    28%  { transform: translateY(-200px) rotateX(-400deg) rotateY(-90deg); }
+    33%  { transform: translateY(-205px) rotateX(-415deg) rotateY(-94deg); }
+    38%  { transform: translateY(-205px) rotateX(-425deg) rotateY(-97deg); }
+    43%  { transform: translateY(-203px) rotateX(-435deg) rotateY(-100deg); }
+    48%  { transform: translateY(-198px) rotateX(-445deg) rotateY(-102deg); }
+    55%  { transform: translateY(-155px) rotateX(-525deg) rotateY(-125deg); }
+    63%  { transform: translateY(-75px) rotateX(-630deg) rotateY(-152deg); }
+    72%  { transform: translateY(0px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1.06); }
+    80%  { transform: translateY(-4px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1); }
+    90%  { transform: translateY(1px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1.01); }
     100% { transform: translateY(0) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1); }
   }
 
-  /* Landing glow */
+  /* === 落地光暈 === */
   .bless-block.landed::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 20px;
+    width: 70%;
+    height: 12px;
     border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(57,255,20,0.3), transparent 70%);
-    animation: glowPulse 1s ease-out;
+    background: radial-gradient(ellipse, rgba(57,255,20,0.35), transparent 70%);
+    animation: glowPulse 1.2s ease-out;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .block-inner {
+    z-index: 1;
   }
 
   @keyframes glowPulse {
-    0% { opacity: 1; transform: translateX(-50%) scale(1.3); }
-    100% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+    0%   { opacity: 0.8; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.6); }
   }
 
   /* === THROW BUTTON === */
@@ -415,35 +437,47 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     transform: none;
   }
 
-  .bless-hint {
-    color: #888;
-    font-size: 0.95rem;
-    margin: 0;
-  }
-
-  /* === RESULT === */
-  .bless-result {
-    max-width: 500px;
-    margin: 0 auto 2rem;
+  /* === RESULT (merged into arena) === */
+  .bless-result-header {
     text-align: center;
-    padding: 2rem 1.5rem;
-    background: rgba(255,255,255,0.03);
-    border-radius: 16px;
-    border: 1px solid #2a2a2a;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .bless-result-footer {
+    width: 100%;
+    text-align: center;
+    animation: fadeInUp 0.35s ease-out;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .bless-result-type {
     font-size: 2rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
+    transition: opacity 0.3s;
+  }
+  .bless-result-type.bless-pre-hint {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #888;
   }
   .bless-result-type.sheng { color: var(--guava-green, #39FF14); }
   .bless-result-type.xiao { color: #f5b800; }
   .bless-result-type.yin-result { color: #FF10F0; }
 
   .bless-result-desc {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: #ccc;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
   .bless-result-quote {
     background: rgba(57,255,20,0.05);
@@ -473,6 +507,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     50% { box-shadow: 0 0 25px rgba(57,255,20,0.6); }
   }
 
+  .bless-result-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   .bless-again-btn {
     background: transparent;
     border: 1.5px solid #555;
@@ -486,6 +526,82 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .bless-again-btn:hover {
     border-color: var(--guava-green, #39FF14);
     color: #fff;
+  }
+  .bless-share-btn {
+    background: linear-gradient(135deg, rgba(57,255,20,0.15), rgba(57,255,20,0.05));
+    border: 1.5px solid var(--guava-green, #39FF14);
+    color: var(--guava-green, #39FF14);
+    font-size: 1rem;
+    padding: 10px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+  }
+  .bless-share-btn:hover {
+    background: rgba(57,255,20,0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(57,255,20,0.2);
+  }
+  .bless-share-panel {
+    margin-top: 1rem;
+    animation: panelSlideIn 0.25s ease-out;
+  }
+  @keyframes panelSlideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .bless-share-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .bshare-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  }
+  .bshare-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .bshare-fb { background: #1877F2; }
+  .bshare-fb:hover { box-shadow: 0 4px 12px rgba(24,119,242,0.35); }
+  .bshare-x { background: #000; border: 1px solid #333; }
+  .bshare-x:hover { box-shadow: 0 4px 12px rgba(255,255,255,0.18); }
+  .bshare-threads { background: #101010; border: 1px solid #333; }
+  .bshare-threads:hover { box-shadow: 0 4px 12px rgba(255,255,255,0.18); }
+  .bshare-ig { background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+  .bshare-ig:hover { box-shadow: 0 4px 12px rgba(220,39,67,0.4); }
+  .bshare-copy { background: var(--guava-green, #39FF14); color: #000; }
+  .bshare-copy:hover { box-shadow: 0 4px 12px rgba(57,255,20,0.4); }
+  .bless-share-toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(57,255,20,0.15);
+    border: 1px solid var(--guava-green, #39FF14);
+    color: var(--guava-green, #39FF14);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+  }
+  .bless-share-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
   /* === HISTORY (collapsible card) === */
@@ -651,10 +767,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .bless-desc { font-size: 0.9rem; line-height: 1.5; }
     .bless-section { margin: 1rem auto; }
     .bless-section-title { font-size: 1.05rem; margin-bottom: 0.7rem; }
-    .bless-blocks-wrap { gap: 24px; }
+    .bless-arena { padding: 1.2rem 0.8rem; gap: 0.8rem; }
+    .bless-blocks-wrap { gap: 24px; min-height: 80px; }
     .bless-block { width: 80px; height: 56px; }
     .bless-throw-btn { font-size: 1.1rem; padding: 12px 36px; }
-    .bless-q { font-size: 0.9rem; padding: 8px 14px; }
+    .bless-select { font-size: 0.95rem; padding: 10px 14px; }
+    .bless-result-header { min-height: 62px; }
+    .bless-result-type { font-size: 1.6rem; }
+    .bless-result-desc { font-size: 0.9rem; }
+    .bless-result-quote { padding: 10px 14px; font-size: 1rem; }
+    .bless-streak { padding: 12px; font-size: 1.05rem; }
   }
 </style>
 
@@ -664,18 +786,66 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   // 芭樂子吐槽素材池
   // =================================================================
   var QUESTIONS = [
+    '今天運勢如何？',
+    '這個決定對嗎？',
+    '今天會有好事嗎？',
+    '我該改變方向嗎？',
     '今天適合買彩券嗎？',
-    '這個娛樂城能信嗎？',
-    '我的投注策略對嗎？',
-    '今天會有財運嗎？',
-    '該不該加碼？',
-    '我該收手了嗎？'
+    '今天手氣好不好？'
   ];
 
   // REPLIES[questionIndex][resultType] = array of strings
   // resultType: 0=聖筊, 1=笑筊, 2=陰筊
   var REPLIES = [
-    // Q0: 今天適合買彩券嗎？
+    // Q0: 今天運勢如何？
+    [
+      ['聖筊！神明說今天運勢不錯。不過芭樂子提醒你：運勢好不代表躺著就有好事，還是要靠自己。',
+       '聖筊。神明給了個讚。但芭樂子統計過：50% 的人今天都會得到聖筊，所以別太膨脹。',
+       '今天運勢 OK 喔。神明認可了，但請記得——真正的好運是做好準備遇到機會。'],
+      ['笑筊。神明表示你今天的運勢⋯有點微妙。不好不壞，就是有趣。',
+       '神明笑了。可能是覺得「運勢」這種事，問祂不如問你今天有沒有早起。',
+       '笑筊——神明覺得你與其問運勢，不如去做點實際的事。'],
+      ['陰筊。神明覺得今天運勢普通。但沒關係，芭樂子統計過：壞運氣的人通常是自己作的。',
+       '嗯⋯不太行。但好消息是，你避開雷區就不會踩雷，主動權在你手上。',
+       '神明搖頭了。不過芭樂子說：運勢是統計學，不是命運。今天小心一點就好。']
+    ],
+    // Q1: 這個決定對嗎？
+    [
+      ['聖筊！神明覺得方向是對的。但芭樂子提醒：做對決定跟做好決定是兩回事，細節還是要顧。',
+       '神明同意了。不過你應該也列出了利弊分析吧？沒有的話建議去做一份。',
+       '聖筊。看來你心裡其實已經有答案了——你只是來找個支持而已，對吧？'],
+      ['笑筊。神明覺得你這個決定⋯有點好笑。也許再想想？',
+       '神明笑了——不是說你錯，是覺得你可能還沒想清楚就跑來問了。',
+       '笑筊。芭樂子翻譯：這個決定不是不行，但你可能忽略了什麼重要的事。'],
+      ['陰筊。神明不太認同這個決定。但別急著放棄——也許只是需要調整方向。',
+       '不同意。但芭樂子說：被否定不代表要放棄，也許只是時機或方式不對。',
+       '神明搖頭了。先暫停，把所有資訊重新整理一次，再做決定也不遲。']
+    ],
+    // Q2: 今天會有好事嗎？
+    [
+      ['聖筊！神明說今天會有好事。但好事的定義很廣——下班準時也算好事。不要想太多。',
+       '聖筊。好事會來的！芭樂子補充：好事通常發生在你不盯著它看的時候。',
+       '神明說會有好事。但芭樂子提醒：真正的好事是你沒做蠢事，這就是最大的好事。'],
+      ['笑筊。神明表示：「好事在不在取決於你怎麼定義好事。」',
+       '神明笑了。也許今天的好事就是——你在這裡擲筊，而不是在外面做傻事。',
+       '笑筊——神明覺得你等好事不如去創造好事。'],
+      ['陰筊。今天可能沒什麼特別的好事。但沒有壞事也是一種好事，你說對不對？',
+       '神明說今天普普。不過芭樂子覺得：沒虧錢、沒被騙，已經贏過很多人了。',
+       '今天可能不是你的日子。但沒關係，把精力存起來，明天再來。']
+    ],
+    // Q3: 我該改變方向嗎？
+    [
+      ['聖筊。神明覺得是時候變了。但芭樂子提醒：改變方向跟亂換方向是兩回事。',
+       '聖筊！看來神明也覺得現在的路可以調整。但新方向想好了嗎？',
+       '神明同意你做出改變。會來問這題的人，通常心裡已經有答案了——聽自己的吧。'],
+      ['笑筊。神明表示：「你明知道該不該變，幹嘛來問我？」',
+       '神明笑了——也許祂覺得你不是真的要變，只是需要有人推你一把。',
+       '笑筊。芭樂子翻譯：也許問題不是方向，而是你還沒準備好。'],
+      ['陰筊。神明覺得現在不用急著變。也許現在的方向沒你想的那麼糟。',
+       '不同意。但這不代表「永遠不變」——也許是「現在不是時候」。',
+       '神明搖頭了。芭樂子建議：先把手上的事做完再說。半途而廢比走錯路更浪費。']
+    ],
+    // Q4: 今天適合買彩券嗎？
     [
       ['神明點頭了，但芭樂子提醒你：神明沒說中多少，統一發票 200 元也算中。',
        '聖筊！不過中獎機率還是 1/22,085,448，神明也改不了這個數字。',
@@ -687,65 +857,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
        '不同意。連神明都不看好，你還有什麼理由下注？',
        '神明說不行。不過就算祂說行，期望值也是負的，你知道的。']
     ],
-    // Q1: 這個娛樂城能信嗎？
+    // Q5: 今天手氣好不好？
     [
-      ['聖筊，但芭樂子建議你還是去查 165 黑名單比較實際。神明管香火，不管你的存款。',
-       '神明勉強同意了，不過祂也沒去玩過。先用娛樂城體檢工具查一下吧。',
-       '聖筊。但神明的判斷標準跟資安專家不太一樣，建議雙重驗證。'],
-      ['笑筊。神明表示：「你自己心裡有答案了吧？」',
-       '神明笑了——大概是看到那個娛樂城的「保證出金」廣告也想笑。',
-       '笑筊。神明拒絕回答，可能是怕背書之後你來找祂退錢。'],
-      ['連神明都搖頭了，你還要信？快去查 165 黑名單。',
-       '陰筊。神明的意思很明確：不要碰。',
-       '不行。如果一個娛樂城連神明都不認可，你應該很清楚了。']
-    ],
-    // Q2: 我的投注策略對嗎？
-    [
-      ['聖筊！不過神明看不懂期望值公式，建議你再用芭樂子的工具跑一次數據。',
-       '神明同意了，但數學不會因為聖筊就改變。RTP 歸 RTP。',
-       '好的，神明覺得可以。芭樂子覺得你至少有在思考策略，這已經贏過 90% 的人了。'],
-      ['笑筊。神明覺得你的「策略」很有趣——但有趣跟有效是兩回事。',
-       '神明笑了，可能是因為你的策略跟「感覺今天會中」差不多。',
-       '笑筊——策略好不好不要問神明，去跑蒙地卡羅模擬。'],
-      ['陰筊。神明建議你重新想想。芭樂子也是。',
-       '不行。但好消息是，你願意先問就表示你還有救。',
-       '神明否決了。也許是時候停下來看看資金管理計算器了。']
-    ],
-    // Q3: 今天會有財運嗎？
-    [
-      ['聖筊！但財運的定義很廣——撿到 10 元也算。不要想太多。',
-       '神明說有。芭樂子翻譯：今天可能省下一筆不該花的錢，這也是財運。',
-       '有！比如說你看了芭樂子的文章，省了一筆被騙的錢——這就是最大的財運。'],
-      ['笑筊。神明表示：「你的財運取決於你今天有沒有亂花錢。」',
-       '神明笑了。財運這種東西，問神不如看存摺。',
-       '笑筊——神明覺得「財運」這個概念本身就很好笑。'],
-      ['陰筊。今天沒有財運。但也沒有破財運——前提是你不要主動去送錢。',
-       '神明說沒有。換個角度想：不虧就是賺。',
-       '沒有。但芭樂子說：不買就不會輸，不輸就是最大的財運。']
-    ],
-    // Q4: 該不該加碼？
-    [
-      ['聖筊⋯但芭樂子必須說：神明如果自己會玩，祂也不會住在廟裡。請三思。',
-       '神明同意了。但你確定你的停損點設好了嗎？',
-       '聖筊。如果你已經在賺，小額加碼問題不大。但超過預算就不行了。'],
-      ['笑筊。神明覺得你問這題的時候心裡已經想加碼了。',
-       '神明笑了——祂大概想說：「你來問我就是希望我說好吧？」',
-       '笑筊。問加碼這件事本身就代表你可能不太確定，而不確定的時候不該加碼。'],
-      ['不該。連神明都不同意，你的數學更不會同意。',
-       '陰筊，非常明確。停損不是認輸，是保護自己。',
-       '神明搖頭了。追殺回本從來不是好策略，這是芭樂子說的第一定律。']
-    ],
-    // Q5: 我該收手了嗎？
-    [
-      ['聖筊。但你會來問這個問題，心裡大概已經有答案了。聽自己的吧。',
-       '神明同意你收手。而且芭樂子也同意。見好就收是智慧。',
-       '聖筊。能問出「該不該收手」的人，通常都是對的。收吧。'],
-      ['笑筊。神明表示：「你明知道該收手，為什麼還來問我？」',
-       '神明笑了——大概是看到你內心的掙扎覺得很可愛。收手吧。',
-       '笑筊。但芭樂子覺得笑筊在這題等於聖筊——你心裡早就有答案了。'],
-      ['陰筊⋯所以神明覺得你不該收手？這題比較特殊。也許是還不到時候——但絕對不是叫你加碼。',
-       '有趣的結果。陰筊在「該不該收手」通常代表神明覺得你還有別的事沒想清楚。',
-       '神明說現在不用急著收。但芭樂子提醒：這不代表「繼續加碼」，而是「想清楚再決定」。']
+      ['聖筊！神明說手氣不錯。但芭樂子提醒：手氣好跟會贏是兩回事，機率不認識你。',
+       '聖筊。手氣 OK，但記住——不管手氣多好，期望值不會改變。見好就收。',
+       '神明給了肯定。但你知道嗎？覺得自己手氣好的時候最容易衝動，小心。'],
+      ['笑筊。神明覺得你的「手氣」是個很有趣的概念——統計學不這麼認為。',
+       '神明笑了——也許祂想說：「手氣是你腦袋編出來的故事。」',
+       '笑筊。芭樂子翻譯：手氣好不好不重要，停利停損設好比較重要。'],
+      ['陰筊。今天手氣不行。芭樂子建議：手氣不好就休息，別跟數學過不去。',
+       '神明搖頭了。不過說真的，手氣從來不是決定因素——資金控管才是。',
+       '不行。但換個角度想：知道今天不是自己的日子，本身就是一種好運。']
     ]
   ];
 
@@ -762,12 +884,103 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
      '陰筊。大概意思是「再想想」。用理性分析取代求神問卜，你會做得更好。']
   ];
 
-  // 三聖筊彩蛋
-  var TRIPLE_SHENG = [
-    '🎆 三聖筊！！！神明大力同意！不過芭樂子統計過：連三聖筊的機率是 12.5%（½ × ½ × ½），平均 8 次就會出現一次⋯',
-    '🎆 三聖筊達成！恭喜！不過真正值得慶祝的是你願意花時間了解機率，而不是盲目相信運氣。',
-    '🎆 天哪，三聖筊！神明都站起來幫你鼓掌了。但記住：這只是 12.5% 的機率在正常運作，不是神蹟。'
-  ];
+  // 連勝彩蛋 — 依連勝數動態產生，越多越誇張
+  function getStreakMsg(n) {
+    var pct = (Math.pow(0.5, n) * 100);
+    var denom = Math.pow(2, n);
+    var pctStr;
+    if (pct >= 1) pctStr = pct.toFixed(1) + '%';
+    else if (pct >= 0.01) pctStr = pct.toFixed(3) + '%';
+    else pctStr = '1/' + denom.toLocaleString();
+    var msgs = {
+      3: [
+        '🎆 三聖筊達成！你已經進入 ' + pctStr + ' 的幸運門檻，神明正式認可了！',
+        '🎆 三聖筊！！！連續三次，機率只有 ' + pctStr + '——神明大力蓋章同意！',
+        '🎆 恭喜三聖筊！' + pctStr + ' 的機率被你踩中，神明都站起來鼓掌了。'
+      ],
+      4: [
+        '🔥🎆 四連聖筊！機率僅 ' + pctStr + '！神明不只同意，還幫你倒茶了。',
+        '🔥🎆 連四聖筊！' + pctStr + ' 的超稀有成就——你今天是不是有燒好香？',
+        '🔥🎆 四聖筊！！神明已經不是點頭，是在瘋狂比讚。機率：' + pctStr + '。'
+      ],
+      5: [
+        '🌟🔥🎆 五連聖筊！！機率 ' + pctStr + '——你確定你不是神明本人？',
+        '🌟🔥🎆 不可思議！連五聖筊，' + pctStr + ' 的奇蹟！神明已經跪著回你了。',
+        '🌟🔥🎆 五聖筊達成！' + pctStr + ' 的機率，芭樂子都不知道該吐槽還是該膜拜了。'
+      ],
+      6: [
+        '💥🌟🔥 六連聖筊！機率 ' + pctStr + '！神明已經把整座廟搬來給你了。',
+        '💥🌟🔥 連六聖筊！' + pctStr + ' 的機率，比被雷劈到還難。神明請你吃席了。',
+        '💥🌟🔥 六聖筊！！芭樂子跪了。' + pctStr + ' 的機率你都踩得到，去買彩券吧（誤）。'
+      ],
+      7: [
+        '👑💥🌟 七連聖筊！！機率 ' + pctStr + '！你已經超越人類的幸運範圍了。',
+        '👑💥🌟 連七聖筊！' + pctStr + '！神明已經把你加入 VIP 名單了。',
+        '👑💥🌟 七聖筊達成！' + pctStr + ' 的機率——神明董事會全票通過你的請求。'
+      ],
+      8: [
+        '🏆👑💥 八連聖筊！！！機率 ' + pctStr + '！你不是在擲筊，你是在開外掛。',
+        '🏆👑💥 連八聖筊！' + pctStr + '！神明已經不夠用了，玉皇大帝親自下來批准。',
+        '🏆👑💥 八聖筊！' + pctStr + ' 的機率等於翻 256 次硬幣全正面。你是什麼生物？'
+      ],
+      9: [
+        '🐉🏆👑 九連聖筊！！機率 ' + pctStr + '！你的運氣可以去申請金氏世界紀錄了。',
+        '🐉🏆👑 連九聖筊！' + pctStr + '！天界已經為你開了專屬通道。',
+        '🐉🏆👑 九聖筊達成！' + pctStr + ' 的機率——連芭樂子的亂數都開始懷疑人生了。'
+      ],
+      10: [
+        '🌈🐉🏆 十連聖筊！！！機率 ' + pctStr + '！你已經不是凡人了，這是統計學上的奇蹟。',
+        '🌈🐉🏆 連十聖筊！' + pctStr + ' = 大約每 1024 人只有 1 個。你就是那個天選之人。',
+        '🌈🐉🏆 十聖筊！芭樂子正式宣布：你的手機可能有神力加持。機率：' + pctStr + '。'
+      ],
+      11: [
+        '⚡🌈🐉 十一連聖筊！機率 ' + pctStr + '！你擲的不是筊，是傳說。',
+        '⚡🌈🐉 連十一聖筊！' + pctStr + '！整個天庭已經列隊歡迎你了。'
+      ],
+      12: [
+        '🪐⚡🌈 十二連聖筊！！機率 ' + pctStr + '！比連續丟 12 次硬幣全正面還離譜。你是 bug 嗎？',
+        '🪐⚡🌈 連十二聖筊！' + pctStr + '！神明已經不是在回答你，是在追星你。'
+      ],
+      13: [
+        '☄️🪐⚡ 十三連聖筊！機率 ' + pctStr + '！芭樂子的程式碼開始自我懷疑了。',
+        '☄️🪐⚡ 連十三聖筊！' + pctStr + '！這個機率比中威力彩頭獎的 0.0000045% 還高一點，但也沒高多少⋯'
+      ],
+      14: [
+        '🌌☄️🪐 十四連聖筊！！機率 ' + pctStr + '！你的運氣已經可以被寫進論文了。',
+        '🌌☄️🪐 連十四聖筊！' + pctStr + '！神明已經退休了，現在是你在替祂上班。'
+      ],
+      15: [
+        '🕳️🌌☄️ 十五連聖筊！！！機率 ' + pctStr + '！地球上 80 億人同時擲筊，大概只有你一個人做到。',
+        '🕳️🌌☄️ 連十五聖筊！' + pctStr + '！芭樂子決定關機了，這已經超出統計學的服務範圍。'
+      ],
+      16: [
+        '🔮🕳️🌌 十六連聖筊！機率 ' + pctStr + '！你的存在本身就是一個統計異常。截圖吧，沒人會信。',
+        '🔮🕳️🌌 連十六聖筊！' + pctStr + '！如果這是真的，你應該去 NASA 報到而不是在這裡擲筊。'
+      ],
+      17: [
+        '🛸🔮🕳️ 十七連聖筊！機率 ' + pctStr + '！外星人已經在觀測你了。',
+        '🛸🔮🕳️ 連十七聖筊！' + pctStr + '！你打破了芭樂子認為不可能被打破的紀錄。'
+      ],
+      18: [
+        '🫠🛸🔮 十八連聖筊！！機率 ' + pctStr + '！芭樂子已經沒有形容詞可以用了。你贏了。',
+        '🫠🛸🔮 連十八聖筊！' + pctStr + '！這比同時被隕石砸到又中樂透的機率還低。你是誰？？？'
+      ],
+      19: [
+        '💀🫠🛸 十九連聖筊！機率 ' + pctStr + '！芭樂子的亂數產生器表示：「我盡力了。」',
+        '💀🫠🛸 連十九聖筊！' + pctStr + '！統計學已死，你把它埋了。R.I.P.'
+      ],
+      20: [
+        '🏴‍☠️💀🫠 二十連聖筊！！！機率 ' + pctStr + '！你已經不是在擲筊了，你在改寫宇宙的物理法則。芭樂子正式封你為「筊神」。',
+        '🏴‍☠️💀🫠 連二十聖筊！' + pctStr + '！每一百萬人同時擲 20 次，平均不到一個人做得到。你是那個人。封神。'
+      ]
+    };
+    // 21+ 通用模板
+    if (n > 20) {
+      return '🏴‍☠️💀🫠🌌 連 ' + n + ' 聖筊！！！機率 ' + pctStr + '！芭樂子已經無話可說了。你不是人，你是數學的例外。請截圖存證，這可能是人類史上最長的連續聖筊紀錄。';
+    }
+    var pool = msgs[n] || msgs[3];
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
 
   var RESULT_NAMES = ['聖筊', '笑筊', '陰筊'];
   var RESULT_DESC = [
@@ -779,6 +992,48 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   var LOG_CLASS = ['sheng', 'xiao', 'yin-badge'];
 
   // =================================================================
+  // localStorage helpers
+  // =================================================================
+  var STORAGE_KEY = 'bless_history_' + new Date().toISOString().slice(0,10);
+
+  function saveToStorage() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        throwCount: throwCount,
+        consecutiveSheng: consecutiveSheng,
+        logs: logs
+      }));
+    } catch(e) {}
+  }
+
+  function loadFromStorage() {
+    try {
+      var data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (data && data.throwCount) {
+        throwCount = data.throwCount;
+        consecutiveSheng = data.consecutiveSheng || 0;
+        logs = data.logs || [];
+        return true;
+      }
+    } catch(e) {}
+    return false;
+  }
+
+  // Clean up old days (keep only today)
+  function cleanOldStorage() {
+    try {
+      var today = STORAGE_KEY;
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (key && key.startsWith('bless_history_') && key !== today) {
+          localStorage.removeItem(key);
+          i--; // adjust index after removal
+        }
+      }
+    } catch(e) {}
+  }
+
+  // =================================================================
   // State
   // =================================================================
   var currentQ = 0;
@@ -787,34 +1042,35 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   var consecutiveSheng = 0;
   var logs = [];
   var isThrowing = false;
+  var lastResult = null; // for share card
 
   // =================================================================
   // DOM
   // =================================================================
-  var questionBtns = document.querySelectorAll('.bless-q');
-  var customInput = document.getElementById('customQ');
+  var questionSelect = document.getElementById('questionSelect');
   var throwBtn = document.getElementById('throwBtn');
   var againBtn = document.getElementById('againBtn');
   var block1 = document.getElementById('block1');
   var block2 = document.getElementById('block2');
-  var resultArea = document.getElementById('resultArea');
-  var hintText = document.getElementById('hintText');
+  var resultHeader = document.getElementById('resultHeader');
+  var resultFooter = document.getElementById('resultFooter');
+  var resultTypeEl = document.getElementById('resultType');
+  var resultDescEl = document.getElementById('resultDesc');
 
   // Question selection
-  questionBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      questionBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      currentQ = parseInt(btn.getAttribute('data-q'));
+  questionSelect.addEventListener('change', function() {
+    var val = questionSelect.value;
+    if (val === 'heart') {
+      isCustom = true;
+      currentQ = -1;
+    } else {
       isCustom = false;
-      customInput.value = '';
-    });
+      currentQ = parseInt(val);
+    }
   });
-
-  customInput.addEventListener('focus', function() {
-    questionBtns.forEach(function(b) { b.classList.remove('active'); });
-    isCustom = true;
-  });
+  // Default: 心裡告知 = custom mode
+  isCustom = true;
+  currentQ = -1;
 
   // =================================================================
   // Audio — 筊杯落地音效 (Web Audio API generated)
@@ -855,8 +1111,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     if (isThrowing) return;
     isThrowing = true;
     throwBtn.disabled = true;
-    resultArea.style.display = 'none';
-    hintText.textContent = '正在擲筊⋯';
+    resultFooter.style.display = 'none';
+    resultTypeEl.textContent = '🙏 正在擲筊⋯';
+    resultTypeEl.className = 'bless-result-type bless-pre-hint';
+    resultDescEl.textContent = '';
 
     var result = getResult();
 
@@ -878,27 +1136,32 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     block2.className = 'bless-block';
     inner1.className = 'block-inner';
     inner2.className = 'block-inner';
-
-    // Trigger reflow
     void block1.offsetWidth;
 
-    // Start throw animation
+    // 一段式動畫：下蹲 → 拋擲 → 頂點懸停 → 落地
     block1.classList.add('throwing');
     block2.classList.add('throwing-alt');
 
-    // Sound at "landing" moment (~70% of 1.2s = 840ms)
-    setTimeout(function() { playBlockSound(); }, 800);
-    setTimeout(function() { playBlockSound(); }, 880);
-
-    // Show result after animation
+    // 第一筊落地 (72% of 2.5s = 1800ms)
     setTimeout(function() {
+      playBlockSound();
+      if (navigator.vibrate) navigator.vibrate(40);
       block1.classList.add('landed');
+    }, 1800);
+
+    // 第二筊落地 (72% of 2.65s = 1908ms)
+    setTimeout(function() {
+      playBlockSound();
+      if (navigator.vibrate) navigator.vibrate(40);
       block2.classList.add('landed');
+    }, 1910);
+
+    // 顯示結果（兩筊穩定後）
+    setTimeout(function() {
       showResult(result);
       isThrowing = false;
       throwBtn.disabled = false;
-      hintText.textContent = '';
-    }, 1300);
+    }, 2700);
   }
 
   function showResult(result) {
@@ -917,7 +1180,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     else throwCount.yin++;
 
     // Get question text
-    var qText = isCustom ? (customInput.value.trim() || '自訂問題') : QUESTIONS[currentQ];
+    var qText = isCustom ? '心中默問' : QUESTIONS[currentQ];
 
     // Get reply
     var replies;
@@ -928,34 +1191,47 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
     var reply = replies[Math.floor(Math.random() * replies.length)];
 
-    // Display result
-    document.getElementById('resultType').textContent = RESULT_NAMES[type];
-    document.getElementById('resultType').className = 'bless-result-type ' + RESULT_CLASS[type];
-    document.getElementById('resultDesc').textContent = RESULT_DESC[type];
-    document.getElementById('resultQuote').textContent = '「' + reply + '」';
+    // Display result — swap header from hint to result
+    var resultQuoteEl = document.getElementById('resultQuote');
+    resultTypeEl.textContent = RESULT_NAMES[type];
+    resultTypeEl.className = 'bless-result-type ' + RESULT_CLASS[type];
+    resultDescEl.textContent = RESULT_DESC[type];
 
-    // Triple sheng easter egg
+    // Streak easter egg — 連 2+ 聖筊時取代普通回覆
     var streakArea = document.getElementById('streakArea');
     if (consecutiveSheng >= 3) {
-      var tripleMsg = TRIPLE_SHENG[Math.floor(Math.random() * TRIPLE_SHENG.length)];
+      var tripleMsg = getStreakMsg(consecutiveSheng);
       streakArea.textContent = tripleMsg;
       streakArea.style.display = 'block';
+      resultQuoteEl.style.display = 'none';
+      reply = tripleMsg;
     } else if (consecutiveSheng === 2) {
-      streakArea.textContent = '✨ 連兩聖筊！再一次就是三聖筊了⋯';
+      var pct = (Math.pow(0.5, 2) * 100).toFixed(0); // 25%
+      streakArea.textContent = '🔥 加油！你的好運已進入 ' + pct + '% 的門檻，再一筊聖筊，神明就答應了！';
       streakArea.style.display = 'block';
+      resultQuoteEl.style.display = 'none';
+      reply = '連兩聖筊！再一筊就是三聖筊了！';
     } else {
+      resultQuoteEl.textContent = '「' + reply + '」';
+      resultQuoteEl.style.display = 'block';
       streakArea.style.display = 'none';
     }
 
-    resultArea.style.display = 'block';
+    resultHeader.style.display = 'block';
+    resultFooter.style.display = 'block';
+    throwBtn.style.display = 'none';
 
     // Update log
     var now = new Date();
     var timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
     logs.unshift({ type: type, q: qText, time: timeStr });
 
+    // Save for share card
+    lastResult = { type: type, q: qText, reply: reply, streak: consecutiveSheng };
+
     updateStats();
     updateLog();
+    saveToStorage();
   }
 
   function updateStats() {
@@ -1012,8 +1288,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   throwBtn.addEventListener('click', doThrow);
 
   againBtn.addEventListener('click', function() {
-    resultArea.style.display = 'none';
-    hintText.textContent = '心中默念問題，然後按下「擲筊」';
+    resultFooter.style.display = 'none';
+    sharePanel.style.display = 'none';
+    shareToggle.textContent = '📤 分享結果';
+    throwBtn.style.display = '';
+    // Reset header back to pre-hint
+    resultTypeEl.textContent = '🙏 虔誠默念，準備好再擲';
+    resultTypeEl.className = 'bless-result-type bless-pre-hint';
+    resultDescEl.textContent = '';
     // Reset block visuals
     block1.className = 'bless-block';
     block2.className = 'bless-block';
@@ -1026,6 +1308,95 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     inner2.style.removeProperty('--final-x');
     inner2.style.removeProperty('--final-y');
   });
+
+  // =================================================================
+  // Share Panel (5 社群按鈕)
+  // =================================================================
+  var shareToggle = document.getElementById('shareToggle');
+  var sharePanel = document.getElementById('sharePanel');
+
+  shareToggle.addEventListener('click', function() {
+    if (sharePanel.style.display === 'none') {
+      sharePanel.style.display = 'block';
+      shareToggle.textContent = '✕ 收起';
+    } else {
+      sharePanel.style.display = 'none';
+      shareToggle.textContent = '📤 分享結果';
+    }
+  });
+
+  function getShareText() {
+    if (!lastResult) return { text: '來芭樂擲筊試試你的運氣！', url: 'https://game8la.com/tools/bless-blocks/' };
+    var labels = ['聖筊', '笑筊', '陰筊'];
+    var url = 'https://game8la.com/tools/bless-blocks/';
+    var text = '我在芭樂擲筊問「' + lastResult.q + '」擲到' + labels[lastResult.type] + '！';
+    if (lastResult.streak >= 3) text = '我在芭樂擲筊連 ' + lastResult.streak + ' 聖筊！！！';
+    text += ' #GAME8LA #芭樂擲筊';
+    return { text: text, url: url };
+  }
+
+  function openPopup(href) {
+    window.open(href, '_blank', 'width=640,height=560,noopener,noreferrer');
+  }
+
+  document.querySelectorAll('[data-bless-share]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var kind = btn.getAttribute('data-bless-share');
+      var d = getShareText();
+      var eUrl = encodeURIComponent(d.url);
+      var eText = encodeURIComponent(d.text);
+
+      if (kind === 'facebook') {
+        openPopup('https://www.facebook.com/sharer/sharer.php?u=' + eUrl + '&quote=' + eText);
+      } else if (kind === 'x') {
+        openPopup('https://twitter.com/intent/tweet?url=' + eUrl + '&text=' + eText);
+      } else if (kind === 'threads') {
+        openPopup('https://www.threads.net/intent/post?text=' + encodeURIComponent(d.text + ' ' + d.url));
+      } else if (kind === 'ig') {
+        navigator.clipboard.writeText(d.url).then(function() {
+          showToast('已複製連結！請貼到 IG 限動或私訊分享 📲');
+        }).catch(function() {
+          showToast('請手動複製：' + d.url);
+        });
+        setTimeout(function() { window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer'); }, 600);
+      } else if (kind === 'copy') {
+        navigator.clipboard.writeText(d.url).then(function() {
+          showToast('✅ 連結已複製到剪貼簿！');
+        }).catch(function() {
+          showToast('複製失敗，請手動複製：' + d.url);
+        });
+      }
+    });
+  });
+
+  function showToast(msg) {
+    var existing = document.querySelector('.bless-share-toast');
+    if (existing) existing.remove();
+    var toast = document.createElement('div');
+    toast.className = 'bless-share-toast';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() { toast.classList.add('show'); });
+    });
+    setTimeout(function() {
+      toast.classList.remove('show');
+      setTimeout(function() { toast.remove(); }, 300);
+    }, 2500);
+  }
+
+  // =================================================================
+  // Init: restore from localStorage
+  // =================================================================
+  cleanOldStorage();
+  if (loadFromStorage()) {
+    updateStats();
+    updateLog();
+    // Auto-open history if there are records
+    if (logs.length > 0) {
+      historyCard.classList.add('open');
+    }
+  }
 
 })();
 </script>

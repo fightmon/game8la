@@ -52,11 +52,6 @@
           <span class="fortune-lucky-label">威力彩</span>
           <span class="fortune-lucky-nums" id="fortunePower"></span>
         </div>
-        <div class="fortune-lucky-row">
-          <span class="fortune-lucky-label">539</span>
-          <span class="fortune-lucky-nums" id="fortune539"></span>
-        </div>
-        <p class="fortune-lucky-note">以上號碼純屬娛樂，中獎機率不會因此改變</p>
       </div>
 
       <div class="fortune-disclaimer">
@@ -377,13 +372,6 @@
     flex-wrap: wrap;
   }
 
-  .fortune-lucky-note {
-    font-size: 0.9rem;
-    color: #ddd;
-    margin: 10px 0 0;
-    text-align: center;
-  }
-
   /* 免責 */
   .fortune-disclaimer {
     font-size: 0.9rem;
@@ -403,8 +391,8 @@
       height: 48px;
     }
     .fortune-btn-text { font-size: 0.65rem; }
-    .fortune-card { width: 340px; min-height: 440px; }
-    .fortune-back { padding: 18px 20px; gap: 14px; }
+    .fortune-card { width: 340px; min-height: auto; }
+    .fortune-back { padding: 18px 20px; gap: 12px; max-height: calc(100dvh - 60px); overflow-y: auto; }
   }
 </style>
 
@@ -558,8 +546,6 @@
 
     var powerNums = luckyNums(rng, 38, 2);
     var powerSpecial = Math.floor(rng() * 8) + 1;
-    var nums539 = luckyNums(rng, 39, 2);
-
     // 日期格式
     var dateStr = now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate();
 
@@ -571,7 +557,6 @@
       quote: quote,
       power: powerNums,
       powerSpecial: powerSpecial,
-      n539: nums539
     };
   }
 
@@ -604,9 +589,6 @@
       numBall(f.powerSpecial, 'ball-special');
     document.getElementById('fortunePower').innerHTML = pH;
 
-    // 539號碼
-    var h539 = f.n539.map(function(n) { return numBall(n, 'ball-539'); }).join('');
-    document.getElementById('fortune539').innerHTML = h539;
   });
 
   // 點卡片翻牌
@@ -662,12 +644,6 @@
     background: rgba(255, 16, 240, 0.2);
     color: #FF10F0;
     border: 1px solid rgba(255, 16, 240, 0.4);
-  }
-
-  .ball-539 {
-    background: rgba(245, 184, 0, 0.2);
-    color: #f5b800;
-    border: 1px solid rgba(245, 184, 0, 0.4);
   }
 
   .fortune-ball-plus {

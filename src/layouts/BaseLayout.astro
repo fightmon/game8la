@@ -57,7 +57,7 @@ const {
     <!-- Google Analytics 4 (延後到首次互動或 3 秒後才載，改善 LCP/TBT) -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      window.gtag = function(){window.dataLayer.push(arguments);};
       (function(){
         var loaded = false;
         function loadGA(){
@@ -144,7 +144,7 @@ const {
     </main>
 
     <FooterBar />
-    <ReadingProgress />
+    {currentPage === 'articles' && <ReadingProgress />}
     <DailyFortune />
     <ScrollToTop />
 
@@ -158,9 +158,6 @@ const {
         item.classList.toggle('open');
       });
     </script>
-
-    <!-- Benchmark Email Newsletter Embed Script（全站共用，只載 1 次） -->
-    <script async src="https://forms.us.benchmarksend.com/assets/embed.js"></script>
   </body>
 </html>
 

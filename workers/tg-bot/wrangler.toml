@@ -8,7 +8,7 @@ crons = ["0 1 * * *"]
 
 [vars]
 # 群組 Chat ID（部署後用 /chatid 指令取得，再填入）
-TG_CHAT_ID = ""
+TG_CHAT_ID = "-1003943550023"
 # 網站 URL
 SITE_URL = "https://game8la.com"
 # 彩券 API

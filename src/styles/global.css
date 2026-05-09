@@ -391,10 +391,3 @@ code{background:var(--bg-secondary);padding:0.15rem 0.4rem;border-radius:4px;col
   .rank-thumb{width:100%;max-width:none;height:auto;aspect-ratio:auto;margin:0 auto}
   .rank-thumb img{width:100%;height:auto;object-fit:contain}
 }
-
-/* === Benchmark Email 表單全域覆寫 === */
-.newsletter-form-wrap .u_content_text div,
-.newsletter-cta [data-bme-form-id] .u_content_text div {
-  font-size: 16px !important;
-  line-height: 1.4 !important;
-}

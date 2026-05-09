@@ -22,13 +22,13 @@ const faqs = [
   { q: 'Game8la 寫這篇是在「唱衰 AT99」嗎？你們收錢了嗎？', a: '沒有。Game8la 整站<strong>拒絕任何娛樂城業配、推薦碼、NGR 抽成</strong>——這也是我們敢把這篇寫出來的底氣。這篇文章引用的是<strong>刑事警察局公開函文編號</strong>、《詐欺犯罪危害防制條例》明文條款、以及實際網域封鎖截圖，全部是<strong>可驗證的客觀事實</strong>。其他博弈資訊站不寫這篇不是不知道，是怕得罪金主。我們<strong>沒金主要顧慮</strong>，所以敢寫。' },
 ];
 import ToolBox from '../../components/ToolBox.astro';
-import NewsletterCTA from '../../components/NewsletterCTA.astro';
+
 ---
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/at99-blocked-analysis/"
-  title="【深度解析】AT99 遭刑事警察局封鎖！是詐騙還是金流漏洞？教你從「封鎖紅條」看懂博弈產業風險"
-  description="2026 年初 AT99 娛樂城（at99.com.tw）遭警政署刑事警察局依《詐欺犯罪危害防制條例》函令封鎖；隨即疑似換殼至 at99tw.com.tw 繼續營運。芭樂子從封鎖法源、金流異常徵兆、玩家求償機率、換殼黑網辨識、報案流程完整解析，附 4 大自查點。"
+  title="AT99娛樂城遭封鎖！「此網域已遭到封鎖」錢拿得回來嗎？完整自救指南"
+  description="AT99（at99.com.tw）被刑事警察局封鎖，新網址 at99tw 能信嗎？錢拿得回來嗎？法源拆解＋5步驟報案SOP＋換殼黑網辨識法。"
   image="https://game8la.com/images/articles/at99-cover.webp"
   datePublished="2026-04-15"
   dateModified="2026-04-15"
@@ -38,7 +38,7 @@ import NewsletterCTA from '../../components/NewsletterCTA.astro';
     { name: 'AT99 封鎖深度解析', url: 'https://game8la.com/articles/at99-blocked-analysis/' },
   ]}
 />
-<BaseLayout currentPage="articles" title="【深度解析】AT99 娛樂城遭刑事警察局封鎖！at99tw.com.tw 新網址是真的嗎？法源、金流、玩家求償完整拆解 - GAME8LA" description="2026 年初 AT99（at99.com.tw）遭詐欺犯罪防制中心依《詐欺犯罪危害防制條例》函令封鎖，隨即疑似換殼至 at99tw.com.tw。芭樂子中立拆解：為什麼被封？換殼新網址能玩嗎？錢拿得回來嗎？如何避免下一個 AT99？">
+<BaseLayout currentPage="articles" title="AT99娛樂城遭封鎖！「此網域已遭到封鎖」錢拿得回來嗎？完整自救指南 - GAME8LA" description="AT99（at99.com.tw）被刑事警察局封鎖，新網址 at99tw 能信嗎？錢拿得回來嗎？法源拆解＋5步驟報案SOP＋換殼黑網辨識法。">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; AT99 封鎖深度解析</div>
     <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
@@ -402,7 +402,7 @@ import NewsletterCTA from '../../components/NewsletterCTA.astro';
         </a>
       </div>
         <ToolBox preset="casino" />
-    <NewsletterCTA variant="article" />
+
 </article>
   </div>
 
