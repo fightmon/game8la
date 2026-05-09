@@ -8,7 +8,7 @@
 ---
 
 <!-- 浮動按鈕（TOP 上方） -->
-<button class="fortune-btn" id="fortuneBtn" type="button" aria-label="芭樂子今日運勢" title="今日運勢">
+<button class="fortune-btn" id="fortuneBtn" type="button" aria-label="game8la玩家今日運勢" title="今日運勢">
   <span class="fortune-btn-text">今日</span>
   <span class="fortune-btn-text">運勢</span>
 </button>
@@ -19,8 +19,8 @@
     <!-- 卡片正面（未翻） -->
     <div class="fortune-front" id="fortuneFront">
       <div class="fortune-front-glow"></div>
-      <span class="fortune-front-icon">🌿</span>
-      <p class="fortune-front-title">芭樂子今日運勢</p>
+      <img src="/images/fortune-qian.webp" alt="籤筒" class="fortune-front-icon-img" width="80" height="132" loading="lazy" />
+      <p class="fortune-front-title">game8la玩家今日運勢</p>
       <p class="fortune-front-sub">點擊翻牌</p>
     </div>
 
@@ -60,7 +60,7 @@
       </div>
 
       <div class="fortune-disclaimer">
-        本運勢純屬娛樂，芭樂子不保證農民曆能打敗機率。
+        本運勢純屬參考，芭樂子不保證農民曆能打敗機率。
       </div>
     </div>
   </div>
@@ -103,6 +103,17 @@
     color: #000;
     line-height: 1.15;
     display: block;
+    background: linear-gradient(90deg, #000, #39FF14, #FF10F0, #f5b800, #39FF14, #000);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fortuneTextShift 3s linear infinite;
+  }
+
+  @keyframes fortuneTextShift {
+    0% { background-position: 300% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   /* 放大縮小 + 呼吸光暈動畫 */
@@ -191,10 +202,12 @@
     50% { transform: scale(1.3); opacity: 1; }
   }
 
-  .fortune-front-icon {
-    font-size: 3.5rem;
+  .fortune-front-icon-img {
+    width: 80px;
+    height: auto;
     position: relative;
     z-index: 1;
+    filter: drop-shadow(0 0 12px rgba(57, 255, 20, 0.4));
   }
 
   .fortune-front-title {

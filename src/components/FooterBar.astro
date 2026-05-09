@@ -38,13 +38,14 @@ import Icon from './Icon.astro';
       <a href="https://docs.google.com/forms/d/1UhHI6PBNmH3BMSi9SMa02u2z9_xc8Yhn8Nl2Z67G5y0/viewform" target="_blank" rel="noopener">問題回報 / 合作提案</a>
     </div>
 
-    <!-- Newsletter Column -->
-    <div class="footer-col footer-col-newsletter">
-      <h4>訂閱芭樂子電子報</h4>
-      <p class="newsletter-sub">每週博弈防詐 + 樂透分析，鐵粉先看獨家</p>
-      <div class="newsletter-form-wrap">
-        <div data-bme-form-id="WOZykcfC7_M7Dzy1vRYjr"></div>
-      </div>
+    <!-- TG Group Column -->
+    <div class="footer-col footer-col-tg">
+      <h4>加入 Game8la TG 討論群</h4>
+      <p class="tg-sub">老虎機實測、攻略討論、詐騙預警，玩家即時交流</p>
+      <a href="https://t.me/game8la" target="_blank" rel="noopener" class="tg-qr-link">
+        <img src="/images/tg-qr.webp" alt="Game8la Telegram QR Code" width="280" height="335" loading="lazy" class="tg-qr-img" />
+      </a>
+      <a href="https://t.me/game8la" target="_blank" rel="noopener" class="tg-join-btn">立即加入 t.me/game8la</a>
     </div>
   </div>
 
@@ -212,32 +213,47 @@ import Icon from './Icon.astro';
     color: #39FF14 !important;
   }
 
-  /* === Newsletter Column === */
-  .footer-col-newsletter h4 {
+  /* === TG Group Column === */
+  .footer-col-tg h4 {
     color: var(--guava-green);
     font-size: 0.95rem;
   }
 
-  .newsletter-sub {
+  .tg-sub {
     font-size: 0.8rem;
     color: var(--text-secondary);
-    margin: 0 0 0.6rem;
+    margin: 0 0 0.8rem;
     line-height: 1.4;
   }
 
-  .newsletter-form-wrap {
-    filter: invert(0.88) hue-rotate(180deg);
-    border-radius: 6px;
-    overflow: hidden;
-    transform: scale(0.72);
-    transform-origin: top left;
-    width: calc(100% / 0.72);
-    margin-bottom: -60px;
+  .tg-qr-link {
+    display: block;
+    max-width: 180px;
+    margin-bottom: 0.8rem;
   }
 
-  .newsletter-form-wrap :global(.u_content_text div) {
-    font-size: 16px !important;
-    line-height: 1.4 !important;
+  .tg-qr-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .tg-join-btn {
+    display: block;
+    text-align: center;
+    padding: 0.55rem 0.8rem;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(57,255,20,0.12), rgba(255,215,0,0.08));
+    border: 1px solid rgba(57,255,20,0.3);
+    color: var(--gold-light, #f5d78e);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .tg-join-btn:hover {
+    box-shadow: 0 4px 15px rgba(57,255,20,0.2);
   }
 
   /* === RESPONSIVE === */
@@ -251,10 +267,6 @@ import Icon from './Icon.astro';
     .footer-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
-    }
-
-    .newsletter-form-wrap {
-      transform: scale(1);
     }
 
     .trust-badge { flex-wrap: wrap; padding: 0.9rem 1rem; }
