@@ -1,0 +1,1033 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  currentPage="tools"
+  title="芭樂擲筊｜線上擲筊求籤，神明 × 機率的終極對決 - GAME8LA"
+  description="免費線上擲筊！選擇你的問題，擲出筊杯看神明怎麼說——再聽芭樂子用機率打臉。內建聖筊/陰筊/笑筊 3D 動畫，連三聖筊有彩蛋。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="bless-hero">
+    <h1>🥢 芭樂擲筊</h1>
+    <p class="bless-slogan">求神不如求數據，但偶爾擲個筊也不錯。</p>
+    <p class="bless-desc">選一個問題、心裡默念、然後擲筊。神明給答案，芭樂子給吐槽。</p>
+  </div>
+
+  <!-- 問題選擇區 -->
+  <div class="bless-section">
+    <h2 class="bless-section-title">🙏 先想好你的問題</h2>
+    <div class="bless-questions" id="questionList">
+      <button class="bless-q active" data-q="0">今天適合買彩券嗎？</button>
+      <button class="bless-q" data-q="1">這個娛樂城能信嗎？</button>
+      <button class="bless-q" data-q="2">我的投注策略對嗎？</button>
+      <button class="bless-q" data-q="3">今天會有財運嗎？</button>
+      <button class="bless-q" data-q="4">該不該加碼？</button>
+      <button class="bless-q" data-q="5">我該收手了嗎？</button>
+    </div>
+    <div class="bless-custom-wrap">
+      <input type="text" id="customQ" class="bless-custom-input" placeholder="或自己輸入問題⋯" maxlength="40" />
+    </div>
+  </div>
+
+  <!-- 擲筊互動區 -->
+  <div class="bless-arena" id="arena">
+    <!-- 筊杯 SVG ×2 -->
+    <div class="bless-blocks-wrap" id="blocksWrap">
+      <div class="bless-block" id="block1">
+        <div class="block-inner">
+          <div class="block-face block-yang">
+            <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="woodYang1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d4a056"/>
+                  <stop offset="50%" stop-color="#b8860b"/>
+                  <stop offset="100%" stop-color="#8B6914"/>
+                </linearGradient>
+              </defs>
+              <path d="M10,45 Q10,5 50,5 Q90,5 90,45 Z" fill="url(#woodYang1)" stroke="#7a5a1e" stroke-width="1.5"/>
+              <path d="M20,42 Q20,14 50,14 Q80,14 80,42" fill="none" stroke="#c9983a" stroke-width="0.8" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="block-face block-yin">
+            <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="woodYin1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#a07030"/>
+                  <stop offset="50%" stop-color="#8B6914"/>
+                  <stop offset="100%" stop-color="#704c14"/>
+                </linearGradient>
+              </defs>
+              <rect x="5" y="2" width="90" height="16" rx="3" fill="url(#woodYin1)" stroke="#5a3e10" stroke-width="1.5"/>
+              <line x1="15" y1="10" x2="85" y2="10" stroke="#9a7a3a" stroke-width="0.6" opacity="0.3"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="bless-block" id="block2">
+        <div class="block-inner">
+          <div class="block-face block-yang">
+            <svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="woodYang2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d4a056"/>
+                  <stop offset="50%" stop-color="#b8860b"/>
+                  <stop offset="100%" stop-color="#8B6914"/>
+                </linearGradient>
+              </defs>
+              <path d="M10,45 Q10,5 50,5 Q90,5 90,45 Z" fill="url(#woodYang2)" stroke="#7a5a1e" stroke-width="1.5"/>
+              <path d="M20,42 Q20,14 50,14 Q80,14 80,42" fill="none" stroke="#c9983a" stroke-width="0.8" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="block-face block-yin">
+            <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="woodYin2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#a07030"/>
+                  <stop offset="50%" stop-color="#8B6914"/>
+                  <stop offset="100%" stop-color="#704c14"/>
+                </linearGradient>
+              </defs>
+              <rect x="5" y="2" width="90" height="16" rx="3" fill="url(#woodYin2)" stroke="#5a3e10" stroke-width="1.5"/>
+              <line x1="15" y1="10" x2="85" y2="10" stroke="#9a7a3a" stroke-width="0.6" opacity="0.3"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="bless-throw-btn" id="throwBtn" type="button">
+      擲筊
+    </button>
+
+    <p class="bless-hint" id="hintText">心中默念問題，然後按下「擲筊」</p>
+  </div>
+
+  <!-- 結果區 -->
+  <div class="bless-result" id="resultArea" style="display:none">
+    <div class="bless-result-type" id="resultType"></div>
+    <div class="bless-result-desc" id="resultDesc"></div>
+    <div class="bless-result-quote" id="resultQuote"></div>
+    <div class="bless-streak" id="streakArea" style="display:none"></div>
+    <button class="bless-again-btn" id="againBtn" type="button">再擲一次</button>
+  </div>
+
+  <!-- 今日紀錄（可收合卡片） -->
+  <div class="bless-history">
+    <button class="history-toggle" id="historyToggle" type="button">
+      <span class="history-toggle-left">
+        <span class="history-toggle-icon">📜</span>
+        <span class="history-toggle-label">今日擲筊紀錄</span>
+      </span>
+      <span class="history-toggle-right">
+        <span class="history-badge" id="historyBadge">0 次</span>
+        <span class="history-chevron" id="historyChevron">▼</span>
+      </span>
+    </button>
+    <div class="history-body" id="historyBody">
+      <div class="bless-stats" id="statsArea">
+        <span class="stat-item stat-sheng">聖筊 <strong id="statSheng">0</strong></span>
+        <span class="stat-item stat-xiao">笑筊 <strong id="statXiao">0</strong></span>
+        <span class="stat-item stat-yin">陰筊 <strong id="statYin">0</strong></span>
+        <span class="stat-item stat-total">共 <strong id="statTotal">0</strong> 次</span>
+      </div>
+      <div class="bless-log" id="logArea">
+        <p class="bless-log-empty">還沒擲過筊，試試看吧！</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 導流 CTA -->
+  <div class="bless-cta-bar">
+    <p>🌿 擲筊問天不如看數據問芭樂子</p>
+    <div class="bless-cta-links">
+      <a href="/lottery/analysis/" class="bless-cta-link">🔢 樂透冷數據專區</a>
+      <a href="/casino-check/" class="bless-cta-link">🛡️ 娛樂城體檢</a>
+      <a href="/tools/" class="bless-cta-link">🔧 更多工具</a>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:2rem 0">
+    <a href="/tools/" class="btn-outline">&larr; 回工具箱</a>
+  </div>
+</div>
+
+<!-- ===== FAQ Schema ===== -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "線上擲筊準嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "擲筊是一種民俗信仰活動，線上版本使用隨機數產生器模擬結果，結果純屬娛樂。跟實體擲筊一樣，每次擲出聖筊的機率約為 50%。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什麼是聖筊、陰筊、笑筊？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "聖筊（一陰一陽）代表神明同意；陰筊（兩面都是陰面朝上）代表神明不同意；笑筊（兩面都是陽面朝上）代表神明覺得問題不清楚或在笑。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "擲筊可以連擲幾次？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "傳統上會連擲三次，三次都是聖筊（三聖筊）代表神明強烈同意。本工具不限次數，但芭樂子建議：連擲三次以上還不是聖筊，大概是神明在暗示你想清楚。"
+      }
+    }
+  ]
+})} />
+
+<style>
+  /* === HERO === */
+  .bless-hero {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+  }
+  .bless-hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .bless-slogan {
+    color: var(--guava-green, #39FF14);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .bless-desc {
+    color: #bbb;
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* === SECTIONS === */
+  .bless-section {
+    max-width: 600px;
+    margin: 2rem auto;
+  }
+  .bless-section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #eee;
+  }
+
+  /* === QUESTIONS === */
+  .bless-questions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .bless-q {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid #333;
+    border-radius: 10px;
+    color: #ddd;
+    font-size: 1rem;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .bless-q:hover {
+    border-color: var(--guava-green, #39FF14);
+    color: #fff;
+  }
+  .bless-q.active {
+    border-color: var(--guava-green, #39FF14);
+    background: rgba(57,255,20,0.1);
+    color: var(--guava-green, #39FF14);
+    font-weight: 700;
+  }
+  .bless-custom-wrap {
+    max-width: 400px;
+    margin: 12px auto 0;
+  }
+  .bless-custom-input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid #333;
+    border-radius: 10px;
+    color: #eee;
+    font-size: 1rem;
+    padding: 10px 16px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .bless-custom-input:focus {
+    border-color: var(--guava-green, #39FF14);
+  }
+  .bless-custom-input::placeholder {
+    color: #666;
+  }
+
+  /* === ARENA === */
+  .bless-arena {
+    max-width: 500px;
+    margin: 2rem auto;
+    text-align: center;
+    padding: 2rem 1rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: 16px;
+    border: 1px solid #2a2a2a;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  /* === JIAO BEI (BLOCKS) === */
+  .bless-blocks-wrap {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    perspective: 600px;
+    min-height: 140px;
+  }
+  .bless-block {
+    width: 100px;
+    height: 70px;
+    position: relative;
+  }
+  .block-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+  }
+  .block-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .block-face svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  }
+  .block-yang {
+    transform: rotateX(0deg);
+  }
+  .block-yin {
+    transform: rotateX(180deg);
+  }
+  /* Show yin face (flat side up) */
+  .block-inner.show-yin {
+    transform: rotateX(180deg);
+  }
+  /* Show yang face (curved side up) - default */
+  .block-inner.show-yang {
+    transform: rotateX(0deg);
+  }
+
+  /* Throwing animation */
+  .bless-block.throwing .block-inner {
+    animation: blockThrow 1.2s ease-out forwards;
+  }
+  .bless-block.throwing-alt .block-inner {
+    animation: blockThrowAlt 1.2s ease-out forwards;
+  }
+
+  @keyframes blockThrow {
+    0% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+    15% { transform: translateY(-120px) rotateX(180deg) rotateY(40deg); }
+    30% { transform: translateY(-150px) rotateX(360deg) rotateY(80deg); }
+    50% { transform: translateY(-80px) rotateX(540deg) rotateY(120deg); }
+    70% { transform: translateY(0px) rotateX(var(--final-x)) rotateY(var(--final-y)); }
+    85% { transform: translateY(-15px) rotateX(var(--final-x)) rotateY(var(--final-y)); }
+    95% { transform: translateY(3px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1.02); }
+    100% { transform: translateY(0) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1); }
+  }
+
+  @keyframes blockThrowAlt {
+    0% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+    15% { transform: translateY(-130px) rotateX(-200deg) rotateY(-50deg); }
+    30% { transform: translateY(-140px) rotateX(-380deg) rotateY(-90deg); }
+    50% { transform: translateY(-60px) rotateX(-520deg) rotateY(-130deg); }
+    70% { transform: translateY(0px) rotateX(var(--final-x)) rotateY(var(--final-y)); }
+    85% { transform: translateY(-12px) rotateX(var(--final-x)) rotateY(var(--final-y)); }
+    95% { transform: translateY(3px) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1.02); }
+    100% { transform: translateY(0) rotateX(var(--final-x)) rotateY(var(--final-y)) scale(1); }
+  }
+
+  /* Landing glow */
+  .bless-block.landed::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(57,255,20,0.3), transparent 70%);
+    animation: glowPulse 1s ease-out;
+  }
+
+  @keyframes glowPulse {
+    0% { opacity: 1; transform: translateX(-50%) scale(1.3); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.8); }
+  }
+
+  /* === THROW BUTTON === */
+  .bless-throw-btn {
+    background: linear-gradient(135deg, #b8860b, #d4a056);
+    border: 2px solid #c9983a;
+    color: #1a1a1a;
+    font-size: 1.3rem;
+    font-weight: 800;
+    padding: 14px 50px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 15px rgba(184,134,11,0.3);
+  }
+  .bless-throw-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(184,134,11,0.4);
+    background: linear-gradient(135deg, #d4a056, #e8b96a);
+  }
+  .bless-throw-btn:active {
+    transform: translateY(1px);
+  }
+  .bless-throw-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .bless-hint {
+    color: #888;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  /* === RESULT === */
+  .bless-result {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    border: 1px solid #2a2a2a;
+  }
+  .bless-result-type {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .bless-result-type.sheng { color: var(--guava-green, #39FF14); }
+  .bless-result-type.xiao { color: #f5b800; }
+  .bless-result-type.yin-result { color: #FF10F0; }
+
+  .bless-result-desc {
+    font-size: 1.05rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+  }
+  .bless-result-quote {
+    background: rgba(57,255,20,0.05);
+    border-left: 3px solid var(--guava-green, #39FF14);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: #fff;
+    font-style: italic;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  .bless-streak {
+    background: linear-gradient(135deg, rgba(57,255,20,0.15), rgba(255,16,240,0.1));
+    border: 2px solid var(--guava-green, #39FF14);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--guava-green, #39FF14);
+    animation: streakGlow 1.5s ease-in-out infinite;
+  }
+  @keyframes streakGlow {
+    0%,100% { box-shadow: 0 0 10px rgba(57,255,20,0.3); }
+    50% { box-shadow: 0 0 25px rgba(57,255,20,0.6); }
+  }
+
+  .bless-again-btn {
+    background: transparent;
+    border: 1.5px solid #555;
+    color: #ccc;
+    font-size: 1rem;
+    padding: 10px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .bless-again-btn:hover {
+    border-color: var(--guava-green, #39FF14);
+    color: #fff;
+  }
+
+  /* === HISTORY (collapsible card) === */
+  .bless-history {
+    max-width: 500px;
+    margin: 2rem auto;
+    border: 1px solid #333;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-card, rgba(255,255,255,0.03));
+  }
+  .history-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: none;
+    border: none;
+    color: #eee;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+  .history-toggle:hover { background: rgba(255,255,255,0.04); }
+  .history-toggle-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+  .history-toggle-icon { font-size: 1.1rem; }
+  .history-toggle-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .history-badge {
+    font-size: 0.8rem;
+    color: #999;
+    background: rgba(255,255,255,0.06);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .history-chevron {
+    font-size: 0.7rem;
+    color: #888;
+    transition: transform 0.3s;
+  }
+  .bless-history.open .history-chevron { transform: rotate(180deg); }
+  .history-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 18px;
+  }
+  .bless-history.open .history-body {
+    max-height: 500px;
+    padding: 0 18px 16px;
+  }
+  .bless-stats {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .stat-item {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    color: #bbb;
+  }
+  .stat-item strong {
+    font-size: 1.2rem;
+    margin-left: 4px;
+  }
+  .stat-sheng strong { color: var(--guava-green, #39FF14); }
+  .stat-xiao strong { color: #f5b800; }
+  .stat-yin strong { color: #FF10F0; }
+  .stat-total strong { color: #fff; }
+
+  .bless-log {
+    max-height: 250px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .bless-log-empty {
+    color: #666;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+  .bless-log-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #ccc;
+  }
+  .log-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .log-badge.sheng { background: rgba(57,255,20,0.15); color: #39FF14; }
+  .log-badge.xiao { background: rgba(245,184,0,0.15); color: #f5b800; }
+  .log-badge.yin-badge { background: rgba(255,16,240,0.12); color: #FF10F0; }
+  .log-q { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .log-time { color: #666; font-size: 0.8rem; flex-shrink: 0; }
+
+  /* === CTA BAR === */
+  .bless-cta-bar {
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(57,255,20,0.04);
+    border: 1px solid rgba(57,255,20,0.15);
+    border-radius: 12px;
+  }
+  .bless-cta-bar p {
+    margin: 0 0 1rem;
+    color: #ccc;
+    font-size: 1rem;
+  }
+  .bless-cta-links {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .bless-cta-link {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #ddd;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .bless-cta-link:hover {
+    border-color: var(--guava-green, #39FF14);
+    color: #fff;
+  }
+
+  /* === RWD === */
+  @media (max-width: 768px) {
+    .bless-hero { padding: 1.2rem 1rem 0.5rem; }
+    .bless-hero h1 { font-size: 1.6rem; margin-bottom: 0.3rem; }
+    .bless-slogan { font-size: 1rem; margin-bottom: 0.3rem; }
+    .bless-desc { font-size: 0.9rem; line-height: 1.5; }
+    .bless-section { margin: 1rem auto; }
+    .bless-section-title { font-size: 1.05rem; margin-bottom: 0.7rem; }
+    .bless-blocks-wrap { gap: 24px; }
+    .bless-block { width: 80px; height: 56px; }
+    .bless-throw-btn { font-size: 1.1rem; padding: 12px 36px; }
+    .bless-q { font-size: 0.9rem; padding: 8px 14px; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  // =================================================================
+  // 芭樂子吐槽素材池
+  // =================================================================
+  var QUESTIONS = [
+    '今天適合買彩券嗎？',
+    '這個娛樂城能信嗎？',
+    '我的投注策略對嗎？',
+    '今天會有財運嗎？',
+    '該不該加碼？',
+    '我該收手了嗎？'
+  ];
+
+  // REPLIES[questionIndex][resultType] = array of strings
+  // resultType: 0=聖筊, 1=笑筊, 2=陰筊
+  var REPLIES = [
+    // Q0: 今天適合買彩券嗎？
+    [
+      ['神明點頭了，但芭樂子提醒你：神明沒說中多少，統一發票 200 元也算中。',
+       '聖筊！不過中獎機率還是 1/22,085,448，神明也改不了這個數字。',
+       '好的，神明同意了。記得只買一注就好，剩下的錢拿去吃滷肉飯。'],
+      ['神明笑了，意思可能是：「你每次都問，我都不知道怎麼回答了。」',
+       '笑筊——神明覺得你問這個問題本身就很有娛樂性。',
+       '神明在笑。不是笑你會中，是笑你真的相信會中。'],
+      ['陰筊。神明搖頭了。芭樂子翻譯：今天把錢省下來吧。',
+       '不同意。連神明都不看好，你還有什麼理由下注？',
+       '神明說不行。不過就算祂說行，期望值也是負的，你知道的。']
+    ],
+    // Q1: 這個娛樂城能信嗎？
+    [
+      ['聖筊，但芭樂子建議你還是去查 165 黑名單比較實際。神明管香火，不管你的存款。',
+       '神明勉強同意了，不過祂也沒去玩過。先用娛樂城體檢工具查一下吧。',
+       '聖筊。但神明的判斷標準跟資安專家不太一樣，建議雙重驗證。'],
+      ['笑筊。神明表示：「你自己心裡有答案了吧？」',
+       '神明笑了——大概是看到那個娛樂城的「保證出金」廣告也想笑。',
+       '笑筊。神明拒絕回答，可能是怕背書之後你來找祂退錢。'],
+      ['連神明都搖頭了，你還要信？快去查 165 黑名單。',
+       '陰筊。神明的意思很明確：不要碰。',
+       '不行。如果一個娛樂城連神明都不認可，你應該很清楚了。']
+    ],
+    // Q2: 我的投注策略對嗎？
+    [
+      ['聖筊！不過神明看不懂期望值公式，建議你再用芭樂子的工具跑一次數據。',
+       '神明同意了，但數學不會因為聖筊就改變。RTP 歸 RTP。',
+       '好的，神明覺得可以。芭樂子覺得你至少有在思考策略，這已經贏過 90% 的人了。'],
+      ['笑筊。神明覺得你的「策略」很有趣——但有趣跟有效是兩回事。',
+       '神明笑了，可能是因為你的策略跟「感覺今天會中」差不多。',
+       '笑筊——策略好不好不要問神明，去跑蒙地卡羅模擬。'],
+      ['陰筊。神明建議你重新想想。芭樂子也是。',
+       '不行。但好消息是，你願意先問就表示你還有救。',
+       '神明否決了。也許是時候停下來看看資金管理計算器了。']
+    ],
+    // Q3: 今天會有財運嗎？
+    [
+      ['聖筊！但財運的定義很廣——撿到 10 元也算。不要想太多。',
+       '神明說有。芭樂子翻譯：今天可能省下一筆不該花的錢，這也是財運。',
+       '有！比如說你看了芭樂子的文章，省了一筆被騙的錢——這就是最大的財運。'],
+      ['笑筊。神明表示：「你的財運取決於你今天有沒有亂花錢。」',
+       '神明笑了。財運這種東西，問神不如看存摺。',
+       '笑筊——神明覺得「財運」這個概念本身就很好笑。'],
+      ['陰筊。今天沒有財運。但也沒有破財運——前提是你不要主動去送錢。',
+       '神明說沒有。換個角度想：不虧就是賺。',
+       '沒有。但芭樂子說：不買就不會輸，不輸就是最大的財運。']
+    ],
+    // Q4: 該不該加碼？
+    [
+      ['聖筊⋯但芭樂子必須說：神明如果自己會玩，祂也不會住在廟裡。請三思。',
+       '神明同意了。但你確定你的停損點設好了嗎？',
+       '聖筊。如果你已經在賺，小額加碼問題不大。但超過預算就不行了。'],
+      ['笑筊。神明覺得你問這題的時候心裡已經想加碼了。',
+       '神明笑了——祂大概想說：「你來問我就是希望我說好吧？」',
+       '笑筊。問加碼這件事本身就代表你可能不太確定，而不確定的時候不該加碼。'],
+      ['不該。連神明都不同意，你的數學更不會同意。',
+       '陰筊，非常明確。停損不是認輸，是保護自己。',
+       '神明搖頭了。追殺回本從來不是好策略，這是芭樂子說的第一定律。']
+    ],
+    // Q5: 我該收手了嗎？
+    [
+      ['聖筊。但你會來問這個問題，心裡大概已經有答案了。聽自己的吧。',
+       '神明同意你收手。而且芭樂子也同意。見好就收是智慧。',
+       '聖筊。能問出「該不該收手」的人，通常都是對的。收吧。'],
+      ['笑筊。神明表示：「你明知道該收手，為什麼還來問我？」',
+       '神明笑了——大概是看到你內心的掙扎覺得很可愛。收手吧。',
+       '笑筊。但芭樂子覺得笑筊在這題等於聖筊——你心裡早就有答案了。'],
+      ['陰筊⋯所以神明覺得你不該收手？這題比較特殊。也許是還不到時候——但絕對不是叫你加碼。',
+       '有趣的結果。陰筊在「該不該收手」通常代表神明覺得你還有別的事沒想清楚。',
+       '神明說現在不用急著收。但芭樂子提醒：這不代表「繼續加碼」，而是「想清楚再決定」。']
+    ]
+  ];
+
+  // 自訂問題的通用回覆
+  var GENERIC_REPLIES = [
+    ['聖筊！神明同意了。不過芭樂子提醒你：做決定還是要看數據，不是看筊。',
+     '聖筊。好的開始！但記住：聖筊的機率本來就是 50%，不要太興奮。',
+     '神明點頭了。希望你問的是值得問的問題，而不是「今天晚餐吃什麼」。'],
+    ['笑筊。神明覺得你的問題很有趣——或是祂覺得你在搞笑。',
+     '笑筊。也許你的問題需要更具體一點，神明也需要明確的方向。',
+     '神明笑了。這不是好也不是壞，就是⋯笑了。你自己體會。'],
+    ['陰筊。神明不同意。但別太在意——重要的決定不應該交給擲筊。',
+     '不行。神明搖頭了。考慮換個方向吧。',
+     '陰筊。大概意思是「再想想」。用理性分析取代求神問卜，你會做得更好。']
+  ];
+
+  // 三聖筊彩蛋
+  var TRIPLE_SHENG = [
+    '🎆 三聖筊！！！神明大力同意！不過芭樂子統計過：連三聖筊的機率是 12.5%（½ × ½ × ½），平均 8 次就會出現一次⋯',
+    '🎆 三聖筊達成！恭喜！不過真正值得慶祝的是你願意花時間了解機率，而不是盲目相信運氣。',
+    '🎆 天哪，三聖筊！神明都站起來幫你鼓掌了。但記住：這只是 12.5% 的機率在正常運作，不是神蹟。'
+  ];
+
+  var RESULT_NAMES = ['聖筊', '笑筊', '陰筊'];
+  var RESULT_DESC = [
+    '一陰一陽——神明同意了',
+    '兩陽朝上——神明在笑',
+    '兩陰朝上——神明不同意'
+  ];
+  var RESULT_CLASS = ['sheng', 'xiao', 'yin-result'];
+  var LOG_CLASS = ['sheng', 'xiao', 'yin-badge'];
+
+  // =================================================================
+  // State
+  // =================================================================
+  var currentQ = 0;
+  var isCustom = false;
+  var throwCount = { sheng: 0, xiao: 0, yin: 0 };
+  var consecutiveSheng = 0;
+  var logs = [];
+  var isThrowing = false;
+
+  // =================================================================
+  // DOM
+  // =================================================================
+  var questionBtns = document.querySelectorAll('.bless-q');
+  var customInput = document.getElementById('customQ');
+  var throwBtn = document.getElementById('throwBtn');
+  var againBtn = document.getElementById('againBtn');
+  var block1 = document.getElementById('block1');
+  var block2 = document.getElementById('block2');
+  var resultArea = document.getElementById('resultArea');
+  var hintText = document.getElementById('hintText');
+
+  // Question selection
+  questionBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      questionBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentQ = parseInt(btn.getAttribute('data-q'));
+      isCustom = false;
+      customInput.value = '';
+    });
+  });
+
+  customInput.addEventListener('focus', function() {
+    questionBtns.forEach(function(b) { b.classList.remove('active'); });
+    isCustom = true;
+  });
+
+  // =================================================================
+  // Audio — 筊杯落地音效 (Web Audio API generated)
+  // =================================================================
+  var audioCtx = null;
+  function playBlockSound() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      // 木頭撞擊音：短促的低頻 + 噪音
+      var duration = 0.12;
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + duration);
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + duration);
+    } catch(e) {}
+  }
+
+  // =================================================================
+  // Throw logic
+  // =================================================================
+  function getResult() {
+    // 聖筊=50%, 笑筊=25%, 陰筊=25% (realistic distribution)
+    var b1 = Math.random() < 0.5 ? 0 : 1; // 0=yang, 1=yin
+    var b2 = Math.random() < 0.5 ? 0 : 1;
+    if (b1 !== b2) return { type: 0, b1: b1, b2: b2 }; // 聖筊
+    if (b1 === 0) return { type: 1, b1: 0, b2: 0 };    // 笑筊 (both yang)
+    return { type: 2, b1: 1, b2: 1 };                    // 陰筊 (both yin)
+  }
+
+  function doThrow() {
+    if (isThrowing) return;
+    isThrowing = true;
+    throwBtn.disabled = true;
+    resultArea.style.display = 'none';
+    hintText.textContent = '正在擲筊⋯';
+
+    var result = getResult();
+
+    // Set final rotation for CSS animation
+    // b=0 (yang up) → rotateX(0), b=1 (yin up) → rotateX(180deg)
+    var finalX1 = result.b1 === 0 ? '0deg' : '180deg';
+    var finalX2 = result.b2 === 0 ? '0deg' : '180deg';
+
+    var inner1 = block1.querySelector('.block-inner');
+    var inner2 = block2.querySelector('.block-inner');
+
+    inner1.style.setProperty('--final-x', finalX1);
+    inner1.style.setProperty('--final-y', '0deg');
+    inner2.style.setProperty('--final-x', finalX2);
+    inner2.style.setProperty('--final-y', '0deg');
+
+    // Reset
+    block1.className = 'bless-block';
+    block2.className = 'bless-block';
+    inner1.className = 'block-inner';
+    inner2.className = 'block-inner';
+
+    // Trigger reflow
+    void block1.offsetWidth;
+
+    // Start throw animation
+    block1.classList.add('throwing');
+    block2.classList.add('throwing-alt');
+
+    // Sound at "landing" moment (~70% of 1.2s = 840ms)
+    setTimeout(function() { playBlockSound(); }, 800);
+    setTimeout(function() { playBlockSound(); }, 880);
+
+    // Show result after animation
+    setTimeout(function() {
+      block1.classList.add('landed');
+      block2.classList.add('landed');
+      showResult(result);
+      isThrowing = false;
+      throwBtn.disabled = false;
+      hintText.textContent = '';
+    }, 1300);
+  }
+
+  function showResult(result) {
+    var type = result.type; // 0=聖, 1=笑, 2=陰
+
+    // Update streak
+    if (type === 0) {
+      consecutiveSheng++;
+    } else {
+      consecutiveSheng = 0;
+    }
+
+    // Update counts
+    if (type === 0) throwCount.sheng++;
+    else if (type === 1) throwCount.xiao++;
+    else throwCount.yin++;
+
+    // Get question text
+    var qText = isCustom ? (customInput.value.trim() || '自訂問題') : QUESTIONS[currentQ];
+
+    // Get reply
+    var replies;
+    if (isCustom || currentQ >= REPLIES.length) {
+      replies = GENERIC_REPLIES[type];
+    } else {
+      replies = REPLIES[currentQ][type];
+    }
+    var reply = replies[Math.floor(Math.random() * replies.length)];
+
+    // Display result
+    document.getElementById('resultType').textContent = RESULT_NAMES[type];
+    document.getElementById('resultType').className = 'bless-result-type ' + RESULT_CLASS[type];
+    document.getElementById('resultDesc').textContent = RESULT_DESC[type];
+    document.getElementById('resultQuote').textContent = '「' + reply + '」';
+
+    // Triple sheng easter egg
+    var streakArea = document.getElementById('streakArea');
+    if (consecutiveSheng >= 3) {
+      var tripleMsg = TRIPLE_SHENG[Math.floor(Math.random() * TRIPLE_SHENG.length)];
+      streakArea.textContent = tripleMsg;
+      streakArea.style.display = 'block';
+    } else if (consecutiveSheng === 2) {
+      streakArea.textContent = '✨ 連兩聖筊！再一次就是三聖筊了⋯';
+      streakArea.style.display = 'block';
+    } else {
+      streakArea.style.display = 'none';
+    }
+
+    resultArea.style.display = 'block';
+
+    // Update log
+    var now = new Date();
+    var timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+    logs.unshift({ type: type, q: qText, time: timeStr });
+
+    updateStats();
+    updateLog();
+  }
+
+  function updateStats() {
+    document.getElementById('statSheng').textContent = throwCount.sheng;
+    document.getElementById('statXiao').textContent = throwCount.xiao;
+    document.getElementById('statYin').textContent = throwCount.yin;
+    var total = throwCount.sheng + throwCount.xiao + throwCount.yin;
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('historyBadge').textContent = total + ' 次';
+  }
+
+  function updateLog() {
+    var logArea = document.getElementById('logArea');
+    if (logs.length === 0) {
+      logArea.innerHTML = '<p class="bless-log-empty">還沒擲過筊，試試看吧！</p>';
+      return;
+    }
+    var html = '';
+    var max = Math.min(logs.length, 20);
+    for (var i = 0; i < max; i++) {
+      var l = logs[i];
+      html += '<div class="bless-log-item">' +
+        '<span class="log-badge ' + LOG_CLASS[l.type] + '">' + RESULT_NAMES[l.type] + '</span>' +
+        '<span class="log-q">' + escapeHtml(l.q) + '</span>' +
+        '<span class="log-time">' + l.time + '</span>' +
+        '</div>';
+    }
+    logArea.innerHTML = html;
+  }
+
+  function escapeHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  // =================================================================
+  // History toggle (collapsible card)
+  // =================================================================
+  var historyCard = document.querySelector('.bless-history');
+  var historyToggleBtn = document.getElementById('historyToggle');
+  historyToggleBtn.addEventListener('click', function() {
+    historyCard.classList.toggle('open');
+  });
+
+  function updateBadge() {
+    var total = throwCount.sheng + throwCount.xiao + throwCount.yin;
+    document.getElementById('historyBadge').textContent = total + ' 次';
+  }
+
+  // =================================================================
+  // Event listeners
+  // =================================================================
+  throwBtn.addEventListener('click', doThrow);
+
+  againBtn.addEventListener('click', function() {
+    resultArea.style.display = 'none';
+    hintText.textContent = '心中默念問題，然後按下「擲筊」';
+    // Reset block visuals
+    block1.className = 'bless-block';
+    block2.className = 'bless-block';
+    var inner1 = block1.querySelector('.block-inner');
+    var inner2 = block2.querySelector('.block-inner');
+    inner1.className = 'block-inner';
+    inner2.className = 'block-inner';
+    inner1.style.removeProperty('--final-x');
+    inner1.style.removeProperty('--final-y');
+    inner2.style.removeProperty('--final-x');
+    inner2.style.removeProperty('--final-y');
+  });
+
+})();
+</script>
+
+</BaseLayout>

@@ -79,9 +79,6 @@
     background: linear-gradient(135deg, #39FF14, #FF10F0);
     border: none;
     cursor: pointer;
-    transition: all 0.3s;
-    opacity: 0;
-    pointer-events: none;
     box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
     display: flex;
     flex-direction: column;
@@ -90,16 +87,13 @@
     gap: 0;
     line-height: 1;
     padding: 0;
-  }
-
-  .fortune-btn.visible {
-    opacity: 1;
-    pointer-events: auto;
+    animation: fortuneBounce 2.5s ease-in-out infinite;
   }
 
   .fortune-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(57, 255, 20, 0.4);
+    animation: none;
+    transform: scale(1.12);
+    box-shadow: 0 8px 25px rgba(57, 255, 20, 0.5);
   }
 
   .fortune-btn-text {
@@ -111,14 +105,16 @@
     display: block;
   }
 
-  /* 呼吸燈動畫 */
-  .fortune-btn.visible {
-    animation: fortunePulse 3s ease-in-out infinite;
-  }
-
-  @keyframes fortunePulse {
-    0%, 100% { box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3); }
-    50% { box-shadow: 0 4px 25px rgba(255, 16, 240, 0.4); }
+  /* 放大縮小 + 呼吸光暈動畫 */
+  @keyframes fortuneBounce {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3);
+    }
+    50% {
+      transform: scale(1.15);
+      box-shadow: 0 6px 28px rgba(255, 16, 240, 0.45);
+    }
   }
 
   /* === 遮罩層 === */
@@ -574,14 +570,7 @@
 
   if (!btn || !overlay || !card) return;
 
-  // 跟隨 ScrollToTop 的顯示邏輯
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 300) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  });
+  // 按鈕直接可見（不需要 scroll 觸發）
 
   // 點按鈕開啟
   btn.addEventListener('click', function() {
