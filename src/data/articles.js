@@ -2,6 +2,21 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'black-hat-seo-exposed',
+    hotTitle: '搜「AT99詐騙」全是垃圾？',
+    title: '為什麼 Google 搜「AT99 詐騙」第一名都是垃圾？6 大黑帽 SEO 手法揭密',
+    excerpt: '芭樂子拆解 6 大黑帽 SEO 手法：Keyword Stuffing、Parasite SEO、Brand Hijacking、Content Farm、Sock Puppet、Recovery Scam。附球員假扮裁判真實案例分析與 5 招辨識「真評測 vs 假警告」自救指南。',
+    category: 'guide',
+    categoryLabel: 'SEO 揭密',
+    badgeType: 'attack',
+    date: '2026-05-10',
+    views: 0,
+    tags: ['最新', '必讀'],
+    icon: 'search',
+    gradient: 'linear-gradient(135deg,#0a0a0a,#1a0520,#39FF14)',
+    thumbnail: '/images/article-thumbs/thumb-cover-black-hat-seo.webp'
+  },
+  {
     slug: 'baccarat-card-counting-myth',
     title: '百家樂算牌有用嗎？用數學拆解電影裡的「神技」真相',
     excerpt: '電影裡主角靠算牌橫掃賭場，現實中百家樂也做得到嗎？芭樂子用 Peter Griffin 的 Effect of Removal 數據拆解：21 點算牌 vs 百家樂算牌的期望值差了 100 倍。附完整比較表、算牌騙局揭密、四個真正有用的百家樂策略。',
