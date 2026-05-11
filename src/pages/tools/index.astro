@@ -1,69 +1,110 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+
+/* ── ItemList Schema（SEO #5）── */
+const tools = [
+  { name: 'Game8la 線上擲筊', url: 'https://game8la.com/tools/bless-blocks/' },
+  { name: '賽特2 RTP 模擬器', url: 'https://game8la.com/tools/slot-simulator/' },
+  { name: '雷神之錘 II 模擬器', url: 'https://game8la.com/tools/thor-hammer-2-simulator/' },
+  { name: '樂透數據站', url: 'https://game8la.com/lottery/analysis/' },
+  { name: '娛樂城體檢', url: 'https://game8la.com/casino-check/' },
+  { name: '老虎機 RTP 紀錄器', url: 'https://game8la.com/tools/rtp-tracker/' },
+  { name: '百家樂策略模擬器', url: 'https://game8la.com/tools/baccarat-simulator/' },
+  { name: '資金管理計算器', url: 'https://game8la.com/tools/bankroll-calculator/' },
+];
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "GAME8LA 免費博弈工具箱",
+  "description": "8 款免費線上博弈分析工具，涵蓋老虎機 RTP 模擬、樂透冷熱號選號、娛樂城安全檢測、百家樂策略回測與資金管理。",
+  "numberOfItems": tools.length,
+  "itemListElement": tools.map((t, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": t.name,
+    "url": t.url,
+  })),
+};
 ---
+<script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+
 <BaseLayout
   currentPage="tools"
-  title="8LA 工具箱｜老虎機 RTP 紀錄器・樂透數據站・娛樂城體檢 - GAME8LA"
-  description="Game8la 免費博弈工具箱：老虎機 RTP 實測紀錄器、539/威力彩/大樂透冷熱號回測與包牌產生器、娛樂城安全體檢。不報明牌，只給你用得上的數據工具。"
+  title="免費博弈工具箱（2026）｜老虎機模擬器・樂透選號・娛樂城體檢・擲筊 - GAME8LA"
+  description="8 款免費線上博弈工具：戰神賽特 RTP 模擬器、雷神之錘倍數模擬、539/威力彩/大樂透冷熱號分析與包牌產生器、娛樂城詐騙體檢、百家樂策略回測、資金管理計算器。免註冊、零廣告，數據留在你的瀏覽器。"
 >
 <div class="container">
   <div class="tools-hero">
-    <h1>🔧 8LA 工具箱</h1>
+    <h1>🔧 Game8la 免費博弈工具箱</h1>
     <p class="tools-sub">不報明牌，只給你用得上的數據工具。</p>
     <p class="tools-desc">以下所有工具完全免費、不需要註冊。你的數據留在你自己的瀏覽器裡，我們不會收集任何個人資訊。</p>
   </div>
 
   <div class="tools-grid">
+    <a href="/tools/bless-blocks/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(184,134,11,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/icon-bless-blocks.webp" alt="Game8la 線上擲筊 — 免費擲筊模擬器，即時機率統計" width="72" height="72" loading="lazy">
+      <h2>Game8la 線上擲筊</h2>
+      <p>線上擲筊模擬，即時機率統計</p>
+    </a>
     <a href="/tools/slot-simulator/" class="tool-tile">
       <div class="tile-glow" style="--glow-color:rgba(236,72,153,0.35)"></div>
-      <div class="tile-icon" style="background:linear-gradient(135deg,#ec4899,#be185d)">🎲</div>
-      <h2>賽特2<br>RTP 模擬器</h2>
-      <p>自己當 RTP 的神</p>
+      <img class="tile-icon" src="/images/tools/icon-slot-sim.webp" alt="賽特2 RTP 模擬器 — 戰神賽特老虎機免費模擬" width="72" height="72" loading="lazy">
+      <h2>賽特2 RTP 模擬器</h2>
+      <p>戰神賽特老虎機免費模擬</p>
     </a>
     <a href="/tools/thor-hammer-2-simulator/" class="tool-tile">
       <div class="tile-glow" style="--glow-color:rgba(255,153,0,0.35)"></div>
-      <div class="tile-icon" style="background:linear-gradient(135deg,#ff9900,#e68600)">⚡</div>
-      <h2>雷神之錘<br>II 模擬器</h2>
-      <p>倍數滾雪球效應</p>
-    </a>
-    <a href="/tools/bankroll-calculator/" class="tool-tile">
-      <div class="tile-glow" style="--glow-color:rgba(57,255,20,0.35)"></div>
-      <div class="tile-icon" style="background:linear-gradient(135deg,#39FF14,#2bcc10)">🧮</div>
-      <h2>資金<br>管理器</h2>
-      <p>算你能撐多久</p>
-    </a>
-    <a href="/tools/rtp-tracker/" class="tool-tile">
-      <div class="tile-glow" style="--glow-color:rgba(245,184,0,0.35)"></div>
-      <div class="tile-icon" style="background:linear-gradient(135deg,#f5b800,#e09900)">🎰</div>
-      <h2>老虎機<br>RTP 紀錄器</h2>
-      <p>看你自己的數據</p>
+      <img class="tile-icon" src="/images/tools/icon-thor-sim.webp" alt="雷神之錘 II 模擬器 — 倍數球鎖定爆分體驗" width="72" height="72" loading="lazy">
+      <h2>雷神之錘 II 模擬器</h2>
+      <p>倍數球鎖定爆分體驗</p>
     </a>
     <a href="/lottery/analysis/" class="tool-tile">
       <div class="tile-glow" style="--glow-color:rgba(124,58,237,0.35)"></div>
-      <div class="tile-icon" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">🔢</div>
-      <h2>樂透<br>數據站</h2>
-      <p>用歷史數據選號</p>
-    </a>
-    <a href="/tools/baccarat-simulator/" class="tool-tile">
-      <div class="tile-glow" style="--glow-color:rgba(0,200,255,0.35)"></div>
-      <div class="tile-icon" style="background:linear-gradient(135deg,#00c8ff,#0080b3)">🃏</div>
-      <h2>百家樂<br>策略模擬器</h2>
-      <p>五種注碼法實測</p>
+      <img class="tile-icon" src="/images/tools/icon-lottery.webp" alt="樂透數據站 — 539 威力彩大樂透冷熱號分析" width="72" height="72" loading="lazy">
+      <h2>樂透數據站</h2>
+      <p>539・威力彩・大樂透冷熱號分析</p>
     </a>
     <a href="/casino-check/" class="tool-tile">
       <div class="tile-glow" style="--glow-color:rgba(239,68,68,0.35)"></div>
-      <div class="tile-icon" style="background:linear-gradient(135deg,#ef4444,#b91c1c)">🛡️</div>
-      <h2>娛樂城<br>體檢</h2>
-      <p>入金前查一下</p>
+      <img class="tile-icon" src="/images/tools/icon-casino-check.webp" alt="娛樂城體檢 — 165 黑名單比對與 WHOIS 查驗" width="72" height="72" loading="lazy">
+      <h2>娛樂城體檢</h2>
+      <p>165 黑名單比對 + WHOIS 查驗</p>
     </a>
-    <a href="/tools/bless-blocks/" class="tool-tile">
-      <div class="tile-glow" style="--glow-color:rgba(184,134,11,0.35)"></div>
-      <div class="tile-icon" style="background:linear-gradient(135deg,#d4a056,#8B6914)">🥢</div>
-      <h2>芭樂<br>擲筊</h2>
-      <p>問神明也問機率</p>
+    <a href="/tools/rtp-tracker/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(245,184,0,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/icon-rtp-tracker.webp" alt="老虎機 RTP 紀錄器 — 記錄每局輸贏自動算 RTP" width="72" height="72" loading="lazy">
+      <h2>老虎機 RTP 紀錄器</h2>
+      <p>記錄每局輸贏，自動算 RTP</p>
+    </a>
+    <a href="/tools/baccarat-simulator/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(0,200,255,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/icon-baccarat-sim.webp" alt="百家樂策略模擬器 — 五種注碼法跑 1000 局回測" width="72" height="72" loading="lazy">
+      <h2>百家樂策略模擬器</h2>
+      <p>五種注碼法跑 1000 局回測</p>
+    </a>
+    <a href="/tools/bankroll-calculator/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(57,255,20,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/icon-bankroll.webp" alt="資金管理計算器 — 停損停利線一鍵算好" width="72" height="72" loading="lazy">
+      <h2>資金管理計算器</h2>
+      <p>停損停利線一鍵算好</p>
     </a>
   </div>
+
+  <!-- SEO #4：工具介紹文字段落，解決 thin content -->
+  <section class="tools-intro">
+    <h2>為什麼需要這些工具？</h2>
+    <p>不管你玩的是老虎機、百家樂還是買樂透，「憑感覺下注」是最快燒錢的方式。GAME8LA 工具箱提供 8 款免費線上工具，讓你用數據取代直覺。</p>
+    <p><strong>賽特2 RTP 模擬器</strong>和<strong>雷神之錘 II 模擬器</strong>能讓你免費試跑上千局，親眼看到 RTP 回歸的過程。</p>
+    <p><strong>樂透數據站</strong>回測 539、威力彩、大樂透近期冷熱號，還有包牌產生器幫你組號。</p>
+    <p><strong>娛樂城體檢</strong>一鍵比對 165 詐騙黑名單 + WHOIS 網域資料，入金前 30 秒就能判斷安不安全。</p>
+    <p><strong>百家樂策略模擬器</strong>讓你用馬丁格爾、柏利等五種注碼法跑 1000 局回測，看清莊家優勢。</p>
+    <p><strong>資金管理計算器</strong>幫你算出停損停利線，控制每局下注比例。</p>
+    <p><strong>老虎機 RTP 紀錄器</strong>記錄你的真實遊戲數據，自動計算實際 RTP。</p>
+    <p>所有工具免註冊、零廣告，數據只存在你的瀏覽器裡。</p>
+  </section>
 
   <!-- 底部提示 -->
   <div class="tools-footer-note">
@@ -146,18 +187,15 @@ import Icon from '../../components/Icon.astro';
     width: 72px;
     height: 72px;
     border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.2rem;
     margin-bottom: 1rem;
     position: relative;
     z-index: 1;
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    object-fit: cover;
   }
 
   .tool-tile h2 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 800;
     line-height: 1.4;
     margin: 0 0 0.4rem;
@@ -166,12 +204,37 @@ import Icon from '../../components/Icon.astro';
   }
 
   .tool-tile p {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
     margin: 0;
     position: relative;
     z-index: 1;
     line-height: 1.4;
+  }
+
+  /* === 工具介紹段落 === */
+  .tools-intro {
+    max-width: 720px;
+    margin: 3rem auto 0;
+    padding: 1.5rem 1.2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .tools-intro h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+    color: var(--gold);
+  }
+  .tools-intro p {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--text-secondary, #ccc);
+    margin: 0;
+  }
+  .tools-intro strong {
+    color: var(--text-primary);
   }
 
   .tools-footer-note {
@@ -196,13 +259,12 @@ import Icon from '../../components/Icon.astro';
     .tile-icon {
       width: 60px;
       height: 60px;
-      font-size: 1.8rem;
       border-radius: 14px;
     }
     .tool-tile {
       padding: 1.8rem 1rem 1.5rem;
     }
-    .tool-tile h2 { font-size: 0.95rem; }
+    .tool-tile h2 { font-size: 0.9rem; }
   }
 
   /* === MOBILE === */
@@ -222,17 +284,25 @@ import Icon from '../../components/Icon.astro';
       border-radius: 14px;
     }
     .tile-icon {
-      width: 48px;
-      height: 48px;
-      font-size: 1.5rem;
-      border-radius: 12px;
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
       margin-bottom: 0.7rem;
     }
     .tool-tile h2 {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
     }
     .tool-tile p {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
+    }
+    .tools-intro {
+      padding: 1.2rem;
+    }
+    .tools-intro h2 {
+      font-size: 1.1rem;
+    }
+    .tools-intro p {
+      font-size: 0.92rem;
     }
   }
 </style>

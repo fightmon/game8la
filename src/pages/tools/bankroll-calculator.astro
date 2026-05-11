@@ -327,6 +327,18 @@ function renderCompare(bankroll, rtp, houseEdge, spinSpeed, currentBet) {
 }
 </script>
 
+<!-- ===== WebApplication Schema ===== -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "資金管理計算器 — 停損停利線一鍵算好",
+  "url": "https://game8la.com/tools/bankroll-calculator/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "description": "免費老虎機資金管理計算器，輸入本金、RTP、波動度，自動算出停損停利線與預期存活局數。"
+})} />
+
 <style>
 /* ===== Bankroll Calculator Styles ===== */
 .bk-hero { text-align: center; padding: 2.5rem 1rem 1.5rem; }

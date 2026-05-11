@@ -1214,6 +1214,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 })();
 </script>
 
+<!-- ===== WebApplication Schema ===== -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "賽特2 RTP 模擬器 — 戰神賽特老虎機免費模擬",
+  "url": "https://game8la.com/tools/slot-simulator/",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "description": "免費線上戰神賽特老虎機 RTP 模擬器，自訂 RTP 和波動度，視覺化體驗數千局的回報率變化。"
+})} />
+
 <style is:global>
 /* === 整體佈局 === */
 .sim-wrap { max-width:1100px; margin:0 auto; padding:1rem; }

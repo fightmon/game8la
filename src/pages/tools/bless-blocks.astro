@@ -3,38 +3,36 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   currentPage="tools"
-  title="芭樂擲筊｜線上擲筊求籤，神明 × 機率的終極對決 - GAME8LA"
-  description="免費線上擲筊！選擇你的問題，擲出筊杯看神明怎麼說——再聽芭樂子用機率打臉。內建聖筊/陰筊/笑筊 3D 動畫，連三聖筊有彩蛋。"
+  title="線上擲筊（免費）｜聖筊陰筊笑筊 3D 動畫模擬，即時機率統計 - GAME8LA"
+  description="免費線上擲筊模擬器！選擇問題、虔誠默念、擲出筊杯。聖筊、陰筊、笑筊 3D 翻轉動畫，即時統計擲筊機率與連續聖筊紀錄。人生難決定？機率之神給參考讓你確定。"
   ogImage="https://game8la.com/images/og-image.webp"
 >
 
 <div class="container">
   <!-- Hero -->
   <div class="bless-hero">
-    <h1>🥢 芭樂擲筊</h1>
-    <p class="bless-slogan">求神不如求數據，但偶爾擲個筊也不錯。</p>
+    <h1>🥢 Game8la 線上擲筊</h1>
+    <p class="bless-slogan">人生難決定？機率之神給參考讓你確定。</p>
     <p class="bless-desc">選一個問題、心裡默念、然後擲筊。神明給答案，芭樂子給吐槽。</p>
   </div>
 
   <!-- 問題選擇區 -->
   <div class="bless-section">
-    <div class="bless-select-wrap">
-      <select id="questionSelect" class="bless-select">
-        <option value="heart" selected>😌 默唸心中疑問</option>
-        <option value="0">今天運勢如何？</option>
-        <option value="1">這個決定對嗎？</option>
-        <option value="2">今天會有好事嗎？</option>
-        <option value="3">我該改變方向嗎？</option>
-        <option value="4">今天適合買彩券嗎？</option>
-        <option value="5">今天手氣好不好？</option>
-      </select>
+    <div class="bless-question-chips" id="questionChips">
+      <button type="button" class="q-chip active" data-q="heart">😌 心中默念</button>
+      <button type="button" class="q-chip" data-q="0">今天運勢如何？</button>
+      <button type="button" class="q-chip" data-q="1">這個決定對嗎？</button>
+      <button type="button" class="q-chip" data-q="2">今天會有好事嗎？</button>
+      <button type="button" class="q-chip" data-q="3">我該改變方向嗎？</button>
+      <button type="button" class="q-chip" data-q="4">今天適合買彩券嗎？</button>
+      <button type="button" class="q-chip" data-q="5">今天手氣好不好？</button>
     </div>
   </div>
 
   <!-- 擲筊互動區（結果合併顯示） -->
   <div class="bless-arena" id="arena">
     <!-- 筊上方：擲前提示 / 擲後結果（等高切換，避免跳動） -->
-    <div class="bless-result-header" id="resultHeader">
+    <div class="bless-result-header" id="resultHeader" aria-live="polite" aria-atomic="true">
       <div class="bless-result-type bless-pre-hint" id="resultType">🙏 虔誠默念，準備好再擲</div>
       <div class="bless-result-desc" id="resultDesc"></div>
     </div>
@@ -104,9 +102,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
 
     <!-- 擲筊按鈕 -->
-    <button class="bless-throw-btn" id="throwBtn" type="button">
-      擲筊
-    </button>
+    <div class="bless-throw-row">
+      <button class="sound-toggle" id="soundToggle" type="button" aria-label="切換音效" title="切換音效">🔊</button>
+      <button class="bless-throw-btn" id="throwBtn" type="button">
+        擲筊
+      </button>
+    </div>
 
     <!-- 擲筊後：結果詳情在筊下方 -->
     <div class="bless-result-footer" id="resultFooter" style="display:none">
@@ -136,6 +137,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <span class="history-toggle-label">今日擲筊紀錄</span>
       </span>
       <span class="history-toggle-right">
+        <button class="history-reset-btn" id="historyResetBtn" type="button" aria-label="清除今日紀錄" title="清除今日紀錄">↻</button>
         <span class="history-badge" id="historyBadge">0 次</span>
         <span class="history-chevron" id="historyChevron">▼</span>
       </span>
@@ -153,6 +155,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </div>
 
+  <!-- 擲筊文化介紹（SEO 靜態文字） -->
+  <section class="bless-intro">
+    <h2>擲筊是什麼？</h2>
+    <p>擲筊（擲杯、博筊）是台灣最常見的民俗信仰占卜方式。信眾將一對紅色新月形木製筊杯拋向空中，透過落地後的正反面組合來判讀神明的意旨。擲筊在廟宇文化中已有數百年歷史，至今仍是許多台灣人做重大決定前的心靈儀式。</p>
+
+    <h3>聖筊、陰筊、笑筊怎麼分？</h3>
+    <p><strong>聖筊</strong>（一正一反）代表神明同意，機率約 50%。<strong>陰筊</strong>（兩面都是陰面朝上）代表神明不同意，機率約 25%。<strong>笑筊</strong>（兩面都是陽面朝上）代表神明覺得問題不清楚或在笑你，機率也約 25%。傳統上連續三次聖筊（三聖筊）代表神明強烈同意。</p>
+
+    <h3>線上擲筊跟廟裡擲筊有差嗎？</h3>
+    <p>從機率角度來看，結果完全一樣——都是隨機的。線上版使用密碼學等級的隨機數產生器（CSPRNG），每次擲筊的結果獨立且公正。差別在於氛圍：廟裡有香火、有虔誠的環境，而線上版有芭樂子的吐槽。但不管在哪裡擲筊，有一件事不會變：最後做決定的，永遠是你自己。</p>
+  </section>
+
   <!-- 導流 CTA -->
   <div class="bless-cta-bar">
     <p>🌿 擲筊問天不如看數據問芭樂子</p>
@@ -168,6 +182,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </div>
 </div>
 
+<!-- ===== SoftwareApplication Schema ===== -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Game8la 線上擲筊 — 免費擲筊模擬器",
+  "url": "https://game8la.com/tools/bless-blocks/",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "description": "免費線上擲筊模擬器，聖筊、陰筊、笑筊 3D 動畫，即時機率統計與連續聖筊紀錄。"
+})} />
+
 <!-- ===== FAQ Schema ===== -->
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
@@ -178,7 +204,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       "name": "線上擲筊準嗎？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "擲筊是一種民俗信仰活動，線上版本使用隨機數產生器模擬結果，結果純屬娛樂。跟實體擲筊一樣，每次擲出聖筊的機率約為 50%。"
+        "text": "擲筊是一種民俗信仰活動，線上版本使用密碼學等級的隨機數產生器（CSPRNG）模擬結果，每次擲出聖筊的機率約為 50%，與實體擲筊相同。結果純屬娛樂，最終做決定的還是你自己。"
       }
     },
     {
@@ -186,7 +212,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       "name": "什麼是聖筊、陰筊、笑筊？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "聖筊（一陰一陽）代表神明同意；陰筊（兩面都是陰面朝上）代表神明不同意；笑筊（兩面都是陽面朝上）代表神明覺得問題不清楚或在笑。"
+        "text": "聖筊（一陰一陽）代表神明同意，機率約 50%；陰筊（兩面都是陰面朝上）代表神明不同意，機率約 25%；笑筊（兩面都是陽面朝上）代表神明覺得問題不清楚或在笑，機率約 25%。"
       }
     },
     {
@@ -194,7 +220,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       "name": "擲筊可以連擲幾次？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "傳統上會連擲三次，三次都是聖筊（三聖筊）代表神明強烈同意。本工具不限次數，但芭樂子建議：連擲三次以上還不是聖筊，大概是神明在暗示你想清楚。"
+        "text": "傳統上會連擲三次，三次都是聖筊（三聖筊）代表神明強烈同意。本工具不限次數，還會即時計算連續聖筊的機率。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "擲筊的機率是多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "每次擲筊有三種結果：聖筊約 50%、陰筊約 25%、笑筊約 25%。連續兩次聖筊的機率約 25%，三聖筊約 12.5%，連續十次聖筊的機率低於千分之一（約 0.098%）。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "線上擲筊跟廟裡擲筊有什麼差別？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "從機率角度來看結果完全相同，都是隨機的。線上版使用密碼學等級隨機數產生器，確保每次結果獨立且公正。差別在於氛圍——但不管在哪裡，最後做決定的永遠是你自己。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什麼時候適合擲筊？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "傳統上，擲筊常用於詢問神明對某件事的看法，例如搬家、換工作、重大決定等。但擲筊只是一種輔助思考的方式，人生有時靠機率給你靈感，最後拍板的還是你自己。"
       }
     }
   ]
@@ -235,38 +285,41 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     color: #eee;
   }
 
-  /* === QUESTION SELECT === */
-  .bless-select-wrap {
-    max-width: 500px;
-    margin: 0 auto;
+  /* === QUESTION CHIPS === */
+  .bless-question-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 600px;
+    margin: 1.5rem auto;
   }
-  .bless-select {
-    width: 100%;
+  .q-chip {
     background: rgba(255,255,255,0.05);
-    border: 1.5px solid #333;
-    border-radius: 10px;
-    color: #eee;
-    font-size: 1.05rem;
-    padding: 12px 18px;
-    outline: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    color: #aaa;
+    padding: 8px 16px;
     cursor: pointer;
-    transition: border-color 0.2s;
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23888' stroke-width='1.5'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    background-size: 12px;
-    font-family: inherit;
+    font-size: 0.88rem;
+    transition: all 0.2s;
+    line-height: 1.4;
   }
-  .bless-select:focus,
-  .bless-select:hover {
+  .q-chip:hover {
     border-color: var(--guava-green, #39FF14);
+    color: #fff;
   }
-  .bless-select option {
-    background: #1a1a1a;
-    color: #eee;
-    padding: 8px;
+  .q-chip.active {
+    background: rgba(57,255,20,0.15);
+    border-color: var(--guava-green, #39FF14);
+    color: var(--guava-green, #39FF14);
+    font-weight: 700;
+  }
+  @media (max-width: 480px) {
+    .q-chip {
+      font-size: 0.82rem;
+      padding: 6px 12px;
+    }
   }
 
   /* === ARENA === */
@@ -407,6 +460,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   @keyframes glowPulse {
     0%   { opacity: 0.8; transform: translateX(-50%) scale(1); }
     100% { opacity: 0; transform: translateX(-50%) scale(0.6); }
+  }
+
+  /* === THROW ROW === */
+  .bless-throw-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .sound-toggle {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 6px 10px;
+    transition: all 0.2s;
+  }
+  .sound-toggle:hover {
+    border-color: var(--gold, #f5b800);
+    color: var(--gold, #f5b800);
   }
 
   /* === THROW BUTTON === */
@@ -647,6 +722,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     padding: 3px 10px;
     border-radius: 20px;
   }
+  .history-reset-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 2px 8px;
+    transition: all 0.2s;
+    margin-right: 6px;
+  }
+  .history-reset-btn:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+  }
   .history-chevron {
     font-size: 0.7rem;
     color: #888;
@@ -771,12 +861,72 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .bless-blocks-wrap { gap: 24px; min-height: 80px; }
     .bless-block { width: 80px; height: 56px; }
     .bless-throw-btn { font-size: 1.1rem; padding: 12px 36px; }
-    .bless-select { font-size: 0.95rem; padding: 10px 14px; }
     .bless-result-header { min-height: 62px; }
     .bless-result-type { font-size: 1.6rem; }
     .bless-result-desc { font-size: 0.9rem; }
     .bless-result-quote { padding: 10px 14px; font-size: 1rem; }
     .bless-streak { padding: 12px; font-size: 1.05rem; }
+  }
+
+  /* === 擲筊文化介紹（SEO 靜態文字，對齊 article-content 風格）=== */
+  .bless-intro {
+    max-width: 720px;
+    margin: 3rem auto 0;
+    padding: 2rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    font-size: 0.92rem;
+    color: var(--text-secondary, #ccc);
+    line-height: 1.9;
+  }
+  .bless-intro h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0 0 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+  .bless-intro h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 1.8rem 0 0.6rem;
+    color: var(--gold-light, #FFD700);
+  }
+  .bless-intro p {
+    margin-bottom: 1rem;
+  }
+  .bless-intro p:last-child {
+    margin-bottom: 0;
+  }
+  .bless-intro strong {
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 480px) {
+    .bless-intro {
+      padding: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .bless-intro h2 {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bless-block.throwing .block-inner,
+    .bless-block.throwing-alt .block-inner {
+      animation-duration: 0.4s;
+      animation-timing-function: linear;
+    }
+    .bless-block.landed::after {
+      animation: none;
+      opacity: 0;
+    }
+    .bless-streak {
+      animation: none;
+    }
   }
 </style>
 
@@ -799,9 +949,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   var REPLIES = [
     // Q0: 今天運勢如何？
     [
-      ['聖筊！神明說今天運勢不錯。不過芭樂子提醒你：運勢好不代表躺著就有好事，還是要靠自己。',
-       '聖筊。神明給了個讚。但芭樂子統計過：50% 的人今天都會得到聖筊，所以別太膨脹。',
-       '今天運勢 OK 喔。神明認可了，但請記得——真正的好運是做好準備遇到機會。'],
+      ['聖筊！神明說今天運勢不錯。但運勢只是一個起點，怎麼走還是看你自己。',
+       '聖筊。神明給了個讚。但芭樂子統計過：50% 的人今天都會得到聖筊——重點是你拿到好牌之後怎麼打。',
+       '今天運勢 OK 喔。神明認可了，但真正的好運是做好準備遇到機會——這部分只有你能決定。'],
       ['笑筊。神明表示你今天的運勢⋯有點微妙。不好不壞，就是有趣。',
        '神明笑了。可能是覺得「運勢」這種事，問祂不如問你今天有沒有早起。',
        '笑筊——神明覺得你與其問運勢，不如去做點實際的事。'],
@@ -811,15 +961,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     ],
     // Q1: 這個決定對嗎？
     [
-      ['聖筊！神明覺得方向是對的。但芭樂子提醒：做對決定跟做好決定是兩回事，細節還是要顧。',
-       '神明同意了。不過你應該也列出了利弊分析吧？沒有的話建議去做一份。',
-       '聖筊。看來你心裡其實已經有答案了——你只是來找個支持而已，對吧？'],
+      ['聖筊！神明覺得方向是對的。但最了解這個決定的人是你自己——相信你的判斷，然後用心執行。',
+       '神明同意了。不過會來問筊的人，通常心裡已經有答案了——聽自己的吧。',
+       '聖筊。方向對了，接下來就看你怎麼走。人生每一步都是自己踩出來的。'],
       ['笑筊。神明覺得你這個決定⋯有點好笑。也許再想想？',
        '神明笑了——不是說你錯，是覺得你可能還沒想清楚就跑來問了。',
        '笑筊。芭樂子翻譯：這個決定不是不行，但你可能忽略了什麼重要的事。'],
-      ['陰筊。神明不太認同這個決定。但別急著放棄——也許只是需要調整方向。',
-       '不同意。但芭樂子說：被否定不代表要放棄，也許只是時機或方式不對。',
-       '神明搖頭了。先暫停，把所有資訊重新整理一次，再做決定也不遲。']
+      ['陰筊。神明不太認同這個決定。但別急——退一步想清楚，最終拍板的還是你自己。',
+       '不同意。但被否定不代表要放棄，也許只是需要換個角度。你比任何人都更了解自己的狀況。',
+       '神明搖頭了。先暫停也沒關係，給自己多一點時間，想清楚再做也不遲。']
     ],
     // Q2: 今天會有好事嗎？
     [
@@ -873,15 +1023,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   // 自訂問題的通用回覆
   var GENERIC_REPLIES = [
-    ['聖筊！神明同意了。不過芭樂子提醒你：做決定還是要看數據，不是看筊。',
-     '聖筊。好的開始！但記住：聖筊的機率本來就是 50%，不要太興奮。',
-     '神明點頭了。希望你問的是值得問的問題，而不是「今天晚餐吃什麼」。'],
-    ['笑筊。神明覺得你的問題很有趣——或是祂覺得你在搞笑。',
-     '笑筊。也許你的問題需要更具體一點，神明也需要明確的方向。',
-     '神明笑了。這不是好也不是壞，就是⋯笑了。你自己體會。'],
-    ['陰筊。神明不同意。但別太在意——重要的決定不應該交給擲筊。',
-     '不行。神明搖頭了。考慮換個方向吧。',
-     '陰筊。大概意思是「再想想」。用理性分析取代求神問卜，你會做得更好。']
+    ['聖筊！神明同意了。不過人生的方向盤在你手上，筊只是參考，最後拍板的還是你自己。',
+     '聖筊。好的開始！但記住：機率給你線索，決定權永遠在你自己手裡。',
+     '神明點頭了。但最了解你處境的人是你自己——相信你的判斷，然後行動。'],
+    ['笑筊。神明覺得你的問題很有趣——也許答案不在筊裡，在你心裡。',
+     '笑筊。也許你的問題需要更具體一點，先跟自己對話，再來問神明。',
+     '神明笑了。有時候人生就是這樣，沒有標準答案，但你可以選擇自己的答案。'],
+    ['陰筊。神明搖頭了。但別灰心——人生很多轉折都是從一個「不」開始的，關鍵是你怎麼回應。',
+     '不行。神明搖頭了。不過最終做決定的是你，不是神明。想清楚了就去做。',
+     '陰筊。大概意思是「再想想」。給自己多一點時間，答案會浮現的。']
   ];
 
   // 連勝彩蛋 — 依連勝數動態產生，越多越誇張
@@ -1047,7 +1197,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   // =================================================================
   // DOM
   // =================================================================
-  var questionSelect = document.getElementById('questionSelect');
+  var questionChips = document.getElementById('questionChips');
+  var allChips = questionChips.querySelectorAll('.q-chip');
   var throwBtn = document.getElementById('throwBtn');
   var againBtn = document.getElementById('againBtn');
   var block1 = document.getElementById('block1');
@@ -1057,16 +1208,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   var resultTypeEl = document.getElementById('resultType');
   var resultDescEl = document.getElementById('resultDesc');
 
-  // Question selection
-  questionSelect.addEventListener('change', function() {
-    var val = questionSelect.value;
-    if (val === 'heart') {
-      isCustom = true;
-      currentQ = -1;
-    } else {
-      isCustom = false;
-      currentQ = parseInt(val);
-    }
+  // Question selection (chip buttons)
+  allChips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      allChips.forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      var val = chip.getAttribute('data-q');
+      if (val === 'heart') {
+        currentQ = -1;
+        isCustom = true;
+      } else {
+        currentQ = parseInt(val);
+        isCustom = false;
+      }
+    });
   });
   // Default: 心裡告知 = custom mode
   isCustom = true;
@@ -1077,6 +1232,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   // =================================================================
   var audioCtx = null;
   function playBlockSound() {
+    if (!soundEnabled) return;
     try {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       // 木頭撞擊音：短促的低頻 + 噪音
@@ -1100,8 +1256,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   // =================================================================
   function getResult() {
     // 聖筊=50%, 笑筊=25%, 陰筊=25% (realistic distribution)
-    var b1 = Math.random() < 0.5 ? 0 : 1; // 0=yang, 1=yin
-    var b2 = Math.random() < 0.5 ? 0 : 1;
+    var arr = new Uint8Array(2);
+    crypto.getRandomValues(arr);
+    var b1 = arr[0] & 1; // 0=yang, 1=yin
+    var b2 = arr[1] & 1;
     if (b1 !== b2) return { type: 0, b1: b1, b2: b2 }; // 聖筊
     if (b1 === 0) return { type: 1, b1: 0, b2: 0 };    // 笑筊 (both yang)
     return { type: 2, b1: 1, b2: 1 };                    // 陰筊 (both yin)
@@ -1219,7 +1377,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     resultHeader.style.display = 'block';
     resultFooter.style.display = 'block';
-    throwBtn.style.display = 'none';
+    throwBtn.parentNode.style.display = 'none';
 
     // Update log
     var now = new Date();
@@ -1283,6 +1441,40 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   // =================================================================
+  // History reset button
+  // =================================================================
+  document.getElementById('historyResetBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!confirm('確定要清除今日所有擲筊紀錄？')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    throwCount = { sheng: 0, xiao: 0, yin: 0 };
+    consecutiveSheng = 0;
+    logs = [];
+    updateStats();
+    updateLog();
+    // 重置結果顯示
+    var resultType = document.getElementById('resultType');
+    var resultDesc = document.getElementById('resultDesc');
+    if (resultType) { resultType.textContent = '🙏 虔誠默念，準備好再擲'; resultType.className = 'bless-result-type bless-pre-hint'; }
+    if (resultDesc) resultDesc.textContent = '';
+  });
+
+  // =================================================================
+  // Sound toggle
+  // =================================================================
+  var SOUND_KEY = 'bless_sound_enabled';
+  var soundEnabled = localStorage.getItem(SOUND_KEY) !== 'off';
+  var soundToggleBtn = document.getElementById('soundToggle');
+  if (soundToggleBtn) {
+    soundToggleBtn.textContent = soundEnabled ? '🔊' : '🔇';
+    soundToggleBtn.addEventListener('click', function() {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem(SOUND_KEY, soundEnabled ? 'on' : 'off');
+      soundToggleBtn.textContent = soundEnabled ? '🔊' : '🔇';
+    });
+  }
+
+  // =================================================================
   // Event listeners
   // =================================================================
   throwBtn.addEventListener('click', doThrow);
@@ -1291,7 +1483,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     resultFooter.style.display = 'none';
     sharePanel.style.display = 'none';
     shareToggle.textContent = '📤 分享結果';
-    throwBtn.style.display = '';
+    throwBtn.parentNode.style.display = '';
     // Reset header back to pre-hint
     resultTypeEl.textContent = '🙏 虔誠默念，準備好再擲';
     resultTypeEl.className = 'bless-result-type bless-pre-hint';
@@ -1326,12 +1518,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   });
 
   function getShareText() {
-    if (!lastResult) return { text: '來芭樂擲筊試試你的運氣！', url: 'https://game8la.com/tools/bless-blocks/' };
+    if (!lastResult) return { text: '來 Game8la 線上擲筊試試你的運氣！', url: 'https://game8la.com/tools/bless-blocks/' };
     var labels = ['聖筊', '笑筊', '陰筊'];
     var url = 'https://game8la.com/tools/bless-blocks/';
-    var text = '我在芭樂擲筊問「' + lastResult.q + '」擲到' + labels[lastResult.type] + '！';
-    if (lastResult.streak >= 3) text = '我在芭樂擲筊連 ' + lastResult.streak + ' 聖筊！！！';
-    text += ' #GAME8LA #芭樂擲筊';
+    var text = '我在 Game8la 線上擲筊問「' + lastResult.q + '」擲到' + labels[lastResult.type] + '！';
+    if (lastResult.streak >= 3) text = '我在 Game8la 線上擲筊連 ' + lastResult.streak + ' 聖筊！！！';
+    text += ' #GAME8LA #Game8la擲筊';
     return { text: text, url: url };
   }
 

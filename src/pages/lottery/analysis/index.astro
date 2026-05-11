@@ -3,8 +3,20 @@ import Icon from '../../../components/Icon.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 ---
 
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "GAME8LA 樂透數據站 — 539 包牌計算器",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "ratingCount": "126" },
+  "description": "免費 539 包牌計算器＋威力彩、大樂透、今彩539 冷熱號排行與期望值分析。歷史開獎回測、拖出號統計、遺漏值追蹤、同號連開機率。",
+  "url": "https://game8la.com/lottery/analysis/",
+  "author": { "@type": "Organization", "name": "GAME8LA" }
+})} />
 <BaseLayout
-  title="539 包牌計算器・威力彩大樂透冷熱號分析｜2026 開獎數據回測＋選號工具 - GAME8LA"
+  title="539 包牌計算器（免費）・威力彩大樂透冷熱號分析｜2026 開獎數據回測＋選號工具 - GAME8LA"
   description="免費 539 包牌計算器＋威力彩、大樂透、今彩539 冷熱號排行與期望值分析。歷史開獎回測、拖出號統計、遺漏值追蹤、同號連開機率，還有芭樂子的選號參考與包牌產生器。用數據選號，不用靠感覺。"
   currentPage="lottery"
 >

@@ -198,6 +198,48 @@ const latestScams = [...scamList]
     </div>
   </div>
 </section>
+<!-- TOOLS STRIP -->
+<section class="section" id="tools-strip">
+  <div class="section-header">
+    <h2>🔧 免費工具箱</h2>
+    <a href="/tools/" class="more-link">查看全部工具 <Icon name="arrow-right" /></a>
+  </div>
+  <div class="tools-scroll">
+    <a href="/tools/bless-blocks/" class="ts-item">
+      <img src="/images/tools/icon-bless-blocks.webp" alt="Game8la 線上擲筊" width="64" height="64" loading="lazy">
+      <span>Game8la 線上擲筊</span>
+    </a>
+    <a href="/tools/slot-simulator/" class="ts-item">
+      <img src="/images/tools/icon-slot-sim.webp" alt="賽特2 RTP 模擬器" width="64" height="64" loading="lazy">
+      <span>賽特2 模擬器</span>
+    </a>
+    <a href="/tools/thor-hammer-2-simulator/" class="ts-item">
+      <img src="/images/tools/icon-thor-sim.webp" alt="雷神之錘 II 模擬器" width="64" height="64" loading="lazy">
+      <span>雷神之錘 II</span>
+    </a>
+    <a href="/lottery/analysis/" class="ts-item">
+      <img src="/images/tools/icon-lottery.webp" alt="樂透數據站" width="64" height="64" loading="lazy">
+      <span>樂透數據站</span>
+    </a>
+    <a href="/casino-check/" class="ts-item">
+      <img src="/images/tools/icon-casino-check.webp" alt="娛樂城體檢" width="64" height="64" loading="lazy">
+      <span>娛樂城體檢</span>
+    </a>
+    <a href="/tools/rtp-tracker/" class="ts-item">
+      <img src="/images/tools/icon-rtp-tracker.webp" alt="老虎機 RTP 紀錄器" width="64" height="64" loading="lazy">
+      <span>RTP 紀錄器</span>
+    </a>
+    <a href="/tools/baccarat-simulator/" class="ts-item">
+      <img src="/images/tools/icon-baccarat-sim.webp" alt="百家樂策略模擬器" width="64" height="64" loading="lazy">
+      <span>百家樂模擬器</span>
+    </a>
+    <a href="/tools/bankroll-calculator/" class="ts-item">
+      <img src="/images/tools/icon-bankroll.webp" alt="資金管理計算器" width="64" height="64" loading="lazy">
+      <span>資金管理器</span>
+    </a>
+  </div>
+</section>
+
 <!-- RANKINGS -->
 <section class="section" id="rankings">
   <div class="section-header">
@@ -1683,24 +1725,59 @@ body {
 }
 .lp-cta-sidebar:hover { box-shadow: 0 4px 15px rgba(57,255,20,0.2); }
 
+/* === TOOLS STRIP === */
+.tools-scroll {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  padding: 0.5rem 0 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.tools-scroll::-webkit-scrollbar { display: none; }
+
+.ts-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 90px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: transform 0.2s;
+}
+.ts-item:hover {
+  transform: translateY(-4px);
+}
+.ts-item img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  object-fit: cover;
+}
+.ts-item span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary, #ccc);
+  text-align: center;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .tools-scroll { gap: 0.8rem; }
+  .ts-item { min-width: 76px; }
+  .ts-item img {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+  .ts-item span { font-size: 0.7rem; }
+}
+
 </style>
 
-<script is:inline type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "GAME8LA",
-  "alternateName": "game-bala",
-  "url": "https://game8la.com/",
-  "description": "台灣最敢講真話的獨立遊戲評測平台",
-  "inLanguage": "zh-TW",
-  "publisher": {
-    "@type": "Organization",
-    "name": "GAME8LA",
-    "url": "https://game8la.com/"
-  }
-}
-</script>
 
 <script is:inline>
 // === SVG ICON HELPER ===

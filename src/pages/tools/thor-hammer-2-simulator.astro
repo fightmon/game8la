@@ -1041,6 +1041,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 })();
 </script>
 
+<!-- ===== WebApplication Schema ===== -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "雷神之錘 II 模擬器 — 倍數球鎖定爆分體驗",
+  "url": "https://game8la.com/tools/thor-hammer-2-simulator/",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "description": "免費線上雷神之錘 II 老虎機模擬器，體驗倍數球鎖定與爆分機制。"
+})} />
+
 <style is:global>
 /* === 整體佈局 === */
 .sim-wrap { max-width:1100px; margin:0 auto; padding:1rem; }

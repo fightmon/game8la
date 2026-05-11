@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>Shorts #01｜AT99 遭刑事局封鎖｜腳本＋AI Video Prompt</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif;
+    background: #0a0a0a; color: #e8e8e8; line-height: 1.6;
+    margin: 0; padding: 2rem 1.5rem;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  h1 {
+    font-size: 1.7rem; line-height: 1.35;
+    background: linear-gradient(90deg,#39FF14,#FF10F0);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 0.5rem;
+  }
+  .sub { color: #aaa; font-size: 0.95rem; margin-bottom: 2rem; }
+  h2 {
+    font-size: 1.2rem; color: #39FF14; margin: 2.5rem 0 0.8rem;
+    border-left: 4px solid #FF10F0; padding-left: 0.8rem;
+  }
+  h3 { font-size: 1rem; color: #FFD700; margin: 1.2rem 0 0.5rem; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 0.8rem 0 1.5rem;
+    background: #15151a; font-size: 0.9rem;
+  }
+  th, td {
+    border: 1px solid #2a2a35; padding: 0.7rem 0.85rem;
+    vertical-align: top; text-align: left;
+  }
+  th {
+    background: linear-gradient(135deg,#1a0a2e,#2a0a3a);
+    color: #FF10F0; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+  td.shot { color:#39FF14; font-weight:800; text-align:center; white-space:nowrap; }
+  td.time { color:#FFD700; font-weight:700; text-align:center; white-space:nowrap; }
+  td.hook { background: rgba(255,16,240,0.08); }
+  .narration { color: #fff; font-weight: 600; }
+  .caption { color: #FFD700; font-size: 0.85rem; display: block; margin-top: 0.3rem; }
+  code {
+    background: #000; color: #39FF14; padding: 0.1rem 0.4rem;
+    border-radius: 3px; font-size: 0.85em;
+  }
+  .badge {
+    display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px;
+    font-size: 0.72rem; font-weight: 700; margin-right: 0.3rem;
+  }
+  .b-hook { background:#FF10F0; color:#000; }
+  .b-build { background:#FFA500; color:#000; }
+  .b-twist { background:#ec4899; color:#fff; }
+  .b-cta { background:#39FF14; color:#000; }
+  .prompt-cn { color: #c8e6c9; position: relative; padding-right: 3rem !important; }
+  .prompt-en { color: #b3e5fc; font-family: "SF Mono", Consolas, monospace; font-size: 0.85rem; position: relative; padding-right: 3rem !important; }
+  .copy-btn {
+    position: absolute; top: 0.5rem; right: 0.5rem;
+    background: linear-gradient(135deg,#39FF14,#00c853);
+    color: #000; border: none; border-radius: 6px;
+    padding: 0.35rem 0.6rem; font-size: 0.75rem; font-weight: 800;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(57,255,20,0.3);
+    font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif;
+    letter-spacing: 0.5px;
+    user-select: none;
+  }
+  .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(57,255,20,0.5); }
+  .copy-btn:active { transform: translateY(0); }
+  .copy-btn.copied {
+    background: linear-gradient(135deg,#FFD700,#FFA500);
+    box-shadow: 0 2px 6px rgba(255,215,0,0.5);
+  }
+  .meta-table th { width: 22%; color:#FFD700; }
+  .note {
+    background: rgba(57,255,20,0.06); border-left: 3px solid #39FF14;
+    padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.9rem; color: #c8e6c9;
+  }
+  .warn {
+    background: rgba(236,72,153,0.08); border-left: 3px solid #ec4899;
+    padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.9rem;
+  }
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🎬 Shorts #01｜AT99 被刑事局封了！你的錢還拿得回來嗎？</h1>
+<p class="sub">改編來源：<code>/articles/at99-blocked-analysis/</code>｜全長 60 秒｜風格：動漫賽博龐克 × 紅黑霓虹危機感｜<strong style="color:#FF10F0">畫面比例 9:16 直式</strong></p>
+
+<!-- =========== 9:16 垂直構圖鐵律 =========== -->
+<div class="warn" style="margin:1.5rem 0 2rem;border-left:4px solid #FF10F0;background:linear-gradient(135deg,rgba(255,16,240,0.08),rgba(57,255,20,0.05))">
+  <h3 style="margin:0 0 0.6rem;color:#FF10F0">📱 9:16 垂直構圖鐵律（全片強制適用）</h3>
+  <ul style="margin:0;font-size:0.92rem">
+    <li><strong>畫面比例</strong>：<code>1080×1920（9:16）</code>，所有 AI Prompt 皆以此比例生成。</li>
+    <li><strong>安全區（Safe Zone）</strong>：所有關鍵視覺、字幕、芭樂子主體必須落在<strong>畫面中央 60%~70% 的垂直區域</strong>。</li>
+    <li><strong>UI 遮擋禁區</strong>：
+      <ul style="margin-top:0.3rem">
+        <li>🔝 上方 0~12%（YouTube/IG 帳號列、TikTok 搜尋條）→ <strong>不放主體與字幕</strong></li>
+        <li>🔻 下方 0~22%（讚／留言／訂閱／分享按鈕＋帳號浮水印）→ <strong>不放關鍵字幕、不放主體腰部以下重點</strong></li>
+        <li>👉 右側 0~15%（按讚／訂閱直排按鈕）→ <strong>不放重要 logo、文字、icon</strong></li>
+      </ul>
+    </li>
+    <li><strong>主體位置</strong>：芭樂子角色一律<strong>置於畫面中央偏上（垂直中線往上 5~10%）</strong>，避免下半身被按鈕擋掉。</li>
+    <li><strong>字幕擺放</strong>：主字幕固定在<strong>畫面垂直 55%~70% 區域</strong>（高於下方 UI 按鈕，低於人物臉部）。</li>
+    <li><strong>Logo / CTA</strong>：CTA 結尾畫面的 logo 與文字置於<strong>畫面正中央</strong>，絕不放在下方 22% 內。</li>
+  </ul>
+</div>
+
+<!-- =========== 區塊 1：影片基本資訊 =========== -->
+<h2>🧭 區塊 1｜影片基本資訊</h2>
+<table class="meta-table">
+  <tr><th>影片定位</th><td>反詐警示型 Shorts（高留存、高轉發）｜防詐三部曲・第一彈</td></tr>
+  <tr><th>總時長</th><td><strong>60 秒</strong>（7 個分鏡，平均每鏡 6–10 秒）</td></tr>
+  <tr><th>視覺主風格</th><td>動漫 cel-shading × 賽博龐克 × 紅警高張力｜霓虹綠 #39FF14、警示紅 #FF1744、洋紅 #FF10F0、黑底 #0a0a0a</td></tr>
+  <tr><th>節奏設計</th><td>0–3s 衝擊／3–32s 快剪推進（每 5–7s 切鏡）／32–45s 數據蒙太奇／45–60s 收尾＋CTA</td></tr>
+  <tr><th>音效基調</th><td>低頻警報嗡鳴（Hook）→ 玻璃碎裂音 → 機械齒輪轉動（換殼）→ 鍵盤打字聲 → 上揚收尾鈴音（CTA）</td></tr>
+  <tr><th>角色一致性</th><td><strong>所有分鏡的芭樂子，請依「圖1」的女性造型</strong>（綠髮、戰鬥服、戰鬥配件）；表情可參考圖2（操控）、圖3（驚嚇）</td></tr>
+</table>
+
+<h3>🎯 標題建議（3 選 1）</h3>
+<table>
+  <tr><th>類型</th><th>標題</th><th>特性</th></tr>
+  <tr>
+    <td class="shot">A 痛點型</td>
+    <td><strong>AT99 打不開！你的錢蒸發了？刑事局函文證據曝光</strong></td>
+    <td>關鍵字命中率最高｜CTR 預估★★★★★</td>
+  </tr>
+  <tr>
+    <td class="shot">B 警示型</td>
+    <td><strong>看到 at99tw.com.tw 別點！這是黑網「金蟬脫殼」</strong></td>
+    <td>長尾搜尋強｜SEO 友善｜CTR ★★★★</td>
+  </tr>
+  <tr>
+    <td class="shot">C 反差型</td>
+    <td><strong>不是倒閉！AT99 被政府「強制下架」的真相</strong></td>
+    <td>勾起好奇心｜分享率高｜CTR ★★★★</td>
+  </tr>
+</table>
+
+<h3>🏷️ Hashtags（YouTube / IG / TikTok 通用）</h3>
+<div class="note">
+#AT99 #AT99封鎖 #at99tw #娛樂城詐騙 #黑網 #刑事警察局 #詐欺犯罪危害防制條例 #165反詐騙 #芭樂子 #GAME8LA #金蟬脫殼 #網域封鎖 #博弈防詐 #台灣娛樂城 #反詐騙
+</div>
+
+<h3>🖼 縮圖文案建議（5 字內大字）</h3>
+<table>
+  <tr><th>縮圖文案</th><th>視覺主體</th></tr>
+  <tr><td><strong>「錢沒了」</strong>＋紅色封鎖紅條</td><td>芭樂子（依圖1造型）怒砸 AT99 招牌，火花四射</td></tr>
+  <tr><td><strong>「別再儲值！」</strong></td><td>芭樂子（依圖1造型）一手擋下手機推來的「新網址」訊息</td></tr>
+</table>
+
+
+<!-- =========== 區塊 2：分鏡腳本表 =========== -->
+<h2>🎞️ 區塊 2｜分鏡腳本表（60 秒｜7 鏡）</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width:5%">#</th>
+      <th style="width:8%">秒數</th>
+      <th style="width:9%">階段</th>
+      <th style="width:30%">畫面動作</th>
+      <th style="width:28%">旁白／字幕</th>
+      <th style="width:20%">運鏡＋音效</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="hook">
+      <td class="shot">01</td>
+      <td class="time">0–3s</td>
+      <td><span class="badge b-hook">HOOK</span></td>
+      <td>畫面瞬間從黑暗中亮起一個血紅色「⛔ 此網域已遭封鎖」告示牌。芭樂子（依圖1造型）從畫面右側爆衝入鏡，<strong>右拳灌入巨大綠色霓虹電光，一拳將紅色告示牌轟得粉碎</strong>，玻璃碎片飛濺。</td>
+      <td>
+        <span class="narration">「你的錢——還在 AT99 裡嗎？」</span>
+        <span class="caption">字幕：⛔ AT99 已封鎖｜刑詐防字第 1146166136 號</span>
+      </td>
+      <td>低角度仰拍 + 極速推鏡｜🔊 低頻轟鳴 + 玻璃碎裂</td>
+    </tr>
+    <tr>
+      <td class="shot">02</td>
+      <td class="time">3–10s</td>
+      <td><span class="badge b-build">鋪陳</span></td>
+      <td>鏡頭快速 zoom in 到一支手機螢幕，顯示 <code>at99.com.tw</code> 紅色封鎖頁。芭樂子（依圖1造型）<strong>單膝半蹲、手持發光放大鏡</strong>湊近螢幕，眉頭緊皺、眼神銳利，放大鏡內浮現「刑事警察局」官方印章。</td>
+      <td>
+        <span class="narration">「不是倒閉！是政府『函令封鎖』。」</span>
+        <span class="caption">字幕：⚠️ 不是倒閉，是強制下架</span>
+      </td>
+      <td>螢幕內視角 → 拉開廣角｜🔊 機械鎖死 ka-chunk</td>
+    </tr>
+    <tr>
+      <td class="shot">03</td>
+      <td class="time">10–20s</td>
+      <td><span class="badge b-build">鋪陳</span></td>
+      <td>畫面分割為左右兩屏：左邊「倒閉」icon 慢慢熄滅；右邊「封鎖」icon 出現警燈閃爍。芭樂子（依圖1造型）<strong>站在兩屏中間，雙手張開，左右大力一推</strong>把兩屏對撞，中間爆出紅色火花，浮現「刑事偵查中」血紅大字。</td>
+      <td>
+        <span class="narration">「倒閉錢還在，封鎖——可能一毛都拿不回。」</span>
+        <span class="caption">字幕：倒閉 ≠ 封鎖｜追回機率 &lt; 5%</span>
+      </td>
+      <td>對稱分割鏡頭 + 中央衝擊推鏡｜🔊 雙重金屬撞擊聲</td>
+    </tr>
+    <tr>
+      <td class="shot">04</td>
+      <td class="time">20–32s</td>
+      <td><span class="badge b-twist">翻轉</span></td>
+      <td>一支詭異的綠色蛇形 URL「<code>at99tw.com.tw</code>」從黑暗中蜿蜒爬向觀眾。芭樂子（依圖1造型）<strong>誇張地驚恐後仰、雙手交叉護胸 X 大喊「STOP！」</strong>，左掌打出一道綠色光牆把蛇形 URL 整個切斷。</td>
+      <td>
+        <span class="narration">「換新網址 at99tw？那是『金蟬脫殼』陷阱！」</span>
+        <span class="caption">字幕：🐍 換殼黑網 = 二次詐騙</span>
+      </td>
+      <td>第一人稱衝擊視角 + Dutch angle 傾斜｜🔊 蛇嘶聲 → 防護罩衝擊音</td>
+    </tr>
+    <tr>
+      <td class="shot">05</td>
+      <td class="time">32–45s</td>
+      <td><span class="badge b-twist">翻轉</span></td>
+      <td>背景切到霓虹銀行金庫，三個血紅章「金流凍結」「支付斷掉」「平台落跑」依序砸下。芭樂子（依圖1造型）<strong>像格鬥遊戲一樣連續三次出拳</strong>，每拳對應一個血紅章爆裂粉碎，最後一拳定格姿勢，背後爆出「💀」骷髏特效。</td>
+      <td>
+        <span class="narration">「銀行凍、支付斷、平台跑——三重死亡警訊。」</span>
+        <span class="caption">字幕：💀 換網域 = 收攤倒數</span>
+      </td>
+      <td>連續三段快剪 + 拳擊定格｜🔊 三聲沉重出拳音 + 骷髏陰風</td>
+    </tr>
+    <tr>
+      <td class="shot">06</td>
+      <td class="time">45–55s</td>
+      <td><span class="badge b-cta">解法</span></td>
+      <td>場景一秒切到賽博龐克作戰指揮中心。芭樂子（依圖1造型，可參考圖2的操控姿態）<strong>雙手快速滑動三面懸浮全息螢幕</strong>，每滑一下就跳出一個綠色 ✅ 大勾：①GLI 認證 ②whois 註冊年齡 ③165 高風險名單。每勾完一個，畫面震動一次。</td>
+      <td>
+        <span class="narration">「3 招快篩：認證、年齡、165——中 1 項就快撤！」</span>
+        <span class="caption">字幕：✅ 3 步快篩｜30 秒辨識黑網</span>
+      </td>
+      <td>環繞推軌 + 三面螢幕特寫｜🔊 全息介面音 + 勾選確認音</td>
+    </tr>
+    <tr>
+      <td class="shot">07</td>
+      <td class="time">55–60s</td>
+      <td><span class="badge b-cta">CTA</span></td>
+      <td>畫面歸零成黑底，芭樂子（依圖1造型）站在中央，<strong>左手指向上方，右手對鏡頭比出「往下滑」的誇張箭頭手勢，眨眼俏皮笑</strong>。背後浮出 GAME8LA 綠色 logo 與「完整 165 報案 SOP」金色發光文字。</td>
+      <td>
+        <span class="narration">「完整自救 SOP，留言『AT99』我寄給你！」</span>
+        <span class="caption">字幕：📌 追蹤芭樂子｜下一支：金蟬脫殼真相</span>
+      </td>
+      <td>正面定格鏡頭 + 緩慢推近｜🔊 上揚鈴音 + Logo 砰一下出現</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- =========== 區塊 3：AI Video Prompt（中英對照）=========== -->
+<h2>🎨 區塊 3｜AI Video Prompt（中／英 雙版本）</h2>
+<p class="sub">📌 所有分鏡的角色設定統一指令：<strong>「請依圖1的女性造型，動作要誇張戲劇化、不能呆板」</strong>。建議丟給 Runway Gen-3、Kling 1.6、Pika 2.0 時，把參考圖1作為角色 reference image 一併上傳。<br>
+📱 <strong>所有 Prompt 已強制標註 9:16 vertical / 主體置中 / 上下安全區留白</strong>，避免主體被 Shorts UI 按鈕遮擋。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:5%">#</th>
+      <th style="width:47.5%">🇹🇼 中文 Prompt（內部討論用）</th>
+      <th style="width:47.5%">🇬🇧 English Prompt（直接餵 Runway/Kling/Pika）</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td class="shot">01</td>
+      <td class="prompt-cn">
+        【9:16 直式構圖｜1080×1920｜主體置中略偏上｜上下安全區留白】請依圖1的女性造型，主角從畫面正中央偏上位置爆衝入鏡，誇張戰鬥姿態，右拳灌入巨大綠色霓虹電光，一拳將前方一塊血紅色「網域封鎖」告示牌轟成粉碎，玻璃碎片以垂直方向向鏡頭爆射。低角度仰拍，極速推鏡 push-in，賽博龐克霓虹綠＋洋紅燈光，背景是黑色資料矩陣與閃爍紅色警告燈，動漫 cel-shading 風格，8K 高細節，動態模糊，電影級爆破，60fps 慢動作捕捉碎片飛濺。重要視覺集中於畫面中段（垂直 25%~75% 區域），下方留白給字幕與 UI。
+      </td>
+      <td class="prompt-en">
+        [9:16 vertical composition, 1080x1920, subject centered slightly upper-mid, top/bottom safe zones reserved] Anime girl character (refer to Image 1 for character design), explosive entry from upper-center frame with dramatic battle pose, right fist surging with massive green neon lightning, smashing a blood-red "DOMAIN BLOCKED" warning sign into shattering glass shards exploding vertically toward camera. Low-angle hero shot, fast push-in, cyberpunk neon green and magenta lighting, background filled with black data matrix and flashing red alert lights, anime cel-shading style, 8K highly detailed, motion blur, cinematic explosion, 60fps slow-motion shard burst. Key visuals confined within central 25%-75% vertical band, bottom area kept clear for caption and Shorts UI overlays.
+      </td>
+    </tr>
+
+    <tr>
+      <td class="shot">02</td>
+      <td class="prompt-cn">
+        【9:16 直式構圖｜1080×1920｜手機螢幕與主角臉部置中｜下方 22% 留白】請依圖1的女性造型，主角單膝半蹲於畫面中央，雙手握著一支會發出綠色螢光的偵探放大鏡，緊湊湊近一支垂直擺放的懸浮手機螢幕（手機本身就是 9:16 直式），螢幕顯示血紅色「at99.com.tw 此網域已遭封鎖」告示頁，眉頭緊皺、眼神銳利凝視，放大鏡內浮現金色「刑事警察局」官方印章浮水印。鏡頭從螢幕內視角拉開到廣角，霓虹綠＋紅色雙色光，賽博龐克調查場景，動漫風格，8K，景深淺，浮動數據粒子環繞。手機螢幕高度限定在畫面 30%~70% 垂直區，避免上下方 UI 遮擋。
+      </td>
+      <td class="prompt-en">
+        [9:16 vertical composition, 1080x1920, phone screen and face dead-center, bottom 22% reserved] Anime girl character (refer to Image 1 for character design), kneeling on one knee at frame center, holding a glowing green detective magnifying glass close to a vertically-oriented floating smartphone screen (phone is itself 9:16) displaying a blood-red "DOMAIN BLOCKED — at99.com.tw" warning page, tense furrowed brow and sharp focused gaze, golden police-bureau official seal watermark emerging inside the magnifier. Camera pulls from inside-screen POV to wide shot, neon green and red dual lighting, cyberpunk investigation scene, anime style, 8K, shallow depth of field, floating data particles swirling around. Phone screen height confined to vertical 30%-70% band, top and bottom safe zones kept clear of UI conflicts.
+      </td>
+    </tr>
+
+    <tr>
+      <td class="shot">03</td>
+      <td class="prompt-cn">
+        【9:16 直式構圖｜1080×1920｜上下分屏垂直堆疊｜主體置中】請依圖1的女性造型，主角站立於畫面正中央，背景採「上下分屏」垂直堆疊（適合 9:16）：上半屏是漸暗的「倒閉」icon、下半屏是閃爍紅色警燈的「封鎖」icon。主角誇張地雙臂大開、瞪大眼睛，雙手分別向上、向下用力一推、把上下兩屏猛烈對撞，中央爆出紅色火花並浮現血紅大字「刑事偵查中」（大字置於畫面垂直 45%~60% 區）。對稱構圖，中央衝擊推鏡，霓虹紅＋綠對比，動漫戰鬥風格，8K，重力衝擊扭曲特效，運動模糊。下方 22% 留白避開 UI 按鈕。
+      </td>
+      <td class="prompt-en">
+        [9:16 vertical composition, 1080x1920, vertically stacked split screens, subject dead-center] Anime girl character (refer to Image 1 for character design), standing dead-center, background vertically split: upper half dimming "BANKRUPT" icon, lower half flashing red-alarm "BLOCKED" icon. Character with dramatic wide-open arms and bulging eyes, forcefully pushing the two halves up and down to violently collide, exploding red sparks at center revealing blood-red text "CRIMINAL INVESTIGATION ONGOING" placed at vertical 45%-60% band. Symmetrical composition, central impact push-in, neon red vs green contrast, anime battle style, 8K, gravity-shockwave distortion VFX, motion blur. Bottom 22% kept clear for Shorts UI overlays.
+      </td>
+    </tr>
+
+    <tr>
+      <td class="shot">04</td>
+      <td class="prompt-cn">
+        【9:16 直式構圖｜1080×1920｜蛇形 URL 從下而上垂直爬升｜主體置中略偏上】請依圖1的女性造型，前景一條詭異的綠色蛇形霓虹 URL「at99tw.com.tw」從畫面下方往上垂直蜿蜒爬向鏡頭（順應 9:16 直式），蛇身由發光程式碼組成。主角站於畫面中央偏上，誇張地驚恐後仰、雙手交叉護胸成 X 型張嘴大喊「STOP」，下一瞬間左掌打出一道厚實的綠色光牆橫向切斷蛇形 URL，蛇身爆裂成像素粒子向四周飛散。第一人稱衝擊視角，Dutch angle 傾斜構圖，霓虹紫綠燈光，動漫風格，8K，魚眼變形＋粒子爆破特效。蛇尾起點落於畫面下方 22% 邊界外，避免被 UI 遮擋。
+      </td>
+      <td class="prompt-en">
+        [9:16 vertical composition, 1080x1920, snake-URL rising vertically from bottom to top, subject upper-mid center] Anime girl character (refer to Image 1 for character design), foreground a sinister neon-green snake-shaped URL "at99tw.com.tw" slithering vertically upward from the bottom of the frame toward camera (following 9:16 flow), its body made of glowing code. Character positioned upper-mid center with exaggerated terrified lean-back, arms crossed in protective X-pose, mouth wide open shouting "STOP", next instant left palm thrusts a thick green horizontal energy wall slicing the snake-URL apart, snake body shattering into pixel particles bursting outward. First-person impact POV, Dutch tilted angle, neon purple-green lighting, anime style, 8K, fisheye distortion + particle burst VFX. Snake tail origin starts above the bottom 22% UI safe-zone boundary.
+      </td>
+    </tr>
+
+    <tr>
+      <td class="shot">05</td>
+      <td class="prompt-cn">
+        【9:16 直式構圖｜1080×1920｜三個血紅章由上而下依序落下｜主體置中】請依圖1的女性造型，背景切換為霓虹發光的銀行金庫，三個帶血紅印章的牌子「FROZEN 金流凍結」「CUT 支付斷掉」「RUNAWAY 平台落跑」依序從畫面上方依序垂直降落（順應 9:16 直式節奏）。主角站於畫面中央偏上，擺出格鬥遊戲決勝姿勢，連續三次誇張出拳，每一拳對應一塊血紅章爆裂粉碎成碎片，最後一拳完成漫畫式定格姿勢，背後爆出巨大白色骷髏「💀」能量特效（骷髏置於主角頭頂後方，垂直 15%~40% 區）。連續三段快剪 + 拳擊定格運鏡，紅金對比燈光，動漫戰鬥風格，8K，速度線特效，重擊衝擊波。下方 22% 留白給字幕與 UI。
+      </td>
+      <td class="prompt-en">
+        [9:16 vertical composition, 1080x1920, three blood-red stamps dropping top-to-bottom, subject dead-center] Anime girl character (refer to Image 1 for character design), background shifts to a neon-glowing bank vault, three blood-red stamped signs "FROZEN", "CUT", "RUNAWAY" dropping vertically from top in sequence (matching 9:16 flow). Character at upper-mid center in fighting-game finisher stance, throwing three exaggerated consecutive punches, each punch shattering one stamped sign into fragments, final punch freezes in comic-style pose with a massive white skull "💀" energy aura bursting behind (skull placed in vertical 15%-40% band above the character's head). Three-shot rapid cut with punch-freeze framing, red and gold contrast lighting, anime battle style, 8K, speed-line VFX, heavy impact shockwave. Bottom 22% kept clear for caption and Shorts UI.
+      </td>
+    </tr>
+
+    <tr>
+      <td class="shot">06</td>
+      <td class="prompt-cn">
+        【9:16 直式構圖｜1080×1920｜三面螢幕垂直堆疊｜主體置中】請依圖1的女性造型（操控姿態可參考圖2），主角站在賽博龐克作戰指揮中心畫面正中央，雙手快速滑動三面懸浮全息螢幕（三面螢幕由上而下垂直堆疊排列，順應 9:16 直式），每滑一下螢幕跳出一個放大的綠色 ✅ 大勾：①GLI 國際認證 ②whois 網域年齡 ③165 高風險名單。每勾完一個，畫面震動一次並亮起綠色光暈。環繞推軌鏡頭從低到高，三面全息螢幕特寫，霓虹綠＋藍光主調，動漫科技風格，8K，全息介面 UI 設計細節，背景虛化資料粒子。三面螢幕區域限制於垂直 15%~78% 內，避開上下安全區與右側按讚按鈕區。
+      </td>
+      <td class="prompt-en">
+        [9:16 vertical composition, 1080x1920, three holographic screens vertically stacked, subject dead-center] Anime girl character (refer to Image 1 for character design, operating posture can reference Image 2), standing dead-center in a cyberpunk command center, both hands rapidly swiping across three floating holographic screens stacked vertically top-to-bottom (matching 9:16 flow), each swipe popping out a giant green ✅ checkmark: ①GLI international certification ②whois domain age ③165 high-risk watchlist. Each checkmark triggers a screen-shake and green glow burst. Orbiting dolly camera from low to high, three holographic screen close-ups, neon green and blue palette, anime tech style, 8K, holographic UI design details, blurred data particles in background. Three screens confined within vertical 15%-78% band, avoiding top/bottom safe zones and right-side action-button area.
+      </td>
+    </tr>
+
+    <tr>
+      <td class="shot">07</td>
+      <td class="prompt-cn">
+        【9:16 直式構圖｜1080×1920｜主體與 logo 全部置於畫面正中央｜下方 22% 全淨空】請依圖1的女性造型，純黑背景，主角站在畫面正中央偏上（垂直 30%~65% 區），左手食指誇張向上指、右手對鏡頭比出大大的「往下滑」箭頭手勢，俏皮眨單眼微笑。「GAME8LA」霓虹綠 logo 置於主角頭頂上方（垂直 15%~25%），金色發光大字「完整 165 報案 SOP」置於主角胸前位置（垂直 50%~62%），絕不擺到畫面下方 22% 內以避開讚／留言／訂閱按鈕。金色光粒子由下往上飛舞。正面平拍，緩慢推近鏡頭，霓虹綠＋金色雙色主光，動漫角色介紹風格，8K，乾淨構圖，logo 出場時加入一次螢幕震動。
+      </td>
+      <td class="prompt-en">
+        [9:16 vertical composition, 1080x1920, character + logo + CTA text all dead-center, bottom 22% completely empty] Anime girl character (refer to Image 1 for character design), pure black background, character standing upper-mid center (vertical 30%-65% band), left index finger pointing up in exaggerated gesture, right hand making big "swipe-down" arrow gesture toward camera, playful single-eye wink with smile. Neon-green "GAME8LA" logo placed above her head (vertical 15%-25%), golden glowing text "Full 165 Report SOP" placed at her chest level (vertical 50%-62%) — never inside the bottom 22% UI safe zone to avoid like/comment/subscribe button overlap. Golden particle motes drifting upward from below. Frontal eye-level shot, slow push-in, neon green and gold dual key light, anime character-intro style, 8K, clean composition, single screen-shake when logo appears.
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+<!-- =========== 區塊 4：CTA & 標題優化 =========== -->
+<h2>📢 區塊 4｜CTA 文案 & 留存優化建議</h2>
+
+<h3>結尾 CTA（3 種版本，依目標選用）</h3>
+<table>
+  <tr><th>類型</th><th>文案</th><th>適用情境</th></tr>
+  <tr>
+    <td class="shot">📩 引導留言型</td>
+    <td>「留言『<strong>AT99</strong>』我寄完整 165 報案 SOP 給你！」</td>
+    <td>衝互動率／養名單｜建議首選</td>
+  </tr>
+  <tr>
+    <td class="shot">🔔 訂閱型</td>
+    <td>「下一支拆『金蟬脫殼』黑網真相──按下訂閱別錯過。」</td>
+    <td>衝頻道訂閱／系列留存</td>
+  </tr>
+  <tr>
+    <td class="shot">🔗 引流文章型</td>
+    <td>「完整自救指南 → 搜尋 <strong>GAME8LA AT99</strong>」</td>
+    <td>導流網站／衝 SEO</td>
+  </tr>
+</table>
+
+<h3>📈 留存率優化備忘</h3>
+<div class="note">
+  <ul>
+    <li><strong>0–3 秒</strong>：拳擊碎玻璃 + 紅色封鎖條 = 強視覺衝擊，避免演算法跳出</li>
+    <li><strong>5 秒處</strong>：第一次出現「函令編號」具體數字，建立可信度（演算法偏好可驗證資訊）</li>
+    <li><strong>每 5–7 秒切鏡一次</strong>：配合 Shorts 觀眾平均專注秒數</li>
+    <li><strong>第 32 秒</strong>：用「💀 收攤倒數」字幕製造小高潮，挽回中段流失</li>
+    <li><strong>留言鉤子</strong>：CTA 用「留言＋暗號」是 Shorts 演算法最愛的互動信號</li>
+  </ul>
+</div>
+
+<div class="warn">
+  <strong>⚠️ 合規提醒</strong>：本片僅以「反詐警示／法律科普」為目的，全片不出現任何疑似換殼網域的可點擊連結；提及 <code>at99tw.com.tw</code> 時，畫面以「蛇形＋切斷」視覺化處理，避免演算法判定為導流推廣。上稿時建議於 YouTube 描述加註：「本影片為公益反詐內容，引用刑事警察局公開函文，零商業合作。」
+</div>
+
+<h3>🎬 連續拍攝建議</h3>
+<div class="note">
+  本片是「<strong>反詐三部曲・第一彈</strong>」。建議結尾預告下一支主題：<strong>「為什麼黑網一直換網址？金蟬脫殼 4 大內幕」</strong>（對應 <code>/articles/domain-hopping-scam-truth/</code>）──能形成系列追蹤，平均提升 30–50% 完播率與訂閱轉換。
+</div>
+
+<p style="text-align:center;margin-top:3rem;color:#666;font-size:0.85rem">
+🥑 GAME8LA Shorts Studio｜腳本 #01｜由芭樂子與 AI 共創
+</p>
+
+</div>
+
+<script>
+  // 自動為每個 Prompt 欄位加上「📋 複製」按鈕
+  document.addEventListener('DOMContentLoaded', () => {
+    const cells = document.querySelectorAll('td.prompt-cn, td.prompt-en');
+    cells.forEach(cell => {
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.type = 'button';
+      btn.textContent = '📋 複製';
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        // 取得不含按鈕的純文字
+        const text = cell.textContent.replace(/^\s*📋\s*複製\s*/,'').replace(/^\s*✅\s*已複製\s*/,'').trim();
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.textContent = '✅ 已複製';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = '📋 複製';
+            btn.classList.remove('copied');
+          }, 1500);
+        } catch (err) {
+          // Fallback for older browsers
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          btn.textContent = '✅ 已複製';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = '📋 複製';
+            btn.classList.remove('copied');
+          }, 1500);
+        }
+      });
+      cell.appendChild(btn);
+    });
+  });
+</script>
+
+</body>
+</html>
