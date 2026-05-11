@@ -18,15 +18,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <!-- 問題選擇區 -->
   <div class="bless-section">
-    <div class="bless-question-chips" id="questionChips">
-      <button type="button" class="q-chip active" data-q="heart">😌 心中默念</button>
-      <button type="button" class="q-chip" data-q="0">今天運勢如何？</button>
-      <button type="button" class="q-chip" data-q="1">這個決定對嗎？</button>
-      <button type="button" class="q-chip" data-q="2">今天會有好事嗎？</button>
-      <button type="button" class="q-chip" data-q="3">我該改變方向嗎？</button>
-      <button type="button" class="q-chip" data-q="4">今天適合買彩券嗎？</button>
-      <button type="button" class="q-chip" data-q="5">今天手氣好不好？</button>
-    </div>
+    <select class="bless-select" id="questionSelect">
+      <option value="heart" selected>😌 心中默念</option>
+      <option value="0">今天運勢如何？</option>
+      <option value="1">這個決定對嗎？</option>
+      <option value="2">今天會有好事嗎？</option>
+      <option value="3">我該改變方向嗎？</option>
+      <option value="4">今天適合買彩券嗎？</option>
+      <option value="5">今天手氣好不好？</option>
+    </select>
   </div>
 
   <!-- 擲筊互動區（結果合併顯示） -->
@@ -99,6 +99,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- 連聖筊圖片 overlay（蓋在筊杯上方） -->
+    <div class="streak-overlay" id="streakOverlay" style="display:none">
+      <img class="streak-img" id="streakImg" src="" alt="" width="280" height="280">
     </div>
 
     <!-- 擲筊按鈕 -->
@@ -285,45 +290,38 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     color: #eee;
   }
 
-  /* === QUESTION CHIPS === */
-  .bless-question-chips {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 600px;
+  /* === QUESTION SELECT === */
+  .bless-select {
+    display: block;
+    width: 100%;
+    max-width: 320px;
     margin: 1.5rem auto;
-  }
-  .q-chip {
-    background: rgba(255,255,255,0.05);
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 20px;
-    color: #aaa;
-    padding: 8px 16px;
+    border-radius: 10px;
+    color: #eee;
+    font-size: 0.95rem;
     cursor: pointer;
-    font-size: 0.88rem;
-    transition: all 0.2s;
-    line-height: 1.4;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
   }
-  .q-chip:hover {
+  .bless-select:focus {
+    outline: none;
     border-color: var(--guava-green, #39FF14);
-    color: #fff;
+    box-shadow: 0 0 0 2px rgba(57,255,20,0.15);
   }
-  .q-chip.active {
-    background: rgba(57,255,20,0.15);
-    border-color: var(--guava-green, #39FF14);
-    color: var(--guava-green, #39FF14);
-    font-weight: 700;
-  }
-  @media (max-width: 480px) {
-    .q-chip {
-      font-size: 0.82rem;
-      padding: 6px 12px;
-    }
+  .bless-select option {
+    background: #1a1a1a;
+    color: #eee;
   }
 
   /* === ARENA === */
   .bless-arena {
+    position: relative;
     max-width: 500px;
     margin: 2rem auto;
     text-align: center;
@@ -346,6 +344,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     align-items: center;
     perspective: 600px;
     min-height: 100px;
+    transition: opacity 0.4s ease;
   }
   .bless-block {
     width: 100px;
@@ -580,6 +579,40 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   @keyframes streakGlow {
     0%,100% { box-shadow: 0 0 10px rgba(57,255,20,0.3); }
     50% { box-shadow: 0 0 25px rgba(57,255,20,0.6); }
+  }
+
+  /* === 連聖筊圖片 overlay === */
+  .streak-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .streak-img {
+    width: 330px;
+    height: 330px;
+    object-fit: contain;
+    border-radius: 20px;
+    filter: drop-shadow(0 0 30px rgba(57,255,20,0.5)) drop-shadow(0 0 60px rgba(245,184,0,0.3));
+    animation: streakPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes streakPop {
+    0% { opacity: 0; transform: scale(0.3) translateY(20px); }
+    60% { opacity: 1; transform: scale(1.08) translateY(-5px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .streak-img.epic {
+    width: 360px;
+    height: 360px;
+    filter: drop-shadow(0 0 40px rgba(245,184,0,0.6)) drop-shadow(0 0 80px rgba(57,255,20,0.4));
+  }
+  @media (max-width: 480px) {
+    .streak-img { width: 260px; height: 260px; }
+    .streak-img.epic { width: 300px; height: 300px; }
   }
 
   .bless-result-actions {
@@ -927,6 +960,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .bless-streak {
       animation: none;
     }
+    .streak-img {
+      animation: none;
+      opacity: 1;
+    }
   }
 </style>
 
@@ -1197,8 +1234,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   // =================================================================
   // DOM
   // =================================================================
-  var questionChips = document.getElementById('questionChips');
-  var allChips = questionChips.querySelectorAll('.q-chip');
+  var questionSelect = document.getElementById('questionSelect');
   var throwBtn = document.getElementById('throwBtn');
   var againBtn = document.getElementById('againBtn');
   var block1 = document.getElementById('block1');
@@ -1208,20 +1244,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   var resultTypeEl = document.getElementById('resultType');
   var resultDescEl = document.getElementById('resultDesc');
 
-  // Question selection (chip buttons)
-  allChips.forEach(function(chip) {
-    chip.addEventListener('click', function() {
-      allChips.forEach(function(c) { c.classList.remove('active'); });
-      chip.classList.add('active');
-      var val = chip.getAttribute('data-q');
-      if (val === 'heart') {
-        currentQ = -1;
-        isCustom = true;
-      } else {
-        currentQ = parseInt(val);
-        isCustom = false;
-      }
-    });
+  // Question selection (dropdown)
+  questionSelect.addEventListener('change', function() {
+    var val = questionSelect.value;
+    if (val === 'heart') {
+      currentQ = -1;
+      isCustom = true;
+    } else {
+      currentQ = parseInt(val);
+      isCustom = false;
+    }
   });
   // Default: 心裡告知 = custom mode
   isCustom = true;
@@ -1357,22 +1389,45 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     // Streak easter egg — 連 2+ 聖筊時取代普通回覆
     var streakArea = document.getElementById('streakArea');
+    var streakOverlay = document.getElementById('streakOverlay');
+    var streakImg = document.getElementById('streakImg');
+    var blocksWrap = document.querySelector('.bless-blocks-wrap');
+
     if (consecutiveSheng >= 3) {
       var tripleMsg = getStreakMsg(consecutiveSheng);
       streakArea.textContent = tripleMsg;
       streakArea.style.display = 'block';
       resultQuoteEl.style.display = 'none';
       reply = tripleMsg;
+
+      // 顯示連聖筊慶祝圖片（3~10，超過10用10的圖）
+      var imgNum = Math.min(consecutiveSheng, 10);
+      var imgPath = '/images/tools/streak/streak-' + String(imgNum).padStart(3, '0') + '.webp';
+      streakImg.src = imgPath;
+      streakImg.alt = imgNum + '連聖筊達成！';
+      streakImg.className = consecutiveSheng >= 7 ? 'streak-img epic' : 'streak-img';
+      streakOverlay.style.display = 'flex';
+      blocksWrap.style.opacity = '0.15';
+
+      // 2.5 秒後自動淡出圖片，恢復筊杯
+      setTimeout(function() {
+        streakOverlay.style.display = 'none';
+        blocksWrap.style.opacity = '1';
+      }, 2500);
     } else if (consecutiveSheng === 2) {
       var pct = (Math.pow(0.5, 2) * 100).toFixed(0); // 25%
       streakArea.textContent = '🔥 加油！你的好運已進入 ' + pct + '% 的門檻，再一筊聖筊，神明就答應了！';
       streakArea.style.display = 'block';
       resultQuoteEl.style.display = 'none';
       reply = '連兩聖筊！再一筊就是三聖筊了！';
+      streakOverlay.style.display = 'none';
+      blocksWrap.style.opacity = '1';
     } else {
       resultQuoteEl.textContent = '「' + reply + '」';
       resultQuoteEl.style.display = 'block';
       streakArea.style.display = 'none';
+      streakOverlay.style.display = 'none';
+      blocksWrap.style.opacity = '1';
     }
 
     resultHeader.style.display = 'block';
@@ -1390,6 +1445,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     updateStats();
     updateLog();
     saveToStorage();
+
+    // 手機版自動捲動：讓 h1 標題對齊螢幕頂部
+    if (window.innerWidth <= 768) {
+      setTimeout(function() {
+        var hero = document.querySelector('.bless-hero');
+        if (hero) {
+          var top = hero.getBoundingClientRect().top + window.pageYOffset - 10;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      }, 300);
+    }
   }
 
   function updateStats() {
@@ -1488,6 +1554,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     resultTypeEl.textContent = '🙏 虔誠默念，準備好再擲';
     resultTypeEl.className = 'bless-result-type bless-pre-hint';
     resultDescEl.textContent = '';
+    // 隱藏連聖筊圖片 overlay
+    var streakOverlay = document.getElementById('streakOverlay');
+    var blocksWrap = document.querySelector('.bless-blocks-wrap');
+    streakOverlay.style.display = 'none';
+    blocksWrap.style.opacity = '1';
     // Reset block visuals
     block1.className = 'bless-block';
     block2.className = 'bless-block';
