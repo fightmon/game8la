@@ -1,0 +1,744 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "什麼是打碼量？",
+      "acceptedAnswer": { "@type": "Answer", "text": "打碼量就是你必須累計下注的金額才能提款。例如打碼倍數 20 倍、存款加紅利共 2000 元，你就要下注 40,000 元才能出金。" }
+    },
+    {
+      "@type": "Question",
+      "name": "娛樂城紅利值得拿嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "取決於打碼倍數和遊戲類型。打碼倍數越高、有效投注比例越低，紅利的實際價值就越差。用計算器算一次就知道值不值得。" }
+    },
+    {
+      "@type": "Question",
+      "name": "有效投注比例是什麼意思？",
+      "acceptedAnswer": { "@type": "Answer", "text": "有些娛樂城規定特定遊戲的投注只算部分有效。例如百家樂只算 30%，表示你押 1000 元只計入 300 元打碼量，實際要押的金額會變成 3.3 倍。" }
+    }
+  ]
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "娛樂城獎金計算器 — 打碼量與預期虧損試算",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "62" }
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
+<BaseLayout
+  currentPage="tools"
+  title="娛樂城獎金計算器（免費）｜打碼量試算、紅利值不值得拿一算就知 - GAME8LA"
+  description="免費線上娛樂城獎金計算器！輸入存款、贈送金額、打碼倍數，即時算出總打碼量、預期虧損、淨收益。芭樂子幫你判斷這個紅利值不值得拿，別再被「存 20000 送 2000」騙了。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="bc-hero">
+    <h1>💰 娛樂城獎金計算器</h1>
+    <p class="bc-slogan">存多少送多少？算一下就知道是糖還是毒。</p>
+    <p class="bc-desc">輸入娛樂城的紅利條件，芭樂子幫你算出打碼量、預期虧損，告訴你這個紅利到底值不值得拿。</p>
+  </div>
+
+  <!-- 計算器主體 -->
+  <div class="bc-calc-wrap">
+    <div class="bc-inputs">
+      <div class="bc-field">
+        <label for="deposit">存款金額 (TWD)</label>
+        <input type="number" id="deposit" value="10000" min="0" step="1000" inputmode="numeric">
+      </div>
+      <div class="bc-field">
+        <label for="bonus">贈送金額 (TWD)</label>
+        <input type="number" id="bonus" value="1000" min="0" step="100" inputmode="numeric">
+        <span class="bc-pct" id="bonusPct">= 紅利 10%</span>
+      </div>
+      <div class="bc-field">
+        <label for="wager">打碼倍數</label>
+        <input type="number" id="wager" value="20" min="1" max="100" step="1" inputmode="numeric">
+        <span class="bc-hint">常見範圍：1x ~ 60x</span>
+      </div>
+      <div class="bc-field">
+        <label for="gameType">遊戲類型</label>
+        <select id="gameType">
+          <option value="baccarat" selected>百家樂（RTP 98.76%）</option>
+          <option value="slots_high">老虎機 — 高 RTP（96%）</option>
+          <option value="slots_mid">老虎機 — 中 RTP（93%）</option>
+          <option value="slots_low">老虎機 — 低 RTP（88%）</option>
+          <option value="sports">體育投注（RTP ~95%）</option>
+          <option value="roulette">輪盤（RTP 97.3%）</option>
+          <option value="blackjack">21 點（RTP 99.5%）</option>
+          <option value="custom">自訂 RTP</option>
+        </select>
+      </div>
+      <div class="bc-field bc-custom-rtp" id="customRtpWrap" style="display:none">
+        <label for="customRtp">自訂 RTP (%)</label>
+        <input type="number" id="customRtp" value="96" min="50" max="100" step="0.1" inputmode="decimal">
+      </div>
+      <div class="bc-field">
+        <label for="validRatio">有效投注比例 (%)</label>
+        <input type="number" id="validRatio" value="100" min="1" max="100" step="1" inputmode="numeric">
+        <span class="bc-hint">百家樂常見 30%，老虎機通常 100%</span>
+      </div>
+    </div>
+
+    <!-- 結果區 -->
+    <div class="bc-result" id="resultArea">
+      <div class="bc-result-grid">
+        <div class="bc-stat">
+          <span class="bc-stat-label">紅利百分比</span>
+          <span class="bc-stat-value" id="rBonusPct">10%</span>
+        </div>
+        <div class="bc-stat">
+          <span class="bc-stat-label">總打碼量</span>
+          <span class="bc-stat-value" id="rWagerTotal">220,000</span>
+        </div>
+        <div class="bc-stat">
+          <span class="bc-stat-label">實際要押注</span>
+          <span class="bc-stat-value" id="rActualBet">220,000</span>
+        </div>
+        <div class="bc-stat">
+          <span class="bc-stat-label">預期虧損</span>
+          <span class="bc-stat-value bc-loss" id="rExpLoss">-2,728</span>
+        </div>
+        <div class="bc-stat bc-stat-big">
+          <span class="bc-stat-label">淨收益</span>
+          <span class="bc-stat-value" id="rNetGain">-1,728</span>
+        </div>
+        <div class="bc-stat bc-stat-worst">
+          <span class="bc-stat-label">⚠️ 最壞情況</span>
+          <span class="bc-stat-value bc-loss" id="rWorstCase">-11,000</span>
+          <span class="bc-stat-sub" id="rWorstDesc">存款 + 紅利全部輸光</span>
+        </div>
+      </div>
+
+      <!-- 芭樂子判定 -->
+      <div class="bc-verdict" id="verdictArea">
+        <div class="bc-verdict-img-wrap">
+          <img class="bc-verdict-img" id="verdictImg" src="/images/tools/bonus-calc/guava-1.webp" alt="芭樂子判定" width="200" height="200" loading="lazy">
+        </div>
+        <div class="bc-verdict-text">
+          <div class="bc-verdict-tag" id="verdictTag">✅ 值得拿</div>
+          <p class="bc-verdict-msg" id="verdictMsg">這個紅利的數學是站在你這邊的。</p>
+        </div>
+      </div>
+
+      <!-- 分享按鈕 -->
+      <div class="bc-share-row">
+        <button class="bc-share-toggle" id="shareToggle" type="button">📤 分享結果</button>
+      </div>
+      <div class="bc-share-panel" id="sharePanel" style="display:none">
+        <div class="bc-share-buttons">
+          <button type="button" data-bc-share="facebook" class="bshare-btn bshare-fb">Facebook</button>
+          <button type="button" data-bc-share="x" class="bshare-btn bshare-x">X</button>
+          <button type="button" data-bc-share="threads" class="bshare-btn bshare-threads">Threads</button>
+          <button type="button" data-bc-share="ig" class="bshare-btn bshare-ig">Instagram</button>
+          <button type="button" data-bc-share="copy" class="bshare-btn bshare-copy">複製連結</button>
+        </div>
+      </div>
+
+      <!-- 詳細計算過程 -->
+      <details class="bc-details">
+        <summary>📊 查看計算過程</summary>
+        <div class="bc-breakdown" id="breakdown"></div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 知識區 -->
+  <section class="bc-edu">
+    <h2>打碼量怎麼算？</h2>
+    <p>打碼量 =（存款 + 紅利）× 打碼倍數。假設你存 10,000 送 1,000，打碼 20 倍，那你必須累計下注 (10,000 + 1,000) × 20 = <strong>220,000 元</strong>才能提款。</p>
+    <p>但這還沒完——每次下注都有莊家優勢。以百家樂（RTP 98.76%）為例，每押 100 元預期虧 1.24 元。下注 220,000 元預期虧損就是 220,000 × 1.24% = <strong>2,728 元</strong>，比你拿到的 1,000 元紅利還多。這就是為什麼很多紅利看起來划算，實際上是虧的。</p>
+
+    <h2>有效投注比例的陷阱</h2>
+    <p>很多娛樂城會規定「百家樂投注只計算 30% 有效」。這代表你押 1,000 元只算 300 元打碼量，實際要押的金額直接變 3.3 倍。如果打碼量已經很高，再打折就是雙重陷阱。</p>
+
+    <h2>常見問題</h2>
+    <h3>什麼是打碼量？</h3>
+    <p>打碼量就是你必須累計下注的金額才能提款。例如打碼倍數 20 倍、存款加紅利共 2,000 元，你就要下注 40,000 元才能出金。</p>
+
+    <h3>娛樂城紅利值得拿嗎？</h3>
+    <p>取決於打碼倍數和遊戲類型。打碼倍數越高、有效投注比例越低，紅利的實際價值就越差。用計算器算一次就知道值不值得。</p>
+
+    <h3>有效投注比例是什麼意思？</h3>
+    <p>有些娛樂城規定特定遊戲的投注只算部分有效。例如百家樂只算 30%，表示你押 1,000 元只計入 300 元打碼量，實際要押的金額會變成 3.3 倍。</p>
+  </section>
+
+  <!-- 芭樂子老實說 -->
+  <div class="bc-honest">
+    <p class="bc-honest-title">🍐 芭樂子老實說</p>
+    <p>「存 20000 送 2000」聽起來是 10% 的免費紅利，但你不會免費拿走這筆錢——打碼量會確保你在提款之前把紅利連本帶利還給莊家。這個計算器不是要教你怎麼賺錢，是要讓你在按下「領取紅利」之前，知道自己到底在簽什麼條件。如果算出來是負的，那就別拿。省下來的錢，就是你真正賺到的。</p>
+  </div>
+
+  <!-- 導流 CTA -->
+  <div class="bc-cta-bar">
+    <p>🌿 算完紅利，也順便檢查一下你的娛樂城安全嗎？</p>
+    <div class="bc-cta-links">
+      <a href="/casino-check/" class="bc-cta-link">🔍 娛樂城體檢</a>
+      <a href="/tools/" class="bc-cta-link">🔧 更多免費工具</a>
+      <a href="/articles/casino-withdrawal-masterguide/" class="bc-cta-link">💸 出金完整攻略</a>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:2rem 0">
+    <a href="/tools/" class="btn-outline">&larr; 回工具箱</a>
+  </div>
+</div>
+
+<style>
+/* ========== Hero ========== */
+.bc-hero { text-align: center; padding: 2.5rem 0 1.5rem; }
+.bc-hero h1 { font-size: 2rem; margin: 0 0 0.5rem; }
+.bc-slogan { color: var(--neon-green, #39FF14); font-size: 1.15rem; font-weight: 600; margin: 0 0 0.4rem; }
+.bc-desc { color: var(--text-secondary, #aaa); font-size: 0.95rem; margin: 0; }
+
+/* ========== Calculator Wrap ========== */
+.bc-calc-wrap {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+/* ========== Inputs ========== */
+.bc-inputs { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2rem; }
+.bc-field { display: flex; flex-direction: column; gap: 0.3rem; }
+.bc-field label { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary, #aaa); }
+.bc-field input, .bc-field select {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  color: #fff;
+  transition: border-color 0.2s;
+}
+.bc-field input:focus, .bc-field select:focus {
+  outline: none;
+  border-color: var(--neon-green, #39FF14);
+  box-shadow: 0 0 0 2px rgba(57,255,20,0.15);
+}
+.bc-field select { cursor: pointer; }
+.bc-field select option { background: #1a1a2e; color: #fff; }
+.bc-pct { font-size: 0.85rem; color: var(--neon-green, #39FF14); font-weight: 600; }
+.bc-hint { font-size: 0.8rem; color: #666; }
+
+/* ========== Results ========== */
+.bc-result {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.5rem;
+}
+.bc-result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.bc-stat {
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bc-stat-big { grid-column: 1 / -1; text-align: center; }
+.bc-stat-label { font-size: 0.8rem; color: #888; }
+.bc-stat-value { font-size: 1.25rem; font-weight: 700; color: #fff; }
+.bc-stat-big .bc-stat-value { font-size: 1.8rem; }
+.bc-loss { color: #ff4d4d !important; }
+.bc-stat-worst {
+  grid-column: 1 / -1;
+  background: rgba(255,77,77,0.06);
+  border: 1px solid rgba(255,77,77,0.15);
+}
+.bc-stat-sub { font-size: 0.75rem; color: #888; margin-top: 2px; }
+
+/* ========== Verdict ========== */
+.bc-verdict {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: rgba(57,255,20,0.04);
+  border: 1px solid rgba(57,255,20,0.15);
+  margin-bottom: 1.5rem;
+  transition: background 0.3s, border-color 0.3s;
+}
+.bc-verdict.good { background: rgba(57,255,20,0.06); border-color: rgba(57,255,20,0.25); }
+.bc-verdict.meh { background: rgba(245,184,0,0.06); border-color: rgba(245,184,0,0.25); }
+.bc-verdict.bad { background: rgba(255,77,77,0.06); border-color: rgba(255,77,77,0.25); }
+.bc-verdict.danger { background: rgba(255,0,0,0.08); border-color: rgba(255,0,0,0.3); }
+
+.bc-verdict-img-wrap { flex-shrink: 0; }
+.bc-verdict-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 12px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+  animation: verdictPop 0.4s ease-out;
+}
+@keyframes verdictPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.bc-verdict-tag {
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 0.4rem;
+}
+.bc-verdict.good .bc-verdict-tag { color: var(--neon-green, #39FF14); }
+.bc-verdict.meh .bc-verdict-tag { color: #f5b800; }
+.bc-verdict.bad .bc-verdict-tag { color: #ff4d4d; }
+.bc-verdict.danger .bc-verdict-tag { color: #ff0040; }
+.bc-verdict-msg { font-size: 0.95rem; color: var(--text-secondary, #aaa); margin: 0; line-height: 1.6; }
+
+/* ========== Details ========== */
+.bc-details {
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  padding: 0;
+}
+.bc-details summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-secondary, #aaa);
+  list-style: none;
+}
+.bc-details summary::-webkit-details-marker { display: none; }
+.bc-details summary::before { content: "▸ "; }
+.bc-details[open] summary::before { content: "▾ "; }
+.bc-breakdown {
+  padding: 0 16px 16px;
+  font-size: 0.9rem;
+  color: #999;
+  line-height: 1.8;
+}
+.bc-breakdown .step { margin-bottom: 0.4rem; }
+.bc-breakdown .step strong { color: #ccc; }
+
+/* ========== Education ========== */
+.bc-edu {
+  max-width: 700px;
+  margin: 3rem auto;
+  line-height: 1.8;
+}
+.bc-edu h2 {
+  font-size: 1.3rem;
+  margin: 2rem 0 0.8rem;
+  color: var(--neon-green, #39FF14);
+}
+.bc-edu h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+.bc-edu p { color: var(--text-secondary, #aaa); font-size: 0.95rem; margin: 0 0 0.8rem; }
+
+/* ========== 芭樂子老實說 ========== */
+.bc-honest {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem 1.8rem;
+  border-radius: 14px;
+  background: rgba(57,255,20,0.04);
+  border-left: 4px solid var(--neon-green, #39FF14);
+}
+.bc-honest-title { font-size: 1.1rem; font-weight: 900; color: var(--neon-green, #39FF14); margin: 0 0 0.8rem; }
+.bc-honest p:last-child { font-size: 0.95rem; line-height: 1.8; color: var(--text-secondary, #aaa); margin: 0; }
+
+/* ========== CTA ========== */
+.bc-cta-bar {
+  text-align: center;
+  margin: 2.5rem auto;
+  max-width: 700px;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.bc-cta-bar p { color: var(--text-secondary, #aaa); margin: 0 0 1rem; }
+.bc-cta-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+.bc-cta-link {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.bc-cta-link:hover { border-color: var(--neon-green, #39FF14); color: #fff; }
+
+/* ========== Share ========== */
+.bc-share-row { text-align: center; margin-bottom: 1.2rem; }
+.bc-share-toggle {
+  background: linear-gradient(135deg, rgba(57,255,20,0.15), rgba(57,255,20,0.05));
+  border: 1.5px solid var(--neon-green, #39FF14);
+  color: var(--neon-green, #39FF14);
+  padding: 10px 28px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.bc-share-toggle:hover {
+  background: rgba(57,255,20,0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(57,255,20,0.2);
+}
+.bc-share-panel {
+  margin-bottom: 1.2rem;
+  animation: bcPanelSlide 0.25s ease-out;
+}
+@keyframes bcPanelSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.bc-share-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.bshare-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+}
+.bshare-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.bshare-fb { background: #1877F2; }
+.bshare-fb:hover { box-shadow: 0 4px 12px rgba(24,119,242,0.35); }
+.bshare-x { background: #000; border: 1px solid #333; }
+.bshare-x:hover { box-shadow: 0 4px 12px rgba(255,255,255,0.18); }
+.bshare-threads { background: #101010; border: 1px solid #333; }
+.bshare-threads:hover { box-shadow: 0 4px 12px rgba(255,255,255,0.18); }
+.bshare-ig { background: linear-gradient(45deg,#f09433,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888); }
+.bshare-ig:hover { box-shadow: 0 4px 12px rgba(220,39,67,0.4); }
+.bshare-copy { background: var(--neon-green, #39FF14); color: #000; }
+.bshare-copy:hover { box-shadow: 0 4px 12px rgba(57,255,20,0.4); }
+.bc-share-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+.bc-share-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 600px) {
+  .bc-hero h1 { font-size: 1.5rem; }
+  .bc-calc-wrap { padding: 1.2rem; }
+  .bc-result-grid { grid-template-columns: 1fr; }
+  .bc-verdict { flex-direction: column; text-align: center; }
+  .bc-verdict-img { width: 120px; height: 120px; }
+  .bc-stat-big .bc-stat-value { font-size: 1.5rem; }
+}
+
+/* ========== Utility ========== */
+.btn-outline {
+  display: inline-block;
+  padding: 10px 24px;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: var(--neon-green, #39FF14); color: #fff; }
+
+/* Net gain color classes */
+.net-positive { color: var(--neon-green, #39FF14) !important; }
+.net-negative { color: #ff4d4d !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bc-verdict-img { animation: none; }
+}
+</style>
+
+<script>
+(function() {
+  // RTP 表
+  var RTP = {
+    baccarat: 0.9876,
+    slots_high: 0.96,
+    slots_mid: 0.93,
+    slots_low: 0.88,
+    sports: 0.95,
+    roulette: 0.973,
+    blackjack: 0.995,
+    custom: 0.96
+  };
+
+  // 芭樂子判定素材
+  var VERDICTS = {
+    good: {
+      img: '/images/tools/bonus-calc/guava-1.webp',
+      tag: '✅ 值得拿',
+      msgs: [
+        '這個紅利數學站在你這邊，拿了不會虧。',
+        '條件不錯，打碼量在合理範圍內。但還是要設停損。',
+        '淨收益是正的，這在娛樂城紅利裡算很少見了。把握！'
+      ]
+    },
+    meh: {
+      img: '/images/tools/bonus-calc/guava-2.webp',
+      tag: '⚠️ 勉強打平',
+      msgs: [
+        '數學上差不多打平，賺不多但也不會虧太慘。看你要不要花這時間。',
+        '淨收益接近零。你的時間值多少？算進去可能就不划算了。',
+        '這個紅利不算坑，但也不算好。你自己決定。'
+      ]
+    },
+    bad: {
+      img: '/images/tools/bonus-calc/guava-3.webp',
+      tag: '❌ 不划算',
+      msgs: [
+        '打碼量太高了，預期虧損會吃掉你的紅利。別碰。',
+        '看起來是紅利，實際上是陷阱。你會在打碼過程中虧更多。',
+        '數學不會騙人——這個紅利拿了反而虧。留著本金比較聰明。'
+      ]
+    },
+    danger: {
+      img: '/images/tools/bonus-calc/guava-4.webp',
+      tag: '☠️ 嚴重倒貼',
+      msgs: [
+        '這根本是陷阱！預期虧損遠超紅利金額，離越遠越好。',
+        '你拿到的紅利根本不夠付打碼的代價。這不是優惠，是圈套。',
+        '芭樂子看了都替你心疼。這種條件只有莊家在笑。拜託不要拿。'
+      ]
+    }
+  };
+
+  // DOM refs
+  var depositEl = document.getElementById('deposit');
+  var bonusEl = document.getElementById('bonus');
+  var wagerEl = document.getElementById('wager');
+  var gameTypeEl = document.getElementById('gameType');
+  var customRtpEl = document.getElementById('customRtp');
+  var customRtpWrap = document.getElementById('customRtpWrap');
+  var validRatioEl = document.getElementById('validRatio');
+  var bonusPctEl = document.getElementById('bonusPct');
+
+  // Result DOM
+  var rBonusPct = document.getElementById('rBonusPct');
+  var rWagerTotal = document.getElementById('rWagerTotal');
+  var rActualBet = document.getElementById('rActualBet');
+  var rExpLoss = document.getElementById('rExpLoss');
+  var rNetGain = document.getElementById('rNetGain');
+  var rWorstCase = document.getElementById('rWorstCase');
+  var rWorstDesc = document.getElementById('rWorstDesc');
+  var verdictArea = document.getElementById('verdictArea');
+  var verdictImg = document.getElementById('verdictImg');
+  var verdictTag = document.getElementById('verdictTag');
+  var verdictMsg = document.getElementById('verdictMsg');
+  var breakdownEl = document.getElementById('breakdown');
+
+  function fmt(n) {
+    return Math.round(n).toLocaleString('zh-TW');
+  }
+
+  function calculate() {
+    var deposit = parseFloat(depositEl.value) || 0;
+    var bonus = parseFloat(bonusEl.value) || 0;
+    var wagerX = parseFloat(wagerEl.value) || 1;
+    var gameType = gameTypeEl.value;
+    var validRatio = (parseFloat(validRatioEl.value) || 100) / 100;
+    var rtp = gameType === 'custom' ? (parseFloat(customRtpEl.value) || 96) / 100 : RTP[gameType];
+
+    // 紅利百分比
+    var pct = deposit > 0 ? (bonus / deposit * 100) : 0;
+    bonusPctEl.textContent = '= 紅利 ' + pct.toFixed(1) + '%';
+    rBonusPct.textContent = pct.toFixed(1) + '%';
+
+    // 打碼量
+    var totalBase = deposit + bonus;
+    var wagerTotal = totalBase * wagerX;
+    rWagerTotal.textContent = fmt(wagerTotal);
+
+    // 實際要押注（考慮有效比例）
+    var actualBet = validRatio > 0 ? wagerTotal / validRatio : wagerTotal;
+    rActualBet.textContent = fmt(actualBet);
+
+    // 預期虧損
+    var houseEdge = 1 - rtp;
+    var expLoss = actualBet * houseEdge;
+    rExpLoss.textContent = '-' + fmt(expLoss);
+
+    // 淨收益
+    var netGain = bonus - expLoss;
+    rNetGain.textContent = (netGain >= 0 ? '+' : '') + fmt(netGain);
+    rNetGain.className = 'bc-stat-value ' + (netGain >= 0 ? 'net-positive' : 'net-negative');
+
+    // 最壞情況：存款 + 紅利全部輸光（破產）
+    var worstLoss = deposit + bonus;
+    rWorstCase.textContent = '-' + fmt(worstLoss);
+    // 破產機率粗估：打碼量越高、RTP 越低，破產機率越高
+    var roundsNeeded = Math.ceil(actualBet / totalBase);
+    // 簡化估算：基於凱利公式概念，連輸機率
+    var bustProb = Math.min(99, Math.max(1, Math.round((1 - rtp) * roundsNeeded * 1.5)));
+    if (actualBet <= totalBase * 3) bustProb = Math.min(bustProb, 15);
+    rWorstDesc.textContent = '存款 + 紅利全輸光（機率約 ' + bustProb + '%）';
+
+    // 判定（以淨收益相對紅利金額分四級）
+    var level;
+    if (netGain > 0) {
+      level = 'good';
+    } else if (netGain >= -bonus) {
+      level = 'meh';
+    } else if (netGain >= -bonus * 2) {
+      level = 'bad';
+    } else {
+      level = 'danger';
+    }
+
+    var v = VERDICTS[level];
+    verdictArea.className = 'bc-verdict ' + level;
+    verdictImg.src = v.img;
+    verdictImg.alt = '芭樂子判定：' + v.tag;
+    verdictTag.textContent = v.tag;
+    verdictMsg.textContent = v.msgs[Math.floor(Math.random() * v.msgs.length)];
+
+    // 計算過程
+    var rtpPct = (rtp * 100).toFixed(2);
+    var edgePct = (houseEdge * 100).toFixed(2);
+    var validPct = (validRatio * 100).toFixed(0);
+    breakdownEl.innerHTML =
+      '<div class="step"><strong>紅利百分比：</strong>' + fmt(bonus) + ' ÷ ' + fmt(deposit) + ' = ' + pct.toFixed(1) + '%</div>' +
+      '<div class="step"><strong>打碼基數：</strong>存款 ' + fmt(deposit) + ' + 紅利 ' + fmt(bonus) + ' = ' + fmt(totalBase) + '</div>' +
+      '<div class="step"><strong>總打碼量：</strong>' + fmt(totalBase) + ' × ' + wagerX + ' 倍 = ' + fmt(wagerTotal) + '</div>' +
+      (validRatio < 1 ? '<div class="step"><strong>有效比例修正：</strong>' + fmt(wagerTotal) + ' ÷ ' + validPct + '% = ' + fmt(actualBet) + '（實際要押注）</div>' : '') +
+      '<div class="step"><strong>遊戲 RTP：</strong>' + rtpPct + '%，莊家優勢 = ' + edgePct + '%</div>' +
+      '<div class="step"><strong>預期虧損：</strong>' + fmt(actualBet) + ' × ' + edgePct + '% = ' + fmt(expLoss) + '</div>' +
+      '<div class="step"><strong>淨收益：</strong>紅利 ' + fmt(bonus) + ' − 虧損 ' + fmt(expLoss) + ' = <strong style="color:' + (netGain >= 0 ? '#39FF14' : '#ff4d4d') + '">' + (netGain >= 0 ? '+' : '') + fmt(netGain) + '</strong></div>';
+  }
+
+  // 事件綁定 — 即時計算
+  [depositEl, bonusEl, wagerEl, validRatioEl, customRtpEl].forEach(function(el) {
+    el.addEventListener('input', calculate);
+  });
+  gameTypeEl.addEventListener('change', function() {
+    customRtpWrap.style.display = gameTypeEl.value === 'custom' ? 'flex' : 'none';
+    calculate();
+  });
+
+  // 初始計算
+  calculate();
+
+  // =================================================================
+  // Share Panel
+  // =================================================================
+  var shareToggle = document.getElementById('shareToggle');
+  var sharePanel = document.getElementById('sharePanel');
+
+  shareToggle.addEventListener('click', function() {
+    if (sharePanel.style.display === 'none') {
+      sharePanel.style.display = 'block';
+      shareToggle.textContent = '✕ 收起';
+    } else {
+      sharePanel.style.display = 'none';
+      shareToggle.textContent = '📤 分享結果';
+    }
+  });
+
+  function getShareText() {
+    var deposit = depositEl.value || 0;
+    var bonus = bonusEl.value || 0;
+    var net = rNetGain.textContent;
+    var tag = verdictTag.textContent;
+    var text = '娛樂城紅利值不值得拿？存 ' + Number(deposit).toLocaleString('zh-TW') + ' 送 ' + Number(bonus).toLocaleString('zh-TW') + '，淨收益 ' + net + ' ' + tag + ' — GAME8LA 獎金計算器';
+    var url = 'https://game8la.com/tools/bonus-calculator/';
+    return { text: text, url: url };
+  }
+
+  function openPopup(url) {
+    window.open(url, '_blank', 'width=600,height=400,noopener,noreferrer');
+  }
+
+  function showBcToast(msg) {
+    var existing = document.querySelector('.bc-share-toast');
+    if (existing) existing.remove();
+    var toast = document.createElement('div');
+    toast.className = 'bc-share-toast';
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() { toast.classList.add('show'); });
+    });
+    setTimeout(function() {
+      toast.classList.remove('show');
+      setTimeout(function() { toast.remove(); }, 300);
+    }, 2500);
+  }
+
+  document.querySelectorAll('[data-bc-share]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var kind = btn.getAttribute('data-bc-share');
+      var d = getShareText();
+      var eUrl = encodeURIComponent(d.url);
+      var eText = encodeURIComponent(d.text);
+
+      if (kind === 'facebook') {
+        openPopup('https://www.facebook.com/sharer/sharer.php?u=' + eUrl + '&quote=' + eText);
+      } else if (kind === 'x') {
+        openPopup('https://twitter.com/intent/tweet?url=' + eUrl + '&text=' + eText);
+      } else if (kind === 'threads') {
+        openPopup('https://www.threads.net/intent/post?text=' + encodeURIComponent(d.text + ' ' + d.url));
+      } else if (kind === 'ig') {
+        navigator.clipboard.writeText(d.url).then(function() {
+          showBcToast('已複製連結！請貼到 IG 限動或私訊分享 📲');
+        }).catch(function() {
+          showBcToast('請手動複製：' + d.url);
+        });
+        setTimeout(function() { window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer'); }, 600);
+      } else if (kind === 'copy') {
+        navigator.clipboard.writeText(d.url).then(function() {
+          showBcToast('✅ 連結已複製到剪貼簿！');
+        }).catch(function() {
+          showBcToast('請手動複製：' + d.url);
+        });
+      }
+    });
+  });
+})();
+</script>
+
+</BaseLayout>

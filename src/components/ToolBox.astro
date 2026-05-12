@@ -33,13 +33,14 @@ const toolMap: Record<string, Tool> = {
   'rtp-tracker':   { name: 'RTP 實測紀錄器', desc: '記錄每局輸贏，自動算 RTP', href: '/tools/rtp-tracker/', icon: 'clipboard' },
   'bankroll':      { name: '資金管理計算器', desc: '停損停利線一鍵算好', href: '/tools/bankroll-calculator/', icon: 'calculator' },
   'baccarat-sim': { name: '百家樂策略模擬器', desc: '五種策略跑 1000 局，看清莊家優勢', href: '/tools/baccarat-simulator/', icon: 'bar-chart' },
+  'bonus-calc':   { name: '娛樂城獎金計算器', desc: '打碼量試算，紅利值不值得拿', href: '/tools/bonus-calculator/', icon: 'calculator' },
 };
 
 const presetMap: Record<Preset, string[]> = {
   'slots':       ['slot-sim', 'rtp-tracker', 'bankroll'],
   'baccarat':    ['baccarat-sim', 'bankroll', 'rtp-tracker'],
-  'casino':      ['casino-check'],
-  'casino-full': ['casino-check', 'bankroll'],
+  'casino':      ['casino-check', 'bonus-calc'],
+  'casino-full': ['casino-check', 'bankroll', 'bonus-calc'],
   'lottery':     ['lottery'],
 };
 

@@ -7,6 +7,11 @@
 // ============================================================================
 ---
 
+<!-- 擲筊浮動 ICON -->
+<a class="bless-float-icon" href="/tools/bless-blocks/" aria-label="Game8la 線上擲筊" title="線上擲筊">
+  <img src="/images/tools/icon-bless-float.webp" alt="線上擲筊" width="52" height="52" loading="lazy" />
+</a>
+
 <!-- 浮動按鈕（TOP 上方） -->
 <button class="fortune-btn" id="fortuneBtn" type="button" aria-label="game8la玩家今日運勢" title="今日運勢">
   <span class="fortune-btn-text">今日</span>
@@ -62,6 +67,63 @@
 </div>
 
 <style>
+  /* === 擲筊浮動 ICON === */
+  .bless-float-icon {
+    position: fixed;
+    bottom: 164px;
+    right: 30px;
+    z-index: 998;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f5b800, #b8860b);
+    border: 2px solid rgba(245, 184, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(245, 184, 0, 0.35);
+    animation: blessWiggle 4s ease-in-out infinite;
+    overflow: hidden;
+  }
+  .bless-float-icon::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(245, 184, 0, 0.5);
+    animation: blessRing 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .bless-float-icon img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .bless-float-icon:hover {
+    animation: none;
+    transform: scale(1.2);
+    box-shadow: 0 0 24px rgba(245, 184, 0, 0.7), 0 0 48px rgba(57, 255, 20, 0.3);
+  }
+  .bless-float-icon:hover::after {
+    animation: none;
+    opacity: 0;
+  }
+  @keyframes blessWiggle {
+    0%, 65%, 100% { transform: rotate(0deg); }
+    70% { transform: rotate(-12deg) scale(1.1); }
+    75% { transform: rotate(10deg) scale(1.1); }
+    80% { transform: rotate(-8deg); }
+    85% { transform: rotate(6deg); }
+    90% { transform: rotate(0deg); }
+  }
+  @keyframes blessRing {
+    0%, 65%, 100% { transform: scale(1); opacity: 0; }
+    70% { opacity: 0.8; transform: scale(1); }
+    90% { opacity: 0; transform: scale(1.6); }
+  }
+
   /* === 浮動按鈕 === */
   .fortune-btn {
     position: fixed;
@@ -398,6 +460,12 @@
 
 <script is:inline>
 (function() {
+  // 如果已經在擲筊頁面，隱藏擲筊浮動 icon
+  if (window.location.pathname.indexOf('/tools/bless-blocks') !== -1) {
+    var bi = document.querySelector('.bless-float-icon');
+    if (bi) bi.style.display = 'none';
+  }
+
   // === 素材池 ===
   var YI = [
     '小注怡情','研究冷熱號','看數據不看感覺','跟朋友合資分攤','設好停損再出手',
@@ -474,7 +542,7 @@
     '月老管姻緣，芭樂子管你別被騙。',
     '今天三合局成形，最佳三合：你、Game8la、理性。',
     '有人說今天水逆結束了。莊家說：抽水永遠不會結束。',
-    '宜閱讀，忌衝動。這八個字每天都適用。',
+    '宜閱讀，忌衝動。這六個字每天都適用。',
     '你今天最需要的不是幸運，是資訊。而你來對地方了。',
     '這是一個免費的運勢，跟免費的娛樂城體驗金不同——這個真的免費。',
     '最後提醒：看完運勢笑一笑就好，認真你就輸了（字面意義上）。'

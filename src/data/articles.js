@@ -2,10 +2,24 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'casino-withdrawal-masterguide',
+    title: '【出金大全】娛樂城出金完整攻略：KYC、打碼量、大額提領、三大管道比較',
+    excerpt: '娛樂城出金不是按一個按鈕的事。芭樂子從 KYC 驗證準備、打碼量精算、大額提領眉角、銀行/電子錢包/USDT 三大管道比較到被卡自救，一篇打完所有出金痛點。附入金前出金檢查清單 + 紅旗訊號判斷法。',
+    category: 'guide',
+    categoryLabel: '出金大全',
+    badgeType: 'featured',
+    date: '2026-05-11',
+    views: 0,
+    tags: ['最新', '必讀', '精選'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a3a2e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-casino-withdrawal-masterguide.webp'
+  },
+  {
     slug: 'black-hat-seo-exposed',
-    hotTitle: '搜「AT99詐騙」全是垃圾？',
-    title: '為什麼 Google 搜「AT99 詐騙」第一名都是垃圾？6 大黑帽 SEO 手法揭密',
-    excerpt: '芭樂子拆解 6 大黑帽 SEO 手法：Keyword Stuffing、Parasite SEO、Brand Hijacking、Content Farm、Sock Puppet、Recovery Scam。附球員假扮裁判真實案例分析與 5 招辨識「真評測 vs 假警告」自救指南。',
+    hotTitle: '搜「AT99詐騙」全是陷阱！',
+    title: '別信 Google 第一名！搜「AT99 詐騙」你看到的全是陷阱——6 大黑帽 SEO 揭密',
+    excerpt: 'Google 搜「AT99 詐騙」前三名全是黑帽 SEO 操作的陷阱。芭樂子拆解 6 大手法 + AT99 實戰案例分析：黑帽如何利用你的恐慌收割流量。附 5 招辨識「真評測 vs 假警告」自救指南。',
     category: 'guide',
     categoryLabel: 'SEO 揭密',
     badgeType: 'attack',
@@ -32,8 +46,8 @@ export const articles = [
   },
   {
     slug: 'super-lotto-wheeling-guide',
-    title: '大樂透包牌要多少錢？6碰到全餐注數・花費・期望值一次算完',
-    excerpt: '大樂透 10 連碰要 $10,500、全餐要 7 億！芭樂子用組合數學拆解 7～12 碼的注數、花費、命中率與期望值。結論：7～8 碼是甜蜜點，10 碼以上數學保證虧到哭。附大樂透 vs 539 包牌 CP 值比較。',
+    title: '大樂透包牌怎麼買最划算？7碼到全餐花費拆解——超過這個碼數保證虧',
+    excerpt: '大樂透 7 碼只要 $350，10 連碰卻要 $10,500——花 30 倍的錢，頭獎機率只多 0.001%。芭樂子拆解各碼數注數、花費與期望回收，告訴你甜蜜點在哪。附包牌計算器 + 大樂透 vs 539 CP 值比較。',
     category: 'lottery',
     categoryLabel: '彩券包牌',
     badgeType: 'featured',

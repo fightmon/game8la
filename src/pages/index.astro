@@ -433,8 +433,8 @@ function renderGames(filter = 'all') {
         </div>
         <div class="game-desc">${g.desc}</div>
         <div class="game-actions">
-          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩<span class="sr-only"> ${g.name}</span></a>
-          <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="info" /> 更多資訊</a>
+          <a href="${'/games/' + g.slug + '/'}" class="btn-play" aria-label="${'免費試玩 ' + g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩<span class="sr-only"> ${g.name}</span></a>
+          <a href="${'/games/' + g.slug + '/'}" class="btn-info" aria-label="${g.name + ' 更多資訊'}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="info" /> 更多資訊</a>
         </div>
       </div>
     </div>

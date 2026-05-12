@@ -12,13 +12,14 @@ const tools = [
   { name: '老虎機 RTP 紀錄器', url: 'https://game8la.com/tools/rtp-tracker/' },
   { name: '百家樂策略模擬器', url: 'https://game8la.com/tools/baccarat-simulator/' },
   { name: '資金管理計算器', url: 'https://game8la.com/tools/bankroll-calculator/' },
+  { name: '娛樂城獎金計算器', url: 'https://game8la.com/tools/bonus-calculator/' },
 ];
 
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "GAME8LA 免費博弈工具箱",
-  "description": "8 款免費線上博弈分析工具，涵蓋老虎機 RTP 模擬、樂透冷熱號選號、娛樂城安全檢測、百家樂策略回測與資金管理。",
+  "description": "9 款免費線上博弈分析工具，涵蓋老虎機 RTP 模擬、樂透冷熱號選號、娛樂城安全檢測、百家樂策略回測與資金管理。",
   "numberOfItems": tools.length,
   "itemListElement": tools.map((t, i) => ({
     "@type": "ListItem",
@@ -33,7 +34,7 @@ const itemListSchema = {
 <BaseLayout
   currentPage="tools"
   title="免費博弈工具箱（2026）｜老虎機模擬器・樂透選號・娛樂城體檢・擲筊 - GAME8LA"
-  description="8 款免費線上博弈工具：戰神賽特 RTP 模擬器、雷神之錘倍數模擬、539/威力彩/大樂透冷熱號分析與包牌產生器、娛樂城詐騙體檢、百家樂策略回測、資金管理計算器。免註冊、零廣告，數據留在你的瀏覽器。"
+  description="9 款免費線上博弈工具：戰神賽特 RTP 模擬器、雷神之錘倍數模擬、539/威力彩/大樂透冷熱號分析與包牌產生器、娛樂城詐騙體檢、百家樂策略回測、資金管理計算器。免註冊、零廣告，數據留在你的瀏覽器。"
 >
 <div class="container">
   <div class="tools-hero">
@@ -91,18 +92,25 @@ const itemListSchema = {
       <h2>資金管理計算器</h2>
       <p>停損停利線一鍵算好</p>
     </a>
+    <a href="/tools/bonus-calculator/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(245,184,0,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/bonus-calc/guava-1.webp" alt="娛樂城獎金計算器 — 打碼量試算，紅利值不值得拿" width="72" height="72" loading="lazy">
+      <h2>娛樂城獎金計算器</h2>
+      <p>打碼量試算，紅利值不值得拿</p>
+    </a>
   </div>
 
   <!-- SEO #4：工具介紹文字段落，解決 thin content -->
   <section class="tools-intro">
     <h2>為什麼需要這些工具？</h2>
-    <p>不管你玩的是老虎機、百家樂還是買樂透，「憑感覺下注」是最快燒錢的方式。GAME8LA 工具箱提供 8 款免費線上工具，讓你用數據取代直覺。</p>
+    <p>不管你玩的是老虎機、百家樂還是買樂透，「憑感覺下注」是最快燒錢的方式。GAME8LA 工具箱提供 9 款免費線上工具，讓你用數據取代直覺。</p>
     <p><strong>賽特2 RTP 模擬器</strong>和<strong>雷神之錘 II 模擬器</strong>能讓你免費試跑上千局，親眼看到 RTP 回歸的過程。</p>
     <p><strong>樂透數據站</strong>回測 539、威力彩、大樂透近期冷熱號，還有包牌產生器幫你組號。</p>
     <p><strong>娛樂城體檢</strong>一鍵比對 165 詐騙黑名單 + WHOIS 網域資料，入金前 30 秒就能判斷安不安全。</p>
     <p><strong>百家樂策略模擬器</strong>讓你用馬丁格爾、柏利等五種注碼法跑 1000 局回測，看清莊家優勢。</p>
     <p><strong>資金管理計算器</strong>幫你算出停損停利線，控制每局下注比例。</p>
     <p><strong>老虎機 RTP 紀錄器</strong>記錄你的真實遊戲數據，自動計算實際 RTP。</p>
+    <p><strong>娛樂城獎金計算器</strong>輸入存款、贈送金額和打碼倍數，即時算出預期虧損，告訴你紅利到底值不值得拿。</p>
     <p>所有工具免註冊、零廣告，數據只存在你的瀏覽器裡。</p>
   </section>
 

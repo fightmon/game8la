@@ -73,7 +73,22 @@ export default {
     // GET /data/{filename} — 直接從 KV 讀取 JSON（給前端即時讀取）
     if (url.pathname.startsWith('/data/')) {
       const file = url.pathname.replace('/data/', '');
-      const data = await env.LOTTERY_KV.get(`json:${file}`, 'text');
+      let data = await env.LOTTERY_KV.get(`json:${file}`, 'text');
+
+      // Auto-seed：KV 沒資料時，從正式站靜態 JSON 拉一份進來
+      if (!data) {
+        try {
+          const seedRes = await fetch(`https://game8la.com/data/${file}`);
+          if (seedRes.ok) {
+            data = await seedRes.text();
+            await env.LOTTERY_KV.put(`json:${file}`, data);
+            console.log(`[auto-seed] ${file} 已從靜態站匯入 KV`);
+          }
+        } catch (e) {
+          console.warn(`[auto-seed] ${file} 失敗: ${e.message}`);
+        }
+      }
+
       if (!data) return new Response('Not found', { status: 404 });
 
       // CORS：允許正式站 + localhost 開發
