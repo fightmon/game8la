@@ -1,0 +1,2400 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "539包牌是什麼意思？",
+      "acceptedAnswer": { "@type": "Answer", "text": "包牌是指從 1–39 號中選超過 5 個號碼，將所有可能的 5 碼組合都買下來，用更高的投注金額換取更大的中獎機會。例如包 7 碼就是把 7 個號碼的所有 21 種組合都買。" }
+    },
+    {
+      "@type": "Question",
+      "name": "539 包幾碼最划算？",
+      "acceptedAnswer": { "@type": "Answer", "text": "沒有絕對划算的碼數。包 6 碼花 300 元，中頭獎機率提升到原本的 6 倍；包 7 碼花 1050 元，提升 21 倍。碼數越多花費呈組合數爆炸成長，建議用計算器算出預算範圍內的最佳碼數。" }
+    },
+    {
+      "@type": "Question",
+      "name": "539 包牌一定會中嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不一定。即使包 10 碼（252 注），頭獎中獎率也只有約 0.047%。包牌只是提高機率，不保證中獎。長期來看，彩券的期望值是負的，包牌不會改變這個事實。" }
+    },
+    {
+      "@type": "Question",
+      "name": "539 包牌要花多少錢？",
+      "acceptedAnswer": { "@type": "Answer", "text": "每注 50 元。包 6 碼 = 6 注 = 300 元；包 7 碼 = 21 注 = 1,050 元；包 8 碼 = 56 注 = 2,800 元；包 10 碼 = 252 注 = 12,600 元。碼數越多，費用呈指數增長。" }
+    },
+    {
+      "@type": "Question",
+      "name": "包牌的期望值是正還是負的？",
+      "acceptedAnswer": { "@type": "Answer", "text": "負的。今彩 539 整體回饋率約 55–58%，意味著每花 100 元，長期平均只能拿回約 55–58 元。包牌不會改變這個數學事實，但可以讓中獎體驗更頻繁（雖然多數是小獎）。" }
+    },
+    {
+      "@type": "Question",
+      "name": "539 立柱包牌是什麼？",
+      "acceptedAnswer": { "@type": "Answer", "text": "立柱包牌是把號碼分成幾組「柱」，每柱各選一定數量的號碼，再交叉排列產生組合。優點是可以用較少的注數涵蓋更多號碼，但涵蓋率不如全包。本計算器採用全組合包牌（也稱輪轉包牌），確保所選號碼的每一種 5 碼組合都不遺漏。" }
+    },
+    {
+      "@type": "Question",
+      "name": "539 包牌跟拖牌差在哪？",
+      "acceptedAnswer": { "@type": "Answer", "text": "包牌是所有號碼地位相同，全部交叉組合；拖牌（膽拖）是指定 1～2 個「必出號」（膽碼），其餘號碼再跟膽碼配對。拖牌注數較少、花費較低，但如果膽碼沒開就全軍覆沒。兩者各有風險取捨。" }
+    },
+    {
+      "@type": "Question",
+      "name": "今彩 539 包牌可以線上買嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "可以。台灣彩券官方 App 和官網都支援今彩 539 線上投注，也可以選擇「多碼包牌」功能直接下注。投注前請確認自己的預算上限，量力而為。" }
+    },
+    {
+      "@type": "Question",
+      "name": "539 包牌有什麼技巧嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "數學上沒有任何方法能提高中獎期望值，因為每期開獎都是獨立隨機事件。但實務上有幾個方向：① 控制碼數和預算上限，不要包到超出能力；② 參考冷熱號統計決定選號範圍；③ 使用號碼排除功能去掉你認為不會出的號。記住：包牌是娛樂工具，不是致富手段。" }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "539 包牌計算器" }
+  ]
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "539 包牌計算器 — 注數、花費、中獎機率一鍵試算",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<BaseLayout
+  currentPage="tools"
+  title="今彩539包牌計算器（免費）｜注數花費＋中獎機率秒算｜539包牌教學 - GAME8LA"
+  description="免費今彩 539 包牌計算器！選碼數一秒算出注數、花費、各獎項中獎機率。支援預算反推最佳碼數、號碼排除、蒙地卡羅期望值模擬。539 包牌怎麼買？包幾碼最划算？包牌教學一頁搞定。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+
+<div class="container">
+  <!-- ═══ Hero ═══ -->
+  <div class="page-hero">
+    <h1>🎯 今彩 539 包牌計算器</h1>
+    <p class="hero-sub">選幾碼？花多少？中獎率多高？一秒算清楚。</p>
+    <p class="hero-desc">根據歷史開獎數據自動推薦高分號碼，展開縮水包牌組合，並用蒙地卡羅模擬告訴你長期損益。</p>
+  </div>
+
+  <!-- ═══ 介紹段落（SEO 靜態內容）═══ -->
+  <div class="intro-section">
+    <h2>什麼是 539 包牌？</h2>
+    <p>
+      <strong>今彩 539 包牌</strong>是指從 1～39 號中選出超過 5 個號碼，將所有可能的 5 碼組合全部投注。
+      例如選 7 個號碼就會產生 21 組（C(7,5) = 21），每注 50 元，共花 1,050 元。
+      碼數越多，中獎機率越高，但花費也呈組合數爆炸成長——這就是為什麼你需要一個<strong>包牌計算器</strong>。
+    </p>
+    <p>
+      本工具幫你做三件事：<strong>① 選碼數，秒算注數與花費</strong>；<strong>② 根據近期開獎數據推薦高分號碼</strong>，自動展開縮水包牌組合；<strong>③ 用蒙地卡羅模擬跑 10,000 次開獎</strong>，告訴你長期期望回收率。不管你是第一次研究 539 包牌教學，還是老手想算 539 包幾碼最划算，往下滑就對了。
+    </p>
+  </div>
+
+  <!-- ═══ Loading skeleton ═══ -->
+  <div id="loadingState" class="loading-state">
+    <div class="skeleton-pulse" style="height:40px;width:60%;margin:0 auto 1rem"></div>
+    <div class="skeleton-pulse" style="height:200px;margin-bottom:1rem"></div>
+    <div class="skeleton-pulse" style="height:150px"></div>
+    <p class="loading-text">正在載入 539 開獎數據...</p>
+  </div>
+
+  <!-- ═══ GAME8LA 包牌產生器 (analysis 頁面同款) ═══ -->
+  <section class="analysis-section wheel-section" id="wheelSection" style="display:none">
+    <div class="section-head">
+      <h2>🎰 GAME8LA 包牌產生器</h2>
+      <p>根據歷史開獎高分號碼，自動展開縮水包牌組合</p>
+    </div>
+    <div class="section-body">
+      <!-- 統計範圍 -->
+      <div class="whl-range-selector">
+        <span class="whl-range-label">統計範圍：</span>
+        <button class="whl-range-btn" data-range="10" onclick="setRange(this)">近 10 期</button>
+        <button class="whl-range-btn" data-range="30" onclick="setRange(this)">近 30 期</button>
+        <button class="whl-range-btn active" data-range="50" onclick="setRange(this)">近 50 期</button>
+        <button class="whl-range-btn" data-range="0" onclick="setRange(this)">全部</button>
+      </div>
+      <!-- 預算選擇 -->
+      <div class="wheel-budget">
+        <span class="wheel-budget-label">投注預算：</span>
+        <button class="whl-btn active" data-budget="1000" onclick="setBudget(this)">$1,000</button>
+        <button class="whl-btn" data-budget="3000" onclick="setBudget(this)">$3,000</button>
+        <button class="whl-btn" data-budget="5000" onclick="setBudget(this)">$5,000</button>
+        <button class="whl-btn" data-budget="10000" onclick="setBudget(this)">$10,000</button>
+        <div class="whl-custom">
+          <input type="number" id="customBudget" placeholder="自訂金額" min="100" step="100">
+          <button class="whl-btn whl-custom-go" onclick="setCustomBudget()">套用</button>
+        </div>
+      </div>
+      <!-- 號碼來源切換 -->
+      <div class="whl-source-toggle">
+        <span class="whl-source-label">號碼來源：</span>
+        <button class="whl-src-btn active" data-src="auto" onclick="setWheelSource('auto',this)">🎱 系統推薦</button>
+        <button class="whl-src-btn" data-src="custom" onclick="setWheelSource('custom',this)">✋ 自選號碼</button>
+      </div>
+      <!-- 號碼排除面板 -->
+      <div class="whl-exclude-panel" id="whlExcludePanel">
+        <div class="whl-exclude-head" onclick="toggleExcludePanel()">
+          <span class="whl-exclude-toggle-icon" id="whlExcToggleIcon">▶</span>
+          <span class="whl-exclude-title">🚫 排除號碼</span>
+          <span class="whl-exclude-count" id="whlExcCount" style="display:none">已排除 <strong id="whlExcCountNum">0</strong> 個</span>
+        </div>
+        <div class="whl-exclude-body" id="whlExcludeBody" style="display:none">
+          <p class="whl-exc-hint">點選要排除的號碼，系統推薦時會自動跳過這些號碼：</p>
+          <div class="whl-exc-grid" id="whlExcGrid"></div>
+          <div class="whl-exc-actions">
+            <button class="whl-exc-quick" onclick="excludeLastDraw()">排除上期開獎號</button>
+            <button class="whl-exc-clear" onclick="clearExcluded()">清除全部</button>
+          </div>
+        </div>
+      </div>
+      <!-- 自選號碼面板 -->
+      <div class="whl-custom-pool" id="whlCustomPool" style="display:none">
+        <p class="whl-cp-hint">點選你要包牌的號碼（至少選 <strong id="whlCpMin">6</strong> 個）：</p>
+        <div class="whl-cp-grid" id="whlCpGrid"></div>
+        <div class="whl-cp-status">
+          <span>已選 <strong id="whlCpCount">0</strong> / 12 個</span>
+          <button class="whl-cp-clear" onclick="clearCustomPool()">清除</button>
+        </div>
+        <div class="whl-cp-warn" id="whlCpWarn" style="display:none"></div>
+      </div>
+      <div class="wheel-summary" id="wheelSummary"></div>
+      <div class="wheel-pool" id="wheelPool"></div>
+      <div class="wheel-combos" id="wheelCombos"></div>
+      <div class="wheel-coverage" id="wheelCoverage"></div>
+      <div class="wheel-review" id="wheelReview"></div>
+      <div class="wheel-backtest" id="wheelBacktest"></div>
+      <div class="wheel-sim" id="wheelSim"></div>
+
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：包牌只是提高號碼覆蓋率，<strong>不是提高中獎率</strong>。彩券期望值永遠是負的，買越多賠越多是數學事實。請量力而為，把它當娛樂就好！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="analysis-section faq-section">
+    <div class="section-head">
+      <h2>❓ 539 包牌常見問題</h2>
+    </div>
+    <div class="section-body">
+      <details class="faq-item">
+        <summary>539 包牌是什麼意思？</summary>
+        <p>包牌是指從 1–39 號中選超過 5 個號碼，將所有可能的 5 碼組合都買下來，用更高的投注金額換取更大的中獎機會。例如包 7 碼就是把 7 個號碼的所有 21 種組合都買。</p>
+      </details>
+      <details class="faq-item">
+        <summary>539 包幾碼最划算？</summary>
+        <p>沒有絕對划算的碼數。包 6 碼花 300 元，中頭獎機率提升到原本的 6 倍；包 7 碼花 1050 元，提升 21 倍。碼數越多花費呈組合數爆炸成長，建議用本計算器算出預算範圍內的最佳碼數。</p>
+      </details>
+      <details class="faq-item">
+        <summary>539 包牌一定會中嗎？</summary>
+        <p>不一定。即使包 10 碼（252 注），頭獎中獎率也只有約 0.047%。包牌只是提高機率，不保證中獎。長期來看，彩券的期望值是負的，包牌不會改變這個事實。</p>
+      </details>
+      <details class="faq-item">
+        <summary>539 包牌要花多少錢？</summary>
+        <p>每注 50 元。包 6 碼 = 6 注 = 300 元；包 7 碼 = 21 注 = 1,050 元；包 8 碼 = 56 注 = 2,800 元；包 10 碼 = 252 注 = 12,600 元。碼數越多，費用呈指數增長。</p>
+      </details>
+      <details class="faq-item">
+        <summary>包牌的期望值是正還是負的？</summary>
+        <p>負的。今彩 539 整體回饋率約 55–58%，意味著每花 100 元，長期平均只能拿回約 55–58 元。包牌不會改變這個數學事實，但可以讓中獎體驗更頻繁（雖然多數是小獎）。</p>
+      </details>
+      <details class="faq-item">
+        <summary>539 立柱包牌是什麼？</summary>
+        <p>立柱包牌是把號碼分成幾組「柱」，每柱各選一定數量的號碼，再交叉排列產生組合。優點是可以用較少的注數涵蓋更多號碼，但涵蓋率不如全包。本計算器採用全組合包牌（也稱輪轉包牌），確保所選號碼的每一種 5 碼組合都不遺漏。</p>
+      </details>
+      <details class="faq-item">
+        <summary>539 包牌跟拖牌差在哪？</summary>
+        <p>包牌是所有號碼地位相同，全部交叉組合；拖牌（膽拖）是指定 1～2 個「必出號」（膽碼），其餘號碼再跟膽碼配對。拖牌注數較少、花費較低，但如果膽碼沒開就全軍覆沒。兩者各有風險取捨。</p>
+      </details>
+      <details class="faq-item">
+        <summary>今彩 539 包牌可以線上買嗎？</summary>
+        <p>可以。台灣彩券官方 App 和官網都支援今彩 539 線上投注，也可以選擇「多碼包牌」功能直接下注。投注前請確認自己的預算上限，量力而為。</p>
+      </details>
+      <details class="faq-item">
+        <summary>539 包牌有什麼技巧嗎？</summary>
+        <p>數學上沒有任何方法能提高中獎期望值，因為每期開獎都是獨立隨機事件。但實務上有幾個方向：① 控制碼數和預算上限，不要包到超出能力；② 參考冷熱號統計決定選號範圍；③ 使用號碼排除功能去掉你認為不會出的號。記住：包牌是娛樂工具，不是致富手段。</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══ CTA 導流 ═══ -->
+  <section class="analysis-section cta-section">
+    <div class="section-body">
+      <div class="cta-grid">
+        <a href="/lottery/analysis/" class="cta-card gold">
+          <span class="cta-icon">📊</span>
+          <div>
+            <strong>芭樂好彩數據站</strong>
+            <p>完整冷熱號、遺漏值、拖出號分析，支援 539 / 威力彩 / 大樂透</p>
+          </div>
+        </a>
+        <a href="/articles/daily-cash-539-wheel-strategy/" class="cta-card green">
+          <span class="cta-icon">📖</span>
+          <div>
+            <strong>539 包牌策略懶人包</strong>
+            <p>碼數怎麼選？預算怎麼分配？看完這篇就懂</p>
+          </div>
+        </a>
+        <a href="/tools/" class="cta-card pink">
+          <span class="cta-icon">🧰</span>
+          <div>
+            <strong>8LA 工具箱</strong>
+            <p>更多免費計算器、模擬器、檢測工具</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+// === 539 WHEEL CALCULATOR (standalone version of GAME8LA 包牌產生器) ===
+
+const MAX_NUM = 39;
+const PICK_COUNT = 5;
+const BET_COST = 50;
+
+let lotteryDraws = [];   // all historical draws
+let currentBudget = 1000;
+let currentRange = 50;
+let wheelSource = 'auto';
+let customPoolNums = [];
+let excludedNums = [];
+const MAX_CUSTOM_POOL = 12;
+
+// === DATA LOADING ===
+async function loadData() {
+  const loading = document.getElementById('loadingState');
+  const section = document.getElementById('wheelSection');
+  try {
+    // Try Worker API first (skip on localhost), fallback to static JSON
+    let data;
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (!isLocal) {
+      try {
+        const res = await fetch('https://lottery-cron.game8la.workers.dev/data/daily_cash_539');
+        if (res.ok) data = await res.json();
+      } catch (e) { /* fall through */ }
+    }
+    if (!data) {
+      const res2 = await fetch('/data/daily-cash-539.json');
+      if (res2.ok) data = await res2.json();
+    }
+    if (data && data.draws && data.draws.length > 0) {
+      lotteryDraws = data.draws;
+      loading.style.display = 'none';
+      section.style.display = '';
+      renderWheel();
+    } else {
+      loading.innerHTML = '<p class="loading-error">⚠️ 無法載入 539 開獎數據，請稍後再試。</p>';
+    }
+  } catch (err) {
+    loading.innerHTML = '<p class="loading-error">⚠️ 載入失敗：' + err.message + '</p>';
+  }
+}
+
+// === STATISTICS HELPERS ===
+function calcFrequency(draws) {
+  const freq = {};
+  for (let i = 1; i <= MAX_NUM; i++) freq[i] = 0;
+  draws.forEach(d => d.numbers.forEach(n => freq[n]++));
+  return freq;
+}
+
+function calcMissing(allDraws) {
+  const missing = {};
+  for (let i = 1; i <= MAX_NUM; i++) {
+    missing[i] = 0;
+    for (let j = 0; j < allDraws.length; j++) {
+      if (allDraws[j].numbers.includes(i)) break;
+      missing[i]++;
+    }
+  }
+  return missing;
+}
+
+function calcRepeat(allDraws) {
+  const stats = {};
+  for (let n = 1; n <= MAX_NUM; n++) {
+    stats[n] = { appeared: 0, repeated: 0 };
+  }
+  for (let i = 0; i < allDraws.length - 1; i++) {
+    const curr = allDraws[i].numbers;
+    const next = allDraws[i + 1].numbers;
+    curr.forEach(n => {
+      stats[n].appeared++;
+      if (next.includes(n)) stats[n].repeated++;
+    });
+  }
+  return stats;
+}
+
+// === SCORING (same algorithm as lottery/analysis) ===
+function calcSuggestions(draws, allDraws) {
+  const freq = calcFrequency(draws);
+  const missing = calcMissing(allDraws);
+  const repeatStats = calcRepeat(allDraws);
+  const lastDraw = allDraws.length > 0 ? allDraws[0].numbers : [];
+
+  const vals = arr => arr.length ? arr : [0];
+  const minMax = (arr) => {
+    const mn = Math.min(...vals(arr)), mx = Math.max(...vals(arr));
+    return { min: mn, max: mx, range: mx - mn || 1 };
+  };
+
+  const freqVals = Object.values(freq);
+  const missVals = Object.values(missing);
+  const fNorm = minMax(freqVals);
+  const mNorm = minMax(missVals);
+
+  const scores = [];
+  for (let n = 1; n <= MAX_NUM; n++) {
+    const freqScore = ((freq[n] - fNorm.min) / fNorm.range) * 100;
+    const missScore = ((missing[n] - mNorm.min) / mNorm.range) * 100;
+    let repeatScore = 0;
+    if (lastDraw.includes(n) && repeatStats[n]) {
+      const s = repeatStats[n];
+      repeatScore = s.appeared > 0 ? (s.repeated / s.appeared) * 100 : 0;
+      repeatScore = Math.min(repeatScore * 2, 100);
+    }
+    const total = freqScore * 0.40 + missScore * 0.35 + repeatScore * 0.25;
+    scores.push({
+      num: n,
+      total: Math.round(total * 10) / 10,
+      freqScore: Math.round(freqScore),
+      missScore: Math.round(missScore),
+      repeatScore: Math.round(repeatScore),
+      freq: freq[n],
+      missing: missing[n],
+      inLastDraw: lastDraw.includes(n)
+    });
+  }
+  scores.sort((a, b) => b.total - a.total);
+  return { allScores: scores };
+}
+
+// === WHEEL SOURCE TOGGLE ===
+function setWheelSource(src, btn) {
+  wheelSource = src;
+  btn.parentElement.querySelectorAll('.whl-src-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cpPanel = document.getElementById('whlCustomPool');
+  if (src === 'custom') {
+    cpPanel.style.display = '';
+    renderCustomPoolGrid();
+  } else {
+    cpPanel.style.display = 'none';
+  }
+  renderWheel();
+}
+
+function renderCustomPoolGrid() {
+  const grid = document.getElementById('whlCpGrid');
+  document.getElementById('whlCpMin').textContent = PICK_COUNT + 1;
+  let html = '';
+  for (let i = 1; i <= MAX_NUM; i++) {
+    const sel = customPoolNums.includes(i) ? ' selected' : '';
+    html += '<div class="whl-cp-num' + sel + '" data-n="' + i + '" onclick="toggleCustomPoolNum(' + i + ')">' + i + '</div>';
+  }
+  grid.innerHTML = html;
+  document.getElementById('whlCpCount').textContent = customPoolNums.length;
+}
+
+function toggleCustomPoolNum(n) {
+  const idx = customPoolNums.indexOf(n);
+  if (idx >= 0) {
+    customPoolNums.splice(idx, 1);
+  } else {
+    if (customPoolNums.length >= MAX_CUSTOM_POOL) {
+      const warn = document.getElementById('whlCpWarn');
+      if (warn) { warn.classList.remove('shake'); void warn.offsetWidth; warn.classList.add('shake'); }
+      return;
+    }
+    customPoolNums.push(n);
+  }
+  customPoolNums.sort((a, b) => a - b);
+  renderCustomPoolGrid();
+  updateCustomPoolWarn();
+  renderWheel();
+}
+
+function updateCustomPoolWarn() {
+  const warn = document.getElementById('whlCpWarn');
+  if (!warn) return;
+  const cnt = customPoolNums.length;
+  if (cnt >= 11) {
+    const combos = C(cnt, PICK_COUNT);
+    const cost = combos * BET_COST;
+    warn.style.display = '';
+    warn.innerHTML = `
+      <div class="whl-cp-warn-icon">⚠️</div>
+      <div class="whl-cp-warn-body">
+        <strong>芭樂子提醒：選超過 10 碼的包牌長期來看不划算</strong>
+        <p>${cnt} 碼包牌 = ${combos.toLocaleString()} 種組合 = 每期花費 $${cost.toLocaleString()}</p>
+        <p>539 頭獎上限 800 萬，若多人中獎還要均分。只要約 ${Math.ceil(8000000 / cost)} 期沒中頭獎，累積成本就超過單次頭獎獎金。小獎（貳獎 2 萬、參獎 300 元）通常遠不夠回本。</p>
+        <p>🎯 建議控制在 <strong>7～10 碼</strong>，用更少的錢覆蓋更高的期望值。</p>
+      </div>`;
+  } else {
+    warn.style.display = 'none';
+    warn.innerHTML = '';
+  }
+}
+
+function clearCustomPool() {
+  customPoolNums = [];
+  renderCustomPoolGrid();
+  updateCustomPoolWarn();
+  renderWheel();
+}
+
+// === BUDGET ===
+function setBudget(btn) {
+  document.querySelectorAll('.whl-btn[data-budget]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBudget = parseInt(btn.dataset.budget);
+  document.getElementById('customBudget').value = '';
+  renderWheel();
+}
+
+function setCustomBudget() {
+  const input = document.getElementById('customBudget');
+  const val = parseInt(input.value);
+  if (!val || val < 100) { input.focus(); return; }
+  document.querySelectorAll('.whl-btn[data-budget]').forEach(b => b.classList.remove('active'));
+  currentBudget = val;
+  renderWheel();
+}
+
+function setRange(btn) {
+  document.querySelectorAll('.whl-range-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRange = parseInt(btn.dataset.range);
+  renderWheel();
+}
+
+function adjustBudgetForCustom(fullCost) {
+  currentBudget = fullCost;
+  document.querySelectorAll('.whl-btn[data-budget]').forEach(b => b.classList.remove('active'));
+  const input = document.getElementById('customBudget');
+  if (input) input.value = fullCost;
+  renderWheel();
+}
+
+// === COMBINATIONS ===
+const _cMemo = {};
+function C(n, k) {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+  const key = n + ',' + k;
+  if (_cMemo[key]) return _cMemo[key];
+  _cMemo[key] = C(n - 1, k - 1) + C(n - 1, k);
+  return _cMemo[key];
+}
+
+function combinations(arr, k) {
+  if (k === 0) return [[]];
+  if (arr.length < k) return [];
+  const result = [];
+  function helper(start, combo) {
+    if (combo.length === k) { result.push([...combo]); return; }
+    for (let i = start; i <= arr.length - (k - combo.length); i++) {
+      combo.push(arr[i]);
+      helper(i + 1, combo);
+      combo.pop();
+    }
+  }
+  helper(0, []);
+  return result;
+}
+
+function getPoolSize(maxBets) {
+  const minPool = PICK_COUNT + 2;
+  let pool = minPool;
+  for (let n = minPool; n <= 20; n++) {
+    let c = 1;
+    for (let i = 0; i < PICK_COUNT; i++) c = c * (n - i) / (i + 1);
+    if (c > maxBets * 3) break;
+    pool = n;
+  }
+  return pool;
+}
+
+// === GENERATE WHEEL ===
+function generateWheel(draws, allDraws, forceAuto) {
+  const maxBets = Math.floor(currentBudget / BET_COST);
+  if (maxBets < 1) return { pool: [], combos: [], maxBets: 0, poolSize: 0, totalCombos: 0, isCustom: false };
+
+  const { allScores } = calcSuggestions(draws, allDraws);
+  const useCustom = !forceAuto && wheelSource === 'custom' && customPoolNums.length > PICK_COUNT;
+
+  let pool, poolNums, poolSize;
+
+  if (useCustom) {
+    poolNums = [...customPoolNums];
+    poolSize = poolNums.length;
+    pool = poolNums.map(n => {
+      const found = allScores.find(s => s.num === n);
+      return found || { num: n, total: 0, freqScore: 0, missScore: 0, inLastDraw: false };
+    });
+  } else {
+    // Filter out excluded numbers from auto scoring
+    const filteredScores = excludedNums.length > 0
+      ? allScores.filter(s => !excludedNums.includes(s.num))
+      : allScores;
+    poolSize = getPoolSize(maxBets);
+    poolSize = Math.min(poolSize, filteredScores.length);
+    pool = filteredScores.slice(0, poolSize);
+    poolNums = pool.map(s => s.num);
+  }
+
+  const totalCombosCount = C(poolSize, PICK_COUNT);
+
+  const MAX_ENUM = 5000;
+  let allCombos;
+
+  const scoreMap = new Map();
+  pool.forEach(p => scoreMap.set(p.num, p));
+
+  function scoreCombo(combo) {
+    let score = 0, hotCount = 0, missCount = 0;
+    for (const n of combo) {
+      const s = scoreMap.get(n);
+      if (s) {
+        score += s.total;
+        if (s.freqScore >= 70) hotCount++;
+        if (s.missScore >= 70) missCount++;
+      }
+    }
+    return { nums: combo, score: Math.round(score * 10) / 10, hotCount, missCount };
+  }
+
+  const needCombos = Math.min(maxBets, MAX_ENUM);
+
+  if (totalCombosCount <= MAX_ENUM) {
+    allCombos = combinations(poolNums, PICK_COUNT).map(scoreCombo);
+  } else {
+    const sampleTarget = Math.min(needCombos * 3, MAX_ENUM);
+    const seen = new Set();
+    const sampled = [];
+    const sorted = [...poolNums].sort((a, b) => {
+      return (scoreMap.get(b)?.total || 0) - (scoreMap.get(a)?.total || 0);
+    });
+    const topN = Math.min(sorted.length, 12);
+    const topCombos = combinations(sorted.slice(0, topN), PICK_COUNT);
+    for (const c of topCombos) {
+      const key = c.join(',');
+      if (!seen.has(key)) { seen.add(key); sampled.push(scoreCombo(c)); }
+      if (sampled.length >= sampleTarget) break;
+    }
+    let attempts = 0;
+    while (sampled.length < sampleTarget && attempts < sampleTarget * 10) {
+      attempts++;
+      const combo = [];
+      const used = new Set();
+      while (combo.length < PICK_COUNT) {
+        const idx = Math.floor(Math.random() * poolNums.length);
+        if (!used.has(idx)) { used.add(idx); combo.push(poolNums[idx]); }
+      }
+      combo.sort((a, b) => a - b);
+      const key = combo.join(',');
+      if (!seen.has(key)) { seen.add(key); sampled.push(scoreCombo(combo)); }
+    }
+    allCombos = sampled;
+  }
+
+  allCombos.sort((a, b) => b.score - a.score);
+  const combos = allCombos.slice(0, needCombos);
+
+  return { pool, combos, maxBets, poolSize, totalCombos: totalCombosCount, isCustom: useCustom };
+}
+
+// === RENDER WHEEL ===
+function renderWheel() {
+  if (lotteryDraws.length === 0) return;
+
+  const draws = currentRange === 0 ? lotteryDraws : lotteryDraws.slice(0, currentRange);
+  const allDraws = lotteryDraws;
+  const { pool, combos, maxBets, poolSize, totalCombos, isCustom } = generateWheel(draws, allDraws);
+
+  // Custom mode: not enough numbers
+  if (wheelSource === 'custom' && customPoolNums.length <= PICK_COUNT) {
+    document.getElementById('wheelSummary').innerHTML = '';
+    document.getElementById('wheelPool').innerHTML = `
+      <div class="whl-cp-not-enough">
+        <span>✋</span> 請至少選 <strong>${PICK_COUNT + 1}</strong> 個號碼才能組成包牌（目前選了 ${customPoolNums.length} 個）
+      </div>`;
+    document.getElementById('wheelCombos').innerHTML = '';
+    document.getElementById('wheelCoverage').innerHTML = '';
+    document.getElementById('wheelReview').innerHTML = '';
+    document.getElementById('wheelBacktest').innerHTML = '';
+    document.getElementById('wheelSim').innerHTML = '';
+    return;
+  }
+
+  // Summary
+  const actualCost = combos.length * BET_COST;
+  document.getElementById('wheelSummary').innerHTML = `
+    <div class="whl-summary-grid">
+      <div class="whl-stat">
+        <span class="whl-stat-val">$${currentBudget.toLocaleString()}</span>
+        <span class="whl-stat-label">投注預算</span>
+      </div>
+      <div class="whl-stat">
+        <span class="whl-stat-val">${combos.length} 注</span>
+        <span class="whl-stat-label">包牌組合（每注 $${BET_COST}）</span>
+      </div>
+      <div class="whl-stat">
+        <span class="whl-stat-val">${poolSize} 碼</span>
+        <span class="whl-stat-label">${isCustom ? '自選號碼' : '候選號碼池'}</span>
+      </div>
+      <div class="whl-stat">
+        <span class="whl-stat-val">$${actualCost.toLocaleString()}</span>
+        <span class="whl-stat-label">實際花費</span>
+      </div>
+    </div>`;
+
+  // Custom mode: budget overflow notice
+  if (isCustom && totalCombos > combos.length) {
+    const fullCost = totalCombos * BET_COST;
+    document.getElementById('wheelSummary').innerHTML += `
+      <div class="whl-budget-overflow">
+        <div class="whl-bo-icon">⚠️</div>
+        <div class="whl-bo-text">
+          <strong>預算不足以包完所有組合</strong>
+          <p>你選了 <strong>${poolSize} 碼</strong>，共可產生 <strong>${totalCombos} 種組合</strong>，全包需要 <strong>$${fullCost.toLocaleString()}</strong>。</p>
+          <p>目前預算 $${currentBudget.toLocaleString()} 只能買 <strong>${combos.length} 注</strong>（已按強度排序取最強組合）。</p>
+        </div>
+        <button class="whl-bo-btn" onclick="adjustBudgetForCustom(${fullCost})">
+          💰 調整預算為 $${fullCost.toLocaleString()}（全包 ${totalCombos} 注）
+        </button>
+      </div>`;
+  }
+
+  // Pool display
+  const poolTitle = isCustom
+    ? `✋ 你的自選號碼（${poolSize} 碼）`
+    : `🎯 候選號碼池（TOP ${poolSize} 高分號碼）`;
+  document.getElementById('wheelPool').innerHTML = `
+    <h4>${poolTitle}</h4>
+    <div class="whl-pool-balls">
+      ${pool.map((s, i) => `
+        <div class="whl-pool-item">
+          <div class="whl-pool-ball">${s.num}</div>
+          <div class="whl-pool-score">${s.total}</div>
+          <div class="suggest-tags">
+            ${s.freqScore >= 70 ? '<span class="sg-tag hot">熱</span>' : ''}
+            ${s.missScore >= 70 ? '<span class="sg-tag miss">遺</span>' : ''}
+            ${s.inLastDraw ? '<span class="sg-tag repeat">連</span>' : ''}
+          </div>
+        </div>`).join('')}
+    </div>`;
+
+  // Combos table
+  if (combos.length === 0) {
+    document.getElementById('wheelCombos').innerHTML = '<p class="whl-empty">預算不足，至少需要 $' + BET_COST + ' 才能買一注。</p>';
+  } else {
+    const showFirst = 5;
+    const MAX_DISPLAY = 200;
+    const displayCombos = combos.slice(0, MAX_DISPLAY);
+    const hasMore = displayCombos.length > showFirst;
+    const truncated = combos.length > MAX_DISPLAY;
+
+    const comboRow = (c, i) => `
+      <tr>
+        <td class="whl-idx">${i + 1}</td>
+        <td class="td-nums">${c.nums.map(n => `<span class="num-mini">${n}</span>`).join('')}</td>
+        <td><span class="whl-strength">${c.score}</span></td>
+        <td class="whl-composition">
+          ${c.hotCount > 0 ? `<span class="sg-tag hot">${c.hotCount}熱</span>` : ''}
+          ${c.missCount > 0 ? `<span class="sg-tag miss">${c.missCount}遺</span>` : ''}
+        </td>
+      </tr>`;
+
+    document.getElementById('wheelCombos').innerHTML = `
+      <h4>📋 包牌組合表${totalCombos > combos.length ? `（從 ${totalCombos.toLocaleString()} 種組合中選出最強 ${combos.length.toLocaleString()} 注）` : ''}</h4>
+      <div class="whl-table-wrap">
+        <table class="whl-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>號碼組合</th>
+              <th>強度</th>
+              <th>組成</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${displayCombos.slice(0, showFirst).map((c, i) => comboRow(c, i)).join('')}
+          </tbody>
+          ${hasMore ? `<tbody id="wheelHiddenRows" style="display:none">
+            ${displayCombos.slice(showFirst).map((c, i) => comboRow(c, i + showFirst)).join('')}
+          </tbody>` : ''}
+        </table>
+      </div>
+      ${hasMore ? `<button class="whl-show-more" id="wheelToggle" onclick="toggleWheelCombos()">顯示前 ${displayCombos.length} 注</button>` : ''}
+      ${truncated ? `<p class="whl-trunc-note">⚠️ 共 ${combos.length.toLocaleString()} 注，為保持頁面流暢僅顯示前 ${MAX_DISPLAY} 注（已按強度排序）</p>` : ''}
+      <div class="whl-export-btns">
+        <button class="whl-copy-text" onclick="copyWheelText()">📋 複製組合文字</button>
+        <button class="whl-download-img" onclick="generateWheelImage()">📸 下載包牌圖片</button>
+        <a href="https://t.me/game8la" target="_blank" rel="noopener" class="whl-tg-cta">📱 加入 8LA Telegram<small>每週開獎前推播熱號分析（免費）</small></a>
+      </div>`;
+  }
+
+  // Number coverage heatmap
+  renderCoverage(combos, pool);
+
+  // Last draw review
+  renderWheelReview(draws, allDraws);
+
+  // Multi-period backtest
+  renderMultiBacktest(draws, allDraws);
+
+  // Probability simulation
+  renderWheelSim(poolSize, combos);
+}
+
+function toggleWheelCombos() {
+  const el = document.getElementById('wheelHiddenRows');
+  const btn = document.getElementById('wheelToggle');
+  if (!el || !btn) return;
+  if (el.style.display === 'none') {
+    el.style.display = '';
+    btn.textContent = '收合';
+  } else {
+    el.style.display = 'none';
+    const total = el.querySelectorAll('tr').length + 5;
+    btn.textContent = '顯示全部 ' + total + ' 注';
+  }
+}
+
+// === WHEEL REVIEW ===
+function renderWheelReview(draws, allDraws) {
+  const el = document.getElementById('wheelReview');
+  if (allDraws.length < 2) { el.innerHTML = ''; return; }
+
+  const pastDraws = draws.length > 1 ? draws.slice(1) : allDraws.slice(1);
+  const pastAllDraws = allDraws.slice(1);
+  if (pastDraws.length < 5) { el.innerHTML = ''; return; }
+
+  const lastDraw = allDraws[0];
+  const isCustomReview = wheelSource === 'custom' && customPoolNums.length > PICK_COUNT;
+  const { pool: simPool, combos: simCombos } = generateWheel(pastDraws, pastAllDraws, !isCustomReview);
+
+  if (simCombos.length === 0) { el.innerHTML = ''; return; }
+
+  const actual = lastDraw.numbers;
+  let bestHit = 0;
+  let bestCombo = null;
+  const hitCombos = simCombos.map(c => {
+    const hits = c.nums.filter(n => actual.includes(n));
+    if (hits.length > bestHit) { bestHit = hits.length; bestCombo = c; }
+    return { ...c, hits, hitCount: hits.length };
+  });
+
+  const anyHit = hitCombos.filter(c => c.hitCount > 0).length;
+  const poolHits = simPool.filter(s => actual.includes(s.num));
+
+  el.innerHTML = `
+    <h4>📋 上期回顧 — 第 ${lastDraw.period} 期 (${lastDraw.date})</h4>
+    <div class="whl-review-grid">
+      <div class="whl-review-item">
+        <span class="whl-review-label">實際開獎</span>
+        <div class="td-nums">${actual.map(n => `<span class="num-mini ${simPool.some(s => s.num === n) ? 'hit' : ''}">${n}</span>`).join('')}</div>
+      </div>
+      <div class="whl-review-item">
+        <span class="whl-review-label">號碼池命中</span>
+        <span class="whl-review-val">${poolHits.length} / ${simPool.length} 個號碼在池中</span>
+      </div>
+      <div class="whl-review-item">
+        <span class="whl-review-label">最佳單注</span>
+        <span class="whl-review-val">${bestCombo ? `命中 ${bestHit} 個：${bestCombo.nums.map(n => actual.includes(n) ? `<span class="num-mini hit">${n}</span>` : `<span class="num-mini">${n}</span>`).join('')}` : '—'}</span>
+      </div>
+      <div class="whl-review-item">
+        <span class="whl-review-label">有命中的注數</span>
+        <span class="whl-review-val">${anyHit} / ${simCombos.length} 注</span>
+      </div>
+    </div>
+    <p class="whl-review-note">💡 以上是假設用${isCustomReview ? '你的自選號碼池' : '同樣的演算法'}和預算 $${currentBudget.toLocaleString()} 回測上一期的結果。</p>`;
+}
+
+// === PROBABILITY SIMULATION ===
+const PRIZE_539 = [
+  { match: 5, prize: 8000000, label: '頭獎（5 中 5）' },
+  { match: 4, prize: 20000,   label: '貳獎（5 中 4）' },
+  { match: 3, prize: 300,     label: '參獎（5 中 3）' },
+  { match: 2, prize: 50,      label: '肆獎（5 中 2）' },
+];
+
+function calcWheelProbabilities(poolSize) {
+  const totalC = C(MAX_NUM, PICK_COUNT);
+  const results = [];
+  for (const tier of PRIZE_539) {
+    const k = tier.match;
+    if (k > PICK_COUNT || k > poolSize) {
+      results.push({ ...tier, probSingle: 0, probWheel: 0 });
+      continue;
+    }
+    const pSingle = C(PICK_COUNT, k) * C(MAX_NUM - PICK_COUNT, PICK_COUNT - k) / totalC;
+    let probAtLeastK = 0;
+    for (let m = k; m <= Math.min(poolSize, PICK_COUNT); m++) {
+      probAtLeastK += C(poolSize, m) * C(MAX_NUM - poolSize, PICK_COUNT - m) / totalC;
+    }
+    results.push({ ...tier, probSingle: pSingle, probWheel: probAtLeastK });
+  }
+  return results;
+}
+
+function calcWheelEV(poolSize, numBets) {
+  const totalC = C(MAX_NUM, PICK_COUNT);
+  let evPerBet = 0;
+  for (const tier of PRIZE_539) {
+    const k = tier.match;
+    const pSingle = C(PICK_COUNT, k) * C(MAX_NUM - PICK_COUNT, PICK_COUNT - k) / totalC;
+    evPerBet += pSingle * tier.prize;
+  }
+  const totalEV = evPerBet * numBets;
+  const totalCost = numBets * BET_COST;
+  const roi = ((totalEV - totalCost) / totalCost * 100);
+  return { evPerBet: Math.round(evPerBet * 100) / 100, totalEV: Math.round(totalEV), totalCost, roi: Math.round(roi * 10) / 10 };
+}
+
+function monteCarloSim(combosList, iterations) {
+  const dist = new Array(PICK_COUNT + 1).fill(0);
+  let totalPrize = 0;
+  for (let i = 0; i < iterations; i++) {
+    const draw = [];
+    const used = new Set();
+    while (draw.length < PICK_COUNT) {
+      const n = Math.floor(Math.random() * MAX_NUM) + 1;
+      if (!used.has(n)) { used.add(n); draw.push(n); }
+    }
+    let bestMatch = 0;
+    let iterPrize = 0;
+    for (const combo of combosList) {
+      const hits = combo.nums.filter(n => draw.includes(n)).length;
+      if (hits > bestMatch) bestMatch = hits;
+      for (const tier of PRIZE_539) {
+        if (hits === tier.match) { iterPrize += tier.prize; break; }
+      }
+    }
+    dist[bestMatch]++;
+    totalPrize += iterPrize;
+  }
+  const pct = dist.map(d => Math.round(d / iterations * 10000) / 100);
+  const avgReturn = Math.round(totalPrize / iterations);
+  return { dist, pct, avgReturn, iterations };
+}
+
+function formatProb(p) {
+  if (p >= 0.01) return (p * 100).toFixed(2) + '%';
+  if (p >= 0.0001) return '1/' + Math.round(1 / p).toLocaleString();
+  if (p > 0) return '1/' + Math.round(1 / p).toLocaleString();
+  return '0';
+}
+
+function renderWheelSim(poolSize, combos) {
+  const el = document.getElementById('wheelSim');
+  if (!el || combos.length === 0) { if (el) el.innerHTML = ''; return; }
+
+  const numBets = combos.length;
+  const totalCost = numBets * BET_COST;
+  const probs = calcWheelProbabilities(poolSize);
+  const ev = calcWheelEV(poolSize, numBets);
+  const mc = monteCarloSim(combos, 10000);
+
+  el.innerHTML = `
+    <div class="sim-panel">
+      <h4>🔮 包牌機率模擬 <span class="sim-badge">539 專屬</span></h4>
+      <p class="sim-subtitle">用 ${poolSize} 碼包 ${numBets} 注（$${totalCost.toLocaleString()}），到底有多少機會中獎？</p>
+
+      <div class="sim-tabs">
+        <button class="sim-tab active" onclick="switchSimTab(this,'simProb')">精算機率</button>
+        <button class="sim-tab" onclick="switchSimTab(this,'simEV')">期望值</button>
+        <button class="sim-tab" onclick="switchSimTab(this,'simMC')">萬次模擬</button>
+      </div>
+
+      <div class="sim-content" id="simProb">
+        <table class="sim-table">
+          <thead>
+            <tr>
+              <th>獎項</th>
+              <th>單注機率</th>
+              <th>${numBets} 注至少中一次</th>
+              <th>獎金</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${probs.map(p => `
+              <tr>
+                <td class="sim-tier">${p.label}</td>
+                <td>${p.probSingle > 0 ? formatProb(p.probSingle) : '—'}</td>
+                <td class="sim-highlight">${p.probWheel > 0 ? formatProb(p.probWheel) : '—'}</td>
+                <td>$${p.prize.toLocaleString()}</td>
+              </tr>`).join('')}
+            <tr class="sim-total-row">
+              <td class="sim-tier">任一獎項</td>
+              <td>—</td>
+              <td class="sim-highlight">${formatProb(probs[probs.length - 1].probWheel)}</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="sim-note">※ 「至少中一次」是指 ${numBets} 注中任一注達到該獎項的機率（考慮號碼池覆蓋）</p>
+      </div>
+
+      <div class="sim-content" id="simEV" style="display:none">
+        <div class="sim-ev-grid">
+          <div class="sim-ev-card">
+            <span class="sim-ev-label">投注成本</span>
+            <span class="sim-ev-val cost">-$${totalCost.toLocaleString()}</span>
+          </div>
+          <div class="sim-ev-card">
+            <span class="sim-ev-label">單注期望回收</span>
+            <span class="sim-ev-val">$${ev.evPerBet.toFixed(1)}</span>
+          </div>
+          <div class="sim-ev-card">
+            <span class="sim-ev-label">${numBets} 注期望回收</span>
+            <span class="sim-ev-val">$${ev.totalEV.toLocaleString()}</span>
+          </div>
+          <div class="sim-ev-card ${ev.roi >= 0 ? 'positive' : 'negative'}">
+            <span class="sim-ev-label">期望報酬率</span>
+            <span class="sim-ev-val">${ev.roi > 0 ? '+' : ''}${ev.roi}%</span>
+          </div>
+        </div>
+        <div class="sim-ev-bar-wrap">
+          <div class="sim-ev-bar-label">
+            <span>投入 $${totalCost.toLocaleString()}</span>
+            <span>期望回收 $${ev.totalEV.toLocaleString()}</span>
+          </div>
+          <div class="sim-ev-bar-track">
+            <div class="sim-ev-bar-fill" style="width:${Math.min(100, ev.totalEV / totalCost * 100)}%"></div>
+          </div>
+          <p class="sim-ev-verdict">每花 $100，平均拿回 $${Math.round(ev.totalEV / totalCost * 100)}<br>
+          <strong style="color:var(--text-muted);font-weight:400">（期望值為負 = 長期一定虧，這是數學事實，跟運氣無關）</strong></p>
+        </div>
+      </div>
+
+      <div class="sim-content" id="simMC" style="display:none">
+        <p class="sim-mc-title">🎲 模擬 ${mc.iterations.toLocaleString()} 次開獎結果</p>
+        <div class="sim-mc-chart">
+          ${mc.pct.map((p, i) => {
+            const barH = Math.max(2, p / Math.max(...mc.pct) * 100);
+            const tierLabel = i === 0 ? '槓龜' : i === 1 ? '中1' : i === 2 ? '肆獎' : i === 3 ? '參獎' : i === 4 ? '貳獎' : '頭獎';
+            const tierColor = i === 0 ? '#555' : i <= 1 ? '#666' : i === 2 ? '#f5b800' : i === 3 ? '#ff8800' : i === 4 ? '#39FF14' : '#ec4899';
+            return `<div class="sim-mc-col">
+              <span class="sim-mc-pct">${p > 0 ? p + '%' : '0%'}</span>
+              <div class="sim-mc-bar" style="height:${barH}%;background:${tierColor}"></div>
+              <span class="sim-mc-label">${tierLabel}</span>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="sim-mc-summary">
+          <div class="sim-mc-stat">
+            <span class="sim-mc-stat-label">每次開獎平均回收</span>
+            <span class="sim-mc-stat-val">$${mc.avgReturn.toLocaleString()}</span>
+          </div>
+          <div class="sim-mc-stat">
+            <span class="sim-mc-stat-label">每次開獎投入</span>
+            <span class="sim-mc-stat-val cost">$${totalCost.toLocaleString()}</span>
+          </div>
+          <div class="sim-mc-stat">
+            <span class="sim-mc-stat-label">模擬淨損益</span>
+            <span class="sim-mc-stat-val ${mc.avgReturn >= totalCost ? 'positive' : 'negative'}">
+              ${mc.avgReturn >= totalCost ? '+' : '-'}$${Math.abs(mc.avgReturn - totalCost).toLocaleString()}
+            </span>
+          </div>
+        </div>
+        <button class="sim-rerun" onclick="rerunMonteCarlo()">🔄 重跑一次模擬</button>
+        <p class="sim-note">※ 每次模擬結果略有不同（隨機性），但趨勢一致：長期期望值為負</p>
+      </div>
+    </div>`;
+}
+
+function switchSimTab(btn, tabId) {
+  btn.parentElement.querySelectorAll('.sim-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.sim-panel').querySelectorAll('.sim-content').forEach(c => c.style.display = 'none');
+  document.getElementById(tabId).style.display = '';
+}
+
+function rerunMonteCarlo() {
+  if (lotteryDraws.length === 0) return;
+  const draws = currentRange === 0 ? lotteryDraws : lotteryDraws.slice(0, currentRange);
+  const allDraws = lotteryDraws;
+  const { pool, combos, poolSize } = generateWheel(draws, allDraws);
+  renderWheelSim(poolSize, combos);
+  const mcBtn = document.querySelector('.sim-tab:last-child');
+  if (mcBtn) switchSimTab(mcBtn, 'simMC');
+}
+
+// === EXPORT IMAGE ===
+function generateWheelImage() {
+  if (lotteryDraws.length === 0) return;
+  const draws = currentRange === 0 ? lotteryDraws : lotteryDraws.slice(0, currentRange);
+  const allDraws = lotteryDraws;
+  const { pool, combos, maxBets, poolSize, totalCombos, isCustom } = generateWheel(draws, allDraws);
+  if (combos.length === 0) return;
+
+  const actualCost = combos.length * BET_COST;
+  const today = new Date();
+  const dateStr = today.getFullYear() + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' + String(today.getDate()).padStart(2, '0');
+  const lastPeriod = allDraws[0]?.period || '';
+
+  // Layout constants
+  const W = 750;
+  const PAD = 32;
+  const COLS = 2;
+  const COL_W = (W - PAD * 2 - 20) / COLS;
+  const BALL_R = 16;
+  const BALL_GAP = 6;
+  const ROW_H = 42;
+  const HEADER_H = 200;
+  const maxDisplay = Math.min(combos.length, 60);
+  const rows = Math.ceil(maxDisplay / COLS);
+  const TABLE_H = rows * ROW_H + 40;
+  const FOOTER_H = 100;
+  const H = HEADER_H + TABLE_H + FOOTER_H;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // Background
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+  bgGrad.addColorStop(0, '#1a1a2e');
+  bgGrad.addColorStop(0.5, '#16213e');
+  bgGrad.addColorStop(1, '#0f3460');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Subtle grid pattern
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < W; i += 40) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, H); ctx.stroke(); }
+  for (let i = 0; i < H; i += 40) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(W, i); ctx.stroke(); }
+
+  // Header area
+  const hdrGrad = ctx.createLinearGradient(0, 0, W, 0);
+  hdrGrad.addColorStop(0, 'rgba(255,136,0,0.15)');
+  hdrGrad.addColorStop(1, 'rgba(255,215,0,0.08)');
+  ctx.fillStyle = hdrGrad;
+  ctx.fillRect(0, 0, W, HEADER_H);
+
+  // Accent line
+  const accentGrad = ctx.createLinearGradient(0, 0, W, 0);
+  accentGrad.addColorStop(0, '#ff8800');
+  accentGrad.addColorStop(1, '#FFD700');
+  ctx.fillStyle = accentGrad;
+  ctx.fillRect(0, HEADER_H - 3, W, 3);
+
+  // Logo text
+  ctx.font = 'bold 28px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = '#FFD700';
+  ctx.textAlign = 'left';
+  ctx.fillText('🎯 GAME8LA', PAD, 48);
+
+  // Title
+  ctx.font = 'bold 22px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('539 包牌組合', PAD, 84);
+
+  // Date & period
+  ctx.font = '14px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.textAlign = 'right';
+  ctx.fillText(dateStr + (lastPeriod ? '  |  最新一期：' + lastPeriod : ''), W - PAD, 48);
+
+  // Summary stats
+  ctx.textAlign = 'left';
+  const stats = [
+    { label: '預算', val: '$' + currentBudget.toLocaleString() },
+    { label: '注數', val: combos.length + ' 注' },
+    { label: '花費', val: '$' + actualCost.toLocaleString() },
+    { label: '碼數', val: poolSize + ' 碼' + (isCustom ? '（自選）' : '') }
+  ];
+  const statW = (W - PAD * 2) / stats.length;
+  stats.forEach((s, i) => {
+    const x = PAD + i * statW;
+    ctx.fillStyle = 'rgba(255,255,255,0.12)';
+    roundRect(ctx, x, 100, statW - 10, 52, 8);
+    ctx.fill();
+    ctx.font = 'bold 20px "Segoe UI", "Noto Sans TC", sans-serif';
+    ctx.fillStyle = '#ff8800';
+    ctx.textAlign = 'center';
+    ctx.fillText(s.val, x + (statW - 10) / 2, 126);
+    ctx.font = '11px "Segoe UI", "Noto Sans TC", sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText(s.label, x + (statW - 10) / 2, 144);
+  });
+
+  // Pool balls row
+  ctx.textAlign = 'left';
+  ctx.font = '12px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.fillText('號碼池：' + pool.map(s => s.num).join(', '), PAD, HEADER_H - 16);
+
+  // Table header
+  const tableY = HEADER_H + 10;
+  ctx.font = 'bold 12px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  for (let col = 0; col < COLS; col++) {
+    const cx = PAD + col * (COL_W + 20);
+    ctx.textAlign = 'left';
+    ctx.fillText('#', cx, tableY + 14);
+    ctx.fillText('號碼組合', cx + 30, tableY + 14);
+  }
+
+  // Combo rows
+  ctx.textAlign = 'left';
+  for (let i = 0; i < maxDisplay; i++) {
+    const c = combos[i];
+    const col = i < Math.ceil(maxDisplay / 2) ? 0 : 1;
+    const row = col === 0 ? i : i - Math.ceil(maxDisplay / 2);
+    const cx = PAD + col * (COL_W + 20);
+    const cy = tableY + 30 + row * ROW_H;
+
+    // Zebra stripe
+    if (row % 2 === 0) {
+      ctx.fillStyle = 'rgba(255,255,255,0.03)';
+      ctx.fillRect(cx - 4, cy - 6, COL_W, ROW_H);
+    }
+
+    // Index
+    ctx.font = '13px "Segoe UI", "Noto Sans TC", sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.fillText(String(i + 1).padStart(2, ' '), cx, cy + 16);
+
+    // Balls
+    c.nums.forEach((n, j) => {
+      const bx = cx + 34 + j * (BALL_R * 2 + BALL_GAP) + BALL_R;
+      const by = cy + 12;
+      // Ball gradient
+      const ballGrad = ctx.createRadialGradient(bx - 3, by - 3, 2, bx, by, BALL_R);
+      ballGrad.addColorStop(0, '#FFD700');
+      ballGrad.addColorStop(1, '#ff8800');
+      ctx.beginPath();
+      ctx.arc(bx, by, BALL_R, 0, Math.PI * 2);
+      ctx.fillStyle = ballGrad;
+      ctx.fill();
+      // Number
+      ctx.font = 'bold 13px "Segoe UI", sans-serif';
+      ctx.fillStyle = '#000';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(n), bx, by + 1);
+    });
+    ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'left';
+  }
+
+  // Truncation note
+  if (combos.length > maxDisplay) {
+    ctx.font = '12px "Segoe UI", "Noto Sans TC", sans-serif';
+    ctx.fillStyle = 'rgba(255,152,0,0.7)';
+    ctx.textAlign = 'center';
+    ctx.fillText('⚠ 共 ' + combos.length + ' 注，圖片僅顯示前 ' + maxDisplay + ' 注', W / 2, tableY + TABLE_H - 8);
+    ctx.textAlign = 'left';
+  }
+
+  // Footer
+  const footerY = H - FOOTER_H;
+  ctx.fillStyle = 'rgba(0,0,0,0.3)';
+  ctx.fillRect(0, footerY, W, FOOTER_H);
+
+  // Divider
+  ctx.fillStyle = accentGrad;
+  ctx.fillRect(0, footerY, W, 2);
+
+  // Disclaimer
+  ctx.font = '12px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.textAlign = 'center';
+  ctx.fillText('芭樂子提醒：包牌只是提高覆蓋率，不是提高中獎率。期望值永遠是負的，請量力而為。', W / 2, footerY + 30);
+
+  // URL
+  ctx.font = 'bold 14px "Segoe UI", sans-serif';
+  ctx.fillStyle = '#FFD700';
+  ctx.fillText('game8la.com/tools/539-wheel-calculator', W / 2, footerY + 56);
+
+  ctx.font = '11px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.fillText('此圖片由 GAME8LA 包牌計算器自動產生', W / 2, footerY + 80);
+
+  // Download
+  const link = document.createElement('a');
+  link.download = '539-wheel-' + dateStr.replace(/\//g, '') + '.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// === COPY COMBOS TEXT ===
+function copyWheelText() {
+  if (lotteryDraws.length === 0) return;
+  const draws = currentRange === 0 ? lotteryDraws : lotteryDraws.slice(0, currentRange);
+  const allDraws = lotteryDraws;
+  const { combos, poolSize, isCustom } = generateWheel(draws, allDraws);
+  if (combos.length === 0) return;
+
+  const today = new Date();
+  const dateStr = today.getFullYear() + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' + String(today.getDate()).padStart(2, '0');
+  const lastPeriod = allDraws[0]?.period || '';
+
+  // 快速跑模擬取摘要數據
+  const mc = monteCarloSim(combos, 10000);
+  const totalCost = combos.length * BET_COST;
+  const anyWinPct = (100 - mc.pct[0] - mc.pct[1]).toFixed(1);
+  const threeUpPct = (mc.pct[3] + mc.pct[4] + mc.pct[5]).toFixed(1);
+
+  let text = '🎯 539 包牌組合 — GAME8LA\n';
+  text += '日期：' + dateStr + (lastPeriod ? '  最新一期：' + lastPeriod : '') + '\n';
+  text += '預算：$' + currentBudget.toLocaleString() + ' ／ ' + combos.length + ' 注 ／ ' + poolSize + ' 碼' + (isCustom ? '（自選）' : '') + '\n';
+  text += '────────────────\n';
+  text += '🎲 萬次模擬結果：' + threeUpPct + '% 機率中參獎以上\n';
+  text += '💸 期望回收：$' + mc.avgReturn.toLocaleString() + ' / 投入 $' + totalCost.toLocaleString() + '\n';
+  text += '────────────────\n';
+  combos.forEach((c, i) => {
+    text += '第' + String(i + 1).padStart(2, ' ') + '注：' + c.nums.map(n => String(n).padStart(2, '0')).join(' ') + '\n';
+  });
+  text += '────────────────\n';
+  text += '⚠️ 包牌只是提高覆蓋率，期望值永遠是負的\n';
+  text += '🔗 game8la.com/tools/539-wheel-calculator';
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.whl-copy-text');
+    if (btn) {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✅ 已複製！';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+    }
+  }).catch(() => {
+    // Fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.querySelector('.whl-copy-text');
+    if (btn) {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✅ 已複製！';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+    }
+  });
+}
+
+// === EXCLUDE NUMBERS ===
+function toggleExcludePanel() {
+  const body = document.getElementById('whlExcludeBody');
+  const icon = document.getElementById('whlExcToggleIcon');
+  if (!body) return;
+  if (body.style.display === 'none') {
+    body.style.display = '';
+    icon.textContent = '▼';
+    renderExcludeGrid();
+  } else {
+    body.style.display = 'none';
+    icon.textContent = '▶';
+  }
+}
+
+function renderExcludeGrid() {
+  const grid = document.getElementById('whlExcGrid');
+  if (!grid) return;
+  let html = '';
+  for (let i = 1; i <= MAX_NUM; i++) {
+    const exc = excludedNums.includes(i) ? ' excluded' : '';
+    html += '<div class="whl-exc-num' + exc + '" data-n="' + i + '" onclick="toggleExclude(' + i + ')">' + i + '</div>';
+  }
+  grid.innerHTML = html;
+  updateExcludeCount();
+}
+
+function toggleExclude(n) {
+  const idx = excludedNums.indexOf(n);
+  if (idx >= 0) {
+    excludedNums.splice(idx, 1);
+  } else {
+    excludedNums.push(n);
+  }
+  excludedNums.sort((a, b) => a - b);
+  renderExcludeGrid();
+  renderWheel();
+}
+
+function excludeLastDraw() {
+  if (lotteryDraws.length === 0) return;
+  const lastNums = lotteryDraws[0].numbers;
+  lastNums.forEach(n => {
+    if (!excludedNums.includes(n)) excludedNums.push(n);
+  });
+  excludedNums.sort((a, b) => a - b);
+  renderExcludeGrid();
+  renderWheel();
+}
+
+function clearExcluded() {
+  excludedNums = [];
+  renderExcludeGrid();
+  renderWheel();
+}
+
+function updateExcludeCount() {
+  const el = document.getElementById('whlExcCount');
+  const numEl = document.getElementById('whlExcCountNum');
+  if (!el || !numEl) return;
+  if (excludedNums.length > 0) {
+    el.style.display = '';
+    numEl.textContent = excludedNums.length;
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+// === NUMBER COVERAGE ===
+function renderCoverage(combos, pool) {
+  const el = document.getElementById('wheelCoverage');
+  if (!el || combos.length === 0) { if (el) el.innerHTML = ''; return; }
+
+  // Count appearances of each number across all combos
+  const countMap = {};
+  pool.forEach(s => countMap[s.num] = 0);
+  combos.forEach(c => c.nums.forEach(n => { if (countMap[n] !== undefined) countMap[n]++; }));
+
+  const maxCount = Math.max(...Object.values(countMap), 1);
+  const nums = pool.map(s => s.num).sort((a, b) => a - b);
+
+  el.innerHTML = '<h4>📊 號碼覆蓋率</h4>' +
+    '<p class="whl-cov-desc">每個號碼在 ' + combos.length + ' 注組合中出現的次數，越深代表被「包得越厚」：</p>' +
+    '<div class="whl-cov-grid">' +
+    nums.map(n => {
+      const cnt = countMap[n] || 0;
+      const pct = cnt / maxCount;
+      const hue = 30; // orange hue
+      const alpha = 0.15 + pct * 0.85;
+      const txtColor = pct > 0.5 ? '#000' : 'var(--text-secondary)';
+      return '<div class="whl-cov-cell" style="background:rgba(255,136,0,' + alpha.toFixed(2) + ');color:' + txtColor + '">' +
+        '<span class="whl-cov-num">' + n + '</span>' +
+        '<span class="whl-cov-cnt">' + cnt + '次</span>' +
+      '</div>';
+    }).join('') +
+    '</div>';
+}
+
+// === MULTI-PERIOD BACKTEST ===
+function renderMultiBacktest(draws, allDraws) {
+  const el = document.getElementById('wheelBacktest');
+  if (!el || allDraws.length < 5) { if (el) el.innerHTML = ''; return; }
+
+  const isCustomBT = wheelSource === 'custom' && customPoolNums.length > PICK_COUNT;
+  const backtestPeriods = Math.min(20, allDraws.length - 5);
+  if (backtestPeriods < 3) { el.innerHTML = ''; return; }
+
+  const results = [];
+  let totalCost = 0;
+  let totalPrize = 0;
+
+  for (let p = 0; p < backtestPeriods; p++) {
+    const targetDraw = allDraws[p];
+    const histDraws = allDraws.slice(p + 1);
+    const rangeDraws = currentRange === 0 ? histDraws : histDraws.slice(0, currentRange);
+    if (rangeDraws.length < 5) continue;
+
+    const { combos: btCombos, poolSize: btPoolSize, pool: btPool } = generateWheel(rangeDraws, histDraws, !isCustomBT);
+    if (btCombos.length === 0) continue;
+
+    const actual = targetDraw.numbers;
+    let bestHit = 0;
+    let iterPrize = 0;
+    let anyHit = 0;
+    for (const combo of btCombos) {
+      const hits = combo.nums.filter(n => actual.includes(n)).length;
+      if (hits > bestHit) bestHit = hits;
+      if (hits > 0) anyHit++;
+      for (const tier of PRIZE_539) {
+        if (hits === tier.match) { iterPrize += tier.prize; break; }
+      }
+    }
+    const poolHitCount = btPool.filter(s => actual.includes(s.num)).length;
+    const cost = btCombos.length * BET_COST;
+    totalCost += cost;
+    totalPrize += iterPrize;
+
+    results.push({
+      period: targetDraw.period,
+      date: targetDraw.date,
+      actual,
+      bestHit,
+      anyHit,
+      totalCombos: btCombos.length,
+      poolHits: poolHitCount,
+      poolSize: btPoolSize,
+      prize: iterPrize,
+      cost,
+      net: iterPrize - cost
+    });
+  }
+
+  if (results.length === 0) { el.innerHTML = ''; return; }
+
+  // Summary stats
+  const avgBest = (results.reduce((s, r) => s + r.bestHit, 0) / results.length).toFixed(1);
+  const prize3up = results.filter(r => r.bestHit >= 3).length;
+  const prize4up = results.filter(r => r.bestHit >= 4).length;
+  const netTotal = totalPrize - totalCost;
+
+  el.innerHTML = `
+    <div class="whl-bt-panel">
+      <h4>🔁 多期回測（近 ${results.length} 期）</h4>
+      <p class="whl-bt-desc">用${isCustomBT ? '你的自選號碼' : '同樣的演算法'}和預算 $${currentBudget.toLocaleString()} 回測每一期的表現：</p>
+      <div class="whl-bt-summary">
+        <div class="whl-bt-stat">
+          <span class="whl-bt-stat-val">${avgBest}</span>
+          <span class="whl-bt-stat-label">平均最佳命中</span>
+        </div>
+        <div class="whl-bt-stat">
+          <span class="whl-bt-stat-val">${prize3up}</span>
+          <span class="whl-bt-stat-label">中參獎以上</span>
+        </div>
+        <div class="whl-bt-stat">
+          <span class="whl-bt-stat-val">${prize4up}</span>
+          <span class="whl-bt-stat-label">中貳獎以上</span>
+        </div>
+        <div class="whl-bt-stat ${netTotal >= 0 ? 'positive' : 'negative'}">
+          <span class="whl-bt-stat-val">${netTotal >= 0 ? '+' : ''}$${netTotal.toLocaleString()}</span>
+          <span class="whl-bt-stat-label">累積損益</span>
+        </div>
+      </div>
+      <div class="whl-bt-table-wrap">
+        <table class="whl-bt-table">
+          <thead>
+            <tr>
+              <th>期數</th>
+              <th>開獎號碼</th>
+              <th>池命中</th>
+              <th>最佳</th>
+              <th>損益</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${results.map(r => {
+              const hitClass = r.bestHit >= 4 ? 'bt-gold' : r.bestHit >= 3 ? 'bt-silver' : r.bestHit >= 2 ? 'bt-bronze' : '';
+              return `<tr class="${hitClass}">
+                <td class="bt-period">${r.period}</td>
+                <td class="bt-nums">${r.actual.map(n => '<span class="num-mini-sm">' + n + '</span>').join('')}</td>
+                <td>${r.poolHits}/${r.poolSize}</td>
+                <td><strong class="bt-best">${r.bestHit}</strong></td>
+                <td class="${r.net >= 0 ? 'bt-profit' : 'bt-loss'}">${r.net >= 0 ? '+' : ''}$${r.net.toLocaleString()}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+      <p class="whl-bt-note">⚠️ 回測結果僅供參考，過去表現不代表未來結果。每期開獎都是獨立事件。</p>
+    </div>`;
+}
+
+// === INIT ===
+loadData();
+</script>
+
+<style is:global>
+/* ═══ 539 Wheel Calculator ═══ */
+.container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+/* Hero */
+.page-hero {
+  text-align: center; padding: 2rem 1rem 1.5rem;
+}
+.page-hero h1 {
+  font-size: 2rem; font-weight: 900; margin: 0 0 0.5rem;
+  background: linear-gradient(135deg, #FFD700, #ff8800);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-sub {
+  font-size: 1.15rem; color: var(--text-secondary); font-weight: 700; margin: 0 0 0.5rem;
+}
+.hero-desc {
+  font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.6;
+}
+
+/* Intro Section (SEO) */
+.intro-section {
+  max-width: 800px; margin: 0 auto 2rem; padding: 1.5rem 1.8rem;
+  background: var(--bg-secondary); border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.intro-section h2 {
+  font-size: 1.25rem; font-weight: 800; margin: 0 0 0.8rem;
+  color: var(--gold);
+}
+.intro-section p {
+  font-size: 0.95rem; line-height: 1.8; color: var(--text-secondary);
+  margin: 0 0 0.8rem;
+}
+.intro-section p:last-child { margin-bottom: 0; }
+
+/* Loading */
+.loading-state {
+  padding: 3rem 1rem; text-align: center;
+}
+.skeleton-pulse {
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, rgba(255,255,255,0.05) 50%, var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  animation: skelPulse 1.5s infinite;
+  border-radius: 10px;
+}
+@keyframes skelPulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.loading-text {
+  margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;
+}
+.loading-error {
+  color: #ef4444; font-size: 0.95rem; padding: 2rem;
+  background: rgba(239,68,68,0.08); border-radius: 10px;
+}
+
+/* Sections */
+.analysis-section {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem;
+}
+.wheel-section {
+  background: linear-gradient(135deg, rgba(255,136,0,0.05), rgba(255,215,0,0.04));
+  border-color: rgba(255,136,0,0.25);
+}
+.section-head { margin-bottom: 1.5rem; }
+.section-head h2 {
+  font-size: 1.3rem; font-weight: 900; margin: 0 0 0.3rem;
+  color: var(--text-primary);
+}
+.section-head p {
+  font-size: 0.9rem; color: var(--text-muted); margin: 0;
+}
+
+/* Guava note */
+.guava-note {
+  display: flex; gap: 0.6rem; align-items: flex-start;
+  padding: 1rem; margin-top: 1.5rem;
+  background: rgba(57,255,20,0.04);
+  border: 1px solid rgba(57,255,20,0.2);
+  border-radius: 10px;
+}
+.gn-icon { font-size: 1.3rem; flex-shrink: 0; }
+.guava-note p {
+  margin: 0; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;
+}
+.guava-note strong { color: #39FF14; }
+
+/* ═══ Range Selector ═══ */
+.whl-range-selector {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem; border-bottom: 1px solid var(--border);
+}
+.whl-range-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.whl-range-btn {
+  padding: 0.4rem 0.9rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-range-btn:hover { border-color: var(--gold); }
+.whl-range-btn.active {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; font-weight: 700;
+}
+
+/* ═══ Wheel Budget ═══ */
+.wheel-budget {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.wheel-budget-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.whl-btn {
+  padding: 0.5rem 1.2rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-btn:hover { border-color: var(--gold); }
+.whl-btn.active {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; font-weight: 700;
+}
+.whl-custom {
+  display: flex; gap: 0.3rem; align-items: center;
+}
+.whl-custom input {
+  width: 100px; padding: 0.45rem 0.6rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-primary); font-size: 0.85rem;
+}
+.whl-custom input::placeholder { color: var(--text-muted); }
+.whl-custom-go { padding: 0.45rem 0.8rem; font-size: 0.85rem; }
+
+/* Source toggle */
+.whl-source-toggle {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1rem;
+}
+.whl-source-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.whl-src-btn {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-src-btn:hover { border-color: var(--gold); }
+.whl-src-btn.active {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; font-weight: 700;
+}
+
+/* Custom pool */
+.whl-custom-pool {
+  margin-bottom: 1.2rem; padding: 1rem;
+  background: rgba(255,136,0,0.04); border: 1px dashed rgba(255,136,0,0.3);
+  border-radius: 12px;
+}
+.whl-cp-hint { font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 0.8rem; }
+.whl-cp-hint strong { color: var(--gold-light); }
+.whl-cp-grid {
+  display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center; margin-bottom: 0.8rem;
+}
+.whl-cp-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg-secondary); border: 2px solid var(--border);
+  color: var(--text-secondary); font-size: 0.92rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.whl-cp-num:hover { border-color: #ff8800; color: #ff8800; }
+.whl-cp-num.selected {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; box-shadow: 0 3px 10px rgba(255,136,0,0.35);
+  transform: scale(1.08);
+}
+.whl-cp-status {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  font-size: 0.88rem; color: var(--text-muted);
+}
+.whl-cp-status strong { color: #ff8800; font-size: 1.05rem; }
+.whl-cp-clear {
+  padding: 0.3rem 0.8rem; border-radius: 6px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.8rem; cursor: pointer;
+}
+.whl-cp-clear:hover { border-color: var(--text-muted); }
+
+/* Custom pool warning */
+.whl-cp-warn {
+  margin-top: 0.8rem; padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 2px solid #ff9800; border-radius: 12px;
+  display: flex; gap: 0.8rem; align-items: flex-start;
+}
+[data-theme="dark"] .whl-cp-warn {
+  background: linear-gradient(135deg, rgba(255,152,0,0.15) 0%, rgba(255,152,0,0.06) 100%);
+}
+.whl-cp-warn-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+.whl-cp-warn-body { font-size: 0.85rem; line-height: 1.6; }
+.whl-cp-warn-body strong { color: #e65100; display: block; margin-bottom: 0.3rem; font-size: 0.92rem; }
+[data-theme="dark"] .whl-cp-warn-body strong { color: #ffab40; }
+.whl-cp-warn-body p { margin: 0.25rem 0; color: #5d4037; }
+[data-theme="dark"] .whl-cp-warn-body p { color: #ffcc80; }
+.whl-cp-warn.shake { animation: whl-shake 0.4s ease-in-out; }
+@keyframes whl-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+.whl-cp-not-enough {
+  padding: 1rem; text-align: center; font-size: 0.92rem;
+  color: var(--text-muted); background: rgba(255,136,0,0.04);
+  border: 1px dashed rgba(255,136,0,0.25); border-radius: 10px;
+}
+.whl-cp-not-enough strong { color: #ff8800; }
+
+/* ═══ Wheel Summary ═══ */
+.whl-summary-grid {
+  display: flex; gap: 0.8rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.whl-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem 1.2rem; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.whl-stat-val { font-size: 1.4rem; font-weight: 900; color: #ff8800; }
+.whl-stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; text-align: center; }
+
+/* Budget overflow */
+.whl-budget-overflow {
+  margin-top: 1rem; padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 2px solid #ff9800; border-radius: 12px;
+  text-align: center;
+}
+[data-theme="dark"] .whl-budget-overflow {
+  background: linear-gradient(135deg, rgba(255,152,0,0.15) 0%, rgba(255,152,0,0.08) 100%);
+  border-color: #ff9800;
+}
+.whl-bo-icon { font-size: 1.6rem; margin-bottom: 0.3rem; }
+.whl-bo-text { font-size: 0.88rem; color: #5d4037; line-height: 1.6; }
+[data-theme="dark"] .whl-bo-text { color: #ffcc80; }
+.whl-bo-text strong { color: #e65100; }
+[data-theme="dark"] .whl-bo-text strong { color: #ffab40; }
+.whl-bo-text p { margin: 0.2rem 0; }
+.whl-bo-btn {
+  margin-top: 0.8rem; padding: 0.6rem 1.4rem;
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: #fff; border: none; border-radius: 8px;
+  font-size: 0.9rem; font-weight: 700; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.whl-bo-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255,152,0,0.4);
+}
+
+/* ═══ Wheel Pool ═══ */
+.wheel-pool { margin-bottom: 1.5rem; }
+.wheel-pool h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.whl-pool-balls {
+  display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
+}
+.whl-pool-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+}
+.whl-pool-ball {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #ff8800, #FFD700);
+  color: #000; font-weight: 900; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(255,136,0,0.3);
+}
+.whl-pool-score { font-size: 0.7rem; color: var(--gold-light); font-weight: 700; }
+.suggest-tags { display: flex; gap: 0.2rem; }
+.sg-tag {
+  font-size: 0.6rem; padding: 0.1rem 0.35rem; border-radius: 4px;
+  font-weight: 700;
+}
+.sg-tag.hot { background: rgba(255,68,68,0.2); color: #ff6666; }
+.sg-tag.miss { background: rgba(68,170,255,0.2); color: #66bbff; }
+.sg-tag.repeat { background: rgba(57,255,20,0.2); color: #39FF14; }
+
+/* ═══ Wheel Combos Table ═══ */
+.wheel-combos { margin-bottom: 1.5rem; }
+.wheel-combos h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.whl-table-wrap { overflow-x: auto; }
+.whl-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.whl-table th {
+  text-align: left; padding: 0.5rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.whl-table td {
+  padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); white-space: nowrap;
+}
+.whl-idx { color: var(--text-muted); font-weight: 600; width: 30px; }
+.whl-strength { font-weight: 800; color: #ff8800; }
+.whl-composition { display: flex; gap: 0.2rem; }
+.td-nums { display: flex; gap: 3px; flex-wrap: wrap; align-items: center; }
+.num-mini {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  font-size: 0.8rem; font-weight: 700; color: var(--text-secondary);
+}
+.num-mini.hit {
+  background: linear-gradient(135deg, #39FF14, #2bcc10);
+  color: #000; border-color: #39FF14;
+  box-shadow: 0 2px 8px rgba(57,255,20,0.3);
+}
+.whl-empty {
+  text-align: center; color: var(--text-muted); font-size: 0.9rem;
+  padding: 2rem; background: var(--bg-secondary); border-radius: 10px;
+}
+.whl-show-more {
+  display: block; width: 100%; margin-top: 0.8rem;
+  padding: 0.6rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--gold-light); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-show-more:hover { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+.whl-trunc-note {
+  margin-top: 0.6rem; padding: 0.5rem 0.8rem;
+  font-size: 0.8rem; color: #ff9800;
+  background: rgba(255,152,0,0.08); border-radius: 8px;
+  text-align: center;
+}
+.whl-download-img {
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  width: 100%; margin-top: 0.8rem; padding: 0.75rem 1rem;
+  border-radius: 10px; border: 2px solid rgba(255,215,0,0.4);
+  background: linear-gradient(135deg, rgba(255,136,0,0.12), rgba(255,215,0,0.08));
+  color: #FFD700; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all 0.25s;
+}
+.whl-download-img:hover {
+  background: linear-gradient(135deg, rgba(255,136,0,0.25), rgba(255,215,0,0.15));
+  border-color: #FFD700; transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255,215,0,0.2);
+}
+
+/* ═══ Wheel Review ═══ */
+.wheel-review { margin-bottom: 1rem; }
+.wheel-review h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.whl-review-grid {
+  display: flex; flex-direction: column; gap: 0.6rem;
+  padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.whl-review-item {
+  display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
+}
+.whl-review-label {
+  font-size: 0.82rem; color: var(--text-muted); font-weight: 600;
+  min-width: 90px;
+}
+.whl-review-val { font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 3px; flex-wrap: wrap; }
+.whl-review-hit { color: #39FF14; font-weight: 700; font-size: 0.85rem; }
+.whl-review-miss { color: var(--text-muted); font-size: 0.85rem; }
+.whl-review-note {
+  font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem;
+  text-align: center;
+}
+
+/* ═══ Simulation Panel ═══ */
+.wheel-sim { margin-top: 1.5rem; }
+.sim-panel {
+  background: linear-gradient(135deg, rgba(138,43,226,0.06), rgba(255,215,0,0.04));
+  border: 1px solid rgba(138,43,226,0.3);
+  border-radius: 14px; padding: 1.5rem;
+}
+.sim-panel h4 {
+  font-size: 1.1rem; color: var(--text-primary); margin: 0 0 0.3rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.sim-badge {
+  font-size: 0.65rem; font-weight: 900; color: #fff;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  padding: 0.15rem 0.6rem; border-radius: 999px; letter-spacing: 0.5px;
+}
+.sim-subtitle { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 1rem; }
+.sim-tabs {
+  display: flex; gap: 0.4rem; margin-bottom: 1.2rem;
+  border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+}
+.sim-tab {
+  padding: 0.5rem 1rem; border-radius: 8px 8px 0 0;
+  background: transparent; border: 1px solid transparent;
+  color: var(--text-muted); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.sim-tab:hover { color: var(--text-primary); }
+.sim-tab.active {
+  background: rgba(138,43,226,0.12); border-color: rgba(138,43,226,0.4);
+  color: #a855f7; font-weight: 700;
+}
+.sim-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.sim-table th {
+  text-align: left; padding: 0.5rem 0.6rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.sim-table td {
+  padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem;
+}
+.sim-tier { font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+.sim-highlight { color: #a855f7; font-weight: 700; }
+.sim-total-row td { border-top: 2px solid var(--border); font-weight: 700; }
+.sim-total-row .sim-highlight { color: #39FF14; font-size: 1rem; }
+.sim-note { font-size: 0.78rem; color: var(--text-muted); margin: 0.6rem 0 0; font-style: italic; }
+
+/* EV cards */
+.sim-ev-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem; margin-bottom: 1.2rem;
+}
+.sim-ev-card {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem; border-radius: 10px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+}
+.sim-ev-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+.sim-ev-val { font-size: 1.2rem; font-weight: 900; color: var(--gold-light); }
+.sim-ev-val.cost { color: #ef4444; }
+.sim-ev-card.negative .sim-ev-val { color: #ef4444; }
+.sim-ev-card.positive .sim-ev-val { color: #39FF14; }
+.sim-ev-bar-wrap { margin: 1rem 0; }
+.sim-ev-bar-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem;
+}
+.sim-ev-bar-track {
+  height: 24px; background: rgba(239,68,68,0.15);
+  border-radius: 12px; overflow: hidden; border: 1px solid rgba(239,68,68,0.3);
+}
+.sim-ev-bar-fill {
+  height: 100%; background: linear-gradient(90deg, #ef4444, #f97316, #FFD700);
+  border-radius: 12px; transition: width 0.5s;
+}
+.sim-ev-verdict {
+  text-align: center; font-size: 0.92rem; color: var(--text-secondary);
+  margin: 0.6rem 0 0; line-height: 1.6;
+}
+
+/* Monte Carlo chart */
+.sim-mc-title { font-size: 0.95rem; color: var(--text-primary); font-weight: 700; margin: 0 0 1rem; }
+.sim-mc-chart {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 0.5rem; height: 160px; margin-bottom: 1rem;
+  padding: 0.5rem; background: var(--bg-secondary); border-radius: 10px;
+}
+.sim-mc-col {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; max-width: 60px; height: 100%;
+  justify-content: flex-end;
+}
+.sim-mc-pct { font-size: 0.7rem; color: var(--text-secondary); font-weight: 700; margin-bottom: 0.2rem; }
+.sim-mc-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 2px; transition: height 0.3s; }
+.sim-mc-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; font-weight: 600; }
+.sim-mc-summary {
+  display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0;
+}
+.sim-mc-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.6rem 1rem; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-radius: 10px; min-width: 120px;
+}
+.sim-mc-stat-label { font-size: 0.72rem; color: var(--text-muted); }
+.sim-mc-stat-val { font-size: 1.1rem; font-weight: 900; color: var(--gold-light); margin-top: 0.2rem; }
+.sim-mc-stat-val.cost { color: #ef4444; }
+.sim-mc-stat-val.negative { color: #ef4444; }
+.sim-mc-stat-val.positive { color: #39FF14; }
+.sim-rerun {
+  display: block; margin: 0.8rem auto 0; padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7); color: #fff;
+  border: none; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.sim-rerun:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(138,43,226,0.4); }
+
+/* ═══ Export Buttons ═══ */
+.whl-export-btns {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.8rem;
+}
+.whl-tg-cta {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.75rem 1rem; border-radius: 10px;
+  border: 2px solid rgba(0, 136, 204, 0.4);
+  background: linear-gradient(135deg, rgba(0, 136, 204, 0.12), rgba(0, 136, 204, 0.06));
+  color: #29b6f6; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all 0.25s; text-decoration: none;
+}
+.whl-tg-cta small {
+  font-weight: 400; font-size: 0.8rem; opacity: 0.8;
+}
+.whl-tg-cta:hover {
+  background: linear-gradient(135deg, rgba(0, 136, 204, 0.25), rgba(0, 136, 204, 0.12));
+  border-color: #29b6f6; transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 136, 204, 0.2);
+}
+.whl-copy-text {
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.75rem 1rem; border-radius: 10px;
+  border: 2px solid rgba(57,255,20,0.4);
+  background: linear-gradient(135deg, rgba(57,255,20,0.12), rgba(57,255,20,0.06));
+  color: #39FF14; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all 0.25s;
+}
+.whl-copy-text:hover {
+  background: linear-gradient(135deg, rgba(57,255,20,0.25), rgba(57,255,20,0.12));
+  border-color: #39FF14; transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(57,255,20,0.2);
+}
+.whl-copy-text.copied {
+  background: linear-gradient(135deg, rgba(57,255,20,0.3), rgba(57,255,20,0.15));
+  border-color: #39FF14;
+}
+
+/* ═══ Exclude Panel ═══ */
+.whl-exclude-panel {
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden;
+}
+.whl-exclude-head {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1rem; cursor: pointer;
+  background: var(--bg-secondary); transition: background 0.2s;
+}
+.whl-exclude-head:hover { background: rgba(255,136,0,0.06); }
+.whl-exclude-toggle-icon {
+  font-size: 0.7rem; color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.whl-exclude-title { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); }
+.whl-exclude-count {
+  margin-left: auto; font-size: 0.82rem; color: #ef4444;
+}
+.whl-exclude-count strong { font-size: 0.95rem; }
+.whl-exclude-body { padding: 1rem; }
+.whl-exc-hint {
+  font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 0.8rem;
+}
+.whl-exc-grid {
+  display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center;
+  margin-bottom: 0.8rem;
+}
+.whl-exc-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg-secondary); border: 2px solid var(--border);
+  color: var(--text-secondary); font-size: 0.92rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.whl-exc-num:hover { border-color: #ef4444; color: #ef4444; }
+.whl-exc-num.excluded {
+  background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff;
+  border-color: #ef4444; box-shadow: 0 3px 10px rgba(239,68,68,0.35);
+  text-decoration: line-through; text-decoration-thickness: 2px;
+}
+.whl-exc-actions {
+  display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+}
+.whl-exc-quick {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+  color: #ef4444; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-exc-quick:hover { background: rgba(239,68,68,0.2); border-color: #ef4444; }
+.whl-exc-clear {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.whl-exc-clear:hover { border-color: var(--text-muted); }
+
+/* ═══ Coverage Heatmap ═══ */
+.wheel-coverage { margin-bottom: 1.5rem; }
+.wheel-coverage h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.3rem; }
+.whl-cov-desc { font-size: 0.85rem; color: var(--text-muted); margin: 0 0 0.8rem; }
+.whl-cov-grid {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center;
+}
+.whl-cov-cell {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; width: 48px; height: 48px;
+  border-radius: 10px; border: 1px solid rgba(255,136,0,0.2);
+  transition: transform 0.15s;
+}
+.whl-cov-cell:hover { transform: scale(1.1); }
+.whl-cov-num { font-size: 0.95rem; font-weight: 800; line-height: 1; }
+.whl-cov-cnt { font-size: 0.65rem; font-weight: 600; opacity: 0.8; margin-top: 1px; }
+
+/* ═══ Multi-period Backtest ═══ */
+.wheel-backtest { margin-bottom: 1.5rem; }
+.whl-bt-panel {
+  background: linear-gradient(135deg, rgba(16,185,129,0.06), rgba(255,215,0,0.04));
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 14px; padding: 1.5rem;
+}
+.whl-bt-panel h4 {
+  font-size: 1.1rem; color: var(--text-primary); margin: 0 0 0.3rem;
+}
+.whl-bt-desc { font-size: 0.88rem; color: var(--text-muted); margin: 0 0 1rem; }
+.whl-bt-summary {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem; margin-bottom: 1.2rem;
+}
+.whl-bt-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem 0.5rem; border-radius: 10px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+}
+.whl-bt-stat-val { font-size: 1.3rem; font-weight: 900; color: #10b981; }
+.whl-bt-stat-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; text-align: center; }
+.whl-bt-stat.negative .whl-bt-stat-val { color: #ef4444; }
+.whl-bt-stat.positive .whl-bt-stat-val { color: #10b981; }
+.whl-bt-table-wrap { overflow-x: auto; }
+.whl-bt-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.whl-bt-table th {
+  text-align: left; padding: 0.5rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.whl-bt-table td {
+  padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem; white-space: nowrap;
+}
+.bt-period { font-weight: 600; color: var(--text-muted); }
+.bt-nums { display: flex; gap: 2px; align-items: center; }
+.num-mini-sm {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  font-size: 0.75rem; font-weight: 700; color: var(--text-secondary);
+}
+.bt-best { color: #10b981; font-size: 1rem; }
+.bt-profit { color: #10b981; font-weight: 700; }
+.bt-loss { color: #ef4444; font-weight: 700; }
+tr.bt-gold { background: rgba(255,215,0,0.08); }
+tr.bt-silver { background: rgba(192,192,192,0.06); }
+tr.bt-bronze { background: rgba(205,127,50,0.04); }
+.whl-bt-note {
+  font-size: 0.8rem; color: var(--text-muted); margin: 0.8rem 0 0;
+  text-align: center; font-style: italic;
+}
+
+/* ═══ FAQ ═══ */
+.faq-section { background: var(--bg-card); }
+.faq-item {
+  border-bottom: 1px solid var(--border); padding: 0.8rem 0;
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-item summary {
+  font-weight: 700; color: var(--text-primary); font-size: 0.95rem;
+  cursor: pointer; padding: 0.3rem 0;
+}
+.faq-item summary:hover { color: var(--gold-light); }
+.faq-item p {
+  margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ═══ CTA Grid ═══ */
+.cta-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.cta-card {
+  display: flex; gap: 0.8rem; align-items: flex-start;
+  padding: 1.2rem; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  text-decoration: none; color: var(--text-primary);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-card:hover { transform: translateY(-2px); }
+.cta-card.gold:hover { border-color: #FFD700; box-shadow: 0 6px 20px rgba(255,215,0,0.15); }
+.cta-card.green:hover { border-color: #39FF14; box-shadow: 0 6px 20px rgba(57,255,20,0.15); }
+.cta-card.pink:hover { border-color: #FF10F0; box-shadow: 0 6px 20px rgba(255,16,240,0.15); }
+.cta-icon { font-size: 1.5rem; flex-shrink: 0; }
+.cta-card strong { font-size: 0.95rem; display: block; margin-bottom: 0.3rem; }
+.cta-card p { margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ═══ Responsive — 大齡友善 (larger tap targets + fonts on mobile) ═══ */
+@media (max-width: 768px) {
+  .page-hero h1 { font-size: 1.5rem; }
+  .intro-section { padding: 1.2rem 1rem; margin-bottom: 1.5rem; }
+  .intro-section h2 { font-size: 1.1rem; }
+  .intro-section p { font-size: 0.9rem; line-height: 1.75; }
+  .analysis-section { padding: 1.2rem; }
+  .whl-summary-grid { gap: 0.5rem; }
+  .whl-stat { min-width: 0; flex: 1 1 40%; padding: 0.7rem 0.5rem; }
+  .whl-stat-val { font-size: 1.2rem; }
+  .whl-stat-label { font-size: 0.78rem; }
+  .whl-pool-balls { gap: 0.6rem; }
+  .whl-pool-ball { width: 42px; height: 42px; font-size: 1.05rem; }
+  .whl-pool-score { font-size: 0.78rem; }
+  .whl-table { font-size: 0.85rem; }
+  .whl-composition { display: none; }
+  .whl-show-more { padding: 0.7rem; font-size: 0.95rem; min-height: 48px; }
+  .whl-cp-num { width: 42px; height: 42px; font-size: 0.92rem; }
+  .whl-cp-grid { gap: 0.35rem; }
+  .whl-exc-num { width: 42px; height: 42px; font-size: 0.92rem; }
+  .whl-exc-grid { gap: 0.35rem; }
+  .sim-panel { padding: 1rem; }
+  .sim-tabs { gap: 0.3rem; }
+  .sim-tab { padding: 0.5rem 0.7rem; font-size: 0.85rem; min-height: 44px; }
+  .sim-ev-grid { grid-template-columns: 1fr 1fr; }
+  .sim-ev-val { font-size: 1rem; }
+  .sim-mc-chart { height: 130px; gap: 0.3rem; }
+  .sim-mc-col { max-width: 50px; }
+  .sim-mc-pct { font-size: 0.7rem; }
+  .sim-mc-label { font-size: 0.7rem; }
+  .sim-mc-summary { gap: 0.5rem; }
+  .sim-mc-stat { min-width: 90px; padding: 0.5rem 0.6rem; }
+  .sim-table { font-size: 0.82rem; }
+  .sim-table th { font-size: 0.75rem; padding: 0.4rem; }
+  .sim-table td { padding: 0.4rem; font-size: 0.85rem; }
+  .cta-grid { grid-template-columns: 1fr; }
+  /* Export buttons stack on tablet */
+  .whl-export-btns { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .whl-copy-text, .whl-download-img { font-size: 0.9rem; padding: 0.7rem 0.6rem; }
+  .whl-tg-cta { font-size: 0.9rem; padding: 0.7rem 0.6rem; }
+  /* Coverage cells */
+  .whl-cov-cell { width: 44px; height: 44px; }
+  .whl-cov-num { font-size: 0.9rem; }
+  .whl-cov-cnt { font-size: 0.65rem; }
+  /* Backtest */
+  .whl-bt-summary { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .whl-bt-stat-val { font-size: 1.1rem; }
+  .whl-bt-stat-label { font-size: 0.72rem; }
+  .whl-bt-panel { padding: 1rem; }
+  .whl-bt-table { font-size: 0.82rem; }
+  .whl-bt-table th { font-size: 0.72rem; padding: 0.4rem; }
+  .whl-bt-table td { padding: 0.4rem; font-size: 0.82rem; }
+  .num-mini-sm { width: 24px; height: 24px; font-size: 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  /* ↓↓↓ 大齡友善：手機版加大所有字體和觸控區域 ↓↓↓ */
+  .analysis-section { padding: 1rem 0.8rem; }
+  .section-head h2 { font-size: 1.2rem; }
+
+  /* Range selector */
+  .whl-range-selector { gap: 0.4rem; }
+  .whl-range-label { font-size: 0.95rem; width: 100%; text-align: center; }
+  .whl-range-btn {
+    flex: 1; padding: 0.6rem 0.4rem; font-size: 0.95rem;
+    min-height: 46px; text-align: center;
+  }
+
+  /* Budget */
+  .wheel-budget {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.4rem;
+  }
+  .wheel-budget-label {
+    grid-column: 1 / -1; text-align: center; margin-bottom: 0.2rem;
+    font-size: 0.95rem;
+  }
+  .whl-btn {
+    padding: 0.6rem 0.4rem; font-size: 0.95rem;
+    text-align: center; min-height: 46px;
+  }
+  .whl-custom {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: 1fr auto; gap: 0.4rem;
+  }
+  .whl-custom input {
+    width: 100%; padding: 0.6rem 0.7rem; font-size: 1rem;
+    min-height: 46px;
+  }
+  .whl-custom-go { min-height: 46px; font-size: 0.95rem; padding: 0.6rem 1rem; }
+
+  /* Summary */
+  .whl-summary-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;
+  }
+  .whl-stat { padding: 0.7rem 0.5rem; }
+  .whl-stat-val { font-size: 1.2rem; }
+  .whl-stat-label { font-size: 0.78rem; }
+
+  /* Pool balls — larger for older eyes */
+  .whl-pool-balls { gap: 1rem 1.2rem; padding: 0.5rem 0; }
+  .whl-pool-ball { width: 48px; height: 48px; font-size: 1.2rem; }
+  .whl-pool-score { font-size: 0.82rem; margin-top: 0.15rem; }
+  .sg-tag { font-size: 0.65rem; padding: 0.15rem 0.4rem; }
+
+  /* Table */
+  .whl-table { font-size: 0.85rem; }
+  .whl-table th, .whl-table td { padding: 0.45rem 0.35rem; }
+  .num-mini { width: 30px; height: 30px; font-size: 0.82rem; }
+  .whl-show-more {
+    padding: 0.8rem; font-size: 1rem;
+    min-height: 48px; font-weight: 700;
+  }
+
+  /* Source toggle */
+  .whl-source-toggle { gap: 0.4rem; }
+  .whl-source-label { font-size: 0.95rem; width: 100%; text-align: center; }
+  .whl-src-btn {
+    flex: 1; text-align: center; padding: 0.6rem 0.5rem;
+    font-size: 0.95rem; min-height: 46px;
+  }
+
+  /* Custom pool grid — bigger for fat fingers */
+  .whl-cp-num { width: 44px; height: 44px; font-size: 1rem; }
+  .whl-cp-hint { font-size: 0.92rem; }
+  .whl-cp-status { font-size: 0.92rem; }
+
+  /* Exclude panel */
+  .whl-exclude-head { padding: 0.9rem 1rem; }
+  .whl-exclude-title { font-size: 1rem; }
+  .whl-exclude-count { font-size: 0.88rem; }
+  .whl-exc-num { width: 44px; height: 44px; font-size: 1rem; }
+  .whl-exc-hint { font-size: 0.92rem; }
+  .whl-exc-quick, .whl-exc-clear {
+    padding: 0.6rem 1rem; font-size: 0.92rem; min-height: 44px;
+  }
+
+  /* Export buttons stack vertically */
+  .whl-export-btns { grid-template-columns: 1fr; gap: 0.5rem; }
+  .whl-copy-text, .whl-download-img {
+    font-size: 1rem; padding: 0.85rem 1rem; min-height: 50px;
+  }
+
+  /* Coverage */
+  .whl-cov-cell { width: 46px; height: 46px; border-radius: 8px; }
+  .whl-cov-num { font-size: 1rem; }
+  .whl-cov-cnt { font-size: 0.7rem; }
+  .whl-cov-desc { font-size: 0.9rem; }
+
+  /* Backtest */
+  .whl-bt-summary { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .whl-bt-stat { padding: 0.7rem 0.4rem; }
+  .whl-bt-stat-val { font-size: 1.15rem; }
+  .whl-bt-stat-label { font-size: 0.75rem; }
+  .whl-bt-panel { padding: 1rem 0.8rem; }
+  .whl-bt-table { font-size: 0.82rem; }
+  .whl-bt-table th { font-size: 0.72rem; }
+  .whl-bt-table td { font-size: 0.82rem; }
+  .num-mini-sm { width: 26px; height: 26px; font-size: 0.72rem; }
+  .bt-best { font-size: 1.05rem; }
+
+  /* Sim tabs */
+  .sim-tab { padding: 0.55rem 0.6rem; font-size: 0.88rem; min-height: 46px; }
+  .sim-rerun { font-size: 0.95rem; padding: 0.7rem 1.5rem; min-height: 46px; }
+
+  /* Review */
+  .whl-review-label { font-size: 0.88rem; min-width: 80px; }
+  .whl-review-val { font-size: 0.9rem; }
+}
+</style>
+
+</BaseLayout>

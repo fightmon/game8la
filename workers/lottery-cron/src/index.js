@@ -11,19 +11,31 @@
  */
 
 // ============================================================
+// 台灣彩券官方 JSON API（和 worker.js 相同來源）
+// ============================================================
+const LOTTERY_API_BASE = 'https://api.taiwanlottery.com/TLCAPIWeB/Lottery';
+
+// ============================================================
 // 彩種設定
 // ============================================================
 const LOTTERY_CONFIG = {
   daily_cash_539: {
     name: '今彩539',
     file: 'daily-cash-539.json',
-    // 539 每天開
-    drawDays: [0, 1, 2, 3, 4, 5, 6], // 0=Sun, 1=Mon...
+    drawDays: [1, 2, 3, 4, 5, 6], // 週一至六（週日不開）
     numberRange: { min: 1, max: 39, count: 5 },
     hasSpecial: false,
-    // 台彩官網查詢頁面
-    url: 'https://www.taiwanlottery.com.tw/Lotto/Dailycash/history.aspx',
-    parseType: 'taiwanlottery',
+    // 官方 API endpoint（多個 fallback）
+    apiEndpoints: ['Daily539Result', 'DailyCash539Result', 'DailyCashResult', 'Cash539Result'],
+    apiArrayKeys: ['daily539Res', 'dailyCash539Res', 'dailyCashRes', 'cash539Res'],
+    parseRecord(rec) {
+      const all = rec.drawNumberSize || rec.drawNumberAppear || [];
+      return {
+        period: rec.period != null ? String(rec.period) : null,
+        date: (rec.lotteryDate || '').slice(0, 10),
+        numbers: all.slice(0, 5).slice().sort((a, b) => a - b),
+      };
+    },
   },
   super_lotto: {
     name: '威力彩',
@@ -32,8 +44,17 @@ const LOTTERY_CONFIG = {
     numberRange: { min: 1, max: 38, count: 6 },
     specialRange: { min: 1, max: 8 },
     hasSpecial: true,
-    url: 'https://www.taiwanlottery.com.tw/Lotto/SuperLotto638/history.aspx',
-    parseType: 'taiwanlottery',
+    apiEndpoints: ['SuperLotto638Result'],
+    apiArrayKeys: ['superLotto638Res'],
+    parseRecord(rec) {
+      const all = rec.drawNumberSize || [];
+      return {
+        period: rec.period != null ? String(rec.period) : null,
+        date: (rec.lotteryDate || '').slice(0, 10),
+        numbers: all.slice(0, 6).slice().sort((a, b) => a - b),
+        special: all[6] != null ? Number(all[6]) : null,
+      };
+    },
   },
   lotto649: {
     name: '大樂透',
@@ -42,8 +63,17 @@ const LOTTERY_CONFIG = {
     numberRange: { min: 1, max: 49, count: 6 },
     specialRange: { min: 1, max: 49 },
     hasSpecial: true,
-    url: 'https://www.taiwanlottery.com.tw/Lotto/Lotto649/history.aspx',
-    parseType: 'taiwanlottery',
+    apiEndpoints: ['Lotto649Result'],
+    apiArrayKeys: ['lotto649Res'],
+    parseRecord(rec) {
+      const all = rec.drawNumberSize || [];
+      return {
+        period: rec.period != null ? String(rec.period) : null,
+        date: (rec.lotteryDate || '').slice(0, 10),
+        numbers: all.slice(0, 6).slice().sort((a, b) => a - b),
+        special: all[6] != null ? Number(all[6]) : null,
+      };
+    },
   },
 };
 
@@ -172,104 +202,78 @@ async function handleCron(env) {
 }
 
 // ============================================================
-// 抓取開獎號碼
+// 抓取開獎號碼（使用官方 JSON API）
 // ============================================================
+
+/** 取得台北時區的當月 YYYY-MM，可往前偏移 */
+function taipeiMonth(offset = 0) {
+  const now = new Date(Date.now() + 8 * 3600 * 1000);
+  now.setUTCMonth(now.getUTCMonth() + offset);
+  const y = now.getUTCFullYear();
+  const m = String(now.getUTCMonth() + 1).padStart(2, '0');
+  return `${y}-${m}`;
+}
+
+/** 從 API JSON 中提取開獎紀錄陣列 */
+function extractRecords(json, arrayKeys) {
+  const content = json?.content;
+  if (!content) return [];
+  for (const k of arrayKeys) {
+    if (Array.isArray(content[k]) && content[k].length > 0) {
+      return content[k];
+    }
+  }
+  return [];
+}
+
 async function fetchLatestDraw(cfg, todayStr) {
-  // === 方法 1：從台灣彩券官網 HTML 解析 ===
-  // 台彩官網是 ASP.NET，歷史頁需要 POST + ViewState
-  // 這裡改用 Open Data 或第三方 JSON API（更穩定）
+  // 嘗試當月和上月（月初可能 API 只有上月資料）
+  const months = [taipeiMonth(0), taipeiMonth(-1)];
 
-  // === 方法 2：透過較穩定的第三方 API ===
-  // 你可以替換成任何可靠的資料源
-  // 以下示範用 fetch + HTML parse 的備案邏輯
+  for (const month of months) {
+    for (const ep of cfg.apiEndpoints) {
+      try {
+        const url = `${LOTTERY_API_BASE}/${ep}?period=&month=${month}&pageNum=1&pageSize=5`;
+        console.log(`[fetchLatestDraw] 嘗試 ${ep} month=${month}`);
 
-  try {
-    // 嘗試從台彩官網的「最新開獎」區塊抓取
-    // 官網首頁有當期號碼，不需要 POST
-    const result = await fetchFromTWLottery(cfg, todayStr);
-    if (result) return result;
-  } catch (e) {
-    console.log(`[fetchLatestDraw] 台彩官網失敗: ${e.message}`);
+        const resp = await fetch(url, {
+          headers: {
+            'Accept': 'application/json',
+            'User-Agent': 'Mozilla/5.0 GAME8LA/1.0',
+          },
+        });
+
+        if (!resp.ok) {
+          console.log(`[fetchLatestDraw] ${ep} HTTP ${resp.status}`);
+          continue;
+        }
+
+        const json = await resp.json();
+        const records = extractRecords(json, cfg.apiArrayKeys);
+
+        if (records.length === 0) {
+          console.log(`[fetchLatestDraw] ${ep} 無開獎紀錄`);
+          continue;
+        }
+
+        // 取最新一筆
+        const latest = records[0];
+        const parsed = cfg.parseRecord(latest);
+
+        if (!parsed.numbers || parsed.numbers.length === 0) {
+          console.log(`[fetchLatestDraw] ${ep} 號碼解析為空`);
+          continue;
+        }
+
+        console.log(`[fetchLatestDraw] 成功取得 ${cfg.name} 第 ${parsed.period} 期`);
+        return parsed;
+      } catch (e) {
+        console.log(`[fetchLatestDraw] ${ep} 失敗: ${e.message}`);
+      }
+    }
   }
 
   return null;
-}
-
-/**
- * 從台灣彩券官網抓取
- * 官網首頁 https://www.taiwanlottery.com.tw/ 有最新一期號碼
- * 各遊戲頁也有：
- *   539:    /Lotto/Dailycash/history.aspx
- *   威力彩: /Lotto/SuperLotto638/history.aspx
- *   大樂透: /Lotto/Lotto649/history.aspx
- */
-async function fetchFromTWLottery(cfg, todayStr) {
-  // 抓各彩種的 history 頁面（預設顯示最新一期）
-  const resp = await fetch(cfg.url, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (compatible; GAME8LA-Bot/1.0)',
-    },
-  });
-
-  if (!resp.ok) {
-    throw new Error(`HTTP ${resp.status}`);
-  }
-
-  const html = await resp.text();
-
-  // --- 解析邏輯（根據台彩官網 HTML 結構）---
-  // 台彩官網把號碼放在 <div class="ball_tx ball_green"> 等 tag 裡
-  // 期別在 <span id="...Label_..."> 裡
-  // 以下用正則式抓取，不依賴 DOM parser
-
-  // 1. 抓期別
-  const periodMatch = html.match(/第\s*<span[^>]*>(\d+)<\/span>\s*期/);
-  if (!periodMatch) {
-    // 備案：try another pattern
-    const altPeriod = html.match(/期別[：:]?\s*(\d+)/);
-    if (!altPeriod) throw new Error('找不到期別');
-    // continue with altPeriod
-  }
-  const period = periodMatch ? periodMatch[1] : null;
-
-  // 2. 抓號碼球
-  // 台彩官網用 <div class="ball_tx ball_xxx">NN</div> 格式
-  const ballRegex = /<div class="ball_tx[^"]*">\s*(\d+)\s*<\/div>/g;
-  const balls = [];
-  let bm;
-  while ((bm = ballRegex.exec(html)) !== null) {
-    balls.push(parseInt(bm[1], 10));
-  }
-
-  if (balls.length === 0) {
-    throw new Error('找不到號碼球');
-  }
-
-  // 3. 分離主號碼和特別號
-  let numbers, special;
-  if (cfg.hasSpecial) {
-    numbers = balls.slice(0, cfg.numberRange.count);
-    special = balls[cfg.numberRange.count] || null;
-  } else {
-    numbers = balls.slice(0, cfg.numberRange.count);
-    special = undefined;
-  }
-
-  // 驗證
-  if (numbers.length !== cfg.numberRange.count) {
-    throw new Error(`號碼數量不對：得到 ${numbers.length}，期望 ${cfg.numberRange.count}`);
-  }
-
-  const draw = {
-    period: period,
-    date: todayStr,
-    numbers: numbers.sort((a, b) => a - b),
-  };
-  if (cfg.hasSpecial && special != null) {
-    draw.special = special;
-  }
-
-  return draw;
 }
 
 // ============================================================

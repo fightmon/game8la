@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'atg-seth-vs-thor-hammer',
+    title: '戰神賽特2 vs 雷神之錘2：RTP、倍數系統、買免遊完整比較',
+    excerpt: 'ATG 戰神賽特2 vs RSG 雷神之錘2 完整對決。RTP 96.89% vs 97.6%、最大倍率 x81,000 vs x25,000、倍數符號 x500 vs 1000x、覺醒之力 vs 五色球、買免遊單段 vs 三段——芭樂子用數據幫你選出最適合的那一台。',
+    category: 'slots',
+    categoryLabel: '老虎機比較',
+    badgeType: 'featured',
+    date: '2026-05-12',
+    views: 0,
+    tags: ['最新', '精選', '比較'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#1a0a2e,#0a1a3e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-seth-vs-thor.webp'
+  },
+  {
     slug: 'casino-withdrawal-masterguide',
     title: '【出金大全】娛樂城出金完整攻略：KYC、打碼量、大額提領、三大管道比較',
     excerpt: '娛樂城出金不是按一個按鈕的事。芭樂子從 KYC 驗證準備、打碼量精算、大額提領眉角、銀行/電子錢包/USDT 三大管道比較到被卡自救，一篇打完所有出金痛點。附入金前出金檢查清單 + 紅旗訊號判斷法。',

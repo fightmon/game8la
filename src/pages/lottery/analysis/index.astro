@@ -10,7 +10,6 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "ratingCount": "126" },
   "description": "免費 539 包牌計算器＋威力彩、大樂透、今彩539 冷熱號排行與期望值分析。歷史開獎回測、拖出號統計、遺漏值追蹤、同號連開機率。",
   "url": "https://game8la.com/lottery/analysis/",
   "author": { "@type": "Organization", "name": "GAME8LA" }
@@ -525,18 +524,21 @@ async function loadData(key) {
   let workerData = null;
   let staticData = null;
 
-  // 先嘗試從 Worker KV 讀取即時資料
-  try {
-    const res = await fetch(`${WORKER_URL}/data/${fileName}`);
-    if (res.ok) {
-      workerData = await res.json();
-      console.log(`[${key}] Worker KV 回應成功，lastUpdated: ${workerData.lastUpdated}`);
+  // 來源 1：Worker KV（localhost 跳過，避免 console 紅字）
+  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  if (!isLocal) {
+    try {
+      const res = await fetch(`${WORKER_URL}/data/${fileName}`);
+      if (res.ok) {
+        workerData = await res.json();
+        console.log(`[${key}] Worker KV lastUpdated: ${workerData.lastUpdated}`);
+      }
+    } catch (e) {
+      console.warn(`[${key}] Worker 連線失敗:`, e.message);
     }
-  } catch (e) {
-    console.warn(`[${key}] Worker 連線失敗:`, e.message);
   }
 
-  // 也讀取靜態 JSON
+  // 來源 2：靜態 JSON
   try {
     const res = await fetch(LOTTERY_CONFIG[key].file);
     if (res.ok) {
@@ -547,25 +549,79 @@ async function loadData(key) {
     console.warn(`[${key}] 靜態 JSON 讀取失敗:`, e.message);
   }
 
-  // 比較兩邊資料，取較新的
+  // 取較新的作為 base
+  let baseData = null;
   if (workerData && staticData) {
-    if (workerData.lastUpdated >= staticData.lastUpdated) {
-      lotteryData[key] = workerData;
-      dataSource = 'worker';
-      console.log(`[${key}] 使用 Worker KV（較新或相同）`);
-    } else {
-      lotteryData[key] = staticData;
-      dataSource = 'static';
-      console.log(`[${key}] 使用靜態 JSON（比 Worker 新）`);
-    }
-  } else if (workerData) {
-    lotteryData[key] = workerData;
-    dataSource = 'worker';
-  } else if (staticData) {
-    lotteryData[key] = staticData;
-    dataSource = 'static';
+    baseData = (workerData.lastUpdated >= staticData.lastUpdated) ? workerData : staticData;
+    dataSource = (workerData.lastUpdated >= staticData.lastUpdated) ? 'worker' : 'static';
   } else {
-    console.error(`[${key}] 兩個來源都讀取失敗`);
+    baseData = workerData || staticData;
+    dataSource = workerData ? 'worker' : 'static';
+  }
+
+  // 來源 3：即時 API（和 /lottery/ 首頁同一個）
+  // 用絕對 URL 確保 dev 環境也能取到；正式站走同域快取
+  const LIVE_API = location.hostname === 'localhost'
+    ? 'https://game8la.com/api/lottery'
+    : '/api/lottery';
+  const API_KEY_MAP = { daily_cash_539: 'daily_cash', super_lotto: 'super_lotto', lotto649: 'lotto649' };
+  try {
+    const apiRes = await fetch(LIVE_API, { cache: 'no-store' });
+    if (apiRes.ok) {
+      const apiJson = await apiRes.json();
+      const apiKey = API_KEY_MAP[key];
+      const gameData = apiJson.data?.[apiKey];
+      if (gameData && gameData.numbers && gameData.numbers.length > 0) {
+        const freshDraws = [];
+        const latest = { period: gameData.period, date: gameData.date, numbers: gameData.numbers };
+        if (gameData.special != null) latest.special = gameData.special;
+        if (gameData.area2 != null) latest.special = gameData.area2;
+        freshDraws.push(latest);
+        if (Array.isArray(gameData.history)) {
+          for (const h of gameData.history) {
+            const d = { period: h.period, date: h.date, numbers: h.numbers };
+            if (h.special != null) d.special = h.special;
+            if (h.area2 != null) d.special = h.area2;
+            freshDraws.push(d);
+          }
+        }
+        if (baseData && baseData.draws) {
+          const existingPeriods = new Set(baseData.draws.map(d => d.period));
+          let merged = false;
+          for (const fd of freshDraws) {
+            if (fd.period && !existingPeriods.has(fd.period)) {
+              baseData.draws.unshift(fd);
+              existingPeriods.add(fd.period);
+              merged = true;
+              console.log(`[${key}] /api/lottery 補入第 ${fd.period} 期`);
+            }
+          }
+          if (merged) {
+            // 按日期降序排列（避免期號格式不同導致字串排序錯誤）
+            baseData.draws.sort((a, b) => (b.date || '').localeCompare(a.date || '') || (Number(b.period) || 0) - (Number(a.period) || 0));
+            baseData.lastUpdated = freshDraws[0]?.date || baseData.lastUpdated;
+            dataSource = 'api+' + dataSource;
+          }
+        } else if (!baseData) {
+          baseData = {
+            lottery: key, description: LOTTERY_CONFIG[key].label,
+            numberRange: { min: 1, max: LOTTERY_CONFIG[key].maxNum, count: LOTTERY_CONFIG[key].count },
+            hasSpecial: LOTTERY_CONFIG[key].hasSpecial,
+            lastUpdated: freshDraws[0]?.date || '', draws: freshDraws,
+          };
+          dataSource = 'api';
+        }
+      }
+    }
+  } catch (e) {
+    console.warn(`[${key}] /api/lottery 讀取失敗:`, e.message);
+  }
+
+  if (baseData) {
+    lotteryData[key] = baseData;
+    console.log(`[${key}] 最終使用 ${dataSource}，共 ${baseData.draws?.length || 0} 期`);
+  } else {
+    console.error(`[${key}] 所有來源都讀取失敗`);
   }
 }
 

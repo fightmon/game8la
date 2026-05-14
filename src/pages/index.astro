@@ -321,56 +321,45 @@ const latestScams = [...scamList]
   <div class="game-grid" id="gameGrid"></div>
 </section>
 <!-- USER RATING SECTION -->
-<section class="section" id="rating">
-  <div class="rating-section">
-    <h3>⚡ 丟出你的8LA評價</h3>
-    <p>不怕辣就來丟8LA！你的真實評價將幫助更多玩家做出選擇！</p>
-    <div class="user-stars" id="userStars">
-      <Icon name="star" />
-      <Icon name="star" />
-      <Icon name="star" />
-      <Icon name="star" />
-      <Icon name="star" />
-    </div>
-    <div class="rating-input">
-      <input type="text" placeholder="丟一顆8LA，分享你的遊戲體驗..." id="reviewText">
-      <button onclick="submitReview()">⚡ 丟8LA</button>
-    </div>
-    <div class="reviews-list" id="reviewsList">
-      <div class="review-item">
-        <div class="review-avatar">A</div>
-        <div class="review-content">
-          <div class="review-header">
-            <span class="name">Alex_Gamer</span>
-            <span class="stars" style="font-size:0.75rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
-            <span class="date">2026-03-20</span>
-          </div>
-          <div class="review-text">皇家遊戲平台的老虎機超好玩，介面流暢、出金速度也快，金8LA認證！</div>
+<section class="section" id="tools-cta">
+  <div class="tools-cta-section">
+    <h3>🔥 8LA 玩家愛用工具</h3>
+    <p>芭樂子精心打造的免費工具，用數據玩更聰明</p>
+    <div class="tools-cta-grid">
+      <a href="/tools/539-wheel-calculator/" class="tools-cta-card">
+        <div class="tools-cta-icon">🎯</div>
+        <div class="tools-cta-body">
+          <h4>539 包牌計算器</h4>
+          <p>選碼數秒算注數花費，蒙地卡羅模擬跑期望值，包幾碼最划算一目瞭然。</p>
         </div>
-      </div>
-      <div class="review-item">
-        <div class="review-avatar">K</div>
-        <div class="review-content">
-          <div class="review-header">
-            <span class="name">King_Poker</span>
-            <span class="stars" style="font-size:0.75rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
-            <span class="date">2026-03-18</span>
-          </div>
-          <div class="review-text">鑽石俱樂部的真人百家樂畫質很棒，客服也很專業，就是優惠活動可以再多一些。</div>
+        <span class="tools-cta-arrow">→</span>
+      </a>
+      <a href="/tools/gambling-self-check/" class="tools-cta-card">
+        <div class="tools-cta-icon">🧠</div>
+        <div class="tools-cta-body">
+          <h4>娛樂城成癮自我檢測</h4>
+          <p>國際 PGSI 量表中文版，9 題測出你的風險等級，玩得開心也要玩得安全。</p>
         </div>
-      </div>
-      <div class="review-item">
-        <div class="review-avatar">M</div>
-        <div class="review-content">
-          <div class="review-header">
-            <span class="name">MiMi_Play</span>
-            <span class="stars" style="font-size:0.75rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
-            <span class="date">2026-03-15</span>
-          </div>
-          <div class="review-text">在金沙國際玩捕魚遊戲，畫面精美而且獎金設定合理，丟顆好8LA給它！</div>
+        <span class="tools-cta-arrow">→</span>
+      </a>
+      <a href="/casino-check/" class="tools-cta-card">
+        <div class="tools-cta-icon">🔍</div>
+        <div class="tools-cta-body">
+          <h4>娛樂城體檢報告</h4>
+          <p>輸入網址一鍵掃描 WHOIS、SSL、165 黑名單比對，30 秒知道這家能不能玩。</p>
         </div>
-      </div>
+        <span class="tools-cta-arrow">→</span>
+      </a>
+      <a href="/lottery/analysis/" class="tools-cta-card">
+        <div class="tools-cta-icon">📊</div>
+        <div class="tools-cta-body">
+          <h4>樂透數據站</h4>
+          <p>539・威力彩・大樂透冷熱號排行、拖出號分析、遺漏值追蹤，用數據選號。</p>
+        </div>
+        <span class="tools-cta-arrow">→</span>
+      </a>
     </div>
+    <a href="/tools/" class="tools-cta-all">查看全部工具 →</a>
   </div>
 </section>
 <!-- FOOTER -->
@@ -529,50 +518,6 @@ const observer = new IntersectionObserver((entries) => {
   });
 });
 observer.observe(document.querySelector('.stats-bar'));
-// === RATING SYSTEM ===
-let userRating = 0;
-function hoverRating(n) {
-  document.querySelectorAll('#userStars svg').forEach((s, i) => {
-    s.style.color = i < n ? 'var(--gold)' : 'var(--text-muted)';
-  });
-}
-function resetRating() {
-  document.querySelectorAll('#userStars svg').forEach((s, i) => {
-    s.style.color = i < userRating ? 'var(--gold)' : 'var(--text-muted)';
-  });
-}
-function setRating(n) { userRating = n; resetRating(); }
-// Bind star events
-document.querySelectorAll('#userStars svg').forEach((s, i) => {
-  s.addEventListener('mouseenter', () => hoverRating(i + 1));
-  s.addEventListener('mouseleave', () => resetRating());
-  s.addEventListener('click', () => setRating(i + 1));
-});
-function submitReview() {
-  const text = document.getElementById('reviewText').value.trim();
-  if (!text || userRating === 0) { alert('先選星星再丟8LA！'); return; }
-  const list = document.getElementById('reviewsList');
-  const starSvg = '<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><polygon points="12 2 15.09 10.26 24 10.27 17.18 16.70 20.27 24.97 12 18.54 3.73 24.98 6.82 16.71 0 10.27 8.91 10.26 12 2"></polygon></svg>';
-  const emptySvg = '<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted)"><polygon points="12 2 15.09 10.26 24 10.27 17.18 16.70 20.27 24.97 12 18.54 3.73 24.98 6.82 16.71 0 10.27 8.91 10.26 12 2"></polygon></svg>';
-  const stars = Array(5).fill(0).map((_, i) =>
-    i < userRating ? starSvg : emptySvg
-  ).join('');
-  const today = new Date().toISOString().split('T')[0];
-  const html = `<div class="review-item animate-in">
-    <div class="review-avatar">你</div>
-    <div class="review-content">
-      <div class="review-header">
-        <span class="name">8LA玩家</span>
-        <span class="stars" style="font-size:0.75rem">${stars}</span>
-        <span class="date">${today}</span>
-      </div>
-      <div class="review-text">${text}</div>
-    </div>
-  </div>`;
-  list.insertAdjacentHTML('afterbegin', html);
-  document.getElementById('reviewText').value = '';
-  userRating = 0; resetRating();
-}
 // === SEARCH ===
 const searchData = [
   ...games.map(g => ({ name: g.name, type: '遊戲', icon: 'gamepad-2' })),
@@ -1264,78 +1209,71 @@ body {
   -webkit-box-orient: vertical; overflow: hidden;
 }
 
-/* === USER RATING WIDGET === */
-.rating-section {
+/* === TOOLS CTA SECTION === */
+.tools-cta-section {
   background: linear-gradient(135deg, var(--bg-secondary), rgba(42,51,32,0.5));
   border-radius: 20px;
-  padding: 3rem; text-align: center;
+  padding: 2.5rem; text-align: center;
   border: 1px solid var(--border);
-  margin: 2rem auto; max-width: 700px;
+  margin: 2rem auto; max-width: 800px;
   position: relative; overflow: hidden;
 }
-.rating-section::before {
+.tools-cta-section::before {
   content: ''; position: absolute; top: -50%; right: -20%;
   width: 300px; height: 300px; border-radius: 50%;
   background: radial-gradient(circle, rgba(57,255,20,0.08), transparent);
 }
-.rating-section h3 { font-size: 1.5rem; margin-bottom: 0.5rem; position: relative; }
-.rating-section > p { color: var(--text-secondary); margin-bottom: 1.5rem; position: relative; }
-.user-stars { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem; position: relative; }
-.user-stars svg {
-  width: 2.5rem; height: 2.5rem; color: var(--text-muted); cursor: pointer;
-  transition: all 0.2s; fill: none; stroke: currentColor;
+.tools-cta-section h3 { font-size: 1.5rem; margin-bottom: 0.5rem; position: relative; }
+.tools-cta-section > p { color: var(--text-secondary); margin-bottom: 1.5rem; position: relative; }
+.tools-cta-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  text-align: left; position: relative;
 }
-.user-stars svg:hover, .user-stars svg.active { color: var(--gold-light); transform: scale(1.15); filter: drop-shadow(0 0 6px var(--gold-glow)); }
-.rating-input {
-  display: flex; gap: 0.5rem; max-width: 500px; margin: 0 auto; position: relative;
-}
-.rating-input input {
-  flex: 1; padding: 0.8rem 1.2rem;
+.tools-cta-card {
+  display: flex; align-items: center; gap: 1rem;
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 10px; color: var(--text-primary);
-  font-size: 0.95rem; outline: none; font-family: inherit;
-}
-.rating-input input:focus { border-color: var(--gold); }
-.rating-input button {
-  padding: 0.8rem 1.5rem;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  border: none; border-radius: 10px; color: #000000;
-  font-weight: 700; cursor: pointer; font-family: inherit;
+  border-radius: 14px; padding: 1.2rem;
+  text-decoration: none; color: inherit;
   transition: all 0.3s;
 }
-.rating-input button:hover { filter: brightness(1.1); box-shadow: 0 4px 15px var(--gold-glow); }
-.rating-input button { white-space: nowrap; flex-shrink: 0; }
-@media (max-width: 600px) {
-  .rating-input { flex-direction: column; gap: 0.6rem; }
-  .rating-input input { width: 100%; }
-  .rating-input button { width: 100%; padding: 0.9rem 1rem; }
-  .review-item { flex-wrap: nowrap; }
-  .review-content { min-width: 0; }
-  .review-content .review-header { flex-wrap: wrap; gap: 0.3rem 0.6rem; }
-  .review-content .review-text { word-break: break-word; }
+.tools-cta-card:hover {
+  border-color: var(--guava-green);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(57,255,20,0.1);
 }
-
-/* === REVIEW COMMENTS === */
-.reviews-list { margin-top: 2rem; position: relative; }
-.review-item {
-  background: var(--bg-card); border-radius: 12px;
-  padding: 1.2rem; margin-bottom: 1rem;
-  border: 1px solid var(--border);
-  display: flex; gap: 1rem;
-}
-.review-avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--guava-green), var(--gold));
+.tools-cta-icon {
+  font-size: 2rem; flex-shrink: 0;
+  width: 52px; height: 52px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700; flex-shrink: 0; color: #000000;
+  background: rgba(57,255,20,0.08); border-radius: 12px;
 }
-.review-content { flex: 1; }
-.review-content .review-header {
-  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.3rem;
+.tools-cta-body h4 {
+  font-size: 1rem; margin: 0 0 0.3rem; color: var(--text-primary);
 }
-.review-content .review-header .name { font-weight: 700; font-size: 0.95rem; }
-.review-content .review-header .date { color: var(--text-muted); font-size: 0.8rem; }
-.review-content .review-text { color: var(--text-secondary); font-size: 0.9rem; }
+.tools-cta-body p {
+  font-size: 0.82rem; margin: 0; color: var(--text-secondary);
+  line-height: 1.5;
+}
+.tools-cta-arrow {
+  font-size: 1.2rem; color: var(--text-muted); flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.tools-cta-card:hover .tools-cta-arrow {
+  transform: translateX(4px); color: var(--guava-green);
+}
+.tools-cta-all {
+  display: inline-block; margin-top: 1.5rem;
+  color: var(--guava-green); font-weight: 600;
+  text-decoration: none; position: relative;
+  transition: all 0.3s;
+}
+.tools-cta-all:hover { filter: brightness(1.2); }
+@media (max-width: 600px) {
+  .tools-cta-grid { grid-template-columns: 1fr; }
+  .tools-cta-section { padding: 1.5rem; }
+  .tools-cta-card { padding: 1rem; }
+  .tools-cta-icon { width: 44px; height: 44px; font-size: 1.6rem; }
+}
 
 /* === SIDEBAR HOT LIST === */
 .hot-list {
@@ -1944,51 +1882,6 @@ var statsObs = new IntersectionObserver(function(entries) {
   });
 });
 statsObs.observe(document.querySelector('.stats-bar'));
-
-// === RATING SYSTEM ===
-let userRating = 0;
-function hoverRating(n) {
-  document.querySelectorAll('#userStars svg').forEach((s, i) => {
-    s.style.color = i < n ? 'var(--gold)' : 'var(--text-muted)';
-  });
-}
-function resetRating() {
-  document.querySelectorAll('#userStars svg').forEach((s, i) => {
-    s.style.color = i < userRating ? 'var(--gold)' : 'var(--text-muted)';
-  });
-}
-function setRating(n) { userRating = n; resetRating(); }
-// Bind star events
-document.querySelectorAll('#userStars svg').forEach((s, i) => {
-  s.addEventListener('mouseenter', () => hoverRating(i + 1));
-  s.addEventListener('mouseleave', () => resetRating());
-  s.addEventListener('click', () => setRating(i + 1));
-});
-function submitReview() {
-  const text = document.getElementById('reviewText').value.trim();
-  if (!text || userRating === 0) { alert('先選星星再丟8LA！'); return; }
-  const list = document.getElementById('reviewsList');
-  const starSvg = '<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><polygon points="12 2 15.09 10.26 24 10.27 17.18 16.70 20.27 24.97 12 18.54 3.73 24.98 6.82 16.71 0 10.27 8.91 10.26 12 2"></polygon></svg>';
-  const emptySvg = '<svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted)"><polygon points="12 2 15.09 10.26 24 10.27 17.18 16.70 20.27 24.97 12 18.54 3.73 24.98 6.82 16.71 0 10.27 8.91 10.26 12 2"></polygon></svg>';
-  const stars = Array(5).fill(0).map((_, i) =>
-    i < userRating ? starSvg : emptySvg
-  ).join('');
-  const today = new Date().toISOString().split('T')[0];
-  const html = `<div class="review-item animate-in">
-    <div class="review-avatar">你</div>
-    <div class="review-content">
-      <div class="review-header">
-        <span class="name">8LA玩家</span>
-        <span class="stars" style="font-size:0.75rem">${stars}</span>
-        <span class="date">${today}</span>
-      </div>
-      <div class="review-text">${text}</div>
-    </div>
-  </div>`;
-  list.insertAdjacentHTML('afterbegin', html);
-  document.getElementById('reviewText').value = '';
-  userRating = 0; resetRating();
-}
 
 // === SEARCH ===
 const searchData = [

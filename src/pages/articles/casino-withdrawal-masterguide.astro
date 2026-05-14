@@ -5,14 +5,15 @@ import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
 import ManifestoBox from '../../components/ManifestoBox.astro';
 import ToolBox from '../../components/ToolBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 
 const faqs = [
   { q: 'KYC 驗證大概要等多久？', a: '正規平台首次 KYC 審核通常 12～24 小時，快的 1 小時內就過。但如果你的證件照片模糊、姓名跟帳戶不一致，退件重傳可能再等 24 小時。建議入金後就先做 KYC，不要等到出金才急。' },
-  { q: '打碼量（流水）跑到一半可以出金嗎？', a: '絕大多數平台不行。流水沒跑完就申請出金，系統會駁回或只讓你提「本金扣除優惠」的部分。少數平台允許放棄優惠後提款，但會扣回已發放的彩金。建議領優惠前先用<a href="/casino-check/#turnover-module">流水計算器</a>算過。' },
+  { q: '打碼量（流水）跑到一半可以出金嗎？', a: '絕大多數平台不行。流水沒跑完就申請出金，系統會駁回或只讓你提「本金扣除優惠」的部分。少數平台允許放棄優惠後提款，但會扣回已發放的彩金。建議領優惠前先用<a href="/tools/bonus-calculator/">獎金計算器</a>算過。' },
   { q: '大額出金（10 萬以上）會不會被刁難？', a: '正規平台不會刁難，但流程確實比小額出金多一關。通常需要人工審核（24～72 小時）、可能要求補充 KYC 資料（如薪轉帳戶或資金來源證明）。建議分批出金降低單筆風控觸發機率，每筆間隔 30 分鐘以上。' },
   { q: '銀行轉帳、電子錢包、USDT 哪個出金最快？', a: 'USDT 最快（幾分鐘到 1 小時），電子錢包次之（數小時到 24 小時），銀行轉帳最慢（1～3 個工作天）。但速度不是唯一考量——銀行轉帳最穩、有法律追溯性；USDT 轉錯地址就找不回來。一般玩家建議用銀行轉帳。' },
   { q: '出金要繳稅嗎？', a: '依台灣稅法，博弈所得屬於「競技、競賽及機會中獎之獎金或給與」（所得稅法第 14 條第 8 類），年度合併申報。海外娛樂城的獎金屬於海外所得，個人海外所得超過 100 萬需計入基本所得額。詳細可看<a href="/articles/casino-jackpot-tax-guide/">稅務指南</a>。' },
-  { q: '被風控凍結帳號，錢還拿得回來嗎？', a: '正規平台的風控凍結通常是暫時性的，提供合理說明或等待審核期過後可以解凍。但如果客服要求你「再存一筆」才能解凍，這是追加詐騙的經典話術，立刻停止儲值並向 165 通報。截圖保存所有對話和餘額紀錄是第一步。詳細自救流程看<a href="/articles/casino-payout-guide/">出金卡關自救 SOP</a>。' },
+  { q: '被風控凍結帳號，錢還拿得回來嗎？', a: '正規平台的風控凍結通常是暫時性的，提供合理說明或等待審核期過後可以解凍。但如果客服要求你「再存一筆」才能解凍，這是追加詐騙的經典話術，立刻停止儲值並向 <a href="https://165.npa.gov.tw/" target="_blank" rel="noopener">165 反詐騙專線</a>通報。截圖保存所有對話和餘額紀錄是第一步。詳細自救流程看<a href="/articles/casino-payout-guide/">出金卡關自救 SOP</a>。' },
   { q: '入金用 A 銀行，可以出金到 B 銀行嗎？', a: '只要兩個帳戶都是你本人名下，大部分平台允許。但少數平台要求出入金帳戶一致，建議先跟客服確認。重點是帳戶必須跟 KYC 驗證的身分一致——用別人的帳戶 100% 會被擋。' },
   { q: '怎麼判斷一間娛樂城出金是不是正常的？', a: '三個指標：(1) 有沒有公開、合理的出金規則和時間表；(2) 小額出金測試能不能在承諾時間內到帳；(3) 客服能不能明確回答出金相關問題。三個都通過才考慮放大投入。用<a href="/casino-check/">娛樂城體檢工具</a>可以先查 165 黑名單和網域年齡。' },
 ];
@@ -24,7 +25,7 @@ const faqs = [
   description="娛樂城出金不是按一個按鈕的事。芭樂子從 KYC 驗證準備、打碼量精算、大額提領眉角、三大出金管道比較到被卡自救，一篇打完所有出金痛點。入金前先看這篇，少走 80% 冤枉路。"
   image="https://game8la.com/images/articles/casino-withdrawal-masterguide-cover.webp"
   datePublished="2026-05-11"
-  dateModified="2026-05-11"
+  dateModified="2026-05-13"
   breadcrumbs={[
     { name: '首頁', url: 'https://game8la.com/' },
     { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
@@ -135,7 +136,7 @@ const faqs = [
         <p style="margin:0"><strong style="color:var(--gold);font-size:1.05rem">⑤ 出金帳戶跟 KYC 帳戶用同一個</strong><br/>少一個變數少一個被退件的理由</p>
       </div>
 
-      <p style="color:var(--text-muted);font-size:0.88rem">⚠️ 芭樂子提醒：KYC 提交的是你的個資，<strong>請在確認平台可信之後才交</strong>。先用<a href="/casino-check/" style="color:var(--guava-green)">娛樂城體檢</a>查過 165 黑名單和網域年齡再說。不明來歷的平台拿到你的身分證正反面 = 你的個資被賣掉的風險。</p>
+      <p style="color:var(--text-muted);font-size:0.88rem">⚠️ 芭樂子提醒：KYC 提交的是你的個資，<strong>請在確認平台可信之後才交</strong>。先用<a href="/casino-check/" style="color:var(--guava-green)">娛樂城體檢</a>查過 <a href="https://165.npa.gov.tw/" target="_blank" rel="noopener" style="color:var(--guava-green)">165</a> 黑名單和網域年齡再說。不明來歷的平台拿到你的身分證正反面 = 你的個資被賣掉的風險。</p>
 
       <figure style="margin:1.5rem 0;text-align:center">
         <img loading="lazy" src="/images/articles/casino-withdrawal-kyc-checklist.webp" alt="芭樂子拿著放大鏡檢查身分證和銀行帳戶，左邊 APPROVED 綠色通過，右邊 REJECTED 紅色退件" width="1376" height="768" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
@@ -175,7 +176,13 @@ const faqs = [
         <p style="margin:0"><strong style="color:#e74c3c">陷阱 ④：反向投注不計入</strong><br/>同場賽事莊閒對壓、或大小盤兩邊都下——被偵測到直接不計入流水，嚴重的還會被風控。</p>
       </div>
 
-      <p>不想自己算？芭樂子在<a href="/casino-check/#turnover-module" style="color:var(--guava-green);font-weight:700">娛樂城體檢</a>裡做了一個流水計算器，輸入存款金額、優惠金額、流水倍數，3 秒算出你的打碼量。<strong>建議每次領優惠之前都先算一下</strong>——有些優惠不領反而比較划算。</p>
+      <p>不想自己算？芭樂子做了一個<a href="/tools/bonus-calculator/" style="color:var(--guava-green);font-weight:700">娛樂城獎金計算器</a>，輸入存款金額、優惠金額、流水倍數，3 秒算出你的打碼量。<strong>建議每次領優惠之前都先算一下</strong>——有些優惠不領反而比較划算。</p>
+
+      <div class="card" style="margin:1.5rem 0;border:2px solid var(--guava-green);background:rgba(57,255,20,0.05);padding:1.2rem;border-radius:12px">
+        <h3 style="margin-top:0;color:var(--guava-green)">🧮 不想自己算？</h3>
+        <p style="margin:0 0 0.8rem">用 Game8la 獎金計算器，輸入打碼量自動算出「<strong>這紅利值不值得拿</strong>」。</p>
+        <a href="/tools/bonus-calculator/" class="btn-primary" style="display:inline-block;background:var(--guava-green);color:#000;padding:0.6rem 1.2rem;border-radius:8px;font-weight:700;text-decoration:none">立刻試算 →</a>
+      </div>
 
       <!-- ===== 出金管道 ===== -->
       <h2 id="channels" style="margin-top:2.5rem">💳 三大出金管道深度比較</h2>
@@ -273,7 +280,7 @@ const faqs = [
         <div style="display:flex;flex-direction:column;gap:0.6rem">
           <label style="display:flex;align-items:flex-start;gap:0.6rem">
             <span style="color:var(--guava-green);font-size:1.2rem;line-height:1.4">☐</span>
-            <span><strong>查 165 黑名單 + 網域年齡</strong> — 用<a href="/casino-check/" style="color:var(--guava-green)">娛樂城體檢</a>一鍵查</span>
+            <span><strong>查 <a href="https://165.npa.gov.tw/" target="_blank" rel="noopener" style="color:var(--guava-green)">165</a> 黑名單 + 網域年齡</strong> — 用<a href="/casino-check/" style="color:var(--guava-green)">娛樂城體檢</a>一鍵查</span>
           </label>
           <label style="display:flex;align-items:flex-start;gap:0.6rem">
             <span style="color:var(--guava-green);font-size:1.2rem;line-height:1.4">☐</span>
@@ -285,7 +292,7 @@ const faqs = [
           </label>
           <label style="display:flex;align-items:flex-start;gap:0.6rem">
             <span style="color:var(--guava-green);font-size:1.2rem;line-height:1.4">☐</span>
-            <span><strong>算流水倍數</strong> — 用<a href="/casino-check/#turnover-module" style="color:var(--guava-green)">流水計算器</a>算出打碼量</span>
+            <span><strong>算流水倍數</strong> — 用<a href="/tools/bonus-calculator/" style="color:var(--guava-green)">獎金計算器</a>算出打碼量</span>
           </label>
           <label style="display:flex;align-items:flex-start;gap:0.6rem">
             <span style="color:var(--guava-green);font-size:1.2rem;line-height:1.4">☐</span>
@@ -327,17 +334,27 @@ const faqs = [
         <p style="margin:0.5rem 0;font-weight:700;color:var(--guava-green)">入金前先做功課，出金時才不用做惡夢。</p>
       </div>
 
+      <!-- 免責聲明 -->
+      <div class="card" style="margin:1.5rem 0;background:rgba(245,184,0,0.05);border-left:4px solid var(--gold);padding:1rem 1.2rem;border-radius:8px">
+        <p style="margin:0;font-size:0.9rem;color:var(--text-secondary)">
+          <strong>⚠️ 免責聲明：</strong>本文為娛樂城出金流程的<strong>教育性說明</strong>，不構成投注建議。
+          Game8la 不接娛樂城業配、不導向任何特定平台。若因賭博出現困擾，請撥打
+          <a href="https://dep.mohw.gov.tw/donahpb/cp-1027-2929-104.html" target="_blank" rel="noopener" style="color:var(--gold)">1925 安心專線</a>（衛福部 24h 免費）。
+        </p>
+      </div>
+
       <!-- 延伸閱讀 -->
       <div style="margin:2rem 0;padding:1.2rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px">
         <h3 style="margin-top:0;font-size:1rem">📚 延伸閱讀</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem">
           <a href="/articles/casino-payout-guide/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">出金卡關？5 大原因自救 SOP<small style="display:block;color:var(--text-muted)">已經卡住了看這篇</small></a>
-          <a href="/casino-check/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">娛樂城體檢工具<small style="display:block;color:var(--text-muted)">165 黑名單 + 網域 + 流水計算</small></a>
+          <a href="/casino-check/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">娛樂城體檢工具<small style="display:block;color:var(--text-muted)">165 黑名單 + 網域 + 獎金計算</small></a>
           <a href="/articles/casino-beginner-guide/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">新手 10 個入金前必知潛規則<small style="display:block;color:var(--text-muted)">現金版 vs 信用版、KYC</small></a>
           <a href="/articles/casino-jackpot-tax-guide/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">娛樂城獎金要繳稅嗎？<small style="display:block;color:var(--text-muted)">稅率、申報、海外所得</small></a>
         </div>
       </div>
 
+      <ShareButtons title="娛樂城出金完整攻略：KYC、打碼量、大額提領一篇搞定" heading="🛡 覺得有用？把這篇傳給可能會中招的朋友" />
       <ToolBox preset="casino-full" />
       <ManifestoBox />
     </article>

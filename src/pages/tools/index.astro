@@ -13,13 +13,15 @@ const tools = [
   { name: '百家樂策略模擬器', url: 'https://game8la.com/tools/baccarat-simulator/' },
   { name: '資金管理計算器', url: 'https://game8la.com/tools/bankroll-calculator/' },
   { name: '娛樂城獎金計算器', url: 'https://game8la.com/tools/bonus-calculator/' },
+  { name: 'PGSI 賭博成癮自我檢測', url: 'https://game8la.com/tools/gambling-self-check/' },
+  { name: '539 包牌計算器', url: 'https://game8la.com/tools/539-wheel-calculator/' },
 ];
 
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "GAME8LA 免費博弈工具箱",
-  "description": "9 款免費線上博弈分析工具，涵蓋老虎機 RTP 模擬、樂透冷熱號選號、娛樂城安全檢測、百家樂策略回測與資金管理。",
+  "description": "11 款免費線上博弈分析工具，涵蓋老虎機 RTP 模擬、樂透冷熱號選號、539包牌計算器、娛樂城安全檢測、百家樂策略回測、資金管理與賭博成癮自我檢測。",
   "numberOfItems": tools.length,
   "itemListElement": tools.map((t, i) => ({
     "@type": "ListItem",
@@ -33,8 +35,8 @@ const itemListSchema = {
 
 <BaseLayout
   currentPage="tools"
-  title="免費博弈工具箱（2026）｜老虎機模擬器・樂透選號・娛樂城體檢・擲筊 - GAME8LA"
-  description="9 款免費線上博弈工具：戰神賽特 RTP 模擬器、雷神之錘倍數模擬、539/威力彩/大樂透冷熱號分析與包牌產生器、娛樂城詐騙體檢、百家樂策略回測、資金管理計算器。免註冊、零廣告，數據留在你的瀏覽器。"
+  title="免費博弈工具箱（2026）｜老虎機模擬器・539包牌計算器・樂透選號・娛樂城體檢 - GAME8LA"
+  description="11 款免費線上博弈工具：539包牌計算器、戰神賽特 RTP 模擬器、雷神之錘倍數模擬、539/威力彩/大樂透冷熱號分析與包牌產生器、娛樂城詐騙體檢、百家樂策略回測、資金管理計算器、PGSI 賭博成癮自我檢測。免註冊、零廣告，數據留在你的瀏覽器。"
 >
 <div class="container">
   <div class="tools-hero">
@@ -68,6 +70,12 @@ const itemListSchema = {
       <h2>樂透數據站</h2>
       <p>539・威力彩・大樂透冷熱號分析</p>
     </a>
+    <a href="/tools/539-wheel-calculator/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(57,255,20,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/icon-lottery.webp" alt="539 包牌計算器 — 選碼數秒算注數花費中獎機率" width="72" height="72" loading="lazy">
+      <h2>539 包牌計算器</h2>
+      <p>注數、花費、中獎機率一鍵算</p>
+    </a>
     <a href="/casino-check/" class="tool-tile">
       <div class="tile-glow" style="--glow-color:rgba(239,68,68,0.35)"></div>
       <img class="tile-icon" src="/images/tools/icon-casino-check.webp" alt="娛樂城體檢 — 165 黑名單比對與 WHOIS 查驗" width="72" height="72" loading="lazy">
@@ -98,19 +106,26 @@ const itemListSchema = {
       <h2>娛樂城獎金計算器</h2>
       <p>打碼量試算，紅利值不值得拿</p>
     </a>
+    <a href="/tools/gambling-self-check/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(239,68,68,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/pgsi/pgsi-hero.webp" alt="PGSI 賭博成癮自我檢測 — 9 題快速評估你的博弈習慣" width="72" height="72" loading="lazy">
+      <h2>賭博成癮自我檢測</h2>
+      <p>PGSI 9 題快速評估博弈習慣</p>
+    </a>
   </div>
 
   <!-- SEO #4：工具介紹文字段落，解決 thin content -->
   <section class="tools-intro">
     <h2>為什麼需要這些工具？</h2>
-    <p>不管你玩的是老虎機、百家樂還是買樂透，「憑感覺下注」是最快燒錢的方式。GAME8LA 工具箱提供 9 款免費線上工具，讓你用數據取代直覺。</p>
+    <p>不管你玩的是老虎機、百家樂還是買樂透，「憑感覺下注」是最快燒錢的方式。GAME8LA 工具箱提供 11 款免費線上工具，讓你用數據取代直覺。</p>
     <p><strong>賽特2 RTP 模擬器</strong>和<strong>雷神之錘 II 模擬器</strong>能讓你免費試跑上千局，親眼看到 RTP 回歸的過程。</p>
-    <p><strong>樂透數據站</strong>回測 539、威力彩、大樂透近期冷熱號，還有包牌產生器幫你組號。</p>
+    <p><strong>樂透數據站</strong>回測 539、威力彩、大樂透近期冷熱號，還有包牌產生器幫你組號。<strong>539 包牌計算器</strong>則讓你選碼後秒算注數、花費、各獎項命中機率，搭配蒙地卡羅模擬看清長期損益。</p>
     <p><strong>娛樂城體檢</strong>一鍵比對 165 詐騙黑名單 + WHOIS 網域資料，入金前 30 秒就能判斷安不安全。</p>
     <p><strong>百家樂策略模擬器</strong>讓你用馬丁格爾、柏利等五種注碼法跑 1000 局回測，看清莊家優勢。</p>
     <p><strong>資金管理計算器</strong>幫你算出停損停利線，控制每局下注比例。</p>
     <p><strong>老虎機 RTP 紀錄器</strong>記錄你的真實遊戲數據，自動計算實際 RTP。</p>
     <p><strong>娛樂城獎金計算器</strong>輸入存款、贈送金額和打碼倍數，即時算出預期虧損，告訴你紅利到底值不值得拿。</p>
+    <p><strong>PGSI 賭博成癮自我檢測</strong>用國際通用的 9 題量表，幫你快速評估自己的博弈習慣是否健康。</p>
     <p>所有工具免註冊、零廣告，數據只存在你的瀏覽器裡。</p>
   </section>
 

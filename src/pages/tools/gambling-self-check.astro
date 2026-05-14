@@ -1,0 +1,1472 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ToolBox from '../../components/ToolBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const medicalSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "娛樂城成癮自我檢測 PGSI",
+  "description": "基於 PGSI 標準量表的娛樂城成癮自我評估工具，完全匿名免費",
+  "url": "https://game8la.com/tools/gambling-self-check/",
+  "audience": { "@type": "MedicalAudience", "audienceType": "Patient" },
+  "lastReviewed": "2026-05-13",
+  "specialty": "MentalHealth",
+  "relatedLink": [
+    "https://game8la.com/articles/rtp-explained/",
+    "https://game8la.com/articles/slot-pool-theory-explained/",
+    "https://game8la.com/articles/anti-scam-8la-guide/",
+    "https://game8la.com/articles/game8la-manifesto/"
+  ]
+};
+
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "娛樂城成癮自我檢測（PGSI）",
+  "description": "基於 PGSI 國際標準量表的 9 題自評工具，5 分鐘測出你的娛樂城風險等級",
+  "about": { "@type": "MedicalCondition", "name": "Problem Gambling", "alternateName": "賭博成癮" },
+  "educationalLevel": "Adult",
+  "isAccessibleForFree": true,
+  "numberOfQuestions": 9,
+  "timeRequired": "PT5M",
+  "educationalAlignment": {
+    "@type": "AlignmentObject",
+    "alignmentType": "assesses",
+    "targetName": "Gambling severity"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "娛樂城成癮自我檢測" }
+  ]
+};
+---
+
+<BaseLayout
+  currentPage="tools"
+  title="娛樂城成癮自我檢測（免費）｜PGSI 9 題自評風險等級 + 戒賭資源 - GAME8LA"
+  description="免費娛樂城成癮自我檢測，基於國際標準 PGSI 量表 9 題問卷，5 分鐘自評娛樂城賭博風險等級。完全匿名、不儲存資料、不需註冊。附 1925 安心專線 + 戒賭專業資源。"
+  ogImage="/images/tools/pgsi/pgsi-og-cover.webp"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(medicalSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(quizSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/tools/">工具箱</a> &gt; 娛樂城成癮自我檢測</div>
+
+    <!-- ===== LANDING ===== -->
+    <section id="pgsi-landing" class="pgsi-section active">
+      <img src="/images/tools/pgsi/pgsi-hero.webp" alt="PGSI 娛樂城成癮自我檢測工具 — 5 分鐘匿名自評" width="1376" height="768" loading="eager" fetchpriority="high" class="hero-img" />
+
+      <h1 class="page-title"><Icon name="shield" /> 娛樂城成癮自我檢測</h1>
+      <p class="page-subtitle">5 分鐘自評，完全匿名，不上傳資料<br/>基於 PGSI 國際標準量表</p>
+
+      <!-- 情境導引前言 -->
+      <div class="intro-hook">
+        <p class="hook-lead">你是否有以下狀況？</p>
+        <div class="hook-scenarios">
+          <div class="hook-card">
+            <span class="hook-icon">🎰</span>
+            <p>最近在娛樂城越玩越大，輸了總想再儲值贏回來？</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-icon">👀</span>
+            <p>身邊有朋友沉迷娛樂城，你很擔心但不知道嚴不嚴重？</p>
+          </div>
+        </div>
+        <p class="hook-cta">不管是自己想確認，還是想幫關心的人評估，花 5 分鐘做完這份國際標準量表就知道了。<br/><small>做完還可以加入 <a href="https://t.me/game8la" target="_blank" rel="noopener" style="color:var(--gold)">8LA Telegram 匿名社群</a> 聊聊。</small></p>
+      </div>
+
+      <!-- 模式選擇 -->
+      <div class="mode-selector" id="mode-selector">
+        <p class="mode-label">請選擇評估對象：</p>
+        <div class="mode-btns">
+          <button type="button" class="mode-btn active" data-mode="self">
+            <span class="mode-icon">🙋</span>
+            <span class="mode-text"><strong>我要自己測</strong><small>評估自己的娛樂城使用狀況</small></span>
+          </button>
+          <button type="button" class="mode-btn" data-mode="proxy">
+            <span class="mode-icon">🤝</span>
+            <span class="mode-text"><strong>幫別人評估</strong><small>我擔心身邊的人可能有問題</small></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="disclaimer-box">
+        <p><strong>開始前請知悉：</strong></p>
+        <p>✅ 基於 PGSI 9 題學術量表（國際通用）</p>
+        <p>✅ 結果僅供參考，<strong>不構成醫療診斷或法律證據</strong></p>
+        <p>✅ 不會儲存你的任何答案到伺服器</p>
+        <p>✅ 結果完全留在你的瀏覽器（sessionStorage），關掉分頁就消失，<strong>不蒐集、不上傳、不保留任何個人資料</strong></p>
+        <p>⚠️ 本工具僅適用 <strong>18 歲以上成年人</strong></p>
+        <p>⚠️ 若你目前有急性精神症狀或重大情緒危機，請<strong>直接撥打下方專線</strong>，不建議自行測驗</p>
+        <p style="margin-top:1rem">如果你目前正在情緒困擾中，請先撥打：</p>
+        <p><a href="tel:1925" class="hotline-link gold">📞 1925 衛福部安心專線</a>（24h 免費）</p>
+        <p><a href="tel:1995" class="hotline-link">📞 1995 生命線</a>（24h 免費）</p>
+        <p class="disclaimer-fine">量表原作：Ferris, J., & Wynne, H. (2001), <em>The Canadian Problem Gambling Index</em>，為公開學術資源。中文化實作與介面設計著作權屬 Game8la。</p>
+      </div>
+
+      <button type="button" id="btn-start" class="btn-primary-lg">我了解，開始檢測 →</button>
+
+      <details class="faq-expand">
+        <summary>📚 想了解這個量表？</summary>
+        <div class="faq-inner">
+          <p><strong>什麼是 PGSI？</strong><br/>Problem Gambling Severity Index，由加拿大藥物濫用中心於 2001 年開發的標準化量表，是全球使用最廣的賭博／娛樂城問題篩檢工具之一。</p>
+          <p><strong>為什麼 Game8la 提供這工具？</strong><br/>Game8la 的定位是「博弈資訊站，不是博弈推廣站」。我們教你看懂機制、算清機率，也要告訴你什麼時候該停下來。這不是裝清高——是做一個負責任的資訊站該有的樣子。</p>
+          <p><strong>結果準確嗎？</strong><br/>PGSI 是學術研究驗證過的篩檢工具，但它是「篩檢」不是「診斷」。如果你的結果顯示中度或重度風險，建議尋求專業諮商。</p>
+        </div>
+      </details>
+
+      <!-- SEO 長文：PGSI 量表完整介紹 -->
+      <div class="pgsi-intro-article">
+        <h2>📖 PGSI 量表完整介紹</h2>
+
+        <h3>PGSI 是什麼？為什麼全世界都在用？</h3>
+        <p>PGSI（Problem Gambling Severity Index，問題賭博嚴重度指標）是由加拿大藥物濫用中心（Canadian Centre on Substance Abuse）的 Jackie Ferris 和 Harold Wynne 於 2001 年開發的標準化篩檢量表。它是 CPGI（Canadian Problem Gambling Index）的核心子量表，專門設計來評估一般人口（而非臨床族群）的賭博問題嚴重程度。</p>
+        <p>截至目前，PGSI 已被翻譯成超過 20 種語言，是全球使用最廣泛的賭博問題篩檢工具之一。澳洲、英國、紐西蘭、北歐各國的公共衛生調查幾乎都以 PGSI 作為標準工具。</p>
+
+        <h3>9 題分別在測什麼？</h3>
+        <p>PGSI 的 9 道題目並非隨機設計，每題對應一個賭博問題的核心維度：</p>
+        <p><strong>Q1 超額下注</strong>——衡量你是否經常投入超出自己經濟能力的金額，這是問題賭博最基本的行為指標。<strong>Q2 耐受性</strong>——跟藥物成癮的「耐受性」概念相同，需要越來越大的刺激才能獲得同樣的興奮感。<strong>Q3 追輸行為</strong>——輸錢後試圖透過繼續賭博來贏回損失，這是所有成癮研究中公認最危險的行為模式之一。</p>
+        <p><strong>Q4 借錢或挪用資金</strong>——當賭博行為開始影響到基本財務安全時，問題已經相當嚴重。<strong>Q5 自我覺察</strong>——受測者是否意識到自己的賭博行為可能有問題，這題的答案往往與「否認心理」有關。<strong>Q6 身心健康影響</strong>——賭博導致的壓力、焦慮、失眠等身心症狀。</p>
+        <p><strong>Q7 社會壓力</strong>——身邊的人是否已經注意到並表達擔憂，這反映問題的外顯程度。<strong>Q8 財務困難</strong>——賭博是否已經對個人或家庭財務造成實質影響。<strong>Q9 愧疚與後悔</strong>——事後的情緒反應，反映內在衝突的程度。</p>
+
+        <h3>為什麼分成 4 級而不是 5 級？</h3>
+        <p>PGSI 採用 4 級分類（0 分 = 無風險、1-2 分 = 低度風險、3-7 分 = 中度風險、8 分以上 = 問題賭博），這個切分點是根據 Ferris & Wynne 原始研究中的因素分析和臨床驗證數據決定的。他們發現 3 分是一個關鍵轉折點——從這裡開始，賭博行為對生活的負面影響開始變得顯著且持續。</p>
+        <p>有些研究者提出過 5 級分類（例如將 8-17 分和 18-27 分再細分），但原始 4 級方案在流行病學研究中的信效度最穩定，所以至今仍是國際主流做法。本工具嚴格遵循原始 4 級標準。</p>
+
+        <h3>PGSI 的信效度如何？</h3>
+        <p>PGSI 在多項跨國研究中展現出優異的心理計量特性。根據 Holtgraves (2009) 的驗證研究，PGSI 的內部一致性信度 Cronbach α = 0.84，顯示 9 道題目之間有高度一致性；兩週間隔的再測信度（test-retest reliability）r = 0.78，代表量表結果在短期內具有穩定性。在效度方面，PGSI 與 DSM-IV 病態賭博診斷準則、SOGS 分數均有顯著正相關，支持其作為問題賭博篩檢工具的建構效度。</p>
+
+        <h3>PGSI 跟 SOGS 有什麼不同？</h3>
+        <p>在 PGSI 出現之前，最常用的賭博問題篩檢工具是 SOGS（South Oaks Gambling Screen，1987 年）。兩者最大的差異在於：SOGS 是為臨床診斷設計的，題目傾向辨識「病態賭博」（Pathological Gambling），門檻較高；PGSI 則是為一般人口調查設計的，能偵測到更早期的風險信號。</p>
+        <p>另一個重要差異是時間框架——PGSI 明確限定「過去 12 個月」，而早期版本的 SOGS 問的是「一生中是否曾經」，這容易導致盛行率被高估。目前學術界普遍認為 PGSI 在一般人口篩檢上優於 SOGS。</p>
+
+        <h3>在台灣使用 PGSI 的考量</h3>
+        <p>PGSI 原始開發語言是英文，量表的文化適切性在跨國使用時需要注意。台灣的賭博行為模式與北美有所不同——線上娛樂城、運彩、六合彩是台灣最主要的賭博形式，而 PGSI 原始設計時的主要參考情境是實體賭場和彩券。</p>
+        <p>本工具在翻譯時特別針對台灣使用者的語境做了調整，將「gambling」對應到「娛樂城」而非直譯為「賭博」，並在每題提供 3 種不同措辭隨機呈現，降低作答模式化的風險。不過，量表的計分方式和分級標準完全依照原始學術版本，沒有任何更動。</p>
+
+        <h3>重要參考文獻</h3>
+        <p class="pgsi-ref">Ferris, J., & Wynne, H. (2001). <em>The Canadian Problem Gambling Index: Final Report.</em> Canadian Centre on Substance Abuse.</p>
+        <p class="pgsi-ref">Holtgraves, T. (2009). Evaluating the Problem Gambling Severity Index. <em>Journal of Gambling Studies</em>, 25(1), 105-120.</p>
+        <p class="pgsi-ref">Currie, S. R., Hodgins, D. C., & Casey, D. M. (2013). Validity of the Problem Gambling Severity Index interpretive categories. <em>Journal of Gambling Studies</em>, 29(2), 311-327.</p>
+      </div>
+    </section>
+
+    <!-- ===== QUIZ ===== -->
+    <section id="pgsi-quiz" class="pgsi-section">
+      <div class="progress-bar-wrap">
+        <div class="progress-label"><span id="q-progress-text">第 1 題 / 共 9 題</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+
+      <p class="period-note">📝 評估時期：<strong>過去 12 個月</strong></p>
+
+      <div id="question-area">
+        <!-- JS 會動態填入題目 -->
+      </div>
+
+      <div class="quiz-nav">
+        <button type="button" id="btn-prev" class="btn-nav" disabled>⬅ 上一題</button>
+        <button type="button" id="btn-next" class="btn-nav btn-nav-primary" disabled>下一題 ➡</button>
+      </div>
+    </section>
+
+    <!-- ===== RESULT ===== -->
+    <section id="pgsi-result" class="pgsi-section">
+      <div id="result-area">
+        <!-- JS 會動態填入結果 -->
+      </div>
+
+      <!-- 分享 -->
+      <div class="share-row" id="share-row">
+        <button type="button" id="btn-download-card" class="btn-share">📷 下載結果圖</button>
+        <button type="button" id="btn-restart" class="btn-share btn-restart">🔄 重新測試</button>
+      </div>
+
+      <!-- 延伸閱讀 -->
+      <div class="ext-links">
+        <h3>📚 延伸閱讀</h3>
+        <div class="ext-grid">
+          <a href="/articles/game8la-manifesto/">Game8la 創站宣言<small>我們為什麼做這個站</small></a>
+          <a href="/articles/rtp-explained/">RTP 完整科普<small>認識娛樂城的真實期望值</small></a>
+          <a href="/articles/slot-pool-theory-explained/">老虎機水池理論<small>為什麼 RTP 96% 還是會輸</small></a>
+          <a href="/articles/anti-scam-8la-guide/">防詐騙完整指南<small>5 招識破娛樂城詐騙</small></a>
+        </div>
+      </div>
+
+      <ShareButtons title="娛樂城成癮自我檢測（PGSI）— 5 分鐘免費自評" heading="🛡 覺得有用？把這工具傳給可能需要的人" />
+      <ToolBox preset="pgsi" />
+
+      <!-- 學術引用 + 免責 -->
+      <div class="citation-box">
+        <p><strong>⚠️ 免責聲明：</strong>本工具僅供自我覺察參考，不構成任何醫療診斷。如有疑慮，請諮詢專業醫療或心理人員。</p>
+        <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--text-muted)">工具基於 PGSI（Problem Gambling Severity Index）量表。原作：Ferris, J., & Wynne, H. (2001). <em>The Canadian Problem Gambling Index: Final Report.</em> Canadian Centre on Substance Abuse. 量表為公開學術資源，本工具僅作教育用途。</p>
+        <p class="last-reviewed">最後更新：2026-05-13 ｜ 內容審閱：Game8la 編輯部</p>
+      </div>
+
+      <ManifestoBox />
+    </section>
+  </div>
+</BaseLayout>
+
+<!-- ===== Canvas 用的隱藏元素 ===== -->
+<canvas id="share-canvas" width="1080" height="1080" style="display:none"></canvas>
+
+<style is:global>
+  .container { max-width: 720px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--guava-green); text-decoration: none; }
+
+  /* Section toggling */
+  .pgsi-section { display: none; }
+  .pgsi-section.active { display: block; }
+
+  /* Landing */
+  .hero-img { display: block; width: 100%; height: auto; border-radius: 12px; margin-bottom: 1.5rem; }
+  .page-title { font-size: 2rem; color: var(--guava-green); margin: 0 0 0.5rem; }
+  .page-subtitle { color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.6; }
+
+  /* 情境導引前言 */
+  .intro-hook {
+    background: linear-gradient(135deg, rgba(57,255,20,0.04), rgba(245,184,0,0.04));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .hook-lead {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1rem;
+  }
+  .hook-scenarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .hook-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .hook-card:hover { border-color: var(--gold); }
+  .hook-icon { font-size: 2rem; display: block; margin-bottom: 0.6rem; }
+  .hook-card p { margin: 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+  .hook-cta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 模式選擇 */
+  .mode-selector {
+    margin-bottom: 1.5rem;
+  }
+  .mode-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.8rem;
+    text-align: center;
+  }
+  .mode-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .mode-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    color: var(--text-secondary);
+  }
+  .mode-btn:hover { border-color: var(--gold); }
+  .mode-btn.active {
+    border-color: var(--guava-green);
+    background: rgba(57,255,20,0.06);
+    color: var(--text-primary);
+  }
+  .mode-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .mode-text { flex: 1; }
+  .mode-text strong { display: block; font-size: 1rem; color: inherit; }
+  .mode-text small { display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+  /* Proxy disclaimer on results */
+  .proxy-disclaimer {
+    background: rgba(245,184,0,0.08);
+    border: 1px solid rgba(245,184,0,0.3);
+    border-left: 4px solid var(--gold);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .proxy-disclaimer p:first-child { margin: 0 0 0.4rem; color: var(--gold); font-size: 0.95rem; }
+  .proxy-disclaimer p:last-child { margin: 0; }
+
+  .disclaimer-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+  .disclaimer-box p { margin: 0.2rem 0; }
+  .disclaimer-fine { margin-top: 0.8rem !important; font-size: 0.78rem; color: var(--text-muted, #888); line-height: 1.5; }
+  .last-reviewed { margin-top: 0.6rem !important; font-size: 0.75rem; color: var(--text-muted, #888); opacity: 0.7; }
+  .hotline-link { color: var(--guava-green); font-weight: 700; text-decoration: none; }
+  .hotline-link.gold { color: var(--gold); }
+
+  .btn-primary-lg {
+    display: block; width: 100%; max-width: 400px; margin: 0 auto 1.5rem;
+    padding: 1rem 2rem; font-size: 1.15rem; font-weight: 800;
+    background: var(--guava-green); color: #000; border: none; border-radius: 12px;
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary-lg:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(57,255,20,0.3); }
+
+  .faq-expand { margin-top: 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; }
+  .faq-expand summary { cursor: pointer; font-weight: 700; color: var(--guava-green); }
+  .faq-inner { margin-top: 0.8rem; }
+  .faq-inner p { margin: 0.8rem 0; line-height: 1.7; font-size: 0.92rem; color: var(--text-secondary); }
+
+  /* Quiz */
+  .progress-bar-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .progress-label {
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.5px;
+  }
+  .progress-track {
+    height: 10px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--guava-green), #39ff14cc);
+    border-radius: 5px;
+    transition: width 0.4s ease;
+    width: 11.1%;
+    box-shadow: 0 0 8px rgba(57,255,20,0.4);
+  }
+
+  .period-note {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+
+  .question-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .question-text {
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin: 0 0 1.5rem;
+  }
+  .question-num {
+    color: var(--guava-green);
+    font-size: 1.3rem;
+  }
+  .att-badge {
+    color: #f5b800 !important;
+  }
+  .attention-check-card {
+    border: 2px dashed rgba(245, 184, 0, 0.4) !important;
+    background: rgba(245, 184, 0, 0.04) !important;
+  }
+  .att-wrong-hint {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    background: rgba(255, 77, 77, 0.1);
+    border: 1px solid rgba(255, 77, 77, 0.3);
+    color: #ff6b6b;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+    20%, 40%, 60%, 80% { transform: translateX(4px); }
+  }
+  .question-card.shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .option-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.3rem;
+    min-height: 54px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    text-align: left;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .option-btn:hover {
+    border-color: var(--guava-green);
+    background: rgba(57,255,20,0.06);
+  }
+  .option-btn:active {
+    transform: scale(0.98);
+  }
+  .option-btn.selected {
+    border-color: var(--guava-green);
+    background: rgba(57,255,20,0.14);
+    box-shadow: 0 0 0 1px var(--guava-green), 0 2px 8px rgba(57,255,20,0.15);
+  }
+  .option-btn .radio-circle {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2.5px solid var(--border); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .option-btn.selected .radio-circle {
+    border-color: var(--guava-green);
+    background: var(--guava-green);
+    box-shadow: 0 0 6px rgba(57,255,20,0.5);
+  }
+  .option-btn.selected .radio-circle::after {
+    content: '';
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #000;
+  }
+
+  .quiz-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .btn-nav {
+    padding: 0.95rem 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    min-height: 50px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s, opacity 0.2s;
+  }
+  .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+  .btn-nav-primary {
+    border-color: var(--guava-green);
+    color: var(--guava-green);
+    font-weight: 800;
+  }
+  .btn-nav-primary:hover:not(:disabled) { background: rgba(57,255,20,0.1); }
+  .btn-nav-primary.submit-mode {
+    background: var(--guava-green);
+    color: #000;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 16px rgba(57,255,20,0.3);
+  }
+
+  /* Result */
+  .result-header { text-align: center; margin-bottom: 1.5rem; }
+  .result-img { width: 200px; height: 200px; border-radius: 50%; margin: 0 auto 1rem; display: block; object-fit: cover; }
+  .result-level { font-size: 1.8rem; font-weight: 900; margin: 0 0 0.3rem; }
+  .result-score { font-size: 1rem; color: var(--text-muted); margin: 0 0 1rem; }
+  .result-desc { font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 1rem; }
+
+  .hotline-block {
+    border-radius: 14px; padding: 1.2rem 1.5rem; margin: 1.5rem 0;
+    text-align: center;
+  }
+  .hotline-block.urgent { background: rgba(255,77,77,0.12); border: 2px solid #ff4d4d; }
+  .hotline-block.moderate { background: rgba(255,136,0,0.1); border: 2px solid #ff8800; }
+  .hotline-block.low { background: rgba(245,184,0,0.08); border: 1px solid var(--gold); }
+  .hotline-block h3 { margin: 0 0 0.8rem; font-size: 1.1rem; }
+  .hotline-btn {
+    display: inline-block; padding: 0.7rem 1.5rem; border-radius: 10px;
+    font-weight: 800; font-size: 1rem; text-decoration: none;
+    margin: 0.3rem; transition: transform 0.15s;
+  }
+  .hotline-btn:hover { transform: translateY(-2px); }
+  .hotline-btn.red { background: #ff4d4d; color: #fff; }
+  .hotline-btn.gold { background: var(--gold); color: #000; }
+  .hotline-btn.green { background: var(--guava-green); color: #000; }
+
+  .action-list { margin: 1rem 0; line-height: 2; font-size: 0.95rem; }
+
+  .share-row { display: flex; gap: 0.8rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
+  .btn-share {
+    padding: 0.7rem 1.5rem; border-radius: 10px; font-weight: 700; font-size: 0.95rem;
+    border: 2px solid var(--guava-green); background: transparent; color: var(--guava-green);
+    cursor: pointer; transition: background 0.2s;
+  }
+  .btn-share:hover { background: rgba(57,255,20,0.1); }
+  .btn-restart { border-color: var(--border); color: var(--text-muted); }
+  .btn-restart:hover { background: rgba(255,255,255,0.05); }
+
+  .ext-links { margin: 2rem 0; }
+  .ext-links h3 { font-size: 1rem; margin-bottom: 0.8rem; }
+  .ext-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .ext-grid a {
+    display: block; padding: 0.8rem 1rem; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--gold); font-size: 0.9rem; text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .ext-grid a:hover { border-color: var(--guava-green); }
+  .ext-grid a small { display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+  .citation-box {
+    margin: 2rem 0; padding: 1rem 1.2rem; border-left: 4px solid var(--gold);
+    background: rgba(245,184,0,0.05); border-radius: 8px; font-size: 0.88rem;
+    line-height: 1.6; color: var(--text-secondary);
+  }
+  .citation-box p { margin: 0; }
+
+  /* ── 漸進式退路卡片 ── */
+  .gradual-steps { margin: 1.5rem 0; }
+  .gradual-title { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.8rem; font-weight: 600; }
+  .gradual-card {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.2rem; border-radius: 12px;
+    margin-bottom: 0.6rem; text-decoration: none; color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .gradual-card:hover { transform: translateY(-2px); }
+  .step-low { background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.2); }
+  .step-low:hover { box-shadow: 0 4px 12px rgba(57,255,20,0.15); }
+  .step-mid { background: rgba(0,136,204,0.08); border: 1px solid rgba(0,136,204,0.25); }
+  .step-mid:hover { box-shadow: 0 4px 12px rgba(0,136,204,0.15); }
+  .step-high { background: rgba(245,184,0,0.08); border: 1px solid rgba(245,184,0,0.25); }
+  .step-high:hover { box-shadow: 0 4px 12px rgba(245,184,0,0.15); }
+  .gradual-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .gradual-body { flex: 1; }
+  .gradual-body strong { display: block; font-size: 0.95rem; color: var(--text-primary); }
+  .gradual-body small { display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+  /* ── 分項回顧 ── */
+  .review-collapse { margin: 1.5rem 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
+  .review-collapse summary {
+    cursor: pointer; padding: 1rem 1.2rem; font-weight: 700; font-size: 0.95rem;
+    color: var(--guava-green); list-style: none;
+  }
+  .review-collapse summary::-webkit-details-marker { display: none; }
+  .review-collapse summary::before { content: '▸ '; }
+  .review-collapse[open] summary::before { content: '▾ '; }
+  .review-items { padding: 0 1.2rem 1rem; }
+  .review-row {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem;
+  }
+  .review-row:last-child { border-bottom: none; }
+  .review-row .rq-label { flex: 1; color: var(--text-secondary); }
+  .review-row .rq-score { font-weight: 700; min-width: 3rem; text-align: right; }
+  .review-row .rq-dot { font-size: 1.1rem; }
+
+  /* ── PGSI 學術介紹段落 ── */
+  .pgsi-intro-article {
+    margin: 3rem 0 2rem;
+    padding: 2rem 1.8rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    line-height: 1.9;
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+  .pgsi-intro-article h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 0 0 1.2rem;
+  }
+  .pgsi-intro-article h3 {
+    font-size: 1.15rem;
+    color: var(--gold);
+    margin: 1.8rem 0 0.6rem;
+  }
+  .pgsi-intro-article p {
+    margin: 0.6rem 0;
+  }
+  .pgsi-intro-article ol,
+  .pgsi-intro-article ul {
+    margin: 0.6rem 0 0.6rem 1.5rem;
+    padding: 0;
+  }
+  .pgsi-intro-article li {
+    margin: 0.3rem 0;
+  }
+  .pgsi-ref {
+    font-size: 0.85rem;
+    color: var(--text-muted, #888);
+    padding-left: 1.5rem;
+    text-indent: -1.5rem;
+    margin: 0.4rem 0;
+    line-height: 1.6;
+  }
+
+  /* ── Mobile RWD：長輩友善大字版 ── */
+  @media (max-width: 600px) {
+    .container { padding: 1rem 0.75rem 3rem; }
+
+    /* Landing */
+    .page-title { font-size: 1.5rem; }
+    .page-subtitle { font-size: 1rem; line-height: 1.7; }
+    .intro-hook { padding: 1rem 1rem; }
+    .hook-scenarios { grid-template-columns: 1fr; gap: 0.8rem; }
+    .hook-card { padding: 1rem 0.8rem; }
+    .hook-card p { font-size: 0.92rem; }
+    .mode-btns { grid-template-columns: 1fr; gap: 0.6rem; }
+    .mode-btn { padding: 0.9rem 1rem; }
+    .disclaimer-box { padding: 1rem 1rem; font-size: 0.95rem; line-height: 1.9; border-radius: 10px; }
+    .proxy-disclaimer { padding: 0.8rem 1rem; font-size: 0.85rem; }
+    .btn-primary-lg { font-size: 1.15rem; padding: 1.1rem 1.5rem; min-height: 56px; border-radius: 14px; }
+
+    /* Progress bar */
+    .progress-bar-wrap { padding: 0.8rem 1rem; border-radius: 12px; margin-bottom: 1.2rem; }
+    .progress-label { font-size: 1.05rem; margin-bottom: 0.5rem; }
+    .progress-track { height: 10px; }
+
+    /* Question card — 大字清晰 */
+    .question-card {
+      padding: 1.4rem 1.1rem 1.6rem;
+      min-height: auto;
+      border-radius: 14px;
+      margin-bottom: 1.2rem;
+    }
+    .question-text {
+      font-size: 1.12rem;
+      font-weight: 800;
+      line-height: 1.75;
+      margin: 0 0 1.2rem;
+    }
+    .question-num { font-size: 1.2rem; }
+    .period-note { font-size: 0.92rem; margin-bottom: 1rem; }
+
+    /* Option buttons — 大觸控區 */
+    .option-list { gap: 0.65rem; }
+    .option-btn {
+      min-height: 58px;
+      padding: 0.95rem 1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      gap: 0.85rem;
+      border-radius: 12px;
+      border-width: 2px;
+    }
+    .option-btn .radio-circle {
+      width: 28px;
+      height: 28px;
+      border-width: 2.5px;
+    }
+    .option-btn.selected .radio-circle::after {
+      width: 11px;
+      height: 11px;
+    }
+
+    /* Navigation buttons — 好按不誤觸 */
+    .quiz-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+    }
+    .btn-nav {
+      min-height: 54px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 0.9rem 0.5rem;
+      border-radius: 12px;
+    }
+    .btn-nav-primary.submit-mode {
+      font-size: 1.12rem;
+    }
+
+    /* Result */
+    .result-img { width: 160px; height: 160px; }
+    .result-level { font-size: 1.5rem; }
+    .result-score { font-size: 1rem; }
+    .result-desc { font-size: 1rem; line-height: 1.8; }
+    .hotline-block { padding: 1rem 1rem; border-radius: 12px; }
+    .hotline-block h3 { font-size: 1.05rem; }
+    .hotline-btn { font-size: 1rem; padding: 0.75rem 1.3rem; }
+    .action-list { font-size: 0.95rem; line-height: 2.1; }
+
+    /* Share / ext */
+    .share-row { gap: 0.6rem; }
+    .btn-share { font-size: 0.92rem; padding: 0.65rem 1.2rem; }
+    .ext-grid { grid-template-columns: 1fr; }
+    .ext-grid a { font-size: 0.92rem; padding: 0.85rem 1rem; }
+    .citation-box { font-size: 0.85rem; padding: 0.8rem 1rem; }
+
+    /* PGSI intro article */
+    .pgsi-intro-article { padding: 1.2rem 1rem; margin: 2rem 0 1.5rem; }
+    .pgsi-intro-article h2 { font-size: 1.25rem; }
+    .pgsi-intro-article h3 { font-size: 1.05rem; }
+    .pgsi-ref { font-size: 0.8rem; }
+  }
+
+  /* ── 極小螢幕（≤380px）再微調 ── */
+  @media (max-width: 380px) {
+    .question-text { font-size: 1.05rem; }
+    .option-btn { font-size: 1.05rem; min-height: 54px; padding: 0.85rem 0.85rem; }
+    .btn-nav { font-size: 1rem; min-height: 50px; }
+    .result-img { width: 140px; height: 140px; }
+    .result-level { font-size: 1.35rem; }
+  }
+</style>
+
+<script is:inline>
+(function () {
+  // ============ DATA ============
+  // 模式：self = 自測，proxy = 幫別人評估
+  let proxyMode = false;
+
+  // 題庫：每題 3 種措辭（self 版），每次測驗隨機抽 1 種，計分方式不變
+  const QUESTION_POOL = [
+    { id: 'q1_overbet', variants: [
+      '你在娛樂城玩的時候，是否曾經下注超過你負擔得起的金額？',
+      '你是否曾在線上賭場押注超出自己經濟能力的金額？',
+      '玩娛樂城遊戲時，你是否曾經投入超過預算的錢？',
+    ]},
+    { id: 'q2_tolerance', variants: [
+      '你是否需要在娛樂城投入越來越多的錢，才能感受到相同的興奮感？',
+      '你是否發現自己在線上賭場的下注金額越來越大，才能獲得跟以前一樣的快感？',
+      '跟剛開始玩娛樂城相比，你是否需要押更大才覺得刺激？',
+    ]},
+    { id: 'q3_chasing', variants: [
+      '當你再次打開娛樂城時，是否曾經試圖贏回之前輸掉的錢？',
+      '你是否曾經因為在線上賭場輸了錢，隔天又上去想把錢贏回來？',
+      '玩娛樂城遊戲輸錢後，你是否會想再儲值把輸的贏回來？',
+    ]},
+    { id: 'q4_borrowing', variants: [
+      '你是否曾經借錢或變賣物品，來繼續在娛樂城儲值？',
+      '你是否曾為了在線上賭場繼續玩，而向朋友、家人借錢或刷信用卡？',
+      '你是否曾經用不該動的錢（房租、生活費）拿去娛樂城儲值？',
+    ]},
+    { id: 'q5_problem', variants: [
+      '你是否覺得自己玩娛樂城的方式可能有問題？',
+      '你是否曾懷疑自己在線上賭場的行為已經不太正常？',
+      '你有沒有想過，自己花在娛樂城的時間和金錢可能已經超出合理範圍？',
+    ]},
+    { id: 'q6_health', variants: [
+      '玩娛樂城是否曾導致你出現健康問題，包括壓力或焦慮？',
+      '你是否因為在線上賭場的輸贏，而感到焦慮、失眠或情緒低落？',
+      '娛樂城的輸贏是否曾經影響到你的身心狀態，例如壓力大、睡不好？',
+    ]},
+    { id: 'q7_criticism', variants: [
+      '別人是否批評過你玩娛樂城的行為，或暗示你可能有問題，不管你認不認同？',
+      '家人或朋友是否曾經說你在線上賭場花太多時間或太多錢？',
+      '身邊的人是否曾對你玩娛樂城的頻率或金額表示擔心？',
+    ]},
+    { id: 'q8_financial', variants: [
+      '你玩娛樂城是否曾經給你或家人造成財務上的困難？',
+      '你在線上賭場花的錢，是否曾經影響到日常生活開銷或家庭經濟？',
+      '因為在娛樂城的支出，你是否曾經繳不出帳單或讓家裡經濟吃緊？',
+    ]},
+    { id: 'q9_guilt', variants: [
+      '你是否曾經對自己在娛樂城花的錢感到愧疚，或為當時發生的事後悔？',
+      '輸錢離開線上賭場後，你是否曾對自己的行為感到自責或後悔？',
+      '回想在娛樂城的經歷，你是否曾覺得後悔、愧疚、或不敢讓家人知道？',
+    ]},
+  ];
+
+  // Proxy 模式題庫（第三人稱）
+  const QUESTION_POOL_PROXY = [
+    { id: 'q1_overbet', variants: [
+      '他/她在娛樂城玩的時候，是否曾經下注超過他/她負擔得起的金額？',
+      '他/她是否曾在線上賭場押注超出自己經濟能力的金額？',
+      '據你觀察，他/她玩娛樂城遊戲時，是否曾經投入超過預算的錢？',
+    ]},
+    { id: 'q2_tolerance', variants: [
+      '他/她是否需要在娛樂城投入越來越多的錢，才能感受到相同的興奮感？',
+      '你是否發現他/她在線上賭場的下注金額越來越大？',
+      '跟剛開始相比，他/她是否需要押更大才覺得刺激？',
+    ]},
+    { id: 'q3_chasing', variants: [
+      '他/她打開娛樂城時，是否曾經試圖贏回之前輸掉的錢？',
+      '他/她是否曾經因為在線上賭場輸了錢，隔天又上去想把錢贏回來？',
+      '據你觀察，他/她輸錢後是否會想再儲值把輸的贏回來？',
+    ]},
+    { id: 'q4_borrowing', variants: [
+      '他/她是否曾經借錢或變賣物品，來繼續在娛樂城儲值？',
+      '他/她是否曾為了在線上賭場繼續玩，而向人借錢或刷信用卡？',
+      '他/她是否曾經用不該動的錢（房租、生活費）拿去娛樂城儲值？',
+    ]},
+    { id: 'q5_problem', variants: [
+      '你覺得他/她玩娛樂城的方式是否可能有問題？',
+      '你是否懷疑他/她在線上賭場的行為已經不太正常？',
+      '你有沒有覺得，他/她花在娛樂城的時間和金錢已經超出合理範圍？',
+    ]},
+    { id: 'q6_health', variants: [
+      '玩娛樂城是否曾導致他/她出現健康問題，包括壓力或焦慮？',
+      '他/她是否因為在線上賭場的輸贏，而出現焦慮、失眠或情緒低落？',
+      '娛樂城的輸贏是否曾經影響到他/她的身心狀態？',
+    ]},
+    { id: 'q7_criticism', variants: [
+      '是否有人批評過他/她玩娛樂城的行為，或暗示可能有問題？',
+      '家人或朋友是否曾經說他/她在線上賭場花太多時間或太多錢？',
+      '身邊的人是否曾對他/她玩娛樂城的頻率或金額表示擔心？',
+    ]},
+    { id: 'q8_financial', variants: [
+      '他/她玩娛樂城是否曾經造成自己或家人財務上的困難？',
+      '他/她在線上賭場花的錢，是否曾經影響到日常開銷或家庭經濟？',
+      '因為在娛樂城的支出，他/她是否曾經繳不出帳單或讓家裡經濟吃緊？',
+    ]},
+    { id: 'q9_guilt', variants: [
+      '他/她是否曾經對自己在娛樂城花的錢感到愧疚或後悔？',
+      '據你觀察，他/她離開線上賭場後是否曾對自己的行為感到自責？',
+      '他/她是否曾因為在娛樂城的經歷而不敢讓家人知道？',
+    ]},
+  ];
+
+  // 注意力檢查題庫（隨機選一題，要求選指定選項）
+  const ATTENTION_CHECKS = [
+    { text: '這題是確認你有在認真看題目 👀 請選擇「有時」。', expectedValue: 1, expectedLabel: '有時' },
+    { text: '注意力確認：請選擇下方的「大多數時候」來繼續作答。', expectedValue: 2, expectedLabel: '大多數時候' },
+    { text: '請仔細閱讀 📖 這一題請你選擇「從不」。', expectedValue: 0, expectedLabel: '從不' },
+  ];
+
+  // 每次測驗隨機選一組措辭（同一次測驗內固定）+ 插入注意力檢查題
+  function pickQuestions() {
+    const pool = proxyMode ? QUESTION_POOL_PROXY : QUESTION_POOL;
+    const questions = pool.map(q => ({
+      id: q.id,
+      text: q.variants[Math.floor(Math.random() * q.variants.length)],
+    }));
+    // 在 Q4~Q6 之間隨機插入一題注意力檢查（index 3, 4, 或 5）
+    const attPos = 3 + Math.floor(Math.random() * 3);
+    const att = ATTENTION_CHECKS[Math.floor(Math.random() * ATTENTION_CHECKS.length)];
+    questions.splice(attPos, 0, {
+      id: 'attention_check',
+      text: att.text,
+      isAttentionCheck: true,
+      expectedValue: att.expectedValue,
+      expectedLabel: att.expectedLabel,
+    });
+    return questions;
+  }
+
+  let QUESTIONS = pickQuestions();
+
+  const OPTIONS = [
+    { label: '從不', value: 0 },
+    { label: '有時', value: 1 },
+    { label: '大多數時候', value: 2 },
+    { label: '幾乎每次', value: 3 },
+  ];
+
+  const LEVELS = {
+    none:     { min: 0,  max: 0,  color: '#39FF14', emoji: '🟢', title: '你的娛樂城使用狀況看起來健康', titleProxy: '他/她的娛樂城使用狀況看起來健康', img: '/images/tools/pgsi/pgsi-result-green.webp' },
+    low:      { min: 1,  max: 2,  color: '#f5b800', emoji: '🟡', title: '你玩娛樂城有低度風險', titleProxy: '他/她玩娛樂城有低度風險', img: '/images/tools/pgsi/pgsi-result-yellow.webp' },
+    moderate: { min: 3,  max: 7,  color: '#ff8800', emoji: '🟠', title: '你玩娛樂城有中度風險', titleProxy: '他/她玩娛樂城有中度風險', img: '/images/tools/pgsi/pgsi-result-orange.webp' },
+    severe:   { min: 8,  max: 27, color: '#ff4d4d', emoji: '🔴', title: '你的娛樂城行為可能已是問題性質', titleProxy: '他/她的娛樂城行為可能已是問題性質', img: '/images/tools/pgsi/pgsi-result-red.webp' },
+  };
+
+  function getLevelTitle(level) {
+    return proxyMode ? level.titleProxy : level.title;
+  }
+
+  // ============ STATE ============
+  let currentQ = 0;
+  let answers = new Array(QUESTIONS.length).fill(null);
+
+  // Restore from sessionStorage (including picked question variants + mode)
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('pgsi_progress'));
+    if (saved && Array.isArray(saved.answers) && Array.isArray(saved.questions) && saved.answers.length === saved.questions.length) {
+      answers = saved.answers;
+      currentQ = saved.currentQ || 0;
+      if (typeof saved.proxyMode === 'boolean') proxyMode = saved.proxyMode;
+      QUESTIONS = saved.questions;
+    }
+  } catch (e) {}
+
+  function saveProgress() {
+    try {
+      sessionStorage.setItem('pgsi_progress', JSON.stringify({ currentQ, answers, questions: QUESTIONS, proxyMode }));
+    } catch (e) {}
+  }
+
+  // ============ DOM REFS ============
+  const secLanding = document.getElementById('pgsi-landing');
+  const secQuiz    = document.getElementById('pgsi-quiz');
+  const secResult  = document.getElementById('pgsi-result');
+  const btnStart   = document.getElementById('btn-start');
+  const btnPrev    = document.getElementById('btn-prev');
+  const btnNext    = document.getElementById('btn-next');
+  const qArea      = document.getElementById('question-area');
+  const progressFill = document.getElementById('progress-fill');
+  const resultArea = document.getElementById('result-area');
+  const btnDownload = document.getElementById('btn-download-card');
+  const btnRestart  = document.getElementById('btn-restart');
+
+  function showSection(sec) {
+    [secLanding, secQuiz, secResult].forEach(s => s.classList.remove('active'));
+    sec.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ============ QUIZ RENDER ============
+  // 計算目前是「第幾題正式題」（跳過 attention check）
+  function getRealQNum(idx) {
+    let count = 0;
+    for (let i = 0; i <= idx; i++) {
+      if (!QUESTIONS[i].isAttentionCheck) count++;
+    }
+    return count;
+  }
+  function getTotalReal() {
+    return QUESTIONS.filter(q => !q.isAttentionCheck).length;
+  }
+
+  function renderQuestion() {
+    const q = QUESTIONS[currentQ];
+    const isAtt = q.isAttentionCheck;
+    const totalReal = getTotalReal();
+
+    // 進度條：用正式題數算
+    if (isAtt) {
+      document.getElementById('q-progress-text').textContent = '注意力確認';
+      // 進度條維持前一題的位置
+      const prevReal = getRealQNum(currentQ - 1);
+      progressFill.style.width = (prevReal / totalReal * 100) + '%';
+    } else {
+      const realNum = getRealQNum(currentQ);
+      document.getElementById('q-progress-text').textContent = '第 ' + realNum + ' 題 / 共 ' + totalReal + ' 題';
+      progressFill.style.width = (realNum / totalReal * 100) + '%';
+    }
+
+    let html = '<div class="question-card' + (isAtt ? ' attention-check-card' : '') + '">';
+    if (isAtt) {
+      html += '<p class="question-text"><span class="question-num att-badge">✋</span> ' + q.text + '</p>';
+    } else {
+      html += '<p class="question-text"><span class="question-num">Q' + getRealQNum(currentQ) + '.</span> ' + q.text + '</p>';
+    }
+    html += '<div class="option-list">';
+    OPTIONS.forEach(opt => {
+      const sel = answers[currentQ] === opt.value ? ' selected' : '';
+      html += '<button type="button" class="option-btn' + sel + '" data-value="' + opt.value + '">';
+      html += '<span class="radio-circle"></span>';
+      html += '<span>' + opt.label + '</span>';
+      html += '</button>';
+    });
+    html += '</div>';
+    // 答錯提示區（初始隱藏）
+    if (isAtt) {
+      html += '<div class="att-wrong-hint" id="att-wrong-hint" style="display:none">';
+      html += '<p>😅 看起來你太快作答了，請再看一次題目喔！</p>';
+      html += '</div>';
+    }
+    html += '</div>';
+    qArea.innerHTML = html;
+
+    // Bind option clicks
+    qArea.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const val = parseInt(this.dataset.value);
+
+        // 注意力檢查題：答錯要擋住
+        if (isAtt && val !== q.expectedValue) {
+          // 顯示提示 + shake 動畫
+          var hint = document.getElementById('att-wrong-hint');
+          if (hint) hint.style.display = 'block';
+          var card = qArea.querySelector('.question-card');
+          if (card) {
+            card.classList.remove('shake');
+            void card.offsetWidth; // force reflow to re-trigger animation
+            card.classList.add('shake');
+          }
+          // 清除選取狀態
+          qArea.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+          answers[currentQ] = null;
+          updateNav();
+          return;
+        }
+
+        // 注意力檢查答對：隱藏提示
+        if (isAtt) {
+          var hint = document.getElementById('att-wrong-hint');
+          if (hint) hint.style.display = 'none';
+        }
+
+        answers[currentQ] = val;
+        qArea.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        updateNav();
+        saveProgress();
+        // GA4 event (question answered, no score detail)
+        if (!isAtt && typeof gtag === 'function') gtag('event', 'pgsi_q_answered', { q_num: getRealQNum(currentQ) });
+      });
+    });
+
+    updateNav();
+  }
+
+  function updateNav() {
+    btnPrev.disabled = currentQ === 0;
+    const answered = answers[currentQ] !== null;
+    btnNext.disabled = !answered;
+
+    if (currentQ === QUESTIONS.length - 1) {
+      btnNext.textContent = '查看結果 ✓';
+      btnNext.classList.add('submit-mode');
+    } else {
+      btnNext.textContent = '下一題 ➡';
+      btnNext.classList.remove('submit-mode');
+    }
+  }
+
+  // ============ RESULT ============
+  function getRiskLevel(score) {
+    if (score === 0) return 'none';
+    if (score <= 2) return 'low';
+    if (score <= 7) return 'moderate';
+    return 'severe';
+  }
+
+  function renderResult() {
+    // 計分時排除注意力檢查題
+    let score = 0;
+    for (let i = 0; i < QUESTIONS.length; i++) {
+      if (!QUESTIONS[i].isAttentionCheck) score += (answers[i] || 0);
+    }
+    const levelKey = getRiskLevel(score);
+    const level = LEVELS[levelKey];
+
+    var dispTitle = getLevelTitle(level);
+
+    let html = '';
+    // Proxy 模式提醒
+    if (proxyMode) {
+      html += '<div class="proxy-disclaimer">';
+      html += '<p><strong>⚠️ 旁觀者評估模式</strong></p>';
+      html += '<p>此結果是根據你對他/她行為的觀察所得，部分涉及內心感受的題目（如 Q5 自覺有問題、Q9 愧疚感）可能與本人實際狀況有落差。建議將結果作為「初步參考」，並鼓勵當事人自行測驗或尋求專業評估。</p>';
+      html += '</div>';
+    }
+
+    html += '<div class="result-header">';
+    html += '<img src="' + level.img + '" alt="' + dispTitle + '" class="result-img" style="border:3px solid ' + level.color + '" />';
+    html += '<p class="result-level" style="color:' + level.color + '">' + level.emoji + ' ' + dispTitle + '</p>';
+    html += '<p class="result-score">總分：' + score + ' / 27</p>';
+    html += '</div>';
+
+    // Hotline block for moderate/severe
+    if (levelKey === 'severe') {
+      html += '<div class="hotline-block urgent">';
+      html += '<h3 style="color:#ff4d4d">📞 請撥打求助專線</h3>';
+      html += '<a href="tel:1925" class="hotline-btn red">1925 安心專線</a>';
+      html += '<a href="tel:1995" class="hotline-btn red">1995 生命線</a>';
+      html += '<a href="https://165.npa.gov.tw/" target="_blank" rel="noopener" class="hotline-btn gold">165 反詐騙</a>';
+      html += '<p style="margin-top:0.8rem;font-size:0.85rem;color:var(--text-muted)">24 小時免費，匿名諮詢</p>';
+      html += '</div>';
+      html += '<div class="result-desc">';
+      if (proxyMode) {
+        html += '<p>根據你的觀察，他/她有嚴重的娛樂城成癮跡象。</p>';
+        html += '<div class="action-list">';
+        html += '<p>📞 建議陪同撥打 1925 安心專線（24 小時免費）</p>';
+        html += '<p>🏥 協助尋求專業諮商或治療</p>';
+        html += '<p>💬 用關心而非指責的方式跟他/她溝通</p>';
+        html += '<p>👨‍👩‍👧‍👦 跟其他家人或信任的人商量對策</p>';
+        html += '<p>🏦 了解是否有財務損失，必要時協助止損</p>';
+        html += '</div>';
+        html += '<p style="margin-top:1rem;color:' + level.color + ';font-weight:700">這不是道德問題，是健康問題，當事人需要專業協助和身邊人的支持。</p>';
+        html += '<p style="margin-top:0.5rem">❤️ 你願意幫他/她評估，本身就是很重要的第一步。</p>';
+      } else {
+        html += '<p>你的回答顯示嚴重的娛樂城成癮跡象。</p>';
+        html += '<div class="action-list">';
+        html += '<p>📞 撥打 1925 安心專線（24 小時免費）</p>';
+        html += '<p>🏥 尋求專業諮商或治療</p>';
+        html += '<p>💸 立即停止在娛樂城的一切儲值與下注</p>';
+        html += '<p>👨‍👩‍👧‍👦 告訴家人或信任的人</p>';
+        html += '<p>🏦 考慮銀行帳戶風控設定，阻斷金流</p>';
+        html += '</div>';
+        html += '<p style="margin-top:1rem;color:' + level.color + ';font-weight:700">這不是道德問題，是健康問題，需要專業協助。</p>';
+        html += '<p style="margin-top:0.5rem">❤️ 你不是一個人。願意面對的人，已經邁出最重要的一步。</p>';
+      }
+      html += '</div>';
+      // 漸進式低門檻退路
+      html += '<div class="gradual-steps">';
+      html += '<p class="gradual-title">💌 還沒準備好打電話？沒關係，從這裡開始：</p>';
+      html += '<a href="/articles/slot-pool-theory-explained/" class="gradual-card step-low">';
+      html += '<span class="gradual-icon">📖</span>';
+      html += '<span class="gradual-body"><strong>先看一篇文章冷靜一下</strong><small>了解老虎機水池理論，用知識取代衝動</small></span>';
+      html += '</a>';
+      html += '<a href="https://t.me/game8la" target="_blank" rel="noopener" class="gradual-card step-mid">';
+      html += '<span class="gradual-icon">💬</span>';
+      html += '<span class="gradual-body"><strong>加入 8LA 匿名社群聊聊</strong><small>沒人會問你是誰，Telegram 匿名加入</small></span>';
+      html += '</a>';
+      html += '<a href="tel:1925" class="gradual-card step-high">';
+      html += '<span class="gradual-icon">📞</span>';
+      html += '<span class="gradual-body"><strong>撥打 1925 安心專線</strong><small>24 小時免費，專業諮詢師接聽</small></span>';
+      html += '</a>';
+      html += '</div>';
+    } else if (levelKey === 'moderate') {
+      html += '<div class="hotline-block moderate">';
+      html += '<h3 style="color:#ff8800">📞 建議撥打諮詢</h3>';
+      html += '<a href="tel:1925" class="hotline-btn gold">1925 安心專線</a>';
+      html += '<p style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-muted)">24 小時免費，匿名諮詢</p>';
+      html += '</div>';
+      html += '<div class="result-desc">';
+      if (proxyMode) {
+        html += '<p>根據你的觀察，他/她有明顯的娛樂城成癮徵兆。</p>';
+        html += '<div class="action-list">';
+        html += '<p>🛑 建議他/她減少玩娛樂城的次數與儲值金額</p>';
+        html += '<p>📞 陪他/她撥打 <a href="tel:1925" style="color:#ff8800;font-weight:700">1925 安心專線</a>諮詢</p>';
+        html += '<p>💬 用關心的方式跟他/她聊聊在娛樂城的狀況</p>';
+        html += '<p>📅 建議設定「冷靜期」——7 到 30 天不碰娛樂城</p>';
+        html += '<p>💰 提議幫忙保管娛樂城預算</p>';
+        html += '</div>';
+        html += '<p style="margin-top:0.8rem;color:' + level.color + '">這個分數已經接近危險區，建議盡早介入。</p>';
+      } else {
+        html += '<p>你的回答顯示明顯的娛樂城成癮徵兆。</p>';
+        html += '<div class="action-list">';
+        html += '<p>🛑 立即減少玩娛樂城的次數與儲值金額</p>';
+        html += '<p>📞 撥打 <a href="tel:1925" style="color:#ff8800;font-weight:700">1925 安心專線</a>諮詢</p>';
+        html += '<p>💬 跟家人或朋友坦白在娛樂城的狀況</p>';
+        html += '<p>📅 設定「冷靜期」——7 到 30 天不碰娛樂城</p>';
+        html += '<p>💰 把娛樂城預算交給信任的人保管</p>';
+        html += '</div>';
+        html += '<p style="margin-top:0.8rem;color:' + level.color + '">這個分數已經接近危險區，請當作警訊。</p>';
+      }
+      html += '</div>';
+      // 中度也加漸進式退路（少一層）
+      html += '<div class="gradual-steps">';
+      html += '<p class="gradual-title">💡 可以先從這裡開始：</p>';
+      html += '<a href="/articles/rtp-explained/" class="gradual-card step-low">';
+      html += '<span class="gradual-icon">📖</span>';
+      html += '<span class="gradual-body"><strong>認識 RTP 真實期望值</strong><small>了解為什麼長期一定虧，數據會幫你冷靜</small></span>';
+      html += '</a>';
+      html += '<a href="https://t.me/game8la" target="_blank" rel="noopener" class="gradual-card step-mid">';
+      html += '<span class="gradual-icon">💬</span>';
+      html += '<span class="gradual-body"><strong>加入 8LA 匿名社群</strong><small>跟有經驗的人聊聊，不用露臉</small></span>';
+      html += '</a>';
+      html += '</div>';
+    } else if (levelKey === 'low') {
+      html += '<div class="hotline-block low">';
+      html += '<p style="margin:0;font-size:0.9rem">如果有需要，<a href="tel:1925" style="color:var(--gold);font-weight:700">1925 安心專線</a>隨時在。</p>';
+      html += '</div>';
+      html += '<div class="result-desc">';
+      if (proxyMode) {
+        html += '<p>根據你的觀察，他/她有一些初期警訊。分數還在可控範圍，但值得留意。</p>';
+        html += '<div class="action-list">';
+        html += '<p>✅ 提醒他/她設定每月娛樂城預算上限</p>';
+        html += '<p>✅ 關心他/她在娛樂城的花費頻率與金額</p>';
+        html += '<p>✅ 提醒「追輸」是最危險的行為模式</p>';
+        html += '<p>✅ 讓他/她知道你在關心，而非批評</p>';
+        html += '</div>';
+      } else {
+        html += '<p>你的回答顯示一些初期警訊。分數還在可控範圍，但要開始留意了。</p>';
+        html += '<div class="action-list">';
+        html += '<p>✅ 設定每月娛樂城預算上限，花完就停</p>';
+        html += '<p>✅ 記錄在娛樂城的花費次數與金額</p>';
+        html += '<p>✅ 避免「追輸」——輸了想贏回來是最危險的行為</p>';
+        html += '<p>✅ 跟信任的人聊聊你玩娛樂城的狀況</p>';
+        html += '</div>';
+      }
+      html += '</div>';
+      // Low 結果 TG CTA
+      html += '<div class="gradual-steps">';
+      html += '<p class="gradual-title">💡 想了解更多？</p>';
+      html += '<a href="https://t.me/game8la" target="_blank" rel="noopener" class="gradual-card step-low">';
+      html += '<span class="gradual-icon">💬</span>';
+      html += '<span class="gradual-body"><strong>加入 8LA Telegram 社群</strong><small>匿名加入，跟懂的人聊聊娛樂城的眉角</small></span>';
+      html += '</a>';
+      html += '</div>';
+    } else {
+      // none
+      html += '<div class="result-desc">';
+      if (proxyMode) {
+        html += '<p>根據你的觀察，他/她目前沒有明顯的問題。</p>';
+        html += '<div class="action-list">';
+        html += '<p>✅ 目前看起來正常，但可以持續留意</p>';
+        html += '<p>✅ 「目前沒問題」不代表「永遠不會有問題」</p>';
+        html += '<p>✅ 如果之後發現情況變化，可以再來測一次</p>';
+        html += '</div>';
+        html += '<p style="margin-top:0.8rem;font-size:0.9rem;color:var(--text-muted)">你的關心是最好的防線。如有需要，<a href="tel:1925" style="color:var(--gold)">1925 安心專線</a>隨時在。</p>';
+      } else {
+        html += '<p>從你的回答來看，你目前沒有明顯的問題。</p>';
+        html += '<div class="action-list">';
+        html += '<p>✅ 娛樂城的長期期望值是負的——平均一定虧</p>';
+        html += '<p>✅ 「目前沒問題」不代表「永遠不會有問題」</p>';
+        html += '<p>✅ 持續關注自己在娛樂城的花費頻率與金額</p>';
+        html += '</div>';
+        html += '<p style="margin-top:0.8rem;font-size:0.9rem;color:var(--text-muted)">如果有需要，<a href="tel:1925" style="color:var(--gold)">1925 安心專線</a>隨時在。</p>';
+      }
+      html += '</div>';
+      // None 結果 TG CTA
+      html += '<div class="gradual-steps">';
+      html += '<p class="gradual-title">🍈 想聊聊娛樂城的事？</p>';
+      html += '<a href="https://t.me/game8la" target="_blank" rel="noopener" class="gradual-card step-low">';
+      html += '<span class="gradual-icon">💬</span>';
+      html += '<span class="gradual-body"><strong>加入 8LA Telegram 社群</strong><small>匿名加入，一起用數據看清娛樂城</small></span>';
+      html += '</a>';
+      html += '</div>';
+    }
+
+    // 分項回顧
+    const dimensionLabels = {
+      q1_overbet: '超額下注',
+      q2_tolerance: '耐受性提高',
+      q3_chasing: '追輸行為',
+      q4_borrowing: '借錢／挪用',
+      q5_problem: '自覺有問題',
+      q6_health: '身心影響',
+      q7_criticism: '被他人批評',
+      q8_financial: '財務困難',
+      q9_guilt: '愧疚感',
+    };
+    const dotColor = function (v) { return v === 0 ? '🟢' : v === 1 ? '🟡' : v === 2 ? '🟠' : '🔴'; };
+    html += '<details class="review-collapse">';
+    html += '<summary>📊 ' + (proxyMode ? '答題回顧（旁觀者評估）' : '你的答題回顧') + '</summary>';
+    html += '<div class="review-items">';
+    var realIdx = 0;
+    QUESTIONS.forEach(function (q, i) {
+      if (q.isAttentionCheck) return; // 跳過注意力檢查題
+      realIdx++;
+      const v = answers[i] || 0;
+      const label = dimensionLabels[q.id] || q.id;
+      html += '<div class="review-row">';
+      html += '<span class="rq-dot">' + dotColor(v) + '</span>';
+      html += '<span class="rq-label">Q' + realIdx + ' ' + label + '</span>';
+      html += '<span class="rq-score" style="color:' + (v >= 2 ? '#ff8800' : 'var(--text-muted)') + '">' + v + ' / 3</span>';
+      html += '</div>';
+    });
+    html += '</div></details>';
+
+    resultArea.innerHTML = html;
+
+    // Store level for share card
+    resultArea.dataset.level = levelKey;
+    resultArea.dataset.score = score;
+
+    // GA4 event
+    if (typeof gtag === 'function') gtag('event', 'pgsi_complete', { level: levelKey });
+  }
+
+  // ============ CANVAS SHARE CARD ============
+  function generateShareCard() {
+    const levelKey = resultArea.dataset.level;
+    const level = LEVELS[levelKey];
+    const canvas = document.getElementById('share-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const colorMap = {
+      none:     ['#0a1a0a', '#1a3a1a', '#39FF14'],
+      low:      ['#1a1a0a', '#3a3a1a', '#f5b800'],
+      moderate: ['#1a0e0a', '#3a1f1a', '#ff8800'],
+      severe:   ['#1a0a0a', '#3a0a0a', '#ff4d4d']
+    };
+    const c = colorMap[levelKey];
+
+    // Background gradient
+    const grad = ctx.createLinearGradient(0, 0, 1080, 1080);
+    grad.addColorStop(0, c[0]);
+    grad.addColorStop(0.5, c[1]);
+    grad.addColorStop(1, c[2] + '40');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1080);
+
+    // Title
+    ctx.fillStyle = c[2];
+    ctx.font = 'bold 52px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🛡️ 娛樂城成癮自我檢測', 540, 150);
+
+    // Main result (large)
+    const titleMap = { none: '✅ 健康', low: '🟡 低度風險', moderate: '🟠 中度風險', severe: '🔴 高度風險' };
+    ctx.fillStyle = c[2];
+    ctx.font = 'bold 100px sans-serif';
+    ctx.fillText(titleMap[levelKey], 540, 450);
+
+    // Subtitle
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '32px sans-serif';
+    ctx.fillText('基於 PGSI 國際標準量表', 540, 540);
+
+    // 1925 for severe
+    if (levelKey === 'severe' || levelKey === 'moderate') {
+      ctx.fillStyle = '#f5b800';
+      ctx.font = 'bold 42px sans-serif';
+      ctx.fillText('📞 1925 安心專線', 540, 680);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '26px sans-serif';
+      ctx.fillText('24 小時免費諮詢', 540, 730);
+    }
+
+    // Branding
+    ctx.fillStyle = c[2];
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillText('🍈 Game8la', 540, 900);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '26px sans-serif';
+    ctx.fillText('game8la.com/tools/gambling-self-check', 540, 950);
+
+    ctx.fillStyle = '#aaaaaa';
+    ctx.font = '22px sans-serif';
+    ctx.fillText('你也來自評，5 分鐘搞定', 540, 1000);
+
+    ctx.fillStyle = '#888888';
+    ctx.font = '20px sans-serif';
+    ctx.fillText('💬 匿名社群 t.me/game8la', 540, 1040);
+
+    return canvas;
+  }
+
+  function downloadShareCard() {
+    const canvas = generateShareCard();
+    canvas.toBlob(function (blob) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'game8la-pgsi-' + (resultArea.dataset.level || 'result') + '.png';
+      a.click();
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+    if (typeof gtag === 'function') gtag('event', 'pgsi_share');
+  }
+
+  // ============ MODE TOGGLE ============
+  var modeBtns = document.querySelectorAll('.mode-btn');
+  modeBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      modeBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      proxyMode = btn.dataset.mode === 'proxy';
+      // Update start button text
+      if (!answers.some(function (a) { return a !== null; })) {
+        btnStart.textContent = proxyMode ? '開始幫他/她評估 →' : '我了解，開始檢測 →';
+      }
+    });
+  });
+
+  // Restore mode toggle state from saved progress
+  if (proxyMode) {
+    modeBtns.forEach(function (b) { b.classList.remove('active'); });
+    var proxyBtn = document.querySelector('.mode-btn[data-mode="proxy"]');
+    if (proxyBtn) proxyBtn.classList.add('active');
+  }
+
+  // ============ EVENT HANDLERS ============
+  btnStart.addEventListener('click', function () {
+    // Re-pick questions based on current mode (only if no saved progress)
+    if (!answers.some(function (a) { return a !== null; })) {
+      QUESTIONS = pickQuestions();
+      answers = new Array(QUESTIONS.length).fill(null);
+    }
+    showSection(secQuiz);
+    renderQuestion();
+    if (typeof gtag === 'function') gtag('event', 'pgsi_start', { mode: proxyMode ? 'proxy' : 'self' });
+  });
+
+  btnPrev.addEventListener('click', function () {
+    if (currentQ > 0) { currentQ--; saveProgress(); renderQuestion(); }
+  });
+
+  btnNext.addEventListener('click', function () {
+    if (answers[currentQ] === null) return;
+    if (currentQ < QUESTIONS.length - 1) {
+      currentQ++;
+      saveProgress();
+      renderQuestion();
+    } else {
+      // Submit — show results
+      sessionStorage.removeItem('pgsi_progress');
+      showSection(secResult);
+      renderResult();
+    }
+  });
+
+  btnDownload.addEventListener('click', downloadShareCard);
+
+  btnRestart.addEventListener('click', function () {
+    proxyMode = false;
+    QUESTIONS = pickQuestions(); // 重測時重新隨機抽題
+    answers = new Array(QUESTIONS.length).fill(null);
+    currentQ = 0;
+    sessionStorage.removeItem('pgsi_progress');
+    // Reset mode toggle
+    modeBtns.forEach(function (b) { b.classList.remove('active'); });
+    var selfBtn = document.querySelector('.mode-btn[data-mode="self"]');
+    if (selfBtn) selfBtn.classList.add('active');
+    btnStart.textContent = '我了解，開始檢測 →';
+    btnStart.style.background = '';
+    showSection(secLanding);
+  });
+
+  // ============ DROPOFF TRACKING ============
+  let dropoffFired = false;
+  function fireDropoff() {
+    if (dropoffFired) return;
+    if (currentQ < QUESTIONS.length && answers.some(a => a !== null) && secQuiz.classList.contains('active')) {
+      dropoffFired = true;
+      if (typeof gtag === 'function') gtag('event', 'pgsi_dropoff', { last_q: currentQ + 1, answered: answers.filter(a => a !== null).length });
+    }
+  }
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') fireDropoff(); });
+  window.addEventListener('pagehide', fireDropoff);
+
+  // If we had saved progress, show resume prompt on landing button
+  if (answers.some(a => a !== null)) {
+    const answeredCount = answers.filter(a => a !== null).length;
+    btnStart.textContent = '繼續上次的檢測（第 ' + (currentQ + 1) + ' 題）→';
+    btnStart.style.background = 'var(--gold)';
+  }
+})();
+</script>

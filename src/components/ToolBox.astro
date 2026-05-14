@@ -11,7 +11,7 @@
 //   <ToolBox preset="lottery" />      // 彩券文章   → 數據站
 import Icon from './Icon.astro';
 
-type Preset = 'slots' | 'baccarat' | 'casino' | 'casino-full' | 'lottery';
+type Preset = 'slots' | 'baccarat' | 'casino' | 'casino-full' | 'lottery' | 'pgsi';
 
 interface Tool {
   name: string;
@@ -42,6 +42,7 @@ const presetMap: Record<Preset, string[]> = {
   'casino':      ['casino-check', 'bonus-calc'],
   'casino-full': ['casino-check', 'bankroll', 'bonus-calc'],
   'lottery':     ['lottery'],
+  'pgsi':        ['casino-check', 'bankroll'],
 };
 
 const { preset } = Astro.props;

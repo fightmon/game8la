@@ -1,0 +1,388 @@
+---
+import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ToolBox from '../../components/ToolBox.astro';
+
+const faqs = [
+  { q: '戰神賽特2 跟雷神之錘2 哪台比較好贏？', a: '沒有哪台「比較好贏」。雷神 RTP 97.6% 看起來比賽特 96.89% 高，但差距只有 0.71%——每轉 100 元大約差 0.71 元。兩台都是高波動率老虎機，長期都是虧的，差別在短期誰先爆。追穩健倍數選雷神，追極限天花板選賽特。' },
+  { q: '兩台的免費遊戲觸發難度一樣嗎？', a: '差不多。賽特要集 4 個 SCATTER，雷神要集 4 個 Bonus 符號，都是「等老天爺賞臉」。賽特進免遊後隨機進一般或覺醒模式，運氣好直接跳進分裂+鎖定的強化版。雷神則看有沒有出 Super Bonus 符號，有出就進超級免遊，高倍數球出現率大幅提高。' },
+  { q: '買免遊該買哪台的？', a: '賽特只有一個 x100 價位，按下去聽天由命。雷神有三段式：100x（一般）、500x（超級）、4000x（神運一擊全場 1000x 倍數球）。如果你喜歡「花一筆固定成本、不想選太多」就買賽特；喜歡「依預算分段押注」就買雷神。不管買哪台，買免遊都不會改變 RTP，只是省掉等 Scatter 的時間。' },
+  { q: '新手先玩哪台？', a: '芭樂子推薦先玩雷神之錘2。RTP 97.6% 比賽特高 0.71%，理論上虧得比較慢；倍數球就是五種顏色加在一起乘分數，很好懂；也沒有賽特那種「覺醒之力裡面還要再觸發分裂跟鎖定」的多層機制。等雷神的節奏摸熟了，再跳賽特2 體驗分裂跟鎖定不遲。' },
+  { q: '倍數符號最高值 1000x vs x500，到底差在哪？', a: '雷神單顆倍數球最高 1000x（彩虹球），賽特單顆最高 x500。但這不代表雷神一定爆更多——因為賽特的分裂技能可以把一顆倍數球拆成 6 顆，鎖定技能又能把它們釘在盤面 6 回合。一顆 x500 分裂成 6 顆 = 3000x，再鎖 6 轉反覆乘……理論上限反而更高，這就是為什麼賽特最大倍率 x81,000 而雷神只有 x25,000。' },
+  { q: '兩台都有 Jackpot 嗎？', a: '都有，而且都是四段式：MINI、MINOR、MAJOR、GRAND。但賽特1代沒有 JP（只有2代有），雷神兩代都有。JP 彩金算是額外的驚喜獎，觸發條件跟主遊戲的消除和倍數系統獨立。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/atg-seth-vs-thor-hammer/"
+  title="戰神賽特2 vs 雷神之錘2：RTP、倍數系統、買免遊完整比較"
+  description="ATG 戰神賽特2 vs RSG 雷神之錘2 兩大爆分老虎機完整對決。RTP、最大倍率、倍數符號系統、免遊機制、買免遊 CP 值、Jackpot 全部攤開比。芭樂子用數據幫你選。"
+  image="https://game8la.com/images/article-hero/seth-vs-thor-hero.webp"
+  datePublished="2026-05-12"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '金8LA賽特專區', url: 'https://game8la.com/atg-seth/' },
+    { name: '賽特2 vs 雷神之錘2', url: 'https://game8la.com/articles/atg-seth-vs-thor-hammer/' },
+  ]}
+/>
+<BaseLayout currentPage="atg-seth" title="戰神賽特2 vs 雷神之錘2 完整比較：RTP、倍數系統、買免遊哪台值得？ - GAME8LA" description="ATG 戰神賽特2 vs RSG 雷神之錘2 完整對決。RTP 96.89% vs 97.6%、最大倍率 x81,000 vs x25,000、倍數符號 x500 vs 1000x、買免遊單段 vs 三段——芭樂子用數據幫你選出最適合的那一台。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/atg-seth/">金8LA賽特專區</a> &gt; 賽特2 vs 雷神之錘2</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-12 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 8 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a0a2e,#0a1a3e,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <img src="/images/article-hero/seth-vs-thor-hero.webp" alt="戰神賽特2 vs 雷神之錘2 完整比較 — 芭樂子帶你用數據選機台" width="1200" height="675" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+      <h1 style="font-size:2rem;line-height:1.3">戰神賽特2 vs 雷神之錘2：兩台爆分老虎機到底選哪台？</h1>
+      <p style="color:var(--text-muted);font-size:0.95rem">最後更新：2026-05-12 ｜ 芭樂子把兩台拆開來比，你自己選</p>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文懶人包</h2>
+        <ol>
+          <li><a href="#s1">30 秒結論：你適合哪一台</a></li>
+          <li><a href="#s2">官方數據完整對照表</a></li>
+          <li><a href="#s3">倍數符號系統大車拼</a></li>
+          <li><a href="#s4">免費遊戲機制比較</a></li>
+          <li><a href="#s5">買免遊 CP 值分析</a></li>
+          <li><a href="#s6">五個面向快速選機</a></li>
+          <li><a href="#s7">芭樂子最終推薦</a></li>
+          <li><a href="#s8">FAQ：常見問題一次回</a></li>
+        </ol>
+      </div>
+
+      <!-- ===== § 1 ===== -->
+      <h2 id="s1">一、30 秒結論：你適合哪一台？</h2>
+      <p>親愛的大大，先把最重要的一句話擺前面——<strong>兩台都是高波動率老虎機，長期都會虧錢</strong>。不存在「哪台穩贏」這件事。差別是虧的速度跟爆的風格不一樣：</p>
+
+      <blockquote style="border-left:4px solid var(--guava-green);padding:0.8rem 1.2rem;background:var(--bg-card);margin:1rem 0">
+        <strong>追穩健回報、倍數系統直觀 → <span style="color:var(--guava-pink)">雷神之錘2</span></strong>（RTP 97.6%、倍數球最高 1000x）<br/>
+        <strong>追極限天花板、愛看機制連鎖 → <span style="color:var(--guava-green)">戰神賽特2</span></strong>（最大倍率 x81,000、覺醒之力分裂+鎖定）
+      </blockquote>
+
+      <p>雷神走的是「RTP 友善 + 五色倍數球加總」的路線，規則乾淨好懂。賽特走的是「覺醒之力讓倍數球自我分裂、還能釘在盤面不走」的路線，爆分天花板高得離譜但更難摸到。講白話：<strong>雷神像可以穩定輸出的戰士，賽特像要碰對裝備才能 one shot 的刺客</strong>——都能打，風格不同。</p>
+
+      <img loading="lazy" src="/images/articles/seth-vs-thor-guava-compare.webp" alt="芭樂子拿著兩台老虎機比較 — 左手賽特右手雷神" class="content-img" width="1200" height="675">
+      <p class="article-img-caption">▲ 芭樂子：兩台我都玩過，錢包都哭過</p>
+
+      <!-- ===== § 2 ===== -->
+      <h2 id="s2">二、官方數據完整對照表</h2>
+      <p>數據來源是 ATG 跟 RSG（GLI 認證）的官方規格，芭樂子不猜不腦補：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">比較項目</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left;color:var(--guava-green)">戰神賽特2：覺醒之力</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left;color:var(--guava-pink)">雷神之錘II</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>遊戲商</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">ATG 電子</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">RSG 皇家電子（GLI 認證）</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>RTP 返還率</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">96.89%</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong style="color:var(--guava-pink)">97.6%</strong> ✅</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>最大中獎倍率</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong style="color:var(--guava-green)">x81,000</strong> ✅</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x25,000</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>波動率</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>盤面結構</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">6 軸 × 5 列</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">6 軸 × 5 列</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>中獎方式</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">自由配對（8 顆同符號）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">自由配對（8 顆同符號）</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>單顆倍數最高值</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x500</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong style="color:var(--guava-pink)">1000x</strong> ✅</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>倍數系統特色</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">分裂（最多拆 6 顆）+ 鎖定（最多 6 回合）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">五色球加總（2x → 1000x）</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>免費遊戲</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">15 回合起，最高 100 回合</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">15 回合起，最高 100 回合</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>免遊強化模式</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">覺醒之力（分裂+鎖定）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">Super Bonus（高倍率球機率大增）</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>買免遊</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">單一 x100</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">三段：100x / 500x / 4000x</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>JP 彩金</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">4 級（Mini / Minor / Major / Grand）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">4 級（Mini / Minor / Major / Grand）</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>消除掉落</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">✅ 消除後新符號掉落</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">✅ 消除後新符號掉落</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)"><strong>主題風格</strong></td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">埃及神話（賽特 + 奈芙蒂絲）</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">北歐神話（雷神索爾）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>數字攤開來看，兩台的骨架幾乎一模一樣——都是 6x5、自由配對、消除掉落、倍數符號累加、免遊最高 100 回合。真正拉開差距的就三個地方：<strong>RTP 誰比較友善（97.6% vs 96.89%）、倍數球怎麼玩（五色球加總 vs 分裂+鎖定）、買免遊有幾種選擇（三段 vs 只有一段）</strong>。下面芭樂子一個一個拆給你看。</p>
+
+      <!-- 遊戲畫面對照 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+        <div>
+          <img loading="lazy" src="/images/seth2/seth2-gameplay-board.webp" alt="戰神賽特2 主遊戲畫面" width="600" height="338" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-green)">
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">▲ 賽特2 主遊戲盤面</p>
+        </div>
+        <div>
+          <img loading="lazy" src="/images/thor2/thor2-gameplay.webp" alt="雷神之錘2 主遊戲畫面" width="600" height="338" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-pink)">
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">▲ 雷神2 主遊戲盤面</p>
+        </div>
+      </div>
+
+      <!-- ===== § 3 ===== -->
+      <h2 id="s3">三、倍數符號系統大車拼 — 這才是勝負關鍵</h2>
+
+      <p>兩台最核心的爆分引擎都是倍數符號，但玩法邏輯根本是兩個世界。芭樂子直接攤開給你看：</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+        <!-- 賽特倍數卡 -->
+        <div style="background:var(--bg-card);border:2px solid var(--guava-green);border-radius:12px;padding:1.2rem">
+          <h3 style="color:var(--guava-green);margin-top:0;font-size:1.1rem">⚔️ 賽特2 倍數系統</h3>
+          <p style="margin:0.3rem 0;font-size:0.9rem"><strong>倍數球範圍：</strong>x2 ~ x500</p>
+          <p style="margin:0.3rem 0;font-size:0.9rem"><strong>分裂（Split）：</strong>一顆拆成最多 6 顆，繼承原倍數</p>
+          <p style="margin:0.3rem 0;font-size:0.9rem"><strong>鎖定（Lock）：</strong>倍數球釘在原位最多 6 回合</p>
+          <p style="margin:0.3rem 0;font-size:0.9rem"><strong>稀有倍數：</strong>每 spin 自動增加倍數值</p>
+          <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--text-muted)">白話說：一顆球倍數不高，但拆成六顆再釘住慢慢滾，最後疊出來的數字嚇死你</p>
+        </div>
+        <!-- 雷神倍數卡 -->
+        <div style="background:var(--bg-card);border:2px solid var(--guava-pink);border-radius:12px;padding:1.2rem">
+          <h3 style="color:var(--guava-pink);margin-top:0;font-size:1.1rem">⚡ 雷神2 倍數系統</h3>
+          <p style="margin:0.3rem 0;font-size:0.9rem"><strong>五色倍數球：</strong></p>
+          <p style="margin:0.2rem 0 0.2rem 0.5rem;font-size:0.85rem"><span style="color:#26c281">●</span> 綠 2x ｜ <span style="color:#42a5f5">●</span> 藍 12x ｜ <span style="color:#ab47bc">●</span> 紫 50x</p>
+          <p style="margin:0.2rem 0 0.2rem 0.5rem;font-size:0.85rem"><span style="color:#e74c3c">●</span> 紅 100x ｜ <span style="background:linear-gradient(90deg,#f59e0b,#ef4444,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">●</span> 彩虹 1000x</p>
+          <p style="margin:0.3rem 0;font-size:0.9rem"><strong>Free Game 鎖定：</strong>倍數球進免遊後不消失，持續累加</p>
+          <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--text-muted)">白話說：一顆 1000x 出來就是 1000x，不用拆不用鎖，簡單粗暴</p>
+        </div>
+      </div>
+
+      <p><strong>白話版差異：</strong>雷神的倍數系統像「拿到一張大面額鈔票」——1000x 彩虹球出來就是 1000x，簡單粗暴。賽特的倍數系統像「一張小面額鈔票自己印鈔」——x500 的球分裂成 6 顆就是 3000x，再鎖 6 回合每回合都疊，最後累積出來的數字可能比雷神更瘋，但你得先觸發覺醒之力、再觸發分裂、再觸發鎖定——三個條件都到齊才行。</p>
+
+      <p>所以<strong>雷神的倍數爆發比較「穩定可預期」</strong>，免遊裡倍數球一直鎖、一直加就好；<strong>賽特的倍數爆發比較「極端」</strong>，要嘛什麼都沒觸發白白浪費免遊，要嘛分裂+鎖定全開直接飛天——芭樂子覺得這就是為什麼賽特最大倍率能到 x81,000 而雷神只有 x25,000 的原因。</p>
+
+      <!-- 倍數系統實際畫面對照 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+        <div>
+          <img loading="lazy" src="/images/seth2/seth2-multiplier-balls.webp" alt="戰神賽特2 倍數球分裂畫面" width="600" height="338" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-green)">
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">▲ 賽特2 倍數球分裂 — 一顆變多顆</p>
+        </div>
+        <div>
+          <img loading="lazy" src="/images/thor2/thor2-multiplier-symbols.webp" alt="雷神之錘2 五色倍數球系統" width="600" height="338" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-pink)">
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">▲ 雷神2 五色倍數球 — 單顆高倍直接加</p>
+        </div>
+      </div>
+
+      <img loading="lazy" src="/images/articles/seth-vs-thor-guava-multiplier.webp" alt="芭樂子解說倍數系統差異 — 賽特分裂鎖定 vs 雷神五色球" class="content-img" width="1200" height="675">
+      <p class="article-img-caption">▲ 倍數系統核心差異：賽特靠分裂+鎖定以量取勝，雷神靠單顆高倍直接暴力</p>
+
+      <!-- ===== § 4 ===== -->
+      <h2 id="s4">四、免費遊戲機制比較 — 進去之後才是重點</h2>
+
+      <p>兩台免遊框架很像（都是 15 回合起、上限 100 回合），但進去之後的玩法差很多。</p>
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h3 style="color:var(--guava-green);margin-top:0">🔱 賽特2 免遊：覺醒之力</h3>
+        <p style="margin:0.5rem 0">進免遊後有機會<strong>隨機觸發「覺醒之力 FREE GAME」模式</strong>——也就是分裂+鎖定全開的強化版。觸發後：</p>
+        <p style="margin:0.3rem 0 0.3rem 0.5rem;font-size:0.9rem">→ 倍數球可以分裂成最多 6 顆（需要 3 個男賽特圖騰同時在場）</p>
+        <p style="margin:0.3rem 0 0.3rem 0.5rem;font-size:0.9rem">→ 倍數球可以被鎖定最多 6 回合（需要 3 個奈芙蒂絲圖騰同時在場）</p>
+        <p style="margin:0.3rem 0 0.3rem 0.5rem;font-size:0.9rem">→ 兩個技能可以疊加：分裂出來的球又被鎖住，每回合重複計算</p>
+        <p style="margin:0.8rem 0 0;font-size:0.9rem;color:var(--text-muted)">沒觸發覺醒之力的免遊就是普通版，倍數球不歸零但不會分裂也不會鎖定。運氣成分很重。</p>
+      </div>
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1rem 0">
+        <h3 style="color:var(--guava-pink);margin-top:0">⚡ 雷神2 免遊：倍數鎖定 + Super Bonus</h3>
+        <p style="margin:0.5rem 0">雷神進免遊後<strong>所有倍數球直接鎖死在盤面</strong>，不像賽特還要看有沒有觸發覺醒。每一轉新出的倍數球繼續往上堆：</p>
+        <p style="margin:0.3rem 0 0.3rem 0.5rem;font-size:0.9rem">→ 第 1 轉出了 2x + 12x = 14x</p>
+        <p style="margin:0.3rem 0 0.3rem 0.5rem;font-size:0.9rem">→ 第 5 轉累積到 14x + 50x + 100x = 164x</p>
+        <p style="margin:0.3rem 0 0.3rem 0.5rem;font-size:0.9rem">→ 第 15 轉可能堆到 500x、1000x 甚至更多</p>
+        <p style="margin:0.5rem 0"><strong>Super Bonus：</strong>觸發免遊時如果同時出現 Super Bonus 符號（1 顆送 100x、2 顆 500x、3 顆 5000x、4 顆 25000x 投注額獎金），會直接進入超級免遊，高倍數球出現率大幅提升。</p>
+        <p style="margin:0.5rem 0 0;font-size:0.9rem;color:var(--text-muted)">雷神的免遊「確定性」比賽特高——進去就鎖倍數，不用等額外觸發條件。爆不爆看你倍數球出得多不多。</p>
+      </div>
+
+      <!-- 免費遊戲實際畫面對照 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+        <div>
+          <img loading="lazy" src="/images/seth2/seth2-free-game.webp" alt="戰神賽特2 免費遊戲覺醒之力畫面" width="600" height="338" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-green)">
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">▲ 賽特2 免費遊戲 — 覺醒之力全開</p>
+        </div>
+        <div>
+          <img loading="lazy" src="/images/thor2/thor2-free-game-play.webp" alt="雷神之錘2 免費遊戲倍數鎖定畫面" width="600" height="338" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-pink)">
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">▲ 雷神2 免費遊戲 — 倍數球鎖定累加</p>
+        </div>
+      </div>
+
+      <p>講體感的話——雷神的免遊像「慢慢加溫的三溫暖」，你看著倍數一轉一轉往上堆，心跳跟著數字走；賽特的免遊像「開門不知道門後面是什麼」，沒觸發覺醒就是普通免遊白走一趟，觸發了直接起飛。喜歡哪種心臟受虐方式，你自己挑。</p>
+
+      <!-- ===== § 5 ===== -->
+      <h2 id="s5">五、買免遊 CP 值分析</h2>
+
+      <p>買免遊是這兩台最常被問的問題。芭樂子直接把兩邊攤開比：</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+        <thead style="background:var(--bg-card)">
+          <tr>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">機台</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">買免遊選項</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">特色</th>
+            <th style="padding:0.6rem;border:1px solid var(--border);text-align:left">芭樂子評語</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border);color:var(--guava-green);font-weight:700" rowspan="1">賽特2</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x100 單段</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">隨機進一般或覺醒模式</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">不用選、不用想，按下去賭運氣</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border);color:var(--guava-pink);font-weight:700" rowspan="3">雷神2</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x100 一般免遊</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">倍數球出現率正常</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">最划算，大部分人買這個就好</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x500 超級免遊</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">高倍數球機率提高</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">本金夠厚才考慮</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;border:1px solid var(--border)">x4000 神運一擊</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">全場 1000x 倍數球</td>
+            <td style="padding:0.6rem;border:1px solid var(--border)">花大錢看煙火，不推薦</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 買免遊畫面對照 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+        <div>
+          <img loading="lazy" src="/images/seth2/seth2-buy-feature.webp" alt="戰神賽特2 買免遊介面" width="600" height="338" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-green)">
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">▲ 賽特2 買免遊 — 單段 x100 一鍵購買</p>
+        </div>
+        <div>
+          <img loading="lazy" src="/images/thor2/thor2-buy-feature.webp" alt="雷神之錘2 買免遊介面" width="600" height="338" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-pink)">
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin:0.3rem 0 0">▲ 雷神2 買免遊 — 三段選擇 x100/x500/x4000</p>
+        </div>
+      </div>
+
+      <p>如果你問芭樂子「買免遊到底該買哪台」，答案是：<strong>預算有限就買賽特的 x100，簡單不用選；想要更多控制權就買雷神的 x100</strong>。兩者花費一樣，體驗不同。雷神多出的 500x 和 4000x 選項是給口袋很深的人準備的，普通玩家碰都不要碰——特別是 4000x，那是花 40 萬元買一場可能一毛不回的煙火秀。</p>
+
+      <div style="background:linear-gradient(135deg,rgba(38,194,129,0.12) 0%,rgba(245,184,0,0.12) 100%);border-left:4px solid #26c281;border-radius:10px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <div style="color:#f5b800;font-weight:900;font-size:1rem;margin-bottom:0.5rem">🎰 想先免費體驗？用模擬器試</div>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem;color:var(--text-secondary)">不確定自己適合哪台？用 <a href="/tools/slot-simulator/" style="color:#26c281;font-weight:700">賽特2 模擬器</a> 和 <a href="/tools/thor-hammer-2-simulator/" style="color:#26c281;font-weight:700">雷神之錘2 模擬器</a> 各跑 500 轉，自己調 RTP 看差別。免費、不花真金白銀。</p>
+      </div>
+
+      <!-- ===== § 6 ===== -->
+      <h2 id="s6">六、五個面向快速選機</h2>
+
+      <p>不想看前面那麼多？芭樂子幫你濃縮成五題，自己對答案：</p>
+
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <p style="margin:0.5rem 0"><strong>① 虧損速度（RTP）：</strong>雷神 97.6% 勝。每轉 100 元，賽特理論虧 3.11 元，雷神只虧 2.4 元。長期差距 0.71%，轉個幾千次就會有感。</p>
+        <p style="margin:0.5rem 0"><strong>② 爆分天花板：</strong>賽特 x81,000 完勝。但芭樂子提醒——那是「神話級」的數字，99.99% 的人這輩子碰不到。日常能摸到的大獎區間（x1000~x5000）兩台差距不大。</p>
+        <p style="margin:0.5rem 0"><strong>③ 上手難度：</strong>雷神比較低。五色球加總就是加法，很直觀。賽特的覺醒之力要理解分裂條件（3 個男賽特圖騰）、鎖定條件（3 個奈芙蒂絲圖騰），新手容易搞混。</p>
+        <p style="margin:0.5rem 0"><strong>④ 買免遊彈性：</strong>雷神三段式選擇多。賽特只有一個按鈕——不好不壞，就是省心。</p>
+        <p style="margin:0"><strong>⑤ 視覺體驗：</strong>看你喜歡埃及還是北歐。賽特的分裂+鎖定特效比較華麗，雷神的雷電+倍數球堆疊比較爽快。純個人口味，跟贏不贏錢無關。</p>
+      </div>
+
+      <img loading="lazy" src="/images/articles/seth-vs-thor-guava-verdict.webp" alt="芭樂子最終裁判 — 拿著天秤比較兩台老虎機" class="content-img" width="1200" height="675">
+      <p class="article-img-caption">▲ 芭樂子的終極裁判：沒有最好，只有最適合你的</p>
+
+      <!-- ===== § 7 ===== -->
+      <h2 id="s7">七、芭樂子最終推薦</h2>
+
+      <ol>
+        <li><strong>第一次碰自由配對老虎機的新手</strong> → 選<strong style="color:var(--guava-pink)">雷神之錘2</strong>。RTP 友善、規則直觀、倍數系統好懂。先摸出自由配對跟消除掉落的節奏，再去挑戰更複雜的賽特。<a href="/articles/thor-hammer-2-guide/" style="color:var(--guava-pink)">雷神完整攻略在這</a>。</li>
+        <li><strong>已經熟悉基本機制、想追更高天花板</strong> → 選<strong style="color:var(--guava-green)">戰神賽特2</strong>。覺醒之力的分裂+鎖定是目前 ATG 系列裡最複雜也最有層次感的機制，爽度跟風險都拉到頂。<a href="/articles/atg-seth-guide/" style="color:var(--guava-green)">賽特完整攻略在這</a>。</li>
+        <li><strong>兩台都想玩</strong> → 可以。但<strong>分開管理預算</strong>，不要用同一筆錢在兩台之間跳。每台設自己的停損線（本金 30% 停損），贏了就走、輸了就停。用 <a href="/tools/bankroll-calculator/" style="color:var(--gold)">資金管理計算器</a> 先算好再上場。</li>
+        <li><strong>預算很緊</strong> → 哪台都不要玩。老虎機是<strong>花錢買娛樂</strong>，不是投資工具。如果這筆錢輸了會心痛，那就不該碰。去 <a href="/tools/slot-simulator/" style="color:var(--guava-green)">模擬器</a> 免費玩過乾癮就好。</li>
+      </ol>
+
+      <p>不管最後選哪台，芭樂子最後的忠告只有一句：<strong>贏了就走，別回頭</strong>。兩台都是高波動率、長期負期望值——所有贏了還繼續打的人，最後都在凌晨三點對著螢幕問自己到底在幹嘛。想看更多老虎機的數學邏輯，可以讀 <a href="/articles/slot-pool-theory-explained/" style="color:var(--guava-green)">老虎機水池理論拆解</a> 和 <a href="/articles/rtp-explained/" style="color:var(--guava-green)">RTP 完整科普</a>。</p>
+
+      <!-- ===== § 8 ===== -->
+      <h2 id="s8">八、FAQ：常見問題一次回</h2>
+      {faqs.map((f) => (
+        <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem">
+          <summary style="cursor:pointer;font-weight:700">{f.q}</summary>
+          <p style="margin:0.8rem 0 0;color:var(--text-muted);line-height:1.75" set:html={f.a}></p>
+        </details>
+      ))}
+
+      <!-- ===== 警語 ===== -->
+      <div style="background:#2a1a0a;border:1px solid #5a3a1a;border-radius:12px;padding:1.2rem 1.5rem;margin:2rem 0">
+        <p style="margin:0 0 0.5rem 0"><strong><Icon name="alert-triangle" /> 重要警語</strong></p>
+        <p style="margin:0;font-size:0.9rem;line-height:1.6">這篇是遊戲機制科普，<strong>不是叫你去賭</strong>。老虎機就是拿來消遣的，花超過自己能承受的錢就是不對。如果你或身邊的人開始覺得「我再玩一把就好」停不下來，打<strong>1925 安心專線</strong>聊聊。</p>
+      </div>
+
+      <ManifestoBox />
+      <ToolBox preset="slots" />
+    </article>
+  </div>
+
+  <style>
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+    .breadcrumb { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .breadcrumb a { color: var(--guava-green); text-decoration: none; }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--guava-green); text-decoration: none; font-size: 0.9rem; }
+    .hero-banner { height: 180px; border-radius: 16px; margin-bottom: 1.5rem; }
+    .article-content h2 { color: var(--guava-green); margin-top: 2rem; font-size: 1.5rem; border-left: 4px solid var(--guava-green); padding-left: 0.8rem; }
+    .article-content h3 { color: #fff; }
+    .article-content p { line-height: 1.85; color: var(--text); }
+    .article-content ul, .article-content ol { line-height: 1.85; padding-left: 1.5rem; }
+    .article-content li { margin-bottom: 0.4rem; }
+    .article-content table { width: 100%; border-collapse: collapse; }
+    .article-content th, .article-content td { padding: 0.6rem; border: 1px solid var(--border); text-align: left; }
+    .article-content thead { background: var(--bg-card); }
+    .content-img { display: block; max-width: 820px; width: 100%; height: auto; margin: 1.2rem auto 0.4rem; border-radius: 12px; }
+    .article-img-caption { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin: 0 0 1.5rem; font-style: italic; }
+    .toc ol { margin: 0.5rem 0 0 1.2rem; padding: 0; }
+    .toc a { color: var(--guava-green); text-decoration: none; }
+    @media (max-width: 600px) {
+      .article-content h2 { font-size: 1.25rem; }
+      div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</BaseLayout>
