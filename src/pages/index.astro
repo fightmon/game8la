@@ -327,7 +327,7 @@ const latestScams = [...scamList]
     <p>芭樂子精心打造的免費工具，用數據玩更聰明</p>
     <div class="tools-cta-grid">
       <a href="/tools/539-wheel-calculator/" class="tools-cta-card">
-        <div class="tools-cta-icon">🎯</div>
+        <img class="tools-cta-icon" src="/images/tools/icon-lottery.webp" alt="539 包牌計算器" width="52" height="52" loading="lazy">
         <div class="tools-cta-body">
           <h4>539 包牌計算器</h4>
           <p>選碼數秒算注數花費，蒙地卡羅模擬跑期望值，包幾碼最划算一目瞭然。</p>
@@ -335,7 +335,7 @@ const latestScams = [...scamList]
         <span class="tools-cta-arrow">→</span>
       </a>
       <a href="/tools/gambling-self-check/" class="tools-cta-card">
-        <div class="tools-cta-icon">🧠</div>
+        <img class="tools-cta-icon" src="/images/tools/pgsi/pgsi-hero.webp" alt="娛樂城成癮自我檢測" width="52" height="52" loading="lazy">
         <div class="tools-cta-body">
           <h4>娛樂城成癮自我檢測</h4>
           <p>國際 PGSI 量表中文版，9 題測出你的風險等級，玩得開心也要玩得安全。</p>
@@ -343,7 +343,7 @@ const latestScams = [...scamList]
         <span class="tools-cta-arrow">→</span>
       </a>
       <a href="/casino-check/" class="tools-cta-card">
-        <div class="tools-cta-icon">🔍</div>
+        <img class="tools-cta-icon" src="/images/tools/icon-casino-check.webp" alt="娛樂城體檢報告" width="52" height="52" loading="lazy">
         <div class="tools-cta-body">
           <h4>娛樂城體檢報告</h4>
           <p>輸入網址一鍵掃描 WHOIS、SSL、165 黑名單比對，30 秒知道這家能不能玩。</p>
@@ -351,7 +351,7 @@ const latestScams = [...scamList]
         <span class="tools-cta-arrow">→</span>
       </a>
       <a href="/lottery/analysis/" class="tools-cta-card">
-        <div class="tools-cta-icon">📊</div>
+        <img class="tools-cta-icon" src="/images/tools/icon-lottery.webp" alt="樂透數據站" width="52" height="52" loading="lazy">
         <div class="tools-cta-body">
           <h4>樂透數據站</h4>
           <p>539・威力彩・大樂透冷熱號排行、拖出號分析、遺漏值追蹤，用數據選號。</p>
@@ -1241,11 +1241,12 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(57,255,20,0.1);
 }
-.tools-cta-icon {
-  font-size: 2rem; flex-shrink: 0;
+img.tools-cta-icon {
+  flex-shrink: 0;
   width: 52px; height: 52px;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(57,255,20,0.08); border-radius: 12px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 .tools-cta-body h4 {
   font-size: 1rem; margin: 0 0 0.3rem; color: var(--text-primary);
@@ -1272,7 +1273,7 @@ body {
   .tools-cta-grid { grid-template-columns: 1fr; }
   .tools-cta-section { padding: 1.5rem; }
   .tools-cta-card { padding: 1rem; }
-  .tools-cta-icon { width: 44px; height: 44px; font-size: 1.6rem; }
+  img.tools-cta-icon { width: 44px; height: 44px; }
 }
 
 /* === SIDEBAR HOT LIST === */
