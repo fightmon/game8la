@@ -66,7 +66,7 @@ const breadcrumbSchema = {
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "539 包牌計算器 — 注數、花費、中獎機率一鍵試算",
+  "name": "今彩 539 包牌計算器｜免費一鍵算注數、花費、中獎機率",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
@@ -78,8 +78,8 @@ const softwareSchema = {
 
 <BaseLayout
   currentPage="tools"
-  title="今彩539包牌計算器（免費）｜注數花費＋中獎機率秒算｜539包牌教學 - GAME8LA"
-  description="免費今彩 539 包牌計算器！選碼數一秒算出注數、花費、各獎項中獎機率。支援預算反推最佳碼數、號碼排除、蒙地卡羅期望值模擬。539 包牌怎麼買？包幾碼最划算？包牌教學一頁搞定。"
+  title="今彩 539 包牌計算器｜免費一鍵算注數、花費、中獎機率 — GAME8LA"
+  description="選碼數一秒算出包牌注數與花費！支援預算反推最佳碼數、號碼排除、蒙地卡羅期望值模擬。539 包幾碼最划算？計算器幫你試算，不用自己按公式。"
   ogImage="https://game8la.com/images/og-image.webp"
 >
 
@@ -276,26 +276,76 @@ let customPoolNums = [];
 let excludedNums = [];
 const MAX_CUSTOM_POOL = 12;
 
-// === DATA LOADING ===
+// === DATA LOADING (三層來源：Worker KV → 靜態 JSON → Live API 合併) ===
 async function loadData() {
   const loading = document.getElementById('loadingState');
   const section = document.getElementById('wheelSection');
   try {
-    // Try Worker API first (skip on localhost), fallback to static JSON
-    let data;
+    let workerData = null;
+    let staticData = null;
     const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+    // 來源 1：Worker KV（localhost 跳過）
     if (!isLocal) {
       try {
-        const res = await fetch('https://lottery-cron.game8la.workers.dev/data/daily_cash_539');
-        if (res.ok) data = await res.json();
+        const res = await fetch('https://lottery-cron.fightmon.workers.dev/data/daily_cash_539');
+        if (res.ok) workerData = await res.json();
       } catch (e) { /* fall through */ }
     }
-    if (!data) {
+
+    // 來源 2：靜態 JSON
+    try {
       const res2 = await fetch('/data/daily-cash-539.json');
-      if (res2.ok) data = await res2.json();
+      if (res2.ok) staticData = await res2.json();
+    } catch (e) { /* fall through */ }
+
+    // 取較新的作為 base
+    let baseData = null;
+    if (workerData && staticData) {
+      baseData = (workerData.lastUpdated >= staticData.lastUpdated) ? workerData : staticData;
+    } else {
+      baseData = workerData || staticData;
     }
-    if (data && data.draws && data.draws.length > 0) {
-      lotteryDraws = data.draws;
+
+    // 來源 3：即時 API（補入最新一期）
+    const LIVE_API = isLocal
+      ? 'https://game8la.com/api/lottery'
+      : '/api/lottery';
+    try {
+      const apiRes = await fetch(LIVE_API, { cache: 'no-store' });
+      if (apiRes.ok) {
+        const apiJson = await apiRes.json();
+        const gameData = apiJson.data?.daily_cash;
+        if (gameData && gameData.numbers && gameData.numbers.length > 0) {
+          const freshDraws = [];
+          freshDraws.push({ period: gameData.period, date: gameData.date, numbers: gameData.numbers });
+          if (Array.isArray(gameData.history)) {
+            for (const h of gameData.history) {
+              freshDraws.push({ period: h.period, date: h.date, numbers: h.numbers });
+            }
+          }
+          if (baseData && baseData.draws) {
+            const existingPeriods = new Set(baseData.draws.map(d => d.period));
+            let merged = false;
+            for (const fd of freshDraws) {
+              if (fd.period && !existingPeriods.has(fd.period)) {
+                baseData.draws.unshift(fd);
+                existingPeriods.add(fd.period);
+                merged = true;
+              }
+            }
+            if (merged) {
+              baseData.draws.sort((a, b) => (b.date || '').localeCompare(a.date || '') || (Number(b.period) || 0) - (Number(a.period) || 0));
+            }
+          } else if (!baseData) {
+            baseData = { draws: freshDraws };
+          }
+        }
+      }
+    } catch (e) { /* fall through */ }
+
+    if (baseData && baseData.draws && baseData.draws.length > 0) {
+      lotteryDraws = baseData.draws;
       loading.style.display = 'none';
       section.style.display = '';
       renderWheel();

@@ -21,6 +21,8 @@ interface Props {
   breadcrumbs: Crumb[];
   authorName?: string;
   authorUrl?: string;
+  wordCount?: number;
+  timeRequired?: string;
 }
 const {
   url, title, description, image,
@@ -29,6 +31,8 @@ const {
   breadcrumbs,
   authorName = '芭樂子',
   authorUrl = 'https://game8la.com/author/baluazi/',
+  wordCount,
+  timeRequired,
 } = Astro.props;
 
 const article = {
@@ -45,7 +49,9 @@ const article = {
     "name": "GAME8LA",
     "logo": { "@type": "ImageObject", "url": "https://game8la.com/images/index/icon-192.webp" }
   },
-  "mainEntityOfPage": { "@type": "WebPage", "@id": url }
+  "mainEntityOfPage": { "@type": "WebPage", "@id": url },
+  ...(wordCount ? { "wordCount": wordCount } : {}),
+  ...(timeRequired ? { "timeRequired": timeRequired } : {}),
 };
 
 const crumbList = {

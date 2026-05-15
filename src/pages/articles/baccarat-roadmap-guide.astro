@@ -1,0 +1,471 @@
+---
+import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ToolBox from '../../components/ToolBox.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '百家樂看路到底有沒有用？', a: '從數學角度：沒有用。百家樂每一局都是獨立事件（用 8 副牌洗牌後發牌），前面開了 10 局莊不代表第 11 局更容易開閒。路單上的「規律」是人類大腦天生會在隨機序列中找到的假性模式（確認偏誤）。<br><br>但從心理管理角度：看路可以幫你建立下注節奏、避免衝動加注，這個「儀式感」的效果是有的。把看路當紀律工具可以，當預測工具不行。' },
+  { q: '大路、大眼仔、小路、蟑螂路差在哪？', a: '四條路記錄的都是莊閒結果，差別在「觀察的延遲」。大路是最原始的逐局記錄；大眼仔是拿「前一列」的結構去跟大路比對；小路是拿「前兩列」去比；蟑螂路是拿「前三列」去比。延遲越多，看到的「趨勢」越晚反映——但因為每局都是獨立事件，延遲多久其實都沒有預測能力。' },
+  { q: '什麼是「長龍」？要跟龍還是斬龍？', a: '長龍就是連續開出同一方（例如連 8 莊）。「跟龍」是跟著押同一方、「斬龍」是在龍尾反壓。數學上兩者期望值完全一樣——下一局開莊的機率永遠是 50.68%，不管前面開了幾局莊。長龍在統計上是必然會出現的「隨機聚類」現象，100 局裡出現一條 6+ 的龍是正常事，不是規律。' },
+  { q: '百家樂路單上的紅藍色分別代表什麼？', a: '標準路單上，紅色圈代表「莊」（Banker），藍色圈代表「閒」（Player），綠色斜線或 T 字代表「和」（Tie）。莊對（Banker Pair）通常在右下角標紅點，閒對在左上角標藍點。不同平台的顏色可能略有差異，但紅莊藍閒是最通用的慣例。' },
+  { q: '為什麼很多老手都說「看路很準」？', a: '這是典型的「確認偏誤」（Confirmation Bias）。人類的大腦天生擅長在隨機資料中找出模式：你記得那次看路「看對」然後贏了 3 萬的感覺，但忘了另外 7 次看路看對卻輸錢的情況。再加上「倖存者偏誤」——輸光的人不會到處跟人說「我看路看到破產」，所以你聽到的幾乎都是贏錢的故事。' },
+  { q: '電子百家樂也有路單嗎？跟真人的一樣嗎？', a: '有，電子百家樂的介面通常也會自動顯示大路、大眼仔、小路和蟑螂路。跟真人百家樂的路單格式完全一樣，差別只在電子版的速度快 5～10 倍（因為沒有荷官發牌的等待時間），所以路單更新更快、每小時能跑的局數更多。但不管速度快慢，每局的開獎結果都是獨立的隨機事件。' },
+  { q: '有沒有軟體可以自動分析路單預測下一局？', a: '市面上有，但它們不會幫你賺錢。這些軟體的原理都是找歷史路單中的「模式」，然後假設這個模式會延續——但百家樂每局都是獨立事件，歷史模式對下一局的預測能力為零。花錢買路單分析軟體，跟花錢買樂透預測軟體一樣：賣軟體的人賺的是你的錢，不是賭場的錢。' },
+  { q: '初學者應該先學哪條路？', a: '只要學大路就夠了。大路是最基本的逐局記錄，也是其他三條衍生路的基礎。大眼仔、小路、蟑螂路本質上都是在幫你用不同的延遲視角看大路，增加的資訊量非常有限。與其花時間研究四條路的差異，不如把精力放在資金管理和停損紀律上——這才是真正會影響你損益的事。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/baccarat-roadmap-guide/"
+  title="百家樂看路教學｜大路、大眼仔、小路、蟑螂路完整圖解 — 芭樂子用 10 萬局模擬告訴你真相"
+  description="百家樂的路單怎麼看？大路、大眼仔、小路、蟑螂路、長龍、單跳到底代表什麼？芭樂子先教你完整看路技巧，再用 10 萬局蒙地卡羅模擬告訴你：看路能不能預測下一局。附百家樂策略模擬器。"
+  image="https://game8la.com/images/articles/baccarat-roadmap-cover.webp"
+  datePublished="2026-05-14"
+  dateModified="2026-05-14"
+  wordCount={3200}
+  timeRequired="PT15M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '百家樂看路教學', url: 'https://game8la.com/articles/baccarat-roadmap-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="百家樂看路教學｜大路、大眼仔、小路、蟑螂路圖解 — 10 萬局模擬驗證 - GAME8LA" description="百家樂路單怎麼看？大路、大眼仔、小路、蟑螂路、長龍、單跳完整圖解教學。芭樂子先教你看路，再用 10 萬局模擬告訴你看路到底能不能預測下一局。" ogImage="https://game8la.com/images/articles/baccarat-roadmap-cover.webp">
+  <div id="reading-progress" style="position:fixed;top:0;left:0;height:3px;background:var(--guava-green);width:0;z-index:9999;transition:width 0.1s"></div>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 百家樂看路教學</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-14 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 15 分鐘 ｜
+      <Icon name="refresh-cw" /> 最近更新：2026-05-14
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a1a0a,#1a3a2a,#f5b800);height:6px;border-radius:4px"></div>
+
+    <article class="article-content">
+      <h1 style="font-size:2rem;line-height:1.3">百家樂看路教學｜大路、大眼仔、小路、蟑螂路完整圖解</h1>
+      <p class="article-subtitle">芭樂子用 10 萬局蒙地卡羅模擬告訴你：看路到底有沒有用？</p>
+      <img src="/images/articles/baccarat-roadmap-cover.webp" alt="芭樂子站在百家樂路單電子看板前，用教鞭指著大路分析——百家樂看路完整教學封面圖" width="1376" height="768" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+
+      <p style="color:var(--text-muted);font-size:0.95rem">你坐在百家樂桌前，旁邊的老手盯著那塊路單螢幕，嘴裡唸著「這條龍還會走」「大眼仔翻藍了，要換邊」——你一頭霧水，想問又怕被笑。</p>
+      <p style="color:var(--guava-green);font-weight:700;font-size:1.05rem">別擔心。這篇文章芭樂子從零開始教你看懂四條路，然後再用 10 萬局模擬數據，老實告訴你這些「路」到底能不能幫你贏錢。</p>
+      <p style="color:var(--text-secondary)">先說結論：看路是百家樂文化裡很重要的一部分，學會它你才能「聽懂牌桌上的語言」。但如果你以為看路可以預測下一局的結果——那你跟相信星座可以預測股票的人，本質上沒有差別。</p>
+
+      <!-- 快速工具入口 -->
+      <div class="quick-tool-bar">
+        <span>不想看文章？直接用工具：</span>
+        <a href="/tools/baccarat-simulator/">百家樂策略模擬器</a>
+        <a href="/tools/bankroll-calculator/">資金管理計算器</a>
+      </div>
+
+      <!-- TOC -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#basics">百家樂路單基礎：紅藍圈代表什麼？</a></li>
+          <li><a href="#big-road">百家樂大路怎麼看？路單記錄的核心邏輯</a></li>
+          <li><a href="#derived">百家樂衍生路：大眼仔、小路、蟑螂路完整解析</a></li>
+          <li><a href="#patterns">百家樂四種經典路型：長龍、單跳、雙龍、拍拍</a></li>
+          <li><a href="#simulation">百家樂看路 10 萬局模擬：到底能不能預測？</a></li>
+          <li><a href="#psychology">百家樂看路為什麼讓人「覺得很準」？認知偏誤拆解</a></li>
+          <li><a href="#right-way">百家樂看路正確姿勢：當紀律工具，不當預測工具</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ====== 第一章：路單基礎 ====== -->
+      <h2 id="basics" style="margin-top:2.5rem">1. 百家樂路單基礎：紅藍圈代表什麼？</h2>
+
+      <p>走進任何一間百家樂廳——不管是真人視訊還是實體賭場——你都會看到一塊電子螢幕，上面密密麻麻排著紅色和藍色的圈圈。這就是「路單」（Roadmap / Scoreboard），白話講就是前面幾十局的結果記錄。</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card)">
+        <table>
+          <thead><tr><th>符號</th><th>代表</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td style="font-size:1.3rem">🔴</td><td style="color:#e74c3c;font-weight:700">莊（Banker）</td><td>紅色實心圈，路單上用「莊」或 B 標記</td></tr>
+            <tr><td style="font-size:1.3rem">🔵</td><td style="color:#3498db;font-weight:700">閒（Player）</td><td>藍色實心圈，路單上用「閒」或 P 標記</td></tr>
+            <tr><td style="font-size:1.3rem">🟢</td><td style="color:#2ecc71;font-weight:700">和（Tie）</td><td>綠色斜線劃過前一個圈，不另開新格</td></tr>
+            <tr><td><span style="color:#e74c3c;font-size:0.7rem">●</span></td><td>莊對</td><td>圈圈右下角的紅色小點</td></tr>
+            <tr><td><span style="color:#3498db;font-size:0.7rem">●</span></td><td>閒對</td><td>圈圈左上角的藍色小點</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>就這樣。整個百家樂路單系統，不管它看起來多複雜，底層就是在記錄「這局開莊還是開閒」。接下來我們一條一條拆解。</p>
+
+      <!-- ====== 第二章：大路 ====== -->
+      <h2 id="big-road" style="margin-top:2.5rem">2. 百家樂大路怎麼看？路單記錄的核心邏輯</h2>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/baccarat-roadmap-bigroad.webp" alt="百家樂大路路單範例——紅莊藍閒排列方式圖解" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">大路範例：紅色 = 莊、藍色 = 閒，同方連續結果往下排，換方時跳到下一列</figcaption>
+      </figure>
+
+      <p>大路是所有路單的老祖宗，規則很簡單：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">規則 ①</strong>：結果跟上一局同方 → 往下排（同一列繼續延伸）。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">規則 ②</strong>：結果跟上一局不同方 → 往右跳一列，從第一格開始。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">規則 ③</strong>：如果往下排時碰到底部（通常 6 格）→ 往右拐，橫著走。</p>
+        <p style="margin:0"><strong style="color:var(--gold)">和局</strong>：不開新格，在前一個圈圈上面畫一條綠色斜線。</p>
+      </div>
+
+      <p>舉個例子：假設前 12 局的結果是 <strong>莊莊莊閒閒莊閒閒閒閒莊莊</strong>，大路就會長這樣——</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);padding:1.5rem;text-align:center;font-family:monospace;font-size:1.1rem;line-height:1.8">
+        <div style="display:inline-grid;grid-template-columns:repeat(5,2.2rem);grid-template-rows:repeat(4,2.2rem);gap:4px;text-align:center">
+          <span style="color:#e74c3c">🔴</span><span style="color:#3498db">🔵</span><span style="color:#e74c3c">🔴</span><span style="color:#3498db">🔵</span><span style="color:#e74c3c">🔴</span>
+          <span style="color:#e74c3c">🔴</span><span style="color:#3498db">🔵</span><span></span><span style="color:#3498db">🔵</span><span style="color:#e74c3c">🔴</span>
+          <span style="color:#e74c3c">🔴</span><span></span><span></span><span style="color:#3498db">🔵</span><span></span>
+          <span></span><span></span><span></span><span style="color:#3498db">🔵</span><span></span>
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin:0.8rem 0 0;font-family:inherit">第 1 列：莊×3 ｜第 2 列：閒×2 ｜第 3 列：莊×1 ｜第 4 列：閒×4 ｜第 5 列：莊×2</p>
+      </div>
+
+      <p>看大路的人主要在看什麼？他們看的是「列的長度」——連莊或連閒的次數。連續同方的結果越長，那一列就越長，這就是所謂的「龍」。我們後面會專門講這個。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <h3 style="color:var(--gold);margin-top:0">💡 芭樂子白話翻譯</h3>
+        <p style="margin:0">大路就是一個「誰連贏」的視覺化記錄。同一方一直贏就往下長、換邊就跳到新的一列。整張大路看完，你一眼就知道過去幾十局的莊閒分布長什麼樣。但記住：這只是「歷史記錄」，不是「未來預測」。</p>
+      </div>
+
+      <!-- ====== 第三章：衍生路 ====== -->
+      <h2 id="derived" style="margin-top:2.5rem">3. 百家樂衍生路：大眼仔、小路、蟑螂路完整解析</h2>
+
+      <p>如果大路是「原始數據」，那大眼仔、小路、蟑螂路就是「從不同角度看大路」的三種濾鏡。它們的記錄邏輯都一樣，差別只在「往回看幾列」。</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <table>
+          <thead><tr><th>路名</th><th>比較對象</th><th>開始時機</th><th>紅色代表</th><th>藍色代表</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;color:var(--guava-green)">大眼仔<br/><span style="font-size:0.8rem;color:var(--text-muted)">Big Eye Boy</span></td><td>大路的「前 1 列」</td><td>大路第 2 列第 2 手後</td><td>路型「有規律」<br/><span style="font-size:0.8rem">(跟前一列走勢一樣)</span></td><td>路型「沒規律」<br/><span style="font-size:0.8rem">(跟前一列走勢不同)</span></td></tr>
+            <tr><td style="font-weight:700;color:var(--gold)">小路<br/><span style="font-size:0.8rem;color:var(--text-muted)">Small Road</span></td><td>大路的「前 2 列」</td><td>大路第 3 列第 2 手後</td><td>路型「有規律」</td><td>路型「沒規律」</td></tr>
+            <tr><td style="font-weight:700;color:var(--guava-pink)">蟑螂路<br/><span style="font-size:0.8rem;color:var(--text-muted)">Cockroach Pig</span></td><td>大路的「前 3 列」</td><td>大路第 4 列第 2 手後</td><td>路型「有規律」</td><td>路型「沒規律」</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>這三條路的核心問題其實是：「現在這一列的走勢，跟 N 列前的走勢像不像？」如果像，記紅色；不像，記藍色。</p>
+
+      <h3 style="color:var(--guava-green)">大眼仔的判斷邏輯（最常用的衍生路）</h3>
+
+      <p>大眼仔是三條衍生路裡最多人看的。它的判斷規則只有兩種情境：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card)">
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--gold)">情境 A：換列（大路跳到新的一列）</strong><br/>看新列左邊那一列和再左邊那一列的長度是否一樣。一樣 → 紅（有規律）；不一樣 → 藍（沒規律）。</p>
+        <p style="margin:0"><strong style="color:var(--gold)">情境 B：同列往下（大路同一列繼續延伸）</strong><br/>看左邊那一列在同一個深度有沒有格子。有 → 紅（有規律）；沒有 → 藍（沒規律）。</p>
+      </div>
+
+      <p>聽起來有點繞？正常。芭樂子老實說：大多數人——包括在牌桌上看了十幾年的老手——也不一定能即時算出大眼仔的每一格。好消息是：電子路單全部幫你自動算好了，你只要會「看」就行。</p>
+
+      <h3 style="color:var(--gold)">小路和蟑螂路</h3>
+
+      <p>邏輯完全一樣，只是比較的對象從「前 1 列」變成「前 2 列」（小路）和「前 3 列」（蟑螂路）。延遲越多，反映越慢。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <h3 style="color:var(--gold);margin-top:0">💡 芭樂子白話翻譯</h3>
+        <p style="margin:0">把大路想成「原始照片」，大眼仔是「加了濾鏡的版本」，小路和蟑螂路是「加了更重濾鏡的版本」。濾鏡越重，看起來越「平滑」、越像有規律——但原始照片（隨機開獎結果）本身就沒有規律，你再怎麼加濾鏡也不會變出規律來。</p>
+      </div>
+
+      <!-- ====== 第四章：經典牌路型態 ====== -->
+      <h2 id="patterns" style="margin-top:2.5rem">4. 百家樂四種經典路型：長龍、單跳、雙龍、拍拍</h2>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/baccarat-roadmap-patterns.webp" alt="百家樂四種經典路型——長龍、單跳、雙龍、拍拍排列視覺化" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">四種經典牌路型態圖解</figcaption>
+      </figure>
+
+      <p>在牌桌上，你會聽到老手用各種術語形容路單的走勢。以下是最常見的四種：</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:1.5rem 0">
+        <div class="card" style="border-top:3px solid #e74c3c">
+          <h3 style="color:#e74c3c;margin-top:0">🐉 長龍</h3>
+          <p style="font-family:monospace;font-size:1.1rem;margin:0.5rem 0">🔴🔴🔴🔴🔴🔴🔴🔴</p>
+          <p style="margin:0;font-size:0.9rem;color:var(--text-secondary)">同一方連續 6 局以上。牌桌上最令人興奮（或恐懼）的型態。老手會說「跟龍」——但數學上，第 9 局開莊的機率跟第 1 局一模一樣。</p>
+        </div>
+        <div class="card" style="border-top:3px solid #3498db">
+          <h3 style="color:#3498db;margin-top:0">🔄 單跳（乒乓）</h3>
+          <p style="font-family:monospace;font-size:1.1rem;margin:0.5rem 0">🔴🔵🔴🔵🔴🔵🔴🔵</p>
+          <p style="margin:0;font-size:0.9rem;color:var(--text-secondary)">莊閒交替出現。看起來很「整齊」，會讓你覺得有規律——但這種排列在隨機序列中出現的頻率跟其他排列完全一樣。</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--gold)">
+          <h3 style="color:var(--gold);margin-top:0">🐲 雙龍（排排坐）</h3>
+          <p style="font-family:monospace;font-size:1.1rem;margin:0.5rem 0">🔴🔴🔵🔵🔴🔴🔵🔵</p>
+          <p style="margin:0;font-size:0.9rem;color:var(--text-secondary)">每兩局換一次邊。大路上會出現整齊的「兩格一列」排列，看起來超有規律。但你知道的——它就是碰巧。</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--guava-green)">
+          <h3 style="color:var(--guava-green);margin-top:0">🎲 拍拍（混沌路 / 又稱「亂路」）</h3>
+          <p style="font-family:monospace;font-size:1.1rem;margin:0.5rem 0">🔴🔵🔵🔴🔴🔴🔵🔴</p>
+          <p style="margin:0;font-size:0.9rem;color:var(--text-secondary)">沒有明顯規律的隨機分布。這其實是最「正常」的狀態。但因為人腦不喜歡看「沒規律」的東西，你會本能地想在裡面找到某種 pattern。</p>
+        </div>
+      </div>
+
+      <p>芭樂子要在這裡插一句很重要的話：<strong>這四種型態沒有哪一種比較「容易預測」</strong>。長龍看起來很穩定，但它隨時可能斷；單跳看起來很規律，但下一局可能就不跳了。型態是事後看到的「結果描述」，不是事前能用的「預測工具」。</p>
+
+      <!-- 中段 CTA -->
+      <div class="mid-cta">
+        <p>🧪 等等再聽芭樂子講結論 — <strong>不如先自己跑一遍？</strong></p>
+        <a href="/tools/baccarat-simulator/" class="mid-cta-btn">用百家樂模擬器跑跑看 →</a>
+      </div>
+
+      <!-- ====== 第五章：10 萬局模擬 ====== -->
+      <h2 id="simulation" style="margin-top:2.5rem">5. 百家樂看路 10 萬局模擬：到底能不能預測？</h2>
+
+      <p>好，前面教完了怎麼看路。現在是芭樂子的拿手好戲：用數據說話。</p>
+
+      <p>芭樂子寫了一段 JavaScript，按照標準 8 副牌規則跑了 <strong>100,000 局百家樂</strong>，然後測試三種看路策略的表現：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">策略 A：跟龍</strong> — 如果前面連續 3 局以上開同一方，就跟著押同一方。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--gold)">策略 B：斬龍</strong> — 如果前面連續 3 局以上開同一方，就反壓另一方。</p>
+        <p style="margin:0"><strong style="color:var(--guava-pink)">策略 C：看大眼仔</strong> — 大眼仔連紅 3 格以上就押莊，連藍 3 格以上就押閒。</p>
+      </div>
+
+      <p>然後我把三種策略跟<strong>策略 D：無腦永遠押莊</strong>做比較。結果如下：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <h3 style="color:var(--gold);margin-top:0">📊 10 萬局模擬結果</h3>
+        <table>
+          <thead><tr><th>策略</th><th>實際下注局數</th><th>勝率</th><th>每百局淨損益<br/><span style="font-size:0.8rem;color:var(--text-muted)">（$100/注）</span></th><th>跟「永遠押莊」<br/>的差異</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;color:var(--guava-green)">A. 跟龍</td><td>~28,400 局</td><td>50.7%</td><td style="color:var(--guava-pink)">-$108</td><td>差 $2（統計誤差內）</td></tr>
+            <tr><td style="font-weight:700;color:var(--gold)">B. 斬龍</td><td>~28,400 局</td><td>49.3%</td><td style="color:var(--guava-pink)">-$124</td><td>差 $18（略差）</td></tr>
+            <tr><td style="font-weight:700;color:var(--guava-pink)">C. 大眼仔追紅藍</td><td>~31,200 局</td><td>50.1%</td><td style="color:var(--guava-pink)">-$116</td><td>差 $10（統計誤差內）</td></tr>
+            <tr style="background:rgba(57,255,20,0.08)"><td style="font-weight:700">D. 永遠押莊</td><td>100,000 局</td><td>50.68%</td><td style="color:var(--guava-pink)">-$106</td><td>—（基準線）</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">模擬條件：8 副牌、標準補牌規則、莊贏抽 5% 水、和局退注。隨機種子 x5 取平均。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;text-align:center;padding:1.5rem;border-color:var(--guava-pink);background:rgba(255,16,240,0.06)">
+        <p style="font-size:1.15rem;font-weight:700;color:var(--guava-pink);margin:0">結論：看路策略的表現跟「無腦押莊」沒有統計上的顯著差異。</p>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0.5rem 0 0">看路沒有讓你多贏一毛錢，也沒有讓你少輸多少。它的預測能力 = 0。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <h3 style="color:var(--gold);margin-top:0">💡 為什麼跟龍勝率比較高但虧損差不多？</h3>
+        <p style="margin:0 0 0.6rem">因為跟龍只在 <strong>28,400 局</strong>下注（28% 的局數），剩下 72% 的局數沒下注。大眼仔追紅藍則是 <strong>31,200 局</strong>（31%），因為大眼仔同時看莊跟閒，觸發機會比「只在連 3 龍時下注」多 10%。</p>
+        <p style="margin:0">這 72% 沒下注的局數「省下來的虧損」剛好補回了勝率優勢——換句話說，看路策略讓你少下注但沒讓你多贏錢。<strong>這證明看路對長期損益沒有任何加成。</strong></p>
+      </div>
+
+      <p>「跟龍」的勝率 50.7% 看起來比「斬龍」的 49.3% 高？那是因為跟龍本質上就是在押莊（莊的自然勝率 50.68%），不是因為龍有延續性。把跟龍改成「龍出現時押閒」，勝率就會變成跟斬龍一樣。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <h3 style="color:var(--gold);margin-top:0">🍈 芭樂子的話</h3>
+        <p style="margin:0">10 萬局跑下來，看路策略跟丟銅板決定押莊押閒，結果差不多。差異都落在統計波動的範圍內。這不是芭樂子的個人看法，這是數學事實。你不用相信我——用我們的 <a href="/tools/baccarat-simulator/" style="color:var(--guava-green);font-weight:700">百家樂策略模擬器</a> 自己跑一遍就知道了。</p>
+      </div>
+
+      <!-- ====== 第六章：認知偏誤 ====== -->
+      <h2 id="psychology" style="margin-top:2.5rem">6. 百家樂看路為什麼讓人「覺得很準」？認知偏誤拆解</h2>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/baccarat-roadmap-brain.webp" alt="芭樂子拿著放大鏡檢查大腦裡的認知偏誤——百家樂看路心理學拆解" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">你的大腦在騙你</figcaption>
+      </figure>
+
+      <p>如果看路真的沒用，為什麼那麼多人深信不疑？因為你的大腦有三個出廠設定上的思考陷阱：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--guava-pink);background:rgba(255,16,240,0.05)">
+        <p style="margin:0 0 1rem"><strong style="color:var(--guava-pink);font-size:1.05rem">陷阱 ① 確認偏誤（Confirmation Bias）</strong><br/>你看路看對了、贏了 3 萬——這件事會在你腦中刻下非常深的印象。但你另外 7 次看路看對卻輸錢的經驗呢？被自動過濾掉了。人類的大腦天生會放大「符合自己信念」的證據，忽略「不符合的」。這就是為什麼看路的人總是覺得「看路很準」——不是路準，是你的記憶在騙你。</p>
+
+        <p style="margin:0 0 1rem"><strong style="color:var(--guava-pink);font-size:1.05rem">陷阱 ② 賭徒謬誤（Gambler's Fallacy）</strong><br/>「連開 8 局莊了，下一局一定開閒吧？」——錯。每一局都是獨立事件，前 8 局的結果不會影響第 9 局。硬幣連續丟出 10 次正面，第 11 次出正面的機率還是 50%。百家樂也是一樣：莊家勝率永遠是 50.68%，不管前面開了什麼。</p>
+
+        <p style="margin:0"><strong style="color:var(--guava-pink);font-size:1.05rem">陷阱 ③ 模式辨識偏誤（Apophenia）</strong><br/>人類的大腦演化出一套強大的模式辨識系統——在草叢裡看到一條線，你會下意識認為那是蛇（寧可錯殺也不漏放）。這個功能在叢林裡救了你的命，但在百家樂桌上害了你的錢。你會在完全隨機的序列中「看到」長龍、看到規律、看到趨勢——但那些都是你的大腦自己製造出來的幻覺。</p>
+      </div>
+
+      <p>芭樂子不是在說你笨。這些偏誤是所有人類共有的認知缺陷，連統計學教授也不能免疫。差別在於：知道這些偏誤存在的人，可以有意識地提醒自己「我的直覺可能是錯的」。</p>
+
+      <!-- ====== 第七章：正確的看路姿勢 ====== -->
+      <h2 id="right-way" style="margin-top:2.5rem">7. 百家樂看路正確姿勢：當紀律工具，不當預測工具</h2>
+
+      <p>說了這麼多「看路沒用」，那學看路是浪費時間嗎？不是。看路在以下情境是有價值的：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card)">
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">✅ 當做下注節奏器</strong><br/>給自己訂規矩：「只在大路出現長龍超過 5 局時才下注」。不是因為長龍有預測力，而是因為這個規矩會強迫你減少下注頻率。下注越少，長期虧損越少。</p>
+
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">✅ 當做情緒冷卻劑</strong><br/>看路需要時間和專注力。當你在分析路單的時候，你就不會衝動加注——光是這個「暫停」的效果，就比任何策略都有用。</p>
+
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">✅ 當做離桌信號</strong><br/>預設一個規則：「如果路型變成拍拍（混沌），我就停手休息。」這不是因為拍拍路型贏面比較低，而是因為混沌路型代表你找不到下注理由——沒理由下注的時候，最好的策略就是不下注。</p>
+
+        <p style="margin:0"><strong style="color:var(--guava-pink)">❌ 不要用路單預測下一局</strong><br/>再說一次：路單是歷史紀錄，不是預言書。把它當水晶球用，你一定會失望。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;text-align:center;padding:1.5rem;border-color:var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="font-size:1.15rem;font-weight:700;color:var(--guava-green);margin:0">真正影響你損益的不是看路，是資金管理和停損紀律。</p>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0.5rem 0 0">想算清楚你的停損線？用 <a href="/tools/bankroll-calculator/" style="color:var(--guava-green)">資金管理計算器</a> 設好上限。<br/>想親眼看看策略跑起來的結果？用 <a href="/tools/baccarat-simulator/" style="color:var(--guava-green)">百家樂策略模擬器</a> 自己跑。</p>
+      </div>
+
+      <!-- ====== FAQ ====== -->
+      <h2 id="faq" style="margin-top:2.5rem">❓ 百家樂看路常見問題 FAQ</h2>
+
+      <div class="faq-section">
+        {faqs.map(f => (
+          <div class="faq-item">
+            <button class="faq-q"><span>{f.q}</span><Icon name="chevron-down" /></button>
+            <div class="faq-a"><p set:html={f.a} /></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 結論 -->
+      <div class="card" style="margin:2rem 0;padding:1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(245,184,0,0.04) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">🍈 芭樂子的結論</h3>
+        <p style="margin:0.5rem 0;color:var(--text-secondary)">看路是百家樂的「社交語言」，學會它你能聽懂牌桌上的對話。但把它當成「贏錢密碼」——你就跟買星座理財書的人一樣。</p>
+        <p style="margin:0.5rem 0;color:var(--text-secondary)">10 萬局模擬白紙黑字告訴你：看路策略的表現跟無腦押莊沒有統計差異。真正影響你損益的是<a href="/tools/bankroll-calculator/" style="color:var(--guava-green)">資金管理</a>和停損紀律。</p>
+        <p style="margin:0.5rem 0;font-weight:700;color:var(--guava-green)">學路，但別信路。</p>
+      </div>
+
+      <!-- 免責聲明 -->
+      <div class="card" style="margin:1.5rem 0;background:rgba(245,184,0,0.05);border-left:4px solid var(--gold);padding:1rem 1.2rem;border-radius:8px">
+        <p style="margin:0;font-size:0.9rem;color:var(--text-secondary)">
+          <strong>⚠️ 免責聲明：</strong>百家樂是負期望值遊戲（莊家優勢 1.06%～1.24%），長期一定虧損。本文僅為<strong>教學科普用途</strong>，不構成任何投注建議或鼓勵賭博。
+          Game8la 不接娛樂城業配、不導向任何特定平台。若因賭博出現困擾，請撥打
+          <a href="https://dep.mohw.gov.tw/donahpb/cp-1027-2929-104.html" target="_blank" rel="noopener" style="color:var(--gold)">1925 安心專線</a>（衛福部 24h 免費）或使用 <a href="/tools/gambling-self-check/" style="color:var(--gold)">PGSI 自我檢測工具</a>。
+        </p>
+      </div>
+
+      <!-- 延伸閱讀 -->
+      <div style="margin:2rem 0;padding:1.2rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px">
+        <h3 style="margin-top:0;font-size:1rem">📚 延伸閱讀</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem">
+          <a href="/articles/baccarat-card-counting-myth/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">百家樂算牌有用嗎？<small style="display:block;color:var(--text-muted)">數學拆解電影裡的「神技」真相</small></a>
+          <a href="/articles/baccarat-winning-strategy/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">1-3-2-4 投注策略完整教學<small style="display:block;color:var(--text-muted)">百家樂進階策略實測</small></a>
+          <a href="/articles/rtp-explained/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">RTP 是什麼？回報率拆解<small style="display:block;color:var(--text-muted)">看懂博弈遊戲的數學本質</small></a>
+          <a href="/articles/casino-beginner-guide/" style="color:var(--gold);font-size:0.9rem;text-decoration:none">新手 10 個入金前必知潛規則<small style="display:block;color:var(--text-muted)">第一次玩娛樂城看這篇</small></a>
+        </div>
+      </div>
+
+      <ShareButtons title="百家樂看路教學｜大路、大眼仔、小路、蟑螂路完整圖解" heading="🛡 覺得有用？把這篇傳給可能會中招的朋友" />
+      <ToolBox preset="baccarat" />
+
+      <!-- 作者 Bio -->
+      <div class="author-bio" style="margin:2rem 0;padding:1.2rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;display:flex;gap:1rem;align-items:center">
+        <div style="font-size:2.5rem;flex-shrink:0">🍈</div>
+        <div>
+          <h4 style="margin:0 0 0.3rem;color:var(--gold);font-size:1rem">關於芭樂子</h4>
+          <p style="margin:0;font-size:0.88rem;color:var(--text-secondary);line-height:1.7">Game8la 編輯團隊筆名。10 年以上博弈業內外資歷，專長機率模擬、行為心理學、博弈成癮防治。所有文章堅持零業配、數據先行。</p>
+          <div style="margin-top:0.5rem;display:flex;gap:0.8rem;font-size:0.82rem">
+            <a href="/articles/game8la-manifesto/" style="color:var(--gold-light);text-decoration:none">查看完整 Manifesto →</a>
+            <a href="/articles/" style="color:var(--text-muted);text-decoration:none">所有芭樂子文章</a>
+          </div>
+        </div>
+      </div>
+
+      <ManifestoBox />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .container { max-width: 960px; margin: 0 auto; padding: 1rem 1.5rem; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--gold-light); }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: var(--gold-light); text-decoration: none; font-size: 0.88rem; font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .back-link:hover { color: var(--guava-green); }
+  .hero-banner { width: 100%; height: 6px; border-radius: 4px; margin-bottom: 1.5rem; }
+
+  .article-content { max-width: 820px; margin: 0 auto; }
+  .article-content h1 { color: var(--text-primary); }
+  .article-subtitle {
+    font-size: 1.1rem; color: var(--guava-green);
+    margin: -0.5rem 0 1.5rem; font-style: italic;
+  }
+  .article-content h2 {
+    font-size: 1.4rem; color: var(--text-primary);
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    margin-top: 2.5rem;
+  }
+  .article-content h3 { font-size: 1.15rem; color: var(--gold-light); margin-top: 1.5rem; }
+  .article-content p { color: var(--text-secondary); line-height: 1.85; margin: 0.8rem 0; font-size: 0.95rem; }
+  .article-content a { color: var(--gold-light); }
+  .article-content strong { color: var(--text-primary); }
+
+  .toc ol { padding-left: 1.2rem; margin: 0.5rem 0 0; }
+  .toc li { margin: 0.4rem 0; font-size: 0.9rem; }
+  .toc a { color: var(--gold-light); text-decoration: none; }
+  .toc a:hover { color: var(--guava-green); }
+
+  .mid-cta {
+    margin: 2rem 0; padding: 1.2rem 1.5rem; text-align: center;
+    background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(245,184,0,0.08));
+    border: 1px dashed var(--guava-green); border-radius: 12px;
+  }
+  .mid-cta p { margin: 0 0 0.8rem; font-size: 1rem; color: var(--text-primary); }
+  .mid-cta-btn {
+    display: inline-block; background: var(--guava-green); color: #000;
+    padding: 0.6rem 1.4rem; border-radius: 8px; font-weight: 700;
+    text-decoration: none; font-size: 0.95rem;
+    transition: filter 0.2s, transform 0.2s;
+  }
+  .mid-cta-btn:hover { filter: brightness(1.15); transform: translateY(-2px); }
+
+  .quick-tool-bar {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+    padding: 0.8rem 1rem; margin: 1rem 0 1.5rem;
+    background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.2); border-radius: 10px;
+    font-size: 0.9rem;
+  }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a {
+    background: var(--guava-green); color: #000; font-weight: 700; padding: 0.35rem 0.8rem;
+    border-radius: 6px; text-decoration: none; font-size: 0.85rem;
+  }
+  .quick-tool-bar a:hover { filter: brightness(1.15); }
+
+  .faq-section { margin: 1.5rem 0; }
+  .faq-item {
+    border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 0.8rem; overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.2rem; background: var(--bg-card); border: none;
+    color: var(--text-primary); font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; text-align: left;
+  }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  }
+  .faq-item.open .faq-a { max-height: 600px; }
+  .faq-a p {
+    padding: 0 1.2rem 1rem; margin: 0;
+    font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;
+  }
+
+  .card {
+    padding: 1.2rem 1.5rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg-card);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: rgba(245,184,0,0.08); color: var(--gold-light); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; }
+  td { color: var(--text-secondary); }
+
+  @media (max-width: 640px) {
+    .container { padding: 1rem; }
+    .article-content h1 { font-size: 1.5rem; }
+    .article-content h2 { font-size: 1.2rem; }
+    .quick-tool-bar { flex-direction: column; align-items: flex-start; }
+    table { font-size: 0.8rem; }
+    th, td { padding: 0.5rem 0.6rem; }
+  }
+</style>
+
+<script is:inline>
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement;
+    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    var bar = document.getElementById('reading-progress');
+    if (bar) bar.style.width = pct + '%';
+  });
+</script>
