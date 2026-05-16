@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 ---
 <BaseLayout
   currentPage="tools"
@@ -132,6 +133,8 @@ import Icon from '../../components/Icon.astro';
   <div style="text-align:center;margin:2rem 0">
     <a href="/tools/" class="btn-outline">&larr; 回工具箱</a>
   </div>
+
+  <ShareButtons title="老虎機資金管理計算器 — 算出你的錢能撐多久" heading="🛡 給愛玩的朋友：算清楚停損線再下注" />
 </div>
 
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>

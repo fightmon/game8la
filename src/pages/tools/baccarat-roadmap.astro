@@ -1,0 +1,1506 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '百家樂大路怎麼看？', a: '大路是百家樂最基本的路單。莊贏畫紅圈、閒贏畫藍圈。同一方連贏就往下排在同一列；換方就跳到下一列第一格。和局不開新格，在前一格畫綠斜線。看大路的重點是觀察「列的長短」——連續長列代表某方連贏（長龍），短列交替代表莊閒頻繁切換（單跳）。' },
+  { q: '大眼仔、小路、蟑螂路是什麼？', a: '這三條統稱「下三路」或「衍生路」，是根據大路的走勢衍生出來的。大眼仔比較目前結果和前 1 列的對應位置，小路比前 2 列，蟑螂路比前 3 列。如果比較結果「有規律」（走勢相同）畫紅色，「沒規律」（走勢不同）畫藍色。注意：下三路的紅藍跟莊閒無關，只代表規律性。' },
+  { q: '看路真的能預測下一局嗎？', a: '不能。百家樂每一局都是獨立事件，前面的結果不會影響下一局的機率。我們用 10 萬局蒙地卡羅模擬實測：看路策略 vs 無腦押莊，勝率差異在統計誤差範圍內。看路的真正價值是當作「紀律工具」——幫你控制下注頻率、避免情緒化追注，而不是預測開牌結果。' },
+  { q: '這個模擬器的發牌規則準確嗎？', a: '完全照標準 8 副牌百家樂規則。閒家 0-5 補牌、6-7 不補；莊家根據閒家第三張牌決定是否補牌（標準補牌表）。莊贏抽 5% 水錢概念不影響路單記錄。和局與對子都會正確標記。' },
+  { q: '什麼是長龍、單跳、雙龍、拍拍？', a: '這是四種常見路型。長龍：同一方連贏 6 局以上（大路上會出現很長的直列）。單跳：莊閒交替出現（BPBPBP）。雙龍：每兩局換一次邊（BBPPBBPP）。拍拍（Choppy）：沒有明顯規律的隨機分布。數學上這四種路型都是隨機產物，不代表趨勢會延續。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<BaseLayout
+  title="百家樂看路模擬器｜即時記錄＋練習・大路・大眼仔・小路・蟑螂路 - GAME8LA"
+  description="免費百家樂看路記錄與練習工具：邊玩邊記錄牌局，即時繪製大路、大眼仔、小路、蟑螂路四條路單。支援手動輸入與自動發牌，附路型自動判斷。"
+  ogImage="/images/tools/icon-baccarat-sim.webp"
+  currentPage="tools"
+>
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "百家樂看路模擬器" }
+  ]
+})} />
+<div class="sim-wrap">
+  <!-- Header -->
+  <div class="sim-header">
+    <a href="/tools/" class="back-link"><Icon name="arrow-left" size="0.85rem" /> 回工具箱</a>
+    <h1>🀄 百家樂看路模擬器<span>即時記錄＋練習看路，學會再上桌</span></h1>
+    <p class="sim-disclaimer">⚠️ 這是看路練習工具，不是賭博遊戲。路單不能預測結果——但能幫你建立紀律。</p>
+  </div>
+
+  <!-- SEO 靜態說明 -->
+  <div class="sim-intro">
+    <p>百家樂「看路」是玩家最常用的觀察工具——大路記錄莊閒勝負，大眼仔、小路、蟑螂路則分析走勢的<strong>規律性</strong>。但光看文字教學很難理解路單怎麼畫。</p>
+    <p>這個模擬器讓你<strong>一局一局發牌</strong>，即時看四條路怎麼長出來。也可以切換「手動輸入」模式，對照真實牌局練習判讀。每條路都會自動標記目前的路型（長龍、單跳、雙龍、拍拍），幫你快速辨認。</p>
+    <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border)">💡 <strong style="color:var(--text-secondary)">跟「百家樂策略模擬器」差在哪？</strong> 這個工具的重點是<strong style="color:var(--text-secondary)">學會看四條路</strong>——練習路單怎麼畫、怎麼判讀路型。<a href="/tools/baccarat-simulator/" style="color:var(--gold-light)">策略模擬器</a>的重點是<strong style="color:var(--text-secondary)">測試投注策略</strong>——跑 N 局比較馬丁格爾、1-3-2-4 等注碼法。兩個工具互補，建議都玩玩看。</p>
+  </div>
+
+  <!-- Control Panel -->
+  <div class="ctrl-panel">
+    <div class="ctrl-mode-row">
+      <div class="mode-toggle">
+        <button class="mode-btn" id="mode-auto">🎲 自動發牌</button>
+        <button class="mode-btn active" id="mode-manual">✏️ 手動輸入</button>
+      </div>
+    </div>
+
+    <!-- Auto mode: single deal button -->
+    <div class="ctrl-auto" id="ctrl-auto" style="display:none">
+      <button class="run-btn" id="deal-btn">
+        <Icon name="play" size="1rem" /> 發牌（下一局）
+      </button>
+      <div class="deal-speed-row">
+        <button class="speed-btn active" data-speed="0">單局</button>
+        <button class="speed-btn" data-speed="10">10 局</button>
+        <button class="speed-btn" data-speed="50">50 局</button>
+        <button class="speed-btn" data-speed="100">100 局</button>
+      </div>
+    </div>
+
+    <!-- Manual mode: choose result -->
+    <div class="ctrl-manual" id="ctrl-manual">
+      <div class="manual-btns">
+        <button class="manual-btn manual-banker" id="man-banker">莊 贏</button>
+        <button class="manual-btn manual-player" id="man-player">閒 贏</button>
+        <button class="manual-btn manual-tie" id="man-tie">和 局</button>
+      </div>
+      <div class="manual-pair-row">
+        <label class="pair-check"><input type="checkbox" id="man-bpair" /> 莊對</label>
+        <label class="pair-check"><input type="checkbox" id="man-ppair" /> 閒對</label>
+      </div>
+    </div>
+
+    <div class="ctrl-bottom-row">
+      <div class="ctrl-bottom-left">
+        <button class="reset-btn" id="reset-btn">🔄 重新開局</button>
+        <button class="undo-btn" id="undo-btn" disabled>↶ 撤回</button>
+      </div>
+      <div class="ctrl-bottom-right">
+        <button class="export-btn" id="export-btn" title="截圖目前路單">📸 截圖</button>
+        <div class="hand-counter">
+          第 <span id="hand-num">0</span> 局
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Last Result Banner -->
+  <div class="last-result" id="last-result" style="display:none">
+    <span id="result-text"></span>
+  </div>
+
+  <!-- Road Maps -->
+  <div class="roads-area">
+    <div class="road-card road-big">
+      <div class="road-card-header">
+        <h2>大路 <small>Big Road</small></h2>
+        <span class="road-pattern-tag" id="tag-big">--</span>
+      </div>
+      <div class="road-canvas-wrap">
+        <canvas id="cv-big" height="210"></canvas>
+      </div>
+    </div>
+
+    <div class="road-card road-derived">
+      <div class="road-card-header">
+        <h2>大眼仔 <small>Big Eye Boy</small></h2>
+        <span class="road-pattern-tag" id="tag-beb">--</span>
+      </div>
+      <div class="road-canvas-wrap">
+        <canvas id="cv-beb" height="140"></canvas>
+      </div>
+    </div>
+
+    <div class="road-card road-derived">
+      <div class="road-card-header">
+        <h2>小路 <small>Small Road</small></h2>
+        <span class="road-pattern-tag" id="tag-sr">--</span>
+      </div>
+      <div class="road-canvas-wrap">
+        <canvas id="cv-sr" height="140"></canvas>
+      </div>
+    </div>
+
+    <div class="road-card road-derived">
+      <div class="road-card-header">
+        <h2>蟑螂路 <small>Cockroach Pig</small></h2>
+        <span class="road-pattern-tag" id="tag-cr">--</span>
+      </div>
+      <div class="road-canvas-wrap">
+        <canvas id="cv-cr" height="140"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid" id="stats-area">
+    <div class="stat-card">
+      <span class="stat-label">莊勝</span>
+      <span class="stat-value" id="s-banker" style="color:#e74c3c">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">閒勝</span>
+      <span class="stat-value" id="s-player" style="color:#3498db">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">和局</span>
+      <span class="stat-value" id="s-tie" style="color:#2ecc71">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">莊對</span>
+      <span class="stat-value" id="s-bpair">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">閒對</span>
+      <span class="stat-value" id="s-ppair">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">目前連莊/閒</span>
+      <span class="stat-value" id="s-streak">--</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">最長龍</span>
+      <span class="stat-value" id="s-maxdragon">--</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">斷龍數</span>
+      <span class="stat-value" id="s-dragoncut">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">目前列長</span>
+      <span class="stat-value" id="s-curcol">0</span>
+    </div>
+  </div>
+
+  <!-- Verdict -->
+  <div class="verdict-card" id="verdict-card" style="display:none">
+    <h3>🍈 芭樂子怎麼說</h3>
+    <p id="verdict-text"></p>
+  </div>
+
+  <!-- Symbol Legend (collapsible) -->
+  <details class="legend-details">
+    <summary>📖 路單符號說明</summary>
+    <div class="legend-grid">
+      <div class="legend-item"><span class="legend-circle" style="background:#e74c3c"></span> 莊贏（大路紅圈）</div>
+      <div class="legend-item"><span class="legend-circle" style="background:#3498db"></span> 閒贏（大路藍圈）</div>
+      <div class="legend-item"><span class="legend-circle" style="background:#2ecc71;width:14px;height:14px"></span> 和局（綠斜線標記）</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#e74c3c"></span> 莊對（右下紅點）</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#3498db"></span> 閒對（左上藍點）</div>
+      <div class="legend-item"><span class="legend-circle" style="background:#e74c3c;width:14px;height:14px;border:2px solid #e74c3c;background:transparent"></span> 衍生路紅＝有規律</div>
+      <div class="legend-item"><span class="legend-circle" style="background:#3498db;width:14px;height:14px;border:2px solid #3498db;background:transparent"></span> 衍生路藍＝沒規律</div>
+    </div>
+  </details>
+
+  <!-- Related Links -->
+  <div class="related-links">
+    <h3>📚 延伸閱讀</h3>
+    <div class="rl-grid">
+      <a href="/articles/baccarat-roadmap-guide/">百家樂看路完整教學<small>大路・大眼仔・小路・蟑螂路圖解</small></a>
+      <a href="/tools/baccarat-simulator/">百家樂投注策略模擬器<small>5 種注碼法實測比較</small></a>
+      <a href="/articles/baccarat-winning-strategy/">百家樂必勝法拆解<small>1-3-2-4 注碼管理教學</small></a>
+      <a href="/articles/baccarat-card-counting-myth/">百家樂算牌真相<small>電影 vs 數學</small></a>
+    </div>
+  </div>
+
+  <div class="guava-note">
+    <p>🌿 本工具使用標準 8 副牌百家樂規則，發牌邏輯完全照第三補牌規則運作。路單繪製遵循國際通用規範。看路是紀律工具，不是預測工具——每一局都是獨立事件。</p>
+  </div>
+
+  <ShareButtons title="百家樂看路模擬器 — 大路、大眼仔、小路、蟑螂路即時練習" heading="🛡 想學看路又不想去賭場？把這個傳給朋友" />
+</div>
+
+<script is:inline>
+(function(){
+  // ===== DOM =====
+  const $ = id => document.getElementById(id);
+  const cvBig = $('cv-big'), cvBeb = $('cv-beb'), cvSr = $('cv-sr'), cvCr = $('cv-cr');
+
+  // ===== CONFIG =====
+  const MAX_HANDS = 500;
+
+  // ===== STATE =====
+  let results = []; // [{winner:'banker'|'player'|'tie', bpair:bool, ppair:bool}]
+  let shoe = [], shoeIdx = 0;
+  let handNum = 0;
+  let mode = 'manual'; // 'auto' | 'manual'
+  let speedCount = 0;
+
+  // Big Road grid: columns of entries, each entry = {side:'B'|'P', ties:number, bpair:bool, ppair:bool}
+  let bigRoadCols = [];
+
+  // Stats
+  let countB = 0, countP = 0, countT = 0, countBP = 0, countPP = 0;
+  let curStreak = { side: null, count: 0 };
+  let maxDragon = 0;
+  let dragonCuts = 0; // columns of length >= 3 that ended
+
+  // Undo history (max 10)
+  let undoStack = [];
+
+  // ===== SHOE & DEAL ENGINE (from baccarat-simulator) =====
+  function createShoe() {
+    const cards = [];
+    for (let d = 0; d < 8; d++)
+      for (let v = 1; v <= 13; v++)
+        for (let s = 0; s < 4; s++)
+          cards.push(Math.min(v, 10));
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    return cards;
+  }
+
+  function bacVal(v) { return v === 10 ? 0 : v; }
+  function handTotal(cards) { return cards.reduce((s, c) => (s + bacVal(c)) % 10, 0); }
+
+  function playHand() {
+    if (shoeIdx + 6 > shoe.length) { shoe = createShoe(); shoeIdx = 0; }
+    const p = [shoe[shoeIdx], shoe[shoeIdx+2]];
+    const b = [shoe[shoeIdx+1], shoe[shoeIdx+3]];
+    let ci = shoeIdx + 4;
+    let pTotal = handTotal(p), bTotal = handTotal(b);
+
+    // Check pairs
+    const bpair = (bacVal(shoe[shoeIdx+1]) === bacVal(shoe[shoeIdx+3]));
+    const ppair = (bacVal(shoe[shoeIdx]) === bacVal(shoe[shoeIdx+2]));
+
+    if (pTotal >= 8 || bTotal >= 8) {
+      shoeIdx = ci;
+      const winner = pTotal > bTotal ? 'player' : bTotal > pTotal ? 'banker' : 'tie';
+      return { winner, pTotal: handTotal(p), bTotal: handTotal(b), bpair, ppair };
+    }
+
+    let pThird = null;
+    if (pTotal <= 5) { pThird = shoe[ci++]; p.push(pThird); pTotal = handTotal(p); }
+
+    if (pThird === null) {
+      if (bTotal <= 5) { b.push(shoe[ci++]); bTotal = handTotal(b); }
+    } else {
+      const pTV = bacVal(pThird);
+      let bankerDraws = false;
+      if (bTotal <= 2) bankerDraws = true;
+      else if (bTotal === 3 && pTV !== 8) bankerDraws = true;
+      else if (bTotal === 4 && pTV >= 2 && pTV <= 7) bankerDraws = true;
+      else if (bTotal === 5 && pTV >= 4 && pTV <= 7) bankerDraws = true;
+      else if (bTotal === 6 && (pTV === 6 || pTV === 7)) bankerDraws = true;
+      if (bankerDraws) { b.push(shoe[ci++]); bTotal = handTotal(b); }
+    }
+
+    shoeIdx = ci;
+    const winner = pTotal > bTotal ? 'player' : bTotal > pTotal ? 'banker' : 'tie';
+    return { winner, pTotal, bTotal, bpair, ppair };
+  }
+
+  // ===== BIG ROAD LOGIC =====
+  function addToBigRoad(result) {
+    const side = result.winner === 'banker' ? 'B' : result.winner === 'player' ? 'P' : 'T';
+
+    if (side === 'T') {
+      // Tie: add to last entry
+      if (bigRoadCols.length > 0) {
+        const lastCol = bigRoadCols[bigRoadCols.length - 1];
+        lastCol[lastCol.length - 1].ties++;
+      }
+      if (result.bpair && bigRoadCols.length > 0) {
+        const lastCol = bigRoadCols[bigRoadCols.length - 1];
+        lastCol[lastCol.length - 1].bpair = true;
+      }
+      if (result.ppair && bigRoadCols.length > 0) {
+        const lastCol = bigRoadCols[bigRoadCols.length - 1];
+        lastCol[lastCol.length - 1].ppair = true;
+      }
+      return;
+    }
+
+    const entry = { side, ties: 0, bpair: result.bpair || false, ppair: result.ppair || false };
+
+    if (bigRoadCols.length === 0) {
+      bigRoadCols.push([entry]);
+    } else {
+      const lastCol = bigRoadCols[bigRoadCols.length - 1];
+      if (lastCol[0].side === side) {
+        lastCol.push(entry);
+      } else {
+        bigRoadCols.push([entry]);
+      }
+    }
+  }
+
+  // ===== DERIVED ROAD LOGIC =====
+  // Build a flat big road grid (col, row) for lookups
+  function buildBigRoadGrid() {
+    const maxRows = 6;
+    const grid = []; // grid[col] = array of {side, row}
+    let col = 0;
+    for (let ci = 0; ci < bigRoadCols.length; ci++) {
+      const column = bigRoadCols[ci];
+      grid[col] = [];
+      for (let ri = 0; ri < column.length; ri++) {
+        let row = ri;
+        if (ri >= maxRows) {
+          // Dragon tail: extend right
+          row = maxRows - 1;
+          // Check if we need a new col for dragon
+          if (ri === maxRows) {
+            // stay in same visual col but offset right conceptually
+          }
+        }
+        grid[col].push({ side: column[ri].side, origRow: ri });
+      }
+      col++;
+    }
+    return grid;
+  }
+
+  // Derived road: compare current column with column N back
+  // Returns array of 'R' (red=regular) or 'B' (blue=irregular)
+  function calcDerivedRoad(offset) {
+    // offset: 1=big eye boy, 2=small road, 3=cockroach pig
+    const road = [];
+    // We need at least offset+1 columns to start
+    // Start from column (offset+1), row 1 for first entry, then continue
+    // Standard rules:
+    // After the (offset+1)th column has at least 2 entries, OR the (offset+2)th column has started
+
+    for (let ci = 0; ci < bigRoadCols.length; ci++) {
+      for (let ri = 0; ri < bigRoadCols[ci].length; ri++) {
+        // Skip until we have enough data
+        // Big Eye Boy starts at col 2 (0-indexed 1), row 1
+        // Small Road starts at col 3 (0-indexed 2), row 1
+        // Cockroach Pig starts at col 4 (0-indexed 3), row 1
+        const startCol = offset; // 0-indexed
+        if (ci < startCol) continue;
+        if (ci === startCol && ri < 1) continue;
+
+        const compareCol = ci - offset;
+        let isRed;
+
+        if (ri === 0) {
+          // First row of a new column: compare lengths of current col-1 and compareCol
+          const prevColLen = bigRoadCols[ci - 1] ? bigRoadCols[ci - 1].length : 0;
+          const compColLen = bigRoadCols[compareCol] ? bigRoadCols[compareCol].length : 0;
+          // Red if same length, Blue if different
+          isRed = (prevColLen === compColLen);
+        } else {
+          // Subsequent rows: check if compareCol had an entry at this row
+          const compColLen = bigRoadCols[compareCol] ? bigRoadCols[compareCol].length : 0;
+          // Red if compareCol also had this row (extended), Blue if it didn't
+          isRed = (ri < compColLen);
+        }
+
+        road.push(isRed ? 'R' : 'B');
+      }
+    }
+    return road;
+  }
+
+  // ===== PATTERN DETECTION =====
+  function detectBigRoadPattern() {
+    if (bigRoadCols.length < 3) return '--';
+    const lens = bigRoadCols.slice(-6).map(c => c.length);
+    const lastLen = bigRoadCols[bigRoadCols.length - 1].length;
+
+    // Long Dragon: current column >= 6
+    if (lastLen >= 6) return '🐉 長龍';
+
+    // Check last few columns for patterns
+    if (lens.length >= 4) {
+      // Ping Pong (all length 1)
+      const recent = lens.slice(-4);
+      if (recent.every(l => l === 1)) return '🔄 單跳';
+      // Double Dragon (alternating 2s)
+      if (recent.every(l => l === 2)) return '🐲 雙龍';
+    }
+
+    if (lens.length >= 3) {
+      const recent = lens.slice(-3);
+      if (recent.every(l => l === 1)) return '🔄 單跳';
+      if (recent.every(l => l === 2)) return '🐲 雙龍';
+    }
+
+    return '🎲 拍拍';
+  }
+
+  function detectDerivedPattern(road) {
+    if (road.length < 6) return '--';
+    const recent = road.slice(-6);
+    const reds = recent.filter(r => r === 'R').length;
+    if (reds >= 5) return '有規律';
+    if (reds <= 1) return '沒規律';
+    return '混合';
+  }
+
+  // ===== CANVAS DRAWING =====
+  const COLORS = { B: '#e74c3c', P: '#3498db', T: '#2ecc71', R: '#e74c3c', BL: '#3498db' };
+
+  function drawBigRoad() {
+    const canvas = cvBig;
+    const wrap = canvas.parentElement;
+    const cellSize = 32;
+    const maxRows = 6;
+    const gap = 2;
+    let visualCols = 0;
+    for (let ci = 0; ci < bigRoadCols.length; ci++) {
+      visualCols += 1 + Math.max(0, bigRoadCols[ci].length - maxRows);
+    }
+    const totalCols = Math.max(30, visualCols + 5);
+
+    canvas.width = totalCols * (cellSize + gap) + gap;
+    canvas.height = maxRows * (cellSize + gap) + gap;
+    canvas.style.height = canvas.height + 'px';
+
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 0.5;
+    for (let r = 0; r <= maxRows; r++) {
+      const y = r * (cellSize + gap);
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+    }
+    for (let c = 0; c <= totalCols; c++) {
+      const x = c * (cellSize + gap);
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+    }
+
+    // Draw entries with dragon tail logic
+    let drawCol = 0;
+    for (let ci = 0; ci < bigRoadCols.length; ci++) {
+      const column = bigRoadCols[ci];
+      let extraRight = 0;
+      for (let ri = 0; ri < column.length; ri++) {
+        let row = ri;
+        let col = drawCol;
+        if (ri >= maxRows) {
+          row = maxRows - 1;
+          extraRight = ri - maxRows + 1;
+          col = drawCol + extraRight;
+        }
+        const x = col * (cellSize + gap) + gap;
+        const y = row * (cellSize + gap) + gap;
+        const cx = x + cellSize / 2;
+        const cy = y + cellSize / 2;
+        const r = cellSize / 2 - 3;
+
+        // Main circle
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fillStyle = COLORS[column[ri].side];
+        ctx.fill();
+
+        // Letter
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 13px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(column[ri].side === 'B' ? '莊' : '閒', cx, cy);
+
+        // Tie marks
+        if (column[ri].ties > 0) {
+          ctx.strokeStyle = COLORS.T;
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.moveTo(x + 2, y + cellSize - 2);
+          ctx.lineTo(x + cellSize - 2, y + 2);
+          ctx.stroke();
+          if (column[ri].ties > 1) {
+            ctx.fillStyle = COLORS.T;
+            ctx.font = 'bold 10px Arial';
+            ctx.fillText(column[ri].ties, x + cellSize - 6, y + 10);
+          }
+        }
+
+        // Banker pair: bottom-right dot
+        if (column[ri].bpair) {
+          ctx.beginPath();
+          ctx.arc(x + cellSize - 5, y + cellSize - 5, 4, 0, Math.PI * 2);
+          ctx.fillStyle = '#e74c3c';
+          ctx.fill();
+        }
+
+        // Player pair: top-left dot
+        if (column[ri].ppair) {
+          ctx.beginPath();
+          ctx.arc(x + 5, y + 5, 4, 0, Math.PI * 2);
+          ctx.fillStyle = '#3498db';
+          ctx.fill();
+        }
+      }
+      drawCol += 1 + Math.max(0, column.length - maxRows);
+    }
+
+    // Scroll to latest
+    wrap.scrollLeft = Math.max(0, canvas.width - wrap.clientWidth);
+  }
+
+  function drawDerivedRoad(canvas, road, cellSize) {
+    const maxRows = 6;
+    const gap = 1;
+    // Layout derived road into columns
+    const cols = [];
+    let curCol = [];
+    let curColor = null;
+    for (const entry of road) {
+      if (curColor === null) {
+        curColor = entry;
+        curCol.push(entry);
+      } else if (entry === curColor) {
+        curCol.push(entry);
+      } else {
+        cols.push(curCol);
+        curCol = [entry];
+        curColor = entry;
+      }
+    }
+    if (curCol.length > 0) cols.push(curCol);
+
+    let visualCols = 0;
+    for (let ci = 0; ci < cols.length; ci++) {
+      visualCols += 1 + Math.max(0, cols[ci].length - maxRows);
+    }
+    const totalCols = Math.max(30, visualCols + 5);
+    canvas.width = totalCols * (cellSize + gap) + gap;
+    canvas.height = maxRows * (cellSize + gap) + gap;
+    canvas.style.height = canvas.height + 'px';
+
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.lineWidth = 0.5;
+    for (let r = 0; r <= maxRows; r++) {
+      const y = r * (cellSize + gap);
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+    }
+    for (let c = 0; c <= totalCols; c++) {
+      const x = c * (cellSize + gap);
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+    }
+
+    // Draw circles (outline style for derived roads)
+    let drawCol = 0;
+    for (let ci = 0; ci < cols.length; ci++) {
+      for (let ri = 0; ri < cols[ci].length; ri++) {
+        let row = ri;
+        let col = drawCol;
+        if (ri >= maxRows) { row = maxRows - 1; col = drawCol + ri - maxRows + 1; }
+        const x = col * (cellSize + gap) + gap;
+        const y = row * (cellSize + gap) + gap;
+        const cx = x + cellSize / 2;
+        const cy = y + cellSize / 2;
+        const r = cellSize / 2 - 2;
+        const color = cols[ci][ri] === 'R' ? COLORS.R : COLORS.BL;
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+      drawCol += 1 + Math.max(0, cols[ci].length - maxRows);
+    }
+
+    // Scroll
+    const wrap = canvas.parentElement;
+    wrap.scrollLeft = Math.max(0, canvas.width - wrap.clientWidth);
+  }
+
+  // ===== RENDER ALL =====
+  function renderAll() {
+    drawBigRoad();
+
+    const bebRoad = calcDerivedRoad(1);
+    const srRoad = calcDerivedRoad(2);
+    const crRoad = calcDerivedRoad(3);
+
+    drawDerivedRoad(cvBeb, bebRoad, 22);
+    drawDerivedRoad(cvSr, srRoad, 20);
+    drawDerivedRoad(cvCr, crRoad, 18);
+
+    // Pattern tags
+    $('tag-big').textContent = detectBigRoadPattern();
+    $('tag-beb').textContent = bebRoad.length > 0 ? detectDerivedPattern(bebRoad) : '--';
+    $('tag-sr').textContent = srRoad.length > 0 ? detectDerivedPattern(srRoad) : '--';
+    $('tag-cr').textContent = crRoad.length > 0 ? detectDerivedPattern(crRoad) : '--';
+
+    // Stats
+    $('s-banker').textContent = countB + (countB + countP + countT > 0 ? ' (' + Math.round(countB / (countB + countP + countT) * 100) + '%)' : '');
+    $('s-player').textContent = countP + (countB + countP + countT > 0 ? ' (' + Math.round(countP / (countB + countP + countT) * 100) + '%)' : '');
+    $('s-tie').textContent = countT + (countB + countP + countT > 0 ? ' (' + Math.round(countT / (countB + countP + countT) * 100) + '%)' : '');
+    $('s-bpair').textContent = countBP;
+    $('s-ppair').textContent = countPP;
+    $('s-streak').textContent = curStreak.side ? (curStreak.side === 'B' ? '莊' : '閒') + ' × ' + curStreak.count : '--';
+    $('s-streak').style.color = curStreak.side === 'B' ? '#e74c3c' : curStreak.side === 'P' ? '#3498db' : 'var(--text-muted)';
+    $('hand-num').textContent = handNum + ' / ' + MAX_HANDS;
+
+    // Dragon stats
+    var curMaxD = 0;
+    var cuts = 0;
+    for (var di = 0; di < bigRoadCols.length; di++) {
+      var clen = bigRoadCols[di].length;
+      if (clen > curMaxD) curMaxD = clen;
+      if (di < bigRoadCols.length - 1 && clen >= 3) cuts++;
+    }
+    maxDragon = curMaxD;
+    dragonCuts = cuts;
+    var curColLen = bigRoadCols.length > 0 ? bigRoadCols[bigRoadCols.length - 1].length : 0;
+    $('s-maxdragon').textContent = curMaxD > 0 ? curMaxD + ' 局' : '--';
+    $('s-maxdragon').style.color = curMaxD >= 6 ? '#e74c3c' : 'var(--text-primary)';
+    $('s-dragoncut').textContent = cuts;
+    $('s-curcol').textContent = curColLen;
+    $('s-curcol').style.color = curColLen >= 6 ? '#e74c3c' : curColLen >= 3 ? 'var(--gold-light)' : 'var(--text-primary)';
+
+    // Undo button state
+    $('undo-btn').disabled = undoStack.length === 0;
+
+    // Save to sessionStorage
+    saveState();
+
+    // Verdict (show after 20 hands)
+    if (handNum >= 20) {
+      $('verdict-card').style.display = '';
+      const total = countB + countP + countT;
+      const bRate = (countB / total * 100).toFixed(1);
+      const pRate = (countP / total * 100).toFixed(1);
+      let v = handNum + ' 局結果：莊 ' + bRate + '% / 閒 ' + pRate + '%。';
+      if (Math.abs(countB / total - 0.458) < 0.03) {
+        v += '分布非常接近理論值（莊 45.8% / 閒 44.6%）。';
+      }
+      v += '記住：不管路單畫出什麼圖案，下一局的機率永遠不變。看路是幫你保持冷靜的工具，不是水晶球。';
+      $('verdict-text').textContent = v;
+    }
+  }
+
+  // ===== PROCESS ONE RESULT =====
+  function processResult(result) {
+    saveSnapshot();
+    handNum++;
+    results.push(result);
+    addToBigRoad(result);
+
+    // Update stats
+    if (result.winner === 'banker') { countB++; }
+    else if (result.winner === 'player') { countP++; }
+    else { countT++; }
+    if (result.bpair) countBP++;
+    if (result.ppair) countPP++;
+
+    // Streak
+    if (result.winner !== 'tie') {
+      const s = result.winner === 'banker' ? 'B' : 'P';
+      if (curStreak.side === s) { curStreak.count++; }
+      else { curStreak = { side: s, count: 1 }; }
+    }
+
+    // Show last result
+    $('last-result').style.display = '';
+    const winnerText = result.winner === 'banker' ? '莊勝' : result.winner === 'player' ? '閒勝' : '和局';
+    const winnerColor = result.winner === 'banker' ? '#e74c3c' : result.winner === 'player' ? '#3498db' : '#2ecc71';
+    let extra = '';
+    if (result.bpair) extra += ' ＋莊對';
+    if (result.ppair) extra += ' ＋閒對';
+    $('result-text').innerHTML = '第 ' + handNum + ' 局：<strong style="color:' + winnerColor + '">' + winnerText + '</strong>' +
+      (result.pTotal !== undefined ? '（莊 ' + result.bTotal + ' vs 閒 ' + result.pTotal + '）' : '') + extra;
+  }
+
+  // ===== LIMIT CHECK =====
+  function checkLimit() {
+    if (handNum >= MAX_HANDS) {
+      $('deal-btn').disabled = true;
+      $('man-banker').disabled = true;
+      $('man-player').disabled = true;
+      $('man-tie').disabled = true;
+      $('result-text').innerHTML = '已達 ' + MAX_HANDS + ' 局上限，請按<strong style="color:#e67e22">「重新開局」</strong>開始新一輪';
+      $('last-result').style.display = '';
+      return true;
+    }
+    return false;
+  }
+
+  function unlockButtons() {
+    $('deal-btn').disabled = false;
+    $('man-banker').disabled = false;
+    $('man-player').disabled = false;
+    $('man-tie').disabled = false;
+  }
+
+  // ===== AUTO DEAL =====
+  function autoDeal(count) {
+    if (checkLimit()) return;
+    count = count || 1;
+    const remaining = MAX_HANDS - handNum;
+    count = Math.min(count, remaining);
+    for (let i = 0; i < count; i++) {
+      const result = playHand();
+      processResult(result);
+    }
+    renderAll();
+    checkLimit();
+  }
+
+  // ===== MANUAL INPUT =====
+  function manualInput(winner) {
+    if (checkLimit()) return;
+    const bpair = $('man-bpair').checked;
+    const ppair = $('man-ppair').checked;
+    processResult({ winner, bpair, ppair });
+    $('man-bpair').checked = false;
+    $('man-ppair').checked = false;
+    renderAll();
+    checkLimit();
+  }
+
+  // ===== UNDO =====
+  function saveSnapshot() {
+    if (undoStack.length >= 10) undoStack.shift();
+    undoStack.push(JSON.stringify({
+      results: results,
+      bigRoadCols: bigRoadCols,
+      handNum: handNum,
+      countB: countB, countP: countP, countT: countT,
+      countBP: countBP, countPP: countPP,
+      curStreak: curStreak
+    }));
+  }
+
+  function undoLast() {
+    if (undoStack.length === 0) return;
+    var snap = JSON.parse(undoStack.pop());
+    results = snap.results;
+    bigRoadCols = snap.bigRoadCols;
+    handNum = snap.handNum;
+    countB = snap.countB; countP = snap.countP; countT = snap.countT;
+    countBP = snap.countBP; countPP = snap.countPP;
+    curStreak = snap.curStreak;
+    if (handNum < MAX_HANDS) unlockButtons();
+    if (handNum === 0) {
+      $('last-result').style.display = 'none';
+    } else {
+      var last = results[results.length - 1];
+      var wt = last.winner === 'banker' ? '莊勝' : last.winner === 'player' ? '閒勝' : '和局';
+      var wc = last.winner === 'banker' ? '#e74c3c' : last.winner === 'player' ? '#3498db' : '#2ecc71';
+      $('result-text').innerHTML = '第 ' + handNum + ' 局：<strong style="color:' + wc + '">' + wt + '</strong>';
+      $('last-result').style.display = '';
+    }
+    renderAll();
+  }
+
+  // ===== SESSION STORAGE =====
+  function saveState() {
+    try {
+      sessionStorage.setItem('g8la-roadmap', JSON.stringify({
+        results: results,
+        bigRoadCols: bigRoadCols,
+        handNum: handNum,
+        countB: countB, countP: countP, countT: countT,
+        countBP: countBP, countPP: countPP,
+        curStreak: curStreak
+      }));
+    } catch(e) {}
+  }
+
+  function loadState() {
+    try {
+      var saved = sessionStorage.getItem('g8la-roadmap');
+      if (!saved) return false;
+      var snap = JSON.parse(saved);
+      if (!snap.results || snap.results.length === 0) return false;
+      results = snap.results;
+      bigRoadCols = snap.bigRoadCols;
+      handNum = snap.handNum;
+      countB = snap.countB; countP = snap.countP; countT = snap.countT;
+      countBP = snap.countBP; countPP = snap.countPP;
+      curStreak = snap.curStreak;
+      // Restore last result display
+      if (handNum > 0) {
+        var last = results[results.length - 1];
+        var wt = last.winner === 'banker' ? '莊勝' : last.winner === 'player' ? '閒勝' : '和局';
+        var wc = last.winner === 'banker' ? '#e74c3c' : last.winner === 'player' ? '#3498db' : '#2ecc71';
+        $('result-text').innerHTML = '第 ' + handNum + ' 局：<strong style="color:' + wc + '">' + wt + '</strong>（已恢復上次進度）';
+        $('last-result').style.display = '';
+      }
+      checkLimit();
+      return true;
+    } catch(e) { return false; }
+  }
+
+  // ===== EXPORT / SCREENSHOT =====
+  function exportRoadmapImage() {
+    var W = 1200, H = 1400;
+    var out = document.createElement('canvas');
+    out.width = W; out.height = H;
+    var ctx = out.getContext('2d');
+
+    // Background
+    ctx.fillStyle = '#0d1117';
+    ctx.fillRect(0, 0, W, H);
+
+    // Header
+    ctx.fillStyle = '#39FF14';
+    ctx.font = 'bold 36px Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('百家樂看路模擬器', W / 2, 50);
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '18px Arial, sans-serif';
+    var total = countB + countP + countT;
+    ctx.fillText('第 ' + handNum + ' 局｜莊 ' + countB + ' (' + (total > 0 ? Math.round(countB/total*100) : 0) + '%)  閒 ' + countP + ' (' + (total > 0 ? Math.round(countP/total*100) : 0) + '%)  和 ' + countT, W / 2, 82);
+
+    var maxD = 0;
+    for (var di = 0; di < bigRoadCols.length; di++) if (bigRoadCols[di].length > maxD) maxD = bigRoadCols[di].length;
+    ctx.fillText('最長龍 ' + maxD + ' 局｜斷龍 ' + dragonCuts + ' 次', W / 2, 106);
+
+    // Draw roads
+    var roads = [
+      { cv: cvBig, label: '大路', tag: $('tag-big').textContent, y: 130, h: 280 },
+      { cv: cvBeb, label: '大眼仔', tag: $('tag-beb').textContent, y: 430, h: 220 },
+      { cv: cvSr, label: '小路', tag: $('tag-sr').textContent, y: 670, h: 200 },
+      { cv: cvCr, label: '蟑螂路', tag: $('tag-cr').textContent, y: 890, h: 190 }
+    ];
+
+    for (var i = 0; i < roads.length; i++) {
+      var r = roads[i];
+      // Card background
+      ctx.fillStyle = '#161b22';
+      ctx.beginPath();
+      ctx.roundRect(30, r.y, W - 60, r.h, 12);
+      ctx.fill();
+      ctx.strokeStyle = '#30363d';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Label
+      ctx.fillStyle = '#e6edf3';
+      ctx.font = 'bold 16px Arial, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(r.label, 50, r.y + 24);
+
+      // Tag
+      ctx.fillStyle = '#f5b800';
+      ctx.font = '13px Arial, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(r.tag, W - 50, r.y + 24);
+
+      // Copy canvas content
+      try {
+        var srcCanvas = r.cv;
+        var availW = W - 100;
+        var availH = r.h - 40;
+        var scale = Math.min(availW / srcCanvas.width, availH / srcCanvas.height, 1);
+        var drawW = srcCanvas.width * scale;
+        var drawH = srcCanvas.height * scale;
+        ctx.drawImage(srcCanvas, 50, r.y + 35, drawW, drawH);
+      } catch(e) {}
+    }
+
+    // Footer
+    var fy = 1100;
+    ctx.fillStyle = '#161b22';
+    ctx.beginPath();
+    ctx.roundRect(30, fy, W - 60, 100, 12);
+    ctx.fill();
+
+    ctx.fillStyle = '#39FF14';
+    ctx.font = 'bold 22px Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('GAME8LA', W / 2, fy + 35);
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '14px Arial, sans-serif';
+    ctx.fillText('game8la.com/tools/baccarat-roadmap', W / 2, fy + 58);
+    ctx.fillText('台灣最敢講真話的遊戲評測平台 · 零業配 · 數據先行', W / 2, fy + 80);
+
+    // Watermark
+    ctx.fillStyle = 'rgba(57,255,20,0.06)';
+    ctx.font = 'bold 60px Arial, sans-serif';
+    ctx.fillText('GAME8LA.COM', W / 2, 700);
+
+    // Download
+    var link = document.createElement('a');
+    link.download = 'baccarat-roadmap-' + handNum + '局.png';
+    link.href = out.toDataURL('image/png');
+    link.click();
+  }
+
+  // ===== RESET =====
+  function resetAll() {
+    if (handNum > 0 && !confirm('確定要重新開局嗎？目前的路單紀錄會全部清除。')) return;
+    results = [];
+    bigRoadCols = [];
+    shoe = createShoe();
+    shoeIdx = 0;
+    handNum = 0;
+    countB = countP = countT = countBP = countPP = 0;
+    curStreak = { side: null, count: 0 };
+    maxDragon = 0;
+    dragonCuts = 0;
+    undoStack = [];
+    $('last-result').style.display = 'none';
+    $('verdict-card').style.display = 'none';
+    unlockButtons();
+    try { sessionStorage.removeItem('g8la-roadmap'); } catch(e) {}
+    renderAll();
+  }
+
+  // ===== EVENT LISTENERS =====
+  // Mode toggle
+  $('mode-auto').addEventListener('click', function() {
+    mode = 'auto';
+    $('mode-auto').classList.add('active');
+    $('mode-manual').classList.remove('active');
+    $('ctrl-auto').style.display = '';
+    $('ctrl-manual').style.display = 'none';
+  });
+  $('mode-manual').addEventListener('click', function() {
+    mode = 'manual';
+    $('mode-manual').classList.add('active');
+    $('mode-auto').classList.remove('active');
+    $('ctrl-auto').style.display = 'none';
+    $('ctrl-manual').style.display = '';
+  });
+
+  // Deal button
+  $('deal-btn').addEventListener('click', function() {
+    autoDeal(speedCount || 1);
+  });
+
+  // Speed buttons
+  document.querySelectorAll('.speed-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.speed-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      speedCount = +btn.dataset.speed;
+      $('deal-btn').querySelector('span') && ($('deal-btn').querySelector('span').textContent = speedCount > 1 ? '連發 ' + speedCount + ' 局' : '發牌（下一局）');
+    });
+  });
+
+  // Manual buttons
+  $('man-banker').addEventListener('click', function() { manualInput('banker'); });
+  $('man-player').addEventListener('click', function() { manualInput('player'); });
+  $('man-tie').addEventListener('click', function() { manualInput('tie'); });
+
+  // Reset
+  $('reset-btn').addEventListener('click', resetAll);
+
+  // Undo
+  $('undo-btn').addEventListener('click', undoLast);
+
+  // Export
+  $('export-btn').addEventListener('click', exportRoadmapImage);
+
+  // ===== INIT =====
+  shoe = createShoe();
+  // Try restore from sessionStorage
+  if (!loadState()) {
+    renderAll();
+  } else {
+    renderAll();
+  }
+})();
+</script>
+
+<!-- WebApplication Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "百家樂看路模擬器 — 即時記錄＋練習看路",
+  "url": "https://game8la.com/tools/baccarat-roadmap/",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "description": "免費百家樂看路記錄與練習工具，邊玩邊記錄牌局，即時繪製大路、大眼仔、小路、蟑螂路，支援手動輸入與路型判斷。"
+})} />
+
+<style>
+  .sim-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 3rem;
+  }
+
+  .sim-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .sim-header h1 {
+    font-size: 2rem;
+    margin: 1rem 0 0.5rem;
+  }
+  .sim-header h1 span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+  .sim-disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: rgba(245,184,0,0.08);
+    border: 1px solid rgba(245,184,0,0.2);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    display: inline-block;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--gold-light); }
+
+  /* Intro */
+  .sim-intro {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+  .sim-intro p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.6rem;
+  }
+  .sim-intro p:last-child { margin-bottom: 0; }
+  .sim-intro strong { color: var(--text-primary); }
+
+  /* Control Panel */
+  .ctrl-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .ctrl-mode-row {
+    margin-bottom: 1rem;
+  }
+  .mode-toggle {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .mode-btn {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .mode-btn.active {
+    background: rgba(57,255,20,0.12);
+    border-color: #39FF14;
+    color: #39FF14;
+  }
+  .mode-btn:hover { border-color: var(--gold-light); }
+
+  .run-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #39FF14, #2bcc10);
+    border: none;
+    border-radius: 12px;
+    color: #000;
+    font-size: 1.15rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .run-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(57,255,20,0.3);
+  }
+
+  .deal-speed-row {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.8rem;
+  }
+  .speed-btn {
+    flex: 1;
+    padding: 0.5rem 0.6rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .speed-btn.active {
+    background: rgba(245,184,0,0.12);
+    border-color: var(--gold-light);
+    color: var(--gold-light);
+  }
+
+  /* Manual mode */
+  .manual-btns {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+  .manual-btn {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.04);
+  }
+  .manual-btn:hover { transform: translateY(-2px); }
+  .manual-banker {
+    color: #e74c3c;
+    border-color: rgba(231,76,60,0.3);
+  }
+  .manual-banker:hover { background: rgba(231,76,60,0.12); border-color: #e74c3c; }
+  .manual-player {
+    color: #3498db;
+    border-color: rgba(52,152,219,0.3);
+  }
+  .manual-player:hover { background: rgba(52,152,219,0.12); border-color: #3498db; }
+  .manual-tie {
+    color: #2ecc71;
+    border-color: rgba(46,204,113,0.3);
+  }
+  .manual-tie:hover { background: rgba(46,204,113,0.12); border-color: #2ecc71; }
+
+  .manual-pair-row {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  .pair-check {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .pair-check input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .ctrl-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .ctrl-bottom-left, .ctrl-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .reset-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 8px;
+    color: #ef4444;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .reset-btn:hover { background: rgba(239,68,68,0.2); }
+  .undo-btn {
+    padding: 0.5rem 0.8rem;
+    background: rgba(245,184,0,0.1);
+    border: 1px solid rgba(245,184,0,0.3);
+    border-radius: 8px;
+    color: var(--gold-light);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .undo-btn:hover { background: rgba(245,184,0,0.2); }
+  .undo-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .export-btn {
+    padding: 0.5rem 0.8rem;
+    background: rgba(57,255,20,0.1);
+    border: 1px solid rgba(57,255,20,0.3);
+    border-radius: 8px;
+    color: #39FF14;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .export-btn:hover { background: rgba(57,255,20,0.2); }
+  .hand-counter {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .hand-counter span {
+    color: var(--gold-light);
+    font-size: 1.2rem;
+  }
+
+  /* Last Result Banner */
+  .last-result {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-secondary);
+  }
+  .last-result strong {
+    font-size: 1.1rem;
+  }
+
+  /* Road Cards */
+  .roads-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .road-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    overflow: hidden;
+  }
+  .road-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+  }
+  .road-card-header h2 {
+    font-size: 1.05rem;
+    margin: 0;
+    color: var(--text-primary);
+  }
+  .road-card-header h2 small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-left: 0.4rem;
+  }
+  .road-pattern-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    background: rgba(245,184,0,0.1);
+    border: 1px solid rgba(245,184,0,0.25);
+    border-radius: 6px;
+    color: var(--gold-light);
+    white-space: nowrap;
+  }
+
+  .road-canvas-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.15);
+    padding: 4px;
+  }
+  .road-canvas-wrap canvas {
+    display: block;
+    min-width: 100%;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  .stat-value {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  /* Verdict */
+  .verdict-card {
+    background: linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.04));
+    border: 1px solid rgba(57,255,20,0.25);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .verdict-card h3 {
+    font-size: 1.05rem;
+    color: var(--guava-green);
+    margin: 0 0 0.5rem;
+  }
+  .verdict-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* Legend */
+  .legend-details {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .legend-details summary {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+  .legend-details summary::-webkit-details-marker { display: none; }
+  .legend-details[open] summary { margin-bottom: 0.8rem; }
+  .legend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+  .legend-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Related Links */
+  .related-links {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .related-links h3 {
+    font-size: 1.05rem;
+    margin: 0 0 0.8rem;
+    color: var(--text-primary);
+  }
+  .rl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .rl-grid a {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 0.5rem 0;
+  }
+  .rl-grid a small {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .rl-grid a:hover { color: #39FF14; }
+
+  .guava-note {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  .guava-note p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* === Responsive === */
+  @media (max-width: 768px) {
+    .sim-header h1 { font-size: 1.6rem; }
+    .sim-header h1 span { font-size: 0.95rem; }
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    .rl-grid { grid-template-columns: 1fr; }
+    .legend-grid { grid-template-columns: 1fr; }
+    .manual-btn { font-size: 1.05rem; padding: 0.9rem 0.5rem; }
+    .mode-btn { font-size: 0.95rem; }
+  }
+
+  @media (max-width: 480px) {
+    .sim-wrap { padding: 0.8rem; }
+    .sim-header h1 { font-size: 1.4rem; }
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    .deal-speed-row { flex-wrap: wrap; }
+    .speed-btn { font-size: 0.85rem; padding: 0.45rem 0.4rem; }
+    .manual-btns { flex-direction: column; gap: 0.5rem; }
+    .manual-btn { padding: 1rem; font-size: 1.1rem; }
+    .road-card { padding: 0.8rem; }
+    .road-card-header h2 { font-size: 0.95rem; }
+    .ctrl-bottom-row { flex-wrap: wrap; gap: 0.5rem; }
+    .export-btn { font-size: 0.8rem; padding: 0.4rem 0.6rem; }
+    .undo-btn { font-size: 0.8rem; padding: 0.4rem 0.6rem; }
+  }
+</style>
+</BaseLayout>

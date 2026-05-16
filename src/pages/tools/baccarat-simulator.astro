@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
 
 const faqs = [
   { q: '百家樂投注策略真的有用嗎？', a: '所有投注策略（馬丁格爾、1-3-2-4、達蘭伯、斐波那契）都無法改變百家樂的期望值。莊家優勢固定在押莊 1.06%、押閒 1.24%，策略只能改變你的「損益分布曲線」——讓你短期贏面看起來比較大，但長期跑下去總虧損不會變。用這個模擬器跑 1000 局以上就能親眼看到。' },
@@ -162,7 +163,8 @@ const faqs = [
     <div class="rl-grid">
       <a href="/articles/baccarat-card-counting-myth/">百家樂算牌真相<small>電影 vs 數學</small></a>
       <a href="/articles/baccarat-winning-strategy/">1-3-2-4 投注法拆解<small>注碼管理教學</small></a>
-      <a href="/articles/baccarat-guide/">百家樂看路教學<small>大路・珠盤路・下三路</small></a>
+      <a href="/tools/baccarat-roadmap/">百家樂看路模擬器<small>四條路即時練習</small></a>
+      <a href="/articles/baccarat-roadmap-guide/">百家樂看路完整教學<small>大路・大眼仔・小路・蟑螂路圖解</small></a>
       <a href="/tools/bankroll-calculator/">資金管理計算器<small>算出你的停損線</small></a>
     </div>
   </div>
@@ -170,6 +172,8 @@ const faqs = [
   <div class="guava-note">
     <p>🌿 本工具使用標準 8 副牌百家樂規則，發牌邏輯完全照第三補牌規則運作。每次模擬用新洗的牌堆。莊贏抽 5% 水錢、和局退注、對子邊注不計。數學是公平的，但賭場永遠站在贏面那邊。</p>
   </div>
+
+  <ShareButtons title="百家樂策略模擬器 — 5 種注碼法實測比較" heading="🛡 想知道你的押注策略長期會虧多少？來這算" />
 </div>
 
 <!-- Chart.js CDN -->
