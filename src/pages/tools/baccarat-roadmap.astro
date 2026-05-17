@@ -541,8 +541,13 @@ const faqs = [
       drawCol += 1 + Math.max(0, column.length - maxRows);
     }
 
-    // Scroll to latest
-    wrap.scrollLeft = Math.max(0, canvas.width - wrap.clientWidth);
+    // Smart scroll: only scroll if data exceeds visible area
+    var dataWidth = drawCol * (cellSize + gap) + gap;
+    if (dataWidth > wrap.clientWidth) {
+      wrap.scrollLeft = Math.max(0, dataWidth - wrap.clientWidth + cellSize);
+    } else {
+      wrap.scrollLeft = 0;
+    }
   }
 
   function drawDerivedRoad(canvas, road, cellSize) {
@@ -612,9 +617,14 @@ const faqs = [
       drawCol += 1 + Math.max(0, cols[ci].length - maxRows);
     }
 
-    // Scroll
+    // Smart scroll: only scroll if data exceeds visible area
     const wrap = canvas.parentElement;
-    wrap.scrollLeft = Math.max(0, canvas.width - wrap.clientWidth);
+    var dataWidth = drawCol * (cellSize + gap) + gap;
+    if (dataWidth > wrap.clientWidth) {
+      wrap.scrollLeft = Math.max(0, dataWidth - wrap.clientWidth + cellSize);
+    } else {
+      wrap.scrollLeft = 0;
+    }
   }
 
   // ===== RENDER ALL =====

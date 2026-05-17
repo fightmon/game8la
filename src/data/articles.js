@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'baccarat-roadmap-tool-guide',
+    title: '百家樂看路模擬器怎麼用？手動記錄＋自動發牌完整教學',
+    excerpt: 'GAME8LA 百家樂看路模擬器操作教學：手動輸入邊玩邊記錄、自動發牌練習看路、四條路即時繪製、統計數據一目了然。附操作截圖、實戰技巧與常見問題。',
+    category: 'baccarat',
+    categoryLabel: '工具教學',
+    badgeType: 'featured',
+    date: '2026-05-16',
+    views: 0,
+    tags: ['最新', '教學', '工具'],
+    icon: 'monitor-smartphone',
+    gradient: 'linear-gradient(135deg,#0a1a0a,#1a3a2a,#39ff14)',
+    thumbnail: '/images/article-thumbs/thumb-roadmap-tool-guide.webp'
+  },
+  {
     slug: 'baccarat-roadmap-guide',
     title: '百家樂看路教學｜大路、大眼仔、小路、蟑螂路完整圖解 — 10 萬局模擬驗證',
     excerpt: '百家樂路單怎麼看？大路、大眼仔、小路、蟑螂路、長龍、單跳完整圖解教學。芭樂子先教你看路，再用 10 萬局蒙地卡羅模擬告訴你：看路到底能不能預測下一局。',
