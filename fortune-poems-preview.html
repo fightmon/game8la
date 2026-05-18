@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>芭樂子詩籤 — 60 首內容總覽</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Noto Sans TC", sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #f5d680;
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .stat {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .stat-great { background: linear-gradient(135deg,#8b0000,#d4190c); color: #ffd700; }
+  .stat-good { background: linear-gradient(135deg,#b35900,#e07000); color: #fff8e1; }
+  .stat-fair { background: linear-gradient(135deg,#2e7d32,#43a047); color: #e8f5e9; }
+  .stat-neutral { background: linear-gradient(135deg,#455a64,#607d8b); color: #eceff1; }
+  .stat-poor { background: linear-gradient(135deg,#4a148c,#7b1fa2); color: #e1bee7; }
+  .stat-bad { background: linear-gradient(135deg,#1a237e,#303f9f); color: #c5cae9; }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #333;
+  }
+  .section-great .section-title { color: #ff4444; border-color: #8b0000; }
+  .section-good .section-title { color: #e07000; border-color: #b35900; }
+  .section-fair .section-title { color: #43a047; border-color: #2e7d32; }
+  .section-neutral .section-title { color: #90a4ae; border-color: #455a64; }
+  .section-poor .section-title { color: #ce93d8; border-color: #4a148c; }
+  .section-bad .section-title { color: #7986cb; border-color: #1a237e; }
+
+  .card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #555; }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  .card-id {
+    font-size: 0.75rem;
+    color: #666;
+    min-width: 2rem;
+  }
+  .card-level {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .lv-great { background: #8b0000; color: #ffd700; }
+  .lv-good { background: #b35900; color: #fff8e1; }
+  .lv-fair { background: #2e7d32; color: #e8f5e9; }
+  .lv-neutral { background: #455a64; color: #eceff1; }
+  .lv-poor { background: #4a148c; color: #e1bee7; }
+  .lv-bad { background: #1a237e; color: #c5cae9; }
+
+  .poem {
+    font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+    font-size: 1.05rem;
+    line-height: 2;
+    color: #f5e6c8;
+    text-align: center;
+    white-space: pre-line;
+    padding: 0.5rem 0;
+  }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #444, transparent);
+    margin: 0.8rem 0;
+  }
+  .guava-label {
+    font-size: 0.8rem;
+    color: #8b6914;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .guava {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #d4c4a0;
+  }
+  @media (max-width: 600px) {
+    body { padding: 1rem 0.5rem; }
+    h1 { font-size: 1.4rem; }
+    .card { padding: 1rem; }
+    .poem { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🎋 芭樂子詩籤 — 60 首總覽</h1>
+<p class="subtitle">GAME8LA 線上擲筊「今日詩籤」完整內容</p>
+
+<div class="stats">
+  <span class="stat stat-great">大吉 ×10</span>
+  <span class="stat stat-good">中吉 ×12</span>
+  <span class="stat stat-fair">小吉 ×12</span>
+  <span class="stat stat-neutral">平 ×12</span>
+  <span class="stat stat-poor">小凶 ×8</span>
+  <span class="stat stat-bad">凶 ×6</span>
+</div>
+
+<!-- 大吉 -->
+<div class="section-great">
+<div class="section-title">大吉（10 首）</div>
+
+<div class="card"><div class="card-header"><span class="card-id">#1</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">順風揚帆千里行，
+雲開霧散見天晴。
+貴人相助逢時運，
+穩步向前事業成。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天的你像開了掛一樣，做什麼都順。但芭樂子提醒：順風的時候更要注意方向，別因為太嗨就忘了設停損。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#2</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">春回大地百花開，
+久旱逢甘露自來。
+把握今朝好時機，
+一步登天莫遲疑。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">等了很久的好消息可能今天會出現。芭樂子說：機會來了就接住，但別因為太興奮就 all-in——聰明人只押自己輸得起的。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#3</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">金鱗本非池中物，
+風雲際會展鵬程。
+厚積薄發今朝顯，
+滿載而歸笑盈盈。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">你之前的努力要開始回收了。芭樂子覺得你值得，但也提醒：贏的時候記得存一些起來，別全部再投回去。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#4</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">東風夜放花千樹，
+星光引路步不虛。
+心想事成非偶然，
+是你用功換來的。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">看起來像運氣好，其實是你夠努力。芭樂子難得不吐槽：今天的好結果是你應得的，好好享受。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#5</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">撥雲見日天地寬，
+前路平坦任馳騁。
+財運亨通人緣旺，
+趁勢而為莫觀望。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">財運和人緣今天都在線，適合推進重要的事。但芭樂子碎念一句：再好的運勢也撐不住亂花錢，量力而為。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#6</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">龍騰四海雲相隨，
+一呼百應氣勢威。
+今日出手皆有利，
+見好就收最上策。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天出手什麼都順，但最後一句是重點——見好就收。芭樂子看過太多人大吉的日子反而虧最多，因為太貪。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#7</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">明月高懸照前程，
+舊疾新愁皆已清。
+放手去做心中事，
+天時地利在此行。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">之前困擾你的事會有轉機。芭樂子翻譯：可以往前走了，但走之前先確認鞋帶有繫好——細節決定成敗。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#8</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">旭日東昇光萬丈，
+鴻運當頭福自來。
+心存正念行正道，
+所求皆得樂開懷。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">想要的東西有機會到手。芭樂子加一句：正念很重要，用歪招得到的東西遲早要還，不如走正路贏得踏實。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#9</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">千帆過盡終有岸，
+守得雲開見月明。
+往日辛酸今日甜，
+回首來時路已平。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">苦日子快到頭了。芭樂子看你一路走來不容易，今天神明發了張好牌給你——但記住，好牌也要會打。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#10</span><span class="card-level lv-great">大吉</span></div>
+<div class="poem">春風得意馬蹄疾，
+一朝逢源事事吉。
+腳踏實地向前行，
+天道酬勤不負你。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天適合衝刺，但衝刺不是瞎衝。芭樂子：把你的計畫拿出來，一步一步執行，今天的運氣會放大你的努力。</div></div>
+</div>
+
+<!-- 中吉 -->
+<div class="section-good">
+<div class="section-title">中吉（12 首）</div>
+
+<div class="card"><div class="card-header"><span class="card-id">#11</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">和風送暖入庭階，
+小有收穫心不壞。
+莫嫌進度稍嫌慢，
+穩紮穩打終有成。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天不會大爆發，但會有小進展。芭樂子覺得這樣剛好——穩穩的贏比大起大落健康多了。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#12</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">細水長流勝急湍，
+耐心等候莫心酸。
+時機未到先蓄力，
+一鳴驚人在明天。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天是蓄力日，不是爆發日。芭樂子說：把今天當成存款，明天提領的時候你會感謝自己。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#13</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">半輪明月掛天邊，
+事情過半已向前。
+再添把勁莫鬆懈，
+圓滿結局在眼前。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">你做的事已經完成一半了，別在這個時候放棄。芭樂子：最怕的不是做不到，是快到終點的時候自己先跑掉。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#14</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">人逢好事精神爽，
+小財進帳笑開顏。
+雖非橫財從天降，
+積少成多也是錢。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">可能會有小錢進帳——不是中樂透那種，但夠你開心一下。芭樂子：小贏是最好的贏，因為你不會因此失控。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#15</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">桃花開在二月天，
+貴人指路在身邊。
+虛心求教不吃虧，
+借力使力省三年。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天有人會給你有用的建議，別嘴硬不聽。芭樂子：免費的忠告是最貴的資產，前提是你要聽得進去。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#16</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">山窮水盡疑無路，
+轉個彎來柳暗花。
+換個角度想問題，
+答案早已在腳下。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">覺得卡住了？換個方向看看。芭樂子：很多時候不是沒路，是你一直盯著同一面牆看。轉身試試。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#17</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">船到橋頭自然直，
+別把煩惱往心擠。
+今天做好今天事，
+明日自有明日計。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">別想太遠，先把今天的事做好。芭樂子：焦慮來自於你同時想了太多事，一次處理一件就好。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#18</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">雨過天青雲破處，
+心頭煩惱漸消除。
+好運不必向外求，
+腳踏實地自有福。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">最近的壓力會慢慢減輕。芭樂子：好運不是天上掉下來的，是你把地基打穩之後，自然長出來的。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#19</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">三分天註定七分拼，
+勤能補拙莫怨命。
+今日播種明日收，
+汗水不會白白淋。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">你的努力會有回報的，只是可能不是今天。芭樂子：期望值是正的就繼續做，別管單次結果。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#20</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">秋收冬藏有時節，
+萬事皆有好時機。
+今日適合打基礎，
+來年豐收在此時。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">現在不是收割的時候，是播種的時候。芭樂子：別急著要結果，先把基本功做好，時間會站在你這邊。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#21</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">江上清風山間月，
+不花一錢得自然。
+知足常樂非空話，
+回頭看看你有的。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">你已經比很多人幸運了，只是你忘了數。芭樂子：偶爾停下來盤點一下自己擁有的，你會發現你其實滿富有的。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#22</span><span class="card-level lv-good">中吉</span></div>
+<div class="poem">新芽初綻向陽開，
+小小進步莫輕待。
+每日精進一點點，
+回首已是大不同。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">不要嫌進步太小。芭樂子算過：每天進步 1%，一年後你會是現在的 37 倍。數學不會騙你。</div></div>
+</div>
+
+<!-- 小吉 -->
+<div class="section-fair">
+<div class="section-title">小吉（12 首）</div>
+
+<div class="card"><div class="card-header"><span class="card-id">#23</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">淡淡清風拂面來，
+不驚不喜也不壞。
+小事順心大事穩，
+平安度日最自在。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天不會有什麼大事，但小事都會順。芭樂子：平平安安的一天其實就是好日子，你只是習慣了所以沒感覺。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#24</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">花開半朵留有餘，
+事成七分莫強求。
+得意之時要收斂，
+留得後路好回頭。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天能拿到七八分的成果就該收了，別貪那最後兩分。芭樂子：100 分的貪心通常換來 0 分的結局。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#25</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">行路慢慢亦到站，
+急不來的就別趕。
+今天適合養精神，
+明天才有力氣戰。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天適合休息和充電，不適合硬拼。芭樂子：休息不是偷懶，是為了下一輪做準備。連手機都要充電了，何況是你。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#26</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">一杯清茶一本書，
+閒來無事最清福。
+莫羨他人風光日，
+你有你的好節奏。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">別看別人贏錢就眼紅。芭樂子：每個人的時區不一樣，有人先贏不代表你會輸，按自己的節奏走就好。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#27</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">雲淡風輕好天氣，
+宜守不宜攻今日。
+手中有牌慢慢打，
+不出錯就是贏棋。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天不要主動出擊，守好現有的就對了。芭樂子：有時候「不虧」就是最好的策略，別小看防守的力量。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#28</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">小橋流水有人家，
+粗茶淡飯也是佳。
+莫道日子太平凡，
+平凡之中藏繁華。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">覺得生活很無聊？那代表你沒有在踩雷，這是好事。芭樂子：無聊的日子是最安全的日子。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#29</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">守株待兔非上策，
+但今日靜觀其變。
+等待不是什麼都不做，
+是蓄力等對的時間。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天不是行動日，是觀察日。芭樂子：看別人先動，你再決定要不要跟。資訊差就是你的優勢。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#30</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">天邊微光已露白，
+好事將來莫著急。
+再等一等就到了，
+提前動手反壞事。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">快了快了，但還差一點。芭樂子：最後一哩路最難走，但也最不該放棄。再撐一下。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#31</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">飯要一口一口吃，
+路要一步一步走。
+今天不求跑多快，
+只求方向沒走偏。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">方向對了，速度慢一點沒關係。芭樂子：跑錯方向的人越努力越慘，你至少方向是對的。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#32</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">池中錦鯉悠然游，
+不爭上流自風流。
+今日隨緣不強求，
+該來的擋也擋不住。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天隨緣就好，不用太用力。芭樂子：你越想抓住什麼，它跑得越快。放輕鬆，反而會有驚喜。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#33</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">手握餘糧心不慌，
+進退之間有主張。
+小賺小贏今日份，
+積沙成塔慢慢來。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天可能會有小小的收穫。芭樂子：不要因為贏太少就不開心，那些大虧的人很羨慕你現在的處境。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#34</span><span class="card-level lv-fair">小吉</span></div>
+<div class="poem">燈火闌珊處有人，
+別急著找往前奔。
+今天適合整理心，
+想清楚了再出門。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天適合想事情，不適合做決定。芭樂子：倉促的決定通常都是爛決定，給自己一天的緩衝。</div></div>
+</div>
+
+<!-- 平 -->
+<div class="section-neutral">
+<div class="section-title">平（12 首）</div>
+
+<div class="card"><div class="card-header"><span class="card-id">#35</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">天地悠悠日月長，
+今日無事也無傷。
+既無大喜亦無憂，
+平平淡淡最吉祥。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天就是普通的一天。芭樂子：「普通」在統計學裡叫「均值回歸」，大部分的日子本來就該是這樣。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#36</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">不上不下在中間，
+不好不壞剛剛好。
+人生大半是如此，
+接受平凡是修行。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天沒有驚喜也沒有驚嚇。芭樂子：如果你覺得無聊，那恭喜你，代表你的生活很穩定。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#37</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">風不起浪水不波，
+萬事如常過一天。
+別嫌日子太安靜，
+多少人求之不得。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">什麼事都沒發生。芭樂子：你知道嗎？全世界有一半以上的人希望今天什麼事都別發生。你正在過他們夢想的生活。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#38</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">走過路過不要錯過，
+但今天沒什麼好過。
+平安就好別太貪，
+明天又是新一天。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天沒有特別的訊息。芭樂子：不是每天都要轟轟烈烈，安安靜靜的過完也是一種成就。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#39</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">中庸之道不偏移，
+求穩不求出奇蹟。
+守好本分做好事，
+日子自然不會差。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天適合做例行的事，不適合冒險。芭樂子：把該做的做完，不加碼不亂來，這就是最好的策略。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#40</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">白雲蒼狗變幻多，
+今日且做今日活。
+明天的事明天說，
+想太多反而蹉跎。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">別想太遠的事，先過好今天。芭樂子：過度規劃跟完全不規劃一樣危險，今天就做今天的份就好。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#41</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">一日三餐一張床，
+簡簡單單也無妨。
+追求太多心會累，
+放下執念最輕鬆。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天的籤要你放輕鬆。芭樂子：你是不是最近想太多了？有些事不是想得越多就越好，適時放空也是實力。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#42</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">春種秋收有定時，
+揠苗助長反傷之。
+今天的你不必急，
+時間到了就開花。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">急也沒用。芭樂子：你不能讓花提早開，但你可以確保土壤夠肥沃。做好準備，然後等。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#43</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">潮起潮落自有時，
+漲了會退退會回。
+今天不漲也不退，
+明天再看也不遲。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天是盤整日。芭樂子用股市比喻：不是每天都有行情，沒行情的時候最聰明的做法就是不動。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#44</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">棋逢敵手將遇良，
+不進不退兩相當。
+今日勝負難分曉，
+不如握手改天量。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天碰到的事不太容易分出結果，先擱著吧。芭樂子：硬要在今天決定的話，大概率是個爛決定。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#45</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">柴米油鹽醬醋茶，
+平凡日子有牽掛。
+把小事做好做滿，
+大事來了你不怕。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天就把手邊的小事處理好。芭樂子：能把小事做好的人，大事來了也不會慌。這是基本功。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#46</span><span class="card-level lv-neutral">平</span></div>
+<div class="poem">四季更迭各有天，
+今天只是尋常篇。
+翻過此頁別回頭，
+下一章會更好看。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天就是書裡比較平淡的一頁。芭樂子：但你知道嗎，每本好書都需要鋪墊的段落，不然高潮就不精彩了。</div></div>
+</div>
+
+<!-- 小凶 -->
+<div class="section-poor">
+<div class="section-title">小凶（8 首）</div>
+
+<div class="card"><div class="card-header"><span class="card-id">#47</span><span class="card-level lv-poor">小凶</span></div>
+<div class="poem">烏雲遮月暫無光，
+行事宜慎不宜狂。
+今天少說多觀察，
+靜待風頭過了再上場。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天小心一點。芭樂子：不是叫你不要做事，是叫你做事之前多想三秒。三秒就好，很多錯誤就能避開。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#48</span><span class="card-level lv-poor">小凶</span></div>
+<div class="poem">逆風行船費力多，
+今天做事卡一些。
+別急別躁別發火，
+過了這關就海闊。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">事情可能不太順，但不嚴重。芭樂子：逆風的時候不要硬衝，縮小帆面等風過去，你還是那艘船。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#49</span><span class="card-level lv-poor">小凶</span></div>
+<div class="poem">花錢容易賺錢難，
+今天荷包要看緊。
+衝動消費最傷財，
+想買的東西明天再算。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天不適合花大錢。芭樂子：如果你今天很想買什麼，先等 24 小時。還是想買的話再買，你會發現一半的東西你都不想買了。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#50</span><span class="card-level lv-poor">小凶</span></div>
+<div class="poem">說者無心聽者意，
+今天言語要小心。
+話到嘴邊留半句，
+禍從口出古有訓。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天講話容易踩雷。芭樂子：在你按送出鍵之前，先想一下這句話截圖傳出去會不會害你。能過這關的話再送出。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#51</span><span class="card-level lv-poor">小凶</span></div>
+<div class="poem">好事多磨莫灰心，
+暫時受阻非終局。
+退後一步看全局，
+迂迴前進也是進。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天會碰到一些小障礙。芭樂子：障礙不是要你停下來，是要你繞路。繞路有時候反而能看到不一樣的風景。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#52</span><span class="card-level lv-poor">小凶</span></div>
+<div class="poem">燈下看花花似霧，
+今天判斷打折扣。
+重要決定先緩緩，
+資訊不夠別亂投。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天的判斷力可能不太準。芭樂子：資訊不足的時候做決定，跟蒙著眼睛過馬路差不多。等看清楚再走。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#53</span><span class="card-level lv-poor">小凶</span></div>
+<div class="poem">小人暗箭防不勝，
+今天凡事留個心。
+天上掉餡餅別接，
+十之八九是陷阱。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天如果有「太好的事」找上你，要特別小心。芭樂子：免費的東西最貴，高報酬的東西最危險。你懂的。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#54</span><span class="card-level lv-poor">小凶</span></div>
+<div class="poem">船漏偏逢打頭風，
+越是著急越不通。
+深呼吸後再想想，
+冷靜才是破局功。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天可能會有連環小衰。芭樂子：越急越亂，越亂越錯。先停下來，喝杯水，深呼吸三次，再繼續。</div></div>
+</div>
+
+<!-- 凶 -->
+<div class="section-bad">
+<div class="section-title">凶（6 首）</div>
+
+<div class="card"><div class="card-header"><span class="card-id">#55</span><span class="card-level lv-bad">凶</span></div>
+<div class="poem">風雨交加路難行，
+今日不宜冒險行。
+退守為上莫逞強，
+留得青山有柴燒。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天真的不適合冒險。芭樂子認真的：不管是投資、賭博還是人生大決定，今天都先暫停。保住本金比什麼都重要。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#56</span><span class="card-level lv-bad">凶</span></div>
+<div class="poem">迷霧重重辨不清，
+此時前進反後行。
+停下腳步等天明，
+硬闖只會更迷路。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天的方向感會很差。芭樂子：看不清楚的時候，站著不動比亂走安全。等看清楚了再出發，也不遲。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#57</span><span class="card-level lv-bad">凶</span></div>
+<div class="poem">杯弓蛇影疑心生，
+越想越怕越不行。
+抽到凶籤別自嚇，
+它是提醒不是命。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">抽到凶不代表今天會出事。芭樂子：這是一個「多注意」的信號，不是「完蛋了」的判決。你的命運不會被一張籤決定——除非你自己嚇自己。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#58</span><span class="card-level lv-bad">凶</span></div>
+<div class="poem">急流暗礁在前方，
+看似平靜藏風浪。
+今日凡事慢三拍，
+能閃的雷就別去撞。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天可能有看不到的風險。芭樂子：慢不是問題，撞到才是問題。所有能延後的大決定，就延後。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#59</span><span class="card-level lv-bad">凶</span></div>
+<div class="poem">失馬焉知非福報，
+今天雖凶有後招。
+壞事有時是轉折，
+跌倒之後看你跑。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天可能不順利，但芭樂子說句真心話：很多人生轉折都是從一個低谷開始的。重點不是你跌倒了，是你怎麼爬起來。</div></div>
+
+<div class="card"><div class="card-header"><span class="card-id">#60</span><span class="card-level lv-bad">凶</span></div>
+<div class="poem">天黑請閉眼休息，
+明日太陽照常起。
+一時低潮非永遠，
+你比你想的更有力。</div>
+<div class="divider"></div>
+<div class="guava-label">🌿 芭樂子解籤</div>
+<div class="guava">今天就到這裡吧，別硬撐。芭樂子：壞日子的最佳策略就是趕快讓它過去。早點睡，明天又是新的一天。你比你以為的還要堅強。</div></div>
+</div>
+
+</body>
+</html>
