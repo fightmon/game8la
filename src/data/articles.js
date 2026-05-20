@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'seth2-buy-free-game-guide',
+    title: '戰神賽特2 買免遊划算嗎？芭樂子用數據拆解：什麼時候該買、什麼時候千萬別買',
+    excerpt: '賽特2 買免遊 x100 注一把梭，到底划不划算？芭樂子從 RTP 96.89%、普通免遊 vs 覺醒之力差異、預算分配四級距、五條生存守則完整拆解，告訴你什麼時候該買、什麼時候乖乖自旋。',
+    category: 'slots',
+    categoryLabel: '老虎機實戰',
+    badgeType: 'featured',
+    date: '2026-05-19',
+    views: 12,
+    tags: ['最新', '精選', '實戰'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#1a0a2e,#2d1b50,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-seth2-buy-free-game.webp'
+  },
+  {
     slug: 'baccarat-roadmap-tool-guide',
     title: '百家樂看路模擬器怎麼用？手動記錄＋自動發牌完整教學',
     excerpt: 'GAME8LA 百家樂看路模擬器操作教學：手動輸入邊玩邊記錄、自動發牌練習看路、四條路即時繪製、統計數據一目了然。附操作截圖、實戰技巧與常見問題。',

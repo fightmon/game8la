@@ -1,0 +1,370 @@
+---
+import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ToolBox from '../../components/ToolBox.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '買免遊的 RTP 跟正常轉一樣嗎？', a: 'ATG 自己公布的數字就是 96.89%，買免遊跟正常轉一模一樣，沒什麼好爭的。你花 100x 只是跳過等 Scatter 的過程，不會因此「更好贏」，期望值完全相同。' },
+  { q: '買免遊一定會進覺醒之力嗎？', a: '想得美。按下去之後系統隨機決定你進「普通免遊」還是「覺醒之力」，你選不了。覺醒之力才有分裂跟鎖定，爆分天花板差很多。所以你按 BUY 之前，先做好「進普通版只回收兩成」的心理準備。' },
+  { q: '一直買免遊會不會被系統偵測？', a: '不會，別想太多。每一轉都是獨立事件，RNG 不知道你上一把幹了什麼，也不在乎你花了多少。你買 100 次跟自旋觸發 100 次，期望值一模一樣。那些「系統會記住你」的說法，都是玄學。想了解 RNG 怎麼運作的，可以看<a href="/articles/seth-rng-myth-busted/">這篇 RNG 科普</a>。' },
+  { q: '免遊裡面的倍數球會累加嗎？', a: '會，這也是大獎的來源。免遊期間倍數球不會每轉清除，會持續疊上去（x2→x3→x5→...→x500）。覺醒之力更猛——分裂技能把一顆球拆成好幾顆，鎖定技能把球釘在盤面不消失。所以才說覺醒之力跟普通免遊根本是兩個世界。' },
+  { q: '賽特2 和雷神之錘2 的買免遊哪個 CP 值高？', a: '沒有標準答案，因為機制完全不同。賽特2 就一個價位 100x，按下去聽天由命；雷神有三段式（100x/500x/4000x），你可以自己選要賭多大。喜歡一翻兩瞪眼就選賽特，喜歡自己掌控預算就選雷神。長期 RTP 差不多，挑你打起來爽的就好。詳細比較看<a href="/articles/atg-seth-vs-thor-hammer/">這篇</a>。' },
+  { q: '買免遊的最佳下注金額是多少？', a: '沒有「最佳金額」這種東西，只有「你虧得起的金額」。<br/><br/>芭樂子的原則很簡單：單次買免遊不超過今日預算的 20%。帶 5,000 就最多下注 10 元（買一次 = 1,000 元），至少留 5 次機會。<br/><br/>一次梭哈的人，通常也是最快離開的人。用<a href="/tools/bankroll-calculator/">資金管理計算器</a>算算你的停損線。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/seth2-buy-free-game-guide/"
+  title="戰神賽特2 買免遊划算嗎？芭樂子用數據幫你算清楚"
+  description="戰神賽特2 買免遊到底該不該買？芭樂子從 RTP、期望值、資金配比、實戰情境四個角度拆解，告訴你什麼時候買、什麼時候不該買、預算怎麼分配最聰明。"
+  image="https://game8la.com/images/articles/seth2-buy-fg-cover.webp"
+  datePublished="2026-05-19"
+  dateModified="2026-05-19"
+  wordCount={2800}
+  timeRequired="PT12M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '賽特2 買免遊指南', url: 'https://game8la.com/articles/seth2-buy-free-game-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="戰神賽特2 買免遊划算嗎？什麼時候該買、什麼時候不該買 - GAME8LA" description="戰神賽特2 買免遊到底該不該買？芭樂子從 RTP、期望值、資金配比、實戰情境拆解，告訴你什麼時候買、什麼時候不買、預算怎麼分配最聰明。附玩家預算分配表與 FAQ。" ogImage="https://game8la.com/images/articles/seth2-buy-fg-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 賽特2 買免遊指南</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-19 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 12 分鐘 ｜
+      <Icon name="refresh-cw" /> 最近更新：2026-05-19
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <article class="article-content">
+      <h1 style="font-size:2rem;line-height:1.3">戰神賽特2 買免遊划算嗎？芭樂子用實戰角度幫你想清楚</h1>
+      <p class="article-subtitle">不是叫你不要買，是叫你想清楚再買</p>
+      <img src="/images/articles/seth2-buy-fg-cover.webp" alt="芭樂子站在戰神賽特2 BUY 按鈕前，周圍環繞倍數球" width="1200" height="669" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+
+      <p style="color:var(--text-muted);font-size:0.95rem">「買免遊到底划不划算？」「正常轉跟買的差在哪？」「預算不多到底該不該按 BUY？」</p>
+      <p style="color:var(--guava-green);font-weight:700;font-size:1.05rem">如果你腦中有以上任何一個問號，這篇就是為你寫的。</p>
+      <p style="color:var(--text-secondary)">芭樂子不會跟你說「一定要買」或「絕對別碰」——那是賣課的才會講的話。這篇從數學、預算、心理三個角度拆，幫你自己判斷什麼時候按 BUY 是合理的，什麼時候按下去只是在燒錢。</p>
+
+      <!-- 快速工具入口 -->
+      <div class="quick-tool-bar">
+        <span>先去試打再回來看：</span>
+        <a href="/games/seth-2/">賽特2 免費試玩</a>
+      </div>
+
+      <!-- TOC -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">30 秒結論：該不該買</a></li>
+          <li><a href="#s2">買免遊到底在買什麼</a></li>
+          <li><a href="#s3">正常轉 vs 買免遊：差在哪</a></li>
+          <li><a href="#s4">什麼時候買下去不算腦衝</a></li>
+          <li><a href="#s5">這三種狀況拜託別買</a></li>
+          <li><a href="#s6">預算怎麼分配才不會一輪就陣亡</a></li>
+          <li><a href="#s7">芭樂子的買免遊生存守則</a></li>
+          <li><a href="#s8">順便跟雷神之錘2 比一下</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ====== 1. 30 秒結論 ====== -->
+      <h2 id="s1" style="margin-top:2.5rem">1. 30 秒結論：該不該買</h2>
+      <p>廢話不多說，先講結論：</p>
+      <div class="card" style="border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <p style="margin:0 0 0.6rem"><strong>買免遊不會讓你更好贏，也不會讓你更難贏。</strong>RTP 跟正常轉完全一樣，都是 96.89%。你花的那個 100x，買的不是「更高的中獎率」，而是「跳過乾旱期直接打 boss」的門票。</p>
+        <p style="margin:0">所以真正的問題從來不是「划不划算」，而是——<strong>你的預算撐得住幾次？</strong></p>
+      </div>
+      <p>看不懂沒關係，下面芭樂子一個一個拆給你聽。</p>
+
+      <!-- ====== 2. 買免遊在買什麼 ====== -->
+      <h2 id="s2" style="margin-top:2.5rem">2. 買免遊到底在買什麼</h2>
+      <p>賽特2 的 Buy Bonus 規則其實很單純，一張表就講完了：</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/seth2/seth2-buy-feature.webp" alt="戰神賽特2 購買特色介面——投注額 x100 直接進入免費遊戲" width="1200" height="778" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">購買免遊介面：投注額 x100，按下去隨機進普通免遊或覺醒之力</figcaption>
+      </figure>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <table>
+          <thead><tr><th>項目</th><th>內容</th></tr></thead>
+          <tbody>
+            <tr><td>價格</td><td>投注額 × 100</td></tr>
+            <tr><td>效果</td><td>直接進入免費遊戲（跳過等 Scatter）</td></tr>
+            <tr><td>免遊類型</td><td>隨機進入「普通免遊」或「覺醒之力」</td></tr>
+            <tr><td>RTP</td><td>96.89%（跟正常轉相同）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>白話翻譯：你下注 10 元，按一下 BUY 就是噴 1,000 元。按下去之後系統丟硬幣決定你進「普通版」還是「覺醒之力版」——對，你沒得選，就是這麼刺激。</p>
+
+      <div class="card" style="border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <h3 style="color:var(--gold);margin-top:0">💡 普通免遊跟覺醒之力差在哪？</h3>
+        <p style="margin:0">覺醒之力有<strong>分裂</strong>（一顆倍數球拆成好幾顆）和<strong>鎖定</strong>（倍數球釘在盤面不消失）兩種技能，爆分天花板高到離譜（最大 x81,000）。普通版就是基本的免費旋轉，回收通常……比較心酸。同樣花 1,000 元按 BUY，有人回收 300 倍爽翻天，有人回收 5 倍想砸手機——差別就在你進了哪個版本，加上倍數球賞不賞臉。</p>
+      </div>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/seth2-buy-fg-buy-button.webp" alt="芭樂子指著老虎機上的 BUY 按鈕，準備按下購買免費遊戲" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">芭樂子：這顆按鈕按下去之前，先確認你口袋夠深</figcaption>
+      </figure>
+
+      <!-- ====== 3. 正常轉 vs 買免遊 ====== -->
+      <h2 id="s3" style="margin-top:2.5rem">3. 正常轉 vs 買免遊：差在哪</h2>
+      <p>先破兩個迷思：「買免遊比較容易爆」是錯的，「正常轉比較穩」也是錯的。兩個 RTP 一模一樣，別再自己騙自己了。直接看表：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <table>
+          <thead><tr><th>比較項目</th><th>正常轉</th><th>買免遊</th></tr></thead>
+          <tbody>
+            <tr><td>RTP</td><td>96.89%</td><td>96.89%</td></tr>
+            <tr><td>進免遊方式</td><td>集滿 4 個 Scatter</td><td>花 100x 直接進</td></tr>
+            <tr><td>等待成本</td><td>平均需 80~150 轉（消耗 80x~150x）</td><td>固定 100x</td></tr>
+            <tr><td>控制感</td><td>慢慢等，有心理準備時間</td><td>按一下就決定，腎上腺素噴發</td></tr>
+            <tr><td>資金消耗節奏</td><td>慢慢磨，偶爾主遊戲也會小中</td><td>一次噴 100x，沒中就是沒中</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>重點來了：你正常轉，平均要燒 80～150 轉才等到一次免遊。下注 10 元就是 800～1,500 元的「等待成本」。買免遊固定 1,000 元，剛好落在中間。</p>
+      <p>所以數學上，<strong>買跟不買的成本效率差不多</strong>。差別只在心理：正常轉是溫水煮青蛙，偶爾主遊戲小贏讓你覺得「好像還行」；買免遊是一刀下去，中了很爽，沒中很幹。你是哪種體質，自己最清楚。</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:1.5rem 0">
+        <div class="card" style="text-align:center">
+          <img loading="lazy" src="/images/seth2/seth2-free-game.webp" alt="戰神賽特2 普通免費遊戲觸發畫面" width="993" height="778" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--guava-green)">
+          <p style="font-size:0.82rem;color:var(--text-muted);margin:0.5rem 0 0">普通免遊：集 4 個聖甲蟲 Scatter 觸發</p>
+        </div>
+        <div class="card" style="text-align:center">
+          <img loading="lazy" src="/images/seth2/seth2-awakening-power.webp" alt="戰神賽特2 覺醒之力模式畫面" width="993" height="778" style="width:100%;height:auto;border-radius:10px;border:2px solid var(--gold)">
+          <p style="font-size:0.82rem;color:var(--text-muted);margin:0.5rem 0 0">覺醒之力：含黃金聖甲蟲才會觸發，才是大獎來源</p>
+        </div>
+      </div>
+
+      <!-- ====== 4. 什麼時候該買 ====== -->
+      <h2 id="s4" style="margin-top:2.5rem">4. 什麼時候買下去不算腦衝</h2>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">午休只有 30 分鐘，不想浪費</strong><br/>時間有限的時候，正常轉可能連一次免遊都等不到。你坐在那邊看主遊戲轉了 100 轉結果什麼都沒發生，午休就結束了。買免遊直接跳到重頭戲，至少你有「體驗過」的感覺，不會帶著遺憾回去上班。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">口袋夠深，至少能買 5 次</strong><br/>這是最關鍵的門檻。買免遊是高波動操作，一次沒中是常態，你得有夠多的「命」來讓運氣有機會出現。帶 5,000 元、每注 10 元，你有 5 條命——勉強及格。帶 10,000 元有 10 條命，比較像話。只有 1-2 條命？那你不是在玩，是在賭命。</p>
+        <p style="margin:0"><strong style="color:var(--guava-green)">已經空轉 200 轉，快要發瘋了</strong><br/>轉了 200 轉都沒看到 Scatter，已經燒掉 2,000 元。花 1,000 買免遊，期望值跟繼續等是一樣的——但至少你不用再忍受「再 50 轉一定會來」的自我催眠。不過要提醒你：這不代表「轉越久越該買」。每一轉都是獨立事件，老虎機不欠你的，它沒有記憶。</p>
+      </div>
+
+      <!-- ====== 5. 什麼時候別買 ====== -->
+      <h2 id="s5" style="margin-top:2.5rem">5. 這三種狀況，拜託別買</h2>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--guava-pink);background:rgba(236,72,153,0.06)">
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-pink)">口袋只剩一兩次的錢</strong><br/>你只剩 2,000 元，買一次就去掉一半。進了普通免遊只回收 15 倍——1,000 變 150，然後你今天就可以收工了。口袋淺的時候，正常轉反而更聰明，因為主遊戲偶爾的小中獎至少能讓你多活幾轉。活著才有機會翻盤，死了就什麼都沒有。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-pink)">你正在想「再一次就回來了」</strong><br/>「剛虧了 3,000，買一次免遊搞不好就回來了」——恭喜你，這句話是虧損加速器的啟動口令。追損的人通常會加大注額，原本下注 10 元的突然跳去 50 元，買一次免遊就是 5,000 元。中了你覺得自己天縱英才，沒中你連明天的便當錢都沒了。芭樂子說真的，這種劇本我看過太多了。</p>
+        <p style="margin:0"><strong style="color:var(--guava-pink)">你連覺醒之力是什麼都不知道</strong><br/>分裂是什麼？鎖定是什麼？倍數球怎麼累加？如果這些問題你答不出來，就先去<a href="/games/seth-2/">試玩版</a>摸清楚。搞懂規則再花真錢，不然你連「剛剛那局到底是贏是輸」都看不明白，更別說判斷該不該繼續買。</p>
+      </div>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/seth2-buy-fg-warning.webp" alt="芭樂子雙手交叉警告 — 追損、梭哈、再一次就好都是虧損加速器" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">看到自己嘴裡冒出這三句話的時候，就是該關遊戲的時候</figcaption>
+      </figure>
+
+      <!-- ====== 6. 預算分配 ====== -->
+      <h2 id="s6" style="margin-top:2.5rem">6. 預算怎麼分配才不會一輪就陣亡</h2>
+      <p>不同口袋深度，打法完全不同。芭樂子直接幫你分好：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <table>
+          <thead><tr><th>今日預算</th><th>建議注額</th><th>買免遊成本</th><th>可買次數</th><th>建議打法</th></tr></thead>
+          <tbody>
+            <tr><td>2,000 元</td><td>5 元</td><td>500 元</td><td>4 次</td><td>先正常轉 50 轉暖機，沒觸發再買 2 次，留 1,000 保命</td></tr>
+            <tr><td>5,000 元</td><td>10 元</td><td>1,000 元</td><td>5 次</td><td>買 3 次看看手氣，剩下正常轉。全部正常轉也行</td></tr>
+            <tr><td>10,000 元</td><td>10 元</td><td>1,000 元</td><td>10 次</td><td>買 5 次 + 正常轉 500 轉，混著打最穩</td></tr>
+            <tr><td>20,000 元</td><td>20 元</td><td>2,000 元</td><td>10 次</td><td>命夠多，怎麼打都行。但停損線還是要設</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="border-left:4px solid var(--guava-pink);background:rgba(236,72,153,0.06)">
+        <p style="margin:0">⚠️ <strong>芭樂子的底線原則：</strong>不管你帶多少，「今天最多虧多少」這個數字在你打開遊戲之前就要決定好。到了就走，不要回頭。買免遊最可怕的從來不是沒中，是沒中之後你開始追。</p>
+      </div>
+
+      <!-- ====== 7. 生存守則 ====== -->
+      <h2 id="s7" style="margin-top:2.5rem">7. 芭樂子的買免遊生存守則</h2>
+      <p>以下五條不是「建議參考」，是「活下來的基本功」：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">① 單次不超過總預算的 20%</strong><br/>帶 5,000 就最多下 10 元買一次。剩下的錢是你的血條，別一次噴光然後在那邊後悔。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">② 停損線先設好再開打</strong><br/>「今天最多虧幾元」，開遊戲前就寫在便條紙上。到了就關。不是關分頁，是把手機收進包包，出門走走。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">③ 贏了先把一半收起來</strong><br/>買免遊噴了 300 倍（下注 10 元 = 3,000 元），先把 1,500 放進口袋。不然你一定會全部輸回去，芭樂子跟你打賭。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:var(--guava-green)">④ 氣頭上別碰 BUY</strong><br/>虧完正在火大？去喝杯水、去尿尿、去看個 YouTube 都好。情緒激動的時候做的每一個決定，事後回想都會想打自己。</p>
+        <p style="margin:0"><strong style="color:var(--guava-green)">⑤ 先用試玩版把手弄髒</strong><br/><a href="/games/seth-2/">Game8la 的賽特2 試玩</a>機制跟正式版一模一樣，差別只在不花真錢。先按 10 次 BUY，感受一下「進覺醒之力的狂喜」和「進普通免遊的心寒」之間的溫差，心理準備好了再拿真錢上。</p>
+      </div>
+
+      <!-- 中段 CTA -->
+      <div class="mid-cta">
+        <p>🎰 看完守則，先去試打看看你的心臟承受得住嗎 — <strong>免費試玩，不花一毛錢</strong></p>
+        <a href="/games/seth-2/" class="mid-cta-btn">賽特2 免費試玩 →</a>
+        <a href="/tools/bankroll-calculator/" class="mid-cta-btn mid-cta-btn--alt" style="margin-top:0.5rem">資金管理計算器 →</a>
+      </div>
+
+      <!-- ====== 8. 跟雷神比 ====== -->
+      <h2 id="s8" style="margin-top:2.5rem">8. 順便跟雷神之錘2 比一下</h2>
+      <p>都聊到買免遊了，不拉雷神出來比一下說不過去：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <table>
+          <thead><tr><th>比較項目</th><th>賽特2</th><th>雷神之錘2</th></tr></thead>
+          <tbody>
+            <tr><td>買免遊價格</td><td>100x（就一個價位）</td><td>100x / 500x / 4000x（三段式菜單）</td></tr>
+            <tr><td>選擇彈性</td><td>按下去聽天由命</td><td>自己挑要花多少</td></tr>
+            <tr><td>爆分天花板</td><td>x81,000</td><td>x25,000</td></tr>
+            <tr><td>RTP</td><td>96.89%</td><td>97.60%</td></tr>
+            <tr><td>買到最強版機率</td><td>隨機（要看臉）</td><td>直接買（500x 或 4000x）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>講白了：<strong>賽特2 是樂透型</strong>——花 100x 然後祈禱進覺醒之力，進了就有機會核爆，沒進就認命。<strong>雷神是點餐型</strong>——你可以選要花多少錢、進哪種等級的免遊，掌控感高很多，但天花板沒賽特2 那麼瘋。</p>
+      <p>喜歡「生死一瞬間」的快感就選賽特2，喜歡「我自己決定要投多少」的掌控感就選雷神。沒有誰比較好，只有誰比較適合你。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/seth2-buy-fg-compare.webp" alt="芭樂子坐在裁判椅上，左手舉賽特牌子右手舉雷神牌子" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">芭樂子的裁判結果：兩台都會讓你的錢包哭，但哭法不一樣</figcaption>
+      </figure>
+
+      <!-- ====== FAQ ====== -->
+      <h2 id="faq" style="margin-top:2.5rem">9. 常見問題 FAQ</h2>
+
+      <div class="faq-section">
+        {faqs.map(f => (
+          <div class="faq-item">
+            <button class="faq-q"><span>{f.q}</span><Icon name="chevron-down" /></button>
+            <div class="faq-a"><p set:html={f.a} /></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 分享 -->
+      <ShareButtons title="戰神賽特2 買免遊划算嗎？芭樂子用數據幫你算清楚" heading="🛡 擔心朋友盲目按 BUY？把這篇傳給他" />
+
+      <!-- 相關推薦 -->
+      <div class="card" style="margin:2rem 0;border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <h3 style="color:var(--guava-green);margin-top:0">📚 延伸閱讀</h3>
+        <p style="margin:0 0 0.5rem"><a href="/games/seth-2/">戰神賽特2 完整評測＋免費試玩</a> — 機制、RTP、覺醒技能完整拆解</p>
+        <p style="margin:0 0 0.5rem"><a href="/articles/atg-seth-vs-thor-hammer/">戰神賽特2 vs 雷神之錘2 完整比較</a> — 兩台熱門機台的全面對決</p>
+        <p style="margin:0 0 0.5rem"><a href="/articles/atg-seth-1-vs-2-comparison/">戰神賽特1代 vs 2代差在哪？</a> — 世代差異與機制升級</p>
+        <p style="margin:0 0 0.5rem"><a href="/articles/slots-rtp-guide/">老虎機 RTP 是什麼？</a> — 搞懂這個數字少虧一半</p>
+        <p style="margin:0"><a href="/tools/bankroll-calculator/">資金控管計算器</a> — 算出你的停損線</p>
+      </div>
+
+      <ManifestoBox />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 880px; margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+  }
+  .breadcrumb {
+    font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;
+  }
+  .breadcrumb a { color: var(--gold-light); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.82rem; color: var(--gold-light); text-decoration: none;
+    margin-bottom: 1rem;
+  }
+  .back-link:hover { color: var(--guava-green); }
+  .article-subtitle {
+    font-size: 1.1rem; color: var(--guava-green);
+    margin: -0.5rem 0 1.5rem; font-style: italic;
+  }
+  .article-content h2 {
+    font-size: 1.4rem; color: var(--text-primary);
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    margin-top: 2.5rem;
+  }
+  .article-content h3 { font-size: 1.15rem; color: var(--gold-light); margin-top: 1.5rem; }
+  .article-content p { color: var(--text-secondary); line-height: 1.85; margin: 0.8rem 0; font-size: 0.95rem; }
+  .article-content a { color: var(--gold-light); }
+  .article-content strong { color: var(--text-primary); }
+
+  .toc ol { padding-left: 1.2rem; margin: 0.5rem 0 0; }
+  .toc li { margin: 0.4rem 0; font-size: 0.9rem; }
+  .toc a { color: var(--gold-light); text-decoration: none; }
+  .toc a:hover { color: var(--guava-green); }
+
+  .mid-cta {
+    margin: 2rem 0; padding: 1.2rem 1.5rem; text-align: center;
+    background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(245,184,0,0.08));
+    border: 1px dashed var(--guava-green); border-radius: 12px;
+  }
+  .mid-cta p { margin: 0 0 0.8rem; font-size: 1rem; color: var(--text-primary); }
+  .mid-cta-btn {
+    display: inline-block; background: var(--guava-green); color: #0d1117 !important;
+    padding: 0.6rem 1.4rem; border-radius: 8px; font-weight: 700;
+    text-decoration: none !important; font-size: 0.95rem;
+    transition: filter 0.2s, transform 0.2s;
+  }
+  .mid-cta-btn:hover { filter: brightness(1.15); transform: translateY(-2px); }
+  .mid-cta-btn--alt {
+    background: transparent !important; color: var(--gold-light) !important;
+    border: 2px solid var(--gold-light);
+  }
+  .mid-cta-btn--alt:hover { background: rgba(245,184,0,0.15) !important; }
+
+  .quick-tool-bar {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+    padding: 0.8rem 1rem; margin: 1rem 0 1.5rem;
+    background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.2); border-radius: 10px;
+    font-size: 0.9rem;
+  }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a {
+    background: var(--guava-green); color: #000; font-weight: 700; padding: 0.35rem 0.8rem;
+    border-radius: 6px; text-decoration: none; font-size: 0.85rem;
+  }
+  .quick-tool-bar a:hover { filter: brightness(1.15); }
+
+  .faq-section { margin: 1.5rem 0; }
+  .faq-item {
+    border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 0.8rem; overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.2rem; background: var(--bg-card); border: none;
+    color: var(--text-primary); font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; text-align: left;
+  }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  }
+  .faq-item.open .faq-a { max-height: 600px; }
+  .faq-a p {
+    padding: 0 1.2rem 1rem; margin: 0;
+    font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;
+  }
+
+  .card {
+    padding: 1.2rem 1.5rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg-card);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: rgba(245,184,0,0.08); color: var(--gold-light); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; }
+  td { color: var(--text-secondary); }
+
+  @media (max-width: 640px) {
+    .container { padding: 1rem; }
+    .article-content h1 { font-size: 1.5rem; }
+    .article-content h2 { font-size: 1.2rem; }
+    .quick-tool-bar { flex-direction: column; align-items: flex-start; }
+    table { font-size: 0.8rem; }
+    th, td { padding: 0.5rem 0.6rem; }
+  }
+</style>

@@ -209,7 +209,7 @@ const faqs = [
       <div class="mid-cta">
         <p>🧪 看完路單教學，不如自己動手練 — <strong>按一下發牌，四條路即時畫給你看</strong></p>
         <a href="/tools/baccarat-roadmap/" class="mid-cta-btn">開始練習看路 →</a>
-        <a href="/tools/baccarat-simulator/" class="mid-cta-btn" style="background:rgba(245,184,0,0.15);border-color:rgba(245,184,0,0.4);margin-top:0.5rem">用策略模擬器跑跑看 →</a>
+        <a href="/tools/baccarat-simulator/" class="mid-cta-btn mid-cta-btn--alt" style="margin-top:0.5rem">用策略模擬器跑跑看 →</a>
       </div>
 
       <!-- ====== 第五章：10 萬局模擬 ====== -->
@@ -408,6 +408,11 @@ const faqs = [
     transition: filter 0.2s, transform 0.2s;
   }
   .mid-cta-btn:hover { filter: brightness(1.15); transform: translateY(-2px); }
+  .mid-cta-btn--alt {
+    background: transparent !important; color: var(--gold-light) !important;
+    border: 2px solid var(--gold-light);
+  }
+  .mid-cta-btn--alt:hover { background: rgba(245,184,0,0.15) !important; }
 
   .quick-tool-bar {
     display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
