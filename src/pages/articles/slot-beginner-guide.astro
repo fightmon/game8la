@@ -1,0 +1,810 @@
+---
+import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ToolBox from '../../components/ToolBox.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '老虎機是不是都被設定好的，根本不可能贏？', a: '正規遊戲都用 RNG（隨機數生成器）決定結果，每一轉都是獨立事件，沒有人為操控。但長期來看，RTP 決定了莊家一定有優勢——比如 RTP 96% 代表你每投入 100 元，「理論上」會拿回 96 元。注意是理論值，短期什麼都可能發生。' },
+  { q: '新手第一次玩應該選哪種類型的老虎機？', a: '建議從 Payline（賠付線）機型開始，因為最直觀——連成一線就中獎，不用理解複雜的規則。等你搞懂基本節奏了，再去試 Ways to Win 或 Megaways 也不遲。別一開始就跳進 Cluster Pays，會搞不清楚為什麼贏、為什麼輸。' },
+  { q: '「波動度高」是不是代表比較好贏？', a: '不是，波動度高代表「贏的時候贏比較多，但輸的時候連續輸的機率也更高」。低波動是細水長流、高波動是大起大落。新手資金少的話，低波動會讓你玩比較久；老手想拚大獎才會選高波動。跟「好不好贏」沒關係，是贏的方式不同。' },
+  { q: '買免遊（Buy Feature）是什麼意思？', a: '就是花一筆固定金額（通常是 50x～100x 你的下注額），直接跳進免費遊戲（Free Game）環節，不用等 Scatter 符號自然觸發。好處是省時間，壞處是一次就燒掉一大筆。RTP 跟正常觸發完全一樣，你只是花錢跳過等待而已。想深入了解可以看<a href="/articles/seth2-buy-free-game-guide/">賽特2 買免遊完整分析</a>。' },
+  { q: '我在 A 娛樂城玩跟在 B 娛樂城玩，同一款遊戲的機率一樣嗎？', a: '如果是同一家遊戲商（比如都是 ATG 的戰神賽特），RTP 和機制完全一樣，不管你在哪間娛樂城玩。差別在於娛樂城的出入金速度、優惠活動、客服品質這些營運面的東西，遊戲本身不會因為換平台就變好打或難打。' },
+  { q: '有沒有什麼「必贏公式」或「破解法」？', a: '沒有，看到任何人跟你說有，直接封鎖他。老虎機是純機率遊戲，每一轉都是獨立的隨機事件，沒有任何策略可以改變 RTP。你能做的只有資金管理——設好預算上限、輸到停損線就收手。能控制的不是輸贏，是你虧多少才停。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/slot-beginner-guide/"
+  title="老虎機怎麼玩？新手必看的 5 種玩法規則完整圖解"
+  description="老虎機新手入門完整教學：Payline 賠付線、Ways to Win 全路得獎、Cluster Pays 群組消除、Megaways 百萬路線、Scatter Pays 散佈中獎五種玩法圖解。搞懂 RTP、波動度、買免遊，從此不再看不懂為什麼中獎。"
+  image="https://game8la.com/images/articles/slot-beginner-cover.webp"
+  datePublished="2026-05-20"
+  dateModified="2026-05-20"
+  wordCount={3200}
+  timeRequired="PT14M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '老虎機新手入門', url: 'https://game8la.com/articles/slot-beginner-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="老虎機怎麼玩？5 種玩法規則完整圖解｜新手入門看這篇就夠 - GAME8LA" description="老虎機新手入門完整教學：Payline 賠付線、Ways to Win 全路得獎、Cluster Pays 群組消除、Megaways 百萬路線、Scatter Pays 散佈中獎五種玩法圖解。搞懂 RTP、波動度、買免遊，從此不再看不懂為什麼中獎。" ogImage="https://game8la.com/images/articles/slot-beginner-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 老虎機新手入門</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-20 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 14 分鐘 ｜
+      <Icon name="refresh-cw" /> 最近更新：2026-05-20
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <article class="article-content">
+      <h1 style="font-size:2rem;line-height:1.3">老虎機怎麼玩？5 種玩法規則完整圖解，新手看這篇就夠</h1>
+      <p class="article-subtitle">別再傻傻按 SPIN 了——搞懂規則，至少知道自己怎麼輸的</p>
+      <img src="/images/articles/slot-beginner-cover.webp" alt="芭樂子站在五台不同類型老虎機前，手指比著螢幕講解——老虎機新手入門封面圖" width="1200" height="669" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+
+      <p style="color:var(--text-muted);font-size:0.95rem">「我每次按 SPIN 都不知道為什麼中獎或沒中。」「盤面上一堆符號到底怎麼算贏？」「朋友一直講什麼 Ways、Cluster，我完全聽不懂。」</p>
+      <p style="color:var(--guava-green);font-weight:700;font-size:1.05rem">如果以上任何一句戳中你，這篇就是為你寫的。</p>
+      <p style="color:var(--text-secondary)">老虎機發展到今天，中獎規則早就不是「三顆一樣排成一條線」那麼簡單了。市面上的遊戲大概可以分成五種主要的中獎機制，搞懂這五種，你以後打開任何一款老虎機都不會再一臉問號。芭樂子今天不講什麼攻略秘技，就講最基本的東西——<strong>遊戲規則</strong>。</p>
+
+      <!-- 快速工具入口 -->
+      <div class="quick-tool-bar">
+        <span>看完想試手感？</span>
+        <a href="/tools/slot-simulator/">芭樂轉轉機 RTP 模擬器</a>
+      </div>
+
+      <!-- TOC -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">老虎機長什麼樣？先搞懂基本結構</a></li>
+          <li><a href="#s2">Payline 賠付線：最經典的「連成一線」</a></li>
+          <li><a href="#s3">Ways to Win 全路得獎：不用連線也能贏</a></li>
+          <li><a href="#s4">Cluster Pays 群組消除：消消樂的概念</a></li>
+          <li><a href="#s5">Megaways 百萬路線：每轉都在變的瘋狂模式</a></li>
+          <li><a href="#s6">Scatter Pays 散佈中獎：不管位置，夠多就贏</a></li>
+          <li><a href="#s7">RTP 和波動度：兩個你一定要懂的數字</a></li>
+          <li><a href="#s8">買免遊（Buy Feature）：花錢跳過等待</a></li>
+          <li><a href="#s9">一張表看懂五種模式的差異</a></li>
+          <li><a href="#faq">新手常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ====== 1. 基本結構 ====== -->
+      <h2 id="s1" style="margin-top:2.5rem">1. 老虎機長什麼樣？先搞懂基本結構</h2>
+
+      <p>在講各種花式中獎規則之前，先確定你看得懂一台老虎機的基本畫面。不管是哪種類型，打開遊戲你會看到這些東西：</p>
+
+      <div class="card" style="border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">轉輪（Reel）</strong><br/>畫面上直排的那一條條叫做「轉輪」。傳統老虎機有 3 條，現在主流是 5 條，有些變態機台甚至有 6～8 條。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">列數（Row）</strong><br/>每條轉輪上顯示幾個符號。3 列、4 列最常見，Megaways 機型每條轉輪的列數還會每轉都變。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">盤面（Grid）</strong><br/>轉輪 × 列數 = 你看到的整個符號區域。比如「5×3」就是 5 條轉輪、每條顯示 3 個符號，總共 15 格。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">符號（Symbol）</strong><br/>格子裡的圖案。分成普通符號（組合中獎用）和特殊符號（Wild 百搭、Scatter 觸發免費遊戲等）。</p>
+        <p style="margin:0"><strong style="color:var(--guava-green)">下注額（Bet）</strong><br/>你每按一次 SPIN 要花多少錢。通常可以調整。</p>
+      </div>
+
+      <p>很多新手搞不清楚「轉輪」和「列」的差別，記住一個最簡單的方式：轉輪是直的、列是橫的。5 條轉輪 × 3 列 = 15 格符號，這就是你的戰場。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/slot-beginner-grid.webp" alt="老虎機 5×3 盤面結構標示圖：轉輪、列、符號位置" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">5×3 盤面基本結構——搞懂轉輪、列、符號的位置關係</figcaption>
+      </figure>
+
+      <!-- ====== 2. Payline ====== -->
+      <h2 id="s2" style="margin-top:2.5rem">2. Payline 賠付線：最經典的「連成一線」</h2>
+
+      <p>這是最古老、最直覺的中獎方式。想像一條線從盤面左邊劃到右邊，如果線上經過的符號都一樣（或有 Wild 替代），就中獎了。</p>
+
+      <div class="card" style="border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--gold)">怎麼贏？</strong><br/>同一條賠付線上，從最左邊的轉輪開始，連續出現相同符號（通常要 3 個以上）。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--gold)">線數差很多</strong><br/>早期老虎機只有 1 條線（中間那條橫線），後來慢慢變成 5 條、10 條、20 條、50 條，甚至 243 條。線越多，中獎的可能組合越多，但通常每條線都要下注。</p>
+        <p style="margin:0"><strong style="color:var(--gold)">代表遊戲</strong><br/>很多經典款都是 Payline 制，你在娛樂城看到寫「20 線」、「50 線」的就是這種。</p>
+      </div>
+
+      <p>Payline 的好處是你中獎的時候很清楚知道「為什麼中」——畫面上會畫一條線出來告訴你。壞處是有些遊戲的線路圖超複雜，你根本記不住哪條線在哪裡。但其實你也不需要記，遊戲會自動判定的。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/slot-beginner-payline.webp" alt="Payline 賠付線圖解：同一條線上連續三個相同符號中獎" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Payline 賠付線——從左到右連成一線就算贏</figcaption>
+      </figure>
+
+      <!-- 📊 Payline 互動圖解 -->
+      <div class="slot-demo">
+        <div class="slot-demo__hd">📊 盤面圖解：賠付線怎麼中獎 <span style="font-weight:400;font-size:0.78rem">（點選切換線路）</span></div>
+        <div class="slot-demo__btns" id="pl-btns">
+          <button class="pl-btn active" data-line="1">線 1（中排）</button>
+          <button class="pl-btn" data-line="2">線 2（上排）</button>
+          <button class="pl-btn" data-line="3">線 3（下排）</button>
+        </div>
+        <div class="sg sg--5x3" id="pl-grid">
+          <div class="sc sc--dim">🍒</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍋</div><div class="sc sc--dim">🍇</div>
+          <div class="sc sc--hit">💎</div><div class="sc sc--hit">💎</div><div class="sc sc--hit">💎</div><div class="sc sc--line">🍒</div><div class="sc sc--line">🔔</div>
+          <div class="sc sc--dim">🔔</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">💎</div><div class="sc sc--dim">🍋</div>
+        </div>
+        <div class="slot-demo__legend"><span class="lg-hit">■ 中獎符號</span><span class="lg-line">□ 在線上但沒中</span><span class="lg-dim">■ 不在此線</span></div>
+        <div id="pl-msg" class="slot-demo__note note--win">✅ 線 1（中排）：前 3 格都是 💎，從左連續 → 中獎！</div>
+      </div>
+
+      <!-- ====== 3. Ways to Win ====== -->
+      <h2 id="s3" style="margin-top:2.5rem">3. Ways to Win 全路得獎：不用連線也能贏</h2>
+
+      <p>這是目前最流行的機制，你在玩的<strong>戰神賽特</strong>就是用這種。規則很簡單：不用管什麼線了，只要相鄰的轉輪上有相同符號就算贏，不管符號在哪一列。</p>
+
+      <div class="card" style="border-left:4px solid #a855f7;background:rgba(168,85,247,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:#a855f7">怎麼贏？</strong><br/>從最左邊的轉輪開始，相鄰的轉輪上只要有至少一個相同符號就算連上，一路往右串。不用在同一條線上，每條轉輪上任何位置都可以。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:#a855f7">243 Ways 的由來</strong><br/>5×3 盤面上，每條轉輪有 3 個位置，所以中獎的排列組合是 3×3×3×3×3 = 243 種。不用你去數，遊戲自動幫你算。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:#a855f7">1024 Ways</strong><br/>如果盤面是 5×4（每條轉輪 4 個符號），就是 4×4×4×4×4 = 1024 Ways。以此類推。</p>
+        <p style="margin:0"><strong style="color:#a855f7">代表遊戲</strong><br/><a href="/games/seth-2/">戰神賽特2</a>（243 Ways）、很多 ATG 和 PG 的遊戲都用這種機制。</p>
+      </div>
+
+      <p>Ways to Win 比 Payline 好懂多了——你不用管線路圖，只要看相鄰轉輪上有沒有相同符號就好。所以現在越來越多遊戲都改用這種機制，對新手來說也比較友善。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/slot-beginner-ways.webp" alt="Ways to Win 全路得獎圖解：相鄰轉輪上有相同符號即中獎" width="1200" height="670" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Ways to Win——不管在哪一列，相鄰轉輪有一樣的就算贏</figcaption>
+      </figure>
+
+      <!-- 📊 Ways to Win 圖解 -->
+      <div class="slot-demo">
+        <div class="slot-demo__hd">📊 盤面圖解：Ways to Win 怎麼中獎</div>
+        <div class="sg sg--5x3">
+          <div class="sc sc--hit">💎</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍋</div><div class="sc sc--dim">🍇</div>
+          <div class="sc sc--dim">🍒</div><div class="sc sc--hit">💎</div><div class="sc sc--dim">🍒</div><div class="sc sc--dim">🍒</div><div class="sc sc--dim">🔔</div>
+          <div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍋</div><div class="sc sc--hit">💎</div><div class="sc sc--hit">💎</div><div class="sc sc--dim">🍋</div>
+        </div>
+        <div class="slot-demo__legend"><span class="lg-hit">■ 中獎符號（💎）</span><span class="lg-dim">■ 其他符號</span></div>
+        <div class="slot-demo__note note--win">✅ 💎 出現在轉輪 1→2→3→4（不同列），相鄰轉輪都有 → 4 連中獎！不用在同一條線上</div>
+      </div>
+
+      <!-- ====== 4. Cluster Pays ====== -->
+      <h2 id="s4" style="margin-top:2.5rem">4. Cluster Pays 群組消除：消消樂的概念</h2>
+
+      <p>如果你玩過手機上的消消樂遊戲，Cluster Pays 你秒懂。沒有賠付線、也不看相鄰轉輪，只要盤面上有一群相同符號「黏在一起」（上下左右相鄰），數量到了就中獎。</p>
+
+      <div class="card" style="border-left:4px solid #ec4899;background:rgba(236,72,153,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:#ec4899">怎麼贏？</strong><br/>通常需要 5 個以上的相同符號上下左右相鄰（不算斜對角）。群組越大，獎金越高。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:#ec4899">消除機制</strong><br/>很多 Cluster Pays 遊戲中獎後符號會消除，上面的符號掉下來填空，可能再次形成群組再次中獎，連鎖反應的爽度很高。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:#ec4899">盤面通常比較大</strong><br/>常見的是 7×7 或 8×8，因為盤面大才有空間形成大群組。</p>
+        <p style="margin:0"><strong style="color:#ec4899">代表遊戲</strong><br/>Reactoonz 系列、Sugar Rush 都是經典的 Cluster Pays。</p>
+      </div>
+
+      <p>Cluster Pays 的視覺衝擊力最強，一大坨符號同時消掉再掉新的下來，連鎖個三四次的時候真的會讓你叫出來。但也因為機制比較複雜，每一轉中獎的機率比 Payline 低，屬於高波動的代表。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/slot-beginner-cluster.webp" alt="Cluster Pays 群組消除圖解：5 個以上相同符號相鄰即中獎" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Cluster Pays——像消消樂一樣，相同符號黏在一起就算贏</figcaption>
+      </figure>
+
+      <!-- 📊 Cluster Pays 圖解 -->
+      <div class="slot-demo">
+        <div class="slot-demo__hd">📊 盤面圖解：Cluster Pays 群組消除</div>
+        <div class="sg sg--6x6">
+          <div class="sc sc--dim">🍒</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍋</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">🍇</div><div class="sc sc--dim">🍒</div>
+          <div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍋</div><div class="sc sc--hit">💎</div><div class="sc sc--hit">💎</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">⭐</div>
+          <div class="sc sc--dim">🔔</div><div class="sc sc--hit">💎</div><div class="sc sc--hit">💎</div><div class="sc sc--hit">💎</div><div class="sc sc--dim">🍋</div><div class="sc sc--dim">🍒</div>
+          <div class="sc sc--dim">🍋</div><div class="sc sc--dim">🍒</div><div class="sc sc--hit">💎</div><div class="sc sc--hit">💎</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">🍇</div>
+          <div class="sc sc--dim">🍇</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍒</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍋</div>
+          <div class="sc sc--dim">🍒</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">🍋</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍇</div><div class="sc sc--dim">🔔</div>
+        </div>
+        <div class="slot-demo__legend"><span class="lg-hit">■ 群組中獎（7 個 💎 相鄰）</span><span class="lg-dim">■ 沒中</span></div>
+        <div class="slot-demo__note note--win">✅ 7 個 💎 上下左右相連成群 → 中獎！群組越大獎金越高</div>
+      </div>
+
+      <!-- ====== 5. Megaways ====== -->
+      <h2 id="s5" style="margin-top:2.5rem">5. Megaways 百萬路線：每轉都在變的瘋狂模式</h2>
+
+      <p>Megaways 是澳洲公司 Big Time Gaming 發明的專利機制，可以說是 Ways to Win 的進階瘋狂版。核心概念：每條轉輪在每次轉動時，顯示的符號數量是隨機的。</p>
+
+      <div class="card" style="border-left:4px solid #f97316;background:rgba(249,115,22,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:#f97316">怎麼贏？</strong><br/>跟 Ways to Win 一樣，相鄰轉輪上有相同符號就算。但因為每條轉輪的符號數量會變（2～7 個不等），每轉的 Ways 數量也跟著變。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:#f97316">117,649 Ways</strong><br/>如果 6 條轉輪都顯示最大的 7 個符號：7×7×7×7×7×7 = 117,649 種組合。這也是為什麼叫「Megaways」。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:#f97316">變動性極高</strong><br/>可能這轉只有 324 Ways，下一轉就變成 46,656 Ways。你永遠不知道下一轉盤面會長什麼樣。</p>
+        <p style="margin:0"><strong style="color:#f97316">代表遊戲</strong><br/>Bonanza Megaways、Sweet Bonanza、Gonzo's Quest Megaways，很多經典遊戲都出了 Megaways 版本。</p>
+      </div>
+
+      <p>Megaways 的魅力在於「不確定性」——每轉盤面結構都不同，讓你很難膩。但也因為 Ways 數量波動大，獎金的波動也跟著劇烈，是重度賭徒最愛的機制。新手如果資金有限，建議先從標準的 Ways to Win 玩起。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/slot-beginner-megaways.webp" alt="Megaways 百萬路線圖解：每條轉輪符號數量隨機變化" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Megaways——每條轉輪的高度都會變，最多 117,649 種組合</figcaption>
+      </figure>
+
+      <!-- 📊 Megaways 互動圖解 -->
+      <div class="slot-demo">
+        <div class="slot-demo__hd">📊 互動圖解：Megaways 每轉都在變的轉輪高度</div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin:0 0 0.5rem;line-height:1.6">普通老虎機每條轉輪固定顯示 3 個符號。Megaways 不一樣——<strong style="color:var(--gold-light)">每按一次 SPIN，每條轉輪顯示幾個符號是隨機的</strong>（2～7 個不等）。</p>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin:0 0 1rem;line-height:1.6">Ways 數怎麼算？<strong style="color:var(--guava-green)">把每條轉輪的符號數量乘起來</strong>就是答案。按下面的按鈕轉轉看：</p>
+        <div style="text-align:center;margin-bottom:1rem">
+          <button class="mw-spin-btn" id="mw-spin">🎰 重新轉一次</button>
+        </div>
+        <div class="mw-wrap" id="mw-grid">
+          <div class="mw-col">
+            <div class="mw-reel">
+              <div class="sc">🍒</div><div class="sc">💎</div><div class="sc">⭐</div>
+            </div>
+            <div class="mw-cnt">3</div>
+          </div>
+          <div class="mw-col">
+            <div class="mw-reel">
+              <div class="sc">🔔</div><div class="sc">🍋</div><div class="sc">💎</div><div class="sc">⭐</div><div class="sc">🍇</div><div class="sc">🍒</div>
+            </div>
+            <div class="mw-cnt">6</div>
+          </div>
+          <div class="mw-col">
+            <div class="mw-reel">
+              <div class="sc">⭐</div><div class="sc">💎</div><div class="sc">🍒</div><div class="sc">🔔</div>
+            </div>
+            <div class="mw-cnt">4</div>
+          </div>
+          <div class="mw-col">
+            <div class="mw-reel">
+              <div class="sc">🍋</div><div class="sc">🔔</div><div class="sc">⭐</div><div class="sc">💎</div><div class="sc">🍒</div>
+            </div>
+            <div class="mw-cnt">5</div>
+          </div>
+          <div class="mw-col">
+            <div class="mw-reel">
+              <div class="sc">💎</div><div class="sc">🍒</div>
+            </div>
+            <div class="mw-cnt">2</div>
+          </div>
+          <div class="mw-col">
+            <div class="mw-reel">
+              <div class="sc">🔔</div><div class="sc">🍋</div><div class="sc">⭐</div><div class="sc">💎</div><div class="sc">🍇</div><div class="sc">🍒</div><div class="sc">⭐</div>
+            </div>
+            <div class="mw-cnt">7</div>
+          </div>
+        </div>
+        <div class="mw-formula" id="mw-calc">3 × 6 × 4 × 5 × 2 × 7 = <span>2,520 Ways</span></div>
+        <p style="font-size:0.7rem;color:var(--text-muted);text-align:center;margin:0.3rem 0 0">最大值：7 × 7 × 7 × 7 × 7 × 7 = 117,649 Ways</p>
+        <div class="slot-demo__note note--win" id="mw-note">👆 按「重新轉一次」看 Ways 數怎麼隨轉輪高度變化</div>
+      </div>
+
+      <!-- ====== 6. Scatter Pays ====== -->
+      <h2 id="s6" style="margin-top:2.5rem">6. Scatter Pays 散佈中獎：不管位置，夠多就贏</h2>
+
+      <p>這是最「佛系」的中獎方式。不用連線、不用相鄰、不用成群——只要盤面上「任何位置」出現足夠數量的指定符號，就中獎了。</p>
+
+      <div class="card" style="border-left:4px solid #06b6d4;background:rgba(6,182,212,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:#06b6d4">怎麼贏？</strong><br/>通常需要 8 個以上的相同符號出現在盤面上的任何位置，不用管在哪一條轉輪、哪一列。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:#06b6d4">跟 Scatter 符號不同</strong><br/>很多人搞混「Scatter Pays」和「Scatter 符號」。Scatter 符號是一種特殊符號（通常用來觸發免費遊戲），幾乎每款遊戲都有；Scatter Pays 是一種「中獎機制」，整個遊戲的普通符號都用這套規則。</p>
+        <p style="margin:0"><strong style="color:#06b6d4">代表遊戲</strong><br/>Sweet Bonanza 就是最有名的 Scatter Pays 遊戲，你看到一堆糖果散佈在盤面上，只要同一種糖果有 8 個以上就中獎。</p>
+      </div>
+
+      <p>Scatter Pays 讓你不用再去追蹤什麼線路或相鄰位置，純粹就是「數數量」。看起來簡單，但因為需要的符號數量比較多（8 個起跳），所以每一轉的中獎機率不見得比較高。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/slot-beginner-scatter.webp" alt="Scatter Pays 散佈中獎圖解：盤面任意位置 8 個以上相同符號即中獎" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">Scatter Pays——不管在哪裡，數量夠就算贏</figcaption>
+      </figure>
+
+      <!-- 📊 Scatter Pays 圖解 -->
+      <div class="slot-demo">
+        <div class="slot-demo__hd">📊 盤面圖解：Scatter Pays 散佈中獎</div>
+        <div class="sg sg--6x5">
+          <div class="sc sc--hit">🍒</div><div class="sc sc--dim">🍋</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🔔</div><div class="sc sc--hit">🍒</div><div class="sc sc--dim">🍇</div>
+          <div class="sc sc--dim">⭐</div><div class="sc sc--dim">🔔</div><div class="sc sc--hit">🍒</div><div class="sc sc--dim">🍋</div><div class="sc sc--dim">⭐</div><div class="sc sc--hit">🍒</div>
+          <div class="sc sc--dim">🔔</div><div class="sc sc--hit">🍒</div><div class="sc sc--dim">🍋</div><div class="sc sc--hit">🍒</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">⭐</div>
+          <div class="sc sc--dim">🍋</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍋</div><div class="sc sc--hit">🍒</div>
+          <div class="sc sc--dim">🍇</div><div class="sc sc--hit">🍒</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🔔</div><div class="sc sc--dim">⭐</div><div class="sc sc--dim">🍋</div>
+        </div>
+        <div class="slot-demo__legend"><span class="lg-hit">■ 🍒 散佈中獎（共 8 個）</span><span class="lg-dim">■ 其他符號</span></div>
+        <div class="slot-demo__note note--win">✅ 盤面上有 8 個 🍒 散落各處（≥8 即中獎）→ 不管位置在哪，夠多就贏！</div>
+      </div>
+
+      <!-- ====== 7. RTP 和波動度 ====== -->
+      <h2 id="s7" style="margin-top:2.5rem">7. RTP 和波動度：兩個你一定要懂的數字</h2>
+
+      <p>搞懂了五種中獎方式之後，接下來要講兩個每款老虎機都有、但很多人從來不看的數字。這兩個數字不會讓你贏更多，但至少讓你知道自己面對的是什麼等級的對手。</p>
+
+      <div class="card" style="border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <h3 style="color:var(--guava-green);margin-top:0">💰 RTP（Return to Player）— 理論回報率</h3>
+        <p style="margin:0 0 0.6rem"><strong>白話翻譯</strong>——每投入 100 元，「長期平均」能拿回多少錢。RTP 96% = 你每 100 元理論上拿回 96 元，娛樂城抽 4 元。</p>
+        <p style="margin:0 0 0.6rem"><strong>重點是「長期」</strong>——這個數字是算幾百萬轉以上的平均值，不代表你今天玩 100 轉就一定拿回 96%。短期什麼事都可能發生，你可能贏到翻、也可能一毛不剩。</p>
+        <p style="margin:0"><strong>多少算正常？</strong>市面上主流遊戲的 RTP 大多在 94%～97% 之間。低於 94% 的少碰，高於 97% 的算很佛了。<a href="/games/seth-2/">戰神賽特2</a> 的 RTP 是 96.89%，算中上水準。</p>
+      </div>
+
+      <div class="card" style="border-left:4px solid var(--gold);background:rgba(245,184,0,0.06);margin-top:1rem">
+        <h3 style="color:var(--gold);margin-top:0">🎢 波動度（Volatility）— 獎金的脾氣</h3>
+        <p style="margin:0 0 0.6rem"><strong>低波動</strong>——常常中小獎，很少乾轉（連續不中）。資金曲線比較平穩，適合想「慢慢玩、不要太刺激」的人。</p>
+        <p style="margin:0 0 0.6rem"><strong>中波動</strong>——中獎頻率和金額都適中，多數遊戲都落在這個區間。新手入門的好選擇。</p>
+        <p style="margin:0"><strong>高波動</strong>——可能連續幾十轉什麼都沒中，但一中就是大的。資金曲線像雲霄飛車，適合預算充足、追求大獎快感的玩家。戰神賽特2 就是高波動的代表。</p>
+      </div>
+
+      <p>選遊戲之前先查 RTP 和波動度，這不是什麼高級技巧，是基本功。你去餐廳點菜至少會看一下價格吧？RTP 和波動度就是老虎機的「價格標籤」。</p>
+
+      <!-- 中段 CTA -->
+      <div class="mid-cta">
+        <p>🎰 想體感 RTP 到底是什麼感覺？ — <strong>免費模擬，不花一毛錢</strong></p>
+        <a href="/tools/slot-simulator/" class="mid-cta-btn">打開芭樂轉轉機 →</a>
+        <a href="/tools/bankroll-calculator/" class="mid-cta-btn mid-cta-btn--alt" style="margin-top:0.5rem">資金管理計算器 →</a>
+      </div>
+
+      <!-- ====== 8. 買免遊 ====== -->
+      <h2 id="s8" style="margin-top:2.5rem">8. 買免遊（Buy Feature）：花錢跳過等待</h2>
+
+      <p>近幾年越來越多遊戲都加了這個功能，尤其是台灣玩家最愛用。簡單講就是：你不想慢慢等 Scatter 自然觸發免費遊戲，直接掏錢買。</p>
+
+      <div class="card" style="border-left:4px solid var(--guava-pink);background:rgba(236,72,153,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-pink)">怎麼運作？</strong><br/>遊戲畫面上會有一個「BUY」按鈕，按下去付一筆固定金額（通常是你下注額的 50x～100x），直接進入免費遊戲環節。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-pink)">RTP 一樣嗎？</strong><br/>正規遊戲商的買免遊 RTP 跟自然觸發完全相同。你花錢買的只是「時間」，不是「更高的機率」。</p>
+        <p style="margin:0"><strong style="color:var(--guava-pink)">風險在哪？</strong><br/>一次買免遊等於你一口氣燒掉 50～100 倍的下注額。如果你帶 5,000 元、下注 10 元，一次買免遊就是 1,000 元，五次就見底了。很多人就是買免遊把自己買到破產的。</p>
+      </div>
+
+      <p>芭樂子對買免遊的態度很明確：不是不能買，但你要知道自己在幹嘛。想深入了解的看<a href="/articles/seth2-buy-free-game-guide/">賽特2 買免遊完整分析</a>，裡面有詳細的預算分配建議。</p>
+
+      <!-- ====== 9. 一張表 ====== -->
+      <h2 id="s9" style="margin-top:2.5rem">9. 一張表看懂五種模式的差異</h2>
+
+      <p>講了這麼多，最後幫你整理一張比較表，下次看到任何遊戲都能馬上對號入座：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>機制</th>
+              <th>中獎條件</th>
+              <th>常見盤面</th>
+              <th>新手友善度</th>
+              <th>代表遊戲</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;color:#f5b800">Payline</td>
+              <td>沿賠付線連續相同符號</td>
+              <td>5×3</td>
+              <td>⭐⭐⭐⭐⭐</td>
+              <td>經典老虎機</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#a855f7">Ways to Win</td>
+              <td>相鄰轉輪有相同符號</td>
+              <td>5×3 / 5×4</td>
+              <td>⭐⭐⭐⭐</td>
+              <td>戰神賽特2</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#ec4899">Cluster Pays</td>
+              <td>5+ 相同符號相鄰成群</td>
+              <td>7×7 / 8×8</td>
+              <td>⭐⭐⭐</td>
+              <td>Reactoonz</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#f97316">Megaways</td>
+              <td>相鄰轉輪（符號數隨機）</td>
+              <td>6×2~7</td>
+              <td>⭐⭐</td>
+              <td>Bonanza</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#06b6d4">Scatter Pays</td>
+              <td>盤面任意位置 8+ 相同</td>
+              <td>6×5</td>
+              <td>⭐⭐⭐</td>
+              <td>Sweet Bonanza</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>記住，不存在「哪種機制比較好贏」這回事。每種機制的 RTP 可以設得一樣高或一樣低，差別只在遊戲體驗和獎金的分配方式。選你喜歡的玩就好，但<strong>先搞懂規則再按 SPIN</strong>。</p>
+
+      <!-- 延伸閱讀 -->
+      <div class="card" style="margin:2rem 0;border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <h3 style="color:var(--guava-green);margin-top:0">📚 延伸閱讀</h3>
+        <p style="margin:0 0 0.5rem"><a href="/games/seth-2/">戰神賽特2 完整評測＋免費試玩</a> — 最熱門的 Ways to Win 機型</p>
+        <p style="margin:0 0 0.5rem"><a href="/articles/seth2-buy-free-game-guide/">賽特2 買免遊划算嗎？</a> — 買免遊的完整預算分析</p>
+        <p style="margin:0 0 0.5rem"><a href="/articles/atg-seth-vs-thor-hammer/">戰神賽特2 vs 雷神之錘2 完整比較</a> — 兩台熱門機台對決</p>
+        <p style="margin:0"><a href="/tools/bankroll-calculator/">資金控管計算器</a> — 算出你的停損線</p>
+      </div>
+
+      <ManifestoBox />
+
+      <!-- ====== FAQ ====== -->
+      <h2 id="faq" style="margin-top:2.5rem">10. 新手常見問題 FAQ</h2>
+
+      <div class="faq-section">
+        {faqs.map(f => (
+          <div class="faq-item">
+            <button class="faq-q"><span>{f.q}</span><Icon name="chevron-down" /></button>
+            <div class="faq-a"><p set:html={f.a} /></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 分享 -->
+      <ShareButtons title="老虎機怎麼玩？5 種玩法規則完整圖解" heading="🎰 身邊有朋友在亂按 SPIN？把這篇傳給他" />
+
+      <script is:inline>
+        document.getElementById('pl-btns')?.addEventListener('click',function(e){
+          var btn=e.target.closest('.pl-btn');
+          if(!btn)return;
+          var line=btn.dataset.line;
+          var cells=document.getElementById('pl-grid').querySelectorAll('.sc');
+          var msg=document.getElementById('pl-msg');
+          this.querySelectorAll('.pl-btn').forEach(function(b){b.classList.remove('active')});
+          btn.classList.add('active');
+          var cf={
+            '1':{path:[5,6,7,8,9],hit:[5,6,7],win:true,txt:'✅ 線 1（中排）：前 3 格都是 💎，從左連續 → 中獎！'},
+            '2':{path:[0,1,2,3,4],hit:[],win:false,txt:'❌ 線 2（上排）：🍒🔔⭐🍋🍇 全不同 → 沒中'},
+            '3':{path:[10,11,12,13,14],hit:[10,11,12],win:true,txt:'✅ 線 3（下排）：前 3 格都是 🔔，從左連續 → 也中獎！'}
+          };
+          var c=cf[line];
+          cells.forEach(function(cell,i){
+            cell.classList.remove('sc--hit','sc--line','sc--dim');
+            if(c.hit.indexOf(i)>=0)cell.classList.add('sc--hit');
+            else if(c.path.indexOf(i)>=0)cell.classList.add('sc--line');
+            else cell.classList.add('sc--dim');
+          });
+          msg.textContent=c.txt;
+          msg.className='slot-demo__note '+(c.win?'note--win':'note--lose');
+        });
+
+        // Megaways 中獎偵測（Ways to Win 邏輯：從左起相鄰轉輪有相同符號）
+        var mwSym=['🍒','💎','⭐','🔔','🍋','🍇','👑','7️⃣'];
+        function mwFindWins(grid){
+          var cols=grid.querySelectorAll('.mw-col');
+          var reels=[];
+          cols.forEach(function(col){
+            var cells=Array.from(col.querySelector('.mw-reel').querySelectorAll('.sc'));
+            reels.push({cells:cells,syms:cells.map(function(c){return c.textContent.trim()})});
+          });
+          reels.forEach(function(r){r.cells.forEach(function(c){c.classList.remove('sc--hit','sc--drop');c.style.removeProperty('animation-delay')})});
+          var uniq={};
+          reels.forEach(function(r){r.syms.forEach(function(s){uniq[s]=true})});
+          var wins=[];
+          Object.keys(uniq).forEach(function(sym){
+            var len=0;
+            for(var i=0;i<reels.length;i++){
+              if(reels[i].syms.indexOf(sym)>=0)len++;else break;
+            }
+            if(len>=3){
+              wins.push({sym:sym,len:len});
+              for(var i=0;i<len;i++){
+                reels[i].cells.forEach(function(cell){
+                  if(cell.textContent.trim()===sym)cell.classList.add('sc--hit');
+                });
+              }
+            }
+          });
+          wins.sort(function(a,b){return b.len-a.len});
+          return wins;
+        }
+        // 頁面載入時偵測初始盤面的中獎
+        var mwG=document.getElementById('mw-grid');
+        if(mwG)mwFindWins(mwG);
+
+        document.getElementById('mw-spin')?.addEventListener('click',function(){
+          var wrap=document.getElementById('mw-grid');
+          var cols=wrap.querySelectorAll('.mw-col');
+          var parts=[];
+          cols.forEach(function(col){
+            var reel=col.querySelector('.mw-reel');
+            var cnt=col.querySelector('.mw-cnt');
+            var n=Math.floor(Math.random()*6)+2;
+            reel.innerHTML='';
+            reel.style.gridTemplateRows='repeat('+n+', 1fr)';
+            for(var i=0;i<n;i++){
+              var cell=document.createElement('div');
+              cell.className='sc';
+              cell.textContent=mwSym[Math.floor(Math.random()*mwSym.length)];
+              cell.classList.add('sc--drop');
+              cell.style.animationDelay=(i*0.04)+'s';
+              reel.appendChild(cell);
+            }
+            cnt.textContent=n;
+            parts.push(n);
+          });
+          var total=parts.reduce(function(a,b){return a*b},1);
+          document.getElementById('mw-calc').innerHTML=parts.join(' × ')+' = <span>'+total.toLocaleString()+' Ways</span>';
+          // 等掉落動畫結束後再偵測中獎
+          setTimeout(function(){
+            var wins=mwFindWins(wrap);
+            var note=document.getElementById('mw-note');
+            if(wins.length>0){
+              var desc=wins.map(function(w){return w.sym+'('+w.len+'連)'}).join(' ');
+              note.innerHTML='✅ 中獎！'+desc+' — <span style="color:var(--guava-green)">綠框</span> = 從左起連續出現在相鄰轉輪';
+              note.className='slot-demo__note note--win';
+            }else{
+              note.textContent='❌ 沒中 — 沒有符號從左起連續出現在 3 條以上轉輪';
+              note.className='slot-demo__note note--lose';
+            }
+          },500);
+        });
+      </script>
+
+    </article>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .container {
+    max-width: 880px; margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+  }
+  .breadcrumb {
+    font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;
+  }
+  .breadcrumb a { color: var(--gold-light); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.82rem; color: var(--gold-light); text-decoration: none;
+    margin-bottom: 1rem;
+  }
+  .back-link:hover { color: var(--guava-green); }
+  .article-subtitle {
+    font-size: 1.1rem; color: var(--guava-green);
+    margin: -0.5rem 0 1.5rem; font-style: italic;
+  }
+  .article-content h2 {
+    font-size: 1.4rem; color: var(--text-primary);
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    margin-top: 2.5rem;
+  }
+  .article-content h3 { font-size: 1.15rem; color: var(--gold-light); margin-top: 1.5rem; }
+  .article-content p { color: var(--text-secondary); line-height: 1.85; margin: 0.8rem 0; font-size: 0.95rem; }
+  .article-content a { color: var(--gold-light); }
+  .article-content strong { color: var(--text-primary); }
+
+  .toc ol { padding-left: 1.2rem; margin: 0.5rem 0 0; }
+  .toc li { margin: 0.4rem 0; font-size: 0.9rem; }
+  .toc a { color: var(--gold-light); text-decoration: none; }
+  .toc a:hover { color: var(--guava-green); }
+
+  .mid-cta {
+    margin: 2rem 0; padding: 1.2rem 1.5rem; text-align: center;
+    background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(245,184,0,0.08));
+    border: 1px dashed var(--guava-green); border-radius: 12px;
+  }
+  .mid-cta p { margin: 0 0 0.8rem; font-size: 1rem; color: var(--text-primary); }
+  .mid-cta-btn {
+    display: inline-block; background: var(--guava-green); color: #0d1117 !important;
+    padding: 0.6rem 1.4rem; border-radius: 8px; font-weight: 700;
+    text-decoration: none !important; font-size: 0.95rem;
+    transition: filter 0.2s, transform 0.2s;
+  }
+  .mid-cta-btn:hover { filter: brightness(1.15); transform: translateY(-2px); }
+  .mid-cta-btn--alt {
+    background: transparent !important; color: var(--gold-light) !important;
+    border: 2px solid var(--gold-light);
+  }
+  .mid-cta-btn--alt:hover { background: rgba(245,184,0,0.15) !important; }
+
+  .quick-tool-bar {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+    padding: 0.8rem 1rem; margin: 1rem 0 1.5rem;
+    background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.2); border-radius: 10px;
+    font-size: 0.9rem;
+  }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a {
+    background: var(--guava-green); color: #000; font-weight: 700; padding: 0.35rem 0.8rem;
+    border-radius: 6px; text-decoration: none; font-size: 0.85rem;
+  }
+  .quick-tool-bar a:hover { filter: brightness(1.15); }
+
+  .faq-section { margin: 1.5rem 0; }
+  .faq-item {
+    border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 0.8rem; overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.2rem; background: var(--bg-card); border: none;
+    color: var(--text-primary); font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; text-align: left;
+  }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  }
+  .faq-item.open .faq-a { max-height: 600px; }
+  .faq-a p {
+    padding: 0 1.2rem 1rem; margin: 0;
+    font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;
+  }
+
+  .card {
+    padding: 1.2rem 1.5rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg-card);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: rgba(245,184,0,0.08); color: var(--gold-light); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; }
+  td { color: var(--text-secondary); }
+
+  @media (max-width: 640px) {
+    .container { padding: 1rem; }
+    .article-content h1 { font-size: 1.5rem; }
+    .article-content h2 { font-size: 1.2rem; }
+    .quick-tool-bar { flex-direction: column; align-items: flex-start; }
+    table { font-size: 0.8rem; }
+    th, td { padding: 0.5rem 0.6rem; }
+  }
+
+  /* === Slot Demo 盤面圖解 === */
+  .slot-demo {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin: 1.2rem 0 1.5rem;
+  }
+  .slot-demo__hd {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 0.8rem;
+  }
+  .slot-demo__btns {
+    display: flex; gap: 0.4rem; margin-bottom: 0.8rem; flex-wrap: wrap;
+  }
+  .pl-btn {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pl-btn:hover { border-color: var(--gold-light); color: var(--text-primary); }
+  .pl-btn.active {
+    background: var(--guava-green);
+    color: #000;
+    border-color: var(--guava-green);
+    font-weight: 700;
+  }
+
+  /* Grid */
+  .sg {
+    display: grid; gap: 5px; max-width: 400px; margin: 0 auto;
+  }
+  .sg--5x3 { grid-template-columns: repeat(5, 1fr); }
+  .sg--6x6 { grid-template-columns: repeat(6, 1fr); max-width: 440px; }
+  .sg--6x5 { grid-template-columns: repeat(6, 1fr); max-width: 440px; }
+
+  /* Cells */
+  .sc {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+  .sc--hit {
+    border-color: var(--guava-green);
+    background: rgba(57,255,20,0.15);
+    box-shadow: 0 0 12px rgba(57,255,20,0.3);
+    transform: scale(1.06);
+    animation: slot-pulse 2s ease-in-out infinite;
+  }
+  .sc--line {
+    border-color: rgba(245,184,0,0.5);
+    background: rgba(245,184,0,0.1);
+  }
+  .sc--dim { opacity: 0.25; }
+
+  /* Animations */
+  @keyframes slot-pulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(57,255,20,0.3); }
+    50% { box-shadow: 0 0 24px rgba(57,255,20,0.6); }
+  }
+  @keyframes slot-drop {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .sc--drop {
+    animation: slot-drop 0.25s ease-out both;
+  }
+
+  /* Legend */
+  .slot-demo__legend {
+    display: flex; gap: 0.8rem; margin-top: 0.7rem;
+    font-size: 0.72rem; color: var(--text-muted);
+    justify-content: center; flex-wrap: wrap;
+  }
+  .lg-hit { color: var(--guava-green); }
+  .lg-line { color: var(--gold-light); }
+  .lg-dim { opacity: 0.4; }
+
+  /* Note */
+  .slot-demo__note {
+    text-align: center; font-size: 0.82rem;
+    margin-top: 0.7rem; padding: 0.5rem 0.8rem;
+    border-radius: 8px; line-height: 1.6;
+  }
+  .note--win { color: var(--guava-green); background: rgba(57,255,20,0.08); }
+  .note--lose { color: #ef4444; background: rgba(239,68,68,0.08); }
+  .note--fire { color: #f97316; background: rgba(249,115,22,0.1); }
+
+  /* Megaways spin button */
+  .mw-spin-btn {
+    padding: 0.55rem 1.4rem;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--gold), #e6a800);
+    color: #000;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .mw-spin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(245,184,0,0.4);
+  }
+  .mw-spin-btn:active {
+    transform: scale(0.96);
+  }
+
+  /* Megaways */
+  .mw-wrap {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    max-width: 460px;
+    margin: 0 auto;
+    height: 340px;
+  }
+  .mw-col {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 0;
+    min-height: 0;
+  }
+  .mw-reel {
+    display: grid;
+    grid-auto-rows: 1fr;
+    gap: 3px;
+    padding: 3px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    min-height: 0;
+    height: 100%;
+  }
+  .mw-reel .sc {
+    aspect-ratio: auto !important;
+    min-height: 0;
+    height: 100%;
+    align-self: stretch;
+    font-size: 1.2rem;
+    overflow: hidden;
+  }
+  .mw-cnt {
+    text-align: center; font-size: 0.72rem; font-weight: 700;
+    color: var(--gold-light); margin-top: 4px;
+    background: rgba(245,184,0,0.12); border-radius: 4px; padding: 3px 0;
+  }
+  .mw-formula {
+    text-align: center; font-size: 0.88rem;
+    color: var(--text-secondary); margin-top: 0.8rem;
+  }
+  .mw-formula span {
+    color: var(--guava-green); font-weight: 700; font-size: 1.05rem;
+  }
+
+  /* Demo 手機響應式 */
+  @media (max-width: 640px) {
+    .sc { font-size: 1.05rem; border-radius: 6px; }
+    .sg, .mw-wrap { gap: 3px; }
+    .slot-demo { padding: 0.8rem; }
+    .slot-demo__hd { font-size: 0.82rem; }
+    .mw-wrap { height: 280px; gap: 3px; }
+    .mw-reel { gap: 2px; padding: 2px; }
+    .mw-reel .sc { font-size: 0.9rem; }
+    .slot-demo__note { font-size: 0.78rem; padding: 0.4rem 0.6rem; }
+    .slot-demo__legend { font-size: 0.65rem; gap: 0.5rem; }
+  }
+</style>

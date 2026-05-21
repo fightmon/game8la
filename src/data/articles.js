@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'slot-beginner-guide',
+    title: '老虎機怎麼玩？5 種玩法規則完整圖解｜新手入門看這篇就夠',
+    excerpt: '老虎機新手入門完整教學：Payline 賠付線、Ways to Win 全路得獎、Cluster Pays 群組消除、Megaways 百萬路線、Scatter Pays 散佈中獎五種玩法圖解。搞懂 RTP、波動度、買免遊，從此不再看不懂為什麼中獎。',
+    category: 'slots',
+    categoryLabel: '新手入門',
+    badgeType: 'featured',
+    date: '2026-05-20',
+    views: 0,
+    tags: ['最新', '精選', '教學'],
+    icon: 'gamepad-2',
+    gradient: 'linear-gradient(135deg,#0a0a2e,#1b1b50,#39ff14)',
+    thumbnail: '/images/article-thumbs/thumb-slot-beginner.webp'
+  },
+  {
     slug: 'seth2-buy-free-game-guide',
     title: '戰神賽特2 買免遊划算嗎？芭樂子用數據拆解：什麼時候該買、什麼時候千萬別買',
     excerpt: '賽特2 買免遊 x100 注一把梭，到底划不划算？芭樂子從 RTP 96.89%、普通免遊 vs 覺醒之力差異、預算分配四級距、五條生存守則完整拆解，告訴你什麼時候該買、什麼時候乖乖自旋。',
