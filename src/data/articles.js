@@ -270,6 +270,20 @@ export const articles = [
     thumbnail: '/images/article-thumbs/thumb-lottery-dragout.webp'
   },
   {
+    slug: '165-weekly-2026-w21',
+    title: '【165 週報】2026 第 21 週（5/14–5/20）：SUPER娛樂城、錢盈娛樂城全新上榜',
+    excerpt: '內政部 165 全民防騙網 5/14–5/20 通報彙整：新增 SUPER娛樂城（sp88.bet）、錢盈娛樂城（qywin88.com）2 個全新詐騙品牌。錢盈娛樂城疑似與先前錢盈539娛樂城為同一集團換皮操作。本週 165 共通報約 157 個詐騙網站。',
+    category: 'anti-scam',
+    categoryLabel: '165 監測站',
+    badgeType: 'attack',
+    date: '2026-05-23',
+    views: 0,
+    tags: ['最新', '165週報'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
+  },
+  {
     slug: '165-weekly-2026-w18',
     title: '【165 週報】2026 第 18 週（4/23–4/29）：鑫浩盛娛樂城上榜、卡利系統連兩週被通報',
     excerpt: '內政部 165 全民防騙網 4/23–4/29 通報彙整：新增鑫浩盛娛樂城、卡利系統新增變種（CaliGroup），BBIN 娛樂城啟用新網址。本週 165 共通報約 125 個詐騙網站，跨境博弈與詐騙娛樂城仍為大宗。',
