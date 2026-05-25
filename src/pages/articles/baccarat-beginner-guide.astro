@@ -1,0 +1,1052 @@
+---
+import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '百家樂是不是莊家一定會贏？', a: '「一定」這個詞太絕對了。莊家長期勝率是 50.68%、閒家是 49.32%（不計和局），差距就 1.36 個百分點而已。但別忘了押莊贏了要扣 5% 抽水，所以實際拿到手的優勢更小。短期什麼都可能發生——閒家連開 10 把也完全正常，別被數學嚇到。' },
+  { q: '看路真的有用嗎？', a: '數學上來說：沒用。每局都是獨立事件，牌不會記得上一局的結果。但心理上來說：有用。與其憑直覺亂壓，不如跟著一套系統走，至少你知道自己為什麼壓這邊、什麼時候該收手。看路的價值不是「預測」，是「紀律」。想練習的話，<a href="/tools/baccarat-roadmap/">路單模擬器</a>免費玩到飽。' },
+  { q: '為什麼不建議押和局？', a: '1:8 賠率看起來很肥對吧？但和局實際只有 9.5% 的機率出現，賭場優勢高達 14.36%——是押莊的 13 倍以上。白話翻譯：你壓 100 次和局，大概只會中 9-10 次，長期下來就是穩定失血。偶爾跟著壓一把助興可以，但拜託不要當主力，你的錢包會哭。' },
+  { q: '線上百家樂跟實體賭場規則一樣嗎？', a: '規則完全一樣——點數怎麼算、什麼時候補牌、賠率多少，全球統一標準。差別在線上用 RNG（隨機數生成器）或真人荷官，速度比實體快很多，而且最低下注門檻通常低很多。新手練手的話線上更適合，不用擔心在賭桌上丟臉。' },
+  { q: '有沒有什麼必贏策略？', a: '沒有。句號。<br/><br/>任何跟你說百家樂有必贏策略的人，不是要賣你課就是要騙你儲值。馬丁格爾、達蘭貝爾、1-3-2-6 這些「系統」都不能改變賭場優勢，只是改變你輸贏的節奏而已。你唯一能控制的是資金管理——設好預算、到停損線就收手，這比任何策略都有效。' },
+  { q: '百家樂的「對子」是什麼？', a: '閒家或莊家的前兩張牌如果點數一樣（比如兩張 8），就叫「對子」。你可以額外押「莊對」或「閒對」，賠率通常 1:11。但出現機率只有 7.47%，賭場優勢超過 10%，跟和局一樣是個看起來很香、實際上在割你韭菜的副注。偶爾壓爽的可以，別認真。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/baccarat-beginner-guide/"
+  title="百家樂怎麼玩？規則、補牌、賠率完整圖解（附互動模擬器）｜新手看這篇就夠"
+  description="百家樂新手入門完整教學：點數計算、發牌流程、補牌規則、莊閒賠率、抽水機制全圖解。附互動發牌模擬器，玩幾局就懂規則。從此不再看不懂為什麼莊贏閒輸。"
+  image="https://game8la.com/images/articles/baccarat-beginner-cover.webp"
+  datePublished="2026-05-23"
+  dateModified="2026-05-23"
+  wordCount={3500}
+  timeRequired="PT15M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '百家樂新手入門', url: 'https://game8la.com/articles/baccarat-beginner-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="百家樂怎麼玩？規則、補牌、賠率完整圖解（附互動模擬器）｜新手看這篇就夠 - GAME8LA" description="百家樂新手入門完整教學：點數計算、發牌流程、補牌規則、莊閒賠率、抽水機制全圖解。附互動發牌模擬器，玩幾局就懂規則。從此不再看不懂為什麼莊贏閒輸。" ogImage="https://game8la.com/images/articles/baccarat-beginner-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 百家樂新手入門</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-23 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 15 分鐘 ｜
+      <Icon name="refresh-cw" /> 最近更新：2026-05-23
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <article class="article-content">
+      <h1 style="font-size:2rem;line-height:1.3">百家樂怎麼玩？規則、補牌、賠率完整圖解，新手看這篇就夠</h1>
+      <p class="article-subtitle">搞懂規則不會讓你贏，但至少讓你知道自己在玩什麼</p>
+      <img src="/images/articles/baccarat-beginner-cover.webp" alt="芭樂子站在百家樂牌桌前，手持撲克牌講解規則——百家樂新手入門封面圖" width="1200" height="669" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px;margin:1rem auto 1.5rem" />
+
+      <p style="color:var(--text-muted);font-size:0.95rem">「百家樂不就是押莊押閒嗎？還需要教？」「為什麼他補牌我不補？那張規則表看了三遍還是看不懂。」「幹嘛贏了還被扣 5%？搶錢喔？」</p>
+      <p style="color:var(--guava-green);font-weight:700;font-size:1.05rem">以上只要中一個，恭喜，這篇就是寫給你的。</p>
+      <p style="color:var(--text-secondary)">百家樂表面上是全世界最簡單的賭場遊戲——選莊選閒，開牌比大小，三秒結束。但你真的坐到桌前，馬上會冒出一堆問號：為什麼有時候兩張牌就收工，有時候又要補第三張？贏了還要被抽 5% 是什麼道理？和局 1:8 看起來很肥，怎麼大家都說不能押？芭樂子今天一次講完，而且不只講——<strong>下面有模擬器讓你直接發牌體驗</strong>，手動操作三局，你就全懂了。</p>
+
+      <!-- 快速工具入口 -->
+      <div class="quick-tool-bar">
+        <span>學會規則後來練看路：</span>
+        <a href="/tools/baccarat-roadmap/">百家樂路單模擬器</a>
+      </div>
+
+      <!-- TOC -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">30 秒看懂百家樂在幹嘛</a></li>
+          <li><a href="#s2">牌面點數怎麼算</a></li>
+          <li><a href="#s3">一局怎麼進行：發牌流程</a></li>
+          <li><a href="#s4">補牌規則：最難懂的部分（有互動表）</a></li>
+          <li><a href="#s5">🎮 互動體驗：迷你發牌模擬器</a></li>
+          <li><a href="#s6">下注選項與賠率</a></li>
+          <li><a href="#s7">💰 互動計算：賠率與抽水計算器</a></li>
+          <li><a href="#s8">新手常犯的 5 個錯誤</a></li>
+          <li><a href="#s9">學會規則之後：看路入門</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ====== 1. 30 秒概述 ====== -->
+      <h2 id="s1" style="margin-top:2.5rem">1. 30 秒看懂百家樂在幹嘛</h2>
+
+      <p>廢話不多說，百家樂的本質就一句話：你選一邊押，荷官發牌，誰的點數比較接近 9 誰就贏。沒了。真的就這麼簡單。</p>
+
+      <div class="card" style="border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">你不是莊家也不是閒家</strong><br/>新手十個有八個搞混這件事。「莊」跟「閒」就是牌桌上兩個位置的名字，跟你本人一點關係都沒有。你就是在旁邊看戲的觀眾——選一邊壓注，坐著等開獎。</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">目標：接近 9 點</strong><br/>兩邊各發 2～3 張牌，加起來取個位數，誰比較接近 9 誰就贏。8 贏 7、3 贏 2，就是這麼直白。</p>
+        <p style="margin:0"><strong style="color:var(--guava-green)">你唯一要做的事：押注</strong><br/>剩下的全部荷官處理。發牌、補牌、算輸贏，你一根手指都不用動。所以百家樂才會被叫做「最容易入門的賭場遊戲」——門檻低到你阿嬤坐下來都能玩。</p>
+      </div>
+
+      <!-- ====== 2. 點數計算 ====== -->
+      <h2 id="s2" style="margin-top:2.5rem">2. 牌面點數怎麼算</h2>
+
+      <p>如果你玩過 21 點，先把那套忘掉。百家樂的算法不一樣，而且更簡單：</p>
+
+      <div class="card" style="border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--gold)">A = 1 點</strong></p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--gold)">2～9 = 牌面數字</strong>（2 就是 2 點、7 就是 7 點）</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--gold)">10、J、Q、K = 0 點</strong>（全部歸零）</p>
+        <p style="margin:0"><strong style="color:var(--gold)">加總只看個位數</strong>——拿到 7 + 8 = 15，取個位數就是 <strong>5 點</strong>。拿到 K + 3 = 3，就是 <strong>3 點</strong>。</p>
+      </div>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/baccarat-beginner-points.webp" alt="百家樂牌面點數計算圖解：A=1、2-9照算、10/J/Q/K=0" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">百家樂點數計算——記住「10 和人頭牌都是 0」就對了</figcaption>
+      </figure>
+
+      <p>最大就是 <strong>9 點</strong>——也叫「天牌」，拿到基本上躺贏。最慘是 <strong>0 點</strong>，也就是你抽到兩張 10 或人頭牌的時候，恭喜你，手上一堆國王但通通不算分。記住一句口訣就好：<strong>「人頭歸零，只看尾數」</strong>。</p>
+
+      <!-- ====== 3. 發牌流程 ====== -->
+      <h2 id="s3" style="margin-top:2.5rem">3. 一局怎麼進行：發牌流程</h2>
+
+      <p>整個流程是死的，你不用做任何決策，看完就懂：</p>
+
+      <div class="card" style="border-left:4px solid #a855f7;background:rgba(168,85,247,0.06)">
+        <p style="margin:0 0 0.8rem"><strong style="color:#a855f7">第一步：下注</strong><br/>選擇押「莊」、「閒」或「和」（也可以加押對子等副注），確認金額。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:#a855f7">第二步：發初始牌</strong><br/>荷官依序發牌——閒家先拿一張、莊家一張、閒家第二張、莊家第二張。兩邊各拿 2 張。</p>
+        <p style="margin:0 0 0.8rem"><strong style="color:#a855f7">第三步：看要不要補牌</strong><br/>根據一張固定的規則表，荷官決定閒家或莊家要不要再拿第 3 張牌。這個你不用管，荷官自己會判斷。但你至少要知道規則在幹嘛，不然每次補牌你都會一臉問號——下一節教你。</p>
+        <p style="margin:0"><strong style="color:#a855f7">第四步：比大小，開獎</strong><br/>兩邊最終點數比較，誰大誰贏。一樣大就是和局。</p>
+      </div>
+
+      <p>有一個很重要的特殊情況：只要任何一邊前兩張牌加起來是 <strong>8 點或 9 點</strong>（天牌），這局直接結束，誰都不用補。天牌就是百家樂裡的王炸——拿到就贏了，除非對面天牌比你大，那只能說運氣不好。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/baccarat-beginner-flow.webp" alt="百家樂一局發牌流程圖：下注→發牌→補牌判斷→比大小" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">一局百家樂的完整流程——發牌、補牌、比大小</figcaption>
+      </figure>
+
+      <!-- ====== 4. 補牌規則 ====== -->
+      <h2 id="s4" style="margin-top:2.5rem">4. 補牌規則：最難懂的部分</h2>
+
+      <p>來了來了，每個百家樂新手看到這裡都會皺眉頭的部分。先講結論：<strong>補牌不是你決定的</strong>，荷官看一張固定的表格操作，跟你想不想補完全無關。但你至少要搞懂規則在幹嘛，不然每次荷官多發一張牌你都在那邊「蛤？」。</p>
+
+      <h3>閒家的補牌規則（簡單）</h3>
+      <div class="card" style="border-left:4px solid #06b6d4;background:rgba(6,182,212,0.06)">
+        <p style="margin:0 0 0.5rem"><strong style="color:#06b6d4">前兩張 0～5 點</strong> → 補第三張牌</p>
+        <p style="margin:0 0 0.5rem"><strong style="color:#06b6d4">前兩張 6 或 7 點</strong> → 不補牌（站牌）</p>
+        <p style="margin:0"><strong style="color:#06b6d4">前兩張 8 或 9 點</strong> → 天牌，直接比大小，雙方都不補</p>
+      </div>
+      <p>閒家的規則白話翻譯：爛牌就補，好牌就站，天牌直接躺平。小學生都聽得懂。</p>
+
+      <h3>莊家的補牌規則（複雜）</h3>
+      <p>莊家的規則就是大魔王了。他不只看自己的點數，還要偷看<strong>閒家補的那張牌是幾點</strong>來決定要不要跟著補。這也是為什麼莊家長期贏率比閒家高一點——因為他多了一個情報優勢。規則長這樣：</p>
+
+      <div class="card" style="border-left:4px solid #ef4444;background:rgba(239,68,68,0.06)">
+        <p style="margin:0 0 0.5rem"><strong style="color:#ef4444">莊家 0～2 點</strong> → 不管閒家第三張是什麼，一律補牌</p>
+        <p style="margin:0 0 0.5rem"><strong style="color:#ef4444">莊家 7 點</strong> → 不管閒家第三張是什麼，一律站牌</p>
+        <p style="margin:0"><strong style="color:#ef4444">莊家 3～6 點</strong> → 要看閒家第三張牌是幾點來決定（見下方互動表）</p>
+      </div>
+
+      <p>看不懂？正常。芭樂子跟你說，根本不用背這些。荷官和系統會幫你處理，你只要知道「喔原來是這樣啊」就夠了。但如果你就是想搞清楚，玩玩下面這個互動表——點幾下就懂了，比死背那張表有用一百倍：</p>
+
+      <!-- 📊 補牌規則互動表 -->
+      <div class="slot-demo" id="draw-table-demo">
+        <div class="slot-demo__hd">📊 互動工具：補牌規則速查表 <span style="font-weight:400;font-size:0.78rem">（點選莊家點數 + 閒家第三張 → 看結果）</span></div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin:0 0 0.8rem;line-height:1.6">前提：雙方都沒拿到天牌（8/9 點），而且閒家已經補了第三張牌。</p>
+        <div class="draw-controls">
+          <div class="draw-ctrl-group">
+            <label>莊家前兩張點數：</label>
+            <div class="draw-btn-row" id="banker-btns">
+              <button class="draw-btn" data-val="0">0</button>
+              <button class="draw-btn" data-val="1">1</button>
+              <button class="draw-btn" data-val="2">2</button>
+              <button class="draw-btn active" data-val="3">3</button>
+              <button class="draw-btn" data-val="4">4</button>
+              <button class="draw-btn" data-val="5">5</button>
+              <button class="draw-btn" data-val="6">6</button>
+              <button class="draw-btn" data-val="7">7</button>
+            </div>
+          </div>
+          <div class="draw-ctrl-group">
+            <label>閒家第三張牌點數：</label>
+            <div class="draw-btn-row" id="player-third-btns">
+              <button class="draw-btn" data-val="0">0</button>
+              <button class="draw-btn active" data-val="1">1</button>
+              <button class="draw-btn" data-val="2">2</button>
+              <button class="draw-btn" data-val="3">3</button>
+              <button class="draw-btn" data-val="4">4</button>
+              <button class="draw-btn" data-val="5">5</button>
+              <button class="draw-btn" data-val="6">6</button>
+              <button class="draw-btn" data-val="7">7</button>
+              <button class="draw-btn" data-val="8">8</button>
+              <button class="draw-btn" data-val="9">9</button>
+            </div>
+          </div>
+        </div>
+        <div id="draw-result" class="slot-demo__note note--win">🃏 莊家 3 點 + 閒家第三張 1 → 莊家<strong>補牌</strong></div>
+        <!-- 完整規則表（視覺化） -->
+        <div class="draw-grid-wrap">
+          <div class="draw-grid-label">莊家＼閒三</div>
+          <div class="draw-grid" id="draw-grid">
+            <!-- JS 動態生成 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== 5. 互動發牌模擬器 ====== -->
+      <h2 id="s5" style="margin-top:2.5rem">5. 🎮 互動體驗：迷你發牌模擬器</h2>
+
+      <p>好了，規則講完了，你可能已經開始頭暈。沒關係，下面這個模擬器直接按了就懂——按一下發一局，系統幫你發牌、補牌、算輸贏，你就在旁邊看就好。多按幾次，你會發現「啊原來是這樣」。</p>
+
+      <!-- 📊 迷你發牌模擬器 -->
+      <div class="slot-demo" id="deal-demo">
+        <div class="slot-demo__hd">🎰 迷你百家樂：按一下發一局</div>
+        <div style="text-align:center;margin-bottom:1rem">
+          <button class="mw-spin-btn" id="deal-btn">🃏 發牌</button>
+          <span id="deal-count" style="display:inline-block;margin-left:0.8rem;font-size:0.78rem;color:var(--text-muted)">已發 0 局</span>
+        </div>
+
+        <div class="bac-table">
+          <div class="bac-side bac-player">
+            <div class="bac-label">閒 PLAYER</div>
+            <div class="bac-cards" id="p-cards"></div>
+            <div class="bac-score">點數：<span id="p-score">-</span></div>
+          </div>
+          <div class="bac-vs">VS</div>
+          <div class="bac-side bac-banker">
+            <div class="bac-label">莊 BANKER</div>
+            <div class="bac-cards" id="b-cards"></div>
+            <div class="bac-score">點數：<span id="b-score">-</span></div>
+          </div>
+        </div>
+
+        <div id="deal-log" class="deal-log"></div>
+        <div id="deal-result" class="slot-demo__note note--win" style="margin-top:0.8rem">👆 按「發牌」開始體驗一局百家樂的完整流程</div>
+      </div>
+
+      <p>多按幾次你就會發現，大部分時候四張牌就收工了——不是天牌秒殺，就是雙方 6、7 點直接站牌。真正要補第三張的情況沒你想像那麼多。這就是為什麼百家樂節奏那麼快，一局 10 秒就結束，一小時可以打 60 局以上，你的錢包要注意。</p>
+
+      <!-- ====== 6. 賠率 ====== -->
+      <h2 id="s6" style="margin-top:2.5rem">6. 下注選項與賠率</h2>
+
+      <p>百家樂的下注選項少到可以用一隻手數完。主要就三個，但裡面學問差很多：</p>
+
+      <div class="card" style="margin:1.5rem 0;background:var(--bg-card);overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>下注選項</th>
+              <th>賠率</th>
+              <th>賭場優勢</th>
+              <th>芭樂子評價</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;color:#ef4444">押莊</td>
+              <td>1:1（扣 5% 抽水）<br><span style="font-size:0.78rem;color:var(--guava-green)">實拿 0.95 倍</span></td>
+              <td>1.06%</td>
+              <td style="color:var(--guava-green)">⭐ 數學最優</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#3b82f6">押閒</td>
+              <td>1:1</td>
+              <td>1.24%</td>
+              <td>也不錯</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#f5b800">押和</td>
+              <td>1:8</td>
+              <td>14.36%</td>
+              <td style="color:#ef4444">⚠️ 超高賭場優勢</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#a855f7">莊對/閒對</td>
+              <td>1:11</td>
+              <td>10.36%</td>
+              <td style="color:#ef4444">⚠️ 副注陷阱</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.82rem;color:var(--gold-light);margin:0.6rem 0 0;padding:0 0.4rem">⚠️ 押莊贏 100 元 → 實際到手 95 元，5 元是賭場抽水（佣金）。這就是「扣 5% 抽水」的意思。</p>
+      </div>
+
+      <p>「押莊贏了還要被扣 5%？搶劫喔？」——對，就是搶劫，但有道理的搶劫。因為莊家在補牌規則上佔便宜（他可以偷看閒家的第三張牌再決定補不補），所以長期勝率比閒家高那麼一咪咪。賭場為了平衡，才對押莊贏的人抽 5% 佣金。重點是：<strong>就算扣了 5%，押莊的期望值還是三個選項裡面最好的</strong>。所以老手幾乎都押莊，道理在這裡。</p>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/baccarat-beginner-odds.webp" alt="百家樂賠率比較圖：莊1.06%、閒1.24%、和14.36%賭場優勢" width="1200" height="669" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem">三種下注選項的賭場優勢比較——和局是明確的陷阱</figcaption>
+      </figure>
+
+      <!-- ====== 7. 賠率計算器 ====== -->
+      <h2 id="s7" style="margin-top:2.5rem">7. 💰 互動計算：賠率與抽水計算器</h2>
+
+      <p>數字看不出感覺？來，輸入你平常下注的金額，芭樂子直接算給你看——押莊、押閒、押和，長期打下來你的口袋差多少：</p>
+
+      <!-- 📊 賠率/抽水計算器 -->
+      <div class="slot-demo" id="odds-calc">
+        <div class="slot-demo__hd">💰 賠率與抽水計算器</div>
+        <div class="calc-row">
+          <label for="bet-amount">每局下注金額：</label>
+          <div class="calc-input-wrap">
+            <span class="calc-prefix">$</span>
+            <input type="number" id="bet-amount" value="100" min="10" max="100000" step="10" />
+          </div>
+        </div>
+        <div class="calc-row">
+          <label for="bet-rounds">模擬局數：</label>
+          <input type="number" id="bet-rounds" value="100" min="10" max="10000" step="10" />
+        </div>
+        <div style="text-align:center;margin:1rem 0">
+          <button class="mw-spin-btn" id="calc-btn">📊 計算期望值</button>
+        </div>
+        <div class="calc-results" id="calc-results">
+          <div class="calc-card calc-banker">
+            <div class="calc-card-title">押莊</div>
+            <div class="calc-card-edge">賭場優勢 1.06%</div>
+            <div class="calc-card-val" id="calc-banker">-$106</div>
+            <div class="calc-card-note">贏了扣 5% 抽水</div>
+          </div>
+          <div class="calc-card calc-player">
+            <div class="calc-card-title">押閒</div>
+            <div class="calc-card-edge">賭場優勢 1.24%</div>
+            <div class="calc-card-val" id="calc-player">-$124</div>
+            <div class="calc-card-note">贏了不扣水</div>
+          </div>
+          <div class="calc-card calc-tie">
+            <div class="calc-card-title">押和</div>
+            <div class="calc-card-edge">賭場優勢 14.36%</div>
+            <div class="calc-card-val" id="calc-tie">-$1,436</div>
+            <div class="calc-card-note">賠率 1:8 的甜蜜陷阱</div>
+          </div>
+        </div>
+        <div class="slot-demo__note note--fire" style="margin-top:0.8rem">
+          ⚠️ 以上是<strong>理論期望虧損</strong>——玩越多局，實際結果越接近這個數字。押和的長期虧損是押莊的 <span id="calc-ratio">13.5</span> 倍！
+        </div>
+      </div>
+
+      <!-- ====== 8. 常犯錯誤 ====== -->
+      <h2 id="s8" style="margin-top:2.5rem">8. 新手常犯的 5 個錯誤</h2>
+
+      <div class="card" style="border-left:4px solid #ef4444;background:rgba(239,68,68,0.06)">
+        <p style="margin:0 0 1rem"><strong style="color:#ef4444">❌ 錯誤 1：把和局當提款機</strong><br/>1:8 賠率看到眼睛都亮了？醒醒。和局出現機率不到 10%，賭場優勢 14.36%——押莊的 13 倍以上。偶爾跟風壓一把好玩可以，把它當主力的人，芭樂子只能送你四個字：錢包保重。</p>
+        <p style="margin:0 0 1rem"><strong style="color:#ef4444">❌ 錯誤 2：覺得看路 = 預知未來</strong><br/>「連開 8 把莊了，下一把一定還是莊！」——不一定，每局都是獨立事件，牌不會記得上一局開什麼。看路可以幫你有紀律地下注，但你要是當它是破解密碼，那跟看星座運勢決定要不要出門沒兩樣。</p>
+        <p style="margin:0 0 1rem"><strong style="color:#ef4444">❌ 錯誤 3：贏了不走，結果全吐回去</strong><br/>百家樂一小時可以打 60-80 局，節奏快到你根本來不及感覺自己在輸。贏了 20 局的利潤，10 分鐘就能還給荷官。停利點跟停損點一樣重要——贏到目標就站起來，別貪。</p>
+        <p style="margin:0 0 1rem"><strong style="color:#ef4444">❌ 錯誤 4：輸了就加倍（馬丁格爾）</strong><br/>「輸 100 下一把壓 200，再輸壓 400，總有一把會贏回來！」——數學上沒錯，前提是你有無限的錢跟無限的注額上限。現實中？你會在第 7 把撞到桌面上限或者口袋先見底。這招是理論上完美、實戰上自殺的策略。</p>
+        <p style="margin:0"><strong style="color:#ef4444">❌ 錯誤 5：沒設預算就坐下來</strong><br/>「今天帶多少就玩多少啦」——這句話翻譯成白話就是「帶多少就輸多少」。上桌前先決定今天最多輸多少錢，到了就起身，不管你多「覺得」下一把是你的。能控制的不是輸贏，是你虧到哪裡停。</p>
+      </div>
+
+      <!-- 中段 CTA -->
+      <div class="mid-cta">
+        <p>🎰 學會規則了？來看看路單怎麼看 — <strong>免費模擬，練到看路變直覺</strong></p>
+        <a href="/tools/baccarat-roadmap/" class="mid-cta-btn">打開路單模擬器 →</a>
+      </div>
+
+      <!-- ====== 9. 看路入門 ====== -->
+      <h2 id="s9" style="margin-top:2.5rem">9. 學會規則之後：看路入門</h2>
+
+      <p>你如果去過真的賭場或看過線上百家樂的畫面，一定注意到旁邊有一堆紅藍圈圈的圖表——那就是「路單」。老手靠看路來決定下一把押什麼，常見的有五種：大路、大眼仔、小路、蟑螂路、珠盤路。聽起來很玄對吧？其實就是把歷史結果畫成圖，幫你找「感覺上的規律」。</p>
+
+      <div class="card" style="border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">芭樂子先打預防針：看路不能預測未來。</strong>但它確實能幫你兩件事：</p>
+        <p style="margin:0 0 0.5rem">1. <strong>讓你有紀律</strong>——跟著一套系統走，至少不會憑感覺亂壓</p>
+        <p style="margin:0">2. <strong>壓住你的衝動</strong>——有路可看的時候，你比較不會連輸三把就抓狂梭哈</p>
+      </div>
+
+      <p>想學看路？不用花錢去賭場繳學費。芭樂子做了一個<strong>免費的路單模擬器</strong>，可以自動發牌、即時畫路，讓你在不花一毛錢的環境下練到看路變本能。</p>
+
+      <div class="casino-check-cta" style="background:linear-gradient(135deg,#0a1a2e,#1a2a4a);border:2px solid var(--guava-green);border-radius:12px;padding:2rem;text-align:center;margin:2rem 0">
+        <h3 style="color:var(--guava-green);margin-top:0;font-size:1.3rem">🎰 百家樂路單模擬器</h3>
+        <p style="color:#ccc;margin-bottom:1.2rem">自動發牌、即時畫路、五種路單同時顯示——免費練到你變老手</p>
+        <a href="/tools/baccarat-roadmap/" class="cta-button" style="display:inline-block;background:var(--guava-green);color:#000;padding:0.8rem 2rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.1rem">開始練習 →</a>
+      </div>
+
+      <!-- 延伸閱讀 -->
+      <div class="card" style="margin:2rem 0;border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <h3 style="color:var(--guava-green);margin-top:0">📚 延伸閱讀</h3>
+        <p style="margin:0 0 0.5rem"><a href="/tools/baccarat-roadmap/">🎰 百家樂路單模擬器</a> — 免費練看路</p>
+        <p style="margin:0 0 0.5rem"><a href="/articles/baccarat-roadmap-guide/">📖 百家樂看路教學</a> — 五種路單完整解析</p>
+        <p style="margin:0 0 0.5rem"><a href="/articles/slot-beginner-guide/">🎰 老虎機新手入門</a> — 五種玩法規則圖解</p>
+        <p style="margin:0"><a href="/tools/bankroll-calculator/">💰 資金控管計算器</a> — 算出你的停損線</p>
+      </div>
+
+      <ManifestoBox />
+
+      <!-- ====== FAQ ====== -->
+      <h2 id="faq" style="margin-top:2.5rem">10. 常見問題 FAQ</h2>
+
+      <div class="faq-section">
+        {faqs.map(f => (
+          <div class="faq-item">
+            <button class="faq-q"><span>{f.q}</span><Icon name="chevron-down" /></button>
+            <div class="faq-a"><p set:html={f.a} /></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 分享 -->
+      <ShareButtons title="百家樂怎麼玩？規則、補牌、賠率完整圖解（附互動模擬器）" heading="🃏 身邊有人第一次玩百家樂？把這篇傳給他" />
+
+      <script is:inline>
+      /* ===== 補牌規則互動表 ===== */
+      (function(){
+        // 莊家補牌規則表：bankerDraw[莊家點數][閒家第三張] = true 表示補牌
+        var bankerDraw = {
+          0: {0:true,1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true},
+          1: {0:true,1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true},
+          2: {0:true,1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true},
+          3: {0:true,1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:false,9:true},
+          4: {0:false,1:false,2:true,3:true,4:true,5:true,6:true,7:true,8:false,9:false},
+          5: {0:false,1:false,2:false,3:false,4:true,5:true,6:true,7:true,8:false,9:false},
+          6: {0:false,1:false,2:false,3:false,4:false,5:false,6:true,7:true,8:false,9:false},
+          7: {0:false,1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false,9:false}
+        };
+
+        function buildGrid(){
+          var grid=document.getElementById('draw-grid');
+          if(!grid)return;
+          grid.innerHTML='';
+          // 頂部標題列（閒家第三張 0-9）
+          var headerRow=document.createElement('div');
+          headerRow.className='draw-grid-row draw-grid-header';
+          var corner=document.createElement('div');
+          corner.className='draw-grid-cell draw-grid-corner';
+          corner.textContent='莊＼閒三';
+          headerRow.appendChild(corner);
+          for(var j=0;j<=9;j++){
+            var th=document.createElement('div');
+            th.className='draw-grid-cell draw-grid-th';
+            th.textContent=j;
+            headerRow.appendChild(th);
+          }
+          grid.appendChild(headerRow);
+          // 每一行（莊家 0-7）
+          for(var i=0;i<=7;i++){
+            var row=document.createElement('div');
+            row.className='draw-grid-row';
+            var rh=document.createElement('div');
+            rh.className='draw-grid-cell draw-grid-rh';
+            rh.textContent=i;
+            row.appendChild(rh);
+            for(var j=0;j<=9;j++){
+              var cell=document.createElement('div');
+              cell.className='draw-grid-cell';
+              cell.dataset.b=i;
+              cell.dataset.p=j;
+              if(bankerDraw[i][j]){
+                cell.textContent='補';
+                cell.classList.add('draw-yes');
+              }else{
+                cell.textContent='站';
+                cell.classList.add('draw-no');
+              }
+              row.appendChild(cell);
+            }
+            grid.appendChild(row);
+          }
+        }
+        buildGrid();
+
+        function updateDrawResult(){
+          var bBtns=document.querySelectorAll('#banker-btns .draw-btn');
+          var pBtns=document.querySelectorAll('#player-third-btns .draw-btn');
+          var bVal=-1,pVal=-1;
+          bBtns.forEach(function(b){if(b.classList.contains('active'))bVal=parseInt(b.dataset.val)});
+          pBtns.forEach(function(b){if(b.classList.contains('active'))pVal=parseInt(b.dataset.val)});
+          if(bVal<0||pVal<0)return;
+          var result=document.getElementById('draw-result');
+          var draws=bankerDraw[bVal][pVal];
+          if(bVal<=2){
+            result.innerHTML='🃏 莊家 '+bVal+' 點 → 不管閒家第三張，一律<strong>補牌</strong>';
+            result.className='slot-demo__note note--fire';
+          }else if(bVal===7){
+            result.innerHTML='🃏 莊家 7 點 → 不管閒家第三張，一律<strong>站牌</strong>';
+            result.className='slot-demo__note note--win';
+          }else{
+            result.innerHTML='🃏 莊家 '+bVal+' 點 + 閒家第三張 '+pVal+' → 莊家<strong>'+(draws?'補牌':'站牌')+'</strong>';
+            result.className='slot-demo__note '+(draws?'note--fire':'note--win');
+          }
+          // 高亮表格
+          document.querySelectorAll('#draw-grid .draw-grid-cell').forEach(function(c){
+            c.classList.remove('draw-active');
+            if(c.dataset.b==bVal && c.dataset.p==pVal) c.classList.add('draw-active');
+          });
+        }
+
+        document.getElementById('banker-btns')?.addEventListener('click',function(e){
+          var btn=e.target.closest('.draw-btn');if(!btn)return;
+          this.querySelectorAll('.draw-btn').forEach(function(b){b.classList.remove('active')});
+          btn.classList.add('active');
+          updateDrawResult();
+        });
+        document.getElementById('player-third-btns')?.addEventListener('click',function(e){
+          var btn=e.target.closest('.draw-btn');if(!btn)return;
+          this.querySelectorAll('.draw-btn').forEach(function(b){b.classList.remove('active')});
+          btn.classList.add('active');
+          updateDrawResult();
+        });
+      })();
+
+      /* ===== 迷你發牌模擬器 ===== */
+      (function(){
+        var suits=['♠','♥','♦','♣'];
+        var ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+        var vals=[1,2,3,4,5,6,7,8,9,0,0,0,0];
+        var dealNum=0;
+
+        function makeCard(rank,suit){
+          var val=vals[ranks.indexOf(rank)];
+          var color=(suit==='♥'||suit==='♦')?'red':'white';
+          return {rank:rank,suit:suit,val:val,color:color};
+        }
+        function drawCard(){
+          return makeCard(ranks[Math.floor(Math.random()*13)],suits[Math.floor(Math.random()*4)]);
+        }
+        function cardHtml(card,delay){
+          return '<div class="bac-card'+(card.color==='red'?' bac-card--red':'')+'" style="animation-delay:'+(delay||0)+'s"><div class="bac-card-rank">'+card.rank+'</div><div class="bac-card-suit">'+card.suit+'</div></div>';
+        }
+        function total(cards){
+          return cards.reduce(function(s,c){return s+c.val},0)%10;
+        }
+
+        document.getElementById('deal-btn')?.addEventListener('click',function(){
+          dealNum++;
+          document.getElementById('deal-count').textContent='已發 '+dealNum+' 局';
+          var pCards=[drawCard(),drawCard()];
+          var bCards=[drawCard(),drawCard()];
+          var pTotal=total(pCards), bTotal=total(bCards);
+          var log=[];
+          var pEl=document.getElementById('p-cards');
+          var bEl=document.getElementById('b-cards');
+          var result=document.getElementById('deal-result');
+          var logEl=document.getElementById('deal-log');
+          var pSide=document.querySelector('.bac-player');
+          var bSide=document.querySelector('.bac-banker');
+          // 清除上一局的勝負 class
+          pSide.classList.remove('bac-win','bac-lose','bac-tie');
+          bSide.classList.remove('bac-win','bac-lose','bac-tie');
+
+          // 發前兩張
+          pEl.innerHTML=cardHtml(pCards[0],0)+cardHtml(pCards[1],0.15);
+          bEl.innerHTML=cardHtml(bCards[0],0.3)+cardHtml(bCards[1],0.45);
+          document.getElementById('p-score').textContent=pTotal;
+          document.getElementById('b-score').textContent=bTotal;
+
+          log.push('📤 閒家發到 '+pCards[0].rank+pCards[0].suit+' + '+pCards[1].rank+pCards[1].suit+' = '+pTotal+' 點');
+          log.push('📤 莊家發到 '+bCards[0].rank+bCards[0].suit+' + '+bCards[1].rank+bCards[1].suit+' = '+bTotal+' 點');
+
+          // 天牌判斷
+          if(pTotal>=8||bTotal>=8){
+            log.push('🌟 天牌！'+(pTotal>=8?'閒家':'莊家')+' 拿到 '+(pTotal>=8?pTotal:bTotal)+' 點，不補牌');
+          }else{
+            // 閒家補牌
+            var pDrew=false, pThird=null;
+            if(pTotal<=5){
+              pThird=drawCard();
+              pCards.push(pThird);
+              pTotal=total(pCards);
+              pDrew=true;
+              log.push('📥 閒家 '+total([pCards[0],pCards[1]])+' 點（≤5）→ 補第三張 '+pThird.rank+pThird.suit+'，新點數 '+pTotal);
+              pEl.innerHTML+=cardHtml(pThird,0.6);
+              document.getElementById('p-score').textContent=pTotal;
+            }else{
+              log.push('✋ 閒家 '+pTotal+' 點（6-7）→ 站牌');
+            }
+
+            // 莊家補牌
+            if(!pDrew){
+              // 閒家沒補牌時，莊家 0-5 補、6-7 站
+              if(bTotal<=5){
+                var bThird=drawCard();
+                bCards.push(bThird);
+                bTotal=total(bCards);
+                log.push('📥 莊家 '+total([bCards[0],bCards[1]])+' 點（≤5，閒家未補）→ 補第三張 '+bThird.rank+bThird.suit+'，新點數 '+bTotal);
+                bEl.innerHTML+=cardHtml(bThird,0.75);
+                document.getElementById('b-score').textContent=bTotal;
+              }else{
+                log.push('✋ 莊家 '+bTotal+' 點（6-7，閒家未補）→ 站牌');
+              }
+            }else{
+              // 閒家有補牌，莊家看規則表
+              var p3v=pThird.val;
+              var bOrig=total([bCards[0],bCards[1]]);
+              var shouldDraw=false;
+              if(bOrig<=2) shouldDraw=true;
+              else if(bOrig===3) shouldDraw=(p3v!==8);
+              else if(bOrig===4) shouldDraw=(p3v>=2&&p3v<=7);
+              else if(bOrig===5) shouldDraw=(p3v>=4&&p3v<=7);
+              else if(bOrig===6) shouldDraw=(p3v===6||p3v===7);
+              else shouldDraw=false;
+
+              if(shouldDraw){
+                var bThird=drawCard();
+                bCards.push(bThird);
+                bTotal=total(bCards);
+                log.push('📥 莊家 '+bOrig+' 點 + 閒家第三張 '+p3v+' → 補牌 '+bThird.rank+bThird.suit+'，新點數 '+bTotal);
+                bEl.innerHTML+=cardHtml(bThird,0.75);
+                document.getElementById('b-score').textContent=bTotal;
+              }else{
+                log.push('✋ 莊家 '+bOrig+' 點 + 閒家第三張 '+p3v+' → 站牌');
+              }
+            }
+          }
+
+          // 判定結果
+          var winner;
+          if(pTotal>bTotal) winner='player';
+          else if(bTotal>pTotal) winner='banker';
+          else winner='tie';
+
+          var resultText={
+            'player':'🔵 閒家勝！ '+pTotal+' 點 > '+bTotal+' 點',
+            'banker':'🔴 莊家勝！ '+bTotal+' 點 > '+pTotal+' 點',
+            'tie':'🟡 和局！ 雙方都是 '+pTotal+' 點'
+          };
+          result.textContent=resultText[winner];
+          result.className='slot-demo__note '+(winner==='player'?'note--win':winner==='banker'?'note--fire':'note--lose');
+
+          // 贏家發光 / 輸家暗化
+          if(winner==='player'){
+            pSide.classList.add('bac-win');
+            bSide.classList.add('bac-lose');
+          }else if(winner==='banker'){
+            bSide.classList.add('bac-win');
+            pSide.classList.add('bac-lose');
+          }else{
+            pSide.classList.add('bac-tie');
+            bSide.classList.add('bac-tie');
+          }
+
+          // 顯示 log
+          logEl.innerHTML=log.map(function(l){return '<div class="deal-log-line">'+l+'</div>'}).join('');
+        });
+      })();
+
+      /* ===== 賠率計算器 ===== */
+      (function(){
+        function calc(){
+          var amt=parseInt(document.getElementById('bet-amount').value)||100;
+          var rounds=parseInt(document.getElementById('bet-rounds').value)||100;
+          var totalBet=amt*rounds;
+          var bankerLoss=Math.round(totalBet*0.0106);
+          var playerLoss=Math.round(totalBet*0.0124);
+          var tieLoss=Math.round(totalBet*0.1436);
+          document.getElementById('calc-banker').textContent='-$'+bankerLoss.toLocaleString();
+          document.getElementById('calc-player').textContent='-$'+playerLoss.toLocaleString();
+          document.getElementById('calc-tie').textContent='-$'+tieLoss.toLocaleString();
+          document.getElementById('calc-ratio').textContent=(tieLoss/bankerLoss).toFixed(1);
+        }
+        document.getElementById('calc-btn')?.addEventListener('click',calc);
+        calc();
+      })();
+      </script>
+
+    </article>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .container {
+    max-width: 880px; margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+  }
+  .breadcrumb {
+    font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem;
+  }
+  .breadcrumb a { color: var(--gold-light); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    font-size: 0.82rem; color: var(--gold-light); text-decoration: none;
+    margin-bottom: 1rem;
+  }
+  .back-link:hover { color: var(--guava-green); }
+  .article-subtitle {
+    font-size: 1.1rem; color: var(--guava-green);
+    margin: -0.5rem 0 1.5rem; font-style: italic;
+  }
+  .article-content h2 {
+    font-size: 1.4rem; color: var(--text-primary);
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    margin-top: 2.5rem;
+  }
+  .article-content h3 { font-size: 1.15rem; color: var(--gold-light); margin-top: 1.5rem; }
+  .article-content p { color: var(--text-secondary); line-height: 1.85; margin: 0.8rem 0; font-size: 0.95rem; }
+  .article-content a { color: var(--gold-light); }
+  .article-content strong { color: var(--text-primary); }
+
+  .toc ol { padding-left: 1.2rem; margin: 0.5rem 0 0; }
+  .toc li { margin: 0.4rem 0; font-size: 0.9rem; }
+  .toc a { color: var(--gold-light); text-decoration: none; }
+  .toc a:hover { color: var(--guava-green); }
+
+  .mid-cta {
+    margin: 2rem 0; padding: 1.2rem 1.5rem; text-align: center;
+    background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(245,184,0,0.08));
+    border: 1px dashed var(--guava-green); border-radius: 12px;
+  }
+  .mid-cta p { margin: 0 0 0.8rem; font-size: 1rem; color: var(--text-primary); }
+  .mid-cta-btn {
+    display: inline-block; background: var(--guava-green); color: #0d1117 !important;
+    padding: 0.6rem 1.4rem; border-radius: 8px; font-weight: 700;
+    text-decoration: none !important; font-size: 0.95rem;
+    transition: filter 0.2s, transform 0.2s;
+  }
+  .mid-cta-btn:hover { filter: brightness(1.15); transform: translateY(-2px); }
+
+  .quick-tool-bar {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+    padding: 0.8rem 1rem; margin: 1rem 0 1.5rem;
+    background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.2); border-radius: 10px;
+    font-size: 0.9rem;
+  }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a {
+    background: var(--guava-green); color: #000; font-weight: 700; padding: 0.35rem 0.8rem;
+    border-radius: 6px; text-decoration: none; font-size: 0.85rem;
+  }
+  .quick-tool-bar a:hover { filter: brightness(1.15); }
+
+  .faq-section { margin: 1.5rem 0; }
+  .faq-item {
+    border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 0.8rem; overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.2rem; background: var(--bg-card); border: none;
+    color: var(--text-primary); font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; text-align: left;
+  }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  }
+  .faq-item.open .faq-a { max-height: 600px; }
+  .faq-a p {
+    padding: 0 1.2rem 1rem; margin: 0;
+    font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;
+  }
+
+  .card {
+    padding: 1.2rem 1.5rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg-card);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: rgba(245,184,0,0.08); color: var(--gold-light); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; }
+  td { color: var(--text-secondary); }
+
+  .slot-demo {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin: 1.2rem 0 1.5rem;
+  }
+  .slot-demo__hd {
+    font-size: 0.9rem; font-weight: 700;
+    color: var(--gold-light); margin-bottom: 0.8rem;
+  }
+  .slot-demo__note {
+    text-align: center; font-size: 0.82rem;
+    margin-top: 0.7rem; padding: 0.5rem 0.8rem;
+    border-radius: 8px; line-height: 1.6;
+  }
+  .note--win { color: var(--guava-green); background: rgba(57,255,20,0.08); }
+  .note--lose { color: #ef4444; background: rgba(239,68,68,0.08); }
+  .note--fire { color: #f97316; background: rgba(249,115,22,0.1); }
+
+  .mw-spin-btn {
+    padding: 0.55rem 1.4rem;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--gold), #e6a800);
+    color: #000; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .mw-spin-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(245,184,0,0.4); }
+  .mw-spin-btn:active { transform: scale(0.96); }
+
+  /* ===== 補牌規則互動表 ===== */
+  .draw-controls { margin-bottom: 1rem; }
+  .draw-ctrl-group { margin-bottom: 0.8rem; }
+  .draw-ctrl-group label {
+    display: block; font-size: 0.82rem; color: var(--text-muted);
+    margin-bottom: 0.4rem; font-weight: 700;
+  }
+  .draw-btn-row { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+  .draw-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg-card); color: var(--text-secondary);
+    font-size: 0.85rem; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .draw-btn:hover { border-color: var(--gold-light); color: var(--text-primary); }
+  .draw-btn.active {
+    background: var(--guava-green); color: #000; border-color: var(--guava-green);
+  }
+
+  .draw-grid-wrap {
+    margin-top: 1rem; overflow-x: auto;
+  }
+  .draw-grid-label {
+    font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.3rem;
+  }
+  .draw-grid-row {
+    display: grid; grid-template-columns: 50px repeat(10, 1fr); gap: 2px;
+  }
+  .draw-grid-cell {
+    padding: 0.3rem; text-align: center; font-size: 0.7rem; font-weight: 700;
+    border-radius: 4px; transition: all 0.2s;
+  }
+  .draw-grid-corner {
+    font-size: 0.6rem; color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .draw-grid-th {
+    background: rgba(245,184,0,0.15); color: var(--gold-light);
+  }
+  .draw-grid-rh {
+    background: rgba(168,85,247,0.15); color: #a855f7;
+  }
+  .draw-yes {
+    background: rgba(249,115,22,0.15); color: #f97316;
+  }
+  .draw-no {
+    background: rgba(57,255,20,0.08); color: var(--guava-green);
+  }
+  .draw-active {
+    outline: 2px solid var(--gold) !important;
+    transform: scale(1.15);
+    z-index: 2;
+    position: relative;
+  }
+
+  /* ===== 迷你發牌模擬器 ===== */
+  .bac-table {
+    display: flex; align-items: flex-start; justify-content: center;
+    gap: 1rem; margin: 0 auto; max-width: 540px;
+  }
+  .bac-side {
+    flex: 1; text-align: center;
+    border-radius: 12px; padding: 0.8rem 0.4rem;
+    border: 2px solid transparent;
+    transition: all 0.4s ease;
+  }
+  .bac-side.bac-win {
+    border-color: var(--guava-green);
+    background: rgba(57,255,20,0.10);
+    box-shadow: 0 0 16px rgba(57,255,20,0.3);
+    transform: scale(1.03);
+    animation: bac-glow 2s ease-in-out infinite;
+  }
+  .bac-side.bac-win .bac-score span {
+    color: var(--guava-green); font-size: 1.3rem;
+  }
+  .bac-side.bac-lose {
+    opacity: 0.7;
+    transform: scale(0.97);
+  }
+  .bac-side.bac-tie {
+    border-color: rgba(245,184,0,0.5);
+    background: rgba(245,184,0,0.08);
+    box-shadow: 0 0 12px rgba(245,184,0,0.25);
+    animation: bac-glow-tie 2s ease-in-out infinite;
+  }
+  @keyframes bac-glow {
+    0%, 100% { box-shadow: 0 0 16px rgba(57,255,20,0.3); }
+    50% { box-shadow: 0 0 28px rgba(57,255,20,0.55); }
+  }
+  @keyframes bac-glow-tie {
+    0%, 100% { box-shadow: 0 0 12px rgba(245,184,0,0.25); }
+    50% { box-shadow: 0 0 22px rgba(245,184,0,0.45); }
+  }
+  .bac-label {
+    font-size: 0.82rem; font-weight: 700;
+    padding: 0.3rem 0.6rem; border-radius: 6px; margin-bottom: 0.6rem;
+  }
+  .bac-player .bac-label { background: rgba(59,130,246,0.2); color: #3b82f6; }
+  .bac-banker .bac-label { background: rgba(239,68,68,0.2); color: #ef4444; }
+  .bac-vs {
+    font-size: 1.2rem; font-weight: 900; color: var(--text-muted);
+    align-self: center; margin-top: 2rem;
+  }
+  .bac-cards {
+    display: flex; gap: 0.4rem; justify-content: center;
+    min-height: 80px; flex-wrap: wrap;
+  }
+  .bac-card {
+    width: 48px; height: 68px;
+    background: #fff; border-radius: 6px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    animation: card-deal 0.3s ease-out both;
+    color: #1a1a2e;
+  }
+  .bac-card--red { color: #dc2626; }
+  .bac-card-rank { font-size: 1rem; font-weight: 900; line-height: 1; }
+  .bac-card-suit { font-size: 0.9rem; line-height: 1; }
+  @keyframes card-deal {
+    from { opacity: 0; transform: translateY(-20px) scale(0.8); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .bac-score {
+    font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; font-weight: 700;
+  }
+  .bac-score span { color: var(--gold-light); font-size: 1.1rem; }
+
+  .deal-log {
+    margin-top: 0.8rem; padding: 0.6rem 0.8rem;
+    background: rgba(0,0,0,0.3); border-radius: 8px;
+    max-height: 150px; overflow-y: auto;
+  }
+  .deal-log-line {
+    font-size: 0.75rem; color: var(--text-muted);
+    padding: 0.15rem 0; line-height: 1.6;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  /* ===== 賠率計算器 ===== */
+  .calc-row {
+    display: flex; align-items: center; gap: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+  .calc-row label {
+    font-size: 0.85rem; color: var(--text-muted);
+    white-space: nowrap; min-width: 120px;
+  }
+  .calc-input-wrap {
+    display: flex; align-items: center;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+  }
+  .calc-prefix {
+    padding: 0.4rem 0.5rem; color: var(--gold-light);
+    font-weight: 700; font-size: 0.9rem;
+  }
+  .calc-row input {
+    width: 100px; padding: 0.4rem 0.5rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text-primary);
+    font-size: 0.9rem; font-weight: 700;
+  }
+  .calc-input-wrap input {
+    border: none; border-radius: 0;
+  }
+  .calc-results {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem; margin-top: 0.5rem;
+  }
+  .calc-card {
+    padding: 1rem 0.8rem; border-radius: 10px; text-align: center;
+    border: 1px solid var(--border);
+  }
+  .calc-banker { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.3); }
+  .calc-player { background: rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.3); }
+  .calc-tie { background: rgba(245,184,0,0.06); border-color: rgba(245,184,0,0.3); }
+  .calc-card-title { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
+  .calc-card-edge { font-size: 0.7rem; color: var(--text-muted); margin: 0.2rem 0 0.5rem; }
+  .calc-card-val { font-size: 1.3rem; font-weight: 900; color: #ef4444; }
+  .calc-card-note { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+  /* ===== 手機版 RWD — 40 歲以上友善 ===== */
+  @media (max-width: 640px) {
+    .container { padding: 1.2rem; }
+
+    /* 文字全面放大 */
+    .article-content h1 { font-size: 1.6rem; line-height: 1.4; }
+    .article-content h2 { font-size: 1.35rem; margin-top: 2rem; }
+    .article-content h3 { font-size: 1.15rem; }
+    .article-content p { font-size: 1.05rem; line-height: 2; margin: 1rem 0; }
+    .article-subtitle { font-size: 1.05rem; }
+    .article-content a { font-size: inherit; }
+
+    /* 麵包屑 & meta */
+    .breadcrumb { font-size: 0.88rem; margin-bottom: 0.5rem; }
+    .back-link { font-size: 0.92rem; margin-bottom: 1.2rem; }
+
+    /* 卡片內文放大 */
+    .card { padding: 1.2rem; }
+    .card p { font-size: 1.02rem !important; line-height: 2 !important; }
+    .card strong { font-size: inherit; }
+
+    /* TOC */
+    .toc { padding: 1.2rem; }
+    .toc li { font-size: 1rem; margin: 0.6rem 0; }
+    .toc h2 { font-size: 1.15rem; }
+
+    /* 快速工具列 */
+    .quick-tool-bar { flex-direction: column; align-items: flex-start; gap: 0.6rem; font-size: 1rem; }
+    .quick-tool-bar a { font-size: 1rem; padding: 0.5rem 1rem; }
+
+    /* 表格 */
+    table { font-size: 0.92rem; }
+    th, td { padding: 0.6rem 0.5rem; }
+
+    /* 互動工具共用 */
+    .slot-demo { padding: 1rem; margin: 1.5rem 0; }
+    .slot-demo__hd { font-size: 1rem; margin-bottom: 1rem; }
+    .slot-demo__note { font-size: 0.95rem; padding: 0.6rem 0.8rem; line-height: 1.8; }
+
+    /* 發牌按鈕放大 */
+    .mw-spin-btn { font-size: 1.1rem; padding: 0.7rem 1.8rem; }
+
+    /* ===== 撲克牌放大 ===== */
+    .bac-table { gap: 0.6rem; }
+    .bac-label { font-size: 0.95rem; padding: 0.4rem 0.8rem; }
+    .bac-cards { min-height: 90px; gap: 0.5rem; }
+    .bac-card { width: 52px; height: 74px; }
+    .bac-card-rank { font-size: 1.15rem; }
+    .bac-card-suit { font-size: 1rem; }
+    .bac-vs { font-size: 1.1rem; margin-top: 2.5rem; }
+    .bac-score { font-size: 1rem; margin-top: 0.6rem; }
+    .bac-score span { font-size: 1.3rem; }
+
+    /* 發牌 log */
+    .deal-log { padding: 0.8rem; }
+    .deal-log-line { font-size: 0.88rem; padding: 0.25rem 0; line-height: 1.7; }
+
+    /* ===== 補牌規則按鈕放大（觸控友善 44px+） ===== */
+    .draw-ctrl-group { margin-bottom: 1rem; }
+    .draw-ctrl-group label { font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .draw-btn-row { gap: 0.35rem; }
+    .draw-btn { width: 40px; height: 40px; font-size: 0.95rem; border-radius: 8px; }
+
+    /* 補牌規則表格 */
+    .draw-grid-wrap { margin-top: 1.2rem; }
+    .draw-grid-row { grid-template-columns: 40px repeat(10, 1fr); gap: 2px; }
+    .draw-grid-cell { font-size: 0.68rem; padding: 0.3rem 0.15rem; min-height: 30px; display: flex; align-items: center; justify-content: center; }
+    .draw-grid-corner { font-size: 0.6rem; }
+
+    /* ===== 賠率計算器 ===== */
+    .calc-results { grid-template-columns: 1fr; gap: 0.8rem; }
+    .calc-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+    .calc-row label { font-size: 1rem; min-width: auto; }
+    .calc-row input { font-size: 1.05rem; padding: 0.55rem 0.6rem; width: 120px; }
+    .calc-prefix { font-size: 1.05rem; padding: 0.55rem 0.6rem; }
+    .calc-card { padding: 1.2rem; }
+    .calc-card-title { font-size: 1.05rem; }
+    .calc-card-edge { font-size: 0.85rem; margin: 0.3rem 0 0.6rem; }
+    .calc-card-val { font-size: 1.5rem; }
+    .calc-card-note { font-size: 0.85rem; }
+
+    /* CTA 按鈕放大 */
+    .mid-cta { padding: 1.2rem; }
+    .mid-cta p { font-size: 1.05rem; }
+    .mid-cta-btn { font-size: 1.05rem; padding: 0.7rem 1.5rem; }
+    .casino-check-cta { padding: 1.5rem 1.2rem; }
+    .casino-check-cta h3 { font-size: 1.2rem; }
+    .casino-check-cta p { font-size: 1rem; }
+    .casino-check-cta .cta-button { font-size: 1.1rem; padding: 0.8rem 1.8rem; }
+
+    /* FAQ 放大 */
+    .faq-q { font-size: 1.05rem; padding: 1.1rem 1.2rem; min-height: 52px; }
+    .faq-a p { font-size: 1rem !important; line-height: 2 !important; padding: 0.2rem 1.2rem 1.2rem; }
+
+    /* 延伸閱讀 */
+    .card a { font-size: 1.02rem; }
+
+    /* figure 圖片說明 */
+    figure figcaption { font-size: 0.88rem !important; }
+  }
+</style>

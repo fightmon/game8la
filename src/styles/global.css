@@ -353,8 +353,69 @@ code{background:var(--bg-secondary);padding:0.15rem 0.4rem;border-radius:4px;col
   .grid-2,.grid-3,.related-links{grid-template-columns:1fr}
   .info-grid{grid-template-columns:1fr}
   .toc-box ol{columns:1}
-  .article-content h2{font-size:1.2rem}
-  .container{padding:90px 1rem 3rem}
+  .container{padding:90px 1.2rem 3rem}
+}
+
+/* ===== 手機版 40 歲以上友善 RWD ===== */
+@media(max-width:640px){
+  /* 文字全面放大 */
+  .article-content{font-size:1.05rem;line-height:2.1}
+  .article-content h1{font-size:1.6rem !important;line-height:1.4}
+  .article-content h2{font-size:1.35rem;margin:1.8rem 0 0.8rem}
+  .article-content h3{font-size:1.15rem}
+  .article-content p{font-size:1.05rem;line-height:2;margin-bottom:1rem}
+  .article-content ul,.article-content ol{font-size:1.05rem;line-height:2}
+  .article-content li{margin-bottom:0.6rem;font-size:1.05rem}
+  .article-content blockquote{padding:1rem 1.2rem;font-size:1.02rem}
+  .article-content a{font-size:inherit}
+  .article-content .tip-box,.article-content .warn-box{padding:1.2rem;font-size:1.02rem}
+
+  /* 麵包屑 & meta */
+  .breadcrumb{font-size:0.9rem;margin-bottom:0.5rem}
+  .back-link{font-size:0.95rem;margin-bottom:1.2rem}
+
+  /* 卡片 */
+  .card{padding:1.2rem;border-radius:12px}
+  .card p{font-size:1.02rem !important;line-height:2 !important}
+  .card h3{font-size:1.1rem}
+
+  /* TOC 放大 */
+  .toc{padding:1.2rem}
+  .toc h4{font-size:1.05rem}
+  .toc li{margin-bottom:0.6rem}
+  .toc a{font-size:1rem}
+  .toc-box{padding:1.2rem 1.4rem}
+  .toc-box h3{font-size:1.05rem}
+  .toc-box ol li{font-size:1rem;margin-bottom:0.6rem}
+
+  /* 表格 */
+  table{font-size:0.95rem}
+  th,td{padding:0.7rem 0.5rem}
+
+  /* FAQ 放大（觸控友善） */
+  .faq-q{font-size:1.05rem;padding:1.1rem 1.2rem;min-height:52px}
+  .faq-a{font-size:1rem;line-height:2}
+  .faq-a p{font-size:1rem !important;line-height:2 !important}
+
+  /* 延伸閱讀 */
+  .related-box{padding:1.2rem}
+  .related-box h3{font-size:1.1rem}
+  .related-links a{padding:1rem;font-size:1rem}
+  .related-links a small{font-size:0.9rem}
+
+  /* 按鈕 */
+  .btn-primary,.btn-outline{font-size:1rem;padding:0.7rem 1.5rem;min-height:48px}
+
+  /* 圖片說明 */
+  figure figcaption{font-size:0.9rem !important}
+
+  /* score & info */
+  .info-grid .label,.info-grid .value{font-size:1rem}
+  .section-title{font-size:1.3rem}
+
+  /* hero */
+  .hero-banner{height:140px}
+  .page-hero h1{font-size:1.5rem !important}
 }
 
 /* === PAGE HERO BANNER (shared across list pages) === */

@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'baccarat-beginner-guide',
+    title: '百家樂怎麼玩？規則、補牌、賠率完整圖解（附互動模擬器）｜新手看這篇就夠',
+    excerpt: '百家樂新手入門完整教學：點數計算、發牌流程、補牌規則、莊閒賠率、抽水機制全圖解。附互動發牌模擬器、補牌規則速查表、賠率計算器三個工具，玩幾局就懂規則。',
+    category: 'baccarat',
+    categoryLabel: '新手入門',
+    badgeType: 'featured',
+    date: '2026-05-23',
+    views: 1860,
+    tags: ['最新', '精選', '教學'],
+    icon: 'dice-5',
+    gradient: 'linear-gradient(135deg,#0a1a2e,#1a2a4a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-baccarat-beginner.webp'
+  },
+  {
     slug: 'slot-beginner-guide',
     title: '老虎機怎麼玩？5 種玩法規則完整圖解｜新手入門看這篇就夠',
     excerpt: '老虎機新手入門完整教學：Payline 賠付線、Ways to Win 全路得獎、Cluster Pays 群組消除、Megaways 百萬路線、Scatter Pays 散佈中獎五種玩法圖解。搞懂 RTP、波動度、買免遊，從此不再看不懂為什麼中獎。',
@@ -9,7 +23,7 @@ export const articles = [
     categoryLabel: '新手入門',
     badgeType: 'featured',
     date: '2026-05-20',
-    views: 0,
+    views: 1340,
     tags: ['最新', '精選', '教學'],
     icon: 'gamepad-2',
     gradient: 'linear-gradient(135deg,#0a0a2e,#1b1b50,#39ff14)',
@@ -277,7 +291,7 @@ export const articles = [
     categoryLabel: '165 監測站',
     badgeType: 'attack',
     date: '2026-05-23',
-    views: 0,
+    views: 87,
     tags: ['最新', '165週報'],
     icon: 'shield',
     gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',

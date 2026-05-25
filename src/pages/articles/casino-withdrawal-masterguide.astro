@@ -460,11 +460,24 @@ const faqs = [
     line-height: 1.8;
   }
 
+  /* 手機版 40+ 友善 RWD */
   @media (max-width: 640px) {
-    .container { padding: 1rem; }
-    .article-content h1 { font-size: 1.5rem; }
-    .article-content h2 { font-size: 1.2rem; }
-    table { font-size: 0.8rem; }
-    th, td { padding: 0.5rem 0.6rem; }
+    .container { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .article-content h1 { font-size: 1.6rem !important; line-height: 1.4; }
+    .article-content h2 { font-size: 1.35rem; }
+    .article-content h3 { font-size: 1.15rem; }
+    .article-content p { font-size: 1.05rem; line-height: 2; }
+    .article-content li { font-size: 1.05rem; line-height: 2; }
+    .card { padding: 1.2rem; }
+    .card p { font-size: 1.02rem !important; line-height: 2 !important; }
+    .card h3 { font-size: 1.1rem; }
+    table { font-size: 0.95rem; }
+    th, td { padding: 0.7rem 0.5rem; }
+    .faq-q { font-size: 1.05rem; padding: 1.1rem 1.2rem; min-height: 52px; }
+    .faq-a { font-size: 1rem; line-height: 2; }
+    .faq-a p { font-size: 1rem !important; line-height: 2 !important; }
+    figure figcaption { font-size: 0.9rem !important; }
+    .content-img { border-radius: 10px; }
+    .article-img-caption { font-size: 0.9rem; }
   }
 </style>

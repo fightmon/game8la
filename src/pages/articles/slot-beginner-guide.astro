@@ -621,13 +621,50 @@ const faqs = [
   th { background: rgba(245,184,0,0.08); color: var(--gold-light); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; }
   td { color: var(--text-secondary); }
 
+  /* ===== 手機版 RWD — 40 歲以上友善 ===== */
   @media (max-width: 640px) {
-    .container { padding: 1rem; }
-    .article-content h1 { font-size: 1.5rem; }
-    .article-content h2 { font-size: 1.2rem; }
-    .quick-tool-bar { flex-direction: column; align-items: flex-start; }
-    table { font-size: 0.8rem; }
-    th, td { padding: 0.5rem 0.6rem; }
+    .container { padding: 1.2rem; }
+
+    /* 文字全面放大 */
+    .article-content h1 { font-size: 1.6rem; line-height: 1.4; }
+    .article-content h2 { font-size: 1.35rem; margin-top: 2rem; }
+    .article-content h3 { font-size: 1.15rem; }
+    .article-content p { font-size: 1.05rem; line-height: 2; margin: 1rem 0; }
+    .article-subtitle { font-size: 1.05rem; }
+    .article-content a { font-size: inherit; }
+
+    /* 麵包屑 & meta */
+    .breadcrumb { font-size: 0.88rem; margin-bottom: 0.5rem; }
+    .back-link { font-size: 0.92rem; margin-bottom: 1.2rem; }
+
+    /* 卡片內文放大 */
+    .card { padding: 1.2rem; }
+    .card p { font-size: 1.02rem !important; line-height: 2 !important; }
+
+    /* TOC */
+    .toc { padding: 1.2rem; }
+    .toc li { font-size: 1rem; margin: 0.6rem 0; }
+    .toc h2 { font-size: 1.15rem; }
+
+    /* 快速工具列 */
+    .quick-tool-bar { flex-direction: column; align-items: flex-start; gap: 0.6rem; font-size: 1rem; }
+    .quick-tool-bar a { font-size: 1rem; padding: 0.5rem 1rem; }
+
+    /* 表格 */
+    table { font-size: 0.92rem; }
+    th, td { padding: 0.6rem 0.5rem; }
+
+    /* CTA 放大 */
+    .mid-cta { padding: 1.2rem; }
+    .mid-cta p { font-size: 1.05rem; }
+    .mid-cta-btn { font-size: 1.05rem; padding: 0.7rem 1.5rem; }
+
+    /* FAQ 放大 */
+    .faq-q { font-size: 1.05rem; padding: 1.1rem 1.2rem; min-height: 52px; }
+    .faq-a p { font-size: 1rem !important; line-height: 2 !important; padding: 0.2rem 1.2rem 1.2rem; }
+
+    /* figure 圖片說明 */
+    figure figcaption { font-size: 0.88rem !important; }
   }
 
   /* === Slot Demo 盤面圖解 === */
@@ -797,16 +834,31 @@ const faqs = [
     color: var(--guava-green); font-weight: 700; font-size: 1.05rem;
   }
 
-  /* Demo 手機響應式 */
+  /* Demo 手機響應式 — 40 歲以上友善 */
   @media (max-width: 640px) {
-    .sc { font-size: 1.05rem; border-radius: 6px; }
-    .sg, .mw-wrap { gap: 3px; }
-    .slot-demo { padding: 0.8rem; }
-    .slot-demo__hd { font-size: 0.82rem; }
-    .mw-wrap { height: 280px; gap: 3px; }
+    /* 互動工具共用 */
+    .slot-demo { padding: 1rem; margin: 1.5rem 0; }
+    .slot-demo__hd { font-size: 1rem; margin-bottom: 1rem; }
+    .slot-demo__note { font-size: 0.95rem; padding: 0.6rem 0.8rem; line-height: 1.8; }
+    .slot-demo__legend { font-size: 0.82rem; gap: 0.6rem; }
+
+    /* 盤面符號放大 */
+    .sc { font-size: 1.2rem; border-radius: 6px; }
+    .sg, .mw-wrap { gap: 4px; }
+
+    /* 玩法切換按鈕（觸控友善 44px+） */
+    .pl-btn { padding: 0.55rem 0.9rem; font-size: 0.95rem; min-height: 42px; }
+    .slot-demo__btns { gap: 0.5rem; }
+
+    /* SPIN 按鈕放大 */
+    .mw-spin-btn { font-size: 1.1rem; padding: 0.7rem 1.8rem; }
+
+    /* Megaways */
+    .mw-wrap { height: 300px; gap: 3px; }
     .mw-reel { gap: 2px; padding: 2px; }
-    .mw-reel .sc { font-size: 0.9rem; }
-    .slot-demo__note { font-size: 0.78rem; padding: 0.4rem 0.6rem; }
-    .slot-demo__legend { font-size: 0.65rem; gap: 0.5rem; }
+    .mw-reel .sc { font-size: 1rem; }
+    .mw-cnt { font-size: 0.82rem; padding: 4px 0; }
+    .mw-formula { font-size: 0.95rem; }
+    .mw-formula span { font-size: 1.1rem; }
   }
 </style
