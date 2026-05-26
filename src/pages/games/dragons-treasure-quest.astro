@@ -1,6 +1,7 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
 
@@ -17,7 +18,7 @@ const faqs = [
 <ArticleSchema
   url="https://game8la.com/games/dragons-treasure-quest/"
   title="尋龍寶藏｜PG Soft 高波動消除老虎機完整攻略 - GAME8LA"
-  description="尋龍寶藏完整攻略！RTP 96.76%、最大倍率 x10,000、5軸最高7,776路、擴展卷軸窗口、獎金翻倍符號x2~x100相加、Free Spin 15轉倍數累積保留。PG Soft 歐美奇幻風，8LA 芭樂子實測解析。"
+  description="尋龍寶藏完整攻略！RTP 96.76%、最大倍率 x10,000、5軸最高7,776路、擴展卷軸窗口、獎金翻倍符號x2~x100相加、Free Spin 15轉倍數累積保留。PG Soft 歐美奇幻風，芭樂子完整解析。"
   image="https://game8la.com/images/dragons-treasure-quest/dragons-treasure-quest-cover.webp"
   datePublished="2026-04-13"
   dateModified="2026-04-13"
@@ -29,7 +30,7 @@ const faqs = [
 />
 <BaseLayout
   title="尋龍寶藏｜PG Soft 高波動消除老虎機完整攻略 - GAME8LA"
-  description="尋龍寶藏完整攻略！RTP 96.76%、最大倍率 x10,000、5軸最高7,776路、擴展卷軸窗口、獎金翻倍符號x2~x100相加、Free Spin 15轉倍數累積保留。PG Soft 歐美奇幻風，8LA 芭樂子實測解析。"
+  description="尋龍寶藏完整攻略！RTP 96.76%、最大倍率 x10,000、5軸最高7,776路、擴展卷軸窗口、獎金翻倍符號x2~x100相加、Free Spin 15轉倍數累積保留。PG Soft 歐美奇幻風，芭樂子完整解析。"
   ogImage="https://game8la.com/images/dragons-treasure-quest/dragons-treasure-quest-cover.webp"
   currentPage="rankings"
 >
@@ -45,9 +46,8 @@ const faqs = [
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 歐美奇幻・擴展卷軸・7,776路</span>
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">尋龍寶藏</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
-        <span class="score-big">9.3</span>
-        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
-        <span style="color:var(--text-muted)">(3,120 次瀏覽)</span>
+        <span class="discussion-index-big">9.3</span>
+        <span style="font-size:0.85rem;color:var(--text-muted)">社群討論度<br><span style="font-size:0.72rem">整合 PTT / Dcard / Google 評論熱度，非本站評分</span></span>
       </div>
       <div class="info-grid">
         <span class="label">遊戲供應商</span><span class="value">PG Soft（Pocket Games Soft）</span>
@@ -319,6 +319,7 @@ const faqs = [
     ))}
   </div>
 
+  <LegalNotice />
   </div><!-- end article-content -->
 
   <!-- 延伸閱讀 -->

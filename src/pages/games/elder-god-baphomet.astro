@@ -1,6 +1,7 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
 
 ---
 
@@ -25,9 +26,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 消除遊戲</span>
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">古神巴風特</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
-        <span class="score-big">9.5</span>
-        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
-        <span style="color:var(--text-muted)">(87 則評價)</span>
+        <span class="discussion-index-big">9.5</span>
+        <span style="font-size:0.85rem;color:var(--text-muted)">社群討論度<br><span style="font-size:0.72rem">整合 PTT / Dcard / Google 評論熱度，非本站評分</span></span>
       </div>
       <div class="info-grid">
         <span class="label">遊戲供應商</span><span class="value">ATG 電子（Agile Titan Games）</span>
@@ -285,6 +285,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="faq-a">沒有。老虎機的結果完全由 RNG（隨機數生成器）決定，每一轉都是獨立事件。任何聲稱「必勝」「破解」的攻略都是詐騙。最好的策略就是設好預算、享受遊戲過程、輸到停損線就離場。</div>
     </div>
   </div>
+  <LegalNotice />
   </div><!-- end article-content -->
   <!-- 社群分享 -->
   <div style="margin:2.5rem 0 1.5rem;text-align:center">

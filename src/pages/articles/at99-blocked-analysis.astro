@@ -13,11 +13,11 @@ const faqs = [
   { q: 'AT99 是什麼？為什麼 2026 年初會被封鎖？', a: 'AT99（域名 at99.com.tw）是一家過去在台灣市場活躍的線上娛樂城。2026 年初，其網域遭到<strong>內政部警政署刑事警察局 詐欺犯罪防制中心</strong>依據《詐欺犯罪危害防制條例》，以「刑詐防字第 1146166136 號」函命令封鎖。封鎖理由通常涉及<strong>大量民眾報案、金流異常、或涉嫌違反博弈法規</strong>。目前使用者連線到該網域時，會直接看到紅色封鎖告示頁。' },
   { q: '「網域被封鎖」和「娛樂城倒閉」有什麼差？', a: '這兩件事非常不一樣，一定要分清楚：<br><br><strong>① 網域被封鎖（Domain Block）</strong>——只是「這個網址進不去了」，但背後的公司、伺服器、資料庫可能還在運作，只是無法透過這個 URL 存取。玩家的會員資料、儲值金、沒提領的籌碼，<strong>理論上還存在資料庫裡，但你拿不到</strong>。<br><br><strong>② 伺服器關閉（Shutdown）</strong>——整個營運單位已經收攤、伺服器斷電、資料庫下線。這種情況下玩家的錢基本上<strong>一毛都要不回來</strong>。<br><br>AT99 目前的狀態是 ①，但歷史經驗顯示，被刑事警察局封鎖的黑網，絕大多數會在 <strong>3~6 個月內轉為 ② 狀態</strong>。' },
   { q: '我還有錢留在 AT99 裡，拿得回來嗎？', a: '芭樂子必須誠實告訴你：<strong>機率極低</strong>。原因有三：<br><br>(1) 被《詐欺犯罪危害防制條例》封鎖的平台，通常銀行金流與第三方支付已經被凍結，它本身就提不出錢；<br>(2) 即使你向 165 檢舉、提告詐欺，AT99 這類境外黑網的<strong>實際營運者多半位於柬埔寨、緬甸或菲律賓</strong>，司法追訴非常困難；<br>(3) 他們可能會用另一個網域（例如 at99b.com、at99v2.net）通知你「重新登入領取餘額」——<strong>這幾乎 100% 是退款二次詐騙</strong>，千萬別信。正確做法：立即停損、保留交易紀錄、撥打 165 檢舉。' },
-  { q: 'AT99 的新網址 at99tw.com.tw 是真的嗎？可以繼續玩嗎？', a: '<strong>一律視為高風險黑網，不要登入、不要儲值</strong>。芭樂子實測觀察：原 <code>at99.com.tw</code> 被刑事警察局封鎖後，網路上隨即出現疑似換殼的新網域 <code>at99tw.com.tw</code>，這是黑網典型的「<strong>域名換殼（Domain Rotation）</strong>」手法——把 <code>.com.tw</code> 前後加字尾、或是把字母數字錯位（例如 at99b、at992、at99-2026、at99.cc、at9g 等），目的是規避 TWNIC 與 ISP 的封鎖名單。<br><br><strong>請注意</strong>：真正合法的博弈平台不會因為被封就換殼繼續營運，會換殼的基本上都是 ① 原本就是黑網、② 退款二次詐騙、③ 第三方仿冒詐騙集團劫持品牌。<strong>無論你是從 LINE、Telegram、老客服簡訊或 Google 搜尋結果看到這些新網址，都請當成詐騙處理</strong>。本文刻意<strong>不提供任何新網域的超連結</strong>，因為 Game8la 拒絕為任何疑似詐騙娛樂城導流。' },
+  { q: 'AT99 的新網址 at99tw.com.tw 是真的嗎？可以繼續玩嗎？', a: '<strong>一律視為高風險黑網，不要登入、不要儲值</strong>。芭樂子觀察：原 <code>at99.com.tw</code> 被刑事警察局封鎖後，網路上隨即出現疑似換殼的新網域 <code>at99tw.com.tw</code>，這是黑網典型的「<strong>域名換殼（Domain Rotation）</strong>」手法——把 <code>.com.tw</code> 前後加字尾、或是把字母數字錯位（例如 at99b、at992、at99-2026、at99.cc、at9g 等），目的是規避 TWNIC 與 ISP 的封鎖名單。<br><br><strong>請注意</strong>：真正合法的博弈平台不會因為被封就換殼繼續營運，會換殼的基本上都是 ① 原本就是黑網、② 退款二次詐騙、③ 第三方仿冒詐騙集團劫持品牌。<strong>無論你是從 LINE、Telegram、老客服簡訊或 Google 搜尋結果看到這些新網址，都請當成詐騙處理</strong>。本文刻意<strong>不提供任何新網域的超連結</strong>，因為 Game8la 拒絕為任何疑似詐騙娛樂城導流。' },
   { q: '如果我已經點進 at99tw.com.tw（或類似換殼網址）怎麼辦？', a: '先不要慌，但要立刻停損。芭樂子建議的 5 步驟自救 SOP：<br><br>(1) <strong>立刻關掉分頁</strong>——不要登入、不要輸入任何資料；<br>(2) <strong>如果已經輸入帳號密碼</strong>：請立刻到你有用相同密碼的其他網站（Google、臉書、銀行網銀等）<strong>更換密碼並開啟兩步驟驗證</strong>；<br>(3) <strong>如果已經輸入身分證、銀行帳號、信用卡</strong>：撥打 165 通報 + 通知發卡銀行 / 開戶銀行凍結異常交易；<br>(4) <strong>如果已經儲值</strong>：保留匯款單、截圖，撥打 165 與到戶籍地派出所提刑事告訴；<br>(5) <strong>檢查手機</strong>：是否被要求安裝「專屬 App」？若有，立即移除並掃毒——很多換殼黑網會搭配惡意 App 竊取簡訊驗證碼。' },
   { q: '為什麼政府有權力封鎖娛樂城網域？法源是什麼？', a: '法源是 2024 年 7 月 31 日施行的《<strong>詐欺犯罪危害防制條例</strong>》。該條例第 14 條授權內政部警政署刑事警察局對涉嫌詐欺的網域，可以函請 TWNIC（台灣網路資訊中心）與各大 ISP 進行 DNS 封鎖。2026 年起，政府把「境外黑網娛樂城」視為優先打擊標的——因為這類平台通常兼具「非法博弈 + 洗錢 + 詐騙三罪合一」。這也是為什麼 2026 年你會發現「過去能開的娛樂城」一家一家進不去的原因。' },
   { q: '看到類似 AT99 這種紅色封鎖告示頁，我還能繼續玩嗎？', a: '<strong>不行，千萬不要想辦法繞過</strong>。有些玩家會嘗試用 VPN、改 DNS、或從 Telegram 群組拿到新網址繼續登入——這是極度危險的行為，風險包括：<br><br>(1) <strong>金流完全暴露於境外黑網</strong>：你的銀行帳戶變成洗錢車手的中繼站，可能被凍結甚至遭受刑事調查；<br>(2) <strong>身分資料被賣給詐騙集團</strong>：你的姓名、身分證、手機號碼很可能已經在黑市流通；<br>(3) <strong>變成共犯證據</strong>：繼續儲值可能被認定「明知涉賭仍參與」，《刑法第 266 條》賭博罪最高可處 5 萬元罰金。' },
-  { q: '怎麼從一開始就避免踩到這種「即將被封的娛樂城」？', a: '芭樂子總結四個自我檢查點：<br><br><strong>① 看 GLI / iTech Labs / BMM 認證</strong>：正規營運商一定會在網站底部放這三個國際博弈實驗室的任一認證 logo，點下去能連到實驗室官網查證。沒有 = 99% 黑網。<br><strong>② 查網域註冊年齡</strong>：用 whois.whois.com.tw 查詢，註冊時間少於 2 年的娛樂城風險極高（黑網平均壽命 1.5~2.5 年就會被封、換殼重開）。<br><strong>③ 看出金速度實測紀錄</strong>：Google 搜尋「娛樂城名稱 + 出金」，看 PTT、Dcard、巴哈的玩家實測。出現大量「卡關」、「要求洗碼」、「聯絡不到客服」=<strong>金流已經有問題</strong>。<br><strong>④ 用 Game8la 防詐指南逐項對照</strong>：我們整理的《<a href="/articles/anti-scam-8la-guide/">娛樂城詐騙 8 大手法</a>》就是為了這件事寫的。' },
+  { q: '怎麼從一開始就避免踩到這種「即將被封的娛樂城」？', a: '芭樂子總結四個自我檢查點：<br><br><strong>① 看 GLI / iTech Labs / BMM 認證</strong>：正規營運商一定會在網站底部放這三個國際博弈實驗室的任一認證 logo，點下去能連到實驗室官網查證。沒有 = 99% 黑網。<br><strong>② 查網域註冊年齡</strong>：用 whois.whois.com.tw 查詢，註冊時間少於 2 年的娛樂城風險極高（黑網平均壽命 1.5~2.5 年就會被封、換殼重開）。<br><strong>③ 看出金速度驗證紀錄</strong>：Google 搜尋「娛樂城名稱 + 出金」，看 PTT、Dcard、巴哈的玩家實測。出現大量「卡關」、「要求洗碼」、「聯絡不到客服」=<strong>金流已經有問題</strong>。<br><strong>④ 用 Game8la 防詐指南逐項對照</strong>：我們整理的《<a href="/articles/anti-scam-8la-guide/">娛樂城詐騙 8 大手法</a>》就是為了這件事寫的。' },
   { q: '被 AT99 詐騙了，我該怎麼報案？', a: '<strong>立即執行以下 5 步驟</strong>，動作越快、追回機率越高：<br><br>(1) <strong>截圖保留所有交易紀錄</strong>：包含儲值時的銀行匯款單、娛樂城平台的存款/投注/出金頁面、與客服的對話紀錄；<br>(2) <strong>撥打 165 反詐騙專線</strong>或線上報案 <a href="https://165.npa.gov.tw/" target="_blank" rel="noopener">165.npa.gov.tw</a>，初步通報；<br>(3) <strong>到戶籍所在地派出所做筆錄</strong>，正式提出「詐欺罪」刑事告訴；<br>(4) <strong>通知銀行凍結可疑帳戶</strong>：如果對方仍在要求你匯款，立刻撥打 <a href="tel:165">165</a> 與銀行 24 小時客服請求凍結；<br>(5) <strong>向 FINCOS 金融機構聯防小組通報</strong>：透過 165 管道，警方會協調銀行端凍結可疑收款帳戶。' },
   { q: 'Game8la 寫這篇是在「唱衰 AT99」嗎？你們收錢了嗎？', a: '沒有。Game8la 整站<strong>拒絕任何娛樂城業配、推薦碼、NGR 抽成</strong>——這也是我們敢把這篇寫出來的底氣。這篇文章引用的是<strong>刑事警察局公開函文編號</strong>、《詐欺犯罪危害防制條例》明文條款、以及實際網域封鎖截圖，全部是<strong>可驗證的客觀事實</strong>。其他博弈資訊站不寫這篇不是不知道，是怕得罪金主。我們<strong>沒金主要顧慮</strong>，所以敢寫。' },
 ];
@@ -263,7 +263,7 @@ import ToolBox from '../../components/ToolBox.astro';
       <h2 id="prevent">🛡️ 如何辨別詐騙娛樂城？<em style="color:var(--text-muted);font-weight:400">除了警政署紅條，你還應該看這 4 個指標</em></h2>
       <p>AT99 封了，下一個會是誰？等到刑事局紅條出來已經太晚——芭樂子整理<strong>4 個 5 分鐘就能做完的自查動作</strong>，在紅條出現之前，就幫你判斷現在正在玩的娛樂城風險等級：</p>
 
-      <img class="content-img" src="/images/articles/at99-selfcheck-4points.webp" alt="芭樂子 4 大自查點：GLI 認證 / 網域年齡 / 出金實測 / 8LA 防詐指南對照" width="1400" height="781" loading="lazy" />
+      <img class="content-img" src="/images/articles/at99-selfcheck-4points.webp" alt="芭樂子 4 大自查點：GLI 認證 / 網域年齡 / 出金驗證 / 8LA 防詐指南對照" width="1400" height="781" loading="lazy" />
       <p class="article-img-caption">把這四張檢查卡存下來，下次遇到新娛樂城逐項打勾</p>
 
       <div class="card" style="border-color:var(--guava-green);margin:1.2rem 0">
@@ -277,7 +277,7 @@ import ToolBox from '../../components/ToolBox.astro';
       </div>
 
       <div class="card" style="border-color:var(--guava-green);margin:1.2rem 0">
-        <h4 style="margin-top:0;color:var(--guava-green)">✅ 自查點 ③：出金速度實測紀錄</h4>
+        <h4 style="margin-top:0;color:var(--guava-green)">✅ 自查點 ③：出金速度驗證紀錄</h4>
         <p style="margin:0">Google 搜尋「<code>娛樂城名稱 + 出金</code>」或到 PTT Lottery 版、Dcard 搜尋。<strong>出現大量「卡關」、「要求洗碼」、「聯絡不到客服」關鍵字 = 金流已經有問題</strong>。正派娛樂城的出金抱怨比例通常低於 5%，如果一頁翻過去全是負評，就是紅旗。</p>
       </div>
 

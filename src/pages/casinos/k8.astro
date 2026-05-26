@@ -1,10 +1,11 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
 ---
 
 <BaseLayout
-  title="K8娛樂城評價｜台灣老牌線上賭場實測 - GAME8LA"
+  title="K8娛樂城評價｜台灣老牌線上賭場規格分析 - GAME8LA"
   description="K8娛樂城完整評測！2015年創立老牌現金版，真人百家樂、體育投注、電子老虎機、彩票、棋牌全覆蓋。PAGCOR認證、台灣24小時客服、存款即時提款5-10分鐘。8LA鄉民真心不騙。"
   ogImage="https://game8la.com/images/casinos/k8-cover.webp"
   currentPage="rankings"
@@ -21,9 +22,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老牌現金版 / 綜合型娛樂城</span>
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">K8娛樂城</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
-        <span class="score-big">9.0</span>
-        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /><Icon name="star-half" /></span>
-        <span style="color:var(--text-muted)">(12,480 次評價)</span>
+        <span class="discussion-index-big">9.0</span>
+        <span style="font-size:0.85rem;color:var(--text-muted)">社群討論度<br><span style="font-size:0.72rem">整合 PTT / Dcard / Google 評論熱度，非本站評分</span></span>
       </div>
       <div class="info-grid">
         <span class="label">創立年份</span><span class="value">2015年</span>
@@ -89,7 +89,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <li><strong>台灣客服24小時在線</strong> — LINE客服、線上客服，有問題隨時解決，不會被冷落</li>
       <li><strong>提款快速有保障</strong> — 5-10分鐘即可提款到賬，不會有「延遲提款」的鬼打牆</li>
       <li><strong>PAGCOR官方認證</strong> — 合法執照，安心玩樂不擔心詐騙</li>
-      <li><strong>優惠活動常駐</strong> — 新會員優惠、每週回饋、季度大活動不間斷</li>
+      <li><strong>獎勵活動</strong> — 該平台長期提供新會員獎勵、週回饋等活動</li>
     </ul>
   </div>
 
@@ -196,7 +196,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </div>
 
   <!-- 優惠活動 -->
-  <h2 id="promotions">優惠活動</h2>
+  <h2 id="promotions">該平台公開獎勵條件</h2>
   <table>
     <thead><tr><th>優惠項目</th><th>活動內容</th><th>申請條件</th></tr></thead>
     <tbody>
@@ -221,6 +221,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <tr><td style="color:var(--guava-pink);font-weight:700">V5 帝王會員</td><td>邀請30位V3會員</td><td>反水1.0%、VIP經理、黑卡禮遇</td></tr>
     </tbody>
   </table>
+
+  <LegalNotice />
 
   <!-- FAQ -->
   <h2 id="faq">常見問題 FAQ</h2>

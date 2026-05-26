@@ -314,7 +314,7 @@ a:hover {
 .section-title{font-size:1.6rem;font-weight:900;margin:2rem 0 1rem;display:flex;align-items:center;gap:0.5rem}
 .section-title::before{content:'';width:4px;height:28px;background:linear-gradient(to bottom,var(--gold-light),var(--guava-green));border-radius:2px}
 .divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
-.score-big{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.discussion-index-big{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .stars{color:var(--gold-light);font-size:0.9rem}
 .stars .empty{color:var(--text-muted)}
 .info-grid{display:grid;grid-template-columns:200px 1fr;gap:0.5rem 1.5rem;margin:1rem 0}

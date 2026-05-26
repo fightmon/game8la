@@ -32,7 +32,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <meta name="description" content={description}>
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, noarchive" />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title}>
@@ -55,10 +55,18 @@ const {
     <link rel="apple-touch-icon" href="/images/index/apple-touch-icon_180x180.webp">
 
     <!-- Google Analytics 4 (延後到首次互動或 3 秒後才載，改善 LCP/TBT) -->
+    <!-- 在 localhost / 127.0.0.1 / .pages.dev preview / .local 開發環境完全不載入 GA -->
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function(){window.dataLayer.push(arguments);};
       (function(){
+        var h = location.hostname;
+        var isDev = h === 'localhost' || h === '127.0.0.1' || h.endsWith('.local')
+          || h.endsWith('.pages.dev') || h.startsWith('192.168.') || h.startsWith('10.');
+        if (isDev) {
+          window.gtag = function(){}; // no-op，避免文章內部呼叫 gtag 報錯
+          return;
+        }
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){window.dataLayer.push(arguments);};
         var loaded = false;
         function loadGA(){
           if (loaded) return; loaded = true;

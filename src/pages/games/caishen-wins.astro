@@ -1,12 +1,13 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
 
 const faqs = [
   { q: '贏財神的 RTP 是多少？', a: '根據 PG Soft 官方規格，贏財神（Caishen Wins）的預設 RTP 為 96.92%，屬於業界中上水準。不過 PG Soft 提供多個 RTP 版本讓平台選用，實際 RTP 請在遊戲內規則頁面確認。' },
-  { q: '贏財神的最大倍率是多少？', a: 'PG Soft 官方公布的最大贏獎倍率為 x100,000。根據 10 億次模擬旋轉，實測最高達到 4,936x。x100,000 是理論天花板，實際達成率極低。' },
+  { q: '贏財神的最大倍率是多少？', a: 'PG Soft 官方公布的最大贏獎倍率為 x100,000。根據 10 億次模擬旋轉，模擬最高達到 4,936x。x100,000 是理論天花板，實際達成率極低。' },
   { q: '贏財神的 Free Spin 怎麼觸發？', a: '盤面上出現 4 個以上奪寶符號（Scatter）即可觸發免費旋轉。基礎 8 轉，每多 1 個 Scatter 額外 +2 轉。觸發後可以選擇直接開始（x8 獎金倍數），或搏一搏挑戰更多轉數和更高倍數。' },
   { q: '搏一搏機制是什麼？', a: '觸發免費旋轉後，玩家可以選擇「搏一搏」來賭更多免費轉數或更高的獎金倍數。成功的話：搏轉數 +2 轉、搏倍數 +2 倍。失敗的話直接結束免費旋轉（搏轉數）或停止加倍（搏倍數）。最高可以搏到 x20 獎金倍數，風險與回報並存。' },
   { q: '多路連消百搭是什麼？', a: '在任何旋轉期間，第 2~5 軸上佔據 2~4 個位置的符號（不含百搭）可能被銀框包圍。上一輪贏獎中的銀框符號會變成金框，金框符號會變成 2~4 個百搭符號。這個連鎖機制讓中獎路數從 2,025 路最高膨脹到 32,400 路。' },
@@ -17,7 +18,7 @@ const faqs = [
 <ArticleSchema
   url="https://game8la.com/games/caishen-wins/"
   title="贏財神｜PG Soft 6軸32400路老虎機完整攻略 - GAME8LA"
-  description="贏財神完整攻略！RTP 96.92%、最大倍率 x100,000、6軸最高32,400路、多路連消百搭、橫財神變4Wild、Free Spin搏一搏最高x20倍。PG Soft 財神系列，8LA 芭樂子實測解析。"
+  description="贏財神完整攻略！RTP 96.92%、最大倍率 x100,000、6軸最高32,400路、多路連消百搭、橫財神變4Wild、Free Spin搏一搏最高x20倍。PG Soft 財神系列，芭樂子完整解析。"
   image="https://game8la.com/images/caishen-wins/caishen-wins-cover.webp"
   datePublished="2026-04-13"
   dateModified="2026-04-13"
@@ -29,7 +30,7 @@ const faqs = [
 />
 <BaseLayout
   title="贏財神｜PG Soft 6軸32400路老虎機完整攻略 - GAME8LA"
-  description="贏財神完整攻略！RTP 96.92%、最大倍率 x100,000、6軸最高32,400路、多路連消百搭、橫財神變4Wild、Free Spin搏一搏最高x20倍。PG Soft 財神系列，8LA 芭樂子實測解析。"
+  description="贏財神完整攻略！RTP 96.92%、最大倍率 x100,000、6軸最高32,400路、多路連消百搭、橫財神變4Wild、Free Spin搏一搏最高x20倍。PG Soft 財神系列，芭樂子完整解析。"
   ogImage="https://game8la.com/images/caishen-wins/caishen-wins-cover.webp"
   currentPage="rankings"
 >
@@ -45,9 +46,8 @@ const faqs = [
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 中國風・連消百搭・32,400路</span>
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">贏財神</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
-        <span class="score-big">9.0</span>
-        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
-        <span style="color:var(--text-muted)">(2,340 次瀏覽)</span>
+        <span class="discussion-index-big">9.0</span>
+        <span style="font-size:0.85rem;color:var(--text-muted)">社群討論度<br><span style="font-size:0.72rem">整合 PTT / Dcard / Google 評論熱度，非本站評分</span></span>
       </div>
       <div class="info-grid">
         <span class="label">遊戲供應商</span><span class="value">PG Soft（Pocket Games Soft）</span>
@@ -320,6 +320,7 @@ const faqs = [
     ))}
   </div>
 
+  <LegalNotice />
   </div><!-- end article-content -->
 
   <!-- 延伸閱讀 -->

@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
 import ManifestoBox from '../../components/ManifestoBox.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
 import ShareButtons from '../../components/ShareButtons.astro';
 
 const faqs = [
@@ -21,7 +22,7 @@ const faqs = [
 
 <BaseLayout
   title="戰神呂布老虎機攻略｜RSG 皇家電子 51000 倍・倍數符號・免費遊戲完整拆解"
-  description="戰神呂布完整攻略！RSG 皇家電子三國老虎機最高 51,000 倍，自由配對 Scatter Pays、倍數符號 2x–500x 相加計算、Free Game 倍數累積最多 100 場、4 級累積彩金。附 RSG vs GR 版本比較、完整賠率表、芭樂子實測建議。"
+  description="戰神呂布完整攻略！RSG 皇家電子三國老虎機最高 51,000 倍，自由配對 Scatter Pays、倍數符號 2x–500x 相加計算、Free Game 倍數累積最多 100 場、4 級累積彩金。附 RSG vs GR 版本比較、完整賠率表、芭樂子攻略建議。"
   ogImage="https://game8la.com/images/games/god-of-war-lubu/lubu-character.webp"
   currentPage="rankings"
 >
@@ -54,9 +55,8 @@ const faqs = [
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 三國志・自由配對</span>
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">戰神呂布</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
-        <span class="score-big">9.4</span>
-        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
-        <span style="color:var(--text-muted)">(5,832 次瀏覽)</span>
+        <span class="discussion-index-big">9.4</span>
+        <span style="font-size:0.85rem;color:var(--text-muted)">社群討論度<br><span style="font-size:0.72rem">整合 PTT / Dcard / Google 評論熱度，非本站評分</span></span>
       </div>
       <div class="info-grid">
         <span class="label">遊戲供應商</span><span class="value">RSG 皇家電子</span>
@@ -418,6 +418,7 @@ const faqs = [
   </div>
 
   <ShareButtons title="戰神呂布老虎機攻略｜RSG 皇家電子 51000 倍完整拆解" hashtag="#GAME8LA #戰神呂布 #RSG電子" />
+  <LegalNotice />
   <ManifestoBox />
 
   <div style="text-align:center;margin-top:2rem">

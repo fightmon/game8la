@@ -1,12 +1,13 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
 
 ---
 
 <BaseLayout
-  title="糖果爆爆樂｜PG Soft 6×6消除老虎機 RTP 96.95% 完整實測 - GAME8LA"
-  description="糖果爆爆樂（Candy Burst）完整實測！PG Soft 6×6消除掉落玩法，RTP 96.95%、最高15000x爆擊，炸彈×火箭×糖果紙三大特殊符號組合連鎖，免費旋轉獎金翻倍x2、爆爆糖模式x10！"
+  title="糖果爆爆樂｜PG Soft 6×6消除老虎機 RTP 96.95% 完整攻略 - GAME8LA"
+  description="糖果爆爆樂（Candy Burst）完整評測！PG Soft 6×6消除掉落玩法，RTP 96.95%、最高15000x爆擊，炸彈×火箭×糖果紙三大特殊符號組合連鎖，免費旋轉獎金翻倍x2、爆爆糖模式x10！"
   ogImage="https://game8la.com/images/candy-burst-cover.webp"
   currentPage="rankings"
 >
@@ -23,9 +24,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">糖果爆爆樂</h1>
       <p style="color:var(--text-muted);font-size:0.85rem;margin:0 0 0.5rem">Candy Burst</p>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
-        <span class="score-big">9.2</span>
-        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
-        <span style="color:var(--text-muted)">(89 則評價)</span>
+        <span class="discussion-index-big">9.2</span>
+        <span style="font-size:0.85rem;color:var(--text-muted)">社群討論度<br><span style="font-size:0.72rem">整合 PTT / Dcard / Google 評論熱度，非本站評分</span></span>
       </div>
       <div class="info-grid">
         <span class="label">遊戲供應商</span><span class="value">PG Soft（Pocket Games Soft）</span>
@@ -100,11 +100,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </div>
   <p>所有中獎以現金顯示，贏獎符號會被炸消除、讓上方符號下跌進行新一輪旋轉，直到沒有新的中獎組合為止。每一輪額外的中獎都會計入該次旋轉的總贏分中。</p>
 
-  <!-- 導流：RTP 實測紀錄器 -->
+  <!-- 導流：RTP 紀錄器 -->
   <a href="/tools/rtp-tracker/" style="display:flex;align-items:center;gap:1rem;padding:1.2rem 1.4rem;margin:1.5rem 0;border-radius:14px;background:linear-gradient(135deg,rgba(57,255,20,0.1) 0%,rgba(245,184,0,0.08) 100%);border:1px solid rgba(57,255,20,0.35);text-decoration:none;color:var(--text-primary);transition:all 0.25s ease">
     <span style="font-size:2rem">📊</span>
     <div>
-      <span style="font-weight:800;font-size:1rem">RTP 實測紀錄器</span>
+      <span style="font-weight:800;font-size:1rem">RTP 紀錄器</span>
       <span style="display:block;font-size:0.88rem;color:var(--text-secondary);margin-top:0.2rem">記錄你在糖果爆爆樂的實際 RTP，看看 96.95% 是不是真的 → 免費使用</span>
     </div>
   </a>
@@ -205,7 +205,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <tr><td>主遊戲中獎率</td><td>29.24%</td></tr>
       <tr><td>免費旋轉中獎率</td><td>0.42%</td></tr>
       <tr><td>波動率</td><td style="color:var(--gold-light)">中</td></tr>
-      <tr><td>最高獎金倍數（實測 10 億轉）</td><td>1,016x</td></tr>
+      <tr><td>最高獎金倍數（模擬 10 億轉）</td><td>1,016x</td></tr>
       <tr><td>最高獎金倍數（宣傳值）</td><td style="color:var(--gold-light)">15,000x</td></tr>
       <tr><td>獎金翻倍範圍</td><td>x2（偏低端）</td></tr>
       <tr><td>免費旋轉翻倍</td><td>x10（中等）</td></tr>
@@ -214,7 +214,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <div class="card" style="padding:1.5rem;margin:1.5rem 0;border-left:4px solid var(--guava-pink)">
     <h4 style="color:var(--guava-pink);margin-bottom:0.5rem">🔍 芭樂子解讀</h4>
-    <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.8">看到那個「10 億轉實測最高 1,016x」跟「宣傳最高 15,000x」的落差了嗎？這就是<a href="/articles/slot-pool-theory-explained/" style="color:var(--guava-pink)">理論值 vs 實際值</a>的差距。15,000x 的爆擊在數學上存在，但 10 億次模擬裡最高也就 1,016x。這不是說遊戲騙人——而是極端事件的機率真的低到超乎想像。把 15,000x 當成買樂透中頭獎那種事就好，別當成預期報酬。</p>
+    <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.8">看到那個「10 億轉模擬最高 1,016x」跟「宣傳最高 15,000x」的落差了嗎？這就是<a href="/articles/slot-pool-theory-explained/" style="color:var(--guava-pink)">理論值 vs 實際值</a>的差距。15,000x 的爆擊在數學上存在，但 10 億次模擬裡最高也就 1,016x。這不是說遊戲騙人——而是極端事件的機率真的低到超乎想像。把 15,000x 當成買樂透中頭獎那種事就好，別當成預期報酬。</p>
   </div>
 
   <!-- 8LA 攻略建議 -->
@@ -274,6 +274,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <h4>15,000 倍是真的嗎？</h4>
     <p>理論上存在，但 PG Soft 自己的 10 億次模擬裡最高也只到 1,016x。15,000x 是數學上的極限值，不是你能合理期待的回報。把它想成樂透頭獎就對了。</p>
   </div>
+  <LegalNotice />
   </div><!-- end article-content -->
   <!-- 社群分享 -->
   <div style="margin:2.5rem 0 1.5rem;text-align:center">
@@ -291,7 +292,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="related-links">
       <a href="/articles/slots-rtp-guide/">老虎機 RTP 完整指南<small>RTP 公式、波動性分級、樣本次數全拆解</small></a>
       <a href="/articles/slot-pool-theory-explained/">老虎機爆金機率底層邏輯<small>RNG 怎麼決定你中不中？</small></a>
-      <a href="/articles/slots-guide/">RSG 雷神之鎚實測<small>北歐神話級爆分？芭樂子真實體驗報告</small></a>
+      <a href="/articles/slots-guide/">RSG 雷神之鎚評測<small>北歐神話級爆分？芭樂子真實體驗報告</small></a>
       <a href="/game-ranking/">2026 金8LA遊戲排行<small>熱門老虎機完整評分｜誰是今年的8LA之王？</small></a>
     </div>
   </div>

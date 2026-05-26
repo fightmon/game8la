@@ -243,10 +243,10 @@ export const articles = [
   {
     slug: 'seth2-slot-simulator-rtp',
     hotTitle: '自己調 RTP 看老虎機怎麼吃錢',
-    title: '戰神賽特2模擬器實測：自己調 RTP，親手拆解老虎機怎麼吃錢',
+    title: '戰神賽特2模擬器體驗：自己調 RTP，親手拆解老虎機怎麼吃錢',
     excerpt: '全台唯一可調 RTP 的賽特2模擬器！親手調整回報率 80~200%，體驗倍數球分裂、覺醒鎖定、消除掉落全機制。轉 1000 局看懂大數法則，搞懂為什麼你總是輸。',
     category: 'slots',
-    categoryLabel: '工具實測',
+    categoryLabel: '工具體驗',
     badgeType: 'featured',
     date: '2026-04-25',
     views: 2830,
@@ -286,7 +286,7 @@ export const articles = [
   {
     slug: 'lottery-dragout-guide',
     title: '彩券「拖出」是什麼意思？「隔1期拖出33號」白話翻譯＋實例圖解',
-    excerpt: '拖出 = 某號碼開獎後，下一期最常跟著出現的號碼。看到「開15號後隔1期拖出33號」看不懂？芭樂子用白話文翻譯＋圖解，再用 539 歷史數據實測給你看。',
+    excerpt: '拖出 = 某號碼開獎後，下一期最常跟著出現的號碼。看到「開15號後隔1期拖出33號」看不懂？芭樂子用白話文翻譯＋圖解，再用 539 歷史數據驗證給你看。',
     category: 'lottery',
     categoryLabel: '彩券進階',
     badgeType: 'featured',
@@ -413,7 +413,7 @@ export const articles = [
   {
     slug: '5-tips-spot-casino-scam',
     title: '【2026 避坑指南】5招識破娛樂城詐騙套路！WHOIS＋流水陷阱＋支付安全完整拆解',
-    excerpt: '高手不看優惠看細節！芭樂子教你 5 招實測識破不出金黑網：WHOIS 查網域年齡辨識跑路前兆、洗碼量流水數學拆解（40 倍流水 = 數學上不可能提款）、支付管道安全性判斷（私人轉帳 = 警示帳戶風險）、客服壓力測試問 USDT 匯率和 RTP、交叉比對同業評價。附入金前 5 項檢核表。',
+    excerpt: '高手不看優惠看細節！芭樂子教你 5 招識破不出金黑網：WHOIS 查網域年齡辨識跑路前兆、洗碼量流水數學拆解（40 倍流水 = 數學上不可能提款）、支付管道安全性判斷（私人轉帳 = 警示帳戶風險）、客服壓力測試問 USDT 匯率和 RTP、交叉比對同業評價。附入金前 5 項檢核表。',
     category: 'guide',
     categoryLabel: '防詐實戰教學',
     badgeType: 'featured',
@@ -525,7 +525,7 @@ export const articles = [
   },
   {
     slug: 'arcade-vs-online-casino',
-    title: '【2026實測比較】台灣遊藝場 vs 線上娛樂城：哪種最好賺？出金速度、安全性、隱私性終極大對決！',
+    title: '【2026完整比較】台灣遊藝場 vs 線上娛樂城：哪種最好賺？出金速度、安全性、隱私性終極大對決！',
     excerpt: '實體遊藝場 RTP 85~95% vs 線上娛樂城 96~98%，出金速度、返水回饋、隱私保護全面大對決。芭樂子從六大維度拆解，告訴你為什麼 2026 年市場正不可逆地線上化。',
     category: 'guide',
     categoryLabel: '避雷教學',
@@ -539,7 +539,7 @@ export const articles = [
   },
   {
     slug: 'baccarat-winning-strategy',
-    title: '【2026實測】真人百家樂必勝法：揭秘賭場最怕的 1-3-2-4 投注策略與期望值真相',
+    title: '【2026攻略】真人百家樂必勝法：揭秘賭場最怕的 1-3-2-4 投注策略與期望值真相',
     excerpt: '百家樂有必勝公式嗎？芭樂子拆解莊 1.06% vs 閒 1.24% vs 和 14.36% 的真實期望值、1-3-2-4 投注法完整教學、真人 vs 電子百家樂比較，附 3 大禁忌與停損停利 SOP。',
     category: 'baccarat',
     categoryLabel: '百家樂',
@@ -553,7 +553,7 @@ export const articles = [
   },
   {
     slug: 'lottery-vs-slots-comparison',
-    title: '【2026實測】威力彩 vs 老虎機勝率大對決：頭獎機率差了 100 倍？',
+    title: '【2026數據】威力彩 vs 老虎機勝率大對決：頭獎機率差了 100 倍？',
     excerpt: '威力彩 RTP 55% vs 老虎機 97%,回收率差了將近兩倍。芭樂子用數學和國際認證數據,拆解「哪個比較好贏」的科學真相。想翻身買威力彩,想娛樂選老虎機。',
     category: 'slots',
     categoryLabel: '老虎機',

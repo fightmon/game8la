@@ -1,6 +1,7 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import ArticleSchema from '../../components/ArticleSchema.astro';
 
@@ -17,7 +18,7 @@ const faqs = [
 <ArticleSchema
   url="https://game8la.com/games/mahjong-ways-2/"
   title="麻將胡了2｜PG Soft 2000路老虎機完整攻略 - GAME8LA"
-  description="麻將胡了2 完整攻略！RTP 96.95%、最大倍率 x100,000、2000路消除掉落、Gold Plated 金牌變 Wild、Free Spin 第3軸全金倍數 x10。PG Soft 經典續作，8LA 芭樂子實測解析。"
+  description="麻將胡了2 完整攻略！RTP 96.95%、最大倍率 x100,000、2000路消除掉落、Gold Plated 金牌變 Wild、Free Spin 第3軸全金倍數 x10。PG Soft 經典續作，芭樂子完整解析。"
   image="https://game8la.com/images/mahjong-ways2/mahjong-ways2-cover.webp"
   datePublished="2026-04-05"
   dateModified="2026-04-13"
@@ -29,7 +30,7 @@ const faqs = [
 />
 <BaseLayout
   title="麻將胡了2｜PG Soft 2000路老虎機完整攻略 - GAME8LA"
-  description="麻將胡了2 完整攻略！RTP 96.95%、最大倍率 x100,000、2000路消除掉落、Gold Plated 金牌變 Wild、Free Spin 第3軸全金倍數 x10。PG Soft 經典續作，8LA 芭樂子實測解析。"
+  description="麻將胡了2 完整攻略！RTP 96.95%、最大倍率 x100,000、2000路消除掉落、Gold Plated 金牌變 Wild、Free Spin 第3軸全金倍數 x10。PG Soft 經典續作，芭樂子完整解析。"
   ogImage="https://game8la.com/images/mahjong-ways2/mahjong-ways2-cover.webp"
   currentPage="rankings"
 >
@@ -45,9 +46,8 @@ const faqs = [
       <span class="badge badge-gold" style="margin-bottom:0.8rem">老虎機 / 麻將・消除掉落・2000路</span>
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">麻將胡了2</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
-        <span class="score-big">9.2</span>
-        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /></span>
-        <span style="color:var(--text-muted)">(4,865 次瀏覽)</span>
+        <span class="discussion-index-big">9.2</span>
+        <span style="font-size:0.85rem;color:var(--text-muted)">社群討論度<br><span style="font-size:0.72rem">整合 PTT / Dcard / Google 評論熱度，非本站評分</span></span>
       </div>
       <div class="info-grid">
         <span class="label">遊戲供應商</span><span class="value">PG Soft（Pocket Games Soft）</span>
@@ -319,6 +319,7 @@ const faqs = [
     ))}
   </div>
 
+  <LegalNotice />
   </div><!-- end article-content -->
 
   <!-- 延伸閱讀 -->

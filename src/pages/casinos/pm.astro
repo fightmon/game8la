@@ -1,10 +1,11 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
 ---
 
 <BaseLayout
-  title="PM娛樂城評價｜遊戲最多的線上賭場實測 - GAME8LA"
+  title="PM娛樂城評價｜遊戲最多的線上賭場規格分析 - GAME8LA"
   description="PM娛樂城完整評測！業界遊戲種類最多的新銳平台，電子+真人+體育+彩票+棋牌+捕魚一站式。PAGCOR+MGA雙認證、系統穩定不卡頓、新人優惠業界最激進。8LA新寵兒。"
   ogImage="https://game8la.com/images/casinos/pm-cover.webp"
   currentPage="rankings"
@@ -21,9 +22,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <span class="badge badge-gold" style="margin-bottom:0.8rem">遊戲最多 / 綜合型娛樂城</span>
       <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0">PM娛樂城</h1>
       <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0">
-        <span class="score-big">9.4</span>
-        <span class="stars" style="font-size:1.2rem"><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star" /><Icon name="star-half" /></span>
-        <span style="color:var(--text-muted)">(34,180 次評價)</span>
+        <span class="discussion-index-big">9.4</span>
+        <span style="font-size:0.85rem;color:var(--text-muted)">社群討論度<br><span style="font-size:0.72rem">整合 PTT / Dcard / Google 評論熱度，非本站評分</span></span>
       </div>
       <div class="info-grid">
         <span class="label">創立年份</span><span class="value">2020年</span>
@@ -77,7 +77,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <!-- 娛樂城介紹 -->
   <h2 id="intro">娛樂城介紹</h2>
   <p>各位8LA鄉民，說到遊戲種類最齊全的娛樂城，非<strong>PM娛樂城（Pony Muah Games）</strong>莫屬。2020年成立到現在才5年多，但人氣卻丁滿高，特別是在年輕玩家圈。為什麼？因為PM做了一件其他娛樂城不敢做的事——把電子、真人、體育、彩票、棋牌、捕魚六大遊戲類別全部整合在一個平台上，一帳號走天下。</p>
-  <p>更狂的是PM的系統穩定度。實測發現，就算人數再多也不會卡頓，在線上賭場這種高併發環境中根本是奇蹟。加上新人優惠超激進——首存最高送100%彩金，每週返水、每日驚喜，根本是在「讓利」給玩家。如果你是個「雜食玩家」（今天想玩老虎機，明天想玩百家樂，後天想買樂透），PM絕對是你的菜。</p>
+  <p>更狂的是PM的系統穩定度。用戶反映，就算人數再多也不會卡頓，在線上賭場這種高併發環境中根本是奇蹟。加上該平台新人獎勵條件較市場寬鬆——首存最高 100% 額外金額，另有週返水與每日獎勵。如果你是個「雜食玩家」（今天想玩老虎機，明天想玩百家樂，後天想買樂透），PM絕對是你的菜。</p>
 
   <!-- 推薦要點 -->
   <h2 id="recommend">推薦要點</h2>
@@ -86,7 +86,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <ul style="padding-left:1.5rem;color:var(--text-secondary)">
       <li><strong>遊戲種類最完整</strong> — 電子+真人+體育+彩票+棋牌+捕魚六大類，根本是娛樂城百貨公司</li>
       <li><strong>系統穩定不卡頓</strong> — 再多人也不會掉線，技術水準業界頂級</li>
-      <li><strong>新人優惠最激進</strong> — 首存送100%，每週返水，天天驚喜</li>
+      <li><strong>新人獎勵</strong> — 該平台公告首存 100% 額外金額，另有週返水</li>
       <li><strong>最低下注只要5元</strong> — 門檻最低，新手最友善</li>
       <li><strong>提款2-5分鐘超快速</strong> — 真的不騙，秒速出金</li>
       <li><strong>PAGCOR + MGA雙認證</strong> — 國際合法，安心玩樂</li>
@@ -196,7 +196,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </div>
 
   <!-- 優惠活動 -->
-  <h2 id="promotions">優惠活動</h2>
+  <h2 id="promotions">該平台公開獎勵條件</h2>
   <table>
     <thead><tr><th>優惠項目</th><th>活動內容</th><th>申請條件</th></tr></thead>
     <tbody>
@@ -222,6 +222,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </tbody>
   </table>
 
+  <LegalNotice />
+
   <!-- FAQ -->
   <h2 id="faq">常見問題 FAQ</h2>
   <div class="faq-section">
@@ -231,7 +233,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
     <div class="faq-item">
       <div class="faq-q">Q：PM遊戲這麼多，系統會不會很複雜難上手？<span class="arrow"><Icon name="chevron-down" /></span></div>
-      <div class="faq-a">反而更簡單。PM的APP設計非常直觀，所有遊戲在首頁都能快速找到分類，不需要跳來跳去。客服也會手把手教新手，第一次玩也能快速上手。實測用戶體驗比某些老牌娛樂城還友善。</div>
+      <div class="faq-a">反而更簡單。PM的APP設計非常直觀，所有遊戲在首頁都能快速找到分類，不需要跳來跳去。客服也會手把手教新手，第一次玩也能快速上手。用戶評論反映體驗比某些老牌娛樂城還友善。</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Q：提款真的2-5分鐘到嗎？有沒有審核或延遲？<span class="arrow"><Icon name="chevron-down" /></span></div>
