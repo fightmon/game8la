@@ -2,14 +2,28 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'casino-wagering-explained',
+    title: '娛樂城流水怎麼算？打碼量公式拆解＋免費計算器',
+    excerpt: '流水 =（存款 + 紅利）× 倍數。存10000送1000、流水20倍，你要下注22萬才能出金。附免費迷你計算器，輸入3個數字秒算打碼量與預期虧損。',
+    category: 'casino',
+    categoryLabel: '娛樂城教學',
+    badgeType: 'featured',
+    date: '2026-05-26',
+    views: 19,
+    tags: ['最新', '教學', '工具'],
+    icon: 'calculator',
+    gradient: 'linear-gradient(135deg,#1a1505,#3d2f0a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-casino-wagering.webp'
+  },
+  {
     slug: 'baphomet-vs-seth2-comparison',
-    title: '古神巴風特 vs 戰神賽特2：ATG 雙強對決——RTP、倍數系統、買免遊完整比較',
+    title: '巴風特 vs 賽特2 該選哪台？暗黑石板 vs 埃及覺醒完整比較',
     excerpt: '同為 ATG 電子高倍神機，古神巴風特（x65,536）跟戰神賽特2（x81,000）到底該玩哪台？芭樂子從 RTP、消除機制、倍數系統、買免遊 CP 值、JP 彩金五大維度全面拆解，用數據幫你選出最適合的那一台。',
     category: 'slots',
     categoryLabel: '老虎機比較',
     badgeType: 'featured',
     date: '2026-05-26',
-    views: 18,
+    views: 22,
     tags: ['最新', '精選', '比較'],
     icon: 'zap',
     gradient: 'linear-gradient(135deg,#1a0a2e,#2d1b50,#0a1a2e)',
@@ -285,8 +299,8 @@ export const articles = [
   },
   {
     slug: 'lottery-dragout-guide',
-    title: '彩券「拖出」是什麼意思？「隔1期拖出33號」白話翻譯＋實例圖解',
-    excerpt: '拖出 = 某號碼開獎後，下一期最常跟著出現的號碼。看到「開15號後隔1期拖出33號」看不懂？芭樂子用白話文翻譯＋圖解，再用 539 歷史數據驗證給你看。',
+    title: '拖出號是什麼？539／大樂透／威力彩免費查詢工具＋白話圖解',
+    excerpt: '拖出號 = 某號碼開獎後最常跟著出的號碼。輸入任一號碼秒查拖出號排行＋偏差值，附白話教學圖解＋近 4000 期歷史數據驗證。',
     category: 'lottery',
     categoryLabel: '彩券進階',
     badgeType: 'featured',
@@ -440,8 +454,8 @@ export const articles = [
   },
   {
     slug: 'power-lottery-vs-super-lotto',
-    title: '同樣花 100 元，威力彩買 1 注 vs 大樂透買 2 注——哪個比較划算？機率＋獎金完整拆解',
-    excerpt: '威力彩頭獎機率 1/2,209 萬、大樂透 1/1,398 萬，差 1.58 倍；但中任一獎差 3 倍（1/9 vs 1/28）。同樣 100 元該買哪張？7 張對比表＋稅後實拿一次算給你看。',
+    title: '100元買威力彩還是大樂透？1注 vs 2注機率＋獎金完整拆解',
+    excerpt: '威力彩1注100元 vs 大樂透2注100元，頭獎機率差3.16倍，但小獎命中率威力彩高3倍。7張對比表＋稅後實拿金額一次算完。',
     category: 'lottery',
     categoryLabel: '彩券科普',
     badgeType: 'featured',
@@ -729,8 +743,8 @@ export const articles = [
   {
     slug: 'lottery-odds-comparison',
     hotTitle: '100元買威力彩還是大樂透',
-    title: '威力彩跟大樂透中獎機率差多少？頭獎差 1.58 倍，但 100 元期望值誰比較高？',
-    excerpt: '威力彩頭獎機率只有 1/22,085,448，大樂透則是 1/13,983,816。各獎項命中率、期望值、RTP 全比較，100 元該買哪個一篇搞懂。',
+    title: '威力彩 vs 大樂透｜100元中獎機率差3.16倍！9獎項完整比較',
+    excerpt: '100元買威力彩1注還是大樂透2注？9個獎項逐一對比＋期望值試算表＋稅後實拿金額，看完就知道該買哪張。',
     category: 'lottery',
     categoryLabel: '彩券',
     badgeType: 'attack',

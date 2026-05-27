@@ -30,6 +30,7 @@ const toolMap: Record<string, Tool> = {
   'lottery':       { name: '芭樂好彩數據站', desc: '冷熱號分析 + 包牌產生器', href: '/lottery/analysis/', icon: 'bar-chart' },
   'slot-sim':      { name: '芭樂轉轉機', desc: 'RTP 視覺化模擬，免費試跑', href: '/tools/slot-simulator/', icon: 'play' },
   'thor-sim':      { name: '雷神之錘 2 模擬器', desc: '體驗倍數球鎖定爆分', href: '/tools/thor-hammer-2-simulator/', icon: 'zap' },
+  'baphomet-sim':  { name: '巴風特模擬器', desc: 'Cluster Pays 石板翻倍體驗', href: '/tools/baphomet-simulator/', icon: 'zap' },
   'rtp-tracker':   { name: 'RTP 紀錄器', desc: '記錄每局輸贏，自動算 RTP', href: '/tools/rtp-tracker/', icon: 'clipboard' },
   'bankroll':      { name: '資金管理計算器', desc: '停損停利線一鍵算好', href: '/tools/bankroll-calculator/', icon: 'calculator' },
   'baccarat-sim': { name: '百家樂策略模擬器', desc: '五種策略跑 1000 局，看清莊家優勢', href: '/tools/baccarat-simulator/', icon: 'bar-chart' },
@@ -37,7 +38,7 @@ const toolMap: Record<string, Tool> = {
 };
 
 const presetMap: Record<Preset, string[]> = {
-  'slots':       ['slot-sim', 'rtp-tracker', 'bankroll'],
+  'slots':       ['slot-sim', 'baphomet-sim', 'rtp-tracker', 'bankroll'],
   'baccarat':    ['baccarat-sim', 'bankroll', 'rtp-tracker'],
   'casino':      ['casino-check', 'bonus-calc'],
   'casino-full': ['casino-check', 'bankroll', 'bonus-calc'],

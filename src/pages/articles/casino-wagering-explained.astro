@@ -1,0 +1,523 @@
+---
+import Icon from '../../components/Icon.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
+
+const faqs = [
+  { q: '流水和打碼量是同一件事嗎？', a: '是的。「流水」「打碼量」「投注量」「有效下注量」通通指同一件事——你必須累計下注達到的金額門檻。不同娛樂城叫法不同而已，別被術語搞混。' },
+  { q: '1 倍流水到底要打多少？', a: '1 倍流水 = 你的（存款 + 紅利）× 1。假設你存 10,000 送 1,000，1 倍流水就是 11,000。但大部分娛樂城送紅利的流水倍數都在 15～30 倍之間，所以 1 倍流水幾乎只出現在「不拿紅利、純存款出金」的情境。' },
+  { q: '不同遊戲的流水計算一樣嗎？', a: '不一樣，這是最多新手踩的坑。很多娛樂城規定百家樂的有效投注只算 30%，意思是你押 10,000 元只計入 3,000 元流水。老虎機通常算 100%，體育投注也常打折。下注前務必看清楚遊戲貢獻比例。' },
+  { q: '流水沒打完可以出金嗎？', a: '通常不行。流水沒達標就申請出金，大部分平台會直接拒絕或扣回紅利。有些平台更狠——直接凍結帳戶。所以領紅利之前先算清楚自己打不打得完，打不完就別拿。' },
+  { q: '有沒有娛樂城不用打流水就能出金？', a: '有，但通常限於「不領任何紅利」的純存款出金。只要你拿了贈送金、體驗金、回饋金，就一定會綁流水條件。天下沒有白吃的午餐，任何「免流水」的宣傳都要仔細看附帶條件。' },
+  { q: '為什麼我流水打完了還是不能出金？', a: '最常見的三個原因：(1) 有效投注比例被打折，你以為打完了其實沒有；(2) 平台額外規定「不計算反向投注」（百家樂同時押莊閒的注碼不算）；(3) 出金有另外的 KYC 驗證或最低提領門檻。碰到這類情況可以用 <a href="/casino-check/">娛樂城體檢工具</a> 查一下該平台是否有黑紀錄。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/casino-wagering-explained/"
+  title="娛樂城流水怎麼算？打碼量公式拆解＋免費計算器"
+  description="流水 = （存款 + 紅利）× 倍數。存10000送1000、流水20倍，你要下注22萬才能出金。附免費迷你計算器，輸入3個數字秒算打碼量與預期虧損。"
+  image="https://game8la.com/images/articles/casino-wagering-cover.webp"
+  datePublished="2026-05-26"
+  dateModified="2026-05-26"
+  wordCount={1800}
+  timeRequired="PT8M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '流水打碼量教學', url: 'https://game8la.com/articles/casino-wagering-explained/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="娛樂城流水怎麼算？打碼量公式拆解＋免費計算器｜3個數字秒懂 - GAME8LA" description="流水 =（存款 + 紅利）× 倍數。存10000送1000、流水20倍，你要下注22萬才能出金。附免費迷你計算器，輸入3個數字秒算打碼量與預期虧損。" ogImage="https://game8la.com/images/articles/casino-wagering-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 流水打碼量教學</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-26 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 8 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <article class="article-content">
+      <h1 style="font-size:2rem;line-height:1.3">娛樂城流水怎麼算？3 個數字搞懂打碼量，別再傻傻領紅利</h1>
+      <p class="article-subtitle">「存 10000 送 1000，流水 20 倍」——你知道這句話的意思是你要下注 22 萬嗎？</p>
+
+      <figure style="margin:1rem 0 1.5rem;text-align:center">
+        <img src="/images/articles/casino-wagering-cover.webp"
+             srcset="/images/articles/casino-wagering-cover-768w.webp 768w, /images/articles/casino-wagering-cover.webp 1376w"
+             sizes="(max-width: 640px) 100vw, 820px"
+             alt="芭樂子舉起巨大計算機顯示220000，金幣被漩渦吸走——娛樂城流水打碼量教學封面圖" width="1376" height="768" loading="eager" fetchpriority="high" style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px" />
+      </figure>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">「存 20000 送 2000 超划算！」「首儲三重禮最高領 5000！」「回饋金 10% 天天送！」</p>
+      <p style="color:var(--text-secondary)">每間娛樂城都在送錢，但你有沒有想過——他們為什麼敢送？因為每一筆紅利後面都綁著一個東西叫<strong>流水（打碼量）</strong>。這個條件會確保你在拿到紅利之後，要下注到一個天文數字才能提款，而在下注的過程中，莊家優勢會慢慢把紅利連本帶利吃回去。</p>
+      <p style="color:var(--guava-green);font-weight:700;font-size:1.05rem">今天芭樂子用最白話的方式把流水算給你看，而且下面有迷你計算器讓你自己算。</p>
+
+      <!-- 快捷工具列 -->
+      <div class="quick-tool-bar">
+        <span>想要更完整的試算？用這個：</span>
+        <a href="/tools/bonus-calculator/">獎金計算器（完整版）</a>
+        <a href="/casino-check/">娛樂城體檢</a>
+        <a href="/articles/casino-withdrawal-masterguide/">出金攻略</a>
+      </div>
+
+      <!-- TOC -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">流水是什麼？一句話解釋</a></li>
+          <li><a href="#s2">公式拆解：3 個數字算出你的打碼量</a></li>
+          <li><a href="#s3">🧮 迷你計算器：自己算一次</a></li>
+          <li><a href="#s4">有效投注比例：最陰的隱藏條件</a></li>
+          <li><a href="#s5">預期虧損：你以為賺 1000，其實虧更多</a></li>
+          <li><a href="#s6">流水倍數多少算合理？</a></li>
+          <li><a href="#s7">芭樂子的結論：什麼時候該拿紅利</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- ====== 1. 流水是什麼 ====== -->
+      <h2 id="s1" style="margin-top:2.5rem">流水是什麼？一句話解釋</h2>
+
+      <div class="card" style="border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0;font-size:1.1rem"><strong style="color:var(--guava-green)">流水 = 你領了紅利之後，必須累計下注達到的金額門檻，達標才能提款。</strong></p>
+      </div>
+
+      <p>不同平台會用不同名詞：流水、打碼量、投注量、有效下注量、wagering requirement——全部是同一件事。核心概念就是：你拿了我的紅利，就要在我這裡玩夠多把才能把錢帶走。</p>
+
+      <p>為什麼娛樂城要設這個門檻？因為如果沒有流水限制，你存 10000 領 1000 紅利後馬上提領 11000 走人，每個人都來白拿一次，娛樂城三天就倒了。流水就是他們的保護機制——也是你的隱形成本。</p>
+
+      <!-- ====== 2. 公式拆解 ====== -->
+      <h2 id="s2" style="margin-top:2.5rem">公式拆解：3 個數字算出你的打碼量</h2>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/casino-wagering-formula.webp"
+             srcset="/images/articles/casino-wagering-formula-768w.webp 768w, /images/articles/casino-wagering-formula.webp 1376w"
+             sizes="(max-width: 640px) 100vw, 820px"
+             alt="芭樂子站在黑板前講解流水打碼量計算公式" width="1376" height="768" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">公式很簡單，但算出來的數字會嚇到你</figcaption>
+      </figure>
+
+      <p>流水的計算公式其實很簡單，只需要 3 個數字：</p>
+
+      <div class="card" style="border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <p style="margin:0 0 1rem;font-size:1.15rem;text-align:center"><strong style="color:var(--gold)">打碼量 =（存款 + 紅利）× 流水倍數</strong></p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--gold)">例子：</strong>存 10,000 送 1,000，流水 20 倍</p>
+        <p style="margin:0 0 0.3rem">打碼量 =（10,000 + 1,000）× 20 = <strong>220,000 元</strong></p>
+        <p style="margin:0;color:var(--text-muted);font-size:0.9rem">你要累計下注 22 萬元，才能提款。</p>
+      </div>
+
+      <p>22 萬——你沒看錯。你為了那 1,000 元紅利，要在這個平台上累積下注超過 22 萬。每一次下注，莊家都從中抽走一點（這就是莊家優勢），等你打完 22 萬的流水，那 1,000 元紅利可能早就被吃回去了。</p>
+
+      <p>有些平台的流水只算紅利部分（打碼量 = 紅利 × 倍數），這種條件比較友善。但台灣絕大多數娛樂城都是算<strong>存款 + 紅利</strong>，所以你存越多，打碼量也越高。領紅利之前一定要看清楚是哪種計算方式。</p>
+
+      <!-- ====== 3. 迷你計算器 ====== -->
+      <h2 id="s3" style="margin-top:2.5rem">🧮 迷你計算器：輸入 3 個數字，秒算你的打碼量</h2>
+
+      <p>不想自己乘？下面直接算。輸入你的存款、紅利、流水倍數，結果馬上出來。</p>
+
+      <div class="wager-calc" id="wagerCalc">
+        <div class="wc-inputs">
+          <div class="wc-field">
+            <label for="wcDeposit">存款金額</label>
+            <div class="wc-input-wrap">
+              <span class="wc-prefix">$</span>
+              <input type="number" id="wcDeposit" value="10000" min="0" step="1000" inputmode="numeric" />
+            </div>
+          </div>
+          <div class="wc-field">
+            <label for="wcBonus">紅利金額</label>
+            <div class="wc-input-wrap">
+              <span class="wc-prefix">$</span>
+              <input type="number" id="wcBonus" value="1000" min="0" step="100" inputmode="numeric" />
+            </div>
+          </div>
+          <div class="wc-field">
+            <label for="wcMulti">流水倍數</label>
+            <div class="wc-input-wrap">
+              <span class="wc-prefix">×</span>
+              <input type="number" id="wcMulti" value="20" min="1" max="100" step="1" inputmode="numeric" />
+            </div>
+          </div>
+        </div>
+        <div class="wc-results">
+          <div class="wc-result-row">
+            <span class="wc-label">總打碼量</span>
+            <span class="wc-value" id="wcTotal">220,000</span>
+          </div>
+          <div class="wc-result-row">
+            <span class="wc-label">預期虧損<span class="wc-sub">（百家樂 RTP 98.76%）</span></span>
+            <span class="wc-value wc-loss" id="wcLoss">-2,728</span>
+          </div>
+          <div class="wc-result-row wc-result-main">
+            <span class="wc-label">紅利淨收益</span>
+            <span class="wc-value" id="wcNet">-1,728</span>
+          </div>
+          <div class="wc-verdict" id="wcVerdict">
+            ⚠️ 這筆紅利的預期虧損比紅利本身還高——數學上不划算
+          </div>
+        </div>
+        <a href="/tools/bonus-calculator/" class="wc-full-link">
+          想算有效投注比例、切換遊戲類型？→ 用完整版獎金計算器
+        </a>
+      </div>
+
+      <!-- ====== 4. 有效投注比例 ====== -->
+      <h2 id="s4" style="margin-top:2.5rem">有效投注比例：最陰的隱藏條件</h2>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/casino-wagering-valid-ratio.webp"
+             srcset="/images/articles/casino-wagering-valid-ratio-768w.webp 768w, /images/articles/casino-wagering-valid-ratio.webp 1376w"
+             sizes="(max-width: 640px) 100vw, 820px"
+             alt="芭樂子震驚地看著剪刀把鈔票剪成三分之一，百家樂牌桌背景——有效投注比例陷阱" width="1376" height="768" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">百家樂流水只算 30%？你的投注直接被砍成三分之一</figcaption>
+      </figure>
+
+      <p>上面的公式已經夠嚇人了，但還有一個更陰的東西——<strong>有效投注比例</strong>。</p>
+
+      <p>很多娛樂城會規定：不同遊戲的下注金額只有「部分」算進流水。最常見的設定：</p>
+
+      <div class="card" style="border-left:4px solid var(--guava-pink);background:rgba(255,64,129,0.06)">
+        <p style="margin:0 0 0.5rem"><strong style="color:var(--guava-pink)">老虎機：100%</strong>（押 1000 算 1000）</p>
+        <p style="margin:0 0 0.5rem"><strong style="color:var(--guava-pink)">體育投注：50～100%</strong>（看平台）</p>
+        <p style="margin:0 0 0.5rem"><strong style="color:var(--guava-pink)">百家樂：30%</strong>（押 1000 只算 300 😱）</p>
+        <p style="margin:0"><strong style="color:var(--guava-pink)">輪盤紅黑對押：0%</strong>（直接不算）</p>
+      </div>
+
+      <p>用同一個例子來算：打碼量 220,000，如果你玩百家樂只算 30%，你實際要下注的金額是：</p>
+
+      <div class="card" style="border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <p style="margin:0;text-align:center;font-size:1.1rem">220,000 ÷ 30% = <strong style="color:var(--gold)">733,333 元</strong></p>
+        <p style="margin:0.5rem 0 0;text-align:center;color:var(--text-muted);font-size:0.88rem">對，73 萬。為了拿 1,000 元紅利。</p>
+      </div>
+
+      <p>這就是為什麼芭樂子一直說：<strong>領紅利之前，先看有效投注比例</strong>。如果你習慣玩百家樂，但平台的百家樂流水只算 30%，那任何紅利對你來說幾乎都是陷阱。想精確計算含有效投注比例的打碼量，可以直接用<a href="/tools/bonus-calculator/" style="color:var(--gold-light)">完整版獎金計算器</a>。</p>
+
+      <!-- ====== 5. 預期虧損 ====== -->
+      <h2 id="s5" style="margin-top:2.5rem">預期虧損：你以為賺 1000，其實虧更多</h2>
+
+      <p>拿到紅利 ≠ 賺到紅利。因為在打流水的過程中，每一手都有莊家優勢在吃你的本金。</p>
+
+      <p>莊家優勢 = 100% - RTP。百家樂押莊的 RTP 大約 98.76%，所以莊家優勢是 1.24%。你每下注 100 元，長期平均會虧 1.24 元。</p>
+
+      <div class="card" style="border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0 0 0.5rem"><strong style="color:var(--guava-green)">預期虧損 = 實際下注金額 × 莊家優勢</strong></p>
+        <p style="margin:0 0 0.3rem">百家樂、流水 100% 有效：220,000 × 1.24% = <strong>虧 2,728 元</strong></p>
+        <p style="margin:0">百家樂、流水只算 30%：733,333 × 1.24% = <strong>虧 9,093 元</strong></p>
+        <p style="margin:0.8rem 0 0;color:var(--text-muted);font-size:0.88rem">紅利才 1,000 元，你為了拿這 1,000 反而多虧了 1,728～8,093 元。這就是「免費紅利」的真相。</p>
+      </div>
+
+      <p>老虎機的情況稍微好一點，因為有效投注通常算 100%，但 RTP 也比較低（約 93–96%），所以莊家優勢更大。用哪種遊戲打流水比較划算？沒有標準答案，要看具體的 RTP 和有效投注比例搭配。這也是我做<a href="/tools/bonus-calculator/" style="color:var(--gold-light)">獎金計算器</a>的原因——讓你自己切換遊戲類型看結果。</p>
+
+      <!-- ====== 6. 流水倍數多少算合理 ====== -->
+      <h2 id="s6" style="margin-top:2.5rem">流水倍數多少算合理？</h2>
+
+      <p>市面上的流水倍數從 1 倍到 60 倍都有，芭樂子的經驗法則：</p>
+
+      <div class="card" style="border-left:4px solid var(--gold);background:rgba(245,184,0,0.06)">
+        <p style="margin:0 0 0.5rem"><strong style="color:var(--guava-green)">1～5 倍：</strong>非常友善。通常出現在「不拿紅利」的純存款出金條件。</p>
+        <p style="margin:0 0 0.5rem"><strong style="color:var(--gold)">5～15 倍：</strong>還算合理。如果紅利比例高（30% 以上），數學上可能還是划算的。</p>
+        <p style="margin:0 0 0.5rem"><strong style="color:var(--guava-pink)">15～30 倍：</strong>要算過才知道。這是台灣市場最常見的區間，但大部分情況下紅利的預期淨值是負的。</p>
+        <p style="margin:0"><strong style="color:red">30 倍以上：</strong>幾乎不可能划算。除非紅利金額異常高（100% 以上），否則就是陷阱。</p>
+      </div>
+
+      <p>記住一個簡單判斷法：<strong>流水倍數 × 莊家優勢 > 紅利百分比 → 不划算。</strong>例如流水 20 倍、百家樂莊家優勢 1.24%，20 × 1.24% = 24.8%。如果紅利只有 10%（存 10000 送 1000），24.8% > 10%，代表你預期虧損比紅利還多，不划算。</p>
+
+      <!-- ====== 7. 結論 ====== -->
+      <h2 id="s7" style="margin-top:2.5rem">芭樂子的結論：什麼時候該拿紅利</h2>
+
+      <figure style="margin:1.5rem 0;text-align:center">
+        <img src="/images/articles/casino-wagering-conclusion.webp"
+             srcset="/images/articles/casino-wagering-conclusion-768w.webp 768w, /images/articles/casino-wagering-conclusion.webp 1376w"
+             sizes="(max-width: 640px) 100vw, 820px"
+             alt="芭樂子雙手交叉站立，左邊金幣堆右邊燃燒鈔票——選值得拿的紅利還是陷阱" width="1376" height="768" loading="lazy" style="width:100%;max-width:820px;height:auto;border-radius:12px;border:1px solid var(--border)" />
+        <figcaption style="color:var(--text-muted);font-size:0.8rem;margin-top:0.5rem">值得拿還是陷阱？算過就知道</figcaption>
+      </figure>
+
+      <div class="card" style="border-left:4px solid var(--guava-green);background:rgba(57,255,20,0.06)">
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-green)">✅ 可以拿：</strong>流水倍數低（10 倍以下）、紅利比例高（30%+）、你本來就打算玩那麼多把</p>
+        <p style="margin:0 0 0.6rem"><strong style="color:var(--guava-pink)">❌ 不要拿：</strong>流水倍數高（20 倍以上）、有效投注打折（百家樂 30%）、你本來只想小玩幾把</p>
+        <p style="margin:0"><strong style="color:var(--gold)">🧮 不確定的時候：</strong><a href="/tools/bonus-calculator/" style="color:var(--gold-light)">用計算器算一次</a>，30 秒就有答案</p>
+      </div>
+
+      <p>娛樂城送紅利不是做慈善，是在用數學賺你的錢。你不需要害怕紅利，但你需要搞懂紅利。算清楚再決定拿不拿——這就是芭樂子一直在說的：<strong>用數學保護自己</strong>。</p>
+
+      <!-- mid-CTA -->
+      <div class="mid-cta" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:2rem 0;text-align:center">
+        <p style="margin:0 0 0.5rem;font-weight:700;color:var(--text-primary)">💰 算算你的紅利值不值得拿</p>
+        <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:0.8rem">
+          <a href="/tools/bonus-calculator/" class="btn-primary" style="font-size:0.9rem">完整版獎金計算器</a>
+          <a href="/casino-check/" class="btn-outline" style="font-size:0.9rem">娛樂城安全體檢</a>
+        </div>
+      </div>
+
+      <!-- ====== FAQ ====== -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題</h2>
+      {faqs.map((f, i) => (
+        <div class="faq-item" data-faq-index={i}>
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>{f.q}</span>
+            <Icon name="chevron-down" size="1rem" />
+          </button>
+          <div class="faq-a" set:html={f.a} />
+        </div>
+      ))}
+
+      <ManifestoBox />
+      <LegalNotice />
+
+      <ShareButtons title="娛樂城流水怎麼算？打碼量公式拆解＋免費計算器" heading="🧮 領紅利之前先算一次，30 秒看懂值不值得拿" />
+    </article>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+(function(){
+  const $ = id => document.getElementById(id);
+  const fmt = n => n.toLocaleString('zh-TW');
+
+  function calc(){
+    const dep = parseFloat($('wcDeposit').value) || 0;
+    const bon = parseFloat($('wcBonus').value) || 0;
+    const mul = parseFloat($('wcMulti').value) || 1;
+    const total = (dep + bon) * mul;
+    const houseEdge = 0.0124; // baccarat
+    const loss = total * houseEdge;
+    const net = bon - loss;
+
+    $('wcTotal').textContent = '$' + fmt(Math.round(total));
+    $('wcLoss').textContent = '-$' + fmt(Math.round(loss));
+    $('wcNet').textContent = (net >= 0 ? '+$' : '-$') + fmt(Math.abs(Math.round(net)));
+    $('wcNet').className = 'wc-value ' + (net >= 0 ? 'wc-gain' : 'wc-loss');
+
+    const v = $('wcVerdict');
+    if(net >= 0){
+      v.className = 'wc-verdict wc-v-good';
+      v.textContent = '✅ 數學上划算——紅利大於預期虧損，可以考慮拿';
+    } else if(net > -bon){
+      v.className = 'wc-verdict wc-v-warn';
+      v.textContent = '⚠️ 小虧——紅利沒有全部被吃掉，但要考慮你是否本來就會打這麼多';
+    } else {
+      v.className = 'wc-verdict wc-v-bad';
+      v.textContent = '❌ 虧損比紅利還高——拿了這筆紅利反而多虧錢，建議不要拿';
+    }
+  }
+
+  ['wcDeposit','wcBonus','wcMulti'].forEach(id => {
+    $(id).addEventListener('input', calc);
+  });
+  calc();
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if(!open) item.classList.add('open');
+      btn.setAttribute('aria-expanded', !open);
+    });
+  });
+})();
+</script>
+
+<style>
+/* ========== Article base ========== */
+.article-content { max-width: 820px; margin: 0 auto; }
+.article-subtitle { color: var(--text-muted); font-size: 1.05rem; margin: -0.5rem 0 1.5rem; font-style: italic; }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  margin: 1rem 0;
+}
+
+h2 { border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+
+/* ========== Wager Calculator ========== */
+.wager-calc {
+  background: var(--bg-card);
+  border: 2px solid var(--guava-green);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+.wc-inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.wc-field label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+.wc-input-wrap {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.wc-prefix {
+  padding: 0.6rem 0.5rem 0.6rem 0.8rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.wc-input-wrap input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.6rem 0.8rem 0.6rem 0;
+  outline: none;
+  width: 100%;
+  min-width: 0;
+}
+.wc-input-wrap input:focus { box-shadow: none; }
+
+/* Results */
+.wc-results {
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+.wc-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.wc-result-row:last-of-type { border-bottom: none; }
+.wc-result-main {
+  padding-top: 0.8rem;
+  margin-top: 0.3rem;
+  border-top: 2px solid var(--border);
+  border-bottom: none;
+}
+.wc-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.wc-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 0.3rem;
+}
+.wc-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.wc-loss { color: #ff4081; }
+.wc-gain { color: #39FF14; }
+
+.wc-verdict {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+}
+.wc-v-good { background: rgba(57,255,20,0.1); color: #39FF14; border: 1px solid rgba(57,255,20,0.3); }
+.wc-v-warn { background: rgba(245,184,0,0.1); color: #f5b800; border: 1px solid rgba(245,184,0,0.3); }
+.wc-v-bad { background: rgba(255,64,129,0.1); color: #ff4081; border: 1px solid rgba(255,64,129,0.3); }
+
+.wc-full-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--gold-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.wc-full-link:hover { color: #39FF14; }
+
+/* ========== FAQ ========== */
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  text-align: left;
+}
+.faq-q :global(svg) { transition: transform 0.2s; flex-shrink: 0; margin-left: 0.5rem; }
+.faq-item.open .faq-q :global(svg) { transform: rotate(180deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1.2rem;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.faq-item.open .faq-a {
+  max-height: 500px;
+  padding: 0 1.2rem 1rem;
+}
+
+/* ========== Quick tool bar ========== */
+.quick-tool-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  padding: 0.8rem 1rem;
+  background: rgba(57,255,20,0.06);
+  border: 1px solid rgba(57,255,20,0.2);
+  border-radius: 10px;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+}
+.quick-tool-bar span { color: var(--text-muted); }
+.quick-tool-bar a {
+  color: #39FF14;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  background: rgba(57,255,20,0.1);
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.quick-tool-bar a:hover { background: rgba(57,255,20,0.2); }
+
+/* ========== Responsive ========== */
+@media (max-width: 640px) {
+  .wc-inputs { grid-template-columns: 1fr; }
+  .wc-value { font-size: 1rem; }
+  .article-content { padding: 0 0.5rem; }
+  .card { padding: 1rem; }
+  .wager-calc { padding: 1rem; }
+}
+</style>
