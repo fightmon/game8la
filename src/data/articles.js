@@ -200,7 +200,7 @@ export const articles = [
   },
   {
     slug: 'power-lottery-odds-explained',
-    title: '威力彩頭獎機率 1/22,085,448 有多難中？9 個獎項中獎機率・期望值・稅後實拿一次算完',
+    title: '威力彩中獎機率 1/22,085,448 是什麼概念？9 獎項精算一次看',
     excerpt: '威力彩頭獎機率 1/22085448 怎麼算的？芭樂子用組合數學從 C(38,6)×8 算起，9 個獎項中獎機率、期望值、稅後實拿全部拆開來看。附生活化比喻表＋包牌成本試算。',
     category: 'lottery',
     categoryLabel: '彩券機率科普',
