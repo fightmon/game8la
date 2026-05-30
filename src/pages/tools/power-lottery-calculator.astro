@@ -1,0 +1,2650 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "威力彩包牌是什麼意思？",
+      "acceptedAnswer": { "@type": "Answer", "text": "威力彩包牌是指在第一區（1–38）選超過 6 個號碼，和／或在第二區（1–8）選超過 1 個號碼，將所有可能的組合都買下來。例如第一區包 8 碼就有 C(8,6) = 28 種組合，若第二區再全包 8 個號碼，總注數就是 28 × 8 = 224 注。" }
+    },
+    {
+      "@type": "Question",
+      "name": "威力彩包牌要花多少錢？",
+      "acceptedAnswer": { "@type": "Answer", "text": "每注 100 元。第一區包 7 碼 = 7 注 = 700 元；包 8 碼 = 28 注 = 2,800 元；包 9 碼 = 84 注 = 8,400 元。若第二區也全包（×8），費用再乘以 8。碼數越多，花費呈組合數爆炸成長。" }
+    },
+    {
+      "@type": "Question",
+      "name": "威力彩包幾碼最划算？",
+      "acceptedAnswer": { "@type": "Answer", "text": "沒有絕對划算的碼數。7 碼包牌只花 700 元，提高約 7 倍中頭獎機率；8 碼花 2,800 元提升 28 倍。建議用本計算器在預算範圍內找出最適合的碼數組合，量力而為。" }
+    },
+    {
+      "@type": "Question",
+      "name": "威力彩包牌一定會中嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不一定。威力彩頭獎機率是 1/22,085,448，即使包 10 碼（210 注），頭獎機率也只有約千分之一。包牌只是提高覆蓋率，不是保證中獎。長期來看，彩券的期望值是負的，包牌不會改變這個數學事實。" }
+    },
+    {
+      "@type": "Question",
+      "name": "威力彩包牌的期望值是正還是負的？",
+      "acceptedAnswer": { "@type": "Answer", "text": "負的。威力彩整體回饋率約 55–58%，意味著每花 100 元，長期平均只能拿回約 55–58 元。除非累積頭獎金額極高（理論上超過 40 億才可能轉正），否則期望值永遠是負的。" }
+    },
+    {
+      "@type": "Question",
+      "name": "第一區和第二區要怎麼包比較好？",
+      "acceptedAnswer": { "@type": "Answer", "text": "第一區的組合爆炸速度遠高於第二區。例如第一區從 7 碼包到 8 碼，注數從 7 變 28（4 倍）；第二區全包只是乘 8。如果預算有限，建議先顧第一區碼數，第二區可以只選 1～2 個。如果預算充裕，第二區全包 8 顆可以確保不錯過第二區。" }
+    },
+    {
+      "@type": "Question",
+      "name": "威力彩包牌可以線上買嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "可以。台灣彩券官方 App 和官網都支援威力彩線上投注，也可以選擇「多碼包牌」功能直接下注。投注前請確認自己的預算上限，量力而為。" }
+    },
+    {
+      "@type": "Question",
+      "name": "威力彩包牌有什麼技巧嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "數學上沒有任何方法能提高中獎期望值，因為每期開獎都是獨立隨機事件。但實務上可以：① 控制碼數和預算上限；② 參考冷熱號統計選號；③ 使用排除號碼功能；④ 第二區至少選 1 顆，不然永遠拿不到頭獎。記住：包牌是娛樂工具，不是致富手段。" }
+    },
+    {
+      "@type": "Question",
+      "name": "威力彩頭獎最低保證多少？",
+      "acceptedAnswer": { "@type": "Answer", "text": "威力彩頭獎最低保證 2 億元（200,000,000 NTD）。若當期無人中獎，獎金會持續累積（俗稱「槓龜」），經常可以累積到 10 億以上，是台灣彩券中獎金最高的玩法。" }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "威力彩包牌計算器" }
+  ]
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "威力彩包牌計算器｜第一區＋第二區包牌費用秒算",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<BaseLayout
+  currentPage="tools"
+  title="威力彩包牌計算器｜第一區＋第二區包牌費用秒算 — GAME8LA"
+  description="威力彩包幾碼最划算？第一區選 7 碼 or 10 碼？第二區要不要全包？注數、花費、中獎率一秒算好。支援冷熱號推薦＋蒙地卡羅模擬。"
+  ogImage="https://game8la.com/images/og-image.webp"
+  noindex={true}
+>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="page-hero">
+    <h1>🎯 威力彩包牌計算器</h1>
+    <p class="hero-sub">第一區選幾碼？第二區要不要全包？一秒算清楚。</p>
+    <p class="hero-desc">根據歷史開獎數據自動推薦第一區高分號碼，搭配第二區策略，展開所有包牌組合並用蒙地卡羅模擬長期損益。</p>
+  </div>
+
+  <!-- SEO 介紹段落 -->
+  <div class="intro-section">
+    <h2>什麼是威力彩包牌？</h2>
+    <p>
+      <strong>威力彩包牌</strong>是指在第一區（1～38 號選 6 個）選超過 6 個號碼，和／或在第二區（1～8 號選 1 個）選超過 1 個號碼，
+      將所有可能的組合全部投注。例如第一區包 8 碼 = C(8,6) = 28 組，搭配第二區全包 8 顆 = 28 × 8 = 224 注，每注 100 元，共花 22,400 元。
+    </p>
+    <p>
+      本工具幫你做三件事：<strong>① 選碼數，秒算注數與花費</strong>；<strong>② 根據近期開獎數據推薦第一區高分號碼</strong>，搭配第二區策略展開包牌組合；
+      <strong>③ 用蒙地卡羅模擬跑 10,000 次開獎</strong>，告訴你長期期望回收率。威力彩每週一、四開獎，頭獎最低保證 2 億——往下滑就對了。
+    </p>
+  </div>
+
+  <!-- Loading skeleton -->
+  <div id="plLoadingState" class="pl-loading-state">
+    <div class="pl-skeleton-pulse" style="height:40px;width:60%;margin:0 auto 1rem"></div>
+    <div class="pl-skeleton-pulse" style="height:200px;margin-bottom:1rem"></div>
+    <div class="pl-skeleton-pulse" style="height:150px"></div>
+    <p class="pl-loading-text">正在載入威力彩開獎數據...</p>
+  </div>
+
+  <!-- Calculator section -->
+  <section class="analysis-section pl-wheel-section" id="plWheelSection" style="display:none">
+    <div class="section-head">
+      <h2>🎰 GAME8LA 威力彩包牌產生器</h2>
+      <p>根據歷史開獎數據推薦第一區號碼，搭配第二區策略展開完整包牌組合</p>
+    </div>
+    <div class="section-body">
+      <!-- 統計範圍 -->
+      <div class="pl-range-selector">
+        <span class="pl-range-label">統計範圍：</span>
+        <button class="pl-range-btn" data-range="10" onclick="plSetRange(this)">近 10 期</button>
+        <button class="pl-range-btn" data-range="30" onclick="plSetRange(this)">近 30 期</button>
+        <button class="pl-range-btn active" data-range="50" onclick="plSetRange(this)">近 50 期</button>
+        <button class="pl-range-btn" data-range="0" onclick="plSetRange(this)">全部</button>
+      </div>
+      <!-- 預算選擇 -->
+      <div class="pl-budget">
+        <span class="pl-budget-label">投注預算：</span>
+        <button class="pl-btn active" data-budget="1000" onclick="plSetBudget(this)">$1,000</button>
+        <button class="pl-btn" data-budget="3000" onclick="plSetBudget(this)">$3,000</button>
+        <button class="pl-btn" data-budget="5000" onclick="plSetBudget(this)">$5,000</button>
+        <button class="pl-btn" data-budget="10000" onclick="plSetBudget(this)">$10,000</button>
+        <div class="pl-custom">
+          <input type="number" id="plCustomBudget" placeholder="自訂金額" min="100" step="100">
+          <button class="pl-btn pl-custom-go" onclick="plSetCustomBudget()">套用</button>
+        </div>
+      </div>
+      <!-- 號碼來源切換 -->
+      <div class="pl-source-toggle">
+        <span class="pl-source-label">號碼來源：</span>
+        <button class="pl-src-btn active" data-src="auto" onclick="plSetSource('auto',this)">🎱 系統推薦</button>
+        <button class="pl-src-btn" data-src="custom" onclick="plSetSource('custom',this)">✋ 自選號碼</button>
+      </div>
+      <!-- 排除號碼面板 -->
+      <div class="pl-exclude-panel" id="plExcludePanel">
+        <div class="pl-exclude-head" onclick="plToggleExclude()">
+          <span class="pl-exclude-toggle-icon" id="plExcToggleIcon">▶</span>
+          <span class="pl-exclude-title">🚫 排除號碼（第一區）</span>
+          <span class="pl-exclude-count" id="plExcCount" style="display:none">已排除 <strong id="plExcCountNum">0</strong> 個</span>
+        </div>
+        <div class="pl-exclude-body" id="plExcludeBody" style="display:none">
+          <p class="pl-exc-hint">點選要排除的第一區號碼，系統推薦時會自動跳過：</p>
+          <div class="pl-exc-grid" id="plExcGrid"></div>
+          <div class="pl-exc-actions">
+            <button class="pl-exc-quick" onclick="plExcludeLastDraw()">排除上期開獎號</button>
+            <button class="pl-exc-clear" onclick="plClearExcluded()">清除全部</button>
+          </div>
+        </div>
+      </div>
+      <!-- 自選號碼面板 -->
+      <div class="pl-custom-pool" id="plCustomPool" style="display:none">
+        <p class="pl-cp-hint">點選你要包牌的<strong>第一區</strong>號碼（至少選 <strong>7</strong> 個）：</p>
+        <div class="pl-cp-grid" id="plCpGridA"></div>
+        <div class="pl-cp-status">
+          <span>第一區已選 <strong id="plCpCountA">0</strong> / 15 個</span>
+          <button class="pl-cp-clear" onclick="plClearCustomA()">清除</button>
+        </div>
+        <div class="pl-cp-warn" id="plCpWarn" style="display:none"></div>
+      </div>
+      <!-- 第二區策略 -->
+      <div class="pl-area-b-strategy">
+        <span class="pl-area-b-label">第二區策略：</span>
+        <button class="pl-b-btn active" data-bstrat="auto" onclick="plSetBStrategy('auto',this)">🎱 系統推薦 1 顆</button>
+        <button class="pl-b-btn" data-bstrat="all" onclick="plSetBStrategy('all',this)">💰 全包 8 顆</button>
+        <button class="pl-b-btn" data-bstrat="custom" onclick="plSetBStrategy('custom',this)">✋ 自選</button>
+      </div>
+      <!-- 第二區自選面板 -->
+      <div class="pl-custom-b" id="plCustomB" style="display:none">
+        <p class="pl-cb-hint">點選你要包的<strong>第二區</strong>號碼（1～8）：</p>
+        <div class="pl-cb-grid" id="plCbGrid"></div>
+        <div class="pl-cb-status">
+          <span>第二區已選 <strong id="plCbCount">0</strong> 個</span>
+          <button class="pl-cp-clear" onclick="plClearCustomB()">清除</button>
+        </div>
+      </div>
+      <!-- Summary -->
+      <div class="pl-summary" id="plSummary"></div>
+      <!-- Pool display -->
+      <div class="pl-pool" id="plPool"></div>
+      <!-- Combos table -->
+      <div class="pl-combos" id="plCombos"></div>
+      <!-- Coverage heatmap -->
+      <div class="pl-coverage" id="plCoverage"></div>
+      <!-- Last draw review -->
+      <div class="pl-review" id="plReview"></div>
+      <!-- Multi-period backtest -->
+      <div class="pl-backtest" id="plBacktest"></div>
+      <!-- Probability simulation -->
+      <div class="pl-sim" id="plSim"></div>
+
+      <div class="guava-note">
+        <span class="gn-icon">🍈</span>
+        <p>芭樂子提醒：包牌只是提高號碼覆蓋率，<strong>不是提高中獎率</strong>。威力彩頭獎機率是 1/22,085,448，就算包 10 碼 + 第二區全包，中頭獎的機率也只有約萬分之七。期望值永遠是負的，請把它當娛樂就好，千萬別借錢買彩券！</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="analysis-section pl-faq-section">
+    <div class="section-head">
+      <h2>❓ 威力彩包牌常見問題</h2>
+    </div>
+    <div class="section-body">
+      <details class="faq-item">
+        <summary>威力彩包牌是什麼意思？</summary>
+        <p>威力彩包牌是指在第一區（1–38）選超過 6 個號碼，和／或在第二區（1–8）選超過 1 個號碼，將所有可能的組合都買下來。例如第一區包 8 碼 = C(8,6) = 28 組，搭配第二區全包 8 顆 = 224 注。</p>
+      </details>
+      <details class="faq-item">
+        <summary>威力彩包牌要花多少錢？</summary>
+        <p>每注 100 元。第一區包 7 碼 = 7 注 = 700 元；包 8 碼 = 28 注 = 2,800 元；包 9 碼 = 84 注 = 8,400 元。若第二區也全包（×8），費用再乘以 8，例如 8 碼全包第二區 = 28 × 8 = 224 注 = 22,400 元。</p>
+      </details>
+      <details class="faq-item">
+        <summary>威力彩包幾碼最划算？</summary>
+        <p>沒有絕對划算的碼數。7 碼包牌只花 700 元，中頭獎機率提高約 7 倍；8 碼花 2,800 元提升約 28 倍。碼數越多花費呈組合數爆炸成長，建議用計算器算出預算範圍內的最佳碼數。</p>
+      </details>
+      <details class="faq-item">
+        <summary>威力彩包牌一定會中嗎？</summary>
+        <p>不一定。威力彩頭獎機率是 1/22,085,448，即使包 10 碼（210 注）+ 第二區全包（×8 = 1,680 注），頭獎機率也只有約萬分之七。包牌只是提高覆蓋率，不保證中獎。</p>
+      </details>
+      <details class="faq-item">
+        <summary>包牌的期望值是正還是負的？</summary>
+        <p>負的。威力彩整體回饋率約 55–58%，意味著每花 100 元，長期平均只能拿回約 55–58 元。除非頭獎累積到極高金額，否則期望值永遠是負的。包牌不會改變這個數學事實。</p>
+      </details>
+      <details class="faq-item">
+        <summary>第一區和第二區要怎麼包比較好？</summary>
+        <p>第一區組合爆炸速度遠大於第二區。例如第一區從 7 碼包到 8 碼，注數從 7 變 28（4 倍）；第二區全包只是乘 8。預算有限建議先顧第一區碼數，第二區只選 1～2 個。預算充裕再考慮第二區全包。</p>
+      </details>
+      <details class="faq-item">
+        <summary>威力彩包牌可以線上買嗎？</summary>
+        <p>可以。台灣彩券官方 App 和官網都支援威力彩線上投注，也可以選擇「多碼包牌」功能直接下注。投注前請確認自己的預算上限，量力而為。</p>
+      </details>
+      <details class="faq-item">
+        <summary>威力彩包牌有什麼技巧嗎？</summary>
+        <p>數學上沒有任何方法能提高中獎期望值，因為每期開獎都是獨立隨機事件。但實務上可以：① 控制碼數和預算上限；② 參考冷熱號統計決定選號範圍；③ 使用排除號碼功能去掉你不看好的號；④ 第二區至少選 1 顆，不然永遠拿不到頭獎。記住：包牌是娛樂工具，不是致富手段。</p>
+      </details>
+      <details class="faq-item">
+        <summary>威力彩頭獎最低保證多少？</summary>
+        <p>威力彩頭獎最低保證 2 億元（200,000,000 NTD）。若當期無人中獎，獎金會持續累積，經常可以累積到 10 億以上，是台灣彩券中獎金最高的玩法。每週一、四開獎。</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA 導流 -->
+  <section class="analysis-section pl-cta-section">
+    <div class="section-body">
+      <div class="pl-cta-grid">
+        <a href="/articles/power-lottery-odds-explained/" class="pl-cta-card gold">
+          <span class="pl-cta-icon">📖</span>
+          <div>
+            <strong>威力彩中獎機率文</strong>
+            <p>頭獎到玖獎，每一獎的機率拆解＋包牌怎麼算</p>
+          </div>
+        </a>
+        <a href="/lottery/analysis/" class="pl-cta-card green">
+          <span class="pl-cta-icon">📊</span>
+          <div>
+            <strong>芭樂好彩數據站</strong>
+            <p>完整冷熱號、遺漏值、拖出號分析，支援 539 / 威力彩 / 大樂透</p>
+          </div>
+        </a>
+        <a href="/tools/" class="pl-cta-card pink">
+          <span class="pl-cta-icon">🧰</span>
+          <div>
+            <strong>8LA 工具箱</strong>
+            <p>更多免費計算器、模擬器、檢測工具</p>
+          </div>
+        </a>
+        <a href="/tools/bless-blocks/" class="pl-cta-card purple">
+          <span class="pl-cta-icon">🥠</span>
+          <div>
+            <strong>號碼選好了嗎？買之前先擲個筊問問運氣吧</strong>
+            <p>芭樂子線上擲筊，聖筊笑筊陰筊一秒揭曉</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <ShareButtons title="威力彩包牌計算器 — 免費一鍵算注數＋花費＋中獎率" heading="🛡 玩威力彩的朋友該知道這個工具" />
+</div>
+
+<script is:inline>
+// === POWER LOTTERY WHEEL CALCULATOR ===
+
+const MAX_NUM_A = 38;
+const PICK_COUNT_A = 6;
+const MAX_NUM_B = 8;
+const PICK_COUNT_B = 1;
+const BET_COST = 100;
+
+let plDraws = [];
+let plBudget = 1000;
+let plRange = 50;
+let plSource = 'auto';
+let plCustomA = [];
+let plExcluded = [];
+let plBStrategy = 'auto';
+let plCustomB = [];
+const PL_MAX_CUSTOM_A = 15;
+
+// === PRIZE TIERS ===
+const PRIZE_PL = [
+  { matchA: 6, matchB: 1, prize: 200000000, label: '頭獎（6+1）' },
+  { matchA: 6, matchB: 0, prize: 4000000,   label: '貳獎（6+0）' },
+  { matchA: 5, matchB: 1, prize: 150000,    label: '參獎（5+1）' },
+  { matchA: 5, matchB: 0, prize: 20000,     label: '肆獎（5+0）' },
+  { matchA: 4, matchB: 1, prize: 4000,      label: '伍獎（4+1）' },
+  { matchA: 4, matchB: 0, prize: 800,       label: '陸獎（4+0）' },
+  { matchA: 3, matchB: 1, prize: 400,       label: '柒獎（3+1）' },
+  { matchA: 2, matchB: 1, prize: 200,       label: '捌獎（2+1）' },
+  { matchA: 1, matchB: 1, prize: 100,       label: '玖獎（1+1 或 0+1）' },
+];
+
+// === DATA LOADING ===
+async function plLoadData() {
+  const loading = document.getElementById('plLoadingState');
+  const section = document.getElementById('plWheelSection');
+  try {
+    let workerData = null;
+    let staticData = null;
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+    if (!isLocal) {
+      try {
+        const res = await fetch('https://lottery-cron.fightmon.workers.dev/data/super-lotto.json');
+        if (res.ok) workerData = await res.json();
+      } catch (e) { /* fall through */ }
+    }
+
+    try {
+      const res2 = await fetch('/data/super-lotto.json');
+      if (res2.ok) staticData = await res2.json();
+    } catch (e) { /* fall through */ }
+
+    let baseData = null;
+    if (workerData && staticData) {
+      baseData = (workerData.lastUpdated >= staticData.lastUpdated) ? workerData : staticData;
+    } else {
+      baseData = workerData || staticData;
+    }
+
+    const LIVE_API = isLocal ? 'https://game8la.com/api/lottery' : '/api/lottery';
+    try {
+      const apiRes = await fetch(LIVE_API, { cache: 'no-store' });
+      if (apiRes.ok) {
+        const apiJson = await apiRes.json();
+        const gameData = apiJson.data?.super_lotto;
+        if (gameData && gameData.numbers && gameData.numbers.length > 0) {
+          const freshDraws = [];
+          freshDraws.push({ period: gameData.period, date: gameData.date, numbers: gameData.numbers, special: gameData.special });
+          if (Array.isArray(gameData.history)) {
+            for (const h of gameData.history) {
+              freshDraws.push({ period: h.period, date: h.date, numbers: h.numbers, special: h.special });
+            }
+          }
+          if (baseData && baseData.draws) {
+            const existingPeriods = new Set(baseData.draws.map(d => d.period));
+            let merged = false;
+            for (const fd of freshDraws) {
+              if (fd.period && !existingPeriods.has(fd.period)) {
+                baseData.draws.unshift(fd);
+                existingPeriods.add(fd.period);
+                merged = true;
+              }
+            }
+            if (merged) {
+              baseData.draws.sort((a, b) => (b.date || '').localeCompare(a.date || '') || (Number(b.period) || 0) - (Number(a.period) || 0));
+            }
+          } else if (!baseData) {
+            baseData = { draws: freshDraws };
+          }
+        }
+      }
+    } catch (e) { /* fall through */ }
+
+    if (baseData && baseData.draws && baseData.draws.length > 0) {
+      // Filter out bad data: numbers > 38 or special > 8 or special < 1
+      plDraws = baseData.draws.filter(d => {
+        if (!d.numbers || d.numbers.length < PICK_COUNT_A) return false;
+        if (Math.max(...d.numbers) > MAX_NUM_A) return false;
+        if (d.special > MAX_NUM_B || d.special < 1) return false;
+        return true;
+      });
+      if (plDraws.length > 0) {
+        loading.style.display = 'none';
+        section.style.display = '';
+        plRenderWheel();
+      } else {
+        loading.innerHTML = '<p class="pl-loading-error">⚠️ 篩選後無有效威力彩開獎數據，請稍後再試。</p>';
+      }
+    } else {
+      loading.innerHTML = '<p class="pl-loading-error">⚠️ 無法載入威力彩開獎數據，請稍後再試。</p>';
+    }
+  } catch (err) {
+    loading.innerHTML = '<p class="pl-loading-error">⚠️ 載入失敗：' + err.message + '</p>';
+  }
+}
+
+// === STATISTICS ===
+function plCalcFrequency(draws) {
+  const freq = {};
+  for (let i = 1; i <= MAX_NUM_A; i++) freq[i] = 0;
+  draws.forEach(d => d.numbers.forEach(n => { if (n >= 1 && n <= MAX_NUM_A) freq[n]++; }));
+  return freq;
+}
+
+function plCalcMissing(allDraws) {
+  const missing = {};
+  for (let i = 1; i <= MAX_NUM_A; i++) {
+    missing[i] = 0;
+    for (let j = 0; j < allDraws.length; j++) {
+      if (allDraws[j].numbers.includes(i)) break;
+      missing[i]++;
+    }
+  }
+  return missing;
+}
+
+function plCalcRepeat(allDraws) {
+  const stats = {};
+  for (let n = 1; n <= MAX_NUM_A; n++) {
+    stats[n] = { appeared: 0, repeated: 0 };
+  }
+  for (let i = 0; i < allDraws.length - 1; i++) {
+    const curr = allDraws[i].numbers;
+    const next = allDraws[i + 1].numbers;
+    curr.forEach(n => {
+      if (n >= 1 && n <= MAX_NUM_A) {
+        stats[n].appeared++;
+        if (next.includes(n)) stats[n].repeated++;
+      }
+    });
+  }
+  return stats;
+}
+
+function plCalcSuggestions(draws, allDraws) {
+  const freq = plCalcFrequency(draws);
+  const missing = plCalcMissing(allDraws);
+  const repeatStats = plCalcRepeat(allDraws);
+  const lastDraw = allDraws.length > 0 ? allDraws[0].numbers : [];
+
+  const vals = arr => arr.length ? arr : [0];
+  const minMax = (arr) => {
+    const mn = Math.min(...vals(arr)), mx = Math.max(...vals(arr));
+    return { min: mn, max: mx, range: mx - mn || 1 };
+  };
+
+  const freqVals = Object.values(freq);
+  const missVals = Object.values(missing);
+  const fNorm = minMax(freqVals);
+  const mNorm = minMax(missVals);
+
+  const scores = [];
+  for (let n = 1; n <= MAX_NUM_A; n++) {
+    const freqScore = ((freq[n] - fNorm.min) / fNorm.range) * 100;
+    const missScore = ((missing[n] - mNorm.min) / mNorm.range) * 100;
+    let repeatScore = 0;
+    if (lastDraw.includes(n) && repeatStats[n]) {
+      const s = repeatStats[n];
+      repeatScore = s.appeared > 0 ? (s.repeated / s.appeared) * 100 : 0;
+      repeatScore = Math.min(repeatScore * 2, 100);
+    }
+    const total = freqScore * 0.40 + missScore * 0.35 + repeatScore * 0.25;
+    scores.push({
+      num: n,
+      total: Math.round(total * 10) / 10,
+      freqScore: Math.round(freqScore),
+      missScore: Math.round(missScore),
+      repeatScore: Math.round(repeatScore),
+      freq: freq[n],
+      missing: missing[n],
+      inLastDraw: lastDraw.includes(n)
+    });
+  }
+  scores.sort((a, b) => b.total - a.total);
+  return { allScores: scores };
+}
+
+// === SECOND AREA HELPERS ===
+function plCalcBFrequency(draws) {
+  const freq = {};
+  for (let i = 1; i <= MAX_NUM_B; i++) freq[i] = 0;
+  draws.forEach(d => { if (d.special >= 1 && d.special <= MAX_NUM_B) freq[d.special]++; });
+  return freq;
+}
+
+function plGetBPicks(draws) {
+  if (plBStrategy === 'all') {
+    return [1, 2, 3, 4, 5, 6, 7, 8];
+  }
+  if (plBStrategy === 'custom') {
+    return plCustomB.length > 0 ? [...plCustomB] : [1];
+  }
+  // auto: pick the most frequent second area number
+  const freq = plCalcBFrequency(draws);
+  let bestNum = 1, bestFreq = 0;
+  for (let i = 1; i <= MAX_NUM_B; i++) {
+    if (freq[i] > bestFreq) { bestFreq = freq[i]; bestNum = i; }
+  }
+  return [bestNum];
+}
+
+// === UI CONTROLS ===
+function plSetRange(btn) {
+  document.querySelectorAll('.pl-range-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  plRange = parseInt(btn.dataset.range);
+  plRenderWheel();
+}
+
+function plSetBudget(btn) {
+  document.querySelectorAll('.pl-btn[data-budget]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  plBudget = parseInt(btn.dataset.budget);
+  document.getElementById('plCustomBudget').value = '';
+  plRenderWheel();
+}
+
+function plSetCustomBudget() {
+  const input = document.getElementById('plCustomBudget');
+  const val = parseInt(input.value);
+  if (!val || val < 100) { input.focus(); return; }
+  document.querySelectorAll('.pl-btn[data-budget]').forEach(b => b.classList.remove('active'));
+  plBudget = val;
+  plRenderWheel();
+}
+
+function plSetSource(src, btn) {
+  plSource = src;
+  btn.parentElement.querySelectorAll('.pl-src-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cpPanel = document.getElementById('plCustomPool');
+  if (src === 'custom') {
+    cpPanel.style.display = '';
+    plRenderCustomAGrid();
+  } else {
+    cpPanel.style.display = 'none';
+  }
+  plRenderWheel();
+}
+
+function plSetBStrategy(strat, btn) {
+  plBStrategy = strat;
+  btn.parentElement.querySelectorAll('.pl-b-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cbPanel = document.getElementById('plCustomB');
+  if (strat === 'custom') {
+    cbPanel.style.display = '';
+    plRenderCustomBGrid();
+  } else {
+    cbPanel.style.display = 'none';
+  }
+  plRenderWheel();
+}
+
+function plAdjustBudget(fullCost) {
+  plBudget = fullCost;
+  document.querySelectorAll('.pl-btn[data-budget]').forEach(b => b.classList.remove('active'));
+  const input = document.getElementById('plCustomBudget');
+  if (input) input.value = fullCost;
+  plRenderWheel();
+}
+
+// === CUSTOM POOL A (first area) ===
+function plRenderCustomAGrid() {
+  const grid = document.getElementById('plCpGridA');
+  let html = '';
+  for (let i = 1; i <= MAX_NUM_A; i++) {
+    const sel = plCustomA.includes(i) ? ' selected' : '';
+    html += '<div class="pl-cp-num' + sel + '" data-n="' + i + '" onclick="plToggleCustomA(' + i + ')">' + i + '</div>';
+  }
+  grid.innerHTML = html;
+  document.getElementById('plCpCountA').textContent = plCustomA.length;
+}
+
+function plToggleCustomA(n) {
+  const idx = plCustomA.indexOf(n);
+  if (idx >= 0) {
+    plCustomA.splice(idx, 1);
+  } else {
+    if (plCustomA.length >= PL_MAX_CUSTOM_A) {
+      const warn = document.getElementById('plCpWarn');
+      if (warn) { warn.classList.remove('shake'); void warn.offsetWidth; warn.classList.add('shake'); }
+      return;
+    }
+    plCustomA.push(n);
+  }
+  plCustomA.sort((a, b) => a - b);
+  plRenderCustomAGrid();
+  plUpdateCustomWarn();
+  plRenderWheel();
+}
+
+function plUpdateCustomWarn() {
+  const warn = document.getElementById('plCpWarn');
+  if (!warn) return;
+  const cnt = plCustomA.length;
+  if (cnt >= 11) {
+    const combosA = plC(cnt, PICK_COUNT_A);
+    const bPicks = plGetBPicks(plDraws);
+    const totalCombos = combosA * bPicks.length;
+    const cost = totalCombos * BET_COST;
+    warn.style.display = '';
+    warn.innerHTML = '<div class="pl-cp-warn-icon">⚠️</div>' +
+      '<div class="pl-cp-warn-body">' +
+      '<strong>芭樂子提醒：第一區超過 10 碼的包牌花費驚人</strong>' +
+      '<p>第一區 ' + cnt + ' 碼 × 第二區 ' + bPicks.length + ' 顆 = ' + totalCombos.toLocaleString() + ' 注 = $' + cost.toLocaleString() + '</p>' +
+      '<p>威力彩頭獎雖然高（最低 2 億），但中獎機率極低。即使全包也不保證回本。</p>' +
+      '<p>🎯 建議第一區控制在 <strong>7～10 碼</strong>，搭配第二區策略更經濟。</p>' +
+      '</div>';
+  } else {
+    warn.style.display = 'none';
+    warn.innerHTML = '';
+  }
+}
+
+function plClearCustomA() {
+  plCustomA = [];
+  plRenderCustomAGrid();
+  plUpdateCustomWarn();
+  plRenderWheel();
+}
+
+// === CUSTOM POOL B (second area) ===
+function plRenderCustomBGrid() {
+  const grid = document.getElementById('plCbGrid');
+  let html = '';
+  for (let i = 1; i <= MAX_NUM_B; i++) {
+    const sel = plCustomB.includes(i) ? ' selected' : '';
+    html += '<div class="pl-cb-num' + sel + '" data-n="' + i + '" onclick="plToggleCustomB(' + i + ')">' + i + '</div>';
+  }
+  grid.innerHTML = html;
+  document.getElementById('plCbCount').textContent = plCustomB.length;
+}
+
+function plToggleCustomB(n) {
+  const idx = plCustomB.indexOf(n);
+  if (idx >= 0) {
+    plCustomB.splice(idx, 1);
+  } else {
+    plCustomB.push(n);
+  }
+  plCustomB.sort((a, b) => a - b);
+  plRenderCustomBGrid();
+  plRenderWheel();
+}
+
+function plClearCustomB() {
+  plCustomB = [];
+  plRenderCustomBGrid();
+  plRenderWheel();
+}
+
+// === EXCLUDE NUMBERS ===
+function plToggleExclude() {
+  const body = document.getElementById('plExcludeBody');
+  const icon = document.getElementById('plExcToggleIcon');
+  if (!body) return;
+  if (body.style.display === 'none') {
+    body.style.display = '';
+    icon.textContent = '▼';
+    plRenderExcludeGrid();
+  } else {
+    body.style.display = 'none';
+    icon.textContent = '▶';
+  }
+}
+
+function plRenderExcludeGrid() {
+  const grid = document.getElementById('plExcGrid');
+  if (!grid) return;
+  let html = '';
+  for (let i = 1; i <= MAX_NUM_A; i++) {
+    const exc = plExcluded.includes(i) ? ' excluded' : '';
+    html += '<div class="pl-exc-num' + exc + '" data-n="' + i + '" onclick="plToggleExcludeNum(' + i + ')">' + i + '</div>';
+  }
+  grid.innerHTML = html;
+  plUpdateExcludeCount();
+}
+
+function plToggleExcludeNum(n) {
+  const idx = plExcluded.indexOf(n);
+  if (idx >= 0) {
+    plExcluded.splice(idx, 1);
+  } else {
+    plExcluded.push(n);
+  }
+  plExcluded.sort((a, b) => a - b);
+  plRenderExcludeGrid();
+  plRenderWheel();
+}
+
+function plExcludeLastDraw() {
+  if (plDraws.length === 0) return;
+  const lastNums = plDraws[0].numbers;
+  lastNums.forEach(n => {
+    if (!plExcluded.includes(n) && n >= 1 && n <= MAX_NUM_A) plExcluded.push(n);
+  });
+  plExcluded.sort((a, b) => a - b);
+  plRenderExcludeGrid();
+  plRenderWheel();
+}
+
+function plClearExcluded() {
+  plExcluded = [];
+  plRenderExcludeGrid();
+  plRenderWheel();
+}
+
+function plUpdateExcludeCount() {
+  const el = document.getElementById('plExcCount');
+  const numEl = document.getElementById('plExcCountNum');
+  if (!el || !numEl) return;
+  if (plExcluded.length > 0) {
+    el.style.display = '';
+    numEl.textContent = plExcluded.length;
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+// === COMBINATORICS ===
+const _plCMemo = {};
+function plC(n, k) {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+  const key = n + ',' + k;
+  if (_plCMemo[key]) return _plCMemo[key];
+  _plCMemo[key] = plC(n - 1, k - 1) + plC(n - 1, k);
+  return _plCMemo[key];
+}
+
+function plCombinations(arr, k) {
+  if (k === 0) return [[]];
+  if (arr.length < k) return [];
+  const result = [];
+  function helper(start, combo) {
+    if (combo.length === k) { result.push([...combo]); return; }
+    for (let i = start; i <= arr.length - (k - combo.length); i++) {
+      combo.push(arr[i]);
+      helper(i + 1, combo);
+      combo.pop();
+    }
+  }
+  helper(0, []);
+  return result;
+}
+
+function plGetPoolSizeA(maxBetsA) {
+  const minPool = PICK_COUNT_A + 1;
+  let pool = minPool;
+  for (let n = minPool; n <= 20; n++) {
+    let c = 1;
+    for (let i = 0; i < PICK_COUNT_A; i++) c = c * (n - i) / (i + 1);
+    if (c > maxBetsA * 3) break;
+    pool = n;
+  }
+  return pool;
+}
+
+// === GENERATE WHEEL ===
+function plGenerateWheel(draws, allDraws, forceAuto) {
+  const bPicks = plGetBPicks(draws);
+  const bCount = bPicks.length;
+  const maxTotalBets = Math.floor(plBudget / BET_COST);
+  if (maxTotalBets < 1) return { poolA: [], bPicks: bPicks, combos: [], maxBets: 0, poolSizeA: 0, totalCombos: 0, isCustom: false };
+
+  const maxBetsA = Math.floor(maxTotalBets / bCount);
+  if (maxBetsA < 1) return { poolA: [], bPicks: bPicks, combos: [], maxBets: 0, poolSizeA: 0, totalCombos: 0, isCustom: false };
+
+  const { allScores } = plCalcSuggestions(draws, allDraws);
+  const useCustom = !forceAuto && plSource === 'custom' && plCustomA.length > PICK_COUNT_A;
+
+  let poolA, poolNumsA, poolSizeA;
+
+  if (useCustom) {
+    poolNumsA = [...plCustomA];
+    poolSizeA = poolNumsA.length;
+    poolA = poolNumsA.map(n => {
+      const found = allScores.find(s => s.num === n);
+      return found || { num: n, total: 0, freqScore: 0, missScore: 0, inLastDraw: false };
+    });
+  } else {
+    const filteredScores = plExcluded.length > 0
+      ? allScores.filter(s => !plExcluded.includes(s.num))
+      : allScores;
+    poolSizeA = plGetPoolSizeA(maxBetsA);
+    poolSizeA = Math.min(poolSizeA, filteredScores.length);
+    poolA = filteredScores.slice(0, poolSizeA);
+    poolNumsA = poolA.map(s => s.num);
+  }
+
+  const totalCombosA = plC(poolSizeA, PICK_COUNT_A);
+  const totalCombosAll = totalCombosA * bCount;
+
+  const MAX_ENUM = 5000;
+  let allCombosA;
+
+  const scoreMap = new Map();
+  poolA.forEach(p => scoreMap.set(p.num, p));
+
+  function scoreCombo(combo) {
+    let score = 0, hotCount = 0, missCount = 0;
+    for (const n of combo) {
+      const s = scoreMap.get(n);
+      if (s) {
+        score += s.total;
+        if (s.freqScore >= 70) hotCount++;
+        if (s.missScore >= 70) missCount++;
+      }
+    }
+    return { nums: combo, score: Math.round(score * 10) / 10, hotCount, missCount };
+  }
+
+  const needCombosA = Math.min(maxBetsA, MAX_ENUM);
+
+  if (totalCombosA <= MAX_ENUM) {
+    allCombosA = plCombinations(poolNumsA, PICK_COUNT_A).map(scoreCombo);
+  } else {
+    const sampleTarget = Math.min(needCombosA * 3, MAX_ENUM);
+    const seen = new Set();
+    const sampled = [];
+    const sorted = [...poolNumsA].sort((a, b) => {
+      return (scoreMap.get(b)?.total || 0) - (scoreMap.get(a)?.total || 0);
+    });
+    const topN = Math.min(sorted.length, 12);
+    const topCombos = plCombinations(sorted.slice(0, topN), PICK_COUNT_A);
+    for (const c of topCombos) {
+      const key = c.join(',');
+      if (!seen.has(key)) { seen.add(key); sampled.push(scoreCombo(c)); }
+      if (sampled.length >= sampleTarget) break;
+    }
+    let attempts = 0;
+    while (sampled.length < sampleTarget && attempts < sampleTarget * 10) {
+      attempts++;
+      const combo = [];
+      const used = new Set();
+      while (combo.length < PICK_COUNT_A) {
+        const idx = Math.floor(Math.random() * poolNumsA.length);
+        if (!used.has(idx)) { used.add(idx); combo.push(poolNumsA[idx]); }
+      }
+      combo.sort((a, b) => a - b);
+      const key = combo.join(',');
+      if (!seen.has(key)) { seen.add(key); sampled.push(scoreCombo(combo)); }
+    }
+    allCombosA = sampled;
+  }
+
+  allCombosA.sort((a, b) => b.score - a.score);
+  const combosA = allCombosA.slice(0, needCombosA);
+
+  // Expand with second area picks
+  const combos = [];
+  for (const ca of combosA) {
+    for (const b of bPicks) {
+      combos.push({ nums: ca.nums, bNum: b, score: ca.score, hotCount: ca.hotCount, missCount: ca.missCount });
+    }
+  }
+
+  // Trim to budget
+  const finalCombos = combos.slice(0, maxTotalBets);
+
+  return {
+    poolA, bPicks, combos: finalCombos,
+    maxBets: maxTotalBets, poolSizeA,
+    totalCombos: totalCombosAll,
+    combosACount: combosA.length,
+    isCustom: useCustom
+  };
+}
+
+// === RENDER WHEEL ===
+function plRenderWheel() {
+  if (plDraws.length === 0) return;
+
+  const draws = plRange === 0 ? plDraws : plDraws.slice(0, plRange);
+  const allDraws = plDraws;
+  const result = plGenerateWheel(draws, allDraws);
+  const { poolA, bPicks, combos, maxBets, poolSizeA, totalCombos, isCustom } = result;
+
+  // Custom mode: not enough A numbers
+  if (plSource === 'custom' && plCustomA.length <= PICK_COUNT_A) {
+    document.getElementById('plSummary').innerHTML = '';
+    document.getElementById('plPool').innerHTML =
+      '<div class="pl-cp-not-enough"><span>✋</span> 請至少選 <strong>' + (PICK_COUNT_A + 1) + '</strong> 個第一區號碼才能組成包牌（目前選了 ' + plCustomA.length + ' 個）</div>';
+    document.getElementById('plCombos').innerHTML = '';
+    document.getElementById('plCoverage').innerHTML = '';
+    document.getElementById('plReview').innerHTML = '';
+    document.getElementById('plBacktest').innerHTML = '';
+    document.getElementById('plSim').innerHTML = '';
+    return;
+  }
+
+  // Summary
+  const actualCost = combos.length * BET_COST;
+  document.getElementById('plSummary').innerHTML =
+    '<div class="pl-summary-grid">' +
+      '<div class="pl-stat"><span class="pl-stat-val">$' + plBudget.toLocaleString() + '</span><span class="pl-stat-label">投注預算</span></div>' +
+      '<div class="pl-stat"><span class="pl-stat-val">' + combos.length + ' 注</span><span class="pl-stat-label">包牌組合（每注 $' + BET_COST + '）</span></div>' +
+      '<div class="pl-stat"><span class="pl-stat-val">' + poolSizeA + ' 碼</span><span class="pl-stat-label">' + (isCustom ? '自選第一區' : '第一區候選池') + '</span></div>' +
+      '<div class="pl-stat"><span class="pl-stat-val">' + bPicks.length + ' 顆</span><span class="pl-stat-label">第二區號碼</span></div>' +
+      '<div class="pl-stat"><span class="pl-stat-val">$' + actualCost.toLocaleString() + '</span><span class="pl-stat-label">實際花費</span></div>' +
+    '</div>';
+
+  // Budget overflow
+  if (isCustom && totalCombos > combos.length) {
+    const fullCost = totalCombos * BET_COST;
+    document.getElementById('plSummary').innerHTML +=
+      '<div class="pl-budget-overflow">' +
+        '<div class="pl-bo-icon">⚠️</div>' +
+        '<div class="pl-bo-text">' +
+          '<strong>預算不足以包完所有組合</strong>' +
+          '<p>第一區 <strong>' + poolSizeA + ' 碼</strong> × 第二區 <strong>' + bPicks.length + ' 顆</strong>，共 <strong>' + totalCombos.toLocaleString() + ' 注</strong>，全包需要 <strong>$' + fullCost.toLocaleString() + '</strong>。</p>' +
+          '<p>目前預算 $' + plBudget.toLocaleString() + ' 只能買 <strong>' + combos.length + ' 注</strong>（已按強度排序取最強組合）。</p>' +
+        '</div>' +
+        '<button class="pl-bo-btn" onclick="plAdjustBudget(' + fullCost + ')">💰 調整預算為 $' + fullCost.toLocaleString() + '（全包 ' + totalCombos + ' 注）</button>' +
+      '</div>';
+  }
+
+  // Pool display
+  const poolTitle = isCustom
+    ? '✋ 你的自選號碼（第一區 ' + poolSizeA + ' 碼）'
+    : '🎯 第一區候選號碼池（TOP ' + poolSizeA + ' 高分號碼）';
+  let poolHtml = '<h4>' + poolTitle + '</h4>' +
+    '<div class="pl-pool-balls">' +
+    poolA.map(function(s) {
+      return '<div class="pl-pool-item">' +
+        '<div class="pl-pool-ball">' + s.num + '</div>' +
+        '<div class="pl-pool-score">' + s.total + '</div>' +
+        '<div class="pl-suggest-tags">' +
+          (s.freqScore >= 70 ? '<span class="pl-sg-tag hot">熱</span>' : '') +
+          (s.missScore >= 70 ? '<span class="pl-sg-tag miss">遺</span>' : '') +
+          (s.inLastDraw ? '<span class="pl-sg-tag repeat">連</span>' : '') +
+        '</div>' +
+      '</div>';
+    }).join('') +
+    '</div>';
+
+  // Show second area picks
+  poolHtml += '<div class="pl-b-picks-display">' +
+    '<h4>🔵 第二區號碼（' + bPicks.length + ' 顆）</h4>' +
+    '<div class="pl-b-balls">' +
+    bPicks.map(function(n) {
+      return '<div class="pl-b-ball">' + n + '</div>';
+    }).join('') +
+    '</div>' +
+    '</div>';
+
+  document.getElementById('plPool').innerHTML = poolHtml;
+
+  // Combos table
+  if (combos.length === 0) {
+    document.getElementById('plCombos').innerHTML = '<p class="pl-empty">預算不足，至少需要 $' + BET_COST + ' 才能買一注。</p>';
+  } else {
+    const showFirst = 5;
+    const MAX_DISPLAY = 200;
+    const displayCombos = combos.slice(0, MAX_DISPLAY);
+    const hasMore = displayCombos.length > showFirst;
+    const truncated = combos.length > MAX_DISPLAY;
+
+    const comboRow = function(c, i) {
+      return '<tr>' +
+        '<td class="pl-idx">' + (i + 1) + '</td>' +
+        '<td class="pl-td-nums">' + c.nums.map(function(n) { return '<span class="pl-num-mini">' + n + '</span>'; }).join('') + '</td>' +
+        '<td><span class="pl-b-mini">' + c.bNum + '</span></td>' +
+        '<td><span class="pl-strength">' + c.score + '</span></td>' +
+        '<td class="pl-composition">' +
+          (c.hotCount > 0 ? '<span class="pl-sg-tag hot">' + c.hotCount + '熱</span>' : '') +
+          (c.missCount > 0 ? '<span class="pl-sg-tag miss">' + c.missCount + '遺</span>' : '') +
+        '</td>' +
+      '</tr>';
+    };
+
+    document.getElementById('plCombos').innerHTML =
+      '<h4>📋 包牌組合表' + (totalCombos > combos.length ? '（從 ' + totalCombos.toLocaleString() + ' 種組合中選出最強 ' + combos.length.toLocaleString() + ' 注）' : '') + '</h4>' +
+      '<div class="pl-table-wrap">' +
+        '<table class="pl-table">' +
+          '<thead><tr>' +
+            '<th>#</th>' +
+            '<th>第一區</th>' +
+            '<th>第二區</th>' +
+            '<th>強度</th>' +
+            '<th>組成</th>' +
+          '</tr></thead>' +
+          '<tbody>' +
+            displayCombos.slice(0, showFirst).map(function(c, i) { return comboRow(c, i); }).join('') +
+          '</tbody>' +
+          (hasMore ? '<tbody id="plHiddenRows" style="display:none">' +
+            displayCombos.slice(showFirst).map(function(c, i) { return comboRow(c, i + showFirst); }).join('') +
+          '</tbody>' : '') +
+        '</table>' +
+      '</div>' +
+      (hasMore ? '<button class="pl-show-more" id="plToggle" onclick="plToggleCombos()">顯示前 ' + displayCombos.length + ' 注</button>' : '') +
+      (truncated ? '<p class="pl-trunc-note">⚠️ 共 ' + combos.length.toLocaleString() + ' 注，為保持頁面流暢僅顯示前 ' + MAX_DISPLAY + ' 注（已按強度排序）</p>' : '') +
+      '<div class="pl-export-btns">' +
+        '<button class="pl-copy-text" onclick="plCopyText()">📋 複製組合文字</button>' +
+        '<button class="pl-download-img" onclick="plDownloadImage()">📸 下載包牌圖片</button>' +
+        '<a href="https://t.me/game8la" target="_blank" rel="noopener" class="pl-tg-cta">📱 加入 8LA Telegram<small>每週開獎前推播熱號分析（免費）</small></a>' +
+      '</div>';
+  }
+
+  // Coverage heatmap
+  plRenderCoverage(combos, poolA);
+
+  // Last draw review
+  plRenderReview(draws, allDraws);
+
+  // Multi-period backtest
+  plRenderBacktest(draws, allDraws);
+
+  // Simulation
+  plRenderSim(poolSizeA, bPicks, combos);
+}
+
+function plToggleCombos() {
+  const el = document.getElementById('plHiddenRows');
+  const btn = document.getElementById('plToggle');
+  if (!el || !btn) return;
+  if (el.style.display === 'none') {
+    el.style.display = '';
+    btn.textContent = '收合';
+  } else {
+    el.style.display = 'none';
+    const total = el.querySelectorAll('tr').length + 5;
+    btn.textContent = '顯示全部 ' + total + ' 注';
+  }
+}
+
+// === COVERAGE HEATMAP ===
+function plRenderCoverage(combos, poolA) {
+  const el = document.getElementById('plCoverage');
+  if (!el || combos.length === 0) { if (el) el.innerHTML = ''; return; }
+
+  const countMap = {};
+  poolA.forEach(function(s) { countMap[s.num] = 0; });
+  combos.forEach(function(c) { c.nums.forEach(function(n) { if (countMap[n] !== undefined) countMap[n]++; }); });
+
+  const maxCount = Math.max(...Object.values(countMap), 1);
+  const nums = poolA.map(function(s) { return s.num; }).sort(function(a, b) { return a - b; });
+
+  el.innerHTML = '<h4>📊 第一區號碼覆蓋率</h4>' +
+    '<p class="pl-cov-desc">每個號碼在 ' + combos.length + ' 注組合中出現的次數，越深代表被「包得越厚」：</p>' +
+    '<div class="pl-cov-grid">' +
+    nums.map(function(n) {
+      var cnt = countMap[n] || 0;
+      var pct = cnt / maxCount;
+      var alpha = 0.15 + pct * 0.85;
+      var txtColor = pct > 0.5 ? '#000' : 'var(--text-secondary)';
+      return '<div class="pl-cov-cell" style="background:rgba(255,136,0,' + alpha.toFixed(2) + ');color:' + txtColor + '">' +
+        '<span class="pl-cov-num">' + n + '</span>' +
+        '<span class="pl-cov-cnt">' + cnt + '次</span>' +
+      '</div>';
+    }).join('') +
+    '</div>';
+}
+
+// === LAST DRAW REVIEW ===
+function plRenderReview(draws, allDraws) {
+  const el = document.getElementById('plReview');
+  if (allDraws.length < 2) { el.innerHTML = ''; return; }
+
+  const pastDraws = draws.length > 1 ? draws.slice(1) : allDraws.slice(1);
+  const pastAllDraws = allDraws.slice(1);
+  if (pastDraws.length < 5) { el.innerHTML = ''; return; }
+
+  const lastDraw = allDraws[0];
+  const isCustomReview = plSource === 'custom' && plCustomA.length > PICK_COUNT_A;
+  const simResult = plGenerateWheel(pastDraws, pastAllDraws, !isCustomReview);
+  const simCombos = simResult.combos;
+  const simPoolA = simResult.poolA;
+
+  if (simCombos.length === 0) { el.innerHTML = ''; return; }
+
+  const actualA = lastDraw.numbers;
+  const actualB = lastDraw.special;
+  let bestHitA = 0;
+  let bestHitB = 0;
+  let bestCombo = null;
+
+  simCombos.forEach(function(c) {
+    const hitsA = c.nums.filter(function(n) { return actualA.includes(n); }).length;
+    const hitB = c.bNum === actualB ? 1 : 0;
+    if (hitsA > bestHitA || (hitsA === bestHitA && hitB > bestHitB)) {
+      bestHitA = hitsA;
+      bestHitB = hitB;
+      bestCombo = c;
+    }
+  });
+
+  const poolHitsA = simPoolA.filter(function(s) { return actualA.includes(s.num); });
+  const bPickHit = simResult.bPicks.includes(actualB);
+  const anyHit = simCombos.filter(function(c) {
+    return c.nums.filter(function(n) { return actualA.includes(n); }).length > 0;
+  }).length;
+
+  el.innerHTML =
+    '<h4>📋 上期回顧 — 第 ' + lastDraw.period + ' 期 (' + lastDraw.date + ')</h4>' +
+    '<div class="pl-review-grid">' +
+      '<div class="pl-review-item">' +
+        '<span class="pl-review-label">第一區開獎</span>' +
+        '<div class="pl-td-nums">' + actualA.map(function(n) {
+          return '<span class="pl-num-mini ' + (simPoolA.some(function(s) { return s.num === n; }) ? 'hit' : '') + '">' + n + '</span>';
+        }).join('') + '</div>' +
+      '</div>' +
+      '<div class="pl-review-item">' +
+        '<span class="pl-review-label">第二區開獎</span>' +
+        '<span class="pl-review-val"><span class="pl-b-mini ' + (bPickHit ? 'hit' : '') + '">' + actualB + '</span> ' + (bPickHit ? '✅ 命中' : '❌ 未命中') + '</span>' +
+      '</div>' +
+      '<div class="pl-review-item">' +
+        '<span class="pl-review-label">號碼池命中</span>' +
+        '<span class="pl-review-val">' + poolHitsA.length + ' / ' + simPoolA.length + ' 個號碼在池中</span>' +
+      '</div>' +
+      '<div class="pl-review-item">' +
+        '<span class="pl-review-label">最佳單注</span>' +
+        '<span class="pl-review-val">' +
+          (bestCombo ? '第一區命中 ' + bestHitA + ' 個 + 第二區 ' + (bestHitB ? '✅' : '❌') : '—') +
+        '</span>' +
+      '</div>' +
+      '<div class="pl-review-item">' +
+        '<span class="pl-review-label">有命中的注數</span>' +
+        '<span class="pl-review-val">' + anyHit + ' / ' + simCombos.length + ' 注</span>' +
+      '</div>' +
+    '</div>' +
+    '<p class="pl-review-note">💡 以上是假設用' + (isCustomReview ? '你的自選號碼池' : '同樣的演算法') + '和預算 $' + plBudget.toLocaleString() + ' 回測上一期的結果。</p>';
+}
+
+// === MULTI-PERIOD BACKTEST ===
+function plRenderBacktest(draws, allDraws) {
+  const el = document.getElementById('plBacktest');
+  if (!el || allDraws.length < 5) { if (el) el.innerHTML = ''; return; }
+
+  const isCustomBT = plSource === 'custom' && plCustomA.length > PICK_COUNT_A;
+  const backtestPeriods = Math.min(20, allDraws.length - 5);
+  if (backtestPeriods < 3) { el.innerHTML = ''; return; }
+
+  const results = [];
+  let totalCost = 0;
+  let totalPrize = 0;
+
+  for (let p = 0; p < backtestPeriods; p++) {
+    const targetDraw = allDraws[p];
+    const histDraws = allDraws.slice(p + 1);
+    const rangeDraws = plRange === 0 ? histDraws : histDraws.slice(0, plRange);
+    if (rangeDraws.length < 5) continue;
+
+    const btResult = plGenerateWheel(rangeDraws, histDraws, !isCustomBT);
+    const btCombos = btResult.combos;
+    if (btCombos.length === 0) continue;
+
+    const actualA = targetDraw.numbers;
+    const actualB = targetDraw.special;
+    let bestHitA = 0;
+    let bestHitB = 0;
+    let iterPrize = 0;
+    let anyHit = 0;
+
+    for (const combo of btCombos) {
+      const hitsA = combo.nums.filter(function(n) { return actualA.includes(n); }).length;
+      const hitB = combo.bNum === actualB ? 1 : 0;
+      if (hitsA > bestHitA || (hitsA === bestHitA && hitB > bestHitB)) {
+        bestHitA = hitsA;
+        bestHitB = hitB;
+      }
+      if (hitsA > 0) anyHit++;
+      // Calculate prize
+      const prize = plMatchPrize(hitsA, hitB);
+      iterPrize += prize;
+    }
+
+    const poolHitCount = btResult.poolA.filter(function(s) { return actualA.includes(s.num); }).length;
+    const cost = btCombos.length * BET_COST;
+    totalCost += cost;
+    totalPrize += iterPrize;
+
+    results.push({
+      period: targetDraw.period,
+      date: targetDraw.date,
+      actualA: actualA,
+      actualB: actualB,
+      bestHitA: bestHitA,
+      bestHitB: bestHitB,
+      anyHit: anyHit,
+      totalCombos: btCombos.length,
+      poolHits: poolHitCount,
+      poolSize: btResult.poolSizeA,
+      prize: iterPrize,
+      cost: cost,
+      net: iterPrize - cost
+    });
+  }
+
+  if (results.length === 0) { el.innerHTML = ''; return; }
+
+  const avgBest = (results.reduce(function(s, r) { return s + r.bestHitA; }, 0) / results.length).toFixed(1);
+  const prize4up = results.filter(function(r) { return r.bestHitA >= 4; }).length;
+  const prize5up = results.filter(function(r) { return r.bestHitA >= 5; }).length;
+  const netTotal = totalPrize - totalCost;
+
+  el.innerHTML =
+    '<div class="pl-bt-panel">' +
+      '<h4>🔁 多期回測（近 ' + results.length + ' 期）</h4>' +
+      '<p class="pl-bt-desc">用' + (isCustomBT ? '你的自選號碼' : '同樣的演算法') + '和預算 $' + plBudget.toLocaleString() + ' 回測每一期的表現：</p>' +
+      '<div class="pl-bt-summary">' +
+        '<div class="pl-bt-stat"><span class="pl-bt-stat-val">' + avgBest + '</span><span class="pl-bt-stat-label">平均最佳命中（第一區）</span></div>' +
+        '<div class="pl-bt-stat"><span class="pl-bt-stat-val">' + prize4up + '</span><span class="pl-bt-stat-label">第一區中 4+ 碼</span></div>' +
+        '<div class="pl-bt-stat"><span class="pl-bt-stat-val">' + prize5up + '</span><span class="pl-bt-stat-label">第一區中 5+ 碼</span></div>' +
+        '<div class="pl-bt-stat ' + (netTotal >= 0 ? 'positive' : 'negative') + '"><span class="pl-bt-stat-val">' + (netTotal >= 0 ? '+' : '') + '$' + netTotal.toLocaleString() + '</span><span class="pl-bt-stat-label">累積損益</span></div>' +
+      '</div>' +
+      '<div class="pl-bt-table-wrap">' +
+        '<table class="pl-bt-table">' +
+          '<thead><tr>' +
+            '<th>期數</th>' +
+            '<th>第一區</th>' +
+            '<th>二區</th>' +
+            '<th>池命中</th>' +
+            '<th>最佳</th>' +
+            '<th>損益</th>' +
+          '</tr></thead>' +
+          '<tbody>' +
+            results.map(function(r) {
+              var hitClass = r.bestHitA >= 5 ? 'pl-bt-gold' : r.bestHitA >= 4 ? 'pl-bt-silver' : r.bestHitA >= 3 ? 'pl-bt-bronze' : '';
+              return '<tr class="' + hitClass + '">' +
+                '<td class="pl-bt-period">' + r.period + '</td>' +
+                '<td class="pl-bt-nums">' + r.actualA.map(function(n) { return '<span class="pl-num-mini-sm">' + n + '</span>'; }).join('') + '</td>' +
+                '<td><span class="pl-b-mini-sm">' + r.actualB + '</span></td>' +
+                '<td>' + r.poolHits + '/' + r.poolSize + '</td>' +
+                '<td><strong class="pl-bt-best">' + r.bestHitA + '+' + r.bestHitB + '</strong></td>' +
+                '<td class="' + (r.net >= 0 ? 'pl-bt-profit' : 'pl-bt-loss') + '">' + (r.net >= 0 ? '+' : '') + '$' + r.net.toLocaleString() + '</td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody>' +
+        '</table>' +
+      '</div>' +
+      '<p class="pl-bt-note">⚠️ 回測結果僅供參考，過去表現不代表未來結果。每期開獎都是獨立事件。</p>' +
+    '</div>';
+}
+
+// === PRIZE MATCHING ===
+function plMatchPrize(hitsA, hitB) {
+  // 玖獎: 0+1 or 1+1 → 100
+  // 捌獎: 2+1 → 200
+  // 柒獎: 3+1 → 400
+  // 陸獎: 4+0 → 800
+  // 伍獎: 4+1 → 4000
+  // 肆獎: 5+0 → 20000
+  // 參獎: 5+1 → 150000
+  // 貳獎: 6+0 → 4000000
+  // 頭獎: 6+1 → 200000000
+  if (hitsA === 6 && hitB === 1) return 200000000;
+  if (hitsA === 6 && hitB === 0) return 4000000;
+  if (hitsA === 5 && hitB === 1) return 150000;
+  if (hitsA === 5 && hitB === 0) return 20000;
+  if (hitsA === 4 && hitB === 1) return 4000;
+  if (hitsA === 4 && hitB === 0) return 800;
+  if (hitsA === 3 && hitB === 1) return 400;
+  if (hitsA === 2 && hitB === 1) return 200;
+  if ((hitsA === 1 || hitsA === 0) && hitB === 1) return 100;
+  return 0;
+}
+
+// === PROBABILITY SIMULATION ===
+function plCalcProbabilities(poolSizeA, bPickCount) {
+  const totalCA = plC(MAX_NUM_A, PICK_COUNT_A);
+  const totalC = totalCA * MAX_NUM_B;
+  const results = [];
+
+  for (const tier of PRIZE_PL) {
+    const kA = tier.matchA;
+    const kB = tier.matchB;
+    // Single bet probability
+    let pSingleA;
+    if (kA === 0 && kB === 1) {
+      // 0+1: match 0 of first area + match second area
+      pSingleA = plC(PICK_COUNT_A, 0) * plC(MAX_NUM_A - PICK_COUNT_A, PICK_COUNT_A - 0) / totalCA;
+    } else if (kA === 1 && kB === 1) {
+      // 1+1
+      pSingleA = plC(PICK_COUNT_A, 1) * plC(MAX_NUM_A - PICK_COUNT_A, PICK_COUNT_A - 1) / totalCA;
+    } else {
+      pSingleA = plC(PICK_COUNT_A, kA) * plC(MAX_NUM_A - PICK_COUNT_A, PICK_COUNT_A - kA) / totalCA;
+    }
+    const pSingleB = kB === 1 ? (1 / MAX_NUM_B) : ((MAX_NUM_B - 1) / MAX_NUM_B);
+
+    let pSingle;
+    if (tier.label.includes('玖獎')) {
+      // 玖獎 includes both 0+1 and 1+1
+      const p0A = plC(PICK_COUNT_A, 0) * plC(MAX_NUM_A - PICK_COUNT_A, PICK_COUNT_A - 0) / totalCA;
+      const p1A = plC(PICK_COUNT_A, 1) * plC(MAX_NUM_A - PICK_COUNT_A, PICK_COUNT_A - 1) / totalCA;
+      pSingle = (p0A + p1A) * (1 / MAX_NUM_B);
+    } else {
+      pSingle = pSingleA * pSingleB;
+    }
+
+    // Wheel probability: at least one bet wins this tier
+    // For first area: probability of at least kA matches from poolSizeA
+    let probWheelA = 0;
+    if (tier.label.includes('玖獎')) {
+      // 0+1 or 1+1
+      let probA01 = 0;
+      for (let m = 0; m <= 1; m++) {
+        probA01 += plC(poolSizeA, m) * plC(MAX_NUM_A - poolSizeA, PICK_COUNT_A - m) / totalCA;
+      }
+      const probB = 1 - Math.pow((MAX_NUM_B - bPickCount) / MAX_NUM_B, 1);
+      probWheelA = probA01;
+      results.push({ ...tier, probSingle: pSingle, probWheel: probA01 * (bPickCount / MAX_NUM_B) });
+    } else {
+      for (let m = kA; m <= Math.min(poolSizeA, PICK_COUNT_A); m++) {
+        probWheelA += plC(poolSizeA, m) * plC(MAX_NUM_A - poolSizeA, PICK_COUNT_A - m) / totalCA;
+      }
+      const probWheelB = kB === 1 ? (bPickCount / MAX_NUM_B) : ((MAX_NUM_B - bPickCount) / MAX_NUM_B);
+      results.push({ ...tier, probSingle: pSingle, probWheel: probWheelA * probWheelB });
+    }
+  }
+  return results;
+}
+
+function plCalcEV(poolSizeA, bPickCount, numBets) {
+  const totalCA = plC(MAX_NUM_A, PICK_COUNT_A);
+  let evPerBet = 0;
+
+  for (const tier of PRIZE_PL) {
+    const kA = tier.matchA;
+    const kB = tier.matchB;
+    let pSingle;
+    if (tier.label.includes('玖獎')) {
+      const p0A = plC(PICK_COUNT_A, 0) * plC(MAX_NUM_A - PICK_COUNT_A, PICK_COUNT_A - 0) / totalCA;
+      const p1A = plC(PICK_COUNT_A, 1) * plC(MAX_NUM_A - PICK_COUNT_A, PICK_COUNT_A - 1) / totalCA;
+      pSingle = (p0A + p1A) * (1 / MAX_NUM_B);
+    } else {
+      const pA = plC(PICK_COUNT_A, kA) * plC(MAX_NUM_A - PICK_COUNT_A, PICK_COUNT_A - kA) / totalCA;
+      const pB = kB === 1 ? (1 / MAX_NUM_B) : ((MAX_NUM_B - 1) / MAX_NUM_B);
+      pSingle = pA * pB;
+    }
+    evPerBet += pSingle * tier.prize;
+  }
+
+  const totalEV = evPerBet * numBets;
+  const totalCost = numBets * BET_COST;
+  const roi = ((totalEV - totalCost) / totalCost * 100);
+  return { evPerBet: Math.round(evPerBet * 100) / 100, totalEV: Math.round(totalEV), totalCost: totalCost, roi: Math.round(roi * 10) / 10 };
+}
+
+function plMonteCarloSim(combosList, iterations) {
+  // Track best match per draw and total prize
+  const distA = new Array(PICK_COUNT_A + 1).fill(0);
+  let totalPrize = 0;
+  let anyPrizeCount = 0;
+
+  for (let i = 0; i < iterations; i++) {
+    // Draw first area
+    const drawA = [];
+    const usedA = new Set();
+    while (drawA.length < PICK_COUNT_A) {
+      const n = Math.floor(Math.random() * MAX_NUM_A) + 1;
+      if (!usedA.has(n)) { usedA.add(n); drawA.push(n); }
+    }
+    // Draw second area
+    const drawB = Math.floor(Math.random() * MAX_NUM_B) + 1;
+
+    let bestMatchA = 0;
+    let iterPrize = 0;
+
+    for (const combo of combosList) {
+      const hitsA = combo.nums.filter(function(n) { return drawA.includes(n); }).length;
+      const hitB = combo.bNum === drawB ? 1 : 0;
+      if (hitsA > bestMatchA) bestMatchA = hitsA;
+      const prize = plMatchPrize(hitsA, hitB);
+      iterPrize += prize;
+    }
+
+    distA[bestMatchA]++;
+    totalPrize += iterPrize;
+    if (iterPrize > 0) anyPrizeCount++;
+  }
+
+  const pct = distA.map(function(d) { return Math.round(d / iterations * 10000) / 100; });
+  const avgReturn = Math.round(totalPrize / iterations);
+  const anyWinPct = Math.round(anyPrizeCount / iterations * 10000) / 100;
+  return { distA: distA, pct: pct, avgReturn: avgReturn, iterations: iterations, anyWinPct: anyWinPct };
+}
+
+function plFormatProb(p) {
+  if (p >= 0.01) return (p * 100).toFixed(2) + '%';
+  if (p >= 0.0001) return '1/' + Math.round(1 / p).toLocaleString();
+  if (p > 0) return '1/' + Math.round(1 / p).toLocaleString();
+  return '0';
+}
+
+function plRenderSim(poolSizeA, bPicks, combos) {
+  const el = document.getElementById('plSim');
+  if (!el || combos.length === 0) { if (el) el.innerHTML = ''; return; }
+
+  const numBets = combos.length;
+  const bPickCount = bPicks.length;
+  const totalCost = numBets * BET_COST;
+  const probs = plCalcProbabilities(poolSizeA, bPickCount);
+  const ev = plCalcEV(poolSizeA, bPickCount, numBets);
+  const mc = plMonteCarloSim(combos, 10000);
+
+  el.innerHTML =
+    '<div class="pl-sim-panel">' +
+      '<h4>🔮 包牌機率模擬 <span class="pl-sim-badge">威力彩</span></h4>' +
+      '<p class="pl-sim-subtitle">第一區 ' + poolSizeA + ' 碼 × 第二區 ' + bPickCount + ' 顆 = ' + numBets + ' 注（$' + totalCost.toLocaleString() + '），到底有多少機會中獎？</p>' +
+
+      '<div class="pl-sim-tabs">' +
+        '<button class="pl-sim-tab active" onclick="plSwitchSimTab(this,\'plSimProb\')">精算機率</button>' +
+        '<button class="pl-sim-tab" onclick="plSwitchSimTab(this,\'plSimEV\')">期望值</button>' +
+        '<button class="pl-sim-tab" onclick="plSwitchSimTab(this,\'plSimMC\')">萬次模擬</button>' +
+      '</div>' +
+
+      '<div class="pl-sim-content" id="plSimProb">' +
+        '<table class="pl-sim-table">' +
+          '<thead><tr>' +
+            '<th>獎項</th>' +
+            '<th>單注機率</th>' +
+            '<th>' + numBets + ' 注至少中一次</th>' +
+            '<th>獎金</th>' +
+          '</tr></thead>' +
+          '<tbody>' +
+            probs.map(function(p) {
+              return '<tr>' +
+                '<td class="pl-sim-tier">' + p.label + '</td>' +
+                '<td>' + (p.probSingle > 0 ? plFormatProb(p.probSingle) : '—') + '</td>' +
+                '<td class="pl-sim-highlight">' + (p.probWheel > 0 ? plFormatProb(p.probWheel) : '—') + '</td>' +
+                '<td>$' + p.prize.toLocaleString() + '</td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody>' +
+        '</table>' +
+        '<p class="pl-sim-note">※ 「至少中一次」考慮號碼池覆蓋率及第二區選號策略。頭獎獎金以最低保證 2 億計算。</p>' +
+      '</div>' +
+
+      '<div class="pl-sim-content" id="plSimEV" style="display:none">' +
+        '<div class="pl-sim-ev-grid">' +
+          '<div class="pl-sim-ev-card"><span class="pl-sim-ev-label">投注成本</span><span class="pl-sim-ev-val cost">-$' + totalCost.toLocaleString() + '</span></div>' +
+          '<div class="pl-sim-ev-card"><span class="pl-sim-ev-label">單注期望回收</span><span class="pl-sim-ev-val">$' + ev.evPerBet.toFixed(1) + '</span></div>' +
+          '<div class="pl-sim-ev-card"><span class="pl-sim-ev-label">' + numBets + ' 注期望回收</span><span class="pl-sim-ev-val">$' + ev.totalEV.toLocaleString() + '</span></div>' +
+          '<div class="pl-sim-ev-card ' + (ev.roi >= 0 ? 'positive' : 'negative') + '"><span class="pl-sim-ev-label">期望報酬率</span><span class="pl-sim-ev-val">' + (ev.roi > 0 ? '+' : '') + ev.roi + '%</span></div>' +
+        '</div>' +
+        '<div class="pl-sim-ev-bar-wrap">' +
+          '<div class="pl-sim-ev-bar-label"><span>投入 $' + totalCost.toLocaleString() + '</span><span>期望回收 $' + ev.totalEV.toLocaleString() + '</span></div>' +
+          '<div class="pl-sim-ev-bar-track"><div class="pl-sim-ev-bar-fill" style="width:' + Math.min(100, ev.totalEV / totalCost * 100) + '%"></div></div>' +
+          '<p class="pl-sim-ev-verdict">每花 $100，平均拿回 $' + Math.round(ev.totalEV / totalCost * 100) + '<br>' +
+          '<strong style="color:var(--text-muted);font-weight:400">（期望值為負 = 長期一定虧，這是數學事實，跟運氣無關）</strong></p>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="pl-sim-content" id="plSimMC" style="display:none">' +
+        '<p class="pl-sim-mc-title">🎲 模擬 ' + mc.iterations.toLocaleString() + ' 次開獎結果</p>' +
+        '<div class="pl-sim-mc-chart">' +
+          mc.pct.map(function(p, i) {
+            var barH = Math.max(2, p / Math.max.apply(null, mc.pct) * 100);
+            var tierLabel = i === 0 ? '槓龜' : i === 1 ? '中1' : i === 2 ? '中2' : i === 3 ? '中3' : i === 4 ? '中4' : i === 5 ? '中5' : '中6';
+            var tierColor = i === 0 ? '#555' : i <= 2 ? '#666' : i === 3 ? '#f5b800' : i === 4 ? '#ff8800' : i === 5 ? '#39FF14' : '#ec4899';
+            return '<div class="pl-sim-mc-col">' +
+              '<span class="pl-sim-mc-pct">' + (p > 0 ? p + '%' : '0%') + '</span>' +
+              '<div class="pl-sim-mc-bar" style="height:' + barH + '%;background:' + tierColor + '"></div>' +
+              '<span class="pl-sim-mc-label">' + tierLabel + '</span>' +
+            '</div>';
+          }).join('') +
+        '</div>' +
+        '<div class="pl-sim-mc-summary">' +
+          '<div class="pl-sim-mc-stat"><span class="pl-sim-mc-stat-label">每次開獎平均回收</span><span class="pl-sim-mc-stat-val">$' + mc.avgReturn.toLocaleString() + '</span></div>' +
+          '<div class="pl-sim-mc-stat"><span class="pl-sim-mc-stat-label">每次開獎投入</span><span class="pl-sim-mc-stat-val cost">$' + totalCost.toLocaleString() + '</span></div>' +
+          '<div class="pl-sim-mc-stat"><span class="pl-sim-mc-stat-label">模擬淨損益</span><span class="pl-sim-mc-stat-val ' + (mc.avgReturn >= totalCost ? 'positive' : 'negative') + '">' + (mc.avgReturn >= totalCost ? '+' : '-') + '$' + Math.abs(mc.avgReturn - totalCost).toLocaleString() + '</span></div>' +
+          '<div class="pl-sim-mc-stat"><span class="pl-sim-mc-stat-label">中任一獎機率</span><span class="pl-sim-mc-stat-val">' + mc.anyWinPct + '%</span></div>' +
+        '</div>' +
+        '<button class="pl-sim-rerun" onclick="plRerunMC()">🔄 重跑一次模擬</button>' +
+        '<p class="pl-sim-note">※ 每次模擬結果略有不同（隨機性），但趨勢一致：長期期望值為負</p>' +
+      '</div>' +
+    '</div>';
+}
+
+function plSwitchSimTab(btn, tabId) {
+  btn.parentElement.querySelectorAll('.pl-sim-tab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+  btn.closest('.pl-sim-panel').querySelectorAll('.pl-sim-content').forEach(function(c) { c.style.display = 'none'; });
+  document.getElementById(tabId).style.display = '';
+}
+
+function plRerunMC() {
+  if (plDraws.length === 0) return;
+  var draws = plRange === 0 ? plDraws : plDraws.slice(0, plRange);
+  var allDraws = plDraws;
+  var result = plGenerateWheel(draws, allDraws);
+  plRenderSim(result.poolSizeA, result.bPicks, result.combos);
+  var mcBtn = document.querySelector('.pl-sim-tab:last-child');
+  if (mcBtn) plSwitchSimTab(mcBtn, 'plSimMC');
+}
+
+// === COPY TEXT ===
+function plCopyText() {
+  if (plDraws.length === 0) return;
+  var draws = plRange === 0 ? plDraws : plDraws.slice(0, plRange);
+  var allDraws = plDraws;
+  var result = plGenerateWheel(draws, allDraws);
+  var combos = result.combos;
+  if (combos.length === 0) return;
+
+  var today = new Date();
+  var dateStr = today.getFullYear() + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' + String(today.getDate()).padStart(2, '0');
+  var lastPeriod = allDraws[0]?.period || '';
+
+  var mc = plMonteCarloSim(combos, 10000);
+  var totalCost = combos.length * BET_COST;
+
+  var text = '🎯 威力彩包牌組合 — GAME8LA\n';
+  text += '日期：' + dateStr + (lastPeriod ? '  最新一期：' + lastPeriod : '') + '\n';
+  text += '預算：$' + plBudget.toLocaleString() + ' ／ ' + combos.length + ' 注 ／ 第一區 ' + result.poolSizeA + ' 碼 × 第二區 ' + result.bPicks.length + ' 顆\n';
+  text += '────────────────\n';
+  text += '🎲 萬次模擬結果：' + mc.anyWinPct + '% 機率中任一獎\n';
+  text += '💸 期望回收：$' + mc.avgReturn.toLocaleString() + ' / 投入 $' + totalCost.toLocaleString() + '\n';
+  text += '────────────────\n';
+  combos.forEach(function(c, i) {
+    text += '第' + String(i + 1).padStart(3, ' ') + '注：' + c.nums.map(function(n) { return String(n).padStart(2, '0'); }).join(' ') + ' ＋ ' + c.bNum + '\n';
+  });
+  text += '────────────────\n';
+  text += '⚠️ 包牌只是提高覆蓋率，期望值永遠是負的\n';
+  text += '🔗 game8la.com/tools/power-lottery-calculator';
+
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.querySelector('.pl-copy-text');
+    if (btn) {
+      var orig = btn.innerHTML;
+      btn.innerHTML = '✅ 已複製！';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+    }
+  }).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    var btn = document.querySelector('.pl-copy-text');
+    if (btn) {
+      var orig = btn.innerHTML;
+      btn.innerHTML = '✅ 已複製！';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+    }
+  });
+}
+
+// === DOWNLOAD IMAGE ===
+function plDownloadImage() {
+  if (plDraws.length === 0) return;
+  var draws = plRange === 0 ? plDraws : plDraws.slice(0, plRange);
+  var allDraws = plDraws;
+  var result = plGenerateWheel(draws, allDraws);
+  var combos = result.combos;
+  if (combos.length === 0) return;
+
+  var actualCost = combos.length * BET_COST;
+  var today = new Date();
+  var dateStr = today.getFullYear() + '/' + String(today.getMonth() + 1).padStart(2, '0') + '/' + String(today.getDate()).padStart(2, '0');
+  var lastPeriod = allDraws[0]?.period || '';
+
+  var W = 800;
+  var PAD = 32;
+  var COLS = 2;
+  var COL_W = (W - PAD * 2 - 20) / COLS;
+  var BALL_R = 14;
+  var BALL_GAP = 4;
+  var ROW_H = 42;
+  var HEADER_H = 210;
+  var maxDisplay = Math.min(combos.length, 60);
+  var rows = Math.ceil(maxDisplay / COLS);
+  var TABLE_H = rows * ROW_H + 40;
+  var FOOTER_H = 100;
+  var H = HEADER_H + TABLE_H + FOOTER_H;
+
+  var canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  var ctx = canvas.getContext('2d');
+
+  // Background
+  var bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+  bgGrad.addColorStop(0, '#1a1a2e');
+  bgGrad.addColorStop(0.5, '#16213e');
+  bgGrad.addColorStop(1, '#0f3460');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid pattern
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 1;
+  for (var i = 0; i < W; i += 40) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, H); ctx.stroke(); }
+  for (var j = 0; j < H; j += 40) { ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(W, j); ctx.stroke(); }
+
+  // Header
+  var hdrGrad = ctx.createLinearGradient(0, 0, W, 0);
+  hdrGrad.addColorStop(0, 'rgba(255,136,0,0.15)');
+  hdrGrad.addColorStop(1, 'rgba(255,215,0,0.08)');
+  ctx.fillStyle = hdrGrad;
+  ctx.fillRect(0, 0, W, HEADER_H);
+
+  var accentGrad = ctx.createLinearGradient(0, 0, W, 0);
+  accentGrad.addColorStop(0, '#ff8800');
+  accentGrad.addColorStop(1, '#FFD700');
+  ctx.fillStyle = accentGrad;
+  ctx.fillRect(0, HEADER_H - 3, W, 3);
+
+  ctx.font = 'bold 28px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = '#FFD700';
+  ctx.textAlign = 'left';
+  ctx.fillText('🎯 GAME8LA', PAD, 48);
+
+  ctx.font = 'bold 22px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('威力彩包牌組合', PAD, 84);
+
+  ctx.font = '14px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.textAlign = 'right';
+  ctx.fillText(dateStr + (lastPeriod ? '  |  最新一期：' + lastPeriod : ''), W - PAD, 48);
+
+  ctx.textAlign = 'left';
+  var stats = [
+    { label: '預算', val: '$' + plBudget.toLocaleString() },
+    { label: '注數', val: combos.length + ' 注' },
+    { label: '花費', val: '$' + actualCost.toLocaleString() },
+    { label: '第一區', val: result.poolSizeA + ' 碼' },
+    { label: '第二區', val: result.bPicks.length + ' 顆' }
+  ];
+  var statW = (W - PAD * 2) / stats.length;
+  stats.forEach(function(s, idx) {
+    var x = PAD + idx * statW;
+    ctx.fillStyle = 'rgba(255,255,255,0.12)';
+    plRoundRect(ctx, x, 100, statW - 8, 52, 8);
+    ctx.fill();
+    ctx.font = 'bold 18px "Segoe UI", "Noto Sans TC", sans-serif';
+    ctx.fillStyle = '#ff8800';
+    ctx.textAlign = 'center';
+    ctx.fillText(s.val, x + (statW - 8) / 2, 126);
+    ctx.font = '11px "Segoe UI", "Noto Sans TC", sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText(s.label, x + (statW - 8) / 2, 144);
+  });
+
+  ctx.textAlign = 'left';
+  ctx.font = '12px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.fillText('第一區號碼池：' + result.poolA.map(function(s) { return s.num; }).join(', ') + '  |  第二區：' + result.bPicks.join(', '), PAD, HEADER_H - 16);
+
+  // Table header
+  var tableY = HEADER_H + 10;
+  ctx.font = 'bold 12px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  for (var col = 0; col < COLS; col++) {
+    var cx = PAD + col * (COL_W + 20);
+    ctx.textAlign = 'left';
+    ctx.fillText('#', cx, tableY + 14);
+    ctx.fillText('第一區 + 第二區', cx + 30, tableY + 14);
+  }
+
+  // Combo rows
+  ctx.textAlign = 'left';
+  for (var idx2 = 0; idx2 < maxDisplay; idx2++) {
+    var c = combos[idx2];
+    var colIdx = idx2 < Math.ceil(maxDisplay / 2) ? 0 : 1;
+    var rowIdx = colIdx === 0 ? idx2 : idx2 - Math.ceil(maxDisplay / 2);
+    var cx2 = PAD + colIdx * (COL_W + 20);
+    var cy = tableY + 30 + rowIdx * ROW_H;
+
+    if (rowIdx % 2 === 0) {
+      ctx.fillStyle = 'rgba(255,255,255,0.03)';
+      ctx.fillRect(cx2 - 4, cy - 6, COL_W, ROW_H);
+    }
+
+    ctx.font = '12px "Segoe UI", "Noto Sans TC", sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.fillText(String(idx2 + 1).padStart(3, ' '), cx2, cy + 16);
+
+    // First area balls
+    c.nums.forEach(function(n, j) {
+      var bx = cx2 + 40 + j * (BALL_R * 2 + BALL_GAP) + BALL_R;
+      var by = cy + 12;
+      var ballGrad = ctx.createRadialGradient(bx - 3, by - 3, 2, bx, by, BALL_R);
+      ballGrad.addColorStop(0, '#FFD700');
+      ballGrad.addColorStop(1, '#ff8800');
+      ctx.beginPath();
+      ctx.arc(bx, by, BALL_R, 0, Math.PI * 2);
+      ctx.fillStyle = ballGrad;
+      ctx.fill();
+      ctx.font = 'bold 12px "Segoe UI", sans-serif';
+      ctx.fillStyle = '#000';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(n), bx, by + 1);
+    });
+
+    // Second area ball
+    var bx2 = cx2 + 40 + 6 * (BALL_R * 2 + BALL_GAP) + BALL_R + 8;
+    var by2 = cy + 12;
+    var bGrad2 = ctx.createRadialGradient(bx2 - 3, by2 - 3, 2, bx2, by2, BALL_R);
+    bGrad2.addColorStop(0, '#66bbff');
+    bGrad2.addColorStop(1, '#2196F3');
+    ctx.beginPath();
+    ctx.arc(bx2, by2, BALL_R, 0, Math.PI * 2);
+    ctx.fillStyle = bGrad2;
+    ctx.fill();
+    ctx.font = 'bold 12px "Segoe UI", sans-serif';
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(String(c.bNum), bx2, by2 + 1);
+
+    ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'left';
+  }
+
+  // Truncation note
+  if (combos.length > maxDisplay) {
+    ctx.font = '12px "Segoe UI", "Noto Sans TC", sans-serif';
+    ctx.fillStyle = 'rgba(255,152,0,0.7)';
+    ctx.textAlign = 'center';
+    ctx.fillText('⚠ 共 ' + combos.length + ' 注，圖片僅顯示前 ' + maxDisplay + ' 注', W / 2, tableY + TABLE_H - 8);
+    ctx.textAlign = 'left';
+  }
+
+  // Footer
+  var footerY = H - FOOTER_H;
+  ctx.fillStyle = 'rgba(0,0,0,0.3)';
+  ctx.fillRect(0, footerY, W, FOOTER_H);
+  ctx.fillStyle = accentGrad;
+  ctx.fillRect(0, footerY, W, 2);
+
+  ctx.font = '12px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.textAlign = 'center';
+  ctx.fillText('芭樂子提醒：包牌只是提高覆蓋率，不是提高中獎率。期望值永遠是負的，請量力而為。', W / 2, footerY + 30);
+
+  ctx.font = 'bold 14px "Segoe UI", sans-serif';
+  ctx.fillStyle = '#FFD700';
+  ctx.fillText('game8la.com/tools/power-lottery-calculator', W / 2, footerY + 56);
+
+  ctx.font = '11px "Segoe UI", "Noto Sans TC", sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.fillText('此圖片由 GAME8LA 威力彩包牌計算器自動產生', W / 2, footerY + 80);
+
+  var link = document.createElement('a');
+  link.download = 'power-lottery-wheel-' + dateStr.replace(/\//g, '') + '.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function plRoundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// === INIT ===
+plLoadData();
+</script>
+
+<style is:global>
+/* ═══ Power Lottery Wheel Calculator ═══ */
+
+/* Loading */
+.pl-loading-state {
+  padding: 3rem 1rem; text-align: center;
+}
+.pl-skeleton-pulse {
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, rgba(255,255,255,0.05) 50%, var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  animation: plSkelPulse 1.5s infinite;
+  border-radius: 10px;
+}
+@keyframes plSkelPulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.pl-loading-text {
+  margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;
+}
+.pl-loading-error {
+  color: #ef4444; font-size: 0.95rem; padding: 2rem;
+  background: rgba(239,68,68,0.08); border-radius: 10px;
+}
+
+/* Wheel section */
+.pl-wheel-section {
+  background: linear-gradient(135deg, rgba(255,136,0,0.05), rgba(255,215,0,0.04));
+  border-color: rgba(255,136,0,0.25);
+}
+
+/* ═══ Range Selector ═══ */
+.pl-range-selector {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem; border-bottom: 1px solid var(--border);
+}
+.pl-range-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.pl-range-btn {
+  padding: 0.4rem 0.9rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-range-btn:hover { border-color: var(--gold); }
+.pl-range-btn.active {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; font-weight: 700;
+}
+
+/* ═══ Budget ═══ */
+.pl-budget {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.pl-budget-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.pl-btn {
+  padding: 0.5rem 1.2rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-btn:hover { border-color: var(--gold); }
+.pl-btn.active {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; font-weight: 700;
+}
+.pl-custom {
+  display: flex; gap: 0.3rem; align-items: center;
+}
+.pl-custom input {
+  width: 100px; padding: 0.45rem 0.6rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-primary); font-size: 0.85rem;
+}
+.pl-custom input::placeholder { color: var(--text-muted); }
+.pl-custom-go { padding: 0.45rem 0.8rem; font-size: 0.85rem; }
+
+/* Source toggle */
+.pl-source-toggle {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1rem;
+}
+.pl-source-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.pl-src-btn {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-src-btn:hover { border-color: var(--gold); }
+.pl-src-btn.active {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; font-weight: 700;
+}
+
+/* Area B strategy */
+.pl-area-b-strategy {
+  display: flex; align-items: center; gap: 0.5rem;
+  flex-wrap: wrap; margin-bottom: 1rem;
+  padding-top: 1rem; border-top: 1px solid var(--border);
+}
+.pl-area-b-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 600; }
+.pl-b-btn {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-b-btn:hover { border-color: #2196F3; }
+.pl-b-btn.active {
+  background: linear-gradient(135deg, #2196F3, #42a5f5); color: #fff;
+  border-color: #2196F3; font-weight: 700;
+}
+
+/* Custom pool A (first area) */
+.pl-custom-pool {
+  margin-bottom: 1.2rem; padding: 1rem;
+  background: rgba(255,136,0,0.04); border: 1px dashed rgba(255,136,0,0.3);
+  border-radius: 12px;
+}
+.pl-cp-hint { font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 0.8rem; }
+.pl-cp-hint strong { color: var(--gold-light); }
+.pl-cp-grid {
+  display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center; margin-bottom: 0.8rem;
+}
+.pl-cp-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg-secondary); border: 2px solid var(--border);
+  color: var(--text-secondary); font-size: 0.92rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.pl-cp-num:hover { border-color: #ff8800; color: #ff8800; }
+.pl-cp-num.selected {
+  background: linear-gradient(135deg, #ff8800, #FFD700); color: #000;
+  border-color: #ff8800; box-shadow: 0 3px 10px rgba(255,136,0,0.35);
+  transform: scale(1.08);
+}
+.pl-cp-status {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  font-size: 0.88rem; color: var(--text-muted);
+}
+.pl-cp-status strong { color: #ff8800; font-size: 1.05rem; }
+.pl-cp-clear {
+  padding: 0.3rem 0.8rem; border-radius: 6px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.8rem; cursor: pointer;
+}
+.pl-cp-clear:hover { border-color: var(--text-muted); }
+
+/* Custom pool warning */
+.pl-cp-warn {
+  margin-top: 0.8rem; padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 2px solid #ff9800; border-radius: 12px;
+  display: flex; gap: 0.8rem; align-items: flex-start;
+}
+[data-theme="dark"] .pl-cp-warn {
+  background: linear-gradient(135deg, rgba(255,152,0,0.15) 0%, rgba(255,152,0,0.06) 100%);
+}
+.pl-cp-warn-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+.pl-cp-warn-body { font-size: 0.85rem; line-height: 1.6; }
+.pl-cp-warn-body strong { color: #e65100; display: block; margin-bottom: 0.3rem; font-size: 0.92rem; }
+[data-theme="dark"] .pl-cp-warn-body strong { color: #ffab40; }
+.pl-cp-warn-body p { margin: 0.25rem 0; color: #5d4037; }
+[data-theme="dark"] .pl-cp-warn-body p { color: #ffcc80; }
+.pl-cp-warn.shake { animation: pl-shake 0.4s ease-in-out; }
+@keyframes pl-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* Custom B (second area) */
+.pl-custom-b {
+  margin-bottom: 1.2rem; padding: 1rem;
+  background: rgba(33,150,243,0.04); border: 1px dashed rgba(33,150,243,0.3);
+  border-radius: 12px;
+}
+.pl-cb-hint { font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 0.8rem; }
+.pl-cb-hint strong { color: #42a5f5; }
+.pl-cb-grid {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 0.8rem;
+}
+.pl-cb-num {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--bg-secondary); border: 2px solid var(--border);
+  color: var(--text-secondary); font-size: 1.1rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.pl-cb-num:hover { border-color: #2196F3; color: #2196F3; }
+.pl-cb-num.selected {
+  background: linear-gradient(135deg, #2196F3, #42a5f5); color: #fff;
+  border-color: #2196F3; box-shadow: 0 3px 10px rgba(33,150,243,0.35);
+  transform: scale(1.08);
+}
+.pl-cb-status {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  font-size: 0.88rem; color: var(--text-muted);
+}
+.pl-cb-status strong { color: #2196F3; font-size: 1.05rem; }
+
+/* Not enough nums */
+.pl-cp-not-enough {
+  padding: 1rem; text-align: center; font-size: 0.92rem;
+  color: var(--text-muted); background: rgba(255,136,0,0.04);
+  border: 1px dashed rgba(255,136,0,0.25); border-radius: 10px;
+}
+.pl-cp-not-enough strong { color: #ff8800; }
+
+/* ═══ Summary ═══ */
+.pl-summary-grid {
+  display: flex; gap: 0.8rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 1.5rem;
+}
+.pl-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem 1rem; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  min-width: 100px;
+}
+.pl-stat-val { font-size: 1.3rem; font-weight: 900; color: #ff8800; }
+.pl-stat-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; text-align: center; }
+
+/* Budget overflow */
+.pl-budget-overflow {
+  margin-top: 1rem; padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 2px solid #ff9800; border-radius: 12px;
+  text-align: center;
+}
+[data-theme="dark"] .pl-budget-overflow {
+  background: linear-gradient(135deg, rgba(255,152,0,0.15) 0%, rgba(255,152,0,0.08) 100%);
+  border-color: #ff9800;
+}
+.pl-bo-icon { font-size: 1.6rem; margin-bottom: 0.3rem; }
+.pl-bo-text { font-size: 0.88rem; color: #5d4037; line-height: 1.6; }
+[data-theme="dark"] .pl-bo-text { color: #ffcc80; }
+.pl-bo-text strong { color: #e65100; }
+[data-theme="dark"] .pl-bo-text strong { color: #ffab40; }
+.pl-bo-text p { margin: 0.2rem 0; }
+.pl-bo-btn {
+  margin-top: 0.8rem; padding: 0.6rem 1.4rem;
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  color: #fff; border: none; border-radius: 8px;
+  font-size: 0.9rem; font-weight: 700; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.pl-bo-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255,152,0,0.4);
+}
+
+/* ═══ Pool ═══ */
+.pl-pool { margin-bottom: 1.5rem; }
+.pl-pool h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.pl-pool-balls {
+  display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
+}
+.pl-pool-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+}
+.pl-pool-ball {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #ff8800, #FFD700);
+  color: #000; font-weight: 900; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(255,136,0,0.3);
+}
+.pl-pool-score { font-size: 0.7rem; color: var(--gold-light); font-weight: 700; }
+.pl-suggest-tags { display: flex; gap: 0.2rem; }
+.pl-sg-tag {
+  font-size: 0.6rem; padding: 0.1rem 0.35rem; border-radius: 4px;
+  font-weight: 700;
+}
+.pl-sg-tag.hot { background: rgba(255,68,68,0.2); color: #ff6666; }
+.pl-sg-tag.miss { background: rgba(68,170,255,0.2); color: #66bbff; }
+.pl-sg-tag.repeat { background: rgba(57,255,20,0.2); color: #39FF14; }
+
+/* Second area picks display */
+.pl-b-picks-display {
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.pl-b-picks-display h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.pl-b-balls {
+  display: flex; gap: 0.6rem; justify-content: center;
+}
+.pl-b-ball {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, #2196F3, #42a5f5);
+  color: #fff; font-weight: 900; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(33,150,243,0.3);
+}
+
+/* ═══ Combos Table ═══ */
+.pl-combos { margin-bottom: 1.5rem; }
+.pl-combos h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.pl-table-wrap { overflow-x: auto; }
+.pl-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.pl-table th {
+  text-align: left; padding: 0.5rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.pl-table td {
+  padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); white-space: nowrap;
+}
+.pl-idx { color: var(--text-muted); font-weight: 600; width: 30px; }
+.pl-strength { font-weight: 800; color: #ff8800; }
+.pl-composition { display: flex; gap: 0.2rem; }
+.pl-td-nums { display: flex; gap: 3px; flex-wrap: wrap; align-items: center; }
+.pl-num-mini {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  font-size: 0.8rem; font-weight: 700; color: var(--text-secondary);
+}
+.pl-num-mini.hit {
+  background: linear-gradient(135deg, #39FF14, #2bcc10);
+  color: #000; border-color: #39FF14;
+  box-shadow: 0 2px 8px rgba(57,255,20,0.3);
+}
+.pl-b-mini {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(33,150,243,0.15); border: 1px solid rgba(33,150,243,0.4);
+  font-size: 0.8rem; font-weight: 700; color: #42a5f5;
+}
+.pl-b-mini.hit {
+  background: linear-gradient(135deg, #2196F3, #42a5f5);
+  color: #fff; border-color: #2196F3;
+  box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+}
+.pl-empty {
+  text-align: center; color: var(--text-muted); font-size: 0.9rem;
+  padding: 2rem; background: var(--bg-secondary); border-radius: 10px;
+}
+.pl-show-more {
+  display: block; width: 100%; margin-top: 0.8rem;
+  padding: 0.6rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--gold-light); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-show-more:hover { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+.pl-trunc-note {
+  margin-top: 0.6rem; padding: 0.5rem 0.8rem;
+  font-size: 0.8rem; color: #ff9800;
+  background: rgba(255,152,0,0.08); border-radius: 8px;
+  text-align: center;
+}
+
+/* ═══ Export Buttons ═══ */
+.pl-export-btns {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.8rem;
+}
+.pl-tg-cta {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.75rem 1rem; border-radius: 10px;
+  border: 2px solid rgba(0, 136, 204, 0.4);
+  background: linear-gradient(135deg, rgba(0, 136, 204, 0.12), rgba(0, 136, 204, 0.06));
+  color: #29b6f6; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all 0.25s; text-decoration: none;
+}
+.pl-tg-cta small {
+  font-weight: 400; font-size: 0.8rem; opacity: 0.8;
+}
+.pl-tg-cta:hover {
+  background: linear-gradient(135deg, rgba(0, 136, 204, 0.25), rgba(0, 136, 204, 0.12));
+  border-color: #29b6f6; transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 136, 204, 0.2);
+}
+.pl-copy-text {
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.75rem 1rem; border-radius: 10px;
+  border: 2px solid rgba(57,255,20,0.4);
+  background: linear-gradient(135deg, rgba(57,255,20,0.12), rgba(57,255,20,0.06));
+  color: #39FF14; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all 0.25s;
+}
+.pl-copy-text:hover {
+  background: linear-gradient(135deg, rgba(57,255,20,0.25), rgba(57,255,20,0.12));
+  border-color: #39FF14; transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(57,255,20,0.2);
+}
+.pl-copy-text.copied {
+  background: linear-gradient(135deg, rgba(57,255,20,0.3), rgba(57,255,20,0.15));
+  border-color: #39FF14;
+}
+.pl-download-img {
+  display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  padding: 0.75rem 1rem; border-radius: 10px;
+  border: 2px solid rgba(255,215,0,0.4);
+  background: linear-gradient(135deg, rgba(255,136,0,0.12), rgba(255,215,0,0.08));
+  color: #FFD700; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all 0.25s;
+}
+.pl-download-img:hover {
+  background: linear-gradient(135deg, rgba(255,136,0,0.25), rgba(255,215,0,0.15));
+  border-color: #FFD700; transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255,215,0,0.2);
+}
+
+/* ═══ Exclude Panel ═══ */
+.pl-exclude-panel {
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden;
+}
+.pl-exclude-head {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1rem; cursor: pointer;
+  background: var(--bg-secondary); transition: background 0.2s;
+}
+.pl-exclude-head:hover { background: rgba(255,136,0,0.06); }
+.pl-exclude-toggle-icon {
+  font-size: 0.7rem; color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.pl-exclude-title { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); }
+.pl-exclude-count {
+  margin-left: auto; font-size: 0.82rem; color: #ef4444;
+}
+.pl-exclude-count strong { font-size: 0.95rem; }
+.pl-exclude-body { padding: 1rem; }
+.pl-exc-hint {
+  font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 0.8rem;
+}
+.pl-exc-grid {
+  display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center;
+  margin-bottom: 0.8rem;
+}
+.pl-exc-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg-secondary); border: 2px solid var(--border);
+  color: var(--text-secondary); font-size: 0.92rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.pl-exc-num:hover { border-color: #ef4444; color: #ef4444; }
+.pl-exc-num.excluded {
+  background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff;
+  border-color: #ef4444; box-shadow: 0 3px 10px rgba(239,68,68,0.35);
+  text-decoration: line-through; text-decoration-thickness: 2px;
+}
+.pl-exc-actions {
+  display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+}
+.pl-exc-quick {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+  color: #ef4444; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-exc-quick:hover { background: rgba(239,68,68,0.2); border-color: #ef4444; }
+.pl-exc-clear {
+  padding: 0.5rem 1rem; border-radius: 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-exc-clear:hover { border-color: var(--text-muted); }
+
+/* ═══ Coverage ═══ */
+.pl-coverage { margin-bottom: 1.5rem; }
+.pl-coverage h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.3rem; }
+.pl-cov-desc { font-size: 0.85rem; color: var(--text-muted); margin: 0 0 0.8rem; }
+.pl-cov-grid {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center;
+}
+.pl-cov-cell {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; width: 48px; height: 48px;
+  border-radius: 10px; border: 1px solid rgba(255,136,0,0.2);
+  transition: transform 0.15s;
+}
+.pl-cov-cell:hover { transform: scale(1.1); }
+.pl-cov-num { font-size: 0.95rem; font-weight: 800; line-height: 1; }
+.pl-cov-cnt { font-size: 0.65rem; font-weight: 600; opacity: 0.8; margin-top: 1px; }
+
+/* ═══ Review ═══ */
+.pl-review { margin-bottom: 1rem; }
+.pl-review h4 { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.8rem; }
+.pl-review-grid {
+  display: flex; flex-direction: column; gap: 0.6rem;
+  padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.pl-review-item {
+  display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
+}
+.pl-review-label {
+  font-size: 0.82rem; color: var(--text-muted); font-weight: 600;
+  min-width: 100px;
+}
+.pl-review-val { font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 3px; flex-wrap: wrap; }
+.pl-review-note {
+  font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem;
+  text-align: center;
+}
+
+/* ═══ Backtest ═══ */
+.pl-backtest { margin-bottom: 1.5rem; }
+.pl-bt-panel {
+  background: linear-gradient(135deg, rgba(16,185,129,0.06), rgba(255,215,0,0.04));
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 14px; padding: 1.5rem;
+}
+.pl-bt-panel h4 {
+  font-size: 1.1rem; color: var(--text-primary); margin: 0 0 0.3rem;
+}
+.pl-bt-desc { font-size: 0.88rem; color: var(--text-muted); margin: 0 0 1rem; }
+.pl-bt-summary {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem; margin-bottom: 1.2rem;
+}
+.pl-bt-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem 0.5rem; border-radius: 10px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+}
+.pl-bt-stat-val { font-size: 1.3rem; font-weight: 900; color: #10b981; }
+.pl-bt-stat-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; text-align: center; }
+.pl-bt-stat.negative .pl-bt-stat-val { color: #ef4444; }
+.pl-bt-stat.positive .pl-bt-stat-val { color: #10b981; }
+.pl-bt-table-wrap { overflow-x: auto; }
+.pl-bt-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.pl-bt-table th {
+  text-align: left; padding: 0.5rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.pl-bt-table td {
+  padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem; white-space: nowrap;
+}
+.pl-bt-period { font-weight: 600; color: var(--text-muted); }
+.pl-bt-nums { display: flex; gap: 2px; align-items: center; }
+.pl-num-mini-sm {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  font-size: 0.75rem; font-weight: 700; color: var(--text-secondary);
+}
+.pl-b-mini-sm {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(33,150,243,0.15); border: 1px solid rgba(33,150,243,0.3);
+  font-size: 0.75rem; font-weight: 700; color: #42a5f5;
+}
+.pl-bt-best { color: #10b981; font-size: 1rem; }
+.pl-bt-profit { color: #10b981; font-weight: 700; }
+.pl-bt-loss { color: #ef4444; font-weight: 700; }
+tr.pl-bt-gold { background: rgba(255,215,0,0.08); }
+tr.pl-bt-silver { background: rgba(192,192,192,0.06); }
+tr.pl-bt-bronze { background: rgba(205,127,50,0.04); }
+.pl-bt-note {
+  font-size: 0.8rem; color: var(--text-muted); margin: 0.8rem 0 0;
+  text-align: center; font-style: italic;
+}
+
+/* ═══ Simulation Panel ═══ */
+.pl-sim { margin-top: 1.5rem; }
+.pl-sim-panel {
+  background: linear-gradient(135deg, rgba(138,43,226,0.06), rgba(255,215,0,0.04));
+  border: 1px solid rgba(138,43,226,0.3);
+  border-radius: 14px; padding: 1.5rem;
+}
+.pl-sim-panel h4 {
+  font-size: 1.1rem; color: var(--text-primary); margin: 0 0 0.3rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.pl-sim-badge {
+  font-size: 0.65rem; font-weight: 900; color: #fff;
+  background: linear-gradient(135deg, #ff8800, #FFD700);
+  padding: 0.15rem 0.6rem; border-radius: 999px; letter-spacing: 0.5px;
+}
+.pl-sim-subtitle { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 1rem; }
+.pl-sim-tabs {
+  display: flex; gap: 0.4rem; margin-bottom: 1.2rem;
+  border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+}
+.pl-sim-tab {
+  padding: 0.5rem 1rem; border-radius: 8px 8px 0 0;
+  background: transparent; border: 1px solid transparent;
+  color: var(--text-muted); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-sim-tab:hover { color: var(--text-primary); }
+.pl-sim-tab.active {
+  background: rgba(138,43,226,0.12); border-color: rgba(138,43,226,0.4);
+  color: #a855f7; font-weight: 700;
+}
+.pl-sim-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.pl-sim-table th {
+  text-align: left; padding: 0.5rem 0.6rem; border-bottom: 2px solid var(--border);
+  color: var(--text-muted); font-size: 0.78rem; white-space: nowrap;
+}
+.pl-sim-table td {
+  padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.88rem;
+}
+.pl-sim-tier { font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+.pl-sim-highlight { color: #a855f7; font-weight: 700; }
+.pl-sim-note { font-size: 0.78rem; color: var(--text-muted); margin: 0.6rem 0 0; font-style: italic; }
+
+/* EV cards */
+.pl-sim-ev-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem; margin-bottom: 1.2rem;
+}
+.pl-sim-ev-card {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.8rem; border-radius: 10px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+}
+.pl-sim-ev-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+.pl-sim-ev-val { font-size: 1.2rem; font-weight: 900; color: var(--gold-light); }
+.pl-sim-ev-val.cost { color: #ef4444; }
+.pl-sim-ev-card.negative .pl-sim-ev-val { color: #ef4444; }
+.pl-sim-ev-card.positive .pl-sim-ev-val { color: #39FF14; }
+.pl-sim-ev-bar-wrap { margin: 1rem 0; }
+.pl-sim-ev-bar-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem;
+}
+.pl-sim-ev-bar-track {
+  height: 24px; background: rgba(239,68,68,0.15);
+  border-radius: 12px; overflow: hidden; border: 1px solid rgba(239,68,68,0.3);
+}
+.pl-sim-ev-bar-fill {
+  height: 100%; background: linear-gradient(90deg, #ef4444, #f97316, #FFD700);
+  border-radius: 12px; transition: width 0.5s;
+}
+.pl-sim-ev-verdict {
+  text-align: center; font-size: 0.92rem; color: var(--text-secondary);
+  margin: 0.6rem 0 0; line-height: 1.6;
+}
+
+/* Monte Carlo chart */
+.pl-sim-mc-title { font-size: 0.95rem; color: var(--text-primary); font-weight: 700; margin: 0 0 1rem; }
+.pl-sim-mc-chart {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 0.5rem; height: 160px; margin-bottom: 1rem;
+  padding: 0.5rem; background: var(--bg-secondary); border-radius: 10px;
+}
+.pl-sim-mc-col {
+  display: flex; flex-direction: column; align-items: center;
+  flex: 1; max-width: 60px; height: 100%;
+  justify-content: flex-end;
+}
+.pl-sim-mc-pct { font-size: 0.7rem; color: var(--text-secondary); font-weight: 700; margin-bottom: 0.2rem; }
+.pl-sim-mc-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 2px; transition: height 0.3s; }
+.pl-sim-mc-label { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.3rem; font-weight: 600; }
+.pl-sim-mc-summary {
+  display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0;
+}
+.pl-sim-mc-stat {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 0.6rem 1rem; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-radius: 10px; min-width: 120px;
+}
+.pl-sim-mc-stat-label { font-size: 0.72rem; color: var(--text-muted); }
+.pl-sim-mc-stat-val { font-size: 1.1rem; font-weight: 900; color: var(--gold-light); margin-top: 0.2rem; }
+.pl-sim-mc-stat-val.cost { color: #ef4444; }
+.pl-sim-mc-stat-val.negative { color: #ef4444; }
+.pl-sim-mc-stat-val.positive { color: #39FF14; }
+.pl-sim-rerun {
+  display: block; margin: 0.8rem auto 0; padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7); color: #fff;
+  border: none; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.pl-sim-rerun:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(138,43,226,0.4); }
+
+/* ═══ FAQ ═══ */
+.pl-faq-section { background: var(--bg-card); }
+
+/* ═══ CTA Grid ═══ */
+.pl-cta-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.pl-cta-card {
+  display: flex; gap: 0.8rem; align-items: flex-start;
+  padding: 1.2rem; border-radius: 12px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  text-decoration: none; color: var(--text-primary);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pl-cta-card:hover { transform: translateY(-2px); }
+.pl-cta-card.gold:hover { border-color: #FFD700; box-shadow: 0 6px 20px rgba(255,215,0,0.15); }
+.pl-cta-card.green:hover { border-color: #39FF14; box-shadow: 0 6px 20px rgba(57,255,20,0.15); }
+.pl-cta-card.pink:hover { border-color: #FF10F0; box-shadow: 0 6px 20px rgba(255,16,240,0.15); }
+.pl-cta-card.purple:hover { border-color: #a855f7; box-shadow: 0 6px 20px rgba(168,85,247,0.15); }
+.pl-cta-icon { font-size: 1.5rem; flex-shrink: 0; }
+.pl-cta-card strong { font-size: 0.95rem; display: block; margin-bottom: 0.3rem; }
+.pl-cta-card p { margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ═══ Responsive ═══ */
+@media (max-width: 768px) {
+  .pl-summary-grid { gap: 0.5rem; }
+  .pl-stat { min-width: 0; flex: 1 1 40%; padding: 0.7rem 0.5rem; }
+  .pl-stat-val { font-size: 1.1rem; }
+  .pl-stat-label { font-size: 0.72rem; }
+  .pl-pool-balls { gap: 0.6rem; }
+  .pl-pool-ball { width: 42px; height: 42px; font-size: 1.05rem; }
+  .pl-pool-score { font-size: 0.78rem; }
+  .pl-table { font-size: 0.85rem; }
+  .pl-composition { display: none; }
+  .pl-show-more { padding: 0.7rem; font-size: 0.95rem; min-height: 48px; }
+  .pl-cp-num { width: 42px; height: 42px; font-size: 0.92rem; }
+  .pl-cp-grid { gap: 0.35rem; }
+  .pl-exc-num { width: 42px; height: 42px; font-size: 0.92rem; }
+  .pl-exc-grid { gap: 0.35rem; }
+  .pl-sim-panel { padding: 1rem; }
+  .pl-sim-tabs { gap: 0.3rem; }
+  .pl-sim-tab { padding: 0.5rem 0.7rem; font-size: 0.85rem; min-height: 44px; }
+  .pl-sim-ev-grid { grid-template-columns: 1fr 1fr; }
+  .pl-sim-ev-val { font-size: 1rem; }
+  .pl-sim-mc-chart { height: 130px; gap: 0.3rem; }
+  .pl-sim-mc-col { max-width: 50px; }
+  .pl-sim-mc-pct { font-size: 0.7rem; }
+  .pl-sim-mc-label { font-size: 0.7rem; }
+  .pl-sim-mc-summary { gap: 0.5rem; }
+  .pl-sim-mc-stat { min-width: 90px; padding: 0.5rem 0.6rem; }
+  .pl-sim-table { font-size: 0.82rem; }
+  .pl-sim-table th { font-size: 0.75rem; padding: 0.4rem; }
+  .pl-sim-table td { padding: 0.4rem; font-size: 0.85rem; }
+  .pl-cta-grid { grid-template-columns: 1fr; }
+  .pl-export-btns { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .pl-copy-text, .pl-download-img { font-size: 0.9rem; padding: 0.7rem 0.6rem; }
+  .pl-tg-cta { font-size: 0.9rem; padding: 0.7rem 0.6rem; }
+  .pl-cov-cell { width: 44px; height: 44px; }
+  .pl-cov-num { font-size: 0.9rem; }
+  .pl-cov-cnt { font-size: 0.65rem; }
+  .pl-bt-summary { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .pl-bt-stat-val { font-size: 1.1rem; }
+  .pl-bt-stat-label { font-size: 0.72rem; }
+  .pl-bt-panel { padding: 1rem; }
+  .pl-bt-table { font-size: 0.82rem; }
+  .pl-bt-table th { font-size: 0.72rem; padding: 0.4rem; }
+  .pl-bt-table td { padding: 0.4rem; font-size: 0.82rem; }
+  .pl-num-mini-sm { width: 24px; height: 24px; font-size: 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  .pl-range-selector { gap: 0.4rem; }
+  .pl-range-label { font-size: 0.95rem; width: 100%; text-align: center; }
+  .pl-range-btn {
+    flex: 1; padding: 0.6rem 0.4rem; font-size: 0.95rem;
+    min-height: 46px; text-align: center;
+  }
+
+  .pl-budget {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.4rem;
+  }
+  .pl-budget-label {
+    grid-column: 1 / -1; text-align: center; margin-bottom: 0.2rem;
+    font-size: 0.95rem;
+  }
+  .pl-btn {
+    padding: 0.6rem 0.4rem; font-size: 0.95rem;
+    text-align: center; min-height: 46px;
+  }
+  .pl-custom {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: 1fr auto; gap: 0.4rem;
+  }
+  .pl-custom input {
+    width: 100%; padding: 0.6rem 0.7rem; font-size: 1rem;
+    min-height: 46px;
+  }
+  .pl-custom-go { min-height: 46px; font-size: 0.95rem; padding: 0.6rem 1rem; }
+
+  .pl-summary-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;
+  }
+  .pl-stat { padding: 0.7rem 0.5rem; }
+  .pl-stat-val { font-size: 1.1rem; }
+  .pl-stat-label { font-size: 0.72rem; }
+
+  .pl-pool-balls { gap: 1rem 1.2rem; padding: 0.5rem 0; }
+  .pl-pool-ball { width: 48px; height: 48px; font-size: 1.2rem; }
+  .pl-pool-score { font-size: 0.82rem; margin-top: 0.15rem; }
+  .pl-sg-tag { font-size: 0.65rem; padding: 0.15rem 0.4rem; }
+
+  .pl-b-ball { width: 48px; height: 48px; font-size: 1.2rem; }
+
+  .pl-table { font-size: 0.85rem; }
+  .pl-table th, .pl-table td { padding: 0.45rem 0.35rem; }
+  .pl-num-mini { width: 28px; height: 28px; font-size: 0.78rem; }
+  .pl-b-mini { width: 28px; height: 28px; font-size: 0.78rem; }
+  .pl-show-more {
+    padding: 0.8rem; font-size: 1rem;
+    min-height: 48px; font-weight: 700;
+  }
+
+  .pl-source-toggle { gap: 0.4rem; }
+  .pl-source-label { font-size: 0.95rem; width: 100%; text-align: center; }
+  .pl-src-btn {
+    flex: 1; text-align: center; padding: 0.6rem 0.5rem;
+    font-size: 0.95rem; min-height: 46px;
+  }
+
+  .pl-area-b-strategy { gap: 0.4rem; }
+  .pl-area-b-label { font-size: 0.95rem; width: 100%; text-align: center; }
+  .pl-b-btn {
+    flex: 1; text-align: center; padding: 0.6rem 0.5rem;
+    font-size: 0.88rem; min-height: 46px;
+  }
+
+  .pl-cp-num { width: 44px; height: 44px; font-size: 1rem; }
+  .pl-cp-hint { font-size: 0.92rem; }
+  .pl-cp-status { font-size: 0.92rem; }
+  .pl-cb-num { width: 50px; height: 50px; font-size: 1.15rem; }
+
+  .pl-exclude-head { padding: 0.9rem 1rem; }
+  .pl-exclude-title { font-size: 1rem; }
+  .pl-exclude-count { font-size: 0.88rem; }
+  .pl-exc-num { width: 44px; height: 44px; font-size: 1rem; }
+  .pl-exc-hint { font-size: 0.92rem; }
+  .pl-exc-quick, .pl-exc-clear {
+    padding: 0.6rem 1rem; font-size: 0.92rem; min-height: 44px;
+  }
+
+  .pl-export-btns { grid-template-columns: 1fr; gap: 0.5rem; }
+  .pl-copy-text, .pl-download-img {
+    font-size: 1rem; padding: 0.85rem 1rem; min-height: 50px;
+  }
+
+  .pl-cov-cell { width: 46px; height: 46px; border-radius: 8px; }
+  .pl-cov-num { font-size: 1rem; }
+  .pl-cov-cnt { font-size: 0.7rem; }
+  .pl-cov-desc { font-size: 0.9rem; }
+
+  .pl-bt-summary { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .pl-bt-stat { padding: 0.7rem 0.4rem; }
+  .pl-bt-stat-val { font-size: 1.15rem; }
+  .pl-bt-stat-label { font-size: 0.75rem; }
+  .pl-bt-panel { padding: 1rem 0.8rem; }
+  .pl-bt-table { font-size: 0.82rem; }
+  .pl-bt-table th { font-size: 0.72rem; }
+  .pl-bt-table td { font-size: 0.82rem; }
+  .pl-num-mini-sm { width: 26px; height: 26px; font-size: 0.72rem; }
+  .pl-b-mini-sm { width: 26px; height: 26px; font-size: 0.72rem; }
+  .pl-bt-best { font-size: 1.05rem; }
+
+  .pl-sim-tab { padding: 0.55rem 0.6rem; font-size: 0.88rem; min-height: 46px; }
+  .pl-sim-rerun { font-size: 0.95rem; padding: 0.7rem 1.5rem; min-height: 46px; }
+
+  .pl-review-label { font-size: 0.88rem; min-width: 80px; }
+  .pl-review-val { font-size: 0.9rem; }
+}
+</style>
+
+</BaseLayout>

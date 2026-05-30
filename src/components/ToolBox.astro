@@ -35,6 +35,7 @@ const toolMap: Record<string, Tool> = {
   'bankroll':      { name: '資金管理計算器', desc: '停損停利線一鍵算好', href: '/tools/bankroll-calculator/', icon: 'calculator' },
   'baccarat-sim': { name: '百家樂策略模擬器', desc: '五種策略跑 1000 局，看清莊家優勢', href: '/tools/baccarat-simulator/', icon: 'bar-chart' },
   'bonus-calc':   { name: '娛樂城獎金計算器', desc: '打碼量試算，紅利值不值得拿', href: '/tools/bonus-calculator/', icon: 'calculator' },
+  'power-lottery-calc': { name: '威力彩包牌計算器', desc: '第一區＋第二區注數費用秒算', href: '/tools/power-lottery-calculator/', icon: 'calculator' },
 };
 
 const presetMap: Record<Preset, string[]> = {
@@ -42,7 +43,7 @@ const presetMap: Record<Preset, string[]> = {
   'baccarat':    ['baccarat-sim', 'bankroll', 'rtp-tracker'],
   'casino':      ['casino-check', 'bonus-calc'],
   'casino-full': ['casino-check', 'bankroll', 'bonus-calc'],
-  'lottery':     ['lottery'],
+  'lottery':     ['lottery', 'power-lottery-calc'],
   'pgsi':        ['casino-check', 'bankroll'],
 };
 
