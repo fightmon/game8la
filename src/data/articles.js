@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'power-lottery-wheeling-guide',
+    title: '威力彩包牌要花多少錢？7碼到12碼費用表＋第二區全包划不划算',
+    excerpt: '威力彩第一區包 7 碼 $700、10 碼 $21,000，第二區全包再乘 8 倍。芭樂子用組合數學拆解兩個維度的注數、花費和期望值，告訴你甜蜜點在哪、幾碼開始穩虧。',
+    category: 'lottery',
+    categoryLabel: '彩券包牌',
+    badgeType: 'featured',
+    date: '2026-05-30',
+    views: 12,
+    tags: ['最新', '精選', '攻略'],
+    icon: 'target',
+    gradient: 'linear-gradient(135deg,#0a0a2e,#1a1a4a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-power-lottery-wheeling.webp'
+  },
+  {
     slug: 'casino-wagering-explained',
     title: '娛樂城流水怎麼算？打碼量公式拆解＋免費計算器',
     excerpt: '流水 =（存款 + 紅利）× 倍數。存10000送1000、流水20倍，你要下注22萬才能出金。附免費迷你計算器，輸入3個數字秒算打碼量與預期虧損。',

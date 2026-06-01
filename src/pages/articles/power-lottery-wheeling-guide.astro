@@ -1,0 +1,458 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import ToolBox from '../../components/ToolBox.astro';
+
+const faqs = [
+  { q: '威力彩包牌幾碼最划算？', a: '從成本效益比來看，<strong>7～8 碼</strong>是甜蜜點。7 碼每期 $700（7 注），8 碼 $2,800（28 注）。超過 9 碼之後組合數爆炸，10 碼就要 $21,000、12 碼 $92,400，長期幾乎不可能靠小獎回本。威力彩 RTP 約 45%，包越多虧越多是數學鐵律。' },
+  { q: '威力彩包牌第二區要不要全包？', a: '全包第二區（8 個號碼全選）等於把所有費用乘以 8 倍。好處是消除第二區的運氣因素，壞處是預算直接爆炸。7 碼包牌從 $700 變成 $5,600，10 碼從 $21,000 變成 $168,000。如果預算允許，包 2～3 個第二區號碼是折衷方案，全包只適合預算完全無上限的人。' },
+  { q: '威力彩包牌一定比單注容易中嗎？', a: '「中某個獎的機率」確實會提高，但每一注的中獎機率完全不變。頭獎永遠是 1/22,085,448。包牌的本質是用更多錢覆蓋更多組合，提升的是「覆蓋率」而不是「單注勝率」。而且威力彩的小獎獎金通常遠低於包牌成本。' },
+  { q: '威力彩「連碰」跟「包牌」一樣嗎？', a: '一樣的意思。彩券行常說的「7 連碰」就是包 7 碼。不過威力彩的連碰只針對第一區（1～38 選 6），第二區（1～8 選 1）要另外決定包幾個。所以威力彩包牌有兩個維度：第一區選幾碼 × 第二區選幾個。' },
+  { q: '威力彩跟大樂透包牌哪個比較划算？', a: '同樣包 7 碼，大樂透花 $350（每注 $50），威力彩花 $700（每注 $100）。頭獎機率方面，大樂透 7 碼是 1/1,997,688，威力彩 7 碼是 1/3,155,064。大樂透的 CP 值略高一些。但兩個都是天文數字等級的難，差別不大。詳見 <a href="/articles/super-lotto-wheeling-guide/">大樂透包牌攻略</a>。' },
+  { q: '威力彩全包 38 碼第一區可以穩中頭獎嗎？', a: '包 38 碼第一區 = C(38,6) = 2,760,681 注 × $100 = <strong>$276,068,100</strong>（2.76 億）。這只保證第一區全中，第二區還要另外猜對（1/8 機率）。如果第二區也全包：2,760,681 × 8 = 22,085,448 注 = <strong>$2,208,544,800</strong>（22 億）。頭獎保證獎金才 2 億，穩虧 20 億。數學上就是自殺式投資。' },
+  { q: '威力彩包牌預算應該怎麼分配？', a: '芭樂子建議「月娛樂預算法」：先決定每月彩券娛樂預算（例如 $3,000），再除以當月期數（威力彩每週一、四開獎，一個月約 8～9 期）。月預算 $3,000 ÷ 8 期 ≈ $375/期，這個預算大約只能買 3～4 注單注。要包 7 碼（$700/期）就需要月預算 $5,600 以上。永遠不要超出預算。' },
+  { q: '威力彩第二區號碼有冷熱號嗎？', a: '沒有。第二區只有 1～8 八個號碼，每個號碼每期的出現機率都是 1/8 = 12.5%。短期可能有某些號碼連續出現，但這是<strong>隨機波動</strong>，不是趨勢。用冷熱號選第二區號碼跟用擲硬幣選沒有任何差別——都是獨立事件。' },
+  { q: '包牌可以跟朋友合資嗎？', a: '可以，但務必事先<strong>白紙黑字寫清楚</strong>：每人出多少錢、號碼怎麼選、中獎怎麼分、誰去領獎。台灣曾發生過多起合資買彩券後因為分錢問題鬧上法院的案例。芭樂子建議合資人數不超過 5 人，每人出資金額固定，用 LINE 群組記錄所有投注明細並截圖存證。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/power-lottery-wheeling-guide/"
+  title="威力彩包牌要花多少錢？7碼到12碼費用表＋第二區全包划不划算"
+  description="威力彩第一區包 7 碼 $700、10 碼 $21,000。第二區全包再乘 8 倍。芭樂子用組合數學拆解注數、花費、期望值，告訴你甜蜜點在哪、幾碼開始穩虧。附免費包牌計算器。"
+  image="https://game8la.com/images/articles/power-lottery-wheeling-cover.webp"
+  datePublished="2026-05-30"
+  dateModified="2026-05-30"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '威力彩包牌攻略', url: 'https://game8la.com/articles/power-lottery-wheeling-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="威力彩包牌要花多少錢？7碼到12碼費用表＋第二區全包划不划算 — GAME8LA" description="威力彩第一區包 7 碼 $700、10 碼 $21,000。第二區全包再乘 8 倍。芭樂子用組合數學拆解注數、花費、期望值，告訴你甜蜜點在哪、幾碼開始穩虧。附免費包牌計算器。" ogImage="https://game8la.com/images/articles/power-lottery-wheeling-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 威力彩包牌攻略</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-05-30 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 10 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a0a2e,#1a1a4a,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">威力彩包牌要花多少錢？<em>第一區包 7 碼只要 $700，但 10 碼就要 $21,000——芭樂子算給你看</em></h1>
+
+      <!-- === 封面圖 === -->
+      <img class="content-img"
+           src="/images/articles/power-lottery-wheeling-cover.webp"
+           srcset="/images/articles/power-lottery-wheeling-cover-768w.webp 768w, /images/articles/power-lottery-wheeling-cover.webp 1376w"
+           sizes="(max-width: 640px) 100vw, 820px"
+           alt="威力彩包牌完整攻略｜7碼到12碼費用表與第二區全包分析｜芭樂子用數學算給你看｜GAME8LA"
+           width="1376" height="768" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">芭樂子算給你看：威力彩 10 碼包牌一期 $21,000，統計上要買 1,012 年才中一次頭獎</p>
+
+      <!-- === 快速工具入口 === -->
+      <div class="quick-tool-bar">
+        <span>不想看文章？直接用工具：</span>
+        <a href="/tools/power-lottery-calculator/">威力彩包牌計算器</a>
+        <a href="/lottery/analysis/">冷熱號分析</a>
+        <a href="/tools/bless-blocks/">擲筊問運氣</a>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。每次威力彩頭獎累積到 10 億、20 億，整條街的彩券行就開始排隊。有人喊「我要包 10 碼！」，結果帳單印出來 $21,000，當場臉綠。更狠的是，有人說「第二區也全包！」——恭喜，費用再乘 8。今天芭樂子把威力彩包牌的兩個維度（第一區碼數 × 第二區個數）全部用數學拆開，讓你走進彩券行之前就知道自己的荷包能不能活著走出來。</p>
+
+      <!-- === 30 秒看懂 === -->
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0;font-size:1rem">30 秒看懂：威力彩包牌花費表（第二區選 1 個）</h3>
+        <table>
+          <thead><tr><th>碼數</th><th>組合數</th><th>每期花費</th><th>頭獎機率</th><th>芭樂評語</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">6 碼</td><td>1 注</td><td>$100</td><td>1/2,209 萬</td><td style="color:var(--text-muted)">就是單注</td></tr>
+            <tr style="background:rgba(76,175,80,0.08)"><td style="font-weight:700;color:#4caf50">7 碼 ⭐</td><td>7 注</td><td>$700</td><td>1/316 萬</td><td style="color:#4caf50;font-weight:700">入門甜蜜點</td></tr>
+            <tr style="background:rgba(76,175,80,0.08)"><td style="font-weight:700;color:#4caf50">8 碼 ⭐</td><td>28 注</td><td>$2,800</td><td>1/79 萬</td><td style="color:#4caf50;font-weight:700">小資進階</td></tr>
+            <tr style="background:rgba(76,175,80,0.05)"><td style="font-weight:700;color:#8bc34a">9 碼</td><td>84 注</td><td>$8,400</td><td>1/26 萬</td><td style="color:#8bc34a">口袋深的可考慮</td></tr>
+            <tr><td style="font-weight:700;color:#ff9800">10 碼</td><td>210 注</td><td style="color:#ff9800">$21,000</td><td>1/10.5 萬</td><td style="color:#ff9800">開始心痛了</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">11 碼</td><td>462 注</td><td>$46,200</td><td>1/47,804</td><td style="color:#f44336">比中獎還難回本</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">12 碼</td><td>924 注</td><td>$92,400</td><td>1/23,902</td><td style="color:#f44336;font-weight:700">數學保證虧到哭</td></tr>
+            <tr style="border-top:2px solid var(--border)"><td style="font-weight:700;color:#9c27b0">38 碼（全餐）</td><td>2,760,681 注</td><td>$276,068,100</td><td>1/8</td><td style="color:#9c27b0">花 2.76 億，頭獎還不保證</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">※ 每注 $100。威力彩第一區從 01～38 中選 6 個號碼，第二區從 01～08 選 1 個。以上費用僅計第二區選 1 個號碼。</p>
+      </div>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#what">威力彩包牌跟 539/大樂透有什麼不同？</a></li>
+          <li><a href="#cost">威力彩包牌費用怎麼算？</a></li>
+          <li><a href="#area2">第二區要不要全包？8 倍的代價值不值得</a></li>
+          <li><a href="#compare">威力彩 7 碼到 12 碼完整數據表</a></li>
+          <li><a href="#ev">威力彩 10 碼包牌一年要燒多少錢？</a></li>
+          <li><a href="#vs">威力彩包牌 vs 大樂透 vs 539：同樣花錢誰 CP 值高？</a></li>
+          <li><a href="#sweet">芭樂子的結論：威力彩包幾碼不會後悔</a></li>
+          <li><a href="#myth">三個威力彩包牌迷思</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- === 正文開始 === -->
+
+      <h2 id="what" style="margin-top:2.5rem">威力彩包牌跟 539/大樂透有什麼不同？</h2>
+
+      <p>先搞清楚威力彩的遊戲規則——它跟 539、大樂透最大的差別就是<strong>有兩個區</strong>：</p>
+
+      <ul>
+        <li><strong>第一區：</strong>從 01～38 選 6 個號碼，組合數 C(38,6) = 2,760,681</li>
+        <li><strong>第二區：</strong>從 01～08 選 1 個號碼，就 8 個裡面猜 1 個</li>
+        <li><strong>總組合：</strong>2,760,681 × 8 = <strong>22,085,448</strong>（頭獎機率就是這個數字的倒數）</li>
+      </ul>
+
+      <p>這代表什麼？<strong>威力彩的包牌有兩個維度可以「包」</strong>。你可以在第一區多選幾個號碼（7 碼、8 碼、10 碼⋯⋯），也可以在第二區多選幾個號碼（選 2 個、4 個、甚至全包 8 個）。最後的注數 = 第一區組合數 × 第二區選幾個。</p>
+
+      <p>539 只有一個區（39 選 5），大樂透也是一個區（49 選 6），所以它們的包牌只有一個維度。威力彩多了第二區，看起來好像多了一個武器，但同時也多了一個燒錢的維度。</p>
+
+      <p>聽起來很靈活對吧？問題在後面。</p>
+
+      <!-- CTA 1 -->
+      <div style="margin:1.5rem 0;padding:1rem 1.2rem;background:linear-gradient(135deg,rgba(245,184,0,0.06),rgba(255,136,0,0.06));border:1px solid rgba(245,184,0,0.3);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <div>
+          <strong style="color:#f5b800">想先體驗包牌？</strong>
+          <p style="margin:0.3rem 0 0;font-size:0.88rem;color:var(--text-secondary)">芭樂子的威力彩包牌計算器幫你自動算注數和費用，不用自己按計算機。</p>
+        </div>
+        <a href="/tools/power-lottery-calculator/" style="text-decoration:none">
+          <div style="background:linear-gradient(135deg,#FFD700,#ff8800);color:#000;font-weight:900;padding:0.7rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.9rem">立即試算 →</div>
+        </a>
+      </div>
+
+      <h2 id="cost" style="margin-top:2.5rem">威力彩包牌費用怎麼算？</h2>
+
+      <p>核心公式只有一條：</p>
+
+      <p style="text-align:center;font-size:1.15rem;font-weight:700;color:#f5b800;margin:1.5rem 0">總花費 = C(第一區選幾碼, 6) × 第二區選幾個 × $100</p>
+
+      <p>翻成白話：<strong>從你看好的第一區號碼裡取所有 6 碼組合，再乘以你在第二區選了幾個號碼，每注 $100</strong>。</p>
+
+      <p>先看第一區的組合數怎麼爆炸（第二區暫時只選 1 個）：</p>
+
+      <div class="card" style="margin:1.5rem 0;overflow-x:auto">
+        <h3 style="margin-top:0;color:#f5b800">威力彩第一區包牌組合數成長表</h3>
+        <table>
+          <thead><tr><th>碼數</th><th>組合數 C(n,6)</th><th>花費（第二區×1）</th><th>跟前一碼比</th></tr></thead>
+          <tbody>
+            <tr><td>6 碼</td><td>1 注</td><td>$100</td><td>—</td></tr>
+            <tr><td>7 碼</td><td>7 注</td><td>$700</td><td>×7.0</td></tr>
+            <tr><td>8 碼</td><td>28 注</td><td>$2,800</td><td>×4.0</td></tr>
+            <tr><td>9 碼</td><td>84 注</td><td>$8,400</td><td>×3.0</td></tr>
+            <tr><td>10 碼</td><td>210 注</td><td>$21,000</td><td>×2.5</td></tr>
+            <tr><td>11 碼</td><td>462 注</td><td>$46,200</td><td>×2.2</td></tr>
+            <tr><td>12 碼</td><td>924 注</td><td>$92,400</td><td>×2.0</td></tr>
+            <tr style="border-top:2px solid var(--border)"><td style="font-weight:700">38 碼（全包第一區）</td><td style="font-weight:700">2,760,681 注</td><td style="font-weight:700">$276,068,100</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>看到了嗎？從 7 碼到 10 碼，花費從 $700 跳到 $21,000，漲了 30 倍。但頭獎機率只從 1/316 萬變成 1/10.5 萬——從「幾乎不可能」變成「還是幾乎不可能」。</p>
+
+      <p>芭樂子白話翻譯：<strong>你的錢在指數成長，中獎機率只在線性成長。這是包牌的根本矛盾，不管哪種彩券都一樣。</strong></p>
+
+      <!-- CTA：包牌計算器 -->
+      <div style="margin:1.5rem 0;padding:1rem 1.2rem;background:linear-gradient(135deg,rgba(245,184,0,0.06),rgba(255,136,0,0.06));border:1px solid rgba(245,184,0,0.3);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <div>
+          <strong style="color:#f5b800">包牌太貴？先用計算器算一下</strong>
+          <p style="margin:0.3rem 0 0;font-size:0.88rem;color:var(--text-secondary)">輸入你的第一區碼數和第二區個數，自動算出注數和花費——省下不必要的冤枉錢。</p>
+        </div>
+        <a href="/tools/power-lottery-calculator/" style="text-decoration:none">
+          <div style="background:linear-gradient(135deg,#FFD700,#ff8800);color:#000;font-weight:900;padding:0.7rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.9rem">包牌計算器 →</div>
+        </a>
+      </div>
+
+      <h2 id="area2" style="margin-top:2.5rem">第二區要不要全包？8 倍的代價值不值得</h2>
+
+      <figure style="margin:1.5rem 0">
+        <img src="/images/articles/power-lottery-wheeling-area2.webp"
+             srcset="/images/articles/power-lottery-wheeling-area2-768w.webp 768w, /images/articles/power-lottery-wheeling-area2.webp 1376w"
+             sizes="(max-width: 640px) 100vw, 820px"
+             alt="芭樂子左手拿薄薄一疊鈔票（選1個第二區），右手拿厚8倍快拿不住的鈔票（全包8個），背景8顆彩球1到8"
+             width="1376" height="768" loading="lazy" decoding="async"
+             style="display:block;width:100%;max-width:820px;height:auto;border-radius:12px" />
+        <figcaption style="text-align:center;font-size:0.82rem;color:var(--text-muted);margin-top:0.5rem">第二區選 1 個 vs 全包 8 個——費用差 8 倍，你的荷包撐得住嗎？</figcaption>
+      </figure>
+
+      <p>這是威力彩包牌最獨特的問題。第二區只有 8 個號碼，全包代表<strong>費用直接乘以 8</strong>，但也把第二區的運氣因素從 1/8 完全消除。</p>
+
+      <p>先看數字：</p>
+
+      <div class="card" style="margin:1.5rem 0;overflow-x:auto">
+        <h3 style="margin-top:0;color:#f5b800">第二區部分包 vs 全包費用比較</h3>
+        <table>
+          <thead><tr><th>第一區碼數</th><th>第二區×1</th><th>第二區×2</th><th>第二區×4</th><th>第二區×8（全包）</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">7 碼</td><td>$700</td><td>$1,400</td><td>$2,800</td><td style="color:#ff9800;font-weight:700">$5,600</td></tr>
+            <tr><td style="font-weight:700">8 碼</td><td>$2,800</td><td>$5,600</td><td>$11,200</td><td style="color:#ff9800;font-weight:700">$22,400</td></tr>
+            <tr><td style="font-weight:700">9 碼</td><td>$8,400</td><td>$16,800</td><td>$33,600</td><td style="color:#f44336;font-weight:700">$67,200</td></tr>
+            <tr><td style="font-weight:700">10 碼</td><td>$21,000</td><td>$42,000</td><td>$84,000</td><td style="color:#f44336;font-weight:700">$168,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>全包第二區的好處是什麼？<strong>如果你的第一區 6 個號碼全中，第二區全包就保證中頭獎</strong>，不用再賭那 1/8 的運氣。聽起來很讚，但問題是——你第一區 6 碼全中的機率本身就是天文數字等級的低。</p>
+
+      <p>用 7 碼來說：第一區 7 碼全中 6 個的機率是 7/2,760,681 = 1/394,383。全包第二區把頭獎機率從 1/3,155,064 提升到 1/394,383，提升了 8 倍——但代價也是 8 倍的錢。</p>
+
+      <p><strong>芭樂子的看法：</strong>全包第二區在數學上不會改變你的期望值比例（EV 永遠是花費的 45%），但它把「第二區猜錯的遺憾」消除了。如果你的包牌預算固定，把錢花在第一區多包一碼，比全包第二區更有效率。比如 8 碼 × 第二區 1 個 = $2,800，跟 7 碼 × 第二區 4 個 = $2,800 花一樣的錢，但前者第一區覆蓋率高 4 倍。</p>
+
+      <h2 id="compare" style="margin-top:2.5rem">威力彩 7 碼到 12 碼完整數據表</h2>
+
+      <p>接下來是正式的數據表。威力彩獎金結構：頭獎（6+1）獎金浮動、貳獎（6+0）約 400 萬、參獎（5+1）約 15 萬、肆獎（5+0）約 2 萬、伍獎（4+1）約 4,000、陸獎（4+0）約 800、柒獎（3+1）約 400、捌獎（2+1）約 200、玖獎（1+1 或 0+1）100 元。</p>
+
+      <p>以下用<strong>頭獎 2 億元</strong>作為基準（最低保證獎金）：</p>
+
+      <div class="card" style="margin:1.5rem 0;overflow-x:auto">
+        <h3 style="margin-top:0;color:#f5b800">威力彩包牌完整數據表（第二區選 1 個、頭獎假設 2 億）</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>碼數</th>
+              <th>注數</th>
+              <th>花費</th>
+              <th>頭獎機率</th>
+              <th>期望回收<br><span style="font-weight:400;font-size:0.75rem">(RTP 45%)</span></th>
+              <th>期望虧損</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight:700">6</td><td>1</td><td>$100</td><td>1/22,085,448</td><td>$45</td><td style="color:#f44336">-$55</td></tr>
+            <tr style="background:rgba(76,175,80,0.1)"><td style="font-weight:700;color:#4caf50">7 ⭐</td><td>7</td><td>$700</td><td>1/3,155,064</td><td>$315</td><td style="color:#f44336">-$385</td></tr>
+            <tr style="background:rgba(76,175,80,0.1)"><td style="font-weight:700;color:#4caf50">8 ⭐</td><td>28</td><td>$2,800</td><td>1/788,766</td><td>$1,260</td><td style="color:#f44336">-$1,540</td></tr>
+            <tr style="background:rgba(76,175,80,0.05)"><td style="font-weight:700;color:#8bc34a">9</td><td>84</td><td>$8,400</td><td>1/262,922</td><td>$3,780</td><td style="color:#f44336">-$4,620</td></tr>
+            <tr><td style="font-weight:700;color:#ff9800">10</td><td>210</td><td>$21,000</td><td>1/105,168</td><td>$9,450</td><td style="color:#f44336">-$11,550</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">11</td><td>462</td><td>$46,200</td><td>1/47,804</td><td>$20,790</td><td style="color:#f44336">-$25,410</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">12</td><td>924</td><td>$92,400</td><td>1/23,902</td><td>$41,580</td><td style="color:#f44336">-$50,820</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">※ 期望回收 ≈ 花費 × 45%（威力彩 RTP 約 45%）。頭獎機率 = 注數 / 22,085,448。頭獎 2 億未扣稅。</p>
+      </div>
+
+      <p>看最右邊那欄——<strong>每一排的期望虧損大約是花費的 55%</strong>。不管包幾碼，你的數學期望值永遠是虧。花 $700 期望虧 $385；花 $92,400 期望虧 $50,820。包越多、虧越多，就這麼簡單。</p>
+
+      <p>這就是台灣公益彩券的結構性真相：<strong>約 55% 的錢會被分配到公益金、稅金和營運費用</strong>。不管你怎麼包，這個比例不會改變。</p>
+
+      <h2 id="ev" style="margin-top:2.5rem">威力彩 10 碼包牌一年要燒多少錢？</h2>
+
+      <p>很多彩迷覺得「包多一點就更接近頭獎」。來，芭樂子幫你算一筆讓你冷靜的帳。</p>
+
+      <p><strong>10 碼包牌（第二區選 1 個），每期 $21,000。</strong>威力彩每週開 2 期（週一、週四），一年約 104 期。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#ff9800">
+        <h3 style="margin-top:0;color:#ff9800">10 碼包牌年度帳本</h3>
+        <table>
+          <thead><tr><th>項目</th><th>金額</th></tr></thead>
+          <tbody>
+            <tr><td>年度總投入</td><td style="font-weight:700">$21,000 × 104 = $2,184,000</td></tr>
+            <tr><td>期望年度回收（RTP 45%）</td><td>$2,184,000 × 45% = $982,800</td></tr>
+            <tr><td style="color:#f44336;font-weight:700">期望年度虧損</td><td style="color:#f44336;font-weight:700">-$1,201,200</td></tr>
+            <tr><td>年度中頭獎機率</td><td>1 - (1 - 210/22,085,448)^104 ≈ 0.099%</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.85rem;color:var(--text-muted)">※ 白話翻譯：每年燒 218 萬，期望拿回 98 萬，穩虧 120 萬。中頭獎的機率是 0.099%，大約 1,012 年會中一次。</p>
+      </div>
+
+      <p>1,012 年。西元 1014 年是北宋年間，當時宋真宗剛跟遼國簽完澶淵之盟。你從那時候開始買，買到現在 2026 年，統計上才「剛好」中一次頭獎。中間每年穩定虧 120 萬。</p>
+
+      <p>如果你是那種「第二區也要全包」的猛人呢？10 碼 × 第二區全包 = $168,000/期，一年 $17,472,000（1,747 萬）。期望年虧 960 萬。你不是在買彩券，你是在給政府捐款。</p>
+
+      <p>芭樂子不是要掃你的興——買彩券本來就是花錢買一個夢。但你得搞清楚這個夢的價格，免得夢還沒做完，房貸就繳不出來。</p>
+
+      <h2 id="vs" style="margin-top:2.5rem">威力彩包牌 vs 大樂透 vs 539：同樣花錢誰 CP 值高？</h2>
+
+      <p>這題很多人問，芭樂子直接列表比給你看。同樣包 7 碼，三種彩券的差距有多大？</p>
+
+      <div class="card" style="margin:1.5rem 0;overflow-x:auto">
+        <h3 style="margin-top:0;color:#f5b800">同樣包 7 碼：威力彩 vs 大樂透 vs 539</h3>
+        <table>
+          <thead><tr><th>項目</th><th>539</th><th>大樂透</th><th>威力彩</th></tr></thead>
+          <tbody>
+            <tr><td>組合數</td><td>C(7,5) = 21 注</td><td>C(7,6) = 7 注</td><td>C(7,6) = 7 注</td></tr>
+            <tr><td>每期花費</td><td>$1,050</td><td>$350</td><td>$700</td></tr>
+            <tr><td>頭獎機率</td><td style="color:#4caf50;font-weight:700">1/27,417</td><td>1/1,997,688</td><td>1/3,155,064</td></tr>
+            <tr><td>頭獎獎金</td><td>$800 萬（固定）</td><td>浮動（約 1 億）</td><td>浮動（約 2 億起）</td></tr>
+            <tr><td>RTP</td><td>~56%</td><td>~55%</td><td>~45%</td></tr>
+            <tr style="background:rgba(76,175,80,0.1)"><td style="font-weight:700">CP 值結論</td><td style="color:#4caf50;font-weight:700">中獎率最高、回本率最好</td><td>費用最低、頭獎居中</td><td>費用居中、但頭獎最難中</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>數字很殘忍：<strong>539 包 7 碼的頭獎機率是威力彩的 115 倍</strong>。雖然 539 頭獎只有 800 萬不像威力彩動輒 10 億，但你中得到才有意義。花 $1,050 有 1/27,417 的機率中 800 萬，跟花 $700 有 1/315 萬的機率中 2 億，你說哪個比較實際？</p>
+
+      <p>大樂透則是折衷選擇：同樣 7 碼只花 $350（威力彩的一半），頭獎機率 1/200 萬也比威力彩好。如果你不是非要搏那個「20 億頭獎」的夢，大樂透的 CP 值其實更高。</p>
+
+      <p>所以威力彩包牌適合什麼人？<strong>你就是衝著那個上億、甚至幾十億的頭獎來的</strong>。如果是這種心態，7～8 碼花 $700～$2,800 是最理性的選擇，搏個夢但不會心痛。</p>
+
+      <!-- CTA 2：導流到 539 和大樂透文 -->
+      <div style="margin:1.5rem 0;padding:1rem 1.2rem;background:linear-gradient(135deg,rgba(76,175,80,0.06),rgba(57,255,20,0.04));border:1px solid rgba(76,175,80,0.3);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <div>
+          <strong style="color:#4caf50">想看其他彩券的包牌拆解？</strong>
+          <p style="margin:0.3rem 0 0;font-size:0.88rem;color:var(--text-secondary)">539 和大樂透的命中率、甜蜜點分析，芭樂子都算好了。</p>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <a href="/articles/daily-cash-539-wheel-strategy/" style="text-decoration:none">
+            <div style="background:linear-gradient(135deg,#4caf50,#2e7d32);color:#fff;font-weight:900;padding:0.7rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.9rem">539 包牌懶人包 →</div>
+          </a>
+          <a href="/articles/super-lotto-wheeling-guide/" style="text-decoration:none">
+            <div style="background:linear-gradient(135deg,#1a3a5c,#0a1a2e);color:#fff;font-weight:900;padding:0.7rem 1.2rem;border-radius:10px;white-space:nowrap;font-size:0.9rem">大樂透包牌攻略 →</div>
+          </a>
+        </div>
+      </div>
+
+      <h2 id="sweet" style="margin-top:2.5rem">芭樂子的結論：威力彩包幾碼不會後悔</h2>
+
+      <p>講了一堆數學，直接給你結論：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#4caf50;background:linear-gradient(135deg,rgba(76,175,80,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#4caf50;margin-top:0">芭樂子的威力彩包牌建議</h3>
+        <p><strong style="font-size:1.1rem;color:#4caf50">第一區 7～8 碼：最理性的選擇</strong></p>
+        <p>7 碼 $700、8 碼 $2,800。花得起，輸得起，中了開心，沒中不痛。以月娛樂預算 $6,000 來說，每期 7 碼（$700 × 8 期 = $5,600）剛好控制在預算內。8 碼適合月預算 $20,000 以上的人。</p>
+        <p style="margin-top:1rem"><strong style="font-size:1.1rem;color:#8bc34a">第一區 9 碼：口袋比較深的選項</strong></p>
+        <p>$8,400/期，月投入接近 7 萬。如果這筆錢對你來說是零用錢等級，9 碼確實覆蓋了更多組合。但請永遠記得：期望回收還是 45%。</p>
+        <p style="margin-top:1rem"><strong style="font-size:1.1rem;color:#f44336">第一區 10 碼以上：不建議</strong></p>
+        <p>10 碼 $21,000/期，一年燒 218 萬。12 碼 $92,400/期，一年 961 萬。除非你開藍寶堅尼去買彩券，否則這筆錢拿去吃好料、投資、甚至買 539 包 7 碼都更划算。</p>
+        <p style="margin-top:1rem"><strong style="font-size:1.1rem;color:#2196f3">第二區：選 1～2 個就好</strong></p>
+        <p>第二區全包（×8 倍費用）在數學上不會改變 EV 比例。除非你預算完全沒有上限，否則把錢花在第一區多包一碼比全包第二區有效率。選 1 個是基本，選 2 個是稍微對沖，超過 2 個就是在燒錢了。</p>
+      </div>
+
+      <h2 id="myth" style="margin-top:2.5rem">三個威力彩包牌迷思</h2>
+
+      <h3>迷思一：「第二區全包就穩中頭獎」</h3>
+
+      <p>大錯特錯。第二區全包只是保證第二區一定中，但<strong>你的第一區 6 個號碼要全部中獎才行</strong>。第一區中 6 碼的機率是 C(你的碼數,6) / C(38,6)。就算你包了 10 碼，第一區全中的機率也只有 210/2,760,681 = 1/13,146。第二區全包只是消除了最後那 1/8 的運氣，但前面那道 1/13,146 的牆你還是得自己翻過去。</p>
+
+      <h3>迷思二：「買威力彩比大樂透划算因為頭獎比較高」</h3>
+
+      <p>頭獎金額高不代表划算。威力彩 RTP 約 45%，大樂透約 55%。也就是說，<strong>你花 100 元買威力彩，期望拿回 45 元；花 50 元買大樂透，期望拿回 27.5 元</strong>。換算成「每塊錢的回收率」，大樂透還高了 10 個百分點。頭獎金額高只是因為中獎機率更低（分母更大），獎池累積更久而已。這不是划算，這是數學。</p>
+
+      <h3>迷思三：「包多碼配合冷熱號就能提高勝率」</h3>
+
+      <p>每一期開獎都是<a href="https://zh.wikipedia.org/wiki/%E7%8D%A8%E7%AB%8B%E4%BA%8B%E4%BB%B6" target="_blank" rel="noopener">獨立事件</a>。開獎機不會記得上一期開了什麼。所謂「冷號該出了」「熱號正旺」純粹是人腦的<a href="https://zh.wikipedia.org/wiki/%E8%B3%AD%E5%BE%92%E8%AC%AC%E8%AA%A4" target="_blank" rel="noopener">賭徒謬誤</a>。你拿遺漏值去選號，跟用生日、車牌去選號，在數學上中獎機率完全一模一樣。芭樂子知道這話不中聽，但數學就是數學。</p>
+
+      <!-- CTA 3：導流到數據站 -->
+      <div style="margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg,rgba(57,255,20,0.08),rgba(245,184,0,0.06));border:1px solid rgba(57,255,20,0.3);border-radius:14px;text-align:center">
+        <p style="font-size:1.2rem;font-weight:900;color:var(--guava-green);margin:0 0 0.5rem">算完包牌方案了？接下來挑號碼</p>
+        <p style="font-size:0.9rem;color:var(--text-secondary);margin:0 0 1rem;max-width:600px;display:inline-block">芭樂子的樂透數據站幫你分析威力彩冷熱號、遺漏值——用數據選出核心號碼，再丟進包牌計算器自動組合。免費、不用註冊、不報明牌。</p>
+        <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap">
+          <a href="/lottery/analysis/" style="display:inline-block;background:linear-gradient(135deg,#39ff14,#2ecc71);color:#000;font-weight:900;padding:0.8rem 1.8rem;border-radius:10px;font-size:0.95rem;text-decoration:none">看冷熱號選號 →</a>
+          <a href="/tools/power-lottery-calculator/" style="display:inline-block;background:linear-gradient(135deg,#FFD700,#ff8800);color:#000;font-weight:900;padding:0.8rem 1.8rem;border-radius:10px;font-size:0.95rem;text-decoration:none">包牌計算器 →</a>
+        </div>
+      </div>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.82rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子免責聲明：</strong>本文所有數據皆基於組合數學精算，不構成投注建議。彩券是負期望值遊戲，長期下來一定虧錢。包牌不是投資策略，是用固定預算買一個夢——請控制預算，量力而為。如果你覺得自己「必須」買彩券才能過日子，請撥打戒賭專線 1925。</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <div class="card" style="margin:2rem 0;border-color:var(--border)">
+        <h3 style="margin-top:0">延伸閱讀</h3>
+        <ul style="margin:0;padding-left:1.2rem">
+          <li><a href="/articles/super-lotto-wheeling-guide/">大樂透包牌怎麼買最划算？7 碼到全餐花費拆解</a></li>
+          <li><a href="/articles/daily-cash-539-wheel-strategy/">539 包牌懶人包：7～12 碼成本 vs 命中率完整比較</a></li>
+          <li><a href="/articles/power-lottery-odds-explained/">威力彩頭獎機率 1/22,085,448 有多難中？</a></li>
+          <li><a href="/articles/lottery-odds-comparison/">威力彩 vs 大樂透中獎機率完整比較</a></li>
+          <li><a href="/tools/power-lottery-calculator/">威力彩包牌計算器：自動算注數與花費</a></li>
+          <li><a href="/lottery/analysis/">樂透數據站：冷熱號分析・選號參考</a></li>
+        </ul>
+      </div>
+
+      <ToolBox preset="lottery" />
+      <ManifestoBox />
+      <ShareButtons title="威力彩包牌要花多少錢？7碼到12碼費用表＋第二區全包划不划算" url="https://game8la.com/articles/power-lottery-wheeling-guide/" />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 1.2rem 3rem; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: 1.4rem; }
+  .article-content p { font-size: 1rem; line-height: 1.85; margin: 1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.7; }
+
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0.5rem; }
+  .article-img-caption { text-align: center; font-size: 0.82rem; color: var(--text-muted); margin: 0 0 1.5rem; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.1rem; }
+  .card p { font-size: 0.95rem; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.85rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 4px 10px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .casino-check-cta { background: linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.06)); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; text-align: center; margin: 2rem 0; }
+  .casino-check-cta .cta-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .casino-check-cta h3 { font-size: 1.2rem; margin: 0.5rem 0; }
+  .casino-check-cta p { color: var(--text-secondary); font-size: 0.92rem; margin: 0.5rem 0 1rem; }
+  .cta-check-btn { display: inline-block; background: var(--guava-green); color: #000; padding: 12px 28px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: transform 0.15s; }
+  .cta-check-btn:hover { transform: translateY(-2px); }
+
+  .faq-list { margin: 1rem 0 2rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1rem 1.2rem; cursor: pointer; font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.2rem 1rem; color: var(--text-secondary); font-size: 0.93rem; line-height: 1.7; }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.75rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 0.95rem; }
+  .rl-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+  .donate-section { margin: 2.5rem 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, rgba(57,255,20,0.04), rgba(245,184,0,0.04)); }
+  .donate-content { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem 1.8rem; }
+  .donate-text { flex: 1; }
+  .donate-text h3 { font-size: 1.15rem; margin: 0 0 0.6rem; color: var(--guava-green); }
+  .donate-text p { font-size: 0.92rem; line-height: 1.7; margin: 0.4rem 0; }
+  .donate-bank { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin-top: 0.8rem; }
+  .donate-bank-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.3rem 0; font-size: 0.9rem; }
+  .donate-label { color: var(--text-muted); min-width: 70px; }
+  .donate-value { font-weight: 700; font-family: 'SF Mono', 'Fira Code', monospace; letter-spacing: 1px; }
+  .donate-copy-btn { background: var(--guava-green); color: #000; border: none; border-radius: 6px; padding: 3px 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer; margin-left: 0.5rem; transition: opacity 0.15s; }
+  .donate-copy-btn:hover { opacity: 0.8; }
+  .donate-img { flex-shrink: 0; width: 180px; }
+  .donate-img img { width: 100%; height: auto; border-radius: 12px; }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.5rem; }
+    .article-content h2 { font-size: 1.2rem; }
+    .donate-content { flex-direction: column; padding: 1.2rem; }
+    .donate-img { width: 140px; }
+  }
+</style>
