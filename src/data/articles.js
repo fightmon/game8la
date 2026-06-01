@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'worldcup-2026-prediction',
+    title: '2026 世足冠軍預測｜48 隊數據分析＋芭樂子擲筊選冠軍',
+    excerpt: '2026 世界盃 48 隊史上最大規模！芭樂子用 FIFA 排名和歷史戰績分出四個梯隊，拆解死亡之組，最後用擲筊選出冠軍——三次聖筊就是天意。附即時投票預測工具。',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-01',
+    views: 5,
+    tags: ['最新', '精選', '時事'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#0a2e1a,#1a4a2a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-worldcup-2026.webp'
+  },
+  {
     slug: 'power-lottery-wheeling-guide',
     title: '威力彩包牌要花多少錢？7碼到12碼費用表＋第二區全包划不划算',
     excerpt: '威力彩第一區包 7 碼 $700、10 碼 $21,000，第二區全包再乘 8 倍。芭樂子用組合數學拆解兩個維度的注數、花費和期望值，告訴你甜蜜點在哪、幾碼開始穩虧。',

@@ -1,0 +1,1087 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+---
+<BaseLayout
+  currentPage="tools"
+  title="2026 世足冠軍預測｜你猜哪隊奪冠？48 隊即時投票統計 — GAME8LA"
+  description="2026 世界盃 48 隊史上最大規模！你猜誰是冠軍？投票後即時看全站預測統計。法國、阿根廷、西班牙還是黑馬？芭樂子帶你看各組分析。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="wc-hero">
+    <h1>⚽ 2026 世足冠軍預測</h1>
+    <p class="wc-slogan">48 隊史上最大規模世界盃，你猜誰笑到最後？</p>
+    <p class="wc-desc">6/11 開踢！選出你心中的冠軍，看看大家都押誰。投完票即時看統計。</p>
+  </div>
+
+  <!-- Voting Section -->
+  <div class="wc-voting-section" id="votingSection">
+    <h2 class="wc-section-title">📋 選出你心中的冠軍</h2>
+    <p class="wc-section-hint">點選任一隊伍，然後按下「確認投票」</p>
+    <div class="wc-groups-grid" id="groupsGrid"></div>
+    <div class="wc-vote-action" id="voteAction">
+      <div class="wc-selected-display" id="selectedDisplay">尚未選擇隊伍</div>
+      <button class="wc-vote-btn" id="voteBtn" disabled>確認投票</button>
+    </div>
+  </div>
+
+  <!-- Confirmation + Fate Card -->
+  <div class="wc-confirmation" id="confirmation" style="display:none">
+    <div class="wc-confirm-card">
+      <p class="wc-confirm-text" id="confirmText"></p>
+      <div class="wc-title-badge" id="titleBadge"></div>
+      <p class="wc-comment" id="teamComment"></p>
+    </div>
+    <!-- Fate Card -->
+    <div class="wc-fate-card" id="fateCard">
+      <div class="wc-fate-header" id="fateHeader"></div>
+      <div class="wc-fate-grid" id="fateGrid"></div>
+    </div>
+    <!-- 芭樂子擲筊 -->
+    <div class="wc-jiao-section" id="jiaoSection">
+      <button class="wc-jiao-btn" id="jiaoBtn" onclick="askGods()">🥠 讓芭樂子擲筊問問神明怎麼看</button>
+      <div class="wc-jiao-result" id="jiaoResult" style="display:none"></div>
+    </div>
+    <div class="wc-confirm-actions">
+      <button class="wc-revote-btn" onclick="revote()">🔄 改變心意？換一隊看看</button>
+      <p class="wc-confirm-sub">👇 來看看大家都押誰</p>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="wc-results-section" id="resultsSection" style="display:none">
+    <h2 class="wc-section-title">📊 全站預測統計</h2>
+    <p class="wc-total-votes" id="totalVotes"></p>
+    <div class="wc-chart" id="chart"></div>
+    <p class="wc-share-prompt">🔥 分享給朋友一起預測！看誰的眼光最準</p>
+  </div>
+
+  <!-- SEO Static Section -->
+  <section class="wc-seo-section">
+    <h2>2026 世界盃你該知道的事</h2>
+
+    <h3>史上最大規模：48 隊、104 場比賽</h3>
+    <p>2026 年 FIFA 世界盃是史上第一次 48 隊參賽的世界盃，也是第一次由三個國家聯合主辦——美國、加拿大、墨西哥。賽事從 6 月 11 日打到 7 月 19 日，總共 104 場比賽。分成 12 組（A 到 L），每組 4 隊，前兩名晉級 32 強淘汰賽。簡單說：場次多到你可以天天看球不睡覺。</p>
+
+    <h3>死亡之組：I 組</h3>
+    <p>法國（FIFA 排名第 1）、塞內加爾（第 18）、挪威（第 22）、伊拉克（第 61）。法國雖然排名第一但別以為穩了——塞內加爾在 2022 年就展現過非洲冠軍的實力，挪威有哈蘭德這個進球機器。芭樂子覺得這組每場都是硬仗，小組第二搞不好比其他組冠軍還強。</p>
+
+    <h3>首次參賽的新面孔</h3>
+    <p>維德角 🇨🇻、乘拉索 🇨🇼、約旦 🇯🇴、烏茲別克 🇺🇿 都是世界盃處女秀！特別是維德角，這個只有 50 萬人口的島國能踢進世界盃，根本是足球界的灰姑娘故事。</p>
+
+    <h3>缺席的強隊</h3>
+    <p>義大利連續第三屆缺席世界盃！上一次他們參賽是 2014 年巴西世界盃。四屆冠軍變成看台觀眾，芭樂子只能說：足球就是這麼殘酷，過去的榮耀不能當飯吃。</p>
+
+    <h3>芭樂子的冠軍分析</h3>
+    <p>說實話，法國跟阿根廷是兩大熱門，這誰都看得出來。但芭樂子要提醒你：2022 年之前誰猜到阿根廷能奪冠？2018 年之前誰猜到法國那批年輕人能封王？世界盃的魅力就在於「意外」。西班牙這兩年的年輕球員爆發力驚人，英格蘭的陣容深度也是頂級，巴西雖然近年起伏大但底蘊在那裡。至於黑馬？芭樂子看好日本——他們在 2022 年連贏德國和西班牙不是運氣，是實力。</p>
+
+    <p>不管你選誰，記住一件事：世界盃四年才一次，享受比賽比猜對答案更重要。當然啦，如果你猜對了，截圖炫耀是基本禮貌 😏</p>
+  </section>
+
+  <!-- CTA Section -->
+  <div class="wc-cta-bar">
+    <p>🎲 不知道選誰？讓命運來決定</p>
+    <div class="wc-cta-links">
+      <a href="/tools/bless-blocks/" class="wc-cta-link">🥢 擲筊問問神明</a>
+      <a href="/tools/blackjack/" class="wc-cta-link">🃏 AI 21 點</a>
+      <a href="/tools/" class="wc-cta-link">🔧 8LA 工具箱</a>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:2rem 0">
+    <a href="/tools/" class="btn-outline">&larr; 回工具箱</a>
+  </div>
+
+  <ShareButtons title="2026 世足冠軍預測｜你猜哪隊奪冠？" heading="⚽ 世足開打在即，你押哪隊？" />
+</div>
+
+<!-- ===== SoftwareApplication Schema ===== -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "2026 世足冠軍預測投票工具",
+  "url": "https://game8la.com/tools/worldcup-2026/",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "description": "2026 世界盃 48 隊冠軍預測投票工具，即時統計全站投票結果，支援 12 組別瀏覽。"
+})} />
+
+<!-- ===== BreadcrumbList Schema ===== -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "2026 世足冠軍預測", "item": "https://game8la.com/tools/worldcup-2026/" }
+  ]
+})} />
+
+<!-- ===== FAQ Schema ===== -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "2026 世界盃有幾隊參賽？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2026 年 FIFA 世界盃首次擴大為 48 隊參賽，分成 12 組（A 到 L），每組 4 隊。這是世界盃歷史上規模最大的一屆。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "2026 世界盃在哪裡舉辦？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2026 世界盃由美國、加拿大和墨西哥三國聯合主辦，是史上第一次由三個國家共同舉辦世界盃。決賽將在美國紐約/紐澤西的大都會體育場舉行。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "2026 世界盃什麼時候開始？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2026 世界盃於 6 月 11 日開幕，7 月 19 日決賽，為期約 39 天，總共進行 104 場比賽。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "2026 世界盃冠軍熱門是誰？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "根據 FIFA 排名和博彩賠率，法國（排名第 1）、阿根廷（排名第 3）、西班牙（排名第 2）、英格蘭（排名第 4）是主要的冠軍熱門。巴西和葡萄牙也被看好。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "哪些隊伍是首次參加世界盃？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "維德角、乘拉索（庫拉索）、約旦和烏茲別克都是首次參加世界盃決賽圈。其中維德角是人口最少的參賽國之一。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "2026 世界盃的死亡之組是哪一組？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I 組被普遍認為是死亡之組，包含 FIFA 排名第 1 的法國、非洲強隊塞內加爾（第 18）、擁有哈蘭德的挪威（第 22）以及伊拉克（第 61）。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "義大利有參加 2026 世界盃嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "沒有。義大利連續第三屆無緣世界盃（2018、2022、2026），這是四屆冠軍得主歷史上最長的缺席紀錄。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "2026 世界盃賽制有什麼改變？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2026 世界盃從 32 隊擴大為 48 隊，分成 12 組。小組賽仍為每組 4 隊循環賽，前兩名加上 8 支最佳第三名晉級 32 強淘汰賽，之後為單淘汰賽制直到決賽。"
+      }
+    }
+  ]
+})} />
+
+<style is:global>
+  /* === HERO === */
+  .wc-hero {
+    text-align: center;
+    padding: 3rem 1rem 1.5rem;
+  }
+  .wc-hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .wc-slogan {
+    color: #f5b800;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .wc-desc {
+    color: #bbb;
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* === SECTION TITLES === */
+  .wc-section-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .wc-section-hint {
+    text-align: center;
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* === VOTING SECTION === */
+  .wc-voting-section {
+    padding: 1rem 0 2rem;
+  }
+
+  /* === GROUPS GRID === */
+  .wc-groups-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .wc-group-card {
+    background: #1a1a2e;
+    border: 1px solid #2a4a35;
+    border-radius: 12px;
+    padding: 0.75rem;
+    transition: border-color 0.2s;
+  }
+  .wc-group-card:hover {
+    border-color: #3d7a50;
+  }
+
+  .wc-group-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #f5b800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #2a4a35;
+  }
+
+  .wc-team-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.4rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  .wc-team-item:hover {
+    background: rgba(245, 184, 0, 0.08);
+    border-color: rgba(245, 184, 0, 0.3);
+  }
+  .wc-team-item.wc-selected {
+    background: rgba(245, 184, 0, 0.12);
+    border-color: #f5b800;
+    box-shadow: 0 0 12px rgba(245, 184, 0, 0.3);
+  }
+
+  .wc-team-flag {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .wc-team-name {
+    flex: 1;
+    font-size: 0.85rem;
+    color: #eee;
+    font-weight: 500;
+  }
+  .wc-team-rank {
+    font-size: 0.7rem;
+    color: #888;
+    background: #222;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* === VOTE ACTION === */
+  .wc-vote-action {
+    text-align: center;
+    padding: 1.5rem;
+    background: #1a1a2e;
+    border-radius: 12px;
+    border: 1px solid #2a4a35;
+  }
+  .wc-selected-display {
+    font-size: 1.1rem;
+    color: #999;
+    margin-bottom: 1rem;
+    min-height: 1.5em;
+  }
+  .wc-selected-display.wc-has-pick {
+    color: #f5b800;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  .wc-vote-btn {
+    background: linear-gradient(135deg, #1a472a, #2d6b3f);
+    color: #f5b800;
+    border: 2px solid #f5b800;
+    padding: 0.8rem 2.5rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .wc-vote-btn.wc-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .wc-vote-btn.wc-active:hover {
+    background: linear-gradient(135deg, #2d6b3f, #3d8b55);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(245, 184, 0, 0.3);
+  }
+
+  /* === CONFIRMATION === */
+  .wc-confirmation {
+    margin: 1.5rem 0;
+  }
+  .wc-confirm-card {
+    text-align: center;
+    background: linear-gradient(135deg, #1a472a, #0d2818);
+    border: 2px solid #f5b800;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(245, 184, 0, 0.15);
+  }
+  .wc-confirm-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #f5b800;
+    margin-bottom: 0.5rem;
+  }
+  .wc-confirm-sub {
+    color: #bbb;
+    font-size: 0.95rem;
+  }
+
+  .wc-title-badge {
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(245,184,0,0.15), rgba(245,184,0,0.05));
+    border: 1px solid rgba(245,184,0,0.4);
+    border-radius: 8px;
+    color: #f5b800;
+    font-size: 0.95rem;
+    display: inline-block;
+  }
+  .wc-title-badge strong { color: #ffd700; }
+
+  .wc-comment {
+    color: #ccc;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin: 0.8rem 0;
+    padding: 0.8rem 1rem;
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid #f5b800;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .wc-fate-card {
+    margin: 1.2rem 0;
+    background: linear-gradient(135deg, rgba(26,71,42,0.4), rgba(13,40,24,0.6));
+    border: 1px solid rgba(57,255,20,0.2);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .wc-fate-header {
+    padding: 0.8rem 1rem;
+    background: rgba(57,255,20,0.1);
+    border-bottom: 1px solid rgba(57,255,20,0.15);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  .wc-fate-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .wc-fate-item {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wc-fate-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.05); }
+  .wc-fate-label { color: var(--text-muted); font-size: 0.82rem; }
+  .wc-fate-val { font-weight: 700; font-size: 0.9rem; }
+  .wc-fate-prob { color: #f5b800; font-size: 1.1rem; }
+
+  .wc-jiao-section { margin: 1rem 0; text-align: center; }
+  .wc-jiao-btn {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, rgba(245,184,0,0.15), rgba(245,184,0,0.08));
+    border: 1px solid rgba(245,184,0,0.4);
+    border-radius: 10px;
+    color: #f5b800;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .wc-jiao-btn:hover {
+    background: rgba(245,184,0,0.2);
+    box-shadow: 0 4px 15px rgba(245,184,0,0.2);
+  }
+  .wc-jiao-result { margin-top: 1rem; }
+  .wc-jiao-throws { display: flex; justify-content: center; gap: 1rem; margin-bottom: 0.8rem; }
+  .wc-jiao-icon { font-size: 1.2rem; padding: 0.4rem 0.8rem; border-radius: 8px; background: rgba(255,255,255,0.05); }
+  .wc-jiao-holy { background: rgba(57,255,20,0.12); color: #39FF14; }
+  .wc-jiao-laugh { background: rgba(245,184,0,0.1); color: #f5b800; }
+  .wc-jiao-dark { background: rgba(255,50,50,0.1); color: #ff6b6b; }
+  .wc-jiao-verdict {
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.5rem 0;
+  }
+  .wc-jiao-yes { background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); color: #39FF14; }
+  .wc-jiao-maybe { background: rgba(245,184,0,0.08); border: 1px solid rgba(245,184,0,0.25); color: #f5b800; }
+  .wc-jiao-hmm { background: rgba(255,150,50,0.08); border: 1px solid rgba(255,150,50,0.25); color: #ff9632; }
+  .wc-jiao-no { background: rgba(255,50,50,0.08); border: 1px solid rgba(255,50,50,0.25); color: #ff6b6b; }
+  .wc-jiao-retry {
+    margin-top: 0.8rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+  .wc-jiao-retry:hover { border-color: #f5b800; color: #f5b800; }
+
+  .wc-confirm-actions {
+    margin-top: 1.2rem;
+    text-align: center;
+  }
+
+  .wc-revote-btn {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .wc-revote-btn:hover {
+    border-color: #f5b800;
+    color: #f5b800;
+    background: rgba(245,184,0,0.08);
+  }
+
+  /* === RESULTS === */
+  .wc-results-section {
+    padding: 2rem 0;
+  }
+  .wc-total-votes {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .wc-chart {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .wc-chart-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+  }
+  .wc-chart-label {
+    min-width: 100px;
+    font-size: 0.85rem;
+    color: #ddd;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.3rem;
+  }
+  .wc-chart-bar-wrap {
+    flex: 1;
+    height: 28px;
+    background: #1a1a2e;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .wc-chart-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #1a472a, #f5b800);
+    border-radius: 6px;
+    transition: width 0.8s ease;
+    min-width: 2px;
+  }
+  .wc-chart-bar.wc-user-pick {
+    background: linear-gradient(90deg, #f5b800, #ff8c00);
+    box-shadow: 0 0 8px rgba(245, 184, 0, 0.4);
+  }
+  .wc-chart-value {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .wc-chart-pct {
+    min-width: 45px;
+    font-size: 0.8rem;
+    color: #888;
+  }
+  .wc-share-prompt {
+    text-align: center;
+    color: #f5b800;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    font-weight: 500;
+  }
+
+  /* === SEO SECTION === */
+  .wc-seo-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: #111;
+    border-radius: 12px;
+    border: 1px solid #222;
+    line-height: 1.8;
+  }
+  .wc-seo-section h2 {
+    font-size: 1.5rem;
+    color: #f5b800;
+    margin-bottom: 1.5rem;
+  }
+  .wc-seo-section h3 {
+    font-size: 1.15rem;
+    color: #4ade80;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .wc-seo-section p {
+    color: #ccc;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  /* === CTA BAR === */
+  .wc-cta-bar {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #1a1a2e;
+    border-radius: 12px;
+    border: 1px solid #2a4a35;
+  }
+  .wc-cta-bar > p {
+    color: #bbb;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  .wc-cta-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .wc-cta-link {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: #4ade80;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .wc-cta-link:hover {
+    background: #2a4a35;
+    border-color: #4ade80;
+    transform: translateY(-1px);
+  }
+
+  /* === RESPONSIVE 768px === */
+  @media (max-width: 768px) {
+    .wc-groups-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+    .wc-hero h1 { font-size: 1.8rem; }
+    .wc-slogan { font-size: 1.1rem; }
+    .wc-hero p { font-size: 1rem; }
+    .wc-section-title { font-size: 1.4rem; }
+    .wc-team-name { font-size: 1rem; }
+    .wc-team-rank { font-size: 0.85rem; }
+    .wc-chart-label { min-width: 80px; font-size: 0.95rem; }
+    .wc-chart-pct { font-size: 0.9rem; }
+    .wc-confirm-text { font-size: 1.3rem; }
+    .wc-comment { font-size: 1rem; line-height: 1.8; }
+    .wc-title-badge { font-size: 1rem; }
+    .wc-fate-label { font-size: 0.95rem; }
+    .wc-fate-val { font-size: 1rem; }
+    .wc-fate-header { font-size: 1.15rem; }
+    .wc-jiao-verdict { font-size: 1rem; line-height: 1.7; }
+    .wc-jiao-icon { font-size: 1.3rem; }
+    .wc-jiao-btn { font-size: 1rem; }
+    .wc-revote-btn { font-size: 0.95rem; }
+    .wc-confirm-sub { font-size: 1rem; }
+    .wc-seo-section p { font-size: 1rem; line-height: 1.8; }
+    .wc-seo-section h2 { font-size: 1.3rem; }
+    .wc-vote-btn { font-size: 1rem; }
+    .wc-selected-display { font-size: 1rem; }
+  }
+
+  /* === RESPONSIVE 480px === */
+  @media (max-width: 480px) {
+    .wc-groups-grid {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+    .wc-hero { padding: 2rem 0.5rem 1rem; }
+    .wc-hero h1 { font-size: 1.5rem; }
+    .wc-slogan { font-size: 1.05rem; }
+    .wc-group-card { padding: 0.6rem; }
+    .wc-team-item { padding: 0.5rem 0.4rem; }
+    .wc-team-flag { font-size: 1.4rem; }
+    .wc-team-name { font-size: 0.95rem; }
+    .wc-team-rank { font-size: 0.85rem; }
+    .wc-vote-btn { width: 100%; padding: 0.8rem 1.5rem; font-size: 1rem; }
+    .wc-chart-label { min-width: 70px; font-size: 0.9rem; }
+    .wc-chart-bar-wrap { height: 28px; }
+    .wc-chart-pct { font-size: 0.85rem; }
+    .wc-confirm-text { font-size: 1.2rem; }
+    .wc-comment { font-size: 0.95rem; }
+    .wc-fate-grid { grid-template-columns: 1fr; }
+    .wc-fate-item:nth-child(odd) { border-right: none; }
+    .wc-fate-label { font-size: 0.9rem; }
+    .wc-fate-val { font-size: 0.95rem; }
+    .wc-cta-links { flex-direction: column; align-items: center; }
+    .wc-seo-section { padding: 1.2rem; }
+    .wc-seo-section h2 { font-size: 1.2rem; }
+    .wc-seo-section p { font-size: 0.95rem; line-height: 1.8; }
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes wc-glow-pulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(245, 184, 0, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(245, 184, 0, 0.5); }
+  }
+  .wc-team-item.wc-selected {
+    animation: wc-glow-pulse 2s ease-in-out infinite;
+  }
+</style>
+
+<script is:inline>
+(function() {
+  // === DATA ===
+  const GROUPS = {
+    A: [
+      { name: '墨西哥', code: 'MEX', flag: '🇲🇽', rank: 15 },
+      { name: '南非', code: 'RSA', flag: '🇿🇦', rank: 55 },
+      { name: '南韓', code: 'KOR', flag: '🇰🇷', rank: 24 },
+      { name: '捷克', code: 'CZE', flag: '🇨🇿', rank: 38 },
+    ],
+    B: [
+      { name: '加拿大', code: 'CAN', flag: '🇨🇦', rank: 42 },
+      { name: '瑞士', code: 'SUI', flag: '🇨🇭', rank: 16 },
+      { name: '卡達', code: 'QAT', flag: '🇶🇦', rank: 43 },
+      { name: '波士尼亞', code: 'BIH', flag: '🇧🇦', rank: 65 },
+    ],
+    C: [
+      { name: '巴西', code: 'BRA', flag: '🇧🇷', rank: 6 },
+      { name: '摩洛哥', code: 'MAR', flag: '🇲🇦', rank: 8 },
+      { name: '海地', code: 'HAI', flag: '🇭🇹', rank: 83 },
+      { name: '蘇格蘭', code: 'SCO', flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', rank: 47 },
+    ],
+    D: [
+      { name: '美國', code: 'USA', flag: '🇺🇸', rank: 11 },
+      { name: '巴拉圭', code: 'PAR', flag: '🇵🇾', rank: 50 },
+      { name: '澳洲', code: 'AUS', flag: '🇦🇺', rank: 26 },
+      { name: '土耳其', code: 'TUR', flag: '🇹🇷', rank: 30 },
+    ],
+    E: [
+      { name: '德國', code: 'GER', flag: '🇩🇪', rank: 10 },
+      { name: '乘拉索', code: 'CUW', flag: '🇨🇼', rank: 82 },
+      { name: '象牙海岸', code: 'CIV', flag: '🇨🇮', rank: 48 },
+      { name: '厄瓜多', code: 'ECU', flag: '🇪🇨', rank: 32 },
+    ],
+    F: [
+      { name: '荷蘭', code: 'NED', flag: '🇳🇱', rank: 7 },
+      { name: '日本', code: 'JPN', flag: '🇯🇵', rank: 17 },
+      { name: '瑞典', code: 'SWE', flag: '🇸🇪', rank: 25 },
+      { name: '突尼西亞', code: 'TUN', flag: '🇹🇳', rank: 37 },
+    ],
+    G: [
+      { name: '比利時', code: 'BEL', flag: '🇧🇪', rank: 9 },
+      { name: '埃及', code: 'EGY', flag: '🇪🇬', rank: 33 },
+      { name: '伊朗', code: 'IRN', flag: '🇮🇷', rank: 20 },
+      { name: '紐西蘭', code: 'NZL', flag: '🇳🇿', rank: 85 },
+    ],
+    H: [
+      { name: '西班牙', code: 'ESP', flag: '🇪🇸', rank: 2 },
+      { name: '維德角', code: 'CPV', flag: '🇨🇻', rank: 69 },
+      { name: '沙烏地阿拉伯', code: 'KSA', flag: '🇸🇦', rank: 56 },
+      { name: '烏拉圭', code: 'URU', flag: '🇺🇾', rank: 14 },
+    ],
+    I: [
+      { name: '法國', code: 'FRA', flag: '🇫🇷', rank: 1 },
+      { name: '塞內加爾', code: 'SEN', flag: '🇸🇳', rank: 18 },
+      { name: '挪威', code: 'NOR', flag: '🇳🇴', rank: 22 },
+      { name: '伊拉克', code: 'IRQ', flag: '🇮🇶', rank: 61 },
+    ],
+    J: [
+      { name: '阿根廷', code: 'ARG', flag: '🇦🇷', rank: 3 },
+      { name: '阿爾及利亞', code: 'ALG', flag: '🇩🇿', rank: 35 },
+      { name: '奧地利', code: 'AUT', flag: '🇦🇹', rank: 23 },
+      { name: '約旦', code: 'JOR', flag: '🇯🇴', rank: 60 },
+    ],
+    K: [
+      { name: '葡萄牙', code: 'POR', flag: '🇵🇹', rank: 5 },
+      { name: '剛果民主共和國', code: 'COD', flag: '🇨🇩', rank: 58 },
+      { name: '烏茲別克', code: 'UZB', flag: '🇺🇿', rank: 62 },
+      { name: '哥倫比亞', code: 'COL', flag: '🇨🇴', rank: 13 },
+    ],
+    L: [
+      { name: '英格蘭', code: 'ENG', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', rank: 4 },
+      { name: '克羅埃西亞', code: 'CRO', flag: '🇭🇷', rank: 12 },
+      { name: '迦納', code: 'GHA', flag: '🇬🇭', rank: 74 },
+      { name: '巴拿馬', code: 'PAN', flag: '🇵🇦', rank: 46 },
+    ],
+  };
+
+  const SEED_VOTES = {
+    FRA: 2847, ARG: 2654, ESP: 1893, ENG: 1756, BRA: 1689,
+    POR: 1245, GER: 1198, NED: 876, BEL: 654, URU: 432,
+    JPN: 398, CRO: 367, MAR: 345, COL: 298, USA: 276,
+    KOR: 234, MEX: 198, SWE: 167, TUR: 145, SEN: 134,
+    NOR: 112, AUS: 98, AUT: 87, IRN: 76, ECU: 65,
+    SUI: 56, EGY: 48, TUN: 42, CZE: 38, PAR: 32,
+    ALG: 28, SCO: 25, CAN: 22, KSA: 18, PAN: 15,
+    CIV: 12, BIH: 10, QAT: 8, GHA: 7, IRQ: 6,
+    JOR: 5, NZL: 4, UZB: 4, CPV: 3, COD: 3,
+    RSA: 2, CUW: 2, HAI: 1,
+  };
+
+  // Build a lookup: code -> team info
+  const TEAM_MAP = {};
+  Object.keys(GROUPS).forEach(function(g) {
+    GROUPS[g].forEach(function(t) {
+      TEAM_MAP[t.code] = t;
+    });
+  });
+
+  // === TEAM INFO: comments, titles, probabilities, stars, best result ===
+  var TEAM_INFO = {
+    FRA: { prob: '18%', title: '穩健派', best: '2018 冠軍', star: 'Mbappé', comment: '選世界第一？穩，但法國小組賽翻船不是沒發生過——2002 年小組賽三場零進球直接回家，對手之一就是塞內加爾，而今年他們又同組了。歷史會重演嗎？', group: 'I', opponents: '塞內加爾、挪威、伊拉克' },
+    ARG: { prob: '16%', title: 'Messi 信徒', best: '2022 冠軍', star: 'Messi', comment: 'Messi 38 歲最後一屆世界盃，衛冕冠軍劇本太完美。但你知道嗎？世界盃歷史上只有兩支球隊成功衛冕（義大利 1938、巴西 1962），機率不到 5%。', group: 'J', opponents: '阿爾及利亞、奧地利、約旦' },
+    ESP: { prob: '14%', title: '鬥牛士擁護者', best: '2010 冠軍', star: 'Lamine Yamal', comment: '歐洲冠軍、FIFA 第二、18 歲的 Yamal 已經是怪物級。但西班牙的世界盃運一直不太好——2014、2018 都是小組賽或十六強就回家。今年呢？', group: 'H', opponents: '維德角、沙烏地阿拉伯、烏拉圭' },
+    ENG: { prob: '10%', title: '足球回家派', best: '1966 冠軍', star: 'Harry Kane', comment: '預選賽全勝零失球，聽起來很猛對吧？但英格蘭每次都是「預選賽之王、正賽回家」。1966 年之後就沒冠軍了，快 60 年了。今年會不一樣嗎？', group: 'L', opponents: '克羅埃西亞、迦納、巴拿馬' },
+    BRA: { prob: '8%', title: '森巴軍團信仰者', best: '2002 冠軍', star: 'Vinícius Jr.', comment: '五冠王的招牌夠硬，但今年傷兵名單比出賽名單還長。Estêvão 腿傷、Militão 報銷、Rodrygo 不確定。巴西靠板凳深度能撐多遠？', group: 'C', opponents: '摩洛哥、海地、蘇格蘭' },
+    POR: { prob: '7%', title: 'CR7 永遠的粉絲', best: '2006 四強', star: 'Cristiano Ronaldo', comment: 'C 羅都幾歲了還在踢世界盃？41 歲。但葡萄牙不只有 C 羅，Bruno Fernandes + Rafael Leão + Bernardo Silva 才是真正的火力。', group: 'K', opponents: '剛果民主共和國、烏茲別克、哥倫比亞' },
+    GER: { prob: '7%', title: '日耳曼戰車迷', best: '2014 冠軍', star: 'Florian Wirtz', comment: '抽到全場最軟的組（庫拉索、象牙海岸、厄瓜多），小組賽應該躺著過。但德國 2018、2022 連續兩屆小組出局，「軟組反而翻車」不是不可能。', group: 'E', opponents: '庫拉索、象牙海岸、厄瓜多' },
+    NED: { prob: '4%', title: '橙色旋風追隨者', best: '2010 亞軍', star: 'Virgil van Dijk', comment: '荷蘭永遠的無冕之王——三次亞軍、零次冠軍。今年更慘，Xavi Simons ACL 報銷。不過有 van Dijk 鎮守後防，防守反擊還是有搞頭的。', group: 'F', opponents: '日本、瑞典、突尼西亞' },
+    BEL: { prob: '3%', title: '黃金世代最後機會派', best: '2018 四強', star: 'Kevin De Bruyne', comment: 'De Bruyne + Lukaku 的黃金世代最後一搏了。但比利時的問題是每次都「紙面最強實際差一步」。2018 四強已經是巔峰了嗎？', group: 'G', opponents: '埃及、伊朗、紐西蘭' },
+    MAR: { prob: '3%', title: '非洲雄獅支持者', best: '2022 四強', star: 'Achraf Hakimi', comment: '2022 世界盃非洲第一支打進四強的隊伍，不是運氣。防守紀律 + Hakimi 的速度 = 任何強隊都頭痛。今年能再創奇蹟嗎？', group: 'C', opponents: '巴西、海地、蘇格蘭' },
+    CRO: { prob: '2%', title: '格子軍團死忠', best: '2018 亞軍', star: 'Luka Modrić', comment: 'Modrić 40 歲還在場上跑！2018 亞軍、2022 四強，克羅埃西亞永遠不能被低估。但歲月不饒人，這可能真的是最後一支。', group: 'L', opponents: '英格蘭、迦納、巴拿馬' },
+    JPN: { prob: '2%', title: '亞洲之光', best: '2022 十六強', star: '三笘薫', comment: '2022 連斬德國西班牙，今年又在友誼賽 1-0 贏英格蘭。日本已經不是「亞洲陪跑」了，但要突破八強還需要一點奇蹟。', group: 'F', opponents: '荷蘭、瑞典、突尼西亞' },
+    COL: { prob: '2%', title: '哥倫比亞咖啡派', best: '2014 八強', star: 'Luis Díaz', comment: 'James Rodríguez + Luis Díaz 的組合很有觀賞性。跟葡萄牙同組，搶第一不是夢。哥倫比亞的問題一直是穩定性——好的時候超強，差的時候一塌糊塗。', group: 'K', opponents: '葡萄牙、剛果民主共和國、烏茲別克' },
+    URU: { prob: '2%', title: '烏拉圭鐵血派', best: '2010 四強', star: 'Federico Valverde', comment: '人口 350 萬的小國拿過兩次世界盃冠軍，足球 DNA 不是開玩笑的。Valverde + Núñez 的反擊速度能讓任何後衛噩夢。', group: 'H', opponents: '西班牙、維德角、沙烏地阿拉伯' },
+    USA: { prob: '2%', title: '美國夢信仰者', best: '2002 八強', star: 'Christian Pulisic', comment: '主場優勢很香，但美國隊三月友誼賽被比利時和葡萄牙灌了 7-2。Pochettino 的三後衛到底行不行？全美國都在問。', group: 'D', opponents: '巴拉圭、澳洲、土耳其' },
+    MEX: { prob: '1%', title: '墨西哥捲餅加辣派', best: '1986 八強', star: 'Hirving Lozano', comment: '開幕戰在阿茲台克球場，8 萬 7 千人的主場。但墨西哥的魔咒是連續 7 屆都倒在十六強——今年能破嗎？', group: 'A', opponents: '南非、南韓、捷克' },
+    KOR: { prob: '1%', title: '太極戰士', best: '2002 四強', star: 'Son Heung-min', comment: 'Son 33 歲可能是最後一屆了。2002 年在韓國主場打進四強，但之後就再也沒突破過小組賽。今年在別人的主場，難度更高。', group: 'A', opponents: '墨西哥、南非、捷克' },
+    SEN: { prob: '1%', title: '特蘭加雄獅派', best: '2002 八強', star: 'Sadio Mané', comment: '非洲第二強隊，死亡之組裡跟法國正面對決。2002 年塞內加爾在開幕戰 1-0 擊敗衛冕冠軍法國，歷史會重演嗎？', group: 'I', opponents: '法國、挪威、伊拉克' },
+    NOR: { prob: '1%', title: 'Haaland 的信徒', best: '1998 十六強', star: 'Erling Haaland', comment: 'Haaland 一個人就能改變一場比賽的結果。但挪威整體實力跟法國、塞內加爾比還是有差距。死亡之組，壓力山大。', group: 'I', opponents: '法國、塞內加爾、伊拉克' },
+    TUR: { prob: '1%', title: '突厥戰士', best: '2002 四強', star: 'Arda Güler', comment: '2002 年爆冷打進四強後就消失了 24 年。Real Madrid 的 Arda Güler 是新希望，但美國隊同組，主場壓力不小。', group: 'D', opponents: '美國、巴拉圭、澳洲' },
+    SWE: { prob: '1%', title: '北歐維京派', best: '2018 八強', star: 'Viktor Gyökeres', comment: 'Gyökeres 在附加賽火力全開，但荷蘭和日本同組，出線不容易。瑞典的風格就是硬碰硬，看誰先倒。', group: 'F', opponents: '荷蘭、日本、突尼西亞' },
+    IRQ: { prob: '0.1%', title: '浪漫主義者', best: '1986 小組賽', star: 'Aymen Hussein', comment: '消失 40 年後回來了！包機飛到墨西哥、2-1 逆轉玻利維亞，光是資格賽的故事就夠拍一部電影。贏不贏不重要，站在這裡就是勝利。', group: 'I', opponents: '法國、塞內加爾、挪威' },
+    HAI: { prob: '0.1%', title: '加勒比海盜', best: '1974 小組賽', star: 'Duckens Nazon', comment: '1974 年以來第一次回到世界盃，跟巴西同組。嗯⋯芭樂子只能祝你好運了。', group: 'C', opponents: '巴西、摩洛哥、蘇格蘭' },
+    CPV: { prob: '0.1%', title: '小島奇蹟創造者', best: '首次參賽', star: 'Ryan Mendes', comment: '人口 60 萬的小島國第一次打世界盃！不管結果如何，站上這個舞台就已經是奇蹟了。', group: 'H', opponents: '西班牙、沙烏地阿拉伯、烏拉圭' },
+    CUW: { prob: '0.05%', title: '真正的勇者', best: '首次參賽', star: 'Juninho Bacuna', comment: '史上最小參賽國！人口 15 萬，比你家附近的區還少。能站在世界盃的草地上就已經贏了。', group: 'E', opponents: '德國、象牙海岸、厄瓜多' },
+    JOR: { prob: '0.1%', title: '約旦驚奇', best: '首次參賽', star: 'Mousa Al-Taamari', comment: '2024 亞洲盃亞軍、第一次打世界盃。跟阿根廷同組？好的，至少能跟 Messi 合照。', group: 'J', opponents: '阿根廷、阿爾及利亞、奧地利' },
+    UZB: { prob: '0.1%', title: '中亞冒險家', best: '首次參賽', star: 'Eldor Shomurodov', comment: '第一次打世界盃就抽到葡萄牙和哥倫比亞？芭樂子默默幫你點了一炷香。', group: 'K', opponents: '葡萄牙、剛果民主共和國、哥倫比亞' },
+  };
+  // Default info for teams not in TEAM_INFO
+  var DEFAULT_INFO = { prob: '<0.5%', title: '勇氣可嘉', best: '—', star: '—', comment: '你選了一支冷門隊！不管結果如何，支持自己喜歡的球隊就是最棒的。', group: '?', opponents: '—' };
+
+  // === STATE ===
+  var selectedCode = null;
+  var userVote = localStorage.getItem('wc2026_vote');
+
+  // === INIT ===
+  function init() {
+    if (userVote) {
+      showAlreadyVoted();
+    } else {
+      renderGroups();
+    }
+  }
+
+  // === RENDER GROUPS ===
+  function renderGroups() {
+    var grid = document.getElementById('groupsGrid');
+    var html = '';
+    Object.keys(GROUPS).forEach(function(groupKey) {
+      var teams = GROUPS[groupKey];
+      html += '<div class="wc-group-card">';
+      html += '<div class="wc-group-label">Group ' + groupKey + '</div>';
+      teams.forEach(function(team) {
+        html += '<div class="wc-team-item" data-code="' + team.code + '">';
+        html += '<span class="wc-team-flag">' + team.flag + '</span>';
+        html += '<span class="wc-team-name">' + team.name + '</span>';
+        html += '<span class="wc-team-rank">#' + team.rank + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+    grid.innerHTML = html;
+
+    // Add click handlers
+    var items = grid.querySelectorAll('.wc-team-item');
+    items.forEach(function(item) {
+      item.addEventListener('click', function() {
+        selectTeam(item.getAttribute('data-code'));
+      });
+    });
+  }
+
+  // === SELECT TEAM ===
+  function selectTeam(code) {
+    selectedCode = code;
+    var team = TEAM_MAP[code];
+
+    // Update visual selection
+    var items = document.querySelectorAll('.wc-team-item');
+    items.forEach(function(item) {
+      item.classList.remove('wc-selected');
+    });
+    var selected = document.querySelector('.wc-team-item[data-code="' + code + '"]');
+    if (selected) selected.classList.add('wc-selected');
+
+    // Update display
+    var display = document.getElementById('selectedDisplay');
+    display.textContent = '你的選擇：' + team.flag + ' ' + team.name;
+    display.classList.add('wc-has-pick');
+
+    // Enable button
+    var btn = document.getElementById('voteBtn');
+    btn.classList.add('wc-active');
+    btn.disabled = false;
+  }
+
+  // === VOTE ===
+  function castVote() {
+    if (!selectedCode) return;
+    userVote = selectedCode;
+    localStorage.setItem('wc2026_vote', selectedCode);
+
+    // Increment user vote in localStorage
+    var userVotes = JSON.parse(localStorage.getItem('wc2026_user_votes') || '{}');
+    userVotes[selectedCode] = (userVotes[selectedCode] || 0) + 1;
+    localStorage.setItem('wc2026_user_votes', JSON.stringify(userVotes));
+
+    // Show confirmation with fate card
+    showFateCard(selectedCode);
+
+    // Hide voting section
+    document.getElementById('votingSection').style.display = 'none';
+
+    // Show results
+    showResults();
+  }
+
+  // === REVOTE ===
+  window.revote = function() {
+    // Remove old vote from user votes
+    var oldVote = localStorage.getItem('wc2026_vote');
+    if (oldVote) {
+      var userVotes = JSON.parse(localStorage.getItem('wc2026_user_votes') || '{}');
+      if (userVotes[oldVote]) {
+        userVotes[oldVote] = Math.max(0, userVotes[oldVote] - 1);
+        if (userVotes[oldVote] === 0) delete userVotes[oldVote];
+        localStorage.setItem('wc2026_user_votes', JSON.stringify(userVotes));
+      }
+    }
+    localStorage.removeItem('wc2026_vote');
+    userVote = null;
+    selectedCode = null;
+
+    // Hide confirmation and results
+    document.getElementById('confirmation').style.display = 'none';
+    document.getElementById('resultsSection').style.display = 'none';
+
+    // Show voting section and re-render
+    document.getElementById('votingSection').style.display = '';
+    document.getElementById('selectedDisplay').textContent = '點選你心中的冠軍隊伍';
+    document.getElementById('selectedDisplay').classList.remove('wc-has-pick');
+    var btn = document.getElementById('voteBtn');
+    btn.classList.remove('wc-active');
+    btn.disabled = true;
+    renderGroups();
+  };
+
+  // === SHOW FATE CARD ===
+  function showFateCard(code) {
+    var team = TEAM_MAP[code];
+    var info = TEAM_INFO[code] || DEFAULT_INFO;
+
+    document.getElementById('confirmText').textContent = '你預測 ' + team.flag + ' ' + team.name + ' 奪冠！';
+    document.getElementById('titleBadge').innerHTML = '🏅 你的稱號：<strong>' + info.title + '</strong>';
+    document.getElementById('teamComment').textContent = '芭樂子說：' + info.comment;
+
+    // Fate card data
+    document.getElementById('fateHeader').innerHTML = team.flag + ' ' + team.name + ' 命運卡';
+    document.getElementById('fateGrid').innerHTML =
+      '<div class="wc-fate-item"><span class="wc-fate-label">FIFA 排名</span><span class="wc-fate-val">#' + team.rank + '</span></div>' +
+      '<div class="wc-fate-item"><span class="wc-fate-label">奪冠機率</span><span class="wc-fate-val wc-fate-prob">' + info.prob + '</span></div>' +
+      '<div class="wc-fate-item"><span class="wc-fate-label">小組</span><span class="wc-fate-val">Group ' + info.group + '</span></div>' +
+      '<div class="wc-fate-item"><span class="wc-fate-label">小組對手</span><span class="wc-fate-val">' + info.opponents + '</span></div>' +
+      '<div class="wc-fate-item"><span class="wc-fate-label">關鍵球星</span><span class="wc-fate-val">' + info.star + '</span></div>' +
+      '<div class="wc-fate-item"><span class="wc-fate-label">歷史最佳</span><span class="wc-fate-val">' + info.best + '</span></div>';
+
+    // Reset jiao
+    document.getElementById('jiaoResult').style.display = 'none';
+    document.getElementById('jiaoBtn').style.display = '';
+
+    document.getElementById('confirmation').style.display = 'block';
+  }
+
+  // === ASK GODS (擲筊) ===
+  window.askGods = function() {
+    var code = userVote || selectedCode;
+    var team = TEAM_MAP[code];
+    var info = TEAM_INFO[code] || DEFAULT_INFO;
+
+    // Probability of 聖筊 based on team strength (higher rank = higher chance)
+    var probNum = parseFloat(info.prob) || 0.1;
+    var holyChance = Math.min(0.85, Math.max(0.15, probNum / 20 + 0.3));
+
+    var results = [];
+    for (var i = 0; i < 3; i++) {
+      results.push(Math.random() < holyChance ? 'holy' : (Math.random() < 0.5 ? 'laugh' : 'dark'));
+    }
+
+    var holyCount = results.filter(function(r) { return r === 'holy'; }).length;
+    var icons = results.map(function(r) {
+      if (r === 'holy') return '<span class="wc-jiao-icon wc-jiao-holy">🌕 聖筊</span>';
+      if (r === 'laugh') return '<span class="wc-jiao-icon wc-jiao-laugh">🌗 笑筊</span>';
+      return '<span class="wc-jiao-icon wc-jiao-dark">🌑 陰筊</span>';
+    }).join('');
+
+    var verdict = '';
+    if (holyCount === 3) {
+      verdict = '<div class="wc-jiao-verdict wc-jiao-yes">✨ 三聖筊！神明大力看好 ' + team.flag + ' ' + team.name + '！天意不可違！</div>';
+    } else if (holyCount === 2) {
+      verdict = '<div class="wc-jiao-verdict wc-jiao-maybe">🤔 兩聖筊一笑筊⋯神明覺得有機會，但不保證。建議再觀望一下？</div>';
+    } else if (holyCount === 1) {
+      verdict = '<div class="wc-jiao-verdict wc-jiao-hmm">😅 只有一個聖筊⋯神明持保留態度。要不要考慮換一隊？</div>';
+    } else {
+      verdict = '<div class="wc-jiao-verdict wc-jiao-no">💀 零聖筊！神明搖頭了⋯' + team.name + ' 今年可能不太行。快按重選吧！</div>';
+    }
+
+    var el = document.getElementById('jiaoResult');
+    el.innerHTML = '<div class="wc-jiao-throws">' + icons + '</div>' + verdict +
+      '<button class="wc-jiao-retry" onclick="askGods()">🔄 再擲一次</button>';
+    el.style.display = 'block';
+    document.getElementById('jiaoBtn').style.display = 'none';
+  };
+
+  // === ALREADY VOTED ===
+  function showAlreadyVoted() {
+    showFateCard(userVote);
+    document.getElementById('votingSection').style.display = 'none';
+    showResults();
+  }
+
+  // === GET COMBINED VOTES ===
+  function getCombinedVotes() {
+    var userVotes = JSON.parse(localStorage.getItem('wc2026_user_votes') || '{}');
+    var combined = {};
+    Object.keys(SEED_VOTES).forEach(function(code) {
+      combined[code] = SEED_VOTES[code] + (userVotes[code] || 0);
+    });
+    // Also add any codes user voted for that aren't in seed
+    Object.keys(userVotes).forEach(function(code) {
+      if (!combined[code]) {
+        combined[code] = userVotes[code];
+      }
+    });
+    return combined;
+  }
+
+  // === SHOW RESULTS ===
+  function showResults() {
+    var resultsSection = document.getElementById('resultsSection');
+    resultsSection.style.display = 'block';
+
+    var combined = getCombinedVotes();
+
+    // Sort by votes desc, get top 10
+    var sorted = Object.keys(combined).map(function(code) {
+      return { code: code, votes: combined[code] };
+    }).sort(function(a, b) { return b.votes - a.votes; });
+
+    var top10 = sorted.slice(0, 10);
+    var totalVotes = sorted.reduce(function(sum, item) { return sum + item.votes; }, 0);
+    var maxVotes = top10[0] ? top10[0].votes : 1;
+
+    // Total votes display
+    document.getElementById('totalVotes').textContent = '共 ' + totalVotes.toLocaleString() + ' 票已投出';
+
+    // Render chart
+    var chartHtml = '';
+    top10.forEach(function(item) {
+      var team = TEAM_MAP[item.code];
+      if (!team) return;
+      var pct = ((item.votes / totalVotes) * 100).toFixed(1);
+      var barWidth = ((item.votes / maxVotes) * 100).toFixed(1);
+      var isUserPick = item.code === userVote;
+      var barClass = 'wc-chart-bar' + (isUserPick ? ' wc-user-pick' : '');
+
+      chartHtml += '<div class="wc-chart-item">';
+      chartHtml += '<div class="wc-chart-label">' + team.flag + ' ' + team.name + '</div>';
+      chartHtml += '<div class="wc-chart-bar-wrap">';
+      chartHtml += '<div class="' + barClass + '" style="width:' + barWidth + '%"></div>';
+      chartHtml += '<span class="wc-chart-value">' + item.votes.toLocaleString() + '</span>';
+      chartHtml += '</div>';
+      chartHtml += '<div class="wc-chart-pct">' + pct + '%</div>';
+      chartHtml += '</div>';
+    });
+    document.getElementById('chart').innerHTML = chartHtml;
+  }
+
+  // === EVENT LISTENERS ===
+  document.getElementById('voteBtn').addEventListener('click', castVote);
+
+  // === RUN ===
+  init();
+})();
+</script>
+
+</BaseLayout>

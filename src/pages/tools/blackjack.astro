@@ -1,0 +1,1563 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+---
+<BaseLayout
+  currentPage="tools"
+  title="AI 21 點｜免費練牌＋基本策略即時教學 — GAME8LA"
+  description="免費 AI 21 點遊戲！每一手牌都有 Basic Strategy 即時建議，做對給綠燈、做錯告訴你最佳策略。不花錢練到熟，莊家優勢從 5% 壓到 0.5%。"
+  ogImage="https://game8la.com/images/og-image.webp"
+  noindex={true}
+>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="bj-hero">
+    <h1>🃏 AI 21 點練習場</h1>
+    <p class="bj-slogan">每一手牌都幫你複習 Basic Strategy，打到莊家哭</p>
+    <p class="bj-desc">免費練牌、即時策略教學、做對綠燈做錯橘燈。不花一毛錢，把莊家優勢從 5% 壓到 0.5%。</p>
+  </div>
+
+  <!-- Game Area -->
+  <div class="bj-game-wrapper" id="bjGame">
+    <!-- Bet Controls -->
+    <div class="bj-bet-area" id="betArea">
+      <div class="bj-balance-display">
+        <span class="bj-balance-label">籌碼</span>
+        <span class="bj-balance-value" id="balanceDisplay">1,000</span>
+      </div>
+      <div class="bj-chip-row">
+        <button class="bj-chip" data-bet="10">10</button>
+        <button class="bj-chip" data-bet="25">25</button>
+        <button class="bj-chip" data-bet="50">50</button>
+        <button class="bj-chip" data-bet="100">100</button>
+      </div>
+      <div class="bj-bet-input-row">
+        <label class="bj-bet-label">下注：</label>
+        <input type="number" id="betInput" class="bj-bet-input" min="1" max="1000" value="25">
+      </div>
+      <button class="bj-deal-btn" id="dealBtn" type="button">發牌</button>
+    </div>
+
+    <!-- Table -->
+    <div class="bj-table" id="bjTable" style="display:none">
+      <!-- Dealer -->
+      <div class="bj-dealer-area">
+        <div class="bj-hand-label">莊家 <span id="dealerScore"></span></div>
+        <div class="bj-cards" id="dealerCards"></div>
+      </div>
+
+      <!-- Player -->
+      <div class="bj-player-area">
+        <div class="bj-hand-label">你的手牌 <span id="playerScore"></span></div>
+        <div class="bj-cards" id="playerCards"></div>
+        <!-- Split hand -->
+        <div class="bj-split-hand" id="splitHand" style="display:none">
+          <div class="bj-hand-label">分牌手 2 <span id="splitScore"></span></div>
+          <div class="bj-cards" id="splitCards"></div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="bj-actions" id="actionArea" style="display:none">
+        <button class="bj-action-btn bj-btn-hit" id="btnHit" type="button">要牌 (Hit)</button>
+        <button class="bj-action-btn bj-btn-stand" id="btnStand" type="button">停牌 (Stand)</button>
+        <button class="bj-action-btn bj-btn-double" id="btnDouble" type="button">加倍 (Double)</button>
+        <button class="bj-action-btn bj-btn-split" id="btnSplit" type="button" style="display:none">分牌 (Split)</button>
+        <button class="bj-action-btn bj-btn-insurance" id="btnInsurance" type="button" style="display:none">保險 (Insurance)</button>
+      </div>
+
+      <!-- AI Advice -->
+      <div class="bj-advice-box" id="adviceBox" style="display:none">
+        <div class="bj-advice-text" id="adviceText"></div>
+      </div>
+
+      <!-- Result -->
+      <div class="bj-result-box" id="resultBox" style="display:none">
+        <div class="bj-result-text" id="resultText"></div>
+        <div class="bj-result-payout" id="resultPayout"></div>
+        <button class="bj-next-btn" id="nextBtn" type="button">下一手</button>
+      </div>
+
+      <!-- Bet display on table -->
+      <div class="bj-current-bet">
+        下注：<span id="currentBetDisplay">25</span>
+      </div>
+    </div>
+
+    <!-- Stats Panel -->
+    <div class="bj-stats-panel">
+      <button class="bj-stats-toggle" id="statsToggle" type="button">
+        <span class="bj-stats-toggle-left">📊 遊戲統計</span>
+        <span class="bj-stats-chevron" id="statsChevron">▼</span>
+      </button>
+      <div class="bj-stats-body" id="statsBody">
+        <div class="bj-stats-grid">
+          <div class="bj-stat-item">
+            <span class="bj-stat-label">手數</span>
+            <span class="bj-stat-value" id="statHands">0</span>
+          </div>
+          <div class="bj-stat-item">
+            <span class="bj-stat-label">勝</span>
+            <span class="bj-stat-value bj-stat-win" id="statWins">0</span>
+          </div>
+          <div class="bj-stat-item">
+            <span class="bj-stat-label">負</span>
+            <span class="bj-stat-value bj-stat-lose" id="statLosses">0</span>
+          </div>
+          <div class="bj-stat-item">
+            <span class="bj-stat-label">和</span>
+            <span class="bj-stat-value" id="statPushes">0</span>
+          </div>
+          <div class="bj-stat-item">
+            <span class="bj-stat-label">連勝</span>
+            <span class="bj-stat-value bj-stat-win" id="statStreak">0</span>
+          </div>
+          <div class="bj-stat-item">
+            <span class="bj-stat-label">最高連勝</span>
+            <span class="bj-stat-value" id="statBestStreak">0</span>
+          </div>
+          <div class="bj-stat-item">
+            <span class="bj-stat-label">策略正確率</span>
+            <span class="bj-stat-value bj-stat-accuracy" id="statAccuracy">-</span>
+          </div>
+          <div class="bj-stat-item">
+            <span class="bj-stat-label">總籌碼變化</span>
+            <span class="bj-stat-value" id="statProfit">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO Section -->
+  <section class="bj-intro">
+    <h2>21 點是什麼？新手必知的完整規則</h2>
+    <p>21 點（Blackjack）是全世界賭場裡<strong>莊家優勢最低</strong>的桌遊之一。芭樂子跟你說白了：如果你學會 Basic Strategy（基本策略），莊家優勢可以從隨便亂打的 5% 壓到只剩 0.5%。這代表你每下注 100 元，平均只會輸 0.5 元——在所有賭場遊戲中，這已經是最接近公平的了。</p>
+
+    <h3>基本規則 30 秒上手</h3>
+    <p>目標很簡單：手牌點數越接近 21 越好，但<strong>不能超過 21</strong>（爆牌 = 直接輸）。2-10 按面值算，J/Q/K 算 10 點，A 可以算 1 或 11（系統會自動幫你選最有利的）。</p>
+    <p>流程：你跟莊家各拿兩張牌，莊家一張蓋著。你可以選擇要牌（Hit）拿更多牌，或停牌（Stand）保持現狀。你決定完之後，莊家翻開蓋住的牌，依規則補牌到 17 以上。比大小，大的贏。</p>
+
+    <h3>什麼是 Blackjack？</h3>
+    <p><strong>Blackjack</strong>（黑傑克/天牌）是前兩張牌就湊到 21 點（A + 10/J/Q/K）。拿到 Blackjack 賠率是 3:2，也就是下注 100 會贏 150。如果莊家也是 Blackjack，則平手退回。</p>
+
+    <h3>什麼是 Basic Strategy？</h3>
+    <p>Basic Strategy 是數學家用電腦模擬幾十億手牌後，算出的<strong>每一種情況的最佳決策</strong>。它告訴你：「你的牌面 vs 莊家的明牌」應該要牌、停牌、加倍還是分牌。跟著打，長期下來你的損失最小。芭樂子這個模擬器就是幫你練到反射動作，不用再查表。</p>
+
+    <h3>特殊動作說明</h3>
+    <p><strong>加倍（Double Down）：</strong>把賭注翻倍，但只能再拿一張牌。適合在你手牌有利時使用（例如手持 11 點、莊家牌弱時）。</p>
+    <p><strong>分牌（Split）：</strong>當你的兩張牌點數相同時，可以分成兩手獨立的牌來打。分牌後兩手各補一張，各自獨立結算。</p>
+    <p><strong>保險（Insurance）：</strong>當莊家明牌是 A 時，可以額外下注一半的保險金。如果莊家是 Blackjack，保險賠 2:1。但數學上，保險是負期望值的——基本策略建議<strong>永遠不要買保險</strong>。</p>
+
+    <h3>為什麼要用這個模擬器練習？</h3>
+    <p>在真的賭場裡學 Basic Strategy 代價太高——每一次猶豫和犯錯都是真金白銀。芭樂子這個免費模擬器讓你用虛擬籌碼無限練習，每一手都有 AI 即時告訴你正確答案。做對了給你綠燈，做錯了告訴你為什麼。練到準確率 95% 以上，你就可以自信地上桌了。</p>
+  </section>
+
+  <!-- CTA Section -->
+  <div class="bj-cta-grid">
+    <p>🎰 芭樂子的其他練習工具</p>
+    <div class="bj-cta-links">
+      <a href="/tools/baccarat-simulator/" class="bj-cta-link">🃏 百家樂模擬器</a>
+      <a href="/tools/slot-simulator/" class="bj-cta-link">🎰 老虎機模擬器</a>
+      <a href="/tools/" class="bj-cta-link">🔧 8LA 工具箱</a>
+      <a href="/tools/bless-blocks/" class="bj-cta-link">🥢 擲筊問運氣</a>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:2rem 0">
+    <a href="/tools/" class="btn-outline">&larr; 回工具箱</a>
+  </div>
+
+  <ShareButtons title="AI 21 點練習場 — 免費 Basic Strategy 即時教學" heading="🃏 21 點想贏？先把 Basic Strategy 練到反射動作" />
+</div>
+
+<!-- SoftwareApplication Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI 21 點練習場 — 免費 Basic Strategy 即時教學",
+  "url": "https://game8la.com/tools/blackjack/",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "description": "免費 AI 21 點遊戲！每一手牌都有 Basic Strategy 即時建議，做對給綠燈、做錯告訴你最佳策略。不花錢練到熟，莊家優勢從 5% 壓到 0.5%。"
+})} />
+
+<!-- FAQ Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "21 點怎麼玩？基本規則是什麼？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "21 點的目標是讓手牌點數盡量接近 21 但不超過。2-10 按面值算，J/Q/K 算 10 點，A 可以算 1 或 11。玩家和莊家各發兩張牌，玩家可以選擇要牌（Hit）、停牌（Stand）、加倍（Double）或分牌（Split）。最後比較雙方點數，接近 21 且未爆牌者獲勝。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "A 在 21 點裡算幾點？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 可以算 1 點或 11 點，系統會自動選擇對你最有利的值。當 A 算 11 不會爆牌時算 11（稱為 Soft Hand 軟手牌），如果算 11 會超過 21 就自動降為 1 點。例如 A+6=17（軟 17），A+6+8=15（A 降為 1）。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什麼是 Blackjack（黑傑克）？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blackjack 是指前兩張牌就拿到 21 點，也就是一張 A 加上一張 10 點牌（10、J、Q、K）。拿到 Blackjack 的賠率是 3:2（下注 100 贏 150），比普通贏牌的 1:1 賠率更高。如果莊家也是 Blackjack 則平手。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什麼是 Basic Strategy（基本策略）？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Basic Strategy 是透過電腦模擬數十億手牌，計算出每一種牌面組合的最佳決策表。它告訴你在任何情況下應該要牌、停牌、加倍還是分牌。完美執行基本策略可以將莊家優勢從約 5% 降低到僅 0.5%，是 21 點玩家的必備知識。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "莊家優勢是多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "如果玩家隨便亂打，莊家優勢約 5%。如果玩家完美執行 Basic Strategy，莊家優勢可以降到約 0.5%。這使得 21 點成為賭場中對玩家最友善的遊戲之一。相比之下，老虎機的莊家優勢通常在 2-15%，百家樂約 1-1.5%。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什麼時候應該要牌、什麼時候停牌？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "基本原則：手牌 17 以上通常停牌；手牌 11 以下一定要牌。中間地帶（12-16）要看莊家明牌：莊家牌弱（2-6）時你可以停牌讓莊家爆，莊家牌強（7-A）時你必須繼續要牌。軟手牌（有 A 的情況）因為不怕爆牌，策略會更積極。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什麼時候適合加倍？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "加倍的最佳時機是當你的手牌有優勢時。最經典的情況：手持 11 點時幾乎永遠加倍；手持 10 點且莊家不是 10 或 A 時加倍；手持 9 點且莊家是 3-6 時加倍。軟手牌中，A+5 或 A+6 對上莊家弱牌時也適合加倍。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "分牌有什麼策略？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "分牌的黃金法則：永遠分 A 和 8；永遠不分 10 和 5。A 分開後各自有機會拿到 21 點；8-8=16 是最爛的牌面，分開後各自從 8 開始比較有利。其他對子要看莊家明牌：2-2、3-3、6-6、7-7 在莊家弱牌時分，4-4 只在莊家 5-6 時分，9-9 在莊家 2-6、8-9 時分。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "保險值得買嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "從數學角度來說，保險永遠不值得買。保險的賠率是 2:1，但莊家有 Blackjack 的機率只有約 30.8%（4/13），期望值是負的。長期來看買保險只會增加你的損失。Basic Strategy 的建議很明確：永遠拒絕保險。唯一例外是算牌者在特定情況下可能會買保險，但這超出基本策略範圍。"
+      }
+    }
+  ]
+})} />
+
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "AI 21 點", "item": "https://game8la.com/tools/blackjack/" }
+  ]
+})} />
+
+<style is:global>
+  /* === HERO === */
+  .bj-hero {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+  }
+  .bj-hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .bj-slogan {
+    color: var(--guava-green, #39FF14);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .bj-desc {
+    color: #bbb;
+    font-size: 1rem;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* === GAME WRAPPER === */
+  .bj-game-wrapper {
+    max-width: 700px;
+    margin: 2rem auto;
+  }
+
+  /* === BET AREA === */
+  .bj-bet-area {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+  }
+  .bj-balance-display {
+    margin-bottom: 1rem;
+  }
+  .bj-balance-label {
+    color: #999;
+    font-size: 0.9rem;
+    margin-right: 8px;
+  }
+  .bj-balance-value {
+    color: #f5b800;
+    font-size: 1.8rem;
+    font-weight: 800;
+  }
+  .bj-balance-value.bj-pulse {
+    animation: bjPulse 0.4s ease;
+  }
+  @keyframes bjPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  .bj-chip-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .bj-chip {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f5b800, #d4a000);
+    border: 3px solid #a67c00;
+    color: #1a1a1a;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 8px rgba(245,184,0,0.3);
+  }
+  .bj-chip:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(245,184,0,0.5);
+  }
+  .bj-chip:active {
+    transform: translateY(0);
+  }
+  .bj-chip.selected {
+    border-color: var(--guava-green, #39FF14);
+    box-shadow: 0 0 12px rgba(57,255,20,0.5);
+  }
+  .bj-bet-input-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+  .bj-bet-label {
+    color: #ccc;
+    font-size: 0.95rem;
+  }
+  .bj-bet-input {
+    width: 80px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .bj-bet-input:focus {
+    outline: none;
+    border-color: #f5b800;
+  }
+  .bj-deal-btn {
+    background: linear-gradient(135deg, #b8860b, #d4a056);
+    border: 2px solid #c9983a;
+    color: #1a1a1a;
+    font-size: 1.2rem;
+    font-weight: 800;
+    padding: 12px 50px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 15px rgba(184,134,11,0.3);
+  }
+  .bj-deal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(184,134,11,0.4);
+  }
+  .bj-deal-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* === TABLE === */
+  .bj-table {
+    background: linear-gradient(180deg, #1a472a 0%, #0d2818 100%);
+    border: 3px solid #2a5a3a;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    min-height: 400px;
+  }
+  .bj-dealer-area,
+  .bj-player-area {
+    margin-bottom: 1.5rem;
+  }
+  .bj-hand-label {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .bj-hand-label span {
+    color: #f5b800;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-left: 8px;
+  }
+  .bj-cards {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-height: 100px;
+    align-items: center;
+  }
+  .bj-split-hand {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* === CARD SVG === */
+  .bj-card {
+    width: 70px;
+    height: 100px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .bj-card.bj-card-deal {
+    animation: bjCardDeal 0.4s ease-out;
+  }
+  @keyframes bjCardDeal {
+    from {
+      opacity: 0;
+      transform: translateY(-60px) rotate(-5deg);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+  .bj-card.bj-card-flip {
+    animation: bjCardFlip 0.5s ease;
+  }
+  @keyframes bjCardFlip {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(90deg); }
+    100% { transform: rotateY(0deg); }
+  }
+
+  /* === ACTIONS === */
+  .bj-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+  .bj-action-btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  .bj-btn-hit {
+    background: linear-gradient(135deg, #f5b800, #d4a000);
+    color: #1a1a1a;
+    border-color: #a67c00;
+  }
+  .bj-btn-stand {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: #fff;
+    border-color: #1565C0;
+  }
+  .bj-btn-double {
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+    color: #fff;
+    border-color: #6A1B9A;
+  }
+  .bj-btn-split {
+    background: linear-gradient(135deg, #FF5722, #E64A19);
+    color: #fff;
+    border-color: #D84315;
+  }
+  .bj-btn-insurance {
+    background: linear-gradient(135deg, #607D8B, #455A64);
+    color: #fff;
+    border-color: #37474F;
+  }
+  .bj-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .bj-action-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* === ADVICE BOX === */
+  .bj-advice-box {
+    margin: 1rem 0;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    animation: bjFadeIn 0.3s ease;
+  }
+  .bj-advice-box.bj-advice-correct {
+    background: rgba(57,255,20,0.1);
+    border: 1px solid rgba(57,255,20,0.4);
+    color: #a5ff8a;
+  }
+  .bj-advice-box.bj-advice-wrong {
+    background: rgba(255,152,0,0.1);
+    border: 1px solid rgba(255,152,0,0.4);
+    color: #ffcc80;
+  }
+  .bj-advice-box.bj-advice-neutral {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #ccc;
+  }
+  @keyframes bjFadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === RESULT BOX === */
+  .bj-result-box {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.3);
+    animation: bjFadeIn 0.4s ease;
+  }
+  .bj-result-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .bj-result-text.bj-win { color: var(--guava-green, #39FF14); }
+  .bj-result-text.bj-lose { color: #ff5252; }
+  .bj-result-text.bj-push { color: #ffeb3b; }
+  .bj-result-text.bj-blackjack { color: #f5b800; text-shadow: 0 0 20px rgba(245,184,0,0.5); }
+  .bj-result-payout {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .bj-next-btn {
+    background: linear-gradient(135deg, #b8860b, #d4a056);
+    border: 2px solid #c9983a;
+    color: #1a1a1a;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .bj-next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184,134,11,0.4);
+  }
+  .bj-current-bet {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+  }
+  .bj-current-bet span {
+    color: #f5b800;
+    font-weight: 700;
+  }
+
+  /* === STATS === */
+  .bj-stats-panel {
+    border: 1px solid #333;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-card, rgba(255,255,255,0.03));
+    margin-top: 1rem;
+  }
+  .bj-stats-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: none;
+    border: none;
+    color: #eee;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+  .bj-stats-toggle:hover { background: rgba(255,255,255,0.04); }
+  .bj-stats-chevron {
+    font-size: 0.7rem;
+    color: #888;
+    transition: transform 0.3s;
+  }
+  .bj-stats-panel.open .bj-stats-chevron { transform: rotate(180deg); }
+  .bj-stats-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 18px;
+  }
+  .bj-stats-panel.open .bj-stats-body {
+    max-height: 300px;
+    padding: 0 18px 16px;
+  }
+  .bj-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .bj-stat-item {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .bj-stat-label {
+    display: block;
+    color: #888;
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+  }
+  .bj-stat-value {
+    display: block;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .bj-stat-win { color: var(--guava-green, #39FF14); }
+  .bj-stat-lose { color: #ff5252; }
+  .bj-stat-accuracy { color: #f5b800; }
+
+  /* === SEO INTRO === */
+  .bj-intro {
+    max-width: 720px;
+    margin: 3rem auto 0;
+    padding: 2rem 1.5rem;
+    background: var(--bg-card, rgba(255,255,255,0.03));
+    border: 1px solid var(--border, #333);
+    border-radius: 14px;
+    font-size: 0.92rem;
+    color: var(--text-secondary, #ccc);
+    line-height: 1.9;
+  }
+  .bj-intro h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0 0 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border, #333);
+    color: var(--text-primary, #fff);
+  }
+  .bj-intro h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 1.8rem 0 0.6rem;
+    color: var(--gold-light, #FFD700);
+  }
+  .bj-intro p {
+    margin-bottom: 1rem;
+  }
+  .bj-intro p:last-child {
+    margin-bottom: 0;
+  }
+  .bj-intro strong {
+    color: var(--text-primary, #fff);
+  }
+
+  /* === CTA === */
+  .bj-cta-grid {
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(57,255,20,0.04);
+    border: 1px solid rgba(57,255,20,0.15);
+    border-radius: 12px;
+  }
+  .bj-cta-grid p {
+    margin: 0 0 1rem;
+    color: #ccc;
+    font-size: 1rem;
+  }
+  .bj-cta-links {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .bj-cta-link {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #ddd;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .bj-cta-link:hover {
+    border-color: var(--guava-green, #39FF14);
+    color: #fff;
+  }
+
+  /* === RWD === */
+  @media (max-width: 768px) {
+    .bj-hero { padding: 1.2rem 1rem 0.5rem; }
+    .bj-hero h1 { font-size: 1.6rem; }
+    .bj-slogan { font-size: 1rem; }
+    .bj-desc { font-size: 0.9rem; }
+    .bj-card { width: 55px; height: 80px; }
+    .bj-table { padding: 1rem; min-height: 320px; }
+    .bj-actions { gap: 6px; }
+    .bj-action-btn { padding: 10px 14px; font-size: 0.85rem; }
+    .bj-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .bj-balance-value { font-size: 1.5rem; }
+    .bj-chip { width: 44px; height: 44px; font-size: 0.8rem; }
+  }
+  @media (max-width: 480px) {
+    .bj-card { width: 50px; height: 72px; }
+    .bj-cards { gap: 5px; }
+    .bj-action-btn { padding: 10px 12px; font-size: 0.8rem; flex: 1; min-width: 0; }
+    .bj-actions { gap: 5px; }
+    .bj-result-text { font-size: 1.2rem; }
+    .bj-intro { padding: 1.2rem; font-size: 0.88rem; }
+    .bj-intro h2 { font-size: 1.1rem; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  // =================================================================
+  // Constants
+  // =================================================================
+  var SUITS = ['♠', '♥', '♦', '♣']; // spade, heart, diamond, club
+  var RANKS = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+  var NUM_DECKS = 6;
+  var RESHUFFLE_THRESHOLD = 52;
+
+  // =================================================================
+  // Basic Strategy Table
+  // Hard totals: key = playerTotal, value = array[10] indexed by dealerUpcard (2-9=index0-7, 10=index8, A=index9)
+  // H=Hit, S=Stand, D=Double(hit if can't), Ds=Double(stand if can't), P=Split
+  // =================================================================
+  // dealerIndex: 2=0, 3=1, 4=2, 5=3, 6=4, 7=5, 8=6, 9=7, 10=8, A=9
+  var HARD_STRATEGY = {
+    5:  ['H','H','H','H','H','H','H','H','H','H'],
+    6:  ['H','H','H','H','H','H','H','H','H','H'],
+    7:  ['H','H','H','H','H','H','H','H','H','H'],
+    8:  ['H','H','H','H','H','H','H','H','H','H'],
+    9:  ['H','D','D','D','D','H','H','H','H','H'],
+    10: ['D','D','D','D','D','D','D','D','H','H'],
+    11: ['D','D','D','D','D','D','D','D','D','D'],
+    12: ['H','H','S','S','S','H','H','H','H','H'],
+    13: ['S','S','S','S','S','H','H','H','H','H'],
+    14: ['S','S','S','S','S','H','H','H','H','H'],
+    15: ['S','S','S','S','S','H','H','H','H','H'],
+    16: ['S','S','S','S','S','H','H','H','H','H'],
+    17: ['S','S','S','S','S','S','S','S','S','S'],
+    18: ['S','S','S','S','S','S','S','S','S','S'],
+    19: ['S','S','S','S','S','S','S','S','S','S'],
+    20: ['S','S','S','S','S','S','S','S','S','S'],
+    21: ['S','S','S','S','S','S','S','S','S','S']
+  };
+
+  // Soft totals: key = total (13=A+2, 14=A+3, ... 20=A+9, 21=A+10)
+  var SOFT_STRATEGY = {
+    13: ['H','H','H','D','D','H','H','H','H','H'],
+    14: ['H','H','H','D','D','H','H','H','H','H'],
+    15: ['H','H','D','D','D','H','H','H','H','H'],
+    16: ['H','H','D','D','D','H','H','H','H','H'],
+    17: ['H','D','D','D','D','H','H','H','H','H'],
+    18: ['Ds','Ds','Ds','Ds','Ds','S','S','H','H','H'],
+    19: ['S','S','S','S','Ds','S','S','S','S','S'],
+    20: ['S','S','S','S','S','S','S','S','S','S'],
+    21: ['S','S','S','S','S','S','S','S','S','S']
+  };
+
+  // Pair strategy: key = card value of the pair (A=11, 2-10)
+  var PAIR_STRATEGY = {
+    2:  ['P','P','P','P','P','P','H','H','H','H'],
+    3:  ['P','P','P','P','P','P','H','H','H','H'],
+    4:  ['H','H','H','P','P','H','H','H','H','H'],
+    5:  ['D','D','D','D','D','D','D','D','H','H'],
+    6:  ['P','P','P','P','P','H','H','H','H','H'],
+    7:  ['P','P','P','P','P','P','H','H','H','H'],
+    8:  ['P','P','P','P','P','P','P','P','P','P'],
+    9:  ['P','P','P','P','P','S','P','P','S','S'],
+    10: ['S','S','S','S','S','S','S','S','S','S'],
+    11: ['P','P','P','P','P','P','P','P','P','P']  // Aces
+  };
+
+  function getDealerIndex(upcard) {
+    // upcard is the rank value (1-11)
+    if (upcard === 11 || upcard === 1) return 9; // Ace
+    return upcard - 2; // 2=0, 3=1, ..., 10=8
+  }
+
+  function getOptimalAction(playerCards, dealerUpValue, canDouble, canSplit) {
+    var di = getDealerIndex(dealerUpValue);
+    var hand = calcHand(playerCards);
+    var total = hand.value;
+
+    // Check pair first
+    if (playerCards.length === 2 && canSplit) {
+      var v1 = cardValue(playerCards[0]);
+      var v2 = cardValue(playerCards[1]);
+      if (v1 === v2) {
+        var pairKey = v1;
+        if (PAIR_STRATEGY[pairKey]) {
+          var pa = PAIR_STRATEGY[pairKey][di];
+          if (pa === 'P') return 'P';
+          // If not P, fall through to hard/soft
+        }
+      }
+    }
+
+    // Soft hand
+    if (hand.soft && total >= 13 && total <= 21) {
+      if (SOFT_STRATEGY[total]) {
+        var sa = SOFT_STRATEGY[total][di];
+        if (sa === 'D' || sa === 'Ds') {
+          if (canDouble) return 'D';
+          return sa === 'Ds' ? 'S' : 'H';
+        }
+        return sa;
+      }
+    }
+
+    // Hard hand
+    var hardKey = Math.min(total, 21);
+    if (hardKey < 5) hardKey = 5;
+    if (HARD_STRATEGY[hardKey]) {
+      var ha = HARD_STRATEGY[hardKey][di];
+      if (ha === 'D' || ha === 'Ds') {
+        if (canDouble) return 'D';
+        return ha === 'Ds' ? 'S' : 'H';
+      }
+      return ha;
+    }
+    return total >= 17 ? 'S' : 'H';
+  }
+
+  // =================================================================
+  // Card functions
+  // =================================================================
+  var shoe = [];
+
+  function createDeck() {
+    var deck = [];
+    for (var d = 0; d < NUM_DECKS; d++) {
+      for (var s = 0; s < SUITS.length; s++) {
+        for (var r = 0; r < RANKS.length; r++) {
+          deck.push({ rank: RANKS[r], suit: SUITS[s] });
+        }
+      }
+    }
+    // Fisher-Yates shuffle
+    for (var i = deck.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = deck[i];
+      deck[i] = deck[j];
+      deck[j] = tmp;
+    }
+    return deck;
+  }
+
+  function dealCard() {
+    if (shoe.length < RESHUFFLE_THRESHOLD) {
+      shoe = createDeck();
+    }
+    return shoe.pop();
+  }
+
+  function cardValue(card) {
+    if (card.rank === 'A') return 11;
+    if (['K','Q','J'].indexOf(card.rank) >= 0) return 10;
+    return parseInt(card.rank);
+  }
+
+  function calcHand(cards) {
+    var total = 0;
+    var aces = 0;
+    for (var i = 0; i < cards.length; i++) {
+      var v = cardValue(cards[i]);
+      if (v === 11) aces++;
+      total += v;
+    }
+    while (total > 21 && aces > 0) {
+      total -= 10;
+      aces--;
+    }
+    return { value: total, soft: aces > 0 };
+  }
+
+  function isBlackjack(cards) {
+    return cards.length === 2 && calcHand(cards).value === 21;
+  }
+
+  // =================================================================
+  // Card SVG rendering
+  // =================================================================
+  function renderCard(card, faceDown) {
+    if (faceDown) {
+      return '<svg class="bj-card bj-card-deal" viewBox="0 0 70 100" xmlns="http://www.w3.org/2000/svg">' +
+        '<rect x="1" y="1" width="68" height="98" rx="6" fill="#1a5c3a" stroke="#0d3d24" stroke-width="1.5"/>' +
+        '<rect x="6" y="6" width="58" height="88" rx="4" fill="none" stroke="#2a8a5a" stroke-width="1"/>' +
+        '<pattern id="bjPat" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">' +
+        '<path d="M0 5 L5 0 M5 10 L10 5" stroke="#2a8a5a" stroke-width="0.5" opacity="0.5"/>' +
+        '</pattern>' +
+        '<rect x="8" y="8" width="54" height="84" rx="3" fill="url(#bjPat)"/>' +
+        '<text x="35" y="55" text-anchor="middle" font-size="18" fill="#2a8a5a" font-weight="bold">?</text>' +
+        '</svg>';
+    }
+
+    var isRed = (card.suit === '♥' || card.suit === '♦');
+    var color = isRed ? '#dc2626' : '#1a1a1a';
+    var displayRank = card.rank;
+
+    return '<svg class="bj-card bj-card-deal" viewBox="0 0 70 100" xmlns="http://www.w3.org/2000/svg">' +
+      '<rect x="1" y="1" width="68" height="98" rx="6" fill="#fff" stroke="#ddd" stroke-width="1"/>' +
+      '<text x="8" y="20" font-size="14" font-weight="bold" fill="' + color + '">' + displayRank + '</text>' +
+      '<text x="8" y="34" font-size="12" fill="' + color + '">' + card.suit + '</text>' +
+      '<text x="35" y="60" text-anchor="middle" font-size="24" fill="' + color + '">' + card.suit + '</text>' +
+      '<text x="62" y="92" text-anchor="end" font-size="14" font-weight="bold" fill="' + color + '" transform="rotate(180 62 85)">' + displayRank + '</text>' +
+      '<text x="62" y="78" text-anchor="end" font-size="12" fill="' + color + '" transform="rotate(180 62 71)">' + card.suit + '</text>' +
+      '</svg>';
+  }
+
+  // =================================================================
+  // Game state
+  // =================================================================
+  var balance = 1000;
+  var currentBet = 25;
+  var baseBet = 25;
+  var hand1Bet = 25;
+  var hand2Bet = 25;
+  var playerHand = [];
+  var dealerHand = [];
+  var splitHand2 = [];
+  var isSplit = false;
+  var playingSplitHand = false;
+  var insuranceBet = 0;
+  var gameActive = false;
+
+  // Stats
+  var stats = {
+    hands: 0,
+    wins: 0,
+    losses: 0,
+    pushes: 0,
+    streak: 0,
+    bestStreak: 0,
+    correctDecisions: 0,
+    totalDecisions: 0,
+    profit: 0
+  };
+
+  // Load stats from localStorage
+  var STATS_KEY = 'bj_stats_v1';
+  var BALANCE_KEY = 'bj_balance_v1';
+  function loadStats() {
+    try {
+      var s = JSON.parse(localStorage.getItem(STATS_KEY));
+      if (s) stats = s;
+      var b = localStorage.getItem(BALANCE_KEY);
+      if (b) balance = parseInt(b);
+      if (isNaN(balance) || balance <= 0) balance = 1000;
+    } catch(e) {}
+  }
+  function saveStats() {
+    try {
+      localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+      localStorage.setItem(BALANCE_KEY, String(balance));
+    } catch(e) {}
+  }
+
+  // =================================================================
+  // DOM references
+  // =================================================================
+  var betArea = document.getElementById('betArea');
+  var bjTable = document.getElementById('bjTable');
+  var dealBtn = document.getElementById('dealBtn');
+  var betInput = document.getElementById('betInput');
+  var balanceDisplay = document.getElementById('balanceDisplay');
+  var dealerCardsEl = document.getElementById('dealerCards');
+  var playerCardsEl = document.getElementById('playerCards');
+  var dealerScoreEl = document.getElementById('dealerScore');
+  var playerScoreEl = document.getElementById('playerScore');
+  var actionArea = document.getElementById('actionArea');
+  var adviceBox = document.getElementById('adviceBox');
+  var adviceText = document.getElementById('adviceText');
+  var resultBox = document.getElementById('resultBox');
+  var resultText = document.getElementById('resultText');
+  var resultPayout = document.getElementById('resultPayout');
+  var nextBtn = document.getElementById('nextBtn');
+  var btnHit = document.getElementById('btnHit');
+  var btnStand = document.getElementById('btnStand');
+  var btnDouble = document.getElementById('btnDouble');
+  var btnSplit = document.getElementById('btnSplit');
+  var btnInsurance = document.getElementById('btnInsurance');
+  var splitHandEl = document.getElementById('splitHand');
+  var splitCardsEl = document.getElementById('splitCards');
+  var splitScoreEl = document.getElementById('splitScore');
+  var currentBetDisplay = document.getElementById('currentBetDisplay');
+
+  // =================================================================
+  // UI Helpers
+  // =================================================================
+  function updateBalance() {
+    balanceDisplay.textContent = balance.toLocaleString();
+    balanceDisplay.classList.remove('bj-pulse');
+    void balanceDisplay.offsetWidth;
+    balanceDisplay.classList.add('bj-pulse');
+  }
+
+  function updateStats() {
+    document.getElementById('statHands').textContent = stats.hands;
+    document.getElementById('statWins').textContent = stats.wins;
+    document.getElementById('statLosses').textContent = stats.losses;
+    document.getElementById('statPushes').textContent = stats.pushes;
+    document.getElementById('statStreak').textContent = stats.streak;
+    document.getElementById('statBestStreak').textContent = stats.bestStreak;
+    var accuracy = stats.totalDecisions > 0
+      ? Math.round((stats.correctDecisions / stats.totalDecisions) * 100) + '%'
+      : '-';
+    document.getElementById('statAccuracy').textContent = accuracy;
+    var profitEl = document.getElementById('statProfit');
+    profitEl.textContent = (stats.profit >= 0 ? '+' : '') + stats.profit;
+    profitEl.style.color = stats.profit >= 0 ? '#39FF14' : '#ff5252';
+  }
+
+  function renderPlayerHand() {
+    var html = '';
+    for (var i = 0; i < playerHand.length; i++) {
+      html += renderCard(playerHand[i], false);
+    }
+    playerCardsEl.innerHTML = html;
+    var hand = calcHand(playerHand);
+    playerScoreEl.textContent = hand.value + (hand.soft ? ' (軟)' : '');
+  }
+
+  function renderDealerHand(revealAll) {
+    var html = '';
+    for (var i = 0; i < dealerHand.length; i++) {
+      if (i === 1 && !revealAll) {
+        html += renderCard(dealerHand[i], true);
+      } else {
+        html += renderCard(dealerHand[i], false);
+      }
+    }
+    dealerCardsEl.innerHTML = html;
+    if (revealAll) {
+      var hand = calcHand(dealerHand);
+      dealerScoreEl.textContent = hand.value;
+    } else {
+      dealerScoreEl.textContent = cardValue(dealerHand[0]);
+    }
+  }
+
+  function renderSplitHand() {
+    var html = '';
+    for (var i = 0; i < splitHand2.length; i++) {
+      html += renderCard(splitHand2[i], false);
+    }
+    splitCardsEl.innerHTML = html;
+    var hand = calcHand(splitHand2);
+    splitScoreEl.textContent = hand.value + (hand.soft ? ' (軟)' : '');
+  }
+
+  function showActions(canDouble, canSplit, showInsurance) {
+    actionArea.style.display = 'flex';
+    btnHit.style.display = '';
+    btnStand.style.display = '';
+    btnDouble.style.display = canDouble ? '' : 'none';
+    btnSplit.style.display = canSplit ? '' : 'none';
+    btnInsurance.style.display = showInsurance ? '' : 'none';
+  }
+
+  function hideActions() {
+    actionArea.style.display = 'none';
+  }
+
+  function showAdvice(text, type) {
+    adviceBox.style.display = 'block';
+    adviceBox.className = 'bj-advice-box bj-advice-' + type;
+    adviceText.textContent = text;
+  }
+
+  function hideAdvice() {
+    adviceBox.style.display = 'none';
+  }
+
+  function getActionName(code) {
+    var names = { 'H': '要牌 (Hit)', 'S': '停牌 (Stand)', 'D': '加倍 (Double)', 'P': '分牌 (Split)' };
+    return names[code] || code;
+  }
+
+  function getActionReason(optimal, playerTotal, dealerUp, isSoft, isPair) {
+    if (optimal === 'H') {
+      if (playerTotal <= 11) return '你的點數低，拿牌不會爆';
+      if (dealerUp >= 7) return '莊家明牌強，你必須追點數';
+      return '目前點數不夠安全，需要再拿一張';
+    }
+    if (optimal === 'S') {
+      if (playerTotal >= 17) return '17 以上停牌是鐵律';
+      if (dealerUp <= 6) return '莊家牌弱，讓他自己爆';
+      return '目前點數夠安全，停牌保平安';
+    }
+    if (optimal === 'D') {
+      if (playerTotal === 11) return '11 點加倍是黃金時機，拿到 10 點牌就是 21';
+      if (playerTotal === 10) return '10 點加倍機會大，拿 10 就是 20';
+      if (isSoft) return '軟手牌加倍，拿到什麼都不怕爆';
+      return '你的牌面有優勢，加倍下注獲利更多';
+    }
+    if (optimal === 'P') {
+      if (isPair === 11) return 'A 永遠要分，兩手各有機會拿到 21';
+      if (isPair === 8) return '16 是最爛的點數，分成兩個 8 各自打更好';
+      return '分牌後期望值更高';
+    }
+    return '';
+  }
+
+  // =================================================================
+  // Game Logic
+  // =================================================================
+  function startDeal() {
+    var bet = parseInt(betInput.value);
+    if (isNaN(bet) || bet < 1) bet = 1;
+    if (bet > balance) bet = balance;
+    currentBet = bet;
+    baseBet = bet;
+    hand1Bet = bet;
+    hand2Bet = bet;
+    betInput.value = bet;
+    currentBetDisplay.textContent = bet;
+
+    // Reset state
+    playerHand = [];
+    dealerHand = [];
+    splitHand2 = [];
+    isSplit = false;
+    playingSplitHand = false;
+    insuranceBet = 0;
+    gameActive = true;
+
+    // Deal
+    playerHand.push(dealCard());
+    dealerHand.push(dealCard());
+    playerHand.push(dealCard());
+    dealerHand.push(dealCard());
+
+    // Show table
+    betArea.style.display = 'none';
+    bjTable.style.display = 'block';
+    resultBox.style.display = 'none';
+    splitHandEl.style.display = 'none';
+    hideAdvice();
+
+    renderPlayerHand();
+    renderDealerHand(false);
+
+    // Check for blackjack
+    if (isBlackjack(playerHand)) {
+      if (isBlackjack(dealerHand)) {
+        // Push
+        endHand('push', 0);
+      } else {
+        // Player blackjack pays 3:2
+        endHand('blackjack', Math.floor(currentBet * 1.5));
+      }
+      return;
+    }
+
+    // Check dealer blackjack possibility
+    var dealerUpValue = cardValue(dealerHand[0]);
+
+    // Dealer peek: if showing 10 and has BJ, end immediately
+    if (dealerUpValue === 10 && isBlackjack(dealerHand)) {
+      endHand('lose', -baseBet);
+      return;
+    }
+
+    var canDouble = balance >= baseBet && playerHand.length === 2;
+    var canSplitHand = playerHand.length === 2 &&
+      cardValue(playerHand[0]) === cardValue(playerHand[1]) &&
+      balance >= baseBet && !isSplit;
+    var showIns = dealerUpValue === 11 && playerHand.length === 2;
+
+    showActions(canDouble, canSplitHand, showIns);
+  }
+
+  function playerAction(action) {
+    if (!gameActive) return;
+
+    var currentHand = playingSplitHand ? splitHand2 : playerHand;
+    var dealerUpValue = cardValue(dealerHand[0]);
+    var canDouble = balance >= currentBet && currentHand.length === 2;
+    var canSplit = currentHand.length === 2 &&
+      cardValue(currentHand[0]) === cardValue(currentHand[1]) &&
+      balance >= currentBet && !isSplit;
+
+    // Get optimal action for feedback
+    var optimal = getOptimalAction(currentHand, dealerUpValue, canDouble, canSplit);
+
+    // Record decision (skip insurance check as separate)
+    if (action !== 'insurance') {
+      stats.totalDecisions++;
+      var playerActCode = action === 'hit' ? 'H' : action === 'stand' ? 'S' : action === 'double' ? 'D' : action === 'split' ? 'P' : 'H';
+
+      if (playerActCode === optimal) {
+        stats.correctDecisions++;
+        showAdvice('✅ 正確！基本策略也建議' + getActionName(optimal), 'correct');
+      } else {
+        var hand = calcHand(currentHand);
+        var isPairVal = (currentHand.length === 2 && cardValue(currentHand[0]) === cardValue(currentHand[1])) ? cardValue(currentHand[0]) : 0;
+        var reason = getActionReason(optimal, hand.value, dealerUpValue, hand.soft, isPairVal);
+        showAdvice('💡 基本策略建議' + getActionName(optimal) + '，因為' + reason, 'wrong');
+      }
+      saveStats();
+    }
+
+    // Execute action
+    if (action === 'hit') {
+      currentHand.push(dealCard());
+      if (playingSplitHand) {
+        renderSplitHand();
+      } else {
+        renderPlayerHand();
+      }
+
+      var handVal = calcHand(currentHand).value;
+      if (handVal > 21) {
+        // Bust
+        if (isSplit && !playingSplitHand) {
+          // Move to split hand
+          playingSplitHand = true;
+          splitHand2.push(dealCard());
+          renderSplitHand();
+          splitHandEl.style.display = 'block';
+          hideAdvice();
+          var canD2 = balance >= currentBet && splitHand2.length === 2;
+          showActions(canD2, false, false);
+        } else {
+          finishPlayerTurn();
+        }
+      } else if (handVal === 21) {
+        // Auto stand on 21
+        if (isSplit && !playingSplitHand) {
+          playingSplitHand = true;
+          splitHand2.push(dealCard());
+          renderSplitHand();
+          splitHandEl.style.display = 'block';
+          hideAdvice();
+          var canD3 = balance >= currentBet && splitHand2.length === 2;
+          showActions(canD3, false, false);
+        } else {
+          finishPlayerTurn();
+        }
+      } else {
+        // Can still hit, no more double/split
+        showActions(false, false, false);
+      }
+
+    } else if (action === 'stand') {
+      if (isSplit && !playingSplitHand) {
+        playingSplitHand = true;
+        splitHand2.push(dealCard());
+        renderSplitHand();
+        splitHandEl.style.display = 'block';
+        hideAdvice();
+        var canD4 = balance >= currentBet && splitHand2.length === 2;
+        showActions(canD4, false, false);
+      } else {
+        finishPlayerTurn();
+      }
+
+    } else if (action === 'double') {
+      if (playingSplitHand) {
+        hand2Bet *= 2;
+      } else {
+        hand1Bet *= 2;
+        currentBet = hand1Bet;
+        currentBetDisplay.textContent = currentBet;
+      }
+      currentHand.push(dealCard());
+      if (playingSplitHand) {
+        renderSplitHand();
+      } else {
+        renderPlayerHand();
+      }
+      // After double, move to next or finish
+      if (isSplit && !playingSplitHand) {
+        playingSplitHand = true;
+        splitHand2.push(dealCard());
+        renderSplitHand();
+        splitHandEl.style.display = 'block';
+        hideAdvice();
+        showActions(splitHand2.length === 2, false, false);
+      } else {
+        finishPlayerTurn();
+      }
+
+    } else if (action === 'split') {
+      isSplit = true;
+      splitHand2 = [playerHand.pop()];
+      playerHand.push(dealCard());
+      splitHand2.push(dealCard());
+      hand1Bet = baseBet;
+      hand2Bet = baseBet;
+      renderPlayerHand();
+      renderSplitHand();
+      splitHandEl.style.display = 'block';
+      hideAdvice();
+      playingSplitHand = false;
+      var canD6 = playerHand.length === 2;
+      showActions(canD6, false, false);
+
+    } else if (action === 'insurance') {
+      insuranceBet = Math.floor(baseBet / 2);
+      balance -= insuranceBet;
+      updateBalance();
+      btnInsurance.style.display = 'none';
+      // Check if dealer has blackjack
+      if (isBlackjack(dealerHand)) {
+        balance += insuranceBet * 3; // pays 2:1 + return
+        updateBalance();
+        showAdvice('💰 保險贏了！莊家是 Blackjack。但記住：長期來看保險是負期望值的。', 'neutral');
+        endHand('lose', -baseBet);
+        return;
+      } else {
+        showAdvice('保險輸了，莊家不是 Blackjack。基本策略建議永遠不買保險。', 'wrong');
+      }
+    }
+  }
+
+  function finishPlayerTurn() {
+    hideActions();
+    dealerPlay();
+  }
+
+  function dealerPlay() {
+    renderDealerHand(true);
+
+    // Check if all player hands are bust
+    var playerBust = calcHand(playerHand).value > 21;
+    var splitBust = isSplit ? calcHand(splitHand2).value > 21 : true;
+
+    if (playerBust && (isSplit ? splitBust : true)) {
+      resolveHands();
+      return;
+    }
+
+    // Dealer draws
+    function dealerDraw() {
+      var dHand = calcHand(dealerHand);
+      // Dealer must hit soft 17
+      if (dHand.value < 17 || (dHand.value === 17 && dHand.soft)) {
+        dealerHand.push(dealCard());
+        renderDealerHand(true);
+        setTimeout(dealerDraw, 500);
+      } else {
+        resolveHands();
+      }
+    }
+    setTimeout(dealerDraw, 600);
+  }
+
+  function resolveHands() {
+    var dealerVal = calcHand(dealerHand).value;
+    var dealerBust = dealerVal > 21;
+
+    if (isSplit) {
+      // Resolve both hands
+      var result1 = resolveOneHand(playerHand, dealerVal, dealerBust, hand1Bet);
+      var result2 = resolveOneHand(splitHand2, dealerVal, dealerBust, hand2Bet);
+      var totalPayout = result1.payout + result2.payout;
+      var msg = '手 1: ' + result1.msg + ' / 手 2: ' + result2.msg;
+
+      if (totalPayout > 0) {
+        endHand('win', totalPayout, msg);
+      } else if (totalPayout < 0) {
+        endHand('lose', totalPayout, msg);
+      } else {
+        endHand('push', 0, msg);
+      }
+    } else {
+      var result = resolveOneHand(playerHand, dealerVal, dealerBust, hand1Bet);
+      if (result.payout > 0) {
+        endHand('win', result.payout);
+      } else if (result.payout < 0) {
+        endHand('lose', result.payout);
+      } else {
+        endHand('push', 0);
+      }
+    }
+  }
+
+  function resolveOneHand(hand, dealerVal, dealerBust, handBet) {
+    var playerVal = calcHand(hand).value;
+    if (playerVal > 21) return { payout: -handBet, msg: '爆牌' };
+    if (dealerBust) return { payout: handBet, msg: '莊家爆牌，你贏！' };
+    if (playerVal > dealerVal) return { payout: handBet, msg: '你贏！' };
+    if (playerVal < dealerVal) return { payout: -handBet, msg: '你輸' };
+    return { payout: 0, msg: '平手' };
+  }
+
+  function endHand(outcome, payout, customMsg) {
+    gameActive = false;
+    hideActions();
+    renderDealerHand(true);
+    resultBox.style.display = 'block';
+
+    stats.hands++;
+
+    if (outcome === 'blackjack') {
+      resultText.textContent = '🏆 Blackjack!';
+      resultText.className = 'bj-result-text bj-blackjack';
+      resultPayout.textContent = '+' + payout + ' 籌碼';
+      balance += payout;
+      stats.wins++;
+      stats.streak++;
+      stats.profit += payout;
+    } else if (outcome === 'win') {
+      resultText.textContent = customMsg || '✅ 你贏了！';
+      resultText.className = 'bj-result-text bj-win';
+      resultPayout.textContent = '+' + payout + ' 籌碼';
+      balance += payout;
+      stats.wins++;
+      stats.streak++;
+      stats.profit += payout;
+    } else if (outcome === 'lose') {
+      resultText.textContent = customMsg || '❌ 你輸了';
+      resultText.className = 'bj-result-text bj-lose';
+      resultPayout.textContent = payout + ' 籌碼';
+      balance += payout; // payout is negative
+      stats.losses++;
+      stats.streak = 0;
+      stats.profit += payout;
+    } else {
+      resultText.textContent = customMsg || '🤝 平手（Push）';
+      resultText.className = 'bj-result-text bj-push';
+      resultPayout.textContent = '退回下注';
+      stats.pushes++;
+    }
+
+    if (stats.streak > stats.bestStreak) {
+      stats.bestStreak = stats.streak;
+    }
+
+    // Bankrupt check
+    if (balance <= 0) {
+      balance = 1000;
+      resultPayout.textContent += ' （籌碼歸零，已重新發放 1,000）';
+    }
+
+    updateBalance();
+    updateStats();
+    saveStats();
+  }
+
+  // =================================================================
+  // Event Bindings
+  // =================================================================
+  // Chip buttons
+  document.querySelectorAll('.bj-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      var val = parseInt(chip.getAttribute('data-bet'));
+      betInput.value = val;
+      document.querySelectorAll('.bj-chip').forEach(function(c) { c.classList.remove('selected'); });
+      chip.classList.add('selected');
+    });
+  });
+
+  dealBtn.addEventListener('click', function() {
+    startDeal();
+  });
+
+  btnHit.addEventListener('click', function() { playerAction('hit'); });
+  btnStand.addEventListener('click', function() { playerAction('stand'); });
+  btnDouble.addEventListener('click', function() { playerAction('double'); });
+  btnSplit.addEventListener('click', function() { playerAction('split'); });
+  btnInsurance.addEventListener('click', function() { playerAction('insurance'); });
+
+  nextBtn.addEventListener('click', function() {
+    betArea.style.display = '';
+    bjTable.style.display = 'none';
+    resultBox.style.display = 'none';
+    hideAdvice();
+    // Pre-fill last bet (use baseBet, not doubled bet)
+    betInput.value = Math.min(baseBet, balance);
+  });
+
+  // Stats toggle
+  var statsPanel = document.querySelector('.bj-stats-panel');
+  document.getElementById('statsToggle').addEventListener('click', function() {
+    statsPanel.classList.toggle('open');
+  });
+
+  // =================================================================
+  // Init
+  // =================================================================
+  shoe = createDeck();
+  loadStats();
+  updateBalance();
+  updateStats();
+
+})();
+</script>
+
+</BaseLayout>
