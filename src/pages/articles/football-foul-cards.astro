@@ -1,0 +1,687 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '黃牌累積兩張會怎樣？', a: '同一場比賽中累積兩張黃牌就等於一張紅牌，球員必須立刻被罰下場，而且球隊不能補人，剩下的時間要少一人踢。在世界盃等淘汰賽制中，累積黃牌還可能讓你在之後的比賽被禁賽。' },
+  { q: '紅牌一定要下場嗎？能不能申訴？', a: '紅牌一出示就必須立刻離場，沒有任何商量餘地。賽後可以透過官方管道申訴，如果成功可以撤銷禁賽場次，但<strong>那場比賽的紅牌判決不會改變</strong>。' },
+  { q: '什麼是「戰術犯規」？', a: '戰術犯規（Tactical Foul）是指球員故意犯規來阻止對方的快速反擊。最常見的就是在中場拉人或絆倒持球者。這種犯規通常會吃到黃牌，是一種「用一張牌換對方一次進攻機會」的策略。曼城的 Rodri 就是出了名的戰術犯規大師。' },
+  { q: '守門員在禁區內手球算犯規嗎？', a: '不算！守門員在自己的禁區內可以合法用手觸球，這是守門員的特權。但如果守門員走出禁區還用手接球，那就跟一般球員一樣算手球犯規，判給對方自由球。' },
+  { q: 'VAR 可以改判黃牌變紅牌嗎？', a: '可以！VAR 可以介入的四種情況之一就是「紅牌事件」。如果主裁判只給了黃牌，但 VAR 認為那個犯規嚴重到應該直接紅牌，可以建議主裁判到場邊看回放，然後改判紅牌。反過來，紅牌也有可能被降為黃牌。' },
+  { q: '假摔被抓到會怎樣？', a: '假摔（Simulation / Diving）被裁判識破的話，會直接吃一張<strong>黃牌</strong>。如果假摔成功騙到點球，事後被 VAR 抓到，點球會被取消，假摔球員還是吃黃牌。嚴重的假摔行為賽後還可能被追加禁賽。' },
+  { q: '教練也會被出示紅黃牌嗎？', a: '會！從 2019-20 賽季開始，FIFA 正式允許裁判對教練和替補席人員出示黃牌和紅牌。教練如果在場邊過度抗議、辱罵裁判或做出不當行為，一樣會被警告甚至驅逐出場。被紅牌罰出去的教練必須離開技術區域，不能在場邊指揮。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/football-foul-cards/"
+  title="足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解 — GAME8LA"
+  description="足球犯規規則白話文解釋：什麼情況給黃牌、什麼直接紅牌。附 9 題裁判模擬器互動測驗，每題都有芭樂子搞笑圖解。"
+  image="https://game8la.com/images/articles/foul-quiz/foul-cover.webp"
+  datePublished="2026-06-02"
+  dateModified="2026-06-02"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '足球教室', url: 'https://game8la.com/articles/' },
+    { name: '犯規與紅黃牌圖解', url: 'https://game8la.com/articles/football-foul-cards/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解 — GAME8LA" description="足球犯規規則白話文解釋：什麼情況給黃牌、什麼直接紅牌。附 9 題裁判模擬器互動測驗，每題都有芭樂子搞笑圖解。" ogImage="https://game8la.com/images/articles/foul-quiz/foul-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 犯規與紅黃牌圖解</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-06-02 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 8 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a1a2e,#e74c3c,#f1c40f)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">足球犯規怎麼判？黃牌紅牌差在哪？<em>芭樂子圖解＋9 題裁判模擬器，看完你比主審還懂</em></h1>
+
+      <!-- === 快速工具入口 === -->
+      <div class="quick-tool-bar">
+        <span>直接玩測驗：</span>
+        <a href="#s6">裁判模擬器</a>
+        <a href="/articles/football-offside-rule/">越位規則</a>
+        <a href="/tools/worldcup-2026/">世足冠軍預測</a>
+      </div>
+
+      <!-- === 封面圖 === -->
+      <img
+        src="/images/articles/foul-quiz/foul-cover.webp"
+        srcset="/images/articles/foul-quiz/foul-cover-768w.webp 768w, /images/articles/foul-quiz/foul-cover.webp 1376w"
+        sizes="(max-width: 640px) 100vw, 820px"
+        alt="足球犯規與紅黃牌規則圖解封面"
+        class="content-img"
+        width="1376" height="774"
+        loading="eager"
+        style="margin-bottom:1.2rem"
+      />
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。上一篇講完越位，這次來聊足球裡另一個讓人搞不清楚的東西——犯規跟紅黃牌。每次看球賽，裁判掏出牌子的時候，旁邊一定有人喊：「這樣也犯規？」「這頂多黃牌吧？」「裁判眼睛有問題嗎？」今天芭樂子一次講清楚，什麼叫犯規、黃牌紅牌差在哪、VAR 怎麼管。看完這篇加上後面的 9 題裁判模擬器，保證你比那些嘴砲球迷還懂判罰。</p>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">足球犯規的基本概念</a></li>
+          <li><a href="#s2">黃牌和紅牌差在哪？</a></li>
+          <li><a href="#s3">常見犯規動作圖解</a></li>
+          <li><a href="#s4">直接自由球 vs 間接自由球</a></li>
+          <li><a href="#s5">VAR 和犯規判定</a></li>
+          <li><a href="#s6">來當裁判！9 題犯規判定模擬器</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- === 正文開始 === -->
+
+      <h2 id="s1" style="margin-top:2.5rem">足球犯規的基本概念</h2>
+
+      <p>足球犯規，簡單來說就是違反比賽規則的動作。但不是所有犯規都一樣嚴重，裁判的判罰是有等級的。芭樂子幫你整理成四個層級，從輕到重：</p>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">裁判判罰四等級</h3>
+        <table>
+          <thead><tr><th style="width:3rem">等級</th><th>判罰</th><th>白話翻譯</th></tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;color:#4caf50;font-size:1.2rem;text-align:center">0</td>
+              <td>沒犯規，繼續比賽</td>
+              <td>合法的身體對抗，裁判揮手讓比賽繼續</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#2196f3;font-size:1.2rem;text-align:center">1</td>
+              <td>犯規 → 自由球</td>
+              <td>輕微犯規，給對方一個自由球機會</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#f5b800;font-size:1.2rem;text-align:center">2</td>
+              <td>犯規 → 黃牌（警告）</td>
+              <td>裁判掏出黃色牌子：「你給我注意一點」</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#f44336;font-size:1.2rem;text-align:center">3</td>
+              <td>犯規 → 紅牌（驅逐）</td>
+              <td>裁判掏出紅色牌子：「你可以回休息室了」</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">裁判會根據犯規的嚴重程度決定判罰等級。同一個動作，力道不同、意圖不同，判罰可能完全不一樣。</p>
+      </div>
+
+      <p>芭樂子小提醒：足球是身體接觸型運動，不是每次碰撞都是犯規。合法的肩對肩衝撞、搶球時的正常身體對抗，裁判會讓比賽繼續。判斷犯規的關鍵在於：<strong>動作是否粗心（Careless）、魯莽（Reckless）、或使用過度力量（Excessive Force）</strong>。</p>
+
+      <p>用生活比喻：你在捷運上不小心踩到別人的腳 = 粗心，頂多道個歉；你明知旁邊有人還硬擠過去把人家撞開 = 魯莽，可能被罵；你一拳打在別人臉上 = 過度力量，準備被警察抓。足球犯規的判定邏輯就是這樣，越嚴重的動作，判罰越重。</p>
+
+      <h2 id="s2" style="margin-top:2.5rem">黃牌和紅牌差在哪？</h2>
+
+      <p>這是大家最容易搞混的部分。芭樂子用兩張大卡幫你分清楚：</p>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.12) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">🟨 黃牌 = 警告</h3>
+        <p style="font-size:1.05rem;line-height:1.9">裁判掏出黃牌的意思是：「兄弟，我警告你，再來一次你就要走人了。」拿到黃牌不用離場，但第二張黃牌會自動升級成紅牌。</p>
+        <p><strong>常見黃牌情境：</strong></p>
+        <ul>
+          <li>魯莽犯規（動作過大但不至於危險）</li>
+          <li>拉球衣、拉手臂阻止對方推進</li>
+          <li>假摔（Simulation），企圖欺騙裁判</li>
+          <li>故意拖延時間（例如慢吞吞開球、把球踢走）</li>
+          <li>進球後脫衣慶祝（真的，這條最搞笑👇）</li>
+        </ul>
+        <figure style="margin:0.5rem 0">
+          <img src="/images/articles/foul-quiz/foul-q9.webp" srcset="/images/articles/foul-quiz/foul-q9-768w.webp 768w, /images/articles/foul-quiz/foul-q9.webp 1376w" sizes="(max-width:640px) 100vw, 760px" alt="芭樂子進球後脫衣慶祝被舉黃牌" width="1376" height="768" loading="lazy" decoding="async" style="display:block;width:100%;border-radius:10px;height:auto" />
+          <figcaption style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem">脫個衣服慶祝也要黃牌，前鋒表示不服</figcaption>
+        </figure>
+        <ul>
+          <li>對裁判判決表達不滿、抗議</li>
+          <li>未經許可進出球場</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.12) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">🟥 紅牌 = 驅逐出場</h3>
+        <p style="font-size:1.05rem;line-height:1.9">裁判掏出紅牌的意思是：「走人。現在。不用換衣服，直接回更衣室。」拿到紅牌的球員必須離場，球隊不能補人，要少一個人踢完剩下的比賽。</p>
+        <p><strong>直接紅牌的情境：</strong></p>
+        <ul>
+          <li>嚴重犯規（Serious Foul Play）——動作可能造成對方受傷</li>
+          <li>暴力行為——踢人、打人、咬人、肘擊、吐口水</li>
+          <li>故意手球阻擋明顯進球機會（DOGSO）</li>
+          <li>用犯規手段阻止明顯得分機會</li>
+          <li>辱罵裁判或使用歧視性語言👇</li>
+        </ul>
+        <figure style="margin:0.5rem 0">
+          <img src="/images/articles/foul-quiz/foul-q10.webp" srcset="/images/articles/foul-quiz/foul-q10-768w.webp 768w, /images/articles/foul-quiz/foul-q10.webp 1376w" sizes="(max-width:640px) 100vw, 760px" alt="芭樂子對裁判大吼大叫被舉紅牌" width="1376" height="768" loading="lazy" decoding="async" style="display:block;width:100%;border-radius:10px;height:auto" />
+          <figcaption style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem">對裁判飆髒話——直接紅牌，沒有例外</figcaption>
+        </figure>
+        <ul>
+          <li>累積兩張黃牌 → 自動變紅牌</li>
+        </ul>
+      </div>
+
+      <p>芭樂子口訣：<strong>「黃牌是警告，紅牌是掰掰。兩張黃牌等於一張紅牌。」</strong>背起來，下次看球你就是判罰專家。</p>
+
+      <p>順帶一提，紅牌的後續影響也不一樣。被直接紅牌罰下的球員，通常至少禁賽一場，暴力行為可能禁賽三場以上。而兩黃變一紅的球員通常只禁賽一場。所以在比賽中，已經有一張黃牌的球員會特別小心——因為再吃一張就要下場了。你會看到教練經常在這種時候把有黃牌的球員換下來，避免風險。</p>
+
+      <p>還有一個名詞你一定會在轉播中聽到：<strong>DOGSO</strong>（Denying an Obvious Goal-Scoring Opportunity），中文翻譯是「阻止明顯得分機會」。當一個球員用犯規手段阻止了對方幾乎確定會進的球（比如最後一個後衛把突破的前鋒拉倒），那就是 DOGSO，通常直接紅牌。但 2016 年規則修改後，如果 DOGSO 發生在禁區內而且裁判判了 PK，那犯規球員可能只拿黃牌而不是紅牌——因為 PK 本身已經是很重的懲罰了。</p>
+
+      <h2 id="s3" style="margin-top:2.5rem">常見犯規動作圖解</h2>
+
+      <p>足球場上最常見的犯規動作有哪些？芭樂子用白話文幫你列出來，每個都會告訴你大概是什麼等級的判罰：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">常見犯規大全</h3>
+
+        <p><strong style="color:#f5b800">鏟球（Tackle）</strong></p>
+        <figure style="margin:0.8rem 0">
+          <img src="/images/articles/foul-quiz/foul-q1.webp" srcset="/images/articles/foul-quiz/foul-q1-768w.webp 768w, /images/articles/foul-quiz/foul-q1.webp 1376w" sizes="(max-width:640px) 100vw, 760px" alt="芭樂子從後方飛鏟對方球員" width="1376" height="768" loading="lazy" decoding="async" style="display:block;width:100%;border-radius:10px;height:auto" />
+          <figcaption style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem">從後方飛鏟——黃牌起跳，腳底朝上直接紅牌</figcaption>
+        </figure>
+        <p style="font-size:1rem;line-height:1.85">鏟球本身不犯規，但<strong>從後方鏟球</strong>基本上黃牌起跳。如果腳底朝上、雙腳離地的飛鏟，直接紅牌沒商量。正面鏟球先碰到球就沒事，先碰到人就犯規。裁判看的是：你到底是在搶球還是在搶人。</p>
+
+        <p><strong style="color:#f5b800">拉球衣（Shirt Pulling）</strong></p>
+        <figure style="margin:0.8rem 0">
+          <img src="/images/articles/foul-quiz/foul-q6.webp" srcset="/images/articles/foul-quiz/foul-q6-768w.webp 768w, /images/articles/foul-quiz/foul-q6.webp 1376w" sizes="(max-width:640px) 100vw, 760px" alt="芭樂子用力拉對方球衣" width="1376" height="768" loading="lazy" decoding="async" style="display:block;width:100%;border-radius:10px;height:auto" />
+          <figcaption style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem">拉到球衣快撕破——經典黃牌動作</figcaption>
+        </figure>
+        <p style="font-size:1rem;line-height:1.85">足球場上最經典的小動作。輕微拉扯可能只判自由球，但如果用力到對方跑不動、球衣都快被撕破，就是黃牌。在禁區裡拉球衣被抓到，除了黃牌還可能送給對方一個 PK。</p>
+
+        <p><strong style="color:#f5b800">手球（Handball）</strong></p>
+        <figure style="margin:0.8rem 0">
+          <img src="/images/articles/foul-quiz/foul-q4.webp" srcset="/images/articles/foul-quiz/foul-q4-768w.webp 768w, /images/articles/foul-quiz/foul-q4.webp 1376w" sizes="(max-width:640px) 100vw, 760px" alt="芭樂子穿守門員手套在禁區外接球" width="1024" height="572" loading="lazy" decoding="async" style="display:block;width:100%;border-radius:10px;height:auto" />
+          <figcaption style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem">守門員跑出禁區外接球——犯規但不一定紅牌哦</figcaption>
+        </figure>
+        <p style="font-size:1rem;line-height:1.85">足球嘛，顧名思義就是用腳踢的球。用手碰球原則上都是犯規，但<strong>「故意」跟「非故意」差很大</strong>。球打到貼著身體的手，通常不判。但把手張開去擋球、或手的位置不自然，裁判就會吹。在禁區裡故意手球更可能送 PK。</p>
+
+        <p><strong style="color:#f5b800">假摔（Simulation / Diving）</strong></p>
+        <figure style="margin:0.8rem 0">
+          <img src="/images/articles/foul-quiz/foul-q2.webp" srcset="/images/articles/foul-quiz/foul-q2-768w.webp 768w, /images/articles/foul-quiz/foul-q2.webp 1376w" sizes="(max-width:640px) 100vw, 760px" alt="芭樂子在球場上誇張假摔" width="1376" height="768" loading="lazy" decoding="async" style="display:block;width:100%;border-radius:10px;height:auto" />
+          <figcaption style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem">明明沒人碰你，你在演哪齣？黃牌伺候</figcaption>
+        </figure>
+        <p style="font-size:1rem;line-height:1.85">裁判最討厭的行為之一。明明沒人碰你，你卻誇張倒地翻滾，裝成被嚴重犯規的樣子。被抓到就是黃牌，而且有 VAR 之後，假摔的代價變得更高——慢動作重播一看就知道你在演戲。</p>
+
+        <p><strong style="color:#f5b800">衝撞（Charge）</strong></p>
+        <figure style="margin:0.8rem 0">
+          <img src="/images/articles/foul-quiz/foul-q5.webp" srcset="/images/articles/foul-quiz/foul-q5-768w.webp 768w, /images/articles/foul-quiz/foul-q5.webp 1376w" sizes="(max-width:640px) 100vw, 760px" alt="芭樂子跟對方肩並肩搶球" width="1376" height="768" loading="lazy" decoding="async" style="display:block;width:100%;border-radius:10px;height:auto" />
+          <figcaption style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:0.4rem">肩對肩合理衝撞——這是合法的！</figcaption>
+        </figure>
+        <p style="font-size:1rem;line-height:1.85">合法 vs 非法的界線在哪？<strong>肩對肩的衝撞是合法的</strong>，這是足球身體對抗的一部分。但如果用手肘頂、從背後撞、或力道明顯過大把人撞飛，就是犯規。</p>
+
+        <p><strong style="color:#f5b800">其他常見犯規</strong></p>
+        <p style="font-size:1rem;line-height:1.85">踩腳（不小心的判自由球，故意的給牌）、肘擊（直接紅牌等級）、推人（依嚴重程度給自由球或黃牌）、絆倒（伸腳或身體把人絆倒，自由球起跳）。</p>
+      </div>
+
+      <p>芭樂子補充一個冷知識：在 2024 年的 FIFA 規則更新中，手球的判定標準做了調整。以前只要手碰到球就很容易被吹，現在裁判會更看重「手臂位置是否自然」。如果你雙手貼著身體，球打到你的手，通常不會判犯規。但如果你把手張得像翅膀一樣，那就是你自找的。</p>
+
+      <h2 id="s4" style="margin-top:2.5rem">直接自由球 vs 間接自由球</h2>
+
+      <p>很多人以為犯規就是判「自由球」，但其實自由球有分兩種，差別很大：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#2196f3;margin-top:0">自由球比較表</h3>
+        <table>
+          <thead><tr><th>項目</th><th>直接自由球</th><th>間接自由球</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">可以直接射門？</td><td style="color:#4caf50;font-weight:700">可以，直接踢進球門就算</td><td style="color:#f44336;font-weight:700">不行，要先碰到另一個球員</td></tr>
+            <tr><td style="font-weight:700">判罰原因</td><td>踢人、絆人、推人、衝撞、手球、跳向對方、扣住對方、打人、咬人、吐口水（共 10 種）</td><td>越位、危險動作、阻擋跑位、阻擋守門員開球等</td></tr>
+            <tr><td style="font-weight:700">裁判手勢</td><td>手臂指向犯規隊伍的球門方向</td><td>手臂舉高，直到球碰到另一個球員</td></tr>
+            <tr><td style="font-weight:700;color:#f5b800">禁區內犯規？</td><td style="color:#f5b800;font-weight:700">直接變罰球（PK）！</td><td>還是間接自由球，但在禁區內開</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>芭樂子重點提醒：<strong>禁區內的直接自由球犯規 = 罰球（PK）</strong>！這就是為什麼禁區裡的犯規這麼關鍵。12 碼罰球的進球率大約 75-85%，所以在禁區裡犯規幾乎就等於送對方一球。後衛們在禁區裡都會特別小心，寧可讓對方射門也不敢輕易鏟球。</p>
+
+      <p>芭樂子分享一個觀察重點：你看到裁判吹完哨之後有沒有舉手？<strong>舉手 = 間接自由球</strong>，不舉手 = 直接自由球。下次看球的時候注意這個細節，你就知道進攻方能不能直接射門了。很多轉播不會特別提這個，但你知道的話就比旁邊的人多一個小知識。</p>
+
+      <h2 id="s5" style="margin-top:2.5rem">VAR 和犯規判定</h2>
+
+      <p>2018 世界盃開始，VAR（影像輔助裁判）正式進入足球世界。它在犯規判定上扮演什麼角色？芭樂子幫你整理：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#9c27b0;background:linear-gradient(135deg,rgba(156,39,176,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#9c27b0;margin-top:0">VAR 介入犯規判定</h3>
+        <table>
+          <thead><tr><th>介入情況</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;color:#4caf50">進球前的犯規</td><td>檢查進球過程中是否有犯規、手球、越位</td></tr>
+            <tr><td style="font-weight:700;color:#f44336">紅牌事件</td><td>確認是否該給紅牌，或是紅牌判給了錯誤的球員</td></tr>
+            <tr><td style="font-weight:700;color:#f5b800">罰球（PK）</td><td>確認禁區內犯規是否成立、犯規地點是否在禁區內</td></tr>
+            <tr><td style="font-weight:700;color:#2196f3">球員身份</td><td>確認裁判處罰的是不是正確的球員</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">注意：黃牌不在 VAR 介入範圍！除非 VAR 認為那個動作應該判紅牌而非黃牌。</p>
+      </div>
+
+      <p>關於 2026 世足，FIFA 預計會升級 VAR 系統，加入更多 AI 輔助和更快速的回放技術。目標是把 VAR 確認時間壓縮到更短，減少比賽中斷的時間。對球迷來說，少等幾分鐘就是好消息。</p>
+
+      <p>芭樂子的觀點：VAR 讓足球更公平了，但也帶來一些爭議。很多球迷覺得 VAR 讓比賽中斷太久、破壞了節奏感。而且 VAR 也不是萬能的——同一個畫面，不同裁判可能看法不同。但整體來說，VAR 確實減少了很多冤枉判決，特別是在 PK 和紅牌這種影響比賽結果的重大判罰上。你說呢？</p>
+
+      <h2 id="s6" style="margin-top:2.5rem">來當裁判！9 題犯規判定模擬器</h2>
+
+      <p>規則看完了，現在換你來吹哨！芭樂子準備了 9 個犯規情境，每題給你看一張圖，你來判斷該怎麼判。四個選項：沒犯規、自由球、黃牌、紅牌。答對 7 題以上，芭樂子封你為「民間主審」！</p>
+
+      <p>提示：連續答對會觸發連對紀錄，答錯會歸零重新計算。答完 9 題之後會根據你的分數給你一個裁判等級評價。你的成績會用 localStorage 記錄，可以多玩幾次看看能不能突破自己的最高分。</p>
+
+      <!-- Quiz Area -->
+      <div class="fq-quiz-area" id="fqQuizArea">
+        <!-- Progress -->
+        <div class="fq-progress" id="fqProgressBar">
+          <span class="fq-progress-text" id="fqProgressText">第 1/9 題</span>
+          <div class="fq-progress-track"><div class="fq-progress-fill" id="fqProgressFill" style="width:11.1%"></div></div>
+        </div>
+
+        <!-- Scenario Image -->
+        <div class="fq-img-wrap" id="fqImgWrap">
+          <img id="fqImage" src="/images/articles/foul-quiz/foul-q1.webp"
+               srcset="/images/articles/foul-quiz/foul-q1-768w.webp 768w, /images/articles/foul-quiz/foul-q1.webp 1376w"
+               sizes="(max-width: 640px) 100vw, 600px"
+               loading="lazy" alt="犯規情境圖" style="width:100%;border-radius:10px;margin-bottom:0.8rem" />
+        </div>
+
+        <!-- Question -->
+        <p class="fq-question" id="fqQuestionText">情境描述載入中...</p>
+
+        <!-- Answer Buttons -->
+        <div class="fq-buttons" id="fqAnswerBtns">
+          <button type="button" class="fq-btn fq-btn-none" onclick="window._fqAnswer('none')">✅沒犯規</button>
+          <button type="button" class="fq-btn fq-btn-free" onclick="window._fqAnswer('free')">⚽自由球</button>
+          <button type="button" class="fq-btn fq-btn-yellow" onclick="window._fqAnswer('yellow')">🟨黃牌</button>
+          <button type="button" class="fq-btn fq-btn-red" onclick="window._fqAnswer('red')">🟥紅牌</button>
+        </div>
+
+        <!-- Explanation -->
+        <div class="fq-explanation" id="fqExplanation" style="display:none">
+          <div class="fq-result-badge" id="fqResultBadge"></div>
+          <p class="fq-explain-text" id="fqExplainText"></p>
+          <p class="fq-rule-ref" id="fqRuleRef"></p>
+          <button type="button" class="fq-next-btn" id="fqNextBtn" onclick="window._fqNext()">下一題 →</button>
+        </div>
+
+        <!-- Final Score -->
+        <div class="fq-final" id="fqFinalPanel" style="display:none">
+          <div class="fq-final-score" id="fqFinalScore"></div>
+          <div class="fq-final-title" id="fqFinalTitle"></div>
+          <div class="fq-final-msg" id="fqFinalMsg"></div>
+          <button type="button" class="fq-replay-btn" id="fqReplayBtn" onclick="window._fqReplay()">再玩一次</button>
+          <div class="fq-share-prompt">覺得自己判得比裁判準？分享給朋友挑戰看看</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="fq-stats-card" id="fqStatsCard">
+        <div class="fq-stats-title">你的裁判紀錄</div>
+        <div class="fq-stats-row">
+          <span class="fq-stat">測驗次數 <strong id="fqStatAttempts">0</strong></span>
+          <span class="fq-stat">最高分 <strong id="fqStatBest">-</strong></span>
+          <span class="fq-stat">平均分 <strong id="fqStatAvg">-</strong></span>
+        </div>
+      </div>
+
+      <div class="card" style="margin:2rem 0 1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">芭樂子犯規規則速記卡</h3>
+        <ul style="line-height:2.1">
+          <li><strong>合理身體對抗</strong> → 沒犯規，比賽繼續</li>
+          <li><strong>粗心犯規（Careless）</strong> → 自由球</li>
+          <li><strong>魯莽犯規（Reckless）</strong> → 黃牌＋自由球</li>
+          <li><strong>過度力量（Excessive Force）</strong> → 紅牌＋自由球</li>
+          <li><strong>禁區內直接自由球犯規</strong> → 升級成 PK</li>
+          <li><strong>假摔被抓到</strong> → 黃牌</li>
+          <li><strong>脫衣慶祝</strong> → 黃牌（別問為什麼）</li>
+        </ul>
+      </div>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.95rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子免責聲明：</strong>本文內容僅供教育參考，規則解釋以 FIFA 最新版《Laws of the Game》為準。芭樂子盡力用白話文解釋，但如果你要去考裁判證，還是乖乖看 FIFA 官方文件吧。看球愉快，不要跟朋友因為犯規判定吵架——反正裁判的決定才算數。</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2 style="margin-top:2.5rem">2026 世足相關延伸閱讀</h2>
+      <p>看懂犯規判罰之後，可以再看看這些世足相關內容，看球時你的解說會更到位：</p>
+
+      <div class="related-links">
+        <a href="/articles/football-offside-rule/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗</strong>
+          <span class="rl-desc">足球越位規則白話文解釋，附互動圖解和 10 題越位測驗</span>
+        </a>
+        <a href="/tools/worldcup-2026/" class="rl-item">
+          <span class="rl-cat">互動工具</span>
+          <strong>2026 美加墨世界盃冠軍預測工具</strong>
+          <span class="rl-desc">輸入你看好的隊伍，看看冠軍勝率算給你看</span>
+        </a>
+        <a href="/articles/worldcup-2026-prediction/" class="rl-item">
+          <span class="rl-cat">分析文</span>
+          <strong>2026 世界盃冠軍分析：誰是最大熱門？</strong>
+          <span class="rl-desc">阿根廷、法國、巴西、英格蘭，誰最有機會奪冠？</span>
+        </a>
+        <a href="/tools/bless-blocks/" class="rl-item">
+          <span class="rl-cat">趣味工具</span>
+          <strong>線上擲筊：問問神明今晚要看哪一場</strong>
+          <span class="rl-desc">兩場好球撞檔不知道選哪場？讓神明幫你決定</span>
+        </a>
+      </div>
+
+      <ManifestoBox />
+      <ShareButtons title="足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解" url="https://game8la.com/articles/football-foul-cards/" />
+    </article>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+  .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: clamp(1.3rem, 4.8vw, 1.55rem); }
+  .article-content p { font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.9; margin: 1.1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.85; font-size: clamp(16px, 4.2vw, 17.5px); }
+
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0.5rem; }
+  .article-img-caption { text-align: center; font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin: 0.5rem auto 1.2rem; max-width: 680px; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.15rem; }
+  .card p { font-size: 1rem; line-height: 1.85; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 5px 12px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .faq-list { margin: 1rem 0 2rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.78rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 1.02rem; }
+  .rl-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
+  th, td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.7; }
+  th { font-weight: 700; font-size: 0.92rem; color: var(--text-muted); }
+
+  /* === Foul Quiz CSS === */
+  .fq-quiz-area { max-width: 600px; margin: 2rem auto; padding: 1.5rem; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid #2a2a2a; }
+
+  .fq-progress { margin-bottom: 1rem; }
+  .fq-progress-text { display: block; text-align: center; font-size: 1rem; color: #ccc; margin-bottom: 0.5rem; font-weight: 600; }
+  .fq-progress-track { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+  .fq-progress-fill { height: 100%; background: var(--guava-green, #39FF14); border-radius: 3px; transition: width 0.4s ease; }
+
+  .fq-img-wrap { width: 100%; margin: 0 auto 1rem; border-radius: 10px; overflow: hidden; }
+  .fq-img-wrap img { display: block; width: 100%; height: auto; border-radius: 10px; }
+
+  .fq-question { text-align: center; font-size: 1.1rem; font-weight: 700; color: #eee; margin: 0 0 1rem; line-height: 1.7; }
+
+  .fq-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fq-btn { font-size: 1.05rem; font-weight: 700; padding: 14px 10px; border-radius: 12px; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; text-align: center; }
+  .fq-btn:hover { transform: translateY(-2px); }
+  .fq-btn:active { transform: translateY(1px); }
+  .fq-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .fq-btn-none { background: linear-gradient(135deg, #16a34a, #22c55e); color: #fff; border-color: #22c55e; }
+  .fq-btn-none:hover { box-shadow: 0 4px 15px rgba(34,197,94,0.4); }
+  .fq-btn-free { background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; border-color: #3b82f6; }
+  .fq-btn-free:hover { box-shadow: 0 4px 15px rgba(59,130,246,0.4); }
+  .fq-btn-yellow { background: linear-gradient(135deg, #ca8a04, #eab308); color: #1a1a1a; border-color: #eab308; }
+  .fq-btn-yellow:hover { box-shadow: 0 4px 15px rgba(234,179,8,0.4); }
+  .fq-btn-red { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; border-color: #ef4444; }
+  .fq-btn-red:hover { box-shadow: 0 4px 15px rgba(239,68,68,0.4); }
+
+  .fq-btn.fq-correct { box-shadow: 0 0 20px rgba(34,197,94,0.6); border-color: #22c55e; }
+  .fq-btn.fq-wrong { animation: fqShake 0.5s ease; border-color: #666; opacity: 0.5; }
+  @keyframes fqShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+
+  .fq-explanation { margin-top: 1.2rem; animation: fqFadeIn 0.35s ease-out; }
+  @keyframes fqFadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .fq-result-badge { text-align: center; font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; white-space: pre-line; }
+  .fq-result-badge.fq-badge-correct { color: #22c55e; }
+  .fq-result-badge.fq-badge-wrong { color: #ef4444; }
+  .fq-explain-text { background: rgba(57,255,20,0.05); border-left: 3px solid var(--guava-green, #39FF14); border-radius: 0 10px 10px 0; padding: 14px 18px; font-size: 1.05rem; line-height: 1.8; color: #ddd; margin-bottom: 0.5rem; }
+  .fq-rule-ref { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; padding-left: 18px; }
+  .fq-next-btn { display: block; margin: 0 auto; background: transparent; border: 1.5px solid #555; color: #ccc; font-size: 1.05rem; padding: 10px 36px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+  .fq-next-btn:hover { border-color: var(--guava-green, #39FF14); color: #fff; }
+
+  .fq-final { text-align: center; animation: fqFadeIn 0.5s ease-out; }
+  .fq-final-score { font-size: 3rem; font-weight: 900; color: var(--guava-green, #39FF14); margin-bottom: 0.3rem; }
+  .fq-final-title { font-size: 1.4rem; font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem; }
+  .fq-final-msg { font-size: 1rem; color: #bbb; margin-bottom: 1.2rem; line-height: 1.7; }
+  .fq-replay-btn { background: linear-gradient(135deg, #b8860b, #d4a056); border: 2px solid #c9983a; color: #1a1a1a; font-size: 1.15rem; font-weight: 800; padding: 14px 40px; border-radius: 12px; cursor: pointer; transition: all 0.3s; letter-spacing: 2px; }
+  .fq-replay-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,134,11,0.4); }
+  .fq-share-prompt { margin-top: 1rem; font-size: 0.95rem; color: #888; }
+
+  .fq-stats-card { max-width: 600px; margin: 2rem auto; padding: 1.2rem 1.5rem; background: var(--bg-card, rgba(255,255,255,0.03)); border: 1px solid #333; border-radius: 14px; }
+  .fq-stats-title { font-size: 1.05rem; font-weight: 700; color: #eee; margin-bottom: 0.8rem; }
+  .fq-stats-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .fq-stat { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 8px 16px; font-size: 0.95rem; color: #bbb; }
+  .fq-stat strong { font-size: 1.2rem; margin-left: 4px; color: var(--guava-green, #39FF14); }
+
+  @media (max-width: 768px) {
+    .fq-quiz-area { padding: 1rem; }
+    .fq-btn { font-size: 0.98rem; padding: 12px 8px; }
+    .fq-question { font-size: 1.02rem; }
+    .fq-final-score { font-size: 2.5rem; }
+    .fq-final-title { font-size: 1.2rem; }
+  }
+  @media (max-width: 480px) {
+    .fq-buttons { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .fq-btn { font-size: 0.95rem; padding: 10px 6px; }
+    .fq-explain-text { font-size: 0.95rem; padding: 10px 14px; }
+    .fq-stat { padding: 6px 12px; font-size: 0.9rem; }
+  }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.55rem; }
+    .article-content h2 { font-size: 1.25rem; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  var FOUL_SCENARIOS = [
+    { id:1, img:'foul-q1', desc:'芭樂子從後方飛鏟對方球員，把人家整個鏟飛起來', answer:'yellow', explain:'從後方鏟球屬於「魯莽犯規」，不管有沒有碰到球，只要動作過大危及對方安全就是黃牌。如果腳底朝上或雙腳離地，直接升級紅牌。', rule:'FIFA 規則第 12 條：魯莽犯規' },
+    { id:2, img:'foul-q2', desc:'芭樂子在禁區邊緣誇張倒地翻滾，但對方根本沒碰到他', answer:'yellow', explain:'假摔（Simulation）是企圖欺騙裁判的行為，直接黃牌警告。2026 世足有 VAR，假摔被抓到的機率更高了。芭樂子奉勸：演技再好也騙不過慢動作回放。', rule:'FIFA 規則第 12 條：企圖欺騙裁判' },
+    { id:3, img:'foul-q3', desc:'芭樂子跳起來腳底朝對方的腿飛踢過去，動作極度危險', answer:'red', explain:'腳底朝上的飛踢屬於「嚴重犯規」（Serious Foul Play），有極高的受傷風險，不管有沒有碰到對方都是直接紅牌。這種動作在職業比賽可能還會被追加禁賽。', rule:'FIFA 規則第 12 條：嚴重犯規' },
+    { id:4, img:'foul-q4', desc:'芭樂子是守門員，跑出禁區外用手接住了球，表情超得意', answer:'free', explain:'守門員在禁區外用手觸球 = 手球犯規，判給對方直接自由球。注意：這不是紅牌！很多人以為守門員禁區外手球是紅牌，但除非是故意手球阻擋明顯進球機會，否則只是普通犯規。', rule:'FIFA 規則第 12 條：手球犯規' },
+    { id:5, img:'foul-q5', desc:'芭樂子跟對方球員肩並肩互相推擠搶球，雙方都很用力', answer:'none', explain:'肩對肩的合理衝撞（Fair Charge）在足球裡是完全合法的！只要雙方都在搶球範圍內、用肩膀而不是手肘、力道沒有過大，裁判會讓比賽繼續。這就是足球的身體對抗。', rule:'FIFA 規則第 12 條：合理衝撞' },
+    { id:6, img:'foul-q6', desc:'芭樂子用力拉住前面球員的球衣，球衣都快被撕破了', answer:'yellow', explain:'拉球衣是最經典的犯規動作之一。如果只是輕微拉扯，判自由球就好；但像芭樂子這樣用力到球衣快撕破、明顯阻止對方進攻，就是黃牌。如果對方有明顯得分機會被你拉住，可能升級紅牌。', rule:'FIFA 規則第 12 條：以犯規阻止有希望的進攻' },
+    { id:7, img:'foul-q7', desc:'芭樂子不是守門員，但在球門前用雙手撲出去擋住射門', answer:'red', explain:'非守門員在禁區內故意用手擋住射門，而且那球幾乎確定會進 = 紅牌 + 罰球（PK）。這叫「阻止明顯的進球機會」（DOGSO），是紅牌中的紅牌。經典案例：2010 世界盃蘇亞雷斯用手擋球。', rule:'FIFA 規則第 12 條：DOGSO（阻止明顯進球機會）' },
+    { id:8, img:'foul-q8', desc:'芭樂子不小心踩到對方球員的腳，被踩的人痛到跳起來', answer:'free', explain:'無意的踩腳通常判直接自由球，不一定給牌。裁判會看動作是「粗心」還是「魯莽」——如果只是跑動中不小心踩到，給自由球就好；如果是在搶球時用力踩下去，可能升級黃牌。', rule:'FIFA 規則第 12 條：粗心犯規' },
+    { id:9, img:'foul-q9', desc:'芭樂子進球後把球衣脫掉甩在空中，開心到不行', answer:'yellow', explain:'進球後脫衣慶祝 = 自動黃牌，沒有例外。FIFA 規定：脫掉球衣或用球衣蓋住頭部都會被警告。所以你會看到球員進球後把球衣拉起來露出裡面的訊息，但不會脫掉——因為脫了就是黃牌。', rule:'FIFA 規則第 12 條：脫衣慶祝' },
+    { id:10, img:'foul-q10', desc:'芭樂子對著裁判大吼大叫、用手指著裁判的臉，隊友怎麼拉都拉不住', answer:'red', explain:'對裁判使用攻擊性、侮辱性或辱罵性的語言和/或動作 = 直接紅牌驅逐出場。不管你覺得判決多離譜，對裁判飆髒話就是紅牌，沒有例外。很多球員就是控制不住情緒，結果讓全隊少一個人踢。', rule:'FIFA 規則第 12 條：攻擊性語言或動作' }
+  ];
+
+  var ANSWER_LABELS = { none: '沒犯規', free: '自由球', yellow: '黃牌', red: '紅牌' };
+  var ANSWER_CLASSES = { none: 'fq-btn-none', free: 'fq-btn-free', yellow: 'fq-btn-yellow', red: 'fq-btn-red' };
+  var LS_KEY = 'fq_stats';
+  var TOTAL = FOUL_SCENARIOS.length;
+  var state = { current: 0, score: 0, streak: 0, answered: false, done: false };
+
+  function loadStats() {
+    try { var s = JSON.parse(localStorage.getItem(LS_KEY)); return s || { attempts: 0, scores: [] }; } catch(e) { return { attempts: 0, scores: [] }; }
+  }
+  function saveStats(score) {
+    var s = loadStats();
+    s.attempts++;
+    s.scores.push(score);
+    try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch(e) {}
+    renderStats();
+  }
+  function renderStats() {
+    var s = loadStats();
+    document.getElementById('fqStatAttempts').textContent = s.attempts;
+    if (s.scores.length > 0) {
+      document.getElementById('fqStatBest').textContent = Math.max.apply(null, s.scores) + '/' + TOTAL;
+      var sum = 0; for (var i = 0; i < s.scores.length; i++) sum += s.scores[i];
+      document.getElementById('fqStatAvg').textContent = (sum / s.scores.length).toFixed(1) + '/' + TOTAL;
+    } else {
+      document.getElementById('fqStatBest').textContent = '-';
+      document.getElementById('fqStatAvg').textContent = '-';
+    }
+  }
+
+  function renderQuestion() {
+    if (state.current >= TOTAL) { showFinal(); return; }
+    var sc = FOUL_SCENARIOS[state.current];
+    state.answered = false;
+
+    document.getElementById('fqProgressText').textContent = '第 ' + (state.current + 1) + '/' + TOTAL + ' 題';
+    document.getElementById('fqProgressFill').style.width = ((state.current + 1) / TOTAL * 100) + '%';
+    document.getElementById('fqQuestionText').textContent = sc.desc;
+
+    // Update image
+    var img = document.getElementById('fqImage');
+    img.src = '/images/articles/foul-quiz/' + sc.img + '.webp';
+    img.srcset = '/images/articles/foul-quiz/' + sc.img + '-768w.webp 768w, /images/articles/foul-quiz/' + sc.img + '.webp 1376w';
+    img.alt = '犯規情境：' + sc.desc;
+
+    document.getElementById('fqAnswerBtns').style.display = 'grid';
+    document.getElementById('fqExplanation').style.display = 'none';
+    document.getElementById('fqFinalPanel').style.display = 'none';
+    document.getElementById('fqProgressBar').style.display = 'block';
+    document.getElementById('fqImgWrap').style.display = 'block';
+
+    // Reset buttons
+    var btns = document.getElementById('fqAnswerBtns').querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].disabled = false;
+      var keys = ['none','free','yellow','red'];
+      btns[i].className = 'fq-btn ' + ANSWER_CLASSES[keys[i]];
+    }
+  }
+
+  window._fqAnswer = function(userAnswer) {
+    if (state.answered || state.done) return;
+    state.answered = true;
+    var sc = FOUL_SCENARIOS[state.current];
+    var correct = (userAnswer === sc.answer);
+    if (correct) { state.score++; state.streak++; } else { state.streak = 0; }
+
+    // Disable all buttons and highlight
+    var btns = document.getElementById('fqAnswerBtns').querySelectorAll('button');
+    var keys = ['none','free','yellow','red'];
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].disabled = true;
+      if (keys[i] === userAnswer) {
+        btns[i].className = 'fq-btn ' + ANSWER_CLASSES[keys[i]] + ' ' + (correct ? 'fq-correct' : 'fq-wrong');
+      }
+      // Highlight the correct answer if user was wrong
+      if (!correct && keys[i] === sc.answer) {
+        btns[i].className = 'fq-btn ' + ANSWER_CLASSES[keys[i]] + ' fq-correct';
+      }
+    }
+
+    var badge = document.getElementById('fqResultBadge');
+    var streakMsg = '';
+    if (correct && state.streak >= 2) {
+      var streakMsgs = {
+        2: '連對2題！有裁判天分',
+        3: '3連對！比亞洲區裁判還準',
+        4: '4連對！可以去吹台灣企甲了',
+        5: '5連對！英超裁判看了都想學',
+        6: '6連對！VAR可以下班了',
+        7: '7連對！FIFA來電了',
+        8: '8連對！比99%球迷還懂',
+        9: '9連對！全場起立鼓掌中',
+        10: '10題全對！你不去當世足裁判真的太可惜了'
+      };
+      streakMsg = streakMsgs[state.streak] || '連續 ' + state.streak + ' 題全對！';
+    }
+    var badgeText = correct ? '答對了！正確答案：' + ANSWER_LABELS[sc.answer] : '❌答錯了！連續紀錄歸零\n正確答案：' + ANSWER_LABELS[sc.answer];
+    if (streakMsg) badgeText += '\n' + streakMsg;
+    badge.textContent = badgeText;
+    badge.className = 'fq-result-badge ' + (correct ? 'fq-badge-correct' : 'fq-badge-wrong');
+    document.getElementById('fqExplainText').textContent = sc.explain;
+    document.getElementById('fqRuleRef').textContent = sc.rule;
+    document.getElementById('fqExplanation').style.display = 'block';
+
+    if (state.current >= TOTAL - 1) {
+      document.getElementById('fqNextBtn').textContent = '看結果 →';
+    } else {
+      document.getElementById('fqNextBtn').textContent = '下一題 →';
+    }
+  };
+
+  window._fqNext = function() {
+    state.current++;
+    if (state.current >= TOTAL) {
+      showFinal();
+    } else {
+      renderQuestion();
+      document.getElementById('fqQuizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  function showFinal() {
+    state.done = true;
+    document.getElementById('fqAnswerBtns').style.display = 'none';
+    document.getElementById('fqExplanation').style.display = 'none';
+    document.getElementById('fqProgressBar').style.display = 'none';
+    document.getElementById('fqQuestionText').textContent = '';
+    document.getElementById('fqImgWrap').style.display = 'none';
+
+    var s = state.score;
+    document.getElementById('fqFinalScore').textContent = s + ' / ' + TOTAL;
+    var title = '', msg = '';
+    if (s === 10) { title = '🏆FIFA認證主審！裁判界的GOAT'; msg = '滿分！芭樂子認證你是犯規判定大師。你對足球規則的理解已經超越了 99% 的球迷，2026 世足考慮讓你去現場吹哨吧。'; }
+    else if (s >= 8) { title = '⭐資深裁判！球員看到你都怕'; msg = '非常厲害！你對犯規和紅黃牌的判斷已經是專業等級了。朋友圈裡應該沒人敢跟你爭論判決。'; }
+    else if (s >= 6) { title = '👍不錯，可以去當第四裁判'; msg = '基本功有了，但一些細節判定還需要加強。多看幾場 VAR 回放，你很快就能更上一層樓。'; }
+    else if (s >= 3) { title = '😅建議重看一次規則'; msg = '嗯⋯芭樂子建議你把上面的文章再讀一遍。犯規規則不算太難，但魔鬼在細節裡。再挑戰一次？'; }
+    else { title = '💀你可能需要重新學足球'; msg = '芭樂子有點擔心你看球的品質⋯不過沒關係，犯規規則真的沒那麼簡單。把文章重新看一遍，再來挑戰一次！'; }
+
+    document.getElementById('fqFinalTitle').textContent = title;
+    document.getElementById('fqFinalMsg').textContent = msg;
+    document.getElementById('fqFinalPanel').style.display = 'block';
+
+    saveStats(s);
+    document.getElementById('fqQuizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window._fqReplay = function() {
+    state.current = 0;
+    state.score = 0;
+    state.streak = 0;
+    state.answered = false;
+    state.done = false;
+    document.getElementById('fqImgWrap').style.display = 'block';
+    document.getElementById('fqFinalPanel').style.display = 'none';
+    renderQuestion();
+    document.getElementById('fqQuizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Init
+  renderStats();
+  renderQuestion();
+})();
+</script>

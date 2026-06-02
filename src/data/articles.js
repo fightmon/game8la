@@ -2,6 +2,34 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'football-foul-cards',
+    title: '足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解',
+    excerpt: '足球犯規規則白話文解釋：什麼情況給黃牌、什麼直接紅牌。附 10 題裁判模擬器互動測驗，每題都有芭樂子搞笑圖解。2026 世足前必讀。',
+    category: 'sports',
+    categoryLabel: '足球教室',
+    badgeType: 'featured',
+    date: '2026-06-02',
+    views: 2,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#2e1a0a,#4a2a1a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-foul.webp'
+  },
+  {
+    slug: 'football-offside-rule',
+    title: '越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗',
+    excerpt: '足球越位規則白話文解釋：倒數第二個防守球員畫一條線，進攻球員超過就越位。附互動圖解、10 題越位測驗、VAR 介紹。2026 世足看球前必讀。',
+    category: 'sports',
+    categoryLabel: '足球教室',
+    badgeType: 'featured',
+    date: '2026-06-01',
+    views: 3,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a2e1a,#1a4a2a,#2d8a4e)',
+    thumbnail: '/images/article-thumbs/thumb-offside-rule.webp'
+  },
+  {
     slug: 'worldcup-2026-prediction',
     title: '2026 世足冠軍預測｜48 隊數據分析＋芭樂子擲筊選冠軍',
     excerpt: '2026 世界盃 48 隊史上最大規模！芭樂子用 FIFA 排名和歷史戰績分出四個梯隊，拆解死亡之組，最後用擲筊選出冠軍——三次聖筊就是天意。附即時投票預測工具。',

@@ -1,0 +1,880 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '越位是什麼意思？', a: '越位（Offside）是足球規則之一，目的是防止進攻球員站在對方球門前面「等球」。簡單說：傳球瞬間，如果接球的進攻球員前面的防守球員不到兩個（含守門員），就是越位。裁判會吹哨停止比賽，由防守方獲得自由球。' },
+  { q: '守門員算不算防守球員？', a: '算！守門員也算防守球員。所以「倒數第二個防守球員」通常是指除了守門員之外，站最後面的那個後衛。如果守門員跑到前面去了（比如補時階段上前頭球），那越位線就要看最後面的兩個球員是誰——不一定包含守門員。' },
+  { q: '越位的時候球員可以碰球嗎？', a: '如果你站在越位位置，但沒有碰球、沒有影響比賽、也沒有干擾對手，裁判不會判越位。越位犯規要同時滿足「在越位位置」和「參與進攻」兩個條件。但實務上，只要球朝你飛過來，基本上就會被認定為參與進攻。' },
+  { q: '角球有越位嗎？', a: '<strong>角球沒有越位。</strong>根據 FIFA 規則，球門球、界外球、角球這三種情況不適用越位規則。所以你會看到角球時，進攻球員全部擠在門前搶頭球——因為不管站多前面都不會越位。' },
+  { q: 'VAR 是什麼？', a: 'VAR 全名是 Video Assistant Referee（影像輔助裁判），2018 年世界盃開始正式啟用。VAR 可以協助主裁判判定進球、紅牌、罰球、球員身份四種情況。越位判定是 VAR 最常介入的場景之一，透過精確畫線技術來判斷進攻球員是否超過越位線。' },
+  { q: '為什麼越位規則這麼重要？', a: '如果沒有越位規則，進攻球員可以直接站在對方球門口等傳球，比賽就會變成「大腳長傳找前鋒」的無聊遊戲。越位規則迫使進攻球員不能一直往前站，鼓勵球隊用短傳配合和跑位來創造機會，讓足球比賽更好看、更有戰術深度。' },
+  { q: '越位被吹之後怎麼辦？', a: '越位被吹之後，比賽暫停，由防守方在越位發生的位置獲得一個<strong>間接自由球</strong>（Indirect Free Kick）。進攻方的進球不算，之前的動作全部作廢。如果 VAR 介入確認，等確認結果出來才會做最終判決。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/football-offside-rule/"
+  title="越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗 — GAME8LA"
+  description="足球越位規則用白話文解釋：倒數第二個防守球員畫一條線，進攻球員超過就越位。附互動圖解、10 題越位測驗、VAR 介紹。2026 世足看球前必讀。"
+  image="https://game8la.com/images/articles/football-offside-rule-cover.webp"
+  datePublished="2026-06-01"
+  dateModified="2026-06-01"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '足球教室', url: 'https://game8la.com/articles/' },
+    { name: '越位規則圖解', url: 'https://game8la.com/articles/football-offside-rule/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗 — GAME8LA" description="足球越位規則用白話文解釋：倒數第二個防守球員畫一條線，進攻球員超過就越位。附互動圖解、10 題越位測驗、VAR 介紹。2026 世足看球前必讀。" ogImage="https://game8la.com/images/articles/football-offside-rule-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 越位規則圖解</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-06-01 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 7 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">越位是什麼？看完這篇你比裁判還懂<em>芭樂子白話圖解＋10 題互動測驗，世足看球前必讀</em></h1>
+
+      <!-- === 快速工具入口 === -->
+      <div class="quick-tool-bar">
+        <span>直接玩測驗：</span>
+        <a href="#s6">越位判定測驗</a>
+        <a href="/tools/worldcup-2026/">世足冠軍預測</a>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。每次看世足，旁邊一定有人問：「為什麼吹哨了？那球不是進了嗎？」答案通常是兩個字：越位。但你再問他越位到底是什麼，十個有八個講不清楚，剩下兩個是在唬爛。今天芭樂子用最白話的方式，保證讓你 5 分鐘搞懂這個足球界最讓人抓狂的規則。看完之後你不只能聽懂轉播，搞不好還能糾正旁邊的「老球迷」。</p>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">越位用一句話解釋</a></li>
+          <li><a href="#s2">越位的三個條件（缺一不可）</a></li>
+          <li><a href="#s3">圖解：一看就懂的越位判定</a></li>
+          <li><a href="#s4">哪些情況不算越位？</a></li>
+          <li><a href="#s5">VAR 和越位有什麼關係？</a></li>
+          <li><a href="#s6">來測試一下！10 題越位判定測驗</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- === 正文開始 === -->
+
+      <h2 id="s1" style="margin-top:2.5rem">越位用一句話解釋</h2>
+
+      <p>芭樂子先給你一句話版本，背起來就夠用了：</p>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0;font-size:1.1rem">一句話版越位規則</h3>
+        <p style="font-size:1.05rem;line-height:1.9"><strong>在對方半場，接到隊友傳球的瞬間，如果你前面的防守球員不到兩個（含守門員），你就越位了。</strong></p>
+      </div>
+
+      <p>聽起來還是有點抽象？沒關係，芭樂子用生活比喻：</p>
+
+      <p><strong>想像你在排隊買珍珠奶茶。</strong>前面還有兩個人在排隊，你乖乖站在後面。結果你朋友從後面把奶茶遞給你——沒問題，你有排隊嘛。但如果你跑到所有人前面，你朋友再把奶茶遞給你，店員就會說：「欸不行喔，你插隊了。」</p>
+
+      <p>足球的越位就是這個意思。那兩個排在你前面的人 = 防守球員（通常是守門員 + 一個後衛），你朋友遞奶茶 = 隊友傳球，店員 = 裁判。你站太前面接球，裁判就吹哨——插隊！不算！</p>
+
+      <h2 id="s2" style="margin-top:2.5rem">越位的三個條件（缺一不可）</h2>
+
+      <p>越位其實不是看感覺的，它有三個非常明確的條件。三個都成立才會被判越位，少一個都不算：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">越位三條件</h3>
+        <table>
+          <thead><tr><th style="width:2.5rem">條件</th><th>規則</th><th>白話翻譯</th></tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;color:#f5b800;font-size:1.2rem;text-align:center">1</td>
+              <td>進攻球員在對方半場</td>
+              <td>你過了中線，到對方的地盤</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#f5b800;font-size:1.2rem;text-align:center">2</td>
+              <td>傳球瞬間，你比倒數第二個防守球員更靠近球門</td>
+              <td>排在你前面的對方球員不到兩個</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#f5b800;font-size:1.2rem;text-align:center">3</td>
+              <td>傳球瞬間，你比球更靠近球門</td>
+              <td>球還在你後面，你人已經跑到前面了</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">三個條件全部成立才是越位。任何一個不成立 = 沒有越位，進球有效！</p>
+      </div>
+
+      <p>芭樂子小提醒：關鍵是<strong>「傳球的瞬間」</strong>，不是球到達你腳下的瞬間。很多人以為跑到再接球就不算越位——錯！裁判看的是隊友腳碰到球的那一刻，你站在哪裡。就像拍照一樣，「喀嚓」那一秒你站在越位位置，不管你之後跑到哪裡，都算越位。</p>
+
+      <h2 id="s3" style="margin-top:2.5rem">圖解：一看就懂的越位判定</h2>
+
+      <p>文字看不懂？直接看圖。芭樂子畫了兩個情境給你：</p>
+
+      <h3 style="color:#f44336">情境一：越位！進球不算</h3>
+
+      <!-- 越位情境 SVG（重設計：字大、加 title/desc 給 SEO）-->
+      <figure class="offside-diagram offside-diagram--bad">
+        <svg
+          class="offside-svg" data-zoomable
+          viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-labelledby="offsideBadTitle offsideBadDesc"
+        >
+          <title id="offsideBadTitle">越位情境圖：ATK 越位（2026 世足越位規則圖解）</title>
+          <desc id="offsideBadDesc">圖中橘色傳球者位於中場，傳球給隊友 ATK，但 ATK 已超過倒數第二個防守者 DEF 所連成的紅色越位線，進球不算。</desc>
+          <!-- 球場背景 -->
+          <rect x="0" y="0" width="700" height="320" rx="12" fill="#1a472a"/>
+          <!-- 球場線（中線）-->
+          <line x1="350" y1="0" x2="350" y2="320" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,6" opacity="0.4"/>
+          <text x="350" y="314" text-anchor="middle" fill="#fff" opacity="0.45" font-size="16">中線</text>
+          <!-- 球門 -->
+          <rect x="660" y="120" width="35" height="80" rx="3" fill="none" stroke="#fff" stroke-width="2.5" opacity="0.6"/>
+          <text x="675" y="220" text-anchor="middle" fill="#fff" opacity="0.55" font-size="15">球門</text>
+          <!-- 進攻方向 -->
+          <text x="20" y="26" fill="#fff" opacity="0.7" font-size="16" font-weight="600">進攻方向 →</text>
+          <!-- 守門員 GK -->
+          <circle cx="635" cy="160" r="20" fill="#2196f3"/>
+          <text x="635" y="166" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">GK</text>
+          <text x="635" y="200" text-anchor="middle" fill="#bbb" font-size="14">守門員</text>
+          <!-- 後衛 DEF -->
+          <circle cx="510" cy="130" r="20" fill="#2196f3"/>
+          <text x="510" y="136" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">DEF</text>
+          <text x="510" y="168" text-anchor="middle" fill="#bbb" font-size="14">最後防守者</text>
+          <!-- 越位線 -->
+          <line x1="510" y1="20" x2="510" y2="300" stroke="#f44336" stroke-width="2.5" stroke-dasharray="8,5"/>
+          <text x="518" y="48" fill="#ff5252" font-size="20" font-weight="800">越位線</text>
+          <!-- 進攻球員 ATK（越位位置）-->
+          <circle cx="580" cy="220" r="20" fill="#f44336"/>
+          <text x="580" y="226" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">ATK</text>
+          <text x="580" y="258" text-anchor="middle" fill="#ff8a80" font-size="15" font-weight="700">越位！</text>
+          <!-- 傳球者 -->
+          <circle cx="320" cy="105" r="20" fill="#ff9800"/>
+          <text x="320" y="111" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">傳球</text>
+          <!-- 傳球路線 -->
+          <line x1="338" y1="115" x2="562" y2="212" stroke="#ff9800" stroke-width="2.5" stroke-dasharray="6,5"/>
+          <polygon points="562,212 546,204 552,218" fill="#ff9800"/>
+        </svg>
+        <span class="offside-zoom-tip">🔍 點圖可放大檢視</span>
+        <figcaption class="article-img-caption">2026 世足越位規則圖解（情境一）：紅色虛線是越位線，畫在倒數第二個防守球員的位置；ATK 超過這條線就是越位。</figcaption>
+        <div class="offside-hint offside-hint--bad" role="note">
+          <div class="offside-hint__verdict">判定：越位！</div>
+          <p>傳球瞬間，ATK 超過了越位線（倒數第二個防守者 DEF 的位置），進球不算。</p>
+        </div>
+      </figure>
+
+      <h3 style="color:#4caf50">情境二：沒有越位！進球有效</h3>
+
+      <!-- 非越位情境 SVG（重設計）-->
+      <figure class="offside-diagram offside-diagram--good">
+        <svg
+          class="offside-svg" data-zoomable
+          viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-labelledby="offsideGoodTitle offsideGoodDesc"
+        >
+          <title id="offsideGoodTitle">沒越位情境圖：ATK 合法接球（2026 世足越位規則圖解）</title>
+          <desc id="offsideGoodDesc">圖中橘色傳球者傳球給 ATK，但 ATK 仍在綠色越位線後方（沒有超過倒數第二個防守者 DEF），合法接球，進球有效。</desc>
+          <!-- 球場背景 -->
+          <rect x="0" y="0" width="700" height="320" rx="12" fill="#1a472a"/>
+          <!-- 球場線 -->
+          <line x1="350" y1="0" x2="350" y2="320" stroke="#fff" stroke-width="1.5" stroke-dasharray="8,6" opacity="0.4"/>
+          <text x="350" y="314" text-anchor="middle" fill="#fff" opacity="0.45" font-size="16">中線</text>
+          <!-- 球門 -->
+          <rect x="660" y="120" width="35" height="80" rx="3" fill="none" stroke="#fff" stroke-width="2.5" opacity="0.6"/>
+          <text x="675" y="220" text-anchor="middle" fill="#fff" opacity="0.55" font-size="15">球門</text>
+          <!-- 進攻方向 -->
+          <text x="20" y="26" fill="#fff" opacity="0.7" font-size="16" font-weight="600">進攻方向 →</text>
+          <!-- 守門員 GK -->
+          <circle cx="635" cy="160" r="20" fill="#2196f3"/>
+          <text x="635" y="166" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">GK</text>
+          <text x="635" y="200" text-anchor="middle" fill="#bbb" font-size="14">守門員</text>
+          <!-- 後衛 DEF -->
+          <circle cx="510" cy="130" r="20" fill="#2196f3"/>
+          <text x="510" y="136" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">DEF</text>
+          <text x="510" y="168" text-anchor="middle" fill="#bbb" font-size="14">最後防守者</text>
+          <!-- 越位線 -->
+          <line x1="510" y1="20" x2="510" y2="300" stroke="#4caf50" stroke-width="2.5" stroke-dasharray="8,5"/>
+          <text x="518" y="48" fill="#66bb6a" font-size="20" font-weight="800">越位線</text>
+          <!-- 進攻球員 ATK（未越位）-->
+          <circle cx="470" cy="220" r="20" fill="#4caf50"/>
+          <text x="470" y="226" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">ATK</text>
+          <text x="470" y="258" text-anchor="middle" fill="#a5d6a7" font-size="15" font-weight="700">沒越位</text>
+          <!-- 傳球者 -->
+          <circle cx="320" cy="105" r="20" fill="#ff9800"/>
+          <text x="320" y="111" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">傳球</text>
+          <!-- 傳球路線 -->
+          <line x1="338" y1="115" x2="452" y2="212" stroke="#ff9800" stroke-width="2.5" stroke-dasharray="6,5"/>
+          <polygon points="452,212 436,204 442,218" fill="#ff9800"/>
+        </svg>
+        <span class="offside-zoom-tip">🔍 點圖可放大檢視</span>
+        <figcaption class="article-img-caption">2026 世足越位規則圖解（情境二）：ATK 還在越位線後方（或與 DEF 平行），合法接球，進球有效。</figcaption>
+        <div class="offside-hint offside-hint--good" role="note">
+          <div class="offside-hint__verdict">判定：沒有越位！</div>
+          <p>傳球瞬間，ATK 還在越位線後方（沒有超過 DEF），合法接球，進球有效！</p>
+        </div>
+      </figure>
+
+      <p>看到差別了嗎？關鍵就在那條紅色（或綠色）虛線。線畫在倒數第二個防守球員的位置，進攻球員有沒有超過那條線，就決定了是不是越位。就這麼簡單。</p>
+
+      <h2 id="s4" style="margin-top:2.5rem">哪些情況不算越位？</h2>
+
+      <p>規則有正就有反，以下四種情況就算你站在對方門口也不會被判越位：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#4caf50;background:linear-gradient(135deg,rgba(76,175,80,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#4caf50;margin-top:0">四種「免死金牌」情境</h3>
+
+        <p><strong style="color:#4caf50">1. 你在自己半場</strong></p>
+        <p style="font-size:1rem;line-height:1.85">越位只發生在對方半場。只要你還站在中線的這一邊，不管多靠前都不會越位。你可以站在中線旁邊等著衝刺，隊友一傳球你再全力往前跑——這就是經典的「反越位戰術」。</p>
+
+        <p><strong style="color:#4caf50">2. 你跟倒數第二個防守球員在同一條線上</strong></p>
+        <p style="font-size:1rem;line-height:1.85">平行不算越位！FIFA 規則明確寫了：進攻球員跟倒數第二個防守球員在同一條線上（齊平），不算越位。用排隊的比喻就是：你跟前面的人並排站，店員不能說你插隊。</p>
+
+        <p><strong style="color:#4caf50">3. 球門球、界外球、角球</strong></p>
+        <p style="font-size:1rem;line-height:1.85">這三種情況不判越位。所以角球的時候你會看到進攻球員全部擠在禁區裡面搶位置——因為不管站多前面都不會越位。這也是角球常常產生進球的原因之一。</p>
+
+        <p><strong style="color:#4caf50">4. 你沒有參與進攻</strong></p>
+        <p style="font-size:1rem;line-height:1.85">站在越位位置但球不是傳給你、你也沒有干擾比賽或影響對手，不算越位犯規。但老實說，這種判定很主觀，裁判的尺度不一定。2026 世足有 VAR 幫忙，但你站在越位位置最好還是乖乖別動。</p>
+      </div>
+
+      <p>芭樂子幫你整理一個口訣：<strong>「自己半場不算、齊平不算、三種球不算、沒碰球不算。」</strong>背起來，下次看球直接當解說員。</p>
+
+      <h2 id="s5" style="margin-top:2.5rem">VAR 和越位有什麼關係？</h2>
+
+      <p>這幾年看世足轉播，你一定常聽到主播喊：「等一下，VAR 正在確認越位！」然後全場安靜 30 秒，最後螢幕上出現一堆彩色線條。到底在看什麼？</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#2196f3;margin-top:0">VAR 快速科普</h3>
+        <table>
+          <thead><tr><th>項目</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">全名</td><td>Video Assistant Referee（影像輔助裁判）</td></tr>
+            <tr><td style="font-weight:700">啟用時間</td><td>2018 俄羅斯世界盃正式啟用</td></tr>
+            <tr><td style="font-weight:700">運作方式</td><td>一組裁判在場外看多角度慢動作回放，用畫線技術精確判定越位</td></tr>
+            <tr><td style="font-weight:700">判定精度</td><td>精確到球員的腳尖、膝蓋甚至肩膀</td></tr>
+            <tr><td style="font-weight:700;color:#f5b800">2026 升級</td><td style="color:#f5b800">半自動越位偵測技術（SAOT），用 AI + 球場內建感測器，幾秒內自動判定</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>以前裁判用肉眼看，球員差 1 公分他也判不出來。有時候明明沒越位卻吹了，有時候明明越位卻沒吹，球員和球迷都很火大。</p>
+
+      <p>現在有了 VAR，連你腳趾頭多出去 2 公分都不放過。螢幕上那些花花綠綠的線，就是 VAR 在比對進攻球員和倒數第二個防守球員的位置。如果進攻球員的任何可以合法碰球的身體部位（頭、身體、腳，但不包含手臂）超過那條線，就是越位。</p>
+
+      <p>芭樂子的看法：科技讓足球更公平了，但也讓進球被取消的次數暴增。以前模糊空間很大，裁判說了算。現在差個鞋釘的距離也要取消進球，前鋒真的很可憐。不過規則就是規則，多 1 公分也是多啊。2026 世足的半自動偵測技術據說只要幾秒就能判定，不用再等 3 分鐘看回放——這對觀眾來說是大好消息。</p>
+
+      <h2 id="s6" style="margin-top:2.5rem">來測試一下！10 題越位判定測驗</h2>
+
+      <p>芭樂子準備了 10 題越位判定測驗，每題給你一個情境圖，你來判斷有沒有越位。答對 8 題以上，你就是 VAR 認證等級的裁判！</p>
+
+      <!-- Quiz Area -->
+      <div class="oq-quiz-area" id="quizArea">
+        <!-- Progress -->
+        <div class="oq-progress" id="progressBar">
+          <span class="oq-progress-text" id="progressText">第 1/10 題</span>
+          <div class="oq-progress-track"><div class="oq-progress-fill" id="progressFill" style="width:10%"></div></div>
+        </div>
+
+        <!-- Pitch SVG -->
+        <div class="oq-pitch-wrap" id="pitchWrap">
+          <svg id="pitchSvg" viewBox="0 0 400 215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="足球場越位情境圖"></svg>
+        </div>
+
+        <!-- Question -->
+        <p class="oq-question" id="questionText">這個傳球瞬間，接球的進攻球員越位了嗎？</p>
+
+        <!-- Answer Buttons -->
+        <div class="oq-buttons" id="answerBtns">
+          <button type="button" class="oq-btn oq-btn-offside" id="btnOffside" onclick="window._oqAnswer(true)">🟥 越位！</button>
+          <button type="button" class="oq-btn oq-btn-onside" id="btnOnside" onclick="window._oqAnswer(false)">🟢 沒越位</button>
+        </div>
+
+        <!-- Explanation -->
+        <div class="oq-explanation" id="explanation" style="display:none">
+          <div class="oq-result-badge" id="resultBadge"></div>
+          <p class="oq-explain-text" id="explainText"></p>
+          <button type="button" class="oq-next-btn" id="nextBtn" onclick="window._oqNext()">下一題 →</button>
+        </div>
+
+        <!-- Final Score -->
+        <div class="oq-final" id="finalPanel" style="display:none">
+          <div class="oq-final-score" id="finalScore"></div>
+          <div class="oq-final-title" id="finalTitle"></div>
+          <div class="oq-final-msg" id="finalMsg"></div>
+          <button type="button" class="oq-replay-btn" id="replayBtn" onclick="window._oqReplay()">🔄 再玩一次</button>
+          <div class="oq-share-prompt">覺得自己很準？分享給朋友挑戰看看 👇</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="oq-stats-card" id="statsCard">
+        <div class="oq-stats-title">📊 你的測驗紀錄</div>
+        <div class="oq-stats-row">
+          <span class="oq-stat">測驗次數 <strong id="statAttempts">0</strong></span>
+          <span class="oq-stat">最高分 <strong id="statBest">-</strong></span>
+          <span class="oq-stat">平均分 <strong id="statAvg">-</strong></span>
+        </div>
+      </div>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.95rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子免責聲明：</strong>本文內容僅供教育參考，規則解釋以 FIFA 最新版《Laws of the Game》為準。芭樂子盡力用白話文解釋，但如果你要去考裁判證，還是乖乖看 FIFA 官方文件吧。看球愉快，不要跟朋友因為越位吵架。</p>
+      </div>
+
+      <!-- === 延伸閱讀（Phase 3：強化內部連結，提升 SEO + 停留時間）=== -->
+      <h2 style="margin-top:2.5rem">2026 世足相關延伸閱讀</h2>
+      <p>看懂越位之後，可以再看看這些世足相關內容，看球時的話題會更多：</p>
+
+      <div class="related-links">
+        <a href="/tools/worldcup-2026/" class="rl-item">
+          <span class="rl-cat">互動工具</span>
+          <strong>2026 美加墨世界盃冠軍預測工具</strong>
+          <span class="rl-desc">輸入你看好的隊伍，看看冠軍勝率算給你看</span>
+        </a>
+        <a href="/articles/worldcup-2026-prediction/" class="rl-item">
+          <span class="rl-cat">分析文</span>
+          <strong>2026 世界盃冠軍分析：誰是最大熱門？</strong>
+          <span class="rl-desc">阿根廷、法國、巴西、英格蘭，誰最有機會奪冠？芭樂子幫你算給看</span>
+        </a>
+        <a href="/tools/bless-blocks/" class="rl-item">
+          <span class="rl-cat">趣味工具</span>
+          <strong>線上擲筊：問問神明今晚要看哪一場</strong>
+          <span class="rl-desc">兩場好球撞檔不知道選哪場？讓神明幫你決定</span>
+        </a>
+      </div>
+
+      <ManifestoBox />
+      <ShareButtons title="越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗" url="https://game8la.com/articles/football-offside-rule/" />
+    </article>
+  </div>
+
+  <!-- Lightbox 圖片放大 modal（Phase 2）-->
+  <div class="lightbox" id="offsideLightbox" role="dialog" aria-modal="true" aria-label="放大圖解">
+    <button type="button" class="lightbox__close" aria-label="關閉放大檢視" onclick="window._closeOffsideLightbox()">×</button>
+    <div class="lightbox__inner" id="offsideLightboxInner" onclick="event.stopPropagation()"></div>
+    <div class="lightbox__hint">點空白處或按 ESC 關閉</div>
+  </div>
+  <script is:inline>
+    (function () {
+      var lb = document.getElementById('offsideLightbox');
+      var inner = document.getElementById('offsideLightboxInner');
+      if (!lb || !inner) return;
+      function open(svg) {
+        var clone = svg.cloneNode(true);
+        clone.removeAttribute('data-zoomable');
+        clone.style.cursor = 'default';
+        inner.innerHTML = '';
+        inner.appendChild(clone);
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+        inner.innerHTML = '';
+      }
+      window._closeOffsideLightbox = close;
+      // 點 SVG 開啟
+      document.querySelectorAll('.offside-svg[data-zoomable]').forEach(function (svg) {
+        svg.addEventListener('click', function () { open(svg); });
+      });
+      // 點黑底 / ESC 關閉
+      lb.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+  .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: clamp(1.3rem, 4.8vw, 1.55rem); }
+  /* 40+ 友善 baseline：手機 17px、桌面 18px */
+  .article-content p { font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.9; margin: 1.1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.85; font-size: clamp(16px, 4.2vw, 17.5px); }
+
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0.5rem; }
+  .article-img-caption { text-align: center; font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin: 0.5rem auto 1.2rem; max-width: 680px; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.15rem; }
+  .card p { font-size: 1rem; line-height: 1.85; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 5px 12px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .faq-list { margin: 1rem 0 2rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.78rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 1.02rem; }
+  .rl-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
+  th, td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.7; }
+  th { font-weight: 700; font-size: 0.92rem; color: var(--text-muted); }
+
+  /* === 越位圖解 figure（圖 + caption + 判定 hint 合一） === */
+  .offside-diagram { margin: 1.2rem 0 1.8rem; padding: 0; border: none; }
+  .offside-svg { width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto; border-radius: 12px; }
+  .offside-svg[data-zoomable] { cursor: zoom-in; transition: filter 0.2s, transform 0.2s; }
+  .offside-svg[data-zoomable]:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .offside-zoom-tip { display: block; text-align: center; font-size: 0.88rem; color: var(--text-muted); margin: 0.3rem 0 0.4rem; }
+  /* 圖下方的判定卡：取代 SVG 內 hint box，文字可正常 wrap */
+  .offside-hint {
+    margin: 0.6rem auto 0; max-width: 720px;
+    padding: 1rem 1.2rem; border-radius: 12px; border: 1.5px solid;
+  }
+  .offside-hint p { margin: 0 !important; font-size: 1rem !important; line-height: 1.85; color: inherit; }
+  .offside-hint__verdict { font-weight: 800; font-size: 1.18rem; margin-bottom: 0.4rem; letter-spacing: 0.5px; }
+  .offside-hint--bad { background: rgba(244,67,54,0.10); border-color: rgba(244,67,54,0.55); color: #ffb4ad; }
+  .offside-hint--bad .offside-hint__verdict { color: #ff5252; }
+  .offside-hint--good { background: rgba(76,175,80,0.10); border-color: rgba(76,175,80,0.55); color: #c8e6c9; }
+  .offside-hint--good .offside-hint__verdict { color: #66bb6a; }
+
+  /* === Lightbox modal（點圖放大）=== */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.93);
+    z-index: 9999;
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 24px;
+    cursor: zoom-out;
+    animation: lbFadeIn 0.18s ease-out;
+  }
+  .lightbox.is-open { display: flex; }
+  @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .lightbox__inner {
+    width: 100%; max-width: 1100px; max-height: 90vh;
+    overflow: auto; -webkit-overflow-scrolling: touch;
+    cursor: default;
+  }
+  .lightbox__inner svg { width: 100%; height: auto; display: block; border-radius: 12px; }
+  .lightbox__close {
+    position: fixed; top: 16px; right: 16px;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(255,255,255,0.18); color: #fff;
+    border: none; font-size: 26px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10001;
+  }
+  .lightbox__close:hover { background: rgba(255,255,255,0.28); }
+  .lightbox__hint {
+    position: fixed; bottom: 18px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7); font-size: 14px;
+    pointer-events: none;
+  }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.55rem; }
+    .article-content h2 { font-size: 1.25rem; }
+    .offside-hint { padding: 0.85rem 1rem; }
+    .offside-hint__verdict { font-size: 1.05rem; }
+    .offside-hint p { font-size: 0.95rem !important; }
+  }
+
+  /* === Quiz CSS (merged from offside-quiz tool) === */
+  .oq-quiz-area { max-width: 600px; margin: 2rem auto; padding: 1.5rem; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid #2a2a2a; }
+
+  .oq-progress { margin-bottom: 1rem; }
+  .oq-progress-text { display: block; text-align: center; font-size: 1rem; color: #ccc; margin-bottom: 0.5rem; font-weight: 600; }
+  .oq-progress-track { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+  .oq-progress-fill { height: 100%; background: var(--guava-green, #39FF14); border-radius: 3px; transition: width 0.4s ease; }
+
+  .oq-pitch-wrap { width: 100%; margin: 0 auto 1rem; border-radius: 10px; overflow: hidden; border: 2px solid rgba(255,255,255,0.15); }
+  .oq-pitch-wrap svg { display: block; width: 100%; height: auto; }
+
+  /* SVG Animations */
+  .oq-pulse-ring {
+    animation: oq-pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes oq-pulse {
+    0%, 100% { opacity: 0.8; r: 19; }
+    50% { opacity: 0.3; r: 24; }
+  }
+  .oq-blink-ring {
+    animation: oq-blink 0.8s ease-in-out infinite;
+  }
+  @keyframes oq-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+  .oq-line-anim {
+    animation: oq-line-draw 0.5s ease-out forwards;
+    stroke-dashoffset: 200;
+  }
+  @keyframes oq-line-draw {
+    from { stroke-dashoffset: 200; opacity: 0; }
+    to { stroke-dashoffset: 0; opacity: 0.9; }
+  }
+  .oq-ball-glow {
+    filter: drop-shadow(0 0 4px rgba(251,191,36,0.6));
+  }
+
+  .oq-question { text-align: center; font-size: 1.15rem; font-weight: 700; color: #eee; margin: 0 0 1rem; }
+
+  .oq-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .oq-btn { font-size: 1.15rem; font-weight: 700; padding: 14px 32px; border-radius: 12px; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; }
+  .oq-btn:hover { transform: translateY(-2px); }
+  .oq-btn:active { transform: translateY(1px); }
+  .oq-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .oq-btn-offside { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; border-color: #ef4444; }
+  .oq-btn-offside:hover { box-shadow: 0 4px 15px rgba(239,68,68,0.4); }
+  .oq-btn-onside { background: linear-gradient(135deg, #16a34a, #22c55e); color: #fff; border-color: #22c55e; }
+  .oq-btn-onside:hover { box-shadow: 0 4px 15px rgba(34,197,94,0.4); }
+
+  .oq-btn.oq-correct { box-shadow: 0 0 20px rgba(34,197,94,0.6); border-color: #22c55e; }
+  .oq-btn.oq-wrong { animation: oqShake 0.5s ease; border-color: #666; opacity: 0.5; }
+  @keyframes oqShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+
+  .oq-explanation { margin-top: 1.2rem; animation: oqFadeIn 0.35s ease-out; }
+  @keyframes oqFadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .oq-result-badge { text-align: center; font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .oq-result-badge.oq-badge-correct { color: #22c55e; }
+  .oq-result-badge.oq-badge-wrong { color: #ef4444; }
+  .oq-explain-text { background: rgba(57,255,20,0.05); border-left: 3px solid var(--guava-green, #39FF14); border-radius: 0 10px 10px 0; padding: 14px 18px; font-size: 1.05rem; line-height: 1.8; color: #ddd; margin-bottom: 1rem; }
+  .oq-next-btn { display: block; margin: 0 auto; background: transparent; border: 1.5px solid #555; color: #ccc; font-size: 1.05rem; padding: 10px 36px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+  .oq-next-btn:hover { border-color: var(--guava-green, #39FF14); color: #fff; }
+
+  .oq-final { text-align: center; animation: oqFadeIn 0.5s ease-out; }
+  .oq-final-score { font-size: 3rem; font-weight: 900; color: var(--guava-green, #39FF14); margin-bottom: 0.3rem; }
+  .oq-final-title { font-size: 1.4rem; font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem; }
+  .oq-final-msg { font-size: 1rem; color: #bbb; margin-bottom: 1.2rem; line-height: 1.7; }
+  .oq-replay-btn { background: linear-gradient(135deg, #b8860b, #d4a056); border: 2px solid #c9983a; color: #1a1a1a; font-size: 1.15rem; font-weight: 800; padding: 14px 40px; border-radius: 12px; cursor: pointer; transition: all 0.3s; letter-spacing: 2px; }
+  .oq-replay-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,134,11,0.4); }
+  .oq-share-prompt { margin-top: 1rem; font-size: 0.95rem; color: #888; }
+
+  .oq-stats-card { max-width: 600px; margin: 2rem auto; padding: 1.2rem 1.5rem; background: var(--bg-card, rgba(255,255,255,0.03)); border: 1px solid #333; border-radius: 14px; }
+  .oq-stats-title { font-size: 1.05rem; font-weight: 700; color: #eee; margin-bottom: 0.8rem; }
+  .oq-stats-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .oq-stat { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 8px 16px; font-size: 0.95rem; color: #bbb; }
+  .oq-stat strong { font-size: 1.2rem; margin-left: 4px; color: var(--guava-green, #39FF14); }
+
+  @media (max-width: 768px) {
+    .oq-quiz-area { padding: 1rem; }
+    .oq-btn { font-size: 1.05rem; padding: 12px 24px; }
+    .oq-question { font-size: 1.05rem; }
+    .oq-final-score { font-size: 2.5rem; }
+    .oq-final-title { font-size: 1.2rem; }
+  }
+  @media (max-width: 480px) {
+    .oq-btn { font-size: 0.95rem; padding: 10px 20px; flex: 1; min-width: 120px; }
+    .oq-explain-text { font-size: 0.95rem; padding: 10px 14px; }
+    .oq-stat { padding: 6px 12px; font-size: 0.9rem; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  var SCENARIOS = [
+    { id:1, attackers:[{x:30,y:50,isPasser:true},{x:63,y:30,isReceiver:true}], defenders:[{x:70,y:60,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:30,y:50}, passTo:{x:63,y:30}, isOffside:false, explanation:'芭樂子：接球的 A 在 x=63，防守者 D 在 x=70，守門員在 x=95。倒數第二位防守者是 D(x=70)。A(63) < D(70)，接球者在防守者後面，沒有越位！這是最基本的情境——進攻球員只要沒跑過最後一個後衛，就安全。', difficulty:'easy' },
+    { id:2, attackers:[{x:40,y:40,isPasser:true},{x:85,y:60,isReceiver:true}], defenders:[{x:72,y:35,isGoalkeeper:false},{x:68,y:70,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:40,y:40}, passTo:{x:85,y:60}, isOffside:true, explanation:'芭樂子：接球的 A 在 x=85，防守方最靠近底線的是守門員 x=95，倒數第二位是 D(x=72)。A(85) 比 D(72) 更靠近底線、比球(x=40)更前面、又在對方半場——三個條件全中，標準越位！這種明顯衝太前面的，連芭樂子閉著眼都能判。', difficulty:'easy' },
+    { id:3, attackers:[{x:35,y:55,isPasser:true},{x:60,y:30,isReceiver:true}], defenders:[{x:65,y:45,isGoalkeeper:false},{x:62,y:75,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:35,y:55}, passTo:{x:60,y:30}, isOffside:false, explanation:'芭樂子：接球的 A 在 x=60，倒數第二位防守者在 x=62。A(60) < D(62)，接球者比防守者更遠離底線，所以沒越位。記住：進攻球員必須「超過」防守者才算越位，在後面或同一條線都不算。', difficulty:'easy' },
+    { id:4, attackers:[{x:25,y:60,isPasser:true},{x:80,y:45,isReceiver:true},{x:55,y:25}], defenders:[{x:78,y:70,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:25,y:60}, passTo:{x:80,y:45}, isOffside:true, explanation:'芭樂子：接球的 A 在 x=80，倒數第二位防守者（D）在 x=78。A(80) > D(78)，雖然只差 2，但越位就是越位。在真正的比賽裡，VAR 會畫一條超精準的線——差一根腳趾也是越位。所以不要跟我說「很接近」，規則不看感覺看數字。', difficulty:'medium' },
+    { id:5, attackers:[{x:30,y:35,isPasser:true},{x:70,y:65,isReceiver:true}], defenders:[{x:70,y:40,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:30,y:35}, passTo:{x:70,y:65}, isOffside:false, explanation:'芭樂子：接球的 A 在 x=70，倒數第二位防守者（D）也在 x=70——兩個人在同一條線上！根據 FIFA 規則，同一條線不算越位。記住這個口訣：「齊平不算越」。這種判決在比賽中最容易引發爭議，但規則寫得很清楚。', difficulty:'medium' },
+    { id:6, attackers:[{x:55,y:30,isPasser:true},{x:82,y:55,isReceiver:true}], defenders:[{x:60,y:50,isGoalkeeper:false},{x:75,y:70,isGoalkeeper:true}], ball:{x:55,y:30}, passTo:{x:82,y:55}, isOffside:true, explanation:'芭樂子：這題的陷阱是守門員跑出來了！守門員在 x=75，後衛在 x=60。越位看「倒數第二個防守球員」，現在倒數第二個是後衛 x=60（不是守門員）。接球 A 在 x=82，遠遠超過 D(x=60)，當然越位。守門員不一定是最後一個人，他衝出來的時候後衛就變成關鍵。', difficulty:'medium' },
+    { id:7, attackers:[{x:45,y:40,isPasser:true},{x:45,y:70,isReceiver:true}], defenders:[{x:70,y:50,isGoalkeeper:false},{x:75,y:30,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:45,y:40}, passTo:{x:45,y:70}, isOffside:false, explanation:'芭樂子：接球的 A 在 x=45，這是在自己的半場（x<50 = 中線以內）。不管防守球員在哪裡，只要你在自己半場，就絕對不會越位。這是很多新手不知道的規則——中線以內是安全區。', difficulty:'easy' },
+    { id:8, attackers:[{x:60,y:25,isPasser:true},{x:85,y:50,isReceiver:true},{x:72,y:75}], defenders:[{x:80,y:40,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:60,y:25}, passTo:{x:85,y:50}, isOffside:true, explanation:'芭樂子：場上有兩個進攻球員在前場：x=85（接球者）和 x=72（沒接球的）。倒數第二個防守者在 x=80。球傳給 x=85 的 A，A(85) > D(80)，越位！注意看另一個 A 在 x=72，他沒越位——但球不是給他的。越位判的是「接球的那個人」有沒有超線。', difficulty:'hard' },
+    { id:9, attackers:[{x:70,y:40,isPasser:true},{x:68,y:70,isReceiver:true}], defenders:[{x:65,y:55,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:70,y:40}, passTo:{x:68,y:70}, isOffside:false, explanation:'芭樂子：接球的 A 在 x=68，球在 x=70。A(68) < 球(70)——接球者比球更遠離底線！越位的第三個條件是「比球更靠近底線」，這裡 A 在球的後面，所以不算越位。就算 A 比防守者更前面也沒關係，只要 A 在球後面就安全。', difficulty:'medium' },
+    { id:10, attackers:[{x:35,y:50,isPasser:true},{x:88,y:40,isReceiver:true}], defenders:[{x:55,y:30,isGoalkeeper:false},{x:60,y:65,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:35,y:50}, passTo:{x:88,y:40}, isOffside:true, explanation:'芭樂子：A 在 x=88，倒數第二個防守者在 x=60。A 比 D 前面了 28 個單位——這不是越位，這是越位的教科書範本。連邊裁都不用跑，直接舉旗。芭樂子建議這位前鋒先回去練習站位。', difficulty:'easy' },
+    { id:11, attackers:[{x:50,y:30,isPasser:true},{x:76,y:55,isReceiver:true}], defenders:[{x:76,y:35,isGoalkeeper:false},{x:72,y:70,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:50,y:30}, passTo:{x:76,y:55}, isOffside:false, explanation:'芭樂子：接球 A 在 x=76，兩個防守者分別在 x=76 和 x=72，守門員在 x=95。倒數第二位防守者是 x=76 的 D。A(76) = D(76)，齊平！齊平不算越位——FIFA 規則第 11 條寫得很清楚。差 0.01 公分也要超過才算，同一條線就是安全的。', difficulty:'medium' },
+    { id:12, attackers:[{x:65,y:45,isPasser:true},{x:90,y:30,isReceiver:true}], defenders:[{x:82,y:60,isGoalkeeper:false},{x:97,y:50,isGoalkeeper:true}], ball:{x:65,y:45}, passTo:{x:90,y:30}, isOffside:true, explanation:'芭樂子：A 在 x=90，倒數第二個防守者在 x=82。A(90) > D(82)，比球(x=65)更前面，在對方半場——三個條件都中。這種「插入禁區」的跑位如果沒有抓好時機，就是越位。好的前鋒會算好起跑時間，差的前鋒只會抱怨裁判。', difficulty:'easy' },
+    { id:13, attackers:[{x:40,y:55,isPasser:true},{x:72,y:35,isReceiver:true},{x:83,y:70}], defenders:[{x:75,y:50,isGoalkeeper:false},{x:80,y:25,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:40,y:55}, passTo:{x:72,y:35}, isOffside:false, explanation:'芭樂子：場上有兩個進攻球員在前場——x=72（接球者）和 x=83（沒接球的）。防守者在 x=75 和 x=80，守門員 x=95。倒數第二位防守者是 x=80 的 D。接球 A 在 x=72，D 在 x=80——A(72) < D(80)，接球者沒有超過倒數第二個防守者。雖然另一個進攻球員 x=83 超過了，但球不是給他的。', difficulty:'hard' },
+    { id:14, attackers:[{x:55,y:40,isPasser:true},{x:92,y:60,isReceiver:true}], defenders:[{x:100,y:80,isGoalkeeper:false},{x:88,y:50,isGoalkeeper:true}], ball:{x:55,y:40}, passTo:{x:92,y:60}, isOffside:true, explanation:'芭樂子：這題有個防守者站在 x=100（底線上），守門員在 x=88。倒數第二個防守者是守門員 x=88。接球 A 在 x=92，A(92) > GK(88)——越位！那個站在底線的 D 是最後一個防守者，但越位看的是「倒數第二個」。守門員跑出來了，越位線就跟著往前移。這種守門員出擊的場面最容易出事。', difficulty:'hard' },
+    { id:15, attackers:[{x:48,y:50,isPasser:true},{x:78,y:35,isReceiver:true}], defenders:[{x:73,y:55,isGoalkeeper:false},{x:69,y:30,isGoalkeeper:false},{x:95,y:50,isGoalkeeper:true}], ball:{x:48,y:50}, passTo:{x:78,y:35}, isOffside:true, explanation:'芭樂子：防守者在 x=73 和 x=69，守門員在 x=95。倒數第二位是 x=73 的 D。接球 A 在 x=78，A(78) > D(73)，越位！這種情況在比賽中超常見——前鋒想搶點但比後衛早跑了一步。差 5 個單位，VAR 畫線出來就很明顯了。' , difficulty:'medium' }
+  ];
+
+  var LS_KEY = 'oq_stats';
+  var state = { current: 0, score: 0, streak: 0, answered: false, questions: [], done: false };
+
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function pickQuestions() {
+    var indices = [];
+    for (var i = 0; i < SCENARIOS.length; i++) indices.push(i);
+    shuffle(indices);
+    return indices.slice(0, 10);
+  }
+
+  function loadStats() {
+    try { var s = JSON.parse(localStorage.getItem(LS_KEY)); return s || { attempts: 0, scores: [] }; } catch(e) { return { attempts: 0, scores: [] }; }
+  }
+  function saveStats(score) {
+    var s = loadStats();
+    s.attempts++;
+    s.scores.push(score);
+    try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch(e) {}
+    renderStats();
+  }
+  function renderStats() {
+    var s = loadStats();
+    document.getElementById('statAttempts').textContent = s.attempts;
+    if (s.scores.length > 0) {
+      document.getElementById('statBest').textContent = Math.max.apply(null, s.scores) + '/10';
+      var sum = 0; for (var i = 0; i < s.scores.length; i++) sum += s.scores[i];
+      document.getElementById('statAvg').textContent = (sum / s.scores.length).toFixed(1) + '/10';
+    } else {
+      document.getElementById('statBest').textContent = '-';
+      document.getElementById('statAvg').textContent = '-';
+    }
+  }
+
+  function drawPitch(scenario, showLine) {
+    var svg = document.getElementById('pitchSvg');
+    var w = 400, h = 200;
+    function sx(v) { return 20 + v * 3.6; }
+    function sy(v) { return 10 + v * 1.8; }
+
+    var html = '';
+    html += '<defs><linearGradient id="oqGrass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2d8a4e"/><stop offset="100%" stop-color="#1a5c33"/></linearGradient>';
+    html += '<marker id="oqArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#fff" opacity="0.8"/></marker></defs>';
+    html += '<rect x="0" y="0" width="'+w+'" height="'+h+'" fill="url(#oqGrass)"/>';
+    for (var gs = 0; gs < 10; gs++) {
+      if (gs % 2 === 0) html += '<rect x="'+( 20 + gs * 36)+'" y="10" width="36" height="180" fill="rgba(255,255,255,0.03)"/>';
+    }
+    html += '<rect x="20" y="10" width="360" height="180" fill="none" stroke="#fff" stroke-width="1.5" rx="2"/>';
+    html += '<line x1="200" y1="10" x2="200" y2="190" stroke="#fff" stroke-width="1" opacity="0.6"/>';
+    html += '<circle cx="200" cy="100" r="30" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/>';
+    html += '<rect x="20" y="60" width="30" height="80" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/>';
+    html += '<rect x="20" y="35" width="55" height="130" fill="none" stroke="#fff" stroke-width="1" opacity="0.4"/>';
+    html += '<rect x="350" y="60" width="30" height="80" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/>';
+    html += '<rect x="325" y="35" width="55" height="130" fill="none" stroke="#fff" stroke-width="1" opacity="0.4"/>';
+    html += '<rect x="14" y="75" width="6" height="50" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.7"/>';
+    html += '<rect x="380" y="75" width="6" height="50" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.7"/>';
+
+    var passer = null, receiver = null;
+    for (var i = 0; i < scenario.attackers.length; i++) {
+      if (scenario.attackers[i].isPasser) passer = scenario.attackers[i];
+      if (scenario.attackers[i].isReceiver) receiver = scenario.attackers[i];
+    }
+    if (passer && scenario.passTo) {
+      html += '<line x1="'+sx(passer.x)+'" y1="'+sy(passer.y)+'" x2="'+sx(scenario.passTo.x)+'" y2="'+sy(scenario.passTo.y)+'" stroke="#fff" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7" marker-end="url(#oqArrow)"/>';
+    }
+
+    if (showLine) {
+      var defXs = [];
+      for (var i = 0; i < scenario.defenders.length; i++) defXs.push(scenario.defenders[i].x);
+      defXs.sort(function(a,b){return b-a;});
+      var ofsLineX = defXs.length >= 2 ? defXs[1] : defXs[0];
+      var lineColor = scenario.isOffside ? '#ef4444' : '#22c55e';
+      html += '<line class="oq-line-anim" x1="'+sx(ofsLineX)+'" y1="10" x2="'+sx(ofsLineX)+'" y2="190" stroke="'+lineColor+'" stroke-width="3" stroke-dasharray="8,4" opacity="0.9"/>';
+      html += '<rect x="'+(sx(ofsLineX)-2)+'" y="12" width="56" height="18" rx="4" fill="rgba(0,0,0,0.7)"/>';
+      html += '<text x="'+(sx(ofsLineX)+26)+'" y="26" text-anchor="middle" fill="'+lineColor+'" font-size="13" font-weight="bold">越位線</text>';
+    }
+
+    for (var i = 0; i < scenario.defenders.length; i++) {
+      var d = scenario.defenders[i];
+      var cx = sx(d.x), cy = sy(d.y);
+      var col = d.isGoalkeeper ? '#84cc16' : '#3b82f6';
+      var label = d.isGoalkeeper ? 'G' : 'D';
+      html += '<circle cx="'+cx+'" cy="'+cy+'" r="14" fill="'+col+'" stroke="#fff" stroke-width="2" opacity="0.9"/>';
+      html += '<text x="'+cx+'" y="'+(cy+5)+'" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">'+label+'</text>';
+    }
+
+    for (var i = 0; i < scenario.attackers.length; i++) {
+      var a = scenario.attackers[i];
+      var cx = sx(a.x), cy = sy(a.y);
+      html += '<circle cx="'+cx+'" cy="'+cy+'" r="14" fill="#ef4444" stroke="#fff" stroke-width="2" opacity="0.9"/>';
+      if (a.isPasser) {
+        html += '<circle cx="'+cx+'" cy="'+cy+'" r="19" fill="none" stroke="#fbbf24" stroke-width="2.5" opacity="0.8" class="oq-pulse-ring"/>';
+      }
+      if (a.isReceiver && showLine) {
+        var rc = scenario.isOffside ? '#ef4444' : '#22c55e';
+        html += '<circle cx="'+cx+'" cy="'+cy+'" r="19" fill="none" stroke="'+rc+'" stroke-width="3" class="oq-blink-ring"/>';
+      }
+      var aLabel = a.isPasser ? 'P' : (a.isReceiver ? 'A' : 'A');
+      html += '<text x="'+cx+'" y="'+(cy+5)+'" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">'+aLabel+'</text>';
+    }
+
+    html += '<circle cx="'+sx(scenario.ball.x)+'" cy="'+sy(scenario.ball.y)+'" r="8" fill="#fbbf24" stroke="#fff" stroke-width="1.5" class="oq-ball-glow"/>';
+
+    html += '<rect x="0" y="188" width="400" height="26" fill="rgba(0,0,0,0.6)" rx="0"/>';
+    html += '<text x="200" y="204" text-anchor="middle" fill="#fff" font-size="10">';
+    html += '<tspan fill="#fbbf24">●</tspan> 球　';
+    html += '<tspan fill="#ef4444">●</tspan> P傳球　';
+    html += '<tspan fill="#fff">●</tspan> A接球　';
+    html += '<tspan fill="#3b82f6">●</tspan> D防守　';
+    html += '<tspan fill="#84cc16">●</tspan> G守門員';
+    html += '</text>';
+
+    svg.innerHTML = html;
+  }
+
+  function renderQuestion() {
+    if (state.current >= state.questions.length) { showFinal(); return; }
+    var idx = state.questions[state.current];
+    var sc = SCENARIOS[idx];
+    state.answered = false;
+
+    document.getElementById('progressText').textContent = '第 ' + (state.current + 1) + '/10 題';
+    document.getElementById('progressFill').style.width = ((state.current + 1) * 10) + '%';
+    document.getElementById('questionText').textContent = '這個傳球瞬間，接球的進攻球員越位了嗎？';
+
+    document.getElementById('answerBtns').style.display = 'flex';
+    document.getElementById('explanation').style.display = 'none';
+    document.getElementById('finalPanel').style.display = 'none';
+    document.getElementById('progressBar').style.display = 'block';
+
+    var bo = document.getElementById('btnOffside');
+    var bn = document.getElementById('btnOnside');
+    bo.disabled = false; bn.disabled = false;
+    bo.className = 'oq-btn oq-btn-offside';
+    bn.className = 'oq-btn oq-btn-onside';
+
+    drawPitch(sc, false);
+  }
+
+  window._oqAnswer = function(userSaysOffside) {
+    if (state.answered || state.done) return;
+    state.answered = true;
+    var idx = state.questions[state.current];
+    var sc = SCENARIOS[idx];
+    var correct = (userSaysOffside === sc.isOffside);
+    if (correct) { state.score++; state.streak++; } else { state.streak = 0; }
+
+    var bo = document.getElementById('btnOffside');
+    var bn = document.getElementById('btnOnside');
+    bo.disabled = true; bn.disabled = true;
+
+    if (userSaysOffside) {
+      bo.className = 'oq-btn oq-btn-offside ' + (correct ? 'oq-correct' : 'oq-wrong');
+      if (correct) bn.className = 'oq-btn oq-btn-onside';
+    } else {
+      bn.className = 'oq-btn oq-btn-onside ' + (correct ? 'oq-correct' : 'oq-wrong');
+      if (correct) bo.className = 'oq-btn oq-btn-offside';
+    }
+
+    drawPitch(sc, true);
+
+    var badge = document.getElementById('resultBadge');
+    var streakMsg = '';
+    if (correct && state.streak >= 2) {
+      var streakMsgs = {
+        2: '連對 2 題！有點東西哦',
+        3: '3 連對！越位對你來說沒什麼難度了',
+        4: '連續 4 題！你是不是偷偷在看英超？',
+        5: '5 連對！芭樂子開始覺得你比我懂',
+        6: '6 連對！這個程度可以去考裁判了吧？',
+        7: '7 連對！VAR 都沒你準',
+        8: '8 連對！FIFA 應該直接發你裁判證',
+        9: '9 連對！全場起立鼓掌中',
+        10: '10 連對！你不去當世足裁判真的太可惜了'
+      };
+      streakMsg = streakMsgs[state.streak] || '🔥 連續 ' + state.streak + ' 題！神了';
+    }
+    var badgeText = correct ? '✅ 答對了！' : '❌ 答錯了！連續紀錄歸零，重新開始累積！';
+    if (streakMsg) badgeText += '\n🔥 ' + streakMsg;
+    badge.textContent = badgeText;
+    badge.style.whiteSpace = 'pre-line';
+    badge.className = 'oq-result-badge ' + (correct ? 'oq-badge-correct' : 'oq-badge-wrong');
+    document.getElementById('explainText').textContent = sc.explanation;
+    document.getElementById('explanation').style.display = 'block';
+
+    if (state.current >= state.questions.length - 1) {
+      document.getElementById('nextBtn').textContent = '看結果 →';
+    } else {
+      document.getElementById('nextBtn').textContent = '下一題 →';
+    }
+  };
+
+  window._oqNext = function() {
+    state.current++;
+    if (state.current >= state.questions.length) {
+      showFinal();
+    } else {
+      renderQuestion();
+      document.getElementById('quizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  function showFinal() {
+    state.done = true;
+    document.getElementById('answerBtns').style.display = 'none';
+    document.getElementById('explanation').style.display = 'none';
+    document.getElementById('progressBar').style.display = 'none';
+    document.getElementById('questionText').textContent = '';
+    document.getElementById('pitchWrap').style.display = 'none';
+
+    var s = state.score;
+    document.getElementById('finalScore').textContent = s + ' / 10';
+    var title = '', msg = '';
+    if (s === 10) { title = '🏆 VAR 認證裁判！你比真的裁判還準'; msg = '滿分！芭樂子拜服。你的越位判斷力已經超越大部分邊裁了。2026 世足考慮讓你去現場吹哨吧。'; }
+    else if (s >= 8) { title = '⭐ 越位判官！偽球迷退散'; msg = '厲害，幾乎全對。你對越位規則的理解已經是專業等級了。朋友圈裡應該沒人敢跟你爭論判決。'; }
+    else if (s >= 6) { title = '👍 還行，多看幾場就會了'; msg = '基本概念有了，但一些邊界情況還需要加強。多看幾場 VAR 回放，很快就能進步。'; }
+    else if (s >= 4) { title = '😅 建議重看一次規則'; msg = '嗯⋯芭樂子建議你把上面的文章再讀一遍。越位規則不難，但魔鬼在細節裡。再挑戰一次？'; }
+    else { title = '💀 你可能在看另一種運動'; msg = '芭樂子懷疑你是不是在想籃球的越位⋯啊不，籃球沒有越位。沒關係，再來一次，這次認真看圖！'; }
+
+    document.getElementById('finalTitle').textContent = title;
+    document.getElementById('finalMsg').textContent = msg;
+    document.getElementById('finalPanel').style.display = 'block';
+
+    saveStats(s);
+    document.getElementById('quizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window._oqReplay = function() {
+    state.current = 0;
+    state.score = 0;
+    state.streak = 0;
+    state.answered = false;
+    state.done = false;
+    state.questions = pickQuestions();
+    document.getElementById('pitchWrap').style.display = 'block';
+    document.getElementById('finalPanel').style.display = 'none';
+    renderQuestion();
+    document.getElementById('quizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Init
+  state.questions = pickQuestions();
+  renderStats();
+  renderQuestion();
+})();
+</script>
