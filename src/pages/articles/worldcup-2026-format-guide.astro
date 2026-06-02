@@ -1,0 +1,618 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '2026 世足什麼時候開始？', a: '2026 世界盃從 <strong>6 月 11 日開踢，7 月 19 日決賽</strong>，整個賽期長達 39 天。比 2022 卡達世界盃多了 10 天，因為多了 32 強那一輪淘汰賽，加上參賽隊伍從 32 隊增加到 48 隊。' },
+  { q: '為什麼從 32 隊變 48 隊？', a: 'FIFA 主席乾脆說白了：更多球隊 = 更多比賽 = 更多轉播費 = 更多錢。官方說法是「讓更多國家有機會參與世界盃」，但背後就是商業考量。不過對球迷來說，能看到更多比賽也不是壞事啦。48 隊從 2026 年開始實施，是世界盃史上最大規模的擴軍。' },
+  { q: '第三名怎麼比誰晉級？', a: '12 個小組的第三名，用<strong>積分 → 淨勝球 → 進球數 → 紀律分 → FIFA 排名</strong>的順序來比較。取最好的 8 個晉級 32 強，剩下 4 個回家。所以就算你小組第三，只要成績夠好就有機會。歐洲盃 2016 開始就用這個制度了，不是全新的東西。' },
+  { q: '台灣有轉播嗎？', a: '有！中華電信 MOD、愛爾達體育台、ELEVEN SPORTS 都有轉播。不過因為比賽在北美舉辦，台灣時間大部分場次在<strong>凌晨 1 點到早上 9 點</strong>之間，上班族要做好熬夜或請假的心理準備。' },
+  { q: '淘汰賽加時賽怎麼打？', a: '淘汰賽如果正規 90 分鐘平手，會踢 30 分鐘的延長賽（上下半場各 15 分鐘）。延長賽還是平手的話，就進入 PK 大戰（互射十二碼），雙方各踢 5 球，還是平手就進入驟死賽，一球定生死。' },
+  { q: '今年有哪些新隊伍第一次參加？', a: '2026 世界盃有好幾個第一次參賽的國家，包括<strong>印尼、泰國</strong>等亞洲球隊，以及一些非洲和中北美的新面孔。48 隊的擴軍讓更多中小型足球國家有機會站上世界盃的舞台。' },
+  { q: '義大利為什麼沒進？', a: '四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃。2026 年附加賽被波士尼亞在 PK 大戰中淘汰。義大利的問題在於青訓斷層和戰術老化，加上歐洲區競爭激烈，強如義大利也撐不住。球迷表示：心已經碎成義大利麵了。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/worldcup-2026-format-guide/"
+  title="2026 世足賽制懶人包｜48 隊怎麼打？5 分鐘搞懂新制＋測驗 — GAME8LA"
+  description="2026 世界盃史上首次 48 隊參賽！12 組、32 強、第三名也能晉級——搞不懂沒關係，芭樂子用白話文＋表格＋10 題測驗，5 分鐘讓你從偽球迷變真球迷。"
+  image="https://game8la.com/images/articles/worldcup-format-cover.webp"
+  datePublished="2026-06-03"
+  dateModified="2026-06-03"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '足球教室', url: 'https://game8la.com/articles/' },
+    { name: '2026 世足賽制懶人包', url: 'https://game8la.com/articles/worldcup-2026-format-guide/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="2026 世足賽制懶人包｜48 隊怎麼打？5 分鐘搞懂新制＋測驗 — GAME8LA" description="2026 世界盃史上首次 48 隊參賽！12 組、32 強、第三名也能晉級——搞不懂沒關係，芭樂子用白話文＋表格＋10 題測驗，5 分鐘讓你從偽球迷變真球迷。" ogImage="https://game8la.com/images/articles/worldcup-format-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 2026 世足賽制懶人包</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-06-03 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 8 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#002868,#bf0a30,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">2026 世足賽制懶人包｜48 隊怎麼打？<em>5 分鐘搞懂新制，從偽球迷變真球迷</em></h1>
+
+      <!-- === 封面圖 === -->
+      <img
+        src="/images/articles/worldcup-format-cover.webp"
+        srcset="/images/articles/worldcup-format-cover-768w.webp 768w, /images/articles/worldcup-format-cover.webp 1376w"
+        sizes="(max-width: 640px) 100vw, 820px"
+        alt="2026 世界盃賽制懶人包封面"
+        class="content-img"
+        width="1376" height="774"
+        loading="eager"
+        style="margin-bottom:1.2rem"
+      />
+
+      <!-- === 快速工具入口 === -->
+      <div class="quick-tool-bar">
+        <span>直接玩測驗：</span>
+        <a href="#s6">賽制測驗</a>
+        <a href="/tools/worldcup-2026/">冠軍預測</a>
+        <a href="/articles/football-offside-rule/">越位規則</a>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。2026 世界盃 6/11 開踢，你一定會在 LINE 群組看到有人問：「欸，今年怎麼 48 隊？以前不是 32 隊嗎？」「第三名也能晉級是什麼意思？」——別擔心，芭樂子 5 分鐘幫你搞定。看完這篇，你就是朋友圈裡最懂世足的那個人。</p>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">2026 vs 2022：到底改了什麼？</a></li>
+          <li><a href="#s2">小組賽怎麼打？12 組 x 4 隊</a></li>
+          <li><a href="#s3">第三名也能晉級？8 個最佳第三名解釋</a></li>
+          <li><a href="#s4">淘汰賽怎麼打？32 強到決賽</a></li>
+          <li><a href="#s5">台灣球迷必知：轉播時間與熬夜指南</a></li>
+          <li><a href="#s6">來測試一下！10 題世足賽制測驗</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- === 正文開始 === -->
+
+      <h2 id="s1" style="margin-top:2.5rem">2026 vs 2022：到底改了什麼？</h2>
+
+      <p>先來一張表，讓你一眼看出 2026 世界盃跟以前差在哪：</p>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">2022 vs 2026 世界盃比較</h3>
+        <table>
+          <thead><tr><th>項目</th><th>2022 卡達</th><th>2026 美加墨</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">參賽隊伍</td><td>32 隊</td><td style="color:#f5b800;font-weight:700">48 隊</td></tr>
+            <tr><td style="font-weight:700">分組</td><td>8 組 x 4 隊</td><td style="color:#f5b800;font-weight:700">12 組 x 4 隊</td></tr>
+            <tr><td style="font-weight:700">小組賽場數</td><td>48 場</td><td>48 場（每隊 3 場不變）</td></tr>
+            <tr><td style="font-weight:700">總比賽場數</td><td>64 場</td><td style="color:#f5b800;font-weight:700">104 場</td></tr>
+            <tr><td style="font-weight:700">晉級淘汰賽</td><td>16 隊</td><td style="color:#f5b800;font-weight:700">32 隊</td></tr>
+            <tr><td style="font-weight:700">淘汰賽起點</td><td>16 強</td><td style="color:#f5b800;font-weight:700">32 強（新增！）</td></tr>
+            <tr><td style="font-weight:700">主辦國</td><td>1 國</td><td style="color:#f5b800;font-weight:700">3 國（史上首次）</td></tr>
+            <tr><td style="font-weight:700">賽期</td><td>29 天</td><td style="color:#f5b800;font-weight:700">39 天</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>芭樂子幫你做個生活化的比喻：以前世界盃像 8 桌麻將，每桌 4 個人打。現在變成 12 桌，打完還多一輪 32 強，整個賽程拉長 10 天。FIFA 的邏輯很簡單——桌子越多、局數越多、打越久，觀眾越多、轉播費越高。你懂的。</p>
+
+      <p>最大的變化就是<strong>隊伍從 32 變 48</strong>，多了整整 16 隊。這意味著更多國家能參加世界盃，像是印尼、泰國這些以前想都不敢想的球隊，今年都站上了世界最高舞台。另外就是三國聯辦——美國、加拿大、墨西哥一起辦，16 個城市分散在 3 個國家，球迷要飛來飛去看比賽，荷包表示壓力很大。</p>
+
+      <h2 id="s2" style="margin-top:2.5rem">小組賽怎麼打？12 組 x 4 隊</h2>
+
+      <p>小組賽的規則其實跟以前差不多，只是組數變多了。芭樂子條列給你看：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">小組賽規則懶人包</h3>
+        <ul style="line-height:2.1">
+          <li>48 隊分成 <strong>A 到 L 共 12 組</strong>，每組 4 隊</li>
+          <li>每隊打 <strong>3 場</strong>小組賽（跟同組其他 3 隊各打 1 場）</li>
+          <li>勝 = <strong>3 分</strong>，平 = <strong>1 分</strong>，負 = <strong>0 分</strong></li>
+          <li>小組<strong>前 2 名直接晉級</strong> 32 強</li>
+          <li><strong>8 個最佳第三名也能晉級</strong>（這是重點！下一段解釋）</li>
+        </ul>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">如果積分相同怎麼辦？依序看：積分 → 淨勝球 → 進球數 → 紀律分（黃紅牌少的贏）→ FIFA 世界排名。</p>
+      </div>
+
+      <p>你可能會想：「3 場比賽就決定生死？也太短了吧。」沒錯，小組賽就是這麼殘酷。贏一場拿 3 分，基本上就不太會墊底；連輸兩場的話，第三場就是生死戰。但今年有個好消息——就算你小組第三，還有機會以「最佳第三名」身份晉級。這個制度以前世界盃沒有，是 2026 新增的（其實歐洲盃 2016 就開始用了）。</p>
+
+      <p>另外提一下，小組賽第三輪的兩場比賽會<strong>同時開踢</strong>。這是為了避免有人踢假球——如果你知道另一場的比分，可能就會「默契球」，兩隊一起放水。同時開賽就沒辦法搞這種小動作了。1982 年西德跟奧地利那場臭名昭彰的「希洪之恥」就是因為這個才改的規則。</p>
+
+      <h2 id="s3" style="margin-top:2.5rem">第三名也能晉級？8 個最佳第三名解釋</h2>
+
+      <figure style="margin:1.5rem 0">
+        <img
+          src="/images/articles/worldcup-format-third.webp"
+          srcset="/images/articles/worldcup-format-third-768w.webp 768w, /images/articles/worldcup-format-third.webp 1376w"
+          sizes="(max-width: 640px) 100vw, 820px"
+          alt="2026 世界盃第三名晉級規則圖解"
+          class="content-img"
+          width="1376" height="774"
+          loading="lazy"
+          style="margin-bottom:0.5rem"
+        />
+        <figcaption class="article-img-caption">2026 世足新制：12 個小組第三名裡，成績最好的 8 個可以晉級 32 強淘汰賽。</figcaption>
+      </figure>
+
+      <p>這是 2026 世界盃最讓人困惑的規則，芭樂子用白話文解釋一次：</p>
+
+      <p><strong>12 個小組各有 1 個第三名，取其中成績最好的 8 個晉級 32 強。</strong>剩下 4 個最差的第三名回家。</p>
+
+      <p>芭樂子比喻：想像你考試成績在班上排第三，但老師說全年級第三名裡成績最好的 8 個人可以進資優班——就是這個概念。你不需要在班上考第一第二，只要你的第三名分數比其他班的第三名高，一樣能進。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#2196f3;margin-top:0">最佳第三名比較方式</h3>
+        <table>
+          <thead><tr><th style="width:2.5rem">順序</th><th>比較項目</th><th>白話翻譯</th></tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700;color:#2196f3;font-size:1.2rem;text-align:center">1</td>
+              <td>積分</td>
+              <td>分數高的先上</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#2196f3;font-size:1.2rem;text-align:center">2</td>
+              <td>淨勝球</td>
+              <td>進球數減掉失球數，越多越好</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#2196f3;font-size:1.2rem;text-align:center">3</td>
+              <td>進球數</td>
+              <td>你總共踢進幾球</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#2196f3;font-size:1.2rem;text-align:center">4</td>
+              <td>紀律分</td>
+              <td>黃牌紅牌少的贏</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700;color:#2196f3;font-size:1.2rem;text-align:center">5</td>
+              <td>FIFA 排名</td>
+              <td>以上都一樣的話，看世界排名</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">簡單算術</h3>
+        <p style="font-size:1.05rem;line-height:1.9"><strong>12 個第三名裡取 8 個</strong> = 有 2/3 的機率晉級。所以只要你不是最後 4 名就行。換句話說，小組第三名拿 4 分（一勝一平一負）大概就穩了，拿 3 分（一勝兩負）就要看淨勝球拼命了。</p>
+      </div>
+
+      <p>這個制度讓小組賽的最後一輪更刺激——因為就算你輸了一場，只要另外兩場打得好，第三名還是有機會晉級。不像以前的世界盃，小組第三就直接去吃泡面等回家了。</p>
+
+      <h2 id="s4" style="margin-top:2.5rem">淘汰賽怎麼打？32 強到決賽</h2>
+
+      <p>小組賽結束，32 隊晉級之後，就進入刺激的淘汰賽。以前世界盃淘汰賽從 16 強開始，但 2026 新增了 32 強這一輪——整個淘汰階段多了 16 場比賽。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">淘汰賽流程一覽</h3>
+        <p style="font-size:1rem;line-height:1.9"><strong>32 強 → 16 強 → 8 強 → 4 強（準決賽）→ 季軍戰 + 決賽</strong></p>
+        <p style="font-size:1rem;line-height:1.9">全部單場定勝負。90 分鐘平手 → 延長賽 30 分鐘 → 還是平手就踢 PK 大戰。沒有第二條路，輸了就回家。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">2026 淘汰賽日期表</h3>
+        <table>
+          <thead><tr><th>階段</th><th>日期</th><th>場數</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">32 強</td><td>6/28 - 7/3</td><td>16 場</td></tr>
+            <tr><td style="font-weight:700">16 強</td><td>7/4 - 7/7</td><td>8 場</td></tr>
+            <tr><td style="font-weight:700">8 強</td><td>7/9 - 7/11</td><td>4 場</td></tr>
+            <tr><td style="font-weight:700">準決賽</td><td>7/14 - 7/15</td><td>2 場</td></tr>
+            <tr><td style="font-weight:700">季軍戰</td><td>7/18</td><td>1 場</td></tr>
+            <tr><td style="font-weight:700;color:#f5b800">決賽</td><td style="color:#f5b800;font-weight:700">7/19</td><td style="color:#f5b800;font-weight:700">1 場</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">決賽地點：MetLife Stadium（紐約紐澤西），台灣時間 7/20 凌晨 3 點左右。</p>
+      </div>
+
+      <p>芭樂子建議你把 <strong>7/19（台灣時間 7/20 凌晨）</strong>這天直接在行事曆上標起來。決賽在 MetLife Stadium，紐約旁邊的紐澤西州，是美式足球紐約巨人隊的主場。這個球場可以容納 8 萬多人，到時候那個氣氛一定是瘋狂的。</p>
+
+      <p>2026 新增的「32 強」這一輪，其實對小組第一名有點不公平——他們在小組賽已經很努力拿第一了，結果還要多打一場淘汰賽。但 FIFA 表示：多打一場才公平，畢竟你是跟第三名打，贏面大得多。小組第一對上最佳第三名，小組第二對上另一組的第二名，抽籤決定對戰組合。</p>
+
+      <h2 id="s5" style="margin-top:2.5rem">台灣球迷必知：轉播時間與熬夜指南</h2>
+
+      <p>好了，規則看完了，現在來談最實際的問題：<strong>我在台灣要幾點起來看球？</strong></p>
+
+      <p>2026 世界盃在北美舉辦，美國橫跨好幾個時區，所以看比賽的時間取決於場地在東岸還是西岸。芭樂子整理如下：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#9c27b0;background:linear-gradient(135deg,rgba(156,39,176,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#9c27b0;margin-top:0">台灣觀賽時間對照</h3>
+        <table>
+          <thead><tr><th>場地位置</th><th>代表城市</th><th>台灣時間（約）</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">東岸</td><td>紐約、波士頓、邁阿密</td><td style="font-weight:700">凌晨 1 - 3 點</td></tr>
+            <tr><td style="font-weight:700">中部</td><td>達拉斯、堪薩斯城、休士頓</td><td style="font-weight:700">凌晨 2 - 4 點</td></tr>
+            <tr><td style="font-weight:700">西岸</td><td>洛杉磯、西雅圖、舊金山</td><td style="font-weight:700">凌晨 3 - 5 點</td></tr>
+            <tr><td style="font-weight:700">墨西哥</td><td>墨西哥城、瓜達拉哈拉</td><td style="font-weight:700">凌晨 2 - 4 點</td></tr>
+            <tr><td style="font-weight:700">加拿大</td><td>多倫多、溫哥華</td><td style="font-weight:700">凌晨 1 - 5 點</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>芭樂子的熬夜策略建議：如果你是上班族，請直接跟老闆請假。不然就設鬧鐘看重點場次就好——<strong>小組賽第三輪和淘汰賽才是真正精彩的部分</strong>。小組賽前兩輪比較試探性質，除非你的愛隊在踢，不然可以先看精華回放就好。</p>
+
+      <p>轉播管道的部分，中華電信 MOD 的愛爾達體育台幾乎每屆世界盃都有全部場次的轉播，ELEVEN SPORTS 也有。如果你沒有電視，手機上的 Hami Video 或 ELEVEN SPORTS app 也可以看。不過具體轉播方案通常開賽前一兩週才會正式公布，到時候再確認一下。</p>
+
+      <p>芭樂子貼心提醒：熬夜看球的時候記得準備好宵夜和飲料。推薦台灣人的世足三寶：泡麵、啤酒、鹹酥雞。配球賽剛剛好。但不要吃太飽，不然看到延長賽的時候你就睡著了。</p>
+
+      <h2 id="s6" style="margin-top:2.5rem">來測試一下！10 題世足賽制測驗</h2>
+
+      <p>規則都看完了嗎？芭樂子準備了 10 題賽制測驗，看看你對 2026 世界盃的新制到底懂多少。全部選擇題，答完告訴你是真球迷還是偽球迷。</p>
+
+      <!-- Quiz Area -->
+      <div class="wf-quiz-area" id="wfQuizArea">
+        <!-- Progress -->
+        <div class="wf-progress" id="wfProgressBar">
+          <span class="wf-progress-text" id="wfProgressText">第 1/10 題</span>
+          <div class="wf-progress-track"><div class="wf-progress-fill" id="wfProgressFill" style="width:10%"></div></div>
+        </div>
+
+        <!-- Question -->
+        <p class="wf-question" id="wfQuestionText">題目載入中...</p>
+
+        <!-- Answer Buttons -->
+        <div class="wf-buttons" id="wfAnswerBtns">
+          <button type="button" class="wf-btn" onclick="window._wfAnswer(0)">A</button>
+          <button type="button" class="wf-btn" onclick="window._wfAnswer(1)">B</button>
+          <button type="button" class="wf-btn" onclick="window._wfAnswer(2)">C</button>
+          <button type="button" class="wf-btn" onclick="window._wfAnswer(3)">D</button>
+        </div>
+
+        <!-- Explanation -->
+        <div class="wf-explanation" id="wfExplanation" style="display:none">
+          <div class="wf-result-badge" id="wfResultBadge"></div>
+          <p class="wf-explain-text" id="wfExplainText"></p>
+          <button type="button" class="wf-next-btn" id="wfNextBtn" onclick="window._wfNext()">下一題 →</button>
+        </div>
+
+        <!-- Final Score -->
+        <div class="wf-final" id="wfFinalPanel" style="display:none">
+          <div class="wf-final-score" id="wfFinalScore"></div>
+          <div class="wf-final-title" id="wfFinalTitle"></div>
+          <div class="wf-final-msg" id="wfFinalMsg"></div>
+          <button type="button" class="wf-replay-btn" id="wfReplayBtn" onclick="window._wfReplay()">再玩一次</button>
+          <div class="wf-share-prompt">覺得自己是真球迷？分享給朋友挑戰看看</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="wf-stats-card" id="wfStatsCard">
+        <div class="wf-stats-title">你的測驗紀錄</div>
+        <div class="wf-stats-row">
+          <span class="wf-stat">測驗次數 <strong id="wfStatAttempts">0</strong></span>
+          <span class="wf-stat">最高分 <strong id="wfStatBest">-</strong></span>
+          <span class="wf-stat">平均分 <strong id="wfStatAvg">-</strong></span>
+        </div>
+      </div>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.95rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子免責聲明：</strong>本文內容僅供教育參考，賽制規則以 FIFA 最新公告為準。芭樂子盡力用白話文解釋，但 FIFA 有時候會臨時改規則（對，他們真的會），如有出入請以官方為主。看球愉快，不要跟朋友因為賽制吵架——反正吵贏了也不會多一張門票。</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2 style="margin-top:2.5rem">2026 世足相關延伸閱讀</h2>
+      <p>搞懂賽制之後，可以再看看這些世足相關內容，看球時你就是朋友圈最靠譜的那個：</p>
+
+      <div class="related-links">
+        <a href="/articles/football-offside-rule/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗</strong>
+          <span class="rl-desc">越位規則白話文解釋，附互動圖解和 10 題越位測驗</span>
+        </a>
+        <a href="/articles/football-foul-cards/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解</strong>
+          <span class="rl-desc">犯規規則白話文解釋，附 9 題裁判模擬器互動測驗</span>
+        </a>
+        <a href="/tools/worldcup-2026/" class="rl-item">
+          <span class="rl-cat">互動工具</span>
+          <strong>2026 美加墨世界盃冠軍預測工具</strong>
+          <span class="rl-desc">輸入你看好的隊伍，看看冠軍勝率算給你看</span>
+        </a>
+        <a href="/articles/worldcup-2026-prediction/" class="rl-item">
+          <span class="rl-cat">分析文</span>
+          <strong>2026 世界盃冠軍分析：誰是最大熱門？</strong>
+          <span class="rl-desc">阿根廷、法國、巴西、英格蘭，誰最有機會奪冠？</span>
+        </a>
+      </div>
+
+      <ManifestoBox />
+      <ShareButtons title="2026 世足賽制懶人包｜48 隊怎麼打？5 分鐘搞懂新制＋測驗" url="https://game8la.com/articles/worldcup-2026-format-guide/" />
+    </article>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+  .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: clamp(1.3rem, 4.8vw, 1.55rem); }
+  .article-content p { font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.9; margin: 1.1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.85; font-size: clamp(16px, 4.2vw, 17.5px); }
+
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0.5rem; }
+  .article-img-caption { text-align: center; font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin: 0.5rem auto 1.2rem; max-width: 680px; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.15rem; }
+  .card p { font-size: 1rem; line-height: 1.85; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 5px 12px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .faq-list { margin: 1rem 0 2rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.78rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 1.02rem; }
+  .rl-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
+  th, td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.7; }
+  th { font-weight: 700; font-size: 0.92rem; color: var(--text-muted); }
+
+  /* === World Format Quiz CSS (wf- prefix) === */
+  .wf-quiz-area { max-width: 600px; margin: 2rem auto; padding: 1.5rem; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px solid #2a2a2a; }
+
+  .wf-progress { margin-bottom: 1rem; }
+  .wf-progress-text { display: block; text-align: center; font-size: 1rem; color: #ccc; margin-bottom: 0.5rem; font-weight: 600; }
+  .wf-progress-track { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+  .wf-progress-fill { height: 100%; background: var(--guava-green, #39FF14); border-radius: 3px; transition: width 0.4s ease; }
+
+  .wf-question { text-align: center; font-size: 1.15rem; font-weight: 700; color: #eee; margin: 0 0 1rem; line-height: 1.7; }
+
+  .wf-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .wf-btn { font-size: 1.02rem; font-weight: 600; padding: 14px 12px; border-radius: 12px; border: 2px solid #444; cursor: pointer; transition: all 0.2s; text-align: center; background: rgba(255,255,255,0.04); color: #ddd; line-height: 1.5; }
+  .wf-btn:hover { transform: translateY(-2px); border-color: var(--guava-green, #39FF14); background: rgba(57,255,20,0.08); }
+  .wf-btn:active { transform: translateY(1px); }
+  .wf-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .wf-btn.wf-correct { box-shadow: 0 0 20px rgba(34,197,94,0.6); border-color: #22c55e; background: rgba(34,197,94,0.15); color: #fff; }
+  .wf-btn.wf-wrong { animation: wfShake 0.5s ease; border-color: #ef4444; background: rgba(239,68,68,0.1); opacity: 0.7; }
+  @keyframes wfShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+
+  .wf-explanation { margin-top: 1.2rem; animation: wfFadeIn 0.35s ease-out; }
+  @keyframes wfFadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .wf-result-badge { text-align: center; font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; white-space: pre-line; }
+  .wf-result-badge.wf-badge-correct { color: #22c55e; }
+  .wf-result-badge.wf-badge-wrong { color: #ef4444; }
+  .wf-explain-text { background: rgba(57,255,20,0.05); border-left: 3px solid var(--guava-green, #39FF14); border-radius: 0 10px 10px 0; padding: 14px 18px; font-size: 1.05rem; line-height: 1.8; color: #ddd; margin-bottom: 1rem; }
+  .wf-next-btn { display: block; margin: 0 auto; background: transparent; border: 1.5px solid #555; color: #ccc; font-size: 1.05rem; padding: 10px 36px; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+  .wf-next-btn:hover { border-color: var(--guava-green, #39FF14); color: #fff; }
+
+  .wf-final { text-align: center; animation: wfFadeIn 0.5s ease-out; }
+  .wf-final-score { font-size: 3rem; font-weight: 900; color: var(--guava-green, #39FF14); margin-bottom: 0.3rem; }
+  .wf-final-title { font-size: 1.4rem; font-weight: 700; color: #fbbf24; margin-bottom: 0.5rem; }
+  .wf-final-msg { font-size: 1rem; color: #bbb; margin-bottom: 1.2rem; line-height: 1.7; }
+  .wf-replay-btn { background: linear-gradient(135deg, #b8860b, #d4a056); border: 2px solid #c9983a; color: #1a1a1a; font-size: 1.15rem; font-weight: 800; padding: 14px 40px; border-radius: 12px; cursor: pointer; transition: all 0.3s; letter-spacing: 2px; }
+  .wf-replay-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,134,11,0.4); }
+  .wf-share-prompt { margin-top: 1rem; font-size: 0.95rem; color: #888; }
+
+  .wf-stats-card { max-width: 600px; margin: 2rem auto; padding: 1.2rem 1.5rem; background: var(--bg-card, rgba(255,255,255,0.03)); border: 1px solid #333; border-radius: 14px; }
+  .wf-stats-title { font-size: 1.05rem; font-weight: 700; color: #eee; margin-bottom: 0.8rem; }
+  .wf-stats-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .wf-stat { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 8px 16px; font-size: 0.95rem; color: #bbb; }
+  .wf-stat strong { font-size: 1.2rem; margin-left: 4px; color: var(--guava-green, #39FF14); }
+
+  @media (max-width: 768px) {
+    .wf-quiz-area { padding: 1rem; }
+    .wf-btn { font-size: 0.95rem; padding: 12px 10px; }
+    .wf-question { font-size: 1.05rem; }
+    .wf-final-score { font-size: 2.5rem; }
+    .wf-final-title { font-size: 1.2rem; }
+  }
+  @media (max-width: 480px) {
+    .wf-buttons { grid-template-columns: 1fr; gap: 8px; }
+    .wf-btn { font-size: 0.95rem; padding: 12px 10px; }
+    .wf-explain-text { font-size: 0.95rem; padding: 10px 14px; }
+    .wf-stat { padding: 6px 12px; font-size: 0.9rem; }
+  }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.55rem; }
+    .article-content h2 { font-size: 1.25rem; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  var WF_QUIZ = [
+    { q:'2026 世界盃有幾隊參加？', opts:['32 隊','48 隊','64 隊','96 隊'], ans:1, explain:'48 隊！比 2022 卡達多了 16 隊。選 96 隊的朋友，你是不是把世界盃跟聯合國大會搞混了？' },
+    { q:'48 隊分成幾組？', opts:['8 組','12 組','16 組','24 組'], ans:1, explain:'12 組，每組 4 隊。以前是 8 組，現在多了 4 組，裁判工會表示加班費要調整。' },
+    { q:'小組第三名有機會晉級嗎？', opts:['有，最佳 8 個第三名可以','沒有，第三名直接回家','有，全部第三名都晉級','要看裁判心情'], ans:0, explain:'12 個第三名裡取最好的 8 個！所以就算你在小組排第三，只要成績夠好，還是有機會繼續踢。選「看裁判心情」的人......你對 FIFA 的信任度也太高了。' },
+    { q:'淘汰賽從幾強開始？', opts:['16 強','32 強','64 強','128 強'], ans:1, explain:'32 強！這是 2026 新增的一輪。以前小組賽結束直接打 16 強，現在多了一輪 32 強，等於多看 16 場比賽。選 128 強的人，你可能在想另一種比賽。' },
+    { q:'2026 世界盃在哪裡舉辦？', opts:['卡達','美國＋加拿大＋墨西哥','日本＋韓國','巴西'], ans:1, explain:'美國、加拿大、墨西哥三國聯辦，史上第一次！16 個城市、3 個國家，球迷要帶三本護照。（好啦其實不用，北美免簽很方便。）' },
+    { q:'總共要踢幾場比賽？', opts:['64 場','80 場','104 場','200 場'], ans:2, explain:'104 場！比 2022 的 64 場多了 40 場。FIFA 表示：比賽越多，轉播費越多，錢越多。資本主義萬歲。' },
+    { q:'決賽在哪個球場？', opts:['阿茲台克球場（墨西哥城）','SoFi 球場（洛杉磯）','MetLife 球場（紐約紐澤西）','BMO 球場（多倫多）'], ans:2, explain:'MetLife Stadium，在紐約旁邊的紐澤西。台灣時間大約是 7/20 凌晨 3 點。建議那天直接不要睡了。' },
+    { q:'小組賽每隊踢幾場？', opts:['2 場','3 場','4 場','5 場'], ans:1, explain:'還是 3 場，跟以前一樣。每組 4 隊，跟其他 3 隊各踢一場。這個沒變，別被 48 隊嚇到。' },
+    { q:'小組賽平手時，先看什麼決定排名？', opts:['FIFA 世界排名','淨勝球','積分','教練長相'], ans:2, explain:'先看積分！勝 3 分、平 1 分、負 0 分。積分一樣再看淨勝球，再看進球數。選「教練長相」的......芭樂子欣賞你的幽默感，但 FIFA 還沒採用這個標準。' },
+    { q:'以下哪個國家三度連續缺席世界盃？', opts:['巴西','義大利','德國','英格蘭'], ans:1, explain:'義大利！四屆冠軍竟然連續三屆（2018、2022、2026）都沒進世界盃。2026 附加賽被波士尼亞在 PK 大戰淘汰。義大利球迷表示：我們的心已經碎成義大利麵了。' }
+  ];
+
+  var TOTAL = WF_QUIZ.length;
+  var LS_KEY = 'wf_stats';
+  var state = { current: 0, score: 0, streak: 0, answered: false, done: false };
+
+  function loadStats() {
+    try { var s = JSON.parse(localStorage.getItem(LS_KEY)); return s || { attempts: 0, scores: [] }; } catch(e) { return { attempts: 0, scores: [] }; }
+  }
+  function saveStats(score) {
+    var s = loadStats();
+    s.attempts++;
+    s.scores.push(score);
+    try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch(e) {}
+    renderStats();
+  }
+  function renderStats() {
+    var s = loadStats();
+    document.getElementById('wfStatAttempts').textContent = s.attempts;
+    if (s.scores.length > 0) {
+      document.getElementById('wfStatBest').textContent = Math.max.apply(null, s.scores) + '/' + TOTAL;
+      var sum = 0; for (var i = 0; i < s.scores.length; i++) sum += s.scores[i];
+      document.getElementById('wfStatAvg').textContent = (sum / s.scores.length).toFixed(1) + '/' + TOTAL;
+    } else {
+      document.getElementById('wfStatBest').textContent = '-';
+      document.getElementById('wfStatAvg').textContent = '-';
+    }
+  }
+
+  function renderQuestion() {
+    if (state.current >= TOTAL) { showFinal(); return; }
+    var q = WF_QUIZ[state.current];
+    state.answered = false;
+
+    document.getElementById('wfProgressText').textContent = '第 ' + (state.current + 1) + '/' + TOTAL + ' 題';
+    document.getElementById('wfProgressFill').style.width = ((state.current + 1) / TOTAL * 100) + '%';
+    document.getElementById('wfQuestionText').textContent = q.q;
+
+    document.getElementById('wfAnswerBtns').style.display = 'grid';
+    document.getElementById('wfExplanation').style.display = 'none';
+    document.getElementById('wfFinalPanel').style.display = 'none';
+    document.getElementById('wfProgressBar').style.display = 'block';
+
+    var btns = document.getElementById('wfAnswerBtns').querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].disabled = false;
+      btns[i].className = 'wf-btn';
+      btns[i].textContent = q.opts[i];
+    }
+  }
+
+  window._wfAnswer = function(idx) {
+    if (state.answered || state.done) return;
+    state.answered = true;
+    var q = WF_QUIZ[state.current];
+    var correct = (idx === q.ans);
+    if (correct) { state.score++; state.streak++; } else { state.streak = 0; }
+
+    var btns = document.getElementById('wfAnswerBtns').querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].disabled = true;
+      if (i === idx) {
+        btns[i].className = 'wf-btn ' + (correct ? 'wf-correct' : 'wf-wrong');
+      }
+      if (!correct && i === q.ans) {
+        btns[i].className = 'wf-btn wf-correct';
+      }
+    }
+
+    var badge = document.getElementById('wfResultBadge');
+    var streakMsg = '';
+    if (correct && state.streak >= 2) {
+      var streakMsgs = {
+        2: '連對 2 題！你不是偽球迷',
+        3: '3 連對！可以去當世足解說了',
+        4: '4 連對！FIFA 想請你當規則顧問',
+        5: '5 連對！你對賽制的理解比半數球評還強',
+        6: '6 連對！朋友圈裡的世足百科就是你',
+        7: '7 連對！體育台應該請你去講解賽制',
+        8: '8 連對！你可能比 FIFA 主席還懂規則',
+        9: '9 連對！全場起立鼓掌中',
+        10: '10 題全對！你就是行走的世足賽制維基百科'
+      };
+      streakMsg = streakMsgs[state.streak] || '連續 ' + state.streak + ' 題全對！';
+    }
+    var badgeText = correct ? '答對了！' : '❌ 答錯了！連續紀錄歸零';
+    if (streakMsg) badgeText += '\n' + streakMsg;
+    badge.textContent = badgeText;
+    badge.className = 'wf-result-badge ' + (correct ? 'wf-badge-correct' : 'wf-badge-wrong');
+    document.getElementById('wfExplainText').textContent = q.explain;
+    document.getElementById('wfExplanation').style.display = 'block';
+
+    if (state.current >= TOTAL - 1) {
+      document.getElementById('wfNextBtn').textContent = '看結果 →';
+    } else {
+      document.getElementById('wfNextBtn').textContent = '下一題 →';
+    }
+  };
+
+  window._wfNext = function() {
+    state.current++;
+    if (state.current >= TOTAL) {
+      showFinal();
+    } else {
+      renderQuestion();
+      document.getElementById('wfQuizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  function showFinal() {
+    state.done = true;
+    document.getElementById('wfAnswerBtns').style.display = 'none';
+    document.getElementById('wfExplanation').style.display = 'none';
+    document.getElementById('wfProgressBar').style.display = 'none';
+    document.getElementById('wfQuestionText').textContent = '';
+
+    var s = state.score;
+    document.getElementById('wfFinalScore').textContent = s + ' / ' + TOTAL;
+    var title = '', msg = '';
+    if (s === 10) { title = '🏆 世足百科全書'; msg = '滿分！芭樂子對你五體投地。你對 2026 世界盃賽制的理解已經超越 99% 的球迷了。朋友圈裡有你在，大家看球不用 Google。'; }
+    else if (s >= 8) { title = '⭐ 資深球迷'; msg = '非常厲害！幾乎全對。你對新賽制的掌握已經是專家等級了，看球的時候你就是那個什麼都能解釋的人。'; }
+    else if (s >= 6) { title = '👍 不錯，及格了'; msg = '基本概念有了，但一些細節還可以再加強。不過沒關係，比賽開始之後看幾場就會越來越懂了。'; }
+    else if (s >= 3) { title = '😅 建議重看一次'; msg = '嗯......芭樂子建議你把上面的文章再讀一遍。新賽制確實跟以前不一樣，搞混很正常。再來一次？'; }
+    else { title = '💀 你可能需要從頭來'; msg = '沒事沒事，世界盃四年才一次，規則記不住很正常。把文章仔細看完再來挑戰，芭樂子等你。'; }
+
+    document.getElementById('wfFinalTitle').textContent = title;
+    document.getElementById('wfFinalMsg').textContent = msg;
+    document.getElementById('wfFinalPanel').style.display = 'block';
+
+    saveStats(s);
+    document.getElementById('wfQuizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window._wfReplay = function() {
+    state.current = 0;
+    state.score = 0;
+    state.streak = 0;
+    state.answered = false;
+    state.done = false;
+    document.getElementById('wfFinalPanel').style.display = 'none';
+    renderQuestion();
+    document.getElementById('wfQuizArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Init
+  renderStats();
+  renderQuestion();
+})();
+</script>

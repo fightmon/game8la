@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'worldcup-2026-format-guide',
+    title: '2026 世足賽制懶人包｜48 隊怎麼打？5 分鐘搞懂新制＋測驗',
+    excerpt: '2026 世界盃史上首次 48 隊參賽！12 組、32 強、第三名也能晉級——搞不懂沒關係，芭樂子用白話文＋表格＋10 題測驗，5 分鐘讓你從偽球迷變真球迷。',
+    category: 'sports',
+    categoryLabel: '足球教室',
+    badgeType: 'featured',
+    date: '2026-06-03',
+    views: 1,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0a2e1a,#1a4a2a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-worldcup-format.webp'
+  },
+  {
     slug: 'football-foul-cards',
     title: '足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解',
     excerpt: '足球犯規規則白話文解釋：什麼情況給黃牌、什麼直接紅牌。附 10 題裁判模擬器互動測驗，每題都有芭樂子搞笑圖解。2026 世足前必讀。',
