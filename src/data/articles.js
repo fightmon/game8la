@@ -18,7 +18,7 @@ export const articles = [
     slug: 'mahjong-scoring-guide',
     title: '麻將算台怎麼算？台灣16張台數完整圖解｜門清自摸到大三元',
     excerpt: '自摸喊「胡！」結果全桌不會算台？芭樂子用自己畫的牌面，把台灣16張算台一張一張圖解：底與台、門清自摸、碰碰胡、清一色、大三元、暗刻、花牌一次搞懂，附台數速查表＋線上練習器。',
-    category: 'mahjong',
+    category: 'poker',
     categoryLabel: '麻將教室',
     badgeType: 'featured',
     date: '2026-06-03',
