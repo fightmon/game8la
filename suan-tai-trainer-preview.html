@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>麻將算台教學・原型 — GAME8LA</title>
+<style>
+  /* 對齊 game8la 設計語言：40+ 友善（大字、大按鈕、卡片式） */
+  :root{
+    --guava-green:#39FF14; --gold:#f5b800; --gold2:#fbbf24;
+    --bg:#140a04; --panel:#1f130a; --bg-card:rgba(255,255,255,0.03);
+    --border:#3a2614; --text:#f3ead8; --text-muted:#b9a98f; --text-secondary:#d8cbb2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(circle at 50% -10%,#2a1a0c,#140a04 60%);color:var(--text);
+       font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+       padding:1.6rem clamp(1rem,4.5vw,1.5rem) 4rem;-webkit-text-size-adjust:100%}
+  .wrap{max-width:680px;margin:0 auto}
+  h1{font-size:clamp(1.5rem,6vw,1.9rem);line-height:1.3;text-align:center;margin:.2rem 0}
+  .tagline{text-align:center;color:var(--text-muted);font-size:clamp(15px,4vw,16.5px);
+           line-height:1.8;margin:.5rem auto 1.5rem;max-width:520px}
+
+  /* 進度條 */
+  .progress{margin-bottom:1.1rem}
+  .progress-text{display:block;text-align:center;font-size:1.05rem;color:var(--text-secondary);
+                 margin-bottom:.5rem;font-weight:700}
+  .progress-track{height:8px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+  .progress-fill{height:100%;background:var(--guava-green);border-radius:4px;transition:width .4s ease}
+
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:18px;
+        padding:clamp(1.1rem,4vw,1.6rem);box-shadow:0 10px 40px rgba(0,0,0,.4)}
+
+  /* 情境徽章（放大） */
+  .ctx{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:1.1rem}
+  .badge{font-size:1.02rem;padding:.42rem 1rem;border-radius:999px;border:1.5px solid;font-weight:800}
+  .b-wind{color:#9cc2ff;border-color:#3a5a9a;background:rgba(60,100,200,.14)}
+  .b-draw{color:var(--guava-green);border-color:#2a7a18;background:rgba(57,255,20,.12)}
+  .b-ron{color:#ff7eb0;border-color:#a03060;background:rgba(255,94,156,.12)}
+  .b-men{color:var(--gold2);border-color:#7a5a10;background:rgba(245,184,0,.12)}
+
+  /* 牌桌 + 牌（放大） */
+  .felt{background:#0d4a2c;border-radius:14px;padding:1.1rem .8rem;
+        box-shadow:inset 0 0 30px rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.12)}
+  .hand{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-end}
+  .meld{display:flex;gap:3px;padding:0 5px}
+  .meld+.meld{border-left:1px dashed rgba(255,255,255,.2)}
+  .hand svg{width:54px;height:74px}
+
+  .ask{text-align:center;margin:1.5rem 0 .9rem;font-size:clamp(1.2rem,5vw,1.35rem);font-weight:800;color:#fff}
+
+  /* 答案按鈕（大、好按、40+ 友善） */
+  .guess{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .guess button{min-width:96px;padding:16px 22px;border-radius:14px;border:2px solid #57401f;
+        background:linear-gradient(135deg,#3a2814,#2a1c10);color:var(--text);
+        font-size:1.45rem;font-weight:800;cursor:pointer;transition:.18s;letter-spacing:.5px}
+  .guess button:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 6px 18px rgba(245,184,0,.3)}
+  .guess button:active{transform:translateY(1px)}
+  .guess button.right{background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border-color:#22c55e;
+        box-shadow:0 0 22px rgba(34,197,94,.55)}
+  .guess button.wrong{background:linear-gradient(135deg,#7a1020,#a02030);border-color:#c0405a;color:#fff;opacity:.85}
+  .guess button:disabled{cursor:default}
+
+  /* 解說（左綠線卡片 + 大字表格） */
+  .reveal{margin-top:1.4rem;display:none}
+  .reveal.show{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  .verdict{text-align:center;font-size:1.5rem;font-weight:900;margin-bottom:.9rem}
+  .verdict.ok{color:var(--guava-green)}.verdict.no{color:#ff7eb0}
+  .breakdown-card{background:rgba(57,255,20,.05);border-left:4px solid var(--guava-green);
+        border-radius:0 12px 12px 0;padding:.8rem 1.1rem}
+  table.tai{width:100%;border-collapse:collapse;font-size:1.12rem}
+  table.tai td{padding:.7rem .3rem;border-bottom:1px solid #33241480;line-height:1.6}
+  table.tai td.n{text-align:right;color:var(--gold2);font-weight:800;white-space:nowrap}
+  table.tai tr.total td{border-top:2px solid var(--gold);border-bottom:none;font-size:1.3rem;
+        font-weight:900;padding-top:.8rem}
+  table.tai tr.total td.n{color:var(--guava-green)}
+  .why{color:var(--text-muted);font-size:.96rem;margin-top:.2rem;line-height:1.6}
+  .next{display:block;margin:1.4rem auto 0;padding:15px 40px;border-radius:14px;border:none;
+        background:linear-gradient(135deg,var(--gold),#ff9d00);color:#1a1a1a;font-weight:900;
+        font-size:1.2rem;cursor:pointer;letter-spacing:1px}
+  .next:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(245,184,0,.4)}
+
+  /* 統計卡 */
+  .stats{margin:1.6rem auto 0;padding:1.2rem 1.4rem;background:var(--bg-card);
+         border:1px solid var(--border);border-radius:14px}
+  .stats-title{font-size:1.1rem;font-weight:800;color:#eee;margin-bottom:.9rem;text-align:center}
+  .stats-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .stat{background:rgba(255,255,255,.04);border-radius:10px;padding:.7rem 1.2rem;font-size:1.05rem;color:var(--text-secondary)}
+  .stat strong{font-size:1.5rem;margin-left:6px;color:var(--guava-green)}
+
+  .note{margin-top:1.6rem;font-size:.92rem;color:var(--text-muted);text-align:center;line-height:1.9}
+  .note code{background:rgba(255,255,255,.06);padding:1px 6px;border-radius:5px}
+
+  /* ===== 手機緊湊版：盡量一個畫面看完 ===== */
+  @media (max-width:600px){
+    body{padding:.9rem .8rem 2.5rem}
+    h1{font-size:1.4rem}
+    .tagline{font-size:13.5px;line-height:1.6;margin:.35rem auto .9rem}
+    .progress{margin-bottom:.7rem}
+    .progress-text{font-size:.95rem;margin-bottom:.35rem}
+    .progress-track{height:6px}
+    .card{padding:.85rem .7rem;border-radius:14px}
+    /* 狀態列：強制一行、縮小 */
+    .ctx{flex-wrap:nowrap;gap:.4rem;margin-bottom:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .badge{font-size:.82rem;padding:.3rem .58rem;border-width:1.2px;white-space:nowrap;flex:0 0 auto}
+    /* 牌縮小，讓整手盡量擠進 2 排 */
+    .felt{padding:.65rem .5rem}
+    .hand{gap:6px}
+    .hand svg{width:34px;height:46px}
+    .meld{gap:2px;padding:0 3px}
+    .ask{font-size:1.15rem;margin:.95rem 0 .65rem}
+    .guess{gap:9px}
+    .guess button{font-size:1.25rem;padding:13px 18px;min-width:76px}
+    .stats{padding:.85rem .9rem;margin-top:1.1rem}
+    .stats-title{font-size:1rem;margin-bottom:.6rem}
+    .stat{padding:.5rem .85rem;font-size:.92rem}
+    .stat strong{font-size:1.25rem}
+    .note{font-size:.8rem;margin-top:1.1rem;line-height:1.75}
+    /* 解說（猜完才出現）也收緊 */
+    .verdict{font-size:1.3rem;margin-bottom:.7rem}
+    table.tai{font-size:1.02rem}
+    table.tai td{padding:.5rem .3rem}
+    table.tai tr.total td{font-size:1.15rem}
+    .next{padding:13px 32px;font-size:1.1rem;margin-top:1.1rem}
+  }
+  @media (max-width:380px){
+    .hand svg{width:30px;height:41px}
+    .hand{gap:4px}
+    .meld{padding:0 2px}
+    .badge{font-size:.76rem;padding:.26rem .48rem}
+    .guess button{font-size:1.15rem;min-width:66px;padding:12px 14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🀄 麻將算台練習場</h1>
+  <div class="tagline">看牌型，猜這手胡牌總共幾台 — 猜完看詳細拆解（台灣 16 張）</div>
+
+  <div class="progress">
+    <span class="progress-text" id="ptext">第 1 / 6 題</span>
+    <div class="progress-track"><div class="progress-fill" id="pfill" style="width:16%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ctx" id="ctx"></div>
+    <div class="felt"><div class="hand" id="hand"></div></div>
+    <div class="ask" id="ask">這手胡牌，總共幾台？</div>
+    <div class="guess" id="guess"></div>
+    <div class="reveal" id="reveal">
+      <div class="verdict" id="verdict"></div>
+      <div class="breakdown-card"><table class="tai"><tbody id="breakdown"></tbody></table></div>
+      <button class="next" id="next">下一題 →</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stats-title">📊 你的練習紀錄</div>
+    <div class="stats-row">
+      <span class="stat">本輪連對 <strong id="streak">0</strong></span>
+      <span class="stat">累計答對 <strong id="correct">0</strong></span>
+      <span class="stat">最佳連對 <strong id="best">0</strong></span>
+    </div>
+  </div>
+
+  <div class="note">
+    GAME8LA 原創教學原型・純向量牌面・免費試玩・不涉及真實金錢。<br>
+    台數依台灣 16 張常見規則，可於程式 <code>TAI</code> 設定調整。平胡/花牌/天地人胡為下一版。
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   設定區：所有台數寫在這，要改地方台規直接改數字
+   ============================================================ */
+const TAI = {
+  qingYiSe:8, hunYiSe:4, ziYiSe:16,
+  pengPeng:4,
+  anke:{3:2,4:5,5:8},          // 三/四/五暗刻
+  dragon:1, xiaoSanYuan:4, daSanYuan:8,
+  quanFeng:1, menFeng:1, xiaoSiXi:8, daSiXi:16,
+  menQing:1, ziMo:1
+};
+
+/* ============================================================
+   牌面 SVG（原創向量）
+   tile string： 數字+花色   m萬 p筒 s條 z字 ; z:1東2南3西4北5中6發7白
+   ============================================================ */
+const CN=["","一","二","三","四","五","六","七","八","九"];
+const HCH={1:"東",2:"南",3:"西",4:"北",5:"中",6:"發",7:"白"};
+const HCOL={1:"#1d4ee8",2:"#1d4ee8",3:"#1d4ee8",4:"#1d4ee8",5:"#c0282d",6:"#1e7a46",7:"#2b7bb0"};
+
+function grid(n){
+  const L=24,C=36,R=48;
+  return ({
+    1:[[C,50]], 2:[[C,30],[C,70]], 3:[[L,28],[C,50],[R,72]],
+    4:[[L,30],[R,30],[L,70],[R,70]], 5:[[L,30],[R,30],[C,50],[L,70],[R,70]],
+    6:[[L,28],[R,28],[L,50],[R,50],[L,72],[R,72]],
+    7:[[L,26],[R,26],[L,50],[C,50],[R,50],[L,74],[R,74]],
+    8:[[L,24],[R,24],[L,42],[R,42],[L,60],[R,60],[L,78],[R,78]],
+    9:[[L,26],[C,26],[R,26],[L,50],[C,50],[R,50],[L,74],[C,74],[R,74]]
+  })[n];
+}
+function pin(n){
+  const cols=["#1e7a46","#c0282d","#1d4ee8"];
+  return grid(n).map(([x,y],i)=>{
+    const col = n===1 ? "#c0282d" : cols[i%3], r = n===1?16:7.5;
+    return `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${col}" stroke-width="${n===1?3:2.4}"/>
+            <circle cx="${x}" cy="${y}" r="${r*0.42}" fill="${col}"/>`;
+  }).join("");
+}
+function sou(n){
+  if(n===1) return `<g transform="translate(36,50)">
+      <ellipse cx="0" cy="7" rx="12" ry="15" fill="#1e7a46"/>
+      <circle cx="0" cy="-11" r="7.5" fill="#c0282d"/>
+      <path d="M0 15 L-5 28 L5 28 Z" fill="#e0a020"/>
+      <circle cx="-2.5" cy="-12" r="1.5" fill="#fff"/></g>`;
+  return grid(n).map(([x,y])=>`<g>
+      <rect x="${x-3}" y="${y-11}" width="6" height="22" rx="3" fill="#1e7a46"/>
+      <rect x="${x-4.4}" y="${y-3}" width="8.8" height="2.6" rx="1.3" fill="#0c5c30"/>
+      <rect x="${x-4.4}" y="${y+5}" width="8.8" height="2.6" rx="1.3" fill="#0c5c30"/></g>`).join("");
+}
+function wan(n){
+  return `<text x="36" y="40" font-size="25" text-anchor="middle" fill="#c0282d" font-family="serif" font-weight="700">${CN[n]}</text>
+          <text x="36" y="76" font-size="29" text-anchor="middle" fill="#1b3a2a" font-family="serif" font-weight="800">萬</text>`;
+}
+function honor(n){
+  return `<text x="36" y="63" font-size="40" text-anchor="middle" fill="${HCOL[n]}" font-family="serif" font-weight="800">${HCH[n]}</text>`;
+}
+function tileSVG(t){
+  const n=+t[0], s=t[1];
+  const inner = s==='m'?wan(n) : s==='p'?pin(n) : s==='s'?sou(n) : honor(n);
+  return `<svg viewBox="0 0 72 98" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="fc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#ece4cf"/></linearGradient>
+      <linearGradient id="sd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9dcc0"/><stop offset="1" stop-color="#bda77f"/></linearGradient>
+    </defs>
+    <rect x="3" y="8" width="66" height="88" rx="9" fill="url(#sd)"/>
+    <rect x="3" y="3" width="66" height="86" rx="9" fill="url(#fc)" stroke="#d9cdaf"/>
+    ${inner}</svg>`;
+}
+
+/* ============================================================
+   胡牌判定 + 拆解（5 面子 + 1 對；面子 = 刻 或 順）
+   ============================================================ */
+const SUIT_ORDER={m:0,p:1,s:2,z:3};
+function cmp(a,b){return SUIT_ORDER[a[1]]-SUIT_ORDER[b[1]] || (+a[0])-(+b[0]);}
+function parse(str){return str.replace(/\s+/g,'').match(/.{2}/g);}  // "1m2m3m 9m9m" → ['1m','2m','3m','9m','9m']
+function toCounts(tiles){const c={};for(const t of tiles)c[t]=(c[t]||0)+1;return c;}
+function findMelds(c){
+  const keys=Object.keys(c).filter(k=>c[k]>0).sort(cmp);
+  if(keys.length===0) return [[]];
+  const t=keys[0], n=+t[0], s=t[1], out=[];
+  if(c[t]>=3){ c[t]-=3; for(const r of findMelds(c)) out.push([{type:'pung',t}].concat(r)); c[t]+=3; }
+  if(s!=='z' && n<=7){
+    const t2=(n+1)+s, t3=(n+2)+s;
+    if(c[t2]>0 && c[t3]>0){ c[t]--;c[t2]--;c[t3]--;
+      for(const r of findMelds(c)) out.push([{type:'chow',t}].concat(r)); c[t]++;c[t2]++;c[t3]++; }
+  }
+  return out;
+}
+function decompose(tiles){
+  const base=toCounts(tiles), res=[];
+  for(const p of Object.keys(base)){
+    if(base[p]<2) continue;
+    const c={...base}; c[p]-=2;
+    for(const melds of findMelds(c)) res.push({pair:p, melds});
+  }
+  return res;
+}
+
+/* ============================================================
+   算台：多種拆法取最高台   ctx={round,seat,selfDraw,concealed}
+   ============================================================ */
+function scoreOne(d, ctx){
+  const lines=[];
+  const allTiles=[d.pair,d.pair];
+  d.melds.forEach(m=>{const n=+m.t[0],s=m.t[1];
+    if(m.type==='pung') allTiles.push(m.t,m.t,m.t);
+    else allTiles.push(m.t,(n+1)+s,(n+2)+s);});
+  const numSuits=new Set(allTiles.filter(t=>t[1]!=='z').map(t=>t[1]));
+  const hasHonor=allTiles.some(t=>t[1]==='z');
+  const pungs=d.melds.filter(m=>m.type==='pung');
+  const allPung=pungs.length===5;
+
+  if(numSuits.size===0) lines.push(['字一色',TAI.ziYiSe]);
+  else if(numSuits.size===1 && hasHonor) lines.push(['混一色',TAI.hunYiSe]);
+  else if(numSuits.size===1 && !hasHonor) lines.push(['清一色',TAI.qingYiSe]);
+
+  if(allPung) lines.push(['碰碰胡',TAI.pengPeng]);
+
+  if(ctx.concealed && ctx.selfDraw){
+    const k=pungs.length; if(TAI.anke[k]) lines.push([`${CN[k]}暗刻`,TAI.anke[k]]);
+  }
+
+  const dragonPung=pungs.filter(m=>m.t[1]==='z' && +m.t[0]>=5).length;
+  const dragonPair=(d.pair[1]==='z' && +d.pair[0]>=5);
+  if(dragonPung===3) lines.push(['大三元',TAI.daSanYuan]);
+  else if(dragonPung===2 && dragonPair) lines.push(['小三元',TAI.xiaoSanYuan]);
+  else for(let i=0;i<dragonPung;i++) lines.push(['三元刻（中/發/白）',TAI.dragon]);
+
+  const windPung=pungs.filter(m=>m.t[1]==='z' && +m.t[0]<=4);
+  const windPair=(d.pair[1]==='z' && +d.pair[0]<=4);
+  if(windPung.length===4) lines.push(['大四喜',TAI.daSiXi]);
+  else if(windPung.length===3 && windPair) lines.push(['小四喜',TAI.xiaoSiXi]);
+  else {
+    for(const m of windPung){
+      const w=+m.t[0];
+      if(w===ctx.round) lines.push(['圈風刻',TAI.quanFeng]);
+      if(w===ctx.seat)  lines.push(['門風刻',TAI.menFeng]);
+    }
+  }
+
+  if(ctx.concealed) lines.push(['門清',TAI.menQing]);
+  if(ctx.selfDraw)  lines.push(['自摸',TAI.ziMo]);
+
+  const total=lines.reduce((s,[,t])=>s+t,0);
+  return {total,lines};
+}
+function score(tiles, ctx){
+  const ways=decompose(tiles);
+  if(ways.length===0) return {total:0,lines:[['（非胡牌）',0]],valid:false};
+  let best=null;
+  for(const d of ways){const r=scoreOne(d,ctx); if(!best||r.total>best.total){best=r;best.d=d;}}
+  best.valid=true; return best;
+}
+
+/* ============================================================
+   題庫（每題 17 張 = 5 面子 + 1 對）
+   ============================================================ */
+const WHY={
+  '清一色':'整手都同一花色、沒有字牌','混一色':'同一花色 + 字牌','字一色':'整手都是字牌',
+  '碰碰胡':'五副都是刻子、沒有順子','大三元':'中、發、白各一刻',
+  '小三元':'中發白其中兩刻 + 第三個做對','三元刻（中/發/白）':'中/發/白其中一種的刻子',
+  '圈風刻':'這局圈風的刻子','門風刻':'自己門風的刻子','大四喜':'東南西北四刻','小四喜':'三個風刻 + 一對風',
+  '門清':'沒有吃、碰、明槓','自摸':'最後一張自己摸到',
+  '三暗刻':'三副自己摸成的暗刻','四暗刻':'四副暗刻','五暗刻':'五副暗刻（門清自摸碰碰胡）'
+};
+const LESSONS=[
+  {tiles:"1m2m3m 4m5m6m 7m8m9m 1m2m3m 5m6m7m 9m9m", ctx:{round:1,seat:1,selfDraw:true,concealed:true}},
+  {tiles:"1m1m1m 3m3m3m 5m5m5m 9m9m9m 5z5z5z 1z1z", ctx:{round:3,seat:4,selfDraw:false,concealed:false}},
+  {tiles:"5z5z5z 6z6z6z 7z7z7z 1m2m3m 4p5p6p 9s9s", ctx:{round:1,seat:2,selfDraw:false,concealed:false}},
+  {tiles:"1m1m1m 9m9m9m 2p2p2p 8s8s8s 4m5m6m 5z5z", ctx:{round:1,seat:3,selfDraw:true,concealed:true}},
+  {tiles:"1z1z1z 2z2z2z 1m2m3m 4p5p6p 7s8s9s 5s5s", ctx:{round:1,seat:2,selfDraw:true,concealed:true}},
+  {tiles:"1m2m3m 4m5m6m 7m8m9m 2p3p4p 6p7p8p 5s5s", ctx:{round:1,seat:4,selfDraw:true,concealed:true}}
+];
+
+/* ============================================================
+   UI
+   ============================================================ */
+let idx=-1, correct=0, streak=0, best=0, cur=null, locked=false;
+const $=id=>document.getElementById(id);
+const LS='suantai_stats';
+function loadStats(){try{return JSON.parse(localStorage.getItem(LS))||{correct:0,best:0}}catch(e){return{correct:0,best:0}}}
+function saveStats(){try{localStorage.setItem(LS,JSON.stringify({correct,best}))}catch(e){}}
+
+function renderHand(d){
+  const groups=d.melds.map(m=>{
+    const n=+m.t[0],s=m.t[1];
+    return m.type==='pung'?[m.t,m.t,m.t]:[m.t,(n+1)+s,(n+2)+s];
+  });
+  let html=groups.map(g=>`<div class="meld">${g.map(tileSVG).join('')}</div>`).join('');
+  html+=`<div class="meld pair">${[cur.pairTile,cur.pairTile].map(tileSVG).join('')}</div>`;
+  $('hand').innerHTML=html;
+}
+function renderCtx(ctx){
+  const w={1:'東',2:'南',3:'西',4:'北'};
+  let b=`<span class="badge b-wind">圈風 ${w[ctx.round]}</span><span class="badge b-wind">門風 ${w[ctx.seat]}</span>`;
+  b+= ctx.selfDraw?`<span class="badge b-draw">自摸</span>`:`<span class="badge b-ron">胡別人</span>`;
+  if(ctx.concealed) b+=`<span class="badge b-men">門清</span>`;
+  $('ctx').innerHTML=b;
+}
+function load(){
+  idx=(idx+1)%LESSONS.length; locked=false;
+  const L=LESSONS[idx];
+  const res=score(parse(L.tiles),L.ctx);
+  cur={res, ctx:L.ctx, pairTile:res.d.pair};
+  $('ptext').textContent=`第 ${idx+1} / ${LESSONS.length} 題`;
+  $('pfill').style.width=((idx+1)/LESSONS.length*100)+'%';
+  renderCtx(L.ctx); renderHand(res.d);
+  const ans=res.total, set=new Set([ans]);
+  [ans-2,ans-1,ans+1,ans+2,ans+4].forEach(v=>{if(v>0)set.add(v);});
+  const opts=[...set].sort((a,b)=>a-b).slice(0,6);
+  $('guess').innerHTML=opts.map(v=>`<button data-v="${v}">${v}</button>`).join('');
+  $('guess').querySelectorAll('button').forEach(btn=>btn.onclick=()=>guess(+btn.dataset.v,btn));
+  $('reveal').classList.remove('show');
+}
+function guess(v,btn){
+  if(locked) return; locked=true;
+  const ans=cur.res.total, ok=(v===ans);
+  $('guess').querySelectorAll('button').forEach(b=>b.disabled=true);
+  if(ok){correct++;streak++;best=Math.max(best,streak);btn.classList.add('right');}
+  else{streak=0;btn.classList.add('wrong');
+       $('guess').querySelectorAll('button').forEach(b=>{if(+b.dataset.v===ans)b.classList.add('right');});}
+  saveStats();
+  $('streak').textContent=streak; $('correct').textContent=correct; $('best').textContent=best;
+  $('verdict').className='verdict '+(ok?'ok':'no');
+  $('verdict').textContent= ok?`✅ 答對！這手 ${ans} 台`:`❌ 正解是 ${ans} 台`;
+  $('breakdown').innerHTML=cur.res.lines.map(([name,t])=>
+    `<tr><td>${name}<div class="why">${WHY[name]||''}</div></td><td class="n">${t} 台</td></tr>`
+  ).join('')+`<tr class="total"><td>合計</td><td class="n">${ans} 台</td></tr>`;
+  $('reveal').classList.add('show');
+}
+$('next').onclick=load;
+
+/* 自我檢查 */
+console.log('=== 算台引擎自我檢查 ===');
+LESSONS.forEach((L,i)=>{const r=score(parse(L.tiles),L.ctx);
+  console.log(`第${i+1}題 → ${r.total}台`, r.lines.map(x=>x[0]+':'+x[1]).join(' / '));});
+
+(function init(){const s=loadStats();correct=s.correct||0;best=s.best||0;
+  $('correct').textContent=correct;$('best').textContent=best;load();})();
+</script>
+</body>
+</html>

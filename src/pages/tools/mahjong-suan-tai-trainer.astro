@@ -1,0 +1,579 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "麻將算台是什麼意思？", "acceptedAnswer": { "@type": "Answer", "text": "算台就是計算一手胡牌總共值多少「台」。台灣麻將的輸贏 = 底 + 台×台數，胡牌時把所有符合的台（門清、自摸、碰碰胡、清一色、大三元等）加總，乘上每台的金額，就是這把贏多少。台數算錯，錢就收錯。" } },
+    { "@type": "Question", "name": "台灣麻將的「底」和「台」差在哪？", "acceptedAnswer": { "@type": "Answer", "text": "「底」是每把固定的基本彩金，不管牌型大小都要付；「台」是依牌型加成的部分。例如講好「10 底 10 台」，胡了一把 5 台的牌，輸家要付 10 + 10×5 = 60。底固定、台浮動，台數高低就靠牌型。" } },
+    { "@type": "Question", "name": "暗刻和明刻差在哪？怎麼看？", "acceptedAnswer": { "@type": "Answer", "text": "暗刻是自己摸成、沒碰出來的刻子；明刻是碰別人打的牌湊成的刻子。兩者牌面一樣，差別在「怎麼來的」——碰過的牌會亮在桌面上（明刻），沒碰的留在手裡（暗刻）。只有暗刻能算三/四/五暗刻的台，碰出來的明刻不算。" } },
+    { "@type": "Question", "name": "門清、自摸各算幾台？門清自摸呢？", "acceptedAnswer": { "@type": "Answer", "text": "常見規則下，門清（沒有吃、碰、明槓）1 台、自摸 1 台。如果是門清又自摸，兩個台會一起算，等於 2 台（部分地方台規會另加「不求人」台，依各桌約定）。" } },
+    { "@type": "Question", "name": "圈風、門風是什麼？怎麼知道哪個是圈風刻？", "acceptedAnswer": { "@type": "Answer", "text": "圈風是「這場打到第幾圈」的風（東圈→南圈→西圈→北圈，打到哪圈那個風就是圈風）；門風是你「座位」的風（莊家東、下家南、對家西、上家北）。湊成圈風或門風的刻子各 1 台，同時是圈風又門風（連風）可算兩台，兩者都不是的風牌刻子（客風）則不算台。本練習器上方會直接標示這局的圈風和門風，對照手上哪副風牌刻子，就知道是不是圈風刻或門風刻。" } },
+    { "@type": "Question", "name": "碰碰胡、清一色、混一色各幾台？", "acceptedAnswer": { "@type": "Answer", "text": "常見台數：碰碰胡（五副都是刻子）4 台、混一色（同一花色＋字牌）4 台、清一色（整手同一花色、無字牌）8 台。清一色比混一色高一倍，因為更難湊。這些台可以疊加，例如清一色碰碰胡就是 8＋4 台。" } },
+    { "@type": "Question", "name": "大三元、小三元幾台？", "acceptedAnswer": { "@type": "Answer", "text": "大三元（中、發、白各一刻）常見 8 台；小三元（中發白其中兩刻＋第三個做對）常見 4 台。三元牌湊齊大三元幾乎是這把封王。注意：大三元不管刻子是自己摸的還是碰來的都算。" } },
+    { "@type": "Question", "name": "三暗刻、四暗刻、五暗刻怎麼算？", "acceptedAnswer": { "@type": "Answer", "text": "暗刻是自己摸成、沒有碰出來的刻子。常見台數：三暗刻 2 台、四暗刻 5 台、五暗刻 8 台。重點是「沒碰」——只要其中一副刻子是碰來的（明刻），就不能算進暗刻數。五暗刻通常出現在門清自摸的碰碰胡，是非常稀有的大牌。" } },
+    { "@type": "Question", "name": "各地算台規則不一樣嗎？這個練習器準嗎？", "acceptedAnswer": { "@type": "Answer", "text": "會。台灣各地、各桌的台數細節（尤其花牌、小三元、地方台）常有差異。本練習器採用台灣 16 張常見台數，所有數值都可調整。練習的重點是「看懂每個台怎麼來」，實際牌桌請以你那桌約定的台規為準。" } }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "麻將算台練習器" }
+  ]
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "麻將算台練習器｜看牌猜台數，台灣16張算台一次學會",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<BaseLayout
+  currentPage="tools"
+  title="麻將算台練習器｜看牌猜台數，台灣16張算台一次學會 — GAME8LA"
+  description="不會算台？看牌型猜台數，門清、自摸、碰碰胡、清一色、大三元…即時拆解每個台怎麼來，還會標出暗刻、明刻、順子。台灣 16 張麻將算台教學，免費線上練習。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+<div class="container">
+
+  <!-- ═══ Hero ═══ -->
+  <div class="page-hero">
+    <h1>🀄 麻將算台練習器</h1>
+    <p class="hero-sub">看牌型，猜這手胡牌總共幾台 — 立刻看詳細拆解。</p>
+    <p class="hero-desc">台灣 16 張規則，門清、自摸、碰碰胡、清一色、大三元…每副牌標出暗刻／明刻／順子，點台數還會幫你把對應的牌圈起來。</p>
+  </div>
+
+  <!-- ═══ 介紹段落（SEO 靜態內容）═══ -->
+  <div class="intro-section">
+    <h2>麻將算台是什麼？怎麼算？</h2>
+    <p>
+      <strong>麻將算台</strong>就是計算一手胡牌總共值多少「台」。台灣 16 張麻將的輸贏公式是
+      <strong>底 ＋ 台 × 台數</strong>——「底」是每把固定的基本彩金，「台」則依牌型加成。
+      胡牌時把所有符合的台（門清、自摸、碰碰胡、清一色、大三元…）加總，台數算錯，錢就收錯。
+    </p>
+    <p>
+      新手最常卡在「<strong>暗刻</strong>到底長怎樣」——因為暗刻和明刻牌面一模一樣，差別只在「碰過沒」。
+      這個<strong>算台練習器</strong>幫你看懂：碰來的牌會<strong>標上「碰」、亮在桌面（明刻）</strong>，沒碰的留在手裡（暗刻）；
+      猜完每副牌下面會標出<strong>暗刻／明刻／順子／將</strong>，點任一個台還會把對應的牌<strong>圈起來發光</strong>，
+      讓「為什麼是這個台」一眼看懂。不管你是第一次學<strong>台灣麻將算台教學</strong>，還是想搞清楚「門清自摸碰碰胡幾台」，一題一題練最快。
+    </p>
+  </div>
+
+  <!-- ═══ 算台練習器（互動）═══ -->
+  <section class="st-game">
+    <div class="st-progress">
+      <span class="st-progress-text" id="stPtext">第 1 / 7 題</span>
+      <div class="st-progress-track"><div class="st-progress-fill" id="stPfill" style="width:14%"></div></div>
+    </div>
+
+    <div class="st-card">
+      <div class="st-ctx" id="stCtx"></div>
+      <div class="st-felt"><div class="st-hand" id="stHand"></div></div>
+      <div class="st-legend">
+        <span><span class="st-an-chip">暗</span> 自己摸的暗刻</span>
+        <span><span class="st-pong-chip">碰</span> 碰來的明刻</span>
+      </div>
+      <div class="st-ask" id="stAsk">這手胡牌，總共幾台？</div>
+      <div class="st-guess" id="stGuess"></div>
+      <div class="st-reveal" id="stReveal">
+        <div class="st-verdict" id="stVerdict"></div>
+        <div class="st-encore" id="stEncore"></div>
+        <p class="st-hl-hint">👆 點下面每一個台，桌上對應的牌會發光</p>
+        <div class="st-breakdown-card"><table class="st-tai"><tbody id="stBreakdown"></tbody></table></div>
+        <button class="st-next" id="stNext">下一題 →</button>
+      </div>
+    </div>
+
+    <div class="st-final" id="stFinal" style="display:none">
+      <div class="st-final-score" id="stFinalScore">0 / 7</div>
+      <div class="st-final-title" id="stFinalTitle"></div>
+      <div class="st-final-msg" id="stFinalMsg"></div>
+      <button class="st-next" id="stReplay">🔄 再玩一次</button>
+    </div>
+
+    <div class="st-stats">
+      <div class="st-stats-title">📊 你的練習紀錄</div>
+      <div class="st-stats-row">
+        <span class="st-stat">本輪連對 <strong id="stStreak">0</strong></span>
+        <span class="st-stat">累計答對 <strong id="stCorrect">0</strong></span>
+        <span class="st-stat">最佳連對 <strong id="stBest">0</strong></span>
+      </div>
+    </div>
+
+    <div class="st-guava">
+      <span class="st-guava-icon">🍈</span>
+      <p>芭樂子提醒：算台規則各地各桌略有不同，這裡用台灣 16 張常見台數。練習重點是「看懂每個台怎麼來」，上桌請以你那桌約定的台規為準。本練習為娛樂教學，不涉及真實金錢。</p>
+    </div>
+  </section>
+
+  <!-- ═══ 台數速查表（SEO 靜態內容）═══ -->
+  <div class="intro-section">
+    <h2>台灣 16 張常見台數速查表</h2>
+    <div class="st-table-wrap">
+      <table class="st-reftable">
+        <thead><tr><th>牌型 / 情境</th><th>台數</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>門清</td><td>1</td><td>沒有吃、碰、明槓</td></tr>
+          <tr><td>自摸</td><td>1</td><td>最後一張自己摸到</td></tr>
+          <tr><td>圈風刻 / 門風刻</td><td>1 / 1</td><td>圈風、門風的刻子各 1 台</td></tr>
+          <tr><td>三元刻（中/發/白）</td><td>1</td><td>單一三元牌的刻子（明暗都算）</td></tr>
+          <tr><td>碰碰胡</td><td>4</td><td>五副都是刻子、沒有順子</td></tr>
+          <tr><td>混一色</td><td>4</td><td>同一花色 ＋ 字牌</td></tr>
+          <tr><td>小三元</td><td>4</td><td>中發白兩刻 ＋ 第三個做對</td></tr>
+          <tr><td>三暗刻 / 四暗刻 / 五暗刻</td><td>2 / 5 / 8</td><td>自己摸成的暗刻（碰來的不算）</td></tr>
+          <tr><td>清一色</td><td>8</td><td>整手同一花色、無字牌</td></tr>
+          <tr><td>小四喜</td><td>8</td><td>三個風刻 ＋ 一對風</td></tr>
+          <tr><td>大三元</td><td>8</td><td>中、發、白各一刻</td></tr>
+          <tr><td>字一色</td><td>16</td><td>整手都是字牌</td></tr>
+          <tr><td>大四喜</td><td>16</td><td>東南西北四刻</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.95rem;color:var(--text-muted,#999)">※ 以上為常見台數，地方台規（花牌、地方台、連莊拉莊等）依各桌約定。</p>
+  </div>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="st-faq">
+    <h2>❓ 麻將算台常見問題</h2>
+    <details class="st-faq-item"><summary>麻將算台是什麼意思？</summary><p>算台就是計算一手胡牌總共值多少「台」。台灣麻將的輸贏 = 底 + 台×台數，胡牌時把所有符合的台（門清、自摸、碰碰胡、清一色、大三元等）加總，乘上每台的金額，就是這把贏多少。台數算錯，錢就收錯。</p></details>
+    <details class="st-faq-item"><summary>台灣麻將的「底」和「台」差在哪？</summary><p>「底」是每把固定的基本彩金，不管牌型大小都要付；「台」是依牌型加成的部分。例如講好「10 底 10 台」，胡了一把 5 台的牌，輸家要付 10 + 10×5 = 60。底固定、台浮動，台數高低就靠牌型。</p></details>
+    <details class="st-faq-item"><summary>暗刻和明刻差在哪？怎麼看？</summary><p>暗刻是自己摸成、沒碰出來的刻子；明刻是碰別人打的牌湊成的刻子。兩者牌面一樣，差別在「怎麼來的」——碰過的牌會亮在桌面上（明刻），沒碰的留在手裡（暗刻）。只有暗刻能算三/四/五暗刻的台，碰出來的明刻不算。本練習器會把碰來的牌標上「碰」並變暗，幫你一眼看出哪些是暗刻。</p></details>
+    <details class="st-faq-item"><summary>門清、自摸各算幾台？門清自摸呢？</summary><p>常見規則下，門清（沒有吃、碰、明槓）1 台、自摸 1 台。如果是門清又自摸，兩個台會一起算，等於 2 台（部分地方台規會另加「不求人」台，依各桌約定）。</p></details>
+    <details class="st-faq-item"><summary>圈風、門風是什麼？怎麼知道哪個是圈風刻？</summary><p>圈風是「這場打到第幾圈」的風（東圈→南圈→西圈→北圈，打到哪圈那個風就是圈風）；門風是你「座位」的風（莊家東、下家南、對家西、上家北）。湊成圈風或門風的刻子各 1 台，同時是圈風又門風（連風）可算兩台，兩者都不是的風牌刻子（客風）則不算台。本練習器上方會直接標示這局的圈風和門風，對照手上哪副風牌刻子，就知道是不是圈風刻或門風刻。</p></details>
+    <details class="st-faq-item"><summary>碰碰胡、清一色、混一色各幾台？</summary><p>常見台數：碰碰胡（五副都是刻子）4 台、混一色（同一花色＋字牌）4 台、清一色（整手同一花色、無字牌）8 台。清一色比混一色高一倍，因為更難湊。這些台可以疊加，例如清一色碰碰胡就是 8＋4 台。</p></details>
+    <details class="st-faq-item"><summary>大三元、小三元幾台？</summary><p>大三元（中、發、白各一刻）常見 8 台；小三元（中發白其中兩刻＋第三個做對）常見 4 台。三元牌湊齊大三元幾乎是這把封王。注意：大三元不管刻子是自己摸的還是碰來的都算。</p></details>
+    <details class="st-faq-item"><summary>三暗刻、四暗刻、五暗刻怎麼算？</summary><p>暗刻是自己摸成、沒有碰出來的刻子。常見台數：三暗刻 2 台、四暗刻 5 台、五暗刻 8 台。重點是「沒碰」——只要其中一副刻子是碰來的（明刻），就不能算進暗刻數。五暗刻通常出現在門清自摸的碰碰胡，是非常稀有的大牌。</p></details>
+    <details class="st-faq-item"><summary>各地算台規則不一樣嗎？這個練習器準嗎？</summary><p>會。台灣各地、各桌的台數細節（尤其花牌、小三元、地方台）常有差異。本練習器採用台灣 16 張常見台數，所有數值都可調整。練習的重點是「看懂每個台怎麼來」，實際牌桌請以你那桌約定的台規為準。</p></details>
+  </section>
+
+  <!-- ═══ CTA 導流 ═══ -->
+  <section class="st-cta">
+    <div class="st-cta-grid">
+      <a href="/game-ranking/" class="st-cta-card">
+        <span class="st-cta-icon">🏆</span>
+        <div><strong>2026 金8LA遊戲排行</strong><p>熱門遊戲完整評分，誰是今年的 8LA 之王？</p></div>
+      </a>
+      <a href="/tools/" class="st-cta-card">
+        <span class="st-cta-icon">🧰</span>
+        <div><strong>8LA 工具箱</strong><p>更多免費計算器、模擬器、檢測工具</p></div>
+      </a>
+      <a href="/articles/" class="st-cta-card">
+        <span class="st-cta-icon">📖</span>
+        <div><strong>芭樂攻略</strong><p>看更多遊戲教學、玩法解析與防詐指南</p></div>
+      </a>
+    </div>
+  </section>
+
+  <ShareButtons title="麻將算台練習器 — 看牌猜台數，台灣16張算台一次學會" heading="🀄 不會算台的朋友該試試這個" />
+</div>
+
+<style is:global>
+  /* 算台練習器（全部 st- 前綴；用 is:global，因為牌/徽章/按鈕是 JS 動態插入，scoped 樣式套不到） */
+  .st-game{ max-width:680px; margin:1.5rem auto; }
+
+  .st-progress{ margin-bottom:1.1rem; }
+  .st-progress-text{ display:block; text-align:center; font-size:1.05rem; color:var(--text-secondary,#ccc); margin-bottom:.5rem; font-weight:700; }
+  .st-progress-track{ height:8px; background:rgba(255,255,255,.1); border-radius:4px; overflow:hidden; }
+  .st-progress-fill{ height:100%; background:var(--guava-green,#39FF14); border-radius:4px; transition:width .4s ease; }
+
+  .st-card{ background:var(--bg-card,rgba(255,255,255,.03)); border:1px solid var(--border,#2a2a2a); border-radius:18px; padding:clamp(1.1rem,4vw,1.6rem); box-shadow:0 10px 40px rgba(0,0,0,.4); }
+
+  .st-ctx{ display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-bottom:1.1rem; }
+  .st-badge{ font-size:1.02rem; padding:.42rem 1rem; border-radius:999px; border:1.5px solid; font-weight:800; }
+  .st-b-wind{ color:#9cc2ff; border-color:#3a5a9a; background:rgba(60,100,200,.14); }
+  .st-b-draw{ color:var(--guava-green,#39FF14); border-color:#2a7a18; background:rgba(57,255,20,.12); }
+  .st-b-ron{ color:#ff7eb0; border-color:#a03060; background:rgba(255,94,156,.12); }
+  .st-b-men{ color:#ffe08a; border-color:var(--gold,#f5b800); background:rgba(245,184,0,.18); box-shadow:0 0 12px rgba(245,184,0,.5); }
+  .st-b-pong{ color:#ffd27a; border-color:#7a5a10; background:rgba(245,184,0,.10); }
+
+  .st-felt{ background:#0d4a2c; border-radius:14px; padding:1.1rem .8rem; box-shadow:inset 0 0 30px rgba(0,0,0,.5); border:2px solid rgba(255,255,255,.12); }
+  .st-hand{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:flex-start; }
+
+  /* 每副牌：直排（碰標籤 / 牌列 / 暗明順 說明） */
+  .st-meld{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:5px 6px; border-radius:12px; transition:background .2s, box-shadow .2s; }
+  .st-meld-tiles{ display:flex; gap:3px; }
+  .st-meld-tiles svg{ width:54px; height:74px; }
+  .st-pong-chip{ font-size:.72rem; font-weight:800; color:#ffd27a; background:rgba(245,184,0,.18); border:1px solid rgba(245,184,0,.5); border-radius:999px; padding:.05rem .55rem; }
+  .st-an-chip{ font-size:.72rem; font-weight:800; color:#9cc2ff; background:rgba(70,110,210,.22); border:1px solid rgba(130,170,255,.6); border-radius:999px; padding:.05rem .55rem; }
+  .st-legend{ display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; justify-content:center; align-items:center; margin:.8rem 0 0; font-size:.95rem; color:var(--text-secondary,#ccc); }
+  .st-legend > span{ display:inline-flex; align-items:center; gap:.4rem; }
+  .st-meld-cap{ font-size:.84rem; font-weight:800; color:var(--text-secondary,#ccc); max-height:0; opacity:0; overflow:hidden; transition:opacity .25s; }
+  .st-hand.revealed .st-meld-cap{ max-height:2.2em; opacity:1; }
+  .st-meld.exposed .st-meld-tiles{ opacity:.72; }
+  .st-meld.exposed .st-meld-cap{ color:#ffd27a; }
+  .st-meld.hl{ background:rgba(245,184,0,.16); box-shadow:0 0 0 2px var(--gold,#f5b800); }
+
+  .st-ask{ text-align:center; margin:1.5rem 0 .9rem; font-size:clamp(1.2rem,5vw,1.35rem); font-weight:800; color:#fff; }
+
+  .st-guess{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .st-guess button{ min-width:96px; padding:16px 22px; border-radius:14px; border:2px solid #57401f; background:linear-gradient(135deg,#3a2814,#2a1c10); color:var(--text-primary,#f3ead8); font-size:1.45rem; font-weight:800; cursor:pointer; transition:.18s; letter-spacing:.5px; }
+  .st-guess button:hover{ border-color:var(--gold,#f5b800); transform:translateY(-3px); box-shadow:0 6px 18px rgba(245,184,0,.3); }
+  .st-guess button:active{ transform:translateY(1px); }
+  .st-guess button.right{ background:linear-gradient(135deg,#16a34a,#22c55e); color:#fff; border-color:#22c55e; box-shadow:0 0 22px rgba(34,197,94,.55); }
+  .st-guess button.wrong{ background:linear-gradient(135deg,#7a1020,#a02030); border-color:#c0405a; color:#fff; opacity:.85; }
+  .st-guess button:disabled{ cursor:default; }
+
+  .st-reveal{ margin-top:1.4rem; display:none; }
+  .st-reveal.show{ display:block; animation:stFade .3s ease; }
+  @keyframes stFade{ from{opacity:0;transform:translateY(8px)} to{opacity:1} }
+  .st-verdict{ text-align:center; font-size:1.5rem; font-weight:900; margin-bottom:.6rem; }
+  .st-verdict.ok{ color:var(--guava-green,#39FF14); }
+  .st-verdict.no{ color:#ff7eb0; }
+  .st-encore{ text-align:center; font-size:1.12rem; font-weight:800; color:var(--gold-light,#fbbf24); margin:-.2rem 0 .7rem; min-height:1.3em; }
+  .st-hl-hint{ text-align:center; font-size:.95rem; color:var(--text-muted,#999); margin:.2rem 0 .9rem; }
+  .st-final{ max-width:680px; margin:1.5rem auto 0; text-align:center; padding:1.9rem 1.4rem; background:var(--bg-card,rgba(255,255,255,.03)); border:1px solid var(--border,#2a2a2a); border-radius:18px; box-shadow:0 10px 40px rgba(0,0,0,.4); animation:stVerdictPop .5s cubic-bezier(.2,.8,.3,1) both; }
+  .st-final-score{ font-size:3.1rem; font-weight:900; color:var(--guava-green,#39FF14); line-height:1; }
+  .st-final-title{ font-size:1.45rem; font-weight:900; color:var(--gold-light,#fbbf24); margin:.5rem 0 .4rem; }
+  .st-final-msg{ font-size:1.08rem; color:var(--text-secondary,#ccc); line-height:1.8; margin:0 auto 1.3rem; max-width:460px; }
+  .st-breakdown-card{ background:rgba(57,255,20,.05); border-left:4px solid var(--guava-green,#39FF14); border-radius:0 12px 12px 0; padding:.6rem 1.1rem; }
+  table.st-tai{ width:100%; border-collapse:collapse; font-size:1.12rem; }
+  table.st-tai td{ padding:.7rem .3rem; border-bottom:1px solid rgba(255,255,255,.08); line-height:1.6; }
+  table.st-tai tr:not(.total){ cursor:pointer; }
+  table.st-tai tr:not(.total):hover td{ background:rgba(245,184,0,.06); }
+  table.st-tai tr.pinned td{ background:rgba(245,184,0,.12); }
+  table.st-tai td.n{ text-align:right; color:var(--gold-light,#fbbf24); font-weight:800; white-space:nowrap; }
+  table.st-tai tr.total td{ border-top:2px solid var(--gold,#f5b800); border-bottom:none; font-size:1.3rem; font-weight:900; padding-top:.8rem; cursor:default; }
+  table.st-tai tr.total td.n{ color:var(--guava-green,#39FF14); }
+  .st-why{ color:var(--text-muted,#999); font-size:.96rem; margin-top:.2rem; line-height:1.6; }
+  .st-next{ display:block; margin:1.4rem auto 0; padding:15px 40px; border-radius:14px; border:none; background:linear-gradient(135deg,var(--gold,#f5b800),#ff9d00); color:#1a1a1a; font-weight:900; font-size:1.2rem; cursor:pointer; letter-spacing:1px; }
+  .st-next:hover{ transform:translateY(-2px); box-shadow:0 8px 22px rgba(245,184,0,.4); }
+
+  .st-stats{ margin:1.6rem auto 0; padding:1.2rem 1.4rem; background:var(--bg-card,rgba(255,255,255,.03)); border:1px solid var(--border,#333); border-radius:14px; }
+  .st-stats-title{ font-size:1.1rem; font-weight:800; color:#eee; margin-bottom:.9rem; text-align:center; }
+  .st-stats-row{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .st-stat{ background:rgba(255,255,255,.04); border-radius:10px; padding:.7rem 1.2rem; font-size:1.05rem; color:var(--text-secondary,#ccc); }
+  .st-stat strong{ font-size:1.5rem; margin-left:6px; color:var(--guava-green,#39FF14); }
+
+  .st-guava{ display:flex; gap:.8rem; align-items:flex-start; margin:1.4rem auto 0; padding:1rem 1.2rem; background:rgba(57,255,20,.05); border:1px solid rgba(57,255,20,.25); border-radius:12px; }
+  .st-guava-icon{ font-size:1.5rem; flex-shrink:0; }
+  .st-guava p{ margin:0; font-size:.96rem; line-height:1.8; color:var(--text-secondary,#ccc); }
+
+  .st-table-wrap{ overflow-x:auto; }
+  table.st-reftable{ width:100%; border-collapse:collapse; font-size:1.02rem; margin:.5rem 0; }
+  table.st-reftable th, table.st-reftable td{ padding:.7rem .8rem; text-align:left; border-bottom:1px solid var(--border,#2a2a2a); line-height:1.6; }
+  table.st-reftable th{ color:var(--text-muted,#999); font-weight:700; }
+  table.st-reftable td:nth-child(2){ color:var(--gold-light,#fbbf24); font-weight:800; white-space:nowrap; }
+
+  .st-faq{ max-width:760px; margin:2.5rem auto; }
+  .st-faq > h2{ font-size:clamp(1.3rem,4.8vw,1.55rem); margin-bottom:1rem; }
+  .st-faq-item{ border:1px solid var(--border,#2a2a2a); border-radius:10px; margin-bottom:.6rem; overflow:hidden; }
+  .st-faq-item summary{ padding:1.1rem 1.3rem; cursor:pointer; font-weight:700; font-size:1.08rem; list-style:none; }
+  .st-faq-item summary::-webkit-details-marker{ display:none; }
+  .st-faq-item summary::before{ content:'▸ '; color:var(--guava-green,#39FF14); }
+  .st-faq-item[open] summary::before{ content:'▾ '; }
+  .st-faq-item p{ margin:0 1.3rem 1.1rem; color:var(--text-secondary,#ccc); font-size:1.02rem; line-height:1.85; }
+
+  .st-cta{ max-width:760px; margin:2.5rem auto; }
+  .st-cta-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .st-cta-card{ display:flex; gap:.9rem; align-items:center; padding:1.1rem 1.2rem; border:1px solid var(--border,#2a2a2a); border-radius:12px; text-decoration:none; color:inherit; transition:border-color .15s, transform .15s; }
+  .st-cta-card:hover{ border-color:var(--guava-green,#39FF14); transform:translateY(-3px); }
+  .st-cta-icon{ font-size:1.8rem; flex-shrink:0; }
+  .st-cta-card strong{ display:block; font-size:1.05rem; margin-bottom:.2rem; }
+  .st-cta-card p{ margin:0; font-size:.9rem; color:var(--text-muted,#999); }
+
+  /* ===== 動畫（讓畫面活起來） ===== */
+  @keyframes stDeal{ 0%{opacity:0;transform:translateY(16px) scale(.85)} 100%{opacity:1;transform:none} }
+  @keyframes stBtnIn{ 0%{opacity:0;transform:translateY(10px)} 100%{opacity:1;transform:none} }
+  @keyframes stPop{ 0%{transform:scale(.3);opacity:0} 70%{transform:scale(1.18)} 100%{transform:scale(1);opacity:1} }
+  @keyframes stCorrect{ 0%{transform:scale(1)} 35%{transform:scale(1.14)} 70%{transform:scale(.96)} 100%{transform:scale(1)} }
+  @keyframes stShake{ 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+  @keyframes stHlPulse{ 0%,100%{box-shadow:0 0 0 2px var(--gold,#f5b800)} 50%{box-shadow:0 0 16px 3px var(--gold,#f5b800)} }
+  @keyframes stNextPulse{ 0%,100%{box-shadow:0 4px 14px rgba(245,184,0,.25)} 50%{box-shadow:0 6px 26px rgba(245,184,0,.6)} }
+  @keyframes stVerdictPop{ 0%{opacity:0;transform:scale(.7)} 60%{transform:scale(1.08)} 100%{opacity:1;transform:scale(1)} }
+  @keyframes stFillShine{ 0%{background-position:0% 0} 100%{background-position:200% 0} }
+
+  .st-meld{ animation: stDeal .42s cubic-bezier(.2,.8,.3,1) both; }
+  .st-guess button{ animation: stBtnIn .34s ease both; }
+  .st-guess button.right{ animation: stCorrect .5s ease; }
+  .st-guess button.wrong{ animation: stShake .45s ease; }
+  .st-meld.hl{ animation: stHlPulse 1.3s ease-in-out infinite; }
+  .st-pong-chip, .st-an-chip{ animation: stPop .32s ease both; }
+  .st-verdict{ animation: stVerdictPop .4s cubic-bezier(.2,.8,.3,1) both; }
+  .st-next{ animation: stNextPulse 2.4s ease-in-out infinite; }
+  .st-progress-fill{ background:linear-gradient(90deg,#2bd60a,var(--guava-green,#39FF14),#9bff7a,var(--guava-green,#39FF14)); background-size:200% 100%; animation: stFillShine 2.5s linear infinite; }
+
+  @media (prefers-reduced-motion: reduce){
+    .st-meld, .st-guess button, .st-guess button.right, .st-guess button.wrong,
+    .st-meld.hl, .st-pong-chip, .st-an-chip, .st-verdict, .st-next, .st-progress-fill{ animation:none !important; }
+  }
+
+  /* ===== 手機緊湊版 ===== */
+  @media (max-width:600px){
+    .st-game{ margin-top:1rem; }
+    .st-progress{ margin-bottom:.7rem; }
+    .st-progress-track{ height:6px; }
+    .st-card{ padding:.85rem .7rem; border-radius:14px; }
+    .st-ctx{ flex-wrap:nowrap; gap:.4rem; margin-bottom:.8rem; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .st-badge{ font-size:.82rem; padding:.3rem .58rem; border-width:1.2px; white-space:nowrap; flex:0 0 auto; }
+    .st-felt{ padding:.65rem .5rem; }
+    .st-hand{ gap:7px; }
+    .st-meld{ padding:3px 4px; gap:3px; }
+    .st-meld-tiles{ gap:2px; }
+    .st-meld-tiles svg{ width:34px; height:46px; }
+    .st-meld-cap{ font-size:.74rem; }
+    .st-pong-chip, .st-an-chip{ font-size:.64rem; padding:.05rem .4rem; }
+    .st-legend{ font-size:.84rem; gap:.4rem .9rem; margin-top:.6rem; }
+    .st-ask{ font-size:1.15rem; margin:.95rem 0 .65rem; }
+    .st-guess{ gap:9px; }
+    .st-guess button{ font-size:1.25rem; padding:13px 18px; min-width:76px; }
+    .st-stats{ padding:.85rem .9rem; margin-top:1.1rem; }
+    .st-stat{ padding:.5rem .85rem; font-size:.92rem; }
+    .st-stat strong{ font-size:1.25rem; }
+    .st-verdict{ font-size:1.3rem; }
+    .st-encore{ font-size:1rem; }
+    .st-final{ padding:1.4rem 1rem; }
+    .st-final-score{ font-size:2.5rem; }
+    .st-final-title{ font-size:1.2rem; }
+    .st-final-msg{ font-size:1rem; }
+    .st-hl-hint{ font-size:.86rem; }
+    table.st-tai{ font-size:1.02rem; }
+    table.st-tai td{ padding:.55rem .3rem; }
+    table.st-tai tr.total td{ font-size:1.15rem; }
+    .st-next{ padding:13px 32px; font-size:1.1rem; margin-top:1.1rem; }
+  }
+  @media (max-width:380px){
+    .st-meld-tiles svg{ width:30px; height:41px; }
+    .st-hand{ gap:5px; }
+    .st-meld{ padding:2px 2px; }
+    .st-badge{ font-size:.76rem; padding:.26rem .48rem; }
+    .st-guess button{ font-size:1.15rem; min-width:66px; padding:12px 14px; }
+  }
+</style>
+
+<script is:inline>
+/* ===== 算台引擎（逐副牌記錄明/暗）＋ UI ===== */
+(function(){
+  const TAI = { qingYiSe:8, hunYiSe:4, ziYiSe:16, pengPeng:4, anke:{3:2,4:5,5:8},
+    dragon:1, xiaoSanYuan:4, daSanYuan:8, quanFeng:1, menFeng:1, xiaoSiXi:8, daSiXi:16, menQing:1, ziMo:1 };
+  const CN=["","一","二","三","四","五","六","七","八","九"];
+  const HCH={1:"東",2:"南",3:"西",4:"北",5:"中",6:"發",7:"白"};
+  const HCOL={1:"#1d4ee8",2:"#1d4ee8",3:"#1d4ee8",4:"#1d4ee8",5:"#c0282d",6:"#1e7a46",7:"#2b7bb0"};
+
+  function grid(n){ const L=24,C=36,R=48; return ({
+    1:[[C,50]],2:[[C,30],[C,70]],3:[[L,28],[C,50],[R,72]],
+    4:[[L,30],[R,30],[L,70],[R,70]],5:[[L,30],[R,30],[C,50],[L,70],[R,70]],
+    6:[[L,28],[R,28],[L,50],[R,50],[L,72],[R,72]],
+    7:[[L,26],[R,26],[L,50],[C,50],[R,50],[L,74],[R,74]],
+    8:[[L,24],[R,24],[L,42],[R,42],[L,60],[R,60],[L,78],[R,78]],
+    9:[[L,26],[C,26],[R,26],[L,50],[C,50],[R,50],[L,74],[C,74],[R,74]] })[n]; }
+  function pin(n){ const cols=["#1e7a46","#c0282d","#1d4ee8"];
+    return grid(n).map(function(p,i){ const x=p[0],y=p[1],col=n===1?"#c0282d":cols[i%3],r=n===1?16:7.5;
+      return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#fff" stroke="'+col+'" stroke-width="'+(n===1?3:2.4)+'"/><circle cx="'+x+'" cy="'+y+'" r="'+(r*0.42)+'" fill="'+col+'"/>'; }).join(""); }
+  function sou(n){ if(n===1) return '<g transform="translate(36,50)"><ellipse cx="0" cy="7" rx="12" ry="15" fill="#1e7a46"/><circle cx="0" cy="-11" r="7.5" fill="#c0282d"/><path d="M0 15 L-5 28 L5 28 Z" fill="#e0a020"/><circle cx="-2.5" cy="-12" r="1.5" fill="#fff"/></g>';
+    return grid(n).map(function(p){ const x=p[0],y=p[1];
+      return '<g><rect x="'+(x-3)+'" y="'+(y-11)+'" width="6" height="22" rx="3" fill="#1e7a46"/><rect x="'+(x-4.4)+'" y="'+(y-3)+'" width="8.8" height="2.6" rx="1.3" fill="#0c5c30"/><rect x="'+(x-4.4)+'" y="'+(y+5)+'" width="8.8" height="2.6" rx="1.3" fill="#0c5c30"/></g>'; }).join(""); }
+  function wan(n){ return '<text x="36" y="40" font-size="25" text-anchor="middle" fill="#c0282d" font-family="serif" font-weight="700">'+CN[n]+'</text><text x="36" y="76" font-size="29" text-anchor="middle" fill="#1b3a2a" font-family="serif" font-weight="800">萬</text>'; }
+  function honor(n){ return '<text x="36" y="63" font-size="40" text-anchor="middle" fill="'+HCOL[n]+'" font-family="serif" font-weight="800">'+HCH[n]+'</text>'; }
+  function tileSVG(t){ const n=+t[0], s=t[1];
+    const inner = s==='m'?wan(n):s==='p'?pin(n):s==='s'?sou(n):honor(n);
+    return '<svg viewBox="0 0 72 98" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="stfc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#ece4cf"/></linearGradient><linearGradient id="stsd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9dcc0"/><stop offset="1" stop-color="#bda77f"/></linearGradient></defs><rect x="3" y="8" width="66" height="88" rx="9" fill="url(#stsd)"/><rect x="3" y="3" width="66" height="86" rx="9" fill="url(#stfc)" stroke="#d9cdaf"/>'+inner+'</svg>'; }
+
+  /* 面子建構器：P=暗刻 MP=明刻(碰) CH=順子 */
+  function P(t){ return {t:t,kind:'pung',exposed:false}; }
+  function MP(t){ return {t:t,kind:'pung',exposed:true}; }
+  function CH(t){ return {t:t,kind:'chow',exposed:false}; }
+  function meldTiles(m){ const n=+m.t[0],s=m.t[1];
+    return m.kind==='pung'?[m.t,m.t,m.t]:[m.t,(n+1)+s,(n+2)+s]; }
+
+  const WHY={ '清一色':'整手都同一花色、沒有字牌','混一色':'同一花色 + 字牌','字一色':'整手都是字牌',
+    '碰碰胡':'五副都是刻子、沒有順子','大三元':'中、發、白各一刻（明暗都算）','小三元':'中發白其中兩刻 + 第三個做對',
+    '三元刻（中/發/白）':'中/發/白其中一種的刻子','圈風刻':'這局圈風的刻子','門風刻':'自己門風的刻子',
+    '大四喜':'東南西北四刻','小四喜':'三個風刻 + 一對風','門清':'沒有吃、碰、明槓，整手自己摸成','自摸':'最後一張自己摸到',
+    '三暗刻':'三副自己摸成的暗刻（沒碰）','四暗刻':'四副暗刻（沒碰）','五暗刻':'五副暗刻（門清自摸碰碰胡）' };
+
+  function scoreHand(melds, pair, ctx){
+    const lines=[];
+    const idxAll=melds.map(function(_,i){return i;});
+    const all=[]; melds.forEach(function(m){ meldTiles(m).forEach(function(t){all.push(t);}); }); all.push(pair,pair);
+    const numSuits=new Set(all.filter(function(t){return t[1]!=='z';}).map(function(t){return t[1];}));
+    const hasHonor=all.some(function(t){return t[1]==='z';});
+    const pungIdx=[]; melds.forEach(function(m,i){ if(m.kind==='pung') pungIdx.push(i); });
+    const concealedPungIdx=pungIdx.filter(function(i){ return !melds[i].exposed; });
+    const allConcealed=melds.every(function(m){ return !m.exposed; });
+    function push(name,tai,groups,pairRef,why){ lines.push({name:name,tai:tai,why:why||WHY[name]||'',groups:groups||[],pairRef:!!pairRef}); }
+
+    if(numSuits.size===0) push('字一色',TAI.ziYiSe,idxAll,true);
+    else if(numSuits.size===1 && hasHonor) push('混一色',TAI.hunYiSe,idxAll,true);
+    else if(numSuits.size===1 && !hasHonor) push('清一色',TAI.qingYiSe,idxAll,true);
+
+    if(pungIdx.length===5) push('碰碰胡',TAI.pengPeng,pungIdx,false);
+
+    if(concealedPungIdx.length>=3){ const k=concealedPungIdx.length; if(TAI.anke[k]) push(CN[k]+'暗刻',TAI.anke[k],concealedPungIdx,false); }
+
+    const dragonIdx=pungIdx.filter(function(i){ return melds[i].t[1]==='z' && +melds[i].t[0]>=5; });
+    const dragonPair=(pair[1]==='z' && +pair[0]>=5);
+    if(dragonIdx.length===3) push('大三元',TAI.daSanYuan,dragonIdx,false);
+    else if(dragonIdx.length===2 && dragonPair) push('小三元',TAI.xiaoSanYuan,dragonIdx,true);
+    else dragonIdx.forEach(function(i){ push('三元刻（中/發/白）',TAI.dragon,[i],false); });
+
+    const windIdx=pungIdx.filter(function(i){ return melds[i].t[1]==='z' && +melds[i].t[0]<=4; });
+    const windPair=(pair[1]==='z' && +pair[0]<=4);
+    if(windIdx.length===4) push('大四喜',TAI.daSiXi,windIdx,false);
+    else if(windIdx.length===3 && windPair) push('小四喜',TAI.xiaoSiXi,windIdx,true);
+    else windIdx.forEach(function(i){ const w=+melds[i].t[0];
+      if(w===ctx.round) push('圈風刻',TAI.quanFeng,[i],false,'上方標示「圈風 '+HCH[ctx.round]+'」→ '+HCH[ctx.round]+' 的刻子就是圈風刻（+1 台）');
+      if(w===ctx.seat) push('門風刻',TAI.menFeng,[i],false,'上方標示「門風 '+HCH[ctx.seat]+'」→ '+HCH[ctx.seat]+' 的刻子就是門風刻（+1 台）'); });
+
+    if(allConcealed) push('門清',TAI.menQing,idxAll,true);
+    if(ctx.selfDraw) push('自摸',TAI.ziMo,[],false);
+
+    const total=lines.reduce(function(s,l){ return s+l.tai; },0);
+    return {total:total, lines:lines};
+  }
+
+  /* 題庫：每題明確列出 5 副面子 + 將，並標明哪副是「碰」(明刻) */
+  const LESSONS=[
+    // 1) 基本門清自摸（全順子）
+    { melds:[CH('1m'),CH('4m'),CH('7m'),CH('2p'),CH('6p')], pair:'5s', ctx:{round:1,seat:4,selfDraw:true} },
+    // 2) 清一色門清自摸
+    { melds:[CH('1m'),CH('4m'),CH('7m'),CH('1m'),CH('5m')], pair:'9m', ctx:{round:1,seat:1,selfDraw:true} },
+    // 3) 混一色 + 碰中（明刻）→ 教明刻、非門清
+    { melds:[CH('1m'),CH('4m'),CH('7m'),CH('1m'),MP('5z')], pair:'9m', ctx:{round:3,seat:2,selfDraw:false} },
+    // 4) 對照：同樣混一色，但中是自己摸的（暗刻）+ 門清自摸
+    { melds:[CH('1m'),CH('4m'),CH('7m'),CH('1m'),P('5z')], pair:'9m', ctx:{round:3,seat:2,selfDraw:true} },
+    // 5) 大三元（其中發是碰來的明刻）+ 自摸 → 碰了也算大三元
+    { melds:[P('5z'),MP('6z'),P('7z'),CH('1m'),CH('4m')], pair:'9s', ctx:{round:1,seat:3,selfDraw:true} },
+    // 6) 四暗刻 門清自摸
+    { melds:[P('1m'),P('9m'),P('2p'),P('8s'),CH('4m')], pair:'5z', ctx:{round:1,seat:3,selfDraw:true} },
+    // 7) 圈風刻 + 門風刻 門清自摸
+    { melds:[P('1z'),P('2z'),CH('1m'),CH('4p'),CH('7s')], pair:'5s', ctx:{round:1,seat:2,selfDraw:true} }
+  ];
+
+  let idx=0, roundScore=0, correct=0, streak=0, best=0, cur=null, locked=false, pinned=null;
+  const ENCORE={ 2:'連對 2 題！手感來了哦', 3:'3 連對！算台越來越順', 4:'4 連對！牌咖開始怕你算錯坑他們',
+    5:'5 連對！這桌就你最會算台', 6:'6 連對！開桌記帳交給你就對了', 7:'7 連對！全對啦，芭樂子甘拜下風' };
+  const $=function(id){ return document.getElementById(id); };
+  const LS='suantai_stats';
+  function loadStats(){ try{ return JSON.parse(localStorage.getItem(LS))||{correct:0,best:0}; }catch(e){ return {correct:0,best:0}; } }
+  function saveStats(){ try{ localStorage.setItem(LS,JSON.stringify({correct:correct,best:best})); }catch(e){} }
+
+  function capFor(m){ if(m.kind==='chow') return '順子'; return m.exposed?'明刻（碰）':'暗刻'; }
+  function renderHand(melds,pair){
+    let html='';
+    melds.forEach(function(m,i){
+      const tiles=meldTiles(m).map(tileSVG).join('');
+      html+='<div class="st-meld'+(m.exposed?' exposed':'')+'" data-gi="'+i+'" style="animation-delay:'+(i*0.06)+'s">'
+          + (m.kind==='pung' ? (m.exposed?'<span class="st-pong-chip">碰</span>':'<span class="st-an-chip">暗</span>') : '')
+          + '<div class="st-meld-tiles">'+tiles+'</div>'
+          + '<span class="st-meld-cap">'+capFor(m)+'</span></div>';
+    });
+    html+='<div class="st-meld" data-gi="pair" style="animation-delay:'+(melds.length*0.06)+'s"><div class="st-meld-tiles">'
+        + [pair,pair].map(tileSVG).join('')
+        + '</div><span class="st-meld-cap">將（眼）</span></div>';
+    const hand=$('stHand'); hand.innerHTML=html; hand.classList.remove('revealed');
+  }
+  function renderCtx(melds,ctx){ const w={1:'東',2:'南',3:'西',4:'北'};
+    let b='<span class="st-badge st-b-wind">圈風 '+w[ctx.round]+'</span><span class="st-badge st-b-wind">門風 '+w[ctx.seat]+'</span>';
+    b+= ctx.selfDraw?'<span class="st-badge st-b-draw">自摸</span>':'<span class="st-badge st-b-ron">胡別人</span>';
+    if(melds.every(function(m){return !m.exposed;})) b+='<span class="st-badge st-b-men">🔒 門清</span>';
+    else b+='<span class="st-badge st-b-pong">有碰</span>';
+    $('stCtx').innerHTML=b; }
+
+  function clearHL(){ $('stHand').querySelectorAll('.st-meld.hl').forEach(function(e){ e.classList.remove('hl'); }); }
+  function showRow(tr){ clearHL();
+    (tr.dataset.groups||'').split(',').filter(function(x){return x!=='';}).forEach(function(i){
+      const el=$('stHand').querySelector('[data-gi="'+i+'"]'); if(el) el.classList.add('hl'); });
+    if(tr.dataset.pair==='1'){ const p=$('stHand').querySelector('[data-gi="pair"]'); if(p) p.classList.add('hl'); }
+  }
+  function wireHighlight(){ pinned=null;
+    $('stBreakdown').querySelectorAll('tr').forEach(function(tr){
+      if(tr.classList.contains('total')) return;
+      tr.onmouseenter=function(){ if(!pinned) showRow(tr); };
+      tr.onmouseleave=function(){ if(!pinned) clearHL(); };
+      tr.onclick=function(){
+        if(pinned===tr){ pinned=null; tr.classList.remove('pinned'); clearHL(); }
+        else { $('stBreakdown').querySelectorAll('tr.pinned').forEach(function(x){x.classList.remove('pinned');});
+               pinned=tr; tr.classList.add('pinned'); showRow(tr); }
+      };
+    });
+  }
+
+  function scrollGameIntoView(){
+    const el=document.querySelector('.st-game'); if(!el) return;
+    const y=el.getBoundingClientRect().top + window.pageYOffset - 84;
+    window.scrollTo({ top:Math.max(0,y), behavior:'smooth' });
+  }
+  function load(doScroll){
+    locked=false; pinned=null;
+    const L=LESSONS[idx];
+    cur={ res:scoreHand(L.melds,L.pair,L.ctx), melds:L.melds, pair:L.pair, ctx:L.ctx };
+    $('stPtext').textContent='第 '+(idx+1)+' / '+LESSONS.length+' 題';
+    $('stPfill').style.width=((idx+1)/LESSONS.length*100)+'%';
+    $('stNext').textContent=(idx>=LESSONS.length-1)?'看結果 →':'下一題 →';
+    $('stEncore').textContent='';
+    renderCtx(L.melds,L.ctx); renderHand(L.melds,L.pair);
+    const ans=cur.res.total, set=new Set([ans]);
+    [ans-2,ans-1,ans+1,ans+2,ans+4].forEach(function(v){ if(v>0) set.add(v); });
+    const opts=Array.from(set).sort(function(a,b){return a-b;}).slice(0,6);
+    $('stGuess').innerHTML=opts.map(function(v,bi){ return '<button data-v="'+v+'" style="animation-delay:'+(bi*0.05)+'s">'+v+'</button>'; }).join('');
+    $('stGuess').querySelectorAll('button').forEach(function(btn){ btn.onclick=function(){ guess(+btn.dataset.v,btn); }; });
+    $('stReveal').classList.remove('show');
+    clearHL();
+    if(doScroll) scrollGameIntoView();
+  }
+  function guess(v,btn){
+    if(locked) return; locked=true;
+    const ans=cur.res.total, ok=(v===ans);
+    $('stGuess').querySelectorAll('button').forEach(function(b){ b.disabled=true; });
+    if(ok){ correct++; roundScore++; streak++; best=Math.max(best,streak); btn.classList.add('right'); }
+    else { streak=0; btn.classList.add('wrong');
+      $('stGuess').querySelectorAll('button').forEach(function(b){ if(+b.dataset.v===ans) b.classList.add('right'); }); }
+    saveStats();
+    $('stStreak').textContent=streak; $('stCorrect').textContent=correct; $('stBest').textContent=best;
+    $('stVerdict').className='st-verdict '+(ok?'ok':'no');
+    $('stVerdict').textContent= ok?('✅ 答對！這手 '+ans+' 台'):('❌ 正解是 '+ans+' 台');
+    $('stEncore').textContent = (ok && streak>=2) ? ('🔥 '+(ENCORE[streak]||('連對 '+streak+' 題！神到不行')))
+      : (!ok ? '連對紀錄歸零，下一題再拚回來！' : '');
+    $('stBreakdown').innerHTML=cur.res.lines.map(function(l){
+      return '<tr data-groups="'+l.groups.join(',')+'" data-pair="'+(l.pairRef?1:0)+'"><td>'+l.name
+        +'<div class="st-why">'+l.why+'</div></td><td class="n">'+l.tai+' 台</td></tr>'; }).join('')
+      +'<tr class="total"><td>合計</td><td class="n">'+ans+' 台</td></tr>';
+    $('stHand').classList.add('revealed');
+    wireHighlight();
+    $('stReveal').classList.add('show');
+  }
+
+  function nextOrFinal(){ if(idx>=LESSONS.length-1){ showFinal(); } else { idx++; load(true); } }
+  function showFinal(){
+    const s=roundScore, n=LESSONS.length; let t,m;
+    if(s===n){ t='🏆 算台宗師！'; m='全對！這桌記帳就交給你，誰也別想少算你的台。'; }
+    else if(s>=n-1){ t='⭐ 老司機等級'; m='幾乎全對，算台難不倒你了，上桌穩穩收錢。'; }
+    else if(s>=Math.ceil(n*0.55)){ t='👍 抓到訣竅了'; m='基本的台都會算了，幾個大牌再熟一點就無敵。再來一輪？'; }
+    else if(s>=Math.ceil(n*0.28)){ t='😅 還會漏台'; m='有些台還沒抓穩，往上滑看一下「台數速查表」再挑戰一次。'; }
+    else { t='💀 先別急著上桌 XD'; m='台數大多漏掉了，回頭把暗刻、門清那幾段看熟，慢慢來不急。'; }
+    $('stFinalScore').textContent=s+' / '+n;
+    $('stFinalTitle').textContent=t; $('stFinalMsg').textContent=m;
+    document.querySelector('.st-card').style.display='none';
+    $('stFinal').style.display='block';
+    scrollGameIntoView();
+  }
+  function startRound(){ idx=0; roundScore=0; streak=0;
+    document.querySelector('.st-card').style.display='';
+    $('stFinal').style.display='none';
+    $('stStreak').textContent=streak;
+    load(false);
+  }
+  function init(){
+    $('stNext').onclick=nextOrFinal;
+    $('stReplay').onclick=function(){ startRound(); scrollGameIntoView(); };
+    const st=loadStats(); correct=st.correct||0; best=st.best||0;
+    $('stCorrect').textContent=correct; $('stBest').textContent=best;
+    startRound();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</BaseLayout>

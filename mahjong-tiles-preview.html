@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>麻將牌面樣板預覽 — GAME8LA 原創 SVG</title>
+<style>
+  :root{
+    --bg:#140a04; --panel:#1f130a; --gold:#f5b800; --green:#39FF14;
+    --face1:#fdfbf3; --face2:#ece4cf; --edge:#cdbfa0; --shadow:#9a8a6a;
+    --ink:#1b3a2a; --red:#c0282d; --blue:#1d4ee8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(circle at 50% 0%,#2a1a0c,#140a04);color:#f3ead8;
+       font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;padding:2.5rem 1.2rem}
+  h1{font-size:1.5rem;text-align:center;margin:0 0 .3rem}
+  .sub{text-align:center;color:#bda;opacity:.7;font-size:.9rem;margin-bottom:2rem}
+  .group{max-width:760px;margin:0 auto 2.4rem}
+  .group h2{font-size:1rem;color:var(--gold);border-left:3px solid var(--gold);padding-left:.6rem;margin:0 0 1rem}
+  .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-start}
+  figure{margin:0;text-align:center}
+  figcaption{font-size:.78rem;color:#cbb;margin-top:.4rem}
+  .felt{background:#0d4a2c;border-radius:14px;padding:1.4rem;display:flex;gap:14px;flex-wrap:wrap;
+        box-shadow:inset 0 0 40px rgba(0,0,0,.5)}
+</style>
+</head>
+<body>
+<h1>🀄 麻將牌面樣板（原創 SVG）</h1>
+<div class="sub">GAME8LA · 純向量手繪 · 可換色換風格 · 這只是風格樣板，不是完整 42 張</div>
+
+<div class="group">
+  <h2>數牌 — 萬 / 筒 / 條</h2>
+  <div class="row" id="suits"></div>
+</div>
+
+<div class="group">
+  <h2>字牌 — 風 / 箭</h2>
+  <div class="row" id="honors"></div>
+</div>
+
+<div class="group">
+  <h2>花牌（範例）＋ 牌背</h2>
+  <div class="row" id="flowers"></div>
+</div>
+
+<div class="group">
+  <h2>放在牌桌上的感覺</h2>
+  <div class="felt" id="felt"></div>
+</div>
+
+<script>
+// ---- 共用牌身 ----
+function tile(inner, opts={}){
+  const w=72,h=98;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#ece4cf"/>
+      </linearGradient>
+      <linearGradient id="side" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e9dcc0"/><stop offset="1" stop-color="#bda77f"/>
+      </linearGradient>
+    </defs>
+    <rect x="3" y="8" width="${w-6}" height="${h-10}" rx="9" fill="url(#side)"/>
+    <rect x="3" y="3" width="${w-6}" height="${h-12}" rx="9" fill="url(#face)" stroke="#d9cdaf" stroke-width="1"/>
+    <rect x="6" y="6" width="${w-12}" height="${h-18}" rx="6" fill="none" stroke="#efe7d2" stroke-width="1"/>
+    ${inner}
+  </svg>`;
+}
+// ---- 筒（dots）----
+function dot(cx,cy,r,col){
+  return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" stroke="${col}" stroke-width="2.6"/>
+          <circle cx="${cx}" cy="${cy}" r="${r*0.45}" fill="${col}"/>`;
+}
+function pin(n){
+  const G="#1e7a46",R="#c0282d",B="#1d4ee8";
+  const P={ // positions per count (cx,cy,color)
+    1:[[36,52,18,R]],
+    3:[[24,30,9,B],[36,49,9,R],[48,68,9,G]],
+    5:[[24,30,9,G],[48,30,9,R],[36,49,9,B],[24,68,9,R],[48,68,9,G]],
+    9:[[22,26,8,G],[36,26,8,G],[50,26,8,G],[22,49,8,R],[36,49,8,R],[50,49,8,R],[22,72,8,B],[36,72,8,B],[50,72,8,B]]
+  }[n];
+  let s="";
+  for(const[c,y,r,col] of P){ if(n===1){s+=dot(c,y,r,col);} else s+=dot(c,y,r,col); }
+  return s;
+}
+// ---- 條（bamboo）----
+function bamboo(x,y,col){
+  return `<g>
+    <rect x="${x-3.2}" y="${y}" width="6.4" height="22" rx="3" fill="${col}"/>
+    <rect x="${x-4.6}" y="${y+8}" width="9.2" height="3" rx="1.5" fill="#0c5c30"/>
+    <rect x="${x-4.6}" y="${y+16}" width="9.2" height="3" rx="1.5" fill="#0c5c30"/>
+  </g>`;
+}
+function sou(n){
+  const G="#1e7a46";
+  if(n===1){ // 一條傳統是鳥，這裡用簡約鳥形示意
+    return `<g transform="translate(36,50)">
+      <ellipse cx="0" cy="6" rx="13" ry="16" fill="#1e7a46"/>
+      <circle cx="0" cy="-12" r="8" fill="#c0282d"/>
+      <path d="M0 14 L-6 30 L6 30 Z" fill="#e0a020"/>
+      <circle cx="-3" cy="-13" r="1.6" fill="#fff"/>
+    </g>`;
+  }
+  const cols=[[22,26],[36,26],[50,26],[22,52],[36,52],[50,52],[22,78],[36,78],[50,78]];
+  let s="";for(let i=0;i<n;i++){const[x,y]=cols[i];s+=bamboo(x,y-11,G);}return s;
+}
+// ---- 萬 ----
+const CN=["","一","二","三","四","五","六","七","八","九"];
+function wan(n){
+  return `<text x="36" y="40" font-size="26" text-anchor="middle" fill="#c0282d"
+            font-family="serif" font-weight="700">${CN[n]}</text>
+          <text x="36" y="76" font-size="30" text-anchor="middle" fill="#1b3a2a"
+            font-family="serif" font-weight="800">萬</text>`;
+}
+// ---- 字牌 ----
+function honor(ch,col){
+  return `<rect x="14" y="22" width="44" height="54" rx="6" fill="none" stroke="${col}" stroke-width="1.5" opacity="0"/>
+          <text x="36" y="62" font-size="40" text-anchor="middle" fill="${col}"
+            font-family="serif" font-weight="800">${ch}</text>`;
+}
+function whiteDragon(){
+  return `<rect x="15" y="20" width="42" height="58" rx="6" fill="none" stroke="#1d4ee8" stroke-width="3"/>`;
+}
+// ---- 牌背 ----
+function back(){
+  return `<rect x="9" y="9" width="54" height="78" rx="6" fill="#1a7a3e"/>
+          <rect x="9" y="9" width="54" height="78" rx="6" fill="none" stroke="#0c5c30" stroke-width="2"/>
+          <path d="M36 24 l10 12 -10 12 -10 -12 z" fill="#f5b800"/>
+          <circle cx="36" cy="60" r="9" fill="none" stroke="#f5b800" stroke-width="2.5"/>`;
+}
+function fig(svg,cap){return `<figure>${svg}<figcaption>${cap}</figcaption></figure>`;}
+
+const suits=document.getElementById('suits');
+suits.innerHTML =
+  fig(tile(wan(5)),'五萬')+fig(tile(wan(9)),'九萬')+
+  fig(tile(pin(1)),'一筒')+fig(tile(pin(5)),'五筒')+fig(tile(pin(9)),'九筒')+
+  fig(tile(sou(1)),'一條')+fig(tile(sou(3)),'三條')+fig(tile(sou(9)),'九條');
+
+document.getElementById('honors').innerHTML =
+  fig(tile(honor('東','#1d4ee8')),'東')+fig(tile(honor('南','#1d4ee8')),'南')+
+  fig(tile(honor('西','#1d4ee8')),'西')+fig(tile(honor('北','#1d4ee8')),'北')+
+  fig(tile(honor('中','#c0282d')),'紅中')+fig(tile(honor('發','#1e7a46')),'發財')+
+  fig(tile(whiteDragon()),'白板');
+
+document.getElementById('flowers').innerHTML =
+  fig(tile(honor('梅','#c0282d')),'梅')+fig(tile(honor('春','#1e7a46')),'春')+
+  fig(tile(back()),'牌背');
+
+document.getElementById('felt').innerHTML =
+  [tile(wan(2)),tile(wan(3)),tile(wan(4)),tile(pin(5)),tile(pin(5)),
+   tile(sou(7)),tile(sou(8)),tile(sou(9)),tile(honor('中','#c0282d')),
+   tile(honor('中','#c0282d')),tile(honor('發','#1e7a46'))].join('');
+</script>
+</body>
+</html>
