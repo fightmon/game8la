@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import LegalNotice from '../../components/LegalNotice.astro';
+import { tileSVG, meldTiles } from '../../lib/mahjong-tiles.js';
+
+const faqs = [
+  { q: '麻將算台怎麼算錢？', a: '台灣麻將輸贏 = 底 + 台 × 台數。「底」是每把固定的、不管牌大小都要付的基本盤；「台」才是看牌型加碼的部分。舉例「10 底 10 台」，你胡一把 5 台，每個輸家付 10 + 10×5 = 60。算錯台不是少收就是被嗆，所以這條公式先背起來，別讓自己的辛苦牌白胡。' },
+  { q: '暗刻和明刻怎麼分？', a: '牌面一模一樣，差別只在「碰過沒」。自己默默摸成、藏在手裡的是暗刻；碰別人打的牌湊成、攤在桌上的是明刻。只有暗刻能算三/四/五暗刻的台，碰出來的明刻一律不算進暗刻數——所以高手能不碰就不碰，一碰下去四暗刻 5 台可能就飛了。' },
+  { q: '平胡是幾台？為什麼有人說不能自摸？', a: '平胡常見 2 台，但條件很龜毛：全部順子 + 將不是字牌 + 兩面聽 + 沒有任何其他台。很多桌規定平胡只能「胡別人（食胡）」、不能自摸——因為自摸本身就有 1 台，會跟平胡「沒有任何台」的定義打架。平胡地方差異超大，上桌前一定要先問清楚，不然胡了才在吵很傷感情。' },
+  { q: '花牌也算台嗎？', a: '會。春夏秋冬、梅蘭竹菊各對應東南西北。摸到跟自己門風對應的「正花」通常每張 1 台；集滿一組四花叫「花槓」；別人花槓、你補上最後一張可成「七搶一」。不過花牌是地方台規差異最大的部分，有的桌算法都不一樣，一律依你那桌約定為準。' },
+  { q: '圈風、門風怎麼看？', a: '圈風是「這場打到第幾圈」（東圈→南圈→西圈→北圈，打到哪圈那個風就是圈風）；門風是你「座位」的風（莊家東、下家南、對家西、上家北）。湊成圈風或門風的刻子各 1 台，剛好同時是圈風又門風（連風）可以算兩台。至於兩個都不是的風牌刻子（客風），抱歉，0 台，湊再多都是白工。' },
+  { q: '台灣 16 張最大的牌是什麼？', a: '單一牌型最大的是 16 台的「字一色」（整手都是字牌）和「大四喜」（東南西北四刻全到）。情境上還有天胡、地胡、人胡這種開局就胡的傳說等級，多數台規直接算滿台或封頂。講白話：能湊到大三元（8 台）這輩子就夠你說嘴了，字一色那種是做夢時段限定。' },
+  { q: '新手要先記哪些台？', a: '先記最常出現的小台：自摸（1）、門清（1）、圈風刻/門風刻（各 1）、三元刻（1）；再記中等的碰碰胡（4）、混一色（4）。大牌像清一色 8、大三元 8 知道存在、看得懂就好，反正也不常摸到。與其死背，不如直接去玩算台練習器，看牌猜台數，幾輪手感就出來了。' },
+];
+
+const P  = (t) => ({ t, kind: 'pung', exposed: false });
+const MP = (t) => ({ t, kind: 'pung', exposed: true });
+const CH = (t) => ({ t, kind: 'chow' });
+function capFor(m) { if (m.kind === 'chow') return '順子'; return m.exposed ? '明刻（碰）' : '暗刻'; }
+function hand(melds, pair, opts) {
+  opts = opts || {};
+  let g = melds.map(function (m, i) {
+    const tiles = meldTiles(m).map(tileSVG).join('');
+    const chip = m.kind === 'pung' ? (m.exposed ? '<span class="mj-chip mj-pong">碰</span>' : '<span class="mj-chip mj-an">暗</span>') : '';
+    const cap = opts.caps ? '<span class="mj-cap">' + capFor(m) + '</span>' : '';
+    const hl = (opts.hl && opts.hl.indexOf(i) >= 0) ? ' hl' : '';
+    return '<div class="mj-meld' + (m.exposed ? ' exposed' : '') + hl + '">' + chip + '<div class="mj-tiles">' + tiles + '</div>' + cap + '</div>';
+  }).join('');
+  const pcap = opts.caps ? '<span class="mj-cap">將（眼）</span>' : '';
+  g += '<div class="mj-meld"><div class="mj-tiles">' + tileSVG(pair) + tileSVG(pair) + '</div>' + pcap + '</div>';
+  return '<div class="mj-felt"><div class="mj-hand">' + g + '</div></div>';
+}
+function row(str) { return '<div class="mj-felt"><div class="mj-hand"><div class="mj-meld"><div class="mj-tiles">' + (str.replace(/\s+/g, '').match(/.{2}/g) || []).map(tileSVG).join('') + '</div></div></div></div>'; }
+
+const URL = 'https://game8la.com/articles/mahjong-scoring-guide/';
+const COVER = 'https://game8la.com/images/articles/mahjong-scoring-guide-cover.webp';
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title="麻將算台怎麼算？台灣16張台數完整圖解（芭樂子白話版） — GAME8LA"
+  description="台灣 16 張麻將算台完整教學：底與台、門清自摸、碰碰胡、清一色、大三元、暗刻、花牌一次搞懂。原創牌面 SVG 圖解＋台數速查表＋線上練習。"
+  image={COVER}
+  datePublished="2026-06-03"
+  dateModified="2026-06-03"
+  timeRequired="PT12M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '麻將算台完整圖解', url: URL },
+  ]}
+/>
+<BaseLayout
+  currentPage="articles"
+  title="麻將算台怎麼算？台灣16張台數完整圖解（芭樂子白話版） — GAME8LA"
+  description="台灣 16 張麻將算台完整教學：底與台、門清自摸、碰碰胡、清一色、大三元、暗刻、花牌一次搞懂。原創牌面 SVG 圖解＋台數速查表＋線上練習。"
+  ogImage={COVER}
+>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 麻將算台完整圖解</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      📅 發佈：2026-06-03 ｜ ✍️ 作者：芭樂子 ｜ ⏱️ 預估閱讀 12 分鐘
+    </div>
+    <a href="/articles/" class="back-link">← 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0d4a2c,#1a7a3e,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:840px;margin:0 auto">
+      <h1 style="font-size:2rem;line-height:1.3">麻將算台怎麼算？台灣 16 張台數完整圖解<em>門清自摸到大三元，芭樂子用原創牌面一張張畫給你看</em></h1>
+
+      <!-- === 封面圖 === -->
+      <img class="content-img"
+           src="/images/articles/mahjong-scoring-guide-cover.webp"
+           srcset="/images/articles/mahjong-scoring-guide-cover-768w.webp 768w, /images/articles/mahjong-scoring-guide-cover.webp 1200w"
+           sizes="(max-width: 640px) 100vw, 840px"
+           alt="麻將算台教學｜芭樂子在白板前用牌面圖解台灣16張台數加總｜GAME8LA"
+           width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">芭樂子用自己畫的牌面教你算台——胡牌之後，誰也別想少算你一台。</p>
+
+      <div class="quick-tool-bar">
+        <span>不想看字？</span>
+        <a href="/tools/mahjong-suan-tai-trainer/">直接玩算台練習器</a>
+        <a href="#cheatsheet">跳到台數速查表</a>
+      </div>
+
+      <p>8LA 大大好，我是芭樂子。每到過年，牌桌上最尷尬的一刻從來不是輸錢，而是有人自摸大喊「胡！」然後全桌安靜三秒——<strong>因為沒人會算這把幾台</strong>。算少了自己虧、算多了被嗆詐胡，那畫面有點鏘。芭樂子當年也算錯被笑到想登出，所以今天乾脆<strong>自己畫牌面</strong>，把台灣 16 張的台一張一張圖解給你看，看完換你當那桌的人肉記帳機。</p>
+
+      <p>先<strong>聲明在先</strong>：麻將這東西，<strong>台規看七分、各桌約定補三分</strong>——規則是死的，牌咖是活的。本文寫的是最常見的台數，但花牌、平胡、地方台這些「各家有各家玩法」的眉角，上桌前先喬好，免得胡了才在吵，傷感情又傷錢包，粉微妙。</p>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文導覽</h2>
+        <ol>
+          <li><a href="#base">底 vs 台：先搞懂怎麼換成錢</a></li>
+          <li><a href="#structure">一手牌怎麼拆？5 副面子 + 1 對</a></li>
+          <li><a href="#small">小台圖解：門清、自摸、圈門風、三元刻</a></li>
+          <li><a href="#anke">暗刻 vs 明刻：三/四/五暗刻</a></li>
+          <li><a href="#color">碰碰胡、混一色、清一色</a></li>
+          <li><a href="#big">大牌圖解：大三元、字一色、大四喜</a></li>
+          <li><a href="#special">平胡、花牌與情境台</a></li>
+          <li><a href="#myths">三個算台迷思（芭樂子打臉時間）</a></li>
+          <li><a href="#cheatsheet">台灣 16 張台數速查表</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <h2 id="base" style="margin-top:2.5rem">底 vs 台：先搞懂怎麼換成錢</h2>
+      <p>先講錢，不然台算得再準、你也不知道要收幾塊。台灣麻將的算錢公式長這樣，背起來一輩子受用：</p>
+      <div class="card" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(245,184,0,0.08),rgba(30,30,30,0.5))">
+        <h3 style="color:var(--gold-light);margin-top:0">輸贏公式</h3>
+        <p style="font-size:1.15rem"><strong>每家要付 = 底 ＋ 台 × 台數</strong></p>
+      </div>
+      <ul>
+        <li><strong>底</strong>：每把固定的基本彩金，不管牌大牌小都要付。</li>
+        <li><strong>台</strong>：依牌型加成的部分，台數越高、加越多。</li>
+      </ul>
+      <div class="tip-box"><strong>💡 算錢範例：</strong>講好「<strong>10 底 10 台</strong>」，你胡了一把 <strong>5 台</strong>的牌。每個輸家要付 10 ＋ 10×5 = <strong>60</strong>。若是自摸，三家都付；放槍（胡別人）通常只有放槍那家付（依台規）。</div>
+
+      <h2 id="structure" style="margin-top:2.5rem">一手牌怎麼拆？5 副面子 + 1 對</h2>
+      <p>胡牌不是把牌湊滿就好。台灣 16 張，胡的那一刻是 16＋1＝<strong>17 張</strong>，而且永遠要拆成 <strong>5 副面子 ＋ 1 對將（眼）</strong>，多一張少一對都不准胡。面子就兩種，不囉嗦：<strong>順子</strong>（三張連號，只有萬筒條有）和<strong>刻子</strong>（三張一模一樣）。先看一手最樸素、最不值錢的牌長怎樣：</p>
+      <div class="mj-fig" set:html={hand([CH('1m'),CH('4m'),CH('7m'),CH('2p'),CH('6p')], '5s', {caps:true})} />
+      <p>上面這手全是順子＋一對 5 條當眼睛。如果是<strong>門清</strong>（沒吃沒碰）又<strong>自摸</strong>，這把也才 門清 1 台 ＋ 自摸 1 台 ＝ <strong>2 台</strong>。別嫌少，這是牌桌上的日常款，先把這個底子記熟，後面才有得加。</p>
+
+      <h2 id="small" style="margin-top:2.5rem">小台圖解：門清、自摸、圈門風、三元刻</h2>
+      <p>別小看這些 1 台的小咖，它們出現頻率最高，東加一台西加一台，一把湊個 4、5 台也是常有的事：</p>
+      <ul>
+        <li><strong>自摸</strong>（1 台）：最後一張胡牌的牌是自己摸到的。</li>
+        <li><strong>門清</strong>（1 台）：整手沒有吃、碰、明槓，全靠自己摸。</li>
+        <li><strong>三元刻</strong>（各 1 台）：中、發、白其中一種湊成刻子。</li>
+        <li><strong>圈風刻 / 門風刻</strong>（各 1 台）：湊成「圈風」或「門風」的刻子。</li>
+      </ul>
+      <p>圈風 = 這場打到第幾圈（東圈→南圈→西圈→北圈）；門風 = 你的座位（莊東、下南、對西、上北）。下面這手在<strong>東圈、你坐東（門風東）</strong>：東東東剛好同時是圈風又門風（連風），可以算兩台！</p>
+      <div class="mj-fig" set:html={hand([P('1z'),P('5z'),CH('2m'),CH('5p'),CH('7s')], '9p', {caps:true, hl:[0,1]})} />
+      <div class="mj-legend">
+        <span>金框 = 這手的得台關鍵</span>
+      </div>
+      <p>東刻（圈風＋門風＝2 台）＋ 中刻（三元刻 1 台）＝ 光這兩副刻子就 3 台，再加門清自摸又 2 台。風牌和三元牌的刻子，是小台的主要來源。</p>
+      <div class="warn-box"><strong>⚠️ 注意客風：</strong>如果某個風牌的刻子<strong>既不是圈風也不是門風</strong>（行話叫「客風」），那副刻子 <strong>0 台</strong>。湊了半天三張一樣的，結果一台都沒有——白高興一場，這就是人生。</div>
+
+      <h2 id="anke" style="margin-top:2.5rem">暗刻 vs 明刻：三/四/五暗刻</h2>
+      <p>這是新手最常忽略、也最看不出來的台，因為<strong>暗刻和明刻牌面長得一模一樣</strong>。差別只在「怎麼來的」：碰別人打的牌湊成、攤在桌上人盡皆知的是明刻；自己默默摸成、藏在手裡誰都不知道的，才叫暗刻。重點來了——<strong>碰過就破功</strong>：四暗刻只要被你碰掉一副，5 台說飛就飛，那種痛比放槍還難受。</p>
+      <figure>
+        <img class="mj-photo" src="/images/articles/mahjong-anke.webp" alt="芭樂子在麻將桌上把暗刻牌緊緊藏在手裡不讓對手偷看，說明暗刻與明刻的差別" width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="mj-photo-cap">暗刻藏在手裡才值錢——碰出來的明刻會攤在桌上給人看，還會少算暗刻台。芭樂子：能藏就藏。</figcaption>
+      </figure>
+      <div class="card" style="border-color:var(--guava-green)">
+        <table>
+          <thead><tr><th>暗刻數</th><th>台數</th><th>條件</th></tr></thead>
+          <tbody>
+            <tr><td>三暗刻</td><td style="color:var(--gold-light);font-weight:700">2 台</td><td>3 副沒碰的刻子</td></tr>
+            <tr><td>四暗刻</td><td style="color:var(--gold-light);font-weight:700">5 台</td><td>4 副沒碰的刻子</td></tr>
+            <tr><td>五暗刻</td><td style="color:var(--gold-light);font-weight:700">8 台</td><td>5 副全暗刻（門清自摸碰碰胡）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>下面這手 4 副刻子全是自己摸的（藍色「暗」標籤），門清自摸，就是<strong>四暗刻</strong>：</p>
+      <div class="mj-fig" set:html={hand([P('1m'),P('9m'),P('2p'),P('8s'),CH('4m')], '5z', {caps:true})} />
+      <p>四暗刻 5 台 ＋ 門清 1 ＋ 自摸 1 ＝ <strong>7 台</strong>。<strong>重點：只要其中一副是「碰」來的（明刻），暗刻數就少一副</strong>，可能整個四暗刻就飛了。所以高手寧可少碰、留在手裡偷偷摸。</p>
+
+      <h2 id="color" style="margin-top:2.5rem">碰碰胡、混一色、清一色</h2>
+      <p>這三個不是頂天的大牌，但出現率高、又能跟別的台疊著算，是中等戰力的主力部隊，務必認得：</p>
+      <h3>碰碰胡（4 台）：五副都是刻子</h3>
+      <p>整手連半個順子都沒有，5 副全是刻子（暗刻明刻都算數）。下面這手有一副是碰來的（金色「碰」、牌變暗），其餘是自己摸的暗刻：</p>
+      <div class="mj-fig" set:html={hand([P('1m'),P('9p'),P('5s'),P('5z'),MP('2z')], '7z', {caps:true})} />
+      <h3>混一色（4 台）：一種數字花色 ＋ 字牌</h3>
+      <div class="mj-fig" set:html={hand([CH('1m'),CH('4m'),CH('7m'),CH('1m'),P('5z')], '9m', {caps:true})} />
+      <h3>清一色（8 台）：整手同一花色、完全沒有字牌</h3>
+      <p>清一色比混一色整整高一倍，因為更難湊——一張字牌都不能有：</p>
+      <div class="mj-fig" set:html={hand([CH('1p'),CH('4p'),CH('7p'),CH('1p'),CH('5p')], '9p', {caps:true})} />
+      <div class="tip-box"><strong>💡 可以疊加：</strong>這些台能跟別的台一起算。例如「清一色 ＋ 碰碰胡」就是 8 ＋ 4 ＝ 12 台，再加門清自摸⋯⋯一把翻身。</div>
+
+      <h2 id="big" style="margin-top:2.5rem">大牌圖解：大三元、字一色、大四喜</h2>
+      <h3>大三元（8 台）：中、發、白各一刻</h3>
+      <figure>
+        <img class="mj-photo" src="/images/articles/mahjong-daisangen.webp" alt="芭樂子湊成大三元，中發白三副刻子發出金光，對手震驚——台灣麻將大三元 8 台" width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="mj-photo-cap">中、發、白三副刻子到齊就是大三元 8 台，這把直接封王。</figcaption>
+      </figure>
+      <p>三元牌全部湊成刻子，麻將桌上最經典的封王牌。下面這手「發」是碰來的（明刻），中、白是暗刻——<strong>大三元不管明暗都算</strong>：</p>
+      <div class="mj-fig" set:html={hand([P('5z'),MP('6z'),P('7z'),CH('1m'),CH('4m')], '9s', {caps:true, hl:[0,1,2]})} />
+      <p>小弟弟版本叫<strong>小三元（4 台）</strong>：三元牌兩副刻子 ＋ 第三個當將（對）。</p>
+      <h3>字一色（16 台）＆ 大四喜（16 台）</h3>
+      <p>台灣 16 張單一牌型的天花板。<strong>字一色</strong>＝整手都是字牌；<strong>大四喜</strong>＝東南西北四個風刻全到。下面這手同時是大四喜＋字一色，屬於做夢等級：</p>
+      <div class="mj-fig" set:html={hand([P('1z'),P('2z'),P('3z'),P('4z'),P('5z')], '6z', {caps:true})} />
+      <p><strong>小四喜（8 台）</strong>則是三個風刻 ＋ 一對風當將，算是大四喜的小弟。</p>
+
+      <p>那要是這些大牌<strong>疊在一起</strong>呢？來看牌桌上的惡夢——同一花色、五副全刻子、而且全是自己摸的，門清自摸：</p>
+      <div class="mj-fig" set:html={hand([P('1m'),P('3m'),P('5m'),P('7m'),P('9m')], '2m', {caps:true})} />
+      <div style="margin:1.5rem 0;padding:1.6rem;background:linear-gradient(135deg,rgba(245,184,0,0.14),rgba(244,67,54,0.06));border:2px solid var(--gold);border-radius:16px;text-align:center">
+        <p style="font-size:1.05rem;font-weight:800;margin:0 0 .4rem;color:var(--gold-light)">清一色 ＋ 碰碰胡 ＋ 五暗刻 ＋ 門清 ＋ 自摸</p>
+        <p style="font-size:2.6rem;font-weight:900;margin:.2rem 0;color:var(--guava-green)">＝ 22 台 💥</p>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:.4rem 0 0">同一花色、五副全是自己偷偷摸成的暗刻——這種牌一把就讓全桌 R.I.P 錢包。一輩子摸到一次，夠你說嘴十年。</p>
+      </div>
+
+      <h2 id="special" style="margin-top:2.5rem">平胡、花牌與情境台</h2>
+      <h3>平胡（常見 2 台，地方差異大）</h3>
+      <p>平胡是出了名的龜毛牌，條件一堆：<strong>全部順子 ＋ 將不是字牌 ＋ 兩面聽 ＋ 沒有任何其他台</strong>，缺一個就不算。而且很多桌規定平胡只能「胡別人、不准自摸」——因為自摸本身就有 1 台，會跟平胡「我什麼台都沒有」的人設互打臉。這玩意各桌差超多，<strong>上桌前一定要先問清楚</strong>，不然你以為平胡、人家說不算，當場很尷尬。</p>
+      <h3>花牌（正花、花槓、七搶一）</h3>
+      <p>春夏秋冬、梅蘭竹菊各對應東南西北一個座位。摸到跟自己門風對應的<strong>正花</strong>，通常每張 1 台（運氣財，爽）；集滿一組四花叫<strong>花槓</strong>；別人花槓、你剛好補上最後缺的那張可以<strong>七搶一</strong>。這八張是芭樂子畫的花牌：</p>
+      <div class="mj-fig" set:html={row('1f2f3f4f5f6f7f8f')} />
+      <h3>情境台（看狀況才有）</h3>
+      <table>
+        <thead><tr><th>台</th><th>台數</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>槓上開花</td><td>1</td><td>槓牌後補摸到的牌剛好自摸胡</td></tr>
+          <tr><td>海底撈月 / 河底撈魚</td><td>1</td><td>最後一張牌自摸 / 胡別人打的最後一張</td></tr>
+          <tr><td>搶槓</td><td>1</td><td>別人加槓的那張剛好是你要胡的牌</td></tr>
+          <tr><td>天胡 / 地胡 / 人胡</td><td>大牌</td><td>莊家起手就胡 / 閒家第一巡就胡，多算滿台</td></tr>
+        </tbody>
+      </table>
+      <div class="warn-box"><strong>⚠️ 地方台規差很大：</strong>花牌、平胡、地方台（如獨聽、單吊、全求人）各桌規則不一。本文是<strong>常見版本</strong>，實際牌桌一律以你那桌約定為準，先講好免得吵架。</div>
+
+      <h2 id="myths" style="margin-top:2.5rem">三個算台迷思（芭樂子打臉時間）</h2>
+      <p>牌桌上最貴的不是手氣差，是「自以為懂」。這三個迷思害人算錯台最多，芭樂子一個一個打臉：</p>
+
+      <h3>❌ 迷思一：「風牌湊成刻子就有台」</h3>
+      <p>大錯特錯。只有<strong>圈風</strong>和<strong>門風</strong>的刻子才算台，剛好同時是圈又是門（連風）才算兩台。其他風牌的刻子叫<strong>客風</strong>，<strong>0 台</strong>。芭樂子看過太多人摸到北風刻興奮半天，結果那局圈風是東、自己門風是南——恭喜，白嗨。湊風刻前先確認那張風是不是你的菜。</p>
+
+      <h3>❌ 迷思二：「碰出來的刻子也能算暗刻」</h3>
+      <p>不行不行不行。暗刻的靈魂就是「<strong>沒碰、自己摸成的</strong>」。你碰一張下去，那副立刻變明刻，<strong>不算進暗刻數</strong>。本來三副自己摸的暗刻好端端的（三暗刻 2 台），你手癢碰一張湊碰碰胡，暗刻剩兩副，台就這樣掉了。能不碰就別碰，這是高手跟肥羊的分水嶺。</p>
+
+      <h3>❌ 迷思三：「平胡隨便都能自摸」</h3>
+      <p>多數台規：<strong>平胡不能自摸</strong>。因為自摸本身有 1 台，跟平胡「全程沒有任何台」的人設直接打架——你一自摸，它就不是平胡了。所以想吃平胡那 2 台，通常得乖乖等別人放槍給你。當然這條地方差異也很大，<strong>還是那句，先問你那桌怎麼算</strong>。</p>
+
+      <div class="tip-box"><strong>💡 一句話總結：</strong>客風刻 0 台、碰了不算暗刻、平胡多半不能自摸。記住這三條，你就贏過半桌只會憑感覺算台的人了。</div>
+
+      <h2 id="cheatsheet" style="margin-top:2.5rem">台灣 16 張台數速查表</h2>
+      <p>懶得看上面的圖解？直接收藏這張分級表，照顏色記，小台金、中台綠、大台紅、天花板粉：</p>
+
+      <div class="card" style="margin:1.2rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08),rgba(30,30,30,0.5))">
+        <h3 style="color:#f5b800;margin-top:0">🟡 小台（1～2 台）・日常款</h3>
+        <p style="margin:.4rem 0"><strong>1 台</strong>：自摸、門清、圈風刻、門風刻、三元刻（中/發/白）、正花、槓上開花、海底撈月、河底撈魚、搶槓</p>
+        <p style="margin:.4rem 0"><strong>2 台</strong>：平胡、三暗刻、門清自摸（門清 1 ＋ 自摸 1）</p>
+      </div>
+      <div class="card" style="margin:1.2rem 0;border-color:#4caf50;background:linear-gradient(135deg,rgba(76,175,80,0.08),rgba(30,30,30,0.5))">
+        <h3 style="color:#4caf50;margin-top:0">🟢 中台（4～5 台）・開始有感</h3>
+        <p style="margin:.4rem 0"><strong>4 台</strong>：碰碰胡、混一色、小三元</p>
+        <p style="margin:.4rem 0"><strong>5 台</strong>：四暗刻</p>
+      </div>
+      <div class="card" style="margin:1.2rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.08),rgba(30,30,30,0.5))">
+        <h3 style="color:#f44336;margin-top:0">🔴 大台（8 台）・封王等級</h3>
+        <p style="margin:.4rem 0">清一色、大三元、小四喜、五暗刻</p>
+      </div>
+      <div class="card" style="margin:1.2rem 0;border-color:var(--guava-pink);background:linear-gradient(135deg,rgba(255,94,156,0.08),rgba(30,30,30,0.5))">
+        <h3 style="color:var(--guava-pink);margin-top:0">💎 天花板（16 台～滿台）・做夢時段</h3>
+        <p style="margin:.4rem 0"><strong>16 台</strong>：字一色、大四喜</p>
+        <p style="margin:.4rem 0"><strong>滿台</strong>：天胡、地胡、人胡（依台規封頂）</p>
+      </div>
+      <p style="font-size:0.95rem;color:var(--text-muted)">※ 以上為台灣 16 張常見台數，花牌、地方台、連莊拉莊等依各桌約定，數字僅供參考。</p>
+
+      <!-- 導流到練習器 -->
+      <div class="card" style="margin:2rem 0;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.08),rgba(30,30,30,0.5));text-align:center">
+        <h3 style="color:var(--guava-green);margin-top:0">看懂了？來實戰！</h3>
+        <p>光看會忘，動手才會。<strong>麻將算台練習器</strong>會給你一手牌，你猜幾台，猜完即時拆解每個台怎麼來、標出暗刻明刻——先從基本台練起，幾輪就有手感。</p>
+        <a href="/tools/mahjong-suan-tai-trainer/" class="btn-primary">🀄 玩算台練習器</a>
+      </div>
+
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <div class="faq-a" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+
+      <p style="margin-top:2rem">好啦，台規大概就這些。最後芭樂子囉嗦一句：算台是為了<strong>胡得明白、收得開心</strong>，不是讓你拿去賭大的。麻將就是個娛樂，跟家人朋友小搓怡情、輸贏控制在笑得出來的範圍就好，真的別把房租押上桌。台規背熟、再去練習器練幾輪，下次自摸換你大聲喊台、不再被全桌虧——學會了記得回來嘴芭樂子一句：「這篇我懂了。」🀄</p>
+
+      <LegalNotice />
+
+      <div class="related-box"><h3>📖 延伸玩玩看</h3><div class="related-links">
+        <a href="/tools/mahjong-suan-tai-trainer/">麻將算台練習器<small>看牌猜台數，暗刻明刻一眼看懂</small></a>
+        <a href="/tools/">8LA 工具箱<small>更多免費計算器、模擬器、檢測工具</small></a>
+        <a href="/articles/">芭樂攻略<small>更多遊戲教學與玩法解析</small></a>
+      </div></div>
+
+      <ShareButtons title="麻將算台怎麼算？台灣16張台數完整圖解" url={URL} />
+    </article>
+  </div>
+
+  <style is:global>
+    /* 覆寫 global.css 的 220px 大塊 hero-banner → 細線（同其他文章） */
+    .hero-banner{ width:100%; height:4px; border-radius:8px; margin-bottom:1.5rem; }
+    .mj-fig{ margin:1.3rem 0; }
+    .mj-felt{ background:#0d4a2c; border:2px solid rgba(255,255,255,.12); border-radius:14px; padding:1rem .7rem; box-shadow:inset 0 0 30px rgba(0,0,0,.5); overflow-x:auto; }
+    .mj-hand{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:flex-start; }
+    .mj-meld{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:4px 5px; border-radius:10px; }
+    .mj-meld + .mj-meld{ border-left:1px dashed rgba(255,255,255,.18); }
+    .mj-tiles{ display:flex; gap:3px; }
+    .mj-tiles svg{ width:42px; height:57px; }
+    .mj-chip{ font-size:.72rem; font-weight:800; border-radius:999px; padding:.05rem .5rem; }
+    .mj-pong{ color:#ffd27a; background:rgba(245,184,0,.18); border:1px solid rgba(245,184,0,.5); }
+    .mj-an{ color:#9cc2ff; background:rgba(70,110,210,.22); border:1px solid rgba(130,170,255,.6); }
+    .mj-meld.exposed .mj-tiles{ opacity:.72; }
+    .mj-cap{ font-size:.8rem; font-weight:800; color:#cbb7a0; }
+    .mj-meld.hl{ background:rgba(245,184,0,.16); box-shadow:0 0 0 2px var(--gold,#f5b800); }
+    .mj-legend{ display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap; font-size:.88rem; color:var(--text-muted); margin:.4rem 0 0; }
+    .content-img{ display:block; width:100%; max-width:840px; height:auto; margin:1rem auto 0; border-radius:12px; border:1px solid var(--border); }
+    .article-img-caption{ text-align:center; font-size:.92rem; line-height:1.7; color:var(--text-muted); margin:.5rem auto 1.4rem; max-width:680px; }
+    .mj-photo{ display:block; width:100%; max-width:840px; height:auto; margin:1.3rem auto .4rem; border-radius:12px; border:1px solid var(--border); }
+    .mj-photo-cap{ text-align:center; font-size:.9rem; color:var(--text-muted); margin:0 auto 1.4rem; max-width:680px; line-height:1.6; }
+    @media (max-width:600px){
+      .mj-tiles svg{ width:31px; height:42px; }
+      .mj-hand{ gap:6px; }
+      .mj-tiles{ gap:2px; }
+      .mj-meld{ padding:3px 3px; }
+      .mj-meld + .mj-meld{ border-left:none; }
+    }
+  </style>
+</BaseLayout>

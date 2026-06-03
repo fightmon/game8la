@@ -2,6 +2,20 @@
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
 export const articles = [
   {
+    slug: 'mahjong-scoring-guide',
+    title: '麻將算台怎麼算？台灣16張台數完整圖解｜門清自摸到大三元',
+    excerpt: '自摸喊「胡！」結果全桌不會算台？芭樂子用自己畫的牌面，把台灣16張算台一張一張圖解：底與台、門清自摸、碰碰胡、清一色、大三元、暗刻、花牌一次搞懂，附台數速查表＋線上練習器。',
+    category: 'mahjong',
+    categoryLabel: '麻將教室',
+    badgeType: 'featured',
+    date: '2026-06-03',
+    views: 1,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0d4a2c,#1a7a3e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-mahjong-scoring.webp'
+  },
+  {
     slug: 'worldcup-2026-format-guide',
     title: '2026 世足賽制懶人包｜48 隊怎麼打？5 分鐘搞懂新制＋測驗',
     excerpt: '2026 世界盃史上首次 48 隊參賽！12 組、32 強、第三名也能晉級——搞不懂沒關係，芭樂子用白話文＋表格＋10 題測驗，5 分鐘讓你從偽球迷變真球迷。',
