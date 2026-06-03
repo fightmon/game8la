@@ -1,17 +1,18 @@
 ---
 import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { articles } from '../data/articles.js';
+import { articles, estViews } from '../data/articles.js';
 import { scamList, lastUpdated } from '../data/scam-list.js';
 
+const now = new Date();
 // 取最新 6 篇給首頁卡片
 const latestArticles = articles.slice(0, 6);
 
-// 🔥 熱門排行 — 依 views 降序，取前 7 篇（views > 0）
+// 🔥 熱門排行 — 依「推估閱讀數」降序，取前 7 篇（views > 0）
 const hotExclude = ['dealers-guide'];
 const hotArticles = [...articles]
   .filter(a => a.views > 0 && !hotExclude.includes(a.slug))
-  .sort((a, b) => (b.views || 0) - (a.views || 0))
+  .sort((a, b) => estViews(b, now) - estViews(a, now))
   .slice(0, 7);
 
 // 短標題：去掉【】前綴，截取到第一個分隔符或 14 字
@@ -142,7 +143,7 @@ const latestScams = [...scamList]
             <h3>{a.title}</h3>
             <div class="article-meta">
               <span><Icon name="calendar" /> {a.date}</span>
-              <span><Icon name="eye" /> {a.views.toLocaleString()}</span>
+              <span><Icon name="eye" /> {estViews(a, now).toLocaleString()}</span>
             </div>
             <p class="article-excerpt">{a.excerpt}</p>
           </div>
@@ -154,10 +155,10 @@ const latestScams = [...scamList]
       <div class="hot-list">
         <h3>🔥 8LA熱門排行</h3>
         {hotArticles.map((a, i) => (
-          <a href={`/articles/${a.slug}/`} class="hot-item" style="text-decoration:none;color:inherit">
+          <a href={a.hotHref || `/articles/${a.slug}/`} class="hot-item" style="text-decoration:none;color:inherit">
             <span class={`hot-num ${i === 0 ? 'top1' : i === 1 ? 'top2' : i === 2 ? 'top3' : 'rest'}`}>{i + 1}</span>
             <span class="hot-title">{a.hotTitle || shortTitle(a.title)}</span>
-            <span class="hot-views">{a.views.toLocaleString()}</span>
+            <span class="hot-views">{estViews(a, now).toLocaleString()}</span>
           </a>
         ))}
       </div>
@@ -218,6 +219,10 @@ const latestScams = [...scamList]
       <a href="/tools/thor-hammer-2-simulator/" class="ts-item">
         <img src="/images/tools/icon-thor-sim.webp" alt="雷神之錘 II 模擬器" width="64" height="64" loading="lazy">
         <span>雷神之錘 II</span>
+      </a>
+      <a href="/tools/mahjong-suan-tai-trainer/" class="ts-item">
+        <div class="ts-mj" aria-hidden="true">🀄</div>
+        <span>算台練習器</span>
       </a>
       <a href="/lottery/analysis/" class="ts-item">
         <img src="/images/tools/icon-lottery.webp" alt="樂透數據站" width="64" height="64" loading="lazy">
@@ -1195,7 +1200,9 @@ body {
 .article-img .cat-badge {
   position: absolute; top: 10px; left: 10px;
   padding: 0.2rem 0.8rem; border-radius: 20px;
-  font-size: 0.75rem; font-weight: 700;
+  font-size: 0.75rem; font-weight: 900;
+  /* 全站分類標籤統一 8LA 螢光綠（此選擇器特異度蓋過下方各 .cat-* 顏色） */
+  background: var(--guava-green); color: #0a2810;
 }
 .cat-attack { background: var(--guava-pink); color: #2a0014; font-weight: 900; }
 .cat-review { background: var(--guava-green); color: #0a2810; font-weight: 900; }
@@ -1751,6 +1758,12 @@ img.tools-cta-icon {
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   object-fit: cover;
 }
+.ts-item .ts-mj {
+  width: 64px; height: 64px; border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; background: linear-gradient(135deg,#0d4a2c,#1a7a3e);
+}
 .ts-item span {
   font-size: 0.75rem;
   font-weight: 600;
@@ -1763,11 +1776,12 @@ img.tools-cta-icon {
 @media (max-width: 480px) {
   .tools-scroll { gap: 0.8rem; }
   .ts-item { min-width: 76px; }
-  .ts-item img {
+  .ts-item img, .ts-item .ts-mj {
     width: 56px;
     height: 56px;
     border-radius: 14px;
   }
+  .ts-item .ts-mj { font-size: 1.7rem; }
   .ts-item span { font-size: 0.7rem; }
 }
 

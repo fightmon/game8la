@@ -1,5 +1,18 @@
 // 全站文章資料來源（單一真相）
 // 新增文章 → 在這個陣列最前面 push 一筆，首頁與 /articles/ 列表都會自動更新
+
+// 依發佈日推估「成長中」的閱讀數：以 views 當人氣種子（越熱門長越快），
+// 用 sqrt(天數) 緩衝避免老文章暴衝。每次 build（上新文章/部署）以當下日期重算 → 數字隨時間增加。
+export function estViews(a, now) {
+  const base = a.views || 0;
+  if (base <= 0) return 0;
+  const today = now || new Date();
+  const published = new Date(a.date + 'T00:00:00');
+  const ageDays = Math.max(0, Math.floor((today - published) / 86400000));
+  const dailyRate = Math.max(4, Math.round(base / 45));
+  return base + Math.round(dailyRate * Math.sqrt(ageDays) * 2.2);
+}
+
 export const articles = [
   {
     slug: 'mahjong-scoring-guide',
@@ -340,7 +353,8 @@ export const articles = [
   },
   {
     slug: 'seth2-slot-simulator-rtp',
-    hotTitle: '自己調 RTP 看老虎機怎麼吃錢',
+    hotTitle: '免費玩戰神賽特2模擬器，自己調RTP',
+    hotHref: '/tools/slot-simulator/',
     title: '戰神賽特2模擬器體驗：自己調 RTP，親手拆解老虎機怎麼吃錢',
     excerpt: '全台唯一可調 RTP 的賽特2模擬器！親手調整回報率 80~200%，體驗倍數球分裂、覺醒鎖定、消除掉落全機制。轉 1000 局看懂大數法則，搞懂為什麼你總是輸。',
     category: 'slots',

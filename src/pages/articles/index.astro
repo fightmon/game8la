@@ -1,8 +1,9 @@
 ---
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { articles } from '../../data/articles.js';
+import { articles, estViews } from '../../data/articles.js';
 
+const now = new Date();
 ---
 
 <BaseLayout title="芭樂攻略 - GAME8LA 遊戲教學與評測" description="GAME8LA 芭樂攻略：老虎機、百家樂、真人娛樂、體育、補魚、棋牌、電競完整教學與評測文章。" currentPage="articles">
@@ -25,6 +26,7 @@ import { articles } from '../../data/articles.js';
         <button class="filter-btn" data-cat="sports">體育</button>
         <button class="filter-btn" data-cat="fishing">捕魚</button>
         <button class="filter-btn" data-cat="poker">棋牌</button>
+        <button class="filter-btn" data-cat="mahjong">麻將</button>
         <button class="filter-btn" data-cat="esports">電競</button>
         <button class="filter-btn" data-cat="lottery">樂透</button>
       </div>
@@ -38,7 +40,7 @@ import { articles } from '../../data/articles.js';
 
     <section class="article-grid" id="articleGrid">
       {articles.map(a => (
-        <a href={a.href || `/articles/${a.slug}/`} class="article-card" data-cat={a.category} data-tags={a.tags.join(',')} data-date={a.date} data-views={a.views}>
+        <a href={a.href || `/articles/${a.slug}/`} class="article-card" data-cat={a.category} data-tags={a.tags.join(',')} data-date={a.date} data-views={estViews(a, now)}>
           <div class="article-thumb" style={`background:${a.gradient}`}>
             {a.thumbnail
               ? <img src={a.thumbnail} alt={a.title} loading="lazy" width="400" height="225" style="width:100%;height:100%;object-fit:cover;display:block" />
@@ -51,7 +53,7 @@ import { articles } from '../../data/articles.js';
             <p>{a.excerpt}</p>
             <div class="meta">
               <span><Icon name="calendar" /> {a.date}</span>
-              <span><Icon name="eye" /> {a.views.toLocaleString()}</span>
+              <span><Icon name="eye" /> {estViews(a, now).toLocaleString()}</span>
             </div>
           </div>
         </a>
@@ -104,8 +106,8 @@ import { articles } from '../../data/articles.js';
     .article-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #fff; }
     .article-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
     .cat-badge {
-      display: inline-block; background: rgba(57,255,20,0.15); color: var(--gold-light);
-      padding: 0.25rem 0.7rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;
+      display: inline-block; background: var(--guava-green); color: #0a2810;
+      padding: 0.25rem 0.7rem; border-radius: 12px; font-size: 0.75rem; font-weight: 800;
       margin-bottom: 0.6rem; align-self: flex-start;
     }
     .article-card h3 { font-size: 1.1rem; margin-bottom: 0.6rem; line-height: 1.4; }
