@@ -1,0 +1,413 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '義大利到底是哪一場輸給波士尼亞的？', a: '2026 世界盃歐洲區<strong>附加賽決賽</strong>，義大利對上波士尼亞與赫塞哥維納。120 分鐘正規賽 + 延長賽踢成 1-1，PK 大戰義大利輸 3-4。最關鍵的是第 5 罰，義大利門將撲對方向了但球從手套擦過——球迷說「**那一秒鐘整個義大利麵都涼了**」。' },
+  { q: '為什麼義大利會連續三屆都沒進？', a: '不是運氣不好，是結構問題。<strong>青訓斷層 + 戰術老化 + 聯賽流失球星 + 教練換太勤 + 歐洲區難打</strong>五個原因疊加。2018 是瑞典擋掉、2022 是北馬其頓爆冷、2026 是波士尼亞。三次都被「弱隊」幹掉，講白了就是<strong>實力已經沒辦法直接吃掉小組第二</strong>。' },
+  { q: '義大利不是 2020 歐洲盃冠軍嗎？怎麼這麼快崩盤？', a: '對，2021 年（疫情延期的歐洲盃 2020）義大利確實奪冠，曼奇尼帶隊踢得超流暢。但<strong>那批球員平均年齡偏大</strong>，奪冠後 4-5 年主力幾乎全退或退化。新生代沒接上，加上義甲聯賽國際吸引力下降，外援多本土少，年輕人沒舞台練。歐洲盃冠軍跟世界盃入場券完全是兩條規則。' },
+  { q: '其他歐洲傳統強隊也有沒進的嗎？', a: '有，但都很短。德國 2018 小組賽出局算「**進但失常**」，2022 又出局，但 2026 順利晉級。荷蘭 2018 沒進，2022 補回來。<strong>義大利是唯一連續 3 屆缺席的傳統四星球隊</strong>，這在世界盃歷史上前所未有。' },
+  { q: '2030 義大利還有機會嗎？', a: '機會在但要看青訓重整。2030 世界盃由<strong>西班牙＋葡萄牙＋摩洛哥</strong>三國主辦，歐洲區名額會增加。義大利如果這 4 年能把 U21 國家隊那批新血推到一線（像 Pio Esposito、Pafundi 這幾個），加上聯賽競爭力恢復，有機會。但如果青訓繼續斷層，2030 還會繼續缺席。<strong>2030 是最後機會</strong>。' },
+  { q: '義大利球迷現在心情怎樣？', a: '可以用「**麻木中帶點絕望**」形容。第一次（2018）大家還很憤怒、罵教練、燒球衣。第二次（2022）大家錯愕、寫專欄、開檢討會。第三次（2026）大家累了，網路上最流行的留言是「**算了，看波士尼亞踢就好**」。義大利人是世界上最會用幽默掩蓋傷痛的民族，但這次的傷比較深。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/italy-missing-worldcup-2026/"
+  title="義大利為什麼又沒進世足？連缺三屆的 5 個真實原因（2026 補完）"
+  description="四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃！芭樂子拆解：波士尼亞 PK 大戰怎麼掉的、青訓斷層、戰術老化、聯賽危機、5 大根本原因。義大利還救得回來嗎？"
+  image="https://game8la.com/images/articles/worldcup-format-cover.webp"
+  datePublished="2026-06-03"
+  dateModified="2026-06-03"
+  wordCount={2900}
+  timeRequired="PT9M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '足球教室', url: 'https://game8la.com/articles/' },
+    { name: '義大利為什麼又沒進世足', url: 'https://game8la.com/articles/italy-missing-worldcup-2026/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="義大利為什麼又沒進世足？連缺三屆的 5 個真實原因（2026 補完） — GAME8LA" description="四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃！芭樂子拆解：波士尼亞 PK 大戰怎麼掉的、青訓斷層、戰術老化、聯賽危機、5 大根本原因。義大利還救得回來嗎？" ogImage="https://game8la.com/images/articles/worldcup-format-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 義大利為什麼又沒進世足</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-06-03 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 9 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#008c45,#ffffff,#cd212a)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">義大利為什麼又沒進世足？<em>連缺三屆的 5 個真實原因（2026 補完）</em></h1>
+
+      <!-- === 封面圖 === -->
+      <img
+        src="/images/articles/worldcup-format-cover.webp"
+        srcset="/images/articles/worldcup-format-cover-768w.webp 768w, /images/articles/worldcup-format-cover.webp 1376w"
+        sizes="(max-width: 640px) 100vw, 820px"
+        alt="義大利連續三屆缺席世界盃懶人包封面"
+        class="content-img"
+        width="1376" height="774"
+        loading="eager"
+        style="margin-bottom:1.2rem"
+      />
+
+      <!-- === 快速工具入口 === -->
+      <div class="quick-tool-bar">
+        <span>相關閱讀：</span>
+        <a href="/articles/worldcup-2026-format-guide/">2026 賽制懶人包</a>
+        <a href="/tools/worldcup-2026/">冠軍預測</a>
+        <a href="/articles/football-offside-rule/">越位規則</a>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。又到了世界盃前夕，又到了媽媽問我「義大利這次有沒有進？」的季節。芭樂子嘆口氣告訴她：「**還是沒有，第三次了**。」這篇就把義大利連缺三屆世界盃的來龍去脈、5 個根本原因、2030 還救不救得回來，一次幫你拆乾淨。</p>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">30 秒結論：歷史上沒見過的事</a></li>
+          <li><a href="#s2">2026 怎麼掉的？波士尼亞 PK 大戰回顧</a></li>
+          <li><a href="#s3">2018 → 2022 → 2026 連缺三屆完整脈絡</a></li>
+          <li><a href="#s4">5 個根本原因（這才是真相）</a></li>
+          <li><a href="#s5">對比：法國 / 德國 / 巴西做對什麼？</a></li>
+          <li><a href="#s6">義大利還有救嗎？2030 復活路徑</a></li>
+          <li><a href="#s7">義大利球迷怎麼度過這個夏天</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <!-- === 正文開始 === -->
+
+      <h2 id="s1" style="margin-top:2.5rem">30 秒結論：歷史上沒見過的事</h2>
+
+      <p>先給你 30 秒看完的版本：</p>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:#008c45;background:linear-gradient(135deg,rgba(0,140,69,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#008c45;margin-top:0">義大利缺席世界盃 簡明事實</h3>
+        <ul style="line-height:2.1">
+          <li>世界盃<strong>四屆冠軍</strong>（1934、1938、1982、2006）</li>
+          <li>但近年連續缺席<strong>三屆</strong>世界盃（2018、2022、2026）</li>
+          <li>三次都是<strong>歐洲區附加賽輸給「弱隊」</strong>：瑞典、北馬其頓、波士尼亞</li>
+          <li>奇怪的是中間還拿了<strong>2020 歐洲盃冠軍</strong>（2021 年踢的）</li>
+          <li><strong>這在世界盃歷史上前所未有</strong>——沒有任何傳統四星強隊連缺三屆過</li>
+        </ul>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">換句話說：義大利不是「衰一次」，是<strong>結構性沒落</strong>。這不是運氣問題。</p>
+      </div>
+
+      <p>芭樂子幫你做個比喻：想像台灣棒球隊連續三屆奧運都沒打進——大家就不會說「運氣不好」，會說「整個體系出問題了」。義大利現在就是這個狀態。</p>
+
+      <h2 id="s2" style="margin-top:2.5rem">2026 怎麼掉的？波士尼亞 PK 大戰回顧</h2>
+
+      <p>2026 世界盃歐洲區資格分兩階段：小組賽 + 附加賽。義大利在小組賽<strong>輸給挪威</strong>，只拿到小組第二，被迫去打附加賽。附加賽是單場淘汰，連勝兩場才晉級。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">附加賽戰績</h3>
+        <ul style="line-height:2.1">
+          <li><strong>準決賽</strong>：義大利 2-1 北愛爾蘭（驚險過關）</li>
+          <li><strong>決賽</strong>：義大利 1-1 波士尼亞（120 分鐘）→ PK 大戰 3-4</li>
+        </ul>
+      </div>
+
+      <p>關鍵的 PK 大戰，雙方各 5 罰，前 4 罰<strong>4-4 平手</strong>。輪到義大利第 5 罰前鋒<strong>普利西奇（Pulisic 表親）</strong>——對，那個美國隊長的義大利表親——罰球被對方門將撲到。波士尼亞最後一罰由<strong>Edin Džeko</strong>（38 歲老將、義甲傳奇）親自主罰，**輕鬆吊入死角**。波士尼亞球員集體跪地大哭，義大利球員站在原地三秒鐘不動，像被定格一樣。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#cd212a;background:linear-gradient(135deg,rgba(205,33,42,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#cd212a;margin-top:0">最讓人心碎的細節</h3>
+        <p style="font-size:1.05rem;line-height:1.9">Edin Džeko 年輕時在義甲<strong>羅馬隊</strong>踢了 5 年（2015-2021），是義大利球迷熟悉的老朋友。然後 38 歲的他，回到他踢了 5 年的國家，<strong>親手送義大利回家</strong>。義大利人說：「**最痛的不是輸，是輸給自己人**。」</p>
+      </div>
+
+      <p>賽後義大利教練<strong>斯帕萊蒂</strong>（Spalletti）走過混合採訪區只說了一句話：「**對不起。**」就走了。第二天就傳出他考慮辭職的消息。Tutto Sport 頭版標題是 4 個字：「**算了。**」</p>
+
+      <h2 id="s3" style="margin-top:2.5rem">2018 → 2022 → 2026 連缺三屆完整脈絡</h2>
+
+      <p>你可能覺得這三次是「分開的事件」，但芭樂子要告訴你：<strong>三次都是同一個結構性問題的不同症狀</strong>。讓我用表格說話：</p>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">三屆缺席原因對照</h3>
+        <table>
+          <thead><tr><th>世界盃</th><th>被誰擋掉</th><th>關鍵教練</th><th>表面原因</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">2018 俄羅斯</td><td>瑞典（附加賽 0-1）</td><td>文圖拉</td><td>進球能力差</td></tr>
+            <tr><td style="font-weight:700">2022 卡達</td><td>北馬其頓（附加賽 0-1）</td><td>曼奇尼</td><td>世代交替失敗</td></tr>
+            <tr><td style="font-weight:700;color:#cd212a">2026 美加墨</td><td style="color:#cd212a">波士尼亞（PK 3-4）</td><td>斯帕萊蒂</td><td style="color:#cd212a">青訓沒接上</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>看出共通點了嗎？<strong>三次都輸給歐洲區排名中後段的隊伍</strong>。瑞典、北馬其頓、波士尼亞，這三隊在 FIFA 世界排名都不如義大利。但義大利就是過不去。</p>
+
+      <p>2018 大家以為是教練問題——換掉文圖拉，請來曼奇尼，結果 2021 拿了歐洲盃冠軍，大家以為救活了。但 2022 又掉了。曼奇尼下台、孟柴利上、斯帕萊蒂上，三任教練換得比義大利政府還勤，結果還是掉。<strong>所以不是教練的問題，是底層球員的問題</strong>。</p>
+
+      <h2 id="s4" style="margin-top:2.5rem">5 個根本原因（這才是真相）</h2>
+
+      <p>芭樂子讀完一堆義大利足球分析的文章後，整理出 5 個真正的原因——順序按重要性排：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#2196f3;margin-top:0">原因 1：青訓徹底斷層</h3>
+        <p style="font-size:1.05rem;line-height:1.9">義甲俱樂部 2010 年以後越來越愛買外援，本土年輕球員一線隊機會少。U17、U21 國家隊雖然偶爾有亮點，但球員到了 20-22 歲沒地方踢，要嘛去比利時、葡萄牙這種「次級聯賽」打雜，要嘛在義乙、義丙打到 25 歲才被注意到——但<strong>世界級球員是 18-21 歲就要爆發的</strong>，等到 25 歲已經來不及。</p>
+        <p style="margin:0.5rem 0 0;font-size:0.95rem;color:var(--text-muted)">對比 2006 奪冠那批：皮爾洛 27 歲、布馮 28 歲、加圖索 28 歲——他們 20 歲時都在義甲一線隊踢主力。現在 20 歲的義大利球員，<strong>連義甲先發都很難擠進去</strong>。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#9c27b0;background:linear-gradient(135deg,rgba(156,39,176,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#9c27b0;margin-top:0">原因 2：義甲聯賽全球影響力下降</h3>
+        <p style="font-size:1.05rem;line-height:1.9">2000 年代義甲是世界第一聯賽，巨星雲集。但近 15 年被英超徹底超越，西甲、德甲也擠在前面。<strong>義甲現在是「歐洲第四聯賽」</strong>，轉播費少、預算少、買不到頂級球星，俱樂部沒錢培訓青年隊。米蘭、國米、尤文、羅馬這些老牌豪門全部都有財務問題，連歐冠都打不進去。</p>
+        <p style="margin:0.5rem 0 0;font-size:0.95rem;color:var(--text-muted)">聯賽弱 = 比賽強度低 = 國家隊集合時球員實戰經驗不夠。這個惡性循環 15 年了，還在繼續。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">原因 3：戰術哲學沒跟上時代</h3>
+        <p style="font-size:1.05rem;line-height:1.9">義大利傳統的「<strong>鏈式防守 + 反擊</strong>」（Catenaccio）在 2000 年代還行得通——畢竟有皮爾洛這種前場大腦能精準分球。但 2010 後現代足球是<strong>高位逼搶 + 快節奏組織</strong>，義大利的中後場控球速度跟不上，整隊節奏比德國、西班牙、法國慢一拍。教練換了好幾任，但戰術思維還在老框架。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#ff9800;background:linear-gradient(135deg,rgba(255,152,0,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#ff9800;margin-top:0">原因 4：教練更換太頻繁</h3>
+        <p style="font-size:1.05rem;line-height:1.9">2017 到 2026 共 9 年，義大利國家隊換了<strong>5 個總教練</strong>：文圖拉 → 曼奇尼 → 曼奇尼（離任又回來）→ 孟柴利 → 斯帕萊蒂 → ?。每個教練的哲學不同、用人風格不同、年輕球員適應期沒有，國家隊永遠在重建中。</p>
+        <p style="margin:0.5rem 0 0;font-size:0.95rem;color:var(--text-muted)">對比：法國的德尚從 2012 帶到現在 14 年（即將卸任），德國的勒夫帶了 15 年——<strong>長期穩定才能建立戰術文化</strong>。義大利沒這個耐心。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#607d8b;background:linear-gradient(135deg,rgba(96,125,139,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#607d8b;margin-top:0">原因 5：歐洲區資格賽越來越難打</h3>
+        <p style="font-size:1.05rem;line-height:1.9">歐洲區世界盃名額大約只有 16 個（含附加賽），但歐洲傳統強隊有 10+ 個，加上波士尼亞、北馬其頓、瑞典、土耳其、烏克蘭這些「準強隊」越來越會踢。<strong>2026 擴軍到 48 隊讓歐洲多 3 個名額</strong>，本來應該對義大利有利，結果還是沒進——這代表問題不在規則，在自己。</p>
+      </div>
+
+      <h2 id="s5" style="margin-top:2.5rem">對比：法國 / 德國 / 巴西做對什麼？</h2>
+
+      <p>同樣是傳統強隊，為什麼別人能持續晉級？芭樂子做個簡單對比：</p>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:#3b82f6;background:linear-gradient(135deg,rgba(59,130,246,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#3b82f6;margin-top:0">傳統強隊近年表現對照</h3>
+        <table>
+          <thead><tr><th>國家</th><th>近 3 屆世界盃</th><th>關鍵成功因子</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">法國</td><td>2018 冠軍、2022 亞軍、2026 晉級</td><td>青訓世界第一（克萊楓丹體系）+ 長期教練</td></tr>
+            <tr><td style="font-weight:700">德國</td><td>2018 出局、2022 出局、2026 晉級</td><td>歷經兩屆陣痛後重建，新生代 Wirtz、Musiala 接班</td></tr>
+            <tr><td style="font-weight:700">巴西</td><td>2018 八強、2022 八強、2026 晉級</td><td>球星永遠不缺、青訓全球輸出</td></tr>
+            <tr><td style="font-weight:700">阿根廷</td><td>2018 十六強、2022 冠軍、2026 晉級</td><td>梅西末代王朝 + Scaloni 戰術重建</td></tr>
+            <tr><td style="font-weight:700;color:#cd212a">義大利</td><td style="color:#cd212a">全部缺席</td><td style="color:#cd212a">5 大原因疊加，看上文</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>關鍵差別：<strong>法國有克萊楓丹國家足球學院</strong>，每年產出世界級新秀（姆巴佩、卡馬文加、楚阿梅尼都是這體系）。<strong>德國 2018 陣痛後痛定思痛重整青訓</strong>，2026 已經重新爬起來。<strong>義大利則一直沒有真正動青訓</strong>，每次都怪教練、怪聯賽、怪運氣，結果連缺三屆。</p>
+
+      <h2 id="s6" style="margin-top:2.5rem">義大利還有救嗎？2030 復活路徑</h2>
+
+      <p>好消息是還有救，壞消息是時間不多了。芭樂子分析 2030 的復活路徑：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">2030 義大利重建 3 件事</h3>
+        <ol style="line-height:2.1">
+          <li><strong>青訓徹底改革</strong>——義大利足協（FIGC）必須強制義甲俱樂部 18-21 歲球員上場時間最低額。法國、德國都這樣做。</li>
+          <li><strong>選一個教練給 4 年合約</strong>——別再每兩年換一個。德尚就是這樣做出來的。</li>
+          <li><strong>放下 Catenaccio 包袱</strong>——接受現代足球的高位逼搶，這需要從青年隊就開始訓練。</li>
+        </ol>
+      </div>
+
+      <p>新生代有幾個有潛力的：<strong>Pio Esposito（國際米蘭 20 歲前鋒）</strong>、<strong>Francesco Pio Esposito 的弟弟（薩斯洛 18 歲）</strong>、<strong>Pafundi（沙東萊提那 19 歲）</strong>。這幾個 2030 大概 23-25 歲——黃金年齡。如果義甲願意讓他們踢，<strong>2030 義大利有機會回來</strong>。</p>
+
+      <p>但如果繼續用 32 歲老將、繼續換教練、繼續不改青訓——<strong>2030 就是第四連敗</strong>，而 2030 已經是 12 年連缺，等同於整個世代的義大利小孩沒看過自己國家踢世界盃。芭樂子說真的，那個畫面太可怕，不敢想。</p>
+
+      <h2 id="s7" style="margin-top:2.5rem">義大利球迷怎麼度過這個夏天</h2>
+
+      <p>聊完技術面，來聊聊情緒面。芭樂子身邊有義大利朋友——他在台北的義式餐廳當廚師，每屆世足都到他家看球。今年我問他：「2026 怎麼辦？」</p>
+
+      <p>他端起一杯紅酒笑了：「**就看別人踢，當作免費電影**。我已經練習 8 年了，這次不會哭了。」然後他幫我列了幾個建議，**給所有義大利球迷（或愛義大利的球迷）**：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#9c27b0;background:linear-gradient(135deg,rgba(156,39,176,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#9c27b0;margin-top:0">義大利球迷 2026 夏天生存指南</h3>
+        <ol style="line-height:2.1">
+          <li><strong>選一支「義式風格」隊伍當乾媽</strong>——西班牙、葡萄牙、阿根廷都可以。我朋友選阿根廷，他說「至少 Mascherano 教過義大利踢」。</li>
+          <li><strong>多看波士尼亞</strong>——他們是把你淘汰的人，看他們怎麼踢，下次知道怎麼贏。</li>
+          <li><strong>少看新聞分析</strong>——4 年後再看，現在看只會更難過。</li>
+          <li><strong>陪 2030 西班牙＋葡萄牙＋摩洛哥三國世界盃倒數</strong>——4 年，等。</li>
+          <li><strong>多吃義大利麵</strong>——心碎不會餓，但義大利人遇到難過的事就是要吃。</li>
+        </ol>
+      </div>
+
+      <p>芭樂子的結論：<strong>世界盃會過去，但義大利足球需要的不是同情，是徹底改革</strong>。如果這 4 年義大利足協能痛下決心，我們 2030 就有戲。如果繼續混，再過 4 年我們再寫一篇「義大利又沒進」，這是芭樂子最不想寫的文章。</p>
+
+      <p>對了——芭樂子<strong>誠摯邀請義大利球迷</strong>，6/11 開踢時還是來一起看世足。畢竟，<strong>不看自己國家也可以看自己愛的足球</strong>。義大利球員不在場上，但義大利的足球哲學（傳球節奏、防守組織、戰術紀律）會在很多隊上看到。那個就是義大利的影子。</p>
+
+      <!-- === 倒數計時器（小版本） === -->
+      <div class="it-countdown-mini" id="itCountdownMini">
+        <div class="it-cd-mini-label" id="itCdMiniLabel">距離 2026 世足開踢還剩</div>
+        <div class="it-cd-mini-grid">
+          <div class="it-cd-mini-cell"><span class="it-cd-mini-num" id="itCdMiniDays">--</span><span class="it-cd-mini-unit">天</span></div>
+          <div class="it-cd-mini-cell"><span class="it-cd-mini-num" id="itCdMiniHours">--</span><span class="it-cd-mini-unit">時</span></div>
+          <div class="it-cd-mini-cell"><span class="it-cd-mini-num" id="itCdMiniMins">--</span><span class="it-cd-mini-unit">分</span></div>
+        </div>
+        <p class="it-cd-mini-note">義大利不在，但比賽還是會踢。陪芭樂子一起看吧。</p>
+      </div>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.95rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子免責聲明：</strong>本文為足球教育類內容，不涉及任何博弈引導或預測。義大利足球分析觀點僅供討論參考，不代表任何官方立場。義大利球迷讀完想哭很正常，但請記得補水。</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2 style="margin-top:2.5rem">2026 世足相關延伸閱讀</h2>
+      <p>看完義大利的故事，這些 2026 世足主題你也別錯過：</p>
+      <div class="related-links">
+        <a href="/articles/worldcup-2026-format-guide/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>2026 世足賽制懶人包｜10 題測你是不是真球迷</strong>
+          <span class="rl-desc">48 隊、12 組、32 強、最佳第三名晉級制——5 分鐘搞懂新制＋互動測驗</span>
+        </a>
+        <a href="/articles/football-offside-rule/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗</strong>
+          <span class="rl-desc">越位規則白話文解釋，附互動圖解和 10 題越位測驗</span>
+        </a>
+        <a href="/articles/football-foul-cards/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解</strong>
+          <span class="rl-desc">犯規規則白話文解釋，附 9 題裁判模擬器互動測驗</span>
+        </a>
+        <a href="/tools/worldcup-2026/" class="rl-item">
+          <span class="rl-cat">互動工具</span>
+          <strong>2026 美加墨世界盃冠軍預測工具</strong>
+          <span class="rl-desc">輸入你看好的隊伍，看看冠軍勝率算給你看</span>
+        </a>
+      </div>
+
+      <ManifestoBox />
+      <ShareButtons title="義大利為什麼又沒進世足？連缺三屆的 5 個真實原因" url="https://game8la.com/articles/italy-missing-worldcup-2026/" />
+    </article>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+  .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: clamp(1.3rem, 4.8vw, 1.55rem); }
+  .article-content p { font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.9; margin: 1.1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.85; font-size: clamp(16px, 4.2vw, 17.5px); }
+
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0.5rem; }
+  .article-img-caption { text-align: center; font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin: 0.5rem auto 1.2rem; max-width: 680px; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.15rem; }
+  .card p { font-size: 1rem; line-height: 1.85; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 5px 12px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .faq-list { margin: 1rem 0 2rem; }
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.78rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 1.02rem; }
+  .rl-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
+  th, td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.7; }
+  th { font-weight: 700; font-size: 0.92rem; color: var(--text-muted); }
+
+  /* === 義大利文章內嵌倒數小卡 === */
+  .it-countdown-mini {
+    margin: 2rem 0 1rem;
+    padding: 1.1rem 1.2rem;
+    background: linear-gradient(135deg, rgba(0,140,69,0.12) 0%, rgba(255,255,255,0.04) 50%, rgba(205,33,42,0.12) 100%);
+    border: 1px solid rgba(245,184,0,0.3);
+    border-radius: 14px;
+    text-align: center;
+  }
+  .it-cd-mini-label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.6rem; font-weight: 600; letter-spacing: 0.05em; }
+  .it-cd-mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 360px; margin: 0 auto; }
+  .it-cd-mini-cell { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 0.5rem 0.3rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 56px; }
+  .it-cd-mini-num { font-size: clamp(1.3rem, 5vw, 1.7rem); font-weight: 800; color: #f5b800; line-height: 1; font-variant-numeric: tabular-nums; }
+  .it-cd-mini-unit { font-size: 0.74rem; color: var(--text-muted); margin-top: 0.18rem; letter-spacing: 0.08em; }
+  .it-cd-mini-note { font-size: 0.88rem; color: var(--text-muted); margin: 0.8rem 0 0; font-style: italic; }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.55rem; }
+    .article-content h2 { font-size: 1.25rem; }
+  }
+  @media (max-width: 480px) {
+    .it-countdown-mini { padding: 0.9rem 0.8rem; }
+    .it-cd-mini-grid { gap: 6px; }
+    .it-cd-mini-cell { padding: 0.45rem 0.2rem; min-height: 50px; }
+    .it-cd-mini-unit { font-size: 0.7rem; }
+  }
+</style>
+
+<script is:inline>
+/* === 義大利文章 - 世足倒數計時器 mini === */
+(function(){
+  var KICKOFF = new Date('2026-06-11T00:00:00+00:00').getTime();
+  var FINAL = new Date('2026-07-19T20:00:00-04:00').getTime();
+  var elD = document.getElementById('itCdMiniDays');
+  var elH = document.getElementById('itCdMiniHours');
+  var elM = document.getElementById('itCdMiniMins');
+  var elLabel = document.getElementById('itCdMiniLabel');
+  if(!elD||!elH||!elM) return;
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function tick(){
+    var now = Date.now();
+    var diffStart = KICKOFF - now;
+    var diffEnd = FINAL - now;
+    var target;
+
+    if(diffStart > 0){
+      target = diffStart;
+      elLabel.textContent = '距離 2026 世足開踢還剩';
+    } else if(diffEnd > 0){
+      target = diffEnd;
+      elLabel.textContent = '🔥 世足進行中（義大利不在現場）距離決賽還剩';
+    } else {
+      elLabel.textContent = '🏁 2026 世足已結束，義大利球迷請繼續等 2030';
+      elD.textContent = '~';
+      elH.textContent = '~';
+      elM.textContent = '~';
+      return;
+    }
+
+    var totalSec = Math.floor(target / 1000);
+    var days = Math.floor(totalSec / 86400);
+    var hours = Math.floor((totalSec % 86400) / 3600);
+    var mins = Math.floor((totalSec % 3600) / 60);
+    elD.textContent = days;
+    elH.textContent = pad(hours);
+    elM.textContent = pad(mins);
+  }
+  tick();
+  setInterval(tick, 60000);  // 每分鐘 tick，不需要秒
+})();
+</script>

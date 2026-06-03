@@ -19,18 +19,20 @@ const faqs = [
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/football-foul-cards/"
-  title="足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解 — GAME8LA"
-  description="足球犯規規則白話文解釋：什麼情況給黃牌、什麼直接紅牌。附 9 題裁判模擬器互動測驗，每題都有芭樂子搞笑圖解。"
+  title="足球犯規怎麼判？2026 世足前 9 題裁判模擬器＋圖解 — GAME8LA"
+  description="足球犯規規則白話文解釋：什麼情況給黃牌、什麼直接紅牌。附 9 題裁判模擬器互動測驗、2026 世足 VAR 升級資訊、史上 5 大經典紅牌時刻，每題都有芭樂子搞笑圖解。"
   image="https://game8la.com/images/articles/foul-quiz/foul-cover.webp"
   datePublished="2026-06-02"
-  dateModified="2026-06-02"
+  dateModified="2026-06-03"
+  wordCount={2900}
+  timeRequired="PT9M"
   breadcrumbs={[
     { name: '首頁', url: 'https://game8la.com/' },
     { name: '足球教室', url: 'https://game8la.com/articles/' },
     { name: '犯規與紅黃牌圖解', url: 'https://game8la.com/articles/football-foul-cards/' },
   ]}
 />
-<BaseLayout currentPage="articles" title="足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解 — GAME8LA" description="足球犯規規則白話文解釋：什麼情況給黃牌、什麼直接紅牌。附 9 題裁判模擬器互動測驗，每題都有芭樂子搞笑圖解。" ogImage="https://game8la.com/images/articles/foul-quiz/foul-cover.webp">
+<BaseLayout currentPage="articles" title="足球犯規怎麼判？2026 世足前 9 題裁判模擬器＋圖解 — GAME8LA" description="足球犯規規則白話文解釋：什麼情況給黃牌、什麼直接紅牌。附 9 題裁判模擬器互動測驗、2026 世足 VAR 升級資訊、史上 5 大經典紅牌時刻，每題都有芭樂子搞笑圖解。" ogImage="https://game8la.com/images/articles/foul-quiz/foul-cover.webp">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 犯規與紅黃牌圖解</div>
     <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
@@ -45,12 +47,24 @@ const faqs = [
 
       <h1 style="font-size:2rem;line-height:1.3">足球犯規怎麼判？黃牌紅牌差在哪？<em>芭樂子圖解＋9 題裁判模擬器，看完你比主審還懂</em></h1>
 
+      <!-- === 倒數計時器 === -->
+      <div class="wc-countdown" id="wcCountdown" aria-live="polite">
+        <div class="wc-cd-label" id="wcCdLabel">距離 2026 世足開踢還剩</div>
+        <div class="wc-cd-grid">
+          <div class="wc-cd-cell"><span class="wc-cd-num" id="wcCdDays">--</span><span class="wc-cd-unit">天</span></div>
+          <div class="wc-cd-cell"><span class="wc-cd-num" id="wcCdHours">--</span><span class="wc-cd-unit">時</span></div>
+          <div class="wc-cd-cell"><span class="wc-cd-num" id="wcCdMins">--</span><span class="wc-cd-unit">分</span></div>
+          <div class="wc-cd-cell"><span class="wc-cd-num" id="wcCdSecs">--</span><span class="wc-cd-unit">秒</span></div>
+        </div>
+        <div class="wc-cd-meta" id="wcCdMeta">📅 開幕戰：2026/06/11 ｜ 🏆 決賽：2026/07/19</div>
+      </div>
+
       <!-- === 快速工具入口 === -->
       <div class="quick-tool-bar">
         <span>直接玩測驗：</span>
-        <a href="#s6">裁判模擬器</a>
+        <a href="#s7">裁判模擬器</a>
         <a href="/articles/football-offside-rule/">越位規則</a>
-        <a href="/tools/worldcup-2026/">世足冠軍預測</a>
+        <a href="/articles/worldcup-2026-format-guide/">世足賽制懶人包</a>
       </div>
 
       <!-- === 封面圖 === -->
@@ -75,8 +89,9 @@ const faqs = [
           <li><a href="#s2">黃牌和紅牌差在哪？</a></li>
           <li><a href="#s3">常見犯規動作圖解</a></li>
           <li><a href="#s4">直接自由球 vs 間接自由球</a></li>
-          <li><a href="#s5">VAR 和犯規判定</a></li>
-          <li><a href="#s6">來當裁判！9 題犯規判定模擬器</a></li>
+          <li><a href="#s5">VAR 和犯規判定（2026 新規 SAOT）</a></li>
+          <li><a href="#s6">世足史上 5 大經典紅牌時刻</a></li>
+          <li><a href="#s7">來當裁判！9 題犯規判定模擬器</a></li>
           <li><a href="#faq">常見問題 FAQ</a></li>
         </ol>
       </div>
@@ -261,9 +276,70 @@ const faqs = [
 
       <p>關於 2026 世足，FIFA 預計會升級 VAR 系統，加入更多 AI 輔助和更快速的回放技術。目標是把 VAR 確認時間壓縮到更短，減少比賽中斷的時間。對球迷來說，少等幾分鐘就是好消息。</p>
 
+      <div class="card" style="margin:1.5rem 0;border-color:#06b6d4;background:linear-gradient(135deg,rgba(6,182,212,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#06b6d4;margin-top:0">🆕 2026 世足 VAR 升級 4 件套</h3>
+        <ul style="line-height:2.1">
+          <li><strong>半自動越位技術（SAOT）正式採用</strong>：球場 12 個高速攝影機追蹤球員每個關節，球內嵌感測器追蹤球的位置，越位判定從 70 秒壓到 25 秒</li>
+          <li><strong>AI 輔助手球判定</strong>：機器學習比對「手是否自然位置」，給主裁判參考</li>
+          <li><strong>透明化球場廣播</strong>：VAR 判決理由會即時透過場內廣播跟全球轉播說明</li>
+          <li><strong>球員場邊看回放</strong>：紅牌事件主裁判可邀請涉事球員一起看回放（爭議仍多）</li>
+        </ul>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">所以 2026 你看的世足，會比 2022 卡達時更快、更透明、更少爭議——理論上啦。</p>
+      </div>
+
       <p>芭樂子的觀點：VAR 讓足球更公平了，但也帶來一些爭議。很多球迷覺得 VAR 讓比賽中斷太久、破壞了節奏感。而且 VAR 也不是萬能的——同一個畫面，不同裁判可能看法不同。但整體來說，VAR 確實減少了很多冤枉判決，特別是在 PK 和紅牌這種影響比賽結果的重大判罰上。你說呢？</p>
 
-      <h2 id="s6" style="margin-top:2.5rem">來當裁判！9 題犯規判定模擬器</h2>
+      <h2 id="s6" style="margin-top:2.5rem">世足史上 5 大經典紅牌時刻</h2>
+
+      <p>規則講完了，來看故事吧。芭樂子幫你整理世足史上最讓人印象深刻的 5 張紅牌——這些畫面，球迷講 20 年都不會膩。</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">🥇 No.1 — 2006 Zidane 頭撞 Materazzi（決賽）</h3>
+        <p style="font-size:1rem;line-height:1.85">世足史上「**最貴的一顆紅牌**」。法國 vs 義大利決賽延長賽，齊達內（Zidane）退役前最後一場比賽，因為義大利後衛馬特拉齊（Materazzi）口頭挑釁，齊達內轉身用<strong>頭錘撞對方胸口</strong>。直接紅牌。法國最後 PK 大戰輸給義大利。</p>
+        <p style="font-size:0.95rem;line-height:1.85;color:var(--text-muted)">⚠️ 芭樂子註：那一次馬特拉齊到底說了什麼，齊達內 20 年來都沒透露。義大利球迷說「不是我們勝之不武」，法國球迷說「義大利就是會用嘴」。歷史就是這樣，一張紅牌定 4 年。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">🥈 No.2 — 2014 蘇雷茲咬人（小組賽）</h3>
+        <p style="font-size:1rem;line-height:1.85">烏拉圭前鋒蘇亞雷斯（Luis Suárez）對上義大利時，<strong>咬了對方後衛 Chiellini 的肩膀</strong>。這已經是他職業生涯<strong>第三次咬人</strong>。賽後 FIFA 追加判罰：禁賽 9 場 + 4 個月不能參加任何足球活動 + 罰款 10 萬瑞士法郎。</p>
+        <p style="font-size:0.95rem;line-height:1.85;color:var(--text-muted)">⚠️ 芭樂子註：當場主裁判沒看到，所以沒紅牌。但 FIFA 看了影片直接重罰。Chiellini 後來笑說「他是不是把我當水煮蛋」。蘇亞雷斯之後成了烏拉圭最強前鋒，但也成了 meme 永久素材。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">🥉 No.3 — 2018 Cavani vs 葡萄牙（16 強）</h3>
+        <p style="font-size:1rem;line-height:1.85">不是紅牌，但是世足史上最有故事性的黃牌之一。烏拉圭前鋒卡瓦尼（Cavani）獨進雙球淘汰葡萄牙，賽後 C 羅承認「葡萄牙時代結束了」。但卡瓦尼比賽後段腿傷下場，被攙扶離場時——<strong>C 羅親自上前扶他</strong>。一場比賽輸了還這麼有風度，球迷說：「**這就是運動精神**。」</p>
+        <p style="font-size:0.95rem;line-height:1.85;color:var(--text-muted)">⚠️ 芭樂子註：放這個不是紅牌但是想提一下，告訴大家紅牌不一定是壞事，運動精神才是真正讓球迷愛上足球的原因。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">🏅 No.4 — 2010 De Jong 飛踹 Xabi Alonso（決賽）</h3>
+        <p style="font-size:1rem;line-height:1.85">荷蘭 vs 西班牙決賽，荷蘭中場德容（Nigel De Jong）<strong>用鞋底直接踹西班牙球員阿隆索（Xabi Alonso）的胸口</strong>。腳掌完全踩到對方肋骨。重點是——當時主裁判 Howard Webb 只給了黃牌。賽後全世界球評都說「**這要是現在用 VAR，絕對紅牌**」。</p>
+        <p style="font-size:0.95rem;line-height:1.85;color:var(--text-muted)">⚠️ 芭樂子註：這場比賽總共出了 14 張黃牌（世足決賽紀錄），最後西班牙加時賽進球贏。如果當時 VAR 已經有了，整場比賽可能要被改寫。</p>
+      </div>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">🎖 No.5 — 1990 Cameroon 對英格蘭（8 強）</h3>
+        <p style="font-size:1rem;line-height:1.85">非洲首次有國家闖進 8 強，喀麥隆 vs 英格蘭。喀麥隆球員<strong>Massing 從後方飛鏟對方前鋒 Gary Lineker</strong>——可以說是「世足史上最暴力的紅牌之一」。賽後 Lineker 笑說「**我終於知道為什麼大象不來踢足球，因為腳太大踩到人**」。</p>
+        <p style="font-size:0.95rem;line-height:1.85;color:var(--text-muted)">⚠️ 芭樂子註：那場比賽喀麥隆吃了 2 張紅牌，但靠著鬥志一度領先英格蘭。最後英格蘭靠 Lineker 的 2 個 PK 進球艱辛贏球。如果當時 Lineker 沒站起來，喀麥隆就創造非洲足球史上最大奇蹟了。</p>
+      </div>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:#9c27b0;background:linear-gradient(135deg,rgba(156,39,176,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#9c27b0;margin-top:0">🏆 番外：紅牌大王榜（世足生涯統計）</h3>
+        <table>
+          <thead><tr><th style="width:3rem">排名</th><th>球員</th><th>世足紅牌</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;text-align:center">1</td><td>Rigobert Song（喀麥隆）</td><td style="color:#f44336;font-weight:700">2 張</td></tr>
+            <tr><td style="font-weight:700;text-align:center">1</td><td>Zinedine Zidane（法國）</td><td style="color:#f44336;font-weight:700">2 張</td></tr>
+            <tr><td style="font-weight:700;text-align:center">1</td><td>Cafu（巴西）</td><td style="color:#f44336;font-weight:700">2 張</td></tr>
+            <tr><td style="font-weight:700;text-align:center">1</td><td>Wim Suurbier（荷蘭）</td><td style="color:#f44336;font-weight:700">2 張</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">※ 含 Zidane 的 2 張紅牌：1998 vs 沙烏地阿拉伯 + 2006 決賽 vs 義大利。一張預賽、一張決賽，齊達內職業生涯最戲劇性的兩張紅牌。</p>
+      </div>
+
+      <p>這些故事告訴我們：<strong>足球場上的紅牌不只是規則問題，是情緒、是壓力、是運氣、是人生</strong>。下次看到球員吃紅牌，先別罵，想想他剛剛背負了什麼。</p>
+
+      <h2 id="s7" style="margin-top:2.5rem">來當裁判！9 題犯規判定模擬器</h2>
 
       <p>規則看完了，現在換你來吹哨！芭樂子準備了 9 個犯規情境，每題給你看一張圖，你來判斷該怎麼判。四個選項：沒犯規、自由球、黃牌、紅牌。答對 7 題以上，芭樂子封你為「民間主審」！</p>
 
@@ -358,6 +434,16 @@ const faqs = [
       <p>看懂犯規判罰之後，可以再看看這些世足相關內容，看球時你的解說會更到位：</p>
 
       <div class="related-links">
+        <a href="/articles/worldcup-2026-format-guide/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>2026 世足賽制懶人包｜10 題測你是不是真球迷</strong>
+          <span class="rl-desc">48 隊、12 組、32 強、最佳第三名晉級制——5 分鐘搞懂新制＋互動測驗</span>
+        </a>
+        <a href="/articles/italy-missing-worldcup-2026/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>義大利為什麼又沒進世足？連缺三屆的 5 個真實原因</strong>
+          <span class="rl-desc">四屆冠軍義大利連續三屆缺席世界盃，2026 又被波士尼亞 PK 大戰淘汰</span>
+        </a>
         <a href="/articles/football-offside-rule/" class="rl-item">
           <span class="rl-cat">足球教室</span>
           <strong>越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗</strong>
@@ -368,20 +454,10 @@ const faqs = [
           <strong>2026 美加墨世界盃冠軍預測工具</strong>
           <span class="rl-desc">輸入你看好的隊伍，看看冠軍勝率算給你看</span>
         </a>
-        <a href="/articles/worldcup-2026-prediction/" class="rl-item">
-          <span class="rl-cat">分析文</span>
-          <strong>2026 世界盃冠軍分析：誰是最大熱門？</strong>
-          <span class="rl-desc">阿根廷、法國、巴西、英格蘭，誰最有機會奪冠？</span>
-        </a>
-        <a href="/tools/bless-blocks/" class="rl-item">
-          <span class="rl-cat">趣味工具</span>
-          <strong>線上擲筊：問問神明今晚要看哪一場</strong>
-          <span class="rl-desc">兩場好球撞檔不知道選哪場？讓神明幫你決定</span>
-        </a>
       </div>
 
       <ManifestoBox />
-      <ShareButtons title="足球犯規怎麼判？黃牌紅牌差在哪？｜裁判模擬器＋圖解" url="https://game8la.com/articles/football-foul-cards/" />
+      <ShareButtons title="足球犯規怎麼判？2026 世足前 9 題裁判模擬器＋圖解" url="https://game8la.com/articles/football-foul-cards/" />
     </article>
   </div>
 </BaseLayout>
@@ -505,7 +581,134 @@ const faqs = [
     .article-content h1 { font-size: 1.55rem; }
     .article-content h2 { font-size: 1.25rem; }
   }
+
+  /* === 倒數計時器 (wc- prefix，沿用世足賽制文同款) === */
+  .wc-countdown {
+    margin: 1.2rem 0 1rem;
+    padding: 1.2rem 1.4rem;
+    background: linear-gradient(135deg, rgba(0,40,104,0.18) 0%, rgba(191,10,48,0.12) 50%, rgba(245,184,0,0.16) 100%);
+    border: 1px solid rgba(245,184,0,0.35);
+    border-radius: 14px;
+    text-align: center;
+  }
+  .wc-cd-label {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+  }
+  .wc-cd-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .wc-cd-cell {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 0.55rem 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+  }
+  .wc-cd-num {
+    font-size: clamp(1.5rem, 6vw, 2.1rem);
+    font-weight: 800;
+    color: #f5b800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .wc-cd-unit {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+    letter-spacing: 0.1em;
+  }
+  .wc-cd-meta {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    margin-top: 0.8rem;
+    line-height: 1.6;
+  }
+  .wc-countdown.wc-live { border-color: rgba(57,255,20,0.5); background: linear-gradient(135deg, rgba(57,255,20,0.1) 0%, rgba(0,40,104,0.18) 50%, rgba(245,184,0,0.14) 100%); }
+  .wc-countdown.wc-live .wc-cd-num { color: var(--guava-green); }
+  .wc-countdown.wc-ended .wc-cd-num { color: #888; }
+
+  @media (max-width: 480px) {
+    .wc-countdown { padding: 1rem 0.9rem; }
+    .wc-cd-grid { gap: 6px; }
+    .wc-cd-cell { padding: 0.5rem 0.2rem; min-height: 56px; }
+    .wc-cd-unit { font-size: 0.72rem; }
+    .wc-cd-meta { font-size: 0.8rem; }
+  }
 </style>
+
+<script is:inline>
+/* === 世足倒數計時器（沿用世足賽制文同款 wc-） === */
+(function(){
+  var KICKOFF = new Date('2026-06-11T00:00:00+00:00').getTime();
+  var FINAL = new Date('2026-07-19T20:00:00-04:00').getTime();
+  var elD = document.getElementById('wcCdDays');
+  var elH = document.getElementById('wcCdHours');
+  var elM = document.getElementById('wcCdMins');
+  var elS = document.getElementById('wcCdSecs');
+  var elLabel = document.getElementById('wcCdLabel');
+  var elMeta = document.getElementById('wcCdMeta');
+  var elBox = document.getElementById('wcCountdown');
+  if(!elD||!elH||!elM||!elS||!elBox) return;
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function tick(){
+    var now = Date.now();
+    var diffStart = KICKOFF - now;
+    var diffEnd = FINAL - now;
+    var target;
+
+    if(diffStart > 0){
+      target = diffStart;
+      elLabel.textContent = '距離 2026 世足開踢還剩';
+      elMeta.textContent = '📅 開幕戰：2026/06/11 ｜ 🏆 決賽：2026/07/19';
+      elBox.classList.remove('wc-live','wc-ended');
+    } else if(diffEnd > 0){
+      target = diffEnd;
+      elLabel.textContent = '🔥 世足賽事進行中，距離決賽還剩';
+      elMeta.textContent = '🏆 決賽：MetLife Stadium 紐約紐澤西 ｜ 台灣時間 7/20 凌晨 3 點';
+      elBox.classList.add('wc-live');
+      elBox.classList.remove('wc-ended');
+    } else {
+      elLabel.textContent = '🏁 2026 世足已結束，距離 2030 世足開踢';
+      elD.textContent = '~';
+      elH.textContent = '~';
+      elM.textContent = '~';
+      elS.textContent = '~';
+      elMeta.textContent = '⏳ 下屆 2030 西班牙＋葡萄牙＋摩洛哥三國聯辦，再等四年';
+      elBox.classList.add('wc-ended');
+      elBox.classList.remove('wc-live');
+      return;
+    }
+
+    var totalSec = Math.floor(target / 1000);
+    var days = Math.floor(totalSec / 86400);
+    var hours = Math.floor((totalSec % 86400) / 3600);
+    var mins = Math.floor((totalSec % 3600) / 60);
+    var secs = totalSec % 60;
+    elD.textContent = days;
+    elH.textContent = pad(hours);
+    elM.textContent = pad(mins);
+    elS.textContent = pad(secs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 
 <script is:inline>
 (function(){

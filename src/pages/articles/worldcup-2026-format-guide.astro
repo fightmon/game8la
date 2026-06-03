@@ -13,24 +13,26 @@ const faqs = [
   { q: '台灣有轉播嗎？', a: '有！中華電信 MOD、愛爾達體育台、ELEVEN SPORTS 都有轉播。不過因為比賽在北美舉辦，台灣時間大部分場次在<strong>凌晨 1 點到早上 9 點</strong>之間，上班族要做好熬夜或請假的心理準備。' },
   { q: '淘汰賽加時賽怎麼打？', a: '淘汰賽如果正規 90 分鐘平手，會踢 30 分鐘的延長賽（上下半場各 15 分鐘）。延長賽還是平手的話，就進入 PK 大戰（互射十二碼），雙方各踢 5 球，還是平手就進入驟死賽，一球定生死。' },
   { q: '今年有哪些新隊伍第一次參加？', a: '2026 世界盃有好幾個第一次參賽的國家，包括<strong>印尼、泰國</strong>等亞洲球隊，以及一些非洲和中北美的新面孔。48 隊的擴軍讓更多中小型足球國家有機會站上世界盃的舞台。' },
-  { q: '義大利為什麼沒進？', a: '四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃。2026 年附加賽被波士尼亞在 PK 大戰中淘汰。義大利的問題在於青訓斷層和戰術老化，加上歐洲區競爭激烈，強如義大利也撐不住。球迷表示：心已經碎成義大利麵了。' },
+  { q: '義大利為什麼沒進？', a: '四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃。2026 年附加賽被波士尼亞在 PK 大戰中淘汰。義大利的問題在於青訓斷層和戰術老化，加上歐洲區競爭激烈，強如義大利也撐不住。球迷表示：心已經碎成義大利麵了。<br/><br/>👉 想看更深層的原因？芭樂子寫了專文：<a href="/articles/italy-missing-worldcup-2026/">義大利為什麼又沒進世足？連缺三屆的 5 個真實原因</a>' },
 ];
 ---
 <FaqSchema faqs={faqs} />
 <ArticleSchema
   url="https://game8la.com/articles/worldcup-2026-format-guide/"
-  title="2026 世足賽制懶人包｜48 隊怎麼打？5 分鐘搞懂新制＋測驗 — GAME8LA"
+  title="2026 世足賽制懶人包｜10 題測你是不是真球迷 — GAME8LA"
   description="2026 世界盃史上首次 48 隊參賽！12 組、32 強、第三名也能晉級——搞不懂沒關係，芭樂子用白話文＋表格＋10 題測驗，5 分鐘讓你從偽球迷變真球迷。"
   image="https://game8la.com/images/articles/worldcup-format-cover.webp"
   datePublished="2026-06-03"
   dateModified="2026-06-03"
+  wordCount={2800}
+  timeRequired="PT8M"
   breadcrumbs={[
     { name: '首頁', url: 'https://game8la.com/' },
     { name: '足球教室', url: 'https://game8la.com/articles/' },
     { name: '2026 世足賽制懶人包', url: 'https://game8la.com/articles/worldcup-2026-format-guide/' },
   ]}
 />
-<BaseLayout currentPage="articles" title="2026 世足賽制懶人包｜48 隊怎麼打？5 分鐘搞懂新制＋測驗 — GAME8LA" description="2026 世界盃史上首次 48 隊參賽！12 組、32 強、第三名也能晉級——搞不懂沒關係，芭樂子用白話文＋表格＋10 題測驗，5 分鐘讓你從偽球迷變真球迷。" ogImage="https://game8la.com/images/articles/worldcup-format-cover.webp">
+<BaseLayout currentPage="articles" title="2026 世足賽制懶人包｜10 題測你是不是真球迷 — GAME8LA" description="2026 世界盃史上首次 48 隊參賽！12 組、32 強、第三名也能晉級——搞不懂沒關係，芭樂子用白話文＋表格＋10 題測驗，5 分鐘讓你從偽球迷變真球迷。" ogImage="https://game8la.com/images/articles/worldcup-format-cover.webp">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 2026 世足賽制懶人包</div>
     <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
@@ -56,6 +58,18 @@ const faqs = [
         loading="eager"
         style="margin-bottom:1.2rem"
       />
+
+      <!-- === 倒數計時器 === -->
+      <div class="wc-countdown" id="wcCountdown" aria-live="polite">
+        <div class="wc-cd-label" id="wcCdLabel">距離 2026 世足開踢還剩</div>
+        <div class="wc-cd-grid">
+          <div class="wc-cd-cell"><span class="wc-cd-num" id="wcCdDays">--</span><span class="wc-cd-unit">天</span></div>
+          <div class="wc-cd-cell"><span class="wc-cd-num" id="wcCdHours">--</span><span class="wc-cd-unit">時</span></div>
+          <div class="wc-cd-cell"><span class="wc-cd-num" id="wcCdMins">--</span><span class="wc-cd-unit">分</span></div>
+          <div class="wc-cd-cell"><span class="wc-cd-num" id="wcCdSecs">--</span><span class="wc-cd-unit">秒</span></div>
+        </div>
+        <div class="wc-cd-meta" id="wcCdMeta">📅 開幕戰：2026/06/11 ｜ 🏆 決賽：2026/07/19</div>
+      </div>
 
       <!-- === 快速工具入口 === -->
       <div class="quick-tool-bar">
@@ -341,7 +355,7 @@ const faqs = [
       </div>
 
       <ManifestoBox />
-      <ShareButtons title="2026 世足賽制懶人包｜48 隊怎麼打？5 分鐘搞懂新制＋測驗" url="https://game8la.com/articles/worldcup-2026-format-guide/" />
+      <ShareButtons title="2026 世足賽制懶人包｜10 題測你是不是真球迷" url="https://game8la.com/articles/worldcup-2026-format-guide/" />
     </article>
   </div>
 </BaseLayout>
@@ -452,7 +466,137 @@ const faqs = [
     .article-content h1 { font-size: 1.55rem; }
     .article-content h2 { font-size: 1.25rem; }
   }
+
+  /* === 倒數計時器 (wc- prefix) === */
+  .wc-countdown {
+    margin: 1.2rem 0 1rem;
+    padding: 1.2rem 1.4rem;
+    background: linear-gradient(135deg, rgba(0,40,104,0.18) 0%, rgba(191,10,48,0.12) 50%, rgba(245,184,0,0.16) 100%);
+    border: 1px solid rgba(245,184,0,0.35);
+    border-radius: 14px;
+    text-align: center;
+  }
+  .wc-cd-label {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+  }
+  .wc-cd-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .wc-cd-cell {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 0.55rem 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+  }
+  .wc-cd-num {
+    font-size: clamp(1.5rem, 6vw, 2.1rem);
+    font-weight: 800;
+    color: #f5b800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .wc-cd-unit {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+    letter-spacing: 0.1em;
+  }
+  .wc-cd-meta {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    margin-top: 0.8rem;
+    line-height: 1.6;
+  }
+  .wc-countdown.wc-live { border-color: rgba(57,255,20,0.5); background: linear-gradient(135deg, rgba(57,255,20,0.1) 0%, rgba(0,40,104,0.18) 50%, rgba(245,184,0,0.14) 100%); }
+  .wc-countdown.wc-live .wc-cd-num { color: var(--guava-green); }
+  .wc-countdown.wc-ended .wc-cd-num { color: #888; }
+
+  @media (max-width: 480px) {
+    .wc-countdown { padding: 1rem 0.9rem; }
+    .wc-cd-grid { gap: 6px; }
+    .wc-cd-cell { padding: 0.5rem 0.2rem; min-height: 56px; }
+    .wc-cd-unit { font-size: 0.72rem; }
+    .wc-cd-meta { font-size: 0.8rem; }
+  }
 </style>
+
+<script is:inline>
+/* === 世足倒數計時器 === */
+(function(){
+  var KICKOFF = new Date('2026-06-11T00:00:00+00:00').getTime();  // 北美東岸開幕（台灣 6/11 約凌晨）
+  var FINAL = new Date('2026-07-19T20:00:00-04:00').getTime();    // 美東 7/19 20:00
+  var elD = document.getElementById('wcCdDays');
+  var elH = document.getElementById('wcCdHours');
+  var elM = document.getElementById('wcCdMins');
+  var elS = document.getElementById('wcCdSecs');
+  var elLabel = document.getElementById('wcCdLabel');
+  var elMeta = document.getElementById('wcCdMeta');
+  var elBox = document.getElementById('wcCountdown');
+  if(!elD||!elH||!elM||!elS||!elBox) return;
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function tick(){
+    var now = Date.now();
+    var diffStart = KICKOFF - now;
+    var diffEnd = FINAL - now;
+    var target, mode;
+
+    if(diffStart > 0){
+      target = diffStart;
+      mode = 'pre';
+      elLabel.textContent = '距離 2026 世足開踢還剩';
+      elMeta.textContent = '📅 開幕戰：2026/06/11 ｜ 🏆 決賽：2026/07/19';
+      elBox.classList.remove('wc-live','wc-ended');
+    } else if(diffEnd > 0){
+      target = diffEnd;
+      mode = 'live';
+      elLabel.textContent = '🔥 世足賽事進行中，距離決賽還剩';
+      elMeta.textContent = '🏆 決賽：MetLife Stadium 紐約紐澤西 ｜ 台灣時間 7/20 凌晨 3 點';
+      elBox.classList.add('wc-live');
+      elBox.classList.remove('wc-ended');
+    } else {
+      // 已結束
+      elLabel.textContent = '🏁 2026 世足已結束，距離 2030 世足開踢';
+      elD.textContent = '~';
+      elH.textContent = '~';
+      elM.textContent = '~';
+      elS.textContent = '~';
+      elMeta.textContent = '⏳ 下屆 2030 西班牙＋葡萄牙＋摩洛哥三國聯辦，再等四年';
+      elBox.classList.add('wc-ended');
+      elBox.classList.remove('wc-live');
+      return;
+    }
+
+    var totalSec = Math.floor(target / 1000);
+    var days = Math.floor(totalSec / 86400);
+    var hours = Math.floor((totalSec % 86400) / 3600);
+    var mins = Math.floor((totalSec % 3600) / 60);
+    var secs = totalSec % 60;
+    elD.textContent = days;
+    elH.textContent = pad(hours);
+    elM.textContent = pad(mins);
+    elS.textContent = pad(secs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 
 <script is:inline>
 (function(){
