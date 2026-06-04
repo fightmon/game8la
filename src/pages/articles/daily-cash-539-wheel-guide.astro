@@ -14,7 +14,7 @@ const faqs = [
   { q: '包牌中獎一定回本嗎？', a: '不一定。包牌的回本要看你選的 n 個號碼裡，有幾碼跟開獎號碼吻合 (命中數 k)，再用 C(k,m)×C(n-k,5-m) 算出每個獎項的中獎注數，最後加總獎金跟成本比較。包 7 碼通常要中到 3 碼才能打平（見回本表）。' },
   { q: '539 冷熱號統計真的有參考價值嗎？', a: '純粹娛樂用。每一期開獎都是獨立事件，號碼球不會記得過去被開過幾次——這在統計學叫「賭徒謬誤」。你可以看冷熱號當作「選號靈感」，但不要把它當做預測工具，更不要花錢買什麼「神準明牌」。真正能優化的只有包牌成本與膽拖策略，這是數學題不是占卜題。' },
   { q: '可以靠 539 包牌穩定賺錢嗎？', a: '不行。539 跟所有彩券一樣是負期望值遊戲，長期回收率約 53%。包牌只是改變「中獎波動」的形狀，不會改變期望值。任何宣稱「穩賺包牌組」的群組、老師、軟體都是詐騙。想穩定獲利建議看老虎機（RTP 96~98%）+ 返水的結構，期望值直接逼近 100%。' },
-  { q: '539 包牌最少要多少錢？', a: '最低門檻是「包 6 碼」，成本 300 元（C(6,5)=6 注 × 50 元）。這也是新手最推薦的起步配置：命中 3 碼就能回本（回 450 元），就算完全沒中，單期也只損失 300 元，非常好控制預算。再往上的常見配置：包 7 碼 1,050 元（21 注）、包 8 碼 2,800 元（56 注）、包 9 碼 6,300 元（126 注）——注數是非線性跳增，包越多絕對虧損越大，千萬別衝動加碼。' },
+  { q: '539 包牌最少要多少錢？', a: '最低門檻是「包 6 碼」，成本 300 元（C(6,5)=6 注 × 50 元）。這也是新手最推薦的起步配置：命中 3 碼就能回本（回 1,050 元），就算完全沒中，單期也只損失 300 元，非常好控制預算。再往上的常見配置：包 7 碼 1,050 元（21 注）、包 8 碼 2,800 元（56 注）、包 9 碼 6,300 元（126 注）——注數是非線性跳增，包越多絕對虧損越大，千萬別衝動加碼。' },
   { q: '539 中 2 個號碼有多少錢？', a: '中 2 碼就是「肆獎」，單注彩金 50 元（剛好等於一注成本，等於沒輸沒贏）。但如果你是包牌、中 2 碼時會同時命中多組肆獎——例如包 7 碼命中 2 個獎號時，你有 C(2,2)×C(5,3)=10 注中肆獎 → 回 500 元（vs 成本 1,050，仍虧 550）。所以「中 2 碼回 50 元」這個基本獎項只夠打平單注，沒辦法撐包牌成本，想靠 539 回本至少要命中 3 碼。' },
   { q: '如何利用大數據分析 539 熱門號碼？冷熱號真的有用嗎？', a: '老實說：大數據冷熱號分析在 539 上「純娛樂用途」。統計學上每期開獎是獨立事件，號碼球沒有記憶，過去開過幾次跟未來機率完全無關——這在數學上叫「賭徒謬誤」。所謂的「熱號(近期常開)」或「冷號(久久沒開)」，下期被開的機率都仍然是 5/39≈12.8%，沒有任何一個號碼有統計顯著性的偏差。你可以看近 20 期走勢當作「選號靈感」，但千萬不要付費買「大數據明牌」或相信「AI 預測 539 必開號」，那全部是詐騙話術。真正能被數學優化的只有包牌結構與膽拖策略。' },
 ];
@@ -237,16 +237,48 @@ const faqs = [
         <table>
           <thead><tr><th>包牌方式</th><th>成本</th><th>剛好打平的最低命中數</th></tr></thead>
           <tbody>
-            <tr><td style="font-weight:700">包 6 碼</td><td>300 元</td><td>需中 3 碼（回 450 元）</td></tr>
+            <tr><td style="font-weight:700">包 6 碼</td><td>300 元</td><td>需中 3 碼（回 1,050 元）</td></tr>
             <tr><td style="font-weight:700">包 7 碼</td><td>1,050 元</td><td>需中 3 碼（回 2,400 元）</td></tr>
-            <tr><td style="font-weight:700">包 8 碼</td><td>2,800 元</td><td>需中 3 碼（回 6,300 元）</td></tr>
-            <tr><td style="font-weight:700">包 9 碼</td><td>6,300 元</td><td>需中 4 碼（回 ~26,000 元）</td></tr>
-            <tr><td style="font-weight:700">包 10 碼</td><td>12,600 元</td><td>需中 4 碼（回 ~31,000 元）</td></tr>
+            <tr><td style="font-weight:700">包 8 碼</td><td>2,800 元</td><td>需中 3 碼（回 4,500 元）</td></tr>
+            <tr><td style="font-weight:700">包 9 碼</td><td>6,300 元</td><td>需中 3 碼（回 7,500 元）</td></tr>
+            <tr><td style="font-weight:700">包 10 碼</td><td>12,600 元</td><td>需中 4 碼（回 ~144,000 元）</td></tr>
           </tbody>
         </table>
       </div>
 
-      <p>看出規律了嗎？包越多碼，需要命中的「最低保本門檻」就越高。包 6~8 還只要中 3 碼就能回本，但包到 9 碼以上，你就必須中到 4 碼才能打平——而中 4 碼的機率本身就只有 <strong>0.0295%</strong>（約 1/3,387）。</p>
+      <p>看出規律了嗎？包越多碼，需要命中的「最低保本門檻」就越高。包 6~9 碼還只要中 3 碼就能回本，但包到 10 碼以上，你就必須中到 4 碼才能打平——而中 4 碼的機率本身就只有 <strong>0.0295%</strong>（約 1/3,387）。</p>
+
+      <h3 style="color:var(--gold-light)">🧮 自己拉拉看：包幾碼、中幾碼，回本了嗎？</h3>
+      <p>別只背上面的表——下面這個試算器，選你要包的碼數、再拉這期命中幾個獎號，立刻算出各獎項中幾注、總回收，以及這把到底是賺是賠：</p>
+      <div class="wb-tool">
+        <div class="wb-row">
+          <span class="wb-label">包幾碼</span>
+          <div class="wb-btns" id="wbCards"></div>
+        </div>
+        <div class="wb-row">
+          <span class="wb-label">這期命中</span>
+          <div class="wb-btns" id="wbHits"></div>
+          <span class="wb-unit">個獎號</span>
+        </div>
+        <div class="wb-summary">
+          <div class="wb-stat"><b id="wbBets">—</b><span>注數</span></div>
+          <div class="wb-stat"><b id="wbCost">—</b><span>花費</span></div>
+        </div>
+        <div class="wb-table-wrap">
+          <table class="wb-table">
+            <thead><tr><th>獎項</th><th>中獎注數</th><th>回收</th></tr></thead>
+            <tbody>
+              <tr><td>頭獎・5中5（800萬）</td><td id="wbN5">0</td><td id="wbR5">$0</td></tr>
+              <tr><td>貳獎・5中4（2萬）</td><td id="wbN4">0</td><td id="wbR4">$0</td></tr>
+              <tr><td>參獎・5中3（300）</td><td id="wbN3">0</td><td id="wbR3">$0</td></tr>
+              <tr><td>肆獎・5中2（50）</td><td id="wbN2">0</td><td id="wbR2">$0</td></tr>
+            </tbody>
+            <tfoot><tr><td>合計回收</td><td></td><td id="wbReturn">$0</td></tr></tfoot>
+          </table>
+        </div>
+        <div class="wb-verdict" id="wbVerdict">—</div>
+        <a href="/tools/539-wheel-calculator/" class="wb-cta">🎯 想實際產生「要買哪幾組」？用完整 539 包牌計算器 →</a>
+      </div>
 
       <!-- ===== 第 5 節 ===== -->
       <h2 id="yang-pai" style="margin-top:2.5rem">5. 539 養牌策略：紀律型玩家的選號法</h2>
@@ -456,6 +488,60 @@ const faqs = [
     .content-img { border-radius: 10px; }
     .article-img-caption { font-size: 0.9rem; }
   }
+  /* 539 包牌損益試算器 */
+  .wb-tool{ background:var(--bg-card); border:1px solid var(--gold); border-radius:14px; padding:1.2rem; margin:1.2rem 0; }
+  .wb-row{ display:flex; align-items:center; gap:.7rem; flex-wrap:wrap; margin-bottom:.8rem; }
+  .wb-label{ min-width:5.5em; font-weight:700; color:var(--text-secondary); }
+  .wb-unit{ color:var(--text-muted); font-size:.9rem; }
+  .wb-btns{ display:flex; gap:.4rem; flex-wrap:wrap; }
+  .wb-btns button{ min-width:2.6em; padding:.45rem .7rem; border-radius:8px; border:1px solid var(--border); background:rgba(255,255,255,.05); color:var(--text-primary); font-weight:800; cursor:pointer; transition:.15s; }
+  .wb-btns button:hover{ border-color:var(--gold); }
+  .wb-btns button.active{ background:var(--guava-green); color:#0a2810; border-color:var(--guava-green); }
+  .wb-summary{ display:flex; gap:1rem; margin:1rem 0; }
+  .wb-stat{ flex:1; text-align:center; background:rgba(255,255,255,.04); border-radius:10px; padding:.6rem; }
+  .wb-stat b{ display:block; font-size:1.25rem; color:var(--guava-green); }
+  .wb-stat span{ font-size:.8rem; color:var(--text-muted); }
+  .wb-table-wrap{ overflow-x:auto; }
+  .wb-table{ width:100%; border-collapse:collapse; font-size:.95rem; }
+  .wb-table th,.wb-table td{ padding:.5rem .6rem; border-bottom:1px solid var(--border); text-align:left; }
+  .wb-table th:nth-child(n+2),.wb-table td:nth-child(n+2){ text-align:right; white-space:nowrap; }
+  .wb-table tfoot td{ font-weight:800; color:var(--gold-light); border-top:2px solid var(--gold); border-bottom:none; }
+  .wb-verdict{ text-align:center; font-size:1.2rem; font-weight:900; padding:.7rem; border-radius:10px; margin:.9rem 0 .6rem; }
+  .wb-verdict.win{ background:rgba(57,255,20,.12); color:var(--guava-green); }
+  .wb-verdict.lose{ background:rgba(255,94,156,.12); color:#ff7eb0; }
+  .wb-cta{ display:block; text-align:center; color:var(--guava-green); font-weight:700; text-decoration:none; }
+  .wb-cta:hover{ text-decoration:underline; }
 </style>
+
+<script is:inline>
+(function(){
+  function C(n,k){ if(k<0||k>n) return 0; if(k===0||k===n) return 1; k=Math.min(k,n-k); var r=1; for(var i=0;i<k;i++) r=r*(n-i)/(i+1); return Math.round(r); }
+  var PRIZE={5:8000000,4:20000,3:300,2:50};
+  var n=7, k=3;
+  function render(){
+    var bets=C(n,5), cost=bets*50, ret=0;
+    for(var m=2;m<=5;m++){ var won=C(k,m)*C(n-k,5-m), r=won*PRIZE[m]; ret+=r;
+      document.getElementById('wbN'+m).textContent=won.toLocaleString();
+      document.getElementById('wbR'+m).textContent='$'+r.toLocaleString(); }
+    document.getElementById('wbBets').textContent=bets.toLocaleString()+' 注';
+    document.getElementById('wbCost').textContent='$'+cost.toLocaleString();
+    document.getElementById('wbReturn').textContent='$'+ret.toLocaleString();
+    var pl=ret-cost, v=document.getElementById('wbVerdict');
+    if(pl>=0){ v.className='wb-verdict win'; v.textContent='✅ 回本！這把淨賺 $'+pl.toLocaleString(); }
+    else { v.className='wb-verdict lose'; v.textContent='❌ 沒回本，倒虧 $'+Math.abs(pl).toLocaleString(); }
+    document.querySelectorAll('#wbCards button').forEach(function(b){ b.classList.toggle('active', +b.dataset.v===n); });
+    document.querySelectorAll('#wbHits button').forEach(function(b){ b.classList.toggle('active', +b.dataset.v===k); });
+  }
+  function init(){
+    var cw=document.getElementById('wbCards'); if(!cw) return;
+    cw.innerHTML=[6,7,8,9,10,11,12].map(function(v){return '<button data-v="'+v+'">'+v+'</button>';}).join('');
+    document.getElementById('wbHits').innerHTML=[0,1,2,3,4,5].map(function(v){return '<button data-v="'+v+'">'+v+'</button>';}).join('');
+    cw.querySelectorAll('button').forEach(function(b){ b.onclick=function(){ n=+b.dataset.v; render(); }; });
+    document.getElementById('wbHits').querySelectorAll('button').forEach(function(b){ b.onclick=function(){ k=+b.dataset.v; render(); }; });
+    render();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
 </content>
 </invoke>
