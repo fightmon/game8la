@@ -6,7 +6,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // 排除舊 redirect 頁（它們是 301/meta-refresh，不該進 sitemap）
-      filter: (page) => !/\/games\/game-[3-9]\/?$/.test(page) && !/\/articles\/arcade-vs-online\/?$/.test(page),
+      filter: (page) => !/\/games\/game-[3-9]\/?$/.test(page) && !/\/articles\/arcade-vs-online\/?$/.test(page) && !/\/articles\/daily-cash-539-wheel-strategy\/?$/.test(page),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
@@ -33,6 +33,8 @@ export default defineConfig({
     '/games/game-9/': '/games/night-market-3/',
     // 2026-04-15 merge duplicate: arcade-vs-online (old) → arcade-vs-online-casino (new)
     '/articles/arcade-vs-online/': '/articles/arcade-vs-online-casino/',
+    // 2026-06-04 解 539 自相殘殺：strategy 併入 guide（兩篇打同關鍵字，guide 是流量贏家）
+    '/articles/daily-cash-539-wheel-strategy/': '/articles/daily-cash-539-wheel-guide/',
   },
 
   // Build configuration
