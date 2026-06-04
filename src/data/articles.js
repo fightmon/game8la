@@ -15,6 +15,34 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: 'worldcup-2026-schedule',
+    title: '2026 世足賽程表（台灣時間）｜開幕6/12、決賽7/20、12組分組對戰一次看',
+    excerpt: '2026 世界盃賽程懶人包：台灣時間 6/12 開踢、7/20 決賽。48 隊 12 組分組名單、小組賽到決賽各階段台灣時間、開幕戰與台灣看球時間一次看。',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-04',
+    views: 1,
+    tags: ['最新', '精選', '時事'],
+    icon: 'calendar',
+    gradient: 'linear-gradient(135deg,#1a472a,#004d98,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-worldcup-schedule.webp'
+  },
+  {
+    slug: 'worldcup-2026-live-broadcast',
+    title: '2026 世足轉播哪裡看？台灣平台一覽：愛爾達、華視免費場、MOD、Hami Video',
+    excerpt: '2026 世界盃台灣轉播哪裡看？愛爾達 ELTA 拿總代理完整 104 場，華視免費轉播重點場。免費 vs 付費、手機看、熬夜時間＋盜連詐騙提醒一次整理。',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-04',
+    views: 1,
+    tags: ['最新', '精選', '時事'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#004d98,#1a472a,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-worldcup-broadcast.webp'
+  },
+  {
     slug: 'mahjong-scoring-guide',
     title: '麻將算台怎麼算？台灣16張台數完整圖解｜門清自摸到大三元',
     excerpt: '自摸喊「胡！」結果全桌不會算台？芭樂子用自己畫的牌面，把台灣16張算台一張一張圖解：底與台、門清自摸、碰碰胡、清一色、大三元、暗刻、花牌一次搞懂，附台數速查表＋線上練習器。',

@@ -1,0 +1,191 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '2026 世足台灣哪裡看？', a: '愛爾達（ELTA）拿下台灣區轉播總代理，完整轉播全部 104 場：電視看中華電信 MOD 的「愛爾達體育 1～4 台」，線上看 ELTA.tv 與 Hami Video（皆為付費／訂閱）。另外華視會免費轉播開幕、四強、冠軍等重點場次，東森、台視也有部分場次。' },
+  { q: '2026 世足可以免費看嗎？', a: '可以看到部分場次。依往例，無線台華視會免費轉播開幕戰、四強、冠軍等重點賽事；想看「完整 104 場」則要透過愛爾達系統（MOD／ELTA.tv／Hami Video）付費收看。實際免費場次以各台官方公告為準。' },
+  { q: '用手機怎麼看 2026 世足直播？', a: '手機可下載 ELTA.tv App 或 Hami Video App（中華電信，付費訂閱）線上看完整賽事；華視的免費重點場也可透過華視自家的線上平台收看。出門通勤、半夜在被窩裡都能追。' },
+  { q: '網路上那些「免費世足直播」連結安全嗎？', a: '要非常小心。世界盃期間會冒出一堆「免費世足直播」「高清不卡」的盜連／釣魚網站，輕則塞滿廣告病毒，重則誘導你註冊娛樂城、輸入個資、被綁信用卡。芭樂子建議：認明愛爾達、華視等官方平台，別點來路不明的直播站，更別在看球網站留個資或入金。' },
+  { q: '世足比賽都在台灣的什麼時間？', a: '美加墨在西半球，跟台灣時差大，多數比賽落在台灣的凌晨到早上，是標準的熬夜／早起看球賽季。開幕戰在台灣時間 6/12（五）03:00，冠軍決賽在 7/20（一）03:00。完整賽程看我們的世足賽程表。' },
+];
+
+const URL = 'https://game8la.com/articles/worldcup-2026-live-broadcast/';
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title="2026 世足轉播哪裡看？台灣平台一覽：愛爾達總代理、華視免費場、MOD、Hami Video — GAME8LA"
+  description="2026 世界盃台灣轉播哪裡看？愛爾達 ELTA 拿總代理完整 104 場（MOD／ELTA.tv／Hami Video），華視免費轉播重點場。免費看 vs 付費、手機看、熬夜看球時間＋盜連詐騙提醒一次整理。"
+  image="https://game8la.com/images/articles/worldcup-2026-live-broadcast-cover.webp"
+  datePublished="2026-06-04"
+  dateModified="2026-06-04"
+  timeRequired="PT5M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '2026 世足轉播哪裡看', url: URL },
+  ]}
+/>
+<BaseLayout
+  currentPage="articles"
+  title="2026 世足轉播哪裡看？台灣平台一覽：愛爾達總代理、華視免費場、MOD、Hami Video — GAME8LA"
+  description="2026 世界盃台灣轉播哪裡看？愛爾達 ELTA 拿總代理完整 104 場（MOD／ELTA.tv／Hami Video），華視免費轉播重點場。免費看 vs 付費、手機看、熬夜看球時間＋盜連詐騙提醒一次整理。"
+  ogImage="https://game8la.com/images/articles/worldcup-2026-live-broadcast-cover.webp"
+>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 2026 世足轉播哪裡看</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      📅 發佈：2026-06-04 ｜ ✍️ 作者：芭樂子 ｜ ⏱️ 預估閱讀 5 分鐘
+    </div>
+    <a href="/articles/" class="back-link">← 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#004d98,#1a472a,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:840px;margin:0 auto">
+      <h1 style="font-size:2rem;line-height:1.3">2026 世足轉播哪裡看？<em>台灣平台一次看：愛爾達完整 104 場、華視免費重點場</em></h1>
+
+      <img class="content-img"
+           src="/images/articles/worldcup-2026-live-broadcast-cover.webp"
+           srcset="/images/articles/worldcup-2026-live-broadcast-cover-768w.webp 768w, /images/articles/worldcup-2026-live-broadcast-cover.webp 1200w"
+           sizes="(max-width: 880px) 100vw, 840px"
+           alt="2026 世足轉播哪裡看｜芭樂子被電視手機平板螢幕包圍、拿遙控器介紹台灣轉播平台｜GAME8LA"
+           width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">電視、MOD、手機 App——芭樂子幫你把台灣看世足的管道一次講清楚，順便教你避開假直播。</p>
+
+      <div class="quick-tool-bar">
+        <span>看球必備：</span>
+        <a href="/articles/worldcup-2026-schedule/">完整賽程表</a>
+        <a href="/tools/worldcup-2026/">冠軍預測</a>
+      </div>
+
+      <p>8LA 大大好，我是芭樂子。世界盃 <strong>台灣時間 6/12 凌晨</strong>就開踢了，但每到這時候最多人問的不是誰會贏，是「<strong>到底在哪看？</strong>」「<strong>有沒有免費的？</strong>」。芭樂子直接幫你把台灣的轉播平台、免費 vs 付費、手機怎麼看一次講清楚——順便提醒你避開那些騙個資的假直播站。</p>
+
+      <h2 id="conclusion" style="margin-top:2.5rem">一句話結論</h2>
+      <div class="card" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(245,184,0,0.08),rgba(30,30,30,0.5))">
+        <p style="margin:0;font-size:1.05rem"><strong>想看完整 104 場 → 愛爾達系統（MOD／ELTA.tv／Hami Video，付費）。<br>只想看開幕、四強、冠軍重點場 → 華視，免費。</strong></p>
+      </div>
+
+      <h2 id="platforms" style="margin-top:2.5rem">台灣轉播平台一覽</h2>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>平台</th><th>怎麼看</th><th>場次</th><th>費用</th></tr></thead>
+        <tbody>
+          <tr><td><strong>愛爾達 ELTA</strong><br><small style="color:var(--text-muted)">台灣轉播總代理</small></td><td>中華電信 MOD「愛爾達體育 1～4 台」</td><td style="color:var(--guava-green)">完整 104 場</td><td>付費</td></tr>
+          <tr><td><strong>ELTA.tv / Hami Video</strong></td><td>手機／網路 App（線上）</td><td style="color:var(--guava-green)">完整 104 場</td><td>付費（訂閱）</td></tr>
+          <tr><td><strong>華視</strong></td><td>無線電視／華視線上</td><td>開幕、四強、冠軍等<strong>重點場</strong></td><td style="color:var(--gold-light)">免費</td></tr>
+          <tr><td>東森電視、台視</td><td>有線／無線電視</td><td>部分場次</td><td>視頻道</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:0.92rem;color:var(--text-muted)">※ 免費重點場、各平台確切轉播場次與訂閱方案，以愛爾達、華視等官方最新公告為準。</p>
+
+      <h2 id="free-vs-paid" style="margin-top:2.5rem">免費看 vs 付費看，怎麼選？</h2>
+      <ul>
+        <li><strong>只想看大場面、不想花錢</strong> → 鎖定 <strong>華視</strong>的免費重點場（開幕、四強、冠軍），無線電視或華視線上就能看。</li>
+        <li><strong>想場場不漏、追自己支持的隊</strong> → 那就要 <strong>愛爾達系統</strong>：家裡有中華電信 MOD 最方便（愛爾達體育 1～4 台），在外面就用 <strong>ELTA.tv 或 Hami Video</strong> App。</li>
+        <li><strong>手機族</strong> → 直接裝 ELTA.tv 或 Hami Video App，半夜在被窩、白天通勤都能看（付費訂閱）。</li>
+      </ul>
+
+      <h2 id="scam" style="margin-top:2.5rem">⚠️ 別踩雷：那些「免費世足直播」可能在騙你</h2>
+      <p>每到世界盃，Google 跟社群就會冒出一堆「<strong>免費世足直播・高清不卡</strong>」的網站。芭樂子做的就是戳破這種陷阱——這些盜連站常見三種坑：</p>
+      <figure style="margin:1.5rem 0">
+        <img class="content-img" src="/images/articles/worldcup-scam-warning.webp" alt="芭樂子伸手擋下筆電上的假免費世足直播彈窗、病毒與釣魚陷阱" width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="article-img-caption">看到「免費高清世足直播」先別衝——那一堆彈窗背後常常是病毒、釣魚跟娛樂城陷阱。</figcaption>
+      </figure>
+      <div class="warn-box">
+        <strong>🚩 假直播站三大坑：</strong><br>
+        ① 滿滿彈窗廣告、夾帶惡意程式，手機電腦中標<br>
+        ② 看到一半跳出「註冊就能看」，把你導去<strong>娛樂城／要你留個資、綁信用卡</strong><br>
+        ③ 假冒官方頁面釣魚，騙帳密與金流資料
+      </div>
+      <p>原則很簡單：<strong>認明愛爾達、華視等官方平台</strong>，別點來路不明的直播連結，更<strong>別在看球網站註冊、留個資或入金</strong>。想查一個娛樂城／網站是不是黑網，用我們的 <a href="/casino-check/" style="color:var(--guava-green)">娛樂城體檢</a> 一鍵比對；看更多手法看 <a href="/articles/anti-scam-8la-guide/" style="color:var(--guava-green)">防詐騙 8LA 指南</a>。</p>
+
+      <div class="wc-bait" id="wcBait">
+        <p class="wc-bait-lead">芭樂子知道…我講這麼多,還是有人心裡在嘀咕:<br><strong>「道理我都懂啦,但免費的到底在哪?讓我看一下下嘛～」</strong></p>
+        <p class="wc-bait-lead">好啦,你贏了。免費高清世足直播,點下去 👇</p>
+        <button type="button" class="wc-bait-btn" id="wcBaitBtn">🔴 免費高清世足直播・點我看（不用錢！）</button>
+        <div class="wc-bait-reveal" id="wcBaitReveal" hidden>
+          <img src="/images/articles/worldcup-scam-gotcha.webp" alt="芭樂子一臉「我就知道你會按」的無奈表情" width="320" height="320" loading="lazy" decoding="async">
+          <h3 id="wcBaitTitle">🤦‍♀️ 就跟你說會中毒你還按？！</h3>
+          <p id="wcBaitMsg">看吧,真的盜連站這時候已經在你電腦裡裝木馬、把你導去黑網娛樂城了——還好這只是芭樂子的假按鈕。<strong>乖乖去看有版權的啦！</strong></p>
+          <div class="wc-bait-cta">
+            <a href="#platforms" class="btn-primary">📺 正版怎麼看（愛爾達／華視）</a>
+            <a href="/casino-check/" class="btn-outline">🛡️ 查網站是不是黑網</a>
+          </div>
+        </div>
+      </div>
+
+      <h2 id="time" style="margin-top:2.5rem">台灣看球時間：準備熬夜</h2>
+      <p>美加墨在西半球，跟台灣時差大，<strong>多數比賽都在台灣的凌晨到早上</strong>。重點時間先記起來（台灣時間）：</p>
+      <ul>
+        <li>🟢 開幕戰：<strong>6/12（五）03:00</strong> 墨西哥 vs 南非</li>
+        <li>🏆 冠軍決賽：<strong>7/20（一）03:00</strong></li>
+      </ul>
+      <p>完整逐場時間、12 組分組對戰，看這份 👉 <a href="/articles/worldcup-2026-schedule/" style="color:var(--guava-green)"><strong>2026 世足賽程表（台灣時間）</strong></a>。</p>
+
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <div class="faq-a" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+
+      <div class="related-box"><h3>📖 世足看球必備</h3><div class="related-links">
+        <a href="/articles/worldcup-2026-schedule/">2026 世足賽程表（台灣時間）<small>開幕6/12、決賽7/20、12組對戰</small></a>
+        <a href="/tools/worldcup-2026/">冠軍預測工具<small>48 隊你猜誰奪冠？即時投票</small></a>
+        <a href="/casino-check/">娛樂城體檢<small>看球前查一下，避開假直播黑網</small></a>
+        <a href="/articles/worldcup-2026-prediction/">芭樂子冠軍預測<small>48 隊數據分析＋擲筊選冠軍</small></a>
+      </div></div>
+
+      <ShareButtons title="2026 世足轉播哪裡看？台灣平台一次看：愛爾達、華視免費場" url={URL} />
+    </article>
+  </div>
+
+  <style is:global>
+    .hero-banner{ width:100%; height:4px; border-radius:8px; margin-bottom:1.5rem; }
+    .content-img{ display:block; width:100%; max-width:840px; height:auto; margin:1rem auto 0; border-radius:12px; border:1px solid var(--border); }
+    .article-img-caption{ text-align:center; font-size:.9rem; line-height:1.7; color:var(--text-muted); margin:.5rem auto 1.4rem; max-width:680px; }
+    .wc-bait{ background:linear-gradient(135deg,rgba(244,67,54,.12),rgba(30,30,30,.55)); border:1px dashed rgba(244,67,54,.55); border-radius:16px; padding:1.5rem 1.3rem; margin:1.8rem 0; text-align:center; }
+    .wc-bait-lead{ margin:.4rem 0; color:var(--text-secondary); line-height:1.75; }
+    .wc-bait-btn{ display:inline-block; margin:1rem auto 0; padding:1rem 1.5rem; font-size:1.12rem; font-weight:900; color:#fff; background:linear-gradient(135deg,#ff1f1f,#c00000); border:none; border-radius:12px; cursor:pointer; animation:wcPulse 1.6s infinite; max-width:100%; }
+    .wc-bait-btn:hover{ filter:brightness(1.12); }
+    .wc-bait-btn:disabled{ opacity:.85; cursor:progress; animation:none; }
+    @keyframes wcPulse{ 0%{box-shadow:0 0 0 0 rgba(255,31,31,.55)} 70%{box-shadow:0 0 0 14px rgba(255,31,31,0)} 100%{box-shadow:0 0 0 0 rgba(255,31,31,0)} }
+    .wc-bait-reveal{ margin-top:1.5rem; animation:wcShake .5s; }
+    .wc-bait-reveal img{ width:200px; max-width:62%; height:auto; border-radius:50%; border:3px solid var(--guava-green); box-shadow:0 0 24px rgba(57,255,20,.25); }
+    .wc-bait-reveal h3{ color:var(--guava-pink); margin:.9rem 0 .5rem; font-size:1.3rem; }
+    .wc-bait-reveal p{ color:var(--text-secondary); line-height:1.75; max-width:560px; margin:0 auto 1.1rem; }
+    .wc-bait-cta{ display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center; }
+    @keyframes wcShake{ 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+    @media (prefers-reduced-motion:reduce){ .wc-bait-btn{ animation:none } .wc-bait-reveal{ animation:none } }
+  </style>
+
+  <script is:inline>
+    (function(){
+      var btn=document.getElementById('wcBaitBtn');
+      if(!btn) return;
+      var reveal=document.getElementById('wcBaitReveal'),
+          title=document.getElementById('wcBaitTitle'),
+          msg=document.getElementById('wcBaitMsg');
+      var label='🔴 免費高清世足直播・點我看（不用錢！）';
+      btn.addEventListener('click',function(){
+        var n=1;
+        try{ n=parseInt(localStorage.getItem('wcBaitN')||'0',10)+1; localStorage.setItem('wcBaitN',String(n)); }catch(e){}
+        btn.textContent='連線中…尋找免費訊號…'; btn.disabled=true;
+        setTimeout(function(){
+          btn.textContent=label; btn.disabled=false;
+          if(n>=3){ title.textContent='😤 第 '+n+' 次了!你是不是真的不信邪'; msg.innerHTML='芭樂子認真說:真實世界你按到第三次,個資大概已經在暗網被拍賣了。求你,<strong>看正版</strong>。'; }
+          else if(n===2){ title.textContent='😮‍💨 又按?!是不是不信邪'; msg.innerHTML='第二次囉…還好還是假的。真的那種你已經中兩次木馬了。乖,<strong>看正版</strong>。'; }
+          reveal.hidden=false;
+          reveal.scrollIntoView({behavior:'smooth',block:'center'});
+        },800);
+      });
+    })();
+  </script>
+</BaseLayout>

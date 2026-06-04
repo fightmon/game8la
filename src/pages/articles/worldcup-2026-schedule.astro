@@ -1,0 +1,242 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '2026 世界盃幾號開踢？台灣時間是什麼時候？', a: '美國當地時間 2026 年 6 月 11 日揭幕，換算台灣時間是 6 月 12 日（五）凌晨 3:00 開踢，由地主墨西哥對南非，在墨西哥市阿茲特克體育場開打。整個賽事打到台灣時間 7 月 20 日（一）凌晨 3:00 的冠軍決賽。' },
+  { q: '2026 世足決賽是哪一天？在哪裡踢？', a: '冠軍決賽在台灣時間 2026 年 7 月 20 日（一）凌晨 3:00，地點是美國紐約／紐澤西的大都會人壽體育場（MetLife Stadium）。' },
+  { q: '2026 世界盃有幾隊？分幾組？', a: '史上首次擴編到 48 隊，分成 A～L 共 12 個小組、每組 4 隊，總共踢 104 場。每組前 2 名加上 8 個成績最好的第 3 名，共 32 隊晉級淘汰賽。' },
+  { q: '小組賽和淘汰賽各打到幾號（台灣時間）？', a: '小組賽 6/12～6/28；接著是 48 隊新制多出來的「32 強淘汰賽」（約 6/29 起）→ 16 強 7/5～7/8 → 8 強 7/10～7/12 → 4 強 7/15～7/16 → 7/20 冠軍決賽。逐場確切時間以 FIFA 官方與愛爾達公告為準。' },
+  { q: '台灣在哪裡看 2026 世足轉播？', a: '愛爾達（ELTA）拿下台灣區轉播總代理，完整轉播全部 104 場：電視可看中華電信 MOD 的愛爾達體育 1～4 台，線上有 ELTA.tv 與 Hami Video（付費）。華視則會免費轉播開幕戰、四強、冠軍等重點場次，東森、台視也有部分場次。完整怎麼看請見我們的世足轉播攻略。' },
+];
+
+const URL = 'https://game8la.com/articles/worldcup-2026-schedule/';
+
+const groups = [
+  ['A', ['墨西哥', '南非', '南韓', '捷克']],
+  ['B', ['加拿大', '波赫', '卡達', '瑞士']],
+  ['C', ['巴西', '摩洛哥', '海地', '蘇格蘭']],
+  ['D', ['美國', '巴拉圭', '澳洲', '土耳其']],
+  ['E', ['德國', '古拉索', '象牙海岸', '厄瓜多']],
+  ['F', ['荷蘭', '日本', '瑞典', '突尼西亞']],
+  ['G', ['比利時', '埃及', '伊朗', '紐西蘭']],
+  ['H', ['西班牙', '維德角', '沙烏地阿拉伯', '烏拉圭']],
+  ['I', ['法國', '塞內加爾', '伊拉克', '挪威']],
+  ['J', ['阿根廷', '阿爾及利亞', '奧地利', '約旦']],
+  ['K', ['葡萄牙', '剛果民主共和國', '烏茲別克', '哥倫比亞']],
+  ['L', ['英格蘭', '克羅埃西亞', '迦納', '巴拿馬']],
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title="2026 世足賽程表（台灣時間）｜開幕6/12、決賽7/20、12組分組對戰一次看 — GAME8LA"
+  description="2026 世界盃賽程懶人包：台灣時間 6/12 開踢、7/20 決賽。48 隊 12 組分組名單、小組賽到決賽各階段台灣時間、開幕戰與台灣看球時間一次看。"
+  image="https://game8la.com/images/articles/worldcup-2026-schedule-cover.webp"
+  datePublished="2026-06-04"
+  dateModified="2026-06-04"
+  timeRequired="PT6M"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '2026 世足賽程表', url: URL },
+  ]}
+/>
+<BaseLayout
+  currentPage="articles"
+  title="2026 世足賽程表（台灣時間）｜開幕6/12、決賽7/20、12組分組對戰一次看 — GAME8LA"
+  description="2026 世界盃賽程懶人包：台灣時間 6/12 開踢、7/20 決賽。48 隊 12 組分組名單、小組賽到決賽各階段台灣時間、開幕戰與台灣看球時間一次看。"
+  ogImage="https://game8la.com/images/articles/worldcup-2026-schedule-cover.webp"
+>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 2026 世足賽程表</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      📅 發佈：2026-06-04 ｜ ✍️ 作者：芭樂子 ｜ ⏱️ 預估閱讀 6 分鐘
+    </div>
+    <a href="/articles/" class="back-link">← 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a472a,#004d98,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:840px;margin:0 auto">
+      <h1 style="font-size:2rem;line-height:1.3">2026 世足賽程表（台灣時間）<em>開幕 6/12、決賽 7/20，48 隊 12 組對戰一次看</em></h1>
+
+      <img class="content-img"
+           src="/images/articles/worldcup-2026-schedule-cover.webp"
+           srcset="/images/articles/worldcup-2026-schedule-cover-768w.webp 768w, /images/articles/worldcup-2026-schedule-cover.webp 1200w"
+           sizes="(max-width: 880px) 100vw, 840px"
+           alt="2026 世足賽程表懶人包｜芭樂子在世界盃作戰板前用教鞭講解 48 隊 12 組分組對戰｜GAME8LA"
+           width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">芭樂子把 48 隊、12 組、104 場的台灣時間賽程一次整理給你，免得熬夜還看錯時間。</p>
+
+      <div class="quick-tool-bar">
+        <span>看球必備：</span>
+        <a href="/articles/worldcup-2026-live-broadcast/">轉播哪裡看</a>
+        <a href="/tools/worldcup-2026/">冠軍預測</a>
+      </div>
+
+      <p>8LA 大大好，我是芭樂子。世界盃要開踢了——美國當地 6/11、<strong>台灣時間 6 月 12 日（五）凌晨 3:00 第一聲哨</strong>。這屆史上最大,48 隊、12 組、104 場,要熬一個多月。問題是賽程一大張、又全是時差,看了頭暈。芭樂子把<strong>台灣時間</strong>整理好,賽程、分組、什麼時候踢、幾點開賽,一頁搞定。</p>
+
+      <div class="wc-countdown" id="wcCd" data-open="2026-06-12T03:00:00+08:00" data-final="2026-07-20T03:00:00+08:00">
+        <div class="wc-cd-label" id="wcCdLabel">距 2026 世界盃開幕還有</div>
+        <div class="wc-cd-clock">
+          <div class="wc-cd-unit"><span class="wc-cd-num" id="cdD">--</span><span class="wc-cd-u">天</span></div>
+          <span class="wc-cd-sep">:</span>
+          <div class="wc-cd-unit"><span class="wc-cd-num" id="cdH">--</span><span class="wc-cd-u">時</span></div>
+          <span class="wc-cd-sep">:</span>
+          <div class="wc-cd-unit"><span class="wc-cd-num" id="cdM">--</span><span class="wc-cd-u">分</span></div>
+          <span class="wc-cd-sep">:</span>
+          <div class="wc-cd-unit"><span class="wc-cd-num" id="cdS">--</span><span class="wc-cd-u">秒</span></div>
+        </div>
+        <div class="wc-cd-quip" id="wcCdQuip">⚽ 倒數中…</div>
+      </div>
+
+      <div class="warn-box"><strong>⚠️ 先講清楚：</strong>下面的<strong>階段日期是依官方公布整理的台灣時間</strong>,但<strong>逐場確切對戰與開賽時間以 FIFA 官方、愛爾達（ELTA）最新公告為準</strong>——賽程偶有微調,芭樂子不騙你「我這份保證一字不差」,要下注或排休假請再對一次官方。</p>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文導覽</h2>
+        <ol>
+          <li><a href="#key">一眼看懂：開幕、決賽、各階段時間</a></li>
+          <li><a href="#stages">各階段台灣時間總表</a></li>
+          <li><a href="#groups">12 組分組名單（A～L）</a></li>
+          <li><a href="#watch">台灣看球時間 & 哪裡看</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <h2 id="key" style="margin-top:2.5rem">一眼看懂：開幕、決賽、各階段時間</h2>
+      <div class="card" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(245,184,0,0.08),rgba(30,30,30,0.5))">
+        <ul style="margin:0">
+          <li><strong>🟢 開幕戰</strong>：台灣時間 <strong>6/12（五）03:00</strong>　墨西哥 vs 南非（阿茲特克體育場）</li>
+          <li><strong>🏆 冠軍決賽</strong>：台灣時間 <strong>7/20（一）03:00</strong>　大都會人壽體育場（紐約／紐澤西）</li>
+          <li><strong>📅 賽期</strong>：6/12 ～ 7/20，共 <strong>104 場</strong>、<strong>48 隊 / 12 組</strong></li>
+        </ul>
+      </div>
+
+      <h2 id="stages" style="margin-top:2.5rem">各階段台灣時間總表</h2>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>階段</th><th>台灣時間</th><th>備註</th></tr></thead>
+        <tbody>
+          <tr><td><strong>小組賽</strong></td><td>6/12 – 6/28</td><td>12 組循環賽，每組前 2 ＋ 8 個最佳第 3 晉級</td></tr>
+          <tr><td>32 強淘汰賽</td><td>約 6/29 起 <span style="color:var(--guava-pink)">※</span></td><td>48 隊新制多出來的一輪</td></tr>
+          <tr><td>16 強</td><td>7/5 – 7/8</td><td>—</td></tr>
+          <tr><td>8 強</td><td>7/10 – 7/12</td><td>—</td></tr>
+          <tr><td>4 強</td><td>7/15 – 7/16</td><td>—</td></tr>
+          <tr><td style="color:var(--gold-light);font-weight:700">冠軍決賽</td><td style="color:var(--gold-light);font-weight:700">7/20（一）03:00</td><td>大都會人壽體育場</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:0.92rem;color:var(--text-muted)"><span style="color:var(--guava-pink)">※</span> 48 隊新制小組賽後先打「32 強淘汰賽」再進 16 強，賽制細節（晉級規則、最佳第三名）看 <a href="/articles/worldcup-2026-format-guide/" style="color:var(--guava-green)">世足賽制懶人包</a>。逐場時間以官方／愛爾達公告為準。</p>
+
+      <h2 id="groups" style="margin-top:2.5rem">12 組分組名單（A～L）</h2>
+      <p>48 隊抽成 A～L 共 12 組，每組 4 隊。死亡之組自己評：</p>
+      <div class="wc-groups">
+        {groups.map(([g, teams]) => (
+          <div class="wc-group">
+            <div class="wc-group-head">{g} 組</div>
+            <ul>{teams.map((t) => <li>{t}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <p style="font-size:0.92rem;color:var(--text-muted)">※ 分組依官方抽籤結果整理。想知道誰最有機會奪冠，玩 <a href="/tools/worldcup-2026/" style="color:var(--guava-green)">冠軍預測工具</a>，或看 <a href="/articles/worldcup-2026-prediction/" style="color:var(--guava-green)">芭樂子冠軍預測分析</a>。</p>
+
+      <h2 id="watch" style="margin-top:2.5rem">台灣看球時間 & 哪裡看</h2>
+      <p>美加墨在西半球，跟台灣有大時差——<strong>多數比賽落在台灣的凌晨到早上</strong>，標準的熬夜／早起看球賽季。先準備好咖啡跟特休。</p>
+      <figure style="margin:1.5rem 0">
+        <img class="content-img" src="/images/articles/worldcup-watch-night.webp" alt="芭樂子半夜頂著黑眼圈、喝咖啡熬夜看世足轉播" width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="article-img-caption">台灣看世足 = 凌晨場修行。咖啡、特休、被窩三件套先備好，別第二天上班才在後悔。</figcaption>
+      </figure>
+      <p>轉播部分：<strong>愛爾達（ELTA）拿下台灣轉播總代理，完整 104 場</strong>（MOD 愛爾達體育 1～4 台 / ELTA.tv / Hami Video，付費）；<strong>華視免費轉播開幕、四強、冠軍等重點場</strong>；東森、台視也有部分場次。完整方案、免費怎麼看、手機怎麼看，整理在這篇 👇</p>
+      <div class="card" style="margin:1.5rem 0;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.08),rgba(30,30,30,0.5));text-align:center">
+        <h3 style="color:var(--guava-green);margin-top:0">📺 不知道在哪看？</h3>
+        <p>愛爾達、華視、MOD、Hami Video、手機 App——免費場 vs 付費場一次說清楚。</p>
+        <a href="/articles/worldcup-2026-live-broadcast/" class="btn-primary">看 2026 世足轉播攻略 →</a>
+      </div>
+
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(f => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <div class="faq-a" set:html={f.a} />
+          </details>
+        ))}
+      </div>
+
+      <div class="related-box"><h3>📖 世足看球必備</h3><div class="related-links">
+        <a href="/articles/worldcup-2026-live-broadcast/">2026 世足轉播哪裡看<small>台灣平台、免費場、手機看一次看</small></a>
+        <a href="/tools/worldcup-2026/">冠軍預測工具<small>48 隊你猜誰奪冠？即時投票</small></a>
+        <a href="/articles/worldcup-2026-format-guide/">世足賽制懶人包<small>48 隊怎麼打？晉級規則 5 分鐘懂</small></a>
+        <a href="/articles/football-offside-rule/">越位規則圖解<small>看球前先搞懂這條最讓人吵的規則</small></a>
+      </div></div>
+
+      <ShareButtons title="2026 世足賽程表（台灣時間）｜開幕6/12、決賽7/20、12組對戰一次看" url={URL} />
+    </article>
+  </div>
+
+  <style is:global>
+    .hero-banner{ width:100%; height:4px; border-radius:8px; margin-bottom:1.5rem; }
+    .content-img{ display:block; width:100%; max-width:840px; height:auto; margin:1rem auto 0; border-radius:12px; border:1px solid var(--border); }
+    .article-img-caption{ text-align:center; font-size:.9rem; line-height:1.7; color:var(--text-muted); margin:.5rem auto 1.4rem; max-width:680px; }
+    .wc-countdown{ background:linear-gradient(135deg,rgba(26,71,42,.55),rgba(0,77,152,.45),rgba(245,184,0,.18)); border:1px solid rgba(57,255,20,.35); border-radius:16px; padding:1.3rem 1rem 1.1rem; margin:1.5rem 0; text-align:center; box-shadow:0 0 30px rgba(57,255,20,.08) inset; }
+    .wc-cd-label{ font-size:1rem; font-weight:700; color:var(--text-secondary); letter-spacing:1px; }
+    .wc-cd-clock{ display:flex; align-items:center; justify-content:center; gap:.35rem; margin:.7rem 0 .6rem; flex-wrap:nowrap; }
+    .wc-cd-unit{ display:flex; flex-direction:column; align-items:center; min-width:58px; background:rgba(0,0,0,.3); border-radius:10px; padding:.45rem .3rem; }
+    .wc-cd-num{ font-size:2.1rem; font-weight:900; line-height:1; color:var(--guava-green); font-variant-numeric:tabular-nums; text-shadow:0 0 12px rgba(57,255,20,.4); }
+    .wc-cd-u{ font-size:.72rem; color:var(--text-muted); margin-top:.25rem; }
+    .wc-cd-sep{ font-size:1.6rem; font-weight:900; color:var(--guava-green); opacity:.6; }
+    .wc-cd-quip{ font-size:1rem; font-weight:700; color:var(--gold-light); line-height:1.6; margin-top:.3rem; min-height:1.6em; }
+    @media (max-width:480px){ .wc-cd-unit{ min-width:46px; padding:.4rem .2rem; } .wc-cd-num{ font-size:1.6rem; } .wc-cd-sep{ font-size:1.2rem; } .wc-cd-label,.wc-cd-quip{ font-size:.92rem; } }
+    .wc-groups{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:.8rem; margin:1.2rem 0; }
+    .wc-group{ background:var(--bg-card); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .wc-group-head{ background:linear-gradient(135deg,#1a472a,#004d98); color:#fff; font-weight:900; text-align:center; padding:.5rem; letter-spacing:1px; }
+    .wc-group ul{ list-style:none; margin:0; padding:.6rem .8rem; }
+    .wc-group li{ padding:.25rem 0; font-size:.95rem; border-bottom:1px dashed rgba(255,255,255,.08); }
+    .wc-group li:last-child{ border-bottom:none; }
+  </style>
+
+  <script is:inline>
+    (function(){
+      var box = document.getElementById('wcCd');
+      if(!box) return;
+      var open = new Date(box.getAttribute('data-open')).getTime();
+      var fin  = new Date(box.getAttribute('data-final')).getTime();
+      var elD=document.getElementById('cdD'), elH=document.getElementById('cdH'),
+          elM=document.getElementById('cdM'), elS=document.getElementById('cdS'),
+          elLabel=document.getElementById('wcCdLabel'), elQuip=document.getElementById('wcCdQuip');
+      var DAY=86400000;
+      function pad(n){ return (n<10?'0':'')+n; }
+      function openQuip(d){
+        if(d>14) return '⚽ 還有一個多月,先把你支持的隊伍挑好';
+        if(d>7)  return '📅 剩 '+d+' 天,世足特休先卡起來,主管問就說芭樂子叫的';
+        if(d>3)  return '📺 剩 '+d+' 天,確認家裡有沒有愛爾達/MOD,別開賽才在裝';
+        if(d===3) return '☕ 剩 3 天,咖啡、泡麵、被窩,看球三件套開始備';
+        if(d===2) return '😴 剩 2 天,這幾天先把睡眠存起來';
+        if(d===1) return '⏰ 明天凌晨 3:00 開踢!今晚早點睡別斷電';
+        return '🔥 就是今晚!凌晨 3:00 墨西哥 vs 南非,鬧鐘設了嗎';
+      }
+      function tick(){
+        var now = Date.now();
+        var target, label, quip, after=false;
+        if(now < open){ target=open; label='距 2026 世界盃開幕還有'; quip=openQuip(Math.floor((open-now)/DAY)); }
+        else if(now < open + 7200000){ // 開幕戰進行中（約 2 小時）
+          target=fin; label='🔴 開幕戰開踢!距冠軍戰還有'; quip='墨西哥 vs 南非開打了!世界盃正式開始,衝啊'; after=true;
+        }
+        else if(now < fin){ target=fin; label='距 7/20 冠軍決賽還有'; quip='🏆 賽事進行中!距冠軍戰還有 '+Math.floor((fin-now)/DAY)+' 天,撐住別爆肝'; after=true; }
+        else { // 賽事結束
+          elLabel.textContent='2026 世界盃結束了'; elQuip.textContent='⚽ 4 年後見,先去把欠的睡眠補回來';
+          elD.textContent='00'; elH.textContent='00'; elM.textContent='00'; elS.textContent='00';
+          clearInterval(timer); return;
+        }
+        var diff = target - now; if(diff<0) diff=0;
+        var d=Math.floor(diff/DAY), h=Math.floor(diff%DAY/3600000),
+            m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
+        elD.textContent=pad(d); elH.textContent=pad(h); elM.textContent=pad(m); elS.textContent=pad(s);
+        elLabel.textContent=label; elQuip.textContent=quip;
+      }
+      tick(); var timer=setInterval(tick,1000);
+    })();
+  </script>
+</BaseLayout>

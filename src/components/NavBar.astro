@@ -14,6 +14,7 @@ const staticSearchItems = [
   { t: '奇幻魔藥', d: 'RG電子蜂巢消除老虎機 RTP 98.28%', u: '/games/fantasy-potion/', c: '遊戲' },
   { t: '2026 老虎機評分總排名', d: '9款熱門Slot完整評比', u: '/game-ranking/', c: '排行' },
   { t: '芭樂攻略', d: '老虎機、百家樂、真人娛樂教學', u: '/articles/', c: '攻略' },
+  { t: '世足8LA專區', d: '2026 世界盃賽程、轉播、規則、冠軍預測一站看', u: '/worldcup/', c: '世足' },
   { t: '芭樂好彩', d: '大樂透、威力彩、今彩539 開獎', u: '/lottery/', c: '彩券' },
   { t: '樂透數據站', d: '威力彩・大樂透・539 冷熱號回測、選號參考、包牌產生器', u: '/lottery/analysis/', c: '彩券' },
   { t: '富遊娛樂城', d: '台灣老牌娛樂城評測', u: '/casinos/fuyou/', c: '娛樂城' },
@@ -60,6 +61,7 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
   <div class="nav-links">
     <a href="/" class={currentPage === 'home' ? 'active' : ''}>首頁</a>
     <a href="/atg-seth/" class={currentPage === 'atg-seth' ? 'active' : ''}>金8LA賽特</a>
+    <a href="/worldcup/" class={currentPage === 'worldcup' ? 'active' : ''}>⚽ 世足8LA</a>
     <a href="/articles/" class={currentPage === 'articles' ? 'active' : ''}>芭樂攻略</a>
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>芭樂遊戲</a>
     <div class="nav-dropdown">
@@ -118,6 +120,7 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
   <div class="mobile-menu-inner">
     <a href="/" class={currentPage === 'home' ? 'active' : ''}>🏠 首頁</a>
     <a href="/atg-seth/" class={currentPage === 'atg-seth' ? 'active' : ''}>⚡ 金8LA賽特</a>
+    <a href="/worldcup/" class={currentPage === 'worldcup' ? 'active' : ''}>⚽ 世足8LA專區</a>
     <a href="/articles/" class={currentPage === 'articles' ? 'active' : ''}>📖 芭樂攻略</a>
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>🎰 芭樂遊戲</a>
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>🎱 芭樂好彩</a>
