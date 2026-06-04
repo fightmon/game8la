@@ -23,7 +23,7 @@ import ToolBox from '../../components/ToolBox.astro';
   description="娛樂城體驗金免儲值真的能領？低流水怎麼算？芭樂子拆解洗碼量提領公式、禁止遊戲陷阱、IP 多開風險，教你體驗金領得到也換得出。"
   image="https://game8la.com/images/articles/free-credit-cover.webp"
   datePublished="2026-04-12"
-  dateModified="2026-04-12"
+  dateModified="2026-06-04"
   breadcrumbs={[
     { name: '首頁', url: 'https://game8la.com/' },
     { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
@@ -245,6 +245,22 @@ import ToolBox from '../../components/ToolBox.astro';
 
       <p><strong>這就是為什麼芭樂子說 20 倍以上的流水就要三思。</strong>數學不會騙人，倍數越高，你拿回錢的機率越低。</p>
 
+      <h3 style="color:var(--gold-light)">🧮 自己拉拉看：你的體驗金，最後領得到多少？</h3>
+      <p>別只看上面兩個例子——選你的體驗金額、流水倍數、主玩遊戲，立刻算出要打多少流水、平台平均抽走多少、你最後預估能提領多少：</p>
+      <div class="fc-tool">
+        <div class="fc-row"><span class="fc-label">體驗金</span><div class="fc-btns" id="fcAmt"></div><span class="fc-unit">元</span></div>
+        <div class="fc-row"><span class="fc-label">流水倍數</span><div class="fc-btns" id="fcMul"></div><span class="fc-unit">倍</span></div>
+        <div class="fc-row"><span class="fc-label">主玩遊戲</span><div class="fc-btns" id="fcGame"></div></div>
+        <div class="fc-grid">
+          <div class="fc-stat"><b id="fcTurn">—</b><span>要打的流水<br>（有效投注）</span></div>
+          <div class="fc-stat"><b id="fcBet">—</b><span>實際要<br>下注總額</span></div>
+          <div class="fc-stat"><b id="fcLoss">—</b><span>平台<br>平均抽走</span></div>
+        </div>
+        <div class="fc-verdict" id="fcVerdict">—</div>
+        <a href="/tools/bonus-calculator/" class="fc-cta">💰 想一次比較多家體驗金/紅利划不划算？用娛樂城獎金計算器 →</a>
+      </div>
+      <p style="font-size:0.88rem;color:var(--text-muted)">※ 以平台平均抽水（老虎機 RTP 96%、真人 98.8%）估算的「理論平均值」，實際受運氣與波動影響，可能更多或直接歸零。<strong>體驗金當試玩就好，別當收入。</strong></p>
+
       <!-- ===== 第 7 節 ===== -->
       <h2 id="8la-tips" style="margin-top:2.5rem">8. 芭樂子的 4 條鐵律</h2>
 
@@ -283,6 +299,7 @@ import ToolBox from '../../components/ToolBox.astro';
       <!-- ===== 延伸閱讀 ===== -->
       <h2 style="margin-top:2.5rem">延伸閱讀</h2>
       <div class="related-links">
+        <a href="/casino-check/">娛樂城體檢<small>領體驗金前，先查平台是不是黑網</small></a>
         <a href="/articles/anti-scam-8la-guide/">防詐騙 8LA 指南<small>2026 娛樂城詐騙 8 大手法全解析</small></a>
         <a href="/articles/casino-payout-guide/">娛樂城出金完整攻略<small>怎麼安全把錢拿回來</small></a>
         <a href="/articles/slots-rtp-guide/">老虎機 RTP 教學<small>選遊戲前必懂的數字</small></a>
@@ -309,4 +326,57 @@ import ToolBox from '../../components/ToolBox.astro';
   background: #0a0e1a;
   height: auto;
 }
+  /* 體驗金提領試算器 */
+  .fc-tool{ background:var(--bg-card); border:1px solid var(--gold); border-radius:14px; padding:1.2rem; margin:1.2rem 0; }
+  .fc-row{ display:flex; align-items:center; gap:.7rem; flex-wrap:wrap; margin-bottom:.8rem; }
+  .fc-label{ min-width:5em; font-weight:700; color:var(--text-secondary); }
+  .fc-unit{ color:var(--text-muted); font-size:.9rem; }
+  .fc-btns{ display:flex; gap:.4rem; flex-wrap:wrap; }
+  .fc-btns button{ padding:.45rem .8rem; border-radius:8px; border:1px solid var(--border); background:rgba(255,255,255,.05); color:var(--text-primary); font-weight:800; cursor:pointer; transition:.15s; }
+  .fc-btns button:hover{ border-color:var(--gold); }
+  .fc-btns button.active{ background:var(--guava-green); color:#0a2810; border-color:var(--guava-green); }
+  .fc-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem; margin:1rem 0; }
+  .fc-stat{ text-align:center; background:rgba(255,255,255,.04); border-radius:10px; padding:.6rem .4rem; }
+  .fc-stat b{ display:block; font-size:1.15rem; color:var(--guava-green); }
+  .fc-stat span{ font-size:.72rem; color:var(--text-muted); line-height:1.25; display:block; margin-top:.2rem; }
+  .fc-verdict{ text-align:center; font-size:1.02rem; font-weight:800; padding:.8rem; border-radius:10px; margin:.6rem 0; line-height:1.7; }
+  .fc-verdict.win{ background:rgba(57,255,20,.12); color:var(--guava-green); }
+  .fc-verdict.lose{ background:rgba(255,94,156,.12); color:#ff7eb0; }
+  .fc-cta{ display:block; text-align:center; color:var(--guava-green); font-weight:700; text-decoration:none; margin-top:.3rem; }
+  .fc-cta:hover{ text-decoration:underline; }
+  @media(max-width:600px){ .fc-grid{ grid-template-columns:1fr; } }
 </style>
+
+<script is:inline>
+(function(){
+  var amt=168, mul=15, gi=0;
+  var GAMES=[{n:'老虎機（貢獻100%）',c:1.0,rtp:0.96},{n:'真人/百家樂（貢獻10%）',c:0.10,rtp:0.988}];
+  function f(x){ return '$'+Math.round(x).toLocaleString(); }
+  function sync(){
+    document.querySelectorAll('#fcAmt button').forEach(function(b){ b.classList.toggle('active',+b.dataset.v===amt); });
+    document.querySelectorAll('#fcMul button').forEach(function(b){ b.classList.toggle('active',+b.dataset.v===mul); });
+    document.querySelectorAll('#fcGame button').forEach(function(b){ b.classList.toggle('active',+b.dataset.v===gi); });
+  }
+  function render(){
+    var g=GAMES[gi], turn=amt*mul, bet=turn/g.c, loss=bet*(1-g.rtp), left=amt-loss;
+    document.getElementById('fcTurn').textContent=f(turn);
+    document.getElementById('fcBet').textContent=f(bet);
+    document.getElementById('fcLoss').textContent=f(loss);
+    var v=document.getElementById('fcVerdict');
+    if(left>0){ v.className='fc-verdict win'; v.innerHTML='✅ 平均打得完，理論上可提領約 <b>'+f(left)+'</b>（體驗金扣掉平台抽水後的剩餘）'; }
+    else { v.className='fc-verdict lose'; v.innerHTML='❌ 平均打不完就歸零——光是抽水（'+f(loss)+'）就吃光了體驗金（'+f(amt)+'），理論提領 $0'; }
+    sync();
+  }
+  function mk(id,arr,set){ var w=document.getElementById(id); if(!w) return;
+    w.innerHTML=arr.map(function(o){return '<button data-v="'+o.v+'">'+o.t+'</button>';}).join('');
+    w.querySelectorAll('button').forEach(function(b){ b.onclick=function(){ set(+b.dataset.v); render(); }; }); }
+  function init(){
+    if(!document.getElementById('fcAmt')) return;
+    mk('fcAmt',[168,300,500,1000].map(function(v){return{v:v,t:v};}),function(v){amt=v;});
+    mk('fcMul',[1,5,8,15,20,30].map(function(v){return{v:v,t:v};}),function(v){mul=v;});
+    mk('fcGame',GAMES.map(function(g,i){return{v:i,t:g.n};}),function(v){gi=v;});
+    render();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
