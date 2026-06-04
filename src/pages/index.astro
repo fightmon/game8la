@@ -5,8 +5,8 @@ import { articles, estViews } from '../data/articles.js';
 import { scamList, lastUpdated } from '../data/scam-list.js';
 
 const now = new Date();
-// 取最新 6 篇給首頁卡片
-const latestArticles = articles.slice(0, 6);
+// 取最新 6 篇給首頁卡片（依日期自動降序：新文章自動排第一，時序往後）
+const latestArticles = [...articles].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
 
 // 🔥 熱門排行 — 依「推估閱讀數」降序，取前 7 篇（views > 0）
 const hotExclude = ['dealers-guide'];
@@ -54,18 +54,14 @@ const latestScams = [...scamList]
   <div class="hero-slides" id="heroSlides">
     <div class="hero-slide">
       <div class="hero-content">
-        <div class="tag">⚡ 2026 金8LA嚴選</div>
+        <div class="tag">⚽ 世足專題・6/12 開踢</div>
         <div class="hero-title-frame"><span class="hero-title-inner">
-          <h1>敢丟8LA 就敢給<em data-text="真評價">真評價</em></h1>
+          <h2 class="hero-h">2026 <em data-text="世足8LA專區">世足8LA專區</em></h2>
         </span></div>
-        <p>收錄 6 大廠商、27 款老虎機完整數據，不灌水、不業配，最真實的遊戲評價都在這！</p>
+        <p>賽程表、台灣轉播哪裡看、48 隊賽制、冠軍預測——芭樂子帶你看球，零業配、防詐騙。</p>
         <div class="hero-btns">
-          <a class="btn-primary" href="/articles/game8la-manifesto/" style="text-decoration:none">
-            <Icon name="shield" /> Game8la，真評價
-          </a>
-          <a class="btn-outline" href="/casino-check/" style="text-decoration:none">
-            <Icon name="shield" /> 娛樂城體檢
-          </a>
+          <a href="/worldcup/" class="btn-primary" style="text-decoration:none"><Icon name="trophy" /> 進世足專區</a>
+          <a href="/articles/worldcup-2026-schedule/" class="btn-outline" style="text-decoration:none"><Icon name="calendar" /> 看賽程表</a>
         </div>
       </div>
     </div>
@@ -95,6 +91,23 @@ const latestScams = [...scamList]
         </div>
       </div>
     </div>
+    <div class="hero-slide">
+      <div class="hero-content">
+        <div class="tag">⚡ 2026 金8LA嚴選</div>
+        <div class="hero-title-frame"><span class="hero-title-inner">
+          <h1>敢丟8LA 就敢給<em data-text="真評價">真評價</em></h1>
+        </span></div>
+        <p>收錄 6 大廠商、27 款老虎機完整數據，不灌水、不業配，最真實的遊戲評價都在這！</p>
+        <div class="hero-btns">
+          <a class="btn-primary" href="/articles/game8la-manifesto/" style="text-decoration:none">
+            <Icon name="shield" /> Game8la，真評價
+          </a>
+          <a class="btn-outline" href="/casino-check/" style="text-decoration:none">
+            <Icon name="shield" /> 娛樂城體檢
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="hero-arrows">
     <button type="button" aria-label="上一張輪播" onclick="changeSlide(-1)"><Icon name="chevron-left" /></button>
@@ -104,6 +117,7 @@ const latestScams = [...scamList]
     <span class="active" onclick="goToSlide(0)"></span>
     <span onclick="goToSlide(1)"></span>
     <span onclick="goToSlide(2)"></span>
+    <span onclick="goToSlide(3)"></span>
   </div>
 </section>
 <!-- STATS BAR -->
@@ -468,7 +482,7 @@ function switchTab(btn) {
 }
 // === HERO SLIDER ===
 let currentSlide = 0;
-const totalSlides = 3;
+const totalSlides = 4;
 function goToSlide(n) {
   currentSlide = n;
   document.getElementById('heroSlides').style.transform = `translateX(-${n * 100}%)`;
@@ -1889,7 +1903,7 @@ function switchTab(btn) {
 
 // === HERO SLIDER ===
 let currentSlide = 0;
-const totalSlides = 3;
+const totalSlides = 4;
 function goToSlide(n) {
   currentSlide = n;
   document.getElementById('heroSlides').style.transform = `translateX(-${n * 100}%)`;

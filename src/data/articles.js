@@ -113,6 +113,20 @@ export const articles = [
     thumbnail: '/images/article-thumbs/thumb-worldcup-2026.webp'
   },
   {
+    slug: 'italy-missing-worldcup-2026',
+    title: '義大利為什麼又沒進世足？連缺三屆的 5 個真實原因（2026 補完）',
+    excerpt: '四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃！芭樂子拆解：波士尼亞 PK 大戰怎麼掉的、青訓斷層、戰術老化、聯賽危機、5 大根本原因。義大利還救得回來嗎？',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-03',
+    views: 4,
+    tags: ['最新', '精選', '時事'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#0a2e1a,#1a4a2a,#2d8a4e)',
+    thumbnail: '/images/article-thumbs/thumb-worldcup-2026.webp'
+  },
+  {
     slug: 'power-lottery-wheeling-guide',
     title: '威力彩包牌要花多少錢？7碼到12碼費用表＋第二區全包划不划算',
     excerpt: '威力彩第一區包 7 碼 $700、10 碼 $21,000，第二區全包再乘 8 倍。芭樂子用組合數學拆解兩個維度的注數、花費和期望值，告訴你甜蜜點在哪、幾碼開始穩虧。',
