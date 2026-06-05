@@ -13,6 +13,7 @@ const faqs = [
   { q: '其他歐洲傳統強隊也有沒進的嗎？', a: '有，但都很短。德國 2018 小組賽出局算「**進但失常**」，2022 又出局，但 2026 順利晉級。荷蘭 2018 沒進，2022 補回來。<strong>義大利是唯一連續 3 屆缺席的傳統四星球隊</strong>，這在世界盃歷史上前所未有。' },
   { q: '2030 義大利還有機會嗎？', a: '機會在但要看青訓重整。2030 世界盃由<strong>西班牙＋葡萄牙＋摩洛哥</strong>三國主辦，歐洲區名額會增加。義大利如果這 4 年能把 U21 國家隊那批新血推到一線（像 Pio Esposito、Pafundi 這幾個），加上聯賽競爭力恢復，有機會。但如果青訓繼續斷層，2030 還會繼續缺席。<strong>2030 是最後機會</strong>。' },
   { q: '義大利球迷現在心情怎樣？', a: '可以用「**麻木中帶點絕望**」形容。第一次（2018）大家還很憤怒、罵教練、燒球衣。第二次（2022）大家錯愕、寫專欄、開檢討會。第三次（2026）大家累了，網路上最流行的留言是「**算了，看波士尼亞踢就好**」。義大利人是世界上最會用幽默掩蓋傷痛的民族，但這次的傷比較深。' },
+  { q: '義大利史上最偉大的球員有哪些？', a: '芭樂子私心挑了 10 位義大利傳奇放進文末的「夢幻隊勝率模擬器」：門將布馮（Gianluigi Buffon）、後衛馬爾蒂尼（Paolo Maldini）、巴雷西（Franco Baresi）、卡納瓦羅（Fabio Cannavaro）、內斯塔（Alessandro Nesta），中場節拍器皮爾洛（Andrea Pirlo），前場則有憂鬱王子巴吉歐（Roberto Baggio）、皮耶羅（Alessandro Del Piero）、羅馬王子托蒂（Francesco Totti），以及國家隊頭號射手里瓦（Luigi Riva）。你可以在工具裡自己選人，看看把這些名將湊一隊，義大利的奪冠勝率會變多少。' },
 ];
 ---
 <FaqSchema faqs={faqs} />
@@ -20,9 +21,9 @@ const faqs = [
   url="https://game8la.com/articles/italy-missing-worldcup-2026/"
   title="義大利為什麼又沒進世足？連缺三屆的 5 個真實原因（2026 補完）"
   description="四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃！芭樂子拆解：波士尼亞 PK 大戰怎麼掉的、青訓斷層、戰術老化、聯賽危機、5 大根本原因。義大利還救得回來嗎？"
-  image="https://game8la.com/images/articles/worldcup-format-cover.webp"
+  image="https://game8la.com/images/articles/italy-missing-cover.webp"
   datePublished="2026-06-03"
-  dateModified="2026-06-03"
+  dateModified="2026-06-05"
   wordCount={2900}
   timeRequired="PT9M"
   breadcrumbs={[
@@ -31,7 +32,7 @@ const faqs = [
     { name: '義大利為什麼又沒進世足', url: 'https://game8la.com/articles/italy-missing-worldcup-2026/' },
   ]}
 />
-<BaseLayout currentPage="articles" title="義大利為什麼又沒進世足？連缺三屆的 5 個真實原因（2026 補完） — GAME8LA" description="四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃！芭樂子拆解：波士尼亞 PK 大戰怎麼掉的、青訓斷層、戰術老化、聯賽危機、5 大根本原因。義大利還救得回來嗎？" ogImage="https://game8la.com/images/articles/worldcup-format-cover.webp">
+<BaseLayout currentPage="articles" title="義大利為什麼又沒進世足？連缺三屆的 5 個真實原因（2026 補完） — GAME8LA" description="四屆冠軍義大利連續三屆（2018、2022、2026）缺席世界盃！芭樂子拆解：波士尼亞 PK 大戰怎麼掉的、青訓斷層、戰術老化、聯賽危機、5 大根本原因。義大利還救得回來嗎？" ogImage="https://game8la.com/images/articles/italy-missing-cover.webp">
   <div class="container">
     <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 義大利為什麼又沒進世足</div>
     <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
@@ -48,15 +49,21 @@ const faqs = [
 
       <!-- === 封面圖 === -->
       <img
-        src="/images/articles/worldcup-format-cover.webp"
-        srcset="/images/articles/worldcup-format-cover-768w.webp 768w, /images/articles/worldcup-format-cover.webp 1376w"
+        src="/images/articles/italy-missing-cover.webp"
+        srcset="/images/articles/italy-missing-cover-768w.webp 768w, /images/articles/italy-missing-cover.webp 1200w"
         sizes="(max-width: 640px) 100vw, 820px"
-        alt="義大利連續三屆缺席世界盃懶人包封面"
+        alt="義大利連續三屆缺席世界盃｜芭樂子當偵探分析師，拿放大鏡檢視破損的義大利國旗與調查白板｜GAME8LA"
         class="content-img"
-        width="1376" height="774"
-        loading="eager"
-        style="margin-bottom:1.2rem"
+        width="1200" height="670"
+        loading="eager" fetchpriority="high" decoding="async"
+        style="margin-bottom:0.3rem"
       />
+      <p class="article-img-caption">芭樂子化身偵探，幫你把義大利連缺三屆的「案情」一條一條查清楚。</p>
+
+      <a href="#dreamteam" class="dt-jump">
+        😏 懶得看落落長分析？只想知道「把哪位傳奇放進來，義大利就會贏」？
+        <strong>👉 直接跳到芭樂子夢幻隊勝率機，10 大義大利名將任你選 →</strong>
+      </a>
 
       <!-- === 快速工具入口 === -->
       <div class="quick-tool-bar">
@@ -148,6 +155,11 @@ const faqs = [
 
       <p>芭樂子讀完一堆義大利足球分析的文章後，整理出 5 個真正的原因——順序按重要性排：</p>
 
+      <figure style="margin:1.5rem 0">
+        <img class="content-img" src="/images/articles/italy-missing-whiteboard.webp" alt="芭樂子站在戰術白板前，用教鞭指著象徵青訓斷層的斷鏈與戰術老化的鏽齒輪" width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="article-img-caption">斷掉的鎖鏈＝青訓斷層，生鏽的齒輪＝戰術老化。芭樂子用一張白板講完義大利的病灶。</figcaption>
+      </figure>
+
       <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06) 0%,rgba(30,30,30,0.5) 100%)">
         <h3 style="color:#2196f3;margin-top:0">原因 1：青訓徹底斷層</h3>
         <p style="font-size:1.05rem;line-height:1.9">義甲俱樂部 2010 年以後越來越愛買外援，本土年輕球員一線隊機會少。U17、U21 國家隊雖然偶爾有亮點，但球員到了 20-22 歲沒地方踢，要嘛去比利時、葡萄牙這種「次級聯賽」打雜，要嘛在義乙、義丙打到 25 歲才被注意到——但<strong>世界級球員是 18-21 歲就要爆發的</strong>，等到 25 歲已經來不及。</p>
@@ -233,6 +245,24 @@ const faqs = [
       <p>芭樂子的結論：<strong>世界盃會過去，但義大利足球需要的不是同情，是徹底改革</strong>。如果這 4 年義大利足協能痛下決心，我們 2030 就有戲。如果繼續混，再過 4 年我們再寫一篇「義大利又沒進」，這是芭樂子最不想寫的文章。</p>
 
       <p>對了——芭樂子<strong>誠摯邀請義大利球迷</strong>，6/11 開踢時還是來一起看世足。畢竟，<strong>不看自己國家也可以看自己愛的足球</strong>。義大利球員不在場上，但義大利的足球哲學（傳球節奏、防守組織、戰術紀律）會在很多隊上看到。那個就是義大利的影子。</p>
+
+      <!-- === 夢幻隊勝率模擬器 === -->
+      <h2 id="dreamteam" style="margin-top:2.5rem">🎮 芭樂子夢幻隊：把義大利史上球星湊一隊，能拿冠軍嗎？</h2>
+      <p>現在的義大利不行，但<strong>歷史上的義大利怪物一大堆</strong>。芭樂子做了台「夢幻隊勝率機」——把史上球星加進這支 2026 缺席的義大利，看勝率怎麼跳。點頭像加人（可複選），芭樂子會在旁邊吐槽 👇</p>
+      <div class="dt-tool">
+        <div class="dt-grid" id="dtGrid"></div>
+        <div class="dt-meter-wrap">
+          <div class="dt-meter-top">
+            <span class="dt-meter-label">義大利奪冠勝率</span>
+            <span class="dt-meter-val" id="dtVal">8%</span>
+          </div>
+          <div class="dt-bar"><div class="dt-bar-fill" id="dtFill"></div></div>
+        </div>
+        <div class="dt-msg" id="dtMsg"><b>芭樂子：</b>一個都還沒選，現實的義大利連會內賽都沒進，勝率先給你 8% 墊底。來，挑人。</div>
+        <div class="dt-msg dt-combo" id="dtCombo" hidden></div>
+        <div class="dt-bio" id="dtBio"></div>
+        <button type="button" class="dt-reset" id="dtReset">↺ 清空重選</button>
+      </div>
 
       <!-- === 倒數計時器（小版本） === -->
       <div class="it-countdown-mini" id="itCountdownMini">
@@ -338,6 +368,44 @@ const faqs = [
   th, td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.7; }
   th { font-weight: 700; font-size: 0.92rem; color: var(--text-muted); }
 
+  /* === 夢幻隊勝率模擬器 === */
+  .dt-jump { display: block; background: linear-gradient(135deg, rgba(57,255,20,0.12) 0%, rgba(245,184,0,0.10) 100%); border: 1px solid var(--guava-green); border-radius: 12px; padding: 0.9rem 1.1rem; margin: 1.2rem 0; text-decoration: none; color: inherit; line-height: 1.65; font-size: 0.98rem; transition: transform 0.15s, box-shadow 0.15s; }
+  .dt-jump:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(57,255,20,0.18); }
+  .dt-jump strong { color: var(--guava-green); display: block; margin-top: 0.25rem; }
+  .dt-tool { background: linear-gradient(135deg, rgba(0,140,69,0.10) 0%, rgba(30,30,30,0.5) 50%, rgba(205,33,42,0.10) 100%); border: 1px solid rgba(245,184,0,0.3); border-radius: 16px; padding: 1.3rem 1.2rem; margin: 1.5rem 0; }
+  .dt-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+  .dt-card { position: relative; border: 2px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; background: var(--bg-card); transition: border-color 0.15s, transform 0.15s; }
+  .dt-card:hover { transform: translateY(-3px); border-color: rgba(57,255,20,0.5); }
+  .dt-thumb { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; }
+  .dt-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .dt-card .dt-name { font-size: 0.82rem; font-weight: 700; padding: 0.32rem 0.15rem; text-align: center; line-height: 1.15; }
+  .dt-card .dt-pos { position: absolute; top: 5px; left: 5px; background: rgba(0,0,0,0.65); color: #fff; font-size: 0.62rem; padding: 0.1rem 0.4rem; border-radius: 6px; z-index: 1; }
+  /* 手機 RWD：客群 40+，字要大、卡要大 → 一排 3 個（超小螢幕 2 個）*/
+  @media (max-width: 640px) {
+    .dt-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+    .dt-card .dt-name { font-size: 0.95rem; padding: 0.45rem 0.2rem; }
+    .dt-card .dt-pos { font-size: 0.72rem; padding: 0.12rem 0.45rem; }
+  }
+  @media (max-width: 360px) {
+    .dt-grid { grid-template-columns: repeat(2, 1fr); }
+    .dt-card .dt-name { font-size: 1rem; }
+  }
+  .dt-card.dt-on { border-color: var(--guava-green); box-shadow: 0 0 14px rgba(57,255,20,0.35); }
+  .dt-card.dt-on::after { content: '✓'; position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; background: var(--guava-green); color: #0a2810; font-weight: 900; font-size: 0.8rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .dt-meter-wrap { margin: 1.2rem 0 0.5rem; }
+  .dt-meter-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
+  .dt-meter-label { font-weight: 700; color: var(--text-secondary); }
+  .dt-meter-val { font-size: 1.8rem; font-weight: 900; color: var(--guava-green); font-variant-numeric: tabular-nums; }
+  .dt-bar { height: 16px; background: rgba(0,0,0,0.4); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .dt-bar-fill { height: 100%; width: 8%; background: linear-gradient(90deg, #cd212a, #f5b800, #39ff14); border-radius: 10px; transition: width 0.5s ease; }
+  .dt-msg { background: rgba(0,0,0,0.25); border-left: 3px solid var(--guava-green); border-radius: 8px; padding: 0.7rem 0.9rem; margin-top: 0.8rem; font-size: 0.97rem; line-height: 1.7; }
+  .dt-msg b { color: var(--guava-green); }
+  .dt-combo { border-left-color: #f5b800; }
+  .dt-combo b { color: #f5b800; }
+  .dt-bio { margin-top: 0.7rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+  .dt-reset { margin-top: 0.9rem; background: none; border: 1px solid var(--border); color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+  .dt-reset:hover { border-color: var(--guava-pink); color: var(--guava-pink); }
+
   /* === 義大利文章內嵌倒數小卡 === */
   .it-countdown-mini {
     margin: 2rem 0 1rem;
@@ -409,5 +477,114 @@ const faqs = [
   }
   tick();
   setInterval(tick, 60000);  // 每分鐘 tick，不需要秒
+})();
+</script>
+
+<script is:inline>
+/* === 義大利夢幻隊勝率模擬器 === */
+(function(){
+  var GRID = document.getElementById('dtGrid');
+  if(!GRID) return;
+  var PLAYERS = [
+    {slug:'buffon', name:'布馮', pos:'門將', rating:95, img:'/images/players/player-buffon.webp',
+      bio:'Gianluigi Buffon——公認史上最佳門將之一，2006 世界盃冠軍主力，義大利國家隊出賽 176 場的紀錄保持者。',
+      quip:'選布馮？對面想進球得先問過這面人牆。十年內你的球門乾淨溜溜。'},
+    {slug:'maldini', name:'馬爾蒂尼', pos:'後衛', rating:96, img:'/images/players/player-maldini.webp',
+      bio:'Paolo Maldini——AC 米蘭效忠一輩子的傳奇後衛兼隊長，防守即藝術，世界足壇後衛的標竿。',
+      quip:'馬爾蒂尼坐鎮，對面邊路直接報廢。優雅防守一輩子。'},
+    {slug:'baresi', name:'巴雷西', pos:'後衛', rating:95, img:'/images/players/player-baresi.webp',
+      bio:'Franco Baresi——AC 米蘭王朝的清道夫祖師爺，讀球如讀心，與馬爾蒂尼組成史上最強防線之一。',
+      quip:'巴雷西這種清道夫，讀球像開了預知，對面進攻還沒開始就被他拆了。'},
+    {slug:'cannavaro', name:'卡納瓦羅', pos:'後衛', rating:92, img:'/images/players/player-cannavaro.webp',
+      bio:'Fabio Cannavaro——2006 世界盃冠軍隊長，同年抱回金球獎，175 公分照樣鎖死所有大個子前鋒。',
+      quip:'2006 金球＋冠軍隊長，矮個子封死全場前鋒，你也太明智了吧！'},
+    {slug:'nesta', name:'內斯塔', pos:'後衛', rating:93, img:'/images/players/player-nesta.webp',
+      bio:'Alessandro Nesta——教科書級的盯人中衛，冷靜又優雅，2006 世界盃冠軍成員。',
+      quip:'內斯塔的盯人是教科書等級，帥到對方前鋒看他都捨不得過。'},
+    {slug:'pirlo', name:'皮爾洛', pos:'中場', rating:96, img:'/images/players/player-pirlo.webp',
+      bio:'Andrea Pirlo——後腰節拍器，任意球與長傳調度大師，2006 世界盃冠軍的中場核心。',
+      quip:'皮爾洛一摸鬍子，全場節奏慢下來，你的中場從此有了大腦。神之一手。'},
+    {slug:'baggio', name:'巴吉歐', pos:'前鋒', rating:95, img:'/images/players/player-baggio.webp',
+      bio:'Roberto Baggio——「憂鬱王子」，1994 世界盃幾乎一人扛義大利到決賽，可惜最後 PK 射失。',
+      quip:'憂鬱王子巴吉歐，94 年一人扛整隊到決賽——只求這次別讓他罰最後一球。'},
+    {slug:'delpiero', name:'皮耶羅', pos:'前鋒', rating:92, img:'/images/players/player-delpiero.webp',
+      bio:'Alessandro Del Piero——尤文圖斯傳奇前鋒，招牌「Del Piero zone」刁鑽角度，2006 世界盃冠軍。',
+      quip:'皮耶羅那個角度（Del Piero zone）進球像開外掛，還自帶燦笑。'},
+    {slug:'totti', name:'托蒂', pos:'前腰', rating:93, img:'/images/players/player-totti.webp',
+      bio:'Francesco Totti——「羅馬王子」，一人一城效忠羅馬一輩子，2006 世界盃冠軍成員。',
+      quip:'托蒂，羅馬王子一人一城，把他放進來，全隊士氣直接拉滿。'},
+    {slug:'riva', name:'里瓦', pos:'前鋒', rating:90, img:'/images/players/player-riva.webp',
+      bio:'Luigi Riva——義大利國家隊史上頭號射手（35 球）紀錄保持者，1970 世界盃亞軍主力。',
+      quip:'里瓦，35 球國家隊射手紀錄保持到現在。老派炮台，純。'}
+  ];
+  var COMBOS = [
+    {set:['buffon','maldini','baresi','cannavaro','nesta','pirlo','baggio','delpiero','totti','riva'],
+      msg:'十大傳奇全到齊！你把義大利半部足球史塞進同一隊了——這隊要還輸，只能怪平行時空。可惜現實裡他們連會內賽都沒踢到，嘆。'},
+    {set:['maldini','baresi','nesta','cannavaro'], msg:'義大利史上四大中衛全上！這後防是要對手 0 射正膩——連蒼蠅都別想飛進來。'},
+    {set:['maldini','nesta','cannavaro'], msg:'三大中衛全上！對面前鋒想進球請先預約掛號，這道牆連核彈都擋得住。'},
+    {set:['maldini','baresi'], msg:'馬爾蒂尼＋巴雷西，米蘭王朝那條傳奇防線重現，對面整場別想呼吸。'},
+    {set:['baggio','delpiero','totti','riva'], msg:'四大前場一起開火力展覽會，對面門將今晚鐵定做惡夢。'},
+    {set:['pirlo','totti','baggio'], msg:'皮爾洛＋托蒂＋巴吉歐，前場三大腦，傳球華麗到對手看到出神——問題是誰當隊長不會吵架。'},
+    {set:['delpiero','totti'], msg:'皮耶羅（尤文）＋托蒂（羅馬）死對頭同隊…更衣室先別放鞭炮，但這火力爆表。'},
+    {set:['buffon','cannavaro'], msg:'2006 冠軍門神＋隊長重聚！那一年的義大利鋼鐵防線，直接複製貼上。'},
+    {set:['pirlo','maldini'], msg:'皮爾洛調度＋馬爾蒂尼壓陣，攻守一把抓，這就是義大利的靈魂中軸。'},
+    {set:['buffon','maldini'], msg:'門將＋後防雙傳奇，光這條中軸線，冠軍就先穩一半。'},
+    {set:['baggio','delpiero'], msg:'兩代 10 號同框，義大利的浪漫全在這了。'},
+    {set:['riva','baggio'], msg:'里瓦＋巴吉歐，老派炮台配憂鬱王子，跨時代鋒線，純看爽。'}
+  ];
+  var sel = [];
+  function winRate(){
+    var CAP = 96, rate = 8;
+    PLAYERS.forEach(function(p){ if(sel.indexOf(p.slug) > -1){ rate += (CAP - rate) * (p.rating/100 * 0.34); } });
+    return rate;
+  }
+  function tierMsg(r){
+    if(sel.length === 0) return '一個都還沒選，現實的義大利連會內賽都沒進，勝率先給你 8% 墊底。來，挑人。';
+    if(r < 25) return '才一個喔？聊勝於無，對面隨便一隊都能海放你。多塞幾個怪物進來。';
+    if(r < 45) return '有 fu 了，但這陣容上去大概還是被電。再加幾塊拼圖。';
+    if(r < 65) return '半套夢幻隊，勝率開始爬了，還差關鍵幾個位置。';
+    if(r < 85) return '這隊有料！對面要開始流汗了，再補強一下就準備封王。';
+    if(r < 93) return '夢幻隊成形！但你發現沒——再怎麼加都摸不到 100%，因為現實裡他們根本沒上場啊（淚）。';
+    return '接近滿格了！紙面上這隊是地表最強，可惜這一切只存在你的螢幕裡。回到現實，義大利還是沒進，嗚。';
+  }
+  function matchedCombo(){
+    for(var i = 0; i < COMBOS.length; i++){
+      var c = COMBOS[i], ok = true;
+      for(var j = 0; j < c.set.length; j++){ if(sel.indexOf(c.set[j]) < 0){ ok = false; break; } }
+      if(ok) return c.msg;
+    }
+    return null;
+  }
+  function bySlug(s){ return PLAYERS.filter(function(x){ return x.slug === s; })[0]; }
+  function render(lastAdded){
+    var r = winRate();
+    document.getElementById('dtVal').textContent = Math.round(r) + '%';
+    document.getElementById('dtFill').style.width = r + '%';
+    var msg = document.getElementById('dtMsg');
+    if(lastAdded){ msg.innerHTML = '<b>芭樂子：</b>' + bySlug(lastAdded).quip; }
+    else { msg.innerHTML = '<b>芭樂子：</b>' + tierMsg(r); }
+    var combo = matchedCombo(), cEl = document.getElementById('dtCombo');
+    if(combo){ cEl.innerHTML = '<b>🔥 合體技：</b>' + combo; cEl.hidden = false; }
+    else { cEl.hidden = true; }
+    var bio = document.getElementById('dtBio');
+    bio.textContent = lastAdded ? ('📖 ' + bySlug(lastAdded).bio) : '';
+    Array.prototype.forEach.call(GRID.children, function(card){
+      card.classList.toggle('dt-on', sel.indexOf(card.getAttribute('data-slug')) > -1);
+    });
+  }
+  PLAYERS.forEach(function(p){
+    var d = document.createElement('div');
+    d.className = 'dt-card';
+    d.setAttribute('data-slug', p.slug);
+    d.innerHTML = '<span class="dt-pos">' + p.pos + '</span><div class="dt-thumb"><img src="' + p.img + '" alt="' + p.name + ' 致敬插畫" loading="lazy" width="480" height="480"></div><div class="dt-name">' + p.name + '</div>';
+    d.addEventListener('click', function(){
+      var i = sel.indexOf(p.slug);
+      if(i > -1){ sel.splice(i, 1); render(null); }
+      else { sel.push(p.slug); render(p.slug); }
+    });
+    GRID.appendChild(d);
+  });
+  document.getElementById('dtReset').addEventListener('click', function(){ sel = []; render(null); });
+  render(null);
 })();
 </script>
