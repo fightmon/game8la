@@ -55,11 +55,20 @@ const {
     <link rel="apple-touch-icon" href="/images/index/apple-touch-icon_180x180.webp">
 
     <!-- Google Analytics 4 (延後到首次互動或 3 秒後才載，改善 LCP/TBT) -->
-    <!-- 在 localhost / 127.0.0.1 / .pages.dev preview / .local 開發環境完全不載入 GA -->
+    <!-- 開發環境(localhost / 127.0.0.1 / .pages.dev / 區網)完全不載入 GA；
+         另支援「個人退出」：在自己的瀏覽器連一次 ?noga=1 之後，這台裝置永遠不送 GA（?noga=0 可還原） -->
     <script is:inline>
       (function(){
         var h = location.hostname;
-        var isDev = h === 'localhost' || h === '127.0.0.1' || h.endsWith('.local')
+        var optout = false;
+        try {
+          var p = new URLSearchParams(location.search);
+          if (p.get('noga') === '1') localStorage.setItem('g8_noga', '1');
+          else if (p.get('noga') === '0') localStorage.removeItem('g8_noga');
+          optout = localStorage.getItem('g8_noga') === '1';
+        } catch (e) {}
+        var isDev = optout
+          || h === 'localhost' || h === '127.0.0.1' || h.endsWith('.local')
           || h.endsWith('.pages.dev') || h.startsWith('192.168.') || h.startsWith('10.');
         if (isDev) {
           window.gtag = function(){}; // no-op，避免文章內部呼叫 gtag 報錯
