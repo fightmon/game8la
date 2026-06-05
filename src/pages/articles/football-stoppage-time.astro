@@ -1,0 +1,426 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '足球傷停補時是什麼意思？', a: '傷停補時（Stoppage Time / Added Time）是<strong>補回上下半場「死球」浪費掉的時間</strong>。足球每半場名義上 45 分鐘，但比賽中換人、進球慶祝、球員受傷治療、VAR 確認都會讓比賽中斷，這些時間裁判會記下來，在該半場最後補回去。所以你常看到「90 分鐘」結束後還要再踢個 3～10 分鐘。' },
+  { q: '補時時間是誰決定的？', a: '由<strong>主裁判</strong>決定、<strong>第四官員（場邊舉牌的那位）</strong>舉電子板公告。主裁判全場默默記錄死球時間，半場快結束時把總數告訴第四官員舉牌。要注意：<strong>那個數字是「最少」會踢的時間</strong>，如果補時內又有人受傷或拖延，還會再往上加。' },
+  { q: '為什麼現代足球補時越來越長，動不動補 7、8 分鐘？', a: '因為 FIFA 從 2022 卡達世界盃開始<strong>要求裁判「精算」所有實際浪費的時間</strong>，把進球慶祝、換人、治療、VAR、慶祝跑動全部算進去，不再像以前隨便抓個 3 分鐘。所以 2022 世界盃常出現 +7、+8 甚至 +10 分鐘的補時，這是規則執行變嚴格，不是裁判心情問題。' },
+  { q: '補時的時間裡，還會再補時嗎？', a: '會。<strong>補時是「至少」的概念</strong>。假設第四官員舉「+5」，但補時的第 3 分鐘有人受傷躺了 2 分鐘，主裁判可以再往上加。所以你會看到舉牌 +5、結果踢到 +7 才吹哨。比賽什麼時候真正結束，是<strong>主裁判說了算</strong>，球員和球迷只能等那一聲長哨。' },
+  { q: '哪些情況會被算進傷停補時？', a: '主要有：<strong>進球後的慶祝、換人、球員受傷與治療、VAR 影像確認、球員拖延時間（換人慢吞吞、門將抱球太久）、罰球準備</strong>，以及任何讓比賽長時間中斷的狀況。簡單說：只要「球是死的、時間在流」，原則上都該被補回來。' },
+  { q: '故意拖延時間（拖時間）有用嗎？會被罰嗎？', a: '短期有用、長期沒用，還可能吃黃牌。領先的球隊常用換人慢慢走、門將抱球、球出界慢慢撿來消耗時間，但<strong>這些被浪費的時間都會被算進補時補回來</strong>，等於白拖。而且明顯拖延（Time-wasting）裁判可以直接出<strong>黃牌</strong>警告。芭樂子的建議：與其拖時間被補回來又吃牌，不如好好把球控住。' },
+];
+
+const URL = 'https://game8la.com/articles/football-stoppage-time/';
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title="傷停補時是什麼？為什麼補時越來越長？｜足球補時規則白話圖解 — GAME8LA"
+  description="足球傷停補時白話解釋：補時是補回換人、進球、受傷、VAR 浪費掉的死球時間。為什麼 2022 世界盃後動輒補 7、8 分鐘？誰決定補多久？拖時間有用嗎？一次看懂。"
+  image="https://game8la.com/images/articles/football-stoppage-cover.webp"
+  datePublished="2026-06-05"
+  dateModified="2026-06-05"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '足球教室', url: 'https://game8la.com/articles/' },
+    { name: '傷停補時規則', url: URL },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="傷停補時是什麼？為什麼補時越來越長？｜足球補時規則白話圖解 — GAME8LA" description="足球傷停補時白話解釋：補時是補回換人、進球、受傷、VAR 浪費掉的死球時間。為什麼 2022 世界盃後動輒補 7、8 分鐘？誰決定補多久？拖時間有用嗎？一次看懂。" ogImage="https://game8la.com/images/articles/football-stoppage-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 傷停補時規則</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-06-05 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 7 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">傷停補時是什麼？為什麼越補越長？<em>芭樂子白話圖解：補時補去哪了、誰決定、拖時間有沒有用</em></h1>
+
+      <img class="content-img"
+           src="/images/articles/football-stoppage-cover.webp"
+           srcset="/images/articles/football-stoppage-cover-768w.webp 768w, /images/articles/football-stoppage-cover.webp 1200w"
+           sizes="(max-width: 880px) 100vw, 820px"
+           alt="傷停補時是什麼｜芭樂子焦慮盯著場邊 +8 電子補時牌｜GAME8LA"
+           width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">第四官員一舉「+8」，芭樂子的心臟就跟著停一下——這 8 分鐘到底在補什麼？</p>
+
+      <div class="quick-tool-bar">
+        <span>看球必備：</span>
+        <a href="/articles/football-positions-guide/">足球位置介紹</a>
+        <a href="/articles/football-penalty-kick-guide/">點球規則</a>
+        <a href="/worldcup/">世足8LA專區</a>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。看球最常見的崩潰瞬間：你支持的隊伍 1-0 領先，時鐘走到 90:00，正想鬆口氣——第四官員舉牌「<strong>+8</strong>」。八分鐘？！那一刻心臟差點停掉。今天芭樂子就來講清楚這個讓人又愛又恨的「傷停補時」：到底在補什麼、誰決定補多久、為什麼這幾年越補越長，還有最重要的——<strong>拖時間到底有沒有用</strong>。</p>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">傷停補時用一句話解釋</a></li>
+          <li><a href="#s2">圖解：補時都補去哪了？</a></li>
+          <li><a href="#s3">補時誰決定？怎麼算？</a></li>
+          <li><a href="#s4">為什麼現代補時越來越長</a></li>
+          <li><a href="#s5">拖時間到底有沒有用？</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <h2 id="s1" style="margin-top:2.5rem">傷停補時用一句話解釋</h2>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0;font-size:1.1rem">一句話版傷停補時</h3>
+        <p style="font-size:1.05rem;line-height:1.9"><strong>比賽中「球是死的、但時間還在走」浪費掉的時間，裁判記下來，在半場最後補回去。</strong></p>
+      </div>
+
+      <p>足球的時鐘有個特點：<strong>它不會停</strong>。籃球犯規會停錶、棒球沒有時間限制，但足球是「跑表制」——換人、進球慶祝、球員倒地治療、VAR 看半天，時鐘照走。這些時間如果不補回來，球隊就會故意用「死球」來偷時間。所以裁判把這些浪費掉的時間記下來，在上下半場各自的 45 分鐘後面補回去，這就是<strong>傷停補時</strong>。</p>
+
+      <h2 id="s2" style="margin-top:2.5rem">圖解：補時都補去哪了？</h2>
+
+      <p>那「+8 分鐘」到底是怎麼來的？芭樂子畫給你看，這 8 分鐘其實是這樣堆出來的：</p>
+
+      <!-- === SVG：補時來源圖 === -->
+      <figure class="pitch-diagram">
+        <svg class="pitch-svg" data-zoomable viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="stTitle stDesc">
+          <title id="stTitle">傷停補時來源圖（足球補時規則圖解）</title>
+          <desc id="stDesc">第四官員電子板顯示加 8 分鐘，下方拆解：進球慶祝、換人、受傷治療、VAR、拖延時間各佔多少。</desc>
+          <rect x="0" y="0" width="720" height="360" rx="12" fill="#12161d"/>
+          <!-- 第四官員電子板 -->
+          <rect x="250" y="26" width="220" height="96" rx="10" fill="#0a0a0a" stroke="#3a3a3a" stroke-width="2"/>
+          <text x="360" y="58" text-anchor="middle" fill="#888" font-size="14" font-weight="700" letter-spacing="2">ADDED TIME</text>
+          <text x="360" y="104" text-anchor="middle" fill="#ff3b30" font-size="46" font-weight="900" class="st-board">+8</text>
+          <text x="360" y="150" text-anchor="middle" fill="#bbb" font-size="15">第四官員舉牌（至少 8 分鐘）</text>
+          <!-- 堆疊長條 -->
+          <text x="60" y="196" fill="#fff" font-size="16" font-weight="700">這 8 分鐘從哪來？</text>
+          <g>
+            <rect x="60" y="210" width="180" height="44" fill="#f5b800"/>
+            <rect x="240" y="210" width="120" height="44" fill="#4caf50"/>
+            <rect x="360" y="210" width="150" height="44" fill="#f44336"/>
+            <rect x="510" y="210" width="90" height="44" fill="#2196f3"/>
+            <rect x="600" y="210" width="60" height="44" fill="#9c27b0"/>
+          </g>
+          <g fill="#fff" font-size="13" font-weight="700" text-anchor="middle">
+            <text x="150" y="237">進球慶祝</text>
+            <text x="300" y="237">換人</text>
+            <text x="435" y="237">受傷治療</text>
+            <text x="555" y="237">VAR</text>
+            <text x="630" y="280">拖延</text>
+          </g>
+          <line x1="630" y1="256" x2="630" y2="272" stroke="#9c27b0" stroke-width="2"/>
+          <!-- 說明 -->
+          <text x="60" y="300" fill="#cfcfcf" font-size="14">每一段都是「球死掉、時間在流」的浪費，全部加起來 = 補時</text>
+          <text x="60" y="326" fill="#ff8a80" font-size="14">※ 舉牌數字是「最少」，補時內再有中斷還會往上加</text>
+        </svg>
+        <span class="pitch-zoom-tip">🔍 點圖可放大檢視</span>
+        <figcaption class="article-img-caption">傷停補時來源（足球補時規則圖解）：進球慶祝、換人、受傷、VAR、拖延，每一段死球時間加起來就是補時。</figcaption>
+      </figure>
+
+      <!-- === 傷停補時計算機 === -->
+      <h2 id="calc" style="margin-top:2.5rem">🧮 換你當裁判：傷停補時計算機</h2>
+      <p>看完拆解，換你當主裁判算算看！把這場比賽發生的事件加一加，芭樂子幫你算要補幾分鐘——記得，補時是<strong>無條件進位</strong>，差一秒也算一分鐘：</p>
+      <section class="st-calc">
+        <div class="st-calc-board">
+          <div class="st-calc-board-label">ADDED TIME</div>
+          <div class="st-calc-board-num" id="stCalcMin">+0</div>
+          <div class="st-calc-board-sec" id="stCalcSec">累積 0 秒</div>
+        </div>
+        <p class="st-calc-hint">點 ＋／－ 累計事件，看補時怎麼跳 👇</p>
+        <div class="st-calc-group">
+          <div id="stCalcNormal"></div>
+        </div>
+        <div class="st-calc-msg" id="stCalcMsg"><b>芭樂子裁判：</b>還沒有事件發生，這場乾乾淨淨，補時先 0 分鐘。</div>
+        <button type="button" class="st-calc-reset" id="stCalcReset">↺ 重新開哨</button>
+      </section>
+
+      <h2 id="s3" style="margin-top:2.5rem">補時誰決定？怎麼算？</h2>
+
+      <p>很多人以為補時是第四官員（場邊舉牌那位）決定的——<strong>錯</strong>。真正決定的是<strong>場上的主裁判</strong>，第四官員只是負責舉牌公告：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#2196f3;margin-top:0">補時計算流程</h3>
+        <ol style="margin:0">
+          <li><strong>主裁判</strong>全場默默記錄每次死球浪費的時間。</li>
+          <li>半場快結束時，把總數告訴<strong>第四官員</strong>。</li>
+          <li>第四官員舉<strong>電子板</strong>公告（例如 +5），讓大家知道至少還要踢多久。</li>
+          <li>補時內若又有中斷，主裁判可<strong>再往上加</strong>，最後由他一聲長哨結束。</li>
+        </ol>
+      </div>
+
+      <figure style="margin:1.5rem 0">
+        <img class="content-img" src="/images/articles/football-stoppage-board.webp" alt="芭樂子化身第四官員高舉電子補時牌公告加時" width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="article-img-caption">補時是主裁判算的，第四官員只負責舉牌公告——而且那是「至少」，不是「剛好」。</figcaption>
+      </figure>
+
+      <p>所以記住兩件事：<strong>(1) 補時是主裁判算的，不是第四官員；(2) 舉牌數字是「最少」，不是「剛好」。</strong>常常看到舉 +5 結果踢到 +7 才結束，就是這個原因。比賽什麼時候真的結束，永遠是主裁判說了算。</p>
+
+      <h2 id="s4" style="margin-top:2.5rem">為什麼現代補時越來越長</h2>
+
+      <p>你沒有錯覺，這幾年補時真的爆增。以前隨便補個 3 分鐘，現在動不動 +7、+8、甚至 +10。原因是 <strong>FIFA 從 2022 卡達世界盃開始「玩真的」</strong>：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">補時暴增的原因</h3>
+        <p>FIFA 要求裁判<strong>精算所有實際浪費的時間</strong>，不再隨便抓。進球慶祝跑去角旗下狂歡？算。換人慢慢走？算。VAR 看了 4 分鐘？算。以前這些都被「估個 3 分鐘」帶過，現在一秒一秒算回來。</p>
+        <p style="margin:0.5rem 0 0;font-size:0.95rem;color:var(--text-muted)">2022 世界盃因此出現一堆 +10 分鐘的比賽，等於一場球實際要踢超過 100 分鐘。球迷褒貶不一，但出發點是好的：<strong>把「真正的比賽時間」還給觀眾</strong>，順便讓拖時間變得沒意義。</p>
+      </div>
+
+      <p>芭樂子的看法：補時變長對<strong>落後的球隊是福音</strong>（多 8 分鐘可以追平），對<strong>領先的球隊是酷刑</strong>（多 8 分鐘可能被翻盤）。看球的我們則是賺到——花一場的錢看 100 分鐘，划算。</p>
+
+      <h2 id="s5" style="margin-top:2.5rem">拖時間到底有沒有用？</h2>
+
+      <p>每次領先的球隊，後段一定開始「演」：換人慢慢走、門將抱球發呆、球出界慢慢撿。這招到底有沒有用？芭樂子直接打臉：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">拖時間的真相</h3>
+        <p><strong style="color:#f44336">短期有用、長期沒用。</strong>你拖掉的時間，全部會被算進補時補回來——等於白拖，還把比賽拖得更長。</p>
+        <p><strong style="color:#f44336">而且會吃牌。</strong>明顯的拖延（Time-wasting），裁判可以直接出<strong>黃牌</strong>。現代規則甚至會記點，拖太多次很危險。</p>
+      </div>
+
+      <p>所以芭樂子的結論：<strong>與其演到被補回來又吃黃牌，不如好好把球控在腳下。</strong>真正會贏球的隊伍，是靠控球消耗時間，不是靠躺在地上裝死。當然啦，看到對手在拖、自己支持的隊在追，那 8 分鐘補時就是你今晚血壓的最大考驗，加油。</p>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.95rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子免責聲明：</strong>本文為足球教育類內容，補時計算細節以 FIFA 最新版《Laws of the Game》與場上裁判判斷為準。補時被翻盤想哭很正常，但請記得明天還要上班。</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2 style="margin-top:2.5rem">2026 世足相關延伸閱讀</h2>
+      <p>看懂補時之後，這些規則一起補齊，看球更不會被旁邊的人糾正：</p>
+      <div class="related-links">
+        <a href="/articles/football-penalty-kick-guide/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>點球（12 碼）是什麼？PK 規則、流程與 PK 大戰圖解</strong>
+          <span class="rl-desc">何時判點球、守門員站位、補射規則、PK 大戰怎麼互射決勝</span>
+        </a>
+        <a href="/articles/football-offside-rule/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗</strong>
+          <span class="rl-desc">倒數第二個防守球員畫一條線，超過就越位。附 10 題測驗</span>
+        </a>
+        <a href="/worldcup/" class="rl-item">
+          <span class="rl-cat">世足專區</span>
+          <strong>世足8LA專區：2026 賽程、轉播、規則一站看</strong>
+          <span class="rl-desc">賽程表、台灣轉播哪裡看、冠軍預測工具全都有</span>
+        </a>
+      </div>
+
+      <ManifestoBox />
+      <ShareButtons title="傷停補時是什麼？為什麼越補越長？" url={URL} />
+    </article>
+  </div>
+
+  <!-- Lightbox 圖片放大 modal -->
+  <div class="lightbox" id="pitchLightbox" role="dialog" aria-modal="true" aria-label="放大圖解">
+    <button type="button" class="lightbox__close" aria-label="關閉放大檢視" onclick="window._closePitchLightbox()">×</button>
+    <div class="lightbox__inner" id="pitchLightboxInner" onclick="event.stopPropagation()"></div>
+    <div class="lightbox__hint">點空白處或按 ESC 關閉</div>
+  </div>
+  <script is:inline>
+    (function () {
+      var lb = document.getElementById('pitchLightbox');
+      var inner = document.getElementById('pitchLightboxInner');
+      if (!lb || !inner) return;
+      function open(svg) {
+        var clone = svg.cloneNode(true);
+        clone.removeAttribute('data-zoomable');
+        clone.style.cursor = 'default';
+        inner.innerHTML = '';
+        inner.appendChild(clone);
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+        inner.innerHTML = '';
+      }
+      window._closePitchLightbox = close;
+      document.querySelectorAll('.pitch-svg[data-zoomable]').forEach(function (svg) {
+        svg.addEventListener('click', function () { open(svg); });
+      });
+      lb.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+      });
+    })();
+  </script>
+
+  <!-- 傷停補時計算機 -->
+  <script is:inline>
+    (function(){
+      var root = document.querySelector('.st-calc');
+      if (!root) return;
+      var NORMAL = [
+        { k:'goal',   e:'⚽', label:'進球慶祝',     sec:20 },
+        { k:'sub',    e:'🔄', label:'換人',         sec:10 },
+        { k:'injury', e:'🤕', label:'球員受傷治療', sec:30 },
+        { k:'var',    e:'📺', label:'VAR 確認',     sec:60 },
+        { k:'delay',  e:'🐢', label:'拖延時間',     sec:15 }
+      ];
+      var ALL = NORMAL;
+      var count = {};
+      ALL.forEach(function(ev){ count[ev.k] = 0; });
+
+      function rowHTML(ev){
+        return '<div class="st-calc-row" data-k="' + ev.k + '">' +
+          '<span class="st-ev">' + ev.e + ' ' + ev.label + ' <small>（' + ev.sec + ' 秒/次）</small></span>' +
+          '<span class="st-calc-step">' +
+            '<button type="button" data-act="minus" aria-label="減少">−</button>' +
+            '<span class="st-cnt" id="cnt-' + ev.k + '">0</span>' +
+            '<button type="button" data-act="plus" aria-label="增加">＋</button>' +
+          '</span></div>';
+      }
+      document.getElementById('stCalcNormal').innerHTML = NORMAL.map(rowHTML).join('');
+
+      function totalSec(){
+        var s = 0;
+        ALL.forEach(function(ev){ s += count[ev.k] * ev.sec; });
+        return s;
+      }
+      function verdict(sec, min){
+        if (sec === 0) return '還沒有事件發生，這場乾乾淨淨，補時先 0 分鐘——這種比賽裁判最愛，準時下班。';
+        if (min <= 2) return '補 ' + min + ' 分鐘，標準場次，沒什麼好吵的，吹哨收工。';
+        if (min <= 5) return '補 ' + min + ' 分鐘，有點長度了，領先的隊開始坐立難安、落後的隊眼睛發亮。';
+        if (min <= 8) return '補 ' + min + ' 分鐘！這場拖很大，落後的隊還有救、領先的隊剉著等，血壓全場最高點。';
+        return '補 ' + min + ' 分鐘？！這已經是另一場小比賽了。觀眾賺到、球員想哭、芭樂子血壓直接破表。';
+      }
+      function render(flash){
+        var sec = totalSec();
+        var min = Math.ceil(sec / 60);
+        var numEl = document.getElementById('stCalcMin');
+        numEl.textContent = '+' + min;
+        document.getElementById('stCalcSec').textContent = '累積 ' + sec + ' 秒';
+        document.getElementById('stCalcMsg').innerHTML = '<b>芭樂子裁判：</b>' + verdict(sec, min);
+        ALL.forEach(function(ev){ document.getElementById('cnt-' + ev.k).textContent = count[ev.k]; });
+        if (flash) { numEl.classList.remove('flash'); void numEl.offsetWidth; numEl.classList.add('flash'); }
+      }
+      root.addEventListener('click', function(e){
+        var btn = e.target.closest('button[data-act]');
+        if (!btn) return;
+        var row = btn.closest('.st-calc-row');
+        var k = row.getAttribute('data-k');
+        if (btn.getAttribute('data-act') === 'plus') count[k]++;
+        else count[k] = Math.max(0, count[k] - 1);
+        render(true);
+      });
+      document.getElementById('stCalcReset').addEventListener('click', function(){
+        ALL.forEach(function(ev){ count[ev.k] = 0; });
+        render(false);
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+  .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: clamp(1.3rem, 4.8vw, 1.55rem); }
+  .article-content h3 { font-size: 1.15rem; }
+  .article-content p { font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.9; margin: 1.1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.85; font-size: clamp(16px, 4.2vw, 17.5px); }
+
+  .article-img-caption { text-align: center; font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin: 0.5rem auto 1.2rem; max-width: 680px; }
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0; border: 1px solid var(--border); }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.15rem; }
+  .card p { font-size: 1rem; line-height: 1.85; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 5px 12px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.78rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 1.02rem; }
+  .rl-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
+  th, td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.7; }
+  th { font-weight: 700; font-size: 0.92rem; color: var(--text-muted); }
+
+  /* === 規則圖 SVG === */
+  .pitch-diagram { margin: 1.2rem 0 1.8rem; padding: 0; border: none; }
+  .pitch-svg { width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto; border-radius: 12px; }
+  .pitch-svg[data-zoomable] { cursor: zoom-in; transition: filter 0.2s, transform 0.2s; }
+  .pitch-svg[data-zoomable]:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .pitch-zoom-tip { display: block; text-align: center; font-size: 0.88rem; color: var(--text-muted); margin: 0.3rem 0 0.4rem; }
+  .st-board { animation: stBlink 1.2s ease-in-out infinite; }
+  @keyframes stBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+  @media (prefers-reduced-motion: reduce) { .st-board { animation: none; } }
+
+  /* === 傷停補時計算機 === */
+  .st-calc { background: linear-gradient(135deg, rgba(245,184,0,0.08) 0%, rgba(30,30,30,0.5) 100%); border: 1px solid rgba(245,184,0,0.3); border-radius: 16px; padding: 1.3rem 1.2rem; margin: 1.5rem 0; }
+  .st-calc-board { background: #0a0a0a; border: 2px solid #3a3a3a; border-radius: 14px; padding: 0.9rem; text-align: center; margin-bottom: 1rem; }
+  .st-calc-board-label { color: #888; font-size: 0.85rem; font-weight: 700; letter-spacing: 3px; }
+  .st-calc-board-num { color: #ff3b30; font-size: 3.1rem; font-weight: 900; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .st-calc-board-num.flash { animation: stCalcFlash 0.4s ease; }
+  @keyframes stCalcFlash { 0% { transform: scale(1.22); filter: brightness(1.6); } 100% { transform: scale(1); filter: none; } }
+  .st-calc-board-sec { color: #bbb; font-size: 0.92rem; margin-top: 0.2rem; }
+  .st-calc-hint { text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin: 0.2rem 0 1rem; }
+  .st-calc-group h4 { margin: 0.8rem 0 0.4rem; font-size: 1.02rem; color: var(--text-secondary); }
+  .st-calc-row { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.2rem; border-bottom: 1px dashed var(--border); }
+  .st-calc-row .st-ev { flex: 1; font-size: 1rem; line-height: 1.4; }
+  .st-calc-row .st-ev small { color: var(--text-muted); }
+  .st-calc-step { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+  .st-calc-step button { width: 36px; height: 36px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--bg-card); color: var(--guava-green); font-size: 1.35rem; font-weight: 900; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center; }
+  .st-calc-step button:hover { border-color: var(--guava-green); }
+  .st-calc-step .st-cnt { min-width: 28px; text-align: center; font-weight: 800; font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+  .st-calc-msg { background: rgba(0,0,0,0.25); border-left: 3px solid #f5b800; border-radius: 8px; padding: 0.7rem 0.9rem; margin-top: 1rem; font-size: 0.98rem; line-height: 1.7; }
+  .st-calc-msg b { color: #f5b800; }
+  .st-calc-reset { margin-top: 0.9rem; background: none; border: 1px solid var(--border); color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+  .st-calc-reset:hover { border-color: var(--guava-pink); color: var(--guava-pink); }
+  @media (prefers-reduced-motion: reduce) { .st-calc-board-num.flash { animation: none; } }
+
+  /* === Lightbox modal === */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; animation: lbFadeIn 0.18s ease-out; }
+  .lightbox.is-open { display: flex; }
+  @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .lightbox__inner { width: 100%; max-width: 1100px; max-height: 90vh; overflow: auto; -webkit-overflow-scrolling: touch; cursor: default; }
+  .lightbox__inner svg { width: 100%; height: auto; display: block; border-radius: 12px; }
+  .lightbox__close { position: fixed; top: 16px; right: 16px; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.18); color: #fff; border: none; font-size: 26px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10001; }
+  .lightbox__close:hover { background: rgba(255,255,255,0.28); }
+  .lightbox__hint { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 14px; pointer-events: none; }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.55rem; }
+    .article-content h2 { font-size: 1.25rem; }
+  }
+</style>

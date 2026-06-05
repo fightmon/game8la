@@ -15,6 +15,48 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: 'football-stoppage-time',
+    title: '傷停補時是什麼？為什麼補時越來越長？｜足球補時規則白話圖解',
+    excerpt: '90 分鐘結束第四官員舉「+8」是怎麼回事？芭樂子白話講補時：補回換人、進球、受傷、VAR 浪費掉的死球時間，為什麼 2022 後動輒補 7、8 分鐘、誰決定、拖時間有沒有用。',
+    category: 'sports',
+    categoryLabel: '足球教室',
+    badgeType: 'featured',
+    date: '2026-06-05',
+    views: 1,
+    tags: ['最新', '精選', '教學'],
+    icon: 'clock',
+    gradient: 'linear-gradient(135deg,#12161d,#2d8a4e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-stoppage.webp'
+  },
+  {
+    slug: 'football-corner-freekick',
+    title: '角球與自由球規則圖解：人牆退幾公尺？直接 vs 間接差在哪？',
+    excerpt: '足球定位球白話圖解：直接自由球可直接射門、間接要先碰第二人；人牆退 9.15 公尺；角球怎麼產生、能不能直接進。附人牆與角球站位 SVG 圖。2026 世足看球必懂。',
+    category: 'sports',
+    categoryLabel: '足球教室',
+    badgeType: 'featured',
+    date: '2026-06-05',
+    views: 1,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-setpiece.webp'
+  },
+  {
+    slug: 'football-mini-rules-guide',
+    title: '足球小規則懶人包：換人、界外球、守門員、球門球、延長賽一次搞懂',
+    excerpt: '新手最常卡住的足球小規則一次整理：一場換幾人（5換3）、界外球怎麼丟才合規、守門員 6 秒與回傳球、球門球 vs 角球差別、延長賽踢多久。芭樂子白話＋圖解包成一包。',
+    category: 'sports',
+    categoryLabel: '足球教室',
+    badgeType: 'featured',
+    date: '2026-06-05',
+    views: 1,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-minirules.webp'
+  },
+  {
     slug: 'football-positions-guide',
     title: '足球位置介紹：守門員、後衛、中場、前鋒在做什麼？｜背號與站位圖解',
     excerpt: '足球場上 11 人怎麼分工？芭樂子用一張 4-4-2 站位圖＋白話解釋，把門將、後衛、中場、前鋒四條線一次講清楚，中後衛 vs 邊後衛、前腰 vs 後腰差在哪，還附背號傳統對照表。',
