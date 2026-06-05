@@ -15,6 +15,34 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: 'football-positions-guide',
+    title: '足球位置介紹：守門員、後衛、中場、前鋒在做什麼？｜背號與站位圖解',
+    excerpt: '足球場上 11 人怎麼分工？芭樂子用一張 4-4-2 站位圖＋白話解釋，把門將、後衛、中場、前鋒四條線一次講清楚，中後衛 vs 邊後衛、前腰 vs 後腰差在哪，還附背號傳統對照表。',
+    category: 'sports',
+    categoryLabel: '足球教室',
+    badgeType: 'featured',
+    date: '2026-06-05',
+    views: 1,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-positions.webp'
+  },
+  {
+    slug: 'football-penalty-kick-guide',
+    title: '點球（12 碼）是什麼？PK 規則、距離、流程與 PK 大戰一次看懂',
+    excerpt: '足球點球（12 碼）規則白話圖解：罰球點距球門 11 公尺、什麼時候判點球、守門員站位規則、補射規則，以及 PK 大戰怎麼互射決勝。2026 世足淘汰賽必懂。',
+    category: 'sports',
+    categoryLabel: '足球教室',
+    badgeType: 'featured',
+    date: '2026-06-05',
+    views: 1,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-penalty.webp'
+  },
+  {
     slug: 'worldcup-2026-schedule',
     title: '2026 世足賽程表（台灣時間）｜開幕6/12、決賽7/20、12組分組對戰一次看',
     excerpt: '2026 世界盃賽程懶人包：台灣時間 6/12 開踢、7/20 決賽。48 隊 12 組分組名單、小組賽到決賽各階段台灣時間、開幕戰與台灣看球時間一次看。',

@@ -1,0 +1,429 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '足球場上一隊有幾個位置？', a: '一隊上場 11 人，傳統分成四條線：<strong>1 個門將、3～5 個後衛、2～5 個中場、1～3 個前鋒</strong>。實際人數要看陣型，例如 4-4-2 是 4 後衛 4 中場 2 前鋒，4-3-3 是 4 後衛 3 中場 3 前鋒。門將永遠只有 1 個，其餘 10 個外場球員怎麼分配就是教練的戰術選擇。' },
+  { q: '足球背號有固定意義嗎？', a: '有傳統但不強制。經典對照是：1 號門將、2～5 號後衛、6～8 號中場、9 號中鋒、10 號核心前腰、11 號邊鋒。其中 <strong>10 號通常是球隊的靈魂人物</strong>（像梅西、馬拉度納、托蒂），9 號是主力射手。現代球員可以挑自己喜歡的號碼，所以背號只能參考，不能 100% 對應位置。' },
+  { q: '中後衛和邊後衛差在哪？', a: '<strong>中後衛（CB）站中間，負責正面擋下對方前鋒、爭頂高空球</strong>，要又高又壯又會讀球；<strong>邊後衛（FB／LB／RB）站兩側，除了防守邊路，現代足球還要常常衝上去助攻、傳中</strong>，所以要能跑、體能好。簡單說中後衛是「牆」，邊後衛是「會跑的牆」。' },
+  { q: '前腰、後腰是什麼意思？', a: '都是中場。<strong>後腰（防守中場 DM）站中場最後面，負責攔截、保護後防、第一時間出球</strong>，像球隊的濾網；<strong>前腰（攻擊中場 AM）站中場最前面、靠近前鋒，負責組織進攻、傳關鍵球、自己也會射門</strong>，就是 10 號那種角色。一個防守、一個進攻，剛好相反。' },
+  { q: '邊鋒和中鋒哪個比較會進球？', a: '不一定，看球隊打法。<strong>中鋒（ST／CF）站最前面中央，是禁區裡的終結者，主要任務就是進球</strong>；<strong>邊鋒（LW／RW）站兩側，靠速度和盤帶內切，可以自己射也可以傳中給中鋒</strong>。現代足球邊鋒進球越來越多（像當年的 C 羅、現在很多球隊靠邊鋒得分），所以「9 號才會進球」已經是舊觀念。' },
+  { q: '不懂位置也能看球嗎？', a: '當然可以！但懂了位置，看球會多一層樂趣——你會看懂「為什麼這個後衛要衝上去」「為什麼前腰要回來接球」這些跑動背後的邏輯，而不只是看誰進球。芭樂子建議：先記住「門將、後衛、中場、前鋒」四條線，再慢慢認識細項，看個幾場就上手了。' },
+];
+
+const URL = 'https://game8la.com/articles/football-positions-guide/';
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title="足球位置介紹：守門員、後衛、中場、前鋒在做什麼？｜背號與站位圖解 — GAME8LA"
+  description="足球位置白話圖解：門將、後衛、中場、前鋒四條線各做什麼？中後衛 vs 邊後衛、前腰 vs 後腰、中鋒 vs 邊鋒差在哪，加上背號傳統對照表。2026 世足看球前先搞懂站位。"
+  image="https://game8la.com/images/articles/football-positions-cover.webp"
+  datePublished="2026-06-05"
+  dateModified="2026-06-05"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '足球教室', url: 'https://game8la.com/articles/' },
+    { name: '足球位置介紹', url: URL },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="足球位置介紹：守門員、後衛、中場、前鋒在做什麼？｜背號與站位圖解 — GAME8LA" description="足球位置白話圖解：門將、後衛、中場、前鋒四條線各做什麼？中後衛 vs 邊後衛、前腰 vs 後腰、中鋒 vs 邊鋒差在哪，加上背號傳統對照表。2026 世足看球前先搞懂站位。" ogImage="https://game8la.com/images/articles/football-positions-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 足球位置介紹</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-06-05 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 8 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">足球位置介紹：守門員、後衛、中場、前鋒在做什麼？<em>芭樂子白話圖解＋背號對照，世足看球前先搞懂站位</em></h1>
+
+      <img class="content-img"
+           src="/images/articles/football-positions-cover.webp"
+           srcset="/images/articles/football-positions-cover-768w.webp 768w, /images/articles/football-positions-cover.webp 1200w"
+           sizes="(max-width: 880px) 100vw, 820px"
+           alt="足球位置介紹｜芭樂子化身教練，手持戰術板講解守門員、後衛、中場、前鋒站位｜GAME8LA"
+           width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">芭樂子教練上線，帶你一張圖搞懂場上 11 人怎麼分工站位。</p>
+
+      <div class="quick-tool-bar">
+        <span>看球必備：</span>
+        <a href="/articles/football-offside-rule/">越位規則</a>
+        <a href="/articles/football-penalty-kick-guide/">點球規則</a>
+        <a href="/worldcup/">世足8LA專區</a>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。每次世足陪家人看球，總有人問：「那個一直站後面不動的是誰？」「為什麼 10 號這麼厲害？」其實只要搞懂場上 11 個人怎麼分工，看球立刻從「看熱鬧」升級成「看門道」。這篇芭樂子用一張站位圖＋白話解釋，把守門員、後衛、中場、前鋒四條線一次講清楚，連背號的祕密都告訴你。</p>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">一張圖看懂：11 人怎麼站？</a></li>
+          <li><a href="#s2">門將（GK）：最後一道防線</a></li>
+          <li><a href="#s3">後衛（DF）：中後衛 vs 邊後衛</a></li>
+          <li><a href="#s4">中場（MF）：前腰、後腰差在哪</a></li>
+          <li><a href="#s5">前鋒（FW）：中鋒 vs 邊鋒</a></li>
+          <li><a href="#s6">背號的祕密（號碼對照表）</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <h2 id="s1" style="margin-top:2.5rem">一張圖看懂：11 人怎麼站？</h2>
+
+      <p>足球一隊上場 <strong>11 人</strong>，傳統上分成<strong>四條線</strong>：門將、後衛、中場、前鋒。下面這張是最經典的 <strong>4-4-2 陣型</strong>（4 後衛、4 中場、2 前鋒），芭樂子用顏色幫你分好：</p>
+
+      <!-- === SVG：4-4-2 站位圖 === -->
+      <figure class="pitch-diagram">
+        <svg class="pitch-svg" data-zoomable viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="formTitle formDesc">
+          <title id="formTitle">足球 4-4-2 陣型站位圖（足球位置介紹）</title>
+          <desc id="formDesc">由左到右為進攻方向：門將 1 號、後衛 2/3/4/5 號、中場 6/7/8/11 號、前鋒 9/10 號，分四條線排列。</desc>
+          <!-- 草皮 -->
+          <rect x="0" y="0" width="720" height="460" rx="12" fill="#1a472a"/>
+          <rect x="0" y="0" width="120" height="460" fill="#1c4e2e"/>
+          <rect x="240" y="0" width="120" height="460" fill="#1c4e2e"/>
+          <rect x="480" y="0" width="120" height="460" fill="#1c4e2e"/>
+          <!-- 外框 + 中線 + 中圈 -->
+          <rect x="14" y="14" width="692" height="432" rx="6" fill="none" stroke="#fff" stroke-width="2" opacity="0.5"/>
+          <line x1="360" y1="14" x2="360" y2="446" stroke="#fff" stroke-width="2" opacity="0.35"/>
+          <circle cx="360" cy="230" r="56" fill="none" stroke="#fff" stroke-width="2" opacity="0.35"/>
+          <!-- 左禁區（我方球門）-->
+          <rect x="14" y="135" width="86" height="190" fill="none" stroke="#fff" stroke-width="2" opacity="0.45"/>
+          <rect x="14" y="185" width="34" height="90" fill="none" stroke="#fff" stroke-width="2" opacity="0.45"/>
+          <!-- 進攻方向 -->
+          <text x="600" y="36" fill="#fff" opacity="0.75" font-size="17" font-weight="700" text-anchor="middle">進攻方向 →</text>
+
+          <!-- 門將 GK（固定，保留雷達脈衝）-->
+          <g class="fp-gk">
+            <circle class="pos-pulse" cx="55" cy="230" r="22" fill="none" stroke="#f5b800" stroke-width="2.5"/>
+            <circle cx="55" cy="230" r="22" fill="#f5b800"/>
+            <text x="55" y="237" text-anchor="middle" fill="#1a1a1a" font-size="19" font-weight="900">1</text>
+            <text x="55" y="276" text-anchor="middle" fill="#ffe082" font-size="15" font-weight="700">門將</text>
+          </g>
+
+          <!-- 10 名外場球員（按鈕切換陣型 → CSS 滑動到新位置）-->
+          <g class="fp-players">
+            <g class="fp-player" id="fp0" style="transform:translate(180px,70px)"><circle class="fp-dot" r="21" fill="#2196f3"/></g>
+            <g class="fp-player" id="fp1" style="transform:translate(180px,170px)"><circle class="fp-dot" r="21" fill="#2196f3"/></g>
+            <g class="fp-player" id="fp2" style="transform:translate(180px,290px)"><circle class="fp-dot" r="21" fill="#2196f3"/></g>
+            <g class="fp-player" id="fp3" style="transform:translate(180px,390px)"><circle class="fp-dot" r="21" fill="#2196f3"/></g>
+            <g class="fp-player" id="fp4" style="transform:translate(360px,70px)"><circle class="fp-dot" r="21" fill="#4caf50"/></g>
+            <g class="fp-player" id="fp5" style="transform:translate(360px,170px)"><circle class="fp-dot" r="21" fill="#4caf50"/></g>
+            <g class="fp-player" id="fp6" style="transform:translate(360px,290px)"><circle class="fp-dot" r="21" fill="#4caf50"/></g>
+            <g class="fp-player" id="fp7" style="transform:translate(360px,390px)"><circle class="fp-dot" r="21" fill="#4caf50"/></g>
+            <g class="fp-player" id="fp8" style="transform:translate(560px,150px)"><circle class="fp-dot" r="21" fill="#f44336"/></g>
+            <g class="fp-player" id="fp9" style="transform:translate(560px,310px)"><circle class="fp-dot" r="21" fill="#f44336"/></g>
+          </g>
+        </svg>
+        <div class="fp-controls" role="group" aria-label="切換陣型">
+          <span class="fp-controls-label">切換陣型：</span>
+          <button type="button" class="fp-btn fp-btn-on" data-f="4-4-2">4-4-2</button>
+          <button type="button" class="fp-btn" data-f="4-3-3">4-3-3</button>
+          <button type="button" class="fp-btn" data-f="4-2-3-1">4-2-3-1</button>
+          <button type="button" class="fp-btn" data-f="3-5-2">3-5-2</button>
+        </div>
+        <p class="fp-desc" id="fpDesc"><b>4-4-2</b>：最經典的平衡陣型，四後衛、四中場、兩前鋒，攻守均衡、好上手。</p>
+        <figcaption class="article-img-caption">足球常見陣型站位（足球位置介紹）：黃＝門將、藍＝後衛、綠＝中場、紅＝前鋒。點按鈕切換陣型，球員會滑到新位置。</figcaption>
+      </figure>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0">四條線一句話記法</h3>
+        <ul style="margin:0">
+          <li><strong style="color:#f5b800">門將</strong>：守球門，唯一能用手的人。</li>
+          <li><strong style="color:#2196f3">後衛</strong>：擋住對方前鋒，保護門將。</li>
+          <li><strong style="color:#4caf50">中場</strong>：球隊的引擎，連接攻與守。</li>
+          <li><strong style="color:#f44336">前鋒</strong>：負責進球的人。</li>
+        </ul>
+      </div>
+
+      <figure style="margin:1.5rem 0">
+        <img class="content-img" src="/images/articles/football-positions-lines.webp" alt="芭樂子站在球場中圈，介紹後衛、中場、前鋒排成的四條線" width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="article-img-caption">後衛、中場、前鋒一層一層往前推——這就是足球的「四條線」分工。</figcaption>
+      </figure>
+
+      <h2 id="s2" style="margin-top:2.5rem">門將（GK）：最後一道防線</h2>
+
+      <p><strong>門將（Goalkeeper，GK）</strong>是全隊唯一可以在禁區內用手碰球的人，背號傳統上是 <strong>1 號</strong>。他的工作就一句話：<strong>不要讓球進門</strong>。撲救、出擊、指揮防線、開球發動進攻，都是他的事。</p>
+
+      <p>別小看這個位置——現代足球門將還要會用腳傳球（叫「<strong>清道夫門將</strong>」），等於是多一個會傳球的後衛。芭樂子的觀察：門將是場上最孤獨也最關鍵的人，整場沒事可能很閒，但一個失誤就是全隊輸球，壓力山大。</p>
+
+      <h2 id="s3" style="margin-top:2.5rem">後衛（DF）：中後衛 vs 邊後衛</h2>
+
+      <p><strong>後衛（Defender，DF）</strong>站在門將前面，負責防守，傳統背號 2～5 號。後衛又分兩種，很多新手分不清：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#2196f3;margin-top:0">兩種後衛比一比</h3>
+        <table>
+          <thead><tr><th>類型</th><th>站位</th><th>主要任務</th><th>需要的能力</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">中後衛<br><small style="color:var(--text-muted)">CB</small></td><td>中間</td><td>正面擋前鋒、爭頂高球、清空危險</td><td>又高又壯、會讀球</td></tr>
+            <tr><td style="font-weight:700">邊後衛<br><small style="color:var(--text-muted)">LB／RB</small></td><td>左右兩側</td><td>守邊路，還要衝上去助攻、傳中</td><td>能跑、體能好</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">一句話：中後衛是「牆」，邊後衛是「會上下跑的牆」。</p>
+      </div>
+
+      <p>義大利傳奇馬爾蒂尼、巴雷西、卡納瓦羅都是中後衛代表——防守可以防到變成一門藝術。現代足球邊後衛越來越重要，常常是進攻的第二發動點。</p>
+
+      <h2 id="s4" style="margin-top:2.5rem">中場（MF）：前腰、後腰差在哪</h2>
+
+      <p><strong>中場（Midfielder，MF）</strong>站在球場中央，是<strong>整支球隊的引擎</strong>——進攻要靠他組織、防守要靠他回收，跑動量通常全隊最大。中場也分三種，差別在「站多前面」：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#4caf50;background:linear-gradient(135deg,rgba(76,175,80,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#4caf50;margin-top:0">三種中場</h3>
+        <p><strong style="color:#4caf50">後腰（防守中場 DM）</strong>：站中場最後面，緊鄰後衛。負責攔截、保護後防、第一時間把球傳出去，是球隊的「濾網」。皮爾洛、布斯克茲是經典。</p>
+        <p><strong style="color:#4caf50">中場（CM）</strong>：站中間，攻守都要管，負責串聯。跑不完的那種。</p>
+        <p><strong style="color:#4caf50">前腰（攻擊中場 AM）</strong>：站中場最前面、貼著前鋒。負責組織進攻、傳關鍵球（助攻），自己也常射門得分，就是經典的 <strong>10 號角色</strong>。托蒂、齊達內、梅西都是。</p>
+      </div>
+
+      <p>芭樂子幫你記：<strong>後腰防守、前腰進攻，剛好相反</strong>。一支球隊中場強不強，常常決定整場比賽誰控制節奏。</p>
+
+      <h2 id="s5" style="margin-top:2.5rem">前鋒（FW）：中鋒 vs 邊鋒</h2>
+
+      <p><strong>前鋒（Forward，FW）</strong>站最前面，任務最單純也最現實：<strong>進球</strong>。前鋒也分兩種：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f44336;background:linear-gradient(135deg,rgba(244,67,54,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f44336;margin-top:0">兩種前鋒</h3>
+        <table>
+          <thead><tr><th>類型</th><th>站位</th><th>怎麼得分</th><th>傳統背號</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700">中鋒<br><small style="color:var(--text-muted)">ST／CF</small></td><td>最前面中央</td><td>禁區裡的終結者，搶點、頭球、近距離射門</td><td>9 號</td></tr>
+            <tr><td style="font-weight:700">邊鋒<br><small style="color:var(--text-muted)">LW／RW</small></td><td>左右兩側</td><td>靠速度盤帶、內切自己射，或傳中給中鋒</td><td>7／11 號</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>提醒一下：「9 號才會進球」已經是舊觀念。現代足球很多球隊靠<strong>邊鋒</strong>得分（內切射門越來越流行），中鋒有時候反而負責做球、幫隊友拉開空間。位置的分工會隨戰術一直演化。</p>
+
+      <h2 id="s6" style="margin-top:2.5rem">背號的祕密（號碼對照表）</h2>
+
+      <p>看球時聽到「10 號好猛」「9 號又進了」，這些號碼其實有傳統意義。雖然現代球員可以自選號碼（所以只能參考），但經典對照長這樣：</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">傳統背號對照表</h3>
+        <table>
+          <thead><tr><th>背號</th><th>位置</th><th>備註</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;text-align:center">1</td><td>門將</td><td>幾乎是鐵則，門將就是 1 號</td></tr>
+            <tr><td style="font-weight:700;text-align:center">2～5</td><td>後衛</td><td>2／3 常是邊後衛，4／5 常是中後衛</td></tr>
+            <tr><td style="font-weight:700;text-align:center">6・8</td><td>中場</td><td>6 號常是後腰，8 號常是全能中場</td></tr>
+            <tr><td style="font-weight:700;text-align:center;color:#f5b800">10</td><td>前腰／核心</td><td><strong>球隊靈魂人物</strong>（梅西、馬拉度納、托蒂）</td></tr>
+            <tr><td style="font-weight:700;text-align:center">9</td><td>中鋒</td><td>主力射手，「9 號」幾乎等於「殺手」</td></tr>
+            <tr><td style="font-weight:700;text-align:center">7・11</td><td>邊鋒</td><td>7 號特別有光環（C 羅、貝克漢）</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">※ 現代球員可自選號碼，背號只能參考，看實際站位最準。</p>
+      </div>
+
+      <p>所以下次看球，聽到「10 號」你就知道那是球隊大腦、「9 號」是殺手、「7 號」是邊路快刀。是不是瞬間專業很多？</p>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.95rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子免責聲明：</strong>本文為足球教育類內容，位置與背號說明以常見慣例整理，實際分工會隨戰術、教練與球員特性調整。看球愉快，懂位置之後記得回來嘴芭樂子哪裡講得不夠細。</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2 style="margin-top:2.5rem">2026 世足相關延伸閱讀</h2>
+      <p>搞懂位置之後，再把這些規則一起補齊，看球功力直接翻倍：</p>
+      <div class="related-links">
+        <a href="/articles/football-offside-rule/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>越位是什麼？看完這篇你比裁判還懂｜圖解＋互動測驗</strong>
+          <span class="rl-desc">倒數第二個防守球員畫一條線，超過就越位。附 10 題互動測驗</span>
+        </a>
+        <a href="/articles/football-penalty-kick-guide/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>點球（12 碼）是什麼？PK 規則、流程與 PK 大戰圖解</strong>
+          <span class="rl-desc">何時判點球、罰球流程、PK 大戰怎麼互射，一次看懂</span>
+        </a>
+        <a href="/worldcup/" class="rl-item">
+          <span class="rl-cat">世足專區</span>
+          <strong>世足8LA專區：2026 賽程、轉播、規則一站看</strong>
+          <span class="rl-desc">賽程表、台灣轉播哪裡看、冠軍預測工具全都有</span>
+        </a>
+      </div>
+
+      <ManifestoBox />
+      <ShareButtons title="足球位置介紹：守門員、後衛、中場、前鋒在做什麼？" url={URL} />
+    </article>
+  </div>
+
+  <!-- Lightbox 圖片放大 modal -->
+  <div class="lightbox" id="pitchLightbox" role="dialog" aria-modal="true" aria-label="放大圖解">
+    <button type="button" class="lightbox__close" aria-label="關閉放大檢視" onclick="window._closePitchLightbox()">×</button>
+    <div class="lightbox__inner" id="pitchLightboxInner" onclick="event.stopPropagation()"></div>
+    <div class="lightbox__hint">點空白處或按 ESC 關閉</div>
+  </div>
+  <script is:inline>
+    (function () {
+      var lb = document.getElementById('pitchLightbox');
+      var inner = document.getElementById('pitchLightboxInner');
+      if (!lb || !inner) return;
+      function open(svg) {
+        var clone = svg.cloneNode(true);
+        clone.removeAttribute('data-zoomable');
+        clone.style.cursor = 'default';
+        inner.innerHTML = '';
+        inner.appendChild(clone);
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+        inner.innerHTML = '';
+      }
+      window._closePitchLightbox = close;
+      document.querySelectorAll('.pitch-svg[data-zoomable]').forEach(function (svg) {
+        svg.addEventListener('click', function () { open(svg); });
+      });
+      lb.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+      });
+    })();
+  </script>
+
+  <!-- 陣型切換互動 -->
+  <script is:inline>
+    (function(){
+      var grid = document.querySelector('.fp-players');
+      if (!grid) return;
+      var COLORS = { d: '#2196f3', m: '#4caf50', f: '#f44336' };
+      var F = {
+        '4-4-2':   [[180,70,'d'],[180,170,'d'],[180,290,'d'],[180,390,'d'],[360,70,'m'],[360,170,'m'],[360,290,'m'],[360,390,'m'],[560,150,'f'],[560,310,'f']],
+        '4-3-3':   [[175,70,'d'],[175,175,'d'],[175,285,'d'],[175,390,'d'],[350,130,'m'],[350,230,'m'],[350,330,'m'],[560,90,'f'],[560,230,'f'],[560,370,'f']],
+        '4-2-3-1': [[170,70,'d'],[170,175,'d'],[170,285,'d'],[170,390,'d'],[300,175,'m'],[300,285,'m'],[470,100,'m'],[470,230,'m'],[470,360,'m'],[580,230,'f']],
+        '3-5-2':   [[185,120,'d'],[185,230,'d'],[185,340,'d'],[330,60,'m'],[330,150,'m'],[330,230,'m'],[330,310,'m'],[330,400,'m'],[565,165,'f'],[565,295,'f']]
+      };
+      var DESC = {
+        '4-4-2': '最經典的平衡陣型，四後衛、四中場、兩前鋒，攻守均衡、好上手。',
+        '4-3-3': '強調邊路與壓迫，三前鋒火力足，現代強隊最愛（西班牙、巴薩那套）。',
+        '4-2-3-1': '雙後腰超穩，一個前腰串聯、一個中鋒頂在最前，攻守兼顧的主流陣型。',
+        '3-5-2': '三中衛＋兩翼衛狂跑，中場人多、控球強，但邊路防守很吃體能。'
+      };
+      var players = [];
+      for (var i = 0; i < 10; i++) players.push(document.getElementById('fp' + i));
+      function apply(name){
+        var arr = F[name]; if (!arr) return;
+        for (var i = 0; i < 10; i++){
+          if (!players[i]) continue;
+          var p = arr[i];
+          players[i].style.transform = 'translate(' + p[0] + 'px,' + p[1] + 'px)';
+          var dot = players[i].querySelector('.fp-dot');
+          if (dot) dot.setAttribute('fill', COLORS[p[2]]);
+        }
+        var desc = document.getElementById('fpDesc');
+        if (desc) desc.innerHTML = '<b>' + name + '</b>：' + DESC[name];
+        var bs = document.querySelectorAll('.fp-btn');
+        for (var k = 0; k < bs.length; k++) bs[k].classList.toggle('fp-btn-on', bs[k].getAttribute('data-f') === name);
+      }
+      var btns = document.querySelectorAll('.fp-btn');
+      for (var b = 0; b < btns.length; b++){
+        btns[b].addEventListener('click', function(){ apply(this.getAttribute('data-f')); });
+      }
+    })();
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+  .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: clamp(1.3rem, 4.8vw, 1.55rem); }
+  .article-content h3 { font-size: 1.15rem; }
+  .article-content p { font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.9; margin: 1.1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.85; font-size: clamp(16px, 4.2vw, 17.5px); }
+
+  .article-img-caption { text-align: center; font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin: 0.5rem auto 1.2rem; max-width: 680px; }
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0; border: 1px solid var(--border); }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.15rem; }
+  .card p { font-size: 1rem; line-height: 1.85; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 5px 12px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.78rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 1.02rem; }
+  .rl-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
+  th, td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.7; }
+  th { font-weight: 700; font-size: 0.92rem; color: var(--text-muted); }
+
+  /* === 站位圖 SVG === */
+  .pitch-diagram { margin: 1.2rem 0 1.8rem; padding: 0; border: none; }
+  .pitch-svg { width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto; border-radius: 12px; }
+  .pitch-svg[data-zoomable] { cursor: zoom-in; transition: filter 0.2s, transform 0.2s; }
+  .pitch-svg[data-zoomable]:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .pitch-zoom-tip { display: block; text-align: center; font-size: 0.88rem; color: var(--text-muted); margin: 0.3rem 0 0.4rem; }
+  /* SVG 動畫：四條線雷達脈衝 */
+  .pos-pulse { animation: posPulse 2.4s ease-out infinite; }
+  @keyframes posPulse { 0% { r: 22; opacity: 0.85; } 70%, 100% { r: 36; opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .pos-pulse { animation: none; opacity: 0; } }
+  /* SVG 互動：陣型切換（球員滑動）*/
+  .fp-player { transition: transform 0.65s cubic-bezier(.34,1.1,.45,1); }
+  .fp-dot { transition: fill 0.4s ease; }
+  @media (prefers-reduced-motion: reduce) { .fp-player { transition: none; } }
+  .fp-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: center; margin: 0.7rem 0 0.3rem; }
+  .fp-controls-label { color: var(--text-muted); font-size: 0.95rem; }
+  .fp-btn { background: var(--bg-card); border: 1.5px solid var(--border); color: var(--text-secondary); font-weight: 800; font-size: 1rem; padding: 0.5rem 1.05rem; border-radius: 10px; cursor: pointer; transition: border-color .15s, transform .15s, background .15s, color .15s; font-variant-numeric: tabular-nums; }
+  .fp-btn:hover { border-color: var(--guava-green); transform: translateY(-2px); }
+  .fp-btn-on { background: var(--guava-green); color: #0a2810; border-color: var(--guava-green); }
+  .fp-desc { text-align: center; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; margin: 0.3rem auto 0; max-width: 640px; }
+  .fp-desc b { color: var(--guava-green); }
+
+  /* === Lightbox modal === */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; animation: lbFadeIn 0.18s ease-out; }
+  .lightbox.is-open { display: flex; }
+  @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .lightbox__inner { width: 100%; max-width: 1100px; max-height: 90vh; overflow: auto; -webkit-overflow-scrolling: touch; cursor: default; }
+  .lightbox__inner svg { width: 100%; height: auto; display: block; border-radius: 12px; }
+  .lightbox__close { position: fixed; top: 16px; right: 16px; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.18); color: #fff; border: none; font-size: 26px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10001; }
+  .lightbox__close:hover { background: rgba(255,255,255,0.28); }
+  .lightbox__hint { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 14px; pointer-events: none; }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.55rem; }
+    .article-content h2 { font-size: 1.25rem; }
+  }
+</style>

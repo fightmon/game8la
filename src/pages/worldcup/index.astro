@@ -4,22 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
 import { articles } from '../../data/articles.js';
 
-// 自動收錄所有「體育/世足」文章（之後新增足球文也會自動進來）
-const order = [
-  'worldcup-2026-schedule',
-  'worldcup-2026-live-broadcast',
-  'worldcup-2026-prediction',
-  'worldcup-2026-format-guide',
-  'football-offside-rule',
-  'football-foul-cards',
-  'italy-missing-worldcup-2026',
-  'sports-guide',
-];
-const sports = articles.filter((a) => a.category === 'sports');
-sports.sort((a, b) => {
-  const ia = order.indexOf(a.slug), ib = order.indexOf(b.slug);
-  return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
-});
+// 自動收錄所有「體育/世足」文章，依發佈日期由新到舊（新文章自動排前面，與首頁一致）
+const sports = articles
+  .filter((a) => a.category === 'sports')
+  .sort((a, b) => b.date.localeCompare(a.date));
 
 const faqs = [
   { q: '2026 世界盃台灣時間幾號開踢？', a: '台灣時間 2026 年 6 月 12 日（五）凌晨 3:00 開踢，由地主墨西哥對南非；冠軍決賽在台灣時間 7 月 20 日（一）凌晨 3:00。完整賽程看本專區的「世足賽程表」。' },
