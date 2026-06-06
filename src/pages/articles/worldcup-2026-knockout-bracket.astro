@@ -1,0 +1,195 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '2026 世足淘汰賽怎麼打？跟以前有什麼不一樣？', a: '2026 是史上首次 48 隊參賽，所以淘汰賽<strong>從「32 強」開始打</strong>（以前是 16 強起）。流程是：32 強 → 16 強 → 8 強 → 4 強 → 決賽，全部單場淘汰、打平就延長賽再 PK。等於比以前多了一輪「32 強淘汰賽」。' },
+  { q: '幾隊可以晉級淘汰賽？怎麼決定？', a: '共 <strong>32 隊</strong>晉級。算法是：12 個小組<strong>每組前 2 名（24 隊）</strong>，再加上<strong>8 個成績最好的第 3 名</strong>，湊成 32 隊進淘汰賽。所以就算小組第 3 名，只要成績夠好還是有機會。' },
+  { q: '淘汰賽各階段是台灣時間幾號？', a: '依官方公布整理（台灣時間）：<strong>32 強淘汰賽約 6/29 起</strong>、16 強 7/5～7/8、8 強 7/10～7/12、4 強 7/15～7/16、<strong>冠軍決賽 7/20（一）凌晨 3:00</strong>，季軍戰約 7/19。逐場確切時間以 FIFA、愛爾達官方最新公告為準。' },
+  { q: '淘汰賽打平怎麼辦？', a: '淘汰賽不能平手。90 分鐘打平就踢<strong>延長賽（上下半場各 15 分鐘）</strong>；延長賽還是平手就進<strong>PK 大戰（互射 12 碼）</strong>，一人一球定生死。完整規則看芭樂子的點球（12 碼）那篇。' },
+  { q: '完整對戰表（誰對誰）什麼時候才會知道？', a: '要等<strong>小組賽全部踢完（約台灣時間 6/28）</strong>才會確定。因為要先知道每組前 2 名、以及哪 8 個第 3 名晉級，才排得出 32 強的對戰組合。<strong>本頁會在小組賽結束後更新真實對戰隊伍</strong>，先收藏起來等開獎。' },
+  { q: '季軍戰（3、4 名）是什麼？', a: '4 強（準決賽）輸掉的兩支球隊，會在決賽前一天踢一場「季軍戰」，爭第 3 名。雖然沒有冠軍光環，但對球員和國家還是有意義（獎金、排名、面子）。2026 季軍戰約在台灣時間 7/19。' },
+];
+
+const URL = 'https://game8la.com/articles/worldcup-2026-knockout-bracket/';
+
+const stages = [
+  { name: '32 強淘汰賽', teams: '32 隊 / 16 場', date: '約 6/29 起', w: 100, c: '#2196f3' },
+  { name: '16 強', teams: '16 隊 / 8 場', date: '7/5 – 7/8', w: 82, c: '#26a69a' },
+  { name: '8 強', teams: '8 隊 / 4 場', date: '7/10 – 7/12', w: 64, c: '#4caf50' },
+  { name: '4 強（準決賽）', teams: '4 隊 / 2 場', date: '7/15 – 7/16', w: 46, c: '#ff9800' },
+  { name: '🏆 冠軍決賽', teams: '2 隊 / 1 場', date: '7/20（一）03:00', w: 30, c: '#f5b800' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title="2026 世足淘汰賽對戰表｜32強到決賽賽程、台灣時間一次看 — GAME8LA"
+  description="2026 世界盃淘汰賽對戰表與賽程（台灣時間）：48 隊新制從 32 強打起，16強→8強→4強→決賽各階段日期、晉級規則、季軍戰一次看。小組賽結束後更新真實對戰組合。"
+  image="https://game8la.com/images/articles/worldcup-knockout-cover.webp"
+  datePublished="2026-06-06"
+  dateModified="2026-06-06"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '2026 世足淘汰賽對戰表', url: URL },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="2026 世足淘汰賽對戰表｜32強到決賽賽程、台灣時間一次看 — GAME8LA" description="2026 世界盃淘汰賽對戰表與賽程（台灣時間）：48 隊新制從 32 強打起，16強→8強→4強→決賽各階段日期、晉級規則、季軍戰一次看。小組賽結束後更新真實對戰組合。" ogImage="https://game8la.com/images/articles/worldcup-knockout-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 世足淘汰賽對戰表</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      📅 發佈：2026-06-06 ｜ ✍️ 作者：芭樂子 ｜ ⏱️ 預估閱讀 6 分鐘
+    </div>
+    <a href="/articles/" class="back-link">← 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a472a,#004d98,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:840px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">2026 世足淘汰賽對戰表<em>32 強到決賽賽程、台灣時間、晉級規則一次看</em></h1>
+
+      <img class="content-img"
+           src="/images/articles/worldcup-knockout-cover.webp"
+           srcset="/images/articles/worldcup-knockout-cover-768w.webp 768w, /images/articles/worldcup-knockout-cover.webp 1200w"
+           sizes="(max-width: 880px) 100vw, 840px"
+           alt="2026 世足淘汰賽對戰表｜芭樂子化身分析師，手持教鞭講解 32 強到決賽對戰樹與世界盃金盃｜GAME8LA"
+           width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">芭樂子幫你把 32 強到決賽的對戰結構、台灣時間一張看完，誰晉級下一輪打誰一目了然。</p>
+
+      <div class="quick-tool-bar">
+        <span>看球必備：</span>
+        <a href="/articles/worldcup-2026-schedule/">完整賽程表</a>
+        <a href="/articles/worldcup-2026-live-broadcast/">轉播哪裡看</a>
+        <a href="/tools/worldcup-2026/">冠軍預測</a>
+      </div>
+
+      <p>8LA 大大好，我是芭樂子。小組賽踢完，世界盃才真正進入心臟病時間——<strong>淘汰賽</strong>。輸一場就回家、打平還要延長賽 PK，刺激度直接拉滿。這篇芭樂子把 2026 淘汰賽的<strong>對戰結構、各階段台灣時間、晉級規則</strong>一次整理好，讓你不用等轉播主播講，自己就知道誰晉級、下一輪打誰、什麼時候踢。</p>
+
+      <!-- 🔔 更新提示 -->
+      <div class="kb-notice">
+        🔔 <strong>對戰隊伍 6/28 更新：</strong>誰對誰要等小組賽全部踢完（約台灣時間 6/28）才會確定。<strong>本頁會在小組賽結束後填入真實 32 強對戰組合並開放互動預測</strong>——先把這頁<strong>加到書籤</strong>，到時候回來看最準。現在想先過癮，可以玩 <a href="/tools/worldcup-2026/" style="color:var(--guava-green)">冠軍預測工具</a>。
+      </div>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文導覽</h2>
+        <ol>
+          <li><a href="#s1">48 隊新制：淘汰賽從 32 強打起</a></li>
+          <li><a href="#s2">淘汰賽階段 & 台灣時間（漏斗圖）</a></li>
+          <li><a href="#s3">32 隊怎麼晉級的？</a></li>
+          <li><a href="#s4">淘汰賽打平怎麼辦？</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <h2 id="s1" style="margin-top:2.5rem">48 隊新制：淘汰賽從 32 強打起</h2>
+      <p>2026 是史上第一次 <strong>48 隊</strong>參賽，所以淘汰賽跟你印象中不太一樣——<strong>從「32 強」開始打</strong>，比以前多了一輪。整條路長這樣：</p>
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06),rgba(30,30,30,0.5))">
+        <p style="font-size:1.1rem;text-align:center;margin:0;line-height:2"><strong>32 強 → 16 強 → 8 強 → 4 強 → 決賽</strong></p>
+      </div>
+      <p>每一輪都是<strong>單場淘汰</strong>：贏了晉級、輸了回家，打平就延長賽再 PK，沒有第二次機會。所以淘汰賽常常爆冷、常常 PK 大戰心臟病，這才是世界盃最好看的部分。</p>
+
+      <h2 id="s2" style="margin-top:2.5rem">淘汰賽階段 & 台灣時間</h2>
+      <p>芭樂子用漏斗圖幫你看——越往下隊伍越少、離冠軍越近（台灣時間）：</p>
+
+      <div class="kb-funnel">
+        {stages.map((s) => (
+          <div class="kb-stage" style={`--w:${s.w}%;--c:${s.c}`}>
+            <div class="kb-stage-inner">
+              <span class="kb-stage-name">{s.name}</span>
+              <span class="kb-stage-meta">{s.teams}</span>
+              <span class="kb-stage-date">{s.date}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>階段</th><th>台灣時間</th><th>隊數</th></tr></thead>
+        <tbody>
+          <tr><td>小組賽</td><td>6/12 – 6/28</td><td>48 隊 / 12 組</td></tr>
+          <tr><td><strong>32 強淘汰賽</strong></td><td>約 6/29 起 <span style="color:var(--guava-pink)">※</span></td><td>32 隊</td></tr>
+          <tr><td>16 強</td><td>7/5 – 7/8</td><td>16 隊</td></tr>
+          <tr><td>8 強</td><td>7/10 – 7/12</td><td>8 隊</td></tr>
+          <tr><td>4 強（準決賽）</td><td>7/15 – 7/16</td><td>4 隊</td></tr>
+          <tr><td>季軍戰</td><td>約 7/19</td><td>2 隊</td></tr>
+          <tr><td style="color:var(--gold-light);font-weight:700">冠軍決賽</td><td style="color:var(--gold-light);font-weight:700">7/20（一）03:00</td><td>2 隊</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:0.92rem;color:var(--text-muted)"><span style="color:var(--guava-pink)">※</span> 階段日期依官方公布整理，逐場確切對戰與開賽時間以 FIFA／愛爾達公告為準。完整每日賽程看 <a href="/articles/worldcup-2026-schedule/" style="color:var(--guava-green)">2026 世足賽程表</a>。</p>
+
+      <h2 id="s3" style="margin-top:2.5rem">32 隊怎麼晉級的？</h2>
+      <p>48 隊分成 12 組、每組 4 隊。淘汰賽 32 個名額這樣來：</p>
+      <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06),rgba(30,30,30,0.5))">
+        <ul style="margin:0;line-height:2.1">
+          <li><strong>12 組 × 前 2 名 = 24 隊</strong>直接晉級</li>
+          <li>再加上 <strong>8 個成績最好的「第 3 名」</strong></li>
+          <li>合計 <strong>32 隊</strong>進淘汰賽</li>
+        </ul>
+      </div>
+      <p>重點來了：<strong>就算你支持的隊小組賽只拿第 3 名，也別太早關電視</strong>——只要成績排進前 8 個最佳第 3 名，照樣晉級。這也是 48 隊新制最大的變化:小組賽容錯率變高了。晉級規則細節看 <a href="/articles/worldcup-2026-format-guide/" style="color:var(--guava-green)">世足賽制懶人包</a>。</p>
+
+      <figure style="margin:1.5rem 0">
+        <img class="content-img" src="/images/articles/worldcup-knockout-path.webp" alt="芭樂子指著一條通往世界盃金盃的晉級之路，兩旁是一階階被淘汰的隊伍" width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="article-img-caption">淘汰賽就是這條金階梯——一場定生死，一路往上爬到頂端的金盃，輸了就在原地變暗。</figcaption>
+      </figure>
+
+      <h2 id="s4" style="margin-top:2.5rem">淘汰賽打平怎麼辦？</h2>
+      <p>淘汰賽<strong>不能平手</strong>，一定要分出勝負：</p>
+      <div class="card" style="margin:1.5rem 0;border-color:#cd212a;background:linear-gradient(135deg,rgba(205,33,42,0.07),rgba(30,30,30,0.5))">
+        <ol style="margin:0;line-height:2.1">
+          <li>90 分鐘打平 → 踢<strong>延長賽（上下半場各 15 分鐘）</strong></li>
+          <li>延長賽還是平手 → <strong>PK 大戰（互射 12 碼）</strong>定生死</li>
+        </ol>
+      </div>
+      <p>PK 大戰是足球最折磨人的時刻——完整規則（5 輪、驟死、不能補射）芭樂子在 <a href="/articles/football-penalty-kick-guide/" style="color:var(--guava-green)">點球（12 碼）規則</a>那篇講過了。淘汰賽看到延長賽，記得先深呼吸。</p>
+
+      <div class="card" style="margin:1.8rem 0;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06),rgba(30,30,30,0.5));text-align:center">
+        <h3 style="color:var(--guava-green);margin-top:0">想先猜誰捧盃？</h3>
+        <p>對戰表 6/28 才出爐，但冠軍可以先預測。48 隊你看好誰？</p>
+        <a href="/tools/worldcup-2026/" class="btn-primary">🏆 玩冠軍預測工具 →</a>
+      </div>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <div class="related-box"><h3>📖 世足看球必備</h3><div class="related-links">
+        <a href="/articles/worldcup-2026-schedule/">2026 世足賽程表（台灣時間）<small>開幕6/12、決賽7/20、12組對戰</small></a>
+        <a href="/articles/worldcup-2026-format-guide/">世足賽制懶人包<small>48 隊怎麼打？晉級規則 5 分鐘懂</small></a>
+        <a href="/articles/worldcup-2026-live-broadcast/">2026 世足轉播哪裡看<small>台灣平台、免費場、手機看一次看</small></a>
+        <a href="/articles/football-penalty-kick-guide/">點球（12 碼）規則<small>淘汰賽 PK 大戰怎麼比，一次看懂</small></a>
+      </div></div>
+
+      <ManifestoBox />
+      <ShareButtons title="2026 世足淘汰賽對戰表｜32強到決賽賽程、台灣時間一次看" url={URL} />
+    </article>
+  </div>
+
+  <style is:global>
+    .hero-banner{ width:100%; height:4px; border-radius:8px; margin-bottom:1.5rem; }
+    .content-img{ display:block; width:100%; max-width:840px; height:auto; border-radius:12px; margin:1rem auto 0; border:1px solid var(--border); }
+    .article-img-caption{ text-align:center; font-size:0.9rem; line-height:1.7; color:var(--text-muted); margin:0.5rem auto 1.4rem; max-width:680px; }
+    .kb-notice{ background:linear-gradient(135deg,rgba(245,184,0,0.1),rgba(30,30,30,0.5)); border:1px solid rgba(245,184,0,0.4); border-radius:12px; padding:1rem 1.2rem; font-size:0.97rem; line-height:1.8; margin:1.2rem 0; }
+    .kb-funnel{ display:flex; flex-direction:column; align-items:center; gap:0.6rem; margin:1.4rem 0; }
+    .kb-stage{ width:var(--w); min-width:240px; max-width:100%; }
+    .kb-stage-inner{ background:linear-gradient(135deg,color-mix(in srgb,var(--c) 22%,transparent),rgba(30,30,30,0.6)); border:1.5px solid var(--c); border-radius:12px; padding:0.7rem 1rem; display:flex; flex-wrap:wrap; align-items:baseline; justify-content:center; gap:0.3rem 0.8rem; text-align:center; }
+    .kb-stage-name{ font-weight:900; font-size:1.1rem; color:#fff; }
+    .kb-stage-meta{ font-size:0.85rem; color:var(--text-muted); }
+    .kb-stage-date{ font-size:0.95rem; font-weight:700; color:var(--c); }
+    @media (max-width:520px){ .kb-stage{ width:100% !important; } }
+  </style>
+</BaseLayout>

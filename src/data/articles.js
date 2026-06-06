@@ -15,6 +15,20 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: 'worldcup-2026-knockout-bracket',
+    title: '2026 世足淘汰賽對戰表｜32強到決賽賽程、台灣時間一次看',
+    excerpt: '2026 世界盃淘汰賽對戰表與賽程（台灣時間）：48 隊新制從 32 強打起，16強→8強→4強→決賽各階段日期、晉級規則、季軍戰一次看。小組賽結束後更新真實對戰組合，先收藏。',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-06',
+    views: 1,
+    tags: ['最新', '精選', '時事'],
+    icon: 'calendar',
+    gradient: 'linear-gradient(135deg,#1a472a,#004d98,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-worldcup-knockout.webp'
+  },
+  {
     slug: 'football-stoppage-time',
     title: '傷停補時是什麼？為什麼補時越來越長？｜足球補時規則白話圖解',
     excerpt: '90 分鐘結束第四官員舉「+8」是怎麼回事？芭樂子白話講補時：補回換人、進球、受傷、VAR 浪費掉的死球時間，為什麼 2022 後動輒補 7、8 分鐘、誰決定、拖時間有沒有用。',
