@@ -1,0 +1,422 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+// === build 時抓財政部官方中獎號碼（含 6 期歷史 + fallback，網路失敗也不會壞）===
+let periods = [
+  { p: '115年 03~04月', special: '19531471', grand: '85941329', first: ['07225810', '20231230', '83518781'] },
+];
+let liveOk = false;
+try {
+  const res = await fetch('https://invoice.etax.nat.gov.tw/invoice.xml', {
+    signal: (typeof AbortSignal !== 'undefined' && AbortSignal.timeout) ? AbortSignal.timeout(8000) : undefined,
+  });
+  if (res.ok) {
+    const xml = await res.text();
+    const items = xml.split('<item>').slice(1);
+    const parsed = [];
+    for (const it of items) {
+      const tM = it.match(/<title><!\[CDATA\[([\s\S]*?)\]\]>/);
+      const dM = it.match(/<description><!\[CDATA\[([\s\S]*?)\]\]>/);
+      if (!tM || !dM) continue;
+      const d = dM[1];
+      const sp = d.match(/特別獎[：:]\s*(\d{8})/);
+      const gr = d.match(/特獎[：:]\s*(\d{8})/);
+      const fb = d.match(/頭獎[：:]\s*([\d、，,\s]+)/);
+      const fn = fb ? (fb[1].match(/\d{8}/g) || []).slice(0, 3) : [];
+      if (sp && gr && fn.length) parsed.push({ p: tM[1].trim(), special: sp[1], grand: gr[1], first: fn });
+    }
+    if (parsed.length) { periods = parsed; liveOk = true; }
+  }
+} catch (e) { /* 用 fallback，build 不中斷 */ }
+
+const cur = periods[0];
+const period = cur.p, special = cur.special, grand = cur.grand, first = cur.first;
+const last3 = first.map((n) => n.slice(5));
+
+const faqs = [
+  { q: '統一發票多久對獎一次？什麼時候開獎？', a: '每兩個月開獎一次，<strong>於單月的 25 日</strong>開出前兩個月的中獎號碼：1/25、3/25、5/25、7/25、9/25、11/25。例如 7/25 開出的是 5～6 月份發票的中獎號碼。如遇假日通常順延。' },
+  { q: '統一發票有哪些獎項？最高中多少錢？', a: '從大到小：<strong>特別獎 1,000 萬</strong>、<strong>特獎 200 萬</strong>、頭獎 20 萬、二獎 4 萬、三獎 1 萬、四獎 4,000、五獎 1,000、六獎 200，另有<strong>增開六獎 200 元</strong>。特別獎、特獎要 8 碼全中，難度極高；多數人中的是六獎 200 元（對中末 3 碼）。' },
+  { q: '統一發票怎麼對獎？號碼怎麼比？', a: '發票號碼是 8 位數。<strong>特別獎、特獎</strong>要跟該獎號碼 8 碼完全相同。<strong>頭獎</strong>那 3 組：8 碼全中是頭獎；對中<strong>末 7 碼</strong>是二獎、<strong>末 6 碼</strong>三獎、<strong>末 5 碼</strong>四獎、<strong>末 4 碼</strong>五獎、<strong>末 3 碼</strong>六獎。所以最快的對法就是——<strong>先看你發票末 3 碼，有沒有對中任一組頭獎的末 3 碼</strong>。' },
+  { q: '這個對獎頁安全嗎？會不會是詐騙？', a: '安全。本頁<strong>不收集任何個資</strong>，中獎號碼直接顯示給你自己對；就算用下方的批次對獎，也只在你的瀏覽器裡比對、不會上傳。<strong>反詐提醒：</strong>真正的對獎絕不會要你輸入銀行帳號、密碼、信用卡或手機 OTP。看到「輸入帳號領獎金」「加 LINE 對獎」的網站或簡訊，100% 是詐騙，別點。' },
+  { q: '雲端發票（載具）要自己對嗎？', a: '如果你用手機條碼載具存發票，<strong>中獎時財政部會自動通知、獎金可直接匯入綁定帳戶</strong>，不用自己對。拿紙本發票就要自己核對。這頁紙本、雲端都能拿來核對。' },
+  { q: '中獎發票怎麼領？有期限嗎？', a: '領獎期間是<strong>開獎月的次月 6 日起、約 3 個月內</strong>（例如 7/25 開獎，8/6 起可領）。<strong>1,000 元以下</strong>可在四大超商、全聯等直接兌領；<strong>較大金額</strong>要帶身分證與印章到指定銀行（如台灣銀行）兌領。逾期作廢，別放到忘記。' },
+];
+
+const URL = 'https://game8la.com/tools/invoice-checker/';
+const softwareSchema = { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": "統一發票對獎工具｜本期中獎號碼一覽 - GAME8LA", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }, "url": URL };
+const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" }, { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" }, { "@type": "ListItem", "position": 3, "name": "統一發票對獎工具" } ] };
+---
+<FaqSchema faqs={faqs} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<BaseLayout
+  currentPage="tools"
+  title={`統一發票中獎號碼 ${period}｜一頁看完＋快速對獎工具 — GAME8LA`}
+  description={`${period}統一發票中獎號碼一覽：特別獎、特獎、頭獎號碼大字清楚排好，末 3 碼放大好對。每期自動更新（財政部官方資料），純看不用打字。附獎項金額對照＋批次對獎。`}
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/tools/">工具箱</a> &gt; 統一發票對獎</div>
+
+    <div class="page-hero">
+      <h1>🧾 統一發票中獎號碼</h1>
+      <p class="hero-sub">號碼排好排滿，看一眼就對完。</p>
+      <div class="ic-period-pick">
+        <label for="icPeriodSel">查詢期別：</label>
+        <select id="icPeriodSel">
+          {periods.map((pp, i) => <option value={i}>{pp.p}{i === 0 ? '（本期）' : ''}</option>)}
+        </select>
+      </div>
+      <p class="ic-source">{liveOk ? '✅ 號碼依財政部官方公告自動帶入' : 'ℹ️ 號碼依財政部最新公告'}（資料來源：財政部 invoice.etax.nat.gov.tw，含近 {periods.length} 期）</p>
+    </div>
+    <script type="application/json" id="icPeriodsData" set:html={JSON.stringify(periods)} />
+
+    <!-- ═══ 快速對：末 3 碼 ═══ -->
+    <section class="ic-quick">
+      <div class="ic-quick-head">📌 最快對法：看你發票<strong>末 3 碼</strong>，中這 3 組任一個就中 <strong>六獎 200 元</strong></div>
+      <div class="ic-quick-nums" id="icQuick3">
+        {last3.map((n) => <span class="ic-q3"><span class="ic-q3-t">{n}</span></span>)}
+      </div>
+      <p class="ic-quick-note">（這 3 組是「頭獎」號碼的末 3 碼。對中更多碼，獎金更大，往下看 👇）</p>
+    </section>
+
+    <!-- ═══ 大獎 ═══ -->
+    <section class="ic-prizes">
+      <div class="ic-pcard special" id="icSpecialCard" data-prize="special" data-num={special}>
+        <div class="ic-pc-head"><span class="ic-pc-name">特別獎</span><span class="ic-pc-amt">1,000 萬</span></div>
+        <div class="ic-num big" id="icSpecialNum">{special.split('').map((d) => <span class="ic-d">{d}</span>)}</div>
+        <div class="ic-pc-foot">8 碼全中</div>
+      </div>
+      <div class="ic-pcard grand" id="icGrandCard" data-prize="grand" data-num={grand}>
+        <div class="ic-pc-head"><span class="ic-pc-name">特獎</span><span class="ic-pc-amt">200 萬</span></div>
+        <div class="ic-num big" id="icGrandNum">{grand.split('').map((d) => <span class="ic-d">{d}</span>)}</div>
+        <div class="ic-pc-foot">8 碼全中</div>
+      </div>
+    </section>
+
+    <!-- ═══ 頭獎 3 組（末3碼放大）═══ -->
+    <section class="ic-firsts">
+      <h2 class="ic-firsts-title">頭獎號碼（3 組）<small>8 碼全中＝頭獎 20 萬；對中越多末碼，獎金越大</small></h2>
+      <div class="ic-first-grid" id="icFirsts">
+        {first.map((n, i) => (
+          <div class="ic-pcard first" data-prize="first" data-num={n}>
+            <div class="ic-pc-head"><span class="ic-pc-name">頭獎 {i + 1}</span></div>
+            <div class="ic-num">
+              <span class="ic-pre">{n.slice(0, 5)}</span><span class="ic-last3">{n.slice(5)}</span>
+            </div>
+            <div class="ic-pc-foot">末 3 碼 <strong>{n.slice(5)}</strong> ＝六獎 200</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ═══ 對獎階梯 ═══ -->
+    <section class="ic-section">
+      <h2>對中末幾碼＝中什麼獎？</h2>
+      <p class="ic-ladder-intro">用頭獎號碼的「末幾碼」對：對中越多碼，獎金越大。以 <strong id="icLadderEg">{first[0]}</strong> 為例：</p>
+      <div class="ic-ladder" id="icLadder">
+        <div class="ic-step"><span class="ic-step-tag">末3碼</span><span class="ic-step-show"><i>{first[0].slice(0,5)}</i>{first[0].slice(5)}</span><span class="ic-step-prize">六獎 <b>200</b></span></div>
+        <div class="ic-step"><span class="ic-step-tag">末4碼</span><span class="ic-step-show"><i>{first[0].slice(0,4)}</i>{first[0].slice(4)}</span><span class="ic-step-prize">五獎 <b>1,000</b></span></div>
+        <div class="ic-step"><span class="ic-step-tag">末5碼</span><span class="ic-step-show"><i>{first[0].slice(0,3)}</i>{first[0].slice(3)}</span><span class="ic-step-prize">四獎 <b>4,000</b></span></div>
+        <div class="ic-step"><span class="ic-step-tag">末6碼</span><span class="ic-step-show"><i>{first[0].slice(0,2)}</i>{first[0].slice(2)}</span><span class="ic-step-prize">三獎 <b>1 萬</b></span></div>
+        <div class="ic-step"><span class="ic-step-tag">末7碼</span><span class="ic-step-show"><i>{first[0].slice(0,1)}</i>{first[0].slice(1)}</span><span class="ic-step-prize">二獎 <b>4 萬</b></span></div>
+        <div class="ic-step top"><span class="ic-step-tag">全8碼</span><span class="ic-step-show">{first[0]}</span><span class="ic-step-prize">頭獎 <b>20 萬</b></span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 批次對獎（次要、可收合）═══ -->
+    <section class="ic-section">
+      <details class="ic-batch">
+        <summary>➕ 發票太多張懶得一張張對？展開「批次對獎」一次貼上全部</summary>
+        <div class="ic-batch-body">
+          <p class="ic-hint">把發票號碼貼進來，一張一行或逗號分隔皆可（只看數字、自動取末 8 碼）。號碼已自動帶入上方本期中獎號碼。</p>
+          <label class="ic-extra-row">增開六獎號碼（選填，末 3 碼、逗號分隔）：<input type="text" id="icExtra" inputmode="numeric" placeholder="如 168, 999"></label>
+          <textarea id="icInvoices" rows="5" placeholder="例如：&#10;AB-12345678&#10;87654321"></textarea>
+          <div class="ic-actions">
+            <button type="button" class="ic-btn-go" id="icCheckBtn">🔍 開始對獎</button>
+            <button type="button" class="ic-btn-ghost" id="icClearBtn">清空</button>
+          </div>
+          <div class="ic-result" id="icResult" hidden></div>
+        </div>
+      </details>
+    </section>
+
+    <div class="guava-note">
+      <span class="gn-icon">🍈</span>
+      <p>芭樂子提醒：對發票是最不傷荷包的小確幸，但<strong>真正的對獎永遠不會跟你要帳號、密碼或 OTP</strong>。收到「輸入帳號領發票獎金」「加 LINE 對獎」一律是詐騙，直接封鎖。這頁不收你任何個資，安心對。</p>
+    </div>
+
+    <!-- ═══ 獎項金額對照表 ═══ -->
+    <section class="ic-section">
+      <h2>統一發票獎項與金額對照表</h2>
+      <div style="overflow-x:auto">
+      <table class="ic-table">
+        <thead><tr><th>獎別</th><th>對中方式</th><th>獎金</th></tr></thead>
+        <tbody>
+          <tr><td>特別獎</td><td>與特別獎號碼 8 碼全同</td><td class="ic-amt">1,000 萬</td></tr>
+          <tr><td>特獎</td><td>與特獎號碼 8 碼全同</td><td class="ic-amt">200 萬</td></tr>
+          <tr><td>頭獎</td><td>與頭獎號碼 8 碼全同</td><td class="ic-amt">20 萬</td></tr>
+          <tr><td>二獎</td><td>對中頭獎號碼<strong>末 7 碼</strong></td><td class="ic-amt">4 萬</td></tr>
+          <tr><td>三獎</td><td>對中頭獎號碼<strong>末 6 碼</strong></td><td class="ic-amt">1 萬</td></tr>
+          <tr><td>四獎</td><td>對中頭獎號碼<strong>末 5 碼</strong></td><td class="ic-amt">4,000</td></tr>
+          <tr><td>五獎</td><td>對中頭獎號碼<strong>末 4 碼</strong></td><td class="ic-amt">1,000</td></tr>
+          <tr><td>六獎</td><td>對中頭獎號碼<strong>末 3 碼</strong></td><td class="ic-amt">200</td></tr>
+          <tr><td>增開六獎</td><td>對中增開六獎號碼<strong>末 3 碼</strong></td><td class="ic-amt">200</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="ic-note">※ 一張發票只能領「對中的最大獎」，不重複累計。增開六獎號碼及最終獎別，以財政部公告為準。</p>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="ic-section">
+      <h2>❓ 統一發票對獎常見問題</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <div class="ic-section" style="font-size:0.95rem;color:var(--text-muted)">
+      <p><strong>免責聲明：</strong>本頁中獎號碼由財政部 invoice.etax.nat.gov.tw 官方資料於每次更新時自動帶入，但仍請以<strong>財政部稅務入口網／台灣彩券官方最新公告</strong>二次確認後再兌領。芭樂子不經手任何獎金，也不會跟你要個資。</p>
+    </div>
+
+    <section class="ic-section">
+      <h2>你可能也用得到</h2>
+      <div class="ic-related">
+        <a href="/tools/539-wheel-calculator/" class="ic-rel"><strong>539 包牌計算器</strong><span>包幾碼最划算？1 秒算注數＋花費</span></a>
+        <a href="/articles/lottery-odds-comparison/" class="ic-rel"><strong>威力彩 vs 大樂透 中獎機率比較</strong><span>100 元該買哪張？機率差幾倍一次看</span></a>
+        <a href="/casino-check/" class="ic-rel"><strong>娛樂城體檢</strong><span>收到可疑連結？一鍵查它是不是黑網</span></a>
+      </div>
+    </section>
+
+    <ShareButtons title={`統一發票中獎號碼 ${period}｜一頁看完＋快速對獎`} url={URL} />
+  </div>
+
+  <style is:global>
+    .container { max-width: 860px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+    .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin: 0.8rem 0 1rem; }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--guava-green); }
+    .page-hero { text-align: center; margin-bottom: 1.4rem; }
+    .page-hero h1 { font-size: clamp(1.7rem, 6vw, 2.2rem); margin: 0 0 0.4rem; }
+    .hero-sub { font-size: clamp(1rem, 4vw, 1.2rem); color: var(--text-secondary); margin: 0.2rem 0; }
+    .hero-sub strong { color: var(--guava-green); }
+    .ic-period-pick { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0.3rem 0; font-size: 0.95rem; color: var(--text-secondary); }
+    .ic-period-pick select { background: var(--bg-card); border: 1.5px solid var(--guava-green); border-radius: 8px; color: #fff; padding: 0.45rem 0.7rem; font-size: 1rem; font-weight: 700; cursor: pointer; }
+    .ic-source { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+    /* 快速對：末3碼 */
+    .ic-quick { background: linear-gradient(135deg, rgba(57,255,20,0.12), rgba(245,184,0,0.08)); border: 1px solid var(--guava-green); border-radius: 16px; padding: 1.2rem; text-align: center; margin-bottom: 1.4rem; }
+    .ic-quick-head { font-size: clamp(1rem, 4vw, 1.15rem); line-height: 1.7; color: var(--text-secondary); }
+    .ic-quick-head strong { color: var(--guava-green); }
+    .ic-quick-nums { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; margin: 0.9rem 0 0.5rem; }
+    .ic-q3 { background: #0a2810; color: var(--guava-green); font-size: clamp(2rem, 11vw, 3rem); font-weight: 900; letter-spacing: 3px; padding: 0.3rem 1rem; border-radius: 12px; border: 2px solid var(--guava-green); font-variant-numeric: tabular-nums; box-shadow: 0 0 16px rgba(57,255,20,0.18); }
+    .ic-q3-t { background: linear-gradient(100deg, #39ff14, #c6ff6e, #f5b800, #c6ff6e, #39ff14); background-size: 280% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: icShine 5s linear infinite; }
+    @keyframes icShine { to { background-position: 280% 50%; } }
+    @media (prefers-reduced-motion: reduce) { .ic-q3-t, .ic-last3 { animation: none; } }
+    .ic-quick-note { font-size: 0.88rem; color: var(--text-muted); margin: 0.4rem 0 0; }
+
+    /* 大獎卡 */
+    .ic-prizes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+    .ic-pcard { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1rem 0.9rem; text-align: center; }
+    .ic-pcard.special { border-color: rgba(244,67,54,0.6); background: linear-gradient(135deg, rgba(244,67,54,0.1), rgba(30,30,30,0.5)); }
+    .ic-pcard.grand { border-color: rgba(245,184,0,0.6); background: linear-gradient(135deg, rgba(245,184,0,0.1), rgba(30,30,30,0.5)); }
+    .ic-pc-head { display: flex; align-items: baseline; justify-content: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+    .ic-pc-name { font-weight: 900; font-size: 1.1rem; }
+    .ic-pcard.special .ic-pc-name { color: #ff5252; }
+    .ic-pcard.grand .ic-pc-name { color: #f5b800; }
+    .ic-pc-amt { font-size: 0.95rem; color: var(--text-muted); font-weight: 700; }
+    .ic-num.big { display: flex; gap: 3px; justify-content: center; flex-wrap: wrap; }
+    .ic-num.big .ic-d { background: rgba(0,0,0,0.35); border-radius: 6px; font-size: clamp(1.3rem, 6.5vw, 1.9rem); font-weight: 900; padding: 0.25rem 0.45rem; font-variant-numeric: tabular-nums; line-height: 1.1; }
+    .ic-pc-foot { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+    /* 頭獎 3 組 */
+    .ic-firsts { margin-bottom: 1.4rem; }
+    .ic-firsts-title { font-size: 1.15rem; margin: 0 0 0.8rem; }
+    .ic-firsts-title small { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-muted); margin-top: 0.2rem; }
+    .ic-first-grid { display: grid; grid-template-columns: 1fr; gap: 0.7rem; }
+    .ic-pcard.first { text-align: left; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1rem; padding: 0.9rem 1.1rem; }
+    .ic-pcard.first .ic-pc-head { margin: 0; }
+    .ic-pcard.first .ic-pc-name { color: var(--guava-green); font-size: 1rem; }
+    .ic-num { font-variant-numeric: tabular-nums; letter-spacing: 2px; }
+    .ic-pre { font-size: clamp(1.4rem, 6vw, 1.9rem); font-weight: 700; color: var(--text-muted); }
+    .ic-last3 { font-size: clamp(1.9rem, 8.5vw, 2.6rem); font-weight: 900; background: linear-gradient(100deg, #39ff14, #c6ff6e, #f5b800, #c6ff6e, #39ff14); background-size: 280% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: icShine 5s linear infinite; }
+    .ic-pcard.first .ic-pc-foot { margin: 0; width: 100%; }
+    .ic-pcard.first .ic-pc-foot strong { color: var(--guava-green); }
+
+    /* 對獎階梯 */
+    .ic-ladder-intro { font-size: 0.97rem; color: var(--text-secondary); line-height: 1.7; }
+    .ic-ladder { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.8rem; }
+    .ic-step { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 0.6rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.55rem 0.8rem; }
+    .ic-step.top { border-color: var(--gold, #f5b800); background: linear-gradient(135deg, rgba(245,184,0,0.1), rgba(30,30,30,0.5)); }
+    .ic-step-tag { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); }
+    .ic-step-show { font-size: clamp(1.05rem, 4.5vw, 1.35rem); font-weight: 800; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
+    .ic-step-show i { color: var(--text-muted); font-style: normal; font-weight: 400; }
+    .ic-step-prize { font-size: 0.92rem; color: var(--text-secondary); white-space: nowrap; }
+    .ic-step-prize b { color: var(--guava-green); font-size: 1.05rem; }
+    .ic-step.top .ic-step-prize b { color: #f5b800; }
+
+    /* 批次對獎 */
+    .ic-batch { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .ic-batch > summary { padding: 1rem 1.2rem; cursor: pointer; font-weight: 700; font-size: 1rem; color: var(--text-secondary); list-style: none; }
+    .ic-batch > summary::-webkit-details-marker { display: none; }
+    .ic-batch-body { padding: 0 1.2rem 1.2rem; }
+    .ic-hint { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 0.7rem; }
+    .ic-extra-row { display: block; font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 0.7rem; }
+    .ic-extra-row input { display: block; width: 100%; max-width: 240px; margin-top: 0.3rem; background: rgba(0,0,0,0.3); border: 1.5px solid var(--border); border-radius: 8px; color: #fff; padding: 0.5rem 0.7rem; font-size: 1.05rem; }
+    #icInvoices { width: 100%; background: rgba(0,0,0,0.3); border: 1.5px solid var(--border); border-radius: 10px; color: #fff; padding: 0.8rem; font-size: 1.1rem; letter-spacing: 1px; resize: vertical; font-variant-numeric: tabular-nums; }
+    #icInvoices:focus, .ic-extra-row input:focus { outline: none; border-color: var(--guava-green); }
+    .ic-actions { display: flex; gap: 0.7rem; margin-top: 0.9rem; flex-wrap: wrap; }
+    .ic-btn-go { flex: 1; min-width: 140px; background: linear-gradient(135deg, var(--guava-green), #2db84a); color: #0a2810; font-size: 1.1rem; font-weight: 900; border: none; border-radius: 12px; padding: 0.8rem; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; }
+    .ic-btn-go:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(57,255,20,0.3); }
+    .ic-btn-ghost { background: transparent; border: 1.5px solid var(--border); color: var(--text-secondary); border-radius: 10px; padding: 0.6rem 1rem; cursor: pointer; font-size: 0.95rem; font-weight: 700; }
+    .ic-result { margin-top: 1rem; animation: icFade 0.35s ease-out; }
+    @keyframes icFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .ic-result-banner { text-align: center; border-radius: 14px; padding: 1.2rem; margin-bottom: 0.9rem; }
+    .ic-result-banner.win { background: linear-gradient(135deg, rgba(57,255,20,0.15), rgba(245,184,0,0.12)); border: 1px solid var(--guava-green); }
+    .ic-result-banner.lose { background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+    .ic-result-total { font-size: 2.4rem; font-weight: 900; color: var(--guava-green); font-variant-numeric: tabular-nums; line-height: 1.1; }
+    .ic-result-sub { font-size: 0.97rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.7; }
+    .ic-rows { display: flex; flex-direction: column; gap: 0.5rem; }
+    .ic-row { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.9rem; }
+    .ic-row.hit { border-color: var(--guava-green); }
+    .ic-row-num { font-size: 1.05rem; font-weight: 700; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
+    .ic-row-num.bad { color: var(--guava-pink); }
+    .ic-row-prize .p-name { font-weight: 800; color: var(--guava-green); }
+    .ic-row-prize .p-amt { font-size: 0.9rem; color: var(--text-secondary); }
+    .ic-row-prize .p-none { color: var(--text-muted); }
+
+    .guava-note { display: flex; gap: 0.8rem; align-items: flex-start; background: rgba(57,255,20,0.05); border: 1px solid rgba(57,255,20,0.25); border-radius: 12px; padding: 1rem 1.2rem; margin-top: 1.4rem; }
+    .guava-note .gn-icon { font-size: 1.5rem; }
+    .guava-note p { margin: 0; font-size: 0.95rem; line-height: 1.75; color: var(--text-secondary); }
+
+    .ic-section { margin-top: 2.4rem; }
+    .ic-section h2 { font-size: clamp(1.3rem, 5vw, 1.5rem); margin-bottom: 1rem; }
+    .ic-table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
+    .ic-table th, .ic-table td { padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.6; }
+    .ic-table th { color: var(--text-muted); font-size: 0.9rem; }
+    .ic-table td:first-child { font-weight: 700; white-space: nowrap; }
+    .ic-amt { font-weight: 800; color: #f5b800; text-align: right; white-space: nowrap; }
+    .ic-note { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.6rem; line-height: 1.6; }
+
+    .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+    .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; gap: 0.5rem; }
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+    .faq-item[open] .faq-q::before { content: '▾ '; }
+    .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+
+    .ic-related { display: flex; flex-direction: column; gap: 0.7rem; }
+    .ic-rel { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+    .ic-rel:hover { border-color: var(--guava-green); transform: translateX(4px); }
+    .ic-rel strong { display: block; margin-bottom: 0.2rem; }
+    .ic-rel span { font-size: 0.9rem; color: var(--text-muted); }
+
+    @media (max-width: 520px) {
+      .ic-prizes { grid-template-columns: 1fr; }
+      .ic-step { grid-template-columns: 52px 1fr auto; gap: 0.4rem; }
+    }
+  </style>
+
+  <script is:inline>
+    (function(){
+      // === 期別切換（歷史 6 期）===
+      var dataEl = document.getElementById('icPeriodsData');
+      var PERIODS = dataEl ? JSON.parse(dataEl.textContent || '[]') : [];
+      function digitsBig(n){ return n.split('').map(function(d){ return '<span class="ic-d">' + d + '</span>'; }).join(''); }
+      function firstCard(n, i){
+        return '<div class="ic-pcard first" data-prize="first" data-num="' + n + '">' +
+          '<div class="ic-pc-head"><span class="ic-pc-name">頭獎 ' + (i + 1) + '</span></div>' +
+          '<div class="ic-num"><span class="ic-pre">' + n.slice(0, 5) + '</span><span class="ic-last3">' + n.slice(5) + '</span></div>' +
+          '<div class="ic-pc-foot">末 3 碼 <strong>' + n.slice(5) + '</strong> ＝六獎 200</div></div>';
+      }
+      function ladderRows(h){
+        var defs = [['末3碼',3,'六獎','200',''],['末4碼',4,'五獎','1,000',''],['末5碼',5,'四獎','4,000',''],['末6碼',6,'三獎','1 萬',''],['末7碼',7,'二獎','4 萬',''],['全8碼',8,'頭獎','20 萬','top']];
+        return defs.map(function(r){
+          var preLen = 8 - r[1], pre = h.slice(0, preLen), show = h.slice(preLen);
+          return '<div class="ic-step ' + r[4] + '"><span class="ic-step-tag">' + r[0] + '</span><span class="ic-step-show"><i>' + pre + '</i>' + show + '</span><span class="ic-step-prize">' + r[2] + ' <b>' + r[3] + '</b></span></div>';
+        }).join('');
+      }
+      function setText(id, t){ var e = document.getElementById(id); if (e) e.textContent = t; }
+      function setHTML(id, h){ var e = document.getElementById(id); if (e) e.innerHTML = h; }
+      function setNum(id, v){ var e = document.getElementById(id); if (e) e.setAttribute('data-num', v); }
+      function renderPeriod(idx){
+        var p = PERIODS[idx]; if (!p) return;
+        setHTML('icQuick3', p.first.map(function(n){ return '<span class="ic-q3"><span class="ic-q3-t">' + n.slice(5) + '</span></span>'; }).join(''));
+        setNum('icSpecialCard', p.special); setHTML('icSpecialNum', digitsBig(p.special));
+        setNum('icGrandCard', p.grand); setHTML('icGrandNum', digitsBig(p.grand));
+        setHTML('icFirsts', p.first.map(firstCard).join(''));
+        setText('icLadderEg', p.first[0]); setHTML('icLadder', ladderRows(p.first[0]));
+      }
+      var sel = document.getElementById('icPeriodSel');
+      if (sel) sel.addEventListener('change', function(){ renderPeriod(parseInt(this.value, 10)); });
+
+      // === 批次對獎 ===
+      var btn = document.getElementById('icCheckBtn');
+      if (!btn) return;
+      function W(){
+        function num(sel){ var e = document.querySelector(sel); return e ? (e.getAttribute('data-num')||'').replace(/\D/g,'') : ''; }
+        var first = Array.prototype.map.call(document.querySelectorAll('[data-prize="first"]'), function(e){ return (e.getAttribute('data-num')||'').replace(/\D/g,''); }).filter(Boolean);
+        var exEl = document.getElementById('icExtra');
+        var extra = exEl ? (exEl.value.match(/\d{3}/g) || []) : [];
+        return { special: num('[data-prize="special"]'), grand: num('[data-prize="grand"]'), first: first, extra: extra };
+      }
+      function checkOne(inv, w){
+        if (w.special && inv === w.special) return { amt: 10000000, name: '特別獎' };
+        if (w.grand && inv === w.grand) return { amt: 2000000, name: '特獎' };
+        var best = null;
+        function up(r){ if (r && (!best || r.amt > best.amt)) best = r; }
+        w.first.forEach(function(h){
+          if (h.length !== 8) return;
+          if (inv === h) up({ amt: 200000, name: '頭獎' });
+          else if (inv.slice(-7) === h.slice(-7)) up({ amt: 40000, name: '二獎' });
+          else if (inv.slice(-6) === h.slice(-6)) up({ amt: 10000, name: '三獎' });
+          else if (inv.slice(-5) === h.slice(-5)) up({ amt: 4000, name: '四獎' });
+          else if (inv.slice(-4) === h.slice(-4)) up({ amt: 1000, name: '五獎' });
+          else if (inv.slice(-3) === h.slice(-3)) up({ amt: 200, name: '六獎' });
+        });
+        w.extra.forEach(function(e){ if (inv.slice(-3) === e) up({ amt: 200, name: '六獎（增開）' }); });
+        return best;
+      }
+      function fmt(n){ return n.toLocaleString('en-US'); }
+      function run(){
+        var w = W();
+        var raw = document.getElementById('icInvoices').value;
+        var tokens = raw.split(/[\s,，、;；]+/).filter(Boolean);
+        if (!tokens.length) { alert('請先貼上你的發票號碼。'); return; }
+        var rows = [], total = 0, hits = 0, valid = 0;
+        tokens.forEach(function(t){
+          var d = t.replace(/\D/g, '');
+          if (d.length < 8) { rows.push({ inv: t, bad: true }); return; }
+          var inv = d.slice(-8); valid++;
+          var r = checkOne(inv, w);
+          if (r) { total += r.amt; hits++; }
+          rows.push({ inv: inv, prize: r });
+        });
+        var html = '';
+        if (hits > 0) html += '<div class="ic-result-banner win"><div class="ic-result-total">中了 NT$ ' + fmt(total) + '</div><div class="ic-result-sub">這 ' + valid + ' 張裡 <strong>' + hits + ' 張中獎</strong> 🎉 記得在期限內去領！</div></div>';
+        else html += '<div class="ic-result-banner lose"><div class="ic-result-total" style="color:var(--text-secondary)">這次槓龜 🥲</div><div class="ic-result-sub">' + valid + ' 張都沒中，發票繼續存、下期再對。</div></div>';
+        html += '<div class="ic-rows">';
+        rows.forEach(function(r){
+          if (r.bad) html += '<div class="ic-row"><span class="ic-row-num bad">' + r.inv + '</span><span class="ic-row-prize p-none">⚠️ 不足 8 碼</span></div>';
+          else if (r.prize) html += '<div class="ic-row hit"><span class="ic-row-num">' + r.inv + '</span><span class="ic-row-prize"><span class="p-name">' + r.prize.name + '</span> <span class="p-amt">NT$ ' + fmt(r.prize.amt) + '</span></span></div>';
+          else html += '<div class="ic-row"><span class="ic-row-num">' + r.inv + '</span><span class="ic-row-prize p-none">沒中</span></div>';
+        });
+        html += '</div>';
+        var box = document.getElementById('icResult'); box.innerHTML = html; box.hidden = false;
+      }
+      btn.addEventListener('click', run);
+      document.getElementById('icClearBtn').addEventListener('click', function(){
+        document.getElementById('icInvoices').value = '';
+        var box = document.getElementById('icResult'); box.hidden = true; box.innerHTML = '';
+      });
+    })();
+  </script>
+</BaseLayout>
