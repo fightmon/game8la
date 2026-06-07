@@ -8,5 +8,12 @@
 		"binding": "ASSETS",
 		"not_found_handling": "404-page",
 		"run_worker_first": true
-	}
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "game8la-db",
+			"database_id": "aaf4ddb2-918a-46d8-a443-8a6661499d93"
+		}
+	]
 }

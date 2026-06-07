@@ -245,6 +245,83 @@ const enrichedList = scamList.map(s => {
 
 
     <!-- ═══════════════════════════════════════════
+         模組 5：你也被坑了？站內回報 + 加 LINE 等通知
+         ═══════════════════════════════════════════ -->
+    <section class="check-module" id="report-intake">
+      <div class="module-header">
+        <span class="module-number" style="background:linear-gradient(135deg,#39ff14,#0a8a3c)">5</span>
+        <div>
+          <h2 style="margin:0">🙋 你也被「不出金」坑了嗎？</h2>
+          <p class="module-desc">查不到不代表安全——你的一筆回報，可能擋下下一個受害者。芭樂子幫你記，黑名單更新第一個通知你。</p>
+        </div>
+      </div>
+
+      <!-- 自助 5 關 -->
+      <div class="selfcheck-box">
+        <p class="selfcheck-title">⚡ 查不到？先自己過這 5 關，中 1 條就快逃：</p>
+        <ul class="selfcheck-list">
+          <li><span class="sc-n">1</span> 域名開不到 3 個月就狂灑優惠？→ 超可疑</li>
+          <li><span class="sc-n">2</span> 出金前叫你「先繳稅／保證金／解凍金」？→ <strong style="color:#ef4444">100% 詐騙話術</strong></li>
+          <li><span class="sc-n">3</span> 找不到實體公司／執照，客服只有 TG？</li>
+          <li><span class="sc-n">4</span> 是有人「帶你玩、報明牌、拉你進群」才認識的？</li>
+          <li><span class="sc-n">5</span> 入金是打到「個人帳戶／USDT／人頭戶」？</li>
+        </ul>
+        <p class="selfcheck-foot">芭樂子：中 1 條我就皺眉，中 2 條快跑，中 3 條……R.I.P 錢包，趕快截圖報警。</p>
+      </div>
+
+      <!-- 回報表單 -->
+      <div id="reportForm" class="report-form">
+        <p class="report-form-title">📝 回報一筆（全部選填、不綁身分，30 秒）：</p>
+        <div class="calc-grid">
+          <div class="calc-field" style="grid-column:1/-1">
+            <label for="rpUrl">🔗 平台網址 / 名稱</label>
+            <input type="text" id="rpUrl" placeholder="例如 bet888.com 或 金沙娛樂城" autocomplete="off" spellcheck="false" />
+          </div>
+          <div class="calc-field">
+            <label for="rpAmount">💸 卡關金額</label>
+            <select id="rpAmount">
+              <option value="">不方便說</option>
+              <option value="1萬內">1 萬內</option>
+              <option value="1-10萬">1～10 萬</option>
+              <option value="10-50萬">10～50 萬</option>
+              <option value="50萬以上">50 萬以上</option>
+            </select>
+          </div>
+        </div>
+        <p class="rp-tags-label">🕳 遇到的手法（可複選）：</p>
+        <div class="rp-tags" id="rpMethods">
+          <label><input type="checkbox" value="出金前要繳稅/保證金" /> 出金前要繳稅／保證金</label>
+          <label><input type="checkbox" value="客服已讀不回/消失" /> 客服已讀不回／消失</label>
+          <label><input type="checkbox" value="平台直接關站" /> 平台直接關站</label>
+          <label><input type="checkbox" value="一直加流水卡提款" /> 一直加流水／卡提款</label>
+          <label><input type="checkbox" value="帳號無故被凍結" /> 帳號無故被凍結</label>
+          <label><input type="checkbox" value="有人帶單拉LINE群" /> 有人帶單／拉 LINE 群</label>
+        </div>
+        <div class="calc-field" style="margin-top:0.8rem">
+          <label for="rpNote">🗒 補充（選填）</label>
+          <textarea id="rpNote" rows="2" placeholder="發生經過、被卡多久…幫後面的人多寫幾句"></textarea>
+        </div>
+        <button type="button" class="calc-btn" id="rpSubmit" onclick="submitReport()">📨 送出回報，造福鄉民</button>
+        <p class="rp-privacy">🔒 不會留你的姓名／電話，只收平台資訊。送出即同意作為避雷公開資料（去識別處理）。</p>
+      </div>
+
+      <!-- 送出後的感謝 + LINE -->
+      <div id="reportThanks" class="report-thanks" style="display:none">
+        <div class="rt-icon">🍈</div>
+        <p class="rt-title">收到了！芭樂子幫你記下這筆了 🙏</p>
+        <p class="rt-sub">我會排進查證佇列。<strong>想在這個平台有新進度、或黑名單更新時第一個收到通知？</strong>加我 LINE，我廣播——你加我、我推你，不用留個資。</p>
+        <a href="https://line.me/R/ti/p/@531ivqvs" target="_blank" rel="noopener" class="rt-line-btn">💬 加入芭樂子避雷 LINE</a>
+      </div>
+
+      <!-- 常駐 LINE 入口（沒回報也能加） -->
+      <div class="report-line-always">
+        <span>只想收避雷更新、不想填表？</span>
+        <a href="https://line.me/R/ti/p/@531ivqvs" target="_blank" rel="noopener">→ 直接加 LINE 收黑名單更新</a>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
          底部提示
          ═══════════════════════════════════════════ -->
     <div class="bottom-cta">
@@ -1096,6 +1173,35 @@ const enrichedList = scamList.map(s => {
     @media (max-width: 600px) {
       .donate-banner-inner { flex-direction: column; padding: 1rem; font-size: 0.85rem; }
     }
+
+    /* ── 模組 5：回報 + LINE ── */
+    .selfcheck-box { background: linear-gradient(135deg, rgba(245,184,0,0.07), rgba(245,184,0,0.02)); border: 1px solid rgba(245,184,0,0.25); border-radius: 12px; padding: 1rem 1.1rem; margin-top: 0.5rem; }
+    .selfcheck-title { font-weight: 700; margin: 0 0 0.6rem; color: var(--text-primary); }
+    .selfcheck-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .selfcheck-list li { position: relative; padding-left: 2rem; font-size: 0.92rem; line-height: 1.6; color: var(--text-secondary); }
+    .sc-n { position: absolute; left: 0; top: 0.05rem; width: 1.4rem; height: 1.4rem; display: inline-flex; align-items: center; justify-content: center; background: #f5b800; color: #000; font-weight: 800; font-size: 0.78rem; border-radius: 50%; }
+    .selfcheck-foot { margin: 0.8rem 0 0; font-size: 0.86rem; color: var(--guava-green); font-weight: 600; }
+    .report-form { margin-top: 1.2rem; }
+    .report-form-title { font-weight: 700; margin: 0 0 0.7rem; color: var(--text-primary); }
+    .report-form textarea { width: 100%; padding: 0.7rem 0.9rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-size: 0.95rem; font-family: inherit; outline: none; resize: vertical; box-sizing: border-box; }
+    .rp-tags-label { font-size: 0.9rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--text-secondary); }
+    .rp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .rp-tags label { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.7rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 20px; font-size: 0.86rem; color: var(--text-secondary); cursor: pointer; }
+    .rp-tags input { accent-color: #39ff14; }
+    .rp-privacy { font-size: 0.78rem; color: var(--text-muted); margin: 0.7rem 0 0; }
+    .report-thanks { text-align: center; background: linear-gradient(135deg, rgba(57,255,20,0.08), rgba(245,184,0,0.05)); border: 1px solid rgba(57,255,20,0.3); border-radius: 14px; padding: 1.5rem 1.2rem; margin-top: 0.5rem; }
+    .rt-icon { font-size: 2.4rem; }
+    .rt-title { font-weight: 800; font-size: 1.1rem; margin: 0.4rem 0 0.5rem; color: var(--text-primary); }
+    .rt-sub { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; max-width: 440px; margin: 0 auto 1rem; }
+    .rt-line-btn { display: inline-block; background: #06c755; color: #fff; font-weight: 800; padding: 0.7rem 1.6rem; border-radius: 30px; font-size: 1rem; text-decoration: none; }
+    .rt-line-btn:hover { filter: brightness(1.08); }
+    .report-line-always { margin-top: 1.2rem; text-align: center; font-size: 0.9rem; color: var(--text-muted); }
+    .report-line-always a { color: #06c755; font-weight: 700; text-decoration: none; }
+    @media (max-width: 520px) {
+      .selfcheck-list li { font-size: 0.88rem; }
+      .rp-tags label { font-size: 0.82rem; }
+      .rt-sub { font-size: 0.88rem; }
+    }
   </style>
 
   <!-- ═══════════════════════════════════════════
@@ -1570,6 +1676,39 @@ const enrichedList = scamList.map(s => {
           card.style.display = tags.includes(tag) ? '' : 'none';
         }
       });
+    };
+  </script>
+
+  <script is:inline>
+    /* ── 回報收件口 ──
+       同源 Cloudflare Worker 路由，直接寫進 D1 資料庫（src/worker.js handleReport）。 */
+    var REPORT_ENDPOINT = '/api/report';
+
+    window.submitReport = function () {
+      var urlEl = document.getElementById('rpUrl');
+      var url = (urlEl.value || '').trim();
+      if (!url) { alert('至少填一下平台網址或名稱，芭樂子才記得住啦 🍈'); urlEl.focus(); return; }
+      var amount = document.getElementById('rpAmount').value || '';
+      var methods = Array.prototype.slice
+        .call(document.querySelectorAll('#rpMethods input:checked'))
+        .map(function (c) { return c.value; }).join('、');
+      var note = (document.getElementById('rpNote').value || '').trim();
+      var domain = url.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].split('?')[0].toLowerCase();
+      var payload = { url: url, domain: domain, amount: amount, methods: methods, note: note, ref: 'casino-check' };
+
+      var btn = document.getElementById('rpSubmit');
+      btn.disabled = true; btn.textContent = '送出中…';
+      var done = function () {
+        document.getElementById('reportForm').style.display = 'none';
+        var t = document.getElementById('reportThanks');
+        t.style.display = 'block';
+        t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+      fetch(REPORT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(done).catch(done);
     };
   </script>
 </BaseLayout>
