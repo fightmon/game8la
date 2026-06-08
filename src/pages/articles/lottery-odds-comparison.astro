@@ -149,6 +149,36 @@ const faqs = [
       <p style="margin:0.8rem 0 0;padding:0.8rem 1rem;background:rgba(236,72,153,0.12);border-left:4px solid #ec4899;border-radius:6px;color:#ec4899;font-weight:800;font-size:0.95rem">🚨 專家結論：雖然彩券頭獎誘人，但 RTP 僅 55%，遠低於線上老虎機的 97%！想科學玩娛樂，數學不會騙人——<strong>每 100 元投注，彩券長期只回你 55 元、老虎機回你 97 元</strong>。</p>
     </div>
 
+    <!-- 互動小工具：用你的預算即時比 -->
+    <div class="vs-calc" id="vsCalc">
+      <div class="vs-calc-head">🎰 換你的金額算算看（100 元只是範例）</div>
+      <div class="vs-calc-input">
+        <label for="vsBudget">我想花</label>
+        <input type="number" id="vsBudget" value="100" min="50" step="50" inputmode="numeric" />
+        <span>元</span>
+      </div>
+      <div class="vs-calc-grid">
+        <div class="vs-col">
+          <div class="vs-col-name">🔵 大樂透 <small>$50/注</small></div>
+          <div class="vs-row"><span>注數</span><b id="vsLottoBets">—</b></div>
+          <div class="vs-row"><span>中頭獎機率</span><b id="vsLottoJackpot">—</b></div>
+          <div class="vs-row"><span>平均中獎（任一獎）</span><b id="vsLottoSmall">—</b></div>
+        </div>
+        <div class="vs-col">
+          <div class="vs-col-name">🔴 威力彩 <small>$100/注</small></div>
+          <div class="vs-row"><span>注數</span><b id="vsPowerBets">—</b></div>
+          <div class="vs-row"><span>中頭獎機率</span><b id="vsPowerJackpot">—</b></div>
+          <div class="vs-row"><span>平均中獎（任一獎）</span><b id="vsPowerSmall">—</b></div>
+        </div>
+      </div>
+      <p class="vs-verdict" id="vsVerdict"></p>
+      <div class="vs-calc-cta">
+        <a href="/tools/lotto649-wheel-calculator/">🎯 大樂透包牌計算器</a>
+        <a href="/tools/power-lottery-calculator/">🎱 威力彩包牌計算器</a>
+      </div>
+      <p class="vs-note">※ 頭獎機率＝注數÷總組合；任一獎中獎率採官方公告（大樂透約 1/28、威力彩約 1/9）估算。兩者長期期望值皆為負，理性娛樂、量力而為。</p>
+    </div>
+
     <h2 id="s3">3. 各獎項中獎機率全比較</h2>
     <p>頭獎遠在天邊,實際上會中的多半是小獎。下面這張表整理了兩種彩券的所有獎項機率(數據以台灣彩券公布為準):</p>
 
@@ -403,6 +433,65 @@ const faqs = [
     .content-img { border-radius: 10px; }
     .article-img-caption { font-size: 0.9rem; }
   }
+
+  /* 互動小工具：威力彩 vs 大樂透 預算比較 */
+  .vs-calc { background: linear-gradient(135deg, rgba(57,255,20,0.05), rgba(245,184,0,0.04)); border: 1.5px solid rgba(57,255,20,0.3); border-radius: 14px; padding: 1.2rem 1.3rem; margin: 1.5rem 0; }
+  .vs-calc-head { font-weight: 800; color: var(--text-primary); font-size: 1.05rem; margin-bottom: 0.8rem; }
+  .vs-calc-input { display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 1rem; flex-wrap: wrap; }
+  .vs-calc-input input { width: 120px; padding: 0.55rem 0.7rem; font-size: 1.1rem; font-weight: 800; text-align: center; background: var(--bg-secondary, #1a1a1a); border: 1.5px solid var(--guava-green); border-radius: 10px; color: var(--guava-green); outline: none; }
+  .vs-calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .vs-col { background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1rem; }
+  .vs-col-name { font-weight: 800; font-size: 1rem; margin-bottom: 0.6rem; color: var(--text-primary); }
+  .vs-col-name small { font-weight: 400; font-size: 0.78rem; color: var(--text-muted); }
+  .vs-row { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; padding: 0.35rem 0; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
+  .vs-row span { color: var(--text-muted); }
+  .vs-row b { color: var(--text-primary); font-size: 1rem; font-weight: 800; white-space: nowrap; }
+  .vs-verdict { margin: 1rem 0 0; padding: 0.8rem 1rem; background: rgba(245,184,0,0.08); border-radius: 10px; font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary); }
+  .vs-calc-cta { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 1rem; }
+  .vs-calc-cta a { flex: 1; min-width: 160px; text-align: center; padding: 0.75rem 1rem; border-radius: 10px; font-weight: 800; font-size: 0.92rem; text-decoration: none; background: linear-gradient(135deg, #f5b800, #e09900); color: #000; transition: transform 0.15s, box-shadow 0.15s; }
+  .vs-calc-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(245,184,0,0.3); }
+  .vs-note { font-size: 0.78rem; color: var(--text-muted); margin: 0.7rem 0 0; line-height: 1.6; }
+  @media (max-width: 520px) { .vs-calc-grid { grid-template-columns: 1fr; } .vs-calc-cta a { min-width: 100%; } }
 </style>
+
+<script is:inline>
+  (function () {
+    var inp = document.getElementById('vsBudget');
+    if (!inp) return;
+    var LOTTO = { price: 50, jackpot: 13983816, anyOdds: 28 };
+    var POWER = { price: 100, jackpot: 22085448, anyOdds: 9 };
+    function fmtOdds(bets, total) {
+      if (bets <= 0) return '—';
+      var one = Math.round(total / bets);
+      return one >= 10000 ? '1/' + (Math.round(one / 10000)).toLocaleString() + ' 萬' : '1/' + one.toLocaleString();
+    }
+    var el = function (id) { return document.getElementById(id); };
+    function render() {
+      var b = Math.max(0, parseInt(inp.value, 10) || 0);
+      var lb = Math.floor(b / LOTTO.price), pb = Math.floor(b / POWER.price);
+      el('vsLottoBets').textContent = lb + ' 注';
+      el('vsPowerBets').textContent = pb + ' 注';
+      el('vsLottoJackpot').textContent = fmtOdds(lb, LOTTO.jackpot);
+      el('vsPowerJackpot').textContent = fmtOdds(pb, POWER.jackpot);
+      el('vsLottoSmall').textContent = (lb / LOTTO.anyOdds).toFixed(2) + ' 次';
+      el('vsPowerSmall').textContent = (pb / POWER.anyOdds).toFixed(2) + ' 次';
+      var lj = lb / LOTTO.jackpot, pj = pb / POWER.jackpot;
+      var v;
+      if (b < 50) {
+        v = '至少 50 元才買得到一注大樂透喔～';
+      } else {
+        var jackpotWin = lj >= pj ? '大樂透' : '威力彩';
+        var ratio = (pj > 0 && lj > 0) ? (lj >= pj ? lj / pj : pj / lj) : 0;
+        var smallWin = (pb / POWER.anyOdds) >= (lb / LOTTO.anyOdds) ? '威力彩' : '大樂透';
+        v = '💡 同樣 ' + b + ' 元：拚頭獎機率 → <b style="color:var(--guava-green)">' + jackpotWin + '</b>'
+          + (ratio > 1.01 ? '（高 ' + ratio.toFixed(2) + ' 倍）' : '')
+          + '；想常中小獎 → <b style="color:#ec4899">' + smallWin + '</b>。芭樂子：大夢想買大樂透，小確幸買威力彩。';
+      }
+      el('vsVerdict').innerHTML = v;
+    }
+    inp.addEventListener('input', render);
+    render();
+  })();
+</script>
 
 </BaseLayout>
