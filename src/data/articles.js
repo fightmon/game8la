@@ -15,6 +15,20 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: '165-weekly-2026-w22',
+    title: '【165 週報】2026 第 22 週（5/21–5/27）：錢盈539娛樂城換皮回歸、假投資與殺豬盤暴增',
+    excerpt: '內政部 165 全民防騙網 5/21–5/27 通報彙整：錢盈539娛樂城以新域名 admin.539lotterybuy.com 換皮回歸（一週改一次名）。本週假投資（華訊電能 15 件）與殺豬盤（Flirting 9 件）為通報大宗，165 共列逾 140 個詐騙網站。芭樂子拆解手法＋導去娛樂城體檢。',
+    category: 'anti-scam',
+    categoryLabel: '165 監測站',
+    badgeType: 'attack',
+    date: '2026-06-09',
+    views: 1,
+    tags: ['最新', '165週報'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
+  },
+  {
     slug: 'worldcup-2026-betting-scam',
     title: '賭世足當心「不出金」！2026 世界盃博弈詐騙 5 大套路｜芭樂子反詐',
     excerpt: '2026 世足開踢、賭博詐騙也旺季。芭樂子拆解世足賭盤「不出金」黑網 5 大套路：體驗金流水黑洞、穩贏報牌殺豬盤、贏太多凍結帳號、出金前繳保證金、人頭帳戶入金。附「該信還是快逃」話術測驗＋一鍵娛樂城體檢，下注前先查再說。',
