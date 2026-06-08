@@ -1298,7 +1298,7 @@ const enrichedList = scamList.map(s => {
     }
 
     /* ── 鄉民回報訊號（公開 /api/report-count，只回已列管確認數） ── */
-    async function checkReports(domain) {
+    async function checkReports(domain, blacklistHit) {
       const el = document.getElementById('reportsResult');
       if (!el) return;
       el.innerHTML = '';
@@ -1313,6 +1313,14 @@ const enrichedList = scamList.map(s => {
           <div class="rpt-hit">
             <div class="rpt-hit-title">🚨 芭樂子情報網：這站已被 <b>${count}</b> 位鄉民回報「不出金」！</div>
             <p class="rpt-hit-sub">大大，這支芭樂子手上已經 ${count} 筆災情了，<strong>錢還沒進去的快收手</strong>；已經卡關的，下面回報一筆、加 LINE 我陪你一起追。別再餵它了。</p>
+          </div>`;
+      } else if (blacklistHit) {
+        // 165 已命中、但鄉民情報網還沒回報 → 不講「查不到」，改成強化命中 + 邀請回報
+        el.innerHTML = `
+          <div class="rpt-zero">
+            <div class="rpt-zero-title">🍈 芭樂子情報網：上面 165 已經命中黑名單了！</div>
+            <p class="rpt-zero-sub">這站官方已經有人報案。芭樂子的鄉民情報網還沒收到回報——<strong>你是不是也踩過這個雷？</strong>回報一筆，讓更多人搜尋的當下就被擋下來，功德無量。</p>
+            <a href="#report-intake" class="rpt-zero-cta" onclick="var t=document.getElementById('report-intake');if(t){t.scrollIntoView({behavior:'smooth'});}return false;">→ 我要回報這個雷</a>
           </div>`;
       } else {
         el.innerHTML = `
@@ -1404,8 +1412,8 @@ const enrichedList = scamList.map(s => {
       const domain = cleanDomain(raw);
 
       // 第一步：先比對黑名單（即時，不需等 RDAP）
-      checkBlacklist(domain);
-      checkReports(domain); // 鄉民回報訊號（非同步，不擋）
+      var blHit = checkBlacklist(domain);
+      checkReports(domain, blHit); // 鄉民回報訊號（非同步，不擋，跟 165 命中協調）
 
       // 第二步：WHOIS 查詢
       btn.disabled = true;
