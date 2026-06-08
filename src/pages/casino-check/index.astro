@@ -83,6 +83,7 @@ const enrichedList = scamList.map(s => {
         </div>
       </div>
       <div id="blacklistResult"></div>
+      <div id="reportsResult"></div>
     </section>
 
     <!-- ═══════════════════════════════════════════
@@ -1174,6 +1175,19 @@ const enrichedList = scamList.map(s => {
       .donate-banner-inner { flex-direction: column; padding: 1rem; font-size: 0.85rem; }
     }
 
+    /* ── 鄉民回報訊號（查詢結果） ── */
+    #reportsResult:empty { display: none; }
+    .rpt-hit { background: linear-gradient(135deg, rgba(239,68,68,0.14), rgba(239,68,68,0.05)); border: 1px solid rgba(239,68,68,0.45); border-radius: 12px; padding: 1rem 1.1rem; margin-top: 0.8rem; }
+    .rpt-hit-title { font-weight: 800; color: #ff6b6b; font-size: 1rem; margin-bottom: 0.4rem; }
+    .rpt-hit-title b { color: #ff3b3b; font-size: 1.15em; }
+    .rpt-hit-sub { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+    .rpt-zero { background: linear-gradient(135deg, rgba(57,255,20,0.06), rgba(245,184,0,0.05)); border: 1px solid rgba(57,255,20,0.28); border-radius: 12px; padding: 1rem 1.1rem; margin-top: 0.8rem; }
+    .rpt-zero-title { font-weight: 800; color: var(--guava-green); font-size: 0.98rem; margin-bottom: 0.4rem; }
+    .rpt-zero-sub { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin: 0 0 0.7rem; }
+    .rpt-zero-cta { display: inline-block; font-size: 0.88rem; font-weight: 700; color: #000; background: var(--guava-green); padding: 0.45rem 1rem; border-radius: 20px; text-decoration: none; }
+    .rpt-zero-cta:hover { filter: brightness(1.08); }
+    @media (max-width: 520px) { .rpt-hit-sub, .rpt-zero-sub { font-size: 0.86rem; } }
+
     /* ── 模組 5：回報 + LINE ── */
     .selfcheck-box { background: linear-gradient(135deg, rgba(245,184,0,0.07), rgba(245,184,0,0.02)); border: 1px solid rgba(245,184,0,0.25); border-radius: 12px; padding: 1rem 1.1rem; margin-top: 0.5rem; }
     .selfcheck-title { font-weight: 700; margin: 0 0 0.6rem; color: var(--text-primary); }
@@ -1283,6 +1297,33 @@ const enrichedList = scamList.map(s => {
       }
     }
 
+    /* ── 鄉民回報訊號（公開 /api/report-count，只回已列管確認數） ── */
+    async function checkReports(domain) {
+      const el = document.getElementById('reportsResult');
+      if (!el) return;
+      el.innerHTML = '';
+      let count = 0;
+      try {
+        const r = await fetch('/api/report-count?domain=' + encodeURIComponent(domain));
+        if (r.ok) { const j = await r.json(); count = j.count || 0; }
+      } catch (_) { /* 端點不可用就靜默 */ }
+
+      if (count > 0) {
+        el.innerHTML = `
+          <div class="rpt-hit">
+            <div class="rpt-hit-title">🚨 芭樂子情報網：這站已被 <b>${count}</b> 位鄉民回報「不出金」！</div>
+            <p class="rpt-hit-sub">大大，這支芭樂子手上已經 ${count} 筆災情了，<strong>錢還沒進去的快收手</strong>；已經卡關的，下面回報一筆、加 LINE 我陪你一起追。別再餵它了。</p>
+          </div>`;
+      } else {
+        el.innerHTML = `
+          <div class="rpt-zero">
+            <div class="rpt-zero-title">🍈 芭樂子提醒：目前 0 筆鄉民回報——但「查不到 ≠ 安全」喔！</div>
+            <p class="rpt-zero-sub">先別急著放心，大大。新詐騙站天天生，芭樂子的名單一定有來不及更新的。<strong>沒人回報，只代表「還沒人來得及哭」</strong>，不代表它乖乖的。覺得怪怪的，先過下面自助 5 關，順手回報一筆，造福後面的鄉民~</p>
+            <a href="#report-intake" class="rpt-zero-cta" onclick="var t=document.getElementById('report-intake');if(t){t.scrollIntoView({behavior:'smooth'});}return false;">→ 帶我去自助檢測 + 回報</a>
+          </div>`;
+      }
+    }
+
     /* ── 清理網域 ── */
     function cleanDomain(raw) {
       return raw.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].split('?')[0].toLowerCase();
@@ -1364,6 +1405,7 @@ const enrichedList = scamList.map(s => {
 
       // 第一步：先比對黑名單（即時，不需等 RDAP）
       checkBlacklist(domain);
+      checkReports(domain); // 鄉民回報訊號（非同步，不擋）
 
       // 第二步：WHOIS 查詢
       btn.disabled = true;

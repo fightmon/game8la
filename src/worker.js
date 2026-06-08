@@ -384,6 +384,26 @@ function setStatus(id,status){
   return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Robots-Tag': 'noindex' } });
 }
 
+// 公開：查某網域「已列管」的鄉民回報數（只回確認數，防止灌假回報黑競品）
+async function handleReportCount(request, env) {
+  const url = new URL(request.url);
+  const domain = normDomain(url.searchParams.get('domain') || '');
+  if (!domain || !env.DB) return jsonResp({ domain, count: 0 });
+  let count = 0;
+  try {
+    const row = await env.DB.prepare(
+      "SELECT COUNT(*) AS n FROM scam_reports WHERE domain=?1 AND status='已列管'"
+    ).bind(domain).first();
+    count = (row && row.n) || 0;
+  } catch (_) { count = 0; }
+  return new Response(JSON.stringify({ domain, count }), {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'public, max-age=60',
+    },
+  });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -391,6 +411,7 @@ export default {
     if (p === '/api/lottery') return handleLottery(request);
     if (p === '/api/report') return handleReport(request, env);
     if (p === '/api/report/status') return handleReportStatus(request, env);
+    if (p === '/api/report-count') return handleReportCount(request, env);
     if (p === '/api/inbox') return handleInbox(request, env);
     return env.ASSETS.fetch(request);
   },
