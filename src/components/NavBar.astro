@@ -305,6 +305,9 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     z-index: 999;
     background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(8px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
   .mobile-menu.open {
     display: block;
@@ -312,10 +315,11 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
   .mobile-menu-inner {
     background: rgba(18, 18, 18, 0.98);
     border-bottom: 1px solid var(--border);
-    padding: 1rem;
+    padding: 1rem 1rem 3rem;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    min-height: min-content;
   }
   .mobile-menu-inner a {
     color: var(--text-primary);
@@ -505,6 +509,7 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     const btn = document.getElementById('menuToggle');
     if (!menu) return;
     const opened = menu.classList.toggle('open');
+    document.body.style.overflow = opened ? 'hidden' : '';
     if (btn) {
       btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
       btn.setAttribute('aria-label', opened ? '關閉選單' : '開啟選單');
@@ -517,6 +522,7 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     // Close when clicking backdrop or a link
     if (event.target === menu || event.target.tagName === 'A') {
       menu.classList.remove('open');
+      document.body.style.overflow = '';
       const btn = document.getElementById('menuToggle');
       if (btn) {
         btn.setAttribute('aria-expanded', 'false');
