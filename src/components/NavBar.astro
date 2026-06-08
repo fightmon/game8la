@@ -78,29 +78,42 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     <div class="nav-dropdown">
       <a href="/tools/" class={currentPage === 'tools' || currentPage === 'casino-check' ? 'active' : ''} style="color:#f5b800">🔧 8LA 工具箱 <span class="dd-arrow">▾</span></a>
       <div class="nav-dropdown-menu">
-        <div class="nav-dropdown-menu-inner">
-          <div class="dropdown-group-label">🎲 機率之神</div>
-          <a href="/tools/bless-blocks/">🥢 Game8la 線上擲筊</a>
-          <div class="dropdown-group-label">🎰 模擬器</div>
-          <a href="/tools/slot-simulator/">🎲 賽特2 RTP 模擬器</a>
-          <a href="/tools/thor-hammer-2-simulator/">⚡ 雷神之錘2 模擬器</a>
-          <a href="/tools/baccarat-simulator/">🃏 百家樂策略模擬器</a>
-          <a href="/tools/baccarat-roadmap/">🀄 百家樂看路模擬器</a>
-          <a href="/tools/blackjack/">🃏 AI 21 點</a>
-          <div class="dropdown-group-label">🀄 牌桌教學</div>
-          <a href="/tools/mahjong-suan-tai-trainer/">🀄 麻將算台練習器</a>
-          <div class="dropdown-group-label">🔧 計算工具</div>
-          <a href="/tools/539-wheel-calculator/">🎯 539 包牌計算器</a>
-          <a href="/tools/power-lottery-calculator/">🎱 威力彩包牌計算器</a>
-          <a href="/tools/lotto649-wheel-calculator/">🎯 大樂透包牌計算器</a>
-          <a href="/tools/invoice-checker/">🧾 統一發票對獎工具</a>
-          <a href="/tools/bankroll-calculator/">🧮 資金管理計算器</a>
-          <a href="/tools/bonus-calculator/">💰 娛樂城獎金計算器</a>
-          <a href="/tools/rtp-tracker/">🎰 老虎機 RTP 紀錄器</a>
-          <a href="/lottery/analysis/">🔢 樂透數據站</a>
-          <a href="/casino-check/">🛡️ 娛樂城體檢</a>
-          <div class="dropdown-group-label">🧠 自我檢測</div>
-          <a href="/tools/gambling-self-check/">🩺 賭博成癮自我檢測</a>
+        <div class="nav-dropdown-menu-inner nav-tools-menu">
+          <div class="dd-group">
+            <div class="dropdown-group-label">🎲 機率之神</div>
+            <a href="/tools/bless-blocks/">🥢 Game8la 線上擲筊</a>
+          </div>
+          <div class="dd-group">
+            <div class="dropdown-group-label">🎰 模擬器</div>
+            <a href="/tools/slot-simulator/">🎲 賽特2 RTP 模擬器</a>
+            <a href="/tools/thor-hammer-2-simulator/">⚡ 雷神之錘2 模擬器</a>
+            <a href="/tools/baccarat-simulator/">🃏 百家樂策略模擬器</a>
+            <a href="/tools/baccarat-roadmap/">🀄 百家樂看路模擬器</a>
+            <a href="/tools/blackjack/">🃏 AI 21 點</a>
+          </div>
+          <div class="dd-group">
+            <div class="dropdown-group-label">🀄 牌桌教學</div>
+            <a href="/tools/mahjong-suan-tai-trainer/">🀄 麻將算台練習器</a>
+          </div>
+          <div class="dd-group">
+            <div class="dropdown-group-label">🎱 樂透工具</div>
+            <a href="/tools/539-wheel-calculator/">🎯 539 包牌計算器</a>
+            <a href="/tools/power-lottery-calculator/">🎱 威力彩包牌計算器</a>
+            <a href="/tools/lotto649-wheel-calculator/">🎯 大樂透包牌計算器</a>
+            <a href="/lottery/analysis/">🔢 樂透數據站</a>
+          </div>
+          <div class="dd-group">
+            <div class="dropdown-group-label">🔧 其他工具</div>
+            <a href="/tools/invoice-checker/">🧾 統一發票對獎工具</a>
+            <a href="/tools/bankroll-calculator/">🧮 資金管理計算器</a>
+            <a href="/tools/bonus-calculator/">💰 娛樂城獎金計算器</a>
+            <a href="/tools/rtp-tracker/">🎰 老虎機 RTP 紀錄器</a>
+            <a href="/casino-check/">🛡️ 娛樂城體檢</a>
+          </div>
+          <div class="dd-group">
+            <div class="dropdown-group-label">🧠 自我檢測</div>
+            <a href="/tools/gambling-self-check/">🩺 賭博成癮自我檢測</a>
+          </div>
         </div>
       </div>
     </div>
@@ -397,6 +410,26 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     box-shadow: 0 8px 30px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
+  }
+  /* 工具箱：分類 2 欄流式排版，避免下拉過長（桌機 ≥768px 才顯示，寬度安全） */
+  .nav-tools-menu {
+    display: block;
+    column-count: 2;
+    column-gap: 0.8rem;
+    min-width: 470px;
+  }
+  .nav-tools-menu .dd-group {
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-tools-menu .dropdown-group-label {
+    margin-top: 0.5rem;
+  }
+  .nav-tools-menu .dd-group:first-child .dropdown-group-label {
+    margin-top: 0;
   }
   .nav-dropdown:hover .nav-dropdown-menu {
     display: block;
