@@ -142,28 +142,35 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     <a href="/game-ranking/" class={currentPage === 'rankings' ? 'active' : ''}>🎰 芭樂遊戲</a>
     <a href="/lottery/" class={currentPage === 'lottery' ? 'active' : ''}>🎱 芭樂好彩</a>
     <a href="/lottery/analysis/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🔢 樂透數據站</a>
-    <a href="/tools/" class={currentPage === 'tools' ? 'active' : ''} style="color:#f5b800;font-weight:700">🔧 8LA 工具箱</a>
-    <div style="padding-left:2.5rem;font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:0.4rem 0 0.2rem">🎲 機率之神</div>
-    <a href="/tools/bless-blocks/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🥢 Game8la 線上擲筊</a>
-    <div style="padding-left:2.5rem;font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:0.6rem 0 0.2rem">🎰 模擬器</div>
-    <a href="/tools/slot-simulator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎲 賽特2 RTP 模擬器</a>
-    <a href="/tools/thor-hammer-2-simulator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">⚡ 雷神之錘2 模擬器</a>
-    <a href="/tools/baccarat-simulator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🃏 百家樂策略模擬器</a>
-    <a href="/tools/baccarat-roadmap/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🀄 百家樂看路模擬器</a>
-    <a href="/tools/blackjack/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🃏 AI 21 點</a>
-    <div style="padding-left:2.5rem;font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:0.6rem 0 0.2rem">🀄 牌桌教學</div>
-    <a href="/tools/mahjong-suan-tai-trainer/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🀄 麻將算台練習器</a>
-    <div style="padding-left:2.5rem;font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:0.6rem 0 0.2rem">🔧 計算工具</div>
-    <a href="/tools/539-wheel-calculator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎯 539 包牌計算器</a>
-    <a href="/tools/power-lottery-calculator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎱 威力彩包牌計算器</a>
-    <a href="/tools/lotto649-wheel-calculator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎯 大樂透包牌計算器</a>
-    <a href="/tools/bankroll-calculator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🧮 資金管理計算器</a>
-    <a href="/tools/bonus-calculator/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">💰 娛樂城獎金計算器</a>
-    <a href="/tools/rtp-tracker/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🎰 老虎機 RTP 紀錄器</a>
-    <a href="/lottery/analysis/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🔢 樂透數據站</a>
-    <a href="/casino-check/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🛡️ 娛樂城體檢</a>
-    <div style="padding-left:2.5rem;font-size:0.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:0.6rem 0 0.2rem">🧠 自我檢測</div>
-    <a href="/tools/gambling-self-check/" class="mobile-sub-link" style="padding-left:2.5rem;font-size:0.9rem;color:var(--text-muted)">🩺 賭博成癮自我檢測</a>
+    <details class="m-acc" open={currentPage === 'tools' || currentPage === 'casino-check'}>
+      <summary class="m-acc-head">🔧 8LA 工具箱 <span class="m-acc-chev">▾</span></summary>
+      <div class="m-acc-body">
+        <a href="/tools/">🧰 全部工具總覽</a>
+        <div class="m-cat">🎲 機率之神</div>
+        <a href="/tools/bless-blocks/">🥢 Game8la 線上擲筊</a>
+        <div class="m-cat">🎰 模擬器</div>
+        <a href="/tools/slot-simulator/">🎲 賽特2 RTP 模擬器</a>
+        <a href="/tools/thor-hammer-2-simulator/">⚡ 雷神之錘2 模擬器</a>
+        <a href="/tools/baccarat-simulator/">🃏 百家樂策略模擬器</a>
+        <a href="/tools/baccarat-roadmap/">🀄 百家樂看路模擬器</a>
+        <a href="/tools/blackjack/">🃏 AI 21 點</a>
+        <div class="m-cat">🀄 牌桌教學</div>
+        <a href="/tools/mahjong-suan-tai-trainer/">🀄 麻將算台練習器</a>
+        <div class="m-cat">🎱 樂透工具</div>
+        <a href="/tools/539-wheel-calculator/">🎯 539 包牌計算器</a>
+        <a href="/tools/power-lottery-calculator/">🎱 威力彩包牌計算器</a>
+        <a href="/tools/lotto649-wheel-calculator/">🎯 大樂透包牌計算器</a>
+        <a href="/lottery/analysis/">🔢 樂透數據站</a>
+        <div class="m-cat">🔧 其他工具</div>
+        <a href="/tools/invoice-checker/">🧾 統一發票對獎工具</a>
+        <a href="/tools/bankroll-calculator/">🧮 資金管理計算器</a>
+        <a href="/tools/bonus-calculator/">💰 娛樂城獎金計算器</a>
+        <a href="/tools/rtp-tracker/">🎰 老虎機 RTP 紀錄器</a>
+        <a href="/casino-check/">🛡️ 娛樂城體檢</a>
+        <div class="m-cat">🧠 自我檢測</div>
+        <a href="/tools/gambling-self-check/">🩺 賭博成癮自我檢測</a>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -334,6 +341,51 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     background: rgba(57, 255, 20, 0.1);
     border-color: rgba(57, 255, 20, 0.3);
     color: var(--gold-light);
+  }
+
+  /* === 手機選單手風琴（8LA 工具箱 展開／收合） === */
+  .m-acc { display: flex; flex-direction: column; }
+  .m-acc-head {
+    list-style: none;
+    cursor: pointer;
+    color: #f5b800;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .m-acc-head::-webkit-details-marker { display: none; }
+  .m-acc-head:hover { background: rgba(245, 184, 0, 0.08); }
+  .m-acc-chev { color: var(--text-muted); transition: transform 0.25s; font-size: 0.85rem; }
+  .m-acc[open] .m-acc-chev { transform: rotate(180deg); }
+  .m-acc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.2rem 0 0.4rem;
+  }
+  .mobile-menu-inner .m-acc-body a {
+    padding: 0.7rem 1rem 0.7rem 2.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .mobile-menu-inner .m-acc-body a:hover,
+  .mobile-menu-inner .m-acc-body a.active {
+    color: var(--gold-light);
+  }
+  .m-cat {
+    padding-left: 2.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0.5rem 0 0.1rem;
   }
 
   /* === SEARCH MODAL === */
