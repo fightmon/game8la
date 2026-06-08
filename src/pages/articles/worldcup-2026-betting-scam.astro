@@ -1,0 +1,447 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '世足期間賭博詐騙真的會變多嗎？', a: '會，而且是<strong>暴增</strong>。大型賽事＝全民賭性最旺的時候，黑網會趁機砸廣告海撈一波——「世足穩贏報牌」「註冊送世足體驗金」「冠軍內線」這類訊息會在 LINE 群、IG、抖音、Telegram 大量出現。芭樂子提醒：<strong>越是熱門賽事，越要小心「不出金」的境外黑網</strong>，因為他們知道這時候最多人衝動下注。' },
+  { q: '「註冊送世足體驗金、免費下注」是真的免費嗎？', a: '幾乎都不是。體驗金一定綁<strong>超高流水（洗碼）倍數</strong>，常見 30～50 倍。意思是送你 888，你得實際投注 888×40＝3 萬多才有資格提款——玩到那個量，你的本金早就被莊家優勢吃光了。這是典型「<strong>看得到、領不到</strong>」的釣魚設計，目的是騙你開戶、入金。' },
+  { q: '平台說我「贏太多被判定異常，要先繳保證金才能出金」，該繳嗎？', a: '<strong>千萬不要繳，這 100% 是詐騙。</strong>不管名目叫保證金、解凍金、稅金、手續費——只要是「<strong>出金前先叫你匯錢進去</strong>」，就是黑網最經典的二次收割。你繳了之後，他會再生出下一個理由叫你繳更多，錢永遠領不回來。正確做法：立刻停損、截圖存證、撥打 165。' },
+  { q: '想合法賭世足，有沒有不會「不出金」的管道？', a: '在台灣，<strong>唯一合法的運動投注是「台灣運彩」</strong>（台灣運動彩券）。透過官方授權的實體經銷商或官方 App 下注，出金、稅務都受法規保障，不會有「不出金」問題。除此之外的境外賭博網站、地下賭盤，<strong>在台灣都是違法的</strong>，而且一旦不出金，你求償無門。芭樂子立場：要玩就玩合法的、玩小的、玩開心的，別碰黑網。' },
+  { q: '怎麼快速判斷一個世足賭博平台是不是「不出金」黑網？', a: '最快的方法：把平台網址丟進芭樂子的<a href="/casino-check/">娛樂城體檢</a>，3 秒幫你查網域年齡、比對 165 詐騙黑名單、看有沒有鄉民回報過「不出金」。再搭配這篇講的 5 大套路自己過一遍——中 1 條就皺眉、中 2 條快跑。<strong>下注前花 3 分鐘查，比事後哭三個月划算太多。</strong>' },
+  { q: '我已經被「世足賭盤不出金」騙了，現在該怎麼辦？', a: '別自責，先止血：<strong>(1) 立刻停止再匯任何錢</strong>（尤其是對方說「再繳一筆就能解凍」的）；<strong>(2) 截圖保存所有對話、交易紀錄、平台畫面</strong>；<strong>(3) 撥打 165 反詐騙專線或 110 報案</strong>；(4) 如果是用銀行轉帳，盡快聯絡銀行看能否警示圈存。你也可以到芭樂子<a href="/casino-check/">娛樂城體檢頁</a>回報這個平台，幫後面的人避雷。' },
+];
+---
+
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url="https://game8la.com/articles/worldcup-2026-betting-scam/"
+  title="賭世足當心「不出金」！2026 世界盃博弈詐騙 5 大套路｜芭樂子反詐"
+  description="2026 世足開踢，賭博詐騙也旺季。芭樂子拆解世足賭盤「不出金」黑網的 5 大套路：體驗金流水黑洞、穩贏報牌殺豬盤、贏太多凍結帳號、出金前繳保證金、人頭帳戶入金。附話術測驗＋一鍵體檢工具。"
+  image="https://game8la.com/images/articles/worldcup-betting-scam-cover.webp"
+  datePublished="2026-06-08"
+  dateModified="2026-06-08"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '賭世足不出金詐騙', url: 'https://game8la.com/articles/worldcup-2026-betting-scam/' },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="賭世足當心「不出金」！2026 世界盃博弈詐騙 5 大套路 - GAME8LA" description="世足開踢、詐騙也旺季。芭樂子拆解世足賭盤『不出金』黑網 5 大套路：體驗金流水黑洞、穩贏報牌殺豬盤、贏太多凍結帳號、出金前繳保證金、人頭帳戶入金。附話術測驗＋娛樂城體檢，下注前先查再說。">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 賭世足不出金詐騙</div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 返回芭樂攻略</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a472a,#7a1020,#f5b800)"></div>
+
+    <article class="article-content">
+      <h1>賭世足當心「不出金」！<em>2026 世界盃博弈詐騙 5 大套路，芭樂子帶你一個一個拆</em></h1>
+
+      <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+        <Icon name="clock" /> 發佈日：2026-06-08 ｜
+        <Icon name="user-pen" /> 作者：芭樂子 ｜
+        <Icon name="book-open" /> 預估閱讀 11 分鐘 ｜
+        <span style="color:#f5b800;font-weight:700">🛡️ 世足反詐特輯</span>
+      </div>
+
+      <figure>
+        <img src="/images/articles/worldcup-betting-scam-cover.webp" srcset="/images/articles/worldcup-betting-scam-cover-768w.webp 768w, /images/articles/worldcup-betting-scam-cover.webp 1200w" sizes="(max-width: 820px) 100vw, 820px" alt="芭樂子在足球場邊舉牌警告：賭世足小心不出金黑網詐騙" class="content-img" width="820" height="461" loading="eager" fetchpriority="high" />
+        <figcaption class="article-img-caption">世足開踢，黑網廣告也開踢。芭樂子先幫你吹哨。</figcaption>
+      </figure>
+
+      <p>8LA 大大好，我是芭樂子。世界盃 <strong>6/12 就要開踢</strong>了，鄉民的熱血我懂——但你發現了嗎？你的 LINE 群、IG 限動、抖音，是不是也開始冒出「<strong>世足冠軍我有內線，跟我穩賺</strong>」「<strong>註冊就送 888 世足體驗金</strong>」這種訊息？</p>
+
+      <p>粉微妙的是，這些訊息出現的時間，跟世足賽程<strong>準到不可思議</strong>。原因很簡單：<strong>大型賽事＝全民賭性最旺的時候＝黑網的收割季</strong>。每一屆世足，都是「不出金」境外賭博網站業績最好的時候，因為這時候最多人會衝動、會「賭一把試試看」。</p>
+
+      <p>芭樂子今天不是要教你怎麼賭（要賭請走<strong>台灣運彩</strong>這個唯一合法管道，後面會講），而是要把這些「<strong>讓你贏的時候爽、領的時候哭</strong>」的黑網套路，一個一個攤在陽光下。看完這篇，世足期間你至少能少掉一個被收割的機會。</p>
+
+      <div class="quick-tool-bar">
+        <span>⚡ 快速跳：</span>
+        <a href="#why">為什麼世足是詐騙旺季</a>
+        <a href="#tricks">不出金 5 大套路</a>
+        <a href="#quiz">話術測驗</a>
+        <a href="#check">一鍵體檢</a>
+        <a href="#legal">合法管道</a>
+      </div>
+
+      <!-- ═══════════════ 為什麼 ═══════════════ -->
+      <h2 id="why" style="margin-top:2.5rem">🌍 為什麼「世足」會是不出金黑網的旺季？</h2>
+
+      <p>不是芭樂子嚇你，這是有跡可循的。大型賽事期間，黑網詐騙會明顯變多，原因有三：</p>
+
+      <ul>
+        <li><strong>全民都在看 → 賭性被點燃：</strong>平常不賭的人，這時候也想「下一注助助興」，黑網要的就是這種一時衝動的新韭菜。</li>
+        <li><strong>「世足」是最好用的廣告餌：</strong>蹭一個全世界都在關注的關鍵字，發「世足穩贏」「世足內線」最容易騙到點擊。</li>
+        <li><strong>大家急著找盤口 → 病急亂投醫：</strong>台灣合法的運彩盤口有限，很多人想賭冷門盤、想要高賠率，就跑去搜境外網站——正中黑網下懷。</li>
+      </ul>
+
+      <p>所以世足期間，<strong>「不出金」不是少數倒楣鬼會遇到的事，而是黑網「設計好」要發生的結局</strong>。下面這 5 個套路，你只要認得，就很難被收割。</p>
+
+      <!-- ═══════════════ 5 套路 ═══════════════ -->
+      <h2 id="tricks" style="margin-top:3rem">🪤 世足賭盤「不出金」5 大經典套路</h2>
+
+      <div class="card" style="margin:1rem 0;border-left:4px solid #f5b800">
+        <h3>套路 1：「註冊送 888 世足體驗金」→ 流水黑洞</h3>
+        <p>聽起來佛心，其實是釣餌。體驗金一定綁<strong>超高流水（洗碼）倍數</strong>，常見 30～50 倍。送你 888、流水 40 倍，代表你要實際投注 <strong>3 萬多</strong>才有資格提款——玩到那個量，本金早被莊家優勢吃光。<br><span style="color:var(--guava-green)"><strong>芭樂子吐槽：</strong>天下沒有白吃的午餐，只有讓你以為免費的釣鉤。</span></p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-left:4px solid #f5b800">
+        <h3>套路 2：「我有冠軍內線，跟我下注穩賺」→ 殺豬盤帶單</h3>
+        <p>LINE 上一個「老師」或剛加你的「正妹」，揪你進群、報牌帶單，前幾把還真的讓你小賺（用假數據養你信心），等你加大本金 all in，平台就收網。這叫<strong>殺豬盤</strong>，世足期間特別猖獗。<br><span style="color:var(--guava-green)"><strong>芭樂子吐槽：</strong>「穩賺不賠」是宇宙最大紅旗。真有內線，人家自己悶聲發財，幹嘛揪你？</span></p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-left:4px solid #ef4444">
+        <h3>套路 3：「你贏太多，系統判定異常」→ 凍結帳號不讓領</h3>
+        <p>你終於贏了一筆想出金，平台突然說你「<strong>開外掛 / 對打套利 / 操作異常</strong>」，帳號凍結、獎金沒收。重點是——他只在你<strong>要領錢的時候</strong>才發現你「異常」。輸的時候怎麼都沒事？<br><span style="color:var(--guava-green)"><strong>芭樂子吐槽：</strong>有點鏘對吧？因為規則本來就是寫好「讓你領不出來」的。</span></p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-left:4px solid #ef4444">
+        <h3>套路 4：「出金前要先繳稅金 / 保證金 / 解凍金」→ 二次收割</h3>
+        <p>這是最毒的一招。你要出金，他說要先繳 20% 保證金、或一筆「解凍手續費」才能放款。你繳了，他再生一個理由叫你繳更多。<strong>只要是「出金前先叫你匯錢」，100% 是詐騙，沒有例外。</strong><br><span style="color:var(--guava-green)"><strong>芭樂子吐槽：</strong>正常的錢是「領出來」，不是「再貼錢進去才領得出來」，這國中數學都知道怪。</span></p>
+      </div>
+
+      <div class="card" style="margin:1rem 0;border-left:4px solid #ef4444">
+        <h3>套路 5：入金匯「個人帳戶 / USDT / 人頭戶」、客服只有 TG</h3>
+        <p>叫你把錢匯給「<strong>陳先生</strong>」「<strong>李小姐</strong>」的個人帳戶，或叫你買 USDT 轉過去——這代表它沒有合法第三方金流，那是<strong>人頭帳戶</strong>。一旦該帳戶被 165 列警示，你的銀行帳戶可能被連帶凍結，甚至被當成洗錢共犯。<br><span style="color:var(--guava-green)"><strong>芭樂子吐槽：</strong>正規金流不會叫你匯給「某個人」。客服只有 Telegram、問什麼都跳針「穩賺包贏」的，請直接左轉離開。</span></p>
+      </div>
+
+      <figure>
+        <img src="/images/articles/worldcup-betting-scam-inline.webp" alt="芭樂子吹哨擋下寫著不出金的黑網足球，示意攔截世足賭博詐騙" class="content-img" width="820" height="461" loading="lazy" />
+        <figcaption class="article-img-caption">中 1 條皺眉、中 2 條快跑、中 3 條……R.I.P 你的錢包。</figcaption>
+      </figure>
+
+      <!-- ═══════════════ 互動測驗 ═══════════════ -->
+      <h2 id="quiz" style="margin-top:3rem">🎯 話術測驗：這句話，該信還是該逃？</h2>
+      <p>看完套路，來實戰一下。下面 8 個情境，你判斷「還算正常」還是「快逃，這是雷」——測測你的反詐雷達靈不靈。</p>
+
+      <div class="fq-quiz" id="fqQuiz">
+        <div class="fq-progress">
+          <span class="fq-prog-text" id="fqProg">第 1 / 8 題</span>
+          <div class="fq-track"><div class="fq-fill" id="fqFill" style="width:12.5%"></div></div>
+        </div>
+        <p class="fq-scenario" id="fqScenario">載入中…</p>
+        <div class="fq-btns" id="fqBtns">
+          <button type="button" class="fq-opt fq-okk" data-i="0">🟢 這還 OK</button>
+          <button type="button" class="fq-opt fq-flee" data-i="1">🔴 快逃！是雷</button>
+        </div>
+        <div class="fq-explain" id="fqExplain" hidden>
+          <div class="fq-badge" id="fqBadge"></div>
+          <p class="fq-exp-text" id="fqExpText"></p>
+          <button type="button" class="fq-next" id="fqNext">下一題 →</button>
+        </div>
+        <div class="fq-final" id="fqFinal" hidden>
+          <div class="fq-score" id="fqScore"></div>
+          <div class="fq-final-title" id="fqTitle"></div>
+          <div class="fq-final-msg" id="fqMsg"></div>
+          <button type="button" class="fq-replay" id="fqReplay">🔄 再測一次</button>
+        </div>
+      </div>
+
+      <!-- ═══════════════ 體檢 CTA ═══════════════ -->
+      <section class="casino-check-cta" id="check">
+        <div class="cta-icon">🛡️</div>
+        <h3>下注前，先把網址丟進來查 3 秒</h3>
+        <p>與其賭它會不會吐錢，不如<strong style="color:#f5b800">先查再說</strong>。把你看到的世足賭博平台網址丟進娛樂城體檢——自動查網域年齡、比對 165 詐騙黑名單、看有沒有鄉民回報過「不出金」。</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:0.3rem">查到災情會直接跳紅色警示；查不到也會提醒你「查不到 ≠ 安全」。順便能回報一筆，造福後面的鄉民。</p>
+        <a href="/casino-check/" class="cta-check-btn">🔎 前往娛樂城體檢 — 免費即時檢測</a>
+      </section>
+
+      <!-- ═══════════════ 打臉迷思 ═══════════════ -->
+      <h2 style="margin-top:3rem">🥊 芭樂子打臉時間：賭世足的 3 個致命迷思</h2>
+
+      <h3>迷思 1：「我跟到內線老師，世足穩賺不賠」</h3>
+      <p>沒有內線，只有劇本。所謂「老師帶單」前期讓你小賺，是用<strong>假帳戶、假數據</strong>養你的信心，目的就是等你 all in。真正的職業莊家連「穩賺」兩個字都不敢講，一個 LINE 上的陌生人憑什麼保證？<strong>聽到「穩賺」就該逃</strong>，這題沒有灰色地帶。</p>
+
+      <h3>迷思 2：「體驗金是免費的，輸了也不虧」</h3>
+      <p>體驗金從來不是讓你領的，是讓你<strong>開戶、入金、上癮</strong>的。它綁的流水高到你不可能洗完，玩到最後你會「為了把體驗金的彩金領出來」而真的儲值真錢進去——這才是它的目的。免費的最貴，粉微妙吧。</p>
+
+      <h3>迷思 3：「贏了一定領得到，不然平台不就倒了？」</h3>
+      <p>黑網本來就是<strong>賺一票就換殼跑路</strong>的商業模式，它根本不在乎「長期信譽」。它的劇本就是：讓你贏在帳面、卡你在出金、最後凍結跑路。它不怕倒，因為它換個網址明天又是一條好漢。延伸閱讀：<a href="/articles/domain-hopping-scam-truth/">娛樂城網址一直換？金蟬脫殼詐騙真相</a>。</p>
+
+      <!-- ═══════════════ 釣魚吐槽 ═══════════════ -->
+      <div class="wc-bait" id="wcBait">
+        <p class="wc-bait-lead">芭樂子知道…我講這麼多,你心裡大概還是在嘀咕:<br><strong>「道理我都懂啦,但到底哪裡可以賭世足？推薦一個嘛～」</strong></p>
+        <p class="wc-bait-lead">好啦,你贏了。想下注世足的娛樂城,芭樂子「推薦」你這個 👇</p>
+        <button type="button" class="wc-bait-btn" id="wcBaitBtn">🎰 世足專屬盤・註冊送 888・點我儲值下注</button>
+        <div class="wc-bait-reveal" id="wcBaitReveal" hidden>
+          <img src="/images/articles/worldcup-scam-gotcha.webp" alt="芭樂子一臉「我就知道你會手癢按下去」的無奈表情" width="320" height="320" loading="lazy" decoding="async">
+          <h3 id="wcBaitTitle">🤦‍♀️ 就跟你說有「不出金」詐騙網站,你還按？！</h3>
+          <p id="wcBaitMsg">看吧——如果這是真的黑網,你這一按,卡號、個資已經被它記走,接著就是讓你「贏在帳面、領的時候哭」。還好這只是芭樂子的假按鈕。<strong>衝動是魔鬼,先去查證再說啦！</strong></p>
+          <div class="wc-bait-cta">
+            <a href="/casino-check/" class="btn-primary">🛡️ 先查這網站是不是黑網</a>
+            <a href="#legal" class="btn-outline">✅ 想合法賭？看台灣運彩</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════ 合法管道 ═══════════════ -->
+      <h2 id="legal" style="margin-top:3rem">✅ 想賭世足，唯一不會「不出金」的合法管道</h2>
+
+      <div class="card" style="margin:1rem 0;border-left:4px solid #16a34a">
+        <p>在台灣，<strong>唯一合法的運動投注是「台灣運彩」（台灣運動彩券）</strong>。透過官方授權經銷商或台灣運彩官方 App 下注世足，出金、稅務都受法規保障，<strong>不會有「不出金」這種事</strong>。</p>
+        <p style="margin-top:0.6rem">除此之外的境外賭博網站、地下賭盤、LINE 私盤，<strong>在台灣都是違法的</strong>，而且一旦不出金，你<strong>求償無門</strong>（因為你也涉及違法投注）。芭樂子的立場很簡單：<strong>要玩就玩合法的、玩小的、玩開心的——把世足當娛樂，不要當提款機。</strong></p>
+      </div>
+
+      <p style="margin-top:1rem;padding:1rem;background:rgba(245,184,0,0.08);border-radius:10px"><strong>⚠️ 重要提醒：</strong>賭博有風險，請理性娛樂、量力而為。<strong>未滿 18 歲請勿參與任何博弈。</strong>如果你發現自己越賭越大、停不下來，請撥打衛福部安心專線 <a href="tel:1925">1925</a>。若已遇到詐騙，請撥 <a href="tel:165">165</a> 反詐騙專線或 110 報案。</p>
+
+      <ManifestoBox />
+
+      <p style="margin-top:2rem;padding:1rem;background:rgba(245,184,0,0.08);border-radius:10px;text-align:center;font-size:0.95rem"><strong>世足要來了，把這篇轉給你身邊喊著「賭一把」的朋友。</strong><br /><span style="color:var(--text-muted);font-size:0.85rem">你的一次提醒，可能擋下他一筆領不回來的錢。</span></p>
+
+      <!-- ═══════════════ FAQ ═══════════════ -->
+      <h2 style="margin-top:3rem">❓ 常見問題（FAQ）</h2>
+      {faqs.map(f => (
+        <details class="faq-item">
+          <summary class="faq-q">{f.q}</summary>
+          <div class="faq-a" set:html={f.a} />
+        </details>
+      ))}
+
+      <ShareButtons title="賭世足當心不出金！2026 世界盃博弈詐騙 5 大套路" url="https://game8la.com/articles/worldcup-2026-betting-scam/" />
+
+      <!-- ═══════════════ 延伸閱讀 ═══════════════ -->
+      <h3 style="margin-top:2.5rem">📚 延伸閱讀</h3>
+      <div class="related-links">
+        <a href="/casino-check/" class="rl-item">
+          <span class="rl-cat">免費工具</span>
+          <strong>娛樂城體檢 — 入金前 3 分鐘安全檢測</strong>
+          <span class="rl-desc">165 黑名單比對＋網域年齡＋鄉民不出金回報，一鍵查</span>
+        </a>
+        <a href="/articles/5-tips-spot-casino-scam/" class="rl-item">
+          <span class="rl-cat">防詐實戰</span>
+          <strong>5 招識破娛樂城詐騙套路</strong>
+          <span class="rl-desc">WHOIS＋流水陷阱＋支付安全完整拆解</span>
+        </a>
+        <a href="/articles/domain-hopping-scam-truth/" class="rl-item">
+          <span class="rl-cat">產業深度</span>
+          <strong>娛樂城網址一直換？金蟬脫殼詐騙真相</strong>
+          <span class="rl-desc">黑網換網址的 4 大暗黑原因＋3 秒判斷法</span>
+        </a>
+        <a href="/articles/worldcup-2026-schedule/" class="rl-item">
+          <span class="rl-cat">世足專題</span>
+          <strong>2026 世界盃完整賽程（台灣時間）</strong>
+          <span class="rl-desc">開幕、分組、淘汰賽日期一次看＋每日吐槽倒數</span>
+        </a>
+      </div>
+
+    </article>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var quiz = document.getElementById('fqQuiz');
+      if (!quiz) return;
+      // a: 0 = 還算正常, 1 = 快逃（詐騙）
+      var Q = [
+        { s:'有人 LINE 你「世足冠軍我有內線，跟我下注穩賺不賠」。', a:1, e:'「穩賺不賠」是宇宙最大紅旗。職業莊家都不敢保證穩賺，哪來的內線？這是要把你騙進殺豬盤。' },
+        { s:'某平台「註冊免儲值就送 888 世足體驗金，免費下注」。', a:1, e:'體驗金一定綁超高流水（常見 30～50 倍），玩到天荒地老也領不出來，純粹釣你開戶入金。' },
+        { s:'你用「台灣運彩」官方 App 投注世足讓分盤。', a:0, e:'台灣運彩是台灣唯一合法的運動投注管道，出金、稅務都受法規保障。要賭世足，這是唯一不會「不出金」的選項。' },
+        { s:'平台說你「贏太多被判定異常，要先繳 20% 保證金才能解凍出金」。', a:1, e:'出金前叫你「先繳錢」——不管名目是稅金、保證金、解凍金——100% 是詐騙，繳了還會有下一筆。' },
+        { s:'入金時客服叫你「匯到這個陳先生的個人帳戶」。', a:1, e:'正規金流不會叫你匯款給「某個人」。那是人頭帳戶，被 165 列警示時，你的帳戶會被連帶凍結，還可能被當洗錢共犯。' },
+        { s:'LINE 上一個剛加你的正妹，聊幾天後揪你一起「玩世足穩賺平台」。', a:1, e:'這是教科書級「殺豬盤」：先養感情再帶你進假平台，等你加碼就收網。世足期間特別多。' },
+        { s:'某境外網站賠率「比台灣運彩好超多」，冷門盤口也都能下。', a:1, e:'賠率好到不真實，就是吸你跳進黑網的餌。境外賭博網站在台灣不合法，出事求償無門。' },
+        { s:'下注前，你先把平台網址丟進「娛樂城體檢」查網域年齡＋165 比對。', a:0, e:'這就是芭樂子要你養成的習慣！3 秒先查再說，能擋掉一大半黑網。文章上面就有，順手查一下。' }
+      ];
+      var i = 0, score = 0, answered = false;
+      var elProg = document.getElementById('fqProg'), elFill = document.getElementById('fqFill'),
+          elScen = document.getElementById('fqScenario'), elBtns = document.getElementById('fqBtns'),
+          elExplain = document.getElementById('fqExplain'), elBadge = document.getElementById('fqBadge'),
+          elExpText = document.getElementById('fqExpText'), elFinal = document.getElementById('fqFinal');
+      var opts = elBtns.querySelectorAll('.fq-opt');
+      function show(){
+        answered = false;
+        elProg.textContent = '第 ' + (i + 1) + ' / ' + Q.length + ' 題';
+        elFill.style.width = ((i) / Q.length * 100) + '%';
+        elScen.textContent = Q[i].s;
+        elBtns.style.display = 'flex';
+        elExplain.hidden = true;
+        opts.forEach(function(b){ b.disabled = false; b.classList.remove('fq-correct','fq-wrong'); });
+      }
+      function answer(choice){
+        if (answered) return; answered = true;
+        var correct = Q[i].a;
+        if (choice === correct) score++;
+        opts.forEach(function(b){
+          var bi = parseInt(b.getAttribute('data-i'), 10);
+          b.disabled = true;
+          if (bi === correct) b.classList.add('fq-correct');
+          else if (bi === choice) b.classList.add('fq-wrong');
+        });
+        elBadge.textContent = (choice === correct) ? '✅ 答對了！' : '❌ 答錯了';
+        elBadge.className = 'fq-badge ' + (choice === correct ? 'ok' : 'no');
+        elExpText.innerHTML = '<b style="color:var(--guava-green)">芭樂子：</b>' + Q[i].e;
+        elFill.style.width = ((i + 1) / Q.length * 100) + '%';
+        elExplain.hidden = false;
+      }
+      function next(){
+        i++;
+        if (i >= Q.length) { finish(); return; }
+        show();
+      }
+      function finish(){
+        elBtns.style.display = 'none';
+        elExplain.hidden = true;
+        document.getElementById('fqScore').textContent = score + ' / ' + Q.length;
+        var t, m;
+        if (score >= 7) { t = '🛡️ 詐騙絕緣體！'; m = '黑網看到你大概會繞道走。把這份雷達分享出去，多救一個是一個。'; }
+        else if (score >= 5) { t = '👍 反詐意識不錯'; m = '大方向都抓得到，少數話術再熟一下就滿分。世足期間保持警覺。'; }
+        else if (score >= 3) { t = '😅 及格邊緣，要小心'; m = '這些套路你還沒記牢，回上面 5 大套路再過一遍，別在世足被收割。'; }
+        else { t = '🚨 危險！你是黑網眼中的肥羊'; m = '說真的，你很可能正是詐騙鎖定的對象。務必把上面 5 套路再看一次，下注前一定先去體檢。'; }
+        document.getElementById('fqTitle').textContent = t;
+        document.getElementById('fqMsg').textContent = m;
+        elFinal.hidden = false;
+      }
+      elBtns.addEventListener('click', function(e){
+        var b = e.target.closest('.fq-opt'); if (!b) return;
+        answer(parseInt(b.getAttribute('data-i'), 10));
+      });
+      document.getElementById('fqNext').addEventListener('click', next);
+      document.getElementById('fqReplay').addEventListener('click', function(){
+        i = 0; score = 0; elFinal.hidden = true; show();
+      });
+      show();
+    })();
+
+    // ── 釣魚吐槽假按鈕 ──
+    (function(){
+      var btn=document.getElementById('wcBaitBtn');
+      if(!btn) return;
+      var reveal=document.getElementById('wcBaitReveal'),
+          title=document.getElementById('wcBaitTitle'),
+          msg=document.getElementById('wcBaitMsg');
+      var label='🎰 世足專屬盤・註冊送 888・點我儲值下注';
+      btn.addEventListener('click',function(){
+        var n=1;
+        try{ n=parseInt(localStorage.getItem('wcBetBaitN')||'0',10)+1; localStorage.setItem('wcBetBaitN',String(n)); }catch(e){}
+        btn.textContent='連線中…幫你找賠率最甜的盤口…'; btn.disabled=true;
+        setTimeout(function(){
+          btn.textContent=label; btn.disabled=false;
+          if(n>=3){ title.textContent='😤 第 '+n+' 次了！你是不是真的不信邪'; msg.innerHTML='芭樂子認真說:真實世界你手癢按到第三次,大概已經在某個黑網填好卡號了。求你,<strong>先去娛樂城體檢、要玩就玩台灣運彩</strong>。'; }
+          else if(n===2){ title.textContent='😮‍💨 又按？！是不是不信邪'; msg.innerHTML='第二次囉…還好還是假的。真的那種,你大概已經把錢匯給「陳先生」了。乖,<strong>先查證再說啦</strong>。'; }
+          reveal.hidden=false;
+          reveal.scrollIntoView({behavior:'smooth',block:'center'});
+        },800);
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+  .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 { font-size: clamp(1.55rem, 6vw, 2.1rem); line-height: 1.35; }
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.6em; color: var(--text-muted); margin-top: 0.4rem; font-weight: 400; line-height: 1.5; }
+  .article-content h2 { font-size: clamp(1.3rem, 4.8vw, 1.55rem); }
+  .article-content h3 { font-size: 1.15rem; }
+  .article-content p { font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.9; margin: 1.1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.6rem; line-height: 1.85; font-size: clamp(16px, 4.2vw, 17.5px); }
+
+  .article-img-caption { text-align: center; font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin: 0.5rem auto 1.2rem; max-width: 680px; }
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0; border: 1px solid var(--border); }
+  figure { margin: 1.5rem 0; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.15rem; margin: 0 0 0.5rem; }
+  .card p { font-size: 1rem; line-height: 1.85; margin: 0.4rem 0; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1.5rem 0; font-size: 0.95rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 5px 12px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+  .faq-a a { color: var(--guava-green); }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.78rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 1.02rem; }
+  .rl-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  /* ── 話術測驗 ── */
+  .fq-quiz { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem 1.3rem; margin: 1.2rem 0 1.8rem; }
+  .fq-prog-text { display: block; text-align: center; font-size: 1rem; color: var(--text-secondary); font-weight: 700; margin-bottom: 0.5rem; }
+  .fq-track { height: 7px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+  .fq-fill { height: 100%; background: var(--guava-green); border-radius: 4px; transition: width 0.4s ease; }
+  .fq-scenario { text-align: center; font-size: 1.12rem; font-weight: 700; color: #eee; line-height: 1.7; margin: 1.2rem 0; min-height: 3.4em; display: flex; align-items: center; justify-content: center; }
+  .fq-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .fq-opt { font-size: 1.1rem; font-weight: 800; padding: 14px 26px; border-radius: 12px; border: 2px solid transparent; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s; color: #fff; }
+  .fq-opt:hover { transform: translateY(-2px); }
+  .fq-okk { background: linear-gradient(135deg,#16a34a,#22c55e); }
+  .fq-flee { background: linear-gradient(135deg,#dc2626,#ef4444); }
+  .fq-opt:disabled { cursor: default; }
+  .fq-opt.fq-correct { box-shadow: 0 0 22px rgba(34,197,94,0.7); animation: fqPop 0.4s ease; }
+  .fq-opt.fq-wrong { opacity: 0.45; animation: fqShake 0.5s ease; }
+  @keyframes fqPop { 0% { transform: scale(1.12); } 100% { transform: scale(1); } }
+  @keyframes fqShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+  .fq-explain { margin-top: 1.2rem; animation: fqFade 0.35s ease-out; }
+  @keyframes fqFade { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .fq-badge { text-align: center; font-size: 1.3rem; font-weight: 900; margin-bottom: 0.5rem; }
+  .fq-badge.ok { color: #22c55e; } .fq-badge.no { color: #ef4444; }
+  .fq-exp-text { background: rgba(57,255,20,0.05); border-left: 3px solid var(--guava-green); border-radius: 0 10px 10px 0; padding: 13px 17px; font-size: 1.02rem; line-height: 1.8; color: #ddd; margin-bottom: 1rem; }
+  .fq-next, .fq-replay { display: block; margin: 0 auto; cursor: pointer; }
+  .fq-next { background: transparent; border: 1.5px solid #555; color: #ccc; font-size: 1.02rem; padding: 10px 34px; border-radius: 10px; transition: border-color 0.2s, color 0.2s; }
+  .fq-next:hover { border-color: var(--guava-green); color: #fff; }
+  .fq-final { text-align: center; animation: fqFade 0.5s ease-out; }
+  .fq-score { font-size: 3rem; font-weight: 900; color: var(--guava-green); }
+  .fq-final-title { font-size: 1.35rem; font-weight: 800; color: #f5b800; margin: 0.3rem 0 0.5rem; }
+  .fq-final-msg { font-size: 1rem; color: #bbb; line-height: 1.7; margin-bottom: 1.2rem; }
+  .fq-replay { background: linear-gradient(135deg,#b8860b,#d4a056); border: none; color: #1a1a1a; font-size: 1.1rem; font-weight: 800; padding: 13px 38px; border-radius: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+  .fq-replay:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(184,134,11,0.4); }
+
+  /* ── 釣魚吐槽假按鈕 ── */
+  .wc-bait { background: linear-gradient(135deg, rgba(244,67,54,.12), rgba(30,30,30,.55)); border: 1px dashed rgba(244,67,54,.55); border-radius: 16px; padding: 1.6rem 1.3rem; margin: 2.2rem 0; text-align: center; }
+  .wc-bait-lead { margin: .4rem 0; color: var(--text-secondary); line-height: 1.75; }
+  .wc-bait-btn { display: inline-block; margin: 1rem auto 0; padding: 1rem 1.5rem; font-size: 1.12rem; font-weight: 900; color: #fff; background: linear-gradient(135deg, #ff1f1f, #c00000); border: none; border-radius: 12px; cursor: pointer; animation: wcPulse 1.6s infinite; max-width: 100%; }
+  .wc-bait-btn:hover { filter: brightness(1.12); }
+  .wc-bait-btn:disabled { opacity: .85; cursor: progress; animation: none; }
+  @keyframes wcPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,31,31,.5); } 50% { box-shadow: 0 0 0 12px rgba(255,31,31,0); } }
+  .wc-bait-reveal { margin-top: 1.5rem; animation: wcShake .5s; }
+  .wc-bait-reveal img { width: 200px; max-width: 62%; height: auto; border-radius: 50%; border: 3px solid var(--guava-green); box-shadow: 0 0 24px rgba(57,255,20,.25); }
+  .wc-bait-reveal h3 { color: var(--guava-pink, #ff4fa3); margin: .9rem 0 .5rem; font-size: 1.3rem; }
+  .wc-bait-reveal p { color: var(--text-secondary); line-height: 1.75; max-width: 560px; margin: 0 auto 1.1rem; }
+  .wc-bait-cta { display: flex; gap: .8rem; flex-wrap: wrap; justify-content: center; }
+  @keyframes wcShake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  @media (prefers-reduced-motion: reduce) { .wc-bait-btn { animation: none; } .wc-bait-reveal { animation: none; } }
+
+  /* ── 體檢 CTA ── */
+  .casino-check-cta { text-align: center; background: linear-gradient(135deg, rgba(245,184,0,0.1), rgba(245,184,0,0.02)); border: 1px solid rgba(245,184,0,0.35); border-radius: 16px; padding: 2rem 1.6rem; margin: 2rem 0; }
+  .casino-check-cta .cta-icon { font-size: 2.6rem; margin-bottom: 0.5rem; }
+  .casino-check-cta h3 { margin: 0 0 0.8rem; font-size: 1.3rem; color: var(--text-primary); }
+  .casino-check-cta p { color: var(--text-secondary); line-height: 1.8; max-width: 540px; margin: 0.4rem auto 0; }
+  .cta-check-btn { display: inline-block; margin-top: 1.2rem; padding: 0.95rem 2rem; background: linear-gradient(135deg, #f5b800, #e09900); border-radius: 12px; color: #000; font-weight: 800; font-size: 1.05rem; text-decoration: none; transition: all 0.2s; }
+  .cta-check-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,184,0,0.35); }
+
+  /* ── 手機版 40+ 友善 RWD ── */
+  @media (max-width: 640px) {
+    .article-content p { font-size: 1.05rem; line-height: 2; }
+    .article-content h2 { font-size: 1.35rem; }
+    .article-content h3 { font-size: 1.12rem; }
+    .article-content li { font-size: 1.05rem; line-height: 2; }
+    .card { padding: 1.2rem; }
+    .card p { font-size: 1.02rem !important; line-height: 2 !important; }
+    .fq-scenario { font-size: 1.05rem; }
+    .fq-opt { font-size: 1rem; padding: 13px 20px; width: 100%; }
+    .fq-btns { flex-direction: column; }
+    .faq-q { font-size: 1.05rem; }
+    .faq-a { font-size: 1rem; line-height: 2; }
+    .casino-check-cta { padding: 1.5rem 1.2rem; }
+    .casino-check-cta h3 { font-size: 1.2rem; }
+    .cta-check-btn { font-size: 1.05rem; padding: 0.85rem 1.5rem; width: 100%; }
+    .related-links { grid-template-columns: 1fr; }
+  }
+</style>

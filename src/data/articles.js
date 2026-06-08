@@ -15,6 +15,20 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: 'worldcup-2026-betting-scam',
+    title: '賭世足當心「不出金」！2026 世界盃博弈詐騙 5 大套路｜芭樂子反詐',
+    excerpt: '2026 世足開踢、賭博詐騙也旺季。芭樂子拆解世足賭盤「不出金」黑網 5 大套路：體驗金流水黑洞、穩贏報牌殺豬盤、贏太多凍結帳號、出金前繳保證金、人頭帳戶入金。附「該信還是快逃」話術測驗＋一鍵娛樂城體檢，下注前先查再說。',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-08',
+    views: 1,
+    tags: ['最新', '精選', '反詐'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#1a472a,#7a1020,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-worldcup-betting-scam.webp'
+  },
+  {
     slug: 'worldcup-2026-knockout-bracket',
     title: '2026 世足淘汰賽對戰表｜32強到決賽賽程、台灣時間一次看',
     excerpt: '2026 世界盃淘汰賽對戰表與賽程（台灣時間）：48 隊新制從 32 強打起，16強→8強→4強→決賽各階段日期、晉級規則、季軍戰一次看。小組賽結束後更新真實對戰組合，先收藏。',
