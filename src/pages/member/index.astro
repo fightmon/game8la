@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  currentPage="member"
+  title="8LA 會員中心｜你的眼光點、今日輸贏、神準戰績 - GAME8LA"
+  description="GAME8LA 會員中心：查看你的眼光點、今日遊戲輸贏、累計神準戰績。加入送 1000 點、每天免費補滿，玩世足預測等遊戲。純娛樂、無真實輸贏。"
+>
+  <div class="container">
+    <div class="page-hero">
+      <div class="m-badge">🪙 天天免費 1,000 點 · 無真實輸贏</div>
+      <h1>🎮 8LA 會員中心</h1>
+      <p class="hero-sub">你的眼光點、今日輸贏、神準戰績,一頁掌握</p>
+    </div>
+
+    <!-- 未登入 -->
+    <div id="mGuest" class="m-card" style="display:none">
+      <h2>加入會員,<span class="hl">天天免費送你 1,000 點</span></h2>
+      <p>用 Google 一鍵登入,馬上拿 1,000 眼光點,玩世足預測等遊戲。每天登入再補滿,輸光別怕。</p>
+      <div class="m-perks">
+        <div class="perk"><span>🎁</span> 加入即送 1,000 點</div>
+        <div class="perk"><span>🔄</span> 每天免費補滿</div>
+        <div class="perk"><span>🏆</span> 排行榜比準度</div>
+      </div>
+      <div id="g_id_onload" data-client_id="909536904489-3pucakf02q0je3mg727a79eoj4smieqa.apps.googleusercontent.com" data-callback="onGoogleLogin" data-auto_prompt="false"></div>
+      <div class="g_id_signin" data-type="standard" data-size="large" data-theme="filled_blue" data-text="signin_with" data-shape="pill" data-locale="zh_TW"></div>
+      <p class="m-mini">登入即同意作為會員,我們只取得你的 Google 名稱與信箱,不會發文或亂寄信。</p>
+    </div>
+
+    <!-- 已登入：後台 -->
+    <div id="mDash" style="display:none">
+      <div class="m-card">
+        <div class="m-top">
+          <div class="m-hi">歡迎回來,<strong id="mName">玩家</strong> 👋</div>
+          <button id="mLogout" class="m-logout">登出</button>
+        </div>
+        <div class="m-walletrow">
+          <div class="m-wallet">
+            <span class="m-wl-label">眼光點餘額</span>
+            <span class="m-wl-points">🪙 <span id="mPoints">0</span></span>
+          </div>
+          <div class="m-today" id="mToday"></div>
+        </div>
+        <div id="mStats" class="m-stats"></div>
+      </div>
+
+      <h2 class="m-sec">🎮 我的遊戲</h2>
+      <div class="m-games">
+        <a href="/predict/" class="m-game live">
+          <span class="m-game-ico">⚽</span>
+          <div><strong>世足神準預測</strong><small>猜單場、猜冠軍,比眼光</small></div>
+          <span class="m-game-tag">開放中</span>
+        </a>
+        <div class="m-game soon"><span class="m-game-ico">🀄</span><div><strong>麻將</strong><small>即將推出</small></div><span class="m-game-tag soon">敬請期待</span></div>
+        <div class="m-game soon"><span class="m-game-ico">🃏</span><div><strong>大老二</strong><small>即將推出</small></div><span class="m-game-tag soon">敬請期待</span></div>
+        <div class="m-game soon"><span class="m-game-ico">🎴</span><div><strong>百家樂</strong><small>即將推出</small></div><span class="m-game-tag soon">敬請期待</span></div>
+      </div>
+
+      <h2 class="m-sec">🏆 神準排行榜</h2>
+      <div id="mLb" class="lb-list"><p class="muted">載入中…</p></div>
+    </div>
+
+    <div id="mLoading" class="m-card m-loading">載入中…</div>
+  </div>
+
+  <script is:inline src="https://accounts.google.com/gsi/client" async></script>
+  <script is:inline>
+    function showState(s) {
+      document.getElementById('mLoading').style.display = s === 'loading' ? '' : 'none';
+      document.getElementById('mGuest').style.display = s === 'guest' ? '' : 'none';
+      document.getElementById('mDash').style.display = s === 'dash' ? '' : 'none';
+    }
+    window.onGoogleLogin = function (resp) {
+      showState('loading');
+      fetch('/api/auth/google', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ credential: resp.credential }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { if (j.ok && j.member) loadDash(); else { alert('登入失敗：' + (j.detail || j.error || '未知')); showState('guest'); } })
+        .catch(function (e) { alert('登入錯誤：' + e); showState('guest'); });
+    };
+    document.getElementById('mLogout').addEventListener('click', function () {
+      fetch('/api/auth/logout', { method: 'POST' }).then(function () { location.reload(); });
+    });
+
+    function loadDash() {
+      fetch('/api/dashboard').then(function (r) { return r.json(); }).then(function (j) {
+        if (!j.member) { showState('guest'); return; }
+        document.getElementById('mName').textContent = j.member.nickname || '玩家';
+        document.getElementById('mPoints').textContent = (j.points || 0).toLocaleString();
+        var tn = j.todayNet || 0;
+        var tcls = tn > 0 ? 'pos' : tn < 0 ? 'neg' : '';
+        document.getElementById('mToday').innerHTML = '<span class="m-td-label">今日輸贏</span><span class="m-td-val ' + tcls + '">' + (tn > 0 ? '+' : '') + tn.toLocaleString() + '</span>';
+        var s = j.stats;
+        var st = document.getElementById('mStats');
+        if (!s || s.settled === 0) {
+          st.innerHTML = '<div class="ds-msg">📊 還沒結算的預測。等開賽結算後,這裡會顯示你的命中率與淨點數——芭樂子會跟你說你準不準。</div>';
+        } else {
+          var netCls = s.net >= 0 ? 'pos' : 'neg';
+          var punch = s.net < 0
+            ? '芭樂子：命中率 ' + s.accuracy + '% 不差,但淨點數 <b>' + s.net + '</b>——這就是抽水,<b>再準長期照樣輸</b>。'
+            : '芭樂子：目前小贏,但玩久一點,抽水會把你磨回來。';
+          st.innerHTML = '<div class="ds-grid">' +
+            '<div class="ds-cell"><span class="ds-v">' + s.settled + '</span><span class="ds-l">已結算</span></div>' +
+            '<div class="ds-cell"><span class="ds-v">' + (s.accuracy != null ? s.accuracy + '%' : '—') + '</span><span class="ds-l">命中率</span></div>' +
+            '<div class="ds-cell"><span class="ds-v ' + netCls + '">' + (s.net >= 0 ? '+' : '') + s.net + '</span><span class="ds-l">累計淨點數</span></div>' +
+            '</div><div class="ds-punch">' + punch + '</div>';
+        }
+        showState('dash');
+        loadLb();
+      }).catch(function () { showState('guest'); });
+    }
+    function loadLb() {
+      fetch('/api/leaderboard').then(function (r) { return r.json(); }).then(function (j) {
+        var el = document.getElementById('mLb');
+        if (!j.leaderboard || !j.leaderboard.length) { el.innerHTML = '<p class="muted">還沒有人上榜。</p>'; return; }
+        el.innerHTML = j.leaderboard.map(function (r) {
+          var medal = r.rank === 1 ? '🥇' : r.rank === 2 ? '🥈' : r.rank === 3 ? '🥉' : '#' + r.rank;
+          return '<div class="lb-row"><span class="lb-rank">' + medal + '</span><span class="lb-name">' + r.nickname + '</span><span class="lb-pts">🪙 ' + (r.points || 0).toLocaleString() + '</span></div>';
+        }).join('');
+      });
+    }
+
+    fetch('/api/me').then(function (r) { return r.json(); }).then(function (j) {
+      if (j.member) loadDash(); else showState('guest');
+    }).catch(function () { showState('guest'); });
+  </script>
+
+  <style is:global>
+    .page-hero { text-align: center; padding: 2rem 1rem 1rem; max-width: 720px; margin: 0 auto; }
+    .m-badge { display: inline-block; font-size: 0.82rem; font-weight: 700; color: #FFD700; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); border-radius: 20px; padding: 0.35rem 0.9rem; margin-bottom: 0.9rem; }
+    .page-hero h1 { font-size: clamp(1.7rem, 6vw, 2.3rem); font-weight: 900; margin: 0 0 0.5rem; background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-sub { font-size: 1.1rem; color: var(--text-secondary); font-weight: 700; margin: 0; }
+    .muted { color: var(--text-muted); }
+
+    .m-card { max-width: 640px; margin: 1.2rem auto; background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 1.6rem 1.5rem; }
+    .m-loading { text-align: center; color: var(--text-muted); }
+    .m-card h2 { font-size: 1.35rem; margin: 0 0 0.7rem; }
+    .m-card h2 .hl { background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .m-card > p { color: var(--text-secondary); line-height: 1.8; margin: 0; }
+    .m-perks { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.2rem 0; }
+    .perk { flex: 1; min-width: 130px; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.8rem; }
+    .perk span { font-size: 1.2rem; }
+    .g_id_signin { margin: 0.4rem 0 0.7rem; display: flex; justify-content: center; }
+    .m-mini { font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+
+    .m-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .m-hi { font-size: 1.15rem; }
+    .m-logout { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.9rem; cursor: pointer; font-size: 0.85rem; }
+    .m-logout:hover { border-color: #FFD700; color: #FFD700; }
+    .m-walletrow { display: flex; gap: 0.8rem; margin: 1.2rem 0; flex-wrap: wrap; }
+    .m-wallet { flex: 2; min-width: 180px; text-align: center; padding: 1.1rem; background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,136,0,0.04)); border: 1px solid rgba(255,215,0,0.25); border-radius: 14px; }
+    .m-wl-label { display: block; font-size: 0.82rem; color: var(--text-muted); }
+    .m-wl-points { display: block; font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.1; margin-top: 0.2rem; }
+    .m-today { flex: 1; min-width: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem; }
+    .m-td-label { font-size: 0.82rem; color: var(--text-muted); }
+    .m-td-val { font-size: 1.6rem; font-weight: 900; color: var(--text-primary); margin-top: 0.2rem; }
+    .m-td-val.pos { color: #22c55e; } .m-td-val.neg { color: #ef4444; }
+
+    .ds-msg { background: rgba(57,255,20,0.06); border-radius: 10px; padding: 0.9rem 1rem; color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; }
+    .ds-grid { display: flex; gap: 0.6rem; }
+    .ds-cell { flex: 1; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 0.4rem; }
+    .ds-v { display: block; font-size: 1.4rem; font-weight: 900; color: var(--text-primary); }
+    .ds-v.pos { color: #22c55e; } .ds-v.neg { color: #ef4444; }
+    .ds-l { display: block; font-size: 0.78rem; color: var(--text-muted); }
+    .ds-punch { margin-top: 0.8rem; padding: 0.8rem 1rem; background: rgba(245,184,0,0.08); border-radius: 10px; font-size: 0.92rem; line-height: 1.7; color: var(--text-secondary); }
+    .ds-punch b { color: #FFD700; }
+
+    .m-sec { max-width: 640px; margin: 2rem auto 0.6rem; font-size: 1.25rem; }
+    .m-games { max-width: 640px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .m-game { display: flex; align-items: center; gap: 0.8rem; padding: 1rem; border-radius: 14px; background: var(--bg-secondary); border: 1px solid var(--border); text-decoration: none; color: var(--text-primary); }
+    .m-game.live:hover { border-color: #FFD700; transform: translateY(-2px); transition: transform 0.15s; }
+    .m-game.soon { opacity: 0.5; }
+    .m-game-ico { font-size: 1.8rem; }
+    .m-game strong { display: block; }
+    .m-game small { color: var(--text-muted); font-size: 0.8rem; }
+    .m-game-tag { margin-left: auto; font-size: 0.72rem; font-weight: 700; color: #000; background: #FFD700; border-radius: 12px; padding: 0.2rem 0.6rem; }
+    .m-game-tag.soon { background: var(--border); color: var(--text-muted); }
+
+    .lb-list { max-width: 640px; margin: 0 auto; }
+    .lb-row { display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); }
+    .lb-rank { width: 2.2rem; font-weight: 800; }
+    .lb-name { flex: 1; }
+    .lb-pts { color: #FFD700; font-weight: 700; }
+
+    @media (max-width: 520px) {
+      .m-card { padding: 1.3rem 1.1rem; }
+      .perk { min-width: 100%; }
+      .m-games { grid-template-columns: 1fr; }
+      .m-wallet, .m-today { min-width: 100%; }
+    }
+  </style>
+</BaseLayout>

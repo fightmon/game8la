@@ -3,104 +3,46 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   currentPage="predict"
-  title="8LA 神準預測擂台｜世足預測比準度，用數據看穿賭盤 - GAME8LA"
-  description="免費世足預測遊戲：加入送 1000 點，每天登入再補滿。猜單場、猜冠軍，跟鄉民比眼光、衝排行榜。芭樂子用數據告訴你——再準的人，長期照樣被抽水磨到輸。純預測娛樂、無真實輸贏。"
+  title="世足神準預測｜猜單場、猜冠軍，比眼光衝排行榜 - GAME8LA"
+  description="免費世足預測遊戲：猜世足單場勝平負、猜冠軍，用眼光點押注，跟全站鄉民比準度、衝排行榜。加入送 1000 點、每天補滿。純預測娛樂、無真實輸贏。"
 >
   <div class="container">
     <div class="page-hero">
-      <div class="pred-badge">🪙 天天免費 1,000 點 · 無真實輸贏</div>
-      <h1>🎯 8LA 神準預測擂台</h1>
-      <p class="hero-sub">猜世足、比眼光、衝排行榜</p>
-      <p class="hero-desc">加入就送 <strong>1,000 點</strong>,每天免費補滿。猜世足單場、猜冠軍,跟全站鄉民比誰最神準!純預測娛樂、無真實輸贏。</p>
+      <a href="/member/" class="pp-back">← 回會員中心</a>
+      <h1>⚽ 世足神準預測</h1>
+      <p class="hero-sub">猜對賺眼光點 · 比準度衝排行榜</p>
     </div>
 
     <!-- 未登入 -->
-    <div id="predGuest" class="pred-card" style="display:none">
-      <h2>加入會員,<span class="hl">天天免費送你 1,000 點</span></h2>
-      <p>用 Google 一鍵登入,馬上拿 1,000 眼光點開始猜世足。<strong>每天登入再補滿 1,000</strong>——輸光了,明天照樣有得玩。</p>
-      <div class="pred-perks">
-        <div class="perk"><span>🎁</span> 加入即送 1,000 點</div>
-        <div class="perk"><span>🔄</span> 每天免費補滿</div>
-        <div class="perk"><span>🏆</span> 排行榜比準度</div>
-      </div>
-      <div id="g_id_onload" data-client_id="909536904489-3pucakf02q0je3mg727a79eoj4smieqa.apps.googleusercontent.com" data-callback="onGoogleLogin" data-auto_prompt="false"></div>
-      <div class="g_id_signin" data-type="standard" data-size="large" data-theme="filled_blue" data-text="signin_with" data-shape="pill" data-locale="zh_TW"></div>
-      <p class="pred-mini">登入即同意作為會員,我們只取得你的 Google 名稱與信箱,不會發文或亂寄信。</p>
+    <div id="ppGuest" class="pp-card" style="display:none">
+      <h2>先登入會員,才能開始預測 🎯</h2>
+      <p>加入即送 1,000 眼光點,每天免費補滿。到會員中心一鍵 Google 登入就能開始猜。</p>
+      <a href="/member/" class="pp-loginbtn">前往會員中心登入 →</a>
     </div>
 
-    <!-- 已登入：遊戲區 -->
-    <div id="predMember" style="display:none">
-      <div class="pred-card">
-        <div class="pm-top">
-          <div class="pm-hi">歡迎回來,<strong id="pmName">玩家</strong> 👋</div>
-          <button id="pmLogout" class="pm-logout">登出</button>
-        </div>
-        <div class="pm-wallet">
-          <span class="pm-wallet-label">你的眼光點</span>
-          <span class="pm-points">🪙 <span id="pmPoints">0</span></span>
-          <span class="pm-wallet-foot">每天登入補滿 1,000,輸光別怕</span>
-        </div>
-        <div id="pmStats" class="pm-stats"></div>
+    <!-- 已登入：遊戲 -->
+    <div id="ppGame" style="display:none">
+      <div class="pp-walletbar">
+        <span>🪙 眼光點 <strong id="ppPoints">0</strong></span>
+        <a href="/member/" class="pp-wallet-link">我的後台 →</a>
       </div>
-
-      <h2 class="sec-title">⚽ 預測賽事</h2>
       <div id="evList" class="ev-list"><p class="muted">載入賽事中…</p></div>
-
-      <h2 class="sec-title">🏆 神準排行榜</h2>
-      <div id="lbList" class="lb-list"><p class="muted">載入中…</p></div>
     </div>
 
-    <div id="predLoading" class="pred-card pred-loading">載入中…</div>
+    <div id="ppLoading" class="pp-card pp-loading">載入中…</div>
   </div>
 
-  <script is:inline src="https://accounts.google.com/gsi/client" async></script>
   <script is:inline>
     var VIG = 0.08;
     function showState(s) {
-      document.getElementById('predLoading').style.display = s === 'loading' ? '' : 'none';
-      document.getElementById('predGuest').style.display = s === 'guest' ? '' : 'none';
-      document.getElementById('predMember').style.display = s === 'member' ? '' : 'none';
+      document.getElementById('ppLoading').style.display = s === 'loading' ? '' : 'none';
+      document.getElementById('ppGuest').style.display = s === 'guest' ? '' : 'none';
+      document.getElementById('ppGame').style.display = s === 'game' ? '' : 'none';
     }
-    function setPoints(p) { document.getElementById('pmPoints').textContent = (p || 0).toLocaleString(); }
-    function renderMember(m) {
-      document.getElementById('pmName').textContent = m.nickname || '玩家';
-      setPoints(m.points);
-      showState('member');
-      loadStats(); loadEvents(); loadLeaderboard();
-    }
-    window.onGoogleLogin = function (resp) {
-      showState('loading');
-      fetch('/api/auth/google', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ credential: resp.credential }) })
-        .then(function (r) { return r.json(); })
-        .then(function (j) { if (j.ok && j.member) renderMember(j.member); else { alert('登入失敗：' + (j.detail || j.error || '未知')); showState('guest'); } })
-        .catch(function (e) { alert('登入錯誤：' + e); showState('guest'); });
-    };
-    document.getElementById('pmLogout').addEventListener('click', function () {
-      fetch('/api/auth/logout', { method: 'POST' }).then(function () { location.reload(); });
-    });
-
-    function loadStats() {
-      fetch('/api/my-stats').then(function (r) { return r.json(); }).then(function (j) {
-        var s = j.stats; var el = document.getElementById('pmStats'); if (!s) { el.innerHTML = ''; return; }
-        if (s.settled === 0) {
-          el.innerHTML = '<div class="ds-msg">📊 還沒有結算的預測。等開賽結算後,芭樂子會在這裡告訴你「你準不準、有沒有被抽水磨到輸」。</div>';
-          return;
-        }
-        var netCls = s.net >= 0 ? 'pos' : 'neg';
-        var punch = s.net < 0
-          ? '芭樂子：你命中率 ' + s.accuracy + '% 不差,但淨點數還是 <b>' + s.net + '</b>——這就是莊家抽水,<b>再準長期照樣輸</b>。看懂了嗎?'
-          : '芭樂子：目前小贏,但樣本還少。玩久一點,抽水會慢慢把你磨回來——這是數學。';
-        el.innerHTML =
-          '<div class="ds-grid">' +
-          '<div class="ds-cell"><span class="ds-v">' + s.settled + '</span><span class="ds-l">已結算</span></div>' +
-          '<div class="ds-cell"><span class="ds-v">' + (s.accuracy != null ? s.accuracy + '%' : '—') + '</span><span class="ds-l">命中率</span></div>' +
-          '<div class="ds-cell"><span class="ds-v ' + netCls + '">' + (s.net >= 0 ? '+' : '') + s.net + '</span><span class="ds-l">預測淨點數</span></div>' +
-          '</div><div class="ds-punch">' + punch + '</div>';
-      });
-    }
+    function setPoints(p) { var el = document.getElementById('ppPoints'); if (el) el.textContent = (p || 0).toLocaleString(); }
 
     function fmtTime(iso) {
-      var d = new Date(iso); var mm = d.getMonth() + 1, dd = d.getDate(), hh = ('0' + d.getHours()).slice(-2), mi = ('0' + d.getMinutes()).slice(-2);
+      var d = new Date(iso), mm = d.getMonth() + 1, dd = d.getDate(), hh = ('0' + d.getHours()).slice(-2), mi = ('0' + d.getMinutes()).slice(-2);
       return mm + '/' + dd + ' ' + hh + ':' + mi;
     }
     function loadEvents() {
@@ -113,50 +55,45 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
     function renderEvent(e) {
       var optMap = {}; e.options.forEach(function (o) { optMap[o.key] = o; });
-      // 已結算
       if (e.status === 'settled') {
         var resLabel = optMap[e.result] ? optMap[e.result].label : e.result;
         var mine = e.myPrediction;
-        var mineHtml = mine
-          ? (mine.status === 'won' ? '<span class="ev-won">✅ 你猜中了,+' + mine.payout + ' 點</span>' : '<span class="ev-lost">❌ 沒中,−' + mine.stake + ' 點</span>')
-          : '<span class="muted">你沒押這場</span>';
+        var mineHtml = mine ? (mine.status === 'won' ? '<span class="ev-won">✅ 你猜中了,+' + mine.payout + ' 點</span>' : '<span class="ev-lost">❌ 沒中,−' + mine.stake + ' 點</span>') : '<span class="muted">你沒押這場</span>';
         return '<div class="ev-card settled"><div class="ev-title">' + e.title + '</div><div class="ev-res">結果：<b>' + resLabel + '</b>　' + mineHtml + '</div></div>';
       }
-      // 已預測
       if (e.myPrediction) {
         var mp = e.myPrediction, ol = optMap[mp.choice] ? optMap[mp.choice].label : mp.choice;
-        return '<div class="ev-card mine"><div class="ev-title">' + e.title + '</div><div class="ev-time">' + fmtTime(e.starts_at) + ' 開賽</div>' +
-          '<div class="ev-mybet">🎯 你押了 <b>' + mp.stake + '</b> 點在「<b>' + ol + '</b>」· 猜中可得 <b>' + mp.potential_payout + '</b> 點 · 等待結算</div></div>';
+        return '<div class="ev-card mine"><div class="ev-title">' + e.title + '</div><div class="ev-time">' + fmtTime(e.starts_at) + ' 開賽</div><div class="ev-mybet">🎯 你押了 <b>' + mp.stake + '</b> 點在「<b>' + ol + '</b>」· 猜中可得 <b>' + mp.potential_payout + '</b> 點 · 等待結算</div></div>';
       }
-      // 已鎖單但沒押
       if (e.locked) {
         return '<div class="ev-card locked"><div class="ev-title">' + e.title + '</div><div class="muted">⏰ 已鎖單(開賽了),這場你沒押到。</div></div>';
       }
-      // 可預測
       var opts = e.options.map(function (o) {
         return '<button class="ev-opt" data-ev="' + e.id + '" data-key="' + o.key + '" data-prob="' + o.prob + '">' + o.label + ' <small>' + Math.round(o.prob * 100) + '%</small></button>';
       }).join('');
-      return '<div class="ev-card" data-ev="' + e.id + '"><div class="ev-title">' + e.title + '</div><div class="ev-time">' + fmtTime(e.starts_at) + ' 截止</div>' +
-        '<div class="ev-opts">' + opts + '</div>' +
-        '<div class="ev-stake" id="stk' + e.id + '" hidden>' +
-        '<div class="ev-stake-row">押 <input type="number" class="ev-stake-input" id="stkin' + e.id + '" value="100" min="1"> 點 ' +
-        '<button class="ev-submit" data-ev="' + e.id + '">確認預測</button></div>' +
-        '<div class="ev-preview" id="prev' + e.id + '"></div></div></div>';
+      return '<div class="ev-card" data-ev="' + e.id + '"><div class="ev-title">' + e.title + '</div><div class="ev-time">' + fmtTime(e.starts_at) + ' 截止</div><div class="ev-opts">' + opts + '</div>' +
+        '<div class="ev-stake" id="stk' + e.id + '" hidden><div class="ev-stake-row">押 <input type="number" class="ev-stake-input" id="stkin' + e.id + '" value="100" min="1"> 點 <button class="ev-submit" data-ev="' + e.id + '">確認預測</button></div><div class="ev-preview" id="prev' + e.id + '"></div></div></div>';
     }
 
-    var pickState = {}; // evId -> {key, prob}
+    var pickState = {};
     function updatePreview(evId) {
       var p = pickState[evId]; if (!p) return;
       var stake = parseInt(document.getElementById('stkin' + evId).value, 10) || 0;
-      var odds = 1 / p.prob;
-      var payout = Math.max(stake, Math.round(stake * odds * (1 - VIG)));
-      document.getElementById('prev' + evId).innerHTML =
-        '猜中可得 <b>' + payout + '</b> 點　<span class="prev-meta">隱含勝率 ' + Math.round(p.prob * 100) + '% · 賠率 ' + odds.toFixed(2) + ' · <b>莊家抽水 ' + (VIG * 100) + '%</b></span>';
+      var odds = 1 / p.prob, payout = Math.max(stake, Math.round(stake * odds * (1 - VIG)));
+      document.getElementById('prev' + evId).innerHTML = '猜中可得 <b>' + payout + '</b> 點　<span class="prev-meta">隱含勝率 ' + Math.round(p.prob * 100) + '% · 賠率 ' + odds.toFixed(2) + ' · <b>莊家抽水 ' + (VIG * 100) + '%</b></span>';
+    }
+    function deselect(evId) {
+      delete pickState[evId];
+      var card = document.querySelector('.ev-card[data-ev="' + evId + '"]');
+      if (card) card.querySelectorAll('.ev-opt').forEach(function (b) { b.classList.remove('sel'); });
+      var stk = document.getElementById('stk' + evId); if (stk) stk.hidden = true;
     }
     document.getElementById('evList').addEventListener('click', function (ev) {
       var opt = ev.target.closest('.ev-opt');
       if (opt) {
         var evId = opt.getAttribute('data-ev');
+        // 再按一次同一隊 → 取消
+        if (opt.classList.contains('sel')) { deselect(evId); return; }
         pickState[evId] = { key: opt.getAttribute('data-key'), prob: parseFloat(opt.getAttribute('data-prob')) };
         var card = opt.closest('.ev-card');
         card.querySelectorAll('.ev-opt').forEach(function (b) { b.classList.remove('sel'); });
@@ -167,7 +104,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       }
       var sub = ev.target.closest('.ev-submit');
       if (sub) {
-        var id = sub.getAttribute('data-ev'); var p = pickState[id];
+        var id = sub.getAttribute('data-ev'), p = pickState[id];
         if (!p) { alert('先選一個結果'); return; }
         var stake = parseInt(document.getElementById('stkin' + id).value, 10) || 0;
         if (stake < 1) { alert('至少押 1 點'); return; }
@@ -175,74 +112,40 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         fetch('/api/predict', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ eventId: parseInt(id, 10), choice: p.key, stake: stake }) })
           .then(function (r) { return r.json(); })
           .then(function (j) {
-            if (j.ok) { setPoints(j.points); loadEvents(); loadStats(); }
+            if (j.ok) { setPoints(j.points); loadEvents(); }
             else { alert('預測失敗：' + ({ 'not-enough-points': '點數不足', 'locked': '已鎖單', 'already-predicted': '你已經押過這場了' }[j.error] || j.error)); sub.disabled = false; sub.textContent = '確認預測'; }
           }).catch(function (e) { alert('錯誤：' + e); sub.disabled = false; sub.textContent = '確認預測'; });
       }
     });
     document.getElementById('evList').addEventListener('input', function (ev) {
-      if (ev.target.classList.contains('ev-stake-input')) {
-        var id = ev.target.id.replace('stkin', ''); updatePreview(id);
-      }
+      if (ev.target.classList.contains('ev-stake-input')) updatePreview(ev.target.id.replace('stkin', ''));
     });
 
-    function loadLeaderboard() {
-      fetch('/api/leaderboard').then(function (r) { return r.json(); }).then(function (j) {
-        var el = document.getElementById('lbList');
-        if (!j.leaderboard || !j.leaderboard.length) { el.innerHTML = '<p class="muted">還沒有人上榜。</p>'; return; }
-        el.innerHTML = j.leaderboard.map(function (r) {
-          var medal = r.rank === 1 ? '🥇' : r.rank === 2 ? '🥈' : r.rank === 3 ? '🥉' : '#' + r.rank;
-          return '<div class="lb-row"><span class="lb-rank">' + medal + '</span><span class="lb-name">' + r.nickname + '</span><span class="lb-pts">🪙 ' + (r.points || 0).toLocaleString() + '</span></div>';
-        }).join('');
-      });
-    }
-
     fetch('/api/me').then(function (r) { return r.json(); }).then(function (j) {
-      if (j.member) renderMember(j.member); else showState('guest');
+      if (j.member) { showState('game'); loadEvents(); } else showState('guest');
     }).catch(function () { showState('guest'); });
   </script>
 
   <style is:global>
-    .page-hero { text-align: center; padding: 2rem 1rem 1.2rem; max-width: 720px; margin: 0 auto; }
-    .pred-badge { display: inline-block; font-size: 0.82rem; font-weight: 700; color: #FFD700; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); border-radius: 20px; padding: 0.35rem 0.9rem; margin-bottom: 0.9rem; }
-    .page-hero h1 { font-size: clamp(1.7rem, 6vw, 2.3rem); font-weight: 900; margin: 0 0 0.5rem; background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .hero-sub { font-size: 1.15rem; color: var(--text-secondary); font-weight: 700; margin: 0 0 0.5rem; }
-    .hero-desc { font-size: 0.95rem; color: var(--text-muted); margin: 0 auto; line-height: 1.7; max-width: 600px; }
-
-    .pred-card { max-width: 640px; margin: 1.2rem auto; background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 1.6rem 1.5rem; }
-    .pred-loading { text-align: center; color: var(--text-muted); }
-    .pred-card h2 { font-size: 1.35rem; margin: 0 0 0.7rem; line-height: 1.4; }
-    .pred-card h2 .hl { background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .pred-card > p { color: var(--text-secondary); line-height: 1.8; margin: 0; }
+    .page-hero { text-align: center; padding: 1.5rem 1rem 0.8rem; max-width: 720px; margin: 0 auto; position: relative; }
+    .pp-back { position: absolute; left: 1rem; top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); text-decoration: none; }
+    .pp-back:hover { color: #FFD700; }
+    .page-hero h1 { font-size: clamp(1.6rem, 6vw, 2.1rem); font-weight: 900; margin: 0 0 0.4rem; background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-sub { font-size: 1.05rem; color: var(--text-secondary); font-weight: 700; margin: 0; }
     .muted { color: var(--text-muted); }
 
-    .pred-perks { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.2rem 0; }
-    .perk { flex: 1; min-width: 130px; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.8rem; }
-    .perk span { font-size: 1.2rem; }
-    .g_id_signin { margin: 0.4rem 0 0.7rem; display: flex; justify-content: center; }
-    .pred-mini { font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+    .pp-card { max-width: 560px; margin: 1.2rem auto; background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 1.8rem 1.6rem; text-align: center; }
+    .pp-loading { color: var(--text-muted); }
+    .pp-card h2 { font-size: 1.3rem; margin: 0 0 0.6rem; }
+    .pp-card p { color: var(--text-secondary); line-height: 1.8; }
+    .pp-loginbtn { display: inline-block; margin-top: 1rem; padding: 0.8rem 1.8rem; border-radius: 12px; background: linear-gradient(135deg, #FFD700, #ff8800); color: #000; font-weight: 800; text-decoration: none; }
 
-    .pm-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .pm-hi { font-size: 1.15rem; }
-    .pm-logout { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.9rem; cursor: pointer; font-size: 0.85rem; }
-    .pm-logout:hover { border-color: #FFD700; color: #FFD700; }
-    .pm-wallet { text-align: center; margin: 1.3rem 0; padding: 1.2rem; background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,136,0,0.04)); border: 1px solid rgba(255,215,0,0.25); border-radius: 14px; }
-    .pm-wallet-label { display: block; font-size: 0.85rem; color: var(--text-muted); }
-    .pm-points { display: block; font-size: 2.4rem; font-weight: 900; background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 0.2rem 0; line-height: 1.1; }
-    .pm-wallet-foot { display: block; font-size: 0.8rem; color: var(--text-muted); }
+    .pp-walletbar { max-width: 640px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,136,0,0.04)); border: 1px solid rgba(255,215,0,0.25); border-radius: 12px; padding: 0.8rem 1.1rem; }
+    .pp-walletbar strong { color: #FFD700; font-size: 1.2rem; }
+    .pp-wallet-link { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; }
+    .pp-wallet-link:hover { color: #FFD700; }
 
-    /* 數據打臉 */
-    .ds-msg { background: rgba(57,255,20,0.06); border-radius: 10px; padding: 0.9rem 1rem; color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; }
-    .ds-grid { display: flex; gap: 0.6rem; }
-    .ds-cell { flex: 1; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 0.4rem; }
-    .ds-v { display: block; font-size: 1.4rem; font-weight: 900; color: var(--text-primary); }
-    .ds-v.pos { color: #22c55e; } .ds-v.neg { color: #ef4444; }
-    .ds-l { display: block; font-size: 0.78rem; color: var(--text-muted); }
-    .ds-punch { margin-top: 0.8rem; padding: 0.8rem 1rem; background: rgba(245,184,0,0.08); border-radius: 10px; font-size: 0.92rem; line-height: 1.7; color: var(--text-secondary); }
-    .ds-punch b { color: #FFD700; }
-
-    .sec-title { max-width: 640px; margin: 2rem auto 0.6rem; font-size: 1.25rem; }
-    .ev-list, .lb-list { max-width: 640px; margin: 0 auto; }
+    .ev-list { max-width: 640px; margin: 0 auto; }
     .ev-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; margin-bottom: 0.9rem; }
     .ev-card.mine { border-color: rgba(255,215,0,0.4); }
     .ev-card.settled { opacity: 0.85; }
@@ -267,15 +170,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .ev-won { color: #22c55e; font-weight: 700; }
     .ev-lost { color: #ef4444; font-weight: 700; }
 
-    .lb-row { display: flex; align-items: center; gap: 0.8rem; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); }
-    .lb-rank { width: 2.2rem; font-weight: 800; }
-    .lb-name { flex: 1; }
-    .lb-pts { color: #FFD700; font-weight: 700; }
-
     @media (max-width: 520px) {
-      .pred-card { padding: 1.3rem 1.1rem; }
-      .perk { min-width: 100%; }
-      .pm-points { font-size: 2.1rem; }
+      .pp-back { position: static; display: block; margin-bottom: 0.5rem; }
       .ev-opt { min-width: 70px; font-size: 0.88rem; }
     }
   </style>

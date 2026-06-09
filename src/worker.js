@@ -626,6 +626,25 @@ async function handleMyStats(request, env) {
   return jsonResp({ stats: { total: r.total || 0, settled, won, pending: r.pending || 0, accuracy: settled > 0 ? Math.round(won / settled * 100) : null, net: returned - settledStake, points: member.points } });
 }
 
+// GET /api/dashboard（會員後台：點數 + 今日輸贏 + 累計戰績）
+async function handleDashboard(request, env) {
+  const member = await currentMember(request, env);
+  if (!member) return jsonResp({ member: null });
+  const points = await refillIfNeeded(env, member);
+  const todayStartUtc = new Date(taipeiDate() + 'T00:00:00+08:00').toISOString();
+  const tn = await env.DB.prepare("SELECT COALESCE(SUM(delta),0) AS net FROM point_ledger WHERE member_id=?1 AND game NOT IN ('daily','signup') AND created_at >= ?2").bind(member.id, todayStartUtc).first();
+  const r = await env.DB.prepare(
+    "SELECT COUNT(*) AS total, SUM(CASE WHEN status!='pending' THEN 1 ELSE 0 END) AS settled, SUM(CASE WHEN status='won' THEN 1 ELSE 0 END) AS won, SUM(CASE WHEN status='pending' THEN 1 ELSE 0 END) AS pending, SUM(CASE WHEN status!='pending' THEN stake ELSE 0 END) AS settled_stake, SUM(payout) AS returned FROM predictions WHERE member_id=?1"
+  ).bind(member.id).first();
+  const settled = r.settled || 0, won = r.won || 0, settledStake = r.settled_stake || 0, returned = r.returned || 0;
+  return jsonResp({
+    member: { nickname: member.nickname || member.name },
+    points,
+    todayNet: tn.net || 0,
+    stats: { total: r.total || 0, settled, won, pending: r.pending || 0, accuracy: settled > 0 ? Math.round(won / settled * 100) : null, net: returned - settledStake },
+  });
+}
+
 // GET /api/leaderboard
 async function handleLeaderboard(request, env) {
   if (!env.DB) return jsonResp({ leaderboard: [] });
@@ -677,6 +696,7 @@ export default {
     if (p === '/api/events') return handleEvents(request, env);
     if (p === '/api/predict') return handlePredict(request, env);
     if (p === '/api/my-stats') return handleMyStats(request, env);
+    if (p === '/api/dashboard') return handleDashboard(request, env);
     if (p === '/api/leaderboard') return handleLeaderboard(request, env);
     if (p === '/api/admin/settle') return handleSettle(request, env);
     return env.ASSETS.fetch(request);
