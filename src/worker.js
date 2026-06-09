@@ -550,6 +550,118 @@ function handleLogout(request) {
   });
 }
 
+// ============================================================
+// 預測遊戲：賽事 / 押注 / 戰績 / 排行 / 結算
+// ============================================================
+const VIG = 0.08; // 莊家抽水 8%（埋進賠付，讓玩家長期被磨到輸）
+
+async function currentMember(request, env) {
+  const sess = await readSession(getCookie(request, 'g8_session'), env);
+  if (!sess) return null;
+  return await env.DB.prepare('SELECT * FROM members WHERE id=?1').bind(sess.mid).first();
+}
+
+// GET /api/events
+async function handleEvents(request, env) {
+  if (!env.DB) return jsonResp({ events: [] });
+  const member = await currentMember(request, env);
+  const { results: events } = await env.DB.prepare(
+    "SELECT id, type, title, options, starts_at, status, result FROM events ORDER BY (status='settled') ASC, starts_at ASC"
+  ).all();
+  const myPreds = {};
+  if (member) {
+    const { results } = await env.DB.prepare('SELECT event_id, choice, stake, potential_payout, status, payout FROM predictions WHERE member_id=?1').bind(member.id).all();
+    for (const p of results) myPreds[p.event_id] = p;
+  }
+  const now = Date.now();
+  const out = (events || []).map(e => ({
+    id: e.id, type: e.type, title: e.title,
+    options: JSON.parse(e.options),
+    starts_at: e.starts_at,
+    locked: e.status !== 'open' || new Date(e.starts_at).getTime() < now,
+    status: e.status, result: e.result,
+    myPrediction: myPreds[e.id] || null,
+  }));
+  return jsonResp({ events: out, points: member ? member.points : null });
+}
+
+// POST /api/predict { eventId, choice, stake }
+async function handlePredict(request, env) {
+  if (request.method !== 'POST') return jsonResp({ error: 'method' }, 405);
+  const member = await currentMember(request, env);
+  if (!member) return jsonResp({ error: 'not-logged-in' }, 401);
+  let b; try { b = await request.json(); } catch { return jsonResp({ error: 'bad-json' }, 400); }
+  const eventId = parseInt(b.eventId, 10);
+  const choice = String(b.choice || '');
+  const stake = parseInt(b.stake, 10);
+  if (!eventId || !choice || !(stake > 0)) return jsonResp({ error: 'bad-args' }, 400);
+  const ev = await env.DB.prepare('SELECT * FROM events WHERE id=?1').bind(eventId).first();
+  if (!ev) return jsonResp({ error: 'no-event' }, 404);
+  if (ev.status !== 'open' || new Date(ev.starts_at).getTime() < Date.now()) return jsonResp({ error: 'locked' }, 400);
+  const opt = JSON.parse(ev.options).find(o => o.key === choice);
+  if (!opt) return jsonResp({ error: 'bad-choice' }, 400);
+  const dup = await env.DB.prepare('SELECT id FROM predictions WHERE member_id=?1 AND event_id=?2').bind(member.id, eventId).first();
+  if (dup) return jsonResp({ error: 'already-predicted' }, 400);
+  const points = await refillIfNeeded(env, member);
+  if (stake > points) return jsonResp({ error: 'not-enough-points' }, 400);
+  const potential = Math.max(stake, Math.round(stake * (1 / opt.prob) * (1 - VIG)));
+  const np = points - stake;
+  const now = new Date().toISOString();
+  await env.DB.prepare('INSERT INTO predictions (member_id, event_id, choice, stake, potential_payout, created_at) VALUES (?1,?2,?3,?4,?5,?6)')
+    .bind(member.id, eventId, choice, stake, potential, now).run();
+  await env.DB.prepare('UPDATE members SET points=?1 WHERE id=?2').bind(np, member.id).run();
+  await env.DB.prepare('INSERT INTO point_ledger (member_id, delta, game, reason, balance_after, created_at) VALUES (?1,?2,?3,?4,?5,?6)')
+    .bind(member.id, -stake, 'prediction', '預測押注 #' + eventId, np, now).run();
+  return jsonResp({ ok: true, points: np, potential });
+}
+
+// GET /api/my-stats（數據打臉）
+async function handleMyStats(request, env) {
+  const member = await currentMember(request, env);
+  if (!member) return jsonResp({ stats: null });
+  const r = await env.DB.prepare(
+    "SELECT COUNT(*) AS total, SUM(CASE WHEN status!='pending' THEN 1 ELSE 0 END) AS settled, SUM(CASE WHEN status='won' THEN 1 ELSE 0 END) AS won, SUM(CASE WHEN status='pending' THEN 1 ELSE 0 END) AS pending, SUM(CASE WHEN status!='pending' THEN stake ELSE 0 END) AS settled_stake, SUM(payout) AS returned FROM predictions WHERE member_id=?1"
+  ).bind(member.id).first();
+  const settled = r.settled || 0, won = r.won || 0, settledStake = r.settled_stake || 0, returned = r.returned || 0;
+  return jsonResp({ stats: { total: r.total || 0, settled, won, pending: r.pending || 0, accuracy: settled > 0 ? Math.round(won / settled * 100) : null, net: returned - settledStake, points: member.points } });
+}
+
+// GET /api/leaderboard
+async function handleLeaderboard(request, env) {
+  if (!env.DB) return jsonResp({ leaderboard: [] });
+  const { results } = await env.DB.prepare('SELECT nickname, points FROM members ORDER BY points DESC, id ASC LIMIT 20').all();
+  return jsonResp({ leaderboard: (results || []).map((r, i) => ({ rank: i + 1, nickname: r.nickname, points: r.points })) });
+}
+
+// POST /api/admin/settle { eventId, result, key }
+async function handleSettle(request, env) {
+  if (request.method !== 'POST') return jsonResp({ error: 'method' }, 405);
+  let b; try { b = await request.json(); } catch { return jsonResp({ error: 'bad-json' }, 400); }
+  if (!env.ADMIN_KEY || b.key !== env.ADMIN_KEY) return jsonResp({ error: 'forbidden' }, 403);
+  const eventId = parseInt(b.eventId, 10), result = String(b.result || '');
+  if (!eventId || !result) return jsonResp({ error: 'bad-args' }, 400);
+  const ev = await env.DB.prepare('SELECT * FROM events WHERE id=?1').bind(eventId).first();
+  if (!ev) return jsonResp({ error: 'no-event' }, 404);
+  const { results: preds } = await env.DB.prepare("SELECT * FROM predictions WHERE event_id=?1 AND status='pending'").bind(eventId).all();
+  const now = new Date().toISOString();
+  let settled = 0, paid = 0;
+  for (const p of (preds || [])) {
+    if (p.choice === result) {
+      const m = await env.DB.prepare('SELECT points FROM members WHERE id=?1').bind(p.member_id).first();
+      const np = (m.points || 0) + p.potential_payout;
+      await env.DB.prepare("UPDATE predictions SET status='won', payout=?1 WHERE id=?2").bind(p.potential_payout, p.id).run();
+      await env.DB.prepare('UPDATE members SET points=?1 WHERE id=?2').bind(np, p.member_id).run();
+      await env.DB.prepare('INSERT INTO point_ledger (member_id, delta, game, reason, balance_after, created_at) VALUES (?1,?2,?3,?4,?5,?6)').bind(p.member_id, p.potential_payout, 'prediction', '預測中獎 #' + eventId, np, now).run();
+      paid++;
+    } else {
+      await env.DB.prepare("UPDATE predictions SET status='lost' WHERE id=?1").bind(p.id).run();
+    }
+    settled++;
+  }
+  await env.DB.prepare("UPDATE events SET status='settled', result=?1 WHERE id=?2").bind(result, eventId).run();
+  return jsonResp({ ok: true, settled, paid });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -562,6 +674,11 @@ export default {
     if (p === '/api/auth/google') return handleAuthGoogle(request, env);
     if (p === '/api/me') return handleMe(request, env);
     if (p === '/api/auth/logout') return handleLogout(request);
+    if (p === '/api/events') return handleEvents(request, env);
+    if (p === '/api/predict') return handlePredict(request, env);
+    if (p === '/api/my-stats') return handleMyStats(request, env);
+    if (p === '/api/leaderboard') return handleLeaderboard(request, env);
+    if (p === '/api/admin/settle') return handleSettle(request, env);
     return env.ASSETS.fetch(request);
   },
 };
