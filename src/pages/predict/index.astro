@@ -4,19 +4,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <BaseLayout
   currentPage="predict"
   title="8LA 神準預測擂台｜世足預測比準度，用數據看穿賭盤 - GAME8LA"
-  description="免費世足預測遊戲：加入送 1000 點，每天補滿。猜單場、猜冠軍，跟鄉民比眼光、衝排行榜。芭樂子用數據告訴你——再準的人，長期照樣被抽水磨到輸。純預測娛樂、無真實輸贏。"
+  description="免費世足預測遊戲：加入送 1000 點，每天登入再補滿。猜單場、猜冠軍，跟鄉民比眼光、衝排行榜。芭樂子用數據告訴你——再準的人，長期照樣被抽水磨到輸。純預測娛樂、無真實輸贏。"
 >
   <div class="container">
-    <div class="pred-hero">
+    <!-- ═══ Hero ═══ -->
+    <div class="page-hero">
+      <div class="pred-badge">🪙 天天免費 1,000 點 · 無真實輸贏</div>
       <h1>🎯 8LA 神準預測擂台</h1>
-      <p class="pred-sub">猜世足、比眼光、衝排行榜——而且芭樂子會用數據讓你親眼看到：<strong>為什麼長期一定輸</strong>。</p>
-      <p class="pred-note">🔞 純預測娛樂，點數不能換錢、無真實輸贏。加入送 1,000 點，每天登入補滿。</p>
+      <p class="hero-sub">猜世足、比眼光、衝排行榜</p>
+      <p class="hero-desc">而且芭樂子會用數據讓你親眼看到——<strong>為什麼賭博長期一定輸</strong>。純預測娛樂,點數不能換錢、無真實輸贏。</p>
     </div>
 
-    <!-- 未登入 -->
+    <!-- ═══ 未登入 ═══ -->
     <div id="predGuest" class="pred-card" style="display:none">
-      <h2>加入會員,免費送你 1,000 點開始猜</h2>
-      <p>用 Google 一鍵登入,馬上拿 1,000 眼光點,開始預測世足賽事。</p>
+      <h2>加入會員,<span class="hl">天天免費送你 1,000 點</span></h2>
+      <p>用 Google 一鍵登入,馬上拿 1,000 眼光點開始猜世足。<strong>每天登入再補滿 1,000</strong>——輸光了,明天照樣有得玩。</p>
+
+      <div class="pred-perks">
+        <div class="perk"><span>🎁</span> 加入即送 1,000 點</div>
+        <div class="perk"><span>🔄</span> 每天免費補滿</div>
+        <div class="perk"><span>🏆</span> 排行榜比準度</div>
+      </div>
+
       <div id="g_id_onload"
            data-client_id="909536904489-3pucakf02q0je3mg727a79eoj4smieqa.apps.googleusercontent.com"
            data-callback="onGoogleLogin"
@@ -25,21 +34,23 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p class="pred-mini">登入即同意作為會員,我們只取得你的 Google 名稱與信箱,不會發文或亂寄信。</p>
     </div>
 
-    <!-- 已登入 -->
+    <!-- ═══ 已登入 ═══ -->
     <div id="predMember" class="pred-card" style="display:none">
       <div class="pm-top">
-        <div>
-          <div class="pm-hi">歡迎回來,<strong id="pmName">玩家</strong> 👋</div>
-          <div class="pm-points">🪙 <span id="pmPoints">0</span> 眼光點</div>
-        </div>
+        <div class="pm-hi">歡迎回來,<strong id="pmName">玩家</strong> 👋</div>
         <button id="pmLogout" class="pm-logout">登出</button>
       </div>
+      <div class="pm-wallet">
+        <span class="pm-wallet-label">你的眼光點</span>
+        <span class="pm-points">🪙 <span id="pmPoints">0</span></span>
+        <span class="pm-wallet-foot">每天登入補滿 1,000,輸光別怕</span>
+      </div>
       <div class="pm-soon">
-        ⚽ <strong>賽事預測即將開放</strong>(世足 6/12 開踢)。登入系統先就緒,你的點數已經在帳上了。
+        ⚽ <strong>賽事預測即將開放</strong>(世足 6/12 開踢)。登入系統先就緒,你的點數已經在帳上了——開賽就能開始猜。
       </div>
     </div>
 
-    <div id="predLoading" class="pred-card" style="text-align:center;color:var(--text-muted)">載入中…</div>
+    <div id="predLoading" class="pred-card pred-loading">載入中…</div>
   </div>
 
   <script is:inline src="https://accounts.google.com/gsi/client" async></script>
@@ -64,27 +75,46 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     document.getElementById('pmLogout').addEventListener('click', function () {
       fetch('/api/auth/logout', { method: 'POST' }).then(function () { location.reload(); });
     });
-    // 進站先問 /api/me
     fetch('/api/me').then(function (r) { return r.json(); }).then(function (j) {
       if (j.member) renderMember(j.member); else showState('guest');
     }).catch(function () { showState('guest'); });
   </script>
 
   <style is:global>
-    .pred-hero { text-align: center; max-width: 720px; margin: 1.5rem auto 1rem; }
-    .pred-hero h1 { font-size: clamp(1.8rem, 6vw, 2.4rem); }
-    .pred-sub { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
-    .pred-note { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.6rem; }
-    .pred-card { max-width: 560px; margin: 1.2rem auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem 1.6rem; }
-    .pred-card h2 { font-size: 1.3rem; margin: 0 0 0.6rem; }
-    .pred-card > p { color: var(--text-secondary); line-height: 1.7; }
-    .g_id_signin { margin: 1.2rem 0 0.6rem; display: flex; justify-content: center; }
-    .pred-mini { font-size: 0.78rem; color: var(--text-muted); }
+    .page-hero { text-align: center; padding: 2rem 1rem 1.2rem; max-width: 720px; margin: 0 auto; }
+    .pred-badge { display: inline-block; font-size: 0.82rem; font-weight: 700; color: #FFD700; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); border-radius: 20px; padding: 0.35rem 0.9rem; margin-bottom: 0.9rem; }
+    .page-hero h1 { font-size: clamp(1.7rem, 6vw, 2.3rem); font-weight: 900; margin: 0 0 0.5rem; background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-sub { font-size: 1.15rem; color: var(--text-secondary); font-weight: 700; margin: 0 0 0.5rem; }
+    .hero-desc { font-size: 0.95rem; color: var(--text-muted); margin: 0 auto; line-height: 1.7; max-width: 600px; }
+
+    .pred-card { max-width: 560px; margin: 1.2rem auto; background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 1.8rem 1.6rem; }
+    .pred-loading { text-align: center; color: var(--text-muted); }
+    .pred-card h2 { font-size: 1.35rem; margin: 0 0 0.7rem; line-height: 1.4; }
+    .pred-card h2 .hl { background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .pred-card > p { color: var(--text-secondary); line-height: 1.8; margin: 0; }
+
+    .pred-perks { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.2rem 0; }
+    .perk { flex: 1; min-width: 130px; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 0.8rem; }
+    .perk span { font-size: 1.2rem; }
+
+    .g_id_signin { margin: 0.4rem 0 0.7rem; display: flex; justify-content: center; }
+    .pred-mini { font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+
     .pm-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .pm-hi { font-size: 1.1rem; }
-    .pm-points { font-size: 1.6rem; font-weight: 900; color: #f5b800; margin-top: 0.3rem; }
-    .pm-logout { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.9rem; cursor: pointer; font-size: 0.85rem; }
-    .pm-logout:hover { border-color: var(--guava-green); color: var(--guava-green); }
-    .pm-soon { margin-top: 1.2rem; padding: 1rem; background: rgba(57,255,20,0.06); border-radius: 10px; color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+    .pm-hi { font-size: 1.15rem; }
+    .pm-logout { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.9rem; cursor: pointer; font-size: 0.85rem; transition: border-color 0.15s, color 0.15s; }
+    .pm-logout:hover { border-color: #FFD700; color: #FFD700; }
+    .pm-wallet { text-align: center; margin: 1.3rem 0; padding: 1.3rem; background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,136,0,0.04)); border: 1px solid rgba(255,215,0,0.25); border-radius: 14px; }
+    .pm-wallet-label { display: block; font-size: 0.85rem; color: var(--text-muted); }
+    .pm-points { display: block; font-size: 2.6rem; font-weight: 900; background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 0.2rem 0; line-height: 1.1; }
+    .pm-wallet-foot { display: block; font-size: 0.8rem; color: var(--text-muted); }
+    .pm-soon { padding: 1rem; background: rgba(57,255,20,0.06); border-radius: 10px; color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+
+    @media (max-width: 520px) {
+      .pred-card { padding: 1.4rem 1.2rem; }
+      .pred-card h2 { font-size: 1.2rem; }
+      .perk { min-width: 100%; }
+      .pm-points { font-size: 2.2rem; }
+    }
   </style>
 </BaseLayout>
