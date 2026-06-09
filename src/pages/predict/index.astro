@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  currentPage="predict"
+  title="8LA 神準預測擂台｜世足預測比準度，用數據看穿賭盤 - GAME8LA"
+  description="免費世足預測遊戲：加入送 1000 點，每天補滿。猜單場、猜冠軍，跟鄉民比眼光、衝排行榜。芭樂子用數據告訴你——再準的人，長期照樣被抽水磨到輸。純預測娛樂、無真實輸贏。"
+>
+  <div class="container">
+    <div class="pred-hero">
+      <h1>🎯 8LA 神準預測擂台</h1>
+      <p class="pred-sub">猜世足、比眼光、衝排行榜——而且芭樂子會用數據讓你親眼看到：<strong>為什麼長期一定輸</strong>。</p>
+      <p class="pred-note">🔞 純預測娛樂，點數不能換錢、無真實輸贏。加入送 1,000 點，每天登入補滿。</p>
+    </div>
+
+    <!-- 未登入 -->
+    <div id="predGuest" class="pred-card" style="display:none">
+      <h2>加入會員,免費送你 1,000 點開始猜</h2>
+      <p>用 Google 一鍵登入,馬上拿 1,000 眼光點,開始預測世足賽事。</p>
+      <div id="g_id_onload"
+           data-client_id="909536904489-3pucakf02q0je3mg727a79eoj4smieqa.apps.googleusercontent.com"
+           data-callback="onGoogleLogin"
+           data-auto_prompt="false"></div>
+      <div class="g_id_signin" data-type="standard" data-size="large" data-theme="filled_blue" data-text="signin_with" data-shape="pill" data-locale="zh_TW"></div>
+      <p class="pred-mini">登入即同意作為會員,我們只取得你的 Google 名稱與信箱,不會發文或亂寄信。</p>
+    </div>
+
+    <!-- 已登入 -->
+    <div id="predMember" class="pred-card" style="display:none">
+      <div class="pm-top">
+        <div>
+          <div class="pm-hi">歡迎回來,<strong id="pmName">玩家</strong> 👋</div>
+          <div class="pm-points">🪙 <span id="pmPoints">0</span> 眼光點</div>
+        </div>
+        <button id="pmLogout" class="pm-logout">登出</button>
+      </div>
+      <div class="pm-soon">
+        ⚽ <strong>賽事預測即將開放</strong>(世足 6/12 開踢)。登入系統先就緒,你的點數已經在帳上了。
+      </div>
+    </div>
+
+    <div id="predLoading" class="pred-card" style="text-align:center;color:var(--text-muted)">載入中…</div>
+  </div>
+
+  <script is:inline src="https://accounts.google.com/gsi/client" async></script>
+  <script is:inline>
+    function showState(s) {
+      document.getElementById('predLoading').style.display = s === 'loading' ? '' : 'none';
+      document.getElementById('predGuest').style.display = s === 'guest' ? '' : 'none';
+      document.getElementById('predMember').style.display = s === 'member' ? '' : 'none';
+    }
+    function renderMember(m) {
+      document.getElementById('pmName').textContent = m.nickname || '玩家';
+      document.getElementById('pmPoints').textContent = (m.points || 0).toLocaleString();
+      showState('member');
+    }
+    window.onGoogleLogin = function (resp) {
+      showState('loading');
+      fetch('/api/auth/google', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ credential: resp.credential }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { if (j.ok && j.member) { renderMember(j.member); } else { alert('登入失敗：' + (j.detail || j.error || '未知')); showState('guest'); } })
+        .catch(function (e) { alert('登入錯誤：' + e); showState('guest'); });
+    };
+    document.getElementById('pmLogout').addEventListener('click', function () {
+      fetch('/api/auth/logout', { method: 'POST' }).then(function () { location.reload(); });
+    });
+    // 進站先問 /api/me
+    fetch('/api/me').then(function (r) { return r.json(); }).then(function (j) {
+      if (j.member) renderMember(j.member); else showState('guest');
+    }).catch(function () { showState('guest'); });
+  </script>
+
+  <style is:global>
+    .pred-hero { text-align: center; max-width: 720px; margin: 1.5rem auto 1rem; }
+    .pred-hero h1 { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+    .pred-sub { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
+    .pred-note { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.6rem; }
+    .pred-card { max-width: 560px; margin: 1.2rem auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem 1.6rem; }
+    .pred-card h2 { font-size: 1.3rem; margin: 0 0 0.6rem; }
+    .pred-card > p { color: var(--text-secondary); line-height: 1.7; }
+    .g_id_signin { margin: 1.2rem 0 0.6rem; display: flex; justify-content: center; }
+    .pred-mini { font-size: 0.78rem; color: var(--text-muted); }
+    .pm-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .pm-hi { font-size: 1.1rem; }
+    .pm-points { font-size: 1.6rem; font-weight: 900; color: #f5b800; margin-top: 0.3rem; }
+    .pm-logout { background: transparent; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.9rem; cursor: pointer; font-size: 0.85rem; }
+    .pm-logout:hover { border-color: var(--guava-green); color: var(--guava-green); }
+    .pm-soon { margin-top: 1.2rem; padding: 1rem; background: rgba(57,255,20,0.06); border-radius: 10px; color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+  </style>
+</BaseLayout>

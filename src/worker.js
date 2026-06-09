@@ -404,6 +404,152 @@ async function handleReportCount(request, env) {
   });
 }
 
+// ============================================================
+// 會員系統：Google 登入驗證 + Session + 每日點數
+// ============================================================
+const GOOGLE_CLIENT_ID = '909536904489-3pucakf02q0je3mg727a79eoj4smieqa.apps.googleusercontent.com';
+const DAILY_POINTS = 1000;
+
+function b64urlToBytes(s) {
+  s = s.replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4) s += '=';
+  const bin = atob(s);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+function bytesToB64url(bytes) {
+  let bin = '';
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+// — Google ID token 驗證（JWKS / RS256）—
+let _gKeys = null, _gKeysExp = 0;
+async function getGoogleKeys() {
+  if (_gKeys && Date.now() < _gKeysExp) return _gKeys;
+  const res = await fetch('https://www.googleapis.com/oauth2/v3/certs');
+  const jwks = await res.json();
+  _gKeys = {};
+  for (const k of jwks.keys) _gKeys[k.kid] = k;
+  _gKeysExp = Date.now() + 3600 * 1000;
+  return _gKeys;
+}
+async function verifyGoogleIdToken(idToken) {
+  const parts = String(idToken || '').split('.');
+  if (parts.length !== 3) throw new Error('bad-token');
+  const header = JSON.parse(new TextDecoder().decode(b64urlToBytes(parts[0])));
+  const payload = JSON.parse(new TextDecoder().decode(b64urlToBytes(parts[1])));
+  const keys = await getGoogleKeys();
+  const jwk = keys[header.kid];
+  if (!jwk) throw new Error('key-not-found');
+  const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
+  const ok = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, b64urlToBytes(parts[2]), new TextEncoder().encode(parts[0] + '.' + parts[1]));
+  if (!ok) throw new Error('bad-signature');
+  if (payload.aud !== GOOGLE_CLIENT_ID) throw new Error('bad-aud');
+  if (payload.iss !== 'https://accounts.google.com' && payload.iss !== 'accounts.google.com') throw new Error('bad-iss');
+  if (Number(payload.exp) * 1000 < Date.now()) throw new Error('expired');
+  return payload; // { sub, email, name, picture, ... }
+}
+
+// — 自家 Session（HMAC 簽章）—
+async function hmacSign(data, secret) {
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(data));
+  return bytesToB64url(new Uint8Array(sig));
+}
+async function makeSession(memberId, env) {
+  const body = bytesToB64url(new TextEncoder().encode(JSON.stringify({ mid: memberId, exp: Date.now() + 30 * 24 * 3600 * 1000 })));
+  return body + '.' + (await hmacSign(body, env.SESSION_SECRET));
+}
+async function readSession(token, env) {
+  if (!token || !env.SESSION_SECRET) return null;
+  const i = token.lastIndexOf('.');
+  if (i < 0) return null;
+  const body = token.slice(0, i), sig = token.slice(i + 1);
+  if (sig !== (await hmacSign(body, env.SESSION_SECRET))) return null;
+  try { const d = JSON.parse(new TextDecoder().decode(b64urlToBytes(body))); return d.exp > Date.now() ? d : null; } catch { return null; }
+}
+function getCookie(request, name) {
+  const c = request.headers.get('Cookie') || '';
+  const m = c.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]+)'));
+  return m ? m[1] : null;
+}
+function taipeiDate() {
+  return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+}
+
+// 每日補點：若今天還沒補 → 點數不足 1000 就補到 1000
+async function refillIfNeeded(env, member) {
+  const today = taipeiDate();
+  if (member.last_refill_date === today) return member.points;
+  let points = member.points;
+  if (points < DAILY_POINTS) {
+    const delta = DAILY_POINTS - points;
+    points = DAILY_POINTS;
+    await env.DB.prepare('INSERT INTO point_ledger (member_id, delta, game, reason, balance_after, created_at) VALUES (?1,?2,?3,?4,?5,?6)')
+      .bind(member.id, delta, 'daily', '每日補點', points, new Date().toISOString()).run();
+  }
+  await env.DB.prepare('UPDATE members SET points=?1, last_refill_date=?2 WHERE id=?3').bind(points, today, member.id).run();
+  return points;
+}
+
+function memberPublic(m, points) {
+  return { id: m.id, nickname: m.nickname || m.name, email: m.email, points: points != null ? points : m.points };
+}
+
+// POST /api/auth/google  { credential }
+async function handleAuthGoogle(request, env) {
+  if (request.method !== 'POST') return jsonResp({ error: 'method' }, 405);
+  if (!env.DB) return jsonResp({ error: 'no-db' }, 500);
+  let body;
+  try { body = await request.json(); } catch { return jsonResp({ error: 'bad-json' }, 400); }
+  let g;
+  try { g = await verifyGoogleIdToken(body.credential); } catch (e) { return jsonResp({ error: 'invalid-token', detail: String(e.message || e) }, 401); }
+
+  const cf = request.cf || {};
+  const now = new Date().toISOString();
+  let member = await env.DB.prepare('SELECT * FROM members WHERE google_sub=?1').bind(g.sub).first();
+  if (!member) {
+    await env.DB.prepare(
+      'INSERT INTO members (google_sub, email, name, nickname, points, last_refill_date, login_city, login_region, login_country, created_at, last_login_at) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?10)'
+    ).bind(g.sub, g.email || '', g.name || '', g.name || '玩家', DAILY_POINTS, taipeiDate(), cf.city || '', cf.region || '', cf.country || '', now).run();
+    member = await env.DB.prepare('SELECT * FROM members WHERE google_sub=?1').bind(g.sub).first();
+    await env.DB.prepare('INSERT INTO point_ledger (member_id, delta, game, reason, balance_after, created_at) VALUES (?1,?2,?3,?4,?5,?6)')
+      .bind(member.id, DAILY_POINTS, 'signup', '加入會員贈點', DAILY_POINTS, now).run();
+  } else {
+    await env.DB.prepare('UPDATE members SET last_login_at=?1, login_city=?2, login_region=?3, login_country=?4 WHERE id=?5')
+      .bind(now, cf.city || member.login_city || '', cf.region || member.login_region || '', cf.country || member.login_country || '', member.id).run();
+  }
+  const points = await refillIfNeeded(env, member);
+  const token = await makeSession(member.id, env);
+  const secure = new URL(request.url).protocol === 'https:' ? ' Secure;' : '';
+  return new Response(JSON.stringify({ ok: true, member: memberPublic(member, points) }), {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Set-Cookie': `g8_session=${token}; Path=/; HttpOnly;${secure} SameSite=Lax; Max-Age=${30 * 24 * 3600}`,
+    },
+  });
+}
+
+// GET /api/me
+async function handleMe(request, env) {
+  if (!env.DB) return jsonResp({ error: 'no-db' }, 500);
+  const sess = await readSession(getCookie(request, 'g8_session'), env);
+  if (!sess) return jsonResp({ member: null });
+  const member = await env.DB.prepare('SELECT * FROM members WHERE id=?1').bind(sess.mid).first();
+  if (!member) return jsonResp({ member: null });
+  const points = await refillIfNeeded(env, member);
+  return jsonResp({ member: memberPublic(member, points) });
+}
+
+// POST /api/auth/logout
+function handleLogout(request) {
+  return new Response(JSON.stringify({ ok: true }), {
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Set-Cookie': 'g8_session=; Path=/; HttpOnly; Max-Age=0' },
+  });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -413,6 +559,9 @@ export default {
     if (p === '/api/report/status') return handleReportStatus(request, env);
     if (p === '/api/report-count') return handleReportCount(request, env);
     if (p === '/api/inbox') return handleInbox(request, env);
+    if (p === '/api/auth/google') return handleAuthGoogle(request, env);
+    if (p === '/api/me') return handleMe(request, env);
+    if (p === '/api/auth/logout') return handleLogout(request);
     return env.ASSETS.fetch(request);
   },
 };
