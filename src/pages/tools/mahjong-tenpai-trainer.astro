@@ -1,0 +1,363 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import { tileRow } from '../../lib/mahjong-tiles.js';
+
+const pageTitle = '麻將聽牌怎麼看？聽什麼牌一張一張練｜兩面、嵌張、邊張、單吊、雙碰';
+const pageDesc = '麻將聽牌老是看不出來聽什麼？免費互動練習器，給你一手牌猜聽哪幾張，兩面／嵌張／邊張／單吊／雙碰五種聽牌型一次學會。手機一屏一題，附完整聽牌教學與常見問題。';
+const canonical = 'https://game8la.com/tools/mahjong-tenpai-trainer/';
+
+const faqs = [
+  { q: '什麼是「聽牌」？', a: '聽牌就是你的手牌只差「最後一張」就能胡了。台灣 16 張差一張湊成 5 副面子＋1 對將、日本 13 張差一張湊成 4 副＋1 對，這個狀態就叫聽牌（日文叫テンパイ）。' },
+  { q: '聽牌有哪幾種型？', a: '常見五種：①兩面（如 45 聽 3、6 兩張）②嵌張（如 46 聽中間的 5）③邊張（如 89 只聽 7）④單吊（最後一張單獨等湊成對子）⑤雙碰／對倒（兩個對子，等其中一個變刻子）。其中兩面聽最多張，通常最好。' },
+  { q: '為什麼大家都說「兩面」最好？', a: '因為聽的牌最多。兩面像 45 聽 3 和 6，能胡的牌有兩種（各 4 張＝最多 8 張）；嵌張、邊張只聽一種（最多 4 張）。聽的牌越多，胡牌機率越高，所以做牌時盡量往兩面靠。' },
+  { q: '單吊和雙碰差在哪？', a: '單吊是「將牌（對子）還沒湊成」，最後一張單獨等它的另一張來配對。雙碰（對倒）是手上有兩個對子，等其中一個對子再來一張變成刻子、另一個當將。雙碰聽兩種牌、單吊只聽一種。' },
+  { q: '聽牌了一定能胡嗎？', a: '不一定。聽牌只是「差一張」，那張牌要嘛自己摸到、要嘛別人打出來你才能胡。聽的牌越多、越常見（如中洞的數牌比字牌好聽），胡的機會才越大。練好看聽牌，就是練「把自己的牌做成好聽的型」。' },
+];
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage', mainEntity: faqs.map(f=>({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+const softwareSchema = { '@context':'https://schema.org','@type':'WebApplication', name:'麻將聽牌練習器', applicationCategory:'GameApplication', operatingSystem:'Web', offers:{ '@type':'Offer', price:'0', priceCurrency:'TWD' }, url:canonical };
+const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
+  { '@type':'ListItem', position:1, name:'首頁', item:'https://game8la.com/' },
+  { '@type':'ListItem', position:2, name:'8LA 工具箱', item:'https://game8la.com/tools/' },
+  { '@type':'ListItem', position:3, name:'麻將聽牌練習器', item:canonical },
+]};
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} ogUrl={canonical} currentPage="tools">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <div class="container">
+    <div class="page-hero">
+      <h1>🀄 麻將聽牌練習器</h1>
+      <p class="hero-sub">差一張就胡了——你看得出這手「聽什麼牌」嗎？一題一手，手機一屏就能練。</p>
+      <p class="hero-desc">8LA 大大好，我是芭樂子。會碰吃槓只是入門，真正的高手差在「看得出聽什麼」。下面這台練習器把已經組好的面子幫你攤開，只留還差的那一組——你只要點出「能讓你胡的牌」。兩面、嵌張、邊張、單吊、雙碰五種聽牌型，練熟就能一眼看穿自己跟對家在等什麼。</p>
+    </div>
+
+    <!-- ===== 互動練習器（一屏完成） ===== -->
+    <section class="tp-game" id="tpGame">
+      <div class="tp-progress">
+        <span class="tp-progress-text" id="tpPtext">第 1 / 6 題</span>
+        <div class="tp-progress-track"><div class="tp-progress-fill" id="tpPfill" style="width:16.6%"></div></div>
+      </div>
+
+      <div class="tp-card" id="tpCard">
+        <div class="tp-felt">
+          <div class="tp-zone-label">✅ 已經組好的部分</div>
+          <div class="tp-done" id="tpDone"></div>
+          <div class="tp-zone-label wait">❓ 還差這組 → 聽什麼？</div>
+          <div class="tp-wait" id="tpWait"></div>
+        </div>
+
+        <div class="tp-ask">點出「能讓你胡」的牌（可能不只一張）：</div>
+        <div class="tp-cands" id="tpCands"></div>
+        <button class="tp-confirm" id="tpConfirm" type="button">確認答案</button>
+
+        <div class="tp-reveal" id="tpReveal">
+          <div class="tp-verdict" id="tpVerdict"></div>
+          <div class="tp-type" id="tpType"></div>
+          <p class="tp-why" id="tpWhy"></p>
+          <button class="tp-next" id="tpNext">下一題 →</button>
+        </div>
+      </div>
+
+      <div class="tp-final" id="tpFinal" style="display:none">
+        <div class="tp-final-score" id="tpFinalScore">0 / 6</div>
+        <div class="tp-final-title" id="tpFinalTitle"></div>
+        <div class="tp-final-msg" id="tpFinalMsg"></div>
+        <button class="tp-next" id="tpReplay">🔄 再玩一次</button>
+      </div>
+
+      <div class="tp-stats">
+        <span class="tp-stat">本輪答對 <strong id="tpCorrect">0</strong></span>
+        <span class="tp-stat">最佳連對 <strong id="tpBest">0</strong></span>
+      </div>
+    </section>
+
+    <!-- ===== 教學 ===== -->
+    <section class="tp-teach">
+      <h2 id="what">🀄 什麼是「聽牌」？</h2>
+      <p><strong>聽牌</strong>＝你只差<strong>最後一張</strong>就能胡了。台灣 16 張差一張湊成 5 副面子＋1 對將；日本 13 張差一張湊成 4 副＋1 對。能讓你胡的那張牌，就是你「聽」的牌。看得出聽什麼、聽幾張，就是判斷「這手好不好胡」的關鍵。</p>
+
+      <h2 id="ryanmen">① 兩面：聽最多，最好的型</h2>
+      <p>兩張連續的牌，<strong>兩頭都能接</strong>。像 <strong>4、5</strong> 萬，3 萬或 6 萬都能胡 → 聽兩種、最多 8 張，胡牌機率最高。做牌盡量往兩面靠。</p>
+      <div class="tp-eg"><div class="tp-eg-tiles" set:html={tileRow('4m5m')} /><span class="tp-eg-arrow">→ 聽</span><div class="tp-eg-tiles" set:html={tileRow('3m6m')} /></div>
+
+      <h2 id="kanchan">② 嵌張：等中間那洞</h2>
+      <p>中間缺一張的型，像 <strong>4、6</strong> 萬，<strong>只聽中間的 5 萬</strong>一種。聽得比兩面少，能換成兩面就換。</p>
+      <div class="tp-eg"><div class="tp-eg-tiles" set:html={tileRow('4m6m')} /><span class="tp-eg-arrow">→ 聽</span><div class="tp-eg-tiles" set:html={tileRow('5m')} /></div>
+
+      <h2 id="penchan">③ 邊張：卡在邊邊只聽一種</h2>
+      <p><strong>1、2</strong> 只聽 3；<strong>8、9</strong> 只聽 7。因為沒有 0 和 10，邊張只能往內接一種，跟嵌張一樣聽得少。</p>
+      <div class="tp-eg"><div class="tp-eg-tiles" set:html={tileRow('8m9m')} /><span class="tp-eg-arrow">→ 聽</span><div class="tp-eg-tiles" set:html={tileRow('7m')} /></div>
+
+      <h2 id="tanki">④ 單吊：最後一張等湊對</h2>
+      <p>面子都湊齊了，只剩<strong>一張單牌</strong>等它的另一張來配成「將（眼）」。只聽一種牌；但好處是想換聽哪張比較靈活。</p>
+      <div class="tp-eg"><div class="tp-eg-tiles" set:html={tileRow('5p')} /><span class="tp-eg-arrow">→ 聽</span><div class="tp-eg-tiles" set:html={tileRow('5p')} /></div>
+
+      <h2 id="shanpon">⑤ 雙碰（對倒）：兩個對子等一個變刻</h2>
+      <p>手上有<strong>兩個對子</strong>，等其中一個再來一張變<strong>刻子</strong>、另一個當將。像 55 萬 + 77 筒，5 萬或 7 筒來都能胡，聽兩種。</p>
+      <div class="tp-eg"><div class="tp-eg-tiles" set:html={tileRow('5m5m7p7p')} /><span class="tp-eg-arrow">→ 聽</span><div class="tp-eg-tiles" set:html={tileRow('5m7p')} /></div>
+
+      <div class="tp-keybox">
+        <strong>🔑 一句話記住：聽越多越好</strong>
+        <p>兩面、雙碰聽兩種；嵌張、邊張、單吊只聽一種。做牌時能往「兩面」靠就靠，胡牌機率差很多。</p>
+      </div>
+    </section>
+
+    <section class="tp-faq">
+      <h2>❓ 聽牌常見問題</h2>
+      {faqs.map(f => (
+        <details class="tp-faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </section>
+
+    <div class="tp-cross">
+      <p>聽牌看懂了？把整套麻將練起來：</p>
+      <div class="tp-cross-row">
+        <a href="/tools/mahjong-rules-trainer/" class="tp-cross-btn">🀄 碰吃槓判斷 →</a>
+        <a href="/tools/mahjong-suan-tai-trainer/" class="tp-cross-btn">🧮 算台練習 →</a>
+        <a href="/articles/taiwan-vs-japan-mahjong/" class="tp-cross-btn ghost">📖 台日麻將差別 →</a>
+      </div>
+    </div>
+
+    <ShareButtons title={pageTitle} url={canonical} />
+  </div>
+
+<style is:global>
+  /* 聽牌練習器（tp- 前綴）；is:global 因牌面 SVG 由 JS 動態插入 */
+  .container{ max-width:760px; margin:0 auto; padding:0 1rem 4rem; }
+  .page-hero{ text-align:center; padding:2.2rem 0 1rem; }
+  .page-hero h1{ font-size:2rem; margin:0 0 .6rem; color:var(--gold-light); }
+  .hero-sub{ font-size:1.08rem; color:var(--text-primary); margin:.2rem 0 .8rem; font-weight:600; }
+  .hero-desc{ font-size:.96rem; color:var(--text-secondary); line-height:1.7; max-width:640px; margin:0 auto; text-align:left; }
+
+  .tp-game{ margin-top:1.6rem; }
+  .tp-progress{ display:flex; align-items:center; gap:.7rem; margin-bottom:.9rem; }
+  .tp-progress-text{ font-size:.9rem; color:var(--text-muted); white-space:nowrap; }
+  .tp-progress-track{ flex:1; height:8px; background:rgba(255,255,255,.08); border-radius:6px; overflow:hidden; }
+  .tp-progress-fill{ height:100%; background:linear-gradient(90deg,#2bd60a,#39FF14,#9bff7a,#39FF14); background-size:200% 100%; border-radius:6px; transition:width .4s ease; }
+
+  .tp-card{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:18px; padding:1.1rem 1rem 1.2rem; }
+  .tp-felt{ background:radial-gradient(ellipse at center,#1f6b3f,#14502e); border:1px solid #0c3d22; border-radius:12px; padding:.7rem .6rem; }
+  .tp-zone-label{ font-size:.88rem; font-weight:700; color:#cfe9d8; margin:.1rem 0 .4rem; text-align:center; }
+  .tp-zone-label.wait{ color:#ffd24a; margin-top:.8rem; }
+  .tp-done{ display:flex; flex-wrap:wrap; gap:7px; justify-content:center; }
+  .tp-meld{ display:flex; gap:1px; background:rgba(0,0,0,.18); border-radius:6px; padding:3px; }
+  .tp-meld svg{ width:40px; height:auto; }
+  .tp-meld.tp-pair{ position:relative; }
+  .tp-wait{ display:flex; gap:3px; background:rgba(245,184,0,.16); border:1.5px dashed #ffd24a; border-radius:8px; padding:6px 9px; width:fit-content; margin:0 auto; }
+  .tp-wait svg{ width:46px; height:auto; }
+
+  .tp-ask{ text-align:center; font-size:1.05rem; font-weight:800; color:var(--text-primary); margin:.95rem 0 .6rem; }
+  .tp-cands{ display:flex; flex-wrap:wrap; justify-content:center; gap:7px; }
+  .tp-cand{ background:#222; border:2px solid var(--border,#444); border-radius:10px; padding:4px; cursor:pointer; line-height:0; transition:all .12s; }
+  .tp-cand svg{ width:50px; height:auto; }
+  .tp-cand.sel{ border-color:var(--gold,#f5b800); background:rgba(245,184,0,.18); transform:translateY(-4px); }
+  .tp-cand.ok{ border-color:#39FF14; background:rgba(57,255,20,.18); }
+  .tp-cand.bad{ border-color:#ff5a5a; background:rgba(255,90,90,.18); }
+  .tp-cand.miss{ border-color:#39FF14; border-style:dashed; }
+  .tp-cand:disabled{ cursor:default; }
+  .tp-confirm{ display:block; margin:.9rem auto 0; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; font-size:1rem; padding:11px 30px; border:none; border-radius:12px; cursor:pointer; }
+  .tp-confirm:disabled{ opacity:.5; cursor:default; }
+
+  .tp-reveal{ display:none; text-align:center; margin-top:.9rem; }
+  .tp-reveal.show{ display:block; }
+  .tp-verdict{ font-size:1.25rem; font-weight:800; margin-bottom:.25rem; }
+  .tp-verdict.ok{ color:#39FF14; }
+  .tp-verdict.no{ color:#ff6b6b; }
+  .tp-type{ font-size:1rem; font-weight:700; color:var(--gold-light,#ffd24a); margin-bottom:.4rem; }
+  .tp-why{ font-size:.94rem; color:var(--text-secondary); line-height:1.65; margin:.2rem auto .9rem; max-width:560px; }
+  .tp-next{ background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; font-size:1.05rem; padding:12px 30px; border:none; border-radius:12px; cursor:pointer; }
+
+  .tp-final{ text-align:center; background:var(--bg-card,#1a1a1a); border:1px solid var(--gold,#f5b800); border-radius:18px; padding:1.8rem 1.2rem; margin-top:1rem; }
+  .tp-final-score{ font-size:2.6rem; font-weight:900; color:var(--gold-light,#ffd24a); }
+  .tp-final-title{ font-size:1.3rem; font-weight:800; margin:.4rem 0; color:var(--text-primary); }
+  .tp-final-msg{ font-size:1rem; color:var(--text-secondary); margin-bottom:1.1rem; line-height:1.6; }
+  .tp-stats{ display:flex; justify-content:center; flex-wrap:wrap; gap:.6rem; margin-top:1.1rem; }
+  .tp-stat{ background:rgba(255,255,255,.05); border:1px solid var(--border,#333); border-radius:10px; padding:.55rem .9rem; font-size:.92rem; color:var(--text-secondary); }
+  .tp-stat strong{ color:var(--gold-light,#ffd24a); font-size:1.25rem; }
+
+  .tp-teach{ margin-top:3rem; }
+  .tp-teach h2{ font-size:1.35rem; margin:2rem 0 .8rem; color:var(--gold-light,#ffd24a); border-bottom:2px solid var(--border,#333); padding-bottom:.4rem; }
+  .tp-teach p{ line-height:1.8; color:var(--text-secondary); margin:.6rem 0; }
+  .tp-teach strong{ color:var(--text-primary); }
+  .tp-eg{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.6rem; background:rgba(30,122,70,.12); border:1px solid rgba(57,255,20,.2); border-radius:12px; padding:.9rem; margin:.8rem 0; }
+  .tp-eg-tiles{ display:flex; gap:3px; }
+  .tp-eg svg{ width:38px; height:auto; }
+  .tp-eg-arrow{ font-size:1rem; font-weight:700; color:var(--gold-light,#ffd24a); }
+  .tp-keybox{ background:rgba(245,184,0,.1); border:1.5px solid var(--gold,#f5b800); border-radius:12px; padding:1rem 1.1rem; margin:1.2rem 0; }
+  .tp-keybox strong{ color:var(--gold-light,#ffd24a); font-size:1.05rem; display:block; margin-bottom:.4rem; }
+  .tp-keybox p{ margin:0; color:var(--text-secondary); }
+
+  .tp-faq{ margin-top:2.5rem; }
+  .tp-faq h2{ font-size:1.35rem; color:var(--gold-light,#ffd24a); margin-bottom:1rem; }
+  .tp-faq-item{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:10px; margin-bottom:.6rem; padding:.2rem .4rem; }
+  .tp-faq-item summary{ cursor:pointer; padding:.85rem .8rem; font-weight:700; color:var(--text-primary); }
+  .tp-faq-item p{ padding:0 .8rem .9rem; color:var(--text-secondary); line-height:1.7; margin:0; }
+
+  .tp-cross{ text-align:center; margin-top:2.5rem; padding:1.4rem; background:rgba(245,184,0,.08); border-radius:14px; }
+  .tp-cross p{ color:var(--text-secondary); margin:0 0 .9rem; }
+  .tp-cross-row{ display:flex; flex-wrap:wrap; gap:.7rem; justify-content:center; }
+  .tp-cross-btn{ display:inline-block; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a !important; font-weight:800; padding:.7rem 1.2rem; border-radius:12px; text-decoration:none; }
+  .tp-cross-btn.ghost{ background:transparent; border:1.5px solid var(--gold,#f5b800); color:var(--gold-light,#ffd24a) !important; }
+
+  /* ===== 手機緊湊版：玩的迴圈塞一屏 ===== */
+  @media (max-width:600px){
+    .page-hero{ padding:1.4rem 0 .6rem; }
+    .page-hero h1{ font-size:1.6rem; }
+    .hero-sub{ font-size:.96rem; }
+    .hero-desc{ font-size:.9rem; }
+    .tp-card{ padding:.85rem .7rem 1rem; border-radius:14px; }
+    .tp-felt{ padding:.55rem .45rem; }
+    .tp-zone-label{ font-size:.82rem; }
+    .tp-meld svg{ width:33px; }
+    .tp-meld{ padding:2px; }
+    .tp-done{ gap:5px; }
+    .tp-wait svg{ width:40px; }
+    .tp-ask{ font-size:1rem; margin:.7rem 0 .5rem; }
+    .tp-cands{ gap:6px; }
+    .tp-cand svg{ width:44px; }
+    .tp-cand{ padding:3px; }
+    .tp-confirm{ padding:10px 24px; }
+    .tp-verdict{ font-size:1.12rem; }
+    .tp-why{ font-size:.88rem; }
+    .tp-next{ padding:11px 26px; font-size:1rem; }
+    .tp-eg svg{ width:32px; }
+    .tp-stat{ padding:.45rem .7rem; font-size:.84rem; }
+  }
+  @media (max-width:380px){
+    .tp-meld svg{ width:28px; }
+    .tp-cand svg{ width:38px; }
+    .tp-wait svg{ width:34px; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  var CN=["","一","二","三","四","五","六","七","八","九"];
+  var HCH={1:"東",2:"南",3:"西",4:"北",5:"中",6:"發",7:"白"};
+  var HCOL={1:"#1d4ee8",2:"#1d4ee8",3:"#1d4ee8",4:"#1d4ee8",5:"#c0282d",6:"#1e7a46",7:"#2b7bb0"};
+  function grid(n){var L=24,C=36,R=48;return ({1:[[C,50]],2:[[C,30],[C,70]],3:[[L,28],[C,50],[R,72]],4:[[L,30],[R,30],[L,70],[R,70]],5:[[L,30],[R,30],[C,50],[L,70],[R,70]],6:[[L,28],[R,28],[L,50],[R,50],[L,72],[R,72]],7:[[L,26],[R,26],[L,50],[C,50],[R,50],[L,74],[R,74]],8:[[L,24],[R,24],[L,42],[R,42],[L,60],[R,60],[L,78],[R,78]],9:[[L,26],[C,26],[R,26],[L,50],[C,50],[R,50],[L,74],[C,74],[R,74]]})[n];}
+  function pin(n){var cols=["#1e7a46","#c0282d","#1d4ee8"];return grid(n).map(function(p,i){var x=p[0],y=p[1],col=n===1?"#c0282d":cols[i%3],r=n===1?16:7.5;return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#fff" stroke="'+col+'" stroke-width="'+(n===1?3:2.4)+'"/><circle cx="'+x+'" cy="'+y+'" r="'+(r*0.42)+'" fill="'+col+'"/>';}).join("");}
+  function sou(n){if(n===1)return '<g transform="translate(36,50)"><ellipse cx="0" cy="7" rx="12" ry="15" fill="#1e7a46"/><circle cx="0" cy="-11" r="7.5" fill="#c0282d"/><path d="M0 15 L-5 28 L5 28 Z" fill="#e0a020"/><circle cx="-2.5" cy="-12" r="1.5" fill="#fff"/></g>';return grid(n).map(function(p){var x=p[0],y=p[1];return '<g><rect x="'+(x-3)+'" y="'+(y-11)+'" width="6" height="22" rx="3" fill="#1e7a46"/><rect x="'+(x-4.4)+'" y="'+(y-3)+'" width="8.8" height="2.6" rx="1.3" fill="#0c5c30"/><rect x="'+(x-4.4)+'" y="'+(y+5)+'" width="8.8" height="2.6" rx="1.3" fill="#0c5c30"/></g>';}).join("");}
+  function wan(n){return '<text x="36" y="40" font-size="25" text-anchor="middle" fill="#c0282d" font-family="serif" font-weight="700">'+CN[n]+'</text><text x="36" y="76" font-size="29" text-anchor="middle" fill="#1b3a2a" font-family="serif" font-weight="800">萬</text>';}
+  function honor(n){return '<text x="36" y="63" font-size="40" text-anchor="middle" fill="'+HCOL[n]+'" font-family="serif" font-weight="800">'+HCH[n]+'</text>';}
+  function tileSVG(t){var n=+t[0],s=t[1];var inner=s==='m'?wan(n):s==='p'?pin(n):s==='s'?sou(n):honor(n);return '<svg viewBox="0 0 72 98" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="tpfc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#ece4cf"/></linearGradient><linearGradient id="tpsd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9dcc0"/><stop offset="1" stop-color="#bda77f"/></linearGradient></defs><rect x="3" y="8" width="66" height="88" rx="9" fill="url(#tpsd)"/><rect x="3" y="3" width="66" height="86" rx="9" fill="url(#tpfc)" stroke="#d9cdaf"/>'+inner+'</svg>';}
+  function meldTiles(g){var n=+g.t[0],s=g.t[1];return g.kind==='pung'?[g.t,g.t,g.t]:[g.t,(n+1)+s,(n+2)+s];}
+
+  /* 題庫：groups=已完成面子, pair=已完成將(可無), wait=還差的搭子(顯示), answer=能胡的牌, candidates=可點選項 */
+  var Q=[
+    { groups:[{t:'1m',kind:'chow'},{t:'4p',kind:'chow'},{t:'7s',kind:'pung'},{t:'2s',kind:'chow'}], pair:'9p',
+      wait:['4m','5m'], answer:['3m','6m'], candidates:['3m','4m','6m','7m','2m'],
+      type:'兩面（雙頭聽）', why:'4萬、5萬是「兩面」，兩頭都能接 → 聽 3 萬和 6 萬兩種，是聽最多的好型。' },
+    { groups:[{t:'1m',kind:'chow'},{t:'4p',kind:'chow'},{t:'7s',kind:'pung'},{t:'2s',kind:'chow'}], pair:'9p',
+      wait:['4m','6m'], answer:['5m'], candidates:['4m','5m','6m','3m','7m'],
+      type:'嵌張（中洞）', why:'4萬、6萬中間缺一張 → 只聽中間的 5 萬一種。能換成兩面就換，聽得比較少。' },
+    { groups:[{t:'1m',kind:'chow'},{t:'4p',kind:'chow'},{t:'7s',kind:'pung'},{t:'2s',kind:'chow'}], pair:'9p',
+      wait:['8m','9m'], answer:['7m'], candidates:['6m','7m','8m','9m'],
+      type:'邊張', why:'8萬、9萬卡在邊邊，沒有「10萬」可接 → 只聽 7 萬一種。邊張跟嵌張一樣聽得少。' },
+    { groups:[{t:'1m',kind:'chow'},{t:'4p',kind:'chow'},{t:'7s',kind:'pung'},{t:'2s',kind:'chow'},{t:'5m',kind:'chow'}], pair:null,
+      wait:['3p'], answer:['3p'], candidates:['3p','2p','4p','3m'],
+      type:'單吊（將牌獨聽）', why:'五副面子都湊齊了，只剩一張 3 筒單獨等另一張 3 筒來配成「將」→ 聽 3 筒一種。' },
+    { groups:[{t:'1m',kind:'chow'},{t:'4p',kind:'chow'},{t:'7s',kind:'chow'},{t:'2m',kind:'chow'}], pair:null,
+      wait:['5m','5m','7p','7p'], answer:['5m','7p'], candidates:['5m','7p','6m','8p','4m'],
+      type:'雙碰（對倒）', why:'手上 55 萬 + 77 筒兩個對子，5 萬或 7 筒來都能讓其中一個變刻子、另一個當將 → 聽兩種。' },
+    { groups:[{t:'2m',kind:'chow'},{t:'5p',kind:'chow'},{t:'1s',kind:'pung'},{t:'6s',kind:'chow'}], pair:'3m',
+      wait:['6p','7p'], answer:['5p','8p'], candidates:['5p','8p','6p','9p','4p'],
+      type:'兩面（雙頭聽）', why:'6筒、7筒是兩面 → 聽 5 筒和 8 筒兩種。看到連續兩張就先想「是不是兩面」。' },
+  ];
+
+  var idx=0, correct=0, streak=0, best=0, locked=false, selected={};
+  var $=function(id){return document.getElementById(id);};
+  var LS='mjtenpai_stats';
+  function loadStats(){try{var s=JSON.parse(localStorage.getItem(LS));if(s)best=s.best||0;}catch(e){}}
+  function saveStats(){try{localStorage.setItem(LS,JSON.stringify({best:best}));}catch(e){}}
+
+  function load(){
+    locked=false; selected={};
+    var q=Q[idx];
+    $('tpPtext').textContent='第 '+(idx+1)+' / '+Q.length+' 題';
+    $('tpPfill').style.width=((idx+1)/Q.length*100)+'%';
+    var html='';
+    q.groups.forEach(function(g){ html+='<div class="tp-meld">'+meldTiles(g).map(tileSVG).join('')+'</div>'; });
+    if(q.pair){ html+='<div class="tp-meld tp-pair">'+[q.pair,q.pair].map(tileSVG).join('')+'</div>'; }
+    $('tpDone').innerHTML=html;
+    $('tpWait').innerHTML=q.wait.map(tileSVG).join('');
+    var ch='';
+    q.candidates.forEach(function(t,i){ ch+='<button class="tp-cand" data-t="'+t+'" data-i="'+i+'" type="button">'+tileSVG(t)+'</button>'; });
+    $('tpCands').innerHTML=ch;
+    $('tpCands').querySelectorAll('.tp-cand').forEach(function(b){ b.addEventListener('click', function(){ toggle(b); }); });
+    var cf=$('tpConfirm'); cf.disabled=false; cf.style.display='';
+    $('tpReveal').className='tp-reveal';
+    paintStats();
+  }
+
+  function toggle(b){
+    if(locked) return;
+    var i=b.dataset.i;
+    if(selected[i]){ delete selected[i]; b.classList.remove('sel'); }
+    else { selected[i]=b.dataset.t; b.classList.add('sel'); }
+  }
+
+  function confirmAns(){
+    if(locked) return; locked=true;
+    var q=Q[idx];
+    var pick=Object.keys(selected).map(function(k){return selected[k];}).sort();
+    var ans=q.answer.slice().sort();
+    var ok = pick.length===ans.length && pick.every(function(t,i){return t===ans[i];});
+    var cands=$('tpCands').querySelectorAll('.tp-cand');
+    cands.forEach(function(b){
+      b.disabled=true;
+      var isAns=q.answer.indexOf(b.dataset.t)!==-1;
+      var isSel=!!selected[b.dataset.i];
+      b.classList.remove('sel');
+      if(isAns && isSel) b.classList.add('ok');
+      else if(isAns && !isSel) b.classList.add('miss');
+      else if(!isAns && isSel) b.classList.add('bad');
+    });
+    $('tpConfirm').style.display='none';
+    if(ok){ correct++; streak++; if(streak>best){ best=streak; saveStats(); } }
+    else { streak=0; }
+    var v=$('tpVerdict');
+    v.className='tp-verdict '+(ok?'ok':'no');
+    v.textContent=ok?'✅ 答對！':'❌ 不對，正解是綠框那幾張';
+    $('tpType').textContent='聽牌型：'+q.type+'（聽 '+q.answer.length+' 種）';
+    $('tpWhy').textContent=q.why;
+    paintStats();
+    $('tpReveal').className='tp-reveal show';
+  }
+  function paintStats(){ $('tpCorrect').textContent=correct; $('tpBest').textContent=best; }
+
+  function next(){
+    if(idx>=Q.length-1){ showFinal(); return; }
+    idx++; load();
+    $('tpGame').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function showFinal(){
+    $('tpCard').style.display='none';
+    $('tpFinal').style.display='block';
+    var t,m;
+    if(correct>=Q.length){ t='🏆 全對！聽牌之眼'; m='五種聽牌型你都看得出來了，上桌一眼就知道自己跟對家聽什麼。接著去把算台也拿下！'; }
+    else if(correct>=4){ t='🀄 有sense了'; m='聽牌判斷很穩！再刷幾輪，把「看到連續兩張先想兩面」變直覺就完美。'; }
+    else{ t='🌱 還在練眼力'; m='沒關係，聽牌是練出來的。記住口訣：兩面雙碰聽兩種、嵌張邊張單吊聽一種。'; }
+    $('tpFinalTitle').textContent=t; $('tpFinalMsg').textContent=m;
+    $('tpFinalScore').textContent='答對 '+correct+' / '+Q.length;
+    $('tpGame').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function replay(){ idx=0; correct=0; streak=0; $('tpCard').style.display=''; $('tpFinal').style.display='none'; load(); $('tpGame').scrollIntoView({behavior:'smooth',block:'start'}); }
+
+  function init(){
+    loadStats(); load();
+    $('tpConfirm').addEventListener('click', confirmAns);
+    $('tpNext').addEventListener('click', next);
+    $('tpReplay').addEventListener('click', replay);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</BaseLayout>
