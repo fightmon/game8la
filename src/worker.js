@@ -495,7 +495,8 @@ async function refillIfNeeded(env, member) {
 }
 
 function memberPublic(m, points) {
-  return { id: m.id, nickname: m.nickname || m.name, email: m.email, points: points != null ? points : m.points };
+  // 只回前端需要的欄位；不外洩 email 等 PII
+  return { id: m.id, nickname: m.nickname || m.name, points: points != null ? points : m.points };
 }
 
 // POST /api/auth/google  { credential }
@@ -626,6 +627,26 @@ async function handleMyStats(request, env) {
   return jsonResp({ stats: { total: r.total || 0, settled, won, pending: r.pending || 0, accuracy: settled > 0 ? Math.round(won / settled * 100) : null, net: returned - settledStake, points: member.points } });
 }
 
+// POST /api/play { delta, game } — 遊戲點數同步（賽特轉轉機等），共用錢包
+async function handlePlay(request, env) {
+  if (request.method !== 'POST') return jsonResp({ error: 'method' }, 405);
+  const member = await currentMember(request, env);
+  if (!member) return jsonResp({ error: 'not-logged-in' }, 401);
+  let b; try { b = await request.json(); } catch { return jsonResp({ error: 'bad-json' }, 400); }
+  let delta = Math.round(Number(b.delta));
+  if (!isFinite(delta)) return jsonResp({ error: 'bad-delta' }, 400);
+  delta = Math.max(-1000000, Math.min(1000000, delta)); // 合理上下界
+  const game = (typeof b.game === 'string' && b.game.length <= 20) ? b.game : 'game';
+  const points = await refillIfNeeded(env, member);
+  const np = Math.max(0, points + delta);
+  const realDelta = np - points;
+  const now = new Date().toISOString();
+  await env.DB.prepare('UPDATE members SET points=?1 WHERE id=?2').bind(np, member.id).run();
+  await env.DB.prepare('INSERT INTO point_ledger (member_id, delta, game, reason, balance_after, created_at) VALUES (?1,?2,?3,?4,?5,?6)')
+    .bind(member.id, realDelta, game, '賽特轉轉機', np, now).run();
+  return jsonResp({ ok: true, points: np });
+}
+
 // GET /api/dashboard（會員後台：點數 + 今日輸贏 + 累計戰績）
 async function handleDashboard(request, env) {
   const member = await currentMember(request, env);
@@ -696,6 +717,7 @@ export default {
     if (p === '/api/events') return handleEvents(request, env);
     if (p === '/api/predict') return handlePredict(request, env);
     if (p === '/api/my-stats') return handleMyStats(request, env);
+    if (p === '/api/play') return handlePlay(request, env);
     if (p === '/api/dashboard') return handleDashboard(request, env);
     if (p === '/api/leaderboard') return handleLeaderboard(request, env);
     if (p === '/api/admin/settle') return handleSettle(request, env);

@@ -40,6 +40,7 @@ const staticSearchItems = [
   { t: '統一發票對獎工具', d: '填中獎號碼、貼上發票一鍵對獎，算總獎金＋獎項金額對照，純前端不收個資', u: '/tools/invoice-checker/', c: '工具' },
   { t: 'AI 21 點', d: '免費練牌＋基本策略即時教學，每手牌都有 AI 建議', u: '/tools/blackjack/', c: '工具' },
   { t: '2026 世足冠軍預測', d: '48 隊你猜誰奪冠？即時投票統計', u: '/tools/worldcup-2026/', c: '工具' },
+  { t: '麻將碰吃槓練習器', d: '碰吃槓搞不清楚？互動判斷練習器一題一張教，上家才能吃、字牌只能碰，麻將新手規則入門', u: '/tools/mahjong-rules-trainer/', c: '工具' },
   { t: '麻將算台練習器', d: '看牌猜台數，門清自摸碰碰胡清一色大三元，台灣16張算台教學', u: '/tools/mahjong-suan-tai-trainer/', c: '工具' },
 ];
 
@@ -93,6 +94,7 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
           </div>
           <div class="dd-group">
             <div class="dropdown-group-label">🀄 牌桌教學</div>
+            <a href="/tools/mahjong-rules-trainer/">🀄 麻將碰吃槓練習器</a>
             <a href="/tools/mahjong-suan-tai-trainer/">🀄 麻將算台練習器</a>
           </div>
           <div class="dd-group">
@@ -122,7 +124,9 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     <Icon name="search" />
     <span class="nav-search-text">搜尋遊戲...</span>
   </div>
+  <a href="/member/" class="nav-member" id="navMember" aria-label="會員中心">🪙 <span id="navMemberLabel">會員</span></a>
   <div class="mobile-actions">
+    <a href="/member/" class="icon-btn icon-btn-member" id="navMemberMobile" aria-label="會員中心">🪙</a>
     <button type="button" class="icon-btn" aria-label="開啟搜尋" onclick="openSearch()">
       <Icon name="search" />
     </button>
@@ -135,6 +139,7 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
 <!-- MOBILE MENU PANEL -->
 <div class="mobile-menu" id="mobileMenu" onclick="closeMenu(event)">
   <div class="mobile-menu-inner">
+    <a href="/member/" class="mobile-member" id="navMemberMobileMenu">🪙 會員中心 · 登入領 1,000 點</a>
     <a href="/" class={currentPage === 'home' ? 'active' : ''}>🏠 首頁</a>
     <a href="/atg-seth/" class={currentPage === 'atg-seth' ? 'active' : ''}>⚡ 金8LA賽特</a>
     <a href="/worldcup/" class={currentPage === 'worldcup' ? 'active' : ''}>⚽ 世足8LA專區</a>
@@ -155,7 +160,8 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
         <a href="/tools/baccarat-roadmap/">🀄 百家樂看路模擬器</a>
         <a href="/tools/blackjack/">🃏 AI 21 點</a>
         <div class="m-cat">🀄 牌桌教學</div>
-        <a href="/tools/mahjong-suan-tai-trainer/">🀄 麻將算台練習器</a>
+        <a href="/tools/mahjong-rules-trainer/">🀄 麻將碰吃槓練習器</a>
+            <a href="/tools/mahjong-suan-tai-trainer/">🀄 麻將算台練習器</a>
         <div class="m-cat">🎱 樂透工具</div>
         <a href="/tools/539-wheel-calculator/">🎯 539 包牌計算器</a>
         <a href="/tools/power-lottery-calculator/">🎱 威力彩包牌計算器</a>
@@ -268,6 +274,47 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
 
   .nav-search i {
     color: var(--text-muted);
+  }
+
+  /* === 會員入口（桌機膠囊鈕） === */
+  .nav-member {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: linear-gradient(135deg, rgba(245,184,0,0.2), rgba(245,184,0,0.08));
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    padding: 0 1rem;
+    min-height: 44px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s;
+    margin-left: 0.5rem;
+  }
+  .nav-member:hover {
+    background: rgba(245,184,0,0.3);
+    box-shadow: 0 0 14px var(--gold-glow);
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+  .nav-member.logged-in {
+    border-color: #39ff14;
+    color: #aaffaa;
+    background: linear-gradient(135deg, rgba(57,255,20,0.18), rgba(57,255,20,0.06));
+  }
+  .icon-btn-member {
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  .icon-btn-member:hover { text-decoration: none; }
+  .mobile-member {
+    background: linear-gradient(135deg, rgba(245,184,0,0.2), rgba(245,184,0,0.06)) !important;
+    border: 1px solid var(--gold) !important;
+    color: var(--gold-light) !important;
+    font-weight: 700;
   }
 
   /* Mobile actions (search + hamburger) - hidden on desktop */
@@ -530,6 +577,9 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
     .nav-search {
       display: none;
     }
+    .nav-member {
+      display: none;
+    }
     .mobile-actions {
       display: flex;
     }
@@ -614,4 +664,26 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeSearch(null);
   });
+
+  // 會員入口：登入後顯示點數（閒置時再抓，不擋首屏）
+  (function () {
+    function paintMember(m) {
+      if (!m) return;
+      var pts = (m.points || 0).toLocaleString();
+      var lbl = document.getElementById('navMemberLabel');
+      var btn = document.getElementById('navMember');
+      if (lbl) lbl.textContent = pts;
+      if (btn) { btn.classList.add('logged-in'); btn.setAttribute('aria-label', '會員中心 · ' + pts + ' 點'); btn.title = (m.nickname || '會員') + '｜' + pts + ' 點'; }
+      var mob = document.getElementById('navMemberMobileMenu');
+      if (mob) mob.textContent = '🪙 ' + (m.nickname || '會員') + '｜' + pts + ' 點';
+    }
+    function check() {
+      fetch('/api/me', { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { if (j && j.member) paintMember(j.member); })
+        .catch(function () {});
+    }
+    if ('requestIdleCallback' in window) requestIdleCallback(check, { timeout: 3000 });
+    else setTimeout(check, 1200);
+  })();
 </script>

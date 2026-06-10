@@ -2,12 +2,12 @@
  * 娛樂城詐騙黑名單
  * 資料來源：內政部警政署 165 全民防騙網（假投資/博弈網站類別）
  * 搜尋關鍵字：娛樂城
- * 最後更新：2026-05-23
+ * 最後更新：2026-06-10
  * 品牌數：99
  * 原始通報筆數：461 + 週報補充（同品牌同網址合併後，再依品牌合併為 97 個）
  */
 
-export const lastUpdated = '2026-05-23';
+export const lastUpdated = '2026-06-10';
 
 export const scamList = [
   { name: 'GF攻富娛樂城', urls: ['pc.billynational.vip'], totalReports: 1, latestDate: '2026-01-07' },

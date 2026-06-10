@@ -12,7 +12,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
   <!-- === 頂部說明 === -->
   <div class="sim-header">
     <a href="/tools/" style="color:var(--text-muted);font-size:0.85rem;text-decoration:none">← 回工具箱</a>
-    <h1>🎰 芭樂轉轉機<span>RTP 體感模擬器</span></h1>
+    <h1>🎰 賽特8LA轉轉機<span>RTP 體感模擬器</span></h1>
     <p class="sim-disclaimer">⚠️ 這不是賭博遊戲，沒有真錢、沒有儲值、沒有獎金。這是一台讓你「當老虎機的神」的教育模擬器——自己設定 RTP，看數學怎麼吃掉你的餘額。</p>
   </div>
 
@@ -46,6 +46,10 @@ import ShareButtons from '../../components/ShareButtons.astro';
       <label>🏦 餘額</label>
       <span id="balance-val" class="ctrl-val balance-display">10,000</span>
     </div>
+    <div class="ctrl-group" id="pointsModeWrap" style="display:none">
+      <label>🪙 會員點數</label>
+      <button id="btn-points-mode" class="btn-points-mode">用會員點數玩</button>
+    </div>
   </div>
 
   <!-- === 遊戲盤面 === -->
@@ -75,9 +79,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
       <div class="auto-group">
         <button id="btn-auto" class="btn-auto" data-count="50">AUTO ×50</button>
         <button class="btn-auto-opt" data-count="200">×200</button>
-        <button class="btn-auto-opt" data-count="500">×500</button>
       </div>
-      <button id="btn-reset" class="btn-reset">重置餘額</button>
     </div>
     <!-- 覺醒預約按鈕 -->
     <div class="awaken-btns">
@@ -180,8 +182,22 @@ import ShareButtons from '../../components/ShareButtons.astro';
   let pendingAwaken = null; // 'power' | 'lock' | null — 預約下一回合強制觸發覺醒
   const LOCK_ROUNDS = 3; // 鎖定覺醒鎖定回合數
   let isAutoSpin = false, autoRemaining = 0, autoTotal = 0;
-  function autoDelay(ms) { return delay(isAutoSpin ? Math.max(ms * 0.25, 30) : ms); }
+  function autoDelay(ms) { return delay(isAutoSpin ? Math.max(ms * 0.6, 120) : ms); }
   let spinWin = 0; // current spin total win
+
+  /* ===== 會員點數模式 ===== */
+  let POINTS_MODE = false, lastSyncBal = 0, syncTimer = null;
+  async function syncWallet() {
+    if (!POINTS_MODE) return;
+    var delta = Math.round(balance - lastSyncBal);
+    if (delta === 0) return;
+    try {
+      var r = await fetch('/api/play', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ delta: delta, game: 'slot' }) });
+      var j = await r.json();
+      if (j.ok) { balance = j.points; lastSyncBal = j.points; var bv = document.getElementById('balance-val'); if (bv) bv.textContent = balance.toLocaleString(); }
+    } catch (e) { /* 同步失敗就先保留本地,下次再試 */ }
+  }
+  function scheduleSync() { if (!POINTS_MODE) return; clearTimeout(syncTimer); syncTimer = setTimeout(syncWallet, 700); }
   let cascadeCount = 0;
 
   // Chart
@@ -665,6 +681,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
     document.getElementById('s-max-drought').textContent = maxDrought;
     document.getElementById('s-fg-count').textContent = fgTriggered;
     $balanceVal.textContent = balance.toLocaleString();
+    scheduleSync();
     $betVal.textContent = bet;
     // 情境導流 CTA：轉超過 20 局後顯示，根據輸贏切換文案
     updateContextCta();
@@ -878,6 +895,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
         spinWin = Math.min(spinWin, allowed);
       }
 
+      spinWin = Math.max(0, Math.floor(spinWin)); // 點數為整數，杜絕小數餘額
       if (spinWin > 0) {
         balance += spinWin;
         totalWin += spinWin;
@@ -1014,7 +1032,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
     autoRemaining = 0;
     $btnAuto.textContent = 'AUTO ×' + autoCount;
     $btnAuto.classList.remove('auto-running');
-    document.querySelectorAll('.btn-auto-opt').forEach(b => b.style.display = '');
+    document.querySelectorAll('.btn-auto-opt').forEach(b => b.style.display = POINTS_MODE ? 'none' : '');
   }
 
   $btnAuto.addEventListener('click', () => {
@@ -1032,7 +1050,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
     });
   });
 
-  $btnReset.addEventListener('click', () => {
+  if ($btnReset) $btnReset.addEventListener('click', () => {
     if (gameState !== 'idle') return;
     balance = 10000;
     totalBet = 0; totalWin = 0; spinCount = 0;
@@ -1106,7 +1124,8 @@ import ShareButtons from '../../components/ShareButtons.astro';
   document.querySelectorAll('.bet-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       const d = parseInt(this.dataset.d);
-      bet = Math.max(10, Math.min(500, bet + d));
+      if (POINTS_MODE) { bet = Math.max(1, Math.min(10, bet + (d > 0 ? 1 : -1))); }
+      else { bet = Math.max(10, Math.min(500, bet + d)); }
       $betVal.textContent = bet;
     });
   });
@@ -1159,7 +1178,35 @@ import ShareButtons from '../../components/ShareButtons.astro';
   $btnAwkLck.addEventListener('click', () => trackEvent('sim_awaken', { awaken_type: 'lock' }));
 
   // 重置
-  $btnReset.addEventListener('click', () => trackEvent('sim_reset', {}));
+  if ($btnReset) $btnReset.addEventListener('click', () => trackEvent('sim_reset', {}));
+
+  /* ===== 會員點數模式：初始化 ===== */
+  (function () {
+    var $wrap = document.getElementById('pointsModeWrap');
+    var $btn = document.getElementById('btn-points-mode');
+    if (!$btn) return;
+    fetch('/api/me').then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.member) {
+        $wrap.style.display = '';
+        $btn.dataset.points = j.member.points || 0;
+        $btn.textContent = '用會員點數玩 (' + (j.member.points || 0).toLocaleString() + ')';
+      }
+    }).catch(function () {});
+    $btn.addEventListener('click', function () {
+      if (POINTS_MODE) return;
+      var pts = parseInt($btn.dataset.points, 10) || 0;
+      POINTS_MODE = true;
+      balance = pts; lastSyncBal = pts;
+      bet = 2; $betVal.textContent = bet;
+      totalBet = 0; totalWin = 0; spinCount = 0; maxSingleWin = 0;
+      if ($btnReset) $btnReset.style.display = 'none';
+      document.querySelectorAll('.btn-auto-opt').forEach(function (b) { b.style.display = 'none'; });
+      if ($btnAuto) { $btnAuto.dataset.count = '20'; $btnAuto.textContent = 'AUTO ×20'; }
+      $btn.textContent = '🪙 點數模式 ON';
+      $btn.disabled = true; $btn.classList.add('on');
+      updateStats();
+    });
+  })();
 
   /* ===== 賠率表渲染 ===== */
   function renderPaytable() {
@@ -1418,6 +1465,9 @@ import ShareButtons from '../../components/ShareButtons.astro';
 .btn-spin:hover:not(:disabled) { box-shadow:0 6px 20px rgba(245,184,0,0.4); }
 .btn-spin:disabled { opacity:0.5; cursor:not-allowed; }
 .btn-spin.btn-free { background:linear-gradient(135deg,#39ff14,#22c55e); }
+.btn-points-mode { padding:0.45rem 0.9rem; border-radius:10px; border:1.5px solid #FFD700; background:rgba(255,215,0,0.12); color:#FFD700; font-weight:800; cursor:pointer; font-size:0.9rem; }
+.btn-points-mode:hover { background:rgba(255,215,0,0.22); }
+.btn-points-mode.on { border-color:#39ff14; color:#39ff14; background:rgba(57,255,20,0.12); cursor:default; }
 .auto-group {
   display:flex; gap:0.3rem; align-items:center;
 }

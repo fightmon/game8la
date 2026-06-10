@@ -1,0 +1,466 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import { tileRow } from '../../lib/mahjong-tiles.js';
+
+const pageTitle = '麻將碰吃槓怎麼判斷？免費互動練習器一張一張教｜上家才能吃';
+const pageDesc = '麻將新手必練！碰、吃、槓老是搞不清楚？8 題互動判斷練習器，手機一屏一題，立刻知道這張能不能碰、能不能吃、能不能槓。附完整碰吃槓規則教學與常見問題。';
+const canonical = 'https://game8la.com/tools/mahjong-rules-trainer/';
+
+const faqs = [
+  { q: '碰和吃有什麼不同？', a: '碰是手上有兩張一樣的牌，任何一家打出第三張都能碰，湊成三張一樣的「刻子」。吃是手上有兩張同花色連號的牌，去湊別人打出的牌成「順子」，而且只能吃你「上家」打的。' },
+  { q: '為什麼我不能吃對家或下家打的牌？', a: '麻將規則規定「吃」只能吃上家（你左手邊、上一個出牌的人）打出的牌。對家、下家打的牌你只能碰或槓，不能吃。這是新手最常踩的雷。' },
+  { q: '槓有哪幾種？', a: '三種：①大明槓＝手上三張一樣，別人打出第四張；②暗槓＝自己摸到四張一樣，蓋著槓；③加槓（小明槓）＝已經碰出的刻子，自己又摸到第四張補上去。槓完都要再補摸一張。' },
+  { q: '碰了之後還能算門清自摸嗎？', a: '不行。只要你碰過、吃過、或開過明槓，這手牌就不是「門清」了，門清那一台會飛走。想算門清，就得忍住不碰不吃，全部自己摸。' },
+  { q: '一張牌可以同時又碰又吃嗎？', a: '不行，一次只能做一個動作。而且如果多家都想要同一張，順序是：胡牌 ＞ 碰／槓 ＞ 吃。有人要碰、你只想吃，碰的人優先。' },
+];
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage', mainEntity: faqs.map(f=>({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+const softwareSchema = { '@context':'https://schema.org','@type':'WebApplication', name:'麻將碰吃槓判斷練習器', applicationCategory:'GameApplication', operatingSystem:'Web', offers:{ '@type':'Offer', price:'0', priceCurrency:'TWD' }, url:canonical };
+const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
+  { '@type':'ListItem', position:1, name:'首頁', item:'https://game8la.com/' },
+  { '@type':'ListItem', position:2, name:'8LA 工具箱', item:'https://game8la.com/tools/' },
+  { '@type':'ListItem', position:3, name:'麻將碰吃槓練習器', item:canonical },
+]};
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} ogUrl={canonical} currentPage="tools">
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <div class="container">
+    <div class="page-hero">
+      <h1>🀄 麻將碰吃槓練習器</h1>
+      <p class="hero-sub">別人打一張牌，你能碰？能吃？能槓？還是只能過？一題一張，手機一屏就能練。</p>
+      <p class="hero-desc">8LA 大大好，我是芭樂子。剛學麻將最卡的就是「碰吃槓」——尤其「吃只能吃上家」這條，十個新手九個踩雷。下面這台練習器我刻意把同一手牌、換不同人打出來，讓你親眼看出差別。先練手感，再上桌不漏胡、不亂碰。</p>
+    </div>
+
+    <!-- ===== 互動練習器（一屏完成） ===== -->
+    <section class="rt-game" id="rtGame">
+      <div class="rt-progress">
+        <span class="rt-progress-text" id="rtPtext">第 1 / 8 題</span>
+        <div class="rt-progress-track"><div class="rt-progress-fill" id="rtPfill" style="width:12.5%"></div></div>
+      </div>
+
+      <div class="rt-card" id="rtCard">
+        <!-- 牌桌：誰打出一張牌 + 上家→你 可吃關係 -->
+        <div class="rt-table" id="rtTable">
+          <svg class="rt-eat-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs><marker id="rtAH" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#39FF14"/></marker></defs>
+            <path d="M15,52 Q15,86 44,89" fill="none" stroke="#39FF14" stroke-width="1.3" stroke-dasharray="3 2.4" marker-end="url(#rtAH)" opacity="0.8"/>
+          </svg>
+          <span class="rt-eat-badge">吃</span>
+          <div class="rt-seat seat-top" data-seat="toi"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">對家</span></div>
+          <div class="rt-seat seat-left" data-seat="kami"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">上家</span></div>
+          <div class="rt-seat seat-right" data-seat="shimo"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">下家</span></div>
+          <div class="rt-seat seat-me"><span class="rt-seat-lbl me">你 👇</span></div>
+          <div class="rt-ghost" id="rtGhost" aria-hidden="true"></div>
+          <div class="rt-center" id="rtDiscard"></div>
+        </div>
+        <p class="rt-from" id="rtFrom">上家打出一張牌</p>
+        <!-- 你的手牌 -->
+        <div class="rt-hand-label">👇 你的手牌</div>
+        <div class="rt-felt"><div class="rt-hand" id="rtHand"></div></div>
+        <!-- 提問 + 作答鈕 -->
+        <div class="rt-ask" id="rtAsk">這張牌，你能做什麼動作？</div>
+        <div class="rt-guess" id="rtGuess">
+          <button data-a="pung">碰</button>
+          <button data-a="chow">吃</button>
+          <button data-a="kong">槓</button>
+          <button data-a="pass">過</button>
+        </div>
+        <!-- 揭曉 -->
+        <div class="rt-reveal" id="rtReveal">
+          <div class="rt-verdict" id="rtVerdict"></div>
+          <p class="rt-why" id="rtWhy"></p>
+          <button class="rt-next" id="rtNext">下一題 →</button>
+        </div>
+      </div>
+
+      <!-- 結算 -->
+      <div class="rt-final" id="rtFinal" style="display:none">
+        <div class="rt-final-score" id="rtFinalScore">0 / 8</div>
+        <div class="rt-final-title" id="rtFinalTitle"></div>
+        <div class="rt-final-msg" id="rtFinalMsg"></div>
+        <button class="rt-next" id="rtReplay">🔄 再玩一次</button>
+      </div>
+
+      <!-- 練習紀錄 -->
+      <div class="rt-stats">
+        <span class="rt-stat">本輪連對 <strong id="rtStreak">0</strong></span>
+        <span class="rt-stat">累計答對 <strong id="rtCorrect">0</strong></span>
+        <span class="rt-stat">最佳連對 <strong id="rtBest">0</strong></span>
+      </div>
+    </section>
+
+    <!-- ===== 教學內容（碰吃槓規則） ===== -->
+    <section class="rt-teach">
+      <h2 id="peng">🟢 碰是什麼？怎麼碰？</h2>
+      <p><strong>碰（Pung）</strong>＝手上已經有<strong>兩張一模一樣</strong>的牌，<strong>任何一家</strong>打出第三張，你就能喊「碰」，湊成三張一樣的<strong>刻子</strong>。</p>
+      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('5m5m')} /><span class="rt-eg-arrow">＋ 別人打 <span set:html={tileRow('5m')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('5m5m5m')} /></div>
+      <ul>
+        <li>✅ 上家、對家、下家打的都能碰，不限位置。</li>
+        <li>✅ 字牌（東南西北中發白）也能碰，<strong>中發白碰成刻子還有台</strong>。</li>
+        <li>⚠️ 碰出來的那副要<strong>攤在桌上（明刻）</strong>，而且這手牌就<strong>不算門清</strong>了。</li>
+      </ul>
+
+      <h2 id="chow">🟡 吃是什麼？為什麼只能吃上家？</h2>
+      <p><strong>吃（Chow）</strong>＝手上有<strong>兩張同花色、數字相連</strong>的牌，去湊<strong>上家</strong>打出的牌，組成<strong>順子</strong>。</p>
+      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('4m5m')} /><span class="rt-eg-arrow">＋ <b>上家</b>打 <span set:html={tileRow('6m')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('4m5m6m')} /></div>
+      <div class="rt-keybox">
+        <strong>🚨 新手最大雷：吃，只能吃「上家」</strong>
+        <p>上家＝你左手邊、<strong>上一個出牌</strong>的人。對家、下家打的牌，就算你手上剛好有搭子，<strong>也不能吃</strong>，只能碰或槓。練習器第 2、3 題就是同一手牌、換人打，自己體會差別。</p>
+      </div>
+      <ul>
+        <li>❌ <strong>字牌不能吃</strong>。東南西北中發白沒有「順子」，只能碰。</li>
+        <li>⚠️ 吃也是攤出來的明子，一樣會破壞門清。</li>
+      </ul>
+
+      <h2 id="kong">🔵 槓是什麼？三種槓一次看懂</h2>
+      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('7p7p7p')} /><span class="rt-eg-arrow">＋ 別人打 <span set:html={tileRow('7p')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('7p7p7p7p')} /></div>
+      <ul>
+        <li><strong>① 大明槓</strong>：手上三張一樣，<strong>別人打出</strong>第四張，槓下來。</li>
+        <li><strong>② 暗槓</strong>：四張一樣<strong>全是自己摸到</strong>的，蓋著槓（不破壞門清）。</li>
+        <li><strong>③ 加槓（小明槓）</strong>：已經<strong>碰</strong>出的刻子，自己又<strong>摸到</strong>第四張，補上去。</li>
+        <li>🎁 槓完都要<strong>再補摸一張</strong>牌（有機會槓上開花）。</li>
+      </ul>
+
+      <h2 id="priority">⚖️ 多人都想要？動作優先順序</h2>
+      <p>同一張牌好幾家都想要時，順序是：</p>
+      <div class="rt-priority">胡牌 <span>＞</span> 碰／槓 <span>＞</span> 吃</div>
+      <p>所以你只想「吃」、但別人要「碰」，碰的人優先；有人能「胡」，那又贏過碰槓。記住這個順序，上桌就不會喊錯被笑。</p>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="rt-faq">
+      <h2>❓ 碰吃槓常見問題</h2>
+      {faqs.map(f => (
+        <details class="rt-faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </section>
+
+    <div class="rt-cross">
+      <p>會碰吃槓了，想知道胡牌能算<strong>幾台幾錢</strong>？</p>
+      <a href="/tools/mahjong-suan-tai-trainer/" class="rt-cross-btn">🀄 接著練「麻將算台練習器」 →</a>
+    </div>
+
+    <ShareButtons title={pageTitle} url={canonical} />
+  </div>
+
+<style is:global>
+  /* 碰吃槓練習器（rt- 前綴）；用 is:global，因為牌面 SVG 是 JS 動態插入，scoped 樣式套不到 */
+  .container{ max-width:760px; margin:0 auto; padding:0 1rem 4rem; }
+  .page-hero{ text-align:center; padding:2.2rem 0 1rem; }
+  .page-hero h1{ font-size:2rem; margin:0 0 .6rem; color:var(--gold-light); }
+  .hero-sub{ font-size:1.08rem; color:var(--text-primary); margin:.2rem 0 .8rem; font-weight:600; }
+  .hero-desc{ font-size:.96rem; color:var(--text-secondary); line-height:1.7; max-width:620px; margin:0 auto; text-align:left; }
+
+  /* ===== 練習器 ===== */
+  .rt-game{ margin-top:1.6rem; }
+  .rt-progress{ display:flex; align-items:center; gap:.7rem; margin-bottom:.9rem; }
+  .rt-progress-text{ font-size:.9rem; color:var(--text-muted); white-space:nowrap; }
+  .rt-progress-track{ flex:1; height:8px; background:rgba(255,255,255,.08); border-radius:6px; overflow:hidden; }
+  .rt-progress-fill{ height:100%; background:linear-gradient(90deg,#2bd60a,#39FF14,#9bff7a,#39FF14); background-size:200% 100%; border-radius:6px; transition:width .4s ease; }
+
+  .rt-card{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:18px; padding:1.1rem 1rem 1.2rem; }
+
+  /* ===== 俯視牌桌 ===== */
+  .rt-table{ position:relative; width:100%; max-width:288px; aspect-ratio:1 / .9; margin:.2rem auto .2rem; }
+  .rt-eat-path{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+  .rt-eat-badge{ position:absolute; left:13%; bottom:20%; z-index:3; background:#1e7a46; color:#fff; font-size:.68rem; font-weight:800; padding:.08rem .42rem; border-radius:8px; border:1px solid #39FF14; }
+  .rt-table.from-kami .rt-eat-badge{ animation:rtEatPulse 1s ease-in-out infinite; }
+  @keyframes rtEatPulse{ 0%,100%{ transform:scale(1); box-shadow:0 0 0 rgba(57,255,20,0); } 50%{ transform:scale(1.18); box-shadow:0 0 10px rgba(57,255,20,.75); } }
+  .rt-seat{ position:absolute; z-index:2; display:flex; flex-direction:column; align-items:center; gap:1px; color:#7a8a99; transition:color .3s; }
+  .rt-person{ width:34px; height:auto; fill:currentColor; transition:filter .3s; }
+  .rt-seat-lbl{ font-size:.72rem; font-weight:700; white-space:nowrap; }
+  .rt-seat-lbl.me{ color:#f5b800; font-size:.84rem; }
+  .seat-top{ top:0; left:50%; transform:translateX(-50%); }
+  .seat-left{ left:0; top:46%; transform:translateY(-50%); }
+  .seat-right{ right:0; top:46%; transform:translateY(-50%); }
+  .seat-me{ bottom:0; left:50%; transform:translateX(-50%); }
+  .rt-seat.active{ color:#39FF14; }
+  .rt-seat.active .rt-person{ filter:drop-shadow(0 0 7px #39FF14); }
+  .rt-center{ position:absolute; top:46%; left:50%; width:56px; z-index:2; transform:translate(-50%,-50%); }
+  .rt-center svg{ width:56px; height:auto; filter:drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
+  .rt-center.fly-toi{ animation:rtFlyToi .5s cubic-bezier(.3,.7,.3,1) both; }
+  .rt-center.fly-kami{ animation:rtFlyKami .5s cubic-bezier(.3,.7,.3,1) both; }
+  .rt-center.fly-shimo{ animation:rtFlyShimo .5s cubic-bezier(.3,.7,.3,1) both; }
+  @keyframes rtFlyToi{ from{ transform:translate(-50%,-50%) translateY(-78px); opacity:0; } to{ transform:translate(-50%,-50%); opacity:1; } }
+  @keyframes rtFlyKami{ from{ transform:translate(-50%,-50%) translateX(-96px); opacity:0; } to{ transform:translate(-50%,-50%); opacity:1; } }
+  @keyframes rtFlyShimo{ from{ transform:translate(-50%,-50%) translateX(96px); opacity:0; } to{ transform:translate(-50%,-50%); opacity:1; } }
+  /* 殘影牌：打出動作無限輪播（真牌靜止可判斷，殘影一直從打牌的人丟向中央） */
+  .rt-ghost{ position:absolute; top:46%; left:50%; width:56px; z-index:1; transform:translate(-50%,-50%); opacity:0; pointer-events:none; }
+  .rt-ghost svg{ width:56px; height:auto; filter:drop-shadow(0 0 5px rgba(57,255,20,.4)); }
+  .rt-ghost.loop-toi{ animation:rtGhostToi 1.9s ease-in-out infinite; }
+  .rt-ghost.loop-kami{ animation:rtGhostKami 1.9s ease-in-out infinite; }
+  .rt-ghost.loop-shimo{ animation:rtGhostShimo 1.9s ease-in-out infinite; }
+  @keyframes rtGhostToi{ 0%{ transform:translate(-50%,-50%) translateY(-78px) scale(.82); opacity:0; } 16%{ opacity:.65; } 52%{ transform:translate(-50%,-50%) scale(1); opacity:.5; } 66%,100%{ transform:translate(-50%,-50%) scale(1); opacity:0; } }
+  @keyframes rtGhostKami{ 0%{ transform:translate(-50%,-50%) translateX(-96px) scale(.82); opacity:0; } 16%{ opacity:.65; } 52%{ transform:translate(-50%,-50%) scale(1); opacity:.5; } 66%,100%{ transform:translate(-50%,-50%) scale(1); opacity:0; } }
+  @keyframes rtGhostShimo{ 0%{ transform:translate(-50%,-50%) translateX(96px) scale(.82); opacity:0; } 16%{ opacity:.65; } 52%{ transform:translate(-50%,-50%) scale(1); opacity:.5; } 66%,100%{ transform:translate(-50%,-50%) scale(1); opacity:0; } }
+  .rt-from{ text-align:center; font-size:.92rem; font-weight:700; color:var(--text-secondary); margin:.1rem 0 .55rem; }
+  .rt-from b{ color:#39FF14; }
+
+  .rt-hand-label{ text-align:center; font-size:.86rem; color:var(--text-muted); margin:.8rem 0 .3rem; }
+  .rt-felt{ background:radial-gradient(ellipse at center,#1f6b3f,#14502e); border-radius:12px; padding:.7rem .5rem; border:1px solid #0c3d22; }
+  .rt-hand{ display:flex; justify-content:center; flex-wrap:wrap; gap:6px; }
+  .rt-hand svg{ width:42px; height:auto; border-radius:5px; transition:transform .2s, filter .2s; }
+  .rt-hand svg.hl{ filter:drop-shadow(0 0 8px #ffd700); transform:translateY(-5px); }
+
+  .rt-ask{ text-align:center; font-size:1.18rem; font-weight:800; color:var(--text-primary); margin:.95rem 0 .7rem; }
+  .rt-guess{ display:flex; justify-content:center; gap:8px; }
+  .rt-guess button{ flex:1; max-width:96px; font-size:1.3rem; font-weight:800; padding:14px 0; border-radius:12px; border:2px solid var(--border,#444); background:#222; color:#fff; cursor:pointer; transition:all .15s; }
+  .rt-guess button:hover{ border-color:var(--gold,#f5b800); }
+  .rt-guess button[data-a="pung"]{ color:#7bffb0; }
+  .rt-guess button[data-a="chow"]{ color:#ffe17b; }
+  .rt-guess button[data-a="kong"]{ color:#7bc4ff; }
+  .rt-guess button[data-a="pass"]{ color:#bbb; }
+  .rt-guess button.right{ background:#1e7a46; border-color:#39FF14; color:#fff; animation:rtPop .4s ease; }
+  .rt-guess button.wrong{ background:#7a1e1e; border-color:#ff5a5a; color:#fff; animation:rtShake .4s ease; }
+  .rt-guess button.dim{ opacity:.4; }
+  @keyframes rtPop{ 0%{transform:scale(1);} 50%{transform:scale(1.12);} 100%{transform:scale(1);} }
+  @keyframes rtShake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
+
+  .rt-reveal{ display:none; margin-top:.9rem; text-align:center; }
+  .rt-reveal.show{ display:block; }
+  .rt-verdict{ font-size:1.3rem; font-weight:800; margin-bottom:.4rem; }
+  .rt-verdict.ok{ color:#39FF14; }
+  .rt-verdict.no{ color:#ff6b6b; }
+  .rt-verdict.half{ color:#ffd24a; }
+  .rt-why{ font-size:.96rem; color:var(--text-secondary); line-height:1.65; margin:.3rem auto .9rem; max-width:560px; }
+  .rt-next{ background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; font-size:1.05rem; padding:12px 30px; border:none; border-radius:12px; cursor:pointer; }
+  .rt-next:hover{ filter:brightness(1.06); }
+
+  .rt-final{ text-align:center; background:var(--bg-card,#1a1a1a); border:1px solid var(--gold,#f5b800); border-radius:18px; padding:1.8rem 1.2rem; margin-top:1rem; }
+  .rt-final-score{ font-size:2.8rem; font-weight:900; color:var(--gold-light,#ffd24a); }
+  .rt-final-title{ font-size:1.3rem; font-weight:800; margin:.4rem 0; color:var(--text-primary); }
+  .rt-final-msg{ font-size:1rem; color:var(--text-secondary); margin-bottom:1.1rem; line-height:1.6; }
+
+  .rt-stats{ display:flex; justify-content:center; flex-wrap:wrap; gap:.6rem; margin-top:1.1rem; }
+  .rt-stat{ background:rgba(255,255,255,.05); border:1px solid var(--border,#333); border-radius:10px; padding:.55rem .9rem; font-size:.92rem; color:var(--text-secondary); }
+  .rt-stat strong{ color:var(--gold-light,#ffd24a); font-size:1.25rem; }
+
+  /* ===== 教學 ===== */
+  .rt-teach{ margin-top:3rem; }
+  .rt-teach h2{ font-size:1.4rem; margin:2rem 0 .8rem; color:var(--gold-light,#ffd24a); border-bottom:2px solid var(--border,#333); padding-bottom:.4rem; }
+  .rt-teach p{ line-height:1.8; color:var(--text-secondary); margin:.6rem 0; }
+  .rt-teach ul{ line-height:1.9; color:var(--text-secondary); padding-left:1.2rem; }
+  .rt-teach strong{ color:var(--text-primary); }
+  .rt-eg{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.5rem; background:rgba(30,122,70,.12); border:1px solid rgba(57,255,20,.2); border-radius:12px; padding:.9rem; margin:.9rem 0; }
+  .rt-eg-tiles{ display:flex; gap:3px; }
+  .rt-eg svg{ width:38px; height:auto; }
+  .rt-eg-arrow{ font-size:.92rem; color:var(--text-secondary); display:flex; align-items:center; gap:4px; }
+  .rt-eg-arrow svg{ width:30px; vertical-align:middle; }
+  .rt-keybox{ background:rgba(192,40,45,.12); border:1.5px solid #c0282d; border-radius:12px; padding:1rem 1.1rem; margin:1rem 0; }
+  .rt-keybox strong{ color:#ff8080; font-size:1.05rem; display:block; margin-bottom:.4rem; }
+  .rt-keybox p{ margin:0; }
+  .rt-priority{ display:flex; align-items:center; justify-content:center; gap:.7rem; font-size:1.3rem; font-weight:800; color:var(--gold-light,#ffd24a); background:rgba(245,184,0,.1); border-radius:12px; padding:1rem; margin:.8rem 0; }
+  .rt-priority span{ color:var(--text-muted); font-size:1rem; }
+
+  .rt-faq{ margin-top:2.5rem; }
+  .rt-faq h2{ font-size:1.4rem; color:var(--gold-light,#ffd24a); margin-bottom:1rem; }
+  .rt-faq-item{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:10px; margin-bottom:.6rem; padding:.2rem .4rem; }
+  .rt-faq-item summary{ cursor:pointer; padding:.85rem .8rem; font-weight:700; color:var(--text-primary); }
+  .rt-faq-item p{ padding:0 .8rem .9rem; color:var(--text-secondary); line-height:1.7; margin:0; }
+
+  .rt-cross{ text-align:center; margin-top:2.5rem; padding:1.4rem; background:rgba(245,184,0,.08); border-radius:14px; }
+  .rt-cross p{ color:var(--text-secondary); margin:0 0 .8rem; }
+  .rt-cross-btn{ display:inline-block; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; padding:.8rem 1.5rem; border-radius:12px; text-decoration:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    .rt-center,.rt-ghost,.rt-eat-badge,.rt-guess button.right,.rt-guess button.wrong,.rt-progress-fill{ animation:none !important; }
+  }
+  /* ===== 手機緊湊版：整個玩的迴圈塞進一屏 ===== */
+  @media (max-width:600px){
+    .page-hero{ padding:1.4rem 0 .6rem; }
+    .page-hero h1{ font-size:1.6rem; }
+    .hero-sub{ font-size:.98rem; }
+    .hero-desc{ font-size:.9rem; }
+    .rt-game{ margin-top:1rem; }
+    .rt-card{ padding:.85rem .7rem 1rem; border-radius:14px; }
+    .rt-from{ font-size:.86rem; margin:.1rem 0 .4rem; }
+    .rt-table{ max-width:238px; }
+    .rt-person{ width:28px; }
+    .rt-seat-lbl{ font-size:.66rem; }
+    .rt-seat-lbl.me{ font-size:.76rem; }
+    .rt-center{ width:48px; } .rt-center svg{ width:48px; }
+    .rt-ghost{ width:48px; } .rt-ghost svg{ width:48px; }
+    .rt-eat-badge{ font-size:.62rem; }
+    .rt-hand-label{ margin:.55rem 0 .25rem; font-size:.8rem; }
+    .rt-felt{ padding:.5rem .4rem; }
+    .rt-hand{ gap:4px; }
+    .rt-hand svg{ width:36px; }
+    .rt-ask{ font-size:1.05rem; margin:.7rem 0 .55rem; }
+    .rt-guess{ gap:6px; }
+    .rt-guess button{ font-size:1.2rem; padding:12px 0; max-width:none; }
+    .rt-reveal{ margin-top:.7rem; }
+    .rt-verdict{ font-size:1.15rem; }
+    .rt-why{ font-size:.88rem; }
+    .rt-next{ padding:11px 26px; font-size:1rem; }
+    .rt-stats{ margin-top:.9rem; gap:.45rem; }
+    .rt-stat{ padding:.45rem .7rem; font-size:.84rem; }
+  }
+  @media (max-width:380px){
+    .rt-hand svg{ width:31px; }
+    .rt-hand{ gap:3px; }
+    .rt-guess button{ font-size:1.1rem; padding:11px 0; }
+    .rt-table{ max-width:212px; }
+    .rt-center{ width:42px; } .rt-center svg{ width:42px; }
+    .rt-ghost{ width:42px; } .rt-ghost svg{ width:42px; }
+    .rt-person{ width:25px; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  /* ===== 牌面 SVG（與 mahjong-tiles 同款，內嵌避免額外請求） ===== */
+  var CN=["","一","二","三","四","五","六","七","八","九"];
+  var HCH={1:"東",2:"南",3:"西",4:"北",5:"中",6:"發",7:"白"};
+  var HCOL={1:"#1d4ee8",2:"#1d4ee8",3:"#1d4ee8",4:"#1d4ee8",5:"#c0282d",6:"#1e7a46",7:"#2b7bb0"};
+  function grid(n){var L=24,C=36,R=48;return ({1:[[C,50]],2:[[C,30],[C,70]],3:[[L,28],[C,50],[R,72]],4:[[L,30],[R,30],[L,70],[R,70]],5:[[L,30],[R,30],[C,50],[L,70],[R,70]],6:[[L,28],[R,28],[L,50],[R,50],[L,72],[R,72]],7:[[L,26],[R,26],[L,50],[C,50],[R,50],[L,74],[R,74]],8:[[L,24],[R,24],[L,42],[R,42],[L,60],[R,60],[L,78],[R,78]],9:[[L,26],[C,26],[R,26],[L,50],[C,50],[R,50],[L,74],[C,74],[R,74]]})[n];}
+  function pin(n){var cols=["#1e7a46","#c0282d","#1d4ee8"];return grid(n).map(function(p,i){var x=p[0],y=p[1],col=n===1?"#c0282d":cols[i%3],r=n===1?16:7.5;return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#fff" stroke="'+col+'" stroke-width="'+(n===1?3:2.4)+'"/><circle cx="'+x+'" cy="'+y+'" r="'+(r*0.42)+'" fill="'+col+'"/>';}).join("");}
+  function sou(n){if(n===1)return '<g transform="translate(36,50)"><ellipse cx="0" cy="7" rx="12" ry="15" fill="#1e7a46"/><circle cx="0" cy="-11" r="7.5" fill="#c0282d"/><path d="M0 15 L-5 28 L5 28 Z" fill="#e0a020"/><circle cx="-2.5" cy="-12" r="1.5" fill="#fff"/></g>';return grid(n).map(function(p){var x=p[0],y=p[1];return '<g><rect x="'+(x-3)+'" y="'+(y-11)+'" width="6" height="22" rx="3" fill="#1e7a46"/><rect x="'+(x-4.4)+'" y="'+(y-3)+'" width="8.8" height="2.6" rx="1.3" fill="#0c5c30"/><rect x="'+(x-4.4)+'" y="'+(y+5)+'" width="8.8" height="2.6" rx="1.3" fill="#0c5c30"/></g>';}).join("");}
+  function wan(n){return '<text x="36" y="40" font-size="25" text-anchor="middle" fill="#c0282d" font-family="serif" font-weight="700">'+CN[n]+'</text><text x="36" y="76" font-size="29" text-anchor="middle" fill="#1b3a2a" font-family="serif" font-weight="800">萬</text>';}
+  function honor(n){return '<text x="36" y="63" font-size="40" text-anchor="middle" fill="'+HCOL[n]+'" font-family="serif" font-weight="800">'+HCH[n]+'</text>';}
+  function tileSVG(t){var n=+t[0],s=t[1];var inner=s==='m'?wan(n):s==='p'?pin(n):s==='s'?sou(n):honor(n);return '<svg viewBox="0 0 72 98" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="rtfc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#ece4cf"/></linearGradient><linearGradient id="rtsd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9dcc0"/><stop offset="1" stop-color="#bda77f"/></linearGradient></defs><rect x="3" y="8" width="66" height="88" rx="9" fill="url(#rtsd)"/><rect x="3" y="3" width="66" height="86" rx="9" fill="url(#rtfc)" stroke="#d9cdaf"/>'+inner+'</svg>';}
+  function tname(t){var n=+t[0],s=t[1];if(s==='z')return HCH[n];return CN[n]+(s==='m'?'萬':s==='p'?'筒':'條');}
+
+  /* ===== 題庫：from = kami(上家)/toi(對家)/shimo(下家) ===== */
+  var Q=[
+    { d:'5m', from:'toi',  hand:['5m','5m','2p','7s','3z'], ans:'pung', hl:['5m','5m'],
+      why:'你手上有兩張五萬，對家打出第三張 → 喊「碰」湊成刻子。碰不限位置，誰打的都能碰。' },
+    { d:'6m', from:'kami', hand:['4m','5m','1p','8s','3z'], ans:'chow', hl:['4m','5m'],
+      why:'上家打六萬，你手上四萬、五萬剛好湊成「四五六萬」順子 → 吃！記住吃只能吃上家。' },
+    { d:'6m', from:'toi',  hand:['4m','5m','1p','8s','3z'], ans:'pass', hl:[],
+      why:'手牌跟上一題一模一樣，但這次是「對家」打的。吃只能吃上家，對家打的不能吃 → 只能過。這就是新手最常踩的雷！' },
+    { d:'7p', from:'shimo',hand:['7p','7p','7p','3m','9s'], ans:'kong', hl:['7p','7p','7p'],
+      why:'你手上有三張七筒，別人打出第四張 → 大明槓！（手上三張，碰也行，但有四張不如直接槓，還能補摸一張。）' },
+    { d:'7z', from:'kami', hand:['2m','5p','8s','3z','6z'], ans:'pass', hl:[],
+      why:'打出的是「白」（字牌）。你手上沒有第二張白可碰，字牌又不能吃 → 只能過。' },
+    { d:'3m', from:'kami', hand:['1m','2m','4p','7s','9z'], ans:'chow', hl:['1m','2m'],
+      why:'上家打三萬，你手上一萬、二萬 → 湊成「一二三萬」順子，吃！邊張順子也算數。' },
+    { d:'5z', from:'kami', hand:['5z','5z','3m','7p','8s'], ans:'pung', hl:['5z','5z'],
+      why:'打出的是「中」。你有兩張中 → 碰！字牌沒有順子，所以字牌只能碰、不能吃。碰中還有台哦。' },
+    { d:'8s', from:'toi',  hand:['8s','2m','5p','1z','6z'], ans:'pass', hl:[],
+      why:'你手上只有「一張」八條，碰要兩張一樣才行；對家打的也不能吃 → 只能過。別急著喊碰被笑。' },
+  ];
+
+  function cnt(hand,t){var c=0;for(var i=0;i<hand.length;i++)if(hand[i]===t)c++;return c;}
+  function validActions(hand,d,from){
+    var acts=[]; var c=cnt(hand,d); var s=d[1],n=+d[0];
+    if(c>=3) acts.push('kong');
+    if(c>=2) acts.push('pung');
+    if(from==='kami' && (s==='m'||s==='p'||s==='s')){
+      var has=function(x){return hand.indexOf(x+s)!==-1;};
+      if((n-2>=1&&has(n-2)&&has(n-1)) || (n-1>=1&&n+1<=9&&has(n-1)&&has(n+1)) || (n+2<=9&&has(n+1)&&has(n+2))) acts.push('chow');
+    }
+    return acts;
+  }
+  var LABEL={pung:'碰',chow:'吃',kong:'槓',pass:'過'};
+
+  var idx=0, correct=0, streak=0, best=0, locked=false;
+  var $=function(id){return document.getElementById(id);};
+  var LS='mjrules_stats';
+  function loadStats(){try{var s=JSON.parse(localStorage.getItem(LS));if(s){correct=s.correct||0;best=s.best||0;}}catch(e){}}
+  function saveStats(){try{localStorage.setItem(LS,JSON.stringify({correct:correct,best:best}));}catch(e){}}
+
+  var ENCORE={2:'連對 2 題！手感來了',3:'3 連對！碰吃槓越來越熟',4:'4 連對！上桌不會漏動作了',5:'5 連對！老鳥等級',6:'6 連對！這桌你最穩',7:'7 連對！差一題全對',8:'全對！芭樂子甘拜下風 🍈'};
+
+  function load(){
+    locked=false;
+    var q=Q[idx];
+    $('rtPtext').textContent='第 '+(idx+1)+' / '+Q.length+' 題';
+    $('rtPfill').style.width=((idx+1)/Q.length*100)+'%';
+    // 牌桌：點亮打牌的人 + 飛牌動畫 + 上家可吃脈動
+    var tableEl=$('rtTable');
+    tableEl.className='rt-table'+(q.from==='kami'?' from-kami':'');
+    tableEl.querySelectorAll('.rt-seat').forEach(function(s){ s.classList.toggle('active', s.dataset.seat===q.from); });
+    var who = q.from==='kami'?'上家（你左手邊）':q.from==='toi'?'對家':'下家';
+    $('rtFrom').innerHTML = (q.from==='kami'?'<b>'+who+'</b>':who)+' 打出一張牌';
+    var c=$('rtDiscard'); c.className='rt-center'; c.innerHTML=tileSVG(q.d); // 真牌靜止常駐，方便判斷
+    var g=$('rtGhost'); g.className='rt-ghost'; g.innerHTML=tileSVG(q.d); void g.offsetWidth; g.classList.add('loop-'+q.from); // 殘影無限輪播打出動作
+    // 手牌
+    $('rtHand').innerHTML=q.hand.map(function(t){return tileSVG(t);}).join('');
+    // 重設按鈕
+    var btns=$('rtGuess').querySelectorAll('button');
+    btns.forEach(function(b){ b.className=''; b.disabled=false; });
+    $('rtReveal').className='rt-reveal';
+    $('rtCard').style.display='';
+    $('rtFinal').style.display='none';
+  }
+
+  function highlight(hl){
+    if(!hl.length) return;
+    var svgs=$('rtHand').querySelectorAll('svg');
+    var used={}; var q=Q[idx];
+    hl.forEach(function(t){
+      for(var i=0;i<q.hand.length;i++){ if(q.hand[i]===t && !used[i]){ used[i]=1; if(svgs[i]) svgs[i].classList.add('hl'); break; } }
+    });
+  }
+
+  function guess(pick){
+    if(locked) return; locked=true;
+    var q=Q[idx];
+    var valid=validActions(q.hand,q.d,q.from);
+    var btns=$('rtGuess').querySelectorAll('button');
+    btns.forEach(function(b){ b.disabled=true; if(b.dataset.a!==pick && b.dataset.a!==q.ans) b.classList.add('dim'); });
+    var pickBtn=Array.prototype.filter.call(btns,function(b){return b.dataset.a===pick;})[0];
+    var ansBtn=Array.prototype.filter.call(btns,function(b){return b.dataset.a===q.ans;})[0];
+
+    var verdict=$('rtVerdict'), why=$('rtWhy');
+    highlight(q.hl);
+
+    if(pick===q.ans){
+      pickBtn.classList.add('right');
+      correct++; streak++; if(streak>best) best=saveBest();
+      verdict.className='rt-verdict ok'; verdict.textContent='✅ 答對！'+(ENCORE[streak]?'　'+ENCORE[streak]:'');
+      why.textContent=q.why;
+    } else if(valid.indexOf(pick)!==-1){
+      // 合法但非最佳（例如有三張可槨卻選碰）
+      pickBtn.classList.add('half'); ansBtn.classList.add('right'); pickBtn.style.borderColor='#ffd24a';
+      streak=0;
+      verdict.className='rt-verdict half'; verdict.textContent='🟡 算半對';
+      why.textContent='「'+LABEL[pick]+'」其實也可以，但這張更該「'+LABEL[q.ans]+'」。'+q.why;
+    } else {
+      pickBtn.classList.add('wrong'); ansBtn.classList.add('right');
+      streak=0;
+      verdict.className='rt-verdict no'; verdict.textContent='❌ 不對，正解是「'+LABEL[q.ans]+'」';
+      why.textContent=q.why;
+    }
+    saveStats(); paintStats();
+    $('rtReveal').className='rt-reveal show';
+  }
+  function saveBest(){ return streak; }
+  function paintStats(){ $('rtStreak').textContent=streak; $('rtCorrect').textContent=correct; $('rtBest').textContent=best; }
+
+  function next(){
+    if(idx>=Q.length-1){ showFinal(); return; }
+    idx++; load();
+    $('rtGame').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function showFinal(){
+    $('rtCard').style.display='none';
+    $('rtFinal').style.display='block';
+    var roundCorrect=correct; // not exact per-round but fine as cumulative cue
+    var t,m;
+    if(best>=Q.length){ t='🏆 全對！麻將鬼才'; m='碰吃槓你已經滾瓜爛熟，上桌不會再漏動作。接著去練算台，連能算幾錢都拿下！'; }
+    else if(best>=5){ t='🀄 老鳥等級'; m='碰吃槓判斷很穩了！再刷幾輪把「吃只能吃上家」變直覺，就完全沒問題。'; }
+    else{ t='🌱 還在練功'; m='沒關係，碰吃槓多刷幾次就會變反射動作。重點記住：吃只能吃上家、字牌只能碰！'; }
+    $('rtFinalTitle').textContent=t; $('rtFinalMsg').textContent=m;
+    $('rtFinalScore').textContent='最佳連對 '+best+' / '+Q.length;
+    $('rtGame').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function replay(){ idx=0; streak=0; load(); $('rtGame').scrollIntoView({behavior:'smooth',block:'start'}); }
+
+  function init(){
+    loadStats(); paintStats(); load();
+    $('rtGuess').addEventListener('click',function(e){ var b=e.target.closest('button'); if(b&&b.dataset.a) guess(b.dataset.a); });
+    $('rtNext').addEventListener('click',next);
+    $('rtReplay').addEventListener('click',replay);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</BaseLayout>

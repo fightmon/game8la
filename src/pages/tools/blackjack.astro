@@ -26,6 +26,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
         <span class="bj-balance-label">籌碼</span>
         <span class="bj-balance-value" id="balanceDisplay">1,000</span>
       </div>
+      <button id="btn-points-mode" class="bj-points-mode" style="display:none">🪙 用會員點數玩</button>
       <div class="bj-chip-row">
         <button class="bj-chip" data-bet="10">10</button>
         <button class="bj-chip" data-bet="25">25</button>
@@ -327,6 +328,19 @@ import ShareButtons from '../../components/ShareButtons.astro';
     font-size: 1.8rem;
     font-weight: 800;
   }
+  .bj-points-mode {
+    margin-top: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 10px;
+    border: 1.5px solid #FFD700;
+    background: rgba(255,215,0,0.12);
+    color: #FFD700;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .bj-points-mode:hover { background: rgba(255,215,0,0.22); }
+  .bj-points-mode.on { border-color:#39ff14; color:#39ff14; background:rgba(57,255,20,0.12); cursor:default; }
   .bj-balance-value.bj-pulse {
     animation: bjPulse 0.4s ease;
   }
@@ -995,6 +1009,24 @@ import ShareButtons from '../../components/ShareButtons.astro';
   var insuranceBet = 0;
   var gameActive = false;
 
+  // ===== 會員點數模式 =====
+  var POINTS_MODE = false, lastSyncBal = 0, syncTimer = null;
+  function syncWallet() {
+    if (!POINTS_MODE) return;
+    var delta = Math.round(balance - lastSyncBal);
+    if (delta === 0) return;
+    fetch('/api/play', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ delta: delta, game: 'blackjack' }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.ok) {
+          balance = j.points; lastSyncBal = j.points;
+          var bd = document.getElementById('balanceDisplay'); if (bd) bd.textContent = balance.toLocaleString();
+          var bi = document.getElementById('betInput'); if (bi) bi.max = balance;
+        }
+      }).catch(function () { /* 同步失敗保留本地，下次再試 */ });
+  }
+  function scheduleSync() { if (!POINTS_MODE) return; clearTimeout(syncTimer); syncTimer = setTimeout(syncWallet, 600); }
+
   // Stats
   var stats = {
     hands: 0,
@@ -1023,7 +1055,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
   function saveStats() {
     try {
       localStorage.setItem(STATS_KEY, JSON.stringify(stats));
-      localStorage.setItem(BALANCE_KEY, String(balance));
+      if (!POINTS_MODE) localStorage.setItem(BALANCE_KEY, String(balance)); // 點數模式以伺服器為準
     } catch(e) {}
   }
 
@@ -1061,6 +1093,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
   // =================================================================
   function updateBalance() {
     balanceDisplay.textContent = balance.toLocaleString();
+    scheduleSync();
     balanceDisplay.classList.remove('bj-pulse');
     void balanceDisplay.offsetWidth;
     balanceDisplay.classList.add('bj-pulse');
@@ -1177,6 +1210,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
   // Game Logic
   // =================================================================
   function startDeal() {
+    if (POINTS_MODE && balance < 1) { alert('點數不足囉！明天登入會自動補滿，或先去玩別的 😎'); return; }
     var bet = parseInt(betInput.value);
     if (isNaN(bet) || bet < 1) bet = 1;
     if (bet > balance) bet = balance;
@@ -1500,10 +1534,12 @@ import ShareButtons from '../../components/ShareButtons.astro';
       stats.bestStreak = stats.streak;
     }
 
-    // Bankrupt check
-    if (balance <= 0) {
+    // Bankrupt check（點數模式不發免費籌碼，靠每日補點）
+    if (balance <= 0 && !POINTS_MODE) {
       balance = 1000;
       resultPayout.textContent += ' （籌碼歸零，已重新發放 1,000）';
+    } else if (balance < 0) {
+      balance = 0; // 點數模式餘額不為負（伺服器也會 clamp 到 0）
     }
 
     updateBalance();
@@ -1556,6 +1592,30 @@ import ShareButtons from '../../components/ShareButtons.astro';
   loadStats();
   updateBalance();
   updateStats();
+
+  // ===== 會員點數模式：初始化 =====
+  (function () {
+    var $btn = document.getElementById('btn-points-mode');
+    if (!$btn) return;
+    fetch('/api/me').then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.member) {
+        $btn.style.display = '';
+        $btn.dataset.points = j.member.points || 0;
+        $btn.textContent = '🪙 用會員點數玩 (' + (j.member.points || 0).toLocaleString() + ')';
+      }
+    }).catch(function () {});
+    $btn.addEventListener('click', function () {
+      if (POINTS_MODE || gameActive) return;
+      var pts = parseInt($btn.dataset.points, 10) || 0;
+      POINTS_MODE = true;
+      balance = pts; lastSyncBal = pts;
+      betInput.max = pts;
+      if (parseInt(betInput.value, 10) > pts) betInput.value = Math.max(1, Math.min(25, pts));
+      updateBalance();
+      $btn.textContent = '🪙 點數模式 ON';
+      $btn.disabled = true; $btn.classList.add('on');
+    });
+  })();
 
 })();
 </script>

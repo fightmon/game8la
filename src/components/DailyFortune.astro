@@ -18,6 +18,9 @@
   <span class="fortune-btn-text">運勢</span>
 </button>
 
+<!-- 浮動按鈕收合握把（手機把擲筊／運勢／TOP 往右收） -->
+<button class="fab-toggle" id="fabToggle" type="button" aria-label="收合浮動按鈕" title="收合／展開浮動按鈕">›</button>
+
 <!-- 運勢卡片 -->
 <div class="fortune-overlay" id="fortuneOverlay">
   <div class="fortune-card" id="fortuneCard">
@@ -695,6 +698,18 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && overlay.classList.contains('open')) closeFortune();
   });
+
+  // === 浮動按鈕收合（手機往右收，記憶選擇、換頁也記得） ===
+  (function() {
+    var tog = document.getElementById('fabToggle');
+    if (!tog) return;
+    var KEY = 'fabsCollapsed';
+    try { if (localStorage.getItem(KEY) === '1') document.documentElement.classList.add('fabs-collapsed'); } catch (e) {}
+    tog.addEventListener('click', function() {
+      var collapsed = document.documentElement.classList.toggle('fabs-collapsed');
+      try { localStorage.setItem(KEY, collapsed ? '1' : '0'); } catch (e) {}
+    });
+  })();
 })();
 </script>
 
@@ -728,5 +743,44 @@
     color: #ddd;
     font-size: 1rem;
     margin: 0 4px;
+  }
+
+  /* ===== 浮動按鈕收合握把（手機把擲筊／運勢／TOP 往右收） ===== */
+  .fab-toggle {
+    position: fixed;
+    right: 0;
+    bottom: 198px;
+    z-index: 1000;
+    width: 20px;
+    height: 50px;
+    padding: 0;
+    border: none;
+    background: rgba(35, 35, 35, 0.9);
+    color: #f5b800;
+    border-radius: 12px 0 0 12px;
+    cursor: pointer;
+    font-size: 1.15rem;
+    line-height: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.35);
+    transition: transform 0.35s ease, background 0.2s;
+  }
+  .fab-toggle:hover { background: rgba(55, 55, 55, 0.95); }
+  html.fabs-collapsed .fab-toggle { transform: rotate(180deg); }
+  /* 用 right 位移收合，避免和 hover 的 transform 打架 */
+  .bless-float-icon, .fortune-btn, .scroll-top {
+    transition: right 0.35s ease, transform 0.25s ease, opacity 0.3s ease !important;
+  }
+  html.fabs-collapsed .bless-float-icon,
+  html.fabs-collapsed .fortune-btn,
+  html.fabs-collapsed .scroll-top {
+    right: -90px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  @media (max-width: 768px) {
+    .fab-toggle { display: flex; }
   }
 </style>

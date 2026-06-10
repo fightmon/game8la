@@ -2048,12 +2048,40 @@ const LP_CONFIG = {
 let lpData = {};
 let lpCurrent = 'daily_cash_539';
 
+// 首頁彩號 = 靜態 JSON（深歷史）+ 即時 /api/lottery 合併最新期數（與 /lottery/analysis/ 同一套）
+var LP_API_KEY = { daily_cash_539: 'daily_cash', super_lotto: 'super_lotto', lotto649: 'lotto649' };
 async function loadLP(key) {
   if (lpData[key]) return;
+  var base = null;
   try {
     const res = await fetch(LP_CONFIG[key].file);
-    lpData[key] = await res.json();
-  } catch(e) { console.error('LP load error:', e); }
+    if (res.ok) base = await res.json();
+  } catch(e) {}
+  // 合併即時開獎（讓首頁日期/推薦號自動更新到最新一期，不再卡在快照日期）
+  try {
+    const apiRes = await fetch('/api/lottery', { cache: 'no-store' });
+    if (apiRes.ok) {
+      const apiJson = await apiRes.json();
+      const g = apiJson.data && apiJson.data[LP_API_KEY[key]];
+      if (g && g.numbers && g.numbers.length) {
+        var fresh = [{ period: g.period, date: g.date, numbers: g.numbers }];
+        if (Array.isArray(g.history)) g.history.forEach(function(h){ fresh.push({ period: h.period, date: h.date, numbers: h.numbers }); });
+        if (base && base.draws) {
+          var seen = {};
+          base.draws.forEach(function(d){ seen[d.period] = 1; });
+          var merged = false;
+          fresh.forEach(function(fd){ if (fd.period && !seen[fd.period]) { base.draws.unshift(fd); seen[fd.period] = 1; merged = true; } });
+          if (merged) {
+            base.draws.sort(function(a,b){ return (b.date||'').localeCompare(a.date||'') || (Number(b.period)||0)-(Number(a.period)||0); });
+            base.lastUpdated = fresh[0].date || base.lastUpdated;
+          }
+        } else if (!base) {
+          base = { lastUpdated: fresh[0].date || '', draws: fresh };
+        }
+      }
+    }
+  } catch(e) {}
+  if (base) lpData[key] = base;
 }
 
 function renderLP() {
