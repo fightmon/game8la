@@ -155,6 +155,20 @@ export const articles = [
     thumbnail: '/images/article-thumbs/thumb-worldcup-broadcast.webp'
   },
   {
+    slug: 'taiwan-vs-japan-mahjong',
+    title: '台灣16張麻將 vs 日本麻將差在哪？8 個關鍵差別一次搞懂｜花牌、算台、立直',
+    excerpt: '玩《雀魂》、看麻將動畫常一頭霧水？台灣 16 張跟日本立直麻將到底差在哪？手牌張數、花牌、算台 vs 飜符、役、立直、寶牌、振聽……芭樂子用一張對照表＋8 段圖解講清楚，附碰吃槓＋算台練習器。',
+    category: 'poker',
+    categoryLabel: '麻將教室',
+    badgeType: 'new',
+    date: '2026-06-10',
+    views: 1,
+    tags: ['最新', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0d4a2c,#1a7a3e,#c0282d)',
+    thumbnail: '/images/article-thumbs/thumb-mahjong-scoring.webp'
+  },
+  {
     slug: 'mahjong-scoring-guide',
     title: '麻將算台怎麼算？台灣16張台數完整圖解｜門清自摸到大三元',
     excerpt: '自摸喊「胡！」結果全桌不會算台？芭樂子用自己畫的牌面，把台灣16張算台一張一張圖解：底與台、門清自摸、碰碰胡、清一色、大三元、暗刻、花牌一次搞懂，附台數速查表＋線上練習器。',

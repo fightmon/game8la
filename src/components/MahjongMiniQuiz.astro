@@ -1,0 +1,124 @@
+---
+// 麻將迷你測驗（可重用）：kind='yesno'（能不能胡）或 'count'（幾台）
+// config 由各文章傳入，含題目與全部 UI 文字 → 同一引擎吃多語
+interface Props { config: any; }
+const { config } = Astro.props;
+---
+<div class="mjq" data-mjq={JSON.stringify(config)}>
+  <div class="mjq-head">{config.title}</div>
+  {config.intro && <p class="mjq-intro">{config.intro}</p>}
+  <div class="mjq-body">
+    <div class="mjq-top"><span class="mjq-ptext"></span></div>
+    <div class="mjq-hand"></div>
+    <div class="mjq-ask">{config.ask}</div>
+    <div class="mjq-opts"></div>
+    <div class="mjq-reveal">
+      <div class="mjq-verdict"></div>
+      <p class="mjq-why"></p>
+      <button class="mjq-next" type="button">{config.nextLabel}</button>
+    </div>
+  </div>
+  <div class="mjq-done">
+    <p class="mjq-done-msg"></p>
+    {config.ctaHref && <a class="mjq-cta" href={config.ctaHref}>{config.ctaLabel}</a>}
+  </div>
+</div>
+
+<script>
+  import { tileSVG } from '../lib/mahjong-tiles.js';
+
+  function initQuiz(root){
+    var cfg; try { cfg = JSON.parse(root.getAttribute('data-mjq')); } catch(e){ return; }
+    var hands = cfg.hands || [];
+    var idx = 0, locked = false;
+    var q = function(sel){ return root.querySelector(sel); };
+    var handEl = q('.mjq-hand'), optsEl = q('.mjq-opts'), askEl = q('.mjq-ask');
+    var revealEl = q('.mjq-reveal'), verdictEl = q('.mjq-verdict'), whyEl = q('.mjq-why');
+    var ptext = q('.mjq-ptext'), bodyEl = q('.mjq-body'), doneEl = q('.mjq-done');
+
+    function optionList(){
+      if (cfg.kind === 'count') return (cfg.counts || []).map(function(n){ return { key:String(n), label:n + (cfg.unit||'') }; });
+      return [ { key:'yes', label:cfg.yes }, { key:'no', label:cfg.no } ];
+    }
+
+    function load(){
+      locked = false;
+      var h = hands[idx];
+      ptext.textContent = (idx+1) + ' / ' + hands.length;
+      handEl.innerHTML = (h.tiles.replace(/\s+/g,'').match(/.{2}/g) || []).map(tileSVG).join('');
+      optsEl.innerHTML = '';
+      optionList().forEach(function(o){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'mjq-opt'; b.textContent = o.label; b.dataset.k = o.key;
+        b.addEventListener('click', function(){ answer(o.key, b); });
+        optsEl.appendChild(b);
+      });
+      revealEl.classList.remove('show');
+    }
+
+    function answer(key, btn){
+      if (locked) return; locked = true;
+      var h = hands[idx];
+      var correct = String(h.ans) === String(key);
+      var btns = optsEl.querySelectorAll('.mjq-opt');
+      btns.forEach(function(b){
+        b.disabled = true;
+        if (b.dataset.k === String(h.ans)) b.classList.add('right');
+        else if (b === btn) b.classList.add('wrong');
+        else b.classList.add('dim');
+      });
+      verdictEl.className = 'mjq-verdict ' + (correct ? 'ok' : 'no');
+      verdictEl.textContent = correct ? (cfg.okText || '✅') : (cfg.noText || '❌');
+      whyEl.textContent = h.why || '';
+      revealEl.classList.add('show');
+    }
+
+    function next(){
+      if (idx >= hands.length - 1){
+        bodyEl.style.display = 'none';
+        var dm = doneEl.querySelector('.mjq-done-msg'); if (dm) dm.textContent = cfg.doneMsg || '';
+        doneEl.classList.add('show');
+        return;
+      }
+      idx++; load();
+    }
+
+    q('.mjq-next').addEventListener('click', next);
+    load();
+  }
+
+  document.querySelectorAll('.mjq').forEach(initQuiz);
+</script>
+
+<style is:global>
+  .mjq{ background:var(--bg-card,#161616); border:1px solid var(--gold,#f5b800); border-radius:16px; padding:1.1rem 1rem 1.2rem; margin:1.6rem 0; }
+  .mjq-head{ font-size:1.15rem; font-weight:800; color:var(--gold-light,#ffd24a); text-align:center; }
+  .mjq-intro{ font-size:.9rem; color:var(--text-secondary); text-align:center; margin:.4rem 0 .8rem !important; line-height:1.6; }
+  .mjq-top{ text-align:center; }
+  .mjq-ptext{ font-size:.85rem; color:var(--text-muted); }
+  .mjq-hand{ display:flex; flex-wrap:wrap; justify-content:center; gap:3px; background:radial-gradient(ellipse at center,#1f6b3f,#14502e); border:1px solid #0c3d22; border-radius:12px; padding:.7rem .5rem; margin:.5rem 0 .8rem; }
+  .mjq-hand svg{ width:34px; height:auto; }
+  .mjq-ask{ text-align:center; font-size:1.05rem; font-weight:800; color:var(--text-primary); margin:.2rem 0 .7rem; }
+  .mjq-opts{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+  .mjq-opt{ font-size:1.05rem; font-weight:800; padding:12px 20px; border-radius:12px; border:2px solid var(--border,#444); background:#222; color:#fff; cursor:pointer; transition:all .15s; min-width:64px; }
+  .mjq-opt:hover:not(:disabled){ border-color:var(--gold,#f5b800); }
+  .mjq-opt.right{ background:#1e7a46; border-color:#39FF14; }
+  .mjq-opt.wrong{ background:#7a1e1e; border-color:#ff5a5a; }
+  .mjq-opt.dim{ opacity:.4; }
+  .mjq-reveal{ display:none; text-align:center; margin-top:.9rem; }
+  .mjq-reveal.show{ display:block; }
+  .mjq-verdict{ font-size:1.2rem; font-weight:800; margin-bottom:.35rem; }
+  .mjq-verdict.ok{ color:#39FF14; }
+  .mjq-verdict.no{ color:#ff6b6b; }
+  .mjq-why{ font-size:.92rem; color:var(--text-secondary); line-height:1.65; margin:.2rem auto .8rem !important; max-width:520px; }
+  .mjq-next{ background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; font-size:1rem; padding:11px 28px; border:none; border-radius:12px; cursor:pointer; }
+  .mjq-done{ display:none; text-align:center; }
+  .mjq-done.show{ display:block; }
+  .mjq-done-msg{ color:var(--text-secondary); line-height:1.7; margin:.2rem 0 1rem !important; }
+  .mjq-cta{ display:inline-block; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a !important; font-weight:800; padding:.8rem 1.4rem; border-radius:12px; text-decoration:none; }
+  @media (max-width:600px){
+    .mjq-hand svg{ width:27px; }
+    .mjq-opt{ font-size:.98rem; padding:11px 16px; min-width:56px; }
+    .mjq-ask{ font-size:.98rem; }
+  }
+</style>

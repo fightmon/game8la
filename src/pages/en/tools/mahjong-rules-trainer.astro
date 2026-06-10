@@ -1,31 +1,31 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ShareButtons from '../../components/ShareButtons.astro';
-import { tileRow } from '../../lib/mahjong-tiles.js';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ShareButtons from '../../../components/ShareButtons.astro';
+import { tileRow } from '../../../lib/mahjong-tiles.js';
 
-const pageTitle = '麻將碰吃槓怎麼判斷？免費互動練習器一張一張教｜上家才能吃';
-const pageDesc = '麻將新手必練！碰、吃、槓老是搞不清楚？8 題互動判斷練習器，手機一屏一題，立刻知道這張能不能碰、能不能吃、能不能槓。附完整碰吃槓規則教學與常見問題。';
-const canonical = 'https://game8la.com/tools/mahjong-rules-trainer/';
-const enUrl = 'https://game8la.com/en/tools/mahjong-rules-trainer/';
+const pageTitle = 'Mahjong Pung, Chow & Kong — Free Interactive Trainer | Chow Only From Your Left';
+const pageDesc = 'Learning mahjong? Confused about when to call Pung, Chow or Kong? This free 8-question interactive trainer teaches you tile by tile — one tap, instant feedback, fits one phone screen. Uses Taiwanese mahjong tiles; the calls are universal across every mahjong variant.';
+const canonical = 'https://game8la.com/en/tools/mahjong-rules-trainer/';
+const zhUrl = 'https://game8la.com/tools/mahjong-rules-trainer/';
 const alternates = [
-  { hreflang: 'zh-Hant', href: canonical },
-  { hreflang: 'en', href: enUrl },
-  { hreflang: 'x-default', href: enUrl },
+  { hreflang: 'en', href: canonical },
+  { hreflang: 'zh-Hant', href: zhUrl },
+  { hreflang: 'x-default', href: canonical },
 ];
 
 const faqs = [
-  { q: '碰和吃有什麼不同？', a: '碰是手上有兩張一樣的牌，任何一家打出第三張都能碰，湊成三張一樣的「刻子」。吃是手上有兩張同花色連號的牌，去湊別人打出的牌成「順子」，而且只能吃你「上家」打的。' },
-  { q: '為什麼我不能吃對家或下家打的牌？', a: '麻將規則規定「吃」只能吃上家（你左手邊、上一個出牌的人）打出的牌。對家、下家打的牌你只能碰或槓，不能吃。這是新手最常踩的雷。' },
-  { q: '槓有哪幾種？', a: '三種：①大明槓＝手上三張一樣，別人打出第四張；②暗槓＝自己摸到四張一樣，蓋著槓；③加槓（小明槓）＝已經碰出的刻子，自己又摸到第四張補上去。槓完都要再補摸一張。' },
-  { q: '碰了之後還能算門清自摸嗎？', a: '不行。只要你碰過、吃過、或開過明槓，這手牌就不是「門清」了，門清那一台會飛走。想算門清，就得忍住不碰不吃，全部自己摸。' },
-  { q: '一張牌可以同時又碰又吃嗎？', a: '不行，一次只能做一個動作。而且如果多家都想要同一張，順序是：胡牌 ＞ 碰／槓 ＞ 吃。有人要碰、你只想吃，碰的人優先。' },
+  { q: "What's the difference between Pung and Chow?", a: 'Pung uses two identical tiles in your hand plus a third discarded by ANY player, forming a triplet. Chow uses two same-suit tiles in sequence plus a discard from your LEFT player only, forming a run.' },
+  { q: "Why can't I Chow a tile from Across or the Right?", a: 'In mahjong you may Chow only from your Left player — the one who discards right before your turn. Tiles from Across or the Right can only be Pung’d or Kong’d. This is the most common beginner mistake.' },
+  { q: 'How many kinds of Kong are there?', a: 'Three: Open Kong (three in hand + a discard), Closed Kong (all four self-drawn, declared face-down), and Added Kong (adding a fourth tile to a Pung you already called). After any Kong you draw a replacement tile.' },
+  { q: 'Does calling Pung break a concealed hand?', a: 'Yes. Once you Pung, Chow, or make an open Kong, your hand is no longer concealed and you lose the concealed-hand bonus. To stay concealed, win entirely by self-draw.' },
+  { q: 'Can one tile be both Pung’d and Chow’d?', a: 'No — you take only one action. And when several players want the same tile, priority is: Win > Pung/Kong > Chow. A player calling Pung beats a player who only wants to Chow.' },
 ];
 const faqSchema = { '@context':'https://schema.org','@type':'FAQPage', mainEntity: faqs.map(f=>({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
-const softwareSchema = { '@context':'https://schema.org','@type':'WebApplication', name:'麻將碰吃槓判斷練習器', applicationCategory:'GameApplication', operatingSystem:'Web', offers:{ '@type':'Offer', price:'0', priceCurrency:'TWD' }, url:canonical };
+const softwareSchema = { '@context':'https://schema.org','@type':'WebApplication', name:'Mahjong Pung Chow Kong Trainer', applicationCategory:'GameApplication', operatingSystem:'Web', inLanguage:'en', offers:{ '@type':'Offer', price:'0', priceCurrency:'USD' }, url:canonical };
 const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbList', itemListElement:[
-  { '@type':'ListItem', position:1, name:'首頁', item:'https://game8la.com/' },
-  { '@type':'ListItem', position:2, name:'8LA 工具箱', item:'https://game8la.com/tools/' },
-  { '@type':'ListItem', position:3, name:'麻將碰吃槓練習器', item:canonical },
+  { '@type':'ListItem', position:1, name:'Home', item:'https://game8la.com/' },
+  { '@type':'ListItem', position:2, name:'Tools', item:'https://game8la.com/tools/' },
+  { '@type':'ListItem', position:3, name:'Mahjong Pung Chow Kong Trainer', item:canonical },
 ]};
 ---
 
@@ -36,111 +36,113 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
 
   <div class="container">
     <div class="page-hero">
-      <div class="lang-switch"><span>中文</span><a href={enUrl}>English</a></div>
-      <h1>🀄 麻將碰吃槓練習器</h1>
-      <p class="hero-sub">別人打一張牌，你能碰？能吃？能槓？還是只能過？一題一張，手機一屏就能練。</p>
-      <p class="hero-desc">8LA 大大好，我是芭樂子。剛學麻將最卡的就是「碰吃槓」——尤其「吃只能吃上家」這條，十個新手九個踩雷。下面這台練習器我刻意把同一手牌、換不同人打出來，讓你親眼看出差別。先練手感，再上桌不漏胡、不亂碰。</p>
+      <div class="lang-switch"><a href={zhUrl}>中文</a><span>English</span></div>
+      <h1>🀄 Mahjong Pung · Chow · Kong Trainer</h1>
+      <p class="hero-sub">Someone discards a tile — can you Pung? Chow? Kong? Or just Pass? One tile at a time, fits a single phone screen.</p>
+      <p class="hero-desc">Hi! I'm Bala-zi. The hardest part for new mahjong players is knowing when to call Pung, Chow and Kong — especially the rule that <strong>you can only Chow from the player on your Left</strong>. This trainer shows the <strong>same hand discarded by different players</strong> so you can see the difference with your own eyes. (The tiles are Taiwanese mahjong, but Pung / Chow / Kong work the same in every mahjong variant — Japanese Riichi, Chinese, Hong Kong, all of them.)</p>
     </div>
 
-    <!-- ===== 互動練習器（一屏完成） ===== -->
+    <!-- ===== Interactive trainer (fits one screen) ===== -->
     <section class="rt-game" id="rtGame">
       <div class="rt-progress">
-        <span class="rt-progress-text" id="rtPtext">第 1 / 8 題</span>
+        <span class="rt-progress-text" id="rtPtext">Q 1 / 8</span>
         <div class="rt-progress-track"><div class="rt-progress-fill" id="rtPfill" style="width:12.5%"></div></div>
       </div>
 
       <div class="rt-card" id="rtCard">
-        <!-- 牌桌：誰打出一張牌 + 上家→你 可吃關係 -->
+        <!-- Table: who discarded + Left → You "can Chow" relationship -->
         <div class="rt-table" id="rtTable">
           <svg class="rt-eat-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
             <defs><marker id="rtAH" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#39FF14"/></marker></defs>
             <path d="M15,52 Q15,86 44,89" fill="none" stroke="#39FF14" stroke-width="1.3" stroke-dasharray="3 2.4" marker-end="url(#rtAH)" opacity="0.8"/>
           </svg>
-          <span class="rt-eat-badge">吃</span>
-          <div class="rt-seat seat-top" data-seat="toi"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">對家</span></div>
-          <div class="rt-seat seat-left" data-seat="kami"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">上家</span></div>
-          <div class="rt-seat seat-right" data-seat="shimo"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">下家</span></div>
-          <div class="rt-seat seat-me"><span class="rt-seat-lbl me">你 👇</span></div>
+          <span class="rt-eat-badge">Chow</span>
+          <div class="rt-seat seat-top" data-seat="toi"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">Across</span></div>
+          <div class="rt-seat seat-left" data-seat="kami"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">Left</span></div>
+          <div class="rt-seat seat-right" data-seat="shimo"><svg class="rt-person" viewBox="0 0 40 42"><circle cx="20" cy="12" r="9"/><path d="M4,42 Q4,24 20,24 Q36,24 36,42 Z"/></svg><span class="rt-seat-lbl">Right</span></div>
+          <div class="rt-seat seat-me"><span class="rt-seat-lbl me">You 👇</span></div>
           <div class="rt-ghost" id="rtGhost" aria-hidden="true"></div>
           <div class="rt-center" id="rtDiscard"></div>
         </div>
-        <p class="rt-from" id="rtFrom">上家打出一張牌</p>
-        <!-- 你的手牌 -->
-        <div class="rt-hand-label">👇 你的手牌</div>
+        <p class="rt-from" id="rtFrom">Left discards a tile</p>
+        <!-- Your hand -->
+        <div class="rt-hand-label">👇 Your hand</div>
         <div class="rt-felt"><div class="rt-hand" id="rtHand"></div></div>
-        <!-- 提問 + 作答鈕 -->
-        <div class="rt-ask" id="rtAsk">這張牌，你能做什麼動作？</div>
+        <!-- Question + answer buttons -->
+        <div class="rt-ask" id="rtAsk">What can you do with this tile?</div>
         <div class="rt-guess" id="rtGuess">
-          <button data-a="pung">碰</button>
-          <button data-a="chow">吃</button>
-          <button data-a="kong">槓</button>
-          <button data-a="pass">過</button>
+          <button data-a="pung">Pung</button>
+          <button data-a="chow">Chow</button>
+          <button data-a="kong">Kong</button>
+          <button data-a="pass">Pass</button>
         </div>
-        <!-- 揭曉 -->
+        <!-- Reveal -->
         <div class="rt-reveal" id="rtReveal">
           <div class="rt-verdict" id="rtVerdict"></div>
           <p class="rt-why" id="rtWhy"></p>
-          <button class="rt-next" id="rtNext">下一題 →</button>
+          <button class="rt-next" id="rtNext">Next →</button>
         </div>
       </div>
 
-      <!-- 結算 -->
+      <!-- Final -->
       <div class="rt-final" id="rtFinal" style="display:none">
         <div class="rt-final-score" id="rtFinalScore">0 / 8</div>
         <div class="rt-final-title" id="rtFinalTitle"></div>
         <div class="rt-final-msg" id="rtFinalMsg"></div>
-        <button class="rt-next" id="rtReplay">🔄 再玩一次</button>
+        <button class="rt-next" id="rtReplay">🔄 Play again</button>
       </div>
 
-      <!-- 練習紀錄 -->
+      <!-- Stats -->
       <div class="rt-stats">
-        <span class="rt-stat">本輪連對 <strong id="rtStreak">0</strong></span>
-        <span class="rt-stat">累計答對 <strong id="rtCorrect">0</strong></span>
-        <span class="rt-stat">最佳連對 <strong id="rtBest">0</strong></span>
+        <span class="rt-stat">This run <strong id="rtStreak">0</strong></span>
+        <span class="rt-stat">Total correct <strong id="rtCorrect">0</strong></span>
+        <span class="rt-stat">Best streak <strong id="rtBest">0</strong></span>
       </div>
     </section>
 
-    <!-- ===== 教學內容（碰吃槓規則） ===== -->
+    <!-- ===== Teaching ===== -->
     <section class="rt-teach">
-      <h2 id="peng">🟢 碰是什麼？怎麼碰？</h2>
-      <p><strong>碰（Pung）</strong>＝手上已經有<strong>兩張一模一樣</strong>的牌，<strong>任何一家</strong>打出第三張，你就能喊「碰」，湊成三張一樣的<strong>刻子</strong>。</p>
-      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('5m5m')} /><span class="rt-eg-arrow">＋ 別人打 <span set:html={tileRow('5m')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('5m5m5m')} /></div>
+      <p class="rt-suit-note">📖 <strong>Reading the tiles:</strong> there are three suits — <strong>Man</strong> (萬 / characters), <strong>Pin</strong> (筒 / circles) and <strong>Sou</strong> (條 / bamboo) — plus honor tiles: the Winds (East 東, South 南, West 西, North 北) and Dragons (Red 中, Green 發, White 白).</p>
+
+      <h2 id="pung">🟢 What is Pung? How do you call it?</h2>
+      <p><strong>Pung</strong> = you already hold <strong>two identical tiles</strong>; when <strong>any player</strong> discards the third, you call "Pung" to form a <strong>triplet</strong>.</p>
+      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('5m5m')} /><span class="rt-eg-arrow">+ anyone discards <span set:html={tileRow('5m')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('5m5m5m')} /></div>
       <ul>
-        <li>✅ 上家、對家、下家打的都能碰，不限位置。</li>
-        <li>✅ 字牌（東南西北中發白）也能碰，<strong>中發白碰成刻子還有台</strong>。</li>
-        <li>⚠️ 碰出來的那副要<strong>攤在桌上（明刻）</strong>，而且這手牌就<strong>不算門清</strong>了。</li>
+        <li>✅ You can Pung a discard from <strong>any</strong> player — Left, Across, or Right.</li>
+        <li>✅ Honor tiles (Winds &amp; Dragons) can be Pung'd too; a Dragon triplet even scores points.</li>
+        <li>⚠️ A Pung'd set is <strong>exposed (face up)</strong>, and your hand is no longer <strong>concealed</strong>.</li>
       </ul>
 
-      <h2 id="chow">🟡 吃是什麼？為什麼只能吃上家？</h2>
-      <p><strong>吃（Chow）</strong>＝手上有<strong>兩張同花色、數字相連</strong>的牌，去湊<strong>上家</strong>打出的牌，組成<strong>順子</strong>。</p>
-      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('4m5m')} /><span class="rt-eg-arrow">＋ <b>上家</b>打 <span set:html={tileRow('6m')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('4m5m6m')} /></div>
+      <h2 id="chow">🟡 What is Chow? Why only from the Left?</h2>
+      <p><strong>Chow</strong> = you hold <strong>two tiles of the same suit in sequence</strong>, and use them with the <strong>Left player's</strong> discard to make a <strong>run</strong>.</p>
+      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('4m5m')} /><span class="rt-eg-arrow">+ <b>Left</b> discards <span set:html={tileRow('6m')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('4m5m6m')} /></div>
       <div class="rt-keybox">
-        <strong>🚨 新手最大雷：吃，只能吃「上家」</strong>
-        <p>上家＝你左手邊、<strong>上一個出牌</strong>的人。對家、下家打的牌，就算你手上剛好有搭子，<strong>也不能吃</strong>，只能碰或槓。練習器第 2、3 題就是同一手牌、換人打，自己體會差別。</p>
+        <strong>🚨 The #1 beginner trap: Chow only from your Left</strong>
+        <p>Your Left player is the one who discards <strong>right before your turn</strong>. Even if you hold the perfect tiles, you <strong>cannot Chow</strong> a discard from Across or the Right — only Pung or Kong. Questions 2 and 3 give you the same hand from different players so you feel the difference.</p>
       </div>
       <ul>
-        <li>❌ <strong>字牌不能吃</strong>。東南西北中發白沒有「順子」，只能碰。</li>
-        <li>⚠️ 吃也是攤出來的明子，一樣會破壞門清。</li>
+        <li>❌ <strong>Honor tiles can't be Chow'd.</strong> Winds and Dragons have no runs — only Pung.</li>
+        <li>⚠️ A Chow is also exposed and breaks a concealed hand.</li>
       </ul>
 
-      <h2 id="kong">🔵 槓是什麼？三種槓一次看懂</h2>
-      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('7p7p7p')} /><span class="rt-eg-arrow">＋ 別人打 <span set:html={tileRow('7p')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('7p7p7p7p')} /></div>
+      <h2 id="kong">🔵 What is Kong? The three types</h2>
+      <div class="rt-eg"><div class="rt-eg-tiles" set:html={tileRow('7p7p7p')} /><span class="rt-eg-arrow">+ someone discards <span set:html={tileRow('7p')} /> →</span><div class="rt-eg-tiles" set:html={tileRow('7p7p7p7p')} /></div>
       <ul>
-        <li><strong>① 大明槓</strong>：手上三張一樣，<strong>別人打出</strong>第四張，槓下來。</li>
-        <li><strong>② 暗槓</strong>：四張一樣<strong>全是自己摸到</strong>的，蓋著槓（不破壞門清）。</li>
-        <li><strong>③ 加槓（小明槓）</strong>：已經<strong>碰</strong>出的刻子，自己又<strong>摸到</strong>第四張，補上去。</li>
-        <li>🎁 槓完都要<strong>再補摸一張</strong>牌（有機會槓上開花）。</li>
+        <li><strong>① Open Kong</strong>: you hold three identical tiles and <strong>someone discards</strong> the fourth.</li>
+        <li><strong>② Closed Kong</strong>: you draw all four <strong>yourself</strong>, declared face-down (keeps your hand concealed).</li>
+        <li><strong>③ Added Kong</strong>: you already <strong>Pung'd</strong> a triplet and later <strong>draw</strong> the fourth tile to add on.</li>
+        <li>🎁 After any Kong you <strong>draw a replacement tile</strong> (a chance at a Kong-draw win).</li>
       </ul>
 
-      <h2 id="priority">⚖️ 多人都想要？動作優先順序</h2>
-      <p>同一張牌好幾家都想要時，順序是：</p>
-      <div class="rt-priority">胡牌 <span>＞</span> 碰／槓 <span>＞</span> 吃</div>
-      <p>所以你只想「吃」、但別人要「碰」，碰的人優先；有人能「胡」，那又贏過碰槓。記住這個順序，上桌就不會喊錯被笑。</p>
+      <h2 id="priority">⚖️ Multiple players want it? Call priority</h2>
+      <p>When several players want the same discard, the order is:</p>
+      <div class="rt-priority">Win <span>&gt;</span> Pung / Kong <span>&gt;</span> Chow</div>
+      <p>So if you only want to Chow but another player calls Pung, the Pung wins; and anyone who can Win beats both. Remember this order and you'll never call out of turn.</p>
     </section>
 
     <!-- ===== FAQ ===== -->
     <section class="rt-faq">
-      <h2>❓ 碰吃槓常見問題</h2>
+      <h2>❓ Pung / Chow / Kong FAQ</h2>
       {faqs.map(f => (
         <details class="rt-faq-item">
           <summary>{f.q}</summary>
@@ -150,15 +152,15 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
     </section>
 
     <div class="rt-cross">
-      <p>會碰吃槓了，想知道胡牌能算<strong>幾台幾錢</strong>？</p>
-      <a href="/tools/mahjong-suan-tai-trainer/" class="rt-cross-btn">🀄 接著練「麻將算台練習器」 →</a>
+      <p>Read Chinese? Try the full Chinese version with extra Taiwanese-scoring tools.</p>
+      <a href={zhUrl} class="rt-cross-btn">🀄 中文版練習器 →</a>
     </div>
 
     <ShareButtons title={pageTitle} url={canonical} />
   </div>
 
 <style is:global>
-  /* 碰吃槓練習器（rt- 前綴）；用 is:global，因為牌面 SVG 是 JS 動態插入，scoped 樣式套不到 */
+  /* Pung/Chow/Kong trainer (rt- prefix); is:global because tile SVGs are injected by JS */
   .container{ max-width:760px; margin:0 auto; padding:0 1rem 4rem; }
   .page-hero{ text-align:center; padding:2.2rem 0 1rem; }
   .page-hero h1{ font-size:2rem; margin:0 0 .6rem; color:var(--gold-light); }
@@ -169,7 +171,7 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   .lang-switch a:hover{ background:rgba(245,184,0,.12); }
   .lang-switch span{ color:#1a1a1a; background:var(--gold,#f5b800); border-radius:20px; padding:.2rem .8rem; font-weight:700; }
 
-  /* ===== 練習器 ===== */
+  /* ===== trainer ===== */
   .rt-game{ margin-top:1.6rem; }
   .rt-progress{ display:flex; align-items:center; gap:.7rem; margin-bottom:.9rem; }
   .rt-progress-text{ font-size:.9rem; color:var(--text-muted); white-space:nowrap; }
@@ -178,10 +180,10 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
 
   .rt-card{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:18px; padding:1.1rem 1rem 1.2rem; }
 
-  /* ===== 俯視牌桌 ===== */
+  /* ===== top-down table ===== */
   .rt-table{ position:relative; width:100%; max-width:288px; aspect-ratio:1 / .9; margin:.2rem auto .2rem; }
   .rt-eat-path{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
-  .rt-eat-badge{ position:absolute; left:13%; bottom:20%; z-index:3; background:#1e7a46; color:#fff; font-size:.68rem; font-weight:800; padding:.08rem .42rem; border-radius:8px; border:1px solid #39FF14; }
+  .rt-eat-badge{ position:absolute; left:13%; bottom:20%; z-index:3; background:#1e7a46; color:#fff; font-size:.6rem; font-weight:800; padding:.08rem .42rem; border-radius:8px; border:1px solid #39FF14; }
   .rt-table.from-kami .rt-eat-badge{ animation:rtEatPulse 1s ease-in-out infinite; }
   @keyframes rtEatPulse{ 0%,100%{ transform:scale(1); box-shadow:0 0 0 rgba(57,255,20,0); } 50%{ transform:scale(1.18); box-shadow:0 0 10px rgba(57,255,20,.75); } }
   .rt-seat{ position:absolute; z-index:2; display:flex; flex-direction:column; align-items:center; gap:1px; color:#7a8a99; transition:color .3s; }
@@ -202,7 +204,7 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   @keyframes rtFlyToi{ from{ transform:translate(-50%,-50%) translateY(-78px); opacity:0; } to{ transform:translate(-50%,-50%); opacity:1; } }
   @keyframes rtFlyKami{ from{ transform:translate(-50%,-50%) translateX(-96px); opacity:0; } to{ transform:translate(-50%,-50%); opacity:1; } }
   @keyframes rtFlyShimo{ from{ transform:translate(-50%,-50%) translateX(96px); opacity:0; } to{ transform:translate(-50%,-50%); opacity:1; } }
-  /* 殘影牌：打出動作無限輪播（真牌靜止可判斷，殘影一直從打牌的人丟向中央） */
+  /* ghost tile: looping discard motion (real tile stays still for reading) */
   .rt-ghost{ position:absolute; top:46%; left:50%; width:56px; z-index:1; transform:translate(-50%,-50%); opacity:0; pointer-events:none; }
   .rt-ghost svg{ width:56px; height:auto; filter:drop-shadow(0 0 5px rgba(57,255,20,.4)); }
   .rt-ghost.loop-toi{ animation:rtGhostToi 1.9s ease-in-out infinite; }
@@ -222,7 +224,7 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
 
   .rt-ask{ text-align:center; font-size:1.18rem; font-weight:800; color:var(--text-primary); margin:.95rem 0 .7rem; }
   .rt-guess{ display:flex; justify-content:center; gap:8px; }
-  .rt-guess button{ flex:1; max-width:96px; font-size:1.3rem; font-weight:800; padding:14px 0; border-radius:12px; border:2px solid var(--border,#444); background:#222; color:#fff; cursor:pointer; transition:all .15s; }
+  .rt-guess button{ flex:1; max-width:96px; font-size:1.1rem; font-weight:800; padding:14px 0; border-radius:12px; border:2px solid var(--border,#444); background:#222; color:#fff; cursor:pointer; transition:all .15s; }
   .rt-guess button:hover{ border-color:var(--gold,#f5b800); }
   .rt-guess button[data-a="pung"]{ color:#7bffb0; }
   .rt-guess button[data-a="chow"]{ color:#ffe17b; }
@@ -245,7 +247,7 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   .rt-next:hover{ filter:brightness(1.06); }
 
   .rt-final{ text-align:center; background:var(--bg-card,#1a1a1a); border:1px solid var(--gold,#f5b800); border-radius:18px; padding:1.8rem 1.2rem; margin-top:1rem; }
-  .rt-final-score{ font-size:2.8rem; font-weight:900; color:var(--gold-light,#ffd24a); }
+  .rt-final-score{ font-size:2.2rem; font-weight:900; color:var(--gold-light,#ffd24a); }
   .rt-final-title{ font-size:1.3rem; font-weight:800; margin:.4rem 0; color:var(--text-primary); }
   .rt-final-msg{ font-size:1rem; color:var(--text-secondary); margin-bottom:1.1rem; line-height:1.6; }
 
@@ -253,8 +255,9 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   .rt-stat{ background:rgba(255,255,255,.05); border:1px solid var(--border,#333); border-radius:10px; padding:.55rem .9rem; font-size:.92rem; color:var(--text-secondary); }
   .rt-stat strong{ color:var(--gold-light,#ffd24a); font-size:1.25rem; }
 
-  /* ===== 教學 ===== */
+  /* ===== teaching ===== */
   .rt-teach{ margin-top:3rem; }
+  .rt-suit-note{ background:rgba(255,255,255,.04); border:1px solid var(--border,#333); border-radius:10px; padding:.8rem 1rem; font-size:.92rem; color:var(--text-secondary); line-height:1.7; }
   .rt-teach h2{ font-size:1.4rem; margin:2rem 0 .8rem; color:var(--gold-light,#ffd24a); border-bottom:2px solid var(--border,#333); padding-bottom:.4rem; }
   .rt-teach p{ line-height:1.8; color:var(--text-secondary); margin:.6rem 0; }
   .rt-teach ul{ line-height:1.9; color:var(--text-secondary); padding-left:1.2rem; }
@@ -283,12 +286,12 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   @media (prefers-reduced-motion: reduce){
     .rt-center,.rt-ghost,.rt-eat-badge,.rt-guess button.right,.rt-guess button.wrong,.rt-progress-fill{ animation:none !important; }
   }
-  /* ===== 手機緊湊版：整個玩的迴圈塞進一屏 ===== */
+  /* ===== mobile compact: whole loop on one screen ===== */
   @media (max-width:600px){
     .page-hero{ padding:1.4rem 0 .6rem; }
-    .page-hero h1{ font-size:1.6rem; }
-    .hero-sub{ font-size:.98rem; }
-    .hero-desc{ font-size:.9rem; }
+    .page-hero h1{ font-size:1.5rem; }
+    .hero-sub{ font-size:.96rem; }
+    .hero-desc{ font-size:.88rem; }
     .rt-game{ margin-top:1rem; }
     .rt-card{ padding:.85rem .7rem 1rem; border-radius:14px; }
     .rt-from{ font-size:.86rem; margin:.1rem 0 .4rem; }
@@ -298,25 +301,25 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
     .rt-seat-lbl.me{ font-size:.76rem; }
     .rt-center{ width:48px; } .rt-center svg{ width:48px; }
     .rt-ghost{ width:48px; } .rt-ghost svg{ width:48px; }
-    .rt-eat-badge{ font-size:.62rem; }
+    .rt-eat-badge{ font-size:.55rem; }
     .rt-hand-label{ margin:.55rem 0 .25rem; font-size:.8rem; }
     .rt-felt{ padding:.5rem .4rem; }
     .rt-hand{ gap:4px; }
     .rt-hand svg{ width:36px; }
-    .rt-ask{ font-size:1.05rem; margin:.7rem 0 .55rem; }
+    .rt-ask{ font-size:1.02rem; margin:.7rem 0 .55rem; }
     .rt-guess{ gap:6px; }
-    .rt-guess button{ font-size:1.2rem; padding:12px 0; max-width:none; }
+    .rt-guess button{ font-size:1rem; padding:12px 0; max-width:none; }
     .rt-reveal{ margin-top:.7rem; }
-    .rt-verdict{ font-size:1.15rem; }
+    .rt-verdict{ font-size:1.12rem; }
     .rt-why{ font-size:.88rem; }
     .rt-next{ padding:11px 26px; font-size:1rem; }
     .rt-stats{ margin-top:.9rem; gap:.45rem; }
-    .rt-stat{ padding:.45rem .7rem; font-size:.84rem; }
+    .rt-stat{ padding:.45rem .7rem; font-size:.8rem; }
   }
   @media (max-width:380px){
     .rt-hand svg{ width:31px; }
     .rt-hand{ gap:3px; }
-    .rt-guess button{ font-size:1.1rem; padding:11px 0; }
+    .rt-guess button{ font-size:.92rem; padding:11px 0; }
     .rt-table{ max-width:212px; }
     .rt-center{ width:42px; } .rt-center svg{ width:42px; }
     .rt-ghost{ width:42px; } .rt-ghost svg{ width:42px; }
@@ -326,7 +329,7 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
 
 <script is:inline>
 (function(){
-  /* ===== 牌面 SVG（與 mahjong-tiles 同款，內嵌避免額外請求） ===== */
+  /* ===== tile SVG (same as mahjong-tiles, inlined) ===== */
   var CN=["","一","二","三","四","五","六","七","八","九"];
   var HCH={1:"東",2:"南",3:"西",4:"北",5:"中",6:"發",7:"白"};
   var HCOL={1:"#1d4ee8",2:"#1d4ee8",3:"#1d4ee8",4:"#1d4ee8",5:"#c0282d",6:"#1e7a46",7:"#2b7bb0"};
@@ -336,26 +339,25 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   function wan(n){return '<text x="36" y="40" font-size="25" text-anchor="middle" fill="#c0282d" font-family="serif" font-weight="700">'+CN[n]+'</text><text x="36" y="76" font-size="29" text-anchor="middle" fill="#1b3a2a" font-family="serif" font-weight="800">萬</text>';}
   function honor(n){return '<text x="36" y="63" font-size="40" text-anchor="middle" fill="'+HCOL[n]+'" font-family="serif" font-weight="800">'+HCH[n]+'</text>';}
   function tileSVG(t){var n=+t[0],s=t[1];var inner=s==='m'?wan(n):s==='p'?pin(n):s==='s'?sou(n):honor(n);return '<svg viewBox="0 0 72 98" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="rtfc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf6"/><stop offset="1" stop-color="#ece4cf"/></linearGradient><linearGradient id="rtsd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9dcc0"/><stop offset="1" stop-color="#bda77f"/></linearGradient></defs><rect x="3" y="8" width="66" height="88" rx="9" fill="url(#rtsd)"/><rect x="3" y="3" width="66" height="86" rx="9" fill="url(#rtfc)" stroke="#d9cdaf"/>'+inner+'</svg>';}
-  function tname(t){var n=+t[0],s=t[1];if(s==='z')return HCH[n];return CN[n]+(s==='m'?'萬':s==='p'?'筒':'條');}
 
-  /* ===== 題庫：from = kami(上家)/toi(對家)/shimo(下家) ===== */
+  /* ===== questions: from = kami(Left)/toi(Across)/shimo(Right) ===== */
   var Q=[
     { d:'5m', from:'toi',  hand:['5m','5m','2p','7s','3z'], ans:'pung', hl:['5m','5m'],
-      why:'你手上有兩張五萬，對家打出第三張 → 喊「碰」湊成刻子。碰不限位置，誰打的都能碰。' },
+      why:'You hold two 5-Man, and Across discards the third → call Pung to form a triplet. Pung works from any player.' },
     { d:'6m', from:'kami', hand:['4m','5m','1p','8s','3z'], ans:'chow', hl:['4m','5m'],
-      why:'上家打六萬，你手上四萬、五萬剛好湊成「四五六萬」順子 → 吃！記住吃只能吃上家。' },
+      why:'Left discards 6-Man, and your 4-Man + 5-Man complete the run 4-5-6 Man → Chow! Remember, you can only Chow from your Left.' },
     { d:'6m', from:'toi',  hand:['4m','5m','1p','8s','3z'], ans:'pass', hl:[],
-      why:'手牌跟上一題一模一樣，但這次是「對家」打的。吃只能吃上家，對家打的不能吃 → 只能過。這就是新手最常踩的雷！' },
+      why:'Same hand as the last question — but this time ACROSS discarded it. You can only Chow from your Left, so a tile from Across cannot be eaten → Pass. This is the #1 beginner trap!' },
     { d:'7p', from:'shimo',hand:['7p','7p','7p','3m','9s'], ans:'kong', hl:['7p','7p','7p'],
-      why:'你手上有三張七筒，別人打出第四張 → 大明槓！（手上三張，碰也行，但有四張不如直接槓，還能補摸一張。）' },
+      why:'You hold three 7-Pin and someone discards the fourth → Open Kong! (You could also Pung with two, but with four tiles it is better to Kong and draw a replacement.)' },
     { d:'7z', from:'kami', hand:['2m','5p','8s','3z','6z'], ans:'pass', hl:[],
-      why:'打出的是「白」（字牌）。你手上沒有第二張白可碰，字牌又不能吃 → 只能過。' },
+      why:'The discard is White Dragon (an honor tile). You have no second White to Pung, and honor tiles cannot be Chow’d → Pass.' },
     { d:'3m', from:'kami', hand:['1m','2m','4p','7s','9z'], ans:'chow', hl:['1m','2m'],
-      why:'上家打三萬，你手上一萬、二萬 → 湊成「一二三萬」順子，吃！邊張順子也算數。' },
+      why:'Left discards 3-Man; your 1-Man + 2-Man complete the run 1-2-3 Man → Chow! Edge runs count too.' },
     { d:'5z', from:'kami', hand:['5z','5z','3m','7p','8s'], ans:'pung', hl:['5z','5z'],
-      why:'打出的是「中」。你有兩張中 → 碰！字牌沒有順子，所以字牌只能碰、不能吃。碰中還有台哦。' },
+      why:'The discard is Red Dragon. You have two of them → Pung! Honor tiles have no runs, so they can only be Pung’d, never Chow’d (a Dragon triplet also scores).' },
     { d:'8s', from:'toi',  hand:['8s','2m','5p','1z','6z'], ans:'pass', hl:[],
-      why:'你手上只有「一張」八條，碰要兩張一樣才行；對家打的也不能吃 → 只能過。別急著喊碰被笑。' },
+      why:'You hold only ONE 8-Sou — Pung needs two matching tiles, and a tile from Across cannot be Chow’d anyway → Pass. Do not call Pung too early.' },
   ];
 
   function cnt(hand,t){var c=0;for(var i=0;i<hand.length;i++)if(hand[i]===t)c++;return c;}
@@ -369,32 +371,29 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
     }
     return acts;
   }
-  var LABEL={pung:'碰',chow:'吃',kong:'槓',pass:'過'};
+  var LABEL={pung:'Pung',chow:'Chow',kong:'Kong',pass:'Pass'};
 
   var idx=0, correct=0, streak=0, best=0, locked=false;
   var $=function(id){return document.getElementById(id);};
-  var LS='mjrules_stats';
+  var LS='mjrules_en_stats';
   function loadStats(){try{var s=JSON.parse(localStorage.getItem(LS));if(s){correct=s.correct||0;best=s.best||0;}}catch(e){}}
   function saveStats(){try{localStorage.setItem(LS,JSON.stringify({correct:correct,best:best}));}catch(e){}}
 
-  var ENCORE={2:'連對 2 題！手感來了',3:'3 連對！碰吃槓越來越熟',4:'4 連對！上桌不會漏動作了',5:'5 連對！老鳥等級',6:'6 連對！這桌你最穩',7:'7 連對！差一題全對',8:'全對！芭樂子甘拜下風 🍈'};
+  var ENCORE={2:'Two in a row! Getting the feel.',3:'3 straight! It is clicking.',4:"4 straight! You won't miss a call now.",5:'5 straight! Veteran level.',6:"6 straight! Steadiest at the table.",7:'7 straight! One away from perfect.',8:'Perfect run! Bala-zi bows to you 🍈'};
 
   function load(){
     locked=false;
     var q=Q[idx];
-    $('rtPtext').textContent='第 '+(idx+1)+' / '+Q.length+' 題';
+    $('rtPtext').textContent='Q '+(idx+1)+' / '+Q.length;
     $('rtPfill').style.width=((idx+1)/Q.length*100)+'%';
-    // 牌桌：點亮打牌的人 + 飛牌動畫 + 上家可吃脈動
     var tableEl=$('rtTable');
     tableEl.className='rt-table'+(q.from==='kami'?' from-kami':'');
     tableEl.querySelectorAll('.rt-seat').forEach(function(s){ s.classList.toggle('active', s.dataset.seat===q.from); });
-    var who = q.from==='kami'?'上家（你左手邊）':q.from==='toi'?'對家':'下家';
-    $('rtFrom').innerHTML = (q.from==='kami'?'<b>'+who+'</b>':who)+' 打出一張牌';
-    var c=$('rtDiscard'); c.className='rt-center'; c.innerHTML=tileSVG(q.d); // 真牌靜止常駐，方便判斷
-    var g=$('rtGhost'); g.className='rt-ghost'; g.innerHTML=tileSVG(q.d); void g.offsetWidth; g.classList.add('loop-'+q.from); // 殘影無限輪播打出動作
-    // 手牌
+    var who = q.from==='kami'?'Left (plays before you)':q.from==='toi'?'Across':'Right';
+    $('rtFrom').innerHTML = (q.from==='kami'?'<b>'+who+'</b>':who)+' discards a tile';
+    var c=$('rtDiscard'); c.className='rt-center'; c.innerHTML=tileSVG(q.d);
+    var g=$('rtGhost'); g.className='rt-ghost'; g.innerHTML=tileSVG(q.d); void g.offsetWidth; g.classList.add('loop-'+q.from);
     $('rtHand').innerHTML=q.hand.map(function(t){return tileSVG(t);}).join('');
-    // 重設按鈕
     var btns=$('rtGuess').querySelectorAll('button');
     btns.forEach(function(b){ b.className=''; b.disabled=false; });
     $('rtReveal').className='rt-reveal';
@@ -425,25 +424,23 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
 
     if(pick===q.ans){
       pickBtn.classList.add('right');
-      correct++; streak++; if(streak>best) best=saveBest();
-      verdict.className='rt-verdict ok'; verdict.textContent='✅ 答對！'+(ENCORE[streak]?'　'+ENCORE[streak]:'');
+      correct++; streak++; if(streak>best) best=streak;
+      verdict.className='rt-verdict ok'; verdict.textContent='✅ Correct!'+(ENCORE[streak]?'　'+ENCORE[streak]:'');
       why.textContent=q.why;
     } else if(valid.indexOf(pick)!==-1){
-      // 合法但非最佳（例如有三張可槨卻選碰）
       pickBtn.classList.add('half'); ansBtn.classList.add('right'); pickBtn.style.borderColor='#ffd24a';
       streak=0;
-      verdict.className='rt-verdict half'; verdict.textContent='🟡 算半對';
-      why.textContent='「'+LABEL[pick]+'」其實也可以，但這張更該「'+LABEL[q.ans]+'」。'+q.why;
+      verdict.className='rt-verdict half'; verdict.textContent='🟡 Half right';
+      why.textContent='"'+LABEL[pick]+'" works too, but this tile is better played as "'+LABEL[q.ans]+'". '+q.why;
     } else {
       pickBtn.classList.add('wrong'); ansBtn.classList.add('right');
       streak=0;
-      verdict.className='rt-verdict no'; verdict.textContent='❌ 不對，正解是「'+LABEL[q.ans]+'」';
+      verdict.className='rt-verdict no'; verdict.textContent='❌ Not quite — the answer is "'+LABEL[q.ans]+'"';
       why.textContent=q.why;
     }
     saveStats(); paintStats();
     $('rtReveal').className='rt-reveal show';
   }
-  function saveBest(){ return streak; }
   function paintStats(){ $('rtStreak').textContent=streak; $('rtCorrect').textContent=correct; $('rtBest').textContent=best; }
 
   function next(){
@@ -454,13 +451,12 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   function showFinal(){
     $('rtCard').style.display='none';
     $('rtFinal').style.display='block';
-    var roundCorrect=correct; // not exact per-round but fine as cumulative cue
     var t,m;
-    if(best>=Q.length){ t='🏆 全對！麻將鬼才'; m='碰吃槓你已經滾瓜爛熟，上桌不會再漏動作。接著去練算台，連能算幾錢都拿下！'; }
-    else if(best>=5){ t='🀄 老鳥等級'; m='碰吃槓判斷很穩了！再刷幾輪把「吃只能吃上家」變直覺，就完全沒問題。'; }
-    else{ t='🌱 還在練功'; m='沒關係，碰吃槓多刷幾次就會變反射動作。重點記住：吃只能吃上家、字牌只能碰！'; }
+    if(best>=Q.length){ t='🏆 Perfect — mahjong prodigy!'; m="You've nailed Pung, Chow and Kong. You won't miss a call at the table. Next, learn how Taiwanese scoring (Tai) works!"; }
+    else if(best>=5){ t='🀄 Veteran level'; m='Your calls are solid! Run it a few more times until "Chow only from the Left" is pure instinct.'; }
+    else{ t='🌱 Still training'; m="No worries — a few more rounds and calling becomes reflex. Remember: Chow only from your Left, and honor tiles can only be Pung'd!"; }
     $('rtFinalTitle').textContent=t; $('rtFinalMsg').textContent=m;
-    $('rtFinalScore').textContent='最佳連對 '+best+' / '+Q.length;
+    $('rtFinalScore').textContent='Best streak '+best+' / '+Q.length;
     $('rtGame').scrollIntoView({behavior:'smooth',block:'start'});
   }
   function replay(){ idx=0; streak=0; load(); $('rtGame').scrollIntoView({behavior:'smooth',block:'start'}); }

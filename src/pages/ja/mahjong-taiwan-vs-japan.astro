@@ -1,0 +1,163 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import MahjongMiniQuiz from '../../components/MahjongMiniQuiz.astro';
+import { tileRow } from '../../lib/mahjong-tiles.js';
+
+const title = '台湾麻雀（台湾16張）と日本のリーチ麻雀の違い8つ｜花牌・台計算・リーチ';
+const description = '台湾麻雀って日本麻雀と何が違う？手牌の枚数、花牌、台計算 vs 翻符、役の有無、リーチ、ドラ、フリテン……リーチ麻雀を打つ人向けに、台湾16張麻雀との違いを比較表＋8つのポイントで解説します。';
+const canonical = 'https://game8la.com/ja/mahjong-taiwan-vs-japan/';
+const zhUrl = 'https://game8la.com/articles/taiwan-vs-japan-mahjong/';
+const alternates = [
+  { hreflang: 'ja', href: canonical },
+  { hreflang: 'zh-Hant', href: zhUrl },
+  { hreflang: 'x-default', href: zhUrl },
+];
+const faqs = [
+  { q: '台湾麻雀と日本麻雀の一番大きな違いは？', a: '手牌の枚数です。台湾16張麻雀は和了に5面子＋雀頭（計17枚）が必要ですが、日本のリーチ麻雀は4面子＋雀頭（計14枚）です。さらに台湾には花牌があり、点数は「台」で計算し、役がなくても和了れます。' },
+  { q: 'なぜ日本麻雀は役がないと和了れないの？', a: '日本のリーチ麻雀では、形が4面子＋雀頭で揃っていても、役（リーチ・タンヤオ・ピンフなど）が最低1つないと和了宣言できません。台湾16張にはこの制限がなく、形が揃えば和了でき、点数は台計算で決まります。' },
+  { q: '台湾の花牌は日本麻雀にもある？', a: '標準的なリーチ麻雀に花牌はありません。台湾16張には8枚の花牌（春夏秋冬・梅蘭竹菊）があり、引くと1枚補充でき、自分の場の花が揃うと台が加算されます。' },
+  { q: 'リーチ麻雀しか知らないけど、台湾麻雀はすぐ打てる？', a: 'ポン・チー・カンは全く同じなのでゼロからではありません。慣れが必要なのは「手牌が3枚多い」「役・リーチ・ドラ・フリテンが無い／違う」「台計算」の部分です。' },
+];
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage', mainEntity: faqs.map(f=>({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+
+const yakuQuiz = {
+  kind: 'yesno',
+  title: '🇯🇵 腕試し：この手、和了れる？',
+  intro: 'どれも「4面子＋雀頭」で形は完成。でも日本では役が無いと和了れません。ロン（出和了）と仮定して、和了れるのはどれ？',
+  ask: 'この手、和了れる？',
+  yes: '和了れる ✅', no: '役なし・和了れない ❌',
+  nextLabel: '次へ →', okText:'✅ 正解！', noText:'❌ 不正解',
+  hands: [
+    { tiles:'2m3m4m6m7m8m3p4p5p5s6s7s8p8p', ans:'yes', why:'すべて2〜8の数牌 → タンヤオ。役あり、和了れます。' },
+    { tiles:'1m1m1m3p4p5p6p7p8p7s8s9s3s3s', ans:'no', why:'形は完成でも役なし：一萬・九索があり（タンヤオ✕）、刻子あり（ピンフ✕）、雀頭も役牌でない → 和了れません。台湾ならそのまま和了OK。' },
+    { tiles:'5z5z5z2m3m4m6p7p8p3s4s5s9m9m', ans:'yes', why:'白（中發白）の刻子は役牌 → 役あり、和了れます。' },
+    { tiles:'9m9m9m1s2s3s5s6s7s4p5p6p3p3p', ans:'no', why:'完成でも役なし：九萬・一索（タンヤオ✕）、刻子あり（ピンフ✕）、一気通貫でもなく、雀頭も役牌でない → 和了れません。台湾には無い制限です。' },
+  ],
+  doneMsg: '「完成＝和了れる」ではない——これが台湾の打ち手が一番驚くところ。台湾16張は形が揃えば和了でき、点数は後から台計算します。',
+};
+
+const taiQuiz = {
+  kind: 'count',
+  title: '🇹🇼 台湾式：この形、何台？',
+  intro: '台湾は「台（タイ）」で計算。下の各手には分かりやすい役（牌型）が1つあります。何台か当ててみて！',
+  ask: 'この形は何台？',
+  counts: [1,2,4,8,16], unit:'台',
+  nextLabel: '次へ →', okText:'✅ 正解！', noText:'❌ 不正解',
+  hands: [
+    { tiles:'1m2m3m3m4m5m5m6m7m7m8m9m2m2m2m9m9m', ans:8, why:'すべて同じ種類（清一色／チンイツ）= 8台！' },
+    { tiles:'2m2m2m5p5p5p8s8s8s3m3m3m7p7p7p9s9s', ans:4, why:'5面子すべて刻子・順子なし（碰碰胡／トイトイ）= 4台！' },
+    { tiles:'5z5z5z6z6z6z7z7z7z2m3m4m6p7p8p9s9s', ans:8, why:'中・發・白それぞれ刻子（大三元）= 8台！' },
+  ],
+  doneMsg: '上記は単一の役の台数です。実際の一手は門前・自摸・暗刻…など複数の台を全部足します。台湾の点数計算、奥が深いんです。',
+};
+---
+
+<ArticleLayout
+  title={title}
+  description={description}
+  ogUrl={canonical}
+  publishDate="2026-06-10"
+  alternates={alternates}
+  breadcrumbs={[{ label:'ホーム', href:'/' }, { label:'台湾 vs 日本麻雀', href:'/ja/mahjong-taiwan-vs-japan/' }]}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <div class="mj-lang"><a href={zhUrl}>中文</a><span>日本語</span></div>
+
+  <p class="mj-lead">こんにちは、芭樂子（バラズ）です。台湾の麻雀「<strong>台湾16張麻雀</strong>」、日本のリーチ麻雀と何が違うか気になりませんか？実はかなり違います——<strong>手牌の枚数からして違う</strong>んです。この記事では比較表＋8つのポイントでサクッと解説します。ポン・チー・カンは同じなので、リーチ麻雀が打てる人ならすぐ馴染めますよ。</p>
+
+  <h2>📊 まず比較表で一目で</h2>
+  <div class="mj-table-wrap">
+    <table class="mj-cmp">
+      <thead><tr><th>項目</th><th>🇹🇼 台湾16張</th><th>🇯🇵 日本リーチ</th></tr></thead>
+      <tbody>
+        <tr><td>手牌</td><td>16枚（和了は5面子＋雀頭）</td><td>13枚（4面子＋雀頭）</td></tr>
+        <tr><td>花牌</td><td>あり（春夏秋冬・梅蘭竹菊）</td><td>なし</td></tr>
+        <tr><td>点数計算</td><td>台計算（底＋台×レート）</td><td>翻＋符（点数表）</td></tr>
+        <tr><td>役（和了条件）</td><td>不要・形が揃えば和了</td><td>役が最低1つ必要</td></tr>
+        <tr><td>リーチ</td><td>なし</td><td>あり</td></tr>
+        <tr><td>ドラ</td><td>なし</td><td>あり</td></tr>
+        <tr><td>待ちの制限</td><td>過水／詐胡</td><td>フリテン</td></tr>
+        <tr><td>体感</td><td>牌が多く展開が速い</td><td>戦略・守備重視</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>1. 🀄 手牌の枚数：16枚 vs 13枚</h2>
+  <p>一番分かりやすい違いです。台湾麻雀は各自 <strong>16枚</strong>の手牌で、和了には <strong>5面子＋雀頭</strong>（計17枚）が必要。日本麻雀は <strong>13枚</strong>で、和了は <strong>4面子＋雀頭</strong>（計14枚）。1面子多いだけで、テンパイや手作りの考え方がガラッと変わります。</p>
+  <div class="mj-eg"><span class="mj-eg-tag">🇹🇼 台湾の和了（5面子＋雀頭）</span><div class="mj-eg-tiles" set:html={tileRow('1m2m3m4p5p6p7s8s9s2m2m2m9p9p5z5z')} /></div>
+  <div class="mj-eg"><span class="mj-eg-tag">🇯🇵 日本の和了（4面子＋雀頭）</span><div class="mj-eg-tiles" set:html={tileRow('1m2m3m4p5p6p7s8s9s5z5z5z9p9p')} /></div>
+
+  <h2>2. 🌸 花牌：台湾ならではの要素</h2>
+  <p>台湾には <strong>8枚の花牌</strong>（春夏秋冬・梅蘭竹菊）があります。引いたら表向きにして <strong>1枚補充</strong>でき、自分の席に対応する「位花」が揃うと <strong>台が加算</strong>されます。標準的なリーチ麻雀には<strong>花牌が無い</strong>ので、「補花」「花槓」といった概念もありません。</p>
+  <div class="mj-eg"><span class="mj-eg-tag">🌸 台湾の花牌</span><div class="mj-eg-tiles" set:html={tileRow('1f2f3f4f5f6f7f8f')} /></div>
+
+  <h2>3. 💰 点数計算：台 vs 翻符</h2>
+  <p>台湾は <strong>「台（タイ）」</strong>で計算——底＋台数×レートで、門前1台、ツモ1台、対々和4台…という風に足していきます。日本は <strong>「翻＋符」</strong>で点数表に当てはめ、満貫・役満といった上限もあります。台湾の台計算は直感的、日本の翻符は初心者にはやや難しめ。</p>
+
+  <h2>4. 🎴 役：日本は「役」が無いと和了れない</h2>
+  <p>日本の打ち手が一番驚くポイント。日本麻雀では <strong>形が4面子＋雀頭で揃っていても、役が1つも無ければ和了れません</strong>（リーチ・タンヤオ・ピンフ・役牌など、最低1つ必要）。ところが台湾16張には <strong>「役」という概念がそもそも無く、形が揃えば和了OK</strong>。点数の大小はあとで台計算します。「テンパイしてるのに和了れない」が台湾には無い、という感覚です。</p>
+
+  <h2>5. 🔥 リーチ：日本麻雀の代名詞</h2>
+  <p>リーチは日麻の華。<strong>門前</strong>テンパイで「リーチ」を宣言し <strong>1000点</strong>供託、以降<strong>手牌は固定</strong>。和了れば打点アップ＋裏ドラのチャンス。リーチ自体が役なので「役なしで和了れない」問題も解決します。台湾16張には <strong>リーチが無く</strong>、門前ツモは台計算で加点する形です。</p>
+
+  <h2>6. ✨ ドラ：日本のランダムボーナス</h2>
+  <p>日麻ではドラ表示牌をめくり、特定の牌が「ドラ」に。手牌に有るぶんだけ翻が増える、いわばランダムボーナスです。リーチ和了なら裏ドラも乗ります。台湾には <strong>ドラが無く</strong>、点数は純粋に手牌の形（台）で決まるので、運の要素は控えめ。</p>
+
+  <h2>7. 🚫 フリテン vs 過水</h2>
+  <p>日本には <strong>「フリテン」</strong>があり、自分の待ち牌の中に<strong>自分が捨てた牌</strong>が1枚でもあると、<strong>ロン和了ができず</strong>ツモのみになります。台湾の対応ルールは <strong>「過水／詐胡」</strong>で、和了れる牌を見逃すとそのめぐりは同じ牌で和了れない…という形（ルールは卓ごとに差あり）。概念は近いですが、細部と罰則が異なります。</p>
+
+  <h2>8. ⚡ 体感の違い</h2>
+  <p>台湾16張は <strong>牌が多く・花牌があり・役不要</strong>なので、和了のハードルが低く展開が速い。日本13張は <strong>役が必要・リーチやドラ・フリテン</strong>があり、<strong>戦略と守備</strong>（押し引き・リーチ判断・放銃回避）がより重要。片方は「爽快」、もう片方は「攻防の駆け引き」。好みの問題で、優劣ではありません。</p>
+
+  <h2>🎮 実際にやってみよう</h2>
+  <p>読むより一度やってみるのが早い。まず日本式の「<strong>この手、和了れる？</strong>」（役の有無）、次に台湾式の「<strong>この形、何台？</strong>」（台計算）を体験してみて：</p>
+  <MahjongMiniQuiz config={yakuQuiz} />
+  <MahjongMiniQuiz config={taiQuiz} />
+
+  <h2>🤔 まとめ</h2>
+  <ul>
+    <li>ポン・チー・カンは<strong>完全に同じ</strong>。まずこの3つを押さえればOK。</li>
+    <li>台湾を打つなら、追加で覚えるのは「3枚多い・花牌・台計算・役は不要」。</li>
+    <li>台湾旅行や台湾の友人と打つ機会があれば、ぜひ16張に挑戦してみてください！</li>
+  </ul>
+  <div class="mj-cross">
+    <a href="/en/tools/mahjong-rules-trainer/" class="mj-cross-btn">🀄 Pung / Chow / Kong trainer (EN) →</a>
+  </div>
+
+  <h2>❓ よくある質問</h2>
+  {faqs.map(f => (
+    <details class="mj-faq">
+      <summary>{f.q}</summary>
+      <p>{f.a}</p>
+    </details>
+  ))}
+
+<style is:global>
+  .mj-lang{ display:flex; gap:.4rem; margin-bottom:1rem; font-size:.85rem; }
+  .mj-lang a{ color:var(--gold-light,#ffd24a); text-decoration:none; border:1px solid var(--border,#444); border-radius:20px; padding:.2rem .8rem; }
+  .mj-lang a:hover{ background:rgba(245,184,0,.12); }
+  .mj-lang span{ color:#1a1a1a; background:var(--gold,#f5b800); border-radius:20px; padding:.2rem .8rem; font-weight:700; }
+  .mj-lead{ font-size:1.02rem; line-height:1.85; background:rgba(245,184,0,.07); border-radius:12px; padding:1rem 1.2rem; }
+  .mj-table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin:1.2rem 0; }
+  table.mj-cmp{ width:100%; border-collapse:collapse; min-width:420px; font-size:.95rem; }
+  table.mj-cmp th, table.mj-cmp td{ border:1px solid var(--border,#333); padding:.6rem .7rem; text-align:left; }
+  table.mj-cmp thead th{ background:rgba(245,184,0,.14); color:var(--text-primary); }
+  table.mj-cmp tbody td:first-child{ font-weight:700; color:var(--text-primary); white-space:nowrap; }
+  table.mj-cmp tbody tr:nth-child(odd){ background:rgba(255,255,255,.03); }
+  .mj-eg{ display:flex; flex-direction:column; gap:.4rem; background:rgba(30,122,70,.12); border:1px solid rgba(57,255,20,.2); border-radius:12px; padding:.8rem; margin:.8rem 0; }
+  .mj-eg-tag{ font-size:.84rem; font-weight:700; color:var(--gold-light,#ffd24a); }
+  .mj-eg-tiles{ display:flex; flex-wrap:wrap; gap:2px; }
+  .mj-eg-tiles svg{ width:34px; height:auto; }
+  .mj-cross{ display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center; margin:1.5rem 0; }
+  .mj-cross-btn{ display:inline-block; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a !important; font-weight:800; padding:.8rem 1.4rem; border-radius:12px; text-decoration:none; }
+  .mj-faq{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:10px; margin-bottom:.6rem; padding:.2rem .4rem; }
+  .mj-faq summary{ cursor:pointer; padding:.85rem .8rem; font-weight:700; color:var(--text-primary); }
+  .mj-faq p{ padding:0 .8rem .9rem !important; color:var(--text-secondary); margin:0 !important; }
+  @media (max-width:600px){
+    .mj-eg-tiles svg{ width:28px; }
+    table.mj-cmp{ min-width:0; font-size:.78rem; }
+    table.mj-cmp th, table.mj-cmp td{ padding:.4rem .35rem; }
+  }
+</style>
+</ArticleLayout>

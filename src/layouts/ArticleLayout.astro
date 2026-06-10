@@ -12,6 +12,7 @@ interface Props {
   publishDate?: string;
   breadcrumbs?: Array<{ label: string; href: string }>;
   showTOC?: boolean;
+  alternates?: { hreflang: string; href: string }[];
 }
 
 const {
@@ -22,7 +23,8 @@ const {
   author = 'GAME8LA',
   publishDate,
   breadcrumbs = [{ label: '首頁', href: '/' }, { label: '文章', href: '/articles/' }],
-  showTOC = false
+  showTOC = false,
+  alternates = []
 } = Astro.props;
 ---
 
@@ -32,6 +34,7 @@ const {
   ogImage={ogImage}
   ogUrl={ogUrl}
   currentPage="article"
+  alternates={alternates}
 >
   <article class="article-wrapper">
     <!-- Breadcrumb Navigation -->

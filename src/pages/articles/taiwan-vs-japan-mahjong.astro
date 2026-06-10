@@ -1,0 +1,169 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import MahjongMiniQuiz from '../../components/MahjongMiniQuiz.astro';
+import { tileRow } from '../../lib/mahjong-tiles.js';
+
+const title = '台灣16張麻將 vs 日本麻將差在哪？8 個關鍵差別一次搞懂｜花牌、算台、立直';
+const description = '玩《雀魂》、看麻將動畫常一頭霧水？台灣 16 張跟日本立直麻將到底差在哪？手牌張數、花牌、算台 vs 飜符、役、立直、寶牌、振聽……芭樂子用一張對照表＋8 段圖解講清楚。';
+const canonical = 'https://game8la.com/articles/taiwan-vs-japan-mahjong/';
+const jaUrl = 'https://game8la.com/ja/mahjong-taiwan-vs-japan/';
+const alternates = [
+  { hreflang: 'zh-Hant', href: canonical },
+  { hreflang: 'ja', href: jaUrl },
+  { hreflang: 'x-default', href: canonical },
+];
+const faqs = [
+  { q: '台灣麻將和日本麻將最大的差別是什麼？', a: '手牌張數。台灣 16 張麻將胡牌要湊 5 副面子＋1 對將（共 17 張），日本立直麻將只要 4 副面子＋1 對將（共 14 張）。再來是台灣有花牌、用「台」計分、不需要「役」就能胡；日本沒有花牌、用「飜＋符」計分、而且一定要有役才能胡。' },
+  { q: '日本麻將為什麼一定要「役」才能胡？', a: '日本立直麻將規定：手牌就算湊成 4 面子＋1 對，如果沒有任何一個「役」（例如立直、斷么九、平和），也不能宣告胡牌。台灣 16 張沒有這個限制，只要牌型湊成就能胡，分數高低再靠算台計算。' },
+  { q: '立直（Riichi）是什麼？台灣有嗎？', a: '立直是日本麻將特有的玩法：門清聽牌時可以宣告「立直」，押 1000 點，之後手牌鎖死不能換，胡了有額外加分。台灣 16 張沒有立直這個機制。' },
+  { q: '台灣的花牌在日本麻將有嗎？', a: '標準日本立直麻將沒有花牌。台灣 16 張有 8 張花牌（春夏秋冬、梅蘭竹菊），摸到可以補一張牌，對到自己的「位花」還能加台。' },
+  { q: '我只會台灣麻將，去日本玩雀魂會很難嗎？', a: '基本動作（碰、吃、槓）完全一樣，所以不會從零開始。主要要重新學的是：少 3 張牌、要記役、立直、寶牌、振聽這幾個概念。先把碰吃槓練熟，再補這些差異就上手了。' },
+];
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage', mainEntity: faqs.map(f=>({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+
+const yakuQuiz = {
+  kind: 'yesno',
+  title: '🇯🇵 小試身手：這手能胡嗎？',
+  intro: '下面都是已經湊成「4 副面子＋1 對」的日本牌。但日本規定沒有「役」就不能胡——假設是別人放槍（Ron），你看得出哪手能胡嗎？',
+  ask: '這手能不能胡？',
+  yes: '能胡 ✅', no: '無役・不能胡 ❌',
+  nextLabel: '下一題 →', okText: '✅ 答對！', noText: '❌ 不對',
+  hands: [
+    { tiles:'2m3m4m6m7m8m3p4p5p5s6s7s8p8p', ans:'yes', why:'整手都是 2~8 的數牌 → 斷么九（Tanyao），有役，能胡！' },
+    { tiles:'1m1m1m3p4p5p6p7p8p7s8s9s3s3s', ans:'no', why:'牌型湊成了，但沒有任何役：有一萬、九條（非斷么九）、有刻子（非平和）、對子也不是役牌 → 日本不能胡！這手在台灣可以直接胡。' },
+    { tiles:'5z5z5z2m3m4m6p7p8p3s4s5s9m9m', ans:'yes', why:'白板（中發白）的刻子是「役牌」→ 有役，能胡！' },
+    { tiles:'9m9m9m1s2s3s5s6s7s4p5p6p3p3p', ans:'no', why:'湊成了卻沒役：有九萬、一條（非斷么九）、有刻子（非平和）、沒有一條龍、對子非役牌 → 不能胡。台灣則無此限制。' },
+  ],
+  doneMsg: '看懂了嗎？「湊成 ≠ 能胡」就是日本麻將最讓台灣人意外的地方。台灣 16 張只要湊成就能胡，分數高低再算台。',
+};
+
+const taiQuiz = {
+  kind: 'count',
+  title: '🇹🇼 換台式：這個牌型幾台？',
+  intro: '台灣用「台」計分。下面每手都有一個明顯的牌型，猜猜它值幾台？',
+  ask: '這個牌型是幾台？',
+  counts: [1,2,4,8,16], unit:'台',
+  nextLabel: '下一題 →', okText:'✅ 答對！', noText:'❌ 不對',
+  hands: [
+    { tiles:'1m2m3m3m4m5m5m6m7m7m8m9m2m2m2m9m9m', ans:8, why:'整手同一花色（清一色）= 8 台！' },
+    { tiles:'2m2m2m5p5p5p8s8s8s3m3m3m7p7p7p9s9s', ans:4, why:'五副全是刻子、沒有順子（碰碰胡）= 4 台！' },
+    { tiles:'5z5z5z6z6z6z7z7z7z2m3m4m6p7p8p9s9s', ans:8, why:'中、發、白各一刻（大三元）= 8 台！' },
+  ],
+  doneMsg: '這些只是單一牌型的台數。真正一手牌常常同時有好幾個台（門清、自摸、暗刻…）要全部加起來——不會算？下面練習器幫你！',
+  ctaHref: '/tools/mahjong-suan-tai-trainer/',
+  ctaLabel: '🧮 去「算台練習器」一張一張練 →',
+};
+---
+
+<ArticleLayout
+  title={title}
+  description={description}
+  ogUrl={canonical}
+  publishDate="2026-06-10"
+  alternates={alternates}
+  breadcrumbs={[{ label:'首頁', href:'/' }, { label:'文章', href:'/articles/' }, { label:'台灣 vs 日本麻將', href:'/articles/taiwan-vs-japan-mahjong/' }]}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <div class="mj-lang"><span>中文</span><a href={jaUrl}>日本語</a></div>
+
+  <p class="mj-lead">8LA 大大好，我是芭樂子。最近《雀魂》紅到爆、麻將動畫一部接一部，超多台灣牌咖問我:「<strong>日本麻將跟我們到底差在哪？</strong>」其實差超多——光是手牌張數就不一樣!這篇用一張對照表 ＋ 8 個重點，讓你看完馬上懂，以後跟日本朋友開桌不鬧笑話。(日本朋友也歡迎看<a href={jaUrl}>日本語版</a> 🇯🇵)</p>
+
+  <h2>📊 一張表先看懂</h2>
+  <div class="mj-table-wrap">
+    <table class="mj-cmp">
+      <thead><tr><th>項目</th><th>🇹🇼 台灣 16 張</th><th>🇯🇵 日本立直</th></tr></thead>
+      <tbody>
+        <tr><td>手牌張數</td><td>16 張（胡牌 5 副＋將）</td><td>13 張（胡牌 4 副＋將）</td></tr>
+        <tr><td>花牌</td><td>有（春夏秋冬梅蘭竹菊）</td><td>無</td></tr>
+        <tr><td>計分</td><td>算台（底＋台×錢）</td><td>飜＋符（分數表）</td></tr>
+        <tr><td>役（成胡條件）</td><td>不需要，湊成就能胡</td><td>一定要有役才能胡</td></tr>
+        <tr><td>立直 Riichi</td><td>無</td><td>有</td></tr>
+        <tr><td>寶牌 Dora</td><td>無</td><td>有</td></tr>
+        <tr><td>聽牌限制</td><td>過水／詐胡</td><td>振聽（フリテン）</td></tr>
+        <tr><td>體感</td><td>牌多、節奏快、爽</td><td>重策略、防守</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>1. 🀄 手牌張數：16 張 vs 13 張</h2>
+  <p>先講最有感的。台灣人手 <strong>16 張</strong>、胡牌要湊 <strong>5 副面子＋1 對</strong>（共 17 張）；日本只有 <strong>13 張</strong>、<strong>4 副＋1 對</strong>（共 14 張）。少一副聽起來沒什麼？差多了——日本牌少、做牌快，咻一下就聽牌；台灣牌多、得多喬一副，慢慢磨。第一次從台灣切去打日麻的人，最常見的 OS 就是:「咦怎麼這麼快就有人胡了？」下面兩張圖排排看，台灣硬是比日本多<strong>整整一副</strong>。</p>
+  <div class="mj-eg"><span class="mj-eg-tag">🇹🇼 台灣胡牌（5 副＋將）</span><div class="mj-eg-tiles" set:html={tileRow('1m2m3m4p5p6p7s8s9s2m2m2m9p9p5z5z')} /></div>
+  <div class="mj-eg"><span class="mj-eg-tag">🇯🇵 日本胡牌（4 副＋將）</span><div class="mj-eg-tiles" set:html={tileRow('1m2m3m4p5p6p7s8s9s5z5z5z9p9p')} /></div>
+
+  <h2>2. 🌸 花牌：台灣的隱藏樂趣</h2>
+  <p>台灣多了 <strong>8 張花牌</strong>——春夏秋冬、梅蘭竹菊。摸到就翻開、<strong>再補摸一張</strong>（等於多抽一次，賺到）；剛好對到自己座位的「位花」還能<strong>加台</strong>，運氣好開局就先爽一張。日本立直<strong>根本沒有花牌</strong>，所以「補花」「花槓」這些詞，你跟日本牌咖講，他大概會一臉問號回你「それ何？」</p>
+  <div class="mj-eg"><span class="mj-eg-tag">🌸 台灣花牌</span><div class="mj-eg-tiles" set:html={tileRow('1f2f3f4f5f6f7f8f')} /></div>
+
+  <h2>3. 💰 計分：算台 vs 飜符</h2>
+  <p>台灣用 <strong>「台」</strong>計分——底＋台數×每台的錢，門清算 1 台、自摸 1 台、碰碰胡 4 台這樣加上去。日本用 <strong>「飜（han）＋符（fu）」</strong>，查一張分數表換算成點數，還有滿貫、役滿這種封頂級距。台灣算台直覺好上手，日本飜符對新手門檻較高。</p>
+  <blockquote>想練台灣算台？文末有<a href="/tools/mahjong-suan-tai-trainer/">算台練習器</a>，看牌猜台數立刻對答案。</blockquote>
+
+  <h2>4. 🎴 役：日本一定要「會一個招」才能胡</h2>
+  <p>這點最容易讓台灣玩家踩雷。日本麻將規定:<strong>就算你牌型湊成 4 面子＋1 對，沒有任何一個「役」也不能胡</strong>。役就像「成胡的資格」——立直、斷么九、平和、役牌……至少要有一個。台灣完全沒這限制，<strong>湊成就能胡</strong>，分數高低再算台。所以台灣玩家剛玩日麻最常見的崩潰是:「我明明聽牌了為什麼不能胡?」——因為你沒役。</p>
+
+  <h2>5. 🔥 立直（Riichi）：日本麻將的招牌</h2>
+  <p>立直就是動畫裡大喊「リーチ！」那一下，日麻的招牌動作。<strong>門清</strong>（沒碰沒吃）聽牌時可以宣告立直、押 <strong>1000 點</strong>下去，之後手牌<strong>鎖死不能換</strong>——等於賭一把:胡了加分還能翻里寶牌，沒胡那 1000 點就送對家了。而且立直本身算一個役，所以它順便解決了上一段「沒役不能胡」的窘境。台灣 16 張<strong>沒有立直</strong>這套，門清自摸直接算台加分，不用喊、不用押，粉乾脆。</p>
+
+  <h2>6. ✨ 寶牌（Dora）：日本的隨機加成</h2>
+  <p>日麻會翻一張<strong>寶牌指示牌</strong>，指定某種牌當「寶牌」，你手裡每有一張就多算一飜——根本麻將版的隨機彩金，開牌前一翻兩瞪眼。立直胡牌還能再翻「里寶牌」加碼，運氣一來分數直接翻倍噴出。台灣<strong>沒有寶牌</strong>，分數純看你牌做得多大，比較不吃天上掉下來的運氣——想靠運氣爽一波的，可能會覺得台灣有點「實在過頭」。</p>
+
+  <h2>7. 🚫 振聽 vs 過水：打過的牌不能胡？</h2>
+  <p>日本有個專坑新手的雷叫 <strong>「振聽（フリテン）」</strong>:只要你的聽牌裡有<strong>任何一張是你自己打掉過的</strong>，你就<strong>不能吃別人放槍（榮和）</strong>，只能乖乖等自摸。講白話——<strong>自己丟掉的牌，回頭就不准靠它胡別人</strong>，超容易玩到一半忘記、然後喊胡被打槍。台灣對應的是<strong>「過水／詐胡」</strong>:放掉一張能胡的牌，這圈通常就不能再胡同一張（各桌規矩略有出入）。概念像、罰則不一樣，所以跨桌打之前先問一句，免得喊錯被笑。</p>
+
+  <h2>8. ⚡ 體感：為什麼感覺差這麼多</h2>
+  <p>台灣 16 張<strong>牌多、又有花牌、不用役</strong>，胡牌門檻低、節奏快、大牌爽快;日本 13 張<strong>要役、有立直和寶牌、有振聽</strong>，更講究<strong>策略與防守</strong>(該不該推、要不要立直、放不放槍)。一個偏「爽」，一個偏「博弈攻防」——沒有誰比較好，看你愛哪種味道。</p>
+
+  <h2>🎮 動手玩玩看，差別馬上有感</h2>
+  <p>看再多不如自己玩一次。先玩日式的「<strong>這手能不能胡</strong>」(體會「沒役不能胡」)，再玩台式的「<strong>這個牌型幾台</strong>」(體會算台)：</p>
+  <MahjongMiniQuiz config={yakuQuiz} />
+  <MahjongMiniQuiz config={taiQuiz} />
+
+  <h2>🤔 我該學哪個？</h2>
+  <ul>
+    <li><strong>想跟家人朋友過年開桌</strong> → 台灣 16 張，身邊就有人陪你玩。</li>
+    <li><strong>愛玩《雀魂》、看麻將動畫</strong> → 日本立直，線上對手多。</li>
+    <li><strong>完全新手</strong> → 不管學哪個，<strong>碰、吃、槓都一樣</strong>，先把這三個動作練熟最實在。</li>
+  </ul>
+  <div class="mj-cross">
+    <a href="/tools/mahjong-rules-trainer/" class="mj-cross-btn">🀄 先練碰吃槓判斷 →</a>
+    <a href="/tools/mahjong-suan-tai-trainer/" class="mj-cross-btn ghost">🧮 再練台灣算台 →</a>
+  </div>
+
+  <h2>❓ 常見問題</h2>
+  {faqs.map(f => (
+    <details class="mj-faq">
+      <summary>{f.q}</summary>
+      <p>{f.a}</p>
+    </details>
+  ))}
+
+<style is:global>
+  .mj-lang{ display:flex; gap:.4rem; margin-bottom:1rem; font-size:.85rem; }
+  .mj-lang a{ color:var(--gold-light,#ffd24a); text-decoration:none; border:1px solid var(--border,#444); border-radius:20px; padding:.2rem .8rem; }
+  .mj-lang a:hover{ background:rgba(245,184,0,.12); }
+  .mj-lang span{ color:#1a1a1a; background:var(--gold,#f5b800); border-radius:20px; padding:.2rem .8rem; font-weight:700; }
+  .mj-lead{ font-size:1.02rem; line-height:1.8; background:rgba(245,184,0,.07); border-radius:12px; padding:1rem 1.2rem; }
+  .mj-table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; margin:1.2rem 0; }
+  table.mj-cmp{ width:100%; border-collapse:collapse; min-width:420px; font-size:.95rem; }
+  table.mj-cmp th, table.mj-cmp td{ border:1px solid var(--border,#333); padding:.6rem .7rem; text-align:left; }
+  table.mj-cmp thead th{ background:rgba(245,184,0,.14); color:var(--text-primary); }
+  table.mj-cmp tbody td:first-child{ font-weight:700; color:var(--text-primary); white-space:nowrap; }
+  table.mj-cmp tbody tr:nth-child(odd){ background:rgba(255,255,255,.03); }
+  .mj-eg{ display:flex; flex-direction:column; gap:.4rem; background:rgba(30,122,70,.12); border:1px solid rgba(57,255,20,.2); border-radius:12px; padding:.8rem; margin:.8rem 0; }
+  .mj-eg-tag{ font-size:.84rem; font-weight:700; color:var(--gold-light,#ffd24a); }
+  .mj-eg-tiles{ display:flex; flex-wrap:wrap; gap:2px; }
+  .mj-eg-tiles svg{ width:34px; height:auto; }
+  .mj-cross{ display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center; margin:1.5rem 0; }
+  .mj-cross-btn{ display:inline-block; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a !important; font-weight:800; padding:.8rem 1.4rem; border-radius:12px; text-decoration:none; }
+  .mj-cross-btn.ghost{ background:transparent; border:1.5px solid var(--gold,#f5b800); color:var(--gold-light,#ffd24a) !important; }
+  .mj-faq{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:10px; margin-bottom:.6rem; padding:.2rem .4rem; }
+  .mj-faq summary{ cursor:pointer; padding:.85rem .8rem; font-weight:700; color:var(--text-primary); }
+  .mj-faq p{ padding:0 .8rem .9rem !important; color:var(--text-secondary); margin:0 !important; }
+  @media (max-width:600px){
+    .mj-eg-tiles svg{ width:28px; }
+    table.mj-cmp{ min-width:0; font-size:.78rem; }
+    table.mj-cmp th, table.mj-cmp td{ padding:.4rem .35rem; }
+  }
+</style>
+</ArticleLayout>

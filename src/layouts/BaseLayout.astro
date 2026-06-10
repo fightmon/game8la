@@ -13,6 +13,7 @@ interface Props {
   ogUrl?: string;
   currentPage?: string;
   noindex?: boolean;
+  alternates?: { hreflang: string; href: string }[];
 }
 
 const {
@@ -21,7 +22,8 @@ const {
   ogImage = 'https://game8la.com/images/og-image.webp',
   ogUrl = Astro.url.href,
   currentPage = 'home',
-  noindex = false
+  noindex = false,
+  alternates = []
 } = Astro.props;
 ---
 
@@ -96,8 +98,12 @@ const {
 
     <meta name="theme-color" content="#121212">
     <link rel="canonical" href={ogUrl}>
-    <link rel="alternate" hreflang="zh-TW" href={ogUrl}>
-    <link rel="alternate" hreflang="x-default" href={ogUrl}>
+    {alternates.length > 0
+      ? alternates.map(a => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)
+      : (<Fragment>
+          <link rel="alternate" hreflang="zh-TW" href={ogUrl}>
+          <link rel="alternate" hreflang="x-default" href={ogUrl}>
+        </Fragment>)}
 
     <!-- Organization Schema (全站) -->
     <script type="application/ld+json" set:html={JSON.stringify({
