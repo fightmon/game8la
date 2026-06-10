@@ -1,0 +1,145 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { tileRow } from '../../lib/mahjong-tiles.js';
+
+const title = '麻將怎麼玩？新手入門一次搞懂｜台灣16張規則、碰吃槓、聽牌、算台（附互動練習器）';
+const description = '第一次學麻將？芭樂子的「麻將教室」從零教起：牌怎麼看、怎麼摸打、碰吃槓、聽牌、胡牌、算台一條龍。每個觀念都配免費互動練習器，看不懂就點進去玩，玩一玩就會了。';
+const canonical = 'https://game8la.com/articles/how-to-play-mahjong/';
+const COVER = 'https://game8la.com/images/articles/mahjong-class-cover.webp';
+
+const faqs = [
+  { q: '完全沒碰過麻將，要從哪開始？', a: '先認識牌（萬、筒、條各 1~9，加字牌和花牌），再去玩「碰吃槓練習器」把三個基本動作練熟，接著聽牌、算台。照這篇的五步順序走，配練習器邊玩邊學最快。' },
+  { q: '學麻將大概要多久？', a: '基本動作（碰吃槓）一天就能上手，聽牌看你練多少、大概幾天有 sense，算台最花時間、要多練。好消息是這些都有互動練習器，比死背規則快很多。' },
+  { q: '一定要會算台才能打嗎？', a: '不用。先會「湊成牌型、能胡」就能上桌，算台是「算贏多少」的進階。建議先把碰吃槓、聽牌練熟能胡牌，算台再慢慢補。' },
+  { q: '台灣麻將和日本麻將一樣嗎？', a: '不一樣喔。台灣 16 張、有花牌、用「台」計分、湊成就能胡；日本 13 張、沒花牌、用飜符、還一定要有「役」才能胡。詳細差別這篇有：台灣16張 vs 日本麻將。' },
+  { q: '麻將算賭博嗎？', a: '芭樂子的立場：麻將是很好的娛樂和動腦遊戲，小賭怡情、純練腦都好，但別賭大的、別想靠它翻身。我們的練習器全部免費、不來真錢，純粹讓你把牌技練起來。' },
+];
+const faqSchema = { '@context':'https://schema.org','@type':'FAQPage', mainEntity: faqs.map(f=>({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) };
+---
+
+<ArticleLayout
+  title={title}
+  description={description}
+  ogUrl={canonical}
+  ogImage={COVER}
+  publishDate="2026-06-10"
+  breadcrumbs={[{ label:'首頁', href:'/' }, { label:'文章', href:'/articles/' }, { label:'麻將教室', href:'/articles/how-to-play-mahjong/' }]}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <img class="content-img" src="/images/articles/mahjong-class-cover.webp"
+       srcset="/images/articles/mahjong-class-cover-768w.webp 768w, /images/articles/mahjong-class-cover.webp 1200w"
+       sizes="(max-width:768px) 100vw, 760px"
+       alt="芭樂子化身麻將老師，在白板前用教鞭講解麻將牌型與算台公式，背景是牌桌——GAME8LA 麻將教室"
+       width="1200" height="670" loading="eager" decoding="async">
+
+  <p class="mj-lead">8LA 大大好，我是芭樂子。「<strong>麻將到底怎麼玩？</strong>」這問題我被問到爛。別怕——這篇就是你的麻將教室，我把整套拆成<strong>五步</strong>，每一步都配一台<strong>免費互動練習器</strong>，看不懂就點進去玩，玩個幾題比看十遍規則還快。坐穩，開始上課！</p>
+
+  <h2>🗺️ 學麻將，照這個順序就對了</h2>
+  <div class="mj-road">
+    <a href="#tiles" class="mj-step"><span class="mj-step-n">1</span><span>認識牌</span></a>
+    <a href="/tools/mahjong-rules-trainer/" class="mj-step tool"><span class="mj-step-n">2</span><span>碰吃槓<small>練習器</small></span></a>
+    <a href="/tools/mahjong-tenpai-trainer/" class="mj-step tool"><span class="mj-step-n">3</span><span>聽牌<small>練習器</small></span></a>
+    <a href="/tools/mahjong-suan-tai-trainer/" class="mj-step tool"><span class="mj-step-n">4</span><span>算台<small>練習器</small></span></a>
+    <span class="mj-step done"><span class="mj-step-n">🎉</span><span>會打了</span></span>
+  </div>
+  <p class="mj-note">※ 標「練習器」的可以直接點進去玩，邊學邊練最有效。</p>
+
+  <h2 id="tiles">1. 🀫 先認識牌</h2>
+  <p>麻將牌分三種「數字牌」，各 1~9：<strong>萬（m）、筒（圓圈）、條（綠竹）</strong>。</p>
+  <div class="mj-eg"><span class="mj-eg-tag">萬子 1~9</span><div class="mj-eg-tiles" set:html={tileRow('1m2m3m4m5m6m7m8m9m')} /></div>
+  <div class="mj-eg"><span class="mj-eg-tag">筒子 1~9</span><div class="mj-eg-tiles" set:html={tileRow('1p2p3p4p5p6p7p8p9p')} /></div>
+  <div class="mj-eg"><span class="mj-eg-tag">條子 1~9</span><div class="mj-eg-tiles" set:html={tileRow('1s2s3s4s5s6s7s8s9s')} /></div>
+  <p>再來是<strong>字牌</strong>：四個風（東南西北）＋三元（中、發、白）。台灣還多了 <strong>8 張花牌</strong>（春夏秋冬、梅蘭竹菊），摸到補一張、對到位花加台。</p>
+  <div class="mj-eg"><span class="mj-eg-tag">字牌</span><div class="mj-eg-tiles" set:html={tileRow('1z2z3z4z5z6z7z')} /></div>
+
+  <h2>2. 🎯 目標：湊成「5 副面子 ＋ 1 對將」</h2>
+  <p>台灣 16 張，胡牌就是把手牌湊成 <strong>5 副「面子」＋ 1 對「將（眼）」</strong>（共 17 張）。面子有兩種：</p>
+  <ul>
+    <li><strong>刻子</strong>＝三張一模一樣（如 <span class="mj-inline" set:html={tileRow('5m5m5m')} />）</li>
+    <li><strong>順子</strong>＝同花色三張連號（如 <span class="mj-inline" set:html={tileRow('3p4p5p')} />）</li>
+  </ul>
+  <p>輪到你就<strong>摸一張、打一張</strong>，目標就是慢慢把這 17 張湊出來。聽起來簡單，難在「怎麼用最快的路湊到」——這就要靠下面三步的功夫了。</p>
+
+  <h2>3. ✋ 三個動作：碰、吃、槓</h2>
+  <p>別人打出的牌，符合條件你可以<strong>叫牌</strong>拿過來，加速做牌：</p>
+  <ul>
+    <li><strong>碰</strong>：手上有兩張一樣，任何人打第三張 → 湊成刻子</li>
+    <li><strong>吃</strong>：手上有兩張連號，<strong>只能吃「上家」</strong>打的 → 湊成順子</li>
+    <li><strong>槓</strong>：四張一樣，補摸一張</li>
+  </ul>
+  <img class="mj-photo" src="/images/articles/mahjong-anke.webp" alt="芭樂子在麻將桌上把暗刻牌緊緊藏在手裡不讓對手偷看，說明碰出來的明刻與自己摸的暗刻差別" width="960" height="536" loading="lazy" decoding="async">
+  <p>「<strong>吃只能吃上家</strong>」是新手最常踩的雷。這三個動作用講的記不牢，<strong>直接玩</strong>最快：</p>
+  <div class="mj-cta"><a href="/tools/mahjong-rules-trainer/" class="mj-cta-btn">🀄 玩「碰吃槓練習器」→ 同一手牌換人打，一眼看懂能不能吃</a></div>
+
+  <h2>4. 👂 聽牌：差一張就胡了</h2>
+  <p>當你只差<strong>最後一張</strong>就能湊成 5 副＋1 對，就叫「聽牌」。看得出「聽什麼牌、聽幾張」，是高手跟新手的差別——聽越多張，胡牌機率越高。常見有兩面、嵌張、邊張、單吊、雙碰五種型。</p>
+  <div class="mj-cta"><a href="/tools/mahjong-tenpai-trainer/" class="mj-cta-btn">👂 玩「聽牌練習器」→ 給你一手牌，猜聽哪幾張</a></div>
+
+  <h2>5. 🎉 胡牌 ＆ 算台：算你贏多少</h2>
+  <p>湊成了喊「胡！」——但贏多少錢，要看你這手有<strong>幾台</strong>。門清、自摸、碰碰胡、清一色、大三元……每個牌型都有台數，加起來×每台的錢就是贏的。</p>
+  <img class="mj-photo" src="/images/articles/mahjong-daisangen.webp" alt="芭樂子湊成大三元，中發白三副刻子發出金光，對手震驚——台灣麻將大三元 8 台" width="960" height="536" loading="lazy" decoding="async">
+  <p>算台是麻將最有成就感、也最花時間練的部分。看牌猜台數，練起來上桌記帳不求人：</p>
+  <div class="mj-cta"><a href="/tools/mahjong-suan-tai-trainer/" class="mj-cta-btn">🧮 玩「算台練習器」→ 看牌猜台數，立刻對答案</a></div>
+
+  <h2>🇯🇵 想知道跟日本麻將差在哪？</h2>
+  <p>看《雀魂》、麻將動畫長大的，一定好奇日本麻將跟台灣差在哪——手牌張數、花牌、役、立直、寶牌……差超多。這篇用對照表＋互動測驗講清楚：</p>
+  <div class="mj-cta"><a href="/articles/taiwan-vs-japan-mahjong/" class="mj-cta-btn ghost">📖 台灣16張 vs 日本麻將：8 個關鍵差別 →</a></div>
+
+  <h2>🏁 複習：五步學會麻將</h2>
+  <ol class="mj-recap">
+    <li><strong>認識牌</strong>——萬筒條＋字牌＋花牌</li>
+    <li><strong>碰吃槓</strong>——三個叫牌動作（<a href="/tools/mahjong-rules-trainer/">練習器</a>）</li>
+    <li><strong>聽牌</strong>——差一張，看你聽什麼（<a href="/tools/mahjong-tenpai-trainer/">練習器</a>）</li>
+    <li><strong>算台</strong>——胡了算贏多少（<a href="/tools/mahjong-suan-tai-trainer/">練習器</a>）</li>
+    <li><strong>上桌開打</strong>——剩下的就是經驗值，多打就強</li>
+  </ol>
+
+  <h2>❓ 新手常見問題</h2>
+  {faqs.map(f => (
+    <details class="mj-faq">
+      <summary>{f.q}</summary>
+      <p>{f.a}</p>
+    </details>
+  ))}
+
+<style is:global>
+  .content-img{ width:100%; height:auto; border-radius:14px; margin:0 0 1.4rem; display:block; }
+  .mj-photo{ width:100%; height:auto; border-radius:12px; margin:1.2rem 0; display:block; }
+  .mj-lead{ font-size:1.04rem; line-height:1.85; background:rgba(245,184,0,.07); border-radius:12px; padding:1rem 1.2rem; }
+  .mj-note{ font-size:.86rem; color:var(--text-muted); }
+
+  /* 學習路線圖 */
+  .mj-road{ display:flex; flex-wrap:wrap; align-items:stretch; gap:.5rem; margin:1.2rem 0 .4rem; }
+  .mj-step{ flex:1 1 90px; min-width:90px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.2rem; text-align:center; background:var(--bg-card,#1a1a1a); border:1.5px solid var(--border,#333); border-radius:12px; padding:.7rem .4rem; text-decoration:none; color:var(--text-secondary); font-weight:700; }
+  .mj-step small{ display:block; font-size:.68rem; color:var(--text-muted); font-weight:400; }
+  .mj-step.tool{ border-color:var(--gold,#f5b800); background:rgba(245,184,0,.08); color:var(--gold-light,#ffd24a); }
+  .mj-step.tool:hover{ background:rgba(245,184,0,.18); }
+  .mj-step.done{ border-color:#39FF14; color:#9bff7a; background:rgba(57,255,20,.08); }
+  .mj-step-n{ display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,.1); font-size:.9rem; }
+  .mj-step.tool .mj-step-n{ background:var(--gold,#f5b800); color:#1a1a1a; }
+
+  .mj-eg{ display:flex; flex-direction:column; gap:.4rem; background:rgba(30,122,70,.12); border:1px solid rgba(57,255,20,.2); border-radius:12px; padding:.8rem; margin:.7rem 0; }
+  .mj-eg-tag{ font-size:.84rem; font-weight:700; color:var(--gold-light,#ffd24a); }
+  .mj-eg-tiles{ display:flex; flex-wrap:wrap; gap:2px; }
+  .mj-eg-tiles svg{ width:38px; height:auto; }
+  .mj-inline{ display:inline-flex; gap:1px; vertical-align:middle; }
+  .mj-inline svg{ width:30px; height:auto; }
+
+  .mj-cta{ margin:1rem 0; }
+  .mj-cta-btn{ display:block; text-align:center; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a !important; font-weight:800; padding:.95rem 1.2rem; border-radius:12px; text-decoration:none; line-height:1.5; }
+  .mj-cta-btn.ghost{ background:transparent; border:1.5px solid var(--gold,#f5b800); color:var(--gold-light,#ffd24a) !important; }
+  .mj-recap{ line-height:2; }
+
+  .mj-faq{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:10px; margin-bottom:.6rem; padding:.2rem .4rem; }
+  .mj-faq summary{ cursor:pointer; padding:.85rem .8rem; font-weight:700; color:var(--text-primary); }
+  .mj-faq p{ padding:0 .8rem .9rem !important; color:var(--text-secondary); margin:0 !important; }
+
+  @media (max-width:600px){
+    .mj-eg-tiles svg{ width:30px; }
+    .mj-inline svg{ width:26px; }
+    .mj-step{ flex-basis:64px; min-width:64px; font-size:.82rem; padding:.6rem .25rem; }
+    .mj-cta-btn{ font-size:.96rem; padding:.85rem 1rem; }
+  }
+</style>
+</ArticleLayout>

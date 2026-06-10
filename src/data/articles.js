@@ -155,6 +155,20 @@ export const articles = [
     thumbnail: '/images/article-thumbs/thumb-worldcup-broadcast.webp'
   },
   {
+    slug: 'how-to-play-mahjong',
+    title: '麻將怎麼玩？新手入門一次搞懂｜台灣16張規則、碰吃槓、聽牌、算台（附互動練習器）',
+    excerpt: '第一次學麻將？芭樂子的「麻將教室」從零教起：認牌、摸打、碰吃槓、聽牌、胡牌、算台一條龍，每個觀念都配免費互動練習器，看不懂就點進去玩，玩一玩就會了。',
+    category: 'poker',
+    categoryLabel: '麻將教室',
+    badgeType: 'featured',
+    date: '2026-06-10',
+    views: 1,
+    tags: ['最新', '精選', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#0d4a2c,#1a7a3e,#f5b800)',
+    thumbnail: '/images/articles/mahjong-class-cover-768w.webp'
+  },
+  {
     slug: 'taiwan-vs-japan-mahjong',
     title: '台灣16張麻將 vs 日本麻將差在哪？8 個關鍵差別一次搞懂｜花牌、算台、立直',
     excerpt: '玩《雀魂》、看麻將動畫常一頭霧水？台灣 16 張跟日本立直麻將到底差在哪？手牌張數、花牌、算台 vs 飜符、役、立直、寶牌、振聽……芭樂子用一張對照表＋8 段圖解講清楚，附碰吃槓＋算台練習器。',
