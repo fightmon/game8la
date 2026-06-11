@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="賽事結算後台 — GAME8LA" description="admin only" noindex={true} currentPage="tools">
+  <div class="as-wrap">
+    <h1>🔧 賽事結算後台</h1>
+    <p class="as-sub">輸入 ADMIN_KEY → 載入賽事 → 賽後點正確結果，系統自動發點數給猜中的會員。</p>
+
+    <div class="as-keyrow">
+      <input type="password" id="asKey" placeholder="ADMIN_KEY" autocomplete="off" />
+      <label class="as-remember"><input type="checkbox" id="asRemember" checked /> 記住</label>
+      <button id="asLoad" type="button">載入賽事</button>
+    </div>
+
+    <div class="as-filter">
+      <label><input type="radio" name="asf" value="due" checked /> 只看待結算（已開賽・未結算）</label>
+      <label><input type="radio" name="asf" value="open" /> 全部未結算</label>
+      <label><input type="radio" name="asf" value="all" /> 全部</label>
+    </div>
+
+    <div id="asMsg" class="as-msg"></div>
+    <div id="asList" class="as-list"></div>
+  </div>
+
+<style is:global>
+  .as-wrap{ max-width:760px; margin:0 auto; padding:1.5rem 1rem 4rem; }
+  .as-wrap h1{ color:var(--gold-light,#ffd24a); font-size:1.6rem; }
+  .as-sub{ color:var(--text-secondary); line-height:1.6; }
+  .as-keyrow{ display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:1rem 0 .6rem; }
+  .as-keyrow input[type=password]{ flex:1; min-width:180px; padding:.6rem .8rem; border-radius:8px; border:1px solid var(--border,#444); background:#1a1a1a; color:#fff; }
+  .as-remember{ color:var(--text-secondary); font-size:.9rem; white-space:nowrap; }
+  .as-keyrow button{ background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; border:none; border-radius:8px; padding:.6rem 1.2rem; cursor:pointer; }
+  .as-filter{ display:flex; flex-wrap:wrap; gap:1rem; font-size:.88rem; color:var(--text-secondary); margin:.4rem 0 1rem; }
+  .as-msg{ min-height:1.2rem; font-weight:700; margin-bottom:.6rem; }
+  .as-msg.ok{ color:#39FF14; } .as-msg.err{ color:#ff6b6b; }
+  .as-row{ background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:12px; padding:.8rem 1rem; margin-bottom:.6rem; }
+  .as-row.settled{ opacity:.6; }
+  .as-row.due{ border-color:#ffd24a; }
+  .as-rtop{ display:flex; justify-content:space-between; gap:.6rem; flex-wrap:wrap; align-items:baseline; }
+  .as-title{ font-weight:800; color:var(--text-primary); font-size:1.05rem; }
+  .as-time{ font-size:.8rem; color:var(--text-muted); white-space:nowrap; }
+  .as-opts{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.6rem; }
+  .as-opt{ flex:1; min-width:90px; padding:.7rem .5rem; border-radius:10px; border:2px solid var(--border,#444); background:#222; color:#fff; font-weight:700; cursor:pointer; font-size:1rem; }
+  .as-opt:hover{ border-color:var(--gold,#f5b800); }
+  .as-settled-tag{ color:#39FF14; font-weight:800; margin-top:.5rem; }
+</style>
+
+<script is:inline>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var LS='g8_admin_key';
+  var events=[];
+  try{ var k=localStorage.getItem(LS); if(k) $('asKey').value=k; }catch(e){}
+
+  function msg(t,cls){ var m=$('asMsg'); m.textContent=t||''; m.className='as-msg'+(cls?' '+cls:''); }
+  function filterVal(){ return document.querySelector('input[name=asf]:checked').value; }
+
+  function render(){
+    var now=Date.now(), f=filterVal();
+    var html='';
+    events.forEach(function(e){
+      var due = e.status!=='settled' && new Date(e.starts_at).getTime()<now;
+      if(f==='due' && !(e.status!=='settled' && due)) return;
+      if(f==='open' && e.status==='settled') return;
+      var cls='as-row'+(e.status==='settled'?' settled':(due?' due':''));
+      html+='<div class="'+cls+'">';
+      html+='<div class="as-rtop"><span class="as-title">'+esc(e.title)+'</span><span class="as-time">'+e.starts_at.replace('T',' ').replace('Z',' UTC')+(due?' ・已開賽':'')+'</span></div>';
+      if(e.status==='settled'){
+        var lab=labelOf(e,e.result);
+        html+='<div class="as-settled-tag">✅ 已結算：'+esc(lab||e.result)+'</div>';
+      } else {
+        html+='<div class="as-opts">';
+        (e.options||[]).forEach(function(o){
+          html+='<button class="as-opt" data-ev="'+e.id+'" data-r="'+esc(o.key)+'" data-l="'+esc(o.label)+'">'+esc(o.label)+'</button>';
+        });
+        html+='</div>';
+      }
+      html+='</div>';
+    });
+    $('asList').innerHTML=html || '<p style="color:#888">沒有符合的賽事。</p>';
+    $('asList').querySelectorAll('.as-opt').forEach(function(b){
+      b.addEventListener('click', function(){ settle(b.dataset.ev, b.dataset.r, b.dataset.l, b); });
+    });
+  }
+  function labelOf(e,key){ var o=(e.options||[]).filter(function(x){return x.key===key;})[0]; return o?o.label:key; }
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+  function load(){
+    var key=$('asKey').value.trim();
+    if($('asRemember').checked){ try{ localStorage.setItem(LS,key); }catch(e){} } else { try{ localStorage.removeItem(LS); }catch(e){} }
+    msg('載入中…');
+    fetch('/api/events',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+      events=j.events||[];
+      msg('已載入 '+events.length+' 場','ok'); render();
+    }).catch(function(e){ msg('載入失敗：'+e.message,'err'); });
+  }
+
+  function settle(eventId, result, label, btn){
+    var key=$('asKey').value.trim();
+    if(!key){ msg('請先輸入 ADMIN_KEY','err'); return; }
+    if(!confirm('確定把這場結算為「'+label+'」？\n猜中的會員會立刻收到點數，無法復原。')) return;
+    btn.disabled=true; msg('結算中…');
+    fetch('/api/admin/settle',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eventId:Number(eventId),result:result,key:key})})
+      .then(function(r){return r.json();}).then(function(j){
+        if(j.ok){
+          msg('✅ 結算完成：'+(j.settled||0)+' 筆預測、'+(j.paid||0)+' 人猜中發點數','ok');
+          var ev=events.filter(function(x){return x.id==eventId;})[0];
+          if(ev){ ev.status='settled'; ev.result=result; }
+          render();
+        } else {
+          msg('結算失敗：'+(j.error||'unknown'),'err'); btn.disabled=false;
+        }
+      }).catch(function(e){ msg('結算失敗：'+e.message,'err'); btn.disabled=false; });
+  }
+
+  $('asLoad').addEventListener('click', load);
+  document.querySelectorAll('input[name=asf]').forEach(function(r){ r.addEventListener('change', render); });
+})();
+</script>
+</BaseLayout>
