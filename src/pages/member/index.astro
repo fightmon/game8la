@@ -74,7 +74,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       showState('loading');
       fetch('/api/auth/google', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ credential: resp.credential }) })
         .then(function (r) { return r.json(); })
-        .then(function (j) { if (j.ok && j.member) loadDash(); else { alert('登入失敗：' + (j.detail || j.error || '未知')); showState('guest'); } })
+        .then(function (j) { if (j.ok && j.member) { try { gtag('event', 'member_login', { method: 'google' }); } catch (e) {} loadDash(); } else { alert('登入失敗：' + (j.detail || j.error || '未知')); showState('guest'); } })
         .catch(function (e) { alert('登入錯誤：' + e); showState('guest'); });
     };
     document.getElementById('mLogout').addEventListener('click', function () {

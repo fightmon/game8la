@@ -1607,7 +1607,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
     $btn.addEventListener('click', function () {
       if (POINTS_MODE || gameActive) return;
       var pts = parseInt($btn.dataset.points, 10) || 0;
-      POINTS_MODE = true;
+      POINTS_MODE = true; try{ gtag('event','game_play',{game:'blackjack'}); }catch(e){}
       balance = pts; lastSyncBal = pts;
       betInput.max = pts;
       if (parseInt(betInput.value, 10) > pts) betInput.value = Math.max(1, Math.min(25, pts));

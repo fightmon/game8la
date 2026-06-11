@@ -112,7 +112,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         fetch('/api/predict', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ eventId: parseInt(id, 10), choice: p.key, stake: stake }) })
           .then(function (r) { return r.json(); })
           .then(function (j) {
-            if (j.ok) { setPoints(j.points); loadEvents(); }
+            if (j.ok) { try { gtag('event', 'prediction_made', { stake: stake }); } catch (e) {} setPoints(j.points); loadEvents(); }
             else { alert('預測失敗：' + ({ 'not-enough-points': '點數不足', 'locked': '已鎖單', 'already-predicted': '你已經押過這場了' }[j.error] || j.error)); sub.disabled = false; sub.textContent = '確認預測'; }
           }).catch(function (e) { alert('錯誤：' + e); sub.disabled = false; sub.textContent = '確認預測'; });
       }

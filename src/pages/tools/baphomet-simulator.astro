@@ -1030,7 +1030,7 @@ import ShareButtons from '../../components/ShareButtons.astro';
     $btn.addEventListener('click', function () {
       if (POINTS_MODE) return;
       var pts = parseInt($btn.dataset.points, 10) || 0;
-      POINTS_MODE = true;
+      POINTS_MODE = true; try{ gtag('event','game_play',{game:'baphomet'}); }catch(e){}
       balance = pts; lastSyncBal = pts;
       bet = 2; $betVal.textContent = bet;
       totalBet = 0; totalWin = 0; spinCount = 0; maxSingleWin = 0;
