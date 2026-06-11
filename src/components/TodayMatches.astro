@@ -1,0 +1,119 @@
+---
+// 今日世足賽事（自動跟日期）：抓 /api/events，篩出「今天（台灣時間）」的場次 + 倒數 + 去預測
+---
+<section class="tm" id="todayMatches" style="display:none">
+  <div class="tm-head">
+    <span class="tm-title">⚽ <span id="tmHeadTxt">今日世足</span></span>
+    <span class="tm-cd" id="tmCd"></span>
+  </div>
+  <div class="tm-list" id="tmList"></div>
+  <a href="/predict/" class="tm-cta">🎯 去「8LA 神準預測」玩全部賽事 →</a>
+</section>
+
+<style is:global>
+  .tm{ background:linear-gradient(135deg,#0d1b3a,#16224a); border:1px solid #2a3a6a; border-radius:16px; padding:1.1rem 1.1rem 1rem; margin:1.4rem 0; max-width:760px; margin-left:auto; margin-right:auto; }
+  .tm-head{ display:flex; justify-content:space-between; align-items:center; gap:.6rem; flex-wrap:wrap; margin-bottom:.8rem; }
+  .tm-title{ font-size:1.25rem; font-weight:800; color:#ffd24a; }
+  .tm-cd{ font-size:1.05rem; font-weight:800; color:#9bdcff; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .tm-cd small{ color:#7fa8c9; font-weight:600; font-size:.78rem; }
+  .tm-list{ display:flex; flex-direction:column; gap:.5rem; }
+  .tm-row{ display:flex; align-items:center; gap:.7rem; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:.7rem .9rem; }
+  .tm-row.soon{ border-color:#ffd24a; background:rgba(245,184,0,.1); }
+  .tm-row.live{ border-color:#39FF14; background:rgba(57,255,20,.1); }
+  .tm-time{ font-size:1.15rem; font-weight:800; color:#fff; min-width:62px; font-variant-numeric:tabular-nums; }
+  .tm-teams{ flex:1; font-size:1.1rem; font-weight:700; color:#eaf2ff; }
+  .tm-teams .tm-grp{ font-size:.72rem; color:#8aa0c8; font-weight:600; margin-right:.3rem; }
+  .tm-flag{ font-size:.72rem; font-weight:700; padding:.12rem .5rem; border-radius:10px; white-space:nowrap; }
+  .tm-flag.soon{ background:#f5b800; color:#1a1a1a; }
+  .tm-flag.live{ background:#39FF14; color:#0a2a0a; }
+  .tm-flag.done{ background:#444; color:#ccc; }
+  .tm-pick{ background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; padding:.45rem .85rem; border-radius:9px; text-decoration:none; font-size:.92rem; white-space:nowrap; }
+  .tm-empty{ color:#cfe; font-size:.98rem; padding:.4rem 0; }
+  .tm-cta{ display:block; text-align:center; margin-top:.9rem; background:transparent; border:1.5px solid #ffd24a; color:#ffd24a; font-weight:800; padding:.7rem; border-radius:11px; text-decoration:none; }
+  @media (max-width:600px){
+    .tm-title{ font-size:1.1rem; }
+    .tm-cd{ font-size:.95rem; }
+    .tm-row{ padding:.6rem .6rem; gap:.5rem; }
+    .tm-time{ font-size:1.05rem; min-width:54px; }
+    .tm-teams{ font-size:1rem; }
+    .tm-pick{ padding:.45rem .7rem; font-size:.86rem; }
+  }
+</style>
+
+<script is:inline>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var DOW=['日','一','二','三','四','五','六'];
+  function twParts(iso){ var d=new Date(new Date(iso).getTime()+8*3600*1000); return { date:d.toISOString().slice(0,10), hm:d.toISOString().slice(11,16), dow:DOW[d.getUTCDay()], md:(d.getUTCMonth()+1)+'/'+d.getUTCDate() }; }
+  function nowTwDate(){ return new Date(Date.now()+8*3600*1000).toISOString().slice(0,10); }
+
+  var matches=[], next=null, cdTimer=null;
+
+  function fmtCd(ms){
+    if(ms<0) ms=0;
+    var s=Math.floor(ms/1000), d=Math.floor(s/86400); s-=d*86400;
+    var h=Math.floor(s/3600); s-=h*3600; var m=Math.floor(s/60); s-=m*60;
+    var pad=function(n){return (n<10?'0':'')+n;};
+    return (d>0?d+' 天 ':'')+pad(h)+':'+pad(m)+':'+pad(s);
+  }
+  function tickCd(){
+    if(!next){ $('tmCd').textContent=''; return; }
+    var ms=new Date(next.starts_at).getTime()-Date.now();
+    if(ms<=0){ render(); return; }
+    $('tmCd').innerHTML='<small>距下一場</small> '+fmtCd(ms);
+  }
+
+  function render(){
+    var now=Date.now(), today=nowTwDate();
+    var todays=matches.filter(function(e){ return twParts(e.starts_at).date===today; })
+                      .sort(function(a,b){ return new Date(a.starts_at)-new Date(b.starts_at); });
+    var upcoming=matches.filter(function(e){ return new Date(e.starts_at).getTime()>now; })
+                        .sort(function(a,b){ return new Date(a.starts_at)-new Date(b.starts_at); });
+    next = upcoming[0] || null;
+
+    var listEl=$('tmList'), headEl=$('tmHeadTxt');
+    if(todays.length){
+      var tp=twParts(todays[0].starts_at);
+      headEl.textContent='今日世足 '+tp.md+'（'+tp.dow+'）';
+      listEl.innerHTML=todays.map(function(e){ return rowHtml(e, now); }).join('');
+    } else if(next){
+      var np=twParts(next.starts_at);
+      headEl.textContent='世足賽事';
+      listEl.innerHTML='<div class="tm-empty">今天沒有比賽，下一場在 '+np.md+'（'+np.dow+'）：</div>'+rowHtml(next, now);
+    } else {
+      // 沒有未來賽事 → 不顯示模組
+      $('todayMatches').style.display='none'; return;
+    }
+    $('todayMatches').style.display='';
+    tickCd();
+  }
+
+  function rowHtml(e, now){
+    var p=twParts(e.starts_at);
+    var t=new Date(e.starts_at).getTime();
+    var started=t<=now, settled=e.status==='settled';
+    var teams=e.title.replace(/^【(.*?)】/, function(m,g){ return '<span class="tm-grp">'+g+'</span>'; });
+    var cls='tm-row', tag='', tagcls='';
+    if(settled){ cls+=''; tag='已結束'; tagcls='done'; }
+    else if(started){ cls+=' live'; tag='開踢'; tagcls='live'; }
+    else if(t-now < 3*3600*1000){ cls+=' soon'; tag='即將'; tagcls='soon'; }
+    var right = settled
+      ? '<span class="tm-flag done">已結束</span>'
+      : '<a class="tm-pick" href="/predict/">'+(started?'看賽果':'去預測')+'</a>';
+    return '<div class="'+cls+'"><span class="tm-time">'+p.hm+'</span>'
+         + '<span class="tm-teams">'+teams+'</span>'
+         + (tag?'<span class="tm-flag '+tagcls+'">'+tag+'</span>':'')
+         + right + '</div>';
+  }
+
+  function init(){
+    fetch('/api/events',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+      matches=(j.events||[]).filter(function(e){ return /vs/.test(e.title); }); // 只要對戰場次，排除冠軍長線
+      if(!matches.length){ return; }
+      render();
+      cdTimer=setInterval(tickCd, 1000);
+    }).catch(function(){});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>

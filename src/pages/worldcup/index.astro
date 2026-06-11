@@ -2,6 +2,7 @@
 import Icon from '../../components/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqSchema from '../../components/FaqSchema.astro';
+import TodayMatches from '../../components/TodayMatches.astro';
 import { articles } from '../../data/articles.js';
 
 // 自動收錄所有「體育/世足」文章，依發佈日期由新到舊（新文章自動排前面，與首頁一致）
@@ -32,6 +33,8 @@ const faqs = [
       <h1>⚽ <em>世足8LA專區</em></h1>
       <p>2026 世界盃 — 賽程、轉播、規則、冠軍預測，芭樂子帶你看球一站搞懂</p>
     </div>
+
+    <TodayMatches />
 
     <!-- 賽事快速資訊卡 -->
     <section style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin:2rem 0">
