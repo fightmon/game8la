@@ -3,7 +3,6 @@ import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { articles, estViews } from '../data/articles.js';
 import { scamList, lastUpdated } from '../data/scam-list.js';
-import TodayMatches from '../components/TodayMatches.astro';
 
 const now = new Date();
 // 取最新 6 篇給首頁卡片（依日期自動降序：新文章自動排第一，時序往後）
@@ -121,7 +120,6 @@ const latestScams = [...scamList]
     <span onclick="goToSlide(3)"></span>
   </div>
 </section>
-<TodayMatches />
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item">
