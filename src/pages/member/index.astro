@@ -44,6 +44,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <div id="mStats" class="m-stats"></div>
       </div>
 
+      <div id="mCheckin" class="m-checkin"></div>
+
       <h2 class="m-sec">🎮 我的遊戲</h2>
       <div class="m-games">
         <a href="/predict/" class="m-game live">
@@ -104,9 +106,49 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             '<div class="ds-cell"><span class="ds-v ' + netCls + '">' + (s.net >= 0 ? '+' : '') + s.net + '</span><span class="ds-l">累計淨點數</span></div>' +
             '</div><div class="ds-punch">' + punch + '</div>';
         }
+        renderCheckin(j.checkin);
         showState('dash');
         loadLb();
       }).catch(function () { showState('guest'); });
+    }
+
+    function renderCheckin(ci) {
+      var el = document.getElementById('mCheckin');
+      if (!ci) { el.innerHTML = ''; return; }
+      var nextStreak = ci.checkedToday ? ci.streak : (ci.continues ? ci.streak + 1 : 1);
+      var curIdx = (Math.max(1, ci.streak) - 1) % 7;
+      var nextIdx = (nextStreak - 1) % 7;
+      var cells = ci.rewards.map(function (rw, i) {
+        var isMark = ci.checkedToday ? (i === curIdx) : (i === nextIdx);
+        var cls = 'ci-day' + (isMark ? (ci.checkedToday ? ' today' : ' next') : '') + (i === 6 ? ' big' : '');
+        return '<div class="' + cls + '"><span class="ci-d">第' + (i + 1) + '天</span><span class="ci-r">+' + rw + '</span></div>';
+      }).join('');
+      var streakTxt = (ci.streak > 0) ? '🔥 連續 <b>' + ci.streak + '</b> 天' : '今天開始連續簽到';
+      var btn = ci.checkedToday
+        ? '<button class="ci-btn done" disabled>✅ 今日已簽到，明天再來</button>'
+        : '<button class="ci-btn" id="ciBtn">🗓️ 簽到領 ' + ci.rewards[nextIdx] + ' 點</button>';
+      el.innerHTML = '<div class="ci-head"><span class="ci-title">📅 每日簽到</span><span class="ci-streak">' + streakTxt + '</span></div>'
+        + '<div class="ci-row">' + cells + '</div>'
+        + btn
+        + '<p class="ci-tip">每天簽到領點數，連越多領越多，<b>第 7 天大獎 1000 點</b>！斷一天就從頭算哦。</p>';
+      var b = document.getElementById('ciBtn');
+      if (b) b.addEventListener('click', doCheckin);
+    }
+    function doCheckin() {
+      var b = document.getElementById('ciBtn'); if (b) b.disabled = true;
+      fetch('/api/checkin', { method: 'POST' }).then(function (r) { return r.json(); }).then(function (j) {
+        if (j.ok) {
+          try { gtag('event', 'daily_checkin', { streak: j.streak }); } catch (e) {}
+          document.getElementById('mPoints').textContent = (j.points || 0).toLocaleString();
+          renderCheckin({ streak: j.streak, best: j.best, checkedToday: true, continues: true, rewards: j.rewards });
+          var t = document.createElement('div'); t.className = 'ci-toast'; t.textContent = '✅ +' + j.bonus + ' 點！連續 ' + j.streak + ' 天 🔥';
+          document.getElementById('mCheckin').appendChild(t);
+          setTimeout(function () { t.classList.add('show'); }, 10);
+          setTimeout(function () { t.remove(); }, 3200);
+        } else if (j.already) {
+          renderCheckin({ streak: j.streak, checkedToday: true, continues: true, rewards: j.rewards });
+        } else { alert('簽到失敗：' + (j.error || '')); if (b) b.disabled = false; }
+      }).catch(function (e) { alert('錯誤：' + e); if (b) b.disabled = false; });
     }
     function loadLb() {
       fetch('/api/leaderboard').then(function (r) { return r.json(); }).then(function (j) {
@@ -132,6 +174,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .muted { color: var(--text-muted); }
 
     .m-card { max-width: 640px; margin: 1.2rem auto; background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 1.6rem 1.5rem; }
+    .m-checkin { max-width: 640px; margin: 0 auto 1.2rem; background: var(--bg-secondary); border: 1px solid var(--gold,#f5b800); border-radius: 16px; padding: 1.2rem 1.3rem; }
+    .ci-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem; margin-bottom:.9rem; }
+    .ci-title { font-size:1.15rem; font-weight:800; color:var(--gold-light,#ffd24a); }
+    .ci-streak { font-size:1rem; color:var(--text-secondary); }
+    .ci-streak b { color:var(--guava-green,#39FF14); font-size:1.25rem; }
+    .ci-row { display:grid; grid-template-columns:repeat(7,1fr); gap:.4rem; margin-bottom:1rem; }
+    .ci-day { display:flex; flex-direction:column; align-items:center; gap:.2rem; background:rgba(255,255,255,.05); border:1.5px solid var(--border,#333); border-radius:10px; padding:.5rem .15rem; }
+    .ci-day .ci-d { font-size:.66rem; color:var(--text-muted); white-space:nowrap; }
+    .ci-day .ci-r { font-size:.86rem; font-weight:800; color:var(--text-primary); }
+    .ci-day.big { background:rgba(245,184,0,.12); }
+    .ci-day.big .ci-r { color:var(--gold-light,#ffd24a); }
+    .ci-day.next { border-color:var(--gold,#f5b800); background:rgba(245,184,0,.2); transform:scale(1.06); }
+    .ci-day.today { border-color:var(--guava-green,#39FF14); background:rgba(57,255,20,.15); }
+    .ci-day.today .ci-r { color:var(--guava-green,#39FF14); }
+    .ci-btn { display:block; width:100%; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; font-size:1.12rem; padding:.9rem; border:none; border-radius:12px; cursor:pointer; }
+    .ci-btn.done { background:rgba(57,255,20,.12); color:var(--guava-green,#39FF14); border:1.5px solid var(--guava-green,#39FF14); cursor:default; }
+    .ci-tip { font-size:.84rem; color:var(--text-muted); margin:.7rem 0 0; line-height:1.6; }
+    .ci-toast { margin-top:.7rem; text-align:center; background:rgba(57,255,20,.15); color:var(--guava-green,#39FF14); font-weight:800; padding:.6rem; border-radius:10px; opacity:0; transition:opacity .3s; }
+    .ci-toast.show { opacity:1; }
+    @media (max-width:600px){ .ci-day .ci-d{ font-size:.58rem; } .ci-day .ci-r{ font-size:.74rem; } .ci-day{ padding:.45rem .08rem; } .ci-row{ gap:.28rem; } .ci-btn{ font-size:1.06rem; } }
     .m-loading { text-align: center; color: var(--text-muted); }
     .m-card h2 { font-size: 1.35rem; margin: 0 0 0.7rem; }
     .m-card h2 .hl { background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }

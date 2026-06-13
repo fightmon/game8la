@@ -647,11 +647,36 @@ async function handlePlay(request, env) {
   return jsonResp({ ok: true, points: np });
 }
 
-// GET /api/dashboard（會員後台：點數 + 今日輸贏 + 累計戰績）
+// ===== 每日簽到 =====
+const CHECKIN_REWARDS = [100, 150, 200, 250, 300, 500, 1000]; // 連續 7 天循環，第 7 天大獎
+function taipeiDateAt(offsetDays) { return new Date(Date.now() + 8 * 3600 * 1000 + offsetDays * 86400000).toISOString().slice(0, 10); }
+
+// POST /api/checkin — 每日簽到，連續天數遞增
+async function handleCheckin(request, env) {
+  if (request.method !== 'POST') return jsonResp({ error: 'method' }, 405);
+  const member = await currentMember(request, env);
+  if (!member) return jsonResp({ error: 'not-logged-in' }, 401);
+  const today = taipeiDateAt(0), yesterday = taipeiDateAt(-1);
+  if (member.last_checkin_date === today) {
+    return jsonResp({ ok: false, already: true, streak: member.streak || 1, points: member.points, rewards: CHECKIN_REWARDS });
+  }
+  const newStreak = (member.last_checkin_date === yesterday) ? (member.streak || 0) + 1 : 1;
+  const reward = CHECKIN_REWARDS[(newStreak - 1) % 7];
+  const points = await refillIfNeeded(env, member); // 先補到安全水位再加簽到獎勵
+  const np = points + reward;
+  const best = Math.max(member.best_streak || 0, newStreak);
+  const now = new Date().toISOString();
+  await env.DB.prepare('UPDATE members SET points=?1, streak=?2, last_checkin_date=?3, best_streak=?4 WHERE id=?5').bind(np, newStreak, today, best, member.id).run();
+  await env.DB.prepare('INSERT INTO point_ledger (member_id, delta, game, reason, balance_after, created_at) VALUES (?1,?2,?3,?4,?5,?6)').bind(member.id, reward, 'checkin', '每日簽到 第' + newStreak + ' 天', np, now).run();
+  return jsonResp({ ok: true, bonus: reward, streak: newStreak, best, points: np, rewards: CHECKIN_REWARDS });
+}
+
+// GET /api/dashboard（會員後台：點數 + 今日輸贏 + 累計戰績 + 簽到狀態）
 async function handleDashboard(request, env) {
   const member = await currentMember(request, env);
   if (!member) return jsonResp({ member: null });
   const points = await refillIfNeeded(env, member);
+  const ciToday = taipeiDateAt(0), ciYesterday = taipeiDateAt(-1);
   const todayStartUtc = new Date(taipeiDate() + 'T00:00:00+08:00').toISOString();
   const tn = await env.DB.prepare("SELECT COALESCE(SUM(delta),0) AS net FROM point_ledger WHERE member_id=?1 AND game NOT IN ('daily','signup') AND created_at >= ?2").bind(member.id, todayStartUtc).first();
   const r = await env.DB.prepare(
@@ -663,6 +688,13 @@ async function handleDashboard(request, env) {
     points,
     todayNet: tn.net || 0,
     stats: { total: r.total || 0, settled, won, pending: r.pending || 0, accuracy: settled > 0 ? Math.round(won / settled * 100) : null, net: returned - settledStake },
+    checkin: {
+      streak: member.streak || 0,
+      best: member.best_streak || 0,
+      checkedToday: member.last_checkin_date === ciToday,
+      continues: member.last_checkin_date === ciYesterday,
+      rewards: CHECKIN_REWARDS,
+    },
   });
 }
 
@@ -719,6 +751,7 @@ export default {
     if (p === '/api/my-stats') return handleMyStats(request, env);
     if (p === '/api/play') return handlePlay(request, env);
     if (p === '/api/dashboard') return handleDashboard(request, env);
+    if (p === '/api/checkin') return handleCheckin(request, env);
     if (p === '/api/leaderboard') return handleLeaderboard(request, env);
     if (p === '/api/admin/settle') return handleSettle(request, env);
     return env.ASSETS.fetch(request);
