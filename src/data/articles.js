@@ -15,6 +15,20 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: 'football-handicap-explained',
+    title: '讓分盤是什麼？為什麼要讓分、讓分怎麼算一次搞懂（附結算計算器）｜芭樂子運彩教室',
+    excerpt: '看球常聽「西班牙讓一球半」卻一頭霧水？芭樂子白話拆解讓分盤：為什麼強弱隊要讓分、−1.5／+1.5 怎麼看、半球一球球半差在哪，還有最坑的 0.25／0.75 走盤退一半。內附「讓分結算計算器」，輸入比數一秒算出過不過關。',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-12',
+    views: 1,
+    tags: ['最新', '精選', '運彩'],
+    icon: 'target',
+    gradient: 'linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-handicap.webp'
+  },
+  {
     slug: '165-weekly-2026-w22',
     title: '【165 週報】2026 第 22 週（5/21–5/27）：錢盈539娛樂城換皮回歸、假投資與殺豬盤暴增',
     excerpt: '內政部 165 全民防騙網 5/21–5/27 通報彙整：錢盈539娛樂城以新域名 admin.539lotterybuy.com 換皮回歸（一週改一次名）。本週假投資（華訊電能 15 件）與殺豬盤（Flirting 9 件）為通報大宗，165 共列逾 140 個詐騙網站。芭樂子拆解手法＋導去娛樂城體檢。',
