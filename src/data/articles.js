@@ -15,6 +15,20 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: 'football-over-under-explained',
+    title: '大小分是什麼？進球數怎麼算大小一次搞懂（附動畫示範＋結算計算器）｜芭樂子運彩教室',
+    excerpt: '大小分（大小球）賭的不是誰贏，是兩隊總進球超過或低於盤口（例 2.5）。芭樂子白話＋開踢動畫示範＋結算計算器：大小怎麼算、2.5 為何不走盤、2.25／2.75 半大半小怎麼拆，一看就懂。',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-15',
+    views: 1,
+    tags: ['最新', '精選', '運彩'],
+    icon: 'target',
+    gradient: 'linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-overunder.webp'
+  },
+  {
     slug: 'football-handicap-explained',
     title: '讓分盤是什麼？為什麼要讓分、讓分怎麼算一次搞懂（附結算計算器）｜芭樂子運彩教室',
     excerpt: '看球常聽「西班牙讓一球半」卻一頭霧水？芭樂子白話拆解讓分盤：為什麼強弱隊要讓分、−1.5／+1.5 怎麼看、半球一球球半差在哪，還有最坑的 0.25／0.75 走盤退一半。內附「讓分結算計算器」，輸入比數一秒算出過不過關。',
