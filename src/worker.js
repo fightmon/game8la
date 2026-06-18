@@ -754,6 +754,15 @@ export default {
     if (p === '/api/checkin') return handleCheckin(request, env);
     if (p === '/api/leaderboard') return handleLeaderboard(request, env);
     if (p === '/api/admin/settle') return handleSettle(request, env);
+    // /llms.txt：靜態資產服務不帶 charset，瀏覽器/爬蟲會猜成 Big5 → 中文亂碼。補上 utf-8。
+    if (p === '/llms.txt') {
+      const res = await env.ASSETS.fetch(request);
+      const body = await res.text();
+      return new Response(body, {
+        status: res.status,
+        headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'public, max-age=3600' },
+      });
+    }
     return env.ASSETS.fetch(request);
   },
 };
