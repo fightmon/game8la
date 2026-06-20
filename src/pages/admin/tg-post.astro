@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="芭樂子發話後台 — GAME8LA" description="admin only" noindex={true} currentPage="tools">
+  <div class="tg-wrap">
+    <h1>📣 芭樂子發話後台</h1>
+    <p class="tg-sub">輸入 ADMIN_KEY → 打訊息 → 送出，Game8la 芭樂子 bot 就會在群裡發話。<br>第一次用先按「查 chat_id」選到你的群。</p>
+
+    <div class="tg-keyrow">
+      <input type="password" id="tgKey" placeholder="ADMIN_KEY" autocomplete="off" />
+      <label class="tg-remember"><input type="checkbox" id="tgRemember" checked /> 記住</label>
+    </div>
+
+    <div class="tg-keyrow">
+      <input type="text" id="tgChat" placeholder="chat_id（留空＝用伺服器預設群）" autocomplete="off" />
+      <button id="tgFindChat" type="button" class="tg-btn-ghost">查 chat_id</button>
+    </div>
+    <div id="tgChats" class="tg-chats"></div>
+
+    <textarea id="tgText" class="tg-text" rows="8" placeholder="想用芭樂子身分說的話…（純文字，連結會自動可點）"></textarea>
+    <div class="tg-actions">
+      <span class="tg-count" id="tgCount">0 字</span>
+      <button id="tgSend" type="button" class="tg-btn-send">送出到群組</button>
+    </div>
+
+    <div id="tgMsg" class="tg-msg"></div>
+
+    <details class="tg-help">
+      <summary>第一次設定（點開）</summary>
+      <ol>
+        <li>跟 <b>@BotFather</b> 拿 bot token，設成 Worker secret：<code>npx wrangler secret put TELEGRAM_BOT_TOKEN</code></li>
+        <li>(選) 把常用群的 chat_id 設成預設：<code>npx wrangler secret put TELEGRAM_CHAT_ID</code>，之後 chat_id 欄留空即可。</li>
+        <li>群裡先講句話 → 按上面「查 chat_id」就能抓到群組 id（負數）。</li>
+        <li>token 是密鑰，只存在 Worker secret，<b>不會出現在這頁、也不會傳給任何人</b>。</li>
+      </ol>
+    </details>
+  </div>
+
+<style is:global>
+  .tg-wrap{ max-width:720px; margin:0 auto; padding:1.5rem 1rem 4rem; }
+  .tg-wrap h1{ color:var(--gold-light,#ffd24a); font-size:1.6rem; }
+  .tg-sub{ color:var(--text-secondary); line-height:1.7; }
+  .tg-keyrow{ display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.8rem 0; }
+  .tg-keyrow input[type=password], .tg-keyrow input[type=text]{ flex:1; min-width:180px; padding:.6rem .8rem; border-radius:8px; border:1px solid var(--border,#444); background:#1a1a1a; color:#fff; }
+  .tg-remember{ color:var(--text-secondary); font-size:.9rem; white-space:nowrap; }
+  .tg-btn-ghost{ background:transparent; border:1.5px solid var(--gold,#f5b800); color:var(--gold-light,#ffd24a); font-weight:700; border-radius:8px; padding:.55rem 1rem; cursor:pointer; white-space:nowrap; }
+  .tg-chats{ display:flex; flex-direction:column; gap:.4rem; margin:.2rem 0 .6rem; }
+  .tg-chat{ text-align:left; background:var(--bg-card,#1a1a1a); border:1px solid var(--border,#333); border-radius:8px; padding:.5rem .8rem; color:#eee; cursor:pointer; font-size:.92rem; }
+  .tg-chat:hover{ border-color:var(--gold,#f5b800); }
+  .tg-chat b{ color:#ffd24a; }
+  .tg-text{ width:100%; box-sizing:border-box; padding:.8rem 1rem; border-radius:12px; border:1px solid var(--border,#444); background:#1a1a1a; color:#fff; font-size:1.02rem; line-height:1.7; resize:vertical; }
+  .tg-actions{ display:flex; justify-content:space-between; align-items:center; margin:.6rem 0; }
+  .tg-count{ color:var(--text-muted); font-size:.85rem; }
+  .tg-btn-send{ background:linear-gradient(135deg,#f5b800,#ffd24a); color:#1a1a1a; font-weight:800; border:none; border-radius:10px; padding:.7rem 1.6rem; cursor:pointer; font-size:1.05rem; }
+  .tg-btn-send:disabled{ opacity:.55; cursor:default; }
+  .tg-msg{ min-height:1.4rem; font-weight:700; margin:.4rem 0; line-height:1.6; }
+  .tg-msg.ok{ color:#39FF14; } .tg-msg.err{ color:#ff6b6b; }
+  .tg-help{ margin-top:1.6rem; color:var(--text-secondary); font-size:.9rem; }
+  .tg-help summary{ cursor:pointer; color:var(--gold-light,#ffd24a); }
+  .tg-help code{ background:#222; padding:.1rem .4rem; border-radius:5px; color:#9fe; }
+  .tg-help li{ margin:.4rem 0; line-height:1.6; }
+</style>
+
+<script is:inline>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var LS_KEY='g8_admin_key', LS_CHAT='g8_tg_chat';
+  try{ var k=localStorage.getItem(LS_KEY); if(k) $('tgKey').value=k; }catch(e){}
+  try{ var c=localStorage.getItem(LS_CHAT); if(c) $('tgChat').value=c; }catch(e){}
+
+  function msg(t,cls){ var m=$('tgMsg'); m.textContent=t||''; m.className='tg-msg'+(cls?' '+cls:''); }
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+  function getKey(){
+    var key=$('tgKey').value.trim();
+    if($('tgRemember').checked){ try{ localStorage.setItem(LS_KEY,key); }catch(e){} }
+    return key;
+  }
+
+  $('tgText').addEventListener('input', function(){ $('tgCount').textContent=$('tgText').value.length+' 字'; });
+
+  $('tgFindChat').addEventListener('click', function(){
+    var key=getKey(); if(!key){ msg('請先輸入 ADMIN_KEY','err'); return; }
+    msg('查詢中…');
+    fetch('/api/admin/tg-updates',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:key})})
+      .then(function(r){return r.json();}).then(function(j){
+        if(!j.ok){ msg('查詢失敗：'+(j.hint||j.error),'err'); return; }
+        var ids=Object.keys(j.chats||{});
+        if(!ids.length){ msg('沒抓到群組——先在群裡講句話再按一次。','err'); return; }
+        msg('點一個群組帶入 chat_id：','ok');
+        var html='';
+        ids.forEach(function(id){ html+='<button type="button" class="tg-chat" data-id="'+esc(id)+'"><b>'+esc(j.chats[id])+'</b> ・ '+esc(id)+'</button>'; });
+        $('tgChats').innerHTML=html;
+        $('tgChats').querySelectorAll('.tg-chat').forEach(function(b){
+          b.addEventListener('click', function(){ $('tgChat').value=b.dataset.id; try{localStorage.setItem(LS_CHAT,b.dataset.id);}catch(e){} msg('已帶入 chat_id：'+b.dataset.id,'ok'); $('tgChats').innerHTML=''; });
+        });
+      }).catch(function(e){ msg('查詢失敗：'+e.message,'err'); });
+  });
+
+  $('tgSend').addEventListener('click', function(){
+    var key=getKey(); if(!key){ msg('請先輸入 ADMIN_KEY','err'); return; }
+    var text=$('tgText').value.trim(); if(!text){ msg('訊息不能空白','err'); return; }
+    var chat=$('tgChat').value.trim();
+    try{ if(chat) localStorage.setItem(LS_CHAT,chat); }catch(e){}
+    if(!confirm('確定用芭樂子身分發送這則到群組？')) return;
+    $('tgSend').disabled=true; msg('發送中…');
+    fetch('/api/admin/tg-post',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:key,text:text,chatId:chat})})
+      .then(function(r){return r.json();}).then(function(j){
+        if(j.ok){ msg('✅ 已發送（訊息 #'+(j.messageId||'?')+'，群 '+j.chatId+'）','ok'); $('tgText').value=''; $('tgCount').textContent='0 字'; }
+        else { msg('發送失敗：'+(j.hint||j.detail||j.error||'unknown'),'err'); }
+        $('tgSend').disabled=false;
+      }).catch(function(e){ msg('發送失敗：'+e.message,'err'); $('tgSend').disabled=false; });
+  });
+})();
+</script>
+</BaseLayout>

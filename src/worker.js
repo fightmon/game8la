@@ -734,6 +734,53 @@ async function handleSettle(request, env) {
   return jsonResp({ ok: true, settled, paid });
 }
 
+// 以芭樂子 bot 在 Telegram 群發話（後台 /admin/tg-post 用）
+async function handleTgPost(request, env) {
+  if (request.method !== 'POST') return jsonResp({ error: 'method' }, 405);
+  let b; try { b = await request.json(); } catch { return jsonResp({ error: 'bad-json' }, 400); }
+  if (!env.ADMIN_KEY || b.key !== env.ADMIN_KEY) return jsonResp({ error: 'forbidden' }, 403);
+  const text = String(b.text || '').trim();
+  if (!text) return jsonResp({ error: 'empty-text' }, 400);
+  const token = env.TELEGRAM_BOT_TOKEN;
+  if (!token) return jsonResp({ error: 'no-token', hint: '尚未設定 TELEGRAM_BOT_TOKEN（wrangler secret put TELEGRAM_BOT_TOKEN）' }, 500);
+  const chatId = String(b.chatId || env.TELEGRAM_CHAT_ID || '').trim();
+  if (!chatId) return jsonResp({ error: 'no-chat', hint: '未提供 chat_id，也沒設 TELEGRAM_CHAT_ID' }, 400);
+  let tg;
+  try {
+    const r = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text }),
+    });
+    tg = await r.json();
+  } catch (e) {
+    return jsonResp({ ok: false, error: 'fetch-fail', detail: String(e) }, 502);
+  }
+  if (!tg || !tg.ok) return jsonResp({ ok: false, error: 'telegram', detail: (tg && tg.description) || 'unknown' }, 502);
+  return jsonResp({ ok: true, messageId: tg.result && tg.result.message_id, chatId });
+}
+
+// 查 bot 收到過的群組 chat_id（第一次設定用）
+async function handleTgUpdates(request, env) {
+  let b; try { b = await request.json(); } catch { return jsonResp({ error: 'bad-json' }, 400); }
+  if (!env.ADMIN_KEY || b.key !== env.ADMIN_KEY) return jsonResp({ error: 'forbidden' }, 403);
+  const token = env.TELEGRAM_BOT_TOKEN;
+  if (!token) return jsonResp({ error: 'no-token', hint: '尚未設定 TELEGRAM_BOT_TOKEN' }, 500);
+  let data;
+  try {
+    const r = await fetch('https://api.telegram.org/bot' + token + '/getUpdates');
+    data = await r.json();
+  } catch (e) {
+    return jsonResp({ ok: false, error: 'fetch-fail', detail: String(e) }, 502);
+  }
+  const chats = {};
+  for (const u of (data.result || [])) {
+    const c = (u.message && u.message.chat) || (u.channel_post && u.channel_post.chat) || (u.my_chat_member && u.my_chat_member.chat);
+    if (c) chats[String(c.id)] = c.title || c.username || c.first_name || c.type;
+  }
+  return jsonResp({ ok: true, chats, defaultChatId: env.TELEGRAM_CHAT_ID || null });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -754,6 +801,8 @@ export default {
     if (p === '/api/checkin') return handleCheckin(request, env);
     if (p === '/api/leaderboard') return handleLeaderboard(request, env);
     if (p === '/api/admin/settle') return handleSettle(request, env);
+    if (p === '/api/admin/tg-post') return handleTgPost(request, env);
+    if (p === '/api/admin/tg-updates') return handleTgUpdates(request, env);
     // /llms.txt：靜態資產服務不帶 charset，瀏覽器/爬蟲會猜成 Big5 → 中文亂碼。補上 utf-8。
     if (p === '/llms.txt') {
       const res = await env.ASSETS.fetch(request);
