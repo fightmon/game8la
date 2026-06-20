@@ -741,7 +741,7 @@ async function handleTgPost(request, env) {
   if (!env.ADMIN_KEY || b.key !== env.ADMIN_KEY) return jsonResp({ error: 'forbidden' }, 403);
   const text = String(b.text || '').trim();
   if (!text) return jsonResp({ error: 'empty-text' }, 400);
-  const token = env.TELEGRAM_BOT_TOKEN;
+  const token = env.TELEGRAM_BOT_TOKEN || env.TG_BOT_TOKEN;
   if (!token) return jsonResp({ error: 'no-token', hint: '尚未設定 TELEGRAM_BOT_TOKEN（wrangler secret put TELEGRAM_BOT_TOKEN）' }, 500);
   const chatId = String(b.chatId || env.TELEGRAM_CHAT_ID || '').trim();
   if (!chatId) return jsonResp({ error: 'no-chat', hint: '未提供 chat_id，也沒設 TELEGRAM_CHAT_ID' }, 400);
@@ -764,7 +764,7 @@ async function handleTgPost(request, env) {
 async function handleTgUpdates(request, env) {
   let b; try { b = await request.json(); } catch { return jsonResp({ error: 'bad-json' }, 400); }
   if (!env.ADMIN_KEY || b.key !== env.ADMIN_KEY) return jsonResp({ error: 'forbidden' }, 403);
-  const token = env.TELEGRAM_BOT_TOKEN;
+  const token = env.TELEGRAM_BOT_TOKEN || env.TG_BOT_TOKEN;
   if (!token) return jsonResp({ error: 'no-token', hint: '尚未設定 TELEGRAM_BOT_TOKEN' }, 500);
   let data;
   try {
