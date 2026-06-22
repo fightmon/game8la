@@ -15,6 +15,20 @@ export function estViews(a, now) {
 
 export const articles = [
   {
+    slug: 'worldcup-2026-qualification-rules',
+    title: '2026 世足怎麼晉級？小組賽前2＋最佳第三名、同分比序一次看｜芭樂子足球教室',
+    excerpt: '2026 世界盃 48 隊怎麼晉級淘汰賽？每組前 2 名＋8 個最佳第三名＝32 隊進「32 強」。芭樂子白話圖解晉級規則、最佳第三名怎麼算、小組同分比序、32強到決賽的淘汰賽路徑。',
+    category: 'sports',
+    categoryLabel: '世足專題',
+    badgeType: 'featured',
+    date: '2026-06-22',
+    views: 1,
+    tags: ['最新', '精選', '時事'],
+    icon: 'trophy',
+    gradient: 'linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-football-qualify.webp'
+  },
+  {
     slug: 'football-over-under-explained',
     title: '大小分是什麼？進球數怎麼算大小一次搞懂（附動畫示範＋結算計算器）｜芭樂子運彩教室',
     excerpt: '大小分（大小球）賭的不是誰贏，是兩隊總進球超過或低於盤口（例 2.5）。芭樂子白話＋開踢動畫示範＋結算計算器：大小怎麼算、2.5 為何不走盤、2.25／2.75 半大半小怎麼拆，一看就懂。',

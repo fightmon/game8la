@@ -1,0 +1,337 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '2026 世足怎樣才能從小組賽晉級？', a: '2026 世界盃 48 隊分 12 組（A～L）、每組 4 隊踢循環賽。晉級淘汰賽的方式是：<strong>每組前 2 名直接晉級（12 組×2＝24 隊）</strong>，再加上<strong>12 個小組第三名裡「最好的 8 個」</strong>，總共 <strong>32 隊</strong>進入淘汰賽（也就是新增的「32 強」這一輪）。所以就算你的隊小組排第三，也還有機會！' },
+  { q: '「最佳第三名」是什麼？怎麼算？', a: '12 個小組各會產生一個第三名，FIFA 把這 12 個第三名拿來<strong>互相排名</strong>，排序看：<strong>① 積分 ② 淨勝球 ③ 進球數 ④ 公平競賽分（黃紅牌越少越好）⑤ 抽籤</strong>。排名<strong>前 8 名的第三名晉級</strong>、後 4 名淘汰。所以第三名之間也是在比氣長——多進一球、少吃一張牌，都可能決定你回不回家。' },
+  { q: '小組同分怎麼比誰前面？', a: '同分時依序比：<strong>① 積分 ② 全部小組賽的淨勝球 ③ 全部小組賽的進球數</strong>；如果還是平，再看<strong>④ 同分球隊之間的「相互對戰」成績</strong>（積分→淨勝球→進球數）；再平就看<strong>⑤ 公平競賽分 ⑥ 抽籤</strong>。重點記法：<strong>先比積分，再比淨勝球，再比進球數</strong>——這也是為什麼領先時還拼命想多進球、落後時死命守不要再丟。' },
+  { q: '2026 為什麼多了一輪「32 強」？', a: '因為這屆從 32 隊擴大到 <strong>48 隊</strong>，是史上最大的一屆。隊伍變多，晉級的也變多（32 隊），所以淘汰賽<strong>多了一輪「32 強」（Round of 32）</strong>，才接到大家熟悉的 16 強。簡單說：<strong>32 強 → 16 強 → 8 強 → 4 強 → 決賽</strong>，比以前多打一輪、冠軍要連贏更多場。' },
+  { q: '晉級之後怎麼一路打到決賽？', a: '進淘汰賽後就是<strong>單場定生死</strong>：<strong>32 強 → 16 強 → 8 強（八強賽）→ 4 強（準決賽）→ 決賽</strong>，輸了就回家。90 分鐘打平就踢延長賽（30 分鐘），再平就 PK 大戰。另外 4 強輸的兩隊會踢<strong>季軍戰</strong>。冠軍從 32 強一路要連贏 5 場才能捧盃。' },
+  { q: '小組賽看球，想順便看懂盤口怎麼辦？', a: '看晉級的同時，轉播常出現「讓分」「大小分」這些盤口名詞。芭樂子有專文白話拆解：<a href="/articles/football-handicap-explained/">讓分盤是什麼</a>（為什麼贏球還會輸盤）、<a href="/articles/football-over-under-explained/">大小分是什麼</a>（賭總進球、不管誰贏）。看球前順手補一下，轉播聽得更懂。提醒：看懂是娛樂，真要玩用 <a href="/worldcup/">世足8LA</a> 的免費點數練手，別碰境外賭盤。' },
+];
+
+const URL = 'https://game8la.com/articles/worldcup-2026-qualification-rules/';
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title="2026 世足怎麼晉級？小組賽前2＋最佳第三名、同分比序一次看 — GAME8LA"
+  description="2026 世界盃 48 隊怎麼晉級淘汰賽？每組前 2 名＋8 個最佳第三名＝32 隊進「32 強」。芭樂子白話圖解晉級規則、最佳第三名怎麼算、小組同分比序、32強到決賽的淘汰賽路徑。"
+  image="https://game8la.com/images/articles/football-qualify-cover.webp"
+  datePublished="2026-06-22"
+  dateModified="2026-06-22"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '足球教室', url: 'https://game8la.com/articles/' },
+    { name: '2026 世足晉級規則', url: URL },
+  ]}
+/>
+<BaseLayout currentPage="articles" title="2026 世足怎麼晉級？小組賽前2＋最佳第三名、同分比序一次看 — GAME8LA" description="2026 世界盃 48 隊怎麼晉級淘汰賽？每組前 2 名＋8 個最佳第三名＝32 隊進「32 強」。芭樂子白話圖解晉級規則、最佳第三名怎麼算、小組同分比序、32強到決賽的淘汰賽路徑。" ogImage="https://game8la.com/images/articles/football-qualify-cover.webp">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">足球教室</a> &gt; 2026 世足晉級規則</div>
+    <div style="color:var(--text-muted);font-size:0.95rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-06-22 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 8 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#1a472a,#2d8a4e,#f5b800)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+
+      <h1 style="font-size:2rem;line-height:1.3">2026 世足怎麼晉級？<em>芭樂子圖解：小組前 2＋最佳第三名、同分比序、32 強到決賽</em></h1>
+
+      <img class="content-img"
+           src="/images/articles/football-qualify-cover.webp"
+           srcset="/images/articles/football-qualify-cover-768w.webp 768w, /images/articles/football-qualify-cover.webp 1200w"
+           sizes="(max-width: 880px) 100vw, 820px"
+           alt="2026 世足晉級規則圖解｜芭樂子化身分析師，在晉級對戰板前講解小組出線｜GAME8LA"
+           width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">小組賽收尾，「我的隊晉級了沒？」芭樂子分析師上線，把 48 隊新賽制的晉級規則一次講清楚。</p>
+
+      <div class="quick-tool-bar">
+        <span>看球必備：</span>
+        <a href="/articles/worldcup-2026-schedule/">世足賽程表</a>
+        <a href="/articles/football-handicap-explained/">讓分盤</a>
+        <a href="/worldcup/">世足8LA專區</a>
+      </div>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">8LA 鄉民好，我是芭樂子。小組賽打到尾聲，群組裡每天都在問同一句：「<strong>我的隊到底晉級了沒？</strong>」2026 世足史上第一次 48 隊、規則跟以前不一樣，連「<strong>小組第三名也可能晉級</strong>」——難怪一堆人霧煞煞。這篇芭樂子用圖解把<strong>怎麼晉級、最佳第三名怎麼算、同分怎麼比</strong>一次講到你會看門道。</p>
+
+      <!-- === 目錄 === -->
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">本文快速導覽</h2>
+        <ol>
+          <li><a href="#s1">一句話版：誰能晉級</a></li>
+          <li><a href="#s2">圖解：48 隊怎麼變成 32 隊</a></li>
+          <li><a href="#s3">「最佳第三名」怎麼算</a></li>
+          <li><a href="#s4">小組同分，誰排前面？</a></li>
+          <li><a href="#s5">32 強到決賽：淘汰賽路徑</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
+      <h2 id="s1" style="margin-top:2.5rem">一句話版：誰能晉級</h2>
+
+      <div class="card" style="margin:1.2rem 0 1.5rem;border-color:var(--guava-green);background:linear-gradient(135deg,rgba(57,255,20,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:var(--guava-green);margin-top:0;font-size:1.1rem">一句話版晉級規則</h3>
+        <p style="font-size:1.05rem;line-height:1.9"><strong>每組前 2 名直接晉級（24 隊），再加上 12 個小組第三名裡「最好的 8 個」，總共 32 隊進淘汰賽。</strong></p>
+      </div>
+
+      <p>跟以前最大的不同就是這句:<strong>小組排第三,也可能晉級!</strong> 因為這屆 48 隊太多,FIFA 多開了一條「最佳第三名」的活路。所以就算你的隊小組沒拿到前兩名,也先別關電視——說不定還在線上。</p>
+
+      <h2 id="s2" style="margin-top:2.5rem">圖解：48 隊怎麼變成 32 隊</h2>
+
+      <p>直接看圖最快。芭樂子把整個晉級結構畫成一張:</p>
+
+      <figure class="pitch-diagram">
+        <svg class="pitch-svg" data-zoomable viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="qTitle qDesc">
+          <title id="qTitle">2026 世足晉級結構圖（48 隊如何變 32 隊）</title>
+          <desc id="qDesc">48 隊分 12 組。每組前 2 名共 24 隊直接晉級，12 個小組第三名取最佳 8 個晉級，合計 32 隊進入 32 強淘汰賽。</desc>
+          <rect x="0" y="0" width="700" height="420" rx="12" fill="#161616"/>
+          <!-- top -->
+          <rect x="200" y="24" width="300" height="52" rx="10" fill="rgba(245,184,0,0.12)" stroke="#f5b800" stroke-width="1.5"/>
+          <text x="350" y="48" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">48 隊・12 組（A～L）</text>
+          <text x="350" y="68" text-anchor="middle" fill="#bbb" font-size="13">每組 4 隊・踢循環賽</text>
+          <!-- arrows down -->
+          <line x1="350" y1="76" x2="200" y2="120" stroke="#4caf50" stroke-width="2"/>
+          <line x1="350" y1="76" x2="500" y2="120" stroke="#f5b800" stroke-width="2"/>
+          <!-- left: top2 -->
+          <rect x="40" y="120" width="300" height="78" rx="10" fill="rgba(76,175,80,0.10)" stroke="#4caf50" stroke-width="1.8"/>
+          <text x="190" y="150" text-anchor="middle" fill="#4caf50" font-size="17" font-weight="800">每組前 2 名 → 直接晉級</text>
+          <text x="190" y="178" text-anchor="middle" fill="#fff" font-size="22" font-weight="900">12 組 × 2 ＝ 24 隊</text>
+          <!-- right: best third -->
+          <rect x="360" y="120" width="300" height="78" rx="10" fill="rgba(245,184,0,0.10)" stroke="#f5b800" stroke-width="1.8"/>
+          <text x="510" y="150" text-anchor="middle" fill="#f5b800" font-size="17" font-weight="800">12 個第三名 → 取最佳</text>
+          <text x="510" y="178" text-anchor="middle" fill="#fff" font-size="22" font-weight="900">最佳 8 個 ＝ 8 隊</text>
+          <!-- merge arrows -->
+          <line x1="190" y1="198" x2="350" y2="248" stroke="#4caf50" stroke-width="2"/>
+          <line x1="510" y1="198" x2="350" y2="248" stroke="#f5b800" stroke-width="2"/>
+          <!-- 32 -->
+          <rect x="210" y="248" width="280" height="60" rx="10" fill="rgba(57,255,20,0.10)" stroke="#39FF14" stroke-width="2"/>
+          <text x="350" y="276" text-anchor="middle" fill="#39FF14" font-size="20" font-weight="900">＝ 32 隊進淘汰賽</text>
+          <text x="350" y="298" text-anchor="middle" fill="#bbb" font-size="13">也就是新增的「32 強」這一輪</text>
+          <!-- knockout path -->
+          <line x1="350" y1="308" x2="350" y2="338" stroke="#666" stroke-width="2" stroke-dasharray="5,4"/>
+          <text x="350" y="362" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">32 強 → 16 強 → 8 強 → 4 強 → 決賽</text>
+          <text x="350" y="392" text-anchor="middle" fill="#f5b800" font-size="14">冠軍要從 32 強連贏 5 場</text>
+        </svg>
+        <span class="pitch-zoom-tip">🔍 點圖可放大檢視</span>
+        <figcaption class="article-img-caption">2026 世足晉級結構：每組前 2（24 隊）＋ 最佳 8 個第三名（8 隊）＝ 32 隊進淘汰賽。</figcaption>
+      </figure>
+
+      <figure style="margin:1.5rem 0">
+        <img class="content-img" src="/images/articles/football-qualify-podium.webp"
+             alt="芭樂子站在頒獎台前比出『前2直接晉級、第三名還有機會』的手勢，示意小組出線規則"
+             width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="article-img-caption">前 2 名穩穩晉級，第三名也別急著哭——還有「最佳 8 個」的活路。芭樂子幫你看清楚自己在不在線上。</figcaption>
+      </figure>
+
+      <h2 id="s3" style="margin-top:2.5rem">「最佳第三名」怎麼算</h2>
+
+      <p>12 個小組各有一個第三名,FIFA 把這 12 隊<strong>抓出來互相排名</strong>,排前 8 的晉級、後 4 的回家。排名依序看:</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#f5b800;background:linear-gradient(135deg,rgba(245,184,0,0.08) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#f5b800;margin-top:0">最佳第三名 排序順序</h3>
+        <ol style="margin:0">
+          <li><strong>積分</strong>（勝 3、平 1、負 0）</li>
+          <li><strong>淨勝球</strong>（進球 − 失球）</li>
+          <li><strong>進球數</strong></li>
+          <li><strong>公平競賽分</strong>（黃牌、紅牌越少越好）</li>
+          <li><strong>抽籤</strong>（前面都一樣才用）</li>
+        </ol>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">所以第三名之間是在「比氣長」——多進一球、少吃一張牌,都可能決定你回不回家。這也是為什麼有些隊就算大局已定,最後一場還在拼進球。</p>
+      </div>
+
+      <h2 id="s4" style="margin-top:2.5rem">小組同分，誰排前面？</h2>
+
+      <p>同一組裡兩隊積分一樣,怎麼分高下?順序是固定的:</p>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#2196f3;background:linear-gradient(135deg,rgba(33,150,243,0.06) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#2196f3;margin-top:0">小組同分 比序</h3>
+        <table>
+          <thead><tr><th style="width:2.5rem">順位</th><th>比什麼</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;color:#2196f3;text-align:center">1</td><td><strong>積分</strong></td></tr>
+            <tr><td style="font-weight:700;color:#2196f3;text-align:center">2</td><td><strong>淨勝球</strong>（全部小組賽）</td></tr>
+            <tr><td style="font-weight:700;color:#2196f3;text-align:center">3</td><td><strong>進球數</strong>（全部小組賽）</td></tr>
+            <tr><td style="font-weight:700;color:#2196f3;text-align:center">4</td><td>還平 → 看<strong>同分球隊「相互對戰」</strong>成績（積分→淨勝球→進球數）</td></tr>
+            <tr><td style="font-weight:700;color:#2196f3;text-align:center">5</td><td><strong>公平競賽分</strong>（黃紅牌）</td></tr>
+            <tr><td style="font-weight:700;color:#2196f3;text-align:center">6</td><td><strong>抽籤</strong></td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.8rem 0 0;font-size:0.95rem;color:var(--text-muted)">口訣:<strong>先比積分,再比淨勝球,再比進球數。</strong>這就是為什麼領先時還拼命想多灌幾球、落後時死守不要再丟——每一球都可能決定排名。</p>
+      </div>
+
+      <h2 id="s5" style="margin-top:2.5rem">32 強到決賽：淘汰賽路徑</h2>
+
+      <p>進了淘汰賽就<strong>單場定生死</strong>,輸了就回家。2026 因為隊伍變多,比以前<strong>多打一輪「32 強」</strong>:</p>
+
+      <figure style="margin:1.5rem 0">
+        <img class="content-img" src="/images/articles/football-qualify-bracket.webp"
+             alt="芭樂子站在淘汰賽對戰表前,指著 32 強到決賽的晉級路徑"
+             width="960" height="536" loading="lazy" decoding="async">
+        <figcaption class="article-img-caption">淘汰賽就是單場定生死:32 強 → 16 強 → 8 強 → 4 強 → 決賽,冠軍要連贏 5 場。</figcaption>
+      </figure>
+
+      <div class="card" style="margin:1.5rem 0;border-color:#cd212a;background:linear-gradient(135deg,rgba(205,33,42,0.07) 0%,rgba(30,30,30,0.5) 100%)">
+        <h3 style="color:#ff5252;margin-top:0">淘汰賽流程</h3>
+        <p style="margin:.3rem 0"><strong>32 強 → 16 強 → 8 強(八強賽)→ 4 強(準決賽)→ 決賽</strong></p>
+        <p style="margin:.3rem 0;font-size:0.97rem">每場 90 分鐘打平 → 延長賽 30 分鐘;再平 → <strong>PK 大戰</strong>。4 強輸的兩隊另外踢<strong>季軍戰</strong>。</p>
+        <p style="margin:0.6rem 0 0;font-size:0.95rem;color:var(--text-muted)">※ 賽制、晉級規則以 <strong>FIFA 官方公告</strong>為準。各階段台灣時間看 <a href="/articles/worldcup-2026-schedule/" style="color:var(--guava-green)">世足賽程表</a>。</p>
+      </div>
+
+      <p>看淘汰賽常會聽到「讓分」「大小分」這些盤口——想看懂轉播在講什麼,順手補芭樂子的 <a href="/articles/football-handicap-explained/" style="color:var(--guava-green)">讓分盤</a> 和 <a href="/articles/football-over-under-explained/" style="color:var(--guava-green)">大小分</a>,還有最讓人抓狂的 <a href="/articles/football-offside-rule/" style="color:var(--guava-green)">越位規則</a>,看球更有門道。</p>
+
+      <!-- === FAQ === -->
+      <h2 id="faq" style="margin-top:2.5rem">常見問題 FAQ</h2>
+      <div class="faq-section">
+        {faqs.map(faq => (
+          <details class="faq-item">
+            <summary class="faq-q">{faq.q}</summary>
+            <div class="faq-a" set:html={faq.a} />
+          </details>
+        ))}
+      </div>
+
+      <!-- === 免責聲明 === -->
+      <div style="margin:2rem 0;padding:1rem 1.2rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;font-size:0.95rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>芭樂子提醒：</strong>本文為 2026 世界盃賽制教育，晉級與比序規則以 <strong>FIFA 官方《Laws / Regulations》最新公告為準</strong>（規則偶有細節調整）。想用免費點數玩賽果預測、零風險練看球手感，來 <a href="/worldcup/" style="color:var(--guava-green)">世足8LA</a>；真錢只碰合法運彩、別碰境外賭盤。</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2 style="margin-top:2.5rem">2026 世足相關延伸閱讀</h2>
+      <p>看懂晉級,再把這幾篇補齊,整個世足看得更通透:</p>
+      <div class="related-links">
+        <a href="/articles/worldcup-2026-schedule/" class="rl-item">
+          <span class="rl-cat">世足專題</span>
+          <strong>2026 世足賽程表（台灣時間）：12 組分組、各階段時間</strong>
+          <span class="rl-desc">開幕到決賽、分組名單、台灣看球時間一次看</span>
+        </a>
+        <a href="/articles/football-handicap-explained/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>讓分盤是什麼？為什麼贏球還會輸盤（附結算計算器）</strong>
+          <span class="rl-desc">−1.5／+1.5 怎麼看、半球一球、淘汰賽看盤必備</span>
+        </a>
+        <a href="/articles/football-over-under-explained/" class="rl-item">
+          <span class="rl-cat">足球教室</span>
+          <strong>大小分是什麼？賭總進球、不管誰贏（附開踢動畫）</strong>
+          <span class="rl-desc">2.5 為何不走盤、半大半小怎麼拆</span>
+        </a>
+      </div>
+
+      <ManifestoBox />
+      <ShareButtons title="2026 世足怎麼晉級？小組賽前2＋最佳第三名、同分比序一次看" url={URL} />
+    </article>
+  </div>
+
+  <!-- Lightbox 圖片放大 modal -->
+  <div class="lightbox" id="pitchLightbox" role="dialog" aria-modal="true" aria-label="放大圖解">
+    <button type="button" class="lightbox__close" aria-label="關閉放大檢視" onclick="window._closePitchLightbox()">×</button>
+    <div class="lightbox__inner" id="pitchLightboxInner" onclick="event.stopPropagation()"></div>
+    <div class="lightbox__hint">點空白處或按 ESC 關閉</div>
+  </div>
+  <script is:inline>
+    (function () {
+      var lb = document.getElementById('pitchLightbox');
+      var inner = document.getElementById('pitchLightboxInner');
+      if (!lb || !inner) return;
+      function open(svg) {
+        var clone = svg.cloneNode(true);
+        clone.removeAttribute('data-zoomable');
+        clone.style.cursor = 'default';
+        inner.innerHTML = '';
+        inner.appendChild(clone);
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+        inner.innerHTML = '';
+      }
+      window._closePitchLightbox = close;
+      document.querySelectorAll('.pitch-svg[data-zoomable]').forEach(function (svg) {
+        svg.addEventListener('click', function () { open(svg); });
+      });
+      lb.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+      });
+    })();
+  </script>
+
+<style is:global>
+  .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4.5vw, 1.5rem) 3rem; }
+  .breadcrumb { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--guava-green); }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.95rem; color: var(--guava-green); text-decoration: none; margin-bottom: 1rem; }
+  .hero-banner { width: 100%; height: 4px; border-radius: 8px; margin-bottom: 1.5rem; }
+
+  .article-content h1 em { font-style: normal; display: block; font-size: 0.65em; color: var(--text-muted); margin-top: 0.3rem; font-weight: 400; }
+  .article-content h2 { font-size: clamp(1.3rem, 4.8vw, 1.55rem); }
+  .article-content h3 { font-size: 1.15rem; }
+  .article-content p { font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.9; margin: 1.1rem 0; }
+  .article-content ul, .article-content ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  .article-content li { margin-bottom: 0.5rem; line-height: 1.85; font-size: clamp(16px, 4.2vw, 17.5px); }
+
+  .article-img-caption { text-align: center; font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin: 0.5rem auto 1.2rem; max-width: 680px; }
+  .content-img { display: block; width: 100%; max-width: 820px; height: auto; border-radius: 12px; margin: 1rem auto 0; border: 1px solid var(--border); }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .card h3 { font-size: 1.15rem; }
+  .card p { font-size: 1rem; line-height: 1.85; }
+
+  .quick-tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+  .quick-tool-bar span { color: var(--text-muted); }
+  .quick-tool-bar a { color: var(--guava-green); text-decoration: none; background: rgba(57,255,20,0.08); padding: 5px 12px; border-radius: 6px; }
+  .quick-tool-bar a:hover { background: rgba(57,255,20,0.18); }
+
+  .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.3rem; cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: flex-start; gap: 0.5rem; }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::before { content: '▸'; color: var(--guava-green); flex-shrink: 0; }
+  .faq-item[open] .faq-q::before { content: '▾ '; }
+  .faq-a { margin: 0 1.3rem 1.1rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+  .faq-a a { color: var(--guava-green); }
+
+  .related-links { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 2rem; }
+  .rl-item { display: block; padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+  .rl-item:hover { border-color: var(--guava-green); transform: translateX(4px); }
+  .rl-cat { font-size: 0.78rem; color: var(--guava-green); text-transform: uppercase; letter-spacing: 0.5px; }
+  .rl-item strong { display: block; margin: 0.2rem 0; font-size: 1.02rem; }
+  .rl-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.97rem; }
+  th, td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); line-height: 1.7; }
+  th { font-weight: 700; font-size: 0.92rem; color: var(--text-muted); }
+
+  /* === 圖解 SVG === */
+  .pitch-diagram { margin: 1.2rem 0 1.8rem; padding: 0; border: none; }
+  .pitch-svg { width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto; border-radius: 12px; }
+  .pitch-svg[data-zoomable] { cursor: zoom-in; transition: filter 0.2s, transform 0.2s; }
+  .pitch-svg[data-zoomable]:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .pitch-zoom-tip { display: block; text-align: center; font-size: 0.88rem; color: var(--text-muted); margin: 0.3rem 0 0.4rem; }
+
+  /* === Lightbox modal === */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; animation: lbFadeIn 0.18s ease-out; }
+  .lightbox.is-open { display: flex; }
+  @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .lightbox__inner { width: 100%; max-width: 1100px; max-height: 90vh; overflow: auto; -webkit-overflow-scrolling: touch; cursor: default; }
+  .lightbox__inner svg { width: 100%; height: auto; display: block; border-radius: 12px; }
+  .lightbox__close { position: fixed; top: 16px; right: 16px; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.18); color: #fff; border: none; font-size: 26px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10001; }
+  .lightbox__close:hover { background: rgba(255,255,255,0.28); }
+  .lightbox__hint { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 14px; pointer-events: none; }
+
+  @media (max-width: 600px) {
+    .article-content h1 { font-size: 1.55rem; }
+    .article-content h2 { font-size: 1.25rem; }
+  }
+</style>
+</BaseLayout>
