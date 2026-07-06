@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ShareButtons from '../../components/ShareButtons.astro';
+import MemberHookCard from '../../components/MemberHookCard.astro';
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -186,6 +187,8 @@ const softwareSchema = {
       </div>
     </div>
   </section>
+
+  <MemberHookCard />
 
   <!-- ═══ FAQ ═══ -->
   <section class="analysis-section faq-section">

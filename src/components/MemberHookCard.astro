@@ -1,0 +1,104 @@
+---
+// 留存引導卡：導向 /member/ 免費領點數 + 每日簽到，掛在首頁與熱門工具頁
+---
+<div class="mhc-card">
+  <div class="mhc-text">
+    <p class="mhc-title">🎁 天天免費領 1000 點</p>
+    <p class="mhc-sub">每日簽到最高再拿 1000</p>
+    <p class="mhc-disclaimer">不用錢・點數不能換現金・純粹玩爽</p>
+  </div>
+  <a href="/member/" class="mhc-cta" id="mhcCtaBtn">免費領點數 →</a>
+</div>
+
+<script is:inline>
+(function(){
+  try {
+    var btn = document.getElementById('mhcCtaBtn');
+    if (btn) {
+      btn.addEventListener('click', function(){
+        try { gtag('event','member_hook_click',{from:location.pathname}); }catch(e){}
+      });
+    }
+  } catch(e){}
+})();
+</script>
+
+<style>
+.mhc-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mhc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.mhc-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.mhc-sub {
+  font-size: 1rem;
+  margin: 0;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+.mhc-disclaimer {
+  font-size: 0.8rem;
+  margin: 4px 0 0;
+  color: #888;
+  line-height: 1.4;
+}
+
+.mhc-cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#b8860b,#f5b800);
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 14px 24px;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mhc-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 184, 0, 0.35);
+}
+
+@media (max-width: 600px) {
+  .mhc-card {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .mhc-cta {
+    width: 100%;
+    padding: 14px 20px;
+  }
+}
+</style>

@@ -1,6 +1,7 @@
 ---
 import Icon from '../components/Icon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MemberHookCard from '../components/MemberHookCard.astro';
 import { articles, estViews } from '../data/articles.js';
 import { scamList, lastUpdated } from '../data/scam-list.js';
 
@@ -213,6 +214,7 @@ const latestScams = [...scamList]
     </div>
   </div>
 </section>
+<MemberHookCard />
 <!-- TOOLS STRIP -->
 <section class="section" id="tools-strip">
   <div class="section-header">
