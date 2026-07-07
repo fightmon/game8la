@@ -43,6 +43,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .as-opt{ flex:1; min-width:90px; padding:.7rem .5rem; border-radius:10px; border:2px solid var(--border,#444); background:#222; color:#fff; font-weight:700; cursor:pointer; font-size:1rem; }
   .as-opt:hover{ border-color:var(--gold,#f5b800); }
   .as-settled-tag{ color:#39FF14; font-weight:800; margin-top:.5rem; }
+  .as-bets{ font-size:.85rem; margin-top:.4rem; font-weight:600; }
+  .as-bets.no-bets{ color:#777; }
+  .as-bets.has-bets{ color:#8ab4f8; }
+  .as-bets.has-pending{ color:#ffb020; font-weight:800; }
+  .as-row.has-live-bets{ border-color:#ffb020; box-shadow:0 0 0 1px rgba(255,176,32,.4); }
 </style>
 
 <script is:inline>
@@ -62,9 +67,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       var due = e.status!=='settled' && new Date(e.starts_at).getTime()<now;
       if(f==='due' && !(e.status!=='settled' && due)) return;
       if(f==='open' && e.status==='settled') return;
-      var cls='as-row'+(e.status==='settled'?' settled':(due?' due':''));
+      var nb=e.bets||0, np=e.pendingBets||0;
+      var cls='as-row'+(e.status==='settled'?' settled':(due?' due':''))+(np>0?' has-live-bets':'');
       html+='<div class="'+cls+'">';
       html+='<div class="as-rtop"><span class="as-title">'+esc(e.title)+'</span><span class="as-time">'+e.starts_at.replace('T',' ').replace('Z',' UTC')+(due?' ・已開賽':'')+'</span></div>';
+      html+='<div class="as-bets'+(np>0?' has-pending':(nb>0?' has-bets':' no-bets'))+'">'+(nb>0?('🎲 '+nb+' 人下注'+(np>0?'　⚠️ '+np+' 筆待派彩（請務必用下面按鈕結算，不要跳過）':'（已全數派彩）')):'— 沒人下注（可安心結算）')+'</div>';
       if(e.status==='settled'){
         var lab=labelOf(e,e.result);
         html+='<div class="as-settled-tag">✅ 已結算：'+esc(lab||e.result)+'</div>';

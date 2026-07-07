@@ -574,6 +574,12 @@ async function handleEvents(request, env) {
     const { results } = await env.DB.prepare('SELECT event_id, choice, stake, potential_payout, status, payout FROM predictions WHERE member_id=?1').bind(member.id).all();
     for (const p of results) myPreds[p.event_id] = p;
   }
+  // 每場下注數（aggregate，非 PII）：total 總下注、pending 未結算，供結算後台判斷哪場有真人下注
+  const betMap = {};
+  const { results: betRows } = await env.DB.prepare(
+    "SELECT event_id, COUNT(*) AS total, SUM(CASE WHEN status='pending' THEN 1 ELSE 0 END) AS pending FROM predictions GROUP BY event_id"
+  ).all();
+  for (const r of (betRows || [])) betMap[r.event_id] = { total: r.total || 0, pending: r.pending || 0 };
   const now = Date.now();
   const out = (events || []).map(e => ({
     id: e.id, type: e.type, title: e.title,
@@ -581,6 +587,8 @@ async function handleEvents(request, env) {
     starts_at: e.starts_at,
     locked: e.status !== 'open' || new Date(e.starts_at).getTime() < now,
     status: e.status, result: e.result,
+    bets: (betMap[e.id] || {}).total || 0,
+    pendingBets: (betMap[e.id] || {}).pending || 0,
     myPrediction: myPreds[e.id] || null,
   }));
   return jsonResp({ events: out, points: member ? member.points : null });
