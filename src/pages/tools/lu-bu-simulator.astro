@@ -1,0 +1,1029 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import { SYMS, MULTIS, BONUS, JACKPOTS, VOL, PAY_DIV, MAX_WIN_X, BUY_COST_X, NATURAL_RTP, JACKPOT_RTP } from '../../../public/lubu/engine.mjs';
+
+const hiSyms = SYMS.filter(s => s.tier === 'hi');
+const loSyms = SYMS.filter(s => s.tier === 'lo');
+---
+<BaseLayout
+  title="戰神呂布免費試玩｜RTP 體感模擬器・倍數符號爆分 - GAME8LA"
+  description="戰神呂布免費試玩：不用儲值、不用註冊。這是一台教育用模擬器，讓你自己設定 RTP 和波動度，親手體驗自由配對、倍數符號相加、Free Game 倍數雪球的數學真相。"
+  currentPage="tools"
+  noindex={true}
+>
+
+<div class="sim-wrap">
+  <div class="sim-header">
+    <a href="/tools/" class="sim-back">← 回工具箱</a>
+    <h1>🐎 戰神呂布<span>免費試玩 · RTP 體感模擬器</span></h1>
+    <p class="sim-disclaimer">⚠️ 沒有真錢、沒有儲值、沒有獎金——教育用模擬器，RTP 這根旋鈕交給你自己轉。</p>
+  </div>
+
+  <!-- 累積彩金（機率為本模擬器設定值，官方未公開——詳見下方賠率表區塊） -->
+  <div class="jp-bar">
+    {JACKPOTS.map(j => (
+      <div class="jp-cell" data-jp={j.id} style={`--jc:${j.color}`}>
+        <span class="jp-name">{j.name}</span>
+        <span class="jp-val">{j.mult.toLocaleString()}x</span>
+        <span class="jp-odds">1 / {j.oneIn.toLocaleString()}</span>
+      </div>
+    ))}
+  </div>
+  <p class="jp-caption">＊彩金機率為本模擬器設定值；官方從未公開真實觸發機率（<a href="#" onclick="document.querySelector('.paytable-toggle').open=true;document.querySelector('.paytable-toggle').scrollIntoView({behavior:'smooth'});return false">說明</a>）</p>
+
+  <!-- 遊戲區 -->
+  <div class="game-area">
+    <div class="play-stage">
+      <div class="stage-board">
+        <div class="board-frame">
+          <div class="board" id="board"></div>
+  
+          <div class="multi-counter" id="multi-counter">
+            <span class="mc-label">總倍數</span>
+            <span class="mc-val" id="multi-value">×0</span>
+          </div>
+  
+          <div class="fg-badge" id="fg-badge">
+            <span id="fg-text">FREE GAME 0</span>
+          </div>
+  
+          <div class="cascade-chip" id="cascade-chip">
+            <span id="cc-sym"></span>
+            <strong id="cc-amt">0</strong>
+          </div>
+  
+          <div class="win-overlay" id="win-overlay">
+            <div class="wo-title" id="wo-title">WIN</div>
+            <div class="wo-amt" id="wo-amt">0</div>
+            <div class="wo-sub" id="wo-sub"></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="stage-rail">
+      <!-- 控制面板 -->
+      <div class="ctrl-panel">
+        <div class="ctrl-group">
+          <label for="rtp-slider">🎯 RTP（你是神，你決定）</label>
+          <div class="ctrl-row">
+            <input type="range" id="rtp-slider" min="80" max="99" value="96" step="1" />
+            <span id="rtp-val" class="ctrl-val">96%</span>
+          </div>
+          <p class="ctrl-hint">真實娛樂城不會讓你看到這根滑桿，但它一直都在。</p>
+        </div>
+        <div class="ctrl-group">
+          <label>🌊 波動度</label>
+          <div class="vol-btns" id="vol-btns">
+            <button type="button" data-vol="low">低波動<small>常中小獎</small></button>
+            <button type="button" data-vol="mid" class="on">中波動<small>標準</small></button>
+            <button type="button" data-vol="high">高波動<small>少中大獎</small></button>
+          </div>
+        </div>
+        <div class="ctrl-group">
+          <label for="bet-input">💰 單轉押注</label>
+          <div class="ctrl-row">
+            <button type="button" class="bet-step" id="bet-minus">−</button>
+            <input type="number" id="bet-input" value="20" min="1" max="1000" step="1" />
+            <button type="button" class="bet-step" id="bet-plus">＋</button>
+          </div>
+          <p class="ctrl-hint">賠率表以「押注 ÷ {PAY_DIV} × 賠率」計算</p>
+        </div>
+        <div class="ctrl-group reset-group">
+          <button type="button" id="reset-btn" class="reset-btn">🔄 重置全部數據</button>
+        </div>
+      </div>
+        <div class="action-bar">
+          <div class="meter">
+            <div class="meter-row"><span>餘額</span><strong class="bal" id="balance">10,000</strong></div>
+            <div class="meter-row"><span>本轉贏分</span><strong id="last-win">0</strong></div>
+          </div>
+          <button type="button" id="spin-btn" class="spin-btn">SPIN</button>
+          <div class="auto-wrap">
+            <button type="button" id="auto-btn" class="auto-btn">自動 50 轉</button>
+            <button type="button" id="buy-btn" class="buy-btn">購買免遊 <small>{BUY_COST_X}x</small></button>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <p class="buy-rtp" id="buy-rtp"></p>
+    <p class="action-note">
+      單轉贏分上限 {MAX_WIN_X.toLocaleString()}x（比照官方）。自動轉會在餘額不足或觸發 Free Game 時停下。
+    </p>
+  </div>
+
+  <!-- 數據面板 -->
+  <div class="stats-panel">
+    <h2>📊 你這一局的真實數據</h2>
+    <div class="stats-grid">
+      <div class="stat-row"><span>設定 RTP</span><strong id="s-rtp-set">96%</strong></div>
+      <div class="stat-row"><span>實測 RTP</span><strong id="s-rtp-real">—</strong></div>
+      <div class="stat-row"><span>總轉數</span><strong id="s-spins">0</strong></div>
+      <div class="stat-row"><span>總投注</span><strong id="s-bet">0</strong></div>
+      <div class="stat-row"><span>總贏分</span><strong id="s-win">0</strong></div>
+      <div class="stat-row"><span>淨損益</span><strong id="s-net">0</strong></div>
+      <div class="stat-row"><span>中獎率</span><strong id="s-hit">—</strong></div>
+      <div class="stat-row"><span>最大單轉</span><strong id="s-best">0x</strong></div>
+      <div class="stat-row"><span>Free Game 次數</span><strong id="s-fg">0</strong></div>
+      <div class="stat-row"><span>彩金中獎</span><strong id="s-jp">0</strong></div>
+    </div>
+    <div class="chart-box"><canvas id="balance-chart"></canvas></div>
+    <p class="chart-note" id="chart-note">轉幾把之後這裡會畫出你的餘額走勢。</p>
+  </div>
+
+  <div class="context-cta" id="context-cta"></div>
+
+  <!-- 賠率表 -->
+  <details class="paytable-toggle" open>
+    <summary>📋 符號賠率表（含「實際賠付係數」對照）</summary>
+
+    <div class="payk-box">
+      <p>
+        <strong>這張表是本站最誠實的一格。</strong>下面「官方賠率」是 RSG 公布的數字；
+        「實際賠付」是本模擬器依你選的 RTP 與波動度真正付給你的金額。
+        兩者的比值就是<strong>賠付係數</strong>——
+      </p>
+      <div class="payk-live">
+        目前賠付係數 <strong id="payk-val">×1.00</strong>
+        <small>（RTP <span id="payk-rtp">96</span>% ／ <span id="payk-vol">中波動</span>）</small>
+      </div>
+      <p class="payk-why">
+        同一張賠率表、同一個「1000 倍」，營運商只要轉動 RTP 旋鈕，你實際拿到的就完全不同。
+        這就是為什麼「賠率表寫多少」從來不等於「你會贏多少」。
+      </p>
+    </div>
+
+    <h3>🔥 高賠符號</h3>
+    <div class="pt-row">
+      {hiSyms.map(s => (
+        <div class="pt-card">
+          <div class={`pt-img${s.plate ? ' has-plate' : ''}`} style={s.plate ? `--plate:${s.plate}` : ''}>
+            <img src={s.img} alt={s.name} width="72" height="72" loading="lazy" />
+          </div>
+          <span class="pt-name">{s.name}</span>
+          <table class="pt-tab">
+            <tr><th>個數</th><th>官方</th><th>實際</th></tr>
+            {[8, 10, 12].map(k => (
+              <tr>
+                <td>{k === 12 ? '12+' : `${k}–${k + 1}`}</td>
+                <td>{s.pay[k].toLocaleString()}</td>
+                <td class="pt-eff" data-pay={s.pay[k]}>—</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      ))}
+    </div>
+
+    <h3>💎 芭樂寶石符號</h3>
+    <div class="pt-row">
+      {loSyms.map(s => (
+        <div class="pt-card">
+          <div class="pt-img"><img src={s.img} alt={s.name} width="72" height="72" loading="lazy" /></div>
+          <span class="pt-name">{s.name}</span>
+          <table class="pt-tab">
+            <tr><th>個數</th><th>官方</th><th>實際</th></tr>
+            {[8, 10, 12].map(k => (
+              <tr>
+                <td>{k === 12 ? '12+' : `${k}–${k + 1}`}</td>
+                <td>{s.pay[k].toLocaleString()}</td>
+                <td class="pt-eff" data-pay={s.pay[k]}>—</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      ))}
+    </div>
+
+    <h3>✨ 倍數符號（盤面上所有倍數<strong>相加</strong>，再乘上贏分）</h3>
+    <div class="pt-row pt-multi">
+      {MULTIS.map(m => (
+        <div class="pt-card">
+          <div class="pt-img"><img src={m.img} alt={m.name} width="72" height="72" loading="lazy" /></div>
+          <span class="pt-name" style={`color:${m.color}`}>{m.name}</span>
+          <span class="pt-range">{m.min}x – {m.max}x</span>
+        </div>
+      ))}
+    </div>
+
+    <h3>🎁 BONUS 與 Free Game</h3>
+    <div class="pt-bonus">
+      <div class="pt-img"><img src={BONUS.img} alt="BONUS 符號" width="88" height="88" loading="lazy" /></div>
+      <ul>
+        <li>盤面 <strong>4 個以上</strong> BONUS → 觸發 <strong>15 場 Free Game</strong></li>
+        <li>觸發即時獎金：4 個 = 3x、5 個 = 5x、6 個 = 100x 總投注</li>
+        <li>Free Game 期間，盤面倍數會<strong>鎖定累積不重置</strong>——這就是雪球</li>
+        <li>Free Game 中再出現 3 個以上 BONUS → 加 5 場，最多累積到 100 場</li>
+        <li>波動度越高，Free Game 越常來、倍數雪球滾得越大</li>
+      </ul>
+    </div>
+
+    <h3>🏆 累積彩金：一個你查不到答案的問題</h3>
+
+    <div class="jp-warn">
+      <p><strong>先講清楚：下面這張表的機率是「本模擬器的設定值」，不是官方數據。</strong></p>
+      <p>
+        我們把 RSG 官方頁面和六個遊戲介紹站全部翻過一遍——<strong>沒有任何一家公布過四級彩金的觸發機率</strong>。
+        所有說法都停在「隨機觸發、獎池隨全體玩家投注累積」。真機的彩金是<strong>累積獎池</strong>
+        （GRAND 動輒 50 萬以上），不是固定倍數；本模擬器為了讓你在單機環境也能體感到「彩金到底有多遠」，
+        才改用固定倍數搭配我們自訂的機率。
+      </p>
+      <p>
+        <strong>而「查不到機率」這件事本身，才是這張表真正想告訴你的。</strong>
+        你查得到賠率表上每個符號賠幾倍，卻查不到它多久出現一次。
+        少了出現機率，賠率表就只是一張願望清單——這正是老虎機資訊不對稱的核心，
+        也是為什麼「我算過這台的賠率很高」這句話通常沒有意義。
+      </p>
+    </div>
+
+    <table class="jp-table">
+      <tr><th>等級</th><th>賠付<small>（模擬器設定）</small></th><th>每轉機率<small>（模擬器設定）</small></th><th>平均多久中一次</th></tr>
+      {JACKPOTS.map(j => (
+        <tr>
+          <td style={`color:${j.color};font-weight:800`}>{j.name}</td>
+          <td>{j.mult.toLocaleString()}x</td>
+          <td>1 / {j.oneIn.toLocaleString()}</td>
+          <td>{j.oneIn.toLocaleString()} 轉</td>
+        </tr>
+      ))}
+    </table>
+    <p class="jp-note">
+      依上表設定，四級彩金合計佔掉 <strong>{JACKPOT_RTP.toFixed(2)}%</strong> 的 RTP。
+      也就是說你設定 96% 的時候，其中 {JACKPOT_RTP.toFixed(2)}% 是「幾乎永遠不會發生在你身上」的那部分——
+      GRAND 平均要轉 100 萬次，一秒一轉、不吃不睡也要 11.6 天。
+      真機的彩金比例只會更難查，但邏輯完全一樣：<strong>你以為的 RTP 裡，有一塊根本不屬於你</strong>。
+    </p>
+  </details>
+
+  <div class="sim-cta">
+    <p>玩完模擬器了？這幾個工具幫你管理真實世界的風險：</p>
+    <div class="cta-links">
+      <a href="/games/god-of-war-lubu/">🐎 戰神呂布完整攻略</a>
+      <a href="/tools/rtp-tracker/">🎰 RTP 實測紀錄器</a>
+      <a href="/tools/bankroll-calculator/">🧮 資金管理計算器</a>
+      <a href="/casino-check/">🛡️ 娛樂城體檢工具</a>
+    </div>
+  </div>
+
+  <ShareButtons title="戰神呂布 — RTP 體感模擬器" heading="🛡 不用花一塊錢，就看懂戰神呂布的數學" />
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "戰神呂布模擬器 — 倍數符號爆分體驗",
+  "url": "https://game8la.com/tools/lu-bu-simulator/",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+  "description": "免費線上戰神呂布老虎機模擬器，體驗自由配對、倍數符號相加與 Free Game 倍數雪球。"
+})} />
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+<script type="module" is:inline>
+import { createGame, SYMS, MULTIS, BONUS, VOL, COLS, ROWS, TOTAL, PAY_DIV, NATURAL_RTP, JACKPOT_RTP, BUY_COST_X, BUY_RTP_RATIO }
+  from '/lubu/engine.mjs';
+
+const $ = id => document.getElementById(id);
+const SYM_BY_ID = Object.fromEntries(SYMS.map(s => [s.id, s]));
+
+let rtp = 96, vol = 'mid', bet = 20, balance = 10000;
+let game = createGame({ rtp, vol });
+let busy = false, autoLeft = 0;
+let spins = 0, hits = 0, best = 0, fgCount = 0, jpCount = 0, totalBet = 0, totalWin = 0;
+const history = [];
+let chart = null;
+
+/* ---------- 盤面渲染 ---------- */
+function cellHtml(c) {
+  if (!c) return '<div class="cell"></div>';
+  if (c.kind === 'multi') {
+    return `<div class="cell cell-multi"><img src="${c.img}" alt="" /><span class="mval">${c.value}x</span></div>`;
+  }
+  if (c.kind === 'bonus') {
+    return `<div class="cell cell-bonus"><img src="${c.img}" alt="BONUS" /></div>`;
+  }
+  const s = SYM_BY_ID[c.id];
+  const plate = s.plate ? ` has-plate" style="--plate:${s.plate}` : '';
+  return `<div class="cell cell-sym${plate}"><img src="${s.img}" alt="${s.name}" /></div>`;
+}
+
+/**
+ * 畫出盤面。
+ *  opts.all  = true       新的一轉，整盤從上方落下
+ *  opts.from = 來源對照表  連鎖之後，只讓「真的往下掉的格子」播動畫、掉幾格就位移幾格；
+ *                         沒被消掉又沒移動的符號必須完全靜止——否則看起來像整盤換新，
+ *                         掉落消除（cascade）的手感就不見了。
+ */
+function renderBoard(board, opts = {}) {
+  $('board').innerHTML = board.map(cellHtml).join('');
+  const cells = $('board').children;
+
+  if (opts.all) {
+    for (let i = 0; i < cells.length; i++) {
+      cells[i].style.setProperty('--fall', String(Math.floor(i / COLS) + 1));
+      cells[i].style.animationDelay = `${(i % COLS) * 26}ms`;
+      cells[i].classList.add('fall');
+    }
+    return;
+  }
+
+  if (!opts.from) return;
+  for (let i = 0; i < cells.length; i++) {
+    const src = opts.from[i];
+    const dstRow = Math.floor(i / COLS);
+    // 新符號從盤面上方掉進來；舊符號則掉「目的地列 − 來源列」格
+    const dist = src < 0 ? dstRow + 1 : dstRow - Math.floor(src / COLS);
+    if (dist > 0) {
+      cells[i].style.setProperty('--fall', String(dist));
+      cells[i].classList.add('fall');
+    }
+  }
+}
+
+function markMatches(positions) {
+  const cells = $('board').children;
+  for (const p of positions) cells[p]?.classList.add('pop');
+}
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const fmt = n => Math.round(n).toLocaleString();
+
+/* ---------- 賠付係數 ---------- */
+function payK() {
+  return Math.max(40, rtp - JACKPOT_RTP) / NATURAL_RTP[vol];
+}
+function refreshPayK() {
+  const k = payK();
+  $('payk-val').textContent = '×' + k.toFixed(2);
+  $('payk-rtp').textContent = rtp;
+  $('payk-vol').textContent = VOL[vol].name;
+  document.querySelectorAll('.pt-eff').forEach(td => {
+    const official = Number(td.dataset.pay);
+    td.textContent = (official * k).toFixed(official * k < 10 ? 1 : 0);
+    td.classList.toggle('down', k < 0.98);
+    td.classList.toggle('up', k > 1.02);
+  });
+
+  // 揭露「購買免遊」的實際 RTP。折損率由 scripts/lubu-buy-test.mjs 實測，不是估的。
+  const buyRtp = rtp * BUY_RTP_RATIO[vol];
+  const gap = rtp - buyRtp;
+  const el = $('buy-rtp');
+  if (gap >= 3) {
+    el.innerHTML = `⚠️ 買下去的實際 RTP 只有 <strong>${buyRtp.toFixed(0)}%</strong>，比正常轉低 ${gap.toFixed(0)} 個百分點`;
+    el.className = 'buy-rtp bad';
+  } else {
+    el.innerHTML = `此設定下購買免遊的實際 RTP ≈ ${buyRtp.toFixed(0)}%，與正常轉相當`;
+    el.className = 'buy-rtp';
+  }
+}
+
+/* ---------- 一次旋轉 ---------- */
+/** 跑「一轉」的演出並回傳結果。排程（免遊續轉／自動轉）由 runSpins 負責，這裡不自我遞迴。 */
+async function playSpin(buy = false) {
+  const cost = game.state.fgLeft > 0 ? 0 : (buy ? bet * BUY_COST_X : bet);
+  $('win-overlay').classList.remove('show');
+  balance -= cost;
+  updateBalance();
+
+  const r = game.spin(bet, { buy });
+
+  renderBoard(r.startBoard, { all: true });
+  await sleep(340);
+
+  // 連鎖過程用小型累計條，不用全螢幕浮層——浮層會蓋住正在消除的盤面，看不到連鎖
+  let running = 0;
+  for (const step of r.steps) {
+    markMatches(step.matches.flatMap(m => m.positions));
+    running += step.stepWin;
+    $('cc-sym').textContent = step.matches.map(m => `${SYM_BY_ID[m.id].name} ×${m.count}`).join('　');
+    $('cc-amt').textContent = fmt(running);
+    $('cascade-chip').classList.add('show');
+    await sleep(520);
+    renderBoard(step.after, { from: step.from });
+    await sleep(300);
+  }
+  $('cascade-chip').classList.remove('show');
+
+  // 倍數計數器
+  if (r.multiSum > 0) {
+    $('multi-counter').classList.add('show');
+    $('multi-value').textContent = '×' + r.multiSum;
+    if (r.steps.length) { await sleep(420); }
+  } else {
+    $('multi-counter').classList.remove('show');
+  }
+
+  // 結算
+  balance += r.win;
+  spins++; totalBet += r.cost; totalWin += r.win;
+  if (!r.wasFreeSpin && r.win > 0) hits++;
+  if (r.win / bet > best) best = r.win / bet;
+  if (r.fgTriggered || buy) fgCount++;
+  if (r.jackpot) jpCount++;
+  history.push(balance);
+  if (history.length > 2000) history.splice(0, history.length - 2000);   // 圖表只取最後 300 筆，不必無限留存
+
+  if (r.win > 0) {
+    const parts = [];
+    if (r.multiSum > 0) parts.push(`總倍數 ×${r.multiSum}`);
+    if (r.instantWin > 0) parts.push(`BONUS 即時獎 ${fmt(r.instantWin)}`);
+    if (r.jackpot) parts.push(`🏆 ${r.jackpot.name} 彩金 ${fmt(r.jackpot.amount)}`);
+    if (r.capped) parts.push('已觸及單轉上限');
+    showWin(r.win / bet >= 20 ? 'BIG WIN' : 'WIN', r.win, parts.join('　'));
+  } else {
+    $('win-overlay').classList.remove('show');
+  }
+
+  $('last-win').textContent = fmt(r.win);
+  $('last-win').className = r.win > 0 ? 'win-pos' : '';
+
+  // Free Game 狀態
+  if (r.fgLeft > 0) {
+    $('fg-badge').classList.add('show');
+    $('fg-text').textContent = `FREE GAME 剩 ${r.fgLeft} 場`;
+  } else {
+    $('fg-badge').classList.remove('show');
+  }
+  if (r.fgTriggered) { flash(`🎁 觸發 15 場 FREE GAME！`); stopAuto(); }
+  if (r.fgAdded > 0) flash(`＋${r.fgAdded} 場 FREE GAME`);
+  if (r.jackpot) flash(`🏆 ${r.jackpot.name}！${fmt(r.jackpot.amount)}`);
+
+  updateBalance(); updateStats(); updateChart(); updateContextCta();
+  return r;
+}
+
+/**
+ * 旋轉排程器——整串（單轉／免遊 15~100 場／自動 50 轉）從頭到尾只有一次進入點。
+ *
+ * 修掉三個問題：
+ *  (1) 重入：舊版在「免遊續轉」與「自動轉」之間就把 busy 放掉，中間有 180~500ms 的空窗，
+ *      玩家在免遊時多按幾下 SPIN 就會同時跑起好幾條旋轉鏈，動畫互相打架、餘額重複扣，越點越卡。
+ *  (2) 記憶體：舊版用 return doSpin() 自我遞迴，每一層都把自己的結果物件（含每段連鎖的整份盤面快照）
+ *      留在呼叫堆疊上，直到整串跑完才釋放；50 連轉或 100 場免遊就是 50~100 份盤面同時佔著。
+ *      改成迴圈之後，每轉結束就回收。
+ *  (3) 卡死：舊版沒有 try/finally，中途只要丟出任何例外，busy 永遠是 true、SPIN 永遠 disabled，
+ *      整台機器就再也按不動了。
+ */
+async function runSpins(buy = false) {
+  if (busy) return;
+  busy = true;
+  setBusyUI(true);
+  try {
+    let useBuy = buy;
+    for (;;) {
+      const inFg = game.state.fgLeft > 0;
+      const cost = inFg ? 0 : (useBuy ? bet * BUY_COST_X : bet);
+      if (cost > balance) { flash('餘額不足'); stopAuto(); break; }
+
+      const r = await playSpin(useBuy);
+      useBuy = false;
+
+      if (r.fgLeft > 0) { await sleep(500); continue; }     // 免遊續轉，不計入自動轉次數
+      if (autoLeft > 1) {
+        autoLeft--; updateAutoBtn();
+        if (balance < bet) { stopAuto(); break; }
+        await sleep(180);
+        continue;
+      }
+      if (autoLeft === 1) stopAuto();
+      break;
+    }
+  } catch (err) {
+    console.error('[呂布模擬器] 旋轉中斷：', err);
+    flash('發生錯誤，已停止這一輪');
+    stopAuto();
+  } finally {
+    busy = false;
+    setBusyUI(false);
+  }
+}
+
+/** 旋轉進行中鎖住會造成重入的按鈕；自動鈕要留著讓玩家隨時喊停 */
+function setBusyUI(on) {
+  $('spin-btn').disabled = on;
+  $('buy-btn').disabled = on;
+}
+
+function showWin(title, amt, sub) {
+  $('wo-title').textContent = title;
+  $('wo-amt').textContent = fmt(amt);
+  $('wo-sub').textContent = sub || '';
+  $('win-overlay').classList.add('show');
+}
+
+let flashTimer = null;
+function flash(msg) {
+  let el = document.querySelector('.sim-flash');
+  if (!el) { el = document.createElement('div'); el.className = 'sim-flash'; document.body.appendChild(el); }
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(flashTimer);
+  flashTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+/* ---------- 統計 ---------- */
+function updateBalance() { $('balance').textContent = fmt(balance); }
+
+function updateStats() {
+  $('s-rtp-set').textContent = rtp + '%';
+  $('s-spins').textContent = fmt(spins);
+  $('s-bet').textContent = fmt(totalBet);
+  $('s-win').textContent = fmt(totalWin);
+  const net = totalWin - totalBet;
+  $('s-net').textContent = (net >= 0 ? '+' : '') + fmt(net);
+  $('s-net').className = net >= 0 ? 'win-pos' : 'win-neg';
+  $('s-rtp-real').textContent = totalBet > 0 ? (totalWin / totalBet * 100).toFixed(1) + '%' : '—';
+  $('s-hit').textContent = spins > 0 ? (hits / spins * 100).toFixed(1) + '%' : '—';
+  $('s-best').textContent = best.toFixed(best < 10 ? 1 : 0) + 'x';
+  $('s-fg').textContent = fgCount;
+  $('s-jp').textContent = jpCount;
+}
+
+function updateChart() {
+  if (history.length < 3) return;
+  $('chart-note').textContent = `已轉 ${spins} 次。長期來看，這條線的斜率就是 (RTP − 100%)。`;
+  const data = history.slice(-300);
+  if (!chart) {
+    chart = new Chart($('balance-chart'), {
+      type: 'line',
+      data: { labels: data.map((_, i) => i), datasets: [{ data, borderColor: '#f5b800', borderWidth: 2, pointRadius: 0, tension: 0.15, fill: false }] },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: false, resizeDelay: 120,
+        plugins: { legend: { display: false } },
+        scales: { x: { display: false }, y: { ticks: { color: '#9aa4b2' }, grid: { color: 'rgba(255,255,255,.06)' } } },
+      },
+    });
+  } else {
+    chart.data.labels = data.map((_, i) => i);
+    chart.data.datasets[0].data = data;
+    chart.update('none');
+  }
+}
+
+function updateContextCta() {
+  if (spins < 25) { $('context-cta').innerHTML = ''; return; }
+  const real = totalWin / totalBet * 100;
+  const net = totalWin - totalBet;
+  let html;
+  if (net < -bet * 40) {
+    html = `<strong>你已經淨輸 ${fmt(-net)}。</strong>注意：你設定的 RTP 是 ${rtp}%，實測 ${real.toFixed(1)}%——
+      機器沒有作弊，是「RTP 96%」本來就代表<strong>長期每轉平均輸掉 ${(100 - rtp).toFixed(0)}%</strong>。
+      這台是免費的，真的機器不是。`;
+  } else if (net > bet * 40) {
+    html = `<strong>你現在淨贏 ${fmt(net)}，實測 RTP ${real.toFixed(1)}%。</strong>
+      看起來很爽，但這只是 ${spins} 轉的短期波動。把轉數拉到幾千次，這個數字一定會往 ${rtp}% 靠回去。
+      「今天手氣好」不是策略。`;
+  } else {
+    html = `已轉 ${spins} 次，實測 RTP ${real.toFixed(1)}%（設定 ${rtp}%）。
+      轉越多次，實測值就越貼近設定值——這就是大數法則，也是娛樂城唯一穩賺的原因。`;
+  }
+  $('context-cta').innerHTML = html;
+}
+
+/* ---------- 控制項 ---------- */
+$('rtp-slider').addEventListener('input', e => {
+  rtp = +e.target.value;
+  $('rtp-val').textContent = rtp + '%';
+  game.setRtp(rtp);
+  refreshPayK(); updateStats();
+});
+
+$('vol-btns').addEventListener('click', e => {
+  const b = e.target.closest('button[data-vol]');
+  if (!b) return;
+  vol = b.dataset.vol;
+  [...$('vol-btns').children].forEach(x => x.classList.toggle('on', x === b));
+  game.setVol(vol);
+  refreshPayK();
+});
+
+function setBet(v) {
+  bet = Math.max(1, Math.min(1000, Math.round(v) || 1));
+  $('bet-input').value = bet;
+}
+$('bet-input').addEventListener('change', e => setBet(+e.target.value));
+$('bet-minus').addEventListener('click', () => setBet(bet <= 20 ? bet - 5 : bet - 20));
+$('bet-plus').addEventListener('click', () => setBet(bet < 20 ? bet + 5 : bet + 20));
+
+$('spin-btn').addEventListener('click', () => runSpins());
+$('buy-btn').addEventListener('click', () => {
+  if (game.state.fgLeft > 0) { flash('免遊進行中'); return; }
+  if (balance < bet * BUY_COST_X) { flash(`需要 ${fmt(bet * BUY_COST_X)} 才能購買`); return; }
+  runSpins(true);
+});
+
+function updateAutoBtn() {
+  $('auto-btn').textContent = autoLeft > 0 ? `停止（剩 ${autoLeft}）` : '自動 50 轉';
+  $('auto-btn').classList.toggle('on', autoLeft > 0);
+}
+function stopAuto() { autoLeft = 0; updateAutoBtn(); }
+$('auto-btn').addEventListener('click', () => {
+  if (autoLeft > 0) { stopAuto(); return; }
+  autoLeft = 50; updateAutoBtn(); runSpins();
+});
+
+$('reset-btn').addEventListener('click', () => {
+  stopAuto();
+  balance = 10000; spins = 0; hits = 0; best = 0; fgCount = 0; jpCount = 0; totalBet = 0; totalWin = 0;
+  history.length = 0;
+  game = createGame({ rtp, vol });
+  if (chart) { chart.destroy(); chart = null; }
+  $('chart-note').textContent = '轉幾把之後這裡會畫出你的餘額走勢。';
+  $('context-cta').innerHTML = '';
+  $('fg-badge').classList.remove('show');
+  $('multi-counter').classList.remove('show');
+  $('win-overlay').classList.remove('show');
+  $('last-win').textContent = '0';
+  updateBalance(); updateStats(); initBoard();
+});
+
+/* ---------- 版面：把盤面縮到「剩餘高度」裡，確保 SPIN 永遠在第一屏 ---------- */
+// CSS 裡的 --chrome 只是無 JS 時的保守預設值；實際數字用量的，才不會因為
+// 導覽列高度、字級、瀏覽器工具列而失準（硬猜每個斷點必定會歪）。
+function fitBoard() {
+  const frame = document.querySelector('.board-frame');
+  if (!frame) return;
+  frame.style.setProperty('--chrome', '0px');          // 先解除限制，才量得到盤面真正的起始位置
+  const above = frame.getBoundingClientRect().top + window.scrollY;
+  const stacked = getComputedStyle(document.querySelector('.play-stage'))
+    .gridTemplateColumns.split(' ').length === 1;
+  const bar = document.querySelector('.action-bar');
+  const below = stacked ? bar.getBoundingClientRect().height + 18 : 0;  // 單欄時 SPIN 在盤面下方，要留位置
+  frame.style.setProperty('--chrome', Math.round(above + below + 14) + 'px');
+}
+let fitTimer = null;
+const refit = () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitBoard, 100); };
+addEventListener('resize', refit);
+addEventListener('load', refit);                                   // 字體/圖片載完，頁首高度才定案
+addEventListener('orientationchange', () => setTimeout(fitBoard, 250));
+if (window.visualViewport) visualViewport.addEventListener('resize', refit);  // 手機網址列收合
+// 只觀察「盤面上方與下方」的元素——它們的高度不受盤面影響，不會和 fitBoard 互相觸發成無限迴圈
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(refit);
+  for (const sel of ['.sim-header', '.jp-bar', '.action-bar']) {
+    const el = document.querySelector(sel);
+    if (el) ro.observe(el);
+  }
+}
+
+/* ---------- 初始 ---------- */
+function initBoard() {
+  const demo = [];
+  const pool = SYMS.slice(3);
+  for (let i = 0; i < TOTAL; i++) {
+    const s = pool[Math.floor(Math.random() * pool.length)];
+    demo.push({ kind: 'sym', id: s.id, img: s.img });
+  }
+  renderBoard(demo);
+}
+initBoard(); refreshPayK(); updateBalance(); updateStats(); fitBoard();
+</script>
+
+<style is:global>
+.sim-wrap { max-width: 1100px; margin: 0 auto; padding: 1rem 1rem 3rem; }
+
+/* header */
+.sim-back { color: var(--text-muted); font-size: 0.9rem; text-decoration: none; }
+.sim-header h1 { font-size: 1.55rem; font-weight: 900; margin: .25rem 0 .3rem; line-height: 1.3; }
+.sim-header h1 span { display: inline; font-size: .95rem; font-weight: 600; color: #f5b800; margin-left: .5rem; }
+.sim-disclaimer {
+  font-size: .95rem; line-height: 1.6; color: var(--text-secondary);
+  background: rgba(245,184,0,.07); border-left: 4px solid #f5b800;
+  padding: .5rem .8rem; border-radius: 8px; margin: 0 0 .7rem;
+}
+
+/* 彩金列 */
+.jp-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; margin-bottom: .7rem; }
+.jp-cell {
+  display: flex; align-items: baseline; justify-content: center; gap: .4rem; flex-wrap: wrap;
+  padding: .35rem .3rem; border-radius: 9px;
+  background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
+  border: 2px solid var(--jc); box-shadow: 0 0 14px -6px var(--jc);
+}
+.jp-name { font-size: .82rem; font-weight: 900; color: var(--jc); letter-spacing: .05em; }
+.jp-val { font-size: 1.05rem; font-weight: 900; color: #fff; }
+.jp-odds { font-size: .7rem; color: var(--text-muted); }
+
+/* 控制面板 */
+.ctrl-panel {
+  display: grid; gap: .7rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  padding: .8rem; margin: 0;
+}
+.ctrl-group label { display: block; font-size: .95rem; font-weight: 800; margin-bottom: .35rem; }
+.ctrl-row { display: flex; align-items: center; gap: .6rem; }
+.ctrl-row input[type=range] { flex: 1; accent-color: #f5b800; height: 26px; }
+.ctrl-val { font-size: 1.3rem; font-weight: 900; color: #f5b800; min-width: 3.4rem; text-align: right; }
+.ctrl-hint { font-size: .78rem; color: var(--text-muted); margin: .3rem 0 0; line-height: 1.45; }
+.vol-btns { display: flex; gap: .4rem; }
+.vol-btns button {
+  flex: 1; padding: .5rem .2rem; border-radius: 9px; cursor: pointer;
+  background: rgba(255,255,255,.05); border: 2px solid var(--border);
+  color: var(--text-secondary); font-size: .95rem; font-weight: 700; line-height: 1.25;
+}
+.vol-btns button small { display: block; font-size: .7rem; font-weight: 500; opacity: .75; margin-top: .15rem; }
+.vol-btns button.on { border-color: #f5b800; color: #f5b800; background: rgba(245,184,0,.12); }
+.bet-step {
+  width: 40px; height: 40px; border-radius: 9px; cursor: pointer; font-size: 1.25rem; font-weight: 900;
+  background: rgba(255,255,255,.06); border: 1px solid var(--border); color: var(--text-primary);
+}
+#bet-input {
+  flex: 1; min-width: 0; text-align: center; font-size: 1.25rem; font-weight: 900; padding: .45rem;
+  border-radius: 9px; background: rgba(0,0,0,.35); border: 1px solid var(--border); color: #fff;
+}
+.reset-group { grid-column: 1 / -1; }
+.reset-btn {
+  width: 100%; padding: .45rem .8rem; font-size: .85rem; border-radius: 8px; cursor: pointer;
+  background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+}
+
+/* 計量表：餘額與本轉贏分緊貼 SPIN，任何版面都跟著 SPIN 一起在第一屏 */
+.meter { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
+.meter-row { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; }
+.meter-row span { font-size: .85rem; color: var(--text-muted); white-space: nowrap; }
+.meter-row strong { font-size: 1.35rem; font-weight: 900; }
+.meter-row .bal { color: #39ff14; }
+
+/* 盤面 */
+.game-area { margin-bottom: 1.2rem; }
+
+/* 舞台：寬螢幕左盤面、右控制列；盤面大小由「視窗剩下的高度」決定，
+   確保 SPIN 鈕永遠在第一屏內——不能讓玩家為了按旋轉而捲動。 */
+.play-stage { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 1rem; align-items: start; }
+.stage-board { min-width: 0; }
+.stage-rail { display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+
+.board-frame {
+  /* --chrome＝導覽列＋頁首＋彩金列＋留白；盤面寬 = 剩餘高度 × 6/5（盤面是 6 欄 5 列） */
+  --chrome: 280px;
+  position: relative; width: 100%;
+  max-width: min(720px, max(300px, calc((100svh - var(--chrome)) * 1.2)));
+  margin-inline: auto;
+  padding: 12px; border-radius: 18px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(120,20,10,.55), transparent 70%),
+    linear-gradient(180deg, #1d0d0a, #12070a 60%, #0d0510);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 3px rgba(245,184,0,.55), 0 0 28px -8px rgba(245,184,0,.5), inset 0 0 60px -20px rgba(255,120,0,.4);
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  aspect-ratio: 6 / 5;          /* 由盤面整體扛比例，格子跟著等分 */
+  gap: 5px;
+}
+.cell {
+  position: relative; border-radius: 9px; min-width: 0; min-height: 0;
+  background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.07);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.cell img { width: 88%; height: 88%; object-fit: contain; display: block; }
+
+/* 程式補的金框底板：赤兔馬/方天畫戟/戰旗 圖檔沒有自帶框，用 CSS 補出跟令符一致的份量 */
+.cell.has-plate::before, .pt-img.has-plate::before {
+  content: ''; position: absolute; inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--plate) 78%, #fff 22%), var(--plate) 70%);
+  border: 2px solid rgba(245,184,0,.85);
+  box-shadow: inset 0 0 12px -3px rgba(0,0,0,.8), 0 0 8px -2px rgba(245,184,0,.6);
+}
+.cell.has-plate img, .pt-img.has-plate img { position: relative; z-index: 1; }
+
+.cell-bonus { background: rgba(245,184,0,.10); border-color: rgba(245,184,0,.45); }
+.cell-multi { background: rgba(255,255,255,.05); }
+.cell-multi .mval {
+  position: absolute; left: 50%; top: 52%; transform: translate(-50%,-50%);
+  font-size: clamp(.85rem, 2.4vw, 1.15rem); font-weight: 900; color: #fff; z-index: 2;
+  text-shadow: 0 0 3px #000, 0 0 6px #000, 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+/* 位移距離＝掉落格數 ×（格高 + 間距），所以視覺上真的是「從原本那一格滑下來」 */
+@keyframes cellFall {
+  from { transform: translateY(calc(var(--fall, 1) * -100% - var(--fall, 1) * 5px)); }
+  to   { transform: none; }
+}
+.cell.fall { animation: cellFall .26s cubic-bezier(.34, .9, .38, 1) both; }
+@keyframes cellPop { 0%,100% { transform: none; } 45% { transform: scale(1.14); filter: brightness(1.7); } }
+.cell.pop { animation: cellPop .5s ease-in-out; box-shadow: 0 0 0 2px #f5b800 inset, 0 0 16px -4px #f5b800; }
+
+.multi-counter {
+  position: absolute; top: 20px; right: 20px; text-align: center; padding: .4rem .7rem;
+  background: rgba(0,0,0,.72); border: 2px solid #d23efa; border-radius: 10px;
+  opacity: 0; transform: scale(.85); transition: .25s; pointer-events: none;
+}
+.multi-counter.show { opacity: 1; transform: none; }
+.mc-label { display: block; font-size: .68rem; color: #d9b8ff; letter-spacing: .1em; }
+.mc-val { display: block; font-size: 1.5rem; font-weight: 900; color: #fff; }
+
+.fg-badge {
+  position: absolute; top: 20px; left: 20px; padding: .4rem .8rem; border-radius: 999px;
+  background: linear-gradient(90deg, #f5b800, #ff8a3d); color: #2a1400;
+  font-size: .95rem; font-weight: 900; opacity: 0; transition: .25s; pointer-events: none;
+}
+.fg-badge.show { opacity: 1; }
+
+.cascade-chip {
+  position: absolute; left: 50%; bottom: 22px; transform: translate(-50%, 8px);
+  display: flex; align-items: center; gap: .6rem; padding: .35rem .9rem; border-radius: 999px;
+  background: rgba(0,0,0,.82); border: 2px solid #f5b800; white-space: nowrap;
+  opacity: 0; transition: .18s; pointer-events: none; max-width: 94%; overflow: hidden;
+}
+.cascade-chip.show { opacity: 1; transform: translate(-50%, 0); }
+.cascade-chip #cc-sym { font-size: .82rem; color: #ffd98a; overflow: hidden; text-overflow: ellipsis; }
+.cascade-chip strong { font-size: 1.25rem; font-weight: 900; color: #39ff14; }
+
+.win-overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .2rem;
+  background: radial-gradient(circle, rgba(0,0,0,.72) 30%, rgba(0,0,0,.25) 75%, transparent);
+  border-radius: 18px; opacity: 0; transition: .2s; pointer-events: none;
+}
+.win-overlay.show { opacity: 1; }
+.wo-title { font-size: 1.5rem; font-weight: 900; color: #f5b800; letter-spacing: .12em; }
+.wo-amt { font-size: clamp(2.2rem, 8vw, 3.6rem); font-weight: 900; color: #fff; line-height: 1;
+  text-shadow: 0 0 18px rgba(245,184,0,.8); }
+.wo-sub { font-size: .95rem; color: #ffd98a; text-align: center; padding: 0 1rem; }
+
+/* 操作列 */
+.action-bar {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .6rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  padding: .8rem; margin: 0;
+}
+
+
+/* 側欄內部：SPIN 排最上面（第一眼就看得到、按得到），設定排下面 */
+.stage-rail .action-bar { order: 1; }
+.stage-rail .ctrl-panel { order: 2; grid-template-columns: 1fr 1fr; gap: .55rem .7rem; }
+.stage-rail .ctrl-panel > .ctrl-group:first-child { grid-column: 1 / -1; }
+#last-win { color: var(--text-primary); }
+#last-win.win-pos { color: #39ff14; }
+.spin-btn {
+  width: 104px; height: 104px; border-radius: 50%; cursor: pointer;
+  font-size: 1.4rem; font-weight: 900; letter-spacing: .08em; color: #2a1400;
+  background: radial-gradient(circle at 50% 32%, #ffe07a, #f5b800 55%, #c07800);
+  border: 4px solid rgba(255,255,255,.35);
+  box-shadow: 0 6px 0 #7a4a00, 0 0 26px -6px rgba(245,184,0,.9);
+  transition: transform .08s;
+}
+.spin-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #7a4a00; }
+.spin-btn:disabled { opacity: .55; cursor: not-allowed; }
+.auto-wrap { display: flex; flex-direction: column; gap: .4rem; align-items: stretch; }
+.auto-btn, .buy-btn {
+  padding: .5rem .6rem; border-radius: 10px; cursor: pointer; font-size: .95rem; font-weight: 800;
+  background: rgba(255,255,255,.06); border: 2px solid var(--border); color: var(--text-secondary);
+}
+.auto-btn.on { border-color: #ff6b6b; color: #ff6b6b; }
+.buy-btn { border-color: rgba(245,184,0,.55); color: #f5b800; }
+.buy-btn small { font-weight: 900; }
+.buy-rtp {
+  max-width: 760px; margin: .9rem auto 0; padding: .55rem .9rem; border-radius: 9px;
+  text-align: center; font-size: 1rem; line-height: 1.6; color: var(--text-secondary);
+  background: rgba(255,255,255,.04); border: 1px solid var(--border);
+}
+.buy-rtp.bad { color: #ffb08a; background: rgba(255,107,107,.10); border-color: rgba(255,107,107,.4); }
+.buy-rtp strong { font-size: 1.25rem; font-weight: 900; color: #ff6b6b; }
+.action-note { text-align: center; font-size: .82rem; color: var(--text-muted); margin: .7rem 0 0; }
+
+/* 數據 */
+.stats-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem; margin-bottom: 1.2rem; }
+.stats-panel h2 { font-size: 1.15rem; margin: 0 0 .8rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .3rem .9rem; margin-bottom: 1rem; }
+.stat-row { display: flex; justify-content: space-between; padding: .35rem 0; border-bottom: 1px dashed rgba(255,255,255,.08); font-size: .95rem; }
+.stat-row strong { font-weight: 900; }
+.win-pos { color: #39ff14; } .win-neg { color: #ff6b6b; }
+/* ⚠️ Chart.js 的 responsive + maintainAspectRatio:false 會去量「父層的高度」來決定畫布多高。
+   若父層高度是由內容決定（.stats-panel 就是），就會形成回饋迴圈：
+   畫布長高 → 父層跟著高 → 下次量到更高 → 畫布再長高……最後畫布會超過瀏覽器上限而整個 render 失敗。
+   解法是把畫布關進一個「自己有固定高度」的盒子，Chart.js 只量得到這個盒子。 */
+.chart-box { position: relative; width: 100%; height: 220px; }
+.chart-box canvas { display: block; width: 100% !important; height: 100% !important; }
+.chart-note { font-size: .85rem; color: var(--text-muted); text-align: center; margin: .5rem 0 0; }
+
+.context-cta:not(:empty) {
+  background: rgba(74,144,217,.10); border-left: 4px solid #4a90d9; border-radius: 8px;
+  padding: .9rem 1.1rem; margin-bottom: 1.2rem; font-size: 1rem; line-height: 1.75;
+}
+
+/* 賠率表 */
+.paytable-toggle { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: .9rem 1.1rem; margin-bottom: 1.2rem; }
+.paytable-toggle summary { cursor: pointer; font-size: 1.05rem; font-weight: 800; }
+.paytable-toggle h3 { font-size: 1.05rem; margin: 1.3rem 0 .7rem; }
+.payk-box { background: rgba(245,184,0,.07); border: 1px solid rgba(245,184,0,.3); border-radius: 10px; padding: .9rem 1rem; margin-top: 1rem; }
+.payk-box p { font-size: .95rem; line-height: 1.75; margin: 0 0 .6rem; }
+.payk-live { text-align: center; font-size: 1.05rem; padding: .5rem; background: rgba(0,0,0,.3); border-radius: 8px; margin: .6rem 0; }
+.payk-live strong { font-size: 1.5rem; color: #f5b800; }
+.payk-live small { display: block; color: var(--text-muted); font-size: .8rem; }
+.payk-why { color: var(--text-secondary); margin-bottom: 0 !important; }
+.pt-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: .7rem; }
+.pt-card { background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 10px; padding: .7rem .5rem; text-align: center; }
+.pt-img { position: relative; width: 76px; height: 76px; margin: 0 auto .4rem; display: flex; align-items: center; justify-content: center; }
+.pt-img img { width: 100%; height: 100%; object-fit: contain; }
+.pt-name { display: block; font-size: .9rem; font-weight: 800; margin-bottom: .35rem; }
+.pt-range { display: block; font-size: 1rem; font-weight: 900; color: #fff; }
+.pt-tab { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.pt-tab th { color: var(--text-muted); font-weight: 600; padding: .15rem 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+.pt-tab td { padding: .18rem 0; }
+.pt-eff { font-weight: 900; }
+.pt-eff.down { color: #ff9d6b; } .pt-eff.up { color: #39ff14; }
+.pt-bonus { display: flex; gap: 1rem; align-items: flex-start; background: rgba(245,184,0,.06); border-radius: 10px; padding: .9rem; }
+.pt-bonus .pt-img { width: 92px; height: 92px; flex: none; margin: 0; }
+.pt-bonus ul { margin: 0; padding-left: 1.1rem; font-size: .95rem; line-height: 1.8; }
+.jp-table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.jp-table th, .jp-table td { padding: .45rem .4rem; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+.jp-table th { color: var(--text-muted); font-weight: 600; }
+.jp-warn {
+  background: rgba(255,107,107,.10); border: 1px solid rgba(255,107,107,.4);
+  border-radius: 10px; padding: .9rem 1rem; margin: .8rem 0;
+}
+.jp-warn p { font-size: .95rem; line-height: 1.8; margin: 0 0 .6rem; }
+.jp-warn p:last-child { margin-bottom: 0; }
+.jp-table th small { display: block; font-weight: 400; font-size: .72rem; color: var(--text-muted); }
+.jp-caption { font-size: .78rem; color: var(--text-muted); text-align: center; margin: -.3rem 0 .6rem; }
+.jp-caption a { color: #f5b800; }
+.jp-note { font-size: .92rem; line-height: 1.8; color: var(--text-secondary); margin-top: .8rem; }
+
+.sim-cta { text-align: center; padding: 1.2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.4rem; }
+.sim-cta p { margin: 0 0 .8rem; font-size: 1rem; }
+.cta-links { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
+.cta-links a {
+  padding: .5rem 1rem; border-radius: 9px; text-decoration: none; font-size: .95rem; font-weight: 700;
+  background: rgba(245,184,0,.1); border: 1px solid rgba(245,184,0,.35); color: #f5b800;
+}
+
+.sim-flash {
+  position: fixed; left: 50%; top: 12%; transform: translate(-50%, -12px);
+  background: rgba(0,0,0,.9); border: 2px solid #f5b800; color: #fff;
+  padding: .8rem 1.4rem; border-radius: 12px; font-size: 1.15rem; font-weight: 900;
+  z-index: 9999; opacity: 0; pointer-events: none; transition: .22s; text-align: center;
+}
+.sim-flash.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ── 窄螢幕／直式：改單欄，順序是 盤面 → SPIN → 設定，讓「看得到盤面就按得到 SPIN」 ── */
+@media (max-width: 1023px) {
+  .play-stage { grid-template-columns: 1fr; gap: .7rem; }
+  .stage-rail { gap: .6rem; }
+  .action-bar { order: 1; grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .ctrl-panel { order: 2; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  /* 單欄時 SPIN 也在畫面裡，所以 chrome 要多算一個操作列的高度 */
+  .board-frame { --chrome: 400px; }
+}
+
+@media (max-width: 768px) {
+  .sim-wrap { padding: .8rem .6rem 2.5rem; }
+  .sim-header h1 { font-size: 1.3rem; }
+  .sim-header h1 span { display: block; font-size: .9rem; margin: .2rem 0 0; }
+  .sim-disclaimer { font-size: .9rem; }
+  .jp-bar { grid-template-columns: repeat(2, 1fr); }
+  .board-frame { --chrome: 380px; padding: 7px; border-radius: 14px; }
+  .board { gap: 3px; }
+  .cell { border-radius: 6px; }
+  .multi-counter, .fg-badge { top: 10px; }
+  .multi-counter { right: 10px; padding: .22rem .45rem; }
+  .mc-val { font-size: 1.05rem; }
+  .fg-badge { left: 10px; font-size: .78rem; padding: .28rem .55rem; }
+  .action-bar { gap: .5rem; padding: .7rem .6rem; }
+  .spin-btn { width: 88px; height: 88px; font-size: 1.1rem; }
+  .auto-wrap { flex-direction: column; }
+  .auto-btn, .buy-btn { padding: .42rem .5rem; font-size: .8rem; }
+  .meter-row strong { font-size: 1.15rem; }
+  .meter-row span { font-size: .8rem; }
+  .pt-bonus { flex-direction: column; align-items: center; }
+  .pt-bonus ul { font-size: .9rem; }
+}
+
+/* 矮螢幕（筆電 720p / 手機橫放）：再壓一次頁首，把高度全留給盤面 */
+@media (max-height: 760px) and (min-width: 1024px) {
+  .sim-header h1 { font-size: 1.3rem; }
+  .sim-disclaimer { font-size: .88rem; padding: .4rem .7rem; }
+  .board-frame { --chrome: 262px; }
+}
+
+/* ── 極矮視窗（手機橫放 390~560px 高）──
+   這種高度塞不下「頁首＋彩金列＋盤面＋SPIN」，必須取捨：
+   收掉裝飾性的彩金列與副標，頁首壓成一行；夠寬的話改回左右分欄，讓 SPIN 站到盤面旁邊。 */
+@media (max-height: 560px) {
+  /* 頁首壓成單行（返回連結＋標題同一列），把垂直空間全部讓給盤面 */
+  .sim-header { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+  .sim-header h1 { font-size: 1rem; margin: 0; }
+  .sim-header h1 span { display: none; }
+  .sim-back { font-size: .78rem; }
+  .sim-disclaimer { flex: 1 1 100%; font-size: .75rem; line-height: 1.35; padding: .2rem .5rem; margin: .25rem 0 .45rem; }
+  .jp-bar { display: none; }
+  .sim-wrap { padding-top: .5rem; }
+  .spin-btn { width: 82px; height: 82px; font-size: 1rem; }
+  .ctrl-hint { display: none; }
+  /* 高度不夠時允許盤面再縮小一點，寧可格子小也不要被切掉 */
+  .board-frame { max-width: min(720px, max(240px, calc((100svh - var(--chrome)) * 1.2))); }
+}
+@media (max-height: 560px) and (min-width: 760px) {
+  .play-stage { grid-template-columns: minmax(0, 1fr) 300px; gap: .7rem; }
+  .stage-rail .action-bar { order: 1; grid-template-columns: 1fr auto 1fr; }
+  .stage-rail .ctrl-panel { order: 2; grid-template-columns: 1fr 1fr; }
+  .action-bar, .ctrl-panel { padding: .6rem; }
+  .meter-row strong { font-size: 1.1rem; }
+}
+</style>
+</BaseLayout>
