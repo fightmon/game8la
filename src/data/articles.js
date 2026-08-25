@@ -57,6 +57,48 @@ export const articles = [
     thumbnail: '/images/article-thumbs/thumb-football-handicap.webp'
   },
   {
+    slug: '165-weekly-2026-w31',
+    title: '【165 週報】2026 第 31 週（7/23–7/29）：假購物 KFC 領銜、冒名臺灣證交所現身',
+    excerpt: '內政部 165 全民防騙網 7/23–7/29 通報彙整：假購物 KFC 以 16 件領銜、假投資分散（decRED 8 件最高）、還冒出蹭「臺灣證券交易所」官方名號的假投資站。娛樂城安靜，只有老面孔新葡京換新域名 k75992.com 回榜。165 共列逾 120 個詐騙網站。芭樂子拆解手法＋導去娛樂城體檢。',
+    category: 'anti-scam',
+    categoryLabel: '165 監測站',
+    badgeType: 'attack',
+    date: '2026-08-17',
+    views: 1,
+    tags: ['最新', '165週報'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
+  },
+  {
+    slug: '165-weekly-2026-w29',
+    title: '【165 週報】2026 第 29 週（7/9–7/15）：RK娛樂城一週再換皮、假投資分散無巨頭',
+    excerpt: '內政部 165 全民防騙網 7/9–7/15 通報彙整：RK娛樂城一週內再換新域名 m.rk678.vip（換域名比換衣服勤）；假投資本週分散、無單一巨頭（TimeeCoin 10 件最高、又換殼）；另有澳門威力彩、得勝彩等蹭官方名號的假彩券站。165 共列逾 100 個詐騙網站。芭樂子拆解手法＋導去娛樂城體檢。',
+    category: 'anti-scam',
+    categoryLabel: '165 監測站',
+    badgeType: 'attack',
+    date: '2026-07-19',
+    views: 1,
+    tags: ['最新', '165週報'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
+  },
+  {
+    slug: '165-weekly-2026-w25',
+    title: '【165 週報】2026 第 25 週（6/11–6/17）：大河智贏假投資空降榜首、殺豬盤持續高檔',
+    excerpt: '內政部 165 全民防騙網 6/11–6/17 通報彙整：假投資「大河智贏」以 23 件空降本週榜首（亂碼域名一看就是即棄殼）；殺豬盤 Flirting 通報 12 件持續高檔；娛樂城老面孔新葡京、必發又換新域名回榜。165 共列逾 150 個詐騙網站。芭樂子拆解手法＋導去娛樂城體檢。',
+    category: 'anti-scam',
+    categoryLabel: '165 監測站',
+    badgeType: 'attack',
+    date: '2026-07-09',
+    views: 1,
+    tags: ['最新', '165週報'],
+    icon: 'shield',
+    gradient: 'linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)',
+    thumbnail: '/images/article-thumbs/thumb-cover-anti-scam.webp'
+  },
+  {
     slug: '165-weekly-2026-w22',
     title: '【165 週報】2026 第 22 週（5/21–5/27）：錢盈539娛樂城換皮回歸、假投資與殺豬盤暴增',
     excerpt: '內政部 165 全民防騙網 5/21–5/27 通報彙整：錢盈539娛樂城以新域名 admin.539lotterybuy.com 換皮回歸（一週改一次名）。本週假投資（華訊電能 15 件）與殺豬盤（Flirting 9 件）為通報大宗，165 共列逾 140 個詐騙網站。芭樂子拆解手法＋導去娛樂城體檢。',
@@ -195,6 +237,20 @@ export const articles = [
     icon: 'zap',
     gradient: 'linear-gradient(135deg,#004d98,#1a472a,#f5b800)',
     thumbnail: '/images/article-thumbs/thumb-worldcup-broadcast.webp'
+  },
+  {
+    slug: 'texas-holdem-rules',
+    title: '德州撲克怎麼玩？10 種牌型互動圖解＋一局流程動畫（新手 5 分鐘上手）',
+    excerpt: '德州撲克規則新手教學：用真的撲克牌互動圖解 10 種牌型大小，還能按按鈕一步步跑完整局（底牌→翻牌→轉牌→河牌）。附牌型機率表、踢腳比大小實例、下注動作說明。芭樂子白話版，零業配不推坑。',
+    category: 'poker',
+    categoryLabel: '撲克教室',
+    badgeType: 'featured',
+    date: '2026-08-19',
+    views: 1,
+    tags: ['最新', '教學'],
+    icon: 'book-open',
+    gradient: 'linear-gradient(135deg,#1b2430,#c0282d,#f5b800)',
+    thumbnail: '/images/article-thumbs/thumb-poker-cover.webp'
   },
   {
     slug: 'how-to-play-mahjong',

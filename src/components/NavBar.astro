@@ -29,6 +29,7 @@ const staticSearchItems = [
   { t: '老虎機 RTP 紀錄器', d: '記錄投入回收，算出你的 RTP，比對官方理論值', u: '/tools/rtp-tracker/', c: '工具' },
   { t: '老虎機資金管理計算器', d: '算出你的錢能撐多久，設好停損停利再上桌', u: '/tools/bankroll-calculator/', c: '工具' },
   { t: '8LA 老虎機 RTP 測試器', d: '自己設定 RTP 和波動度，體驗老虎機的數學真相', u: '/tools/slot-simulator/', c: '工具' },
+  { t: '戰神呂布模擬器', d: '免費試玩戰神呂布，看懂倍數符號相加與免遊雪球的數學', u: '/tools/lu-bu-simulator/', c: '工具' },
   { t: '百家樂策略模擬器', d: '五種下注策略模擬，1000局跑給你看，看清莊家優勢', u: '/tools/baccarat-simulator/', c: '工具' },
   { t: '百家樂看路模擬器', d: '即時記錄＋練習看路，大路、大眼仔、小路、蟑螂路四條路', u: '/tools/baccarat-roadmap/', c: '工具' },
   { t: 'Game8la 線上擲筊', d: '線上擲筊求籤，問神明也問機率，芭樂子吐槽加料', u: '/tools/bless-blocks/', c: '工具' },
@@ -39,10 +40,12 @@ const staticSearchItems = [
   { t: '大樂透包牌計算器', d: '大樂透 6/49 包牌（連碰）注數費用中獎率秒算，含特別號期望值模擬與冷熱號推薦', u: '/tools/lotto649-wheel-calculator/', c: '工具' },
   { t: '統一發票對獎工具', d: '填中獎號碼、貼上發票一鍵對獎，算總獎金＋獎項金額對照，純前端不收個資', u: '/tools/invoice-checker/', c: '工具' },
   { t: 'AI 21 點', d: '免費練牌＋基本策略即時教學，每手牌都有 AI 建議', u: '/tools/blackjack/', c: '工具' },
+  { t: '21點算牌練習器', d: 'Hi-Lo 記牌訓練，牌一張張發你來記流水計數，算正確率與真數；並說明線上娛樂城為何算牌無效', u: '/tools/blackjack-card-counting/', c: '工具' },
   { t: '2026 世足冠軍預測', d: '48 隊你猜誰奪冠？即時投票統計', u: '/tools/worldcup-2026/', c: '工具' },
   { t: '麻將碰吃槓練習器', d: '碰吃槓搞不清楚？互動判斷練習器一題一張教，上家才能吃、字牌只能碰，麻將新手規則入門', u: '/tools/mahjong-rules-trainer/', c: '工具' },
   { t: '麻將聽牌練習器', d: '差一張就胡了，你看得出聽什麼牌嗎？兩面嵌張邊張單吊雙碰五種聽牌型互動練習', u: '/tools/mahjong-tenpai-trainer/', c: '工具' },
   { t: '麻將算台練習器', d: '看牌猜台數，門清自摸碰碰胡清一色大三元，台灣16張算台教學', u: '/tools/mahjong-suan-tai-trainer/', c: '工具' },
+  { t: '台灣16張麻將練習桌', d: '跟 3 個 AI 打完整一局台麻，教練即時教你該打哪張、顯示向聽進張與放槍風險，局後逐手覆盤，免費不用下載', u: '/games/taiwan-mahjong/', c: '遊戲' },
 ];
 
 // 從 articles.js 自動生成文章搜尋索引
@@ -89,12 +92,15 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
             <div class="dropdown-group-label">🎰 模擬器</div>
             <a href="/tools/slot-simulator/">🎲 賽特2 RTP 模擬器</a>
             <a href="/tools/thor-hammer-2-simulator/">⚡ 雷神之錘2 模擬器</a>
+            <a href="/tools/lu-bu-simulator/">🐎 戰神呂布模擬器 <span class="dd-new">NEW</span></a>
             <a href="/tools/baccarat-simulator/">🃏 百家樂策略模擬器</a>
             <a href="/tools/baccarat-roadmap/">🀄 百家樂看路模擬器</a>
             <a href="/tools/blackjack/">🃏 AI 21 點</a>
+            <a href="/tools/blackjack-card-counting/">🃏 21點算牌練習器<span class="dd-new">NEW</span></a>
           </div>
           <div class="dd-group">
             <div class="dropdown-group-label">🀄 牌桌教學</div>
+            <a href="/games/taiwan-mahjong/">🀄 台灣16張麻將練習桌<span class="dd-new">NEW</span></a>
             <a href="/tools/mahjong-rules-trainer/">🀄 麻將碰吃槓練習器</a>
             <a href="/tools/mahjong-tenpai-trainer/">🀄 麻將聽牌練習器</a>
             <a href="/tools/mahjong-suan-tai-trainer/">🀄 麻將算台練習器</a>
@@ -158,10 +164,13 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
         <div class="m-cat">🎰 模擬器</div>
         <a href="/tools/slot-simulator/">🎲 賽特2 RTP 模擬器</a>
         <a href="/tools/thor-hammer-2-simulator/">⚡ 雷神之錘2 模擬器</a>
+        <a href="/tools/lu-bu-simulator/">🐎 戰神呂布模擬器</a>
         <a href="/tools/baccarat-simulator/">🃏 百家樂策略模擬器</a>
         <a href="/tools/baccarat-roadmap/">🀄 百家樂看路模擬器</a>
         <a href="/tools/blackjack/">🃏 AI 21 點</a>
+            <a href="/tools/blackjack-card-counting/">🃏 21點算牌練習器<span class="dd-new">NEW</span></a>
         <div class="m-cat">🀄 牌桌教學</div>
+        <a href="/games/taiwan-mahjong/">🀄 台灣16張麻將練習桌<span class="dd-new">NEW</span></a>
         <a href="/tools/mahjong-rules-trainer/">🀄 麻將碰吃槓練習器</a>
             <a href="/tools/mahjong-tenpai-trainer/">🀄 麻將聽牌練習器</a>
             <a href="/tools/mahjong-suan-tai-trainer/">🀄 麻將算台練習器</a>
@@ -539,6 +548,18 @@ const searchIndex = JSON.stringify([...staticSearchItems, ...articleSearchItems]
   }
   .nav-dropdown:hover .nav-dropdown-menu {
     display: block;
+  }
+  .dd-new {
+    display: inline-block;
+    margin-left: 0.4rem;
+    background: linear-gradient(135deg, #f5b800, #ffd24a);
+    color: #2a1d00;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    padding: 0.05rem 0.35rem;
+    border-radius: 5px;
+    vertical-align: middle;
   }
   .dropdown-group-label {
     padding: 0.5rem 0.8rem;

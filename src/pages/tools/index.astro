@@ -7,6 +7,7 @@ const tools = [
   { name: 'Game8la 線上擲筊', url: 'https://game8la.com/tools/bless-blocks/' },
   { name: '賽特2 RTP 模擬器', url: 'https://game8la.com/tools/slot-simulator/' },
   { name: '雷神之錘 II 模擬器', url: 'https://game8la.com/tools/thor-hammer-2-simulator/' },
+  { name: '戰神呂布模擬器', url: 'https://game8la.com/tools/lu-bu-simulator/' },
   { name: '巴風特模擬器', url: 'https://game8la.com/tools/baphomet-simulator/' },
   { name: '樂透數據站', url: 'https://game8la.com/lottery/analysis/' },
   { name: '娛樂城體檢', url: 'https://game8la.com/casino-check/' },
@@ -19,11 +20,14 @@ const tools = [
   { name: '539 包牌計算器', url: 'https://game8la.com/tools/539-wheel-calculator/' },
   { name: '威力彩包牌計算器', url: 'https://game8la.com/tools/power-lottery-calculator/' },
   { name: '大樂透包牌計算器', url: 'https://game8la.com/tools/lotto649-wheel-calculator/' },
+  { name: '賓果賓果機率計算器', url: 'https://game8la.com/tools/bingo-bingo-calculator/' },
   { name: 'AI 21 點', url: 'https://game8la.com/tools/blackjack/' },
   { name: '2026 世足冠軍預測', url: 'https://game8la.com/tools/worldcup-2026/' },
   { name: '麻將碰吃槓練習器', url: 'https://game8la.com/tools/mahjong-rules-trainer/' },
   { name: '麻將聽牌練習器', url: 'https://game8la.com/tools/mahjong-tenpai-trainer/' },
   { name: '麻將算台練習器', url: 'https://game8la.com/tools/mahjong-suan-tai-trainer/' },
+  { name: '台灣16張麻將練習桌（AI 對戰）', url: 'https://game8la.com/games/taiwan-mahjong/' },
+  { name: '21點算牌練習器', url: 'https://game8la.com/tools/blackjack-card-counting/' },
 ];
 
 const itemListSchema = {
@@ -67,6 +71,12 @@ const itemListSchema = {
       <h2>麻將聽牌練習器</h2>
       <p>差一張就胡，練「聽什麼牌」五種聽牌型</p>
     </a>
+    <a href="/games/taiwan-mahjong/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(47,156,114,0.4)"></div>
+      <div class="tile-icon" style="display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:linear-gradient(135deg,#0d4a2c,#2f9c72)">🀄</div>
+      <h2>台灣16張麻將練習桌</h2>
+      <p>跟 AI 打真實一局，教練即時教你打哪張</p>
+    </a>
     <a href="/tools/mahjong-suan-tai-trainer/" class="tool-tile">
       <div class="tile-glow" style="--glow-color:rgba(57,255,20,0.35)"></div>
       <div class="tile-icon" style="display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:linear-gradient(135deg,#0d4a2c,#1a7a3e)">🀄</div>
@@ -90,6 +100,12 @@ const itemListSchema = {
       <img class="tile-icon" src="/images/tools/icon-thor-sim.webp" alt="雷神之錘 II 模擬器 — 倍數球鎖定爆分體驗" width="72" height="72" loading="lazy">
       <h2>雷神之錘 II 模擬器</h2>
       <p>倍數球鎖定爆分體驗</p>
+    </a>
+    <a href="/tools/lu-bu-simulator/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(220,38,38,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/icon-lubu-sim.webp" alt="戰神呂布模擬器 — 免費試玩並看穿賠付係數" width="72" height="72" loading="lazy">
+      <h2>戰神呂布模擬器</h2>
+      <p>免費試玩，還揭露真實賠付係數</p>
     </a>
     <a href="/tools/baphomet-simulator/" class="tool-tile">
       <div class="tile-glow" style="--glow-color:rgba(168,85,252,0.35)"></div>
@@ -120,6 +136,18 @@ const itemListSchema = {
       <img class="tile-icon" src="/images/tools/icon-lottery.webp" alt="大樂透包牌計算器 — 6/49 連碰注數費用中獎率秒算" width="72" height="72" loading="lazy">
       <h2>大樂透包牌計算器</h2>
       <p>大樂透 6/49 包牌（連碰）注數費用中獎率秒算</p>
+    </a>
+    <a href="/tools/bingo-bingo-calculator/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(57,255,20,0.35)"></div>
+      <img class="tile-icon" src="/images/tools/icon-lottery.webp" alt="賓果賓果機率計算器 — 1~10星中獎機率賠率期望值秒算" width="72" height="72" loading="lazy">
+      <h2>賓果賓果機率計算器</h2>
+      <p>1~10 星中獎機率、賠率、期望值一次算穿</p>
+    </a>
+    <a href="/tools/blackjack-card-counting/" class="tool-tile">
+      <div class="tile-glow" style="--glow-color:rgba(192,40,45,0.35)"></div>
+      <div class="tile-icon" style="display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:linear-gradient(135deg,#1b2430,#c0282d)">🃏</div>
+      <h2>21點算牌練習器</h2>
+      <p>Hi-Lo 記牌訓練＋線上算牌到底有沒有用</p>
     </a>
     <a href="/tools/blackjack/" class="tool-tile">
       <div class="tile-glow" style="--glow-color:rgba(245,184,0,0.35)"></div>
