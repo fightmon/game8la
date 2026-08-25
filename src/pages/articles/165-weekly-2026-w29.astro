@@ -1,0 +1,207 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const weekLabel = '2026 第 29 週（7/9–7/15）';
+const publishDate = '2026-07-19';
+
+/* ── 娛樂城／博弈類（本週：換皮＋新殼站＋假彩券） ── */
+const casinoBrands = [
+  { name: 'RK娛樂城', url: 'm.rk678.vip', count: 1, badge: '換皮', note: '一週一換的活教材：上週（W25）通報的還是 rk588.com，這週就換成 m.rk678.vip。同一個「RK」招牌、換個即棄網域繼續騙。看到「RK娛樂城」但網址每次都不一樣的，核心永遠是同一票人、同一套不出金。' },
+  { name: 'RH娛樂城', url: 'www.ns8618.cc', count: 1, badge: '新上榜', note: '本週新上榜、單一域名的殼站。跟 RK 一樣走「兩碼英文＋數字」的命名，剛開沒多久，第一批入金的就是白老鼠。' },
+  { name: '澳門威力彩（假彩券）', url: 'macauloot.com', count: 1, badge: '假彩券', note: '蹭「威力彩」官方彩券名號的假博弈站。台灣威力彩只有台彩一家、實體與官方通路才買得到——冒出「澳門威力彩」這種掛官方彩券名的網站，100% 是假的。' },
+  { name: '得勝彩（假彩券）', url: 'www.hotnumbers.top', count: 1, badge: '假彩券', note: '同樣是假彩券博弈站，用 .top 便宜即丟域名。任何叫你線上「儲值買彩券、包牌代簽」的私站都別碰，中獎不出金是必然結局。' },
+];
+
+/* ── 假投資平台（本週財務詐騙大宗，取通報量前段） ── */
+const investScams = [
+  { name: 'TimeeCoin（假虛擬貨幣）', url: 'lmonx.com', count: 10 },
+  { name: '中國金融期貨交易所（冒名）', url: 'zzgjrqh…ondigitalocean.app', count: 7 },
+  { name: '策聯優選', url: 'www.lweuzc.com', count: 6 },
+  { name: 'DWTMarkets', url: 'www.dwtyeovnspg.com', count: 5 },
+  { name: 'Chun Feng（QuanYong 系列）', url: 'www.quanyong-forex.com', count: 5 },
+  { name: '效能管理系統', url: 'netzeroav.com', count: 5 },
+  { name: 'BitFinex（冒名交易所）', url: 'fxaxtc.com', count: 4 },
+  { name: 'J.Q.X', url: 'www.jqxzhi.com', count: 3 },
+];
+
+/* ── 殺豬盤（假交友 → 假投資） ── */
+const romanceScams = [
+  { name: 'Flirting', url: 'es.tdgbgf.cc', count: 3 },
+  { name: '心遇', url: 'h5.psby168.xyz', count: 2 },
+  { name: 'Masked Sex', url: 'er.sgsvsd.cc', count: 1 },
+  { name: 'Dating', url: 'bp.bache1or.com', count: 1 },
+  { name: 'Meet your zone', url: 'ws.gjabhsb.cc', count: 1 },
+];
+---
+
+<ArticleSchema
+  url="https://game8la.com/articles/165-weekly-2026-w29/"
+  title={`【165 週報】${weekLabel}：RK娛樂城一週再換皮、假投資分散無巨頭`}
+  description={`內政部警政署 165 全民防騙網 ${weekLabel} 詐騙通報週報。RK娛樂城一週內再換新域名 m.rk678.vip；假投資本週分散、無單一巨頭（TimeeCoin 10 件最高、又換殼）；另有澳門威力彩、得勝彩等假彩券站。165 共列逾 100 個詐騙網站，GAME8LA 165 監測站每週追蹤。`}
+  image="https://game8la.com/images/articles/165-weekly-default-cover.webp"
+  datePublished={publishDate}
+  dateModified={publishDate}
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '165 週報', url: 'https://game8la.com/articles/165-weekly-2026-w29/' },
+  ]}
+/>
+<BaseLayout
+  currentPage="articles"
+  title={`【165 週報】${weekLabel}：RK娛樂城一週再換皮｜GAME8LA 165 監測站`}
+  description={`165 全民防騙網 ${weekLabel} 通報彙整：RK娛樂城一週內再換新域名，假投資分散無巨頭，另有假彩券站上榜。芭樂子每週追蹤整理，保護你的錢包。`}
+>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 165 週報</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：{publishDate} ｜
+      <Icon name="user-pen" /> 作者：芭樂子｜
+      <Icon name="book-open" /> 預估閱讀 4 分鐘 ｜
+      <span style="color:#f5b800;font-weight:700">🔍 165 監測站週報</span>
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+    <div class="hero-banner" style="background:linear-gradient(135deg,#0a0a1a,#1a1a3a,#ef4444)"></div>
+
+    <article class="article-content" style="max-width:820px;margin:0 auto">
+      <h1 style="font-size:1.8rem;line-height:1.3">🔍 165 監測站週報｜{weekLabel}<br /><em>RK娛樂城一週再換皮，假投資本週分散無巨頭</em></h1>
+
+      <p style="color:var(--text-muted);font-size:0.95rem">各位 8LA 鄉民好，我是芭樂子。每週我會從<strong>內政部警政署 165 全民防騙網</strong>的最新通報中，挑出跟<strong>娛樂城、博弈、假投資、殺豬盤</strong>這類「會把你錢騙光」的財務詐騙整理成週報。目的很簡單——<strong>讓你在入金、匯款之前，多一道防線</strong>。（冒用品牌的假購物詐騙不是本站專長，僅在文末帶過。）</p>
+
+      <!-- === 本週摘要 === -->
+      <div class="card" style="border-left:4px solid #ef4444;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#ef4444">⚠️ 本週摘要</h3>
+        <p style="margin:0">165 本週（7/9–7/15）公布逾 <strong>100 筆</strong>「假投資（博弈）」詐騙通報，通報量前三為 <strong>TikTok</strong>（冒用品牌假購物）16 件、<strong>TimeeCoin</strong>（假虛擬貨幣）10 件、<strong>KFC</strong>（冒用品牌假購物）9 件。財務詐騙這邊，本週<strong>假投資分散、沒有單一巨頭</strong>（最高的 TimeeCoin 也才 10 件，而且又換了新域名）；娛樂城類看點是 <strong>RK娛樂城「一週內再換皮」</strong>；另外出現 <strong>澳門威力彩、得勝彩</strong>等蹭官方彩券名號的假彩券站。</p>
+      </div>
+
+      <!-- === 165 總覽 === -->
+      <div class="card" style="border-left:4px solid #44aaff;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#44aaff">📈 本週 165 通報總覽</h3>
+        <p>本週「假投資（博弈）」類公告共列出逾 <strong>100 個</strong>詐騙網站，通報量前段：</p>
+        <ul style="margin:0.5rem 0;line-height:2">
+          <li><strong>TikTok</strong>（冒用品牌假購物）— 16 件</li>
+          <li><strong>TimeeCoin</strong>（假虛擬貨幣）— 10 件</li>
+          <li><strong>KFC</strong>（冒用品牌假購物）— 9 件</li>
+          <li><strong>iOPEN Mall</strong>（假購物）— 8 件</li>
+        </ul>
+        <p style="margin-bottom:0">類型分布上，<strong>假投資平台</strong>（冒名券商、虛擬貨幣交易所、AI 智能量化）仍是財務詐騙主流，但本週較分散；<strong>假購物</strong>（TikTok、KFC、iOPEN Mall）通報量竄前；殺豬盤本週降溫。娛樂城／博弈品牌通報量分散，多半轉往社群、廣告、LINE 群這些更難被通報的管道。</p>
+      </div>
+
+      <!-- === 娛樂城／博弈 === -->
+      <h2 id="casino" style="color:#ef4444">🎰 娛樂城／博弈：RK 一週再換皮、假彩券冒頭</h2>
+      <p>本週娛樂城類的教科書案例是「RK娛樂城」——它完美示範了詐騙娛樂城的本質：換域名比換衣服還勤。另外還冒出蹭官方彩券名的假彩券站：</p>
+      <div class="weekly-brand-list">
+        {casinoBrands.map(brand => (
+          <div class="weekly-brand-card new-brand">
+            <div class="brand-header">
+              <span class="brand-badge updated">{brand.badge === '換皮' ? '🔁 換皮' : brand.badge === '假彩券' ? '🎫 假彩券' : '🆕 新上榜'}</span>
+              <strong>{brand.name}</strong>
+              <span class="brand-count">{brand.count} 件</span>
+            </div>
+            <div class="brand-url">🌐 <code>{brand.url}</code></div>
+            <p class="brand-note">💡 {brand.note}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- === 假投資 === -->
+      <h2 id="invest" style="color:#f5b800">💰 假投資平台（本週大宗、但分散）</h2>
+      <p>假投資仍是財務詐騙主流——冒名券商、假交易所、AI 智能量化、虛擬貨幣，話術千變萬化，但結局都一樣：<strong>初期讓你看到帳面獲利，等你加碼，提領時就「不出金」</strong>。本週沒有壓倒性的單一巨頭，通報量前段：</p>
+      <div class="scam-table-wrap">
+        <table class="scam-table">
+          <thead><tr><th>品牌</th><th>網址</th><th>件數</th></tr></thead>
+          <tbody>
+            {investScams.map(s => (
+              <tr><td>{s.name}</td><td><code>{s.url}</code></td><td class="ct">{s.count}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- === 殺豬盤 === -->
+      <h2 id="romance" style="color:#ec4899">💔 殺豬盤：先談感情，再騙你投資</h2>
+      <p>本週殺豬盤降溫，但套路不變：<strong>先用「正妹／帥哥」假交友養感情</strong>，幾天後再「不小心」透露自己有內線投資管道，把你導去假平台或假博弈。本週上榜的假交友幌子：</p>
+      <div class="scam-table-wrap">
+        <table class="scam-table">
+          <thead><tr><th>品牌</th><th>網址</th><th>件數</th></tr></thead>
+          <tbody>
+            {romanceScams.map(s => (
+              <tr><td>{s.name}</td><td><code>{s.url}</code></td><td class="ct">{s.count}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- === 趨勢觀察 === -->
+      <h2 id="trend">📊 本週趨勢觀察</h2>
+      <div class="card" style="border-left:4px solid #f5b800;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#f5b800">芭樂子觀察筆記</h3>
+        <p><strong>1. RK娛樂城「一週再換皮」是最好的教材</strong>——上週 rk588.com、這週 m.rk678.vip，七天換一個域名。這就是為什麼<strong>判斷該不該信要看網域紀錄與網域年齡，不是看名字</strong>。一個正派平台不會每週換網址；會換的，八成在躲通報。</p>
+        <p><strong>2. 「中國金融期貨交易所」用免費雲端網址裝正規</strong>——它的網址是 <code>…ondigitalocean.app</code>，這是開發者用的免費雲端子網域。看到「交易所／期貨／證券」這種正規金融名號，網址卻掛 <code>.app</code>、<code>ondigitalocean</code>、<code>pages.dev</code> 這類雲端開發網址，直接跳過，正規券商不會用。</p>
+        <p style="margin-bottom:0"><strong>3. 假彩券站蹭官方名號</strong>——這週冒出「澳門威力彩」「得勝彩」。台灣的威力彩、大樂透、今彩539只有<strong>台灣彩券一家</strong>，實體通路或官方 App 才買得到。任何叫你「線上儲值買彩券、代簽包牌」的私站，中獎不出金是必然。想算包牌成本、中獎機率，用我們的<a href="/tools/">免費計算器</a>就好，別把錢送進私站。</p>
+      </div>
+
+      <!-- === CTA === -->
+      <div class="casino-check-cta" style="background:linear-gradient(135deg,#0a1a2e,#1a2a4a);border:2px solid #f5b800;border-radius:12px;padding:2rem;text-align:center;margin:2rem 0">
+        <h3 style="color:#f5b800;margin-top:0;font-size:1.3rem">🔍 擔心你玩的娛樂城／平台在黑名單上？</h3>
+        <p style="color:#ccc;margin-bottom:1.2rem">把網址丟進「娛樂城體檢」，一秒比對 165 詐騙黑名單 + WHOIS 網域年齡 + 鄉民不出金回報</p>
+        <a href="/casino-check/" class="cta-button" style="display:inline-block;background:#f5b800;color:#000;padding:0.8rem 2rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.1rem">立即查詢 →</a>
+      </div>
+
+      <!-- === 其他類別 === -->
+      <div class="card" style="border-left:4px solid #888;margin:1.5rem 0">
+        <h3 style="margin-top:0;color:#aaa">📦 其他類別：冒用品牌假購物</h3>
+        <p style="margin:0">本週假購物通報量竄前，另有 <strong>TikTok（16 件）、KFC（9 件）、iOPEN Mall（8 件）、SHEIN、POYA、Lohaco、Coupang、Amazon</strong> 等冒用知名品牌的假購物網站。這類非本站專長，僅提醒大家：<strong>看到「知名品牌但網址很怪」（如 kfcxuu.com、vips-tikonline.cc）的超低價購物連結，請直接跳過。</strong>完整名單見下方 165 官方公告。</p>
+      </div>
+
+      <!-- === 資料來源 === -->
+      <div style="margin-top:2rem;padding:1rem;background:rgba(255,255,255,0.05);border-radius:8px;font-size:0.85rem;color:var(--text-muted)">
+        <p style="margin:0"><strong>📋 資料來源</strong>：<a href="https://165.npa.gov.tw/#/article/9/1816" target="_blank" rel="noopener noreferrer">內政部警政署 165 全民防騙網 — 115/7/9-115/7/15 民眾通報假投資(博弈)詐騙網站</a></p>
+        <p style="margin:0.5rem 0 0">本站聚焦娛樂城／博弈／假投資／殺豬盤等財務詐騙通報，並加上芭樂子的手法解析；完整名單請以 165 官方公告為準。整理發布時間：{publishDate}</p>
+      </div>
+
+      <!-- === 延伸閱讀 === -->
+      <h2>📚 延伸閱讀</h2>
+      <ul style="line-height:2">
+        <li><a href="/casino-check/">🔍 娛樂城體檢工具 — 一鍵查 165 黑名單 + WHOIS + 鄉民回報</a></li>
+        <li><a href="/articles/165-weekly-2026-w25/">🔍 前期週報：2026 第 25 週（6/11–6/17）</a></li>
+        <li><a href="/articles/domain-hopping-scam-truth/">🔗 娛樂城網址一直換？金蟬脫殼詐騙真相</a></li>
+        <li><a href="/articles/5-tips-spot-casino-scam/">🛡️ 5 招識破娛樂城詐騙套路</a></li>
+        <li><a href="/articles/anti-scam-8la-guide/">🐊 芭樂子反詐總攻略</a></li>
+      </ul>
+
+      <ShareButtons />
+      <ManifestoBox />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .weekly-brand-list { display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0; }
+  .weekly-brand-card { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 1.2rem; border-left: 4px solid; }
+  .weekly-brand-card.new-brand { border-left-color: #ef4444; }
+  .brand-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; font-size: 1.1rem; flex-wrap: wrap; }
+  .brand-badge { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700; white-space: nowrap; }
+  .brand-badge.updated { background: rgba(245,184,0,0.2); color: #f5b800; }
+  .brand-count { margin-left: auto; font-size: 0.8rem; color: var(--text-muted); }
+  .brand-url { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .brand-url code { background: rgba(255,255,255,0.08); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85rem; color: #ff9999; }
+  .brand-note { font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+
+  .scam-table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; }
+  .scam-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .scam-table th { text-align: left; color: var(--text-muted); font-weight: 600; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+  .scam-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
+  .scam-table td code { background: rgba(255,255,255,0.08); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.8rem; color: #ff9999; word-break: break-all; }
+  .scam-table td.ct { text-align: center; font-weight: 800; color: #ef4444; white-space: nowrap; }
+
+  @media (max-width: 768px) {
+    .weekly-brand-card { padding: 1rem; }
+    .brand-header { font-size: 1rem; }
+    .scam-table { font-size: 0.84rem; }
+  }
+</style>

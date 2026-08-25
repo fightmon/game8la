@@ -2,21 +2,26 @@
  * 娛樂城詐騙黑名單
  * 資料來源：內政部警政署 165 全民防騙網（假投資/博弈網站類別）
  * 搜尋關鍵字：娛樂城
- * 最後更新：2026-06-10
- * 品牌數：99
+ * 最後更新：2026-08-17
+ * 品牌數：104
  * 原始通報筆數：461 + 週報補充（同品牌同網址合併後，再依品牌合併為 97 個）
  */
 
-export const lastUpdated = '2026-06-10';
+export const lastUpdated = '2026-08-17';
 
 export const scamList = [
+  { name: 'RH娛樂城', urls: ['www.ns8618.cc'], totalReports: 1, latestDate: '2026-07-15' },
+  { name: '老虎城娛樂城', urls: ['www.tgc888.net'], totalReports: 1, latestDate: '2026-06-17' },
+  { name: 'RK娛樂城', urls: ['www.rk588.com', 'm.rk678.vip'], totalReports: 2, latestDate: '2026-07-15' },
+  { name: '金鼎娛樂', urls: ['www.naturev5.net'], totalReports: 1, latestDate: '2026-06-17' },
+  { name: '澳門銀河娛樂', urls: ['darkersf.com'], totalReports: 1, latestDate: '2026-06-17' },
   { name: 'GF攻富娛樂城', urls: ['pc.billynational.vip'], totalReports: 1, latestDate: '2026-01-07' },
   { name: '無界娛樂城', urls: ['infinity168.bet'], totalReports: 1, latestDate: '2025-12-31' },
   { name: '金沙娛樂城', urls: ['m.jsylc5.com', 'm.sandss2.vip', 'm.sandsq1.vip', 'm.sandss11.vip', 'm.sandss9.vip', 'm.sds88.top', 't.sads55.top', 'm.jsylc1.com', 'm.sads2.vip', 'm.sads99.vip', 't.sads77.top', 'm.sads3.vip', 'h5.best-sands.cc', 'm.sand999.cc', 'jsylvg.com', 't.sads66.top', 'm.sads99.cc', 'm.sds88.vip', 'm.sds88.cc', 'h5.sandswins.cc', 'app.csaedes.cc', 'app.csased.cc', 'www.jinsha889.com'], totalReports: 36, latestDate: '2026-04-08' },
   { name: '3A娛樂城', urls: ['3a1888.com', 'seo188.3a1788.bet', 'ag002.3a5168.com', 'www.aaa1788.casino', 'aaawin.page', 'ag003.aaawin88.com', 'www.aaawin99.com', '3a5688.com', 'aaa1778.com', 'aaa1788.net', 'www.3a88.net', 'www.aaa1788.com', 'vip118.aaa1788.net'], totalReports: 21, latestDate: '2025-12-17' },
-  { name: '必發娛樂城', urls: ['betfairos.com', 'betfairse.com', 'www.betfairo.com'], totalReports: 5, latestDate: '2025-11-19' },
+  { name: '必發娛樂城', urls: ['betfairos.com', 'betfairse.com', 'www.betfairo.com', 'betfairae.com'], totalReports: 6, latestDate: '2026-06-17' },
   { name: '國際娛樂城', urls: ['www.947877.cc', 'tjyl888.top', 'wap.wns4489.xyz', 'wap.wns4169.xyz', 'wap.wns4269.xyz'], totalReports: 7, latestDate: '2025-10-08' },
-  { name: '新葡京娛樂城', urls: ['k9856825.com', 'm.kqxs88.top', 'm.kqxs66.top', 'n.ylhg82.xyz', 'xpj19208.com', 'm.kqxs323.xyz', 'm.kqxs567.xyz', 'm.kqxs23.top', 'm.kqxs3.top', 'm.kqxs99.cc', 'm.xin6868.com', 'm.xp99999.com', 'b.bycp26.com', 'a.bycp23.com', 'm.bycp27.com', 'm.bycp232.com', 'm.bycp1188.com', 'm.bycp1788.com', 'm.bycp28.com', 'm.bycp2233.com', 'm.bycp2266.com', 'm.bycp235.com', 'm.bycp238.com', 'm.bycp256.com', 'm.bycp21.com', 'm.bycp2688.com', 'm.bycp2988.com', 'm.bycp268.com', 'm.bycp298.com', 'm.bycp378.com', 'm.bycp2688.net', 'm.bycp38.com', 'app.bycp2688.com', 'app.bycp568.com', 'm.bycp2388.com', 'app.bycp278.com', 'm.bycp336.com', 'm.bycp326.com', 'm.bycp658.com', 'm.bycp6688.com', 'm.bycp338.com', 'm.bycp3588.com', 'm.bycp728.com', 'm.bycp398.com', 'm.bycp3988.com', 'm.kqxs9.top', 'm.bycp788.com', 'm.kqxs1.top', 'm.kqxs6.top', 'm.bycp29.com', 'm.bycp31.com', 'm.bycp36.com', 'm.bycp25.com', 'm.bycp1588.com', 'm.bycp1388.com', 'm.bycp26.net', 'm.bycp139.com', 'm.bycp1288.com', 'm.bycp1188.net', 'm.xpj3338.com'], totalReports: 217, latestDate: '2026-04-08' },
+  { name: '新葡京娛樂城', urls: ['k9856825.com', 'm.kqxs88.top', 'm.kqxs66.top', 'n.ylhg82.xyz', 'xpj19208.com', 'm.kqxs323.xyz', 'm.kqxs567.xyz', 'm.kqxs23.top', 'm.kqxs3.top', 'm.kqxs99.cc', 'm.xin6868.com', 'm.xp99999.com', 'b.bycp26.com', 'a.bycp23.com', 'm.bycp27.com', 'm.bycp232.com', 'm.bycp1188.com', 'm.bycp1788.com', 'm.bycp28.com', 'm.bycp2233.com', 'm.bycp2266.com', 'm.bycp235.com', 'm.bycp238.com', 'm.bycp256.com', 'm.bycp21.com', 'm.bycp2688.com', 'm.bycp2988.com', 'm.bycp268.com', 'm.bycp298.com', 'm.bycp378.com', 'm.bycp2688.net', 'm.bycp38.com', 'app.bycp2688.com', 'app.bycp568.com', 'm.bycp2388.com', 'app.bycp278.com', 'm.bycp336.com', 'm.bycp326.com', 'm.bycp658.com', 'm.bycp6688.com', 'm.bycp338.com', 'm.bycp3588.com', 'm.bycp728.com', 'm.bycp398.com', 'm.bycp3988.com', 'm.kqxs9.top', 'm.bycp788.com', 'm.kqxs1.top', 'm.kqxs6.top', 'm.bycp29.com', 'm.bycp31.com', 'm.bycp36.com', 'm.bycp25.com', 'm.bycp1588.com', 'm.bycp1388.com', 'm.bycp26.net', 'm.bycp139.com', 'm.bycp1288.com', 'm.bycp1188.net', 'm.xpj3338.com', 'm.k937765.com', 'k75992.com'], totalReports: 219, latestDate: '2026-07-29' },
   { name: '澳門賭王娛樂城', urls: ['539222.net'], totalReports: 1, latestDate: '2025-09-24' },
   { name: 'AT99娛樂城', urls: ['www.at99.io'], totalReports: 2, latestDate: '2025-09-03' },
   { name: '英皇娛樂城', urls: ['www.royaloaks-game.com'], totalReports: 1, latestDate: '2025-09-03' },
