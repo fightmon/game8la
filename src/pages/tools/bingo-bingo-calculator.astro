@@ -1,0 +1,281 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "賓果賓果幾星最划算？", "acceptedAnswer": { "@type": "Answer", "text": "從「回饋率（RTP）」看，賓果賓果各星數的長期回饋率大多落在 50%~65%（5 到 6 成半）之間，沒有哪一星「划算」——星數越多獎金看起來越大，但中獎難度呈指數上升，長期期望值全都是負的。真正划算的玩法是「當娛樂、花小錢」，不是想靠它賺錢。用本計算器選不同星數，就能看到每一種的真實 RTP。" } },
+    { "@type": "Question", "name": "賓果賓果中獎機率怎麼算？", "acceptedAnswer": { "@type": "Answer", "text": "賓果賓果每期從 01~80 開出 20 個號碼。假設你玩 N 星（選 N 個號碼），對中 k 個的機率＝C(20,k)×C(60,N−k)÷C(80,N)，這是統計學的「超幾何分布」。例如玩 1 星，中獎機率就是 20/80＝25%。每個號碼中獎機率都相同，所以選哪些號碼不影響機率，只有「玩幾星」有差。" } },
+    { "@type": "Question", "name": "賓果賓果的回饋率（RTP）是多少？", "acceptedAnswer": { "@type": "Answer", "text": "賓果賓果各星數 RTP 落在 50%~65% 之間（1 星 50% 最低、9 星 65% 最高），例如 1 星只有 50%（每投 100 元長期剩 50 元）。這比大樂透（約 55%）差不多或更差，遠低於合法線上老虎機的 96%~98%。賓果是全台彩回饋率最差的遊戲之一，適合當娛樂，不適合當投資。" } },
+    { "@type": "Question", "name": "賓果賓果選越多號碼越容易中嗎？", "acceptedAnswer": { "@type": "Answer", "text": "不是。星數越多，要對中的門檻越高、難度呈指數上升。低星（1~3 星）容易中小獎但獎金低；高星（8~10 星）獎金驚人但幾乎中不到，還會靠「中 0 個」給安慰獎來掩飾難度。不管幾星，長期期望值都是負的，多星不會讓你比較容易賺錢。" } },
+    { "@type": "Question", "name": "賓果賓果多久開一次？", "acceptedAnswer": { "@type": "Answer", "text": "台灣彩券的賓果賓果每 5 分鐘開獎一次，一天開超過 200 期，是「快開型」彩券。開獎快、節奏刺激，也正因為這樣容易讓人一期接一期投注、越玩越多。玩之前先設好預算上限。" } }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "賓果賓果機率計算器" }
+  ]
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "賓果賓果機率＋期望值計算器｜1~10星 RTP 一次看穿",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<BaseLayout
+  currentPage="tools"
+  title="賓果賓果機率計算器｜1~10星中獎機率、賠率、期望值一次算 — GAME8LA"
+  description="賓果賓果玩幾星最划算？選 1~10 星，一秒看真實中獎機率、官方賠率與期望值（RTP）。芭樂子用純數學拆穿：賓果 RTP 只有 50%~65%，跟大樂透差不多或更差。免費線上計算，不推坑。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+<div class="container">
+
+  <!-- ═══ Hero ═══ -->
+  <div class="bb-hero">
+    <h1>🎱 賓果賓果機率計算器</h1>
+    <p class="bb-sub">選一種玩法，一秒看穿你的錢長期會剩多少 — 純數學、不推坑。</p>
+  </div>
+
+  <!-- ═══ 計算器 ═══ -->
+  <div class="bb-tool">
+    <div class="bb-panel">
+      <div class="bb-label">① 選玩法（玩幾個號碼）</div>
+      <div class="bb-stars" id="bbStars"></div>
+      <button class="bb-super" id="bbSuperBtn" type="button">⭐ 超級獎號（對中第 20 顆球，48 倍）</button>
+
+      <div class="bb-label" style="margin-top:1.2rem">② 下注倍數（每注基本 25 元）</div>
+      <div class="bb-betrow">
+        <button class="bb-step" id="bbMinus" type="button">−</button>
+        <input type="number" id="bbMult" value="1" min="1" max="100" />
+        <button class="bb-step" id="bbPlus" type="button">＋</button>
+        <span class="bb-cost">＝ 每注 <strong id="bbCost">25</strong> 元</span>
+      </div>
+    </div>
+
+    <div class="bb-result" id="bbResult"></div>
+  </div>
+
+  <!-- ═══ 介紹段落（SEO 靜態） ═══ -->
+  <div class="bb-intro">
+    <h2>賓果賓果怎麼算機率？玩幾星最划算？</h2>
+    <p>
+      <strong>賓果賓果（BINGO BINGO）</strong>是台灣彩券每 <strong>5 分鐘</strong>開一次的快開型彩券，每期從 <strong>01~80</strong> 開出 <strong>20 個</strong>號碼。你可以選玩 <strong>1 到 10 個號碼</strong>（叫「1 星」到「10 星」），每注基本 25 元，看你對中幾個決定獎金。
+    </p>
+    <p>
+      因為每個號碼中獎機率都一樣，<strong>選哪些號碼不影響機率</strong>，真正有差的只有「<strong>玩幾星</strong>」。這個計算器用統計學的<strong>超幾何分布</strong>算出各星數對中幾個的真實機率，再乘上台彩官方賠率，算出每一種玩法的<strong>期望值（RTP，回饋率）</strong>——也就是「每投 100 元，長期平均會剩多少」。
+    </p>
+    <p>
+      先講結論：<strong>賓果賓果各星數 RTP 只有 50%~65%（5 到 6 成半）</strong>，跟大樂透（約 55%）差不多、多數更差，更被合法線上老虎機（96~98%）電爆。星數越多獎金看起來越誘人，但期望值全都是負的。<strong>它好玩、節奏刺激，但它是全台彩回饋率最差的遊戲之一——當娛樂花小錢就好，別想靠它賺。</strong>
+    </p>
+  </div>
+
+  <!-- ═══ 官方賠率表 ═══ -->
+  <div class="bb-intro">
+    <h2>賓果賓果 1~10 星官方賠率表</h2>
+    <p style="color:var(--text-muted,#999);font-size:1rem">每注 25 元，倍率＝「中獎金額 ÷ 25」；「拿回本金」代表打平（安慰獎）。</p>
+    <div class="bb-paylist" id="bbPayoutTable"></div>
+  </div>
+
+  <!-- ═══ FAQ ═══ -->
+  <div class="bb-intro">
+    <h2>❓ 賓果賓果常見問題</h2>
+    <details class="bb-faq"><summary>賓果賓果幾星最划算？</summary><p>從回饋率（RTP）看，各星數 RTP 落在 50%~65%，沒有哪一星「划算」——星數越多獎金看起來越大，但難度呈指數上升，長期期望值全是負的。真正划算的是「當娛樂、花小錢」，不是想靠它賺。</p></details>
+    <details class="bb-faq"><summary>賓果賓果中獎機率怎麼算？</summary><p>每期從 01~80 開 20 個號碼。玩 N 星對中 k 個的機率＝C(20,k)×C(60,N−k)÷C(80,N)（超幾何分布）。例如 1 星中獎率就是 20/80＝25%。每個號碼機率都相同，選哪些號碼不影響機率。</p></details>
+    <details class="bb-faq"><summary>賓果賓果的回饋率（RTP）是多少？</summary><p>各星數 RTP 落在 50%~65%，例如 1 星只有 50%（每投 100 元長期剩 50 元）。比大樂透（約 55%）差不多或更差，遠低於合法老虎機的 96~98%。是全台彩回饋率最差的遊戲之一。</p></details>
+    <details class="bb-faq"><summary>賓果賓果選越多號碼越容易中嗎？</summary><p>不是。星數越多門檻越高、難度指數上升。低星容易中小獎但獎金低，高星獎金驚人但幾乎中不到。不管幾星，長期期望值都是負的。</p></details>
+  </div>
+
+  <ShareButtons />
+</div>
+
+<script is:inline>
+(function(){
+  // ── 官方賠率（倍率＝獎金÷25，1 倍＝拿回本金） ──
+  var PAYOUT = {
+    1:{1:2},
+    2:{2:3,1:1},
+    3:{3:20,2:2},
+    4:{4:40,3:4,2:1},
+    5:{5:300,4:20,3:2},
+    6:{6:1000,5:40,4:8,3:1},
+    7:{7:3200,6:120,5:12,4:2,3:1},
+    8:{8:20000,7:800,6:40,5:8,4:1,0:1},
+    9:{9:40000,8:4000,7:120,6:20,5:4,4:1,0:1},
+    10:{10:200000,9:10000,8:1000,7:100,6:10,5:1,0:1}
+  };
+  var BASE = 25;
+
+  function comb(n,k){ if(k<0||k>n) return 0; k=Math.min(k,n-k); var r=1; for(var i=0;i<k;i++){ r=r*(n-i)/(i+1); } return r; }
+  // 玩 N 星、對中 k 個的機率（超幾何）
+  function pMatch(N,k){ return comb(20,k)*comb(60,N-k)/comb(80,N); }
+  function fmtPct(p){ if(p===0) return '0%'; if(p<0.0001) return (p*100).toExponential(1)+'%'; if(p<1) return (p*100).toFixed(p<0.01?3:2)+'%'; return (p*100).toFixed(1)+'%'; }
+  function fmtMoney(n){ return n.toLocaleString('en-US'); }
+  function oneIn(p){ if(p<=0) return '—'; var x=Math.round(1/p); return '約 1/'+fmtMoney(x); }
+
+  var $=function(id){return document.getElementById(id);};
+  var state = { star:3, mult:1, super:false };
+
+  // 建星數按鈕
+  var starsEl=$('bbStars'), html='';
+  for(var s=1;s<=10;s++){ html+='<button class="bb-star" data-s="'+s+'">'+s+'★</button>'; }
+  starsEl.innerHTML=html;
+
+  function rtpOf(N){ var t=PAYOUT[N], sum=0; for(var k in t){ sum += pMatch(N,+k)*t[k]; } return sum; }
+  function verdict(rtp){
+    var pct=Math.round(rtp*100);
+    if(pct>=70) return {t:'RTP '+pct+'%：還是負的，只是沒那麼慘',c:'#f5b800'};
+    if(pct>=60) return {t:'RTP '+pct+'%：偏低，長期穩輸',c:'#ff9800'};
+    return {t:'RTP '+pct+'%：超爛，比大樂透還差',c:'#ff5252'};
+  }
+
+  function render(){
+    var mult=state.mult, cost=BASE*mult;
+    $('bbCost').textContent=fmtMoney(cost);
+    document.querySelectorAll('.bb-star').forEach(function(b){ b.classList.toggle('sel', !state.super && +b.dataset.s===state.star); });
+    $('bbSuperBtn').classList.toggle('sel', state.super);
+
+    var out='';
+    if(state.super){
+      var p=1/80, prize=48*cost, rtp=48/80;
+      out+='<div class="bb-rtp" style="border-color:#ff9800">';
+      out+='<div class="bb-rtp-num" style="color:#ff9800">RTP 60%</div>';
+      out+='<div class="bb-rtp-txt">超級獎號：對中當期第 20 顆球即中 48 倍</div></div>';
+      out+='<table class="bb-odds"><thead><tr><th>結果</th><th>機率</th><th>獎金</th></tr></thead><tbody>';
+      out+='<tr class="win"><td>對中第20球</td><td>'+fmtPct(p)+'（'+oneIn(p)+'）</td><td>'+fmtMoney(prize)+' 元</td></tr>';
+      out+='<tr><td>沒中</td><td>'+fmtPct(1-p)+'</td><td>0 元</td></tr>';
+      out+='</tbody></table>';
+      out+='<p class="bb-ev">每注 '+fmtMoney(cost)+' 元，長期平均拿回 <strong>'+fmtMoney(Math.round(rtp*cost))+' 元</strong>（每投 100 元剩 60 元）。</p>';
+    } else {
+      var N=state.star, tbl=PAYOUT[N], rtp=rtpOf(N), v=verdict(rtp);
+      out+='<div class="bb-rtp" style="border-color:'+v.c+'">';
+      out+='<div class="bb-rtp-num" style="color:'+v.c+'">RTP '+Math.round(rtp*100)+'%</div>';
+      out+='<div class="bb-rtp-txt">'+N+' 星玩法 · 每投 100 元長期平均剩 <strong>'+Math.round(rtp*100)+' 元</strong></div></div>';
+      out+='<table class="bb-odds"><thead><tr><th>對中個數</th><th>中獎機率</th><th>獎金（'+fmtMoney(cost)+'元注）</th></tr></thead><tbody>';
+      // 由高到低列出有獎的層級
+      var keys=[]; for(var k in tbl){ keys.push(+k); } keys.sort(function(a,b){return b-a;});
+      for(var i=0;i<keys.length;i++){ var kk=keys[i], p2=pMatch(N,kk), prize2=tbl[kk]*cost, brk=tbl[kk]===1;
+        out+='<tr class="'+(brk?'':'win')+'"><td>中 '+kk+' 個'+(brk?'（拿回本金）':'')+'</td><td>'+fmtPct(p2)+'<span class="bb-onein">'+oneIn(p2)+'</span></td><td>'+fmtMoney(prize2)+' 元</td></tr>';
+      }
+      out+='</tbody></table>';
+      out+='<p class="bb-ev">💡 每注 '+fmtMoney(cost)+' 元，長期平均拿回 <strong>'+fmtMoney(Math.round(rtp*cost))+' 元</strong>，等於每注平均<strong style="color:#ff5252">虧 '+fmtMoney(Math.round((1-rtp)*cost))+' 元</strong>。星數越高獎金越誘人，但期望值一樣是負的。</p>';
+    }
+    out+='<div class="bb-compare"><span>賓果 '+(state.super?'60':Math.round(rtpOf(state.star)*100))+'%</span><span>大樂透 55%</span><span class="good">老虎機 96%</span></div>';
+    $('bbResult').innerHTML=out;
+  }
+
+  // 賠率總覽：每星一張卡（手機友善，不用寬表格）
+  (function(){
+    var h='';
+    for(var N=10;N>=1;N--){
+      var tbl=PAYOUT[N], rtp=Math.round(rtpOf(N)*100), rc=(rtp>=63?'#ff9800':'#ff5252');
+      var keys=[]; for(var k in tbl){ keys.push(+k); } keys.sort(function(a,b){return b-a;});
+      var tiers=keys.map(function(kk){ var v=tbl[kk], lab=(v===1?'拿回本金':fmtMoney(v)+'倍');
+        return '<span class="bb-tier'+(v===1?' brk':'')+'"><em>中'+kk+'</em><b>'+lab+'</b></span>'; }).join('');
+      h+='<div class="bb-pcard"><div class="bb-pcard-head"><span class="bb-pcard-star">'+N+'★</span>'
+        +'<span class="bb-pcard-rtp" style="color:'+rc+'">RTP '+rtp+'%</span></div>'
+        +'<div class="bb-pcard-tiers">'+tiers+'</div></div>';
+    }
+    $('bbPayoutTable').innerHTML=h;
+  })();
+
+  starsEl.addEventListener('click',function(e){ var b=e.target.closest('.bb-star'); if(!b) return; state.super=false; state.star=+b.dataset.s; render(); });
+  $('bbSuperBtn').addEventListener('click',function(){ state.super=true; render(); });
+  $('bbPlus').addEventListener('click',function(){ state.mult=Math.min(100,state.mult+1); $('bbMult').value=state.mult; render(); });
+  $('bbMinus').addEventListener('click',function(){ state.mult=Math.max(1,state.mult-1); $('bbMult').value=state.mult; render(); });
+  $('bbMult').addEventListener('input',function(){ var v=parseInt(this.value,10)||1; state.mult=Math.max(1,Math.min(100,v)); render(); });
+
+  render();
+})();
+</script>
+
+<style is:global>
+  .bb-hero{ text-align:center; padding:1.5rem 1rem 0.5rem; max-width:720px; margin:0 auto; }
+  .bb-hero h1{ font-size:clamp(1.7rem,6vw,2.2rem); font-weight:900; color:var(--gold-light,#ffd24a); margin:0 0 .4rem; }
+  .bb-sub{ color:var(--text-secondary,#ccc); font-size:1.15rem; font-weight:600; margin:0; line-height:1.5; }
+
+  .bb-tool{ max-width:680px; margin:1.2rem auto; padding:0 .2rem; }
+  .bb-panel{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:16px; padding:1.2rem 1.2rem 1.5rem; }
+  .bb-label{ font-weight:800; color:var(--text-primary,#fff); margin-bottom:.7rem; font-size:1.12rem; }
+  .bb-stars{ display:grid; grid-template-columns:repeat(5,1fr); gap:.5rem; }
+  .bb-star{ padding:.95rem .2rem; border-radius:12px; border:2px solid var(--border,#444); background:#222; color:#fff; font-weight:800; font-size:1.3rem; cursor:pointer; transition:border-color .12s,background .12s; }
+  .bb-star:hover{ border-color:var(--gold,#f5b800); }
+  .bb-star.sel{ border-color:var(--gold,#f5b800); background:rgba(245,184,0,.15); color:var(--gold-light,#ffd24a); }
+  .bb-super{ width:100%; margin-top:.6rem; padding:.9rem; border-radius:12px; border:2px solid var(--border,#444); background:#222; color:#eee; font-weight:700; font-size:1.05rem; cursor:pointer; }
+  .bb-super:hover{ border-color:var(--gold,#f5b800); }
+  .bb-super.sel{ border-color:#ff9800; background:rgba(255,152,0,.14); color:#ffb74d; }
+
+  .bb-betrow{ display:flex; align-items:center; gap:.55rem; flex-wrap:wrap; }
+  .bb-step{ width:52px; height:52px; border-radius:12px; border:1px solid var(--border,#444); background:#222; color:#fff; font-size:1.6rem; font-weight:800; cursor:pointer; }
+  #bbMult{ width:90px; height:52px; text-align:center; border-radius:12px; border:2px solid var(--guava-green,#39FF14); background:#111; color:var(--guava-green,#39FF14); font-weight:800; font-size:1.35rem; }
+  .bb-cost{ color:var(--text-secondary,#ccc); font-size:1.1rem; } .bb-cost strong{ color:var(--gold-light,#ffd24a); }
+
+  .bb-result{ margin-top:1.1rem; }
+  .bb-rtp{ border:2px solid; border-radius:14px; padding:1.2rem 1.2rem; text-align:center; background:rgba(255,255,255,.03); margin-bottom:1rem; }
+  .bb-rtp-num{ font-size:2.8rem; font-weight:900; line-height:1; }
+  .bb-rtp-txt{ color:var(--text-secondary,#ccc); font-size:1.12rem; margin-top:.5rem; line-height:1.5; }
+  .bb-rtp-txt strong{ color:#fff; }
+
+  .bb-odds{ width:100%; border-collapse:collapse; font-size:1.1rem; }
+  .bb-odds th{ text-align:left; color:var(--text-muted,#aaa); font-weight:700; padding:.6rem .6rem; border-bottom:1px solid var(--border,#333); font-size:.95rem; }
+  .bb-odds td{ padding:.7rem .6rem; border-bottom:1px solid rgba(255,255,255,.06); }
+  .bb-odds tr.win td{ color:#fff; } .bb-odds tr.win td:last-child{ color:var(--guava-green,#39FF14); font-weight:800; }
+  .bb-onein{ display:block; font-size:.9rem; color:var(--text-muted,#999); margin-top:.15rem; }
+  .bb-ev{ margin:1.1rem 0 .3rem; padding:1rem 1.1rem; background:rgba(255,82,82,.08); border-left:4px solid #ff5252; border-radius:8px; font-size:1.08rem; color:var(--text-secondary,#eee); line-height:1.8; }
+  .bb-ev strong{ color:#fff; }
+  .bb-compare{ display:flex; gap:.5rem; margin-top:1rem; }
+  .bb-compare span{ flex:1; text-align:center; padding:.7rem .3rem; border-radius:8px; background:rgba(255,255,255,.05); font-size:1rem; font-weight:800; color:var(--text-secondary,#ddd); }
+  .bb-compare span.good{ background:rgba(57,255,20,.12); color:var(--guava-green,#39FF14); }
+
+  .bb-intro{ max-width:760px; margin:2.2rem auto 0; padding:0 .2rem; }
+  .bb-intro h2{ font-size:1.5rem; color:var(--text-primary,#fff); line-height:1.35; }
+  .bb-intro p{ color:var(--text-secondary,#ddd); line-height:1.9; font-size:1.1rem; }
+  .bb-paylist{ display:grid; grid-template-columns:1fr; gap:.7rem; margin-top:.8rem; }
+  @media (min-width:640px){ .bb-paylist{ grid-template-columns:1fr 1fr; } }
+  .bb-pcard{ background:rgba(255,255,255,.03); border:1px solid var(--border,#333); border-radius:12px; padding:.9rem 1rem 1rem; }
+  .bb-pcard-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:.6rem; }
+  .bb-pcard-star{ font-size:1.6rem; font-weight:900; color:var(--gold-light,#ffd24a); }
+  .bb-pcard-rtp{ font-size:1.2rem; font-weight:800; }
+  .bb-pcard-tiers{ display:flex; flex-wrap:wrap; gap:.45rem; }
+  .bb-tier{ display:inline-flex; align-items:baseline; gap:.3rem; background:rgba(255,255,255,.06); border-radius:8px; padding:.4rem .6rem; font-size:1.02rem; color:#fff; }
+  .bb-tier em{ font-style:normal; color:var(--text-muted,#aaa); font-size:.9rem; }
+  .bb-tier b{ color:var(--guava-green,#39FF14); font-weight:800; }
+  .bb-tier.brk b{ color:var(--text-muted,#999); }
+
+  .bb-faq{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:10px; padding:1rem 1.2rem; margin-bottom:.6rem; }
+  .bb-faq summary{ cursor:pointer; font-weight:700; color:var(--text-primary,#fff); font-size:1.12rem; }
+  .bb-faq p{ margin:.8rem 0 0; color:var(--text-secondary,#ddd); line-height:1.8; font-size:1.05rem; }
+
+  @media (max-width:520px){
+    /* 手機：關鍵資訊放更大、好點，不縮小 */
+    .bb-hero h1{ font-size:1.75rem; }
+    .bb-sub{ font-size:1.08rem; }
+    .bb-stars{ gap:.45rem; }
+    .bb-star{ padding:.9rem .1rem; font-size:1.35rem; }
+    .bb-rtp-num{ font-size:2.6rem; }
+    .bb-rtp-txt{ font-size:1.08rem; }
+    .bb-odds{ font-size:1.05rem; }
+    .bb-ev{ font-size:1.05rem; }
+    .bb-compare{ flex-direction:column; gap:.4rem; }
+    .bb-compare span{ font-size:1.05rem; padding:.6rem; }
+    .bb-intro p{ font-size:1.06rem; }
+    .bb-intro h2{ font-size:1.35rem; }
+    .bb-faq summary{ font-size:1.08rem; }
+    .bb-faq p{ font-size:1.02rem; }
+  }
+</style>
+</BaseLayout>

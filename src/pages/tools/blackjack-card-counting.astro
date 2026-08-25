@@ -1,0 +1,362 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '21 點算牌是真的有用還是騙人的？', a: '在「真人實體賭場、用真牌、且沒有連續洗牌機」的條件下，Hi-Lo 算牌是真的有數學根據——它能把莊家優勢從約 0.5% 反轉成玩家約 +0.5%~1% 的優勢。但條件非常苛刻：要記得準、要跟著牌數調整下注、要撐過大量牌局讓優勢顯現，而且賭場發現你在算牌會直接請你離開或換洗牌機。' },
+  { q: '線上娛樂城的 21 點可以算牌嗎？', a: '不行，完全無效。線上 21 點（RNG 版）每一局都等於重新洗一副全新的牌，牌堆沒有記憶，前面出過什麼牌對後面的機率毫無影響——這種情況下算牌算出來的數字沒有任何意義。就算是真人荷官視訊桌，多數也使用連續洗牌機（CSM），把用過的牌立刻放回去洗，同樣讓算牌失效。任何說「線上娛樂城算牌能贏」的教學，不是不懂就是在騙你。' },
+  { q: 'Hi-Lo 算牌法怎麼算？', a: 'Hi-Lo 是最通用的算牌系統：看到 2、3、4、5、6 記 +1；7、8、9 記 0；10、J、Q、K、A 記 −1。把每張出現的牌加總就是「流水計數（Running Count）」。因為大牌（10 與 A）對玩家有利，計數為正代表剩下的牌堆大牌多、對玩家較有利。' },
+  { q: '真數（True Count）又是什麼？', a: '流水計數要除以「還沒發的牌大約幾副」才有意義，這個結果叫真數。例如流水計數 +6、剩下約 3 副牌，真數就是 +2。真數才是決定要不要加大注碼的依據——同樣 +6，在剩 1 副和剩 6 副的情況下意義完全不同。' },
+  { q: '練到什麼程度才算合格？', a: '一般認為要能在「一副牌 30 秒內發完」的速度下，維持 90% 以上的計數正確率，才勉強達到實戰門檻。本練習器會記錄你的正確率與速度，讓你看到自己離這個標準還有多遠——多數人第一次練會發現自己連慢速都算不準。' },
+  { q: '這個練習器是要鼓勵我去賭嗎？', a: '正好相反。GAME8LA 零業配、不放娛樂城連結。做這個工具是為了讓你親身體驗兩件事：第一，算牌是一項需要苦練的技術，不是看完一篇文章就會的秘訣；第二，就算你練成了，在你能接觸到的線上場合它也完全無效。認清這兩點，能幫你省下很多錢。' },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+const softwareSchema = {
+  "@context": "https://schema.org", "@type": "SoftwareApplication",
+  name: "21點算牌練習器（Hi-Lo 記牌訓練）",
+  applicationCategory: "UtilitiesApplication", operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "TWD" },
+};
+const breadcrumbSchema = {
+  "@context": "https://schema.org", "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "首頁", item: "https://game8la.com/" },
+    { "@type": "ListItem", position: 2, name: "工具箱", item: "https://game8la.com/tools/" },
+    { "@type": "ListItem", position: 3, name: "21點算牌練習器" },
+  ],
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<BaseLayout
+  currentPage="tools"
+  title="21點算牌練習器｜Hi-Lo 記牌訓練＋線上算牌到底有沒有用 - GAME8LA"
+  description="免費 21 點算牌練習器：牌一張張發，你來記 Hi-Lo 流水計數，系統即時算正確率。附真數（True Count）練習與完整教學，並老實告訴你——線上娛樂城的 21 點為什麼算牌完全無效。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/tools/">工具箱</a> &gt; 21點算牌練習器</div>
+
+  <div class="cc-hero">
+    <h1>🃏 21 點算牌練習器</h1>
+    <p class="cc-sub">牌一張張發，<strong>你來記 Hi-Lo 計數</strong>——練完就知道自己到底行不行。</p>
+  </div>
+
+  <!-- ═══ 練習器 ═══ -->
+  <section class="cc-tool">
+    <div class="cc-panel" id="ccSetup">
+      <div class="cc-row">
+        <div class="cc-field">
+          <label>牌組數</label>
+          <div class="cc-seg" id="ccDecks">
+            <button data-v="1" class="on">1 副</button>
+            <button data-v="6">6 副</button>
+            <button data-v="8">8 副</button>
+          </div>
+        </div>
+        <div class="cc-field">
+          <label>這輪發幾張</label>
+          <div class="cc-seg" id="ccCount">
+            <button data-v="15">15 張</button>
+            <button data-v="30" class="on">30 張</button>
+            <button data-v="52">52 張</button>
+          </div>
+        </div>
+      </div>
+      <div class="cc-row">
+        <div class="cc-field">
+          <label>速度</label>
+          <div class="cc-seg" id="ccSpeed">
+            <button data-v="1600">慢（1.6秒）</button>
+            <button data-v="1000" class="on">中（1秒）</button>
+            <button data-v="600">快（0.6秒）</button>
+            <button data-v="350">實戰（0.35秒）</button>
+          </div>
+        </div>
+      </div>
+      <label class="cc-check"><input type="checkbox" id="ccTeach"> 教學模式（邊發邊顯示計數，先熟悉再關掉）</label>
+      <button class="cc-start" id="ccStart">▶ 開始這一輪</button>
+    </div>
+
+    <div class="cc-stage" id="ccStage" style="display:none">
+      <div class="cc-progress"><span id="ccProg">0 / 30</span></div>
+      <div class="cc-cardbox" id="ccCardBox"></div>
+      <div class="cc-live" id="ccLive"></div>
+      <button class="cc-stop" id="ccStop">中止</button>
+    </div>
+
+    <div class="cc-quiz" id="ccQuiz" style="display:none">
+      <h2>牌發完了 —— 現在的流水計數（Running Count）是多少？</h2>
+      <div class="cc-inputrow">
+        <button class="cc-pm" id="ccMinus">−</button>
+        <input type="number" id="ccAnswer" value="0" />
+        <button class="cc-pm" id="ccPlus">＋</button>
+      </div>
+      <button class="cc-submit" id="ccSubmit">確認答案</button>
+    </div>
+
+    <div class="cc-result" id="ccResult" style="display:none"></div>
+  </section>
+
+  <!-- ═══ Hi-Lo 教學 ═══ -->
+  <section class="cc-sec">
+    <h2>Hi-Lo 算牌法怎麼記？</h2>
+    <p>只有三組數字要記，看到牌就加減：</p>
+    <div class="cc-hilo">
+      <div class="cc-hl plus"><div class="cc-hl-v">+1</div><div class="cc-hl-c">2 · 3 · 4 · 5 · 6</div><small>小牌出去了 → 對玩家有利</small></div>
+      <div class="cc-hl zero"><div class="cc-hl-v">0</div><div class="cc-hl-c">7 · 8 · 9</div><small>中性牌，不加不減</small></div>
+      <div class="cc-hl minus"><div class="cc-hl-v">−1</div><div class="cc-hl-c">10 · J · Q · K · A</div><small>大牌出去了 → 對玩家不利</small></div>
+    </div>
+    <p>
+      把每張出現的牌加總，就是<strong>流水計數（Running Count）</strong>。
+      正數代表<strong>剩下的牌堆裡大牌比較多</strong>——這對玩家有利，因為 21 點的大牌（10 與 A）會讓莊家更容易爆牌、也更容易發出 Blackjack。
+    </p>
+    <p>
+      實戰上還要再除以「大約還剩幾副沒發」得到<strong>真數（True Count）</strong>，那才是決定要不要加大注碼的依據。
+      同樣是 +6，剩 1 副和剩 6 副的意義完全不同。
+    </p>
+  </section>
+
+  <!-- ═══ 殘酷真相（品牌核心）═══ -->
+  <section class="cc-sec cc-truth">
+    <h2>⚠️ 但先講清楚：你能碰到的地方，算牌大多沒用</h2>
+    <div class="cc-truth-grid">
+      <div class="cc-t-card bad">
+        <h3>線上 RNG 21 點 → <span>完全無效</span></h3>
+        <p>線上娛樂城的電子 21 點<strong>每一局都等於重新洗一副全新的牌</strong>。牌堆沒有記憶，前面出過什麼對後面的機率毫無影響。這種情況下算出來的計數，<strong>數字本身沒有任何意義</strong>。</p>
+      </div>
+      <div class="cc-t-card bad">
+        <h3>真人荷官視訊桌 → <span>幾乎無效</span></h3>
+        <p>多數視訊桌使用<strong>連續洗牌機（CSM）</strong>，打完的牌立刻放回去重洗，牌堆永遠是「全新」狀態，算牌同樣失效。</p>
+      </div>
+      <div class="cc-t-card ok">
+        <h3>實體賭場、真牌、無 CSM → <span>真的有用，但…</span></h3>
+        <p>這種條件下 Hi-Lo 確實能把莊家優勢反轉成玩家<strong>約 +0.5%~1%</strong>。但代價是：要記得準、要按真數調整注碼、要撐過大量牌局讓優勢顯現，而且<strong>賭場發現你在算牌會直接請你離開</strong>。</p>
+      </div>
+    </div>
+    <p class="cc-note">
+      +1% 的優勢是什麼概念？代表你平均每押 100 元「期望」賺 1 元——而過程中的起伏可能讓你先輸掉好幾萬。
+      <strong>算牌從來不是「穩贏秘訣」，它是一份需要苦練、還要承受巨大波動的工作。</strong>
+      這個練習器的目的，是讓你親手驗證自己到底做不做得到——多數人練過就知道了。
+    </p>
+  </section>
+
+  <section class="cc-sec">
+    <h2>順便練這個</h2>
+    <ul class="cc-links">
+      <li><a href="/tools/blackjack/">🃏 AI 21 點練習場</a> — 每手都有 Basic Strategy 即時建議，先把基本策略練熟（這才是真正能降低莊家優勢的東西）</li>
+      <li><a href="/articles/baccarat-card-counting-myth/">🎴 百家樂算牌的真相</a> — 為什麼百家樂算牌比 21 點更沒用</li>
+      <li><a href="/tools/bankroll-calculator/">💰 資金管理計算器</a> — 算你的本金能撐多久</li>
+      <li><a href="/tools/gambling-self-check/">🧭 賭博成癮自我檢測</a> — PGSI 量表</li>
+    </ul>
+  </section>
+
+  <section class="cc-sec">
+    <h2>❓ 常見問題</h2>
+    {faqs.map(f => (
+      <details class="cc-faq"><summary>{f.q}</summary><p>{f.a}</p></details>
+    ))}
+  </section>
+
+  <ShareButtons />
+</div>
+
+<script is:inline>
+(function(){
+  const $=id=>document.getElementById(id);
+  const SUITS=[{s:'♠',c:'b'},{s:'♥',c:'r'},{s:'♦',c:'r'},{s:'♣',c:'b'}];
+  const RANKS=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+  const hiloOf=r=>['2','3','4','5','6'].includes(r)?1:['7','8','9'].includes(r)?0:-1;
+
+  const cfg={decks:1,count:30,speed:1000,teach:false};
+  let deck=[], idx=0, running=0, timer=null, stats=load();
+
+  function load(){ try{ return JSON.parse(localStorage.getItem('g8_cc'))||{rounds:0,correct:0,best:0,streak:0}; }
+    catch(e){ return {rounds:0,correct:0,best:0,streak:0}; } }
+  function save(){ try{ localStorage.setItem('g8_cc',JSON.stringify(stats)); }catch(e){} }
+
+  function seg(id,key){ $(id).addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    $(id).querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); cfg[key]=+b.dataset.v;
+  });}
+  seg('ccDecks','decks'); seg('ccCount','count'); seg('ccSpeed','speed');
+  $('ccTeach').addEventListener('change',e=>{ cfg.teach=e.target.checked; });
+
+  function buildDeck(){
+    const d=[];
+    for(let n=0;n<cfg.decks;n++) for(const su of SUITS) for(const r of RANKS) d.push({r,su});
+    for(let i=d.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [d[i],d[j]]=[d[j],d[i]]; }
+    return d;
+  }
+  function cardHTML(c){
+    return `<div class="cc-card ${c.su.c}"><span class="cc-r">${c.r}</span><span class="cc-s">${c.su.s}</span></div>`;
+  }
+
+  $('ccStart').addEventListener('click',()=>{
+    if(timer){ clearInterval(timer); timer=null; }   // 防呆：清掉任何殘留的計時器
+    $('ccQuiz').style.display='none';
+    deck=buildDeck(); idx=0; running=0;
+    const total=Math.min(cfg.count, deck.length);
+    $('ccSetup').style.display='none'; $('ccResult').style.display='none';
+    $('ccStage').style.display=''; $('ccLive').innerHTML=''; $('ccCardBox').innerHTML='';
+    $('ccProg').textContent=`0 / ${total}`;
+    timer=setInterval(()=>{
+      if(idx>=total){ clearInterval(timer); timer=null; askQuiz(); return; }
+      const c=deck[idx++];
+      running+=hiloOf(c.r);
+      $('ccCardBox').innerHTML=cardHTML(c);
+      $('ccProg').textContent=`${idx} / ${total}`;
+      if(cfg.teach){
+        const v=hiloOf(c.r);
+        $('ccLive').innerHTML=`這張 <b>${v>0?'+1':v<0?'−1':'0'}</b>　目前計數 <b class="cc-rc">${running>0?'+':''}${running}</b>`;
+      }
+    }, cfg.speed);
+  });
+
+  $('ccStop').addEventListener('click',()=>{
+    if(timer){ clearInterval(timer); timer=null; }
+    $('ccStage').style.display='none'; $('ccSetup').style.display='';
+  });
+
+  function askQuiz(){
+    $('ccStage').style.display='none';
+    $('ccQuiz').style.display='';
+    $('ccAnswer').value=0; $('ccAnswer').focus();
+  }
+  $('ccMinus').addEventListener('click',()=>{ $('ccAnswer').value=(+$('ccAnswer').value||0)-1; });
+  $('ccPlus').addEventListener('click',()=>{ $('ccAnswer').value=(+$('ccAnswer').value||0)+1; });
+
+  $('ccSubmit').addEventListener('click',()=>{
+    const ans=parseInt($('ccAnswer').value,10)||0;
+    const ok=ans===running;
+    stats.rounds++; if(ok){ stats.correct++; stats.streak++; if(stats.streak>stats.best) stats.best=stats.streak; }
+    else stats.streak=0;
+    save();
+    const acc=Math.round(stats.correct/stats.rounds*100);
+    // 真數 = 流水計數 ÷ 剩餘副數（用實際剩牌，不做粗略進位，避免灌水）
+    const remainDecks=Math.max(0.25,(deck.length-idx)/52);
+    const trueCount=Math.round(running/remainDecks*10)/10;
+    const remainShow=Math.round(remainDecks*100)/100;
+    const level = acc>=90?'A｜達到實戰門檻' : acc>=75?'B｜還算穩，速度再加快' : acc>=50?'C｜常常算掉，需要大量練習' : 'D｜目前完全跟不上';
+    $('ccQuiz').style.display='none';
+    $('ccResult').style.display='';
+    $('ccResult').innerHTML=`
+      <div class="cc-verdict ${ok?'ok':'no'}">${ok?'✅ 答對了！':'❌ 算錯了'}</div>
+      <div class="cc-nums">
+        <div><small>正確答案</small><b>${running>0?'+':''}${running}</b></div>
+        <div><small>你的答案</small><b>${ans>0?'+':''}${ans}</b></div>
+        <div><small>換算真數</small><b>${trueCount>0?'+':''}${trueCount}</b><small>（剩 ${deck.length-idx} 張＝${remainShow} 副）</small></div>
+      </div>
+      <div class="cc-stats">累計 ${stats.rounds} 輪 · 正確率 <b>${acc}%</b> · 連對紀錄 <b>${stats.best}</b>　→　<b>${level}</b></div>
+      ${acc<90&&stats.rounds>=3?`<div class="cc-hint">💡 一般認為要在「一副牌 30 秒發完」的速度下維持 <b>90% 以上</b>正確率才勉強達到實戰門檻。你現在 ${acc}%。</div>`:''}
+      <div class="cc-again"><button class="cc-start" id="ccAgain">再來一輪</button>
+        <button class="cc-back" id="ccBack">改設定</button></div>`;
+    $('ccAgain').addEventListener('click',()=>{ $('ccResult').style.display='none'; $('ccStart').click(); });
+    $('ccBack').addEventListener('click',()=>{ $('ccResult').style.display='none'; $('ccSetup').style.display=''; });
+  });
+  $('ccAnswer').addEventListener('keydown',e=>{ if(e.key==='Enter') $('ccSubmit').click(); });
+})();
+</script>
+
+<style is:global>
+  .cc-hero{ text-align:center; padding:1.4rem 1rem .6rem; max-width:760px; margin:0 auto; }
+  .cc-hero h1{ font-size:clamp(1.7rem,6vw,2.3rem); font-weight:900; color:var(--gold-light,#ffd24a); margin-bottom:.5rem; }
+  .cc-sub{ font-size:1.15rem; color:var(--text-secondary); line-height:1.7; }
+
+  .cc-tool{ max-width:640px; margin:1.2rem auto 0; }
+  .cc-panel{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:16px; padding:1.2rem; }
+  .cc-row{ display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:.9rem; }
+  .cc-field{ flex:1; min-width:200px; }
+  .cc-field label{ display:block; font-size:1rem; font-weight:800; margin-bottom:.45rem; }
+  .cc-seg{ display:flex; gap:.35rem; flex-wrap:wrap; }
+  .cc-seg button{ flex:1; min-width:64px; padding:.6rem .3rem; border-radius:10px; border:2px solid var(--border,#444);
+    background:#222; color:#ddd; font-weight:800; font-size:.98rem; cursor:pointer; }
+  .cc-seg button.on{ border-color:var(--gold,#f5b800); background:rgba(245,184,0,.15); color:var(--gold-light,#ffd24a); }
+  .cc-check{ display:flex; align-items:center; gap:.5rem; font-size:1rem; color:var(--text-secondary); margin:.4rem 0 1rem; cursor:pointer; }
+  .cc-check input{ width:20px; height:20px; accent-color:var(--gold,#f5b800); }
+  .cc-start{ width:100%; padding:.9rem; border:none; border-radius:12px; cursor:pointer;
+    background:linear-gradient(135deg,#f5b800,#ffd24a); color:#2a1d00; font-size:1.2rem; font-weight:900; }
+
+  .cc-stage{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:16px;
+    padding:1.2rem; text-align:center; }
+  .cc-progress{ font-size:1rem; color:var(--text-muted); font-variant-numeric:tabular-nums; margin-bottom:.8rem; }
+  .cc-cardbox{ min-height:190px; display:flex; align-items:center; justify-content:center; }
+  .cc-card{ width:130px; height:182px; background:linear-gradient(180deg,#fffdf6,#efe9d8); border-radius:14px;
+    box-shadow:0 6px 18px rgba(0,0,0,.5); display:flex; flex-direction:column; align-items:center; justify-content:center;
+    animation:ccIn .12s ease-out; }
+  @keyframes ccIn{ from{ transform:scale(.86); opacity:.2; } to{ transform:none; opacity:1; } }
+  .cc-card.r{ color:#c0282d; } .cc-card.b{ color:#1b2430; }
+  .cc-r{ font-size:3.4rem; font-weight:900; line-height:1; }
+  .cc-s{ font-size:2.4rem; line-height:1; }
+  .cc-live{ margin-top:.8rem; font-size:1.1rem; color:var(--text-secondary); min-height:1.6rem; }
+  .cc-live b{ color:#fff; } .cc-rc{ color:var(--gold-light,#ffd24a)!important; font-size:1.3rem; }
+  .cc-stop{ margin-top:1rem; padding:.6rem 1.6rem; border-radius:10px; border:1px solid var(--border);
+    background:rgba(255,255,255,.08); color:var(--text-secondary); font-size:1rem; cursor:pointer; }
+
+  .cc-quiz{ background:var(--bg-card,#161616); border:2px solid var(--gold,#f5b800); border-radius:16px;
+    padding:1.4rem 1.2rem; text-align:center; }
+  .cc-quiz h2{ font-size:1.2rem; line-height:1.5; margin-bottom:1rem; }
+  .cc-inputrow{ display:flex; gap:.5rem; justify-content:center; align-items:center; margin-bottom:1rem; }
+  .cc-pm{ width:56px; height:56px; border-radius:12px; border:1px solid var(--border); background:#222;
+    color:#fff; font-size:1.8rem; font-weight:900; cursor:pointer; }
+  #ccAnswer{ width:110px; height:56px; text-align:center; font-size:1.8rem; font-weight:900;
+    border-radius:12px; border:2px solid var(--guava-green,#39FF14); background:#111; color:var(--guava-green,#39FF14); }
+  .cc-submit{ padding:.8rem 2.4rem; border:none; border-radius:12px; cursor:pointer;
+    background:linear-gradient(135deg,#f5b800,#ffd24a); color:#2a1d00; font-size:1.15rem; font-weight:900; }
+
+  .cc-result{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:16px;
+    padding:1.3rem 1.2rem; text-align:center; }
+  .cc-verdict{ font-size:1.5rem; font-weight:900; margin-bottom:.9rem; }
+  .cc-verdict.ok{ color:#7ee29b; } .cc-verdict.no{ color:#ff6b6b; }
+  .cc-nums{ display:flex; gap:.5rem; justify-content:center; margin-bottom:.9rem; flex-wrap:wrap; }
+  .cc-nums>div{ flex:1; min-width:96px; background:rgba(255,255,255,.05); border-radius:10px; padding:.6rem .3rem; }
+  .cc-nums small{ display:block; font-size:.75rem; color:var(--text-muted); }
+  .cc-nums b{ font-size:1.7rem; color:var(--gold-light,#ffd24a); }
+  .cc-stats{ font-size:1rem; color:var(--text-secondary); line-height:1.8; }
+  .cc-stats b{ color:#fff; }
+  .cc-hint{ margin-top:.8rem; background:rgba(255,176,32,.12); border-left:4px solid #ffb020;
+    border-radius:8px; padding:.7rem .9rem; font-size:.95rem; text-align:left; line-height:1.7; color:#ffe6bf; }
+  .cc-again{ display:flex; gap:.5rem; margin-top:1rem; }
+  .cc-back{ flex:0 0 auto; padding:.9rem 1.2rem; border-radius:12px; border:1px solid var(--border);
+    background:rgba(255,255,255,.08); color:var(--text-secondary); font-size:1rem; cursor:pointer; }
+
+  .cc-sec{ max-width:820px; margin:2.4rem auto 0; }
+  .cc-sec h2{ font-size:1.45rem; margin-bottom:.8rem; }
+  .cc-sec p{ font-size:1.08rem; color:var(--text-secondary); line-height:1.95; margin-bottom:.9rem; }
+  .cc-hilo{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:.8rem; margin:1rem 0 1.2rem; }
+  .cc-hl{ border-radius:14px; padding:1rem; text-align:center; border:2px solid; }
+  .cc-hl.plus{ border-color:#7ee29b; background:rgba(126,226,155,.08); }
+  .cc-hl.zero{ border-color:#8899a6; background:rgba(136,153,166,.08); }
+  .cc-hl.minus{ border-color:#ff6b6b; background:rgba(255,107,107,.08); }
+  .cc-hl-v{ font-size:2.4rem; font-weight:900; line-height:1; }
+  .cc-hl.plus .cc-hl-v{ color:#7ee29b; } .cc-hl.zero .cc-hl-v{ color:#b9c4bb; } .cc-hl.minus .cc-hl-v{ color:#ff6b6b; }
+  .cc-hl-c{ font-size:1.25rem; font-weight:800; margin:.4rem 0 .3rem; color:#fff; }
+  .cc-hl small{ font-size:.85rem; color:var(--text-muted); }
+
+  .cc-truth-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:.8rem; margin:1rem 0; }
+  .cc-t-card{ border-radius:12px; padding:1rem 1.1rem; border-left:5px solid; background:var(--bg-card,#161616); }
+  .cc-t-card.bad{ border-left-color:#ff5252; }
+  .cc-t-card.ok{ border-left-color:#ffb020; }
+  .cc-t-card h3{ font-size:1.05rem; margin-bottom:.5rem; line-height:1.5; }
+  .cc-t-card.bad h3 span{ color:#ff6b6b; } .cc-t-card.ok h3 span{ color:#ffb020; }
+  .cc-t-card p{ font-size:.98rem; line-height:1.85; margin:0; }
+  .cc-note{ background:rgba(255,255,255,.05); border-radius:10px; padding:1rem 1.1rem; font-size:1.02rem!important; }
+  .cc-links{ line-height:2.2; font-size:1.05rem; color:var(--text-secondary); padding-left:1.2rem; }
+  .cc-faq{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:10px;
+    padding:1rem 1.2rem; margin-bottom:.6rem; }
+  .cc-faq summary{ cursor:pointer; font-weight:700; font-size:1.08rem; }
+  .cc-faq p{ margin:.8rem 0 0; color:var(--text-secondary); line-height:1.85; font-size:1rem; }
+
+  @media(max-width:520px){
+    .cc-card{ width:112px; height:158px; } .cc-r{ font-size:2.9rem; } .cc-s{ font-size:2rem; }
+    .cc-nums b{ font-size:1.4rem; }
+  }
+</style>
+</BaseLayout>
