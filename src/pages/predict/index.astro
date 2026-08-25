@@ -13,6 +13,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p class="hero-sub">猜對賺眼光點 · 比準度衝排行榜</p>
     </div>
 
+    <!-- 世足收官橫幅 -->
+    <div class="pp-champ">
+      <span class="pp-champ-badge">🏆 世足落幕</span>
+      <p class="pp-champ-txt"><b>西班牙 1-0 阿根廷</b>（延長賽）奪冠！2026 世界盃全部賽事已結束，你的預測成績都在下面 👇 下屆大賽再一起玩。</p>
+    </div>
+
     <!-- 未登入 -->
     <div id="ppGuest" class="pp-card" style="display:none">
       <h2>先登入會員,才能開始預測 🎯</h2>
@@ -133,6 +139,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .page-hero h1 { font-size: clamp(1.6rem, 6vw, 2.1rem); font-weight: 900; margin: 0 0 0.4rem; background: linear-gradient(135deg, #FFD700, #ff8800); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .hero-sub { font-size: 1.05rem; color: var(--text-secondary); font-weight: 700; margin: 0; }
     .muted { color: var(--text-muted); }
+
+    .pp-champ { max-width: 640px; margin: 0 auto 1.2rem; text-align: center; background: linear-gradient(135deg, rgba(184,134,11,0.18), rgba(255,215,0,0.08)); border: 1.5px solid rgba(255,215,0,0.45); border-radius: 14px; padding: 1rem 1.2rem; }
+    .pp-champ-badge { display: inline-block; background: linear-gradient(135deg,#FFD700,#ff8800); color: #000; font-weight: 900; font-size: 0.78rem; letter-spacing: 0.05em; padding: 0.2rem 0.8rem; border-radius: 20px; margin-bottom: 0.5rem; }
+    .pp-champ-txt { margin: 0; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; }
+    .pp-champ-txt b { color: #FFD700; }
 
     .pp-card { max-width: 560px; margin: 1.2rem auto; background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 1.8rem 1.6rem; text-align: center; }
     .pp-loading { color: var(--text-muted); }
