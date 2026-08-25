@@ -1,12 +1,38 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
+/**
+ * 不進 sitemap 的網址，分三類：
+ *  (1) 301／meta-refresh 轉址頁（舊 slug）
+ *  (2) 後台頁面——不該出現在給搜尋引擎的清單裡
+ *  (3) 帶 noindex 的頁面：純遊戲畫面與模擬器。排名集中在對應的 /games/ 落地頁，
+ *      避免同一組關鍵字自相殘殺（大樂透那組就是這樣互打過）
+ */
+const SITEMAP_EXCLUDE = [
+  // (1) 轉址頁
+  /\/games\/game-[3-9]\/?$/,
+  /\/articles\/arcade-vs-online\/?$/,
+  /\/articles\/daily-cash-539-wheel-strategy\/?$/,
+  // (2) 後台
+  /\/admin\//,
+  // (3) noindex 頁面
+  /\/games\/taiwan-mahjong\/play\/?$/,
+  /\/tools\/(slot|thor-hammer-2|baphomet|lu-bu)-simulator\/?$/,
+  /\/tools\/blackjack\/?$/,
+  /\/tools\/power-lottery-calculator\/?$/,
+  /\/articles\/capcomcup-12-sahara-champion\/?$/,
+  /\/caseDemo\//,
+];
+
 export default defineConfig({
   // Integrations
   integrations: [
     sitemap({
-      // 排除舊 redirect 頁（它們是 301/meta-refresh，不該進 sitemap）
-      filter: (page) => !/\/games\/game-[3-9]\/?$/.test(page) && !/\/articles\/arcade-vs-online\/?$/.test(page) && !/\/articles\/daily-cash-539-wheel-strategy\/?$/.test(page),
+      // ⚠️ 鐵則：sitemap 不可以收錄 noindex 或會轉址的頁面。
+      // 兩者放進 sitemap 等於「主動提交、又叫 Google 別收」，GSC 會報
+      // 「已提交的網址標記為 noindex」，浪費檢索預算也稀釋網站訊號。
+      // 新增 noindex 頁面時，記得同步加進 SITEMAP_EXCLUDE。
+      filter: (page) => !SITEMAP_EXCLUDE.some((re) => re.test(page)),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),

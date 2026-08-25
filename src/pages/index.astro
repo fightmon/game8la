@@ -54,14 +54,14 @@ const latestScams = [...scamList]
   <div class="hero-slides" id="heroSlides">
     <div class="hero-slide">
       <div class="hero-content">
-        <div class="tag">⚽ 世足專題・6/12 開踢</div>
+        <div class="tag">🏆 世足落幕・西班牙奪冠</div>
         <div class="hero-title-frame"><span class="hero-title-inner">
           <h2 class="hero-h">2026 <em data-text="世足8LA專區">世足8LA專區</em></h2>
         </span></div>
-        <p>賽程表、台灣轉播哪裡看、48 隊賽制、冠軍預測——芭樂子帶你看球，零業配、防詐騙。</p>
+        <p>西班牙 1-0 阿根廷（延長賽）拿下隊史第 2 冠！整屆賽程、規則、看球懶人包全站留檔——芭樂子陪你回顧，零業配、防詐騙。</p>
         <div class="hero-btns">
-          <a href="/worldcup/" class="btn-primary" style="text-decoration:none"><Icon name="trophy" /> 進世足專區</a>
-          <a href="/articles/worldcup-2026-schedule/" class="btn-outline" style="text-decoration:none"><Icon name="calendar" /> 看賽程表</a>
+          <a href="/worldcup/" class="btn-primary" style="text-decoration:none"><Icon name="trophy" /> 進世足專區看回顧</a>
+          <a href="/predict/" class="btn-outline" style="text-decoration:none"><Icon name="target" /> 我的預測成績</a>
         </div>
       </div>
     </div>
@@ -178,7 +178,7 @@ const latestScams = [...scamList]
       </div>
       <!-- 今日推薦彩號 -->
       <div class="lottery-preview-widget">
-        <h3>🎱 今日推薦彩號</h3>
+        <h3 id="lpTitle">🎱 今日推薦彩號</h3>
         <div class="lp-tabs">
           <button class="lp-tab active" data-lp="daily_cash_539" onclick="switchLP(this)">539</button>
           <button class="lp-tab" data-lp="super_lotto" onclick="switchLP(this)">威力彩</button>
@@ -233,6 +233,10 @@ const latestScams = [...scamList]
       <a href="/tools/thor-hammer-2-simulator/" class="ts-item">
         <img src="/images/tools/icon-thor-sim.webp" alt="雷神之錘 II 模擬器" width="64" height="64" loading="lazy">
         <span>雷神之錘 II</span>
+      </a>
+      <a href="/tools/lu-bu-simulator/" class="ts-item">
+        <img src="/images/tools/icon-lubu-sim.webp" alt="戰神呂布 RTP 模擬器" width="64" height="64" loading="lazy">
+        <span>戰神呂布</span>
       </a>
       <a href="/tools/mahjong-suan-tai-trainer/" class="ts-item">
         <div class="ts-mj" aria-hidden="true">🀄</div>
@@ -428,14 +432,14 @@ function getSVGIcon(name) {
 // === GAME DATA ===
 const games = [
   { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 8942, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
-  { id: 2, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.7, views: 7623, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-2', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
-  { id: 3, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.6, views: 6518, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: 'hot', gradient: 'gc-3', icon: 'dice-5', label: 'PG · 2000路', img: 'images/mahjong-ways2/mahjong-ways2-cover.webp' },
+  { id: 2, slug: 'thor-hammer-2', name: '雷神之錘II', cat: 'slots', rating: 9.7, views: 7623, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-2', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
+  { id: 3, slug: 'mahjong-ways-2', name: '麻將胡了2', cat: 'slots', rating: 9.6, views: 6518, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: 'hot', gradient: 'gc-3', icon: 'dice-5', label: 'PG · 2000路', img: 'images/mahjong-ways2/mahjong-ways2-cover.webp' },
   { id: 4, slug: 'elder-god-baphomet', name: '古神巴風特', cat: 'slots', rating: 9.5, views: 3680, desc: 'ATG電子暗黑新作！5×5 Cluster Pays消除＋累進翻倍倍數石板，FG倍數不重置一路疊到底。RTP 96.35%、最大x65,536倍、5種購買特色、4級JP彩金。', badge: 'new', gradient: 'gc-4', icon: 'skull', label: 'ATG · x65536', img: 'images/baphomet/baphomet-card-thumbnail.webp' },
   { id: 5, slug: 'dragon-legend', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 5240, desc: 'GR Gaming經典IP！5x3盤面、20條賠付線單向連線，RTP 96.35%、最高625x、倍數連鎖x5、Free Game、隕石百搭、幸運彩金，國民老虎機。', badge: 'hot', gradient: 'gc-5', icon: 'flame', label: 'GR · 經典IP', img: 'images/games/dragon-legend/card-thumbnail.webp' },
-  { id: 6, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 4870, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-6', icon: 'dice-5', label: 'PG · 1024 Ways', img: 'images/mahjong-ways/mahjong-ways-card-thumbnail.webp' },
-  { id: 7, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 4320, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。最高51,000倍。', badge: null, gradient: 'gc-7', icon: 'shield', label: 'RSG · x51000', img: 'images/games/god-of-war-lubu/lubu-banner.webp' },
+  { id: 6, slug: 'mahjong-ways', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 4870, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-6', icon: 'dice-5', label: 'PG · 1024 Ways', img: 'images/mahjong-ways/mahjong-ways-card-thumbnail.webp' },
+  { id: 7, slug: 'god-of-war-lubu', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 4320, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。最高51,000倍。', badge: null, gradient: 'gc-7', icon: 'shield', label: 'RSG · x51000', img: 'images/games/god-of-war-lubu/lubu-banner.webp' },
   { id: 8, slug: 'candy-burst', name: '糖果爆爆樂', cat: 'slots', rating: 9.2, views: 1260, desc: 'PG Soft 6×6消除掉落！RTP 96.95%、最高15000x爆擊，炸彈×火箭×糖果紙三大特殊符號組合連鎖，免費旋轉獎金翻倍x2、爆爆糖模式x10！', badge: 'new', gradient: 'gc-8', icon: 'candy', label: 'PG · 6×6消除', img: 'images/candy-burst-card-thumb.webp' },
-  { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 3685, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
+  { id: 9, slug: 'night-market-3', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 3685, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
   { id: 10, slug: 'caishen-wins', name: '贏財神', cat: 'slots', rating: 9.0, views: 2340, desc: 'PG Soft 6軸最高32,400路老虎機！RTP 96.92%、最大x100,000倍，多路連消百搭（銀框→金框→Wild）、橫財神模式一次4個Wild、Free Spin搏一搏最高x20獎金倍數。中波動財神系列。', badge: 'new', gradient: 'gc-10', icon: 'coins', label: 'PG · 32400路', img: 'images/caishen-wins/caishen-wins-card-thumbnail.webp' },
   { id: 11, slug: 'dragons-treasure-quest', name: '尋龍寶藏', cat: 'slots', rating: 9.3, views: 3120, desc: 'PG Soft 5軸最高7,776路高波動老虎機！RTP 96.76%、最大x10,000倍，擴展視窗分裂＋倍數符號x2~x100累加、寶箱收集系統、Free Spin 15轉倍數狂疊。博弈型尋寶冒險機。', badge: 'new', gradient: 'gc-11', icon: 'flame', label: 'PG · 7776路', img: 'images/dragons-treasure-quest/dragons-treasure-quest-card-thumbnail.webp' },
 ];
@@ -1695,6 +1699,18 @@ img.tools-cta-icon {
   margin-bottom: 0.6rem;
 }
 .lp-update { font-size: 0.75rem; color: var(--text-muted); }
+.lp-stale {
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: #ffc98a;
+  background: rgba(255, 176, 32, 0.12);
+  border-left: 3px solid #ffb020;
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+}
+.lp-stale b { color: #fff; }
+.lp-ball.stale { opacity: 0.45; filter: grayscale(0.5); }
 .lp-cta-sidebar {
   display: block; text-align: center;
   padding: 0.55rem 0.8rem; border-radius: 8px;
@@ -1845,14 +1861,14 @@ function getSVGIcon(name) {
 // === GAME DATA ===
 const games = [
   { id: 1, slug: 'seth-2', name: '戰神賽特2：覺醒之力', cat: 'slots', rating: 9.8, views: 8942, desc: 'ATG電子神話級續作！RTP 96.89%、最大x81000倍，符號分裂＋鎖倍技能雙系統，高波動爆分核彈。', badge: 'hot', gradient: 'gc-1', icon: 'zap', label: 'ATG · x81000', img: 'images/seth2/seth2-card-thumbnail.webp' },
-  { id: 2, slug: 'game-4', name: '雷神之錘II', cat: 'slots', rating: 9.7, views: 7623, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-2', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
-  { id: 3, slug: 'game-8', name: '麻將胡了2', cat: 'slots', rating: 9.6, views: 6518, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: 'hot', gradient: 'gc-3', icon: 'dice-5', label: 'PG · 2000路', img: 'images/mahjong-ways2/mahjong-ways2-cover.webp' },
+  { id: 2, slug: 'thor-hammer-2', name: '雷神之錘II', cat: 'slots', rating: 9.7, views: 7623, desc: 'RSG皇家電子北歐神話巨作！GLI認證、自由配對、最大x25000倍，Free Game倍數累積不重置。', badge: 'new', gradient: 'gc-2', icon: 'hammer', label: 'RSG · x25000', img: 'images/thor2/thor2-card-thumbnail.webp' },
+  { id: 3, slug: 'mahjong-ways-2', name: '麻將胡了2', cat: 'slots', rating: 9.6, views: 6518, desc: 'PG Soft 2000路消除掉落麻將老虎機！Gold Plated中獎變Wild、倍數連鎖x1→x5、Free Spin 10轉第3軸全金倍數x2→x10。初代全面進化版，UKGC+MGA雙執照。', badge: 'hot', gradient: 'gc-3', icon: 'dice-5', label: 'PG · 2000路', img: 'images/mahjong-ways2/mahjong-ways2-cover.webp' },
   { id: 4, slug: 'elder-god-baphomet', name: '古神巴風特', cat: 'slots', rating: 9.5, views: 3680, desc: 'ATG電子暗黑新作！5×5 Cluster Pays消除＋累進翻倍倍數石板，FG倍數不重置一路疊到底。RTP 96.35%、最大x65,536倍、5種購買特色、4級JP彩金。', badge: 'new', gradient: 'gc-4', icon: 'skull', label: 'ATG · x65536', img: 'images/baphomet/baphomet-card-thumbnail.webp' },
   { id: 5, slug: 'dragon-legend', name: '魔龍傳奇', cat: 'slots', rating: 9.5, views: 5240, desc: 'GR Gaming經典IP！5x3盤面、20條賠付線單向連線，RTP 96.35%、最高625x、倍數連鎖x5、Free Game、隕石百搭、幸運彩金，國民老虎機。', badge: 'hot', gradient: 'gc-5', icon: 'flame', label: 'GR · 經典IP', img: 'images/games/dragon-legend/card-thumbnail.webp' },
-  { id: 6, slug: 'game-5', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 4870, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-6', icon: 'dice-5', label: 'PG · 1024 Ways', img: 'images/mahjong-ways/mahjong-ways-card-thumbnail.webp' },
-  { id: 7, slug: 'game-6', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 4320, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。最高51,000倍。', badge: null, gradient: 'gc-7', icon: 'shield', label: 'RSG · x51000', img: 'images/games/god-of-war-lubu/lubu-banner.webp' },
+  { id: 6, slug: 'mahjong-ways', name: '麻將胡了', cat: 'slots', rating: 9.4, views: 4870, desc: 'PG Soft 1024 Ways麻將老虎機！消除掉落倍數連鎖x1→x5，Gold Plated中獎變Wild，Free Spin 12轉倍數最高x10。', badge: 'hot', gradient: 'gc-6', icon: 'dice-5', label: 'PG · 1024 Ways', img: 'images/mahjong-ways/mahjong-ways-card-thumbnail.webp' },
+  { id: 7, slug: 'god-of-war-lubu', name: '戰神呂布', cat: 'slots', rating: 9.4, views: 4320, desc: 'RSG皇家電子三國志老虎機！自由配對(Scatter Pays)、倍數符號2x~500x相加計算、4級累積彩金、15場Free Game倍數累積不重置，可重觸最多100場。最高51,000倍。', badge: null, gradient: 'gc-7', icon: 'shield', label: 'RSG · x51000', img: 'images/games/god-of-war-lubu/lubu-banner.webp' },
   { id: 8, slug: 'candy-burst', name: '糖果爆爆樂', cat: 'slots', rating: 9.2, views: 1260, desc: 'PG Soft 6×6消除掉落！RTP 96.95%、最高15000x爆擊，炸彈×火箭×糖果紙三大特殊符號組合連鎖，免費旋轉獎金翻倍x2、爆爆糖模式x10！', badge: 'new', gradient: 'gc-8', icon: 'candy', label: 'PG · 6×6消除', img: 'images/candy-burst-card-thumb.webp' },
-  { id: 9, slug: 'game-9', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 3685, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
+  { id: 9, slug: 'night-market-3', name: '逛夜市3', cat: 'slots', rating: 9.2, views: 3685, desc: 'RSG皇家電子台灣夜市主題！243路中獎組合，Free Game倍數每局自動遞增最高x150，額外押注觸發率翻倍，購買免遊僅50倍。GLI認證，門檻親民的歡樂爆分機。', badge: 'new', gradient: 'gc-9', icon: 'store', label: 'RSG · x150' },
   { id: 10, slug: 'caishen-wins', name: '贏財神', cat: 'slots', rating: 9.0, views: 2340, desc: 'PG Soft 6軸最高32,400路老虎機！RTP 96.92%、最大x100,000倍，多路連消百搭（銀框→金框→Wild）、橫財神模式一次4個Wild、Free Spin搏一搏最高x20獎金倍數。中波動財神系列。', badge: 'new', gradient: 'gc-10', icon: 'coins', label: 'PG · 32400路', img: 'images/caishen-wins/caishen-wins-card-thumbnail.webp' },
   { id: 11, slug: 'dragons-treasure-quest', name: '尋龍寶藏', cat: 'slots', rating: 9.3, views: 3120, desc: 'PG Soft 5軸最高7,776路高波動老虎機！RTP 96.76%、最大x10,000倍，擴展視窗分裂＋倍數符號x2~x100累加、寶箱收集系統、Free Spin 15轉倍數狂疊。博弈型尋寶冒險機。', badge: 'new', gradient: 'gc-11', icon: 'flame', label: 'PG · 7776路', img: 'images/dragons-treasure-quest/dragons-treasure-quest-card-thumbnail.webp' },
 ];
@@ -1879,8 +1895,8 @@ function renderGames(filter = 'all') {
         </div>
         <div class="game-desc">${g.desc}</div>
         <div class="game-actions">
-          <a href="/games/${g.slug}/" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩<span class="sr-only"> ${g.name}</span></a>
-          <a href="/games/${g.slug}/" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="info" /> 更多資訊</a>
+          <a href="${'/games/' + g.slug + '/'}" class="btn-play" aria-label="免費試玩 ${g.name}" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="play" /> 免費試玩<span class="sr-only"> ${g.name}</span></a>
+          <a href="${'/games/' + g.slug + '/'}" class="btn-info" aria-label="${g.name} 更多資訊" style="text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.3rem"><Icon name="info" /> 更多資訊</a>
         </div>
       </div>
     </div>
@@ -2041,9 +2057,10 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
 
 // === LOTTERY PREVIEW ===
 const LP_CONFIG = {
-  daily_cash_539: { file: '/data/daily-cash-539.json', maxNum: 39, count: 5 },
-  super_lotto:    { file: '/data/super-lotto.json',    maxNum: 38, count: 6 },
-  lotto649:       { file: '/data/lotto649.json',       maxNum: 49, count: 6 },
+  // staleDays：超過幾天沒新資料就當成「過期」，誠實標示而不是假裝是今日
+  daily_cash_539: { file: '/data/daily-cash-539.json', maxNum: 39, count: 5, staleDays: 4 },
+  super_lotto:    { file: '/data/super-lotto.json',    maxNum: 38, count: 6, staleDays: 7 },
+  lotto649:       { file: '/data/lotto649.json',       maxNum: 49, count: 6, staleDays: 7 },
 };
 let lpData = {};
 let lpCurrent = 'daily_cash_539';
@@ -2119,10 +2136,28 @@ function renderLP() {
   scores.sort(function(a, b) { return b.score - a.score; });
   var picks = scores.slice(0, count).sort(function(a, b) { return a.num - b.num; });
 
+  // ── 資料新鮮度：過期就誠實講，不要拿舊資料冒充「今日」 ──
+  var last = data.lastUpdated || '';
+  var daysOld = null;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(last)) {
+    daysOld = Math.floor((Date.now() - new Date(last + 'T00:00:00+08:00').getTime()) / 86400000);
+  }
+  var stale = daysOld === null || daysOld > (cfg.staleDays || 7);
+
   document.getElementById('lpRec').innerHTML = picks.map(function(p) {
-    return '<span class="lp-ball rec">' + p.num + '</span>';
+    return '<span class="lp-ball rec' + (stale ? ' stale' : '') + '">' + p.num + '</span>';
   }).join('');
-  document.getElementById('lpDate').textContent = data.lastUpdated || '--';
+
+  var titleEl = document.getElementById('lpTitle');
+  var metaEl = document.querySelector('.lp-meta');
+  if (stale) {
+    if (titleEl) titleEl.textContent = '🎱 推薦彩號（資料待更新）';
+    if (metaEl) metaEl.innerHTML = '<span class="lp-stale">⚠️ 即時開獎資料暫時取不到，以下是最後一次更新（' +
+      (last || '不明') + (daysOld !== null ? '，' + daysOld + ' 天前' : '') + '）的結果，<b>不是今日資料</b></span>';
+  } else {
+    if (titleEl) titleEl.textContent = '🎱 今日推薦彩號';
+    if (metaEl) metaEl.innerHTML = '<span class="lp-update">更新至 <span id="lpDate">' + last + '</span></span>';
+  }
 }
 
 function switchLP(btn) {
