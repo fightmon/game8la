@@ -24,14 +24,14 @@ const breadcrumbSchema = {
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
     { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://game8la.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "麻將算台練習器" }
+    { "@type": "ListItem", "position": 3, "name": "麻將台數計算器" }
   ]
 };
 
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "麻將算台練習器｜看牌猜台數，台灣16張算台一次學會",
+  "name": "麻將台數計算器｜勾選算台數與賠付金額，附看牌猜台練習",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
@@ -43,18 +43,85 @@ const softwareSchema = {
 
 <BaseLayout
   currentPage="tools"
-  title="麻將算台練習器｜看牌猜台數，台灣16張算台一次學會 — GAME8LA"
-  description="不會算台？看牌型猜台數，門清、自摸、碰碰胡、清一色、大三元…即時拆解每個台怎麼來，還會標出暗刻、明刻、順子。台灣 16 張麻將算台教學，免費線上練習。"
+  title="麻將台數計算器｜勾一勾算幾台、對方賠多少（台灣16張算台）— GAME8LA"
+  description="免費麻將台數計算器：勾選門清、自摸、碰碰胡、清一色、大三元等牌型，立刻算出總台數，並依「底＋台×台數」算出自摸三家各付多少、放槍要賠多少。附看牌猜台數練習器與台灣16張台數速查表。"
   ogImage="https://game8la.com/images/og-image.webp"
 >
 <div class="container">
 
   <!-- ═══ Hero ═══ -->
   <div class="page-hero">
-    <h1>🀄 麻將算台練習器</h1>
-    <p class="hero-sub">看牌型，猜這手胡牌總共幾台 — 立刻看詳細拆解。</p>
-    <p class="hero-desc">台灣 16 張規則，門清、自摸、碰碰胡、清一色、大三元…每副牌標出暗刻／明刻／順子，點台數還會幫你把對應的牌圈起來。</p>
+    <h1>🀄 麻將台數計算器</h1>
+    <p class="hero-sub">勾選你這把成立的台，馬上算出<strong>總共幾台</strong>、以及<strong>對方要賠你多少錢</strong>。</p>
+    <p class="hero-desc">台灣 16 張規則。算完想練功力的話，下面還有「看牌猜台數」練習器，每副牌都會標出暗刻／明刻／順子。</p>
   </div>
+
+  <!-- ═══ 台數計算機（搜「麻將台數計算器」的人要的是這個：輸入我的牌型 → 幾台、賠多少）═══ -->
+  <section class="calc-card" id="tai-calc">
+    <h2 class="calc-title">🧮 這把幾台？勾一勾就知道</h2>
+
+    <div class="calc-groups">
+      <div class="calc-group">
+        <h3>基本台</h3>
+        <label class="ck"><input type="checkbox" data-tai="1" value="門清"><span>門清<em>1台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="1" value="自摸" id="ck-tsumo"><span>自摸<em>1台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="1" value="門風刻"><span>門風刻<em>1台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="1" value="圈風刻"><span>圈風刻<em>1台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="1" value="正花"><span>正花（每張）<em>1台</em></span></label>
+        <div class="calc-num">
+          <span>三元刻（中／發／白）</span>
+          <button type="button" data-step="-1" data-target="sanyuan">−</button>
+          <output id="sanyuan">0</output>
+          <button type="button" data-step="1" data-target="sanyuan">＋</button>
+          <em>每組 1 台</em>
+        </div>
+        <div class="calc-num">
+          <span>花牌張數</span>
+          <button type="button" data-step="-1" data-target="flower">−</button>
+          <output id="flower">0</output>
+          <button type="button" data-step="1" data-target="flower">＋</button>
+          <em>每張 1 台</em>
+        </div>
+      </div>
+
+      <div class="calc-group">
+        <h3>牌型台</h3>
+        <label class="ck"><input type="checkbox" data-tai="4" value="碰碰胡"><span>碰碰胡<em>4台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="4" value="混一色" data-excl="色"><span>混一色<em>4台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="8" value="清一色" data-excl="色"><span>清一色<em>8台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="4" value="小三元" data-excl="三元"><span>小三元<em>4台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="8" value="大三元" data-excl="三元"><span>大三元<em>8台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="8" value="小四喜" data-excl="四喜"><span>小四喜<em>8台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="16" value="大四喜" data-excl="四喜"><span>大四喜<em>16台</em></span></label>
+        <label class="ck"><input type="checkbox" data-tai="16" value="字一色"><span>字一色<em>16台</em></span></label>
+      </div>
+
+      <div class="calc-group">
+        <h3>暗刻（碰來的不算）</h3>
+        <label class="ck"><input type="radio" name="ankou" data-tai="0" value="無暗刻加台" checked><span>沒有／一兩組<em>0台</em></span></label>
+        <label class="ck"><input type="radio" name="ankou" data-tai="2" value="三暗刻"><span>三暗刻<em>2台</em></span></label>
+        <label class="ck"><input type="radio" name="ankou" data-tai="5" value="四暗刻"><span>四暗刻<em>5台</em></span></label>
+        <label class="ck"><input type="radio" name="ankou" data-tai="8" value="五暗刻"><span>五暗刻<em>8台</em></span></label>
+      </div>
+    </div>
+
+    <div class="calc-money">
+      <label>底 <input type="number" id="base" value="10" min="0" step="1"></label>
+      <label>台 <input type="number" id="unit" value="10" min="0" step="1"></label>
+      <button type="button" id="calc-reset" class="calc-reset">清空重算</button>
+    </div>
+
+    <div class="calc-out" id="calc-out">
+      <div class="co-tai">總計 <strong id="out-tai">0</strong> 台</div>
+      <div class="co-money" id="out-money"></div>
+      <div class="co-detail" id="out-detail">還沒勾選任何台</div>
+    </div>
+
+    <p class="calc-note">
+      算式：<strong>底 ＋ 台 × 台數</strong>。<strong>自摸</strong>三家都要付，所以你收到的是三倍；
+      <strong>放槍</strong>只有放槍那家付。各桌台規略有差異（花牌、地方台、連莊拉莊），以你那桌約定為準。
+    </p>
+  </section>
 
   <!-- ═══ 介紹段落（SEO 靜態內容）═══ -->
   <div class="intro-section">
@@ -74,6 +141,11 @@ const softwareSchema = {
 
   <!-- ═══ 算台練習器（互動）═══ -->
   <section class="st-game">
+    <h2 style="font-size:1.25rem;margin:0 0 .3rem">🎯 看牌猜台數：練到不用算也知道</h2>
+    <p style="font-size:.95rem;color:var(--text-secondary,#b6bdc9);line-height:1.75;margin:0 0 1rem">
+      上面的計算機是「知道有哪些台、算出金額」；這裡反過來——直接給你一副胡牌，你猜幾台。
+      猜完會標出暗刻／明刻／順子，點任一個台還會把對應的牌圈起來。
+    </p>
     <div class="st-progress">
       <span class="st-progress-text" id="stPtext">第 1 / 7 題</span>
       <div class="st-progress-track"><div class="st-progress-fill" id="stPfill" style="width:14%"></div></div>
@@ -162,6 +234,10 @@ const softwareSchema = {
   <!-- ═══ CTA 導流 ═══ -->
   <section class="st-cta">
     <div class="st-cta-grid">
+      <a href="/games/taiwan-mahjong/" class="st-cta-card">
+        <span class="st-cta-icon">🀄</span>
+        <div><strong>台灣16張麻將練習桌</strong><p>跟 AI 打真實一局，胡牌自動幫你算台＋列出明細</p></div>
+      </a>
       <a href="/game-ranking/" class="st-cta-card">
         <span class="st-cta-icon">🏆</span>
         <div><strong>2026 金8LA遊戲排行</strong><p>熱門遊戲完整評分，誰是今年的 8LA 之王？</p></div>
@@ -181,6 +257,52 @@ const softwareSchema = {
 </div>
 
 <style is:global>
+/* ═══ 台數計算機 ═══ */
+.calc-card {
+  background: var(--bg-card, #14161c); border: 1px solid var(--border, #2a2f3a);
+  border-radius: 16px; padding: 1.2rem; margin: 0 0 1.6rem;
+}
+.calc-title { font-size: 1.25rem; margin: 0 0 1rem; }
+.calc-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
+.calc-group h3 { font-size: 1rem; margin: 0 0 .55rem; color: var(--guava-green, #39ff14); }
+.ck { display: flex; align-items: center; gap: .55rem; padding: .5rem .6rem; margin-bottom: .35rem;
+  border: 1px solid var(--border, #2a2f3a); border-radius: 9px; cursor: pointer; font-size: 1rem; }
+.ck input { width: 20px; height: 20px; accent-color: var(--guava-green, #39ff14); flex: none; cursor: pointer; }
+.ck span { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; flex: 1; }
+.ck em { font-style: normal; font-size: .82rem; color: var(--text-muted, #8b93a1); white-space: nowrap; }
+.ck:has(input:checked) { border-color: var(--guava-green, #39ff14); background: rgba(57,255,20,.08); }
+.calc-num { display: flex; align-items: center; gap: .4rem; padding: .5rem .6rem; margin-bottom: .35rem;
+  border: 1px solid var(--border, #2a2f3a); border-radius: 9px; font-size: 1rem; flex-wrap: wrap; }
+.calc-num > span:first-child { flex: 1 1 100%; }
+.calc-num button { width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1.15rem; font-weight: 900;
+  background: rgba(255,255,255,.06); border: 1px solid var(--border, #2a2f3a); color: inherit; }
+.calc-num output { min-width: 2.2rem; text-align: center; font-size: 1.2rem; font-weight: 900; }
+.calc-num em { font-style: normal; font-size: .82rem; color: var(--text-muted, #8b93a1); margin-left: auto; }
+.calc-money { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; margin: 1rem 0 .8rem; }
+.calc-money label { display: flex; align-items: center; gap: .4rem; font-size: 1rem; font-weight: 700; }
+.calc-money input { width: 88px; padding: .45rem .5rem; font-size: 1.05rem; font-weight: 800; text-align: center;
+  border-radius: 8px; border: 1px solid var(--border, #2a2f3a); background: rgba(0,0,0,.3); color: inherit; }
+.calc-reset { margin-left: auto; padding: .45rem .9rem; border-radius: 8px; cursor: pointer; font-size: .9rem;
+  background: transparent; border: 1px solid var(--border, #2a2f3a); color: var(--text-muted, #8b93a1); }
+.calc-out { background: rgba(57,255,20,.08); border: 1px solid rgba(57,255,20,.35); border-radius: 12px; padding: .9rem 1rem; }
+.co-tai { font-size: 1.15rem; font-weight: 700; }
+.co-tai strong { font-size: 2rem; color: var(--guava-green, #39ff14); }
+.co-money { font-size: 1.05rem; line-height: 1.85; margin-top: .35rem; }
+.co-money b { color: #ffd54a; font-size: 1.2rem; }
+.co-detail { font-size: .9rem; color: var(--text-muted, #8b93a1); margin-top: .5rem; line-height: 1.7; }
+.calc-note { font-size: .9rem; line-height: 1.8; color: var(--text-secondary, #b6bdc9); margin: .8rem 0 0; }
+@media (max-width: 640px) {
+  .calc-card { padding: .9rem; }
+  .calc-groups { grid-template-columns: 1fr; gap: .8rem; }
+  .calc-money label { font-size: 1rem; }
+  .calc-reset { margin-left: 0; width: 100%; padding: .6rem; font-size: 1rem; }
+  /* 觸控目標放大：使用者族群 40+，小按鈕很難按 */
+  .calc-num button { width: 44px; height: 44px; font-size: 1.3rem; }
+  .calc-num output { font-size: 1.35rem; min-width: 2.6rem; }
+  .ck { padding: .6rem; }
+  .ck input { width: 22px; height: 22px; }
+}
+
   /* 算台練習器（全部 st- 前綴；用 is:global，因為牌/徽章/按鈕是 JS 動態插入，scoped 樣式套不到） */
   .st-game{ max-width:680px; margin:1.5rem auto; }
 
@@ -354,6 +476,72 @@ const softwareSchema = {
 </style>
 
 <script is:inline>
+/* ═══ 台數計算機 ═══
+   台灣 16 張：輸贏 = 底 ＋ 台 × 台數。
+   自摸三家都付（收三份）、放槍只有放槍者付（收一份）。 */
+(function () {
+  var card = document.getElementById('tai-calc');
+  if (!card) return;
+  var counts = { sanyuan: 0, flower: 0 };
+
+  function calc() {
+    var tai = 0, parts = [];
+    card.querySelectorAll('input[type=checkbox]:checked, input[type=radio]:checked').forEach(function (el) {
+      var t = parseInt(el.dataset.tai, 10) || 0;
+      if (t > 0) { tai += t; parts.push(el.value + ' ' + t); }
+    });
+    if (counts.sanyuan > 0) { tai += counts.sanyuan; parts.push('三元刻×' + counts.sanyuan + ' ' + counts.sanyuan); }
+    if (counts.flower > 0) { tai += counts.flower; parts.push('花牌×' + counts.flower + ' ' + counts.flower); }
+
+    var base = Math.max(0, parseInt(document.getElementById('base').value, 10) || 0);
+    var unit = Math.max(0, parseInt(document.getElementById('unit').value, 10) || 0);
+    var each = base + unit * tai;                       // 單一家要付的金額
+    var tsumo = document.getElementById('ck-tsumo').checked;
+
+    document.getElementById('out-tai').textContent = tai;
+    document.getElementById('out-money').innerHTML = tsumo
+      ? '自摸：<b>三家各付 ' + each.toLocaleString() + '</b>，你總共收 <b>' + (each * 3).toLocaleString() + '</b>'
+      : '放槍：<b>放槍者付 ' + each.toLocaleString() + '</b>，你收 <b>' + each.toLocaleString() + '</b>'
+        + '<br><small style="color:var(--text-muted,#8b93a1)">（勾「自摸」會改成三家都付）</small>';
+    document.getElementById('out-detail').textContent = parts.length
+      ? '計入：' + parts.join('　＋　') + '　＝　' + tai + ' 台'
+      : '還沒勾選任何台';
+  }
+
+  // 互斥：清一色/混一色、大小三元、大小四喜不可同時成立
+  card.addEventListener('change', function (e) {
+    var el = e.target;
+    if (el.type === 'checkbox' && el.checked && el.dataset.excl) {
+      card.querySelectorAll('input[data-excl="' + el.dataset.excl + '"]').forEach(function (o) {
+        if (o !== el) o.checked = false;
+      });
+    }
+    calc();
+  });
+
+  card.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-step]');
+    if (!b) return;
+    var k = b.dataset.target;
+    var max = k === 'sanyuan' ? 3 : 8;
+    counts[k] = Math.max(0, Math.min(max, counts[k] + parseInt(b.dataset.step, 10)));
+    document.getElementById(k).textContent = counts[k];
+    calc();
+  });
+
+  document.getElementById('calc-reset').addEventListener('click', function () {
+    card.querySelectorAll('input[type=checkbox]').forEach(function (c) { c.checked = false; });
+    var first = card.querySelector('input[name=ankou]');
+    if (first) first.checked = true;
+    counts.sanyuan = 0; counts.flower = 0;
+    document.getElementById('sanyuan').textContent = '0';
+    document.getElementById('flower').textContent = '0';
+    calc();
+  });
+
+  calc();
+})();
+
 /* ===== 算台引擎（逐副牌記錄明/暗）＋ UI ===== */
 (function(){
   const TAI = { qingYiSe:8, hunYiSe:4, ziYiSe:16, pengPeng:4, anke:{3:2,4:5,5:8},

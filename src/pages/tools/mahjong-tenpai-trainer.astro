@@ -1,10 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ShareButtons from '../../components/ShareButtons.astro';
-import { tileRow } from '../../lib/mahjong-tiles.js';
+import { tileRow, tileSVG } from '../../lib/mahjong-tiles.js';
 
-const pageTitle = '麻將聽牌怎麼看？聽什麼牌一張一張練｜兩面、嵌張、邊張、單吊、雙碰';
-const pageDesc = '麻將聽牌老是看不出來聽什麼？免費互動練習器，給你一手牌猜聽哪幾張，兩面／嵌張／邊張／單吊／雙碰五種聽牌型一次學會。手機一屏一題，附完整聽牌教學與常見問題。';
+// 選牌盤：34 種牌（0-8 萬、9-17 筒、18-26 條、27-33 東南西北中發白），
+// 索引與 /mahjong/core/tiles.mjs 的 counts[34] 完全一致
+const PICKER = [
+  { label: '萬', tiles: Array.from({ length: 9 }, (_, i) => ({ k: i, t: (i + 1) + 'm' })) },
+  { label: '筒', tiles: Array.from({ length: 9 }, (_, i) => ({ k: i + 9, t: (i + 1) + 'p' })) },
+  { label: '條', tiles: Array.from({ length: 9 }, (_, i) => ({ k: i + 18, t: (i + 1) + 's' })) },
+  { label: '字', tiles: Array.from({ length: 7 }, (_, i) => ({ k: i + 27, t: (i + 1) + 'z' })) },
+];
+
+const pageTitle = '麻將聽牌計算機｜輸入手牌馬上算你聽什麼（台灣16張）＋聽牌練習器';
+const pageDesc = '免費麻將聽牌計算機：點出你的手牌，立刻算出這手聽哪幾張、每張還剩幾張，還沒聽牌也會告訴你差幾步。台灣16張規則。另附聽牌練習器與兩面／嵌張／邊張／單吊／雙碰完整教學。';
 const canonical = 'https://game8la.com/tools/mahjong-tenpai-trainer/';
 
 const faqs = [
@@ -30,13 +39,63 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
 
   <div class="container">
     <div class="page-hero">
-      <h1>🀄 麻將聽牌練習器</h1>
-      <p class="hero-sub">差一張就胡了——你看得出這手「聽什麼牌」嗎？一題一手，手機一屏就能練。</p>
+      <h1>🀄 麻將聽牌計算機</h1>
+      <p class="hero-sub">點出你的手牌，馬上算出<strong>這手聽什麼</strong>、每張<strong>還剩幾張</strong>。還沒聽牌也會告訴你差幾步。</p>
       <p class="hero-desc">8LA 大大好，我是芭樂子。會碰吃槓只是入門，真正的高手差在「看得出聽什麼」。下面這台練習器把已經組好的面子幫你攤開，只留還差的那一組——你只要點出「能讓你胡的牌」。兩面、嵌張、邊張、單吊、雙碰五種聽牌型，練熟就能一眼看穿自己跟對家在等什麼。</p>
     </div>
 
+    <!-- ═══ 聽牌計算機：搜「聽牌器／聽牌機／聽牌計算」的人要的是這個 ═══ -->
+    <section class="tc-card" id="tenpaiCalc">
+      <h2 class="tc-title">🧮 你這手聽什麼？點牌就算</h2>
+
+      <div class="tc-melds">
+        <span>吃／碰／槓了幾組？</span>
+        <div class="tc-meldbtns" id="tcMelds">
+          {[0, 1, 2, 3, 4].map((n) => (
+            <button type="button" data-melds={n} class={n === 0 ? 'on' : ''}>{n}</button>
+          ))}
+        </div>
+      </div>
+
+      <div class="tc-hand-wrap">
+        <div class="tc-hand-head">
+          <span>你的手牌（點牌可移除）</span>
+          <strong id="tcCount">0 / 16</strong>
+        </div>
+        <div class="tc-hand" id="tcHand"><span class="tc-empty">從下面選牌加進來 ↓</span></div>
+      </div>
+
+      <div class="tc-out" id="tcOut">先把手牌點滿，我就幫你算聽什麼</div>
+
+      <div class="tc-picker">
+        {PICKER.map((grp) => (
+          <div class="tc-grp">
+            <div class="tc-grp-label">{grp.label}</div>
+            <div class="tc-grp-tiles">
+              {grp.tiles.map((t) => (
+                <button type="button" class="tc-tile" data-k={t.k} set:html={tileSVG(t.t)} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="tc-actions">
+        <button type="button" id="tcClear" class="tc-clear">清空手牌</button>
+      </div>
+
+      <p class="tc-note">
+        台灣 16 張：手牌 16 張（每吃碰槓一組就少 3 張），差一張湊成 5 副面子＋1 對將就是聽牌。
+        「剩幾張」是扣掉你自己手上那幾張之後、牌堆＋別人手裡理論上還有的數量。
+      </p>
+    </section>
+
     <!-- ===== 互動練習器（一屏完成） ===== -->
     <section class="tp-game" id="tpGame">
+      <h2 style="font-size:1.2rem;margin:0 0 .3rem">🎯 看牌猜聽張：練到不用算</h2>
+      <p style="font-size:.95rem;color:var(--text-secondary,#b6bdc9);line-height:1.75;margin:0 0 1rem">
+        上面是「算給你看」，這裡是「練到你自己看得出來」——給你一手牌，你點出能讓你胡的那幾張。
+      </p>
       <div class="tp-progress">
         <span class="tp-progress-text" id="tpPtext">第 1 / 6 題</span>
         <div class="tp-progress-track"><div class="tp-progress-fill" id="tpPfill" style="width:16.6%"></div></div>
@@ -117,8 +176,9 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
     </section>
 
     <div class="tp-cross">
-      <p>聽牌看懂了？把整套麻將練起來：</p>
+      <p>聽牌看懂了？<strong>實戰中即時看向聽與聽哪張</strong>，或把整套麻將練起來：</p>
       <div class="tp-cross-row">
+        <a href="/games/taiwan-mahjong/" class="tp-cross-btn">🀄 跟 AI 打一局（即時顯示向聽/進張）→</a>
         <a href="/tools/mahjong-rules-trainer/" class="tp-cross-btn">🀄 碰吃槓判斷 →</a>
         <a href="/tools/mahjong-suan-tai-trainer/" class="tp-cross-btn">🧮 算台練習 →</a>
         <a href="/articles/how-to-play-mahjong/" class="tp-cross-btn ghost">📖 麻將教室總覽 →</a>
@@ -129,6 +189,59 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   </div>
 
 <style is:global>
+/* ═══ 聽牌計算機 ═══ */
+.tc-card { background: var(--bg-card, #14161c); border: 1px solid var(--border, #2a2f3a);
+  border-radius: 16px; padding: 1.1rem; margin: 0 0 1.6rem; }
+.tc-title { font-size: 1.25rem; margin: 0 0 .9rem; }
+.tc-melds { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; margin-bottom: .9rem; font-size: 1rem; }
+.tc-meldbtns { display: flex; gap: .35rem; }
+.tc-meldbtns button { width: 44px; height: 40px; border-radius: 9px; cursor: pointer; font-size: 1.05rem; font-weight: 800;
+  background: rgba(255,255,255,.05); border: 2px solid var(--border, #2a2f3a); color: inherit; }
+.tc-meldbtns button.on { border-color: var(--guava-green, #39ff14); color: var(--guava-green, #39ff14); background: rgba(57,255,20,.12); }
+.tc-hand-head { display: flex; justify-content: space-between; align-items: baseline; font-size: .95rem;
+  color: var(--text-muted, #8b93a1); margin-bottom: .4rem; }
+.tc-hand-head strong { font-size: 1.1rem; color: var(--text-primary, #e8ecf2); }
+.tc-hand { display: flex; flex-wrap: wrap; gap: 3px; min-height: 62px; padding: .5rem;
+  background: rgba(0,0,0,.28); border: 1px dashed var(--border, #2a2f3a); border-radius: 10px; align-items: center; }
+.tc-hand svg { width: 38px; height: auto; display: block; }
+.tc-hand button { background: none; border: none; padding: 0; cursor: pointer; line-height: 0; border-radius: 5px; }
+.tc-hand button:hover { outline: 2px solid #ff6b6b; }
+.tc-empty { color: var(--text-muted, #8b93a1); font-size: .95rem; }
+.tc-out { margin: .9rem 0; padding: .85rem 1rem; border-radius: 12px; font-size: 1.05rem; line-height: 1.85;
+  background: rgba(255,255,255,.04); border: 1px solid var(--border, #2a2f3a); }
+.tc-out.ok { background: rgba(57,255,20,.10); border-color: rgba(57,255,20,.4); }
+.tc-out.no { background: rgba(255,193,7,.10); border-color: rgba(255,193,7,.4); }
+.tc-out.win { background: rgba(255,213,74,.14); border-color: rgba(255,213,74,.55); }
+.tc-out b { color: var(--guava-green, #39ff14); font-size: 1.2rem; }
+.tc-wait { display: flex; flex-wrap: wrap; gap: 6px; margin-top: .5rem; }
+.tc-wait .w { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.tc-wait svg { width: 42px; height: auto; display: block; }
+.tc-wait small { font-size: .78rem; color: var(--text-muted, #8b93a1); }
+.tc-picker { display: grid; gap: .55rem; }
+.tc-grp { display: flex; align-items: center; gap: .5rem; }
+.tc-grp-label { flex: none; width: 1.6rem; font-weight: 800; color: var(--guava-green, #39ff14); font-size: 1rem; }
+.tc-grp-tiles { display: flex; gap: 3px; flex-wrap: wrap; }
+.tc-tile { background: none; border: none; padding: 0; cursor: pointer; line-height: 0; border-radius: 5px; transition: transform .08s; }
+.tc-tile svg { width: 40px; height: auto; display: block; }
+.tc-tile:hover { transform: translateY(-3px); }
+.tc-tile:disabled { opacity: .3; cursor: not-allowed; transform: none; }
+.tc-actions { margin-top: .8rem; }
+.tc-clear { width: 100%; padding: .6rem; border-radius: 9px; cursor: pointer; font-size: 1rem;
+  background: transparent; border: 1px solid var(--border, #2a2f3a); color: var(--text-muted, #8b93a1); }
+.tc-note { font-size: .9rem; line-height: 1.8; color: var(--text-secondary, #b6bdc9); margin: .8rem 0 0; }
+@media (max-width: 640px) {
+  .tc-card { padding: .8rem .6rem; }
+  .tc-hand svg { width: 34px; }
+  .tc-wait svg { width: 38px; }
+  /* 花色標籤改放上方，把整列寬度讓給牌，1~9 才排得成一列不斷行 */
+  .tc-grp { display: block; }
+  .tc-grp-label { width: auto; margin-bottom: .2rem; font-size: .88rem; }
+  .tc-grp-tiles { gap: 2px; flex-wrap: nowrap; }
+  .tc-tile { flex: 1 1 0; min-width: 0; }
+  .tc-tile svg { width: 100%; height: auto; }
+  .tc-picker { gap: .7rem; }
+}
+
   /* 聽牌練習器（tp- 前綴）；is:global 因牌面 SVG 由 JS 動態插入 */
   .container{ max-width:760px; margin:0 auto; padding:0 1rem 4rem; }
   .page-hero{ text-align:center; padding:2.2rem 0 1rem; }
@@ -236,6 +349,93 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
     .tp-wait svg{ width:34px; }
   }
 </style>
+
+<script type="module" is:inline>
+/* ═══ 聽牌計算機 ═══
+   直接用台灣麻將練習桌那套向聽引擎（/mahjong/core/），同一份數學，不另外實作一次。 */
+import { emptyCounts, TILE_NAMES } from '/mahjong/core/tiles.mjs';
+import { shanten } from '/mahjong/core/shanten.mjs';
+import { usefulTiles } from '/mahjong/core/ukeire.mjs';
+
+const card = document.getElementById('tenpaiCalc');
+if (card) {
+  const handEl = document.getElementById('tcHand');
+  const outEl = document.getElementById('tcOut');
+  const cntEl = document.getElementById('tcCount');
+  let counts = emptyCounts();
+  let melds = 0;
+
+  const target = () => 16 - melds * 3;
+  const total = () => counts.reduce((a, b) => a + b, 0);
+  const svgOf = (k) => card.querySelector('.tc-tile[data-k="' + k + '"] svg');
+
+  function render() {
+    const n = total(), want = target();
+    cntEl.textContent = n + ' / ' + want;
+    cntEl.style.color = n === want ? 'var(--guava-green,#39ff14)' : n > want ? '#ff6b6b' : '';
+
+    // 手牌
+    handEl.innerHTML = '';
+    if (!n) {
+      handEl.innerHTML = '<span class="tc-empty">從下面選牌加進來 ↓</span>';
+    } else {
+      for (let k = 0; k < 34; k++) {
+        for (let c = 0; c < counts[k]; c++) {
+          const b = document.createElement('button');
+          b.type = 'button'; b.dataset.rm = k;
+          b.title = '移除 ' + TILE_NAMES[k];
+          b.appendChild(svgOf(k).cloneNode(true));
+          handEl.appendChild(b);
+        }
+      }
+    }
+    // 選牌盤：同一種牌滿 4 張、或手牌已滿就停用
+    card.querySelectorAll('.tc-tile').forEach((t) => {
+      const k = +t.dataset.k;
+      t.disabled = counts[k] >= 4 || n >= want;
+    });
+
+    // 結果
+    outEl.className = 'tc-out';
+    if (n < want) { outEl.textContent = '還差 ' + (want - n) + ' 張，點滿 ' + want + ' 張就會自動算'; return; }
+    if (n > want) { outEl.textContent = '超過 ' + want + ' 張了，先移除幾張'; outEl.classList.add('no'); return; }
+
+    const u = usefulTiles(counts.slice(), melds);
+    if (u.shanten < 0) {
+      outEl.classList.add('win');
+      outEl.innerHTML = '🎉 這手已經胡了！';
+    } else if (u.shanten === 0) {
+      outEl.classList.add('ok');
+      outEl.innerHTML = '✅ <b>聽牌了！</b>你聽這 ' + u.tiles.length + ' 種，總共還有 <b>' + u.totalLeft + '</b> 張可以胡'
+        + '<div class="tc-wait">' + u.tiles.map((t) =>
+            '<span class="w">' + svgOf(t.kind).outerHTML + '<small>剩 ' + t.left + '</small></span>').join('') + '</div>';
+    } else {
+      outEl.classList.add('no');
+      outEl.innerHTML = '還沒聽牌——距離聽牌還差 <b>' + u.shanten + '</b> 步。'
+        + '<br><small style="color:var(--text-muted,#8b93a1)">摸到這些牌會前進一步：</small>'
+        + '<div class="tc-wait">' + u.tiles.slice(0, 14).map((t) =>
+            '<span class="w">' + svgOf(t.kind).outerHTML + '<small>剩 ' + t.left + '</small></span>').join('') + '</div>';
+    }
+  }
+
+  card.addEventListener('click', (e) => {
+    const add = e.target.closest('.tc-tile');
+    if (add && !add.disabled) { counts[+add.dataset.k]++; render(); return; }
+    const rm = e.target.closest('[data-rm]');
+    if (rm) { counts[+rm.dataset.rm]--; render(); return; }
+    const m = e.target.closest('#tcMelds button');
+    if (m) {
+      melds = +m.dataset.melds;
+      card.querySelectorAll('#tcMelds button').forEach((b) => b.classList.toggle('on', b === m));
+      while (total() > target()) { const k = counts.findIndex((c) => c > 0); if (k < 0) break; counts[k]--; }
+      render();
+    }
+  });
+
+  document.getElementById('tcClear').addEventListener('click', () => { counts = emptyCounts(); render(); });
+  render();
+}
+</script>
 
 <script is:inline>
 (function(){
