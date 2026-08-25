@@ -1,0 +1,461 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const URL = 'https://game8la.com/articles/texas-holdem-rules/';
+
+const faqs = [
+  { q: '德州撲克一手牌到底是幾張？', a: '你自己拿 <strong>2 張底牌</strong>（只有你看得到），桌面中央會陸續翻開 <strong>5 張公牌</strong>（大家共用）。比大小的時候，是從這 7 張裡<strong>挑出最強的 5 張</strong>來比——可以用 2 張底牌 + 3 張公牌、1 張底牌 + 4 張公牌，甚至完全不用底牌直接用 5 張公牌。' },
+  { q: '同花順跟順子差在哪？', a: '順子是「5 張連號」但花色可以不同（例如 5♠6♥7♦8♣9♠）；同花順是「5 張連號<strong>而且同一個花色</strong>」（例如 5♠6♠7♠8♠9♠）。同花順比順子大非常多——順子大約 250 手會出現 1 次，同花順要 7 萬多手才出現 1 次。' },
+  { q: '兩個人牌型一樣大怎麼辦？', a: '比「組成牌型的牌」誰大，還一樣就比<strong>踢腳（Kicker）</strong>——也就是沒參與牌型、但湊滿 5 張的那幾張。例如兩人都是一對 A，就比第 3、4、5 張誰大。如果連 5 張都完全一樣大（花色不比大小），就<strong>平分彩池</strong>。' },
+  { q: '花色有大小之分嗎？', a: '德州撲克<strong>花色不分大小</strong>。黑桃不會比紅心大——這點跟某些撲克遊戲不同。所以兩手牌如果 5 張的點數完全相同，就是平手分彩池。' },
+  { q: 'A 可以當 1 也可以當 13 嗎？', a: '可以。A 在順子裡可以當最大（10-J-Q-K-A，叫 Broadway）也可以當最小（A-2-3-4-5，叫 Wheel）。但要注意：<strong>A 不能繞圈</strong>，Q-K-A-2-3 不算順子。' },
+  { q: '新手最常犯什麼錯？', a: '第一是<strong>玩太多手牌</strong>——覺得任何兩張都有機會，但實際上多數起手牌長期都是虧的。第二是<strong>看到自己有一對就不肯蓋牌</strong>，忽略公牌上明顯的順子同花可能。第三是<strong>把「贏過一次」當成技術</strong>——撲克短期運氣佔比極高，幾百手根本看不出實力。' },
+];
+
+const HANDS = [
+  { n:'皇家同花順', en:'Royal Flush', cards:['AS','KS','QS','JS','TS'], odds:'約 65 萬手 1 次', desc:'同一花色的 10-J-Q-K-A，撲克裡最強的一手，一輩子可能遇不到幾次。' },
+  { n:'同花順', en:'Straight Flush', cards:['9H','8H','7H','6H','5H'], odds:'約 7.2 萬手 1 次', desc:'同一花色的 5 張連號。除了皇家同花順以外沒有牌打得過。' },
+  { n:'四條（鐵支）', en:'Four of a Kind', cards:['7S','7H','7D','7C','KD'], odds:'約 4,165 手 1 次', desc:'四張同點數。第 5 張是踢腳，兩人都四條時才用得到。' },
+  { n:'葫蘆', en:'Full House', cards:['JS','JH','JD','4C','4S'], odds:'約 694 手 1 次', desc:'三條 ＋ 一對。比大小先看三條，三條一樣才比那一對。' },
+  { n:'同花', en:'Flush', cards:['AD','JD','9D','6D','3D'], odds:'約 509 手 1 次', desc:'5 張同花色但不連號。比大小是從最大那張開始一張一張比。' },
+  { n:'順子', en:'Straight', cards:['9C','8D','7H','6S','5C'], odds:'約 255 手 1 次', desc:'5 張連號但花色不同。A 可當最大也可當最小，但不能繞圈。' },
+  { n:'三條', en:'Three of a Kind', cards:['QS','QH','QD','8C','3S'], odds:'約 47 手 1 次', desc:'三張同點數 ＋ 兩張雜牌。' },
+  { n:'兩對', en:'Two Pair', cards:['KS','KH','5D','5C','9S'], odds:'約 21 手 1 次', desc:'兩組對子 ＋ 一張踢腳。先比大的那對。' },
+  { n:'一對', en:'One Pair', cards:['TS','TH','AD','7C','4S'], odds:'約 2.4 手 1 次', desc:'一組對子 ＋ 三張踢腳。最常見的成牌，但也最容易被幹掉。' },
+  { n:'高牌', en:'High Card', cards:['AS','JH','8D','5C','2S'], odds:'約 2 手 1 次', desc:'什麼都沒湊成，比最大的那張。多數時候該蓋牌。' },
+];
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title="德州撲克怎麼玩？10 種牌型互動圖解＋一局流程動畫（新手 5 分鐘上手）"
+  description="德州撲克規則完整教學：用真的撲克牌互動圖解 10 種牌型大小、可以一步步跑完整局流程（底牌→翻牌→轉牌→河牌），附各牌型出現機率與比大小規則。芭樂子白話版，零業配。"
+  image="https://game8la.com/images/articles/poker-cover.webp"
+  datePublished="2026-08-19"
+  dateModified="2026-08-19"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '德州撲克規則', url: URL },
+  ]}
+/>
+<BaseLayout
+  currentPage="articles"
+  title="德州撲克怎麼玩？10 種牌型互動圖解＋一局流程動畫 - GAME8LA"
+  description="德州撲克規則新手教學：真撲克牌互動圖解 10 種牌型、一步步跑完一局（底牌→翻牌→轉牌→河牌）、牌型機率表與比大小規則。芭樂子白話版，零業配不推坑。"
+  ogImage="https://game8la.com/images/articles/poker-cover.webp"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 德州撲克規則</div>
+  <div style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.6rem">
+    <Icon name="clock" /> 2026-08-19 ｜ <Icon name="user-pen" /> 作者：芭樂子 ｜ <Icon name="book-open" /> 閱讀約 6 分鐘
+  </div>
+
+  <div class="th-hero">
+    <h1>🃏 德州撲克怎麼玩？</h1>
+    <img class="th-cover"
+         src="/images/articles/poker-cover.webp"
+         srcset="/images/articles/poker-cover-768w.webp 768w, /images/articles/poker-cover.webp 1200w"
+         sizes="(max-width: 768px) 100vw, 820px"
+         alt="芭樂子化身德州撲克荷官，在牌桌上把五張公牌攤成扇形教你怎麼玩｜GAME8LA"
+         width="1200" height="670" loading="eager" fetchpriority="high" decoding="async" />
+    <p class="th-lead">
+      8LA 大大好，我是芭樂子。德州撲克看起來很難，其實<strong>規則本身 5 分鐘就能學會</strong>——難的是後面的判斷。
+      這篇我用<strong>真的撲克牌</strong>帶你看：一局怎麼走、10 種牌型長什麼樣、一樣大時怎麼比。
+      看不懂的地方就按按鈕，牌會自己翻給你看。
+    </p>
+  </div>
+
+  <!-- ═══ 路線圖 ═══ -->
+  <h2>🗺️ 學德州撲克，照這個順序</h2>
+  <div class="th-road">
+    <a href="#flow" class="th-step"><span class="th-n">1</span><span>一局怎麼走</span></a>
+    <a href="#hands" class="th-step"><span class="th-n">2</span><span>10 種牌型</span></a>
+    <a href="#compare" class="th-step"><span class="th-n">3</span><span>一樣大怎麼比</span></a>
+    <a href="#actions" class="th-step"><span class="th-n">4</span><span>下注動作</span></a>
+    <a href="#odds" class="th-step"><span class="th-n">5</span><span>機率與現實</span></a>
+  </div>
+
+  <!-- ═══ 1. 一局流程（互動）═══ -->
+  <h2 id="flow">1. 🎬 一局怎麼走（按按鈕看牌翻開）</h2>
+  <img class="th-img" src="/images/articles/poker-flow.webp"
+       alt="芭樂子當荷官俐落翻開三張公牌，牌在半空中旋轉｜德州撲克翻牌 Flop 示意"
+       width="960" height="536" loading="lazy" decoding="async" />
+  <p class="th-cap">翻牌（Flop）一次開三張——這是整局最關鍵的判斷點。</p>
+  <p>德州撲克你只拿 <strong>2 張底牌</strong>，桌面中央有 <strong>5 張公牌</strong>大家共用。最後從這 7 張裡<strong>挑最強的 5 張</strong>比大小。</p>
+
+  <div class="th-table" id="thFlow">
+    <div class="th-stage-label" id="thStageLabel">按下面的按鈕開始發牌</div>
+
+    <div class="th-board">
+      <div class="th-zone">
+        <div class="th-zone-t">🃏 公牌（大家共用）</div>
+        <div class="th-cards" id="thBoard"></div>
+      </div>
+      <div class="th-zone mine">
+        <div class="th-zone-t">👤 你的底牌（只有你看得到）</div>
+        <div class="th-cards" id="thHole"></div>
+      </div>
+    </div>
+
+    <div class="th-explain" id="thExplain">德州撲克一局分四個階段，每個階段都可以選擇跟注或蓋牌。</div>
+    <div class="th-btns">
+      <button class="th-btn" id="thNext">▶ 開始發牌</button>
+      <button class="th-btn ghost" id="thReset">重來</button>
+    </div>
+  </div>
+
+  <!-- ═══ 2. 十種牌型 ═══ -->
+  <h2 id="hands">2. 🏆 10 種牌型（由大到小）</h2>
+  <img class="th-img" src="/images/articles/poker-hands.webp"
+       alt="芭樂子托起發光的同花順，身後漂浮著四條、葫蘆、同花等牌型階梯｜德州撲克牌型大小示意"
+       width="960" height="536" loading="lazy" decoding="async" />
+  <p class="th-cap">牌型有強弱階梯——越難湊的越大，越少出現。</p>
+  <p>這是全部了，就這 10 種。往下滑，每一種都會用真的牌排給你看：</p>
+
+  <div class="th-hands">
+    {HANDS.map((h, i) => (
+      <div class="th-hand reveal" data-rank={i + 1}>
+        <div class="th-hand-head">
+          <span class="th-rank">{i + 1}</span>
+          <div class="th-hand-name"><strong>{h.n}</strong><small>{h.en}</small></div>
+          <span class="th-odds">{h.odds}</span>
+        </div>
+        <div class="th-cards small" data-cards={h.cards.join(',')}></div>
+        <p class="th-hand-desc">{h.desc}</p>
+      </div>
+    ))}
+  </div>
+
+  <!-- ═══ 3. 比大小 ═══ -->
+  <h2 id="compare">3. ⚖️ 牌型一樣大，怎麼比？</h2>
+  <p>比「組成牌型的牌」誰大；還一樣就看<strong>踢腳（Kicker）</strong>——沒參與牌型、但湊滿 5 張的那幾張。按按鈕看實例：</p>
+
+  <div class="th-versus" id="thVs">
+    <div class="th-vs-row">
+      <div class="th-vs-side"><div class="th-vs-t">玩家 A</div><div class="th-cards small" id="thVsA"></div><div class="th-vs-r" id="thVsAr"></div></div>
+      <div class="th-vs-mid">VS</div>
+      <div class="th-vs-side"><div class="th-vs-t">玩家 B</div><div class="th-cards small" id="thVsB"></div><div class="th-vs-r" id="thVsBr"></div></div>
+    </div>
+    <div class="th-vs-say" id="thVsSay">按下面看第一個例子</div>
+    <button class="th-btn" id="thVsNext">▶ 看下一個例子</button>
+  </div>
+
+  <div class="th-tip">
+    <strong>💡 兩個重要細節</strong>
+    <ul>
+      <li><strong>花色不分大小</strong>——黑桃不會比紅心大。5 張點數完全相同就<strong>平分彩池</strong>。</li>
+      <li><strong>A 可大可小</strong>——10-J-Q-K-A 和 A-2-3-4-5 都算順子，但 <strong>Q-K-A-2-3 不算</strong>（不能繞圈）。</li>
+    </ul>
+  </div>
+
+  <!-- ═══ 4. 下注動作 ═══ -->
+  <h2 id="actions">4. ✋ 輪到你時，可以做什麼</h2>
+  <div class="th-acts">
+    <div class="th-act"><span class="th-act-i">✓</span><div><strong>過牌 Check</strong><p>沒人下注時，選擇不下注、把發言權交給下一位。免費看下一張牌。</p></div></div>
+    <div class="th-act"><span class="th-act-i">💰</span><div><strong>下注 Bet</strong><p>第一個投錢進彩池。後面的人要繼續玩就得跟上。</p></div></div>
+    <div class="th-act"><span class="th-act-i">🤝</span><div><strong>跟注 Call</strong><p>投入跟前面一樣的金額，留在這一手。</p></div></div>
+    <div class="th-act"><span class="th-act-i">⬆️</span><div><strong>加注 Raise</strong><p>投入比前面更多，逼其他人付更多錢才能繼續。</p></div></div>
+    <div class="th-act"><span class="th-act-i">🚪</span><div><strong>蓋牌 Fold</strong><p>放棄這一手，已投入的錢拿不回來——但也不會再輸更多。<strong>新手最該多用的動作。</strong></p></div></div>
+    <div class="th-act"><span class="th-act-i">🔥</span><div><strong>全下 All-in</strong><p>把桌上所有籌碼推出去。刺激，但一次就可能結束你的牌局。</p></div></div>
+  </div>
+
+  <!-- ═══ 5. 機率與現實 ═══ -->
+  <h2 id="odds">5. 📊 機率長怎樣（以及芭樂子的老實話）</h2>
+  <p>用 5 張隨機牌算，各牌型出現的機率大概是這樣：</p>
+  <div class="th-tablewrap">
+    <table class="th-odds-table">
+      <thead><tr><th>牌型</th><th>大約多久出現一次</th><th>機率</th></tr></thead>
+      <tbody>
+        <tr><td>皇家同花順</td><td>65 萬手</td><td>0.00015%</td></tr>
+        <tr><td>同花順</td><td>7.2 萬手</td><td>0.0014%</td></tr>
+        <tr><td>四條</td><td>4,165 手</td><td>0.024%</td></tr>
+        <tr><td>葫蘆</td><td>694 手</td><td>0.14%</td></tr>
+        <tr><td>同花</td><td>509 手</td><td>0.20%</td></tr>
+        <tr><td>順子</td><td>255 手</td><td>0.39%</td></tr>
+        <tr><td>三條</td><td>47 手</td><td>2.1%</td></tr>
+        <tr><td>兩對</td><td>21 手</td><td>4.8%</td></tr>
+        <tr><td>一對</td><td>2.4 手</td><td>42%</td></tr>
+        <tr><td>高牌</td><td>2 手</td><td>50%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="th-note">
+    ※ 這是「隨機 5 張」的機率。實際德州撲克從 7 張挑 5 張，成牌率會高一些，但<strong>相對順序不變</strong>。
+  </p>
+
+  <img class="th-img" src="/images/articles/poker-fold.webp"
+       alt="芭樂子冷靜地蓋牌，對面玩家滿頭大汗想全下｜德州撲克紀律對比示意"
+       width="960" height="536" loading="lazy" decoding="async" />
+  <p class="th-cap">會賺的人，大部分時間在做這個動作——蓋牌。</p>
+
+  <div class="th-real">
+    <h3>🐊 芭樂子老實話</h3>
+    <p>
+      規則學會了不代表你會贏。德州撲克<strong>短期運氣佔比極高</strong>——幾百手根本看不出誰強誰弱，
+      這也是為什麼新手很容易「贏了幾次就以為自己有天分」。
+    </p>
+    <p>
+      真正拉開差距的是<strong>紀律</strong>：多數起手牌長期都是虧的，會賺的人大部分時間在<strong>蓋牌</strong>。
+      而且線上牌桌還有<strong>抽水（rake）</strong>在持續磨你——你不只要打贏對手，還要贏過抽水。
+    </p>
+    <p style="margin-bottom:0">
+      <strong>當娛樂玩、設好上限就好。</strong>本站零業配、不放任何娛樂城連結，也不會叫你去哪裡下注。
+    </p>
+  </div>
+
+  <!-- ═══ 延伸 ═══ -->
+  <h2>🎯 想繼續練，這幾個免費工具給你</h2>
+  <ul class="th-links">
+    <li><a href="/tools/blackjack/">🃏 AI 21 點練習場</a> — 每手都有 Basic Strategy 即時建議</li>
+    <li><a href="/tools/blackjack-card-counting/">🎴 21 點算牌練習器</a> — Hi-Lo 記牌訓練，順便看算牌到底有沒有用</li>
+    <li><a href="/tools/bankroll-calculator/">💰 資金管理計算器</a> — 算你的本金能撐多久、該設多少停損</li>
+    <li><a href="/articles/how-to-play-mahjong/">🀄 麻將怎麼玩</a> — 同系列的白話教學</li>
+    <li><a href="/tools/gambling-self-check/">🧭 賭博成癮自我檢測</a> — PGSI 量表，20 秒測一下</li>
+  </ul>
+
+  <h2>❓ 新手常見問題</h2>
+  {faqs.map(f => (
+    <details class="th-faq"><summary>{f.q}</summary><p set:html={f.a} /></details>
+  ))}
+
+  <ShareButtons title="德州撲克怎麼玩？10 種牌型互動圖解" url={URL} />
+  <ManifestoBox />
+</div>
+
+<script is:inline>
+(function(){
+  const $=id=>document.getElementById(id);
+  const SUIT={S:{s:'♠',c:'b'},H:{s:'♥',c:'r'},D:{s:'♦',c:'r'},C:{s:'♣',c:'b'}};
+  const RANKMAP={T:'10'};
+  function cardHTML(code,delay){
+    if(code==='?') return `<div class="pc back"${delay?` style="animation-delay:${delay}ms"`:''}></div>`;
+    const r=RANKMAP[code[0]]||code[0], su=SUIT[code[1]];
+    return `<div class="pc ${su.c}"${delay?` style="animation-delay:${delay}ms"`:''}>
+      <span class="pc-tl">${r}<i>${su.s}</i></span>
+      <span class="pc-mid">${su.s}</span>
+      <span class="pc-br">${r}<i>${su.s}</i></span></div>`;
+  }
+  function fill(el,codes){ el.innerHTML=codes.map((c,i)=>cardHTML(c,i*90)).join(''); }
+
+  /* ── 靜態牌型展示 ── */
+  document.querySelectorAll('.th-cards[data-cards]').forEach(el=>{
+    el.innerHTML=el.dataset.cards.split(',').map((c,i)=>cardHTML(c,i*70)).join('');
+  });
+
+  /* ── 進場動畫 ── */
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+  } else document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));
+
+  /* ── 一局流程互動 ── */
+  const HOLE=['AH','KH'], BOARD=['QH','JH','7C','TH','2D'];
+  const STEPS=[
+    { l:'第 1 階段：發底牌（Pre-flop）', hole:2, board:0, btn:'▶ 翻開 3 張公牌',
+      e:'莊家發給每人 <b>2 張底牌</b>，只有你自己看得到。看完決定要跟注還是蓋牌——<b>多數牌這時候就該蓋掉了。</b>' },
+    { l:'第 2 階段：翻牌（Flop）', hole:2, board:3, btn:'▶ 翻開轉牌',
+      e:'桌面一次翻開 <b>3 張公牌</b>。你現在有 5 張可用了——這裡是最關鍵的判斷點：你的牌有沒有跟公牌配合？' },
+    { l:'第 3 階段：轉牌（Turn）', hole:2, board:4, btn:'▶ 翻開河牌',
+      e:'再翻 <b>第 4 張</b>公牌。彩池通常在這裡開始變大，聽牌的人要算「值不值得跟」。' },
+    { l:'第 4 階段：河牌（River）', hole:2, board:5, btn:'🔍 看看你組成什麼',
+      e:'翻開<b>最後一張</b>公牌。牌面定了，剩下就是最後一輪下注，然後攤牌比大小。' },
+    { l:'攤牌：你的最強 5 張', hole:2, board:5, btn:'🔄 再看一次', highlight:[0,1,2,3,'b3'],
+      e:'你的 7 張是 A♥K♥ ＋ Q♥J♥7♣10♥2♦。從裡面挑最強的 5 張 → <b class="th-win">A♥K♥Q♥J♥10♥ ＝ 皇家同花順！</b><br><small>（7♣ 和 2♦ 用不到——記住：是「挑最強的 5 張」，不是全部都要用。）</small>' },
+  ];
+  let step=-1;
+  function renderFlow(){
+    if(step<0){
+      $('thStageLabel').textContent='按下面的按鈕開始發牌';
+      $('thHole').innerHTML=''; $('thBoard').innerHTML='';
+      $('thExplain').innerHTML='德州撲克一局分四個階段，每個階段都可以選擇跟注或蓋牌。';
+      $('thNext').textContent='▶ 開始發牌'; return;
+    }
+    const s=STEPS[step];
+    $('thStageLabel').textContent=s.l;
+    fill($('thHole'), HOLE.slice(0,s.hole));
+    fill($('thBoard'), BOARD.slice(0,s.board));
+    $('thExplain').innerHTML=s.e;
+    $('thNext').textContent=s.btn;
+    if(s.highlight){
+      setTimeout(()=>{
+        [...$('thHole').children].forEach(c=>c.classList.add('hit'));
+        [...$('thBoard').children].forEach((c,i)=>{ if(i!==2&&i!==4) c.classList.add('hit'); else c.classList.add('dim'); });
+      },300);
+    }
+  }
+  $('thNext').addEventListener('click',()=>{ step=(step+1)%STEPS.length; if(step===0&&$('thNext').textContent.includes('再看')) step=0; renderFlow(); });
+  $('thReset').addEventListener('click',()=>{ step=-1; renderFlow(); });
+  renderFlow();
+
+  /* ── 比大小示範 ── */
+  const VS=[
+    { a:['AS','AD','9H','7C','3S'], b:['AH','AC','9S','7D','2H'],
+      ra:'一對 A（踢腳 9-7-3）', rb:'一對 A（踢腳 9-7-2）',
+      say:'兩人都是<b>一對 A</b>，前兩張踢腳也一樣（9、7）——比到<b>第三張踢腳</b>才分勝負：<b class="th-win">A 的 3 大於 B 的 2，玩家 A 贏。</b>踢腳一張都不能小看。', w:'a' },
+    { a:['KS','KH','KD','5C','2S'], b:['9S','9H','9D','AC','QS'],
+      ra:'三條 K', rb:'三條 9（踢腳 A、Q）',
+      say:'都是<b>三條</b>時，先比三條本身：<b class="th-win">K 大於 9，玩家 A 贏</b>。B 的踢腳有 A 也沒用——<b>踢腳只有在牌型本體一樣時才拿出來比。</b>', w:'a' },
+    { a:['QS','JS','TS','9S','8S'], b:['AD','AH','AS','AC','KD'],
+      ra:'同花順', rb:'四條 A',
+      say:'很多新手會以為<b>四條 A</b> 很大——但<b class="th-win">同花順比四條大</b>，就算是最小的同花順也贏最大的四條。牌型順序背熟很重要。', w:'a' },
+    { a:['AS','KH','QD','JC','TS'], b:['AH','KD','QS','JH','TD'],
+      ra:'順子 A-10', rb:'順子 A-10',
+      say:'兩手<b>完全一樣大</b>（花色不分大小）→ <b class="th-win">平手，平分彩池。</b>這在德州撲克其實不算罕見，尤其是牌型主要由公牌組成時。', w:'tie' },
+  ];
+  let vi=-1;
+  $('thVsNext').addEventListener('click',()=>{
+    vi=(vi+1)%VS.length; const v=VS[vi];
+    fill($('thVsA'),v.a); fill($('thVsB'),v.b);
+    $('thVsAr').textContent=v.ra; $('thVsBr').textContent=v.rb;
+    $('thVsSay').innerHTML=v.say;
+    $('thVsNext').textContent='▶ 看下一個例子';
+    const A=$('thVsA').parentElement, B=$('thVsB').parentElement;
+    A.classList.remove('win','lose'); B.classList.remove('win','lose');
+    setTimeout(()=>{
+      if(v.w==='a'){ A.classList.add('win'); B.classList.add('lose'); }
+      else if(v.w==='b'){ B.classList.add('win'); A.classList.add('lose'); }
+    },700);
+  });
+})();
+</script>
+
+<style is:global>
+  .th-hero{ text-align:center; padding:1rem 0 .4rem; }
+  .th-hero h1{ font-size:clamp(1.8rem,6vw,2.5rem); font-weight:900; color:var(--gold-light,#ffd24a); margin-bottom:.7rem; }
+  .th-lead{ font-size:1.1rem; line-height:2; color:var(--text-secondary); max-width:760px; margin:0 auto; text-align:left; }
+  .th-cover,.th-img{ width:100%; height:auto; border-radius:14px; display:block; margin:1rem auto .5rem;
+    box-shadow:0 6px 20px rgba(0,0,0,.35); }
+  .th-cap{ font-size:.92rem!important; color:var(--text-muted)!important; text-align:center; margin:0 0 1.2rem!important; }
+  .container h2{ font-size:1.5rem; margin:2.4rem 0 .8rem; }
+  .container p{ font-size:1.08rem; line-height:1.95; color:var(--text-secondary); }
+
+  /* 路線圖 */
+  .th-road{ display:flex; gap:.5rem; flex-wrap:wrap; margin:1rem 0 0; }
+  .th-step{ flex:1; min-width:120px; display:flex; align-items:center; gap:.5rem; text-decoration:none;
+    background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:12px; padding:.7rem .8rem;
+    color:var(--text-primary); font-weight:700; font-size:1rem; transition:border-color .15s,transform .15s; }
+  .th-step:hover{ border-color:var(--gold,#f5b800); transform:translateY(-2px); }
+  .th-n{ width:26px; height:26px; border-radius:50%; background:var(--gold,#f5b800); color:#2a1d00;
+    display:grid; place-items:center; font-weight:900; font-size:.9rem; flex:none; }
+
+  /* ── 撲克牌 ── */
+  .th-cards{ display:flex; gap:.4rem; justify-content:center; flex-wrap:wrap; }
+  .pc{ position:relative; width:64px; height:90px; border-radius:8px; background:linear-gradient(180deg,#fffdf8,#f0ebe0);
+    box-shadow:0 3px 10px rgba(0,0,0,.45); border:1px solid #d8d2c4; flex:none;
+    animation:pcIn .34s cubic-bezier(.2,1.3,.4,1) both; transition:transform .2s, box-shadow .2s, opacity .2s; }
+  @keyframes pcIn{ from{ transform:translateY(14px) rotateY(70deg); opacity:0; } to{ transform:none; opacity:1; } }
+  .pc.b{ color:#1b2430; } .pc.r{ color:#c0282d; }
+  .pc-tl,.pc-br{ position:absolute; font-size:.92rem; font-weight:900; line-height:1; display:flex; flex-direction:column; align-items:center; }
+  .pc-tl{ top:5px; left:5px; } .pc-br{ bottom:5px; right:5px; transform:rotate(180deg); }
+  .pc-tl i,.pc-br i{ font-style:normal; font-size:.82rem; }
+  /* 中央花色：縮小一點，避免跟四角的點數擠在一起 */
+  .pc-mid{ position:absolute; inset:0; display:grid; place-items:center; font-size:1.65rem; opacity:.92; }
+  .pc.back{ background:repeating-linear-gradient(45deg,#1d4ee8,#1d4ee8 6px,#163bb0 6px,#163bb0 12px); }
+  .pc.hit{ transform:translateY(-8px); box-shadow:0 0 0 3px var(--gold,#f5b800),0 8px 18px rgba(0,0,0,.5); }
+  .pc.dim{ opacity:.35; }
+  .th-cards.small .pc{ width:52px; height:73px; }
+  .th-cards.small .pc-mid{ font-size:1.3rem; }
+  .th-cards.small .pc-tl,.th-cards.small .pc-br{ font-size:.8rem; }
+
+  /* 牌桌 */
+  .th-table{ background:radial-gradient(120% 80% at 50% 30%,#1c6b4f,#12523c 65%,#0b3626);
+    border:2px solid rgba(255,255,255,.1); border-radius:18px; padding:1.2rem 1rem; margin:1.2rem 0; }
+  .th-stage-label{ text-align:center; font-size:1.1rem; font-weight:900; color:var(--gold-light,#ffd24a); margin-bottom:1rem; }
+  .th-board{ display:flex; flex-direction:column; gap:1rem; }
+  .th-zone{ background:rgba(0,0,0,.2); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:.8rem .6rem; min-height:118px; }
+  .th-zone.mine{ border-color:rgba(245,184,0,.4); }
+  .th-zone-t{ font-size:.85rem; color:#cfe6d8; margin-bottom:.6rem; text-align:center; }
+  .th-explain{ margin-top:1rem; background:rgba(0,0,0,.28); border-radius:10px; padding:.8rem 1rem;
+    font-size:1.02rem; line-height:1.85; color:#eaf5ee; }
+  .th-explain b{ color:#fff; } .th-win{ color:#ffd24a!important; }
+  .th-btns{ display:flex; gap:.5rem; justify-content:center; margin-top:1rem; flex-wrap:wrap; }
+  .th-btn{ padding:.75rem 1.6rem; border:none; border-radius:12px; cursor:pointer; font-size:1.05rem; font-weight:900;
+    background:linear-gradient(135deg,#f5b800,#ffd24a); color:#2a1d00; }
+  .th-btn.ghost{ background:transparent; border:2px solid rgba(255,255,255,.3); color:#dfe9e2; }
+
+  /* 牌型清單 */
+  .th-hands{ display:flex; flex-direction:column; gap:.8rem; margin:1.2rem 0; }
+  .th-hand{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:14px; padding:1rem;
+    opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s cubic-bezier(.2,1,.3,1); }
+  .th-hand.in{ opacity:1; transform:none; }
+  .th-hand[data-rank="1"]{ border-color:var(--gold,#f5b800); box-shadow:0 0 20px rgba(245,184,0,.18); }
+  .th-hand-head{ display:flex; align-items:center; gap:.6rem; margin-bottom:.8rem; flex-wrap:wrap; }
+  .th-rank{ width:30px; height:30px; border-radius:8px; background:rgba(245,184,0,.18); color:var(--gold-light,#ffd24a);
+    display:grid; place-items:center; font-weight:900; flex:none; }
+  .th-hand-name strong{ font-size:1.2rem; display:block; }
+  .th-hand-name small{ font-size:.8rem; color:var(--text-muted); letter-spacing:.05em; }
+  .th-odds{ margin-left:auto; font-size:.85rem; color:var(--text-muted); white-space:nowrap; }
+  .th-hand-desc{ margin:.8rem 0 0!important; font-size:.98rem!important; line-height:1.8!important; }
+
+  /* 比大小 */
+  .th-versus{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:16px; padding:1.2rem 1rem; margin:1.2rem 0; }
+  .th-vs-row{ display:flex; gap:.6rem; align-items:center; justify-content:center; flex-wrap:wrap; }
+  .th-vs-side{ flex:1; min-width:220px; border:2px solid transparent; border-radius:12px; padding:.7rem .4rem; transition:.35s; }
+  .th-vs-side.win{ border-color:#7ee29b; background:rgba(126,226,155,.1); }
+  .th-vs-side.lose{ border-color:rgba(255,107,107,.4); opacity:.6; }
+  .th-vs-t{ text-align:center; font-weight:800; margin-bottom:.5rem; }
+  .th-vs-r{ text-align:center; font-size:.9rem; color:var(--gold-soft,#ffd24a); margin-top:.5rem; font-weight:700; }
+  .th-vs-mid{ font-weight:900; color:var(--text-muted); font-size:1.1rem; }
+  .th-vs-say{ margin:1rem 0; background:rgba(0,0,0,.25); border-radius:10px; padding:.8rem 1rem;
+    font-size:1.02rem; line-height:1.9; color:var(--text-secondary); }
+  .th-vs-say b{ color:#fff; }
+  #thVsNext{ display:block; margin:0 auto; }
+
+  .th-tip{ background:rgba(245,184,0,.08); border:1px solid rgba(245,184,0,.35); border-radius:12px; padding:1rem 1.2rem; margin:1.2rem 0; }
+  .th-tip ul{ margin:.6rem 0 0; padding-left:1.2rem; line-height:2; font-size:1.02rem; color:var(--text-secondary); }
+
+  /* 下注動作 */
+  .th-acts{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:.7rem; margin:1rem 0; }
+  .th-act{ display:flex; gap:.7rem; background:var(--bg-card,#161616); border:1px solid var(--border,#333);
+    border-radius:12px; padding:.9rem 1rem; }
+  .th-act-i{ font-size:1.4rem; flex:none; }
+  .th-act strong{ font-size:1.05rem; }
+  .th-act p{ margin:.3rem 0 0!important; font-size:.95rem!important; line-height:1.75!important; }
+
+  /* 機率表 */
+  .th-tablewrap{ overflow-x:auto; margin:1rem 0; }
+  .th-odds-table{ width:100%; border-collapse:collapse; font-size:1rem; min-width:320px; }
+  .th-odds-table th{ text-align:left; padding:.6rem .5rem; border-bottom:2px solid var(--border); color:var(--text-muted); font-size:.9rem; }
+  .th-odds-table td{ padding:.6rem .5rem; border-bottom:1px solid rgba(255,255,255,.07); }
+  .th-odds-table tr:nth-child(-n+3) td{ color:var(--gold-soft,#ffd24a); font-weight:700; }
+  .th-note{ font-size:.9rem!important; color:var(--text-muted)!important; }
+
+  .th-real{ background:linear-gradient(135deg,rgba(192,40,45,.12),rgba(245,184,0,.06));
+    border:1px solid rgba(245,184,0,.3); border-radius:14px; padding:1.2rem 1.3rem; margin:1.4rem 0; }
+  .th-real h3{ font-size:1.2rem; color:var(--gold-light,#ffd24a); margin-bottom:.7rem; }
+  .th-links{ line-height:2.2; font-size:1.05rem; color:var(--text-secondary); padding-left:1.2rem; }
+  .th-faq{ background:var(--bg-card,#161616); border:1px solid var(--border,#333); border-radius:10px;
+    padding:1rem 1.2rem; margin-bottom:.6rem; }
+  .th-faq summary{ cursor:pointer; font-weight:700; font-size:1.08rem; }
+  .th-faq p{ margin:.8rem 0 0!important; font-size:1rem!important; line-height:1.85!important; }
+
+  @media(max-width:520px){
+    /* 手機：牌縮小＋間距收緊，確保 5 張公牌一定排成一行不換行 */
+    .th-cards{ gap:.25rem; flex-wrap:nowrap; }
+    .pc{ width:46px; height:64px; border-radius:6px; }
+    /* 小牌塞不下「角落點數＋中央大符號」→ 只留角落索引（花色仍看得到），中央符號收起來 */
+    .pc-mid{ display:none; }
+    .pc-tl,.pc-br{ font-size:.8rem; line-height:1; }
+    .pc-tl i,.pc-br i{ font-size:.75rem; margin-top:1px; }
+    .th-cards.small .pc{ width:40px; height:56px; }
+    .th-cards.small .pc-br{ display:none; }          /* 更小的牌：只留左上角索引，避免對角壓到 */
+    .th-cards.small .pc-tl{ font-size:.82rem; top:6px; left:6px; }
+    .th-cards.small .pc-tl i{ font-size:.78rem; }
+    .th-zone{ padding:.7rem .4rem; min-height:96px; }
+    .th-vs-mid{ width:100%; text-align:center; }
+  }
+  @media(max-width:360px){
+    .pc{ width:40px; height:56px; }
+    .pc-br{ display:none; }                          /* 極窄手機：全部只留左上角索引 */
+    .th-cards.small .pc{ width:35px; height:49px; }
+    .th-cards.small .pc-tl{ font-size:.74rem; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } }
+</style>
+</BaseLayout>
