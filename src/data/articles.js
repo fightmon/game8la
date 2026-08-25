@@ -239,6 +239,17 @@ export const articles = [
     thumbnail: '/images/article-thumbs/thumb-worldcup-broadcast.webp'
   },
   {
+    slug: 'slot-burst-signal-truth',
+    title: '老虎機爆分訊號是真的嗎？我們跑了 200 萬轉，數據說沒有',
+    excerpt: '「空轉 30 次快爆了」「這台今天很鬆」——芭樂子用自己寫的老虎機引擎實跑 200 萬轉，把三個最紅的爆分訊號說法一個一個拿去對數據，模擬腳本公開讓你自己重跑。順便回答：為什麼 RTP 96% 的機器，你體感永遠不到 96%。',
+    date: '2026-08-26',
+    views: 1,
+    tags: ['最新', '精選', '老虎機'],
+    icon: 'zap',
+    gradient: 'linear-gradient(135deg,#1a1a2e,#c0282d,#f5b800)',
+    thumbnail: '/images/og-image.webp'
+  },
+  {
     slug: 'texas-holdem-rules',
     title: '德州撲克怎麼玩？10 種牌型互動圖解＋一局流程動畫（新手 5 分鐘上手）',
     excerpt: '德州撲克規則新手教學：用真的撲克牌互動圖解 10 種牌型大小，還能按按鈕一步步跑完整局（底牌→翻牌→轉牌→河牌）。附牌型機率表、踢腳比大小實例、下注動作說明。芭樂子白話版，零業配不推坑。',

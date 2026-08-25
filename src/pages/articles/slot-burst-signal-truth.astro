@@ -1,0 +1,315 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ArticleSchema from '../../components/ArticleSchema.astro';
+import ManifestoBox from '../../components/ManifestoBox.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '老虎機真的有「爆分訊號」嗎？', a: '沒有。我們用自己寫的老虎機引擎跑了 200 萬轉來驗：在已經連續空轉 30 次之後，下一轉的中獎率是 20.71%；而在剛中完獎、完全沒有空轉的狀態下，下一轉的中獎率是 20.75%。差距 0.04 個百分點，在 157 萬筆樣本下等於沒有差別。機器沒有記憶，它不知道你前面輸了多久。' },
+  { q: '那為什麼我常常覺得「連續空轉很久之後就會爆」？', a: '因為你只記得應驗的那幾次。連續空轉本來就常常發生——高波動機台每 10 段空轉就有 1 段會超過 10 轉，最長我們跑出 56 轉。空轉之後一定會有中獎（不然就永遠不會中了），所以「空很久之後中了」每天都在發生，但那不是因果關係，只是它遲早會中。' },
+  { q: '「這台今天很鬆／很緊」是真的看得出來嗎？', a: '看不出來。我們把同一台設定 RTP 96% 的機器切成 200 段、每段 300 轉，結果單段實測 RTP 從 9.4% 一路分佈到 1416.8%。同一台機器、同樣設定，你在不同時段坐下來體感可以差 150 倍。你以為的「機台狀態」，其實只是波動。' },
+  { q: '既然 RTP 是 96%，為什麼我幾乎每次都輸得比那個多？', a: '因為 96% 是平均值，而平均值被極少數的暴擊拉上去了。同一份實測資料裡，200 段各 300 轉的中位數只有 63%——也就是超過一半的人，在一個晚上的體驗裡拿到的是 63% 而不是 96%。RTP 沒有騙你，但它描述的不是你今晚會遇到的事。' },
+  { q: '空轉計數法、Buy Bonus 時機論這些打法有用嗎？', a: '沒用，而且原理都一樣：它們都假設機器記得前面發生過什麼。RNG（隨機數產生器）在你按下按鈕的那一刻才產生結果，跟前一轉完全獨立。Buy Bonus 走的也是同一套 RNG，不會因為你「在低點才買」就比較容易爆。' },
+  { q: '那玩家到底能控制什麼？', a: '三件事，而且都不是「預測」：一、選 RTP 高的正版平台（差幾個百分點，長期差很多）；二、認清波動度——高波動不是比較好賺，是同樣的錢輸得更快或贏得更誇張；三、設停損停利並且真的執行。能控制的只有你自己的行為，不是機器。' },
+  { q: '你們的模擬能代表真實機台嗎？', a: '不能，也不需要。我們模擬的是「RNG 老虎機」這類機器的數學結構，不是任何一台特定機器的內部參數（那些廠商不公開）。但這篇要打的迷思——「機器有記憶」「空轉越久越快爆」——只要機器用 RNG 就一定成立，跟是哪一款無關。想自己驗，我們的模擬器和模擬腳本都是公開的。' },
+];
+
+const TITLE = '老虎機爆分訊號是真的嗎？我們跑了 200 萬轉，數據說沒有';
+const DESC = '「空轉 30 次快爆了」「這台今天很鬆」——老虎機爆分訊號到底存不存在？芭樂子用自己寫的老虎機引擎實跑 200 萬轉驗證三個最紅的說法，並公開模擬腳本讓你自己重跑。順便回答一個更扎心的問題：為什麼 RTP 96% 的機器，你體感永遠不到 96%。';
+const URL = 'https://game8la.com/articles/slot-burst-signal-truth/';
+// TODO 封面圖待生成後改回 /images/articles/slot-signal-cover.webp
+const COVER = 'https://game8la.com/images/og-image.webp';
+---
+<FaqSchema faqs={faqs} />
+<ArticleSchema
+  url={URL}
+  title={TITLE}
+  description={DESC}
+  image={COVER}
+  datePublished="2026-08-26"
+  dateModified="2026-08-26"
+  breadcrumbs={[
+    { name: '首頁', url: 'https://game8la.com/' },
+    { name: '芭樂攻略', url: 'https://game8la.com/articles/' },
+    { name: '老虎機爆分訊號真相', url: URL },
+  ]}
+/>
+<BaseLayout currentPage="articles" title={TITLE + ' - GAME8LA'} description={DESC} ogImage={COVER}>
+  <div class="container">
+    <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/articles/">芭樂攻略</a> &gt; 老虎機爆分訊號真相</div>
+    <div style="color:var(--text-muted);font-size:0.8rem;margin-bottom:0.5rem">
+      <Icon name="clock" /> 發佈日：2026-08-26 ｜
+      <Icon name="user-pen" /> 作者：芭樂子 ｜
+      <Icon name="book-open" /> 預估閱讀 12 分鐘
+    </div>
+    <a href="/articles/" class="back-link"><Icon name="arrow-left" /> 回攻略列表</a>
+
+    <h1>老虎機爆分訊號是真的嗎？我們跑了 200 萬轉，數據說沒有</h1>
+
+    <div class="article-content">
+
+      <p>
+        8LA 大大好，我是芭樂子。你一定看過這種說法：
+      </p>
+
+      <blockquote>
+        「這台空轉 30 次了，快爆了，快上。」<br>
+        「藍鑽石連出兩次就是訊號，準備買免遊。」<br>
+        「今天這台很鬆，手感超好。」
+      </blockquote>
+
+      <p>
+        <strong>老虎機爆分訊號</strong>大概是台灣電子遊戲圈流傳最廣的一套說法。攻略站教你看，
+        群組裡有人整理成表，直播主一邊轉一邊喊「訊號來了」。聽久了會覺得——好像真的有那麼一回事。
+      </p>
+
+      <p>
+        這篇不打嘴砲。我們自己寫了一台老虎機引擎（就是<a href="/tools/lu-bu-simulator/">戰神呂布模擬器</a>在跑的那一套），
+        設定 RTP 96%，<strong>實際跑了 200 萬轉</strong>，把三個最紅的「訊號」說法一個一個拿去對數據。
+      </p>
+
+      <div class="tip-box">
+        <p><strong>🔬 先講清楚我們測的是什麼</strong></p>
+        <p>
+          我們模擬的是「RNG 老虎機」這一類機器的<strong>數學結構</strong>，不是任何一台特定機器的內部參數——
+          那些數字廠商從來不公開（這件事本身就值得想一想）。
+        </p>
+        <p>
+          但這篇要打的迷思都是<strong>結構性</strong>的：「機器有記憶」「空轉越久越快爆」這些說法，
+          只要機器用 RNG 就一定不成立，跟它是賽特、雷神還是呂布無關。
+          而且模擬腳本我們公開在 repo 裡（<code>scripts/slot-signal-myth.mjs</code>），你可以自己重跑。
+        </p>
+      </div>
+
+      <h2>說法一：「連續空轉越久，下一轉越容易中」</h2>
+
+      <p>
+        這是所有訊號論的根。我們讓引擎跑，每一轉都記下「在這之前已經連續空轉幾次」，
+        然後分組統計：<strong>在已經空轉 N 次的狀態下，下一轉的中獎率是多少？</strong>
+      </p>
+
+      <p>如果訊號論成立，空轉越久那一組的中獎率應該越高。實際結果（高波動設定，200 萬轉）：</p>
+
+      <div class="st-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>目前已連續空轉</th><th>下一轉中獎率</th><th>下一轉平均贏分</th><th>樣本數</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0 次（剛中完獎）</td><td><strong>20.75%</strong></td><td>0.369x</td><td>1,573,505 轉</td></tr>
+            <tr><td>≥ 10 次</td><td><strong>20.69%</strong></td><td>0.354x</td><td>154,589 轉</td></tr>
+            <tr><td>≥ 20 次</td><td><strong>20.87%</strong></td><td>0.308x</td><td>15,119 轉</td></tr>
+            <tr><td>≥ 30 次</td><td><strong>20.71%</strong></td><td>0.178x</td><td>1,642 轉</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <strong>從 0 次到 30 次，中獎率在 20.69% 到 20.87% 之間，一條水平線。</strong>
+        剛中完獎和連續空轉 30 次之後，下一轉的機率差了 0.04 個百分點——在 157 萬筆樣本下，那叫做「沒有差別」。
+      </p>
+
+      <p>
+        更值得注意的是最後一欄：空轉越久，下一轉的<strong>平均贏分反而略低</strong>（0.369 → 0.178）。
+        這不是「機器在懲罰你」，只是小樣本的雜訊。但它至少徹底否定了「憋越久爆越大」。
+      </p>
+
+      <div class="warn-box">
+        <p>
+          <strong>為什麼這個直覺這麼難擺脫？</strong>因為空轉之後一定會中——不然就永遠不會中了。
+          所以「空很久之後中了」這件事每天都在發生，你會記得。但那不是因果，
+          只是它遲早要中，而你剛好在旁邊看著。
+        </p>
+      </div>
+
+      <h2>說法二：「連續沒中這麼多次，一定是快爆了」</h2>
+
+      <p>
+        這句話的隱含前提是：「連續空轉這麼多次是不正常的」。所以我們去數：
+        <strong>連續空轉到底多常見？</strong>
+      </p>
+
+      <div class="st-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>波動度</th><th>中獎率</th><th>空轉中位數</th><th>每 10 段有 1 段超過</th><th>最長空轉</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>低波動</td><td>44.8%</td><td>2 次</td><td>4 次</td><td>22 次</td></tr>
+            <tr><td>中波動</td><td>32.7%</td><td>2 次</td><td>6 次</td><td>38 次</td></tr>
+            <tr><td>高波動</td><td>20.7%</td><td>3 次</td><td><strong>10 次</strong></td><td><strong>56 次</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        高波動機台跑出 28 萬段連續空轉，其中<strong>每 10 段就有 1 段超過 10 轉</strong>，
+        1% 的段落超過 20 轉，最長一段 56 轉。
+      </p>
+
+      <p>
+        換句話說：<strong>你今天遇到的「連空 15 轉」，是每小時都會發生好幾次的日常。</strong>
+        它不是徵兆，它是這台機器的正常呼吸。把日常當成徵兆，然後在那個當下加碼——
+        這就是訊號論真正的危險之處，它讓你在最沒有理由的時候下最大的注。
+      </p>
+
+      <h2>說法三：「這台今天很鬆／很緊」——最有意思的一個</h2>
+
+      <p>
+        這個說法最難反駁，因為它訴諸體感，而體感是真的。所以我們換個方式測：
+        <strong>把同一台機器切成很多段，看每一段的體感會差多少。</strong>
+      </p>
+
+      <p>
+        設定一台 RTP 96% 的機器，切成 200 段、每段 300 轉（差不多是一個晚上的量），
+        看每一段各自跑出多少 RTP：
+      </p>
+
+      <div class="st-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>波動度</th><th>最慘的一段</th><th>中位數</th><th>最爽的一段</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>低波動</td><td>47.5%</td><td>89.7%</td><td>263.7%</td></tr>
+            <tr><td>中波動</td><td>22.7%</td><td>68.2%</td><td>665.6%</td></tr>
+            <tr><td>高波動</td><td><strong>9.4%</strong></td><td>63.0%</td><td><strong>1416.8%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <strong>同一台機器、同樣的設定，沒有任何人動過任何東西。</strong>
+        但你在不同時段坐下來玩 300 轉，體感可以從「投 100 只剩 9 塊」到「投 100 變 1416 塊」——差 150 倍。
+      </p>
+
+      <p>
+        所以「今天這台很鬆」是真的嗎？你的感受是真的，但你歸因錯了。
+        那不是機台狀態，那是<strong>波動</strong>。而波動最擅長的事，就是假裝自己是規律。
+      </p>
+
+      <h2>順便回答一個更扎心的問題：為什麼 RTP 96%，我體感永遠不到 96%？</h2>
+
+      <p>
+        回頭看上面那張表的<strong>中位數</strong>那一欄——高波動是 <strong>63.0%</strong>。
+        但這台機器整體跑 200 萬轉的實測 RTP 是 <strong>97.01%</strong>，設定值是 96%。兩個數字都沒錯。
+      </p>
+
+      <div class="warn-box">
+        <p>
+          <strong>這就是 RTP 最容易被誤解的地方：它是平均值，而平均值被極少數的暴擊拉上去了。</strong>
+        </p>
+        <p>
+          200 段裡有一段跑出 1416%，那一段把整體平均硬生生拉起來。
+          代價是：<strong>超過一半的段落低於 63%</strong>。
+        </p>
+      </div>
+
+      <p>
+        講白話——如果 100 個人各自玩 300 轉，最後拿去平均，確實接近 96%。
+        但這 100 個人裡，會有一兩個人爆到笑不出來，然後<strong>五十幾個人拿到 63% 以下</strong>。
+        你大機率是那五十幾個人之一。
+      </p>
+
+      <p>
+        RTP 96% 沒有騙你。它只是<strong>沒有在描述你今晚會遇到的事</strong>。
+        而且波動度越高，這個落差越大——這也是為什麼「高波動比較好賺」是另一個誤會：
+        高波動不是比較好賺，是同樣的錢輸得更快，或者贏得更誇張，中間沒有溫和地帶。
+      </p>
+
+      <h2>那到底能控制什麼？</h2>
+
+      <p>三件事，而且沒有一件是「預測」：</p>
+
+      <ol>
+        <li>
+          <strong>RTP —— 唯一長期有效的變數。</strong>
+          96% 和 92% 聽起來只差 4 個百分點，但那是「每轉平均輸 4%」和「每轉平均輸 8%」的差別，也就是<strong>輸的速度差一倍</strong>。
+          正版平台通常公開 RTP，盜版仿版通常不會——這也是<a href="/casino-check/">辨識平台</a>的一個現成線索。
+        </li>
+        <li>
+          <strong>波動度 —— 決定你的錢能撐多久。</strong>
+          同樣 1000 塊，低波動可以磨很久，高波動可能 20 分鐘就見底（也可能一把回本）。
+          先想清楚你今天是想玩久一點還是想搏一把，再選機台。
+        </li>
+        <li>
+          <strong>停損停利 —— 唯一你 100% 說了算的東西。</strong>
+          機器不會配合你，但你的手可以。設好數字，到了就走，這是整篇文章裡唯一真正有效的「打法」。
+        </li>
+      </ol>
+
+      <h2>不用相信我，自己跑一次</h2>
+
+      <p>
+        這篇的所有數字都可以重現。我們把<strong>模擬腳本放在公開的 repo</strong> 裡，
+        引擎也是同一份——網頁上的模擬器和跑出這些數據的腳本，用的是完全相同的數學：
+      </p>
+
+      <div class="tip-box">
+        <p><strong>🎮 用模擬器自己試（免安裝，直接玩）</strong></p>
+        <ul>
+          <li><a href="/tools/lu-bu-simulator/">戰神呂布模擬器</a>——這篇的數據就是這台引擎跑的。可以自己調 RTP 和波動度，親眼看同一台機器怎麼變成另一台</li>
+          <li><a href="/tools/slot-simulator/">賽特 2 模擬器</a>、<a href="/tools/thor-hammer-2-simulator/">雷神之錘 II 模擬器</a>——換個機制再驗一次</li>
+          <li><a href="/tools/rtp-tracker/">RTP 實測紀錄器</a>——記錄你在真實平台的實際結果，看它跟公告的 RTP 差多少</li>
+        </ul>
+      </div>
+
+      <p>
+        特別建議試一件事：把模擬器的<strong>波動度切到高</strong>，然後連轉 300 次，看最後的實測 RTP 是多少。
+        再重置、再轉 300 次。多做幾輪你就會親眼看到上面那張表——同一個設定，結果可以差得離譜。
+      </p>
+
+      <h2>最後：為什麼會有人一直教你看訊號？</h2>
+
+      <p>
+        因為「有訊號」這件事很好賣。
+      </p>
+
+      <p>
+        如果老虎機純粹是機率，那能寫的攻略就很短——選高 RTP、設停損、玩得起再玩，講完了。
+        但如果有「訊號」，就有教學、有課程、有跟單群組、有導流連結，
+        還可以讓你相信輸錢是因為「沒看懂訊號」，而不是因為這件事本來就是負期望值。
+      </p>
+
+      <p>
+        <strong>把責任推到玩家的技術上，是這門生意最順手的一招。</strong>
+        機率的殘酷之處在於它很誠實：它不會因為你認真研究就對你好一點。
+      </p>
+
+      <ManifestoBox />
+
+      <h2>❓ 常見問題</h2>
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p set:html={f.a} />
+        </details>
+      ))}
+
+      <div class="related-box">
+        <h3>📚 延伸閱讀</h3>
+        <div class="related-links">
+          <a href="/articles/seth-rng-myth-busted/">RNG 到底怎麼運作？<small>從隨機數產生器的原理講起，拆解賽特三大「必勝打法」</small></a>
+          <a href="/articles/slot-pool-theory-explained/">水池理論是真的嗎？<small>老虎機怎麼挑才會爆金，波動率與 RTP 魔改</small></a>
+          <a href="/articles/slots-rtp-guide/">RTP 是什麼？<small>返還率完整說明，以及它為什麼不等於你的勝率</small></a>
+          <a href="/casino-check/">娛樂城體檢工具<small>先確認平台出得了金，再研究怎麼玩</small></a>
+        </div>
+      </div>
+
+    </div>
+
+    <ShareButtons title={TITLE} heading="🛡 把這篇傳給還在等訊號的朋友" />
+  </div>
+
+<style is:global>
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.98rem; margin: 1rem 0; }
+.data-table th, .data-table td { padding: 0.65rem 0.6rem; border: 1px solid var(--border); text-align: left; }
+.data-table thead th { background: rgba(255,255,255,0.05); font-weight: 700; color: var(--text-secondary); }
+.data-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.data-table strong { color: var(--guava-green, #39ff14); }
+.st-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0; }
+@media (max-width: 640px) { .data-table { font-size: 0.95rem; } .data-table th, .data-table td { padding: 0.55rem 0.4rem; } }
+</style>
+</BaseLayout>

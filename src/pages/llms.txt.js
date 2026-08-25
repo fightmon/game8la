@@ -10,6 +10,7 @@ const TOOLS = [
   ['老虎機模擬器（免費試玩）', '/tools/slot-simulator/', '免費試玩、看 RTP 真相，不花一毛錢'],
   ['雷神之鎚 II 模擬器', '/tools/thor-hammer-2-simulator/', '雷神之鎚 2 免費模擬試玩'],
   ['戰神呂布模擬器', '/tools/lu-bu-simulator/', '戰神呂布免費試玩，附賠付係數對照與購買免遊真實 RTP 揭露'],
+  ['老虎機爆分訊號真相', '/articles/slot-burst-signal-truth/', '實跑 200 萬轉驗證爆分訊號不存在，附公開模擬腳本'],
   ['巴風特模擬器', '/tools/baphomet-simulator/', '巴風特免費模擬試玩'],
   ['21 點（Blackjack）', '/tools/blackjack/', '免費 21 點，用會員點數玩'],
   ['百家樂路紙工具', '/tools/baccarat-roadmap/', '大路、大眼、小路、曱甴路看牌'],
