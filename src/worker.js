@@ -713,6 +713,134 @@ async function handleLeaderboard(request, env) {
   return jsonResp({ leaderboard: (results || []).map((r, i) => ({ rank: i + 1, nickname: r.nickname, points: r.points })) });
 }
 
+// ============================================================
+// 麻將練習桌：成績記錄與排行榜（訪客可玩，登入才記錄／上榜）
+// ============================================================
+
+// 台灣麻將算錢：自摸＝三家各付（底＋台×台數）；胡別人＝只有放槍那家付
+const MJ_STAKES = { 10: true, 50: true, 100: true };
+function mjDelta({ outcome, selfDraw, dealtIn, tai, base, taiVal }) {
+  const unit = base + tai * taiVal;
+  if (outcome === 'win') return selfDraw ? unit * 3 : unit;
+  if (outcome === 'lose') {
+    if (selfDraw) return -unit;   // 別人自摸 → 你也要付一份
+    return dealtIn ? -unit : 0;   // 別人胡牌：你放槍才付，否則不付
+  }
+  return 0; // 流局
+}
+
+// POST /api/mahjong/result —— 伺服器算錢並結算（防作弊：金額由伺服器算，不吃前端數字）
+// { outcome:'win'|'lose'|'draw', selfDraw, dealtIn, tai, base, taiVal, coachMatch, coachTotal }
+async function handleMahjongResult(request, env) {
+  if (request.method !== 'POST') return jsonResp({ error: 'method' }, 405);
+  if (!env.DB) return jsonResp({ error: 'no-db' }, 503);
+  const member = await currentMember(request, env);
+  if (!member) return jsonResp({ ok: false, error: 'guest' }); // 訪客照玩，只是不記錄
+
+  let b; try { b = await request.json(); } catch { return jsonResp({ error: 'bad-json' }, 400); }
+  const outcome = ['win', 'lose', 'draw'].includes(b.outcome) ? b.outcome : 'draw';
+  const selfDraw = !!b.selfDraw, dealtIn = !!b.dealtIn;
+  const tai = Math.max(0, Math.min(50, parseInt(b.tai, 10) || 0));
+  const base = MJ_STAKES[parseInt(b.base, 10)] ? parseInt(b.base, 10) : 10;
+  const taiVal = MJ_STAKES[parseInt(b.taiVal, 10)] ? parseInt(b.taiVal, 10) : 10;
+  const coachTotal = Math.max(0, Math.min(80, parseInt(b.coachTotal, 10) || 0));
+  const coachMatch = Math.max(0, Math.min(coachTotal, parseInt(b.coachMatch, 10) || 0));
+
+  const now = new Date();
+  const row = await env.DB.prepare('SELECT * FROM mahjong_stats WHERE member_id=?1').bind(member.id).first();
+  if (row) {
+    const last = Date.parse(row.updated_at || 0);
+    if (Number.isFinite(last) && now.getTime() - last < 20000) return jsonResp({ ok: false, error: 'too-fast' });
+  }
+
+  let delta = mjDelta({ outcome, selfDraw, dealtIn, tai, base, taiVal });
+  // 點數不會變負數（輸光就是 0，隔天自動補滿）
+  if (delta < 0) delta = -Math.min(Math.abs(delta), member.points || 0);
+
+  if (delta !== 0) {
+    const after = (member.points || 0) + delta;
+    await env.DB.prepare('UPDATE members SET points=?2 WHERE id=?1').bind(member.id, after).run();
+    await env.DB.prepare(
+      'INSERT INTO point_ledger (member_id, delta, game, reason, balance_after, created_at) VALUES (?1,?2,?3,?4,?5,?6)'
+    ).bind(member.id, delta, 'mahjong',
+      outcome === 'win' ? (selfDraw ? `麻將自摸 ${tai}台` : `麻將胡牌 ${tai}台`)
+        : (selfDraw ? '麻將被自摸' : '麻將放槍'),
+      after, now.toISOString()).run();
+  }
+
+  const won = outcome === 'win';
+  if (row) {
+    await env.DB.prepare(
+      `UPDATE mahjong_stats SET games=games+1, wins=wins+?2, best_tai=MAX(best_tai,?3),
+       coach_match=coach_match+?4, coach_total=coach_total+?5, net_points=net_points+?6,
+       deal_ins=deal_ins+?7, self_draws=self_draws+?8, updated_at=?9 WHERE member_id=?1`
+    ).bind(member.id, won ? 1 : 0, tai, coachMatch, coachTotal, delta,
+      (outcome === 'lose' && dealtIn && !selfDraw) ? 1 : 0, (won && selfDraw) ? 1 : 0, now.toISOString()).run();
+  } else {
+    await env.DB.prepare(
+      `INSERT INTO mahjong_stats (member_id, games, wins, best_tai, coach_match, coach_total, net_points, deal_ins, self_draws, updated_at)
+       VALUES (?1, 1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)`
+    ).bind(member.id, won ? 1 : 0, tai, coachMatch, coachTotal, delta,
+      (outcome === 'lose' && dealtIn && !selfDraw) ? 1 : 0, (won && selfDraw) ? 1 : 0, now.toISOString()).run();
+  }
+
+  const me = await env.DB.prepare('SELECT * FROM mahjong_stats WHERE member_id=?1').bind(member.id).first();
+  const fresh = await env.DB.prepare('SELECT points FROM members WHERE id=?1').bind(member.id).first();
+  return jsonResp({ ok: true, delta, points: fresh ? fresh.points : null, stats: me, report: mjReport(me) });
+}
+
+/** 雙軌評級：技術（教練一致率）與戰績（輸贏）分開判定 —— 15 局才給 */
+const MJ_MIN_GAMES = 15;
+function mjReport(s) {
+  if (!s || s.games < MJ_MIN_GAMES) {
+    return { ready: false, games: s ? s.games : 0, need: MJ_MIN_GAMES - (s ? s.games : 0) };
+  }
+  const acc = s.coach_total ? (s.coach_match / s.coach_total) * 100 : 0;
+  const skill = acc >= 80 ? 'A' : acc >= 68 ? 'B' : acc >= 55 ? 'C' : 'D';
+  const net = s.net_points || 0;
+  const luck = net > 0 ? 'win' : net < 0 ? 'lose' : 'even';
+  // 2×2：技術 × 戰績 → 給不同的話
+  const good = skill === 'A' || skill === 'B';
+  let verdict;
+  if (good && luck === 'win') verdict = 'skill-win';
+  else if (good && luck !== 'win') verdict = 'skill-lose';
+  else if (!good && luck === 'win') verdict = 'luck-win';
+  else verdict = 'both-bad';
+  return { ready: true, games: s.games, accuracy: Math.round(acc * 10) / 10, skill, net, luck, verdict };
+}
+
+// GET /api/mahjong/leaderboard —— 主榜＝教練一致率（技術指標，不靠運氣）
+async function handleMahjongLeaderboard(request, env) {
+  if (!env.DB) return jsonResp({ leaderboard: [], me: null });
+  const MIN_GAMES = 3;
+  const { results } = await env.DB.prepare(
+    `SELECT m.nickname, s.member_id, s.games, s.wins, s.best_tai, s.coach_match, s.coach_total
+     FROM mahjong_stats s JOIN members m ON m.id = s.member_id
+     WHERE s.games >= ?1 AND s.coach_total > 0
+     ORDER BY (CAST(s.coach_match AS REAL) / s.coach_total) DESC, s.games DESC
+     LIMIT 20`
+  ).bind(MIN_GAMES).all();
+
+  const board = (results || []).map((r, i) => ({
+    rank: i + 1, nickname: r.nickname, games: r.games, wins: r.wins, bestTai: r.best_tai,
+    accuracy: r.coach_total ? Math.round((r.coach_match / r.coach_total) * 1000) / 10 : 0,
+  }));
+
+  // 自己的成績（含未達門檻者）
+  let me = null;
+  const member = await currentMember(request, env);
+  if (member) {
+    const s = await env.DB.prepare('SELECT * FROM mahjong_stats WHERE member_id=?1').bind(member.id).first();
+    if (s) me = {
+      nickname: member.nickname, games: s.games, wins: s.wins, bestTai: s.best_tai,
+      accuracy: s.coach_total ? Math.round((s.coach_match / s.coach_total) * 1000) / 10 : 0,
+      needGames: Math.max(0, MIN_GAMES - s.games),
+    };
+    else me = { nickname: member.nickname, games: 0, wins: 0, bestTai: 0, accuracy: 0, needGames: MIN_GAMES };
+  }
+  return jsonResp({ leaderboard: board, me, minGames: MIN_GAMES });
+}
+
 // POST /api/admin/settle { eventId, result, key }
 async function handleSettle(request, env) {
   if (request.method !== 'POST') return jsonResp({ error: 'method' }, 405);
@@ -808,6 +936,8 @@ export default {
     if (p === '/api/dashboard') return handleDashboard(request, env);
     if (p === '/api/checkin') return handleCheckin(request, env);
     if (p === '/api/leaderboard') return handleLeaderboard(request, env);
+    if (p === '/api/mahjong/result') return handleMahjongResult(request, env);
+    if (p === '/api/mahjong/leaderboard') return handleMahjongLeaderboard(request, env);
     if (p === '/api/admin/settle') return handleSettle(request, env);
     if (p === '/api/admin/tg-post') return handleTgPost(request, env);
     if (p === '/api/admin/tg-updates') return handleTgUpdates(request, env);

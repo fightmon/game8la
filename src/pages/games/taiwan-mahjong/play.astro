@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 純遊戲畫面：不讓它跟 /games/taiwan-mahjong/ 落地頁搶排名 -->
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://game8la.com/games/taiwan-mahjong/">
+<title>台灣16張麻將練習桌 — 對局中｜GAME8LA</title>
+<meta name="description" content="台灣16張麻將練習桌對局畫面：跟 3 個 AI 打真實一局，教練即時建議該打哪張、該不該吃碰槓，胡牌自動算台。免費、不用下載。">
+<!-- 分享到 LINE / FB 時的預覽（本頁 noindex，但仍會被分享） -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GAME8LA">
+<meta property="og:url" content="https://game8la.com/games/taiwan-mahjong/">
+<meta property="og:title" content="台灣16張麻將練習桌｜跟 AI 打一局，教練教你打哪張">
+<meta property="og:description" content="免費線上台灣16張麻將：教練即時建議該打哪張、該不該吃碰槓，胡牌自動算台，局後還能逐手覆盤。不用下載、無課金。">
+<meta property="og:image" content="https://game8la.com/images/og-image.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico">
+<style is:global>
+  :root{
+    --felt-1:#1c6b4f; --felt-2:#12523c; --felt-edge:#0b3626;
+    --shell:#0a0f0c;
+    --tile:#f6f1e4; --tile-edge:#d9d2bf; --tile-shadow:rgba(0,0,0,.45);
+    --ink:#26324f; --pin:#1f6f8b; --sou:#2f7d4f; --honor:#3a352c;
+    --red:#c0392b; --green:#2f7d4f;
+    --gold:#f5b800; --gold-soft:#ffd24a;
+    --txt:#f3efe6; --txt-dim:#b9c4bb; --line:rgba(255,255,255,.12);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  html,body{ height:100%; }
+  body{ background:var(--shell); color:var(--txt);
+    font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+    display:flex; justify-content:center; }
+  .screen{ width:100%; max-width:440px; height:100svh; height:100dvh;
+    display:flex; flex-direction:column; overflow:hidden; position:relative;
+    background:radial-gradient(125% 75% at 50% 40%, var(--felt-1), var(--felt-2) 60%, var(--felt-edge)); }
+  @media(min-width:480px){
+    body{ align-items:center; padding:12px 0; }
+    .screen{ height:min(880px, calc(100dvh - 24px)); border-radius:26px;
+      box-shadow:0 20px 60px rgba(0,0,0,.55),0 0 0 8px #04060599; }
+  }
+
+  /* top bar */
+  .top{ flex:none; display:flex; align-items:center; justify-content:space-between; gap:.4rem;
+    padding:.4rem .6rem; background:rgba(0,0,0,.3); border-bottom:1px solid var(--line); }
+  .exit-btn{ flex:none; width:34px; height:34px; border-radius:9px; border:1px solid var(--line);
+    background:rgba(255,255,255,.07); color:var(--txt); font-size:1.15rem; font-weight:800;
+    display:grid; place-items:center; text-decoration:none; }
+  .exit-btn:hover{ background:rgba(255,255,255,.16); color:var(--gold-soft); }
+  .wind{ display:flex; align-items:center; gap:.45rem; min-width:0; }
+  .wind b{ white-space:nowrap; }
+  .wind-badge{ width:30px; height:30px; border-radius:8px; background:var(--gold);
+    color:#2a1d00; font-weight:900; font-size:1.05rem; display:grid; place-items:center; }
+  .wind small{ display:block; color:var(--txt-dim); font-size:.6rem; letter-spacing:.1em; }
+  .wind b{ font-size:.85rem; }
+  .wall{ text-align:center; }
+  .wall .n{ font-size:1.1rem; font-weight:800; font-variant-numeric:tabular-nums; line-height:1; }
+  .wall small{ color:var(--txt-dim); font-size:.6rem; letter-spacing:.08em; }
+  .coach-toggle{ display:flex; align-items:center; gap:.3rem; font-size:.7rem; color:var(--txt-dim); }
+  .coach-toggle input{ width:18px; height:18px; accent-color:var(--gold); }
+
+  /* opponents */
+  .oppo{ flex:none; display:flex; gap:.4rem; padding:.45rem .55rem; }
+  .oc{ flex:1; background:rgba(0,0,0,.28); border:1px solid var(--line); border-radius:10px;
+    padding:.35rem .45rem; min-width:0; }
+  .oc.turn{ border-color:var(--gold); box-shadow:0 0 0 1px var(--gold),0 0 12px rgba(245,184,0,.25); }
+  .oc-top{ display:flex; align-items:center; gap:.3rem; margin-bottom:.28rem; }
+  .seat-b{ width:19px; height:19px; border-radius:5px; background:rgba(255,255,255,.14);
+    display:grid; place-items:center; font-size:.68rem; font-weight:800; color:var(--gold-soft); flex:none; }
+  .oc-name{ font-size:.72rem; font-weight:700; white-space:nowrap; }
+  .oc-n{ margin-left:auto; font-size:.62rem; color:var(--txt-dim); flex:none; }
+  .oc-threat{ margin-left:auto; font-size:.58rem; font-weight:800; padding:1px 5px; border-radius:5px; flex:none; }
+  .oc-threat.lo{ background:rgba(126,226,155,.18); color:#7ee29b; }
+  .oc-threat.mid{ background:rgba(255,176,32,.18); color:#ffb020; }
+  .oc-threat.hi{ background:rgba(255,107,107,.22); color:#ff6b6b; }
+  .oc-bot{ display:flex; align-items:center; gap:.3rem; min-height:26px; flex-wrap:wrap; }
+  .oc-meld{ font-size:.58rem; color:var(--gold-soft); background:rgba(245,184,0,.12);
+    padding:1px 5px; border-radius:5px; white-space:nowrap; }
+  .oc-cut{ display:flex; align-items:center; gap:.25rem; margin-left:auto; }
+  .oc-cut small{ font-size:.55rem; color:var(--txt-dim); }
+  .oc-flower{ font-size:.58rem; color:#ff9db5; }
+
+  /* tiles（牌面由 SVG 繪製，含牌身與陰影） */
+  .tile{ position:relative; border-radius:8px; user-select:none; line-height:0; }
+  .tile .tface{ width:100%; height:100%; display:block; }
+  .t-mini{ width:21px; height:29px; }
+  .t-sm{ width:26px; height:35px; }
+
+  /* river */
+  .river{ flex:1 1 auto; min-height:0; margin:.15rem .55rem; border-radius:12px;
+    background:rgba(0,0,0,.18); border:1px solid var(--line); padding:.5rem;
+    display:flex; flex-direction:column; }
+  .river-label{ font-size:.6rem; color:var(--txt-dim); letter-spacing:.14em; margin-bottom:.35rem; flex:none;
+    display:flex; justify-content:space-between; }
+  .river-legend{ display:flex; gap:.5rem; }
+  .river-legend span{ display:flex; align-items:center; gap:2px; }
+  .river-legend i{ width:8px; height:3px; border-radius:2px; display:inline-block; }
+  .river-grid{ display:flex; flex-wrap:wrap; gap:3px; align-content:flex-start; overflow-y:auto; flex:1; min-height:0; }
+  .river .tile{ border-bottom:3px solid transparent; }
+  .river .tile.fresh{ outline:2px solid var(--gold); outline-offset:1px; }
+  .rs0{ border-bottom-color:var(--gold)!important; }
+  .rs1{ border-bottom-color:#5a9bd5!important; }
+  .rs2{ border-bottom-color:#b07fd8!important; }
+  .rs3{ border-bottom-color:#e58bb1!important; }
+
+  /* info + coach */
+  .chip{ flex:1; background:rgba(0,0,0,.32); border:1px solid var(--line); border-radius:9px;
+    padding:.3rem .2rem; text-align:center; }
+  .chip small{ display:block; font-size:.55rem; color:var(--txt-dim); letter-spacing:.06em; }
+  .chip b{ font-size:.9rem; color:var(--gold-soft); }
+  .chip.wide{ flex:1.7; } .chip.wide b{ color:var(--txt); font-size:.78rem; }
+  .coach{ flex:none; margin:.3rem .55rem 0; min-height:30px;
+    background:linear-gradient(90deg,rgba(245,184,0,.18),rgba(245,184,0,.05));
+    border:1px solid rgba(245,184,0,.4); border-radius:9px; padding:.4rem .6rem;
+    font-size:.8rem; line-height:1.35; }
+  .coach b{ color:var(--gold-soft); }
+  .coach.off{ opacity:.35; }
+
+  /* own melds + flowers：一律橫排單行，不吃上下空間 */
+  .mine-extra{ flex:none; display:flex; align-items:center; gap:.4rem; margin:.3rem .55rem 0;
+    flex-wrap:nowrap; min-height:22px; }
+  #uMelds{ display:flex; gap:.28rem; flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden;
+    flex:1; min-width:0; scrollbar-width:none; padding-bottom:1px; }
+  #uMelds::-webkit-scrollbar{ display:none; }
+  .mine-meld{ display:flex; gap:1px; background:rgba(0,0,0,.25); padding:2px 3px; border-radius:6px; flex:none; }
+  .mine-meld .tile{ width:17px; height:23px; }
+  .mine-flowers{ font-size:.68rem; color:#ff9db5; white-space:nowrap; flex:none; }
+
+  /* 可以胡了！提示 */
+  @keyframes wpIn{ from{ transform:translateY(10px) scale(.94); opacity:0; } to{ transform:none; opacity:1; } }
+  @keyframes wpGlow{ 0%,100%{ box-shadow:0 0 12px rgba(245,184,0,.35); } 50%{ box-shadow:0 0 24px rgba(245,184,0,.75); } }
+  .win-prompt{ flex:none; margin:.35rem .55rem 0; padding:.5rem .6rem .55rem;
+    background:linear-gradient(135deg,rgba(245,184,0,.22),rgba(245,184,0,.06));
+    border:2px solid var(--gold); border-radius:12px;
+    animation:wpIn .32s cubic-bezier(.2,1.3,.4,1) both, wpGlow 1.6s ease-in-out infinite .32s; }
+  .wp-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:.4rem; }
+  .wp-title{ font-size:1.05rem; font-weight:900; color:var(--gold-soft); }
+  .wp-tai{ font-size:.95rem; font-weight:900; color:#fff; }
+  .wp-hand{ display:flex; flex-wrap:wrap; gap:.3rem; }
+  .wp-meld{ display:flex; gap:1px; background:rgba(0,0,0,.22); padding:3px 4px; border-radius:6px; }
+  .wp-meld .tile.wt{ outline:2px solid var(--gold); outline-offset:1px; }
+  .wp-note{ font-size:.68rem; color:var(--txt-dim); margin-top:.35rem; line-height:1.4; }
+
+  /* hand zone */
+  .hand-zone{ flex:none; padding:.5rem .35rem calc(.55rem + env(safe-area-inset-bottom,0px));
+    background:rgba(0,0,0,.26); border-top:1px solid var(--line); }
+  .drawn-row{ display:flex; align-items:center; justify-content:flex-end; gap:.35rem; padding:0 .3rem .3rem; min-height:66px; }
+  .drawn-row small{ font-size:.62rem; color:var(--gold-soft); letter-spacing:.05em; }
+  .drawn-row .cell .tile{ width:48px; height:65px; }
+  .hand{ display:grid; grid-template-columns:repeat(8,1fr); gap:3px; }
+  .cell{ position:relative; }
+  .cell .tile{ width:100%; aspect-ratio:72/98; cursor:pointer; transition:transform .12s ease; }
+  .cell.rec .tile{ outline:2px solid var(--gold); outline-offset:-1px; border-radius:9px;
+    box-shadow:0 0 12px rgba(245,184,0,.55); }
+  .cell.lift .tile{ transform:translateY(-15px) scale(1.05); box-shadow:0 10px 14px rgba(0,0,0,.5); }
+  .rec-tag{ position:absolute; top:-13px; left:50%; transform:translateX(-50%); z-index:3;
+    background:var(--gold); color:#2a1d00; font-size:.52rem; font-weight:800;
+    padding:1px 5px; border-radius:6px; white-space:nowrap; }
+  .cut-tag{ position:absolute; top:-30px; left:50%; transform:translateX(-50%); z-index:4;
+    background:var(--red); color:#fff; font-size:.68rem; font-weight:800;
+    padding:.2rem .55rem; border-radius:8px; white-space:nowrap; box-shadow:0 3px 8px rgba(0,0,0,.5);
+    pointer-events:none; }
+
+  .actions{ display:flex; gap:.45rem; justify-content:center; margin-top:.6rem; padding:0 .2rem; min-height:44px; flex-wrap:wrap; }
+  .act{ flex:1; max-width:110px; min-width:72px; padding:.6rem .3rem; border-radius:11px; border:none;
+    font-size:1.05rem; font-weight:900; letter-spacing:.03em; cursor:pointer; }
+  @keyframes actIn{ from{ transform:translateY(16px) scale(.85); opacity:0; } to{ transform:none; opacity:1; } }
+  .act{ animation:actIn .3s cubic-bezier(.2,1.3,.4,1) both; }
+  .act.tiles{ display:inline-flex; align-items:center; justify-content:center; gap:3px;
+    flex:0 0 auto; max-width:none; padding:.5rem .6rem; }
+  .act.tiles .act-lab{ font-size:1rem; font-weight:900; margin-right:2px; }
+  .act.tiles .tile{ pointer-events:none; }
+  .act.tiles .tile.claimed{ outline:2px solid var(--gold); outline-offset:1px; }
+  .act.chow{ background:#3d6fa5; color:#fff }
+  .act.pon{ background:#2f7d4f; color:#fff }
+  .act.kong{ background:#8a5cc4; color:#fff }
+  .mine-meld.is-kong{ box-shadow:0 0 0 1px rgba(138,92,196,.6); }
+  .act.hu{ background:var(--gold); color:#2a1d00; box-shadow:0 0 14px rgba(245,184,0,.45) }
+  .act.pass{ background:rgba(255,255,255,.1); color:var(--txt-dim) }
+  .act.best{ outline:3px solid var(--gold); outline-offset:2px; box-shadow:0 0 14px rgba(245,184,0,.55); }
+  .act.best::after{ content:'教練推薦'; position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    background:var(--gold); color:#2a1d00; font-size:.52rem; font-weight:800; padding:1px 5px; border-radius:5px; white-space:nowrap; }
+  .act{ position:relative; }
+  .hint{ text-align:center; font-size:.62rem; color:var(--txt-dim); margin-top:.4rem; min-height:.9rem; }
+
+  /* overlays */
+  .overlay{ position:absolute; inset:0; z-index:20; background:rgba(0,0,0,.72);
+    display:flex; align-items:center; justify-content:center; padding:1rem; }
+  .panel{ width:100%; max-width:380px; background:#14201a; border:2px solid var(--gold);
+    border-radius:18px; padding:1.4rem 1.3rem; text-align:center; box-shadow:0 0 40px rgba(245,184,0,.25); }
+  .panel h2{ font-size:1.5rem; color:var(--gold-soft); margin-bottom:.6rem; }
+  .panel .sub{ color:var(--txt-dim); font-size:.9rem; line-height:1.6; margin-bottom:1rem; }
+  .win-hand{ display:flex; flex-wrap:wrap; gap:.5rem .5rem; justify-content:center; margin:0 0 1rem; }
+  .win-meld{ position:relative; display:flex; gap:1px; background:rgba(255,255,255,.05);
+    padding:5px 6px; border-radius:8px; border:2px solid transparent; transition:border-color .15s, box-shadow .15s; }
+  .win-meld.hl{ border-color:var(--gold); box-shadow:0 0 12px rgba(245,184,0,.55); }
+  .wm-tag{ position:absolute; top:-9px; right:-4px; font-style:normal; font-size:.58rem; font-weight:800;
+    background:#3a4a41; color:#ddd; padding:1px 5px; border-radius:5px; }
+  .wm-tag.j{ background:var(--gold); color:#2a1d00; }
+  .score-hint{ font-size:.72rem; color:var(--txt-dim); margin:-.5rem 0 .8rem; }
+  .score-table tr[data-groups]{ cursor:pointer; }
+  .score-table{ width:100%; border-collapse:collapse; margin:0 0 1rem; font-size:.95rem; }
+  .score-table td{ padding:.35rem .3rem; border-bottom:1px solid rgba(255,255,255,.08); text-align:left; }
+  .score-table td:last-child{ text-align:right; color:var(--gold-soft); font-weight:800; white-space:nowrap; }
+  .score-table tr.tt td{ border-bottom:none; font-weight:900; color:#fff; font-size:1.05rem; }
+  .big-btn{ display:inline-block; background:linear-gradient(135deg,#f5b800,#ffd24a); color:#2a1d00;
+    border:none; font-size:1.1rem; font-weight:900; padding:.75rem 2.2rem; border-radius:12px; cursor:pointer; }
+  .big-btn.ghost{ background:transparent; border:2px solid var(--gold); color:var(--gold-soft); }
+  .btn-row{ display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; }
+  .back-link{ margin-top:.9rem; font-size:.8rem; }
+  .back-link a{ color:var(--txt-dim); text-decoration:none; }
+  .btn-row .big-btn{ padding:.7rem 1.2rem; font-size:1rem; }
+
+  /* 底台選擇 */
+  .stake-pick{ margin:0 0 1rem; }
+  .sp-label{ font-size:.85rem; color:var(--txt-dim); margin-bottom:.5rem; }
+  .sp-label small{ font-size:.72rem; }
+  .sp-row{ display:flex; gap:.4rem; }
+  .sp{ flex:1; padding:.5rem .2rem; border-radius:10px; border:2px solid var(--border,#444);
+    background:#1b241e; color:#ddd; font-weight:800; font-size:.9rem; cursor:pointer; line-height:1.3; }
+  .sp small{ display:block; font-size:.7rem; font-weight:600; color:var(--txt-dim); margin-top:2px; }
+  .sp.on{ border-color:var(--gold); background:rgba(245,184,0,.14); color:var(--gold-soft); }
+  .sp-pts{ margin-top:.6rem; font-size:.85rem; color:var(--txt-dim); }
+  .sp-pts b{ color:var(--gold-soft); }
+
+  /* 真錢換算警語 */
+  .money-warn{ background:rgba(255,82,82,.1); border-left:4px solid #ff5252; border-radius:8px;
+    padding:.6rem .8rem; margin:.6rem 0 0; font-size:.88rem; line-height:1.7; text-align:left; color:#ffd9d9; }
+  .money-warn b{ color:#fff; }
+
+  /* 雙軌評級報告 */
+  .rpt{ text-align:left; margin:0 0 1rem; }
+  .rpt-grid{ display:flex; gap:.5rem; margin-bottom:.7rem; }
+  .rpt-card{ flex:1; background:rgba(255,255,255,.05); border:1px solid var(--line);
+    border-radius:10px; padding:.6rem; text-align:center; }
+  .rpt-card small{ display:block; font-size:.65rem; color:var(--txt-dim); letter-spacing:.08em; }
+  .rpt-g{ font-size:2rem; font-weight:900; line-height:1.1; }
+  .rpt-g.A{color:#7ee29b} .rpt-g.B{color:#a5e88f} .rpt-g.C{color:#ffb020} .rpt-g.D{color:#ff6b6b}
+  .rpt-net{ font-size:1.3rem; font-weight:900; }
+  .rpt-net.up{color:#7ee29b} .rpt-net.down{color:#ff6b6b}
+  .rpt-say{ background:rgba(245,184,0,.1); border:1px solid rgba(245,184,0,.35);
+    border-radius:10px; padding:.7rem .85rem; font-size:.9rem; line-height:1.8; }
+  .rpt-say b{ color:var(--gold-soft); }
+  .rpt-note{ font-size:.7rem; color:var(--txt-dim); margin-top:.5rem; line-height:1.6; }
+
+  /* 本局教練一致率 ＋ 登入引導 */
+  .acc-box{ background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:10px;
+    padding:.6rem .8rem; margin:0 0 .9rem; font-size:.9rem; line-height:1.6; }
+  .acc-box .acc-n{ font-size:1.4rem; font-weight:900; color:var(--gold-soft); }
+  .acc-box .acc-cta{ display:inline-block; margin-top:.5rem; background:linear-gradient(135deg,#f5b800,#ffd24a);
+    color:#2a1d00; font-weight:800; font-size:.85rem; padding:.4rem 1rem; border-radius:8px; text-decoration:none; }
+  .acc-box small{ color:var(--txt-dim); }
+
+  /* 排行榜 */
+  #uBoard{ z-index:26; }
+  .panel.bd{ max-width:400px; }
+  .bd-body{ text-align:left; margin:0 0 1rem; font-size:.9rem; max-height:46vh; overflow-y:auto; }
+  .bd-row{ display:flex; align-items:center; gap:.5rem; padding:.4rem .2rem; border-bottom:1px solid rgba(255,255,255,.07); }
+  .bd-row.mine{ background:rgba(245,184,0,.12); border-radius:6px; }
+  .bd-rank{ width:26px; font-weight:900; color:var(--gold-soft); flex:none; text-align:center; }
+  .bd-name{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .bd-acc{ font-weight:900; color:#fff; flex:none; }
+  .bd-sub{ font-size:.72rem; color:var(--txt-dim); flex:none; }
+  .bd-empty{ color:var(--txt-dim); text-align:center; padding:1.2rem .5rem; line-height:1.8; }
+
+  /* 覆盤（z-index 高於結算面板，雙保險） */
+  #uReview{ z-index:24; }
+  .panel.rv{ max-width:400px; text-align:left; }
+  .rv-head{ display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.7rem; }
+  .rv-head>div{ text-align:center; flex:1; }
+  .rv-title{ font-size:1.15rem; font-weight:900; color:var(--gold-soft); }
+  .rv-idx{ font-size:.75rem; color:var(--txt-dim); }
+  .rv-nav{ width:40px; height:40px; border-radius:10px; border:1px solid var(--line);
+    background:rgba(255,255,255,.06); color:var(--txt); font-size:1.5rem; cursor:pointer; flex:none; }
+  .rv-nav:disabled{ opacity:.3; cursor:default; }
+  .rv-verdict{ text-align:center; font-weight:800; font-size:1rem; padding:.5rem; border-radius:9px; margin-bottom:.7rem; }
+  .rv-verdict.good{ background:rgba(126,226,155,.15); color:#7ee29b; }
+  .rv-verdict.warn{ background:rgba(255,176,32,.15); color:#ffb020; }
+  .rv-hand{ display:flex; flex-wrap:wrap; gap:2px; justify-content:center; margin-bottom:.7rem; }
+  .rv-hand .tile.played{ outline:2px solid #ff6b6b; outline-offset:-1px; border-radius:6px; }
+  .rv-hand .tile.best{ outline:2px solid var(--gold); outline-offset:-1px; border-radius:6px; }
+  .rv-rows{ font-size:.85rem; margin-bottom:1rem; }
+  .rv-row{ display:flex; align-items:center; gap:.4rem; padding:.35rem 0; border-bottom:1px solid rgba(255,255,255,.07); }
+  .rv-row b{ color:#fff; } .rv-row .rv-m{ margin-left:auto; color:var(--txt-dim); font-size:.78rem; }
+  .toast{ position:absolute; top:14%; left:50%; transform:translateX(-50%); z-index:15;
+    background:rgba(0,0,0,.75); border:1px solid var(--gold); color:var(--gold-soft);
+    font-size:1.05rem; font-weight:800; padding:.5rem 1.2rem; border-radius:12px;
+    pointer-events:none; opacity:0; transition:opacity .25s; white-space:nowrap; }
+  .toast.show{ opacity:1; }
+
+  /* ══ 動畫（雀神感） ══ */
+  /* 發牌：逐張滑入 */
+  @keyframes dealIn{ from{ transform:translateY(22px) scale(.72); opacity:0; } to{ transform:none; opacity:1; } }
+  .cell.deal{ animation:dealIn .4s cubic-bezier(.2,1.4,.4,1) both; }
+  /* 摸牌：彈跳登場 */
+  @keyframes popIn{ 0%{ transform:scale(.25) rotate(-10deg); opacity:0; } 62%{ transform:scale(1.14) rotate(2deg); } 100%{ transform:none; opacity:1; } }
+  .cell.pop{ animation:popIn .34s cubic-bezier(.2,1.2,.4,1) both; }
+  /* 棄牌：落河 */
+  @keyframes riverDrop{ 0%{ transform:translateY(-16px) scale(1.4); opacity:0; } 68%{ transform:translateY(2px) scale(.96); } 100%{ transform:none; opacity:1; } }
+  .river .tile.drop{ animation:riverDrop .32s ease-out both; }
+  /* 教練推薦：呼吸金光 */
+  @keyframes recPulse{
+    0%,100%{ box-shadow:0 0 8px rgba(245,184,0,.35); }
+    50%{ box-shadow:0 0 18px rgba(245,184,0,.85); } }
+  .cell.rec .tile{ animation:recPulse 1.6s ease-in-out infinite; }
+  /* 輪到誰：邊框脈動 */
+  @keyframes turnPulse{
+    0%,100%{ box-shadow:0 0 0 1px var(--gold),0 0 8px rgba(245,184,0,.2); }
+    50%{ box-shadow:0 0 0 1px var(--gold),0 0 16px rgba(245,184,0,.5); } }
+  .oc.turn{ animation:turnPulse 1.4s ease-in-out infinite; }
+  /* 選牌浮起：彈簧 */
+  .cell .tile{ transition:transform .16s cubic-bezier(.2,1.6,.4,1); }
+  /* 大字特效（碰/吃/胡/自摸/流局） */
+  #uCallout{ position:absolute; top:36%; left:50%; transform:translate(-50%,-50%); z-index:18;
+    pointer-events:none; opacity:0; text-align:center; }
+  #uCallout .co{ font-size:3.4rem; font-weight:900; letter-spacing:.08em; line-height:1.1;
+    text-shadow:0 0 24px currentColor,0 4px 10px rgba(0,0,0,.6); -webkit-text-stroke:2px rgba(0,0,0,.35); }
+  #uCallout .co-sub{ font-size:.95rem; font-weight:800; color:#fff; text-shadow:0 2px 6px rgba(0,0,0,.7); margin-top:.2rem; }
+  @keyframes calloutGo{
+    0%{ transform:translate(-50%,-50%) scale(2.4); opacity:0; }
+    22%{ transform:translate(-50%,-50%) scale(1); opacity:1; }
+    72%{ transform:translate(-50%,-50%) scale(1); opacity:1; }
+    100%{ transform:translate(-50%,-50%) scale(.88); opacity:0; } }
+  #uCallout.go{ animation:calloutGo 1.05s cubic-bezier(.2,1,.4,1) both; }
+  /* 結算面板：縮放進場＋台數逐行揭示 */
+  @keyframes panelIn{ from{ transform:scale(.8); opacity:0; } to{ transform:none; opacity:1; } }
+  .panel{ animation:panelIn .38s cubic-bezier(.2,1.3,.4,1) both; }
+  @keyframes rowIn{ from{ opacity:0; transform:translateX(-16px); } to{ opacity:1; transform:none; } }
+  .score-table tr.srow{ animation:rowIn .34s ease-out both; }
+  /* ── 飛牌：打出的牌從手上/對手飛進牌河 ── */
+  .fly{ position:fixed; z-index:30; pointer-events:none; will-change:transform;
+    transition:transform .42s cubic-bezier(.3,.9,.35,1), opacity .42s ease; }
+  .fly .tface{ width:100%; height:100%; display:block;
+    filter:drop-shadow(0 8px 14px rgba(0,0,0,.55)); }
+  .river .tile.landing{ opacity:0; }
+
+  /* ── 氈面呼吸光（環境動態） ── */
+  .screen::before{ content:''; position:absolute; inset:-20%; pointer-events:none; z-index:0;
+    background:radial-gradient(closest-side, rgba(120,255,190,.10), transparent 70%);
+    animation:feltGlow 9s ease-in-out infinite; }
+  @keyframes feltGlow{
+    0%,100%{ transform:translate(-6%,-4%) scale(1); opacity:.55; }
+    50%{ transform:translate(6%,5%) scale(1.15); opacity:.9; } }
+  .top,.oppo,.river,.coach,.mine-extra,.hand-zone,.win-prompt{ position:relative; z-index:1; }
+
+  /* ── 輪到你：手牌區亮起 ── */
+  @keyframes myTurnGlow{
+    0%,100%{ box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 -6px 20px -8px rgba(245,184,0,.35); }
+    50%{ box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 -6px 26px -6px rgba(245,184,0,.75); } }
+  .hand-zone.my-turn{ animation:myTurnGlow 2s ease-in-out infinite; }
+
+  /* ── 聽牌了：資訊條脈動 ── */
+  @keyframes tenpaiPulse{
+    0%,100%{ border-color:var(--line); }
+    50%{ border-color:var(--gold); box-shadow:0 0 12px rgba(245,184,0,.4); } }
+  .chip.tenpai{ animation:tenpaiPulse 1.5s ease-in-out infinite; }
+
+  /* ── 副露翻轉進場 ── */
+  @keyframes meldFlip{ from{ transform:rotateY(90deg) scale(.7); opacity:0; } to{ transform:none; opacity:1; } }
+  .mine-meld.fresh, .oc-meld.fresh{ animation:meldFlip .4s cubic-bezier(.2,1.2,.4,1) both; }
+
+  /* ── 牌牆數字跳動 ── */
+  @keyframes wallBump{ 0%{ transform:scale(1); } 40%{ transform:scale(1.28); color:var(--gold-soft); } 100%{ transform:scale(1); } }
+  .wall .n.bump{ animation:wallBump .32s ease-out; }
+
+  /* ── 胡牌光芒爆發 ── */
+  #uBurst{ position:absolute; inset:0; z-index:17; pointer-events:none; opacity:0; }
+  #uBurst.go{ animation:burstFade 1.4s ease-out both; }
+  @keyframes burstFade{ 0%{ opacity:1; } 100%{ opacity:0; } }
+  #uBurst .ring{ position:absolute; top:36%; left:50%; width:40px; height:40px; margin:-20px 0 0 -20px;
+    border-radius:50%; border:3px solid var(--gold); animation:ringOut 1.1s cubic-bezier(.15,.8,.3,1) both; }
+  #uBurst .ring:nth-child(2){ animation-delay:.14s; border-color:#fff8d0; }
+  #uBurst .ring:nth-child(3){ animation-delay:.28s; border-color:rgba(245,184,0,.6); }
+  @keyframes ringOut{ from{ transform:scale(.2); opacity:.95; } to{ transform:scale(11); opacity:0; } }
+  #uBurst .spark{ position:absolute; top:36%; left:50%; width:7px; height:7px; margin:-3.5px 0 0 -3.5px;
+    border-radius:50%; background:var(--gold-soft); animation:sparkOut 1s ease-out both; }
+  @keyframes sparkOut{ from{ transform:translate(0,0) scale(1); opacity:1; }
+    to{ transform:translate(var(--dx),var(--dy)) scale(.2); opacity:0; } }
+
+  @media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="top">
+    <a href="/games/taiwan-mahjong/" class="exit-btn" title="離開牌桌" aria-label="離開牌桌">←</a>
+    <div class="wind">
+      <div class="wind-badge" id="uWind">東</div>
+      <span><small>東圈 · 你是</small><b id="uWindTxt">東家（莊）</b></span>
+    </div>
+    <div class="wall"><div class="n" id="uWall">–</div><small>牌牆剩</small></div>
+    <label class="coach-toggle"><input type="checkbox" id="uCoachOn" checked>教練</label>
+  </div>
+
+  <div class="oppo" id="uOppo"></div>
+
+  <div class="river">
+    <div class="river-label"><span>牌 河 · 四家棄牌</span>
+      <span class="river-legend">
+        <span><i class="rs0" style="background:var(--gold)"></i>你</span>
+        <span><i style="background:#5a9bd5"></i>下</span>
+        <span><i style="background:#b07fd8"></i>對</span>
+        <span><i style="background:#e58bb1"></i>上</span>
+      </span>
+    </div>
+    <div class="river-grid" id="uRiver"></div>
+  </div>
+
+  <div class="coach" id="uCoach">🧑‍🏫 教練待命中…</div>
+
+  <div class="mine-extra">
+    <span id="uMelds"></span>
+    <span class="mine-flowers" id="uFlowers"></span>
+  </div>
+
+  <div class="win-prompt" id="uWinPrompt" style="display:none">
+    <div class="wp-head"><span class="wp-title" id="uWpTitle">🎉 你可以胡了！</span><span class="wp-tai" id="uWpTai"></span></div>
+    <div class="wp-hand" id="uWpHand"></div>
+    <div class="wp-note" id="uWpNote"></div>
+  </div>
+
+  <div class="hand-zone">
+    <div class="drawn-row" id="uDrawn"></div>
+    <div class="hand" id="uHand"></div>
+    <div class="actions" id="uActions"></div>
+    <div class="hint" id="uHint"></div>
+  </div>
+
+  <div class="overlay" id="uBoard" style="display:none">
+    <div class="panel bd">
+      <h2>🏆 教練一致率排行榜</h2>
+      <p class="sub">排的是<strong>技術</strong>不是運氣——你的每一手跟教練建議一致的比率。<br>訪客也能玩，<strong>登入才會記錄成績</strong>。</p>
+      <div id="uBoardBody" class="bd-body">載入中…</div>
+      <button class="big-btn" id="uBoardClose">關閉</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="uReview" style="display:none">
+    <div class="panel rv">
+      <div class="rv-head">
+        <button class="rv-nav" id="uRvPrev">‹</button>
+        <div><div class="rv-title">📖 覆盤</div><div class="rv-idx" id="uRvIdx"></div></div>
+        <button class="rv-nav" id="uRvNext">›</button>
+      </div>
+      <div class="rv-verdict" id="uRvVerdict"></div>
+      <div class="rv-hand" id="uRvHand"></div>
+      <div class="rv-rows" id="uRvRows"></div>
+      <button class="big-btn" id="uRvClose">關閉覆盤</button>
+    </div>
+  </div>
+
+  <div class="toast" id="uToast"></div>
+  <div id="uCallout"><div class="co" id="uCoWord"></div><div class="co-sub" id="uCoSub"></div></div>
+  <div id="uBurst"></div>
+  <div class="overlay" id="uStart">
+    <div class="panel">
+      <h2>🀄 台麻練習桌</h2>
+      <p class="sub">你（東家莊）對戰 3 個 AI。<br>教練會即時建議打哪張、顯示向聽與進張。<br>點一下選牌，<b>再點同一張</b>就打出。</p>
+      <div class="stake-pick">
+        <div class="sp-label">選底台 <small>（用眼光點當籌碼，輸光隔天自動補滿）</small></div>
+        <div class="sp-row" id="uStakeRow">
+          <button class="sp on" data-b="10" data-t="10">練習<small>10 / 10</small></button>
+          <button class="sp" data-b="50" data-t="50">家庭局<small>50 / 50</small></button>
+          <button class="sp" data-b="100" data-t="100">大局<small>100 / 100</small></button>
+        </div>
+        <div class="sp-pts" id="uPts">載入中…</div>
+      </div>
+      <button class="big-btn" id="uStartBtn">開始對局</button>
+      <p class="back-link"><a href="/games/taiwan-mahjong/">← 回說明頁</a></p>
+    </div>
+  </div>
+  <div class="overlay" id="uOver" style="display:none">
+    <div class="panel">
+      <h2 id="uOverTitle">結果</h2>
+      <p class="sub" id="uOverSub"></p>
+      <div class="win-hand" id="uOverHand"></div>
+      <table class="score-table" id="uOverScore"></table>
+      <p class="score-hint" id="uOverHint"></p>
+      <div class="acc-box" id="uAccBox"></div>
+      <div class="btn-row">
+        <button class="big-btn ghost" id="uReviewBtn">📖 看覆盤</button>
+        <button class="big-btn" id="uAgainBtn">再來一局</button>
+      </div>
+      <p class="back-link"><a href="#" id="uBoardBtn">🏆 排行榜</a> ・ <a href="/games/taiwan-mahjong/">← 離開牌桌</a></p>
+    </div>
+  </div>
+</div>
+
+<script type="module" is:inline>
+import { TILE_NAMES, KINDS } from '/mahjong/core/tiles.mjs';
+import { shanten } from '/mahjong/core/shanten.mjs';
+import { usefulTiles } from '/mahjong/core/ukeire.mjs';
+import { rankDiscards, evalClaim, evalKong } from '/mahjong/ai/discard.mjs';
+import { Game, aiController } from '/mahjong/game/flow.mjs';
+import { strToKind, scoreWin } from '/mahjong/core/decompose.mjs';
+import { tileFaceSVG, TILE_DEFS } from '/mahjong/tiles-svg.mjs';
+import { dangerOf, dangerLabel, threatOf } from '/mahjong/ai/defense.mjs';
+
+/* ── 牌面：與 game8la 算台練習器同一套（一萬/一索鳥/一筒大餅） ── */
+document.body.insertAdjacentHTML('afterbegin', TILE_DEFS);
+function tileHTML(k,size){ return `<div class="tile ${size||''}">${tileFaceSVG(k)}</div>`; }
+const FLOWER_NAMES=['','春','夏','秋','冬','梅','蘭','竹','菊'];
+
+/* ── 遊戲狀態 ── */
+const $=id=>document.getElementById(id);
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const state={ game:null, mode:'idle', lifted:null, drawn:-1, resolve:null,
+  claimOffer:null, turnSeat:-1, riverSeq:[], coachOn:true, autopilot:false,
+  lastHandCount:0, animRiverLen:0, animDrawnFor:-1, dealtAt:0, review:[], rvIdx:0,
+  cutRect:null, freshMeld:null, stake:{b:10,t:10}, me:null };
+
+function toast(msg){ const t=$('uToast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1400); }
+function callout(word,color,sub){
+  const el=$('uCallout');
+  $('uCoWord').textContent=word; $('uCoWord').style.color=color;
+  $('uCoSub').textContent=sub||'';
+  el.classList.remove('go'); void el.offsetWidth; el.classList.add('go');
+}
+
+/* 胡牌光芒爆發（三圈擴散＋放射火花） */
+function burst(){
+  if(state.autopilot) return;
+  const el=$('uBurst');
+  let h='<div class="ring"></div><div class="ring"></div><div class="ring"></div>';
+  for(let i=0;i<14;i++){
+    const a=(i/14)*Math.PI*2, d=90+Math.random()*70;
+    h+=`<div class="spark" style="--dx:${(Math.cos(a)*d).toFixed(0)}px;--dy:${(Math.sin(a)*d).toFixed(0)}px;animation-delay:${(i*0.02).toFixed(2)}s"></div>`;
+  }
+  el.innerHTML=h;
+  el.classList.remove('go'); void el.offsetWidth; el.classList.add('go');
+}
+
+/* 飛牌：從 srcRect 飛到牌河最新那張的位置 */
+function flyTile(kind, srcRect){
+  if(state.autopilot||!srcRect) return;
+  const target=$('uRiver').querySelector('.tile:last-child');
+  if(!target) return;
+  const tr=target.getBoundingClientRect();
+  const el=document.createElement('div');
+  el.className='fly';
+  el.style.cssText=`left:0;top:0;width:${srcRect.width}px;height:${srcRect.height}px;`
+    +`transform:translate(${srcRect.left}px,${srcRect.top}px) scale(1);opacity:1;`;
+  el.innerHTML=tileFaceSVG(kind);
+  document.body.appendChild(el);
+  target.classList.add('landing');
+  requestAnimationFrame(()=>{
+    const sc=tr.width/srcRect.width;
+    el.style.transform=`translate(${tr.left}px,${tr.top}px) scale(${sc.toFixed(3)})`;
+    el.style.transformOrigin='top left';
+  });
+  setTimeout(()=>{ el.remove(); target.classList.remove('landing'); }, 440);
+}
+
+/* 人類控制器：resolve 由 UI 點擊觸發 */
+const human={
+  async discard(view){
+    state.mode='discard'; state.lifted=null; render();
+    if(state.autopilot){ const c=rankDiscards(view.hand,view.meldCount,view.visible,view.table)[0];
+      recordDecision(view,c.kind); state.mode='idle'; state.drawn=-1; return c.kind; }
+    return new Promise(res=>{ state.resolve=k=>{ recordDecision(view,k); state.mode='idle'; state.drawn=-1; state.resolve=null; res(k); render(); }; });
+  },
+  async claim(view,offer){
+    if(state.autopilot){
+      if(offer.type==='win') return true;
+      if(offer.type==='kong'){
+        for(let i=0;i<offer.options.length;i++)
+          if(evalKong(view.hand,view.meldCount,offer.options[i]).take) return i;
+        return null;
+      }
+      if(offer.type==='pon'){
+        if(offer.canKong&&evalKong(view.hand,view.meldCount,{mode:'minkan',tile:offer.tile}).take) return 'kong';
+        return evalClaim(view.hand,view.meldCount,{type:'pon',tile:offer.tile}).take;
+      }
+      for(const b of offer.bases) if(evalClaim(view.hand,view.meldCount,{type:'chow',tile:offer.tile,base:b}).take) return b;
+      return null;
+    }
+    state.mode='claim'; state.claimOffer=offer; render();
+    return new Promise(res=>{ state.resolve=v=>{ state.mode='idle'; state.claimOffer=null; state.resolve=null; res(v); render(); }; });
+  },
+};
+/* AI 加一點思考延遲，讓人跟得上 */
+function slowAI(){ const base=aiController();
+  return { async discard(v){ if(!state.autopilot) await sleep(500); return base.discard(v); },
+           async claim(v,o){ if(!state.autopilot) await sleep(250); return base.claim(v,o); } }; }
+
+/* ── 鳴牌建議：吃/碰/槓到底該不該？ ── */
+function claimAdvice(off){
+  if(!off||off.type==='win') return null;
+  const g=state.game, me=g.seats[0], f=me.melds.length;
+  const menqing = f===0;                                   // 目前還是門清
+  const isDragon = k => k>=31;                             // 中發白
+  const myWind = 27+(me.wind-1), roundWind = 27+(g.round-1);
+  const valueTile = k => isDragon(k) || k===myWind || k===roundWind;
+  const cost = menqing ? '，而且會失去門清（−1 台）' : '';
+
+  if(off.type==='kong'){
+    const rs=off.options.map((o,i)=>({i,o,r:evalKong(me.hand,f,o)}));
+    const good=rs.find(x=>x.r.take);
+    if(good) return { idx:good.i, take:true,
+      text:`建議<b>${good.o.mode==='ankan'?'暗槓':'加槓'}</b>——槓完向聽維持 ${good.r.after} 向聽還能多補一張牌（暗槓不破門清）` };
+    return { take:false, text:`建議<b>不要槓</b>——槓完向聽會變差（${rs[0].r.before}→${rs[0].r.after}），手牌變化也變少` };
+  }
+
+  if(off.type==='pon'){
+    const r=evalClaim(me.hand,f,{type:'pon',tile:off.tile});
+    if(r.take) return { take:true,
+      text:`建議<b>碰</b>——碰完從 ${r.before} 向聽進步到 ${r.after} 向聽${valueTile(off.tile)?'，而且這是有台的牌':''}${cost}` };
+    if(valueTile(off.tile)) return { take:true, soft:true,
+      text:`可以碰——向聽不會變好（維持 ${r.before} 向聽），但 <b>${TILE_NAMES[off.tile]}</b> 有台，想做牌可以碰${cost}` };
+    return { take:false,
+      text:`建議<b>不要碰</b>——碰了向聽也不會變好（還是 ${r.before} 向聽）${cost}` };
+  }
+
+  // 吃
+  const rs=off.bases.map(b=>({b,r:evalClaim(me.hand,f,{type:'chow',tile:off.tile,base:b})}));
+  const good=rs.filter(x=>x.r.take).sort((a,b)=>a.r.after-b.r.after)[0];
+  if(good) return { base:good.b, take:true,
+    text:`建議<b>吃 ${[good.b,good.b+1,good.b+2].map(k=>TILE_NAMES[k]).join('')}</b>——吃完從 ${good.r.before} 向聽進步到 ${good.r.after} 向聽${cost}` };
+  return { take:false,
+    text:`建議<b>不用吃</b>——吃了向聽不會變好（還是 ${rs[0].r.before} 向聽），等於拆牌換一組面子${cost}` };
+}
+
+/* ── 渲染 ── */
+const OPPO_LABEL=['你','下家','對家','上家'];
+/* 放槍危險度（現物/筋/壁/字牌見數 × 對手威脅度） */
+const RISKC={ '安全':'#7ee29b', '低':'#a5e88f', '中':'#ffb020', '高':'#ff6b6b' };
+function riskOf(k){
+  const v=state.game.viewFor(0);
+  return dangerOf(k, v.table.seats, 0, v.visible, v.table.turnsPlayed);
+}
+const WINDCH=['東','南','西','北'];
+function render(){
+  const g=state.game; if(!g||!g.seats) return;
+  // 牌牆數字：有變動就跳一下
+  const wallN=g.remaining();
+  const wEl=$('uWall');
+  if(wEl.textContent!==String(wallN)){
+    wEl.textContent=wallN;
+    wEl.classList.remove('bump'); void wEl.offsetWidth; wEl.classList.add('bump');
+  }
+  // 輪到你：手牌區呼吸光
+  document.querySelector('.hand-zone').classList.toggle('my-turn', state.mode==='discard');
+
+  // 對手（座位 1,2,3）
+  let oh='';
+  for(const i of [2,1,3].sort()) {} // keep order 1,2,3 → 下/對/上
+  for(let i=1;i<=3;i++){
+    const s=g.seats[i];
+    const cnt=s.hand.reduce((a,b)=>a+b,0);
+    const freshOc=state.freshMeld&&state.freshMeld.seat===i&&(Date.now()-state.freshMeld.at)<600;
+    const melds=s.melds.map((m,mi)=>{
+      const lab=m.kind==='kong'?(m.concealed?'暗槓':'槓'):m.kind==='pung'?'碰':'吃';
+      const isLast=mi===s.melds.length-1;
+      return `<span class="oc-meld${freshOc&&isLast?' fresh':''}">${lab}${TILE_NAMES[m.base]}</span>`;
+    }).join('');
+    const fl=s.flowers.length?`<span class="oc-flower">花×${s.flowers.length}</span>`:'';
+    const last=s.river.length?tileHTML(s.river[s.river.length-1],'t-mini'):'';
+    const th=threatOf(s, Math.max(...g.seats.map(x=>x.river.length)));
+    const thLv=th<0.3?'lo':th<0.55?'mid':'hi';
+    const thTxt=th<0.3?'安全':th<0.55?'留意':'危險';
+    oh+=`<div class="oc${state.turnSeat===i?' turn':''}">
+      <div class="oc-top"><span class="seat-b">${WINDCH[i]}</span><span class="oc-name">${OPPO_LABEL[i]}</span>
+        <span class="oc-threat ${thLv}" title="威脅度（副露/巡數/牌路推估）">${thTxt}</span></div>
+      <div class="oc-bot">${melds}${fl}<span class="oc-cut"><small>打</small>${last}</span></div></div>`;
+  }
+  $('uOppo').innerHTML=oh;
+
+  // 牌河（依打出順序；最新一張落河動畫，只播一次）
+  const newDrop=state.animRiverLen!==state.riverSeq.length;
+  if(newDrop) state.animRiverLen=state.riverSeq.length;
+  $('uRiver').innerHTML=state.riverSeq.map((r,i)=>{
+    const last=i===state.riverSeq.length-1;
+    const cls=(last?' fresh':'')+(last&&newDrop?' drop':'');
+    return tileHTML(r.tile,'t-sm'+cls).replace('class="tile ',`class="tile rs${r.seat} `);
+  }).join('');
+  const rg=$('uRiver'); rg.scrollTop=rg.scrollHeight;
+
+  // 我的副露/花
+  const me=g.seats[0];
+  const freshMine=state.freshMeld&&state.freshMeld.seat===0&&(Date.now()-state.freshMeld.at)<600;
+  $('uMelds').innerHTML=me.melds.map((m,mi)=>{
+    const ks = m.kind==='kong' ? [m.base,m.base,m.base,m.base]
+             : m.kind==='pung' ? [m.base,m.base,m.base]
+             : [m.base,m.base+1,m.base+2];
+    const isLast=mi===me.melds.length-1;
+    return `<span class="mine-meld${m.kind==='kong'?' is-kong':''}${freshMine&&isLast?' fresh':''}">${ks.map(k=>tileHTML(k,'t-mini')).join('')}</span>`;
+  }).join(' ');
+  $('uFlowers').textContent=me.flowers.length?('花：'+me.flowers.map(f=>FLOWER_NAMES[f]).join('')):'';
+
+  // 手牌（打牌模式含摸牌 = 17-3f 張；其餘為靜止）
+  state.advice = state.mode==='claim' ? claimAdvice(state.claimOffer) : null;
+  renderHand();
+  renderWinPrompt();
+  renderActions();
+}
+
+/* 可以胡了：秀出胡牌牌型與台數，讓玩家看懂再決定 */
+function renderWinPrompt(){
+  const el=$('uWinPrompt'), o=state.claimOffer;
+  if(state.mode!=='claim'||!o||o.type!=='win'){ el.style.display='none'; return; }
+  const me=state.game.seats[0];
+  const hand=me.hand.slice();
+  if(!o.selfDraw) hand[o.tile]++;               // 榮和：把那張加進來看牌型
+  const ctx=state.game.ctxFor(me, !!o.selfDraw, o.selfDraw?null:o.tile);
+  const sc=scoreWin(hand, me.melds, ctx);
+  $('uWpTitle').textContent = o.selfDraw?'🎉 自摸！可以胡了':'🎉 可以胡了！（胡別人打的牌）';
+  $('uWpTai').textContent = sc?`${sc.total} 台`:'';
+  if(sc){
+    let used=false;
+    $('uWpHand').innerHTML = sc.melds.map(m=>{
+      const k0=strToKind(m.t);
+      const ks=m.kind==='pung'?[k0,k0,k0]:[k0,k0+1,k0+2];
+      return `<span class="wp-meld">${ks.map(k=>{
+        const mark=(!used&&k===o.tile)?(used=true,' wt'):'';
+        return tileHTML(k,'t-mini'+mark);
+      }).join('')}</span>`;
+    }).join('')
+    + `<span class="wp-meld">${[0,1].map(()=>{
+        const pk=strToKind(sc.pair);
+        const mark=(!used&&pk===o.tile)?(used=true,' wt'):'';
+        return tileHTML(pk,'t-mini'+mark);
+      }).join('')}</span>`;
+    const names=sc.lines.length?sc.lines.map(l=>l.name+' '+l.tai).join('・'):'屁胡（無台）';
+    $('uWpNote').innerHTML=`牌型：5 副面子 + 1 對將（金框＝胡的那張）　台：${names}`;
+  } else { $('uWpHand').innerHTML=''; $('uWpNote').textContent=''; }
+  el.style.display='';
+}
+
+function handList(){
+  const me=state.game.seats[0], list=[];
+  const counts=me.hand.slice();
+  if(state.mode==='discard' && state.drawn>=0 && counts[state.drawn]>0) counts[state.drawn]--; // 摸的那張獨立顯示
+  for(let k=0;k<KINDS;k++) for(let c=0;c<counts[k];c++) list.push(k);
+  return list;
+}
+function renderHand(){
+  const me=state.game.seats[0];
+  const canCut=state.mode==='discard';
+  // 教練建議：同向聽且進張並列最高的「全部」推薦，讓玩家自己選
+  let recSet=new Set(), coachTxt='';
+  if(canCut && state.coachOn){
+    const rk=rankDiscards(me.hand, me.melds.length, state.game.visibleFor(0));
+    if(rk.length){
+      const bestS=rk[0].shanten;
+      const group=rk.filter(o=>o.shanten===bestS);
+      const maxU=group[0].ukeire;
+      const coBest=group.filter(o=>o.ukeire===maxU);
+      const others=group.filter(o=>o.ukeire<maxU).slice(0,2);
+      coBest.forEach(o=>recSet.add(o.kind));
+      const names=coBest.map(o=>`<b>${TILE_NAMES[o.kind]}</b>`).join(' 或 ');
+      let stateTxt=bestS===-1?'就胡了':bestS===0?'聽牌':bestS+'向聽';
+      if(bestS===0){
+        me.hand[coBest[0].kind]--;
+        const w=usefulTiles(me.hand, me.melds.length, state.game.visibleFor(0));
+        me.hand[coBest[0].kind]++;
+        stateTxt='聽牌，聽 '+w.tiles.map(t=>TILE_NAMES[t.kind]).slice(0,5).join('/');
+      }
+      coachTxt=`🧑‍🏫 建議打 ${names}　<span style="color:var(--txt-dim)">打完${stateTxt}、進張 ${maxU} 張</span>`;
+      if(others.length) coachTxt+=`<span style="color:var(--txt-dim)">　次選：${others.map(o=>TILE_NAMES[o.kind]+'('+o.ukeire+'張)').join('、')}</span>`;
+      // 防守教學：每張建議牌的放槍風險（含最安全的替代選擇）
+      const riskTxt=coBest.map(o=>{ const lb=dangerLabel(riskOf(o.kind)); return `${TILE_NAMES[o.kind]} <b style="color:${RISKC[lb]}">${lb}</b>`; }).join('・');
+      let extra='';
+      const safest=[...rk].filter(o=>o.shanten<=bestS+1).map(o=>({o,d:riskOf(o.kind)})).sort((a,b)=>a.d-b.d)[0];
+      if(safest && !recSet.has(safest.o.kind) && safest.d<0.15)
+        extra=`　想保守可打 <b style="color:#7ee29b">${TILE_NAMES[safest.o.kind]}</b>（最安全）`;
+      coachTxt+=`<br><span style="font-size:.72rem;color:var(--txt-dim)">放槍風險：${riskTxt}${extra}</span>`;
+    }
+  }
+  const coach=$('uCoach');
+  if(!state.coachOn){ coach.className='coach off'; coach.innerHTML='🧑‍🏫 教練已關閉（右上角可開）'; }
+  else {
+    coach.className='coach';
+    const off=state.mode==='claim'?state.claimOffer:null;
+    const t=off&&off.type;
+    const adv=state.advice;
+    coach.innerHTML= coachTxt || (
+      t==='win' ? '🧑‍🏫 上面是你的胡牌牌型——看懂了再按「胡」，也可以先不胡繼續打'
+    : adv ? `🧑‍🏫 ${adv.text}`
+    : t ? '🧑‍🏫 有人打了牌——看下面按鈕決定要不要鳴' : '🧑‍🏫 等待中…');
+  }
+
+  // 摸牌位
+  const dr=$('uDrawn');
+  if(canCut && state.drawn>=0){
+    const isRec=recSet.has(state.drawn);
+    const doPop=state.animDrawnFor!==state.drawn; if(doPop) state.animDrawnFor=state.drawn;
+    const lifted=state.lifted==='d';
+    dr.innerHTML=`<small>剛摸 ▸</small><div class="cell${isRec?' rec':''}${lifted?' lift':''}${doPop?' pop':''}" data-key="d" data-k="${state.drawn}">
+      ${isRec?'<div class="rec-tag">教練推薦</div>':''}${lifted?'<div class="cut-tag">再點一下打出 ▲</div>':''}${tileHTML(state.drawn)}</div>`;
+  } else { dr.innerHTML=''; state.animDrawnFor=-1; }
+
+  // 手牌格（同種牌只在第一張標「教練推薦」字樣；發光全都有；開局逐張滑入）
+  const list=handList();
+  const nowT=Date.now();
+  if(state.lastHandCount===0&&list.length>0) state.dealtAt=nowT;
+  state.lastHandCount=list.length;
+  const dealAnim=nowT-state.dealtAt<900;
+  const tagged=new Set();
+  $('uHand').innerHTML=list.map((k,i)=>{
+    const isRec=canCut&&recSet.has(k)&&!(state.drawn===k&&recSet.has(state.drawn));
+    const showTag=isRec&&!tagged.has(k); if(showTag) tagged.add(k);
+    const lifted=canCut&&state.lifted===('h'+i);   // 用位置判斷：同種牌不會一起彈
+    const anim=dealAnim?` deal" style="animation-delay:${i*38}ms`:'';
+    return `<div class="cell${isRec?' rec':''}${lifted?' lift':''}${anim}" data-key="h${i}" data-k="${k}">
+      ${showTag?'<div class="rec-tag">教練推薦</div>':''}${lifted?'<div class="cut-tag">再點一下打出 ▲</div>':''}${tileHTML(k)}</div>`;
+  }).join('');
+  $('uHint').textContent=canCut?'點一下選牌，再點同一張打出':'';
+}
+
+function renderActions(){
+  const a=$('uActions');
+  if(state.mode!=='claim'||!state.claimOffer){ a.innerHTML=''; return; }
+  const o=state.claimOffer;
+  const adv=state.advice, coachOn=state.coachOn;
+  // 教練推薦的那顆按鈕加金框
+  const mark=(kind,val)=>{
+    if(!coachOn||!adv) return '';
+    if(kind==='pass') return adv.take===false?' best':'';
+    if(!adv.take) return '';
+    if(kind==='chow') return adv.base===val?' best':'';
+    if(kind==='kong') return adv.idx===val?' best':'';
+    return ' best';
+  };
+  let h='';
+  if(o.type==='win') h=`<button class="act hu" data-a="win" style="animation-delay:0s">${o.selfDraw?'自摸胡！':'胡！'}</button><button class="act pass" data-a="pass" style="animation-delay:.08s">先不胡</button>`;
+  else if(o.type==='kong'){
+    h=o.options.map((op,i)=>{
+      const tiles=Array.from({length:4},(_,j)=>tileHTML(op.tile,'t-sm'+(j===3?' claimed':''))).join('');
+      const lab=op.mode==='ankan'?'暗槓':'加槓';
+      return `<button class="act kong tiles${mark('kong',i)}" data-a="kong" data-i="${i}" style="animation-delay:${i*.08}s"><span class="act-lab">${lab}</span>${tiles}</button>`;
+    }).join('')+`<button class="act pass${mark('pass')}" data-a="pass" style="animation-delay:${o.options.length*.08}s">不槓</button>`;
+  }
+  else if(o.type==='pon'){
+    const tiles=[o.tile,o.tile,o.tile].map((k,i)=>tileHTML(k,'t-sm'+(i===2?' claimed':''))).join('');
+    h=`<button class="act pon tiles${mark('pon')}" data-a="pon" style="animation-delay:0s"><span class="act-lab">碰</span>${tiles}</button>`;
+    if(o.canKong){
+      const kt=Array.from({length:4},(_,j)=>tileHTML(o.tile,'t-sm'+(j===3?' claimed':''))).join('');
+      h+=`<button class="act kong tiles" data-a="minkan" style="animation-delay:.08s"><span class="act-lab">槓</span>${kt}</button>`;
+    }
+    h+=`<button class="act pass${mark('pass')}" data-a="pass" style="animation-delay:${o.canKong?.16:.08}s">跳過</button>`;
+  }
+  else if(o.type==='chow'){
+    h=o.bases.map((b,i)=>{
+      const tiles=[b,b+1,b+2].map(k=>tileHTML(k,'t-sm'+(k===o.tile?' claimed':''))).join('');
+      return `<button class="act chow tiles${mark('chow',b)}" data-a="chow" data-b="${b}" style="animation-delay:${i*.08}s"><span class="act-lab">吃</span>${tiles}</button>`;
+    }).join('')
+     +`<button class="act pass${mark('pass')}" data-a="pass" style="animation-delay:${o.bases.length*.08}s">跳過</button>`;
+  }
+  a.innerHTML=h;
+}
+
+/* ── 事件接線 ── */
+$('uHand').addEventListener('click',handTap);
+$('uDrawn').addEventListener('click',handTap);
+function handTap(e){
+  if(state.mode!=='discard') return;
+  const cell=e.target.closest('.cell'); if(!cell) return;
+  const key=cell.dataset.key, k=+cell.dataset.k;
+  if(state.lifted===key){                     // 點「同一張」＝打出（比位置，不是比牌種）
+    const t=cell.querySelector('.tile');
+    state.cutRect = t ? t.getBoundingClientRect() : null;   // 記住起飛座標
+    if(state.resolve) state.resolve(k);
+    return;
+  }
+  state.lifted=key; // 點別張＝換選
+  renderHand();
+}
+$('uActions').addEventListener('click',e=>{
+  const b=e.target.closest('.act'); if(!b||!state.resolve) return;
+  const act=b.dataset.a;
+  if(act==='win') state.resolve(true);
+  else if(act==='pon') state.resolve(true);
+  else if(act==='minkan') state.resolve('kong');
+  else if(act==='kong') state.resolve(+b.dataset.i);
+  else if(act==='chow') state.resolve(+b.dataset.b);
+  else state.resolve((state.claimOffer.type==='chow'||state.claimOffer.type==='kong')?null:false);
+});
+$('uCoachOn').addEventListener('change',e=>{ state.coachOn=e.target.checked; render(); });
+$('uOverScore').addEventListener('click',e=>{
+  const tr=e.target.closest('tr'); if(!tr||tr.dataset.groups===undefined) return;
+  document.querySelectorAll('.win-meld').forEach(el=>el.classList.remove('hl'));
+  (tr.dataset.groups||'').split(',').filter(x=>x!=='').forEach(gi=>{
+    const el=document.querySelector(`.win-meld[data-g="${gi}"]`); if(el) el.classList.add('hl'); });
+  if(tr.dataset.pair==='1'){ const p=document.querySelector('.win-meld[data-g="pair"]'); if(p) p.classList.add('hl'); }
+});
+
+/* ── 覆盤：記錄你每一手的決策 ── */
+function recordDecision(view,chosen){
+  const rk=rankDiscards(view.hand, view.meldCount, view.visible, view.table);
+  const dg=k=>dangerOf(k, view.table.seats, 0, view.visible, view.table.turnsPlayed);
+  const best=rk[0], mine=rk.find(o=>o.kind===chosen)||null;
+  state.review.push({
+    hand: view.hand.slice(), chosen, bestKind: best.kind,
+    bestS: best.shanten, bestU: best.ukeire,
+    mineS: mine?mine.shanten:null, mineU: mine?mine.ukeire:null,
+    dangerChosen: dg(chosen),
+    top: rk.slice(0,4).map(o=>({kind:o.kind, shanten:o.shanten, ukeire:o.ukeire, danger:dg(o.kind)})),
+  });
+}
+
+function renderReview(){
+  const R=state.review, i=state.rvIdx;
+  if(!R.length){ $('uRvIdx').textContent='這局你沒有出手紀錄'; $('uRvHand').innerHTML=''; $('uRvRows').innerHTML=''; $('uRvVerdict').className='rv-verdict'; $('uRvVerdict').textContent=''; return; }
+  const d=R[i];
+  $('uRvIdx').textContent=`第 ${i+1} 手 / 共 ${R.length} 手`;
+  $('uRvPrev').disabled=i===0; $('uRvNext').disabled=i===R.length-1;
+  const optimal = d.chosen===d.bestKind || (d.mineS===d.bestS && d.mineU===d.bestU);
+  const v=$('uRvVerdict');
+  v.className='rv-verdict '+(optimal?'good':'warn');
+  v.innerHTML = optimal
+    ? `✅ 好球！你打 <b>${TILE_NAMES[d.chosen]}</b>　${d.bestS===0?'保持聽牌':d.bestS+' 向聽'}、進張 ${d.bestU} 張`
+    : `⚠️ 有更好的：你打 <b>${TILE_NAMES[d.chosen]}</b>（${d.mineS!=null?d.mineS+'向聽/進張'+d.mineU:'—'}）　教練會打 <b>${TILE_NAMES[d.bestKind]}</b>（${d.bestS}向聽/進張${d.bestU}）`;
+  const list=[]; for(let k=0;k<KINDS;k++) for(let c=0;c<d.hand[k];c++) list.push(k);
+  let markedPlayed=false, markedBest=false;
+  $('uRvHand').innerHTML=list.map(k=>{
+    let cls='t-sm';
+    if(k===d.chosen&&!markedPlayed){ cls+=' played'; markedPlayed=true; }
+    else if(k===d.bestKind&&!markedBest){ cls+=' best'; markedBest=true; }
+    return tileHTML(k,cls);
+  }).join('');
+  $('uRvRows').innerHTML=d.top.map((o,n)=>{
+    const lb=dangerLabel(o.danger);
+    const tag=o.kind===d.chosen?'（你打的）':n===0?'（最佳）':'';
+    return `<div class="rv-row">${tileHTML(o.kind,'t-mini')}<b>${TILE_NAMES[o.kind]}</b>${tag}
+      <span class="rv-m">${o.shanten===0?'聽牌':o.shanten+'向聽'}・進張${o.ukeire}・風險<span style="color:${RISKC[lb]}">${lb}</span></span></div>`;
+  }).join('');
+}
+
+/* ── 成績上傳（訪客照玩，只是不記錄）＋ 排行榜 ── */
+function coachAccuracy(){
+  const R=state.review;
+  if(!R.length) return {match:0,total:0,pct:null};
+  const match=R.filter(d=>d.chosen===d.bestKind||(d.mineS===d.bestS&&d.mineU===d.bestU)).length;
+  return { match, total:R.length, pct:Math.round(match/R.length*1000)/10 };
+}
+const VERDICT={
+  'skill-win':{t:'技術有底子，這回牌運也站你這邊',
+    d:'但別忘了：這是<b>打 AI</b>。真人牌桌有情緒、有默契、有你看不到的變數，而且長期還有抽水在磨你。<b>打牌怡情就好，別把它當提款機。</b>'},
+  'skill-lose':{t:'你打得不錯——但還是輸了',
+    d:'這就是麻將：<b>技術好也擋不住牌運</b>。而這正是真實牌桌上最危險的情況——你會覺得「只是運氣不好」，然後一直加碼想凹回來。<b>會這樣想的人，就是輸最多的人。</b>'},
+  'luck-win':{t:'你贏了，但打法有問題',
+    d:'這是<b>最危險的一種贏</b>：贏錢會讓你以為自己會打，於是敢賭更大。等牌運回歸平均，前面贏的會全部吐回去、還倒賠。<b>先把技術補起來再說。</b>'},
+  'both-bad':{t:'技術和牌運都還沒站在你這邊',
+    d:'老實說：<b>你現在去跟人賭錢，大概率是輸的那個</b>。先在這裡練到一致率 70% 以上，再考慮上真牌桌——而且就算練起來了，也建議只玩輸得起的金額。'},
+};
+function renderReport(rep, stake){
+  if(!rep||!rep.ready) return rep&&rep.need>0
+    ? `<div class="rpt-note">📊 打滿 ${rep.need+rep.games} 局會給你「技術／戰績」雙軌評級（還差 ${rep.need} 局）</div>` : '';
+  const v=VERDICT[rep.verdict], mul=100/stake.b;
+  const netReal=Math.round(Math.abs(rep.net)*mul);
+  return `<div class="rpt">
+    <div class="rpt-grid">
+      <div class="rpt-card"><small>技術評級</small><div class="rpt-g ${rep.skill}">${rep.skill}</div>
+        <small>教練一致率 ${rep.accuracy}%</small></div>
+      <div class="rpt-card"><small>戰績</small>
+        <div class="rpt-net ${rep.net>=0?'up':'down'}">${rep.net>=0?'+':''}${rep.net}</div>
+        <small>${rep.games} 局累計（點）</small></div>
+    </div>
+    <div class="rpt-say"><b>${v.t}</b><br>${v.d}</div>
+    <div class="rpt-note">※ 換算成 <b>100 元一台</b>的真實牌局，你這 ${rep.games} 局${rep.net>=0?'贏':'輸'}了約 <b>NT$${netReal}</b>。<br>
+      ※ 麻將短期運氣佔比很高，15 局只是參考——但<b>真實牌桌不會等你打滿 15 局才收你錢</b>。</div>
+  </div>`;
+}
+
+async function submitResult(res){
+  const acc=coachAccuracy();
+  const iWon = res.type==='win' && res.winner===0;
+  const tai = res.score ? res.score.total : 0;   // 我輸時＝付給贏家的台數
+  const outcome = res.type==='draw' ? 'draw' : (iWon ? 'win' : 'lose');
+  const selfDraw = res.type==='win' && !!res.selfDraw;
+  const dealtIn = res.type==='win' && !iWon && res.from===0;   // 我放槍
+  const st=state.stake;
+  const box=$('uAccBox');
+  const local = acc.total
+    ? `本局跟教練一致 <span class="acc-n">${acc.pct}%</span> <small>（${acc.match}/${acc.total} 手）</small>`
+    : '本局你沒有出手紀錄';
+  box.innerHTML=local;
+  if(!acc.total) return;
+  try{
+    const r=await fetch('/api/mahjong/result',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ outcome, selfDraw, dealtIn, tai, base:st.b, taiVal:st.t,
+        coachMatch:acc.match, coachTotal:acc.total })}).then(x=>x.json());
+    if(r.ok){
+      const s=r.stats, pct=s.coach_total?Math.round(s.coach_match/s.coach_total*1000)/10:0;
+      let h=local;
+      if(r.delta!==0){
+        const real=Math.round(Math.abs(r.delta)*(100/st.b));
+        h+=`<br><span class="acc-n" style="color:${r.delta>0?'#7ee29b':'#ff6b6b'}">${r.delta>0?'+':''}${r.delta} 點</span>`
+         + `<small>　剩 ${r.points} 點</small>`
+         + `<div class="money-warn">💸 這局你${r.delta>0?'贏了':(dealtIn?'放槍付了':'付了')} <b>${Math.abs(r.delta)} 點</b>。
+              如果這是真的 <b>100 元一台</b>的牌局，就是 <b>NT$${real}</b> 進出你的口袋。</div>`;
+      } else h+=`<br><small>本局沒有輸贏（流局／別人胡別人）</small>`;
+      h+=`<br><small>累計 ${s.games} 局・胡 ${s.wins} 次・一致率 ${pct}%・淨 ${s.net_points>=0?'+':''}${s.net_points} 點</small>`;
+      h+=renderReport(r.report, st);
+      box.innerHTML=h;
+    } else if(r.error==='guest'){
+      box.innerHTML=local+`<br><small>訪客不記錄成績、也不計輸贏——登入就能用 1000 點當籌碼，測出自己的真實牌技</small><br><a class="acc-cta" href="/member/">免費登入開始測 →</a>`;
+    }
+  }catch(e){ /* 離線也不影響遊戲 */ }
+}
+async function showBoard(){
+  $('uBoard').style.display='flex';
+  const body=$('uBoardBody'); body.textContent='載入中…';
+  try{
+    const j=await fetch('/api/mahjong/leaderboard',{cache:'no-store'}).then(r=>r.json());
+    const rows=(j.leaderboard||[]).map(r=>
+      `<div class="bd-row${j.me&&j.me.nickname===r.nickname?' mine':''}"><span class="bd-rank">${r.rank}</span>
+        <span class="bd-name">${String(r.nickname||'鄉民').replace(/[<>&]/g,'')}</span>
+        <span class="bd-acc">${r.accuracy}%</span>
+        <span class="bd-sub">${r.games}局・${r.bestTai}台</span></div>`).join('');
+    let mine='';
+    if(!j.me) mine=`<div class="bd-empty">你還沒登入——訪客可以照玩，<br><a class="acc-cta" href="/member/">登入後成績才會記錄上榜 →</a></div>`;
+    else if(j.me.needGames>0) mine=`<div class="bd-empty">你目前 ${j.me.games} 局、一致率 ${j.me.accuracy}%<br>再打 <b>${j.me.needGames}</b> 局就會出現在榜上</div>`;
+    body.innerHTML=(rows||`<div class="bd-empty">還沒有人上榜，快去打第一局！</div>`)+mine;
+  }catch(e){ body.innerHTML='<div class="bd-empty">排行榜載入失敗</div>'; }
+}
+$('uBoardBtn').addEventListener('click',e=>{ e.preventDefault(); $('uOver').style.display='none'; showBoard(); });
+$('uBoardClose').addEventListener('click',()=>{ $('uBoard').style.display='none'; $('uOver').style.display='flex'; });
+
+$('uReviewBtn').addEventListener('click',()=>{
+  state.rvIdx=0; renderReview();
+  $('uOver').style.display='none';       // 先收起結算面板，避免疊在覆盤上面
+  $('uReview').style.display='flex';
+});
+$('uRvClose').addEventListener('click',()=>{
+  $('uReview').style.display='none';
+  $('uOver').style.display='flex';       // 關閉覆盤 → 回到結算面板
+});
+$('uRvPrev').addEventListener('click',()=>{ if(state.rvIdx>0){ state.rvIdx--; renderReview(); } });
+$('uRvNext').addEventListener('click',()=>{ if(state.rvIdx<state.review.length-1){ state.rvIdx++; renderReview(); } });
+
+/* ── 對局生命週期 ── */
+function onEvent(e){
+  if(e.t==='draw'){ state.turnSeat=e.seat; if(e.seat===0) state.drawn=e.tile; }
+
+  if(e.t==='discard'){
+    state.riverSeq.push({seat:e.seat,tile:e.tile});
+    // 起飛座標：自己＝剛點的那張牌；對手＝他的資訊卡中心
+    let src=state.cutRect;
+    if(e.seat!==0){
+      const card=$('uOppo').children[e.seat-1];
+      if(card){ const r=card.getBoundingClientRect();
+        src={ left:r.left+r.width/2-13, top:r.bottom-18, width:26, height:35 }; }
+    }
+    render();
+    flyTile(e.tile, src);
+    state.cutRect=null;
+    return;
+  }
+
+  if(e.t==='pon'||e.t==='chow'||e.t==='kong'){
+    if(e.t!=='kong'||e.mode==='minkan'){
+      for(let i=state.riverSeq.length-1;i>=0;i--){ if(state.riverSeq[i].tile===e.tile){ state.riverSeq.splice(i,1); break; } }
+      state.animRiverLen=state.riverSeq.length;
+    }
+    state.turnSeat=e.seat;
+    state.freshMeld={ seat:e.seat, at:Date.now() };
+    const who=e.seat===0?'你':OPPO_LABEL[e.seat];
+    if(e.t==='pon') callout('碰！','#4ade80',who);
+    else if(e.t==='chow') callout('吃！','#7db8ff',who);
+    else callout('槓！','#c9a2f5', who+(e.mode==='ankan'?'（暗槓）':e.mode==='kakan'?'（加槓）':'（明槓）'));
+  }
+
+  if(e.t==='win') burst();
+  if(e.t==='flower'&&e.seat===0) toast('補花：'+FLOWER_NAMES[e.flower]);
+  render();
+}
+
+async function startGame(seed){
+  state.riverSeq=[]; state.drawn=-1; state.mode='idle'; state.turnSeat=0;
+  state.lastHandCount=0; state.animRiverLen=0; state.animDrawnFor=-1;
+  state.review=[]; state.rvIdx=0; state.cutRect=null; state.freshMeld=null;
+  $('uStart').style.display='none'; $('uOver').style.display='none';
+  $('uReview').style.display='none'; $('uBoard').style.display='none';
+  const g=new Game({ seed: seed ?? (Math.random()*1e9)|0,
+    controllers:[human,slowAI(),slowAI(),slowAI()], onEvent });
+  state.game=g;
+  window.G8M.game=g;
+  try{
+    const res=await g.play();
+    showResult(res);
+    return res;
+  }catch(err){ console.error(err); toast('發生錯誤：'+err.message); throw err; }
+}
+
+function showResult(res){
+  state.mode='over'; render();
+  const ov=$('uOver');
+  let delay=0;
+  if(res.type==='draw'){
+    callout('流 局','#b9c4bb'); delay=900;
+    $('uOverTitle').textContent='🌊 流局';
+    $('uOverSub').textContent='牌牆摸完、沒人胡牌。休息一下再開！';
+    $('uOverScore').innerHTML=''; $('uOverHand').innerHTML=''; $('uOverHint').textContent='';
+  } else {
+    const who=res.winner===0?'你':OPPO_LABEL[res.winner];
+    callout(res.selfDraw?'自 摸！':'胡！','#ffd24a',who); delay=1000;
+    $('uOverTitle').textContent = res.winner===0?'🎉 你胡了！':`${who} 胡了`;
+    $('uOverSub').textContent = (res.selfDraw?'自摸':'胡 '+(res.from===0?'你':OPPO_LABEL[res.from])+' 打的牌');
+    const sc=res.score;
+    // 胡牌牌型（圖示）：5 組面子 + 將
+    if(sc){
+      $('uOverHand').innerHTML = sc.melds.map((m,gi)=>{
+        const k0=strToKind(m.t);
+        const ks=m.kind==='pung'?[k0,k0,k0]:[k0,k0+1,k0+2];
+        return `<span class="win-meld" data-g="${gi}">${ks.map(k=>tileHTML(k,'t-sm')).join('')}${m.exposed?'<i class="wm-tag">明</i>':''}</span>`;
+      }).join('')
+      +`<span class="win-meld" data-g="pair">${tileHTML(strToKind(sc.pair),'t-sm')}${tileHTML(strToKind(sc.pair),'t-sm')}<i class="wm-tag j">將</i></span>`;
+    } else $('uOverHand').innerHTML='';
+    if(sc && sc.lines.length){
+      $('uOverScore').innerHTML =
+        sc.lines.map((l,i)=>`<tr class="srow" data-groups="${l.groups.join(',')}" data-pair="${l.pairRef?1:0}" style="animation-delay:${.15+i*.12}s"><td>${l.name}</td><td>${l.tai} 台</td></tr>`).join('')
+        +`<tr class="tt srow" style="animation-delay:${.15+sc.lines.length*.12}s"><td>合計</td><td>${sc.total} 台</td></tr>`;
+      $('uOverHint').textContent='👆 點台種名稱，上面會亮出對應的牌';
+    } else {
+      $('uOverScore').innerHTML='<tr class="tt srow"><td>屁胡（無台）</td><td>0 台</td></tr>';
+      $('uOverHint').textContent='';
+    }
+  }
+  submitResult(res);
+  setTimeout(()=>{ ov.style.display='flex'; }, state.autopilot?0:delay);
+}
+
+/* 底台選擇 ＋ 目前點數 */
+$('uStakeRow').addEventListener('click',e=>{
+  const b=e.target.closest('.sp'); if(!b) return;
+  $('uStakeRow').querySelectorAll('.sp').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  state.stake={ b:+b.dataset.b, t:+b.dataset.t };
+  refreshPts();
+});
+function refreshPts(){
+  const st=state.stake, el=$('uPts');
+  if(!state.me){ el.innerHTML='🎮 <b>訪客模式</b>：可以照玩，但不計輸贏、不記錄成績　<a class="acc-cta" href="/member/" style="margin-top:.4rem">免費登入用 1000 點測牌技 →</a>'; return; }
+  const unit=st.b+2*st.t; // 以 2 台估一局
+  el.innerHTML=`🪙 你有 <b>${state.me.points}</b> 點　<small>（這個底台，一局大約 ${unit}~${st.b+8*st.t} 點進出；輸光隔天自動補滿）</small>`;
+}
+fetch('/api/me').then(r=>r.json()).then(j=>{ state.me=j.member||null; refreshPts(); }).catch(()=>refreshPts());
+
+$('uStartBtn').addEventListener('click',()=>startGame());
+$('uAgainBtn').addEventListener('click',()=>startGame());
+
+/* 測試掛鉤：autopilot 全自動打完一局 */
+window.G8M={ state, startGame, game:null, render,
+  async autoTest(seed){ state.autopilot=true; try{ const r=await startGame(seed??42); return {type:r.type,winner:r.winner,total:r.score?r.score.total:null}; } finally{ state.autopilot=false; } } };
+</script>
+</body>
+</html>

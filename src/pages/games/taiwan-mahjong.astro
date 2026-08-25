@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "這個麻將遊戲要下載嗎？免費嗎？", "acceptedAnswer": { "@type": "Answer", "text": "不用下載、完全免費。網頁直接開就能玩，手機、電腦都可以。沒有註冊、沒有課金、沒有籌碼買賣——這是純練習用的單機麻將，跟賭博無關。" } },
+    { "@type": "Question", "name": "是台灣 16 張麻將嗎？", "acceptedAnswer": { "@type": "Answer", "text": "是。台灣 16 張規則：手牌 16 張、胡牌 17 張（5 副面子 + 1 對將），含吃、碰、槓（暗槓／加槓／大明槓／搶槓）、補花、自摸、榮和，胡牌後自動算台（門清、自摸、碰碰胡、清一色、混一色、字一色、三/四/五暗刻、大小三元、大小四喜、圈風門風、正花、槓上開花、搶槓）。" } },
+    { "@type": "Question", "name": "「教練模式」是什麼？", "acceptedAnswer": { "@type": "Answer", "text": "每次輪到你打牌，系統會即時算出建議打哪張、打完剩幾向聽、有幾張進張可以摸，以及這張牌的放槍風險。如果有多張一樣好的牌，會全部標示讓你自己選。想自己練也可以一鍵關掉教練。" } },
+    { "@type": "Question", "name": "向聽數、進張是什麼意思？", "acceptedAnswer": { "@type": "Answer", "text": "向聽數是「距離聽牌還差幾步」，0 向聽就是聽牌、-1 就是胡牌。進張是「摸到哪些牌可以前進一步」，張數越多代表這手牌越好進。這兩個數字是麻將實力的核心，本練習器會即時顯示，讓你邊玩邊建立牌感。" } },
+    { "@type": "Question", "name": "覆盤功能可以看什麼？", "acceptedAnswer": { "@type": "Answer", "text": "一局結束後可以逐手回顧你的每個決策：你打了哪張、教練會打哪張、兩者的向聽與進張差多少、風險高低。打得好會標「好球」，有更好選擇會標出來並說明差異——這是進步最快的方式。" } },
+    { "@type": "Question", "name": "會不會有賭博內容？", "acceptedAnswer": { "@type": "Answer", "text": "沒有。GAME8LA 零業配、不放娛樂城連結。這是純粹的麻將技術練習工具，沒有籌碼、沒有金錢、沒有排行榜賭注，只算台數學給你看。" } }
+  ]
+};
+
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "台灣16張麻將練習桌（單機 AI 對戰＋教練模式）",
+  "applicationCategory": "Game",
+  "gamePlatform": "Web browser",
+  "playMode": "SinglePlayer",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://game8la.com/" },
+    { "@type": "ListItem", "position": 2, "name": "芭樂遊戲", "item": "https://game8la.com/games/" },
+    { "@type": "ListItem", "position": 3, "name": "台灣16張麻將練習桌" }
+  ]
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<BaseLayout
+  currentPage="games"
+  title="台灣16張麻將練習桌｜免費單機 AI 對戰＋教練即時教你打哪張 - GAME8LA"
+  description="免費線上台灣16張麻將：跟 3 個 AI 打真實一局，教練即時告訴你該打哪張、還差幾向聽、進張幾張、放槍風險多高，局後還能逐手覆盤。不用下載、無課金、無賭博。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; <a href="/games/">芭樂遊戲</a> &gt; 台灣16張麻將練習桌</div>
+
+  <div class="mj-hero">
+    <h1>🀄 台灣16張麻將練習桌</h1>
+    <p class="mj-sub">跟 3 個 AI 打真實一局，<strong>教練即時教你該打哪張</strong>——不用下載、免費、無課金。</p>
+    <a href="/games/taiwan-mahjong/play/" class="mj-cta">▶ 開始對局</a>
+    <p class="mj-note">手機、電腦都能玩 · 直式操作 · 大牌面好點</p>
+  </div>
+
+  <div class="mj-feats">
+    <div class="mj-feat">
+      <div class="mj-ico">🧑‍🏫</div>
+      <h2>教練模式</h2>
+      <p>每一手都告訴你<strong>建議打哪張</strong>、打完剩幾向聽、有幾張進張。多張一樣好會全部標出來讓你自己選，想自己練可一鍵關掉。</p>
+    </div>
+    <div class="mj-feat">
+      <div class="mj-ico">📊</div>
+      <h2>向聽 · 進張即時顯示</h2>
+      <p>隨時看得到「距離聽牌還差幾步」「摸到哪些牌會前進」「聽的是哪幾張」——牌感就是這樣練出來的。</p>
+    </div>
+    <div class="mj-feat">
+      <div class="mj-ico">🛡️</div>
+      <h2>放槍風險提示</h2>
+      <p>用現物、筋牌、壁牌、對手副露推估每張牌的<strong>危險度</strong>，還會標出誰快聽牌了。學會什麼時候該收手。</p>
+    </div>
+    <div class="mj-feat">
+      <div class="mj-ico">📖</div>
+      <h2>局後覆盤</h2>
+      <p>逐手回顧你的每個決策：你打的 vs 教練打的、差在哪裡。打得好標「好球」，有更好選擇會說明原因。</p>
+    </div>
+  </div>
+
+  <section class="mj-section">
+    <h2>完整台灣 16 張規則</h2>
+    <p>
+      手牌 16 張、胡牌 17 張（<strong>5 副面子 + 1 對將</strong>），支援<strong>吃</strong>（只能吃上家）、<strong>碰</strong>、
+      <strong>四種槓</strong>（暗槓／加槓／大明槓／搶槓）＋槓上補牌、<strong>補花</strong>（含連續補花）、
+      自摸與榮和、牌牆留底 16 張流局。優先權照規矩來：<strong>胡 &gt; 碰槓 &gt; 吃</strong>。
+    </p>
+    <p>
+      胡牌後<strong>自動算台並列出明細</strong>：門清、自摸、碰碰胡、清一色、混一色、字一色、三／四／五暗刻、
+      大三元、小三元、大四喜、小四喜、圈風刻、門風刻、正花、槓上開花、搶槓。
+      結算畫面會把你的<strong>胡牌牌型攤開</strong>，點台種名稱就會亮出對應的那組牌——讓你看懂為什麼是這些台。
+    </p>
+  </section>
+
+  <section class="mj-section">
+    <h2>誰適合玩這個？</h2>
+    <ul class="mj-list">
+      <li><strong>剛學麻將</strong>：不敢上牌桌怕拖累別人，先跟 AI 練到有信心。</li>
+      <li><strong>會打但常常算錯台</strong>：每局結算列出台數明細，久了自然記得。</li>
+      <li><strong>想變強</strong>：向聽、進張、危險度這些高手在算的東西，這裡全部攤開給你看。</li>
+      <li><strong>純粹想摸兩把</strong>：開網頁就能打，不用揪人、不用等連線。</li>
+    </ul>
+  </section>
+
+  <div class="mj-cta-band">
+    <a href="/games/taiwan-mahjong/play/" class="mj-cta">▶ 開始對局（免費）</a>
+  </div>
+
+  <section class="mj-section">
+    <h2>搭配這些麻將工具一起練</h2>
+    <ul class="mj-list">
+      <li><a href="/tools/mahjong-rules-trainer/">🀄 碰吃槓練習器</a> — 搞懂什麼時候能碰、能吃、能槓</li>
+      <li><a href="/tools/mahjong-tenpai-trainer/">👀 聽牌練習器</a> — 看牌判斷聽哪幾張</li>
+      <li><a href="/tools/mahjong-suan-tai-trainer/">🧮 算台練習器</a> — 看牌型猜台數，附完整拆解</li>
+      <li><a href="/articles/mahjong-scoring-guide/">📘 麻將算台完整圖解</a> — 台數規則白話版</li>
+      <li><a href="/articles/how-to-play-mahjong/">📗 麻將怎麼玩</a> — 從零開始的入門</li>
+    </ul>
+  </section>
+
+  <section class="mj-section">
+    <h2>❓ 常見問題</h2>
+    {faqSchema.mainEntity.map(q => (
+      <details class="mj-faq">
+        <summary>{q.name}</summary>
+        <p>{q.acceptedAnswer.text}</p>
+      </details>
+    ))}
+  </section>
+
+  <ShareButtons />
+</div>
+
+<style>
+  .mj-hero{ text-align:center; padding:1.5rem 1rem 1rem; max-width:760px; margin:0 auto; }
+  .mj-hero h1{ font-size:clamp(1.7rem,6vw,2.4rem); font-weight:900; color:var(--gold-light,#ffd24a); margin-bottom:.6rem; }
+  .mj-sub{ font-size:1.15rem; color:var(--text-secondary); line-height:1.7; margin-bottom:1.2rem; }
+  .mj-cta{ display:inline-block; background:linear-gradient(135deg,#1c6b4f,#2f9c72);
+    color:#fff; font-size:1.35rem; font-weight:900; padding:.9rem 2.6rem; border-radius:14px;
+    text-decoration:none; box-shadow:0 6px 20px rgba(47,156,114,.35); border:2px solid #3fbe8c; }
+  .mj-cta:hover{ filter:brightness(1.1); }
+  .mj-note{ font-size:.9rem; color:var(--text-muted); margin-top:.7rem; }
+
+  .mj-feats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin:2rem auto; max-width:900px; }
+  .mj-feat{ background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:1.2rem; }
+  .mj-ico{ font-size:1.8rem; margin-bottom:.4rem; }
+  .mj-feat h2{ font-size:1.15rem; color:var(--gold-light,#ffd24a); margin-bottom:.5rem; }
+  .mj-feat p{ font-size:1rem; color:var(--text-secondary); line-height:1.75; }
+
+  .mj-section{ max-width:820px; margin:2rem auto 0; }
+  .mj-section h2{ font-size:1.4rem; margin-bottom:.8rem; }
+  .mj-section p{ font-size:1.05rem; color:var(--text-secondary); line-height:1.9; margin-bottom:.8rem; }
+  .mj-list{ line-height:2.1; font-size:1.05rem; color:var(--text-secondary); padding-left:1.2rem; }
+  .mj-cta-band{ text-align:center; margin:2.5rem 0; }
+  .mj-faq{ background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:1rem 1.2rem; margin-bottom:.6rem; }
+  .mj-faq summary{ cursor:pointer; font-weight:700; font-size:1.08rem; }
+  .mj-faq p{ margin:.8rem 0 0; color:var(--text-secondary); line-height:1.8; font-size:1rem; }
+</style>
+</BaseLayout>
