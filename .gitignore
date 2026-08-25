@@ -33,3 +33,6 @@ Thumbs.db
 
 .dev.vars
 .wrangler/
+
+# 壓圖前的原檔備份（3.8MB，不進版控）
+_img-backup-*/
