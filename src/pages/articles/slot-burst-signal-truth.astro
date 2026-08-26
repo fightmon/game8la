@@ -106,6 +106,35 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         </table>
       </div>
 
+      <figure class="chart-fig">
+        <p class="chart-hint">← 左右滑動看完整圖表</p>
+        <div class="chart-scroll">
+        <svg viewBox="0 0 720 330" role="img" aria-label="長條圖：連續空轉 0、10、20、30 次之後的下一轉中獎率，四根長條幾乎等高，都在 20.7% 上下">
+          <text x="0" y="16" fill="#e8ecf2" font-size="15" font-weight="700">已空轉 N 次之後，下一轉的中獎率</text>
+          <line x1="60" y1="285" x2="700" y2="285" stroke="#3a4150" stroke-width="1.5" />
+          {[0, 10, 20, 30].map((v) => (
+            <g>
+              <line x1="60" y1={285 - (v / 30) * 240} x2="700" y2={285 - (v / 30) * 240} stroke="#262c37" stroke-width="1" />
+              <text x="52" y={285 - (v / 30) * 240 + 5} fill="#8b93a1" font-size="13" text-anchor="end">{v}%</text>
+            </g>
+          ))}
+          {[
+            { label: '0 次', v: 20.75 }, { label: '≥10 次', v: 20.69 },
+            { label: '≥20 次', v: 20.87 }, { label: '≥30 次', v: 20.71 },
+          ].map((d, i) => (
+            <g>
+              <rect x={90 + i * 155} y={285 - (d.v / 30) * 240} width="100" height={(d.v / 30) * 240} rx="4" fill="#39ff14" opacity="0.82" />
+              <text x={140 + i * 155} y={285 - (d.v / 30) * 240 - 9} fill="#39ff14" font-size="15" font-weight="800" text-anchor="middle">{d.v}%</text>
+              <text x={140 + i * 155} y="307" fill="#c3cad6" font-size="14" text-anchor="middle">{d.label}</text>
+            </g>
+          ))}
+          <path d="M140 119 L295 96 L450 66 L605 34" stroke="#ff6b6b" stroke-width="2.5" stroke-dasharray="7 5" fill="none" />
+          <text x="605" y="26" fill="#ff6b6b" font-size="13" font-weight="700" text-anchor="end">↖ 訊號論預期會長這樣</text>
+        </svg>
+        </div>
+        <figcaption>四根長條幾乎完全等高。紅色虛線是「如果爆分訊號存在」應該出現的形狀——它沒有出現。</figcaption>
+      </figure>
+
       <p>
         <strong>從 0 次到 30 次，中獎率在 20.69% 到 20.87% 之間，一條水平線。</strong>
         剛中完獎和連續空轉 30 次之後，下一轉的機率差了 0.04 個百分點——在 157 萬筆樣本下，那叫做「沒有差別」。
@@ -179,6 +208,43 @@ const COVER = 'https://game8la.com/images/og-image.webp';
           </tbody>
         </table>
       </div>
+
+      <figure class="chart-fig">
+        <p class="chart-hint">← 左右滑動看完整圖表</p>
+        <div class="chart-scroll">
+        <svg viewBox="0 0 720 360" role="img" aria-label="直方圖：同一台 RTP 96% 的機器切成 200 段各 300 轉，各段實測 RTP 的分佈。大多數段落集中在 75% 以下，少數極端高值拉高平均">
+          <text x="0" y="16" fill="#e8ecf2" font-size="15" font-weight="700">同一台 RTP 96% 的機器，200 段各 300 轉的實測 RTP 分佈</text>
+          <line x1="52" y1="290" x2="706" y2="290" stroke="#3a4150" stroke-width="1.5" />
+          {[0, 15, 30, 45].map((v) => (
+            <g>
+              <line x1="52" y1={290 - (v / 50) * 236} x2="706" y2={290 - (v / 50) * 236} stroke="#262c37" stroke-width="1" />
+              <text x="44" y={290 - (v / 50) * 236 + 5} fill="#8b93a1" font-size="13" text-anchor="end">{v}</text>
+            </g>
+          ))}
+          {[
+            { l: '0–25%', n: 40, lo: true }, { l: '25–50%', n: 45, lo: true },
+            { l: '50–75%', n: 34, lo: true }, { l: '75–100%', n: 20, lo: true },
+            { l: '100–150%', n: 26 }, { l: '150–200%', n: 16 },
+            { l: '200–300%', n: 10 }, { l: '300–500%', n: 3 }, { l: '500%+', n: 6 },
+          ].map((d, i) => (
+            <g>
+              <rect x={60 + i * 72} y={290 - (d.n / 50) * 236} width="56" height={(d.n / 50) * 236} rx="3"
+                fill={d.lo ? '#ff6b6b' : '#39ff14'} opacity={d.lo ? '0.8' : '0.7'} />
+              <text x={88 + i * 72} y={290 - (d.n / 50) * 236 - 7} fill={d.lo ? '#ff9d8a' : '#39ff14'} font-size="13" font-weight="700" text-anchor="middle">{d.n}</text>
+              <text x={88 + i * 72} y="310" fill="#a8b0bd" font-size="13" text-anchor="middle">{d.l}</text>
+            </g>
+          ))}
+          <line x1="348" y1="34" x2="348" y2="290" stroke="#f5b800" stroke-width="2" stroke-dasharray="6 4" />
+          <text x="356" y="46" fill="#f5b800" font-size="13.5" font-weight="800">← 公告 RTP 96% 在這裡</text>
+          <text x="356" y="66" fill="#f5b800" font-size="13">左邊共 137 段（69%）</text>
+          <text x="0" y="338" fill="#8b93a1" font-size="13">縱軸：段數（共 200 段）　橫軸：該段 300 轉跑出來的實測 RTP</text>
+        </svg>
+        </div>
+        <figcaption>
+          紅色是低於公告 RTP 的段落，共 <strong>137 段、佔 69%</strong>；其中 85 段甚至低於 50%。
+          右邊那幾根綠色的長尾（最高一段 1416.8%）就是把平均值拉回 96% 的原因。
+        </figcaption>
+      </figure>
 
       <p>
         <strong>同一台機器、同樣的設定，沒有任何人動過任何東西。</strong>
@@ -310,6 +376,22 @@ const COVER = 'https://game8la.com/images/og-image.webp';
 .data-table tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
 .data-table strong { color: var(--guava-green, #39ff14); }
 .st-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0; }
+/* 數據圖表 */
+.chart-fig { margin: 1.6rem 0; padding: 1rem .8rem .8rem; background: rgba(255,255,255,.03);
+  border: 1px solid var(--border); border-radius: 12px; }
+.chart-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.chart-fig svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart-hint { display: none; font-size: .85rem; color: var(--text-muted); margin: 0 0 .4rem; }
+.chart-fig figcaption { margin-top: .7rem; font-size: .92rem; line-height: 1.75; color: var(--text-muted); }
+.chart-fig figcaption strong { color: #ff9d8a; }
+@media (max-width: 700px) {
+  .chart-fig { padding: .7rem .5rem .6rem; }
+  .chart-fig figcaption { font-size: .9rem; }
+  /* 圖表縮太小字會糊掉（縮 0.44 倍時 13px 只剩 5.8px），
+     改成保留最小寬度、讓圖表自己橫捲——跟站上寬表格同一套處理 */
+  .chart-fig svg { min-width: 640px; }
+  .chart-hint { display: block; }
+}
 @media (max-width: 640px) { .data-table { font-size: 0.95rem; } .data-table th, .data-table td { padding: 0.55rem 0.4rem; } }
 </style>
 </BaseLayout>
