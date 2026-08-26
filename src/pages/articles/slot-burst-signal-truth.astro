@@ -70,6 +70,27 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         設定 RTP 96%，<strong>實際跑了 200 萬轉</strong>，把三個最紅的「訊號」說法一個一個拿去對數據。
       </p>
 
+      <div class="quick-tool-bar">
+        <span>邊看邊驗：</span>
+        <a href="/tools/lu-bu-simulator/">戰神呂布模擬器</a>
+        <a href="/tools/slot-simulator/">賽特 2 模擬器</a>
+        <a href="/tools/rtp-tracker/">RTP 實測紀錄器</a>
+      </div>
+
+      <div class="toc" style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin:1.5rem 0">
+        <h2 style="font-size:1.2rem;margin-top:0">📋 本文快速導覽</h2>
+        <ol>
+          <li><a href="#myth1">說法一：連續空轉越久，下一轉越容易中？</a></li>
+          <li><a href="#myth2">說法二：連續沒中這麼多次，一定快爆了？</a></li>
+          <li><a href="#myth3">說法三：這台今天很鬆／很緊，看得出來？</a></li>
+          <li><a href="#rtp-gap">為什麼 RTP 96%，我體感永遠不到 96%</a></li>
+          <li><a href="#control">那到底能控制什麼？</a></li>
+          <li><a href="#verify">不用相信我，自己跑一次</a></li>
+          <li><a href="#why">為什麼會有人一直教你看訊號？</a></li>
+          <li><a href="#faq">常見問題 FAQ</a></li>
+        </ol>
+      </div>
+
       <div class="tip-box">
         <p><strong>🔬 先講清楚我們測的是什麼</strong></p>
         <p>
@@ -83,7 +104,7 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         </p>
       </div>
 
-      <h2>說法一：「連續空轉越久，下一轉越容易中」</h2>
+      <h2 id="myth1">說法一：「連續空轉越久，下一轉越容易中」</h2>
 
       <p>
         這是所有訊號論的根。我們讓引擎跑，每一轉都記下「在這之前已經連續空轉幾次」，
@@ -153,7 +174,7 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         </p>
       </div>
 
-      <h2>說法二：「連續沒中這麼多次，一定是快爆了」</h2>
+      <h2 id="myth2">說法二：「連續沒中這麼多次，一定是快爆了」</h2>
 
       <p>
         這句話的隱含前提是：「連續空轉這麼多次是不正常的」。所以我們去數：
@@ -184,7 +205,7 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         這就是訊號論真正的危險之處，它讓你在最沒有理由的時候下最大的注。
       </p>
 
-      <h2>說法三：「這台今天很鬆／很緊」——最有意思的一個</h2>
+      <h2 id="myth3">說法三：「這台今天很鬆／很緊」——最有意思的一個</h2>
 
       <p>
         這個說法最難反駁，因為它訴諸體感，而體感是真的。所以我們換個方式測：
@@ -256,7 +277,7 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         那不是機台狀態，那是<strong>波動</strong>。而波動最擅長的事，就是假裝自己是規律。
       </p>
 
-      <h2>順便回答一個更扎心的問題：為什麼 RTP 96%，我體感永遠不到 96%？</h2>
+      <h2 id="rtp-gap">順便回答一個更扎心的問題：為什麼 RTP 96%，我體感永遠不到 96%？</h2>
 
       <p>
         回頭看上面那張表的<strong>中位數</strong>那一欄——高波動是 <strong>63.0%</strong>。
@@ -285,7 +306,7 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         高波動不是比較好賺，是同樣的錢輸得更快，或者贏得更誇張，中間沒有溫和地帶。
       </p>
 
-      <h2>那到底能控制什麼？</h2>
+      <h2 id="control">那到底能控制什麼？</h2>
 
       <p>三件事，而且沒有一件是「預測」：</p>
 
@@ -306,7 +327,7 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         </li>
       </ol>
 
-      <h2>不用相信我，自己跑一次</h2>
+      <h2 id="verify">不用相信我，自己跑一次</h2>
 
       <p>
         這篇的所有數字都可以重現。我們把<strong>模擬腳本放在公開的 repo</strong> 裡，
@@ -327,7 +348,7 @@ const COVER = 'https://game8la.com/images/og-image.webp';
         再重置、再轉 300 次。多做幾輪你就會親眼看到上面那張表——同一個設定，結果可以差得離譜。
       </p>
 
-      <h2>最後：為什麼會有人一直教你看訊號？</h2>
+      <h2 id="why">最後：為什麼會有人一直教你看訊號？</h2>
 
       <p>
         因為「有訊號」這件事很好賣。
@@ -346,7 +367,7 @@ const COVER = 'https://game8la.com/images/og-image.webp';
 
       <ManifestoBox />
 
-      <h2>❓ 常見問題</h2>
+      <h2 id="faq">❓ 常見問題</h2>
       {faqs.map((f) => (
         <details class="faq-item">
           <summary>{f.q}</summary>
@@ -370,6 +391,20 @@ const COVER = 'https://game8la.com/images/og-image.webp';
   </div>
 
 <style is:global>
+/* 快速工具列（沿用站內其他文章的同一份定義，保持一致） */
+.quick-tool-bar {
+  display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  padding: 0.8rem 1rem; background: rgba(245,184,0,0.06);
+  border: 1px solid rgba(245,184,0,0.2); border-radius: 10px;
+  margin: 1rem 0 0.5rem; font-size: 0.88rem;
+}
+.quick-tool-bar span { color: var(--text-muted); white-space: nowrap; }
+.quick-tool-bar a {
+  padding: 0.3rem 0.7rem; background: rgba(245,184,0,0.12);
+  border-radius: 6px; color: var(--gold); font-weight: 700;
+  text-decoration: none; transition: background 0.2s;
+}
+.quick-tool-bar a:hover { background: rgba(245,184,0,0.25); }
 .data-table { width: 100%; border-collapse: collapse; font-size: 0.98rem; margin: 1rem 0; }
 .data-table th, .data-table td { padding: 0.65rem 0.6rem; border: 1px solid var(--border); text-align: left; }
 .data-table thead th { background: rgba(255,255,255,0.05); font-weight: 700; color: var(--text-secondary); }
