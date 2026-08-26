@@ -35,6 +35,10 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
   <div class="container">
+    <div class="mj-hubbar">
+      <a href="/mahjong/">🀄 麻將8LA 專區</a>
+      <span>碰吃槓是第 2 步 — 專區裡還有聽牌、算台與 AI 對戰</span>
+    </div>
     <div class="page-hero">
       <div class="lang-switch"><span>中文</span><a href={enUrl}>English</a></div>
       <h1>🀄 麻將碰吃槓練習器</h1>
@@ -160,6 +164,13 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   </div>
 
 <style is:global>
+.mj-hubbar { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+  padding: .55rem .9rem; margin: 0 0 1rem; border-radius: 10px; font-size: .92rem;
+  background: rgba(57,255,20,.07); border: 1px solid rgba(57,255,20,.25); }
+.mj-hubbar a { color: var(--guava-green, #39ff14); font-weight: 800; text-decoration: none; white-space: nowrap; }
+.mj-hubbar a:hover { text-decoration: underline; }
+.mj-hubbar span { color: var(--text-muted); }
+
   /* 碰吃槓練習器（rt- 前綴）；用 is:global，因為牌面 SVG 是 JS 動態插入，scoped 樣式套不到 */
   .container{ max-width:760px; margin:0 auto; padding:0 1rem 4rem; }
   .page-hero{ text-align:center; padding:2.2rem 0 1rem; }

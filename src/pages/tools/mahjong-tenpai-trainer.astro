@@ -38,6 +38,10 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
   <div class="container">
+    <div class="mj-hubbar">
+      <a href="/mahjong/">🀄 麻將8LA 專區</a>
+      <span>聽牌是第 3 步 — 專區裡還有碰吃槓、算台與 AI 對戰</span>
+    </div>
     <div class="page-hero">
       <h1>🀄 麻將聽牌計算機</h1>
       <p class="hero-sub">點出你的手牌，馬上算出<strong>這手聽什麼</strong>、每張<strong>還剩幾張</strong>。還沒聽牌也會告訴你差幾步。</p>
@@ -189,6 +193,13 @@ const breadcrumbSchema = { '@context':'https://schema.org','@type':'BreadcrumbLi
   </div>
 
 <style is:global>
+.mj-hubbar { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+  padding: .55rem .9rem; margin: 0 0 1rem; border-radius: 10px; font-size: .92rem;
+  background: rgba(57,255,20,.07); border: 1px solid rgba(57,255,20,.25); }
+.mj-hubbar a { color: var(--guava-green, #39ff14); font-weight: 800; text-decoration: none; white-space: nowrap; }
+.mj-hubbar a:hover { text-decoration: underline; }
+.mj-hubbar span { color: var(--text-muted); }
+
 /* ═══ 聽牌計算機 ═══ */
 .tc-card { background: var(--bg-card, #14161c); border: 1px solid var(--border, #2a2f3a);
   border-radius: 16px; padding: 1.1rem; margin: 0 0 1.6rem; }

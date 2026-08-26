@@ -50,6 +50,10 @@ const softwareSchema = {
 <div class="container">
 
   <!-- ═══ Hero ═══ -->
+  <div class="mj-hubbar">
+    <a href="/mahjong/">🀄 麻將8LA 專區</a>
+    <span>算台是第 4 步 — 專區裡還有碰吃槓、聽牌與 AI 對戰</span>
+  </div>
   <div class="page-hero">
     <h1>🀄 麻將台數計算器</h1>
     <p class="hero-sub">勾選你這把成立的台，馬上算出<strong>總共幾台</strong>、以及<strong>對方要賠你多少錢</strong>。</p>
@@ -257,6 +261,13 @@ const softwareSchema = {
 </div>
 
 <style is:global>
+.mj-hubbar { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+  padding: .55rem .9rem; margin: 0 0 1rem; border-radius: 10px; font-size: .92rem;
+  background: rgba(57,255,20,.07); border: 1px solid rgba(57,255,20,.25); }
+.mj-hubbar a { color: var(--guava-green, #39ff14); font-weight: 800; text-decoration: none; white-space: nowrap; }
+.mj-hubbar a:hover { text-decoration: underline; }
+.mj-hubbar span { color: var(--text-muted); }
+
 /* ═══ 台數計算機 ═══ */
 .calc-card {
   background: var(--bg-card, #14161c); border: 1px solid var(--border, #2a2f3a);

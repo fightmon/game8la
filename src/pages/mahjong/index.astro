@@ -1,0 +1,193 @@
+---
+import Icon from '../../components/Icon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqSchema from '../../components/FaqSchema.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+
+const faqs = [
+  { q: '完全不會麻將，要從哪裡開始？', a: '照這頁的四步順序走：先看「麻將怎麼玩」認識牌和基本流程，接著用碰吃槓練習器把三個動作練熟，再練聽牌，最後才學算台。每一步都有對應的免費互動工具，看不懂就點進去玩，玩一玩就會了。' },
+  { q: '這裡的工具是台灣麻將還是日本麻將？', a: '全部是台灣 16 張。台灣麻將是 5 副面子＋1 對將（胡牌 17 張）、用「台」計分、有花牌；日本麻將是 13 張、用飜符、還一定要有役才能胡，規則差很多。兩者差異我們另有一篇完整比較。' },
+  { q: '算台的台數各地不一樣，你們用哪一套？', a: '用台灣 16 張最通行的常見台數（門清 1 台、自摸 1 台、碰碰胡 4 台、清一色 8 台、大三元 8 台…）。但各地各桌的細節（尤其花牌、地方台、連莊拉莊）確實有差，上桌請以你那桌約定的台規為準。我們的台數計算器也把每個台的來源都標出來，方便你對照自己那桌的規則。' },
+  { q: '「麻將胡了」是麻將嗎？', a: '不是。「麻將胡了」（Mahjong Ways）是 PG Soft 的老虎機，只是用了麻將牌當符號，玩法是消除連線、跟真正的麻將完全沒關係。如果你要找的是那款老虎機，我們也有攻略頁；但這個專區講的是真的麻將。' },
+  { q: '這些工具要付費或註冊嗎？', a: '完全免費，也不用註冊。全部在瀏覽器裡直接玩，手機也可以。芭樂子全站零業配、沒有導流連結，工具就是工具。' },
+];
+
+const STEPS = [
+  {
+    n: '1', tag: '入門', icon: '📖',
+    title: '先搞懂怎麼玩',
+    desc: '牌怎麼看、怎麼摸打、什麼叫胡牌。完全沒碰過麻將的從這裡開始。',
+    href: '/articles/how-to-play-mahjong/', cta: '看入門教學',
+  },
+  {
+    n: '2', tag: '基本動作', icon: '🀇',
+    title: '碰、吃、槓練到反射',
+    desc: '三個基本動作練熟就能上桌。含動作優先順序（誰先誰後）的判斷練習。',
+    href: '/tools/mahjong-rules-trainer/', cta: '開始練碰吃槓',
+  },
+  {
+    n: '3', tag: '進階', icon: '👀',
+    title: '看得出自己聽什麼',
+    desc: '輸入手牌算出你聽哪幾張、各剩幾張；也可以反過來練「看牌猜聽張」。',
+    href: '/tools/mahjong-tenpai-trainer/', cta: '打開聽牌計算機',
+  },
+  {
+    n: '4', tag: '算錢', icon: '🧮',
+    title: '算台數，也算贏多少錢',
+    desc: '勾選成立的台就算出總台數，再依「底＋台×台數」算出自摸與放槍各要收多少。',
+    href: '/tools/mahjong-suan-tai-trainer/', cta: '打開台數計算器',
+  },
+];
+
+const MORE = [
+  { icon: '🀄', title: '台灣16張麻將練習桌', desc: '單機 AI 對戰，教練會即時告訴你該打哪張、為什麼。不用湊咖也能練。', href: '/games/taiwan-mahjong/' },
+  { icon: '📊', title: '麻將算台完整圖解', desc: '每個台長什麼樣、怎麼來的，用牌面一個一個拆給你看。', href: '/articles/mahjong-scoring-guide/' },
+  { icon: '🇹🇼', title: '台灣16張 vs 日本麻將', desc: '張數、計分、役、花牌…8 個關鍵差異一次講清楚。', href: '/articles/taiwan-vs-japan-mahjong/' },
+];
+---
+<FaqSchema faqs={faqs} />
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: '麻將8LA 專區',
+  url: 'https://game8la.com/mahjong/',
+  description: '台灣 16 張麻將學習專區：碰吃槓、聽牌、算台四台免費互動工具，加上 AI 對戰練習桌與完整教學。',
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首頁', item: 'https://game8la.com/' },
+      { '@type': 'ListItem', position: 2, name: '麻將8LA', item: 'https://game8la.com/mahjong/' },
+    ],
+  },
+})} />
+
+<BaseLayout
+  currentPage="mahjong"
+  title="麻將8LA 專區｜台灣16張算台、聽牌、碰吃槓 — 四台免費工具＋AI 對戰練習桌"
+  description="台灣 16 張麻將學習專區：台數計算器（算幾台、賠多少）、聽牌計算機（算你聽什麼）、碰吃槓練習器、AI 對戰練習桌，全部免費免註冊。從完全不會到會算台，四步走完。"
+  ogImage="https://game8la.com/images/og-image.webp"
+>
+<div class="container">
+  <div class="breadcrumb"><a href="/">首頁</a> &gt; 麻將8LA</div>
+
+  <div class="page-hero mj-hero">
+    <h1>🀄 麻將8LA 專區</h1>
+    <p class="mj-sub">台灣 16 張。從完全不會，到能算出這把幾台、對方該賠你多少。</p>
+    <p class="mj-desc">
+      四台免費互動工具＋一張 AI 對戰練習桌，全部在瀏覽器裡玩，<strong>不用註冊、不用下載、手機也行</strong>。
+      芭樂子全站零業配，工具就是工具。
+    </p>
+  </div>
+
+  <h2 class="section-title">四步走：從看不懂到會算台</h2>
+  <p class="mj-lead">不知道從哪開始的話，照這個順序走就對了。每一步都有對應的工具，邊玩邊會。</p>
+
+  <div class="mj-steps">
+    {STEPS.map((s) => (
+      <a href={s.href} class="mj-step">
+        <div class="mj-step-head">
+          <span class="mj-step-n">{s.n}</span>
+          <span class="mj-step-tag">{s.tag}</span>
+        </div>
+        <div class="mj-step-icon">{s.icon}</div>
+        <h3>{s.title}</h3>
+        <p>{s.desc}</p>
+        <span class="mj-step-cta">{s.cta} →</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="section-title">還有這些</h2>
+  <div class="mj-more">
+    {MORE.map((m) => (
+      <a href={m.href} class="mj-more-card">
+        <span class="mj-more-icon">{m.icon}</span>
+        <div>
+          <h3>{m.title}</h3>
+          <p>{m.desc}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <div class="mj-note">
+    <p>
+      <strong>⚠️ 順帶說清楚：「麻將胡了」不是麻將。</strong>
+      「麻將胡了（Mahjong Ways）」是 PG Soft 的老虎機，只是拿麻將牌當符號，玩法是消除連線，
+      跟真正的麻將沒有關係。找那款的話我們也有
+      <a href="/games/mahjong-ways/">麻將胡了</a>、<a href="/games/mahjong-ways-2/">麻將胡了 2</a> 的攻略頁——
+      但這個專區講的是真的麻將。
+    </p>
+  </div>
+
+  <h2 class="section-title">❓ 麻將常見問題</h2>
+  <div class="mj-faq">
+    {faqs.map((f) => (
+      <details class="mj-faq-item">
+        <summary>{f.q}</summary>
+        <p>{f.a}</p>
+      </details>
+    ))}
+  </div>
+
+  <ShareButtons title="麻將8LA 專區 — 台灣16張算台、聽牌、碰吃槓免費工具" heading="🀄 把這個專區傳給還在用手指數台的朋友" />
+</div>
+
+<style is:global>
+.mj-hero { text-align: center; padding: 1.4rem 0 0.6rem; }
+.mj-hero h1 { font-size: 2.1rem; font-weight: 900; margin: 0.3rem 0; }
+.mj-sub { font-size: 1.15rem; color: var(--guava-green, #39ff14); font-weight: 700; margin: 0.5rem 0; line-height: 1.6; }
+.mj-desc { font-size: 1rem; line-height: 1.85; color: var(--text-secondary); max-width: 660px; margin: 0.6rem auto 0; }
+.mj-lead { font-size: 1rem; line-height: 1.8; color: var(--text-secondary); margin: 0 0 1.2rem; }
+
+.mj-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2.4rem; }
+.mj-step {
+  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 1.1rem; transition: transform .15s, border-color .15s;
+}
+.mj-step:hover { transform: translateY(-4px); border-color: var(--guava-green, #39ff14); }
+.mj-step-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .6rem; }
+.mj-step-n {
+  width: 30px; height: 30px; flex: none; border-radius: 50%; display: grid; place-items: center;
+  background: var(--guava-green, #39ff14); color: #06210a; font-weight: 900; font-size: 1.05rem;
+}
+.mj-step-tag { font-size: .82rem; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: .12rem .6rem; }
+.mj-step-icon { font-size: 2.1rem; line-height: 1; margin-bottom: .4rem; }
+.mj-step h3 { font-size: 1.1rem; margin: 0 0 .4rem; }
+.mj-step p { font-size: .95rem; line-height: 1.75; color: var(--text-secondary); margin: 0 0 .8rem; flex: 1; }
+.mj-step-cta { font-size: .95rem; font-weight: 800; color: var(--guava-green, #39ff14); }
+
+.mj-more { display: grid; gap: .8rem; margin-bottom: 2rem; }
+.mj-more-card {
+  display: flex; gap: .9rem; align-items: flex-start; text-decoration: none; color: inherit;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1rem;
+  transition: border-color .15s;
+}
+.mj-more-card:hover { border-color: var(--guava-green, #39ff14); }
+.mj-more-icon { font-size: 1.8rem; line-height: 1; flex: none; }
+.mj-more-card h3 { font-size: 1.05rem; margin: 0 0 .25rem; }
+.mj-more-card p { font-size: .95rem; line-height: 1.7; color: var(--text-secondary); margin: 0; }
+
+.mj-note {
+  background: rgba(245,184,0,.07); border: 1px solid rgba(245,184,0,.3);
+  border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 2.2rem;
+}
+.mj-note p { font-size: .98rem; line-height: 1.85; margin: 0; }
+
+.mj-faq { margin-bottom: 2rem; }
+.mj-faq-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  padding: .9rem 1.1rem; margin-bottom: .6rem;
+}
+.mj-faq-item summary { cursor: pointer; font-size: 1.05rem; font-weight: 700; }
+.mj-faq-item p { font-size: .98rem; line-height: 1.85; color: var(--text-secondary); margin: .7rem 0 0; }
+
+@media (max-width: 640px) {
+  .mj-hero h1 { font-size: 1.6rem; }
+  .mj-sub { font-size: 1.05rem; }
+  .mj-steps { grid-template-columns: 1fr; }
+  .mj-step { padding: .9rem; }
+}
+</style>
+</BaseLayout>
