@@ -247,7 +247,7 @@ export const articles = [
     tags: ['最新', '精選', '老虎機'],
     icon: 'zap',
     gradient: 'linear-gradient(135deg,#1a1a2e,#c0282d,#f5b800)',
-    thumbnail: '/images/og-image.webp'
+    thumbnail: '/images/article-thumbs/thumb-slot-signal.webp'
   },
   {
     slug: 'texas-holdem-rules',

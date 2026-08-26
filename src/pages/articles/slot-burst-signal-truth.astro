@@ -19,8 +19,7 @@ const faqs = [
 const TITLE = '老虎機爆分訊號是真的嗎？我們跑了 200 萬轉，數據說沒有';
 const DESC = '「空轉 30 次快爆了」「這台今天很鬆」——老虎機爆分訊號到底存不存在？芭樂子用自己寫的老虎機引擎實跑 200 萬轉驗證三個最紅的說法，並公開模擬腳本讓你自己重跑。順便回答一個更扎心的問題：為什麼 RTP 96% 的機器，你體感永遠不到 96%。';
 const URL = 'https://game8la.com/articles/slot-burst-signal-truth/';
-// TODO 封面圖待生成後改回 /images/articles/slot-signal-cover.webp
-const COVER = 'https://game8la.com/images/og-image.webp';
+const COVER = 'https://game8la.com/images/articles/slot-signal-cover.webp';
 ---
 <FaqSchema faqs={faqs} />
 <ArticleSchema
@@ -49,6 +48,15 @@ const COVER = 'https://game8la.com/images/og-image.webp';
     <h1>老虎機爆分訊號是真的嗎？我們跑了 200 萬轉，數據說沒有</h1>
 
     <div class="article-content">
+
+      <!-- === 封面視覺 === -->
+      <img class="content-img"
+           src="/images/articles/slot-signal-cover.webp"
+           srcset="/images/articles/slot-signal-cover-768w.webp 768w, /images/articles/slot-signal-cover.webp 1400w"
+           sizes="(max-width: 768px) 100vw, 820px"
+           alt="老虎機爆分訊號真相-芭樂子指著機台上一條完全水平的中獎率折線圖｜GAME8LA"
+           width="1400" height="782" loading="eager" fetchpriority="high" decoding="async" />
+      <p class="article-img-caption">芭樂子：那條線一直是平的——<strong style="color:#f5b800">200 萬轉跑下來，「爆分訊號」從頭到尾沒出現過</strong></p>
 
       <p>
         8LA 大大好，我是芭樂子。你一定看過這種說法：
@@ -391,6 +399,10 @@ const COVER = 'https://game8la.com/images/og-image.webp';
   </div>
 
 <style is:global>
+/* 封面圖與圖說（站內各篇自帶，沿用同一份定義——少了這段圖片會用屬性寬撐破版面） */
+.content-img { display: block; max-width: 820px; width: 100%; height: auto; margin: 1.2rem auto 0.4rem; border-radius: 12px; }
+.article-img-caption { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin: 0 0 1.5rem; font-style: italic; line-height: 1.7; }
+
 /* 快速工具列（沿用站內其他文章的同一份定義，保持一致） */
 .quick-tool-bar {
   display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
